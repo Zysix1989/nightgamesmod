@@ -104,10 +104,10 @@ public class GUI extends JFrame implements Observer {
     private TacticGroup currentTactics;
     CommandPanel commandPanel;
     private JTextPane textPane;
-    private JLabel stamina;
-    private JLabel arousal;
-    private JLabel mojo;
-    private JLabel willpower;
+    private GUIMeter stamina;
+    private GUIMeter arousal;
+    private GUIMeter mojo;
+    private GUIMeter willpower;
     private JLabel lvl;
     private JLabel xp;
     private JProgressBar staminaBar;
@@ -880,36 +880,39 @@ public class GUI extends JFrame implements Observer {
         topPanel.add(meter);
         meter.setLayout(new GridLayout(0, 4, 0, 0));
 
-        stamina = new JLabel("Stamina: " + getLabelString(player.getStamina()));
-        stamina.setFont(new Font("Sylfaen", 1, 15));
-        stamina.setHorizontalAlignment(SwingConstants.CENTER);
-        stamina.setForeground(new Color(164, 8, 2));
-        stamina.setToolTipText(
-                        "Stamina represents your endurance and ability to keep fighting. If it drops to zero, you'll be temporarily stunned.");
-        meter.add(stamina);
+        stamina = new GUIMeter(
+            "Stamina",
+            player.getStamina(),
+            new Color(164, 8, 2),
+            "Stamina represents your endurance and ability to keep fighting. If it drops to zero, you'll be temporarily stunned."
+        );
+        meter.add(stamina.getLabel());
 
-        arousal = new JLabel("Arousal: " + getLabelString(player.getArousal()));
-        arousal.setFont(new Font("Sylfaen", 1, 15));
-        arousal.setHorizontalAlignment(SwingConstants.CENTER);
-        arousal.setForeground(new Color(254, 1, 107));
-        arousal.setToolTipText(
-                        "Arousal is raised when your opponent pleasures or seduces you. If it hits your max, you'll orgasm and lose the fight.");
-        meter.add(arousal);
+        arousal = new GUIMeter(
+            "Arousal",
+            player.getArousal(),
+            new Color(254, 1, 107),
+            "Arousal is raised when your opponent pleasures or seduces you. If it hits your max, you'll orgasm and lose the fight."
+        );
 
-        mojo = new JLabel("Mojo: " + getLabelString(player.getMojo()));
-        mojo.setFont(new Font("Sylfaen", 1, 15));
-        mojo.setHorizontalAlignment(SwingConstants.CENTER);
-        mojo.setForeground(new Color(51, 153, 255));
-        mojo.setToolTipText(
-                        "Mojo is the abstract representation of your momentum and style. It increases with normal techniques and is used to power special moves");
-        meter.add(mojo);
+        meter.add(arousal.getLabel());
 
-        willpower = new JLabel("Willpower: " + getLabelString(player.getWillpower()));
-        willpower.setFont(new Font("Sylfaen", 1, 15));
-        willpower.setHorizontalAlignment(SwingConstants.CENTER);
-        willpower.setForeground(new Color(68, 170, 85));
-        willpower.setToolTipText("Willpower is a representation of your will to fight. When this reaches 0, you lose.");
-        meter.add(willpower);
+        mojo = new GUIMeter(
+            "Mojo",
+            player.getMojo(),
+            new Color(51, 153, 255),
+            "Mojo is the abstract representation of your momentum and style. It increases with normal techniques and is used to power special moves"
+        );
+        meter.add(mojo.getLabel());
+
+        willpower = new GUIMeter(
+            "Willpower",
+            player.getWillpower(),
+            new Color(68, 170, 85),
+            "Willpower is a representation of your will to fight. When this reaches 0, you lose."
+        );
+        meter.add(willpower.getLabel());
+
         try {
             // on macs, the aqua look and feel does not have colored progress bars.
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -1340,10 +1343,10 @@ public class GUI extends JFrame implements Observer {
 
     public void refresh() {
         Player player = Global.human;
-        stamina.setText("Stamina: " + getLabelString(player.getStamina()));
-        arousal.setText("Arousal: " + getLabelString(player.getArousal()));
-        mojo.setText("Mojo: " + getLabelString(player.getMojo()));
-        willpower.setText("Willpower: " + getLabelString(player.getWillpower()));
+        stamina.refresh();
+        arousal.refresh();
+        mojo.refresh();
+        willpower.refresh();
         lvl.setText("Lvl: " + player.getLevel());
         xp.setText("XP: " + player.getXP());
         staminaBar.setMaximum(player.getStamina().max());
