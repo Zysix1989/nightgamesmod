@@ -110,10 +110,6 @@ public class GUI extends JFrame implements Observer {
     private GUIMeter willpower;
     private JLabel lvl;
     private JLabel xp;
-    private JProgressBar staminaBar;
-    private JProgressBar arousalBar;
-    private JProgressBar mojoBar;
-    private JProgressBar willpowerBar;
     private JPanel topPanel;
     private JLabel loclbl;
     private JLabel timeLabel;
@@ -888,6 +884,7 @@ public class GUI extends JFrame implements Observer {
         );
         meter.add(stamina.getLabel());
 
+
         arousal = new GUIMeter(
             "Arousal",
             player.getArousal(),
@@ -920,37 +917,12 @@ public class GUI extends JFrame implements Observer {
                         | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        staminaBar = new JProgressBar();
-        staminaBar.setBorder(new SoftBevelBorder(1, null, null, null, null));
-        staminaBar.setForeground(new Color(164, 8, 2));
-        staminaBar.setBackground(new Color(50, 50, 50));
-        meter.add(staminaBar);
-        staminaBar.setMaximum(player.getStamina().max());
-        staminaBar.setValue(player.getStamina().get());
 
-        arousalBar = new JProgressBar();
-        arousalBar.setBorder(new SoftBevelBorder(1, null, null, null, null));
-        arousalBar.setForeground(new Color(254, 1, 107));
-        arousalBar.setBackground(new Color(50, 50, 50));
-        meter.add(arousalBar);
-        arousalBar.setMaximum(player.getArousal().max());
-        arousalBar.setValue(player.getArousal().get());
+        meter.add(stamina.getProgressBar());
+        meter.add(arousal.getProgressBar());
+        meter.add(mojo.getProgressBar());
+        meter.add(willpower.getProgressBar());
 
-        mojoBar = new JProgressBar();
-        mojoBar.setBorder(new SoftBevelBorder(1, null, null, null, null));
-        mojoBar.setForeground(new Color(51, 153, 255));
-        mojoBar.setBackground(new Color(50, 50, 50));
-        meter.add(mojoBar);
-        mojoBar.setMaximum(player.getMojo().max());
-        mojoBar.setValue(player.getMojo().get());
-
-        willpowerBar = new JProgressBar();
-        willpowerBar.setBorder(new SoftBevelBorder(1, null, null, null, null));
-        willpowerBar.setForeground(new Color(68, 170, 85));
-        willpowerBar.setBackground(new Color(50, 50, 50));
-        meter.add(willpowerBar);
-        willpowerBar.setMaximum(player.getWillpower().max());
-        willpowerBar.setValue(player.getWillpower().get());
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
@@ -1349,14 +1321,7 @@ public class GUI extends JFrame implements Observer {
         willpower.refresh();
         lvl.setText("Lvl: " + player.getLevel());
         xp.setText("XP: " + player.getXP());
-        staminaBar.setMaximum(player.getStamina().max());
-        staminaBar.setValue(player.getStamina().get());
-        arousalBar.setMaximum(player.getArousal().max());
-        arousalBar.setValue(player.getArousal().get());
-        mojoBar.setMaximum(player.getMojo().max());
-        mojoBar.setValue(player.getMojo().get());
-        willpowerBar.setMaximum(player.getWillpower().max());
-        willpowerBar.setValue(player.getWillpower().get());
+
         loclbl.setText(player.location().name);
         cashLabel.setText("$" + player.money);
         if (map != null) {

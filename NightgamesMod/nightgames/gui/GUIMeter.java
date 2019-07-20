@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
+import javax.swing.border.SoftBevelBorder;
 
 import nightgames.characters.Meter;
 
@@ -13,6 +15,7 @@ class GUIMeter {
     private String name;
     private Meter meter;
     private JLabel label;
+    private JProgressBar progressBar;
 
     GUIMeter(String name, Meter meter, Color color, String toolTipText) {
         this.name = name;
@@ -23,14 +26,28 @@ class GUIMeter {
         this.label.setHorizontalAlignment(SwingConstants.CENTER);
         this.label.setForeground(color);
         this.label.setToolTipText(toolTipText);
+
+        this.progressBar = new JProgressBar();
+        this.progressBar.setBorder(new SoftBevelBorder(1, null, null, null, null));
+        this.progressBar.setForeground(color);
+        this.progressBar.setBackground(new Color(50, 50, 50));
+
+        this.progressBar.setMaximum(meter.max());
+        this.progressBar.setValue(meter.get());
     }
 
     JLabel getLabel() {
         return label;
     }
 
+    JProgressBar getProgressBar() {
+        return progressBar;
+    }
+
     void refresh() {
         label.setText(getLabelString());
+        progressBar.setMaximum(meter.max());
+        progressBar.setValue(meter.get());
     }
 
     private String getLabelString() {
