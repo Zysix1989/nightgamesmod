@@ -855,15 +855,6 @@ public class GUI extends JFrame implements Observer {
         showPortrait();
     }
 
-    // getLabelString - handles all the meters (bars)
-
-    public String getLabelString(Meter meter) {
-        if (meter.getOverflow() > 0) {
-            return "(" + Integer.toString(meter.get() + meter.getOverflow()) + ")/" + meter.max();
-        }
-        return Integer.toString(meter.get()) + "/" + meter.max();
-    }
-
     public void populatePlayer(Player player) {
         mntmOptions.setEnabled(true);
         getContentPane().remove(creation);
