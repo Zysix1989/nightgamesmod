@@ -20,20 +20,19 @@ class GUIMeter {
     GUIMeter(String name, Meter meter, Color color, String toolTipText) {
         this.name = name;
         this.meter = meter;
-        this.label = new JLabel(this.getLabelString());
+        label = new JLabel("");
 
-        this.label.setFont(new Font("Sylfaen", 1, 15));
-        this.label.setHorizontalAlignment(SwingConstants.CENTER);
-        this.label.setForeground(color);
-        this.label.setToolTipText(toolTipText);
+        label.setFont(new Font("Sylfaen", 1, 15));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setForeground(color);
+        label.setToolTipText(toolTipText);
 
-        this.progressBar = new JProgressBar();
-        this.progressBar.setBorder(new SoftBevelBorder(1, null, null, null, null));
-        this.progressBar.setForeground(color);
-        this.progressBar.setBackground(new Color(50, 50, 50));
+        progressBar = new JProgressBar();
+        progressBar.setBorder(new SoftBevelBorder(1, null, null, null, null));
+        progressBar.setForeground(color);
+        progressBar.setBackground(new Color(50, 50, 50));
 
-        this.progressBar.setMaximum(meter.max());
-        this.progressBar.setValue(meter.get());
+        refresh();
     }
 
     JLabel getLabel() {
@@ -44,7 +43,7 @@ class GUIMeter {
         return progressBar;
     }
 
-    void refresh() {
+    final void refresh() {
         label.setText(getLabelString());
         progressBar.setMaximum(meter.max());
         progressBar.setValue(meter.get());
