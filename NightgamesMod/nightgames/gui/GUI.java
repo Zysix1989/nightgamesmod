@@ -104,10 +104,7 @@ public class GUI extends JFrame implements Observer {
     private TacticGroup currentTactics;
     CommandPanel commandPanel;
     private JTextPane textPane;
-    private GUIMeter stamina;
-    private GUIMeter arousal;
-    private GUIMeter mojo;
-    private GUIMeter willpower;
+    private GUIPlayerStatus playerStatus;
     private JLabel lvl;
     private JLabel xp;
     private JPanel topPanel;
@@ -862,44 +859,9 @@ public class GUI extends JFrame implements Observer {
         getContentPane().validate();
         player.gui = this;
         player.addObserver(this);
-        JPanel meter = new JPanel();
-        meter.setBackground(GUIColors.bgDark);
-        topPanel.add(meter);
-        meter.setLayout(new GridLayout(0, 4, 0, 0));
 
-        stamina = new GUIMeter(
-            "Stamina",
-            player.getStamina(),
-            new Color(164, 8, 2),
-            "Stamina represents your endurance and ability to keep fighting. If it drops to zero, you'll be temporarily stunned."
-        );
-        meter.add(stamina.getLabel());
-
-
-        arousal = new GUIMeter(
-            "Arousal",
-            player.getArousal(),
-            new Color(254, 1, 107),
-            "Arousal is raised when your opponent pleasures or seduces you. If it hits your max, you'll orgasm and lose the fight."
-        );
-
-        meter.add(arousal.getLabel());
-
-        mojo = new GUIMeter(
-            "Mojo",
-            player.getMojo(),
-            new Color(51, 153, 255),
-            "Mojo is the abstract representation of your momentum and style. It increases with normal techniques and is used to power special moves"
-        );
-        meter.add(mojo.getLabel());
-
-        willpower = new GUIMeter(
-            "Willpower",
-            player.getWillpower(),
-            new Color(68, 170, 85),
-            "Willpower is a representation of your will to fight. When this reaches 0, you lose."
-        );
-        meter.add(willpower.getLabel());
+        playerStatus = new GUIPlayerStatus(player);
+        topPanel.add(playerStatus.getPanel());
 
         try {
             // on macs, the aqua look and feel does not have colored progress bars.
@@ -909,17 +871,6 @@ public class GUI extends JFrame implements Observer {
             e.printStackTrace();
         }
 
-        meter.add(stamina.getProgressBar());
-        meter.add(arousal.getProgressBar());
-        meter.add(mojo.getProgressBar());
-        meter.add(willpower.getProgressBar());
-
-        try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-                        | UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
         JPanel bio = new JPanel();
         topPanel.add(bio);
         bio.setLayout(new GridLayout(2, 0, 0, 0));
@@ -1306,10 +1257,7 @@ public class GUI extends JFrame implements Observer {
 
     public void refresh() {
         Player player = Global.human;
-        stamina.refresh();
-        arousal.refresh();
-        mojo.refresh();
-        willpower.refresh();
+        playerStatus.refresh();
         lvl.setText("Lvl: " + player.getLevel());
         xp.setText("XP: " + player.getXP());
 
