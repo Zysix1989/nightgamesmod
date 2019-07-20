@@ -190,7 +190,8 @@ public class Global {
     private static List<Quest> quests = new ArrayList<Quest>();    
      
     static {
-        hookLogwriter();rng = new Random();
+        hookLogwriter();
+        rng = new Random();
         flags = new HashSet<>();
         players = new HashSet<>();
         quests = new ArrayList<>();

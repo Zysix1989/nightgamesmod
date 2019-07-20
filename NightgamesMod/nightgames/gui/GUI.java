@@ -162,7 +162,7 @@ public class GUI extends JFrame implements Observer {
     private boolean skippedFeat;
     public NgsChooser saveFileChooser;
     private Box groupBox;
-	private JFrame inventoryFrame;
+    private JFrame inventoryFrame;
     private JMenuItem mntmOptions;
 
     private final static String USE_PORTRAIT = "PORTRAIT";
