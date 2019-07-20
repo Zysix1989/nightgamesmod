@@ -141,7 +141,7 @@ public class Mara extends BasePersonality {
                                 + "computerized rather than prescription. {self:PRONOUN} also has a device of unknown purpose strapped to {self:possessive} arm. Underneath all of that, {self:pronoun} has the same cute, mischievous expression {self:pronoun} "
                                 + "you're used to.";
             } else if (character.has(Trait.madscientist) && self.isDemonic()) {
-                return "{self:SUBJECT} seems to have gotten too much of the demonic juju. Despite going high tech, {self:PRONOUN}'s rig of equipment – {self:possessive} fancy rig of various gadgets and computerized glasses seem to have "
+                return "{self:SUBJECT} seems to have gotten too much of the demonic juju. Despite going high tech, {self:PRONOUN}'s rig of equipment {self:possessive} fancy rig of various gadgets and computerized glasses seem to have "
                                 + "something newer and more sinister behind them. {self:POSSESSIVE} eyes seem cruel and evil, bent on serving darker, more demonic powers. {self:POSSESSIVE} body seems a little different, too.</br>"
                                 + "Underneath all of the equipment, {self:SUBJECT} the cyberdemon has the same cute, mischievous expression that you're used to...";
             } else {
