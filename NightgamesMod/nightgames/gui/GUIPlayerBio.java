@@ -2,18 +2,12 @@ package nightgames.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -29,7 +23,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Player;
 import nightgames.global.Global;
 import nightgames.global.Time;
-import nightgames.items.Item;
 
 class GUIPlayerBio {
     private static JLabel labelForString(String s) {
@@ -45,7 +38,7 @@ class GUIPlayerBio {
     private JLabel name;
     private JLabel level;
     private JLabel xp;
-    private JFrame inventory;
+    private GUIPlayerInventory inventory;
     private JLabel location;
     private JLabel time;
     private JLabel cash;
@@ -86,17 +79,6 @@ class GUIPlayerBio {
         });
         panel.add(statusButton);
 
-        inventory = new JFrame("Inventory");
-        inventory.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        inventory.setVisible(false);
-        inventory.setLocationByPlatform(true);
-        inventory.setResizable(true);
-        inventory.setMinimumSize(new Dimension(800, 100));
-
-        JButton inventoryButton = new JButton("Inventory");
-        inventoryButton.addActionListener(arg0 -> {
-            toggleInventory(refreshTarget);
-        });
         location = new JLabel();
         location.setFont(new Font("Sylfaen", 1, 16));
         location.setForeground(GUIColors.textColorLight);
@@ -108,22 +90,13 @@ class GUIPlayerBio {
 
         cash = labelForString("");
         panel.add(cash);
-        panel.add(inventoryButton);
+
+        inventory = new GUIPlayerInventory(player);
+        panel.add(inventory.getButton());
     }
 
     JPanel getPanel() {
         return panel;
-    }
-
-    private void toggleInventory(GUI refreshTarget) {
-        EventQueue.invokeLater(() -> {
-            if (!inventory.isVisible()) {
-                refreshTarget.refresh();
-                inventory.setVisible(true);
-            } else {
-                inventory.setVisible(false);
-            }
-        });
     }
 
     void refresh() {
@@ -135,7 +108,7 @@ class GUIPlayerBio {
 
         refreshTime();
         displayStatus();
-        refreshInventory();
+        inventory.refresh();
     }
 
     private void refreshTime() {
@@ -275,27 +248,5 @@ class GUIPlayerBio {
         statusPanel.revalidate();
         statusPanel.revalidate();
         statusPanel.repaint();
-    }
-
-    private void refreshInventory() {
-        List<Item> availItems = player.getInventory().entrySet().stream().filter(entry -> (entry.getValue() > 0))
-            .map(Map.Entry::getKey).collect(Collectors.toList());
-
-        JPanel inventoryPane = new JPanel();
-        inventoryPane.setLayout(new GridLayout(0, 5));
-        inventoryPane.setSize(new Dimension(400, 800));
-        inventoryPane.setBackground(GUIColors.bgDark);
-
-        Map<Item, Integer> items = player.getInventory();
-
-        for (Item i : availItems) {
-            JLabel label = new JLabel(i.getName() + ": " + items.get(i) + "\n");
-            label.setForeground(GUIColors.textColorLight);
-            label.setToolTipText(i.getDesc());
-            inventoryPane.add(label);
-        }
-        inventory.getContentPane().removeAll();
-        inventory.getContentPane().add(BorderLayout.CENTER, inventoryPane);
-        inventory.pack();
     }
 }
