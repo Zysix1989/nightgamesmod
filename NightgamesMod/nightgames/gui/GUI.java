@@ -599,7 +599,7 @@ public class GUI extends JFrame implements Observer {
         } else {
             skippedFeat = false;
             clearCommand();
-            Global.writeIfCombatUpdateImmediately(combat, player, Global.gainSkills(player));
+            Global.gainSkills(player);
             player.finishDing();
             if (player.getLevelsToGain() > 0) {
                 player.actuallyDing(combat);
@@ -712,7 +712,7 @@ public class GUI extends JFrame implements Observer {
             clearText();
             Global.gui().message("Gained feat: " + trait.toString());
             Global.getPlayer().add(trait);
-            Global.gui().message(Global.gainSkills(Global.getPlayer()));
+            Global.gainSkills(Global.getPlayer());
             Global.getPlayer().traitPoints -= 1;
             refresh();
             ding();
