@@ -494,6 +494,10 @@ public class Player extends Character {
         }
     }
 
+    public void finishDing() {
+        levelsToGain -= 1;
+    }
+
     @Override
     public int getMaxWillpowerPossible() {
         return 50 + getLevel() * 5 - get(Attribute.Submissive) * 2;
