@@ -44,18 +44,21 @@ import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
 public class Player extends Character {
-    public GUI gui;
+
+    private GUI gui;
     public int traitPoints;
     private int levelsToGain;
 
-    public Player(String name) {
-        this(name, CharacterSex.male, Optional.empty(), new ArrayList<>(), new HashMap<>());
+    public Player(String name, GUI gui) {
+        this(name, gui, CharacterSex.male, Optional.empty(), new ArrayList<>(), new HashMap<>());
     }
 
     // TODO(Ryplinn): This initialization pattern is very close to that of BasePersonality. I think it makes sense to make NPC the primary parent of characters instead of BasePersonality.
-    public Player(String name, CharacterSex sex, Optional<PlayerConfiguration> config, List<Trait> pickedTraits,
+    public Player(String name, GUI gui, CharacterSex sex, Optional<PlayerConfiguration> config,
+        List<Trait> pickedTraits,
                     Map<Attribute, Integer> selectedAttributes) {
         super(name, 1);
+        this.gui = gui;
         initialGender = sex;
         levelsToGain = 0;
         applyBasicStats(this);

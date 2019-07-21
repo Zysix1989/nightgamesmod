@@ -344,7 +344,6 @@ public class GUI extends JFrame implements Observer {
         getContentPane().remove(creation);
         getContentPane().add(gamePanel);
         getContentPane().validate();
-        player.gui = this;
         player.addObserver(this);
 
         playerStatus = new GUIPlayerStatus(player);

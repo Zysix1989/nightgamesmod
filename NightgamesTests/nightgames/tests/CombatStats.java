@@ -194,7 +194,7 @@ public class CombatStats {
                     Daytime.train(partner, c, (Attribute) Global.pickRandom(c.att.keySet().toArray()).get());
                 }
                 c.modMoney(level * 500);
-                Global.day = new Daytime(new Player("<player>"));
+                Global.day = new Daytime(new Player("<player>"), null);
                 Global.day.advance(999);
                 Global.day.plan();
             });

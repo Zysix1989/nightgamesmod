@@ -41,7 +41,8 @@ public class PlayerConfigurationTest {
         chosenAttributes.put(Attribute.Power, 5);
         chosenAttributes.put(Attribute.Seduction, 6);
         chosenAttributes.put(Attribute.Cunning, 7);
-        Player malePlayer = new Player("dude", CharacterSex.male, Optional.of(playerConfig), pickedTraits,
+        Player malePlayer = new Player("dude", null, CharacterSex.male, Optional.of(playerConfig),
+            pickedTraits,
                         chosenAttributes);
         assertEquals(5, malePlayer.level);
         assertEquals(15000, malePlayer.money);

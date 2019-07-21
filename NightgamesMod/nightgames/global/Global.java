@@ -289,7 +289,8 @@ public class Global {
         Collection<DebugFlags> cfgDebugFlags = config.map
                         (StartConfiguration::getDebugFlags).orElse(new ArrayList<>());
         Collection<String> cfgFlags = config.map(StartConfiguration::getFlags).orElse(new ArrayList<>());
-        human = new Player(playerName, pickedGender, playerConfig, pickedTraits, selectedAttributes);
+        human = new Player(playerName, gui, pickedGender, playerConfig, pickedTraits,
+            selectedAttributes);
         if(human.has(Trait.largereserves)) {
             human.getWillpower().gain(20);
         }
@@ -1367,7 +1368,7 @@ public class Global {
         players.clear();
         flags.clear();
         gui.clearText();
-        human = new Player("Dummy");
+        human = new Player("Dummy", gui);
         gui.purgePlayer();
         buildSkillPool(human);
         Clothing.buildClothingTable();
@@ -1504,7 +1505,7 @@ public class Global {
         flags.clear();
         day = null;
         match = null;
-        human = new Player("Dummy");
+        human = new Player("Dummy", null);
         gui.purgePlayer();
         xpRate = 1.0;
         gui.createCharacter();
