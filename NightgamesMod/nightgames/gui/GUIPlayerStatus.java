@@ -61,17 +61,12 @@ class GUIPlayerStatus {
 
         panel = new JPanel();
         panel.setBackground(GUIColors.bgDark);
-        panel.setLayout(new GridLayout(0, 4, 0, 0));
+        panel.setLayout(new GridLayout(0, meters.size(), 0, 0));
 
-        panel.add(stamina.getLabel());
-        panel.add(arousal.getLabel());
-        panel.add(mojo.getLabel());
-        panel.add(willpower.getLabel());
-
-        panel.add(stamina.getProgressBar());
-        panel.add(arousal.getProgressBar());
-        panel.add(mojo.getProgressBar());
-        panel.add(willpower.getProgressBar());
+        panel.add(stamina.getPanel());
+        panel.add(arousal.getPanel());
+        panel.add(mojo.getPanel());
+        panel.add(willpower.getPanel());
     }
 
     JPanel getPanel() {
