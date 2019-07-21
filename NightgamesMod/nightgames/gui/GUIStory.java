@@ -13,7 +13,6 @@ import javax.swing.text.DefaultCaret;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 import nightgames.characters.Character;
-import nightgames.combat.Combat;
 import nightgames.global.*;
 import nightgames.utilities.DebugHelper;
 
