@@ -719,6 +719,7 @@ public class GUI extends JFrame implements Observer {
         commandPanel.refresh();
     }
 
+    // level up
     public void ding() {
         if (combat != null) {
             combat.pause();
