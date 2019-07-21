@@ -114,10 +114,8 @@ public class GUI extends JFrame implements Observer {
     private JPanel mainPanel;
     private JPanel clothesPanel;
     private JPanel optionsPanel;
-    private JPanel portraitPanel;
+    private GUILeftPanel portraitPanel;
     private JPanel centerPanel;
-    private JLabel portrait;
-    private JComponent map;
     private JPanel imgPanel;
     private JLabel imgLabel;
 
@@ -131,9 +129,6 @@ public class GUI extends JFrame implements Observer {
     private Box groupBox;
     private JFrame inventoryFrame;
 
-    private final static String USE_PORTRAIT = "PORTRAIT";
-    private final static String USE_MAP = "MAP";
-    private final static String USE_NONE = "NONE";
     private static final String USE_MAIN_TEXT_UI = "MAIN_TEXT";
     private static final String USE_CLOSET_UI = "CLOSET";
 
@@ -171,8 +166,6 @@ public class GUI extends JFrame implements Observer {
 
         getContentPane().setLayout(new BoxLayout(getContentPane(), 1));
 
-
-
         // panel layouts
 
         // gamePanel - everything is contained within it
@@ -201,21 +194,10 @@ public class GUI extends JFrame implements Observer {
 
         // portraitPanel - invisible, contains imgPanel, west panel
 
-        portraitPanel = new JPanel();
-        mainPanel.add(portraitPanel, BorderLayout.WEST);
+        portraitPanel = new GUILeftPanel();
+        mainPanel.add(portraitPanel.getPanel(), BorderLayout.WEST);
 
-        portraitPanel.setLayout(new ShrinkingCardLayout());
-
-        portraitPanel.setBackground(GUIColors.bgDark);
-        portrait = new JLabel("");
-        portrait.setVerticalAlignment(SwingConstants.TOP);
-        portraitPanel.add(portrait, USE_PORTRAIT);
-
-        map = new MapComponent();
-        portraitPanel.add(map, USE_MAP);
-        portraitPanel.add(Box.createGlue(), USE_NONE);
-
-        menuBar = new GUIMenuBar(imgPanel, imgLabel, portraitPanel, this);
+        menuBar = new GUIMenuBar(imgPanel, imgLabel, portraitPanel.getPanel(), this);
 
         // centerPanel, a CardLayout that will flip between the main text and different UIs
         centerPanel = new JPanel(new ShrinkingCardLayout());
@@ -365,63 +347,19 @@ public class GUI extends JFrame implements Observer {
         imgLabel.setIcon(null);
     }
     public void clearPortrait() {
-        portrait.setIcon(null);
+        portraitPanel.clearPortrait();
     }
     public void loadPortrait(String imagepath) {
-        if (imagepath != null && new File("assets/"+imagepath).canRead()) {
-            BufferedImage face = null;
-            try {
-                face = ImageIO.read(ResourceLoader.getFileResourceAsStream("assets/" + imagepath));
-            } catch (IOException | IllegalArgumentException e) {
-                e.printStackTrace();
-            }
-            if (face != null) {
-                if (Global.isDebugOn(DebugFlags.DEBUG_IMAGES)) {
-                    System.out.println("Loading Portrait " + imagepath + " \n");
-                }
-                portrait.setIcon(null);
-
-                if (width > 720) {
-                    portrait.setIcon(new ImageIcon(face));
-                    portrait.setVerticalAlignment(SwingConstants.TOP);
-                } else {
-                    Image scaledFace = face.getScaledInstance(width / 6, height / 4, Image.SCALE_SMOOTH);
-                    portrait.setIcon(new ImageIcon(scaledFace));
-                    portrait.setVerticalAlignment(SwingConstants.TOP);
-                    System.out.println("Portrait resizing active.");
-                }
-            }
-        }
+        portraitPanel.loadPortrait(imagepath);
     }
 
     // portrait loader
     public void loadPortrait(Combat c, Character player, Character enemy) {
-        if (!Global.checkFlag(Flag.noportraits) && c != null && c.isBeingObserved()) {
-            if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-                System.out.println("Load portraits");
-            }
-            String imagepath = null;
-            if (!player.human()) {
-                imagepath = player.getPortrait(c);
-            } else if (!enemy.human()) {
-                imagepath = enemy.getPortrait(c);
-            }
-            loadPortrait(imagepath);
-        } else {
-            clearPortrait();
-            if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-                System.out.println("No portraits");
-            }
-        }
+        portraitPanel.loadPortrait(c, player, enemy);
     }
 
     public void showMap() {
-        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-            System.out.println("Show map");
-        }
-        map.setPreferredSize(new Dimension(300, 385));
-        CardLayout portraitLayout = (CardLayout) (portraitPanel.getLayout());
-        portraitLayout.show(portraitPanel, USE_MAP);
+        portraitPanel.showMap();
     }
 
     public void showPortrait() {
@@ -804,14 +742,9 @@ public class GUI extends JFrame implements Observer {
     }
 
     public void refresh() {
-        Player player = Global.human;
         playerStatus.refresh();
-
         playerBio.refresh();
-
-        if (map != null) {
-            map.repaint();
-        }
+        portraitPanel.refresh();
     }
 
     public void displayStatus() {
