@@ -19,9 +19,15 @@ class GUIPlayerInventory {
     private Player player;
     private JButton button;
     private JFrame frame;
+    private JPanel panel;
 
     GUIPlayerInventory(Player player) {
         this.player = player;
+
+        panel = new JPanel();
+        panel.setLayout(new GridLayout(0, 5));
+        panel.setSize(new Dimension(400, 800));
+        panel.setBackground(GUIColors.bgDark);
 
         frame = new JFrame("Inventory");
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -29,6 +35,7 @@ class GUIPlayerInventory {
         frame.setLocationByPlatform(true);
         frame.setResizable(true);
         frame.setMinimumSize(new Dimension(800, 100));
+        frame.getContentPane().add(BorderLayout.CENTER, panel);
 
 
         button = new JButton("Inventory");
@@ -47,21 +54,16 @@ class GUIPlayerInventory {
         List<Item> availItems = player.getInventory().entrySet().stream().filter(entry -> (entry.getValue() > 0))
             .map(Map.Entry::getKey).collect(Collectors.toList());
 
-        JPanel inventoryPane = new JPanel();
-        inventoryPane.setLayout(new GridLayout(0, 5));
-        inventoryPane.setSize(new Dimension(400, 800));
-        inventoryPane.setBackground(GUIColors.bgDark);
-
         Map<Item, Integer> items = player.getInventory();
+
+        panel.removeAll();
 
         for (Item i : availItems) {
             JLabel label = new JLabel(i.getName() + ": " + items.get(i) + "\n");
             label.setForeground(GUIColors.textColorLight);
             label.setToolTipText(i.getDesc());
-            inventoryPane.add(label);
+            panel.add(label);
         }
-        frame.getContentPane().removeAll();
-        frame.getContentPane().add(BorderLayout.CENTER, inventoryPane);
         frame.pack();
     }
 
