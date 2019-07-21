@@ -105,18 +105,12 @@ public class GUI extends JFrame implements Observer {
     CommandPanel commandPanel;
     private JTextPane textPane;
     private GUIPlayerStatus playerStatus;
-    private JLabel lvl;
-    private JLabel xp;
+    private GUIPlayerBio playerBio;
     private JPanel topPanel;
-    private JLabel loclbl;
-    private JLabel timeLabel;
-    private JLabel cashLabel;
     private Panel panel0;
     protected CreationGUI creation;
     private JScrollPane textScroll;
     private JPanel gamePanel;
-    private JToggleButton stsbtn;
-    private JPanel statusPanel;
     private JPanel mainPanel;
     private JPanel clothesPanel;
     private JPanel optionsPanel;
@@ -584,12 +578,6 @@ public class GUI extends JFrame implements Observer {
         gamePanel.add(mainPanel);
         mainPanel.setLayout(new BorderLayout(0, 0));
 
-
-        // statusPanel - visible, character status
-
-        statusPanel = new JPanel();
-        statusPanel.setLayout(new BoxLayout(statusPanel, 1));
-
         // portraitPanel - invisible, contains imgPanel, west panel
 
         portraitPanel = new JPanel();
@@ -871,67 +859,11 @@ public class GUI extends JFrame implements Observer {
             e.printStackTrace();
         }
 
-        JPanel bio = new JPanel();
-        topPanel.add(bio);
-        bio.setLayout(new GridLayout(2, 0, 0, 0));
-        bio.setBackground(GUIColors.bgDark);
-
-        JLabel name = new JLabel(player.getTrueName());
-        name.setHorizontalAlignment(SwingConstants.LEFT);
-        name.setFont(new Font("Sylfaen", 1, 15));
-        name.setForeground(GUIColors.textColorLight);
-        bio.add(name);
-        lvl = new JLabel("Lvl: " + player.getLevel());
-        lvl.setFont(new Font("Sylfaen", 1, 15));
-        lvl.setForeground(GUIColors.textColorLight);
-
-        bio.add(lvl);
-        xp = new JLabel("XP: " + player.getXP());
-        xp.setFont(new Font("Sylfaen", 1, 15));
-        xp.setForeground(GUIColors.textColorLight);
-        bio.add(xp);
+        playerBio = new GUIPlayerBio(player, mainPanel, this);
+        topPanel.add(playerBio.getPanel());
 
         UIManager.put("ToggleButton.select", new Color(75, 88, 102));
-        stsbtn = new JToggleButton("Status");
-        stsbtn.addActionListener(arg0 -> {
-            if (stsbtn.isSelected()) {
-                mainPanel.add(statusPanel, BorderLayout.EAST);
-            } else {
-                mainPanel.remove(statusPanel);
-            }
-            GUI.this.refresh();
-            mainPanel.validate();
-        });
-        bio.add(stsbtn);
 
-    	inventoryFrame = new JFrame("Inventory");
-        inventoryFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        inventoryFrame.setVisible(false);
-        inventoryFrame.setLocationByPlatform(true);
-        inventoryFrame.setResizable(true);
-        inventoryFrame.setMinimumSize(new Dimension(800, 100));
-
-        JButton inventoryButton = new JButton("Inventory");
-        inventoryButton.addActionListener(arg0 -> {
-            toggleInventory();
-        });
-        loclbl = new JLabel();
-        loclbl.setFont(new Font("Sylfaen", 1, 16));
-        loclbl.setForeground(GUIColors.textColorLight);
-
-        //stsbtn.setBackground(new Color(85, 98, 112));
-        //stsbtn.setForeground(GUIColors.textColorLight);
-        bio.add(loclbl);
-
-        timeLabel = new JLabel();
-        timeLabel.setFont(new Font("Sylfaen", 1, 16));
-        timeLabel.setForeground(GUIColors.textColorLight);
-        bio.add(timeLabel);
-        cashLabel = new JLabel();
-        cashLabel.setFont(new Font("Sylfaen", 1, 16));
-        cashLabel.setForeground(new Color(33, 180, 42));
-        bio.add(cashLabel);
-        bio.add(inventoryButton);
         removeClosetGUI();
         topPanel.validate();
         showNone();
@@ -1258,177 +1190,16 @@ public class GUI extends JFrame implements Observer {
     public void refresh() {
         Player player = Global.human;
         playerStatus.refresh();
-        lvl.setText("Lvl: " + player.getLevel());
-        xp.setText("XP: " + player.getXP());
 
-        loclbl.setText(player.location().name);
-        cashLabel.setText("$" + player.money);
+        playerBio.refresh();
+
         if (map != null) {
             map.repaint();
         }
-        // We may be in between setting NIGHT and building the Match object
-        String timeText;
-        String textColor = "rgb(0, 0, 0)";
-        if (Global.getTime() == Time.NIGHT) {
-            // yup... silverbard pls :D
-            if (Global.getMatch() == null) {
-                timeText = "9:50 pm";
-            } else if (Global.getMatch().getHour() >= 12) {
-                timeText = Global.getMatch().getTime() + " am";
-            } else {
-                timeText = Global.getMatch().getTime() + " pm";
-            }
-            textColor = "rgb(51, 101, 202)";
-        } else if (Global.getTime() == Time.DAY) { // not updating correctly during daytime
-            if (Global.getDay() != null) {
-                timeText = Global.getDay().getTime();
-            } else {
-                timeText = "10:00 am";
-            }
-            textColor = "rgb(253, 184, 19)";
-        } else {
-            System.err.println("Unknown time of day: " + Global.getTime());
-            timeText = "";
-        }
-        timeLabel.setText(String.format("<html>Day %d - <font color='%s'>%s</font></html>", Global.getDate(), textColor, timeText));
-        displayStatus();
-        List<Item> availItems = player.getInventory().entrySet().stream().filter(entry -> (entry.getValue() > 0))
-                .map(Map.Entry::getKey).collect(Collectors.toList());
-
-	    JPanel inventoryPane = new JPanel();
-	    inventoryPane.setLayout(new GridLayout(0, 5));
-	    inventoryPane.setSize(new Dimension(400, 800));
-	    inventoryPane.setBackground(GUIColors.bgDark);
-
-	    Map<Item, Integer> items = player.getInventory();
-	    int count = 0;
-	
-	    for (Item i : availItems) {
-	        JLabel label = new JLabel(i.getName() + ": " + items.get(i) + "\n");
-	        label.setForeground(GUIColors.textColorLight);
-	        label.setToolTipText(i.getDesc());
-	        inventoryPane.add(label);
-	        count++;
-	    }
-	    inventoryFrame.getContentPane().removeAll();
-        inventoryFrame.getContentPane().add(BorderLayout.CENTER, inventoryPane);
-        inventoryFrame.pack();
     }
 
-    private void toggleInventory() {
-    	EventQueue.invokeLater(() -> {
-    		if (!inventoryFrame.isVisible()) {
-	    		refresh();
-		        inventoryFrame.setVisible(true);
-    		} else {
-    			inventoryFrame.setVisible(false);
-    		}
-    	});
-    }
-    
     public void displayStatus() {
-        statusPanel.removeAll();
-        statusPanel.repaint();
-        //statusPanel.setPreferredSize(new Dimension(400, mainPanel.getHeight()));
-        statusPanel.setPreferredSize(new Dimension(width/8, mainPanel.getHeight()));
-
-        
-        if (width < 720) {
-            statusPanel.setMaximumSize(new Dimension(height, width / 6));
-            System.out.println("STATUS PANEL");
-        }
-        JPanel statsPanel = new JPanel(new GridLayout(0, 3));
-
-        Player player = Global.human;
-
-        statusPanel.add(statsPanel);
-        //statsPanel.setPreferredSize(new Dimension(400, 200));
-        statsPanel.setPreferredSize(new Dimension(width/8, 200));
-
-        JSeparator sep = new JSeparator();
-        sep.setMaximumSize(new Dimension(statusPanel.getWidth(), 2));
-        statusPanel.add(sep);
-        int count = 0;
-        statsPanel.setBackground(GUIColors.bgLight);
-        int descFontSize = fontsize - 1;
-        ArrayList<JLabel> attlbls = new ArrayList<>();
-        for (Attribute a : Attribute.values()) {
-            int amt = player.get(a);
-            int pure = player.getPure(a);
-            if (pure > 0 || amt > 0) {
-                if (amt == pure) {
-                    JLabel label = new JLabel(String.format("<html><font face='Georgia' size=%d>%s: %s</font></html>", descFontSize, a.name(), amt));
-                    label.setForeground(GUIColors.textColorLight);
-                    attlbls.add(count, label);
-                    statsPanel.add(attlbls.get(count++));
-                } else {
-                    String attrColor;
-                    String bonusColor;
-                    if (amt < pure) {
-                        attrColor = "255,100,100";
-                        bonusColor = "255,0,0";
-                    } else {
-                        attrColor = "100,255,255";
-                        bonusColor = "0,255,0";
-                    }
-                    int statBonusFontSize = descFontSize - 1;
-                    String labelString = String.format("<html><font face='Georgia' size=%d>%s: <font color='rgb(%s)'>%d</font> <font size=%d color='rgb(%s)'>(%+d)</font></font></html>",
-                                    descFontSize, a.name(), attrColor, amt, statBonusFontSize, bonusColor, amt - pure);
-                    JLabel label = new JLabel(labelString);
-                    label.setForeground(GUIColors.textColorLight);
-                    attlbls.add(count, label);
-                    statsPanel.add(attlbls.get(count++));
-                }
-            }
-        }
-
-        // statusText - body, clothing and status description
-        JTextPane statusText = new JTextPane();
-        DefaultCaret caret = (DefaultCaret) statusText.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
-        statusText.setBackground(GUIColors.bgLight);
-        statusText.setEditable(false);
-        statusText.setContentType("text/html");
-        HTMLDocument doc = (HTMLDocument) statusText.getDocument();
-        HTMLEditorKit editorKit = (HTMLEditorKit) statusText.getEditorKit();
-        Global.freezeRNG();
-        try {
-            editorKit.insertHTML(doc, doc.getLength(),
-                            "<font face='Georgia' color='white' size='" + descFontSize + "'>"
-
-                                            + player.getOutfit().describe(player) + "<br/>" + player.describeStatus()
-
-                                            + (Global.getButtslutQuest().isPresent()?("<br/>" + Global.getButtslutQuest().get().getDescriptionFor(player)):"")
-                                            + "</font><br/>",
-                            0, 0, null);
-        } catch (BadLocationException | IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        Global.unfreezeRNG();
-        JScrollPane scrollPane = new JScrollPane(statusText);
-        scrollPane.setBackground(GUIColors.bgLight);
-        scrollPane.setOpaque(false);
-        scrollPane.getViewport().setOpaque(false);
-        JPanel currentStatusPanel = new JPanel(new GridLayout());
-//        statusPanel.setPreferredSize(new Dimension(400, height));
-//        currentStatusPanel.setMaximumSize(new Dimension(400, 2000));
-//        currentStatusPanel.setPreferredSize(new Dimension(400, 2000));
-        statusPanel.setPreferredSize(new Dimension(width/8, height));
-        currentStatusPanel.setMaximumSize(new Dimension(width/8, 2000));
-        currentStatusPanel.setPreferredSize(new Dimension(width/8, 2000));
-        
-        currentStatusPanel.setBackground(GUIColors.bgLight);
-        statusPanel.add(currentStatusPanel);
-        currentStatusPanel.add(scrollPane);
-        statusPanel.setBackground(GUIColors.bgLight);
-        if (width < 720) {
-            currentStatusPanel.setSize(new Dimension(height, width / 6));
-            System.out.println("Oh god so tiny");
-        }
-        mainPanel.revalidate();
-        statusPanel.revalidate();
-        statusPanel.repaint();
+        playerBio.displayStatus();
     }
 
     @Override
