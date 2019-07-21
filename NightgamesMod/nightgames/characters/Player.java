@@ -102,8 +102,8 @@ public class Player extends Character {
 
     public String describeStatus() {
         StringBuilder b = new StringBuilder();
-        if (Global.gui().combat != null && (Global.gui().combat.p1.human() || Global.gui().combat.p2.human())) {
-            body.describeBodyText(b, Global.gui().combat.getOpponent(this), false);
+        if (gui.combat != null && (gui.combat.p1.human() || gui.combat.p2.human())) {
+            body.describeBodyText(b, gui.combat.getOpponent(this), false);
         } else {
             body.describeBodyText(b, Global.getCharacterByType("Angel"), false);
         }
@@ -213,7 +213,7 @@ public class Player extends Character {
             available.add(new Nothing(this));
         }
         available.addAll(cds);
-        Global.gui().clearCommand();
+        gui.clearCommand();
         Skill lastUsed = null;
         for (Skill a : available) {
             if (a.getName().equals(c.getCombatantData(this).getLastUsedSkillName())) {
@@ -239,36 +239,36 @@ public class Player extends Character {
             }
         }
         if (lastUsed != null) {
-            Global.gui().addSkill(c, lastUsed, target);
+            gui.addSkill(c, lastUsed, target);
         }
         for (Skill a : stripping) {
-            Global.gui().addSkill(c, a, target);
+            gui.addSkill(c, a, target);
         }
         for (Skill a : position) {
-            Global.gui().addSkill(c, a, target);
+            gui.addSkill(c, a, target);
         }
         for (Skill a : fucking) {
-            Global.gui().addSkill(c, a, target);
+            gui.addSkill(c, a, target);
         }
         for (Skill a : pleasure) {
-            Global.gui().addSkill(c, a, target);
+            gui.addSkill(c, a, target);
         }
         for (Skill a : damage) {
-            Global.gui().addSkill(c, a, target);
+            gui.addSkill(c, a, target);
         }
         for (Skill a : debuff) {
-            Global.gui().addSkill(c, a, target);
+            gui.addSkill(c, a, target);
         }
         for (Skill a : summoning) {
-            Global.gui().addSkill(c, a, target);
+            gui.addSkill(c, a, target);
         }
         for (Skill a : recovery) {
-            Global.gui().addSkill(c, a, target);
+            gui.addSkill(c, a, target);
         }
         for (Skill a : misc) {
-            Global.gui().addSkill(c, a, target);
+            gui.addSkill(c, a, target);
         }
-        Global.gui().showSkills();
+        gui.showSkills();
     }
 
 
@@ -315,8 +315,7 @@ public class Player extends Character {
     public void detect() {
         for (Area adjacent : location.adjacent) {
             if (adjacent.ping(get(Attribute.Perception))) {
-                Global.gui()
-                      .message("You hear something in the <b>" + adjacent.name + "</b>.");
+                gui.message("You hear something in the <b>" + adjacent.name + "</b>.");
                 adjacent.setPinged(true);
             }
         }
@@ -525,7 +524,7 @@ public class Player extends Character {
     @Override
     public void craft() {
         int roll = Global.random(10);
-        Global.gui().message("You spend some time crafting some potions with the equipment.");
+        gui.message("You spend some time crafting some potions with the equipment.");
         if (check(Attribute.Cunning, 25)) {
             if (roll == 9) {
                 gain(Item.Aphrodisiac);
@@ -690,8 +689,7 @@ public class Player extends Character {
 
     @Override
     public void gain(Item item) {
-        Global.gui()
-              .message("<b>You've gained " + item.pre() + item.getName() + ".</b>");
+        gui.message("<b>You've gained " + item.pre() + item.getName() + ".</b>");
         super.gain(item);
     }
 
@@ -702,8 +700,7 @@ public class Player extends Character {
 
     @Override
     public void promptTrap(Encounter enc, Character target, Trap trap) {
-        Global.gui()
-              .message("Do you want to take the opportunity to ambush <b>" + target.getName() + "</b>?");
+        gui.message("Do you want to take the opportunity to ambush <b>" + target.getName() + "</b>?");
         assessOpponent(target);
         gui.message("<br/>");
 
