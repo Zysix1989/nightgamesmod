@@ -129,7 +129,6 @@ public class Combat extends Observable implements Cloneable {
     public Area location;
     private String message;
     private Position stance;
-    public Character lastTalked;
     protected int timer;
     public Result state;
     private HashMap<String, String> images;
@@ -1260,7 +1259,6 @@ public class Combat extends Observable implements Cloneable {
         String added = message + "<br/>" + text;
         message = added;
         wroteMessage = true;
-        lastTalked = null;
     }
 
     public void updateMessage() {
@@ -1288,7 +1286,6 @@ public class Combat extends Observable implements Cloneable {
             } else {
                 message = message + "<br/><font color='rgb(255,200,200)'>" + text + "<font color='white'>";
             }
-            lastTalked = user;
         }
         wroteMessage = true;
     }
