@@ -114,11 +114,10 @@ public class GUI extends JFrame implements Observer {
     private JPanel optionsPanel;
     private GUILeftPanel portraitPanel;
     private JPanel centerPanel;
-    private JPanel imgPanel;
-    private JLabel imgLabel;
 
     private GUIMenuBar menuBar;
     private GUIStory story;
+    private GUIStoryImage storyImage;
 
     private int width;
     private int height;
@@ -196,22 +195,15 @@ public class GUI extends JFrame implements Observer {
         portraitPanel = new GUILeftPanel();
         mainPanel.add(portraitPanel.getPanel(), BorderLayout.WEST);
 
-        menuBar = new GUIMenuBar(imgPanel, imgLabel, portraitPanel.getPanel(), this);
+        storyImage = new GUIStoryImage();
+        story = new GUIStory(storyImage.getLabel());
+        menuBar = new GUIMenuBar(storyImage.getPanel(), storyImage.getLabel(), portraitPanel.getPanel(), this);
 
         // centerPanel, a CardLayout that will flip between the main text and different UIs
         centerPanel = new JPanel(new ShrinkingCardLayout());
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         fontsize = 5;
 
-        // imgPanel - visible, contains imgLabel
-        imgPanel = new JPanel();
-
-        // imgLabel - probably contains the in-battle images
-        imgLabel = new JLabel();
-        imgPanel.add(imgLabel, BorderLayout.NORTH);
-        imgLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        story = new GUIStory(imgLabel);
         centerPanel.add(story.getPanel(), USE_MAIN_TEXT_UI);
 
         // clothesPanel - used for closet ui
@@ -283,7 +275,6 @@ public class GUI extends JFrame implements Observer {
         return combat;
     }
 
-    // image loader
     public static void setUIFont (javax.swing.plaf.FontUIResource f){
         Enumeration<Object> keys = UIManager.getDefaults().keys();
         while (keys.hasMoreElements()) {
@@ -295,36 +286,11 @@ public class GUI extends JFrame implements Observer {
     }
 
     public void displayImage(String path, String artist) {
-        if (Global.checkFlag(Flag.noimage)){ 
-            return;
-        }
-        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-            System.out.println("Display image: " + path);
-        }
-        if (!(new File("assets/"+path).canRead())) {
-            return;
-        }
-        BufferedImage pic = null;
-        try {
-            pic = ImageIO.read(ResourceLoader.getFileResourceAsStream("assets/" + path));
-        } catch (IOException | IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-        clearImage();
-        if (pic != null) {
-            imgLabel.setIcon(new ImageIcon(pic));
-            imgLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            imgLabel.setToolTipText(artist);
-        }
+        storyImage.displayImage(path, artist);
     }
 
-    // image unloader
-
     public void clearImage() {
-        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-            System.out.println("Reset image");
-        }
-        imgLabel.setIcon(null);
+        storyImage.clearImage();
     }
     public void clearPortrait() {
         portraitPanel.clearPortrait();
