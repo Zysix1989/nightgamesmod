@@ -395,7 +395,7 @@ public class GUI extends JFrame implements Observer {
     }
 
     public void message(Combat c, Character character, String text) {
-        story.message(c, character, text);
+        story.message(character, text);
     }
 
     public void combatMessage(String text) {

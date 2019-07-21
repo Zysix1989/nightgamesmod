@@ -18,6 +18,7 @@ import nightgames.global.*;
 import nightgames.utilities.DebugHelper;
 
 class GUIStory {
+
     private JTextPane textPane;
     private JPanel panel;
     private Integer fontSize;
@@ -64,25 +65,22 @@ class GUIStory {
         if (text.trim().length() == 0) {
             return;
         }
-
+        text = Global.capitalizeFirstLetter(text);
         HTMLDocument doc = (HTMLDocument) textPane.getDocument();
         HTMLEditorKit editorKit = (HTMLEditorKit) textPane.getEditorKit();
         try {
             editorKit.insertHTML(doc, doc.getLength(),
-                "<font face='Georgia' color='white' size='" + fontSize + "'>" + text + "</font><br/>",
+                "<font face='Georgia' color='white' size='" + fontSize + "'>" + text
+                    + "</font><br/>",
                 0, 0, null);
         } catch (BadLocationException | IOException e) {
             e.printStackTrace();
         }
     }
 
-    void message(Combat c, Character character, String text) {
-        if (c != null) {
-            if (character != null) {
-                c.write(character, text);
-            } else {
-                c.write(text);
-            }
+    void message(Character character, String text) {
+        if (character != null) {
+            text = Global.colorizeMessage(character, text);
         }
         message(text);
     }
