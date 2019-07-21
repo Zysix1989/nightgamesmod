@@ -1446,10 +1446,10 @@ public class Global {
     
     public static void main(String[] args) {
         hookLogwriter();
-        init(false);
+        init();
     }
     
-    public static void init(boolean headless) {
+    public static void init() {
         makeGUI();
         gui.createCharacter();
     }

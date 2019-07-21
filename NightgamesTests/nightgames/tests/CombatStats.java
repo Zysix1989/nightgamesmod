@@ -108,7 +108,7 @@ public class CombatStats {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Global.init(true);
+        Global.init();
         Global.newGame("TestPlayer", Optional.empty(), new ArrayList<>(), CharacterSex.asexual, new HashMap<>());
         Global.setUpMatch(new NoModifier());
         Thread.sleep(10000);
