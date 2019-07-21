@@ -60,10 +60,6 @@ class GUIStory {
         textPane.setText("");
     }
 
-    void clearTextIfNeeded() {
-        clearText();
-    }
-
     void message(String text) {
         if (text.trim().length() == 0) {
             return;
@@ -90,11 +86,6 @@ class GUIStory {
         }
         message(text);
     }
-
-    void combatMessage(String text) {
-        message(text);
-    }
-
 }
 
 

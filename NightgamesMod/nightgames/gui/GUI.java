@@ -425,10 +425,6 @@ public class GUI extends JFrame implements Observer {
         story.clearText();
     }
 
-    protected void clearTextIfNeeded() {
-        story.clearTextIfNeeded();
-    }
-
     public void message(String text) {
         story.message(text);
     }
@@ -438,7 +434,7 @@ public class GUI extends JFrame implements Observer {
     }
 
     public void combatMessage(String text) {
-        story.combatMessage(text);
+        story.message(text);
     }
 
     public void clearCommand() {
@@ -732,7 +728,7 @@ public class GUI extends JFrame implements Observer {
 
     private KeyableButton attributeButton(Attribute att) {
         RunnableButton button = new RunnableButton(att.name(), () -> {
-            clearTextIfNeeded();
+            clearText();
             Global.getPlayer().mod(att, 1);
             Global.getPlayer().availableAttributePoints -= 1;
             refresh();
@@ -743,7 +739,7 @@ public class GUI extends JFrame implements Observer {
 
     private KeyableButton featButton(Trait trait) {
         RunnableButton button = new RunnableButton(trait.toString(), () -> {
-            clearTextIfNeeded();
+            clearText();
             Global.gui().message("Gained feat: " + trait.toString());
             Global.getPlayer().add(trait);
             Global.gui().message(Global.gainSkills(Global.getPlayer()));
@@ -758,7 +754,7 @@ public class GUI extends JFrame implements Observer {
     private KeyableButton skipFeatButton() {
         RunnableButton button = new RunnableButton("Skip", () -> {
             skippedFeat = true;
-            clearTextIfNeeded();
+            clearText();
             ding();
         });
         button.getButton().setToolTipText("Save the trait point for later.");
