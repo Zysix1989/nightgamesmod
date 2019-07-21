@@ -577,25 +577,22 @@ public class GUI extends JFrame implements Observer {
             clearCommand();
             for (Attribute att : player.att.keySet()) {
                 if (Attribute.isTrainable(player, att) && player.getPure(att) > 0) {
-                    commandPanel.add(attributeButton(att));
+                    addToCommandPanel(attributeButton(att));
                 }
             }
-            commandPanel.add(attributeButton(Attribute.Willpower));
+            addToCommandPanel(attributeButton(Attribute.Willpower));
             if (Global.getMatch() != null) {
                 Global.getMatch().pause();
             }
-            commandPanel.refresh();
         } else if (player.traitPoints > 0 && !skippedFeat) {
             clearCommand();
             message(player, "You've earned a new perk. Select one below.</br>");
             for (Trait feat : Global.getFeats(player)) {
                 if (!player.has(feat)) {
-                    commandPanel.add(featButton(feat));
+                    addToCommandPanel(featButton(feat));
                 }
-                commandPanel.refresh();
             }
-            commandPanel.add(skipFeatButton());
-            commandPanel.refresh();
+            addToCommandPanel(skipFeatButton());
         } else {
             skippedFeat = false;
             clearCommand();
