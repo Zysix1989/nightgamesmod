@@ -478,7 +478,7 @@ public class Player extends Character {
         if (levelsToGain == 1) {
             actuallyDing(c);
             if (cloned == 0) {
-                gui.ding();
+                gui.ding(c);
             }
         }
     }
@@ -940,9 +940,6 @@ public class Player extends Character {
         return levelsToGain;
     }
 
-    public void finishDing() {
-        levelsToGain -= 1;
-    }
     
 
 }

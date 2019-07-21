@@ -566,7 +566,7 @@ public class GUI extends JFrame implements Observer {
     }
 
     // level up
-    public void ding() {
+    public void ding(Combat combat) {
         if (combat != null) {
             combat.pause();
         }
@@ -603,7 +603,7 @@ public class GUI extends JFrame implements Observer {
             player.finishDing();
             if (player.getLevelsToGain() > 0) {
                 player.actuallyDing(combat);
-                ding();
+                ding(combat);
             } else {
                 if (combat != null) {
                     combat.resume();
@@ -702,7 +702,7 @@ public class GUI extends JFrame implements Observer {
             Global.getPlayer().mod(att, 1);
             Global.getPlayer().availableAttributePoints -= 1;
             refresh();
-            ding();
+            ding(combat);
         });
         return button;
     }
@@ -715,7 +715,7 @@ public class GUI extends JFrame implements Observer {
             Global.gainSkills(Global.getPlayer());
             Global.getPlayer().traitPoints -= 1;
             refresh();
-            ding();
+            ding(combat);
         });
         button.getButton().setToolTipText(trait.getDesc());
         return button;
@@ -725,7 +725,7 @@ public class GUI extends JFrame implements Observer {
         RunnableButton button = new RunnableButton("Skip", () -> {
             skippedFeat = true;
             clearText();
-            ding();
+            ding(combat);
         });
         button.getButton().setToolTipText("Save the trait point for later.");
         return button;
