@@ -61,25 +61,10 @@ class GUIStory {
     }
 
     void clearTextIfNeeded() {
-        textPane.getCaretPosition();
-        textPane.setCaretPosition(textPane.getDocument().getLength());
-        textPane.selectAll();
-        int x = textPane.getSelectionEnd();
-        textPane.select(x, x);
+        clearText();
     }
 
     void message(String text) {
-        message(null, null, text);
-    }
-
-    void message(Combat c, Character character, String text) {
-        if (c != null) {
-            if (character != null) {
-                c.write(character, text);
-            } else {
-                c.write(text);
-            }
-        }
         if (text.trim().length() == 0) {
             return;
         }
@@ -95,16 +80,19 @@ class GUIStory {
         }
     }
 
-    void combatMessage(String text) {
-        HTMLDocument doc = (HTMLDocument) textPane.getDocument();
-        HTMLEditorKit editorKit = (HTMLEditorKit) textPane.getEditorKit();
-        try {
-            editorKit.insertHTML(doc, doc.getLength(),
-                "<font face='Georgia' color='white' size='" + fontSize + "'>" + text + "</font><br/>",
-                0, 0, null);
-        } catch (BadLocationException | IOException e) {
-            e.printStackTrace();
+    void message(Combat c, Character character, String text) {
+        if (c != null) {
+            if (character != null) {
+                c.write(character, text);
+            } else {
+                c.write(text);
+            }
         }
+        message(text);
+    }
+
+    void combatMessage(String text) {
+        message(text);
     }
 
 }
