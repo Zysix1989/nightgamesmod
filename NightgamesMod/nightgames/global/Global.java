@@ -243,7 +243,7 @@ public class Global {
         buildModifierPool();
     }
 
-    protected static void makeGUI(boolean headless) {
+    protected static void makeGUI() {
         gui = new GUI();
     }
     
@@ -1450,7 +1450,7 @@ public class Global {
     }
     
     public static void init(boolean headless) {
-        makeGUI(headless);
+        makeGUI();
         gui.createCharacter();
     }
     

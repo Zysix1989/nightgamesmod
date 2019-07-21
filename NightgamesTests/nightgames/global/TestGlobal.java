@@ -11,7 +11,7 @@ public class TestGlobal extends Global {
         super();
     }
 
-    protected static void makeGUI(boolean headless) {
+    protected static void makeGUI() {
         /*return*/ new TestGUI();
     }
 }
