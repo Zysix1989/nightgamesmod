@@ -2,11 +2,11 @@ package nightgames.characters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import nightgames.actions.Action;
 import nightgames.actions.Leap;
 import nightgames.actions.Move;
@@ -28,6 +28,8 @@ import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.match.Encounter;
 import nightgames.match.ftc.FTCMatch;
+import nightgames.skills.Nothing;
+import nightgames.skills.Skill;
 import nightgames.skills.Stage;
 import nightgames.skills.Tactics;
 import nightgames.skills.damage.DamageType;
@@ -36,8 +38,6 @@ import nightgames.stance.Neutral;
 import nightgames.stance.Position;
 import nightgames.start.PlayerConfiguration;
 import nightgames.status.Enthralled;
-import nightgames.status.Masochistic;
-import nightgames.status.Pheromones;
 import nightgames.status.PlayerSlimeDummy;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
@@ -182,9 +182,95 @@ public class Player extends Character {
         } else {
             target = c.p1;
         }
-        pickSkillsWithGUI(c, target);
+        pickSkills(c, target);
         return true;
     }
+
+    /**Adds skills to the GUI*/
+    private void pickSkills(Combat c, Character target) {
+        HashSet<Skill> available = new HashSet<>();
+        HashSet<Skill> cds = new HashSet<>();
+        for (Skill a : getSkills()) {
+            if (Skill.isUsable(c, a)) {
+                if (cooldownAvailable(a)) {
+                    available.add(a);
+                } else {
+                    cds.add(a);
+                }
+            }
+        }
+        HashSet<Skill> damage = new HashSet<>();
+        HashSet<Skill> pleasure = new HashSet<>();
+        HashSet<Skill> fucking = new HashSet<>();
+        HashSet<Skill> position = new HashSet<>();
+        HashSet<Skill> debuff = new HashSet<>();
+        HashSet<Skill> recovery = new HashSet<>();
+        HashSet<Skill> summoning = new HashSet<>();
+        HashSet<Skill> stripping = new HashSet<>();
+        HashSet<Skill> misc = new HashSet<>();
+        Skill.filterAllowedSkills(c, available, this, target);
+        if (available.size() == 0) {
+            available.add(new Nothing(this));
+        }
+        available.addAll(cds);
+        Global.gui().clearCommand();
+        Skill lastUsed = null;
+        for (Skill a : available) {
+            if (a.getName().equals(c.getCombatantData(this).getLastUsedSkillName())) {
+                lastUsed = a;
+            } else if (a.type(c) == Tactics.damage) {
+                damage.add(a);
+            } else if (a.type(c) == Tactics.pleasure) {
+                pleasure.add(a);
+            } else if (a.type(c) == Tactics.fucking) {
+                fucking.add(a);
+            } else if (a.type(c) == Tactics.positioning) {
+                position.add(a);
+            } else if (a.type(c) == Tactics.debuff) {
+                debuff.add(a);
+            } else if (a.type(c) == Tactics.recovery || a.type(c) == Tactics.calming) {
+                recovery.add(a);
+            } else if (a.type(c) == Tactics.summoning) {
+                summoning.add(a);
+            } else if (a.type(c) == Tactics.stripping) {
+                stripping.add(a);
+            } else {
+                misc.add(a);
+            }
+        }
+        if (lastUsed != null) {
+            Global.gui().addSkill(c, lastUsed, target);
+        }
+        for (Skill a : stripping) {
+            Global.gui().addSkill(c, a, target);
+        }
+        for (Skill a : position) {
+            Global.gui().addSkill(c, a, target);
+        }
+        for (Skill a : fucking) {
+            Global.gui().addSkill(c, a, target);
+        }
+        for (Skill a : pleasure) {
+            Global.gui().addSkill(c, a, target);
+        }
+        for (Skill a : damage) {
+            Global.gui().addSkill(c, a, target);
+        }
+        for (Skill a : debuff) {
+            Global.gui().addSkill(c, a, target);
+        }
+        for (Skill a : summoning) {
+            Global.gui().addSkill(c, a, target);
+        }
+        for (Skill a : recovery) {
+            Global.gui().addSkill(c, a, target);
+        }
+        for (Skill a : misc) {
+            Global.gui().addSkill(c, a, target);
+        }
+        Global.gui().showSkills();
+    }
+
 
     /**Overridden abstract method for determining if this character is human - meaning the player. 
      * TODO: Reccomend renaming to isHuman(), to make more meaningful name and easier to find.*/
