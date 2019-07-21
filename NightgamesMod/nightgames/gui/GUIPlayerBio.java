@@ -23,10 +23,13 @@ class GUIPlayerBio {
     private JLabel name;
     private JLabel level;
     private JLabel xp;
-    private GUIPlayerInventory inventory;
     private JLabel location;
     private JLabel time;
     private JLabel cash;
+
+    // These live here because their status buttons are on the
+    // bio panel and they are otherwise independent.
+    private GUIPlayerInventory inventory;
     private GUIPlayerAttributes attributes;
 
     GUIPlayerBio(Player player, JPanel statusTarget, GUI refreshTarget) {
