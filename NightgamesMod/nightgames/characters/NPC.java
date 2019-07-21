@@ -274,11 +274,7 @@ public class NPC extends Character {
     }
 
     private boolean act(Combat c, Character target) {
-        if (target.human() && Global.isDebugOn(DebugFlags.DEBUG_SKILL_CHOICES)) {
-            pickSkillsWithGUI(c, target);
-            return true;
-        }
-        
+
         CombatantData combatantData = c.getCombatantData(this);
 
         // if there's no strategy, try getting a new one.
