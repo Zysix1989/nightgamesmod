@@ -1276,17 +1276,7 @@ public class Combat extends Observable implements Cloneable {
 
     public void write(Character user, String text) {
         text = Global.capitalizeFirstLetter(text);
-        if (text.length() > 0) {
-            if (user.human()) {
-                message = message + "<br/><font color='rgb(200,200,255)'>" + text + "<font color='white'>";
-            } else if (user.isPet() && user.isPetOf(Global.getPlayer())) {
-                message = message + "<br/><font color='rgb(130,225,200)'>" + text + "<font color='white'>";
-            } else if (user.isPet()) {
-                message = message + "<br/><font color='rgb(210,130,255)'>" + text + "<font color='white'>";
-            } else {
-                message = message + "<br/><font color='rgb(255,200,200)'>" + text + "<font color='white'>";
-            }
-        }
+        message = message + Global.colorizeMessage(user, text);
         wroteMessage = true;
     }
     

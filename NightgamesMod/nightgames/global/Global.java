@@ -992,6 +992,21 @@ public class Global {
         match.start();
     }
 
+    public static String colorizeMessage(Character speaker, String message) {
+        if (message.length() > 0) {
+            if (speaker.human()) {
+                return "<br/><font color='rgb(200,200,255)'>" + message + "<font color='white'>";
+            } else if (speaker.isPet() && speaker.isPetOf(Global.getPlayer())) {
+                return "<br/><font color='rgb(130,225,200)'>" + message + "<font color='white'>";
+            } else if (speaker.isPet()) {
+                return "<br/><font color='rgb(210,130,255)'>" + message + "<font color='white'>";
+            } else {
+                return "<br/><font color='rgb(255,200,200)'>" + message + "<font color='white'>";
+            }
+        }
+        return "";
+    }
+
     public static String gainSkills(Character c) {
         String message = "";
         if (c.getPure(Attribute.Dark) >= 6 && !c.has(Trait.darkpromises)) {
