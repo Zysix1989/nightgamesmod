@@ -103,13 +103,11 @@ public class GUI extends JFrame implements Observer {
     private Map<TacticGroup, List<SkillButton>> skills;
     private TacticGroup currentTactics;
     CommandPanel commandPanel;
-    private JTextPane textPane;
     private GUIPlayerStatus playerStatus;
     private GUIPlayerBio playerBio;
     private JPanel topPanel;
     private Panel panel0;
     protected CreationGUI creation;
-    private JScrollPane textScroll;
     private JPanel gamePanel;
     private JPanel mainPanel;
     private JPanel clothesPanel;
@@ -120,6 +118,7 @@ public class GUI extends JFrame implements Observer {
     private JLabel imgLabel;
 
     private GUIMenuBar menuBar;
+    private GUIStory story;
 
     private int width;
     private int height;
@@ -202,20 +201,6 @@ public class GUI extends JFrame implements Observer {
         // centerPanel, a CardLayout that will flip between the main text and different UIs
         centerPanel = new JPanel(new ShrinkingCardLayout());
         mainPanel.add(centerPanel, BorderLayout.CENTER);
-
-        // textScroll
-        textScroll = new JScrollPane();
-
-        // textPane
-        textPane = new JTextPane();
-        DefaultCaret caret = (DefaultCaret) textPane.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-        textPane.setForeground(GUIColors.textColorLight);
-        textPane.setBackground(GUIColors.bgLight);
-        textPane.setPreferredSize(new Dimension(width, 400));
-        textPane.setEditable(false);
-        textPane.setContentType("text/html");
-        textScroll.setViewportView(textPane);
         fontsize = 5;
 
         // imgPanel - visible, contains imgLabel
@@ -225,14 +210,9 @@ public class GUI extends JFrame implements Observer {
         imgLabel = new JLabel();
         imgPanel.add(imgLabel, BorderLayout.NORTH);
         imgLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        // textAreaPanel - the area with the main text window and the in-battle stance image if active.
-        JPanel textAreaPanel = new JPanel();
-        textAreaPanel.setLayout(new BoxLayout(textAreaPanel, BoxLayout.PAGE_AXIS));
-        textAreaPanel.add(imgLabel);
-        textAreaPanel.add(textScroll);
-        textAreaPanel.setBackground(GUIColors.bgDark);
 
-        centerPanel.add(textAreaPanel, USE_MAIN_TEXT_UI);
+        story = new GUIStory(imgLabel);
+        centerPanel.add(story.getPanel(), USE_MAIN_TEXT_UI);
 
         // clothesPanel - used for closet ui
         clothesPanel = new JPanel();
@@ -442,60 +422,23 @@ public class GUI extends JFrame implements Observer {
     }
 
     public void clearText() {
-        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-            System.out.println("Clearing messages");
-            DebugHelper.printStackFrame(5, 1);
-        }
-        textPane.setText("");
+        story.clearText();
     }
 
     protected void clearTextIfNeeded() {
-        textPane.getCaretPosition();
-        textPane.setCaretPosition(textPane.getDocument().getLength());
-        textPane.selectAll();
-        int x = textPane.getSelectionEnd();
-        textPane.select(x, x);
+        story.clearTextIfNeeded();
     }
 
     public void message(String text) {
-        message(null, null, text);
+        story.message(text);
     }
 
     public void message(Combat c, Character character, String text) {
-        if (c != null) {
-            if (character != null) {
-                c.write(character, text);
-            } else {
-                c.write(text);
-            }
-        }
-        if (text.trim().length() == 0) {
-            return;
-        }
-
-        HTMLDocument doc = (HTMLDocument) textPane.getDocument();
-        HTMLEditorKit editorKit = (HTMLEditorKit) textPane.getEditorKit();
-        try {
-            editorKit.insertHTML(doc, doc.getLength(),
-                            "<font face='Georgia' color='white' size='" + fontsize + "'>" + text + "</font><br/>",
-                            0, 0, null);
-        } catch (BadLocationException | IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        story.message(c, character, text);
     }
 
     public void combatMessage(String text) {
-
-        HTMLDocument doc = (HTMLDocument) textPane.getDocument();
-        HTMLEditorKit editorKit = (HTMLEditorKit) textPane.getEditorKit();
-        try {
-            editorKit.insertHTML(doc, doc.getLength(),
-                            "<font face='Georgia' color='white' size='" + fontsize + "'>" + text + "</font><br/>",
-                            0, 0, null);
-        } catch (BadLocationException | IOException e) {
-            e.printStackTrace();
-        }
+        story.combatMessage(text);
     }
 
     public void clearCommand() {
