@@ -568,7 +568,8 @@ public class GUI extends JFrame implements Observer {
         }
         Player player = Global.human;
         if (player.availableAttributePoints > 0) {
-            Global.writeIfCombatUpdateImmediately(combat, player, player.availableAttributePoints + " Attribute Points remain.\n");
+            message(combat, player,
+                player.availableAttributePoints + " Attribute Points remain.</br>");
             clearCommand();
             for (Attribute att : player.att.keySet()) {
                 if (Attribute.isTrainable(player, att) && player.getPure(att) > 0) {
@@ -582,7 +583,7 @@ public class GUI extends JFrame implements Observer {
             commandPanel.refresh();
         } else if (player.traitPoints > 0 && !skippedFeat) {
             clearCommand();
-            Global.writeIfCombatUpdateImmediately(combat, player, "You've earned a new perk. Select one below.");
+            message(combat, player, "You've earned a new perk. Select one below.</br>");
             for (Trait feat : Global.getFeats(player)) {
                 if (!player.has(feat)) {
                     commandPanel.add(featButton(feat));
@@ -660,7 +661,7 @@ public class GUI extends JFrame implements Observer {
         refresh();
         if (combat != null) {
             if (combat.combatMessageChanged) {
-                combatMessage(combat.getMessage());
+                message(combat.getMessage());
                 combat.combatMessageChanged = false;
             }
         }
