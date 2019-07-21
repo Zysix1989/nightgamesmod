@@ -1446,12 +1446,6 @@ public class Global {
     
     public static void main(String[] args) {
         hookLogwriter();
-        for (String arg : args) {
-            try {
-            } catch (IllegalArgumentException e) {
-                // pass
-            }
-        }
         init(false);
     }
     
