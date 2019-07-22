@@ -614,8 +614,8 @@ public class GUI extends JFrame implements Observer {
     private KeyableButton attributeButton(Attribute att) {
         RunnableButton button = new RunnableButton(att.name(), () -> {
             clearText();
-            refresh();
             Global.getPlayer().increaseAttribute(att);
+            refresh();
         });
         return button;
     }
@@ -623,12 +623,8 @@ public class GUI extends JFrame implements Observer {
     private KeyableButton featButton(Trait trait) {
         RunnableButton button = new RunnableButton(trait.toString(), () -> {
             clearText();
-            Global.gui().message("Gained feat: " + trait.toString());
-            Global.getPlayer().add(trait);
-            Global.gainSkills(Global.getPlayer());
-            Global.getPlayer().traitPoints -= 1;
+            Global.getPlayer().grantTrait(trait);
             refresh();
-            Global.getPlayer().handleLevelUp();
         });
         button.getButton().setToolTipText(trait.getDesc());
         return button;

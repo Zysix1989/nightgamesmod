@@ -546,6 +546,17 @@ public class Player extends Character {
         handleLevelUp();
     }
 
+    public void grantTrait(Trait trait) {
+        if (traitPoints < 1) {
+            throw new RuntimeException("attempted to grant trait without trait points")
+        }
+        gui.message(this, "Gained feat: " + trait.toString());
+        add(trait);
+        Global.gainSkills(this);
+        traitPoints -= 1;
+        handleLevelUp();
+    }
+
     private void actuallyDing() {
         level += 1;
         getStamina().gain(getGrowth().stamina);
