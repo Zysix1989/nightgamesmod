@@ -588,10 +588,11 @@ public class GUI extends JFrame implements Observer {
     }
 
     private KeyableButton nextButton(Combat combat) {
-        return new RunnableButton("Next", () -> {
+        CommandPanelOption o = new CommandPanelOption("Next", event -> {
             clearCommand();
             combat.resume();
         });
+        return optionButton(o);
     }
 
     private KeyableButton optionButton(CommandPanelOption option) {
@@ -602,90 +603,91 @@ public class GUI extends JFrame implements Observer {
         return button;
     }
 
-    private KeyableButton eventButton(Activity event, String choice, String tooltip) {
-        RunnableButton button = new RunnableButton(choice, () -> {
-            event.visit(choice);
+    private KeyableButton eventButton(Activity activity, String choice, String tooltip) {
+        CommandPanelOption o = new CommandPanelOption(choice,
+            tooltip,
+            event -> {
+                activity.visit(choice);
         });
-        if (tooltip != null) {
-        	button.getButton().setToolTipText(tooltip);
-        }
-        return button;
+        return optionButton(o);
     }
 
-    private KeyableButton itemButton(Activity event, Loot i) {
-        RunnableButton button = new RunnableButton(Global.capitalizeFirstLetter(i.getName()), () -> {
-            event.visit(i.getName());
+    private KeyableButton itemButton(Activity activity, Loot i) {
+        CommandPanelOption o = new CommandPanelOption(Global.capitalizeFirstLetter(i.getName()),
+            i.getDesc(),
+            event -> {
+                activity.visit(i.getName());
         });
-        button.getButton().setToolTipText(i.getDesc());
-        return button;
+        return optionButton(o);
     }
 
     private KeyableButton interveneButton(Encounter enc, Character assist) {
-        RunnableButton button = new RunnableButton("Help " + assist.getName(), () -> {
+        CommandPanelOption o = new CommandPanelOption("Help " + assist.getName(), event -> {
             enc.intrude(Global.getPlayer(), assist);
         });
-        return button;
+        return optionButton(o);
     }
 
     private KeyableButton encounterButton(String label, Encounter enc, Character target, Encs choice) {
-        RunnableButton button = new RunnableButton(label, () -> {
+        CommandPanelOption o = new CommandPanelOption(label, event -> {
             enc.parse(choice, Global.getPlayer(), target);
             Global.getMatch().resume();
         });
-        return button;
+        return optionButton(o);
     }
 
     private KeyableButton encounterButton(String label, Encounter enc, Character target, Encs choice, Trap trap) {
-        RunnableButton button = new RunnableButton(label, () -> {
+        CommandPanelOption o = new CommandPanelOption(label, event -> {
             enc.parse(choice, Global.getPlayer(), target, trap);
             Global.getMatch().resume();
         });
-        return button;
+        return optionButton(o);
     }
 
     private KeyableButton watchButton(Encounter enc) {
-        RunnableButton button = new RunnableButton("Watch them fight", () -> {
+        CommandPanelOption o = new CommandPanelOption("Watch them fight", event -> {
             enc.watch();
         });
-        return button;
+        return optionButton(o);
     }
 
     private KeyableButton activityButton(Activity act) {
-        RunnableButton button = new RunnableButton(act.toString(), () -> {
+        CommandPanelOption o = new CommandPanelOption(act.toString(), event -> {
             act.visit("Start");
         });
-        return button;
+        return optionButton(o);
     }
 
     private KeyableButton sleepButton() {
-        RunnableButton button = new RunnableButton("Go to sleep", () -> {
+        CommandPanelOption o = new CommandPanelOption("Go to sleep", event -> {
             Global.startDay();
         });
-        return button;
+        return optionButton(o);
     }
 
     private KeyableButton matchButton() {
-        RunnableButton button = new RunnableButton("Start the match", () -> {
+        CommandPanelOption o = new CommandPanelOption("Start the match", event -> {
             Global.setUpMatch(new NoModifier());
         });
-        return button;
+        return optionButton(o);
     }
 
-    private KeyableButton locatorButton(final Action event, final String choice, final Character self) {
-        RunnableButton button = new RunnableButton(choice, () -> {
-            ((Locate) event).handleEvent(self, choice);
+    private KeyableButton locatorButton(final Action action, final String choice,
+        final Character self) {
+        CommandPanelOption o = new CommandPanelOption(choice, event -> {
+            ((Locate) action).handleEvent(self, choice);
         });
-        return button;
+        return optionButton(o);
     }
 
     private KeyableButton combatSceneButton(String label, Combat c, nightgames.characters.Character npc, CombatSceneChoice choice) {
-        RunnableButton button = new RunnableButton(label, () -> {
+        CommandPanelOption o = new CommandPanelOption(label, event -> {
             c.write("<br/>");
             choice.choose(c, npc);
             c.updateMessage();
             Global.gui().next(c);
         });
-        return button;
+        return optionButton(o);
     }
 
     public void changeClothes(Character player, Activity event, String backOption) {
