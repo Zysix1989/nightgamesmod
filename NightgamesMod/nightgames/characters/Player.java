@@ -478,7 +478,7 @@ public class Player extends Character {
     public void ding(Combat c) {
         levelsToGain += 1;
         if (levelsToGain == 1) {
-            actuallyDing(c);
+            actuallyDing();
             if (cloned == 0) {
                 if (c != null) {
                     c.pause();
@@ -517,7 +517,7 @@ public class Player extends Character {
             Global.gainSkills(player);
             levelsToGain -= 1;
             if (player.getLevelsToGain() > 0) {
-                player.actuallyDing(combat);
+                player.actuallyDing();
                 handleLevelUp(combat);
             } else {
                 if (combat != null) {
@@ -537,12 +537,12 @@ public class Player extends Character {
         skippedFeat = true;
     }
 
-    public void actuallyDing(Combat c) {
+    private void actuallyDing() {
         level += 1;
         getStamina().gain(getGrowth().stamina);
         getArousal().gain(getGrowth().arousal);
         availableAttributePoints += getGrowth().attributes[Math.min(rank, getGrowth().attributes.length-1)];
-        Global.writeIfCombatUpdateImmediately(c, this, "You've gained a Level!<br/>Select which attributes to increase.");
+        gui.message(this, "You've gained a Level!<br/>Select which attributes to increase.");
         if (getLevel() % 3 == 0 && level < 10 || (getLevel() + 1) % 2 == 0 && level > 10) {
             traitPoints += 1;
         }
