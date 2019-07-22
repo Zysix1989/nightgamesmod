@@ -405,6 +405,7 @@ public class GUI extends JFrame implements Observer {
         commandPanel.refresh();
     }
 
+    // New code should use this one
     public void addToCommandPanel(final CommandPanelOption option) {
         CommandPanelOption wrappedOption = new CommandPanelOption(option.displayText,
             option.toolTipText,
@@ -414,32 +415,6 @@ public class GUI extends JFrame implements Observer {
                 refresh();
             });
         addToCommandPanel(optionButton(wrappedOption));
-    }
-
-    public void addAttributeToCommandPanel(Attribute a) {
-        CommandPanelOption o = new CommandPanelOption(a.name(), event -> {
-            Global.getPlayer().increaseAttribute(a);
-        });
-        addToCommandPanel(o);
-    }
-
-    public void addTraitToCommandPanel(Trait trait) {
-        CommandPanelOption o = new CommandPanelOption("Skip",
-            "Save the trait point for later.",
-            event -> {
-                Global.getPlayer().skipFeat();
-                Global.getPlayer().handleLevelUp();
-            });
-        if (trait != null) {
-            o = new CommandPanelOption(trait.toString(), trait.getDesc(), event -> {
-                Global.getPlayer().grantTrait(trait);
-            });
-        }
-        addToCommandPanel(o);
-    }
-
-    public void addOptionToCommandPanel(CommandPanelOption option) {
-        addToCommandPanel(optionButton(option));
     }
 
     public void addAction(Action action, Character user) {

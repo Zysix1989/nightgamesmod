@@ -23,6 +23,7 @@ import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Flag;
 import nightgames.global.Global;
+import nightgames.gui.CommandPanelOption;
 import nightgames.gui.GUI;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
@@ -494,10 +495,10 @@ public class Player extends Character {
             gui.clearCommand();
             for (Attribute att : att.keySet()) {
                 if (Attribute.isTrainable(this, att) && getPure(att) > 0) {
-                    gui.addAttributeToCommandPanel(att);
+                    gui.addToCommandPanel(optionToSelectAttribute(att));
                 }
             }
-            gui.addAttributeToCommandPanel(Attribute.Willpower);
+            gui.addToCommandPanel(optionToSelectAttribute(Attribute.Willpower));
             if (Global.getMatch() != null) {
                 Global.getMatch().pause();
             }
@@ -506,10 +507,10 @@ public class Player extends Character {
             gui.message(this, "You've earned a new perk. Select one below.</br>");
             for (Trait feat : Global.getFeats(this)) {
                 if (!this.has(feat)) {
-                    gui.addTraitToCommandPanel(feat);
+                    gui.addToCommandPanel(optionToSelectTrait(feat));
                 }
             }
-            gui.addTraitToCommandPanel(null);
+            gui.addToCommandPanel(optionToSelectTrait(null));
         } else {
             skippedFeat = false;
             gui.clearCommand();
@@ -530,6 +531,27 @@ public class Player extends Character {
                 }
             }
         }
+    }
+
+    private CommandPanelOption optionToSelectAttribute(Attribute a) {
+        return new CommandPanelOption(a.name(), event -> {
+            increaseAttribute(a);
+        });
+    }
+
+    private CommandPanelOption optionToSelectTrait(Trait t) {
+        CommandPanelOption o = new CommandPanelOption("Skip",
+            "Save the trait point for later.",
+            event -> {
+                skipFeat();
+                handleLevelUp();
+            });
+        if (t != null) {
+            o = new CommandPanelOption(t.toString(), t.getDesc(), event -> {
+                grantTrait(t);
+            });
+        }
+        return o;
     }
 
     public void skipFeat() {
