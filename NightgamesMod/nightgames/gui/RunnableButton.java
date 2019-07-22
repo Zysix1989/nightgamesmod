@@ -2,6 +2,8 @@ package nightgames.gui;
 
 import java.awt.Font;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import org.apache.commons.lang3.text.WordUtils;
 
 class RunnableButton extends KeyableButton {
@@ -13,6 +15,14 @@ class RunnableButton extends KeyableButton {
         resetFontSize();
 
         getButton().addActionListener((evt) -> runnable.run());
+    }
+
+    public RunnableButton(String text, ActionListener action) {
+        super(formatHTMLMultiline(text, ""));
+        this.text = text;
+        resetFontSize();
+
+        getButton().addActionListener(action);
     }
 
     private void resetFontSize() {

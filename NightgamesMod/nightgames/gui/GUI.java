@@ -416,6 +416,10 @@ public class GUI extends JFrame implements Observer {
         addToCommandPanel(featButton(trait));
     }
 
+    public void addOptionToCommandPanel(CommandPanelOption option) {
+        addToCommandPanel(optionButton(option));
+    }
+
     public void addAction(Action action, Character user) {
         commandPanel.add(new ActionButton(action, user));
         Global.getMatch().pause();
@@ -591,6 +595,14 @@ public class GUI extends JFrame implements Observer {
             clearCommand();
             combat.resume();
         });
+    }
+
+    private KeyableButton optionButton(CommandPanelOption option) {
+        RunnableButton button = new RunnableButton(option.displayText, option.action);
+        if (option.toolTipText != null) {
+            button.getButton().setToolTipText(option.toolTipText);
+        }
+        return button;
     }
 
     private KeyableButton eventButton(Activity event, String choice, String tooltip) {
