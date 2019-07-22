@@ -42,13 +42,13 @@ class GUIPlayerAttributes {
 
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, 1));
-        panel.setPreferredSize(new Dimension(width/8, targetPanel.getHeight()));
+        panel.setPreferredSize(new Dimension(width / 8, targetPanel.getHeight()));
         if (width < 720) {
             panel.setMaximumSize(new Dimension(height, width / 6));
         }
         statsPanel = new JPanel(new GridLayout(0, 3));
         panel.add(statsPanel);
-        statsPanel.setPreferredSize(new Dimension(width/8, 200));
+        statsPanel.setPreferredSize(new Dimension(width / 8, 200));
 
         JSeparator sep = new JSeparator();
         sep.setMaximumSize(new Dimension(panel.getWidth(), 2));
@@ -67,8 +67,8 @@ class GUIPlayerAttributes {
         appearanceScrollPane.setOpaque(false);
         appearanceScrollPane.getViewport().setOpaque(false);
         JPanel appearancePanel = new JPanel(new GridLayout());
-        appearancePanel.setMaximumSize(new Dimension(width/8, 2000));
-        appearancePanel.setPreferredSize(new Dimension(width/8, 2000));
+        appearancePanel.setMaximumSize(new Dimension(width / 8, 2000));
+        appearancePanel.setPreferredSize(new Dimension(width / 8, 2000));
 
         appearancePanel.setBackground(GUIColors.bgLight);
         panel.add(appearancePanel);
@@ -100,7 +100,9 @@ class GUIPlayerAttributes {
             int pure = player.getPure(a);
             if (pure > 0 || amt > 0) {
                 if (amt == pure) {
-                    JLabel label = new JLabel(String.format("<html><font face='Georgia' size=%d>%s: %s</font></html>", descFontSize, a.name(), amt));
+                    JLabel label = new JLabel(String
+                        .format("<html><font face='Georgia' size=%d>%s: %s</font></html>",
+                            descFontSize, a.name(), amt));
                     label.setForeground(GUIColors.textColorLight);
                     statsPanel.add(label);
                 } else {
@@ -114,8 +116,10 @@ class GUIPlayerAttributes {
                         bonusColor = "0,255,0";
                     }
                     int statBonusFontSize = descFontSize - 1;
-                    String labelString = String.format("<html><font face='Georgia' size=%d>%s: <font color='rgb(%s)'>%d</font> <font size=%d color='rgb(%s)'>(%+d)</font></font></html>",
-                        descFontSize, a.name(), attrColor, amt, statBonusFontSize, bonusColor, amt - pure);
+                    String labelString = String.format(
+                        "<html><font face='Georgia' size=%d>%s: <font color='rgb(%s)'>%d</font> <font size=%d color='rgb(%s)'>(%+d)</font></font></html>",
+                        descFontSize, a.name(), attrColor, amt, statBonusFontSize, bonusColor,
+                        amt - pure);
                     JLabel label = new JLabel(labelString);
                     label.setForeground(GUIColors.textColorLight);
                     statsPanel.add(label);
@@ -124,15 +128,18 @@ class GUIPlayerAttributes {
         }
 
         HTMLDocument doc = (HTMLDocument) appearance.getDocument();
-        HTMLEditorKit editorKit = (HTMLEditorKit) appearance.getEditorKit();
-        Global.freezeRNG();
         try {
+            doc.remove(0, doc.getLength());
+            HTMLEditorKit editorKit = (HTMLEditorKit) appearance.getEditorKit();
+            Global.freezeRNG();
+
             editorKit.insertHTML(doc, doc.getLength(),
                 "<font face='Georgia' color='white' size='" + descFontSize + "'>"
 
                     + player.getOutfit().describe(player) + "<br/>" + player.describeStatus()
 
-                    + (Global.getButtslutQuest().isPresent()?("<br/>" + Global.getButtslutQuest().get().getDescriptionFor(player)):"")
+                    + (Global.getButtslutQuest().isPresent() ? ("<br/>" + Global
+                    .getButtslutQuest().get().getDescriptionFor(player)) : "")
                     + "</font><br/>",
                 0, 0, null);
         } catch (BadLocationException | IOException e) {
