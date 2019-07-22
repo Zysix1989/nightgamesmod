@@ -614,10 +614,8 @@ public class GUI extends JFrame implements Observer {
     private KeyableButton attributeButton(Attribute att) {
         RunnableButton button = new RunnableButton(att.name(), () -> {
             clearText();
-            Global.getPlayer().mod(att, 1);
-            Global.getPlayer().availableAttributePoints -= 1;
             refresh();
-            Global.getPlayer().handleLevelUp();
+            Global.getPlayer().increaseAttribute(att);
         });
         return button;
     }

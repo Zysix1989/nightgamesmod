@@ -537,6 +537,15 @@ public class Player extends Character {
         skippedFeat = true;
     }
 
+    public void increaseAttribute(Attribute attribute) {
+        if (availableAttributePoints < 1) {
+            throw new RuntimeException("attempted to increase attributes with no points remaining");
+        }
+        mod(attribute, 1);
+        availableAttributePoints -= 1;
+        handleLevelUp();
+    }
+
     private void actuallyDing() {
         level += 1;
         getStamina().gain(getGrowth().stamina);
