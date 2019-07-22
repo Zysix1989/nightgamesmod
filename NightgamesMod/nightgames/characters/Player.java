@@ -554,11 +554,11 @@ public class Player extends Character {
         return o;
     }
 
-    public void skipFeat() {
+    private void skipFeat() {
         skippedFeat = true;
     }
 
-    public void increaseAttribute(Attribute attribute) {
+    private void increaseAttribute(Attribute attribute) {
         if (availableAttributePoints < 1) {
             throw new RuntimeException("attempted to increase attributes with no points remaining");
         }
@@ -567,7 +567,7 @@ public class Player extends Character {
         handleLevelUp();
     }
 
-    public void grantTrait(Trait trait) {
+    private void grantTrait(Trait trait) {
         if (traitPoints < 1) {
             throw new RuntimeException("attempted to grant trait without trait points");
         }
