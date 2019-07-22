@@ -515,7 +515,7 @@ public class Player extends Character {
             skippedFeat = false;
             gui.clearCommand();
             Global.gainSkills(player);
-            player.finishDing();
+            levelsToGain -= 1;
             if (player.getLevelsToGain() > 0) {
                 player.actuallyDing(combat);
                 handleLevelUp(combat);
@@ -528,7 +528,6 @@ public class Player extends Character {
                     Global.getDay().plan();
                 } else {
                     MatchType.NORMAL.runPrematch();
-                    ;
                 }
             }
         }
@@ -547,10 +546,6 @@ public class Player extends Character {
         if (getLevel() % 3 == 0 && level < 10 || (getLevel() + 1) % 2 == 0 && level > 10) {
             traitPoints += 1;
         }
-    }
-
-    public void finishDing() {
-        levelsToGain -= 1;
     }
 
     @Override
