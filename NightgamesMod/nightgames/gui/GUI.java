@@ -406,14 +406,30 @@ public class GUI extends JFrame implements Observer {
     }
 
     public void addAttributeToCommandPanel(Attribute a) {
-        addToCommandPanel(attributeButton(a));
+        CommandPanelOption o = new CommandPanelOption(a.name(), event -> {
+            clearText();
+            Global.getPlayer().increaseAttribute(a);
+            refresh();
+        });
+        addToCommandPanel(optionButton(o));
     }
 
     public void addTraitToCommandPanel(Trait trait) {
-        if (trait == null) {
-            addToCommandPanel(skipFeatButton());
+        CommandPanelOption o = new CommandPanelOption("Skip",
+            "Save the trait point for later.",
+            event -> {
+                Global.getPlayer().skipFeat();
+                clearText();
+                Global.getPlayer().handleLevelUp();
+            });
+        if (trait != null) {
+            o = new CommandPanelOption(trait.toString(), trait.getDesc(), event -> {
+                clearText();
+                Global.getPlayer().grantTrait(trait);
+                refresh();
+            });
         }
-        addToCommandPanel(featButton(trait));
+        addToCommandPanel(optionButton(o));
     }
 
     public void addOptionToCommandPanel(CommandPanelOption option) {
@@ -621,35 +637,6 @@ public class GUI extends JFrame implements Observer {
         });
         button.getButton().setToolTipText(i.getDesc());
         return button;
-    }
-
-    private KeyableButton attributeButton(Attribute att) {
-        CommandPanelOption o = new CommandPanelOption(att.name(), event -> {
-            clearText();
-            Global.getPlayer().increaseAttribute(att);
-            refresh();
-        });
-        return optionButton(o);
-    }
-
-    private KeyableButton featButton(Trait trait) {
-        CommandPanelOption o = new CommandPanelOption(trait.toString(), trait.getDesc(), event -> {
-            clearText();
-            Global.getPlayer().grantTrait(trait);
-            refresh();
-        });
-        return optionButton(o);
-    }
-
-    private KeyableButton skipFeatButton() {
-        CommandPanelOption o = new CommandPanelOption("Skip",
-            "Save the trait point for later.",
-            event -> {
-            Global.getPlayer().skipFeat();
-            clearText();
-            Global.getPlayer().handleLevelUp();
-        });
-        return optionButton(o);
     }
 
     private KeyableButton interveneButton(Encounter enc, Character assist) {
