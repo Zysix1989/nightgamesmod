@@ -489,12 +489,11 @@ public class Player extends Character {
     }
 
     public void handleLevelUp() {
-        Player player = Global.human;
-        if (player.availableAttributePoints > 0) {
-            gui.message(player, player.availableAttributePoints + " Attribute Points remain.</br>");
+        if (availableAttributePoints > 0) {
+            gui.message(this, availableAttributePoints + " Attribute Points remain.</br>");
             gui.clearCommand();
-            for (Attribute att : player.att.keySet()) {
-                if (Attribute.isTrainable(player, att) && player.getPure(att) > 0) {
+            for (Attribute att : att.keySet()) {
+                if (Attribute.isTrainable(this, att) && getPure(att) > 0) {
                     gui.addAttributeToCommandPanel(att);
                 }
             }
@@ -502,11 +501,11 @@ public class Player extends Character {
             if (Global.getMatch() != null) {
                 Global.getMatch().pause();
             }
-        } else if (player.traitPoints > 0 && !skippedFeat) {
+        } else if (traitPoints > 0 && !skippedFeat) {
             gui.clearCommand();
-            gui.message(player, "You've earned a new perk. Select one below.</br>");
-            for (Trait feat : Global.getFeats(player)) {
-                if (!player.has(feat)) {
+            gui.message(this, "You've earned a new perk. Select one below.</br>");
+            for (Trait feat : Global.getFeats(this)) {
+                if (!this.has(feat)) {
                     gui.addTraitToCommandPanel(feat);
                 }
             }
@@ -514,10 +513,10 @@ public class Player extends Character {
         } else {
             skippedFeat = false;
             gui.clearCommand();
-            Global.gainSkills(player);
+            Global.gainSkills(this);
             levelsToGain -= 1;
-            if (player.getLevelsToGain() > 0) {
-                player.actuallyDing();
+            if (getLevelsToGain() > 0) {
+                actuallyDing();
                 handleLevelUp();
             } else {
                 if (gui.combat != null) {
