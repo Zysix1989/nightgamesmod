@@ -624,32 +624,32 @@ public class GUI extends JFrame implements Observer {
     }
 
     private KeyableButton attributeButton(Attribute att) {
-        RunnableButton button = new RunnableButton(att.name(), () -> {
+        CommandPanelOption o = new CommandPanelOption(att.name(), event -> {
             clearText();
             Global.getPlayer().increaseAttribute(att);
             refresh();
         });
-        return button;
+        return optionButton(o);
     }
 
     private KeyableButton featButton(Trait trait) {
-        RunnableButton button = new RunnableButton(trait.toString(), () -> {
+        CommandPanelOption o = new CommandPanelOption(trait.toString(), trait.getDesc(), event -> {
             clearText();
             Global.getPlayer().grantTrait(trait);
             refresh();
         });
-        button.getButton().setToolTipText(trait.getDesc());
-        return button;
+        return optionButton(o);
     }
 
     private KeyableButton skipFeatButton() {
-        RunnableButton button = new RunnableButton("Skip", () -> {
+        CommandPanelOption o = new CommandPanelOption("Skip",
+            "Save the trait point for later.",
+            event -> {
             Global.getPlayer().skipFeat();
             clearText();
             Global.getPlayer().handleLevelUp();
         });
-        button.getButton().setToolTipText("Save the trait point for later.");
-        return button;
+        return optionButton(o);
     }
 
     private KeyableButton interveneButton(Encounter enc, Character assist) {
