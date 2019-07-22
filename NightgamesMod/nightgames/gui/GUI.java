@@ -424,16 +424,21 @@ public class GUI extends JFrame implements Observer {
     }
 
     public void addActivity(Activity act) {
-        commandPanel.add(activityButton(act));
-        commandPanel.refresh();
+        CommandPanelOption o = new CommandPanelOption(act.toString(), event -> {
+            act.visit("Start");
+        });
+        addToCommandPanel(o);
     }
 
     public void next(Combat combat) {
         refresh();
         clearCommand();
-        commandPanel.add(nextButton(combat));
         Global.getMatch().pause();
-        commandPanel.refresh();
+        CommandPanelOption o = new CommandPanelOption("Next", event -> {
+            clearCommand();
+            combat.resume();
+        });
+        addToCommandPanel(o);
     }
 
     public void next(Activity event) {
@@ -444,8 +449,13 @@ public class GUI extends JFrame implements Observer {
     }
 
     public void choose(Combat c, Character npc, String message, CombatSceneChoice choice) {
-        commandPanel.add(combatSceneButton(message, c, npc, choice));
-        commandPanel.refresh();
+        CommandPanelOption o = new CommandPanelOption(message, event -> {
+            c.write("<br/>");
+            choice.choose(c, npc);
+            c.updateMessage();
+            Global.gui().next(c);
+        });
+        addToCommandPanel(o);
     }
 
     public void choose(String choice) {
@@ -463,14 +473,20 @@ public class GUI extends JFrame implements Observer {
         commandPanel.refresh();
     }
 
-    public void choose(Action event, String choice, Character self) {
-        commandPanel.add(locatorButton(event, choice, self));
-        commandPanel.refresh();
+    public void choose(Action action, String choice, Character self) {
+        CommandPanelOption o = new CommandPanelOption(choice, event -> {
+            ((Locate) action).handleEvent(self, choice);
+        });
+        addToCommandPanel(o);
     }
 
     public void sale(Store shop, Loot i) {
-        commandPanel.add(itemButton(shop, i));
-        commandPanel.refresh();
+        CommandPanelOption o = new CommandPanelOption(Global.capitalizeFirstLetter(i.getName()),
+            i.getDesc(),
+            event -> {
+                shop.visit(i.getName());
+            });
+        addToCommandPanel(o);
     }
 
     public void promptFF(Encounter enc, Character target) {
@@ -495,7 +511,11 @@ public class GUI extends JFrame implements Observer {
 
     public void promptOpportunity(Encounter enc, Character target, Trap trap) {
         clearCommand();
-        commandPanel.add(encounterButton("Attack " + target.getName(), enc, target, Encs.capitalize, trap));
+        CommandPanelOption o = new CommandPanelOption("Attack " + target.getName(), event -> {
+            enc.parse(Encs.capitalize, Global.getPlayer(), target, trap);
+            Global.getMatch().resume();
+        });
+        addToCommandPanel(o);
         commandPanel.add(encounterButton("Wait", enc, target, Encs.wait));
         Global.getMatch().pause();
         commandPanel.refresh();
@@ -519,7 +539,10 @@ public class GUI extends JFrame implements Observer {
         clearCommand();
         commandPanel.add(interveneButton(enc, p1));
         commandPanel.add(interveneButton(enc, p2));
-        commandPanel.add(watchButton(enc));
+        CommandPanelOption o = new CommandPanelOption("Watch them fight", event -> {
+            enc.watch();
+        });
+        addToCommandPanel(o);
         Global.getMatch().pause();
         commandPanel.refresh();
     }
@@ -561,7 +584,10 @@ public class GUI extends JFrame implements Observer {
         showNone();
         menuBar.setQuitMatchEnabled(false);
         Global.endNightForSave();
-        commandPanel.add(sleepButton());
+        CommandPanelOption o = new CommandPanelOption("Go to sleep", event -> {
+            Global.startDay();
+        });
+        addToCommandPanel(o);
         commandPanel.add(new SaveButton());
         commandPanel.refresh();
     }
@@ -587,14 +613,6 @@ public class GUI extends JFrame implements Observer {
         }
     }
 
-    private KeyableButton nextButton(Combat combat) {
-        CommandPanelOption o = new CommandPanelOption("Next", event -> {
-            clearCommand();
-            combat.resume();
-        });
-        return optionButton(o);
-    }
-
     private KeyableButton optionButton(CommandPanelOption option) {
         RunnableButton button = new RunnableButton(option.displayText, option.action);
         if (option.toolTipText != null) {
@@ -612,15 +630,6 @@ public class GUI extends JFrame implements Observer {
         return optionButton(o);
     }
 
-    private KeyableButton itemButton(Activity activity, Loot i) {
-        CommandPanelOption o = new CommandPanelOption(Global.capitalizeFirstLetter(i.getName()),
-            i.getDesc(),
-            event -> {
-                activity.visit(i.getName());
-        });
-        return optionButton(o);
-    }
-
     private KeyableButton interveneButton(Encounter enc, Character assist) {
         CommandPanelOption o = new CommandPanelOption("Help " + assist.getName(), event -> {
             enc.intrude(Global.getPlayer(), assist);
@@ -632,60 +641,6 @@ public class GUI extends JFrame implements Observer {
         CommandPanelOption o = new CommandPanelOption(label, event -> {
             enc.parse(choice, Global.getPlayer(), target);
             Global.getMatch().resume();
-        });
-        return optionButton(o);
-    }
-
-    private KeyableButton encounterButton(String label, Encounter enc, Character target, Encs choice, Trap trap) {
-        CommandPanelOption o = new CommandPanelOption(label, event -> {
-            enc.parse(choice, Global.getPlayer(), target, trap);
-            Global.getMatch().resume();
-        });
-        return optionButton(o);
-    }
-
-    private KeyableButton watchButton(Encounter enc) {
-        CommandPanelOption o = new CommandPanelOption("Watch them fight", event -> {
-            enc.watch();
-        });
-        return optionButton(o);
-    }
-
-    private KeyableButton activityButton(Activity act) {
-        CommandPanelOption o = new CommandPanelOption(act.toString(), event -> {
-            act.visit("Start");
-        });
-        return optionButton(o);
-    }
-
-    private KeyableButton sleepButton() {
-        CommandPanelOption o = new CommandPanelOption("Go to sleep", event -> {
-            Global.startDay();
-        });
-        return optionButton(o);
-    }
-
-    private KeyableButton matchButton() {
-        CommandPanelOption o = new CommandPanelOption("Start the match", event -> {
-            Global.setUpMatch(new NoModifier());
-        });
-        return optionButton(o);
-    }
-
-    private KeyableButton locatorButton(final Action action, final String choice,
-        final Character self) {
-        CommandPanelOption o = new CommandPanelOption(choice, event -> {
-            ((Locate) action).handleEvent(self, choice);
-        });
-        return optionButton(o);
-    }
-
-    private KeyableButton combatSceneButton(String label, Combat c, nightgames.characters.Character npc, CombatSceneChoice choice) {
-        CommandPanelOption o = new CommandPanelOption(label, event -> {
-            c.write("<br/>");
-            choice.choose(c, npc);
-            c.updateMessage();
-            Global.gui().next(c);
         });
         return optionButton(o);
     }
