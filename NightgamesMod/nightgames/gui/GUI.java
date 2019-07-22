@@ -617,7 +617,7 @@ public class GUI extends JFrame implements Observer {
             Global.getPlayer().mod(att, 1);
             Global.getPlayer().availableAttributePoints -= 1;
             refresh();
-            Global.getPlayer().handleLevelUp(combat);
+            Global.getPlayer().handleLevelUp();
         });
         return button;
     }
@@ -630,7 +630,7 @@ public class GUI extends JFrame implements Observer {
             Global.gainSkills(Global.getPlayer());
             Global.getPlayer().traitPoints -= 1;
             refresh();
-            Global.getPlayer().handleLevelUp(combat);
+            Global.getPlayer().handleLevelUp();
         });
         button.getButton().setToolTipText(trait.getDesc());
         return button;
@@ -640,7 +640,7 @@ public class GUI extends JFrame implements Observer {
         RunnableButton button = new RunnableButton("Skip", () -> {
             Global.getPlayer().skipFeat();
             clearText();
-            Global.getPlayer().handleLevelUp(combat);
+            Global.getPlayer().handleLevelUp();
         });
         button.getButton().setToolTipText("Save the trait point for later.");
         return button;

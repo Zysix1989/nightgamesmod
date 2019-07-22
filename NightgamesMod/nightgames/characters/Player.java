@@ -483,12 +483,12 @@ public class Player extends Character {
                 if (c != null) {
                     c.pause();
                 }
-                handleLevelUp(c);
+                handleLevelUp();
             }
         }
     }
 
-    public void handleLevelUp(Combat combat) {
+    public void handleLevelUp() {
         Player player = Global.human;
         if (player.availableAttributePoints > 0) {
             gui.message(player, player.availableAttributePoints + " Attribute Points remain.</br>");
@@ -518,10 +518,10 @@ public class Player extends Character {
             levelsToGain -= 1;
             if (player.getLevelsToGain() > 0) {
                 player.actuallyDing();
-                handleLevelUp(combat);
+                handleLevelUp();
             } else {
-                if (combat != null) {
-                    combat.resume();
+                if (gui.combat != null) {
+                    gui.combat.resume();
                 } else if (Global.getMatch() != null) {
                     Global.getMatch().resume();
                 } else if (Global.day != null) {
