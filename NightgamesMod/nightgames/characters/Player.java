@@ -27,6 +27,7 @@ import nightgames.gui.GUI;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.match.Encounter;
+import nightgames.match.MatchType;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.skills.Nothing;
 import nightgames.skills.Skill;
@@ -48,6 +49,7 @@ public class Player extends Character {
     private GUI gui;
     public int traitPoints;
     private int levelsToGain;
+    private boolean skippedFeat;
 
     public Player(String name, GUI gui) {
         this(name, gui, CharacterSex.male, Optional.empty(), new ArrayList<>(), new HashMap<>());
@@ -478,9 +480,62 @@ public class Player extends Character {
         if (levelsToGain == 1) {
             actuallyDing(c);
             if (cloned == 0) {
-                gui.ding(c);
+                handleLevelUp(c);
             }
         }
+    }
+
+    public void handleLevelUp(Combat combat) {
+        if (combat != null) {
+            combat.pause();
+        }
+        Player player = Global.human;
+        if (player.availableAttributePoints > 0) {
+            gui.message(player, player.availableAttributePoints + " Attribute Points remain.</br>");
+            gui.clearCommand();
+            for (Attribute att : player.att.keySet()) {
+                if (Attribute.isTrainable(player, att) && player.getPure(att) > 0) {
+                    gui.addAttributeToCommandPanel(att);
+                }
+            }
+            gui.addAttributeToCommandPanel(Attribute.Willpower);
+            if (Global.getMatch() != null) {
+                Global.getMatch().pause();
+            }
+        } else if (player.traitPoints > 0 && !skippedFeat) {
+            gui.clearCommand();
+            gui.message(player, "You've earned a new perk. Select one below.</br>");
+            for (Trait feat : Global.getFeats(player)) {
+                if (!player.has(feat)) {
+                    gui.addTraitToCommandPanel(feat);
+                }
+            }
+            gui.addTraitToCommandPanel(null);
+        } else {
+            skippedFeat = false;
+            gui.clearCommand();
+            Global.gainSkills(player);
+            player.finishDing();
+            if (player.getLevelsToGain() > 0) {
+                player.actuallyDing(combat);
+                handleLevelUp(combat);
+            } else {
+                if (combat != null) {
+                    combat.resume();
+                } else if (Global.getMatch() != null) {
+                    Global.getMatch().resume();
+                } else if (Global.day != null) {
+                    Global.getDay().plan();
+                } else {
+                    MatchType.NORMAL.runPrematch();
+                    ;
+                }
+            }
+        }
+    }
+
+    public void skipFeat() {
+        skippedFeat = true;
     }
 
     public void actuallyDing(Combat c) {

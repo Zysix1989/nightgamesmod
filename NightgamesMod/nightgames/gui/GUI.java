@@ -405,6 +405,17 @@ public class GUI extends JFrame implements Observer {
         commandPanel.refresh();
     }
 
+    public void addAttributeToCommandPanel(Attribute a) {
+        addToCommandPanel(attributeButton(a));
+    }
+
+    public void addTraitToCommandPanel(Trait trait) {
+        if (trait == null) {
+            addToCommandPanel(skipFeatButton());
+        }
+        addToCommandPanel(featButton(trait));
+    }
+
     public void addAction(Action action, Character user) {
         commandPanel.add(new ActionButton(action, user));
         Global.getMatch().pause();
@@ -522,56 +533,6 @@ public class GUI extends JFrame implements Observer {
         commandPanel.refresh();
     }
 
-    // level up
-    public void ding(Combat combat) {
-        if (combat != null) {
-            combat.pause();
-        }
-        Player player = Global.human;
-        if (player.availableAttributePoints > 0) {
-            message(player,
-                player.availableAttributePoints + " Attribute Points remain.</br>");
-            clearCommand();
-            for (Attribute att : player.att.keySet()) {
-                if (Attribute.isTrainable(player, att) && player.getPure(att) > 0) {
-                    addToCommandPanel(attributeButton(att));
-                }
-            }
-            addToCommandPanel(attributeButton(Attribute.Willpower));
-            if (Global.getMatch() != null) {
-                Global.getMatch().pause();
-            }
-        } else if (player.traitPoints > 0 && !skippedFeat) {
-            clearCommand();
-            message(player, "You've earned a new perk. Select one below.</br>");
-            for (Trait feat : Global.getFeats(player)) {
-                if (!player.has(feat)) {
-                    addToCommandPanel(featButton(feat));
-                }
-            }
-            addToCommandPanel(skipFeatButton());
-        } else {
-            skippedFeat = false;
-            clearCommand();
-            Global.gainSkills(player);
-            player.finishDing();
-            if (player.getLevelsToGain() > 0) {
-                player.actuallyDing(combat);
-                ding(combat);
-            } else {
-                if (combat != null) {
-                    combat.resume();
-                } else if (Global.getMatch() != null) {
-                    Global.getMatch().resume();
-                } else if (Global.day != null) {
-                    Global.getDay().plan();
-                } else {
-                    MatchType.NORMAL.runPrematch();;
-                }
-            }
-        }
-    }
-
     public void endCombat() {
         if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
             System.out.println("End Combat");
@@ -656,7 +617,7 @@ public class GUI extends JFrame implements Observer {
             Global.getPlayer().mod(att, 1);
             Global.getPlayer().availableAttributePoints -= 1;
             refresh();
-            ding(combat);
+            Global.getPlayer().handleLevelUp(combat);
         });
         return button;
     }
@@ -669,7 +630,7 @@ public class GUI extends JFrame implements Observer {
             Global.gainSkills(Global.getPlayer());
             Global.getPlayer().traitPoints -= 1;
             refresh();
-            ding(combat);
+            Global.getPlayer().handleLevelUp(combat);
         });
         button.getButton().setToolTipText(trait.getDesc());
         return button;
@@ -677,9 +638,9 @@ public class GUI extends JFrame implements Observer {
 
     private KeyableButton skipFeatButton() {
         RunnableButton button = new RunnableButton("Skip", () -> {
-            skippedFeat = true;
+            Global.getPlayer().skipFeat();
             clearText();
-            ding(combat);
+            Global.getPlayer().handleLevelUp(combat);
         });
         button.getButton().setToolTipText("Save the trait point for later.");
         return button;
