@@ -4,12 +4,13 @@ import java.awt.event.ActionListener;
 
 public class CommandPanelOption {
 
-    String displayText;
-    String toolTipText;
-    ActionListener action;
+    final String displayText;
+    final String toolTipText;
+    final ActionListener action;
 
     public CommandPanelOption(String displayText, ActionListener action) {
         this.displayText = displayText;
+        this.toolTipText = null;
         this.action = action;
     }
 
