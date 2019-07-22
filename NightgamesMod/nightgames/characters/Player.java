@@ -480,15 +480,15 @@ public class Player extends Character {
         if (levelsToGain == 1) {
             actuallyDing(c);
             if (cloned == 0) {
+                if (c != null) {
+                    c.pause();
+                }
                 handleLevelUp(c);
             }
         }
     }
 
     public void handleLevelUp(Combat combat) {
-        if (combat != null) {
-            combat.pause();
-        }
         Player player = Global.human;
         if (player.availableAttributePoints > 0) {
             gui.message(player, player.availableAttributePoints + " Attribute Points remain.</br>");
