@@ -405,13 +405,22 @@ public class GUI extends JFrame implements Observer {
         commandPanel.refresh();
     }
 
+    public void addToCommandPanel(final CommandPanelOption option) {
+        CommandPanelOption wrappedOption = new CommandPanelOption(option.displayText,
+            option.toolTipText,
+            event -> {
+                clearText();
+                option.action.actionPerformed(event);
+                refresh();
+            });
+        addToCommandPanel(optionButton(wrappedOption));
+    }
+
     public void addAttributeToCommandPanel(Attribute a) {
         CommandPanelOption o = new CommandPanelOption(a.name(), event -> {
-            clearText();
             Global.getPlayer().increaseAttribute(a);
-            refresh();
         });
-        addToCommandPanel(optionButton(o));
+        addToCommandPanel(o);
     }
 
     public void addTraitToCommandPanel(Trait trait) {
@@ -419,17 +428,14 @@ public class GUI extends JFrame implements Observer {
             "Save the trait point for later.",
             event -> {
                 Global.getPlayer().skipFeat();
-                clearText();
                 Global.getPlayer().handleLevelUp();
             });
         if (trait != null) {
             o = new CommandPanelOption(trait.toString(), trait.getDesc(), event -> {
-                clearText();
                 Global.getPlayer().grantTrait(trait);
-                refresh();
             });
         }
-        addToCommandPanel(optionButton(o));
+        addToCommandPanel(o);
     }
 
     public void addOptionToCommandPanel(CommandPanelOption option) {
