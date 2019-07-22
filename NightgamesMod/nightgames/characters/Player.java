@@ -547,7 +547,7 @@ public class Player extends Character {
 
     public void grantTrait(Trait trait) {
         if (traitPoints < 1) {
-            throw new RuntimeException("attempted to grant trait without trait points")
+            throw new RuntimeException("attempted to grant trait without trait points");
         }
         gui.message(this, "Gained feat: " + trait.toString());
         add(trait);
