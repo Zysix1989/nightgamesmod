@@ -23,6 +23,7 @@ import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.GooeyMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
+import nightgames.daytime.Activity;
 import nightgames.daytime.BodyShop;
 import nightgames.daytime.Exercise;
 import nightgames.daytime.Porn;
@@ -1180,6 +1181,12 @@ public class Player extends Character {
         gui.addToCommandPanel(new CommandPanelOption("Next", event -> {
             gui.clearCommand();
             c.resume();
+        }));
+    }
+
+    public void activityChoice(Activity activity) {
+        gui.addToCommandPanel(new CommandPanelOption(activity.toString(), event -> {
+            activity.visit("Start");
         }));
     }
 }
