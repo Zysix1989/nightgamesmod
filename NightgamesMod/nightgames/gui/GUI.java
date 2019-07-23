@@ -446,11 +446,6 @@ public class GUI extends JFrame implements Observer {
         commandPanel.refresh();
     }
 
-    public void choose(Activity event, String choice, String tooltip) {
-        commandPanel.add(eventButton(event, choice, tooltip));
-        commandPanel.refresh();
-    }
-
     public void prompt(String message, List<KeyableButton> choices) {
         clearText();
         clearCommand();

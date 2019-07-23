@@ -1165,7 +1165,11 @@ public class Player extends Character {
 
     @Override
     public void bodyShopOptions(BodyShop shop, String displayText, int price) {
-        Global.gui().choose(shop, displayText, "Price: $" + price);
+        gui.addToCommandPanel(new CommandPanelOption(displayText,
+            "Price: $" + price,
+            event -> {
+                shop.visit(displayText);
+            }));
     }
 
 
