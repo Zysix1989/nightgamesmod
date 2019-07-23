@@ -983,4 +983,10 @@ public class NPC extends Character {
         throw new UnsupportedOperationException(
             String.format("attempted to access item %s in %s", displayText, shop.toString()));
     }
+
+    @Override
+    public void nextCombat(Combat c) {
+    }
+
+    ;
 }

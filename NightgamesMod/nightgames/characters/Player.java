@@ -1172,5 +1172,13 @@ public class Player extends Character {
             }));
     }
 
-
+    @Override
+    public void nextCombat(Combat c) {
+        gui.clearCommand();
+        Global.getMatch().pause();
+        gui.addToCommandPanel(new CommandPanelOption("Next", event -> {
+            gui.clearCommand();
+            c.resume();
+        }));
+    }
 }

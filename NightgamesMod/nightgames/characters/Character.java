@@ -4740,4 +4740,6 @@ public abstract class Character extends Observable implements Cloneable {
     public abstract void shopOptions(Store shop, Loot i);
 
     public abstract void bodyShopOptions(BodyShop shop, String displayText, int price);
+
+    public abstract void nextCombat(Combat c);
 }

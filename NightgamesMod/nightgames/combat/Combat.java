@@ -1361,7 +1361,8 @@ public class Combat extends Observable implements Cloneable {
                 return false;
             } else {
                 if (!paused) {
-                    Global.gui().next(this);
+                    p1.nextCombat(this);
+                    p2.nextCombat(this);
                 }
                 return true;
             }
@@ -1453,7 +1454,8 @@ public class Combat extends Observable implements Cloneable {
                     return;
                 }
             } else {
-                Global.gui().next(this);
+                p1.nextCombat(this);
+                p2.nextCombat(this);
             }
         }
         processedEnding = true;
