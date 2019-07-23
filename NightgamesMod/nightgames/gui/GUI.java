@@ -390,7 +390,7 @@ public class GUI extends JFrame implements Observer {
         commandPanel.refresh();
     }
 
-    public void addToCommandPanel(KeyableButton button) {
+    private void addToCommandPanel(KeyableButton button) {
         commandPanel.add(button);
         commandPanel.refresh();
     }
