@@ -1197,7 +1197,7 @@ public class Player extends Character {
             c.write("<br/>");
             choice.choose(c, npc);
             c.updateMessage();
-            gui.next(c);
+            nextCombat(c);
         });
         gui.addToCommandPanel(o);
     }

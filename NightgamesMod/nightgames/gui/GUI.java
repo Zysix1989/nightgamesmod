@@ -413,17 +413,6 @@ public class GUI extends JFrame implements Observer {
         commandPanel.refresh();
     }
 
-    public void next(Combat combat) {
-        refresh();
-        clearCommand();
-        Global.getMatch().pause();
-        CommandPanelOption o = new CommandPanelOption("Next", event -> {
-            clearCommand();
-            combat.resume();
-        });
-        addToCommandPanel(o);
-    }
-
     public void choose(Activity event, String choice) {
         commandPanel.add(eventButton(event, choice, null));
         commandPanel.refresh();
