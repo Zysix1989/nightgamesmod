@@ -456,13 +456,6 @@ public class GUI extends JFrame implements Observer {
         commandPanel.refresh();
     }
 
-    public void choose(Action action, String choice, Character self) {
-        CommandPanelOption o = new CommandPanelOption(choice, event -> {
-            ((Locate) action).handleEvent(self, choice);
-        });
-        addToCommandPanel(o);
-    }
-
     public void sale(Store shop, Loot i) {
         CommandPanelOption o = new CommandPanelOption(Global.capitalizeFirstLetter(i.getName()),
             i.getDesc(),

@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import nightgames.actions.Action;
 import nightgames.actions.Leap;
+import nightgames.actions.Locate;
 import nightgames.actions.Move;
 import nightgames.actions.Shortcut;
 import nightgames.areas.Area;
@@ -1126,11 +1127,17 @@ public class Player extends Character {
     }
 
     public void chooseTarget(Action action, String displayText) {
-        gui.choose(action, displayText, this);
+        CommandPanelOption o = new CommandPanelOption(displayText, event -> {
+            ((Locate) action).handleEvent(this, displayText);
+        });
+        gui.addToCommandPanel(o);
 
     }
 
     public void leaveAction(Action action) {
-        gui.choose(action, "Leave", this);
+        CommandPanelOption o = new CommandPanelOption("Leave", event -> {
+            ((Locate) action).handleEvent(this, "Leave");
+        });
+        gui.addToCommandPanel(o);
     }
 }
