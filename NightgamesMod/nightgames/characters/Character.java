@@ -23,6 +23,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.swing.plaf.basic.BasicTreeUI.TreeIncrementAction;
+import nightgames.global.Configuration;
 import org.apache.commons.lang3.ObjectUtils;
 import javax.xml.stream.events.Characters;
 
@@ -4714,5 +4715,17 @@ public abstract class Character extends Observable implements Cloneable {
 
     public String victoryLiner(Combat c, Character target) {
         return Global.format("{self:SUBJECT-ACTION:try} smiles in satisfaction with their victory.", this, target);
+    }
+
+    public int exercise() {
+        int maximumStaminaForLevel = Configuration.getMaximumStaminaPossible(this);
+        int gain = 1 + Global.random(2);
+        if (has(Trait.fitnessNut)) {
+            gain = gain + Global.random(2);
+        }
+        gain = Math.max(0,
+            (int) (Math.min(maximumStaminaForLevel, stamina.trueMax() + gain) - stamina.trueMax()));
+        stamina.gain(gain);
+        return gain;
     }
 }

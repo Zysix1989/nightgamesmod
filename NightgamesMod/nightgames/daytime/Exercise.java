@@ -24,7 +24,7 @@ public class Exercise extends Activity {
         Global.gui().clearText();
         if (page == 0) {
             Global.gui().next(this);
-            int gain = gainStamina(player);
+            int gain = player.exercise();
             showScene(pickScene(gain));
             if (gain > 0) {
                 Global.gui().message("<b>Your maximum stamina has increased by " + gain + ".</b>");
@@ -33,21 +33,10 @@ public class Exercise extends Activity {
             done(true);
         }
     }
-    
-    private int gainStamina(Character self) {
-        int maximumStaminaForLevel = Configuration.getMaximumStaminaPossible(self);
-        int gain = 1 + Global.random(2);
-        if (player.has(Trait.fitnessNut)) {
-            gain = gain + Global.random(2);
-        }
-        gain = Math.max(0, (int) (Math.min(maximumStaminaForLevel, self.getStamina().trueMax() + gain) - self.getStamina().trueMax()));
-        self.getStamina().gain(gain);
-        return gain;
-    }
 
     @Override
     public void shop(Character npc, int budget) {
-        gainStamina(npc);
+        npc.exercise();
     }
 
     private void showScene(Scene chosen) {
