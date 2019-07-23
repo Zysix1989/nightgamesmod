@@ -1153,4 +1153,8 @@ public class Player extends Character {
                 shop.visit(item.getName());
             }));
     }
+
+    public void sceneNext() {
+        Global.gui().choose("Next");
+    }
 }
