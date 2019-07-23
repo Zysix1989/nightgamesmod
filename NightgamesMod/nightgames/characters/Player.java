@@ -397,7 +397,14 @@ public class Player extends Character {
         assessOpponent(opponent);
         gui.message("<br/>");
 
-        gui.promptAmbush(enc, opponent);
+        gui.clearCommand();
+        gui.addToCommandPanel(new CommandPanelOption("Attack " + opponent.getName(),
+            encounterOption(enc, opponent, Encs.ambush)));
+        gui.addToCommandPanel(new CommandPanelOption("Wait",
+            encounterOption(enc, opponent, Encs.wait)));
+        gui.addToCommandPanel(new CommandPanelOption("Flee",
+            encounterOption(enc, opponent, Encs.fleehidden)));
+        Global.getMatch().pause();
     }
 
     @Override
@@ -733,7 +740,20 @@ public class Player extends Character {
         assessOpponent(target);
         gui.message("<br/>");
 
-        gui.promptShower(encounter, target);
+        gui.clearCommand();
+        gui.addToCommandPanel(new CommandPanelOption("Surprise Her",
+            encounterOption(encounter, target, Encs.showerattack)));
+        if (!target.mostlyNude()) {
+            gui.addToCommandPanel(new CommandPanelOption("Steal Clothes",
+                encounterOption(encounter, target, Encs.stealclothes)));
+        }
+        if (has(Item.Aphrodisiac)) {
+            gui.addToCommandPanel(new CommandPanelOption("Use Aphrodisiac",
+                encounterOption(encounter, target, Encs.aphrodisiactrick)));
+        }
+        gui.addToCommandPanel(new CommandPanelOption("Do Nothing",
+            encounterOption(encounter, target, Encs.wait)));
+        Global.getMatch().pause();
     }
 
     @Override
@@ -816,7 +836,14 @@ public class Player extends Character {
         assessOpponent(target);
         gui.message("<br/>");
 
-        gui.promptOpportunity(enc, target, trap);
+        gui.clearCommand();
+        gui.addToCommandPanel(new CommandPanelOption("Attack " + target.getName(), event -> {
+            enc.parse(Encs.capitalize, Global.getPlayer(), target, trap);
+            Global.getMatch().resume();
+        }));
+        gui.addToCommandPanel(new CommandPanelOption("Wait",
+            encounterOption(enc, target, Encs.wait)));
+        Global.getMatch().pause();
     }
 
     @Override

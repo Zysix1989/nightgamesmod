@@ -489,41 +489,6 @@ public class GUI extends JFrame implements Observer {
         addToCommandPanel(o);
     }
 
-    public void promptAmbush(Encounter enc, Character target) {
-        clearCommand();
-        commandPanel.add(encounterButton("Attack " + target.getName(), enc, target, Encs.ambush));
-        commandPanel.add(encounterButton("Wait", enc, target, Encs.wait));
-        commandPanel.add(encounterButton("Flee", enc, target, Encs.fleehidden));
-        Global.getMatch().pause();
-        commandPanel.refresh();
-    }
-
-    public void promptOpportunity(Encounter enc, Character target, Trap trap) {
-        clearCommand();
-        CommandPanelOption o = new CommandPanelOption("Attack " + target.getName(), event -> {
-            enc.parse(Encs.capitalize, Global.getPlayer(), target, trap);
-            Global.getMatch().resume();
-        });
-        addToCommandPanel(o);
-        commandPanel.add(encounterButton("Wait", enc, target, Encs.wait));
-        Global.getMatch().pause();
-        commandPanel.refresh();
-    }
-
-    public void promptShower(Encounter encounter, Character target) {
-        clearCommand();
-        commandPanel.add(encounterButton("Suprise Her", encounter, target, Encs.showerattack));
-        if (!target.mostlyNude()) {
-            commandPanel.add(encounterButton("Steal Clothes", encounter, target, Encs.stealclothes));
-        }
-        if (Global.human.has(Item.Aphrodisiac)) {
-            commandPanel.add(encounterButton("Use Aphrodisiac", encounter, target, Encs.aphrodisiactrick));
-        }
-        commandPanel.add(encounterButton("Do Nothing", encounter, target, Encs.wait));
-        Global.getMatch().pause();
-        commandPanel.refresh();
-    }
-
     public void promptIntervene(Encounter enc, Character p1, Character p2) {
         clearCommand();
         commandPanel.add(interveneButton(enc, p1));
@@ -622,14 +587,6 @@ public class GUI extends JFrame implements Observer {
     private KeyableButton interveneButton(Encounter enc, Character assist) {
         CommandPanelOption o = new CommandPanelOption("Help " + assist.getName(), event -> {
             enc.intrude(Global.getPlayer(), assist);
-        });
-        return optionButton(o);
-    }
-
-    private KeyableButton encounterButton(String label, Encounter enc, Character target, Encs choice) {
-        CommandPanelOption o = new CommandPanelOption(label, event -> {
-            enc.parse(choice, Global.getPlayer(), target);
-            Global.getMatch().resume();
         });
         return optionButton(o);
     }
