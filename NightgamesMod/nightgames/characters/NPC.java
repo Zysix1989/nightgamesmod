@@ -35,6 +35,7 @@ import nightgames.global.DebugFlags;
 import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
+import nightgames.global.Scene;
 import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
@@ -988,5 +989,7 @@ public class NPC extends Character {
     public void nextCombat(Combat c) {
     }
 
-    ;
+    @Override
+    public void sceneNext(Scene s) {
+    }
 }

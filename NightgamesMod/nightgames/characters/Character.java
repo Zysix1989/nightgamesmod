@@ -52,6 +52,7 @@ import nightgames.global.Configuration;
 import nightgames.global.DebugFlags;
 import nightgames.global.Flag;
 import nightgames.global.Global;
+import nightgames.global.Scene;
 import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
@@ -4742,4 +4743,6 @@ public abstract class Character extends Observable implements Cloneable {
     public abstract void bodyShopOptions(BodyShop shop, String displayText, int price);
 
     public abstract void nextCombat(Combat c);
+
+    public abstract void sceneNext(Scene source);
 }

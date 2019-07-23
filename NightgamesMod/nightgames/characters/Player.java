@@ -1156,6 +1156,7 @@ public class Player extends Character {
             }));
     }
 
+    @Override
     public void sceneNext(Scene source) {
         gui.addToCommandPanel(new CommandPanelOption(
             "Next",
