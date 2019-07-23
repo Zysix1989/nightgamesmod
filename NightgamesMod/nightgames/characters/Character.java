@@ -1,5 +1,8 @@
 package nightgames.characters;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,15 +25,6 @@ import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.swing.plaf.basic.BasicTreeUI.TreeIncrementAction;
-import nightgames.global.Configuration;
-import org.apache.commons.lang3.ObjectUtils;
-import javax.xml.stream.events.Characters;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
 import nightgames.actions.Action;
 import nightgames.actions.Move;
 import nightgames.actions.Movement;
@@ -39,10 +33,6 @@ import nightgames.areas.NinjaStash;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockMod;
-import nightgames.characters.body.CockPart;
-
-import nightgames.characters.body.PussyPart;
-
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.ToysPart;
 import nightgames.characters.body.mods.DemonicMod;
@@ -65,13 +55,11 @@ import nightgames.json.JsonUtils;
 import nightgames.match.Encounter;
 import nightgames.match.Match;
 import nightgames.match.ftc.FTCMatch;
-import nightgames.nskills.tags.SkillTag;
 import nightgames.pet.CharacterPet;
 import nightgames.pet.PetCharacter;
 import nightgames.pet.arms.ArmManager;
 import nightgames.pet.arms.ArmType;
 import nightgames.skills.AssFuck;
-import nightgames.skills.Nothing;
 import nightgames.skills.OrgasmicThrust;
 import nightgames.skills.OrgasmicTighten;
 import nightgames.skills.Skill;
@@ -86,8 +74,6 @@ import nightgames.status.BodyFetish;
 import nightgames.status.Disguised;
 import nightgames.status.DivineCharge;
 import nightgames.status.DivineRecoil;
-import nightgames.status.Enthralled;
-import nightgames.status.Drained;
 import nightgames.status.Falling;
 import nightgames.status.Feral;
 import nightgames.status.Frenzied;
@@ -96,7 +82,6 @@ import nightgames.status.Masochistic;
 import nightgames.status.Resistance;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
-import nightgames.status.Trance;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.Addiction.Severity;
 import nightgames.status.addiction.AddictionType;
