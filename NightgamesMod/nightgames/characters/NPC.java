@@ -29,11 +29,13 @@ import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
 import nightgames.combat.CombatantData;
 import nightgames.combat.Result;
+import nightgames.daytime.Store;
 import nightgames.global.DebugFlags;
 import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.match.Encounter;
@@ -967,5 +969,11 @@ public class NPC extends Character {
     public void leaveAction(Locate action) {
         throw new UnsupportedOperationException(
             String.format("attempted to leave %s", action.toString()));
+    }
+
+    @Override
+    public void shopOptions(Store shop, Loot item) {
+        throw new UnsupportedOperationException(
+            String.format("attempted to access item %s in %s", item.getName(), shop.toString()));
     }
 }

@@ -45,12 +45,14 @@ import nightgames.combat.CombatantData;
 import nightgames.combat.Result;
 import nightgames.daytime.Exercise;
 import nightgames.daytime.Porn;
+import nightgames.daytime.Store;
 import nightgames.global.Challenge;
 import nightgames.global.Configuration;
 import nightgames.global.DebugFlags;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
@@ -4733,4 +4735,6 @@ public abstract class Character extends Observable implements Cloneable {
     public abstract void chooseTarget(Locate action, String displayText);
 
     public abstract void leaveAction(Locate action);
+
+    public abstract void shopOptions(Store shop, Loot i);
 }

@@ -25,12 +25,14 @@ import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.daytime.Exercise;
 import nightgames.daytime.Porn;
+import nightgames.daytime.Store;
 import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.gui.CommandPanelOption;
 import nightgames.gui.GUI;
 import nightgames.items.Item;
+import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
 import nightgames.match.Encounter;
 import nightgames.match.MatchType;
@@ -1141,5 +1143,10 @@ public class Player extends Character {
             action.handleEvent(this, "Leave");
         });
         gui.addToCommandPanel(o);
+    }
+
+    @Override
+    public void shopOptions(Store shop, Loot item) {
+        Global.gui().sale(shop, item);
     }
 }

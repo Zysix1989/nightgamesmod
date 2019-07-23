@@ -58,7 +58,7 @@ public class HWStore extends Store {
     protected void displayItems() {
         for (Item i : stock.keySet()) {
             if (i != Item.EmptyBottle || player.getRank() > 0) {
-                Global.gui().sale(this, i);
+                player.shopOptions(this, i);
             }
         }
     }
