@@ -1126,6 +1126,7 @@ public class Player extends Character {
         return gain;
     }
 
+    @Override
     public void chooseTarget(Locate action, String displayText) {
         CommandPanelOption o = new CommandPanelOption(displayText, event -> {
             action.handleEvent(this, displayText);
@@ -1134,6 +1135,7 @@ public class Player extends Character {
 
     }
 
+    @Override
     public void leaveAction(Locate action) {
         CommandPanelOption o = new CommandPanelOption("Leave", event -> {
             action.handleEvent(this, "Leave");
