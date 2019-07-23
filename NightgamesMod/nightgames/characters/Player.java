@@ -22,6 +22,7 @@ import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.GooeyMod;
 import nightgames.combat.Combat;
+import nightgames.combat.CombatSceneChoice;
 import nightgames.combat.Result;
 import nightgames.daytime.Activity;
 import nightgames.daytime.BodyShop;
@@ -1188,5 +1189,16 @@ public class Player extends Character {
         gui.addToCommandPanel(new CommandPanelOption(activity.toString(), event -> {
             activity.visit("Start");
         }));
+    }
+
+    public void chooseCombatScene(Combat c, Character npc, String message,
+        CombatSceneChoice choice) {
+        CommandPanelOption o = new CommandPanelOption(message, event -> {
+            c.write("<br/>");
+            choice.choose(c, npc);
+            c.updateMessage();
+            gui.next(c);
+        });
+        gui.addToCommandPanel(o);
     }
 }

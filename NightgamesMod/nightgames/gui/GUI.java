@@ -424,16 +424,6 @@ public class GUI extends JFrame implements Observer {
         addToCommandPanel(o);
     }
 
-    public void choose(Combat c, Character npc, String message, CombatSceneChoice choice) {
-        CommandPanelOption o = new CommandPanelOption(message, event -> {
-            c.write("<br/>");
-            choice.choose(c, npc);
-            c.updateMessage();
-            Global.gui().next(c);
-        });
-        addToCommandPanel(o);
-    }
-
     public void choose(Activity event, String choice) {
         commandPanel.add(eventButton(event, choice, null));
         commandPanel.refresh();
