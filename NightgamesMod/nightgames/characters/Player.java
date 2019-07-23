@@ -29,6 +29,7 @@ import nightgames.daytime.Store;
 import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
+import nightgames.global.Scene;
 import nightgames.gui.CommandPanelOption;
 import nightgames.gui.GUI;
 import nightgames.items.Item;
@@ -1154,10 +1155,10 @@ public class Player extends Character {
             }));
     }
 
-    public void sceneNext() {
+    public void sceneNext(Scene source) {
         gui.addToCommandPanel(new CommandPanelOption(
             "Next",
-            event -> Global.current.respond("Next")
+            event -> source.respond("Next")
         ));
     }
 }

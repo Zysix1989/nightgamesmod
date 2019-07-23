@@ -60,7 +60,7 @@ abstract class DaytimeEvent implements Scene {
     private void runScene(String scene) {
         play(scene);
         Global.current = this;
-        player.sceneNext();
+        player.sceneNext(this);
     }
     
     abstract boolean available();
