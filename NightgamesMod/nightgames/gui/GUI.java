@@ -489,17 +489,6 @@ public class GUI extends JFrame implements Observer {
         addToCommandPanel(o);
     }
 
-    public void promptFF(Encounter enc, Character target) {
-        clearCommand();
-        commandPanel.add(encounterButton("Fight", enc, target, Encs.fight));
-        commandPanel.add(encounterButton("Flee", enc, target, Encs.flee));
-        if (item(Item.SmokeBomb, 1).meets(null, Global.human, null)) {
-            commandPanel.add(encounterButton("Smoke Bomb", enc, target, Encs.smoke));
-        }
-        Global.getMatch().pause();
-        commandPanel.refresh();
-    }
-
     public void promptAmbush(Encounter enc, Character target) {
         clearCommand();
         commandPanel.add(encounterButton("Attack " + target.getName(), enc, target, Encs.ambush));

@@ -1,5 +1,6 @@
 package nightgames.characters;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,6 +22,7 @@ import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.GooeyMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
+import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.gui.CommandPanelOption;
@@ -317,6 +319,13 @@ public class Player extends Character {
         return null;
     }
 
+    private ActionListener encounterOption(Encounter enc, Character target, Encs choice) {
+        return event -> {
+            enc.parse(choice, Global.getPlayer(), target);
+            Global.getMatch().resume();
+        };
+    }
+
     @Override
     public void detect() {
         for (Area adjacent : location.adjacent) {
@@ -333,7 +342,12 @@ public class Player extends Character {
                         + "</b> and you both hesitate for a moment, deciding whether to attack or retreat.");
         assessOpponent(opponent);
         gui.message("<br/>");
-        gui.promptFF(enc, opponent);
+        gui.clearCommand();
+        gui.addToCommandPanel(new CommandPanelOption("Fight",
+            encounterOption(enc, opponent, Encs.fight)));
+        gui.addToCommandPanel(new CommandPanelOption("Flee",
+            encounterOption(enc, opponent, Encs.flee)));
+        Global.getMatch().pause();
     }
 
     private void assessOpponent(Character opponent) {
