@@ -762,7 +762,18 @@ public class Player extends Character {
                         + "</b> fighting too intensely to notice your arrival. If you intervene now, it'll essentially decide the winner.");
         gui.message("Then again, you could just wait and see which one of them comes out on top. It'd be entertaining,"
                         + " at the very least.");
-        gui.promptIntervene(enc, p1, p2);
+
+        gui.clearCommand();
+        gui.addToCommandPanel(new CommandPanelOption("Help " + p1.getName(), event -> {
+            enc.intrude(Global.getPlayer(), p1);
+        }));
+        gui.addToCommandPanel(new CommandPanelOption("Help " + p2.getName(), event -> {
+            enc.intrude(Global.getPlayer(), p2);
+        }));
+        gui.addToCommandPanel(new CommandPanelOption("Watch them fight", event -> {
+            enc.watch();
+        }));
+        Global.getMatch().pause();
     }
 
     @Override

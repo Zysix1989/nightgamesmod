@@ -40,7 +40,6 @@ import nightgames.global.DebugFlags;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Loot;
-import nightgames.match.Encounter;
 import nightgames.skills.Skill;
 import nightgames.skills.TacticGroup;
 
@@ -480,18 +479,6 @@ public class GUI extends JFrame implements Observer {
         addToCommandPanel(o);
     }
 
-    public void promptIntervene(Encounter enc, Character p1, Character p2) {
-        clearCommand();
-        commandPanel.add(interveneButton(enc, p1));
-        commandPanel.add(interveneButton(enc, p2));
-        CommandPanelOption o = new CommandPanelOption("Watch them fight", event -> {
-            enc.watch();
-        });
-        addToCommandPanel(o);
-        Global.getMatch().pause();
-        commandPanel.refresh();
-    }
-
     public void prompt(String message, List<KeyableButton> choices) {
         clearText();
         clearCommand();
@@ -571,13 +558,6 @@ public class GUI extends JFrame implements Observer {
             tooltip,
             event -> {
                 activity.visit(choice);
-        });
-        return optionButton(o);
-    }
-
-    private KeyableButton interveneButton(Encounter enc, Character assist) {
-        CommandPanelOption o = new CommandPanelOption("Help " + assist.getName(), event -> {
-            enc.intrude(Global.getPlayer(), assist);
         });
         return optionButton(o);
     }
