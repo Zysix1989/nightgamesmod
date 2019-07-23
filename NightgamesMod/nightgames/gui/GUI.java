@@ -251,7 +251,7 @@ public class GUI extends JFrame implements Observer {
         portraitPanel.loadPortrait(c, player, enemy);
     }
 
-    public void showMap() {
+    private void showMap() {
         portraitPanel.showMap();
     }
 
@@ -259,7 +259,7 @@ public class GUI extends JFrame implements Observer {
         menuBar.showPortrait();
     }
 
-    public void showNone() {
+    private void showNone() {
         menuBar.showNone();
     }
 
