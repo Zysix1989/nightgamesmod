@@ -456,15 +456,6 @@ public class GUI extends JFrame implements Observer {
         commandPanel.refresh();
     }
 
-    public void sale(Store shop, Loot i) {
-        CommandPanelOption o = new CommandPanelOption(Global.capitalizeFirstLetter(i.getName()),
-            i.getDesc(),
-            event -> {
-                shop.visit(i.getName());
-            });
-        addToCommandPanel(o);
-    }
-
     public void prompt(String message, List<KeyableButton> choices) {
         clearText();
         clearCommand();

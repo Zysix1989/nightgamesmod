@@ -1147,6 +1147,10 @@ public class Player extends Character {
 
     @Override
     public void shopOptions(Store shop, Loot item) {
-        Global.gui().sale(shop, item);
+        gui.addToCommandPanel(new CommandPanelOption(Global.capitalizeFirstLetter(item.getName()),
+            item.getDesc(),
+            event -> {
+                shop.visit(item.getName());
+            }));
     }
 }
