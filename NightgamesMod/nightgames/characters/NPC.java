@@ -29,6 +29,7 @@ import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
 import nightgames.combat.CombatantData;
 import nightgames.combat.Result;
+import nightgames.daytime.BodyShop;
 import nightgames.daytime.Store;
 import nightgames.global.DebugFlags;
 import nightgames.global.Encs;
@@ -975,5 +976,11 @@ public class NPC extends Character {
     public void shopOptions(Store shop, Loot item) {
         throw new UnsupportedOperationException(
             String.format("attempted to access item %s in %s", item.getName(), shop.toString()));
+    }
+
+    @Override
+    public void bodyShopOptions(BodyShop shop, String displayText, int price) {
+        throw new UnsupportedOperationException(
+            String.format("attempted to access item %s in %s", displayText, shop.toString()));
     }
 }

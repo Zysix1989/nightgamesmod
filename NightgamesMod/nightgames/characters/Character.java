@@ -43,6 +43,7 @@ import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatantData;
 import nightgames.combat.Result;
+import nightgames.daytime.BodyShop;
 import nightgames.daytime.Exercise;
 import nightgames.daytime.Porn;
 import nightgames.daytime.Store;
@@ -4737,4 +4738,6 @@ public abstract class Character extends Observable implements Cloneable {
     public abstract void leaveAction(Locate action);
 
     public abstract void shopOptions(Store shop, Loot i);
+
+    public abstract void bodyShopOptions(BodyShop shop, String displayText, int price);
 }

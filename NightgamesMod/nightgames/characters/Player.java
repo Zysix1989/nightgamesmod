@@ -23,6 +23,7 @@ import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.GooeyMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
+import nightgames.daytime.BodyShop;
 import nightgames.daytime.Exercise;
 import nightgames.daytime.Porn;
 import nightgames.daytime.Store;
@@ -1161,4 +1162,11 @@ public class Player extends Character {
             event -> source.respond("Next")
         ));
     }
+
+    @Override
+    public void bodyShopOptions(BodyShop shop, String displayText, int price) {
+        Global.gui().choose(shop, displayText, "Price: $" + price);
+    }
+
+
 }
