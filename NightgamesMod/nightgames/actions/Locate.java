@@ -2,7 +2,6 @@ package nightgames.actions;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
 import nightgames.areas.Area;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
