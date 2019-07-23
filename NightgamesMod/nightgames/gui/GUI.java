@@ -1,7 +1,5 @@
 package nightgames.gui;
 
-import static nightgames.requirements.RequirementShortcuts.item;
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -32,26 +30,19 @@ import javax.swing.WindowConstants;
 import javax.swing.border.CompoundBorder;
 import nightgames.actions.Action;
 import nightgames.actions.Locate;
-import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Player;
-import nightgames.characters.Trait;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatSceneChoice;
 import nightgames.daytime.Activity;
 import nightgames.daytime.Store;
 import nightgames.global.DebugFlags;
-import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
-import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.match.Encounter;
-import nightgames.match.MatchType;
-import nightgames.modifier.standard.NoModifier;
 import nightgames.skills.Skill;
 import nightgames.skills.TacticGroup;
-import nightgames.trap.Trap;
 
 @SuppressWarnings("unused")
 public class GUI extends JFrame implements Observer {
