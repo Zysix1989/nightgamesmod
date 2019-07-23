@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import nightgames.characters.Character;
+import nightgames.characters.Player;
 import nightgames.global.Global;
 import nightgames.global.Scene;
 
 abstract class DaytimeEvent implements Scene {
 
-    protected Character player;
+    protected Player player;
     private List<EventVariation> scenes;
-    
-    protected DaytimeEvent(Character player) {
+
+    protected DaytimeEvent(Player player) {
         this.player = player;
         scenes = new ArrayList<>();
     }
