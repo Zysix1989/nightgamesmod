@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.actions.Leap;
+import nightgames.actions.Locate;
 import nightgames.actions.Move;
 import nightgames.actions.Resupply;
 import nightgames.actions.Shortcut;
@@ -955,13 +956,15 @@ public class NPC extends Character {
         return lines;
     }
 
-    public void chooseTarget(Action action, String displayText) {
+    @Override
+    public void chooseTarget(Locate action, String displayText) {
         throw new UnsupportedOperationException(
             String.format("attempted to choose target %s for %s",
                 displayText, action.toString()));
     }
 
-    public void leaveAction(Action action) {
+    @Override
+    public void leaveAction(Locate action) {
         throw new UnsupportedOperationException(
             String.format("attempted to leave %s", action.toString()));
     }

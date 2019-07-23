@@ -1126,17 +1126,17 @@ public class Player extends Character {
         return gain;
     }
 
-    public void chooseTarget(Action action, String displayText) {
+    public void chooseTarget(Locate action, String displayText) {
         CommandPanelOption o = new CommandPanelOption(displayText, event -> {
-            ((Locate) action).handleEvent(this, displayText);
+            action.handleEvent(this, displayText);
         });
         gui.addToCommandPanel(o);
 
     }
 
-    public void leaveAction(Action action) {
+    public void leaveAction(Locate action) {
         CommandPanelOption o = new CommandPanelOption("Leave", event -> {
-            ((Locate) action).handleEvent(this, "Leave");
+            action.handleEvent(this, "Leave");
         });
         gui.addToCommandPanel(o);
     }

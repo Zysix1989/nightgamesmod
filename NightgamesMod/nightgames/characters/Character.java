@@ -26,6 +26,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import nightgames.actions.Action;
+import nightgames.actions.Locate;
 import nightgames.actions.Move;
 import nightgames.actions.Movement;
 import nightgames.areas.Area;
@@ -4729,7 +4730,7 @@ public abstract class Character extends Observable implements Cloneable {
         return gain;
     }
 
-    public abstract void chooseTarget(Action action, String displayText);
+    public abstract void chooseTarget(Locate action, String displayText);
 
-    public abstract void leaveAction(Action action);
+    public abstract void leaveAction(Locate action);
 }
