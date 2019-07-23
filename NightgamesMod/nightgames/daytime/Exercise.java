@@ -22,11 +22,7 @@ public class Exercise extends Activity {
     @Override
     public void visit(String choice) {
         Global.gui().clearText();
-        if (page == 0) {
-            player.exercise(this);
-        } else {
-            done(true);
-        }
+        player.exercise(this);
     }
 
     @Override

@@ -1092,11 +1092,12 @@ public class Player extends Character {
     @Override
     public int exercise(Exercise source) {
         int gain = super.exercise(source);
-        source.next();
+        gui.clearText();
         gui.clearCommand();
         CommandPanelOption o = new CommandPanelOption("Next",
             event -> {
-                source.visit("Next");
+                source.done(true);
+                gui.clearText();
             });
         gui.addToCommandPanel(o);
         source.showScene(source.pickScene(gain));
@@ -1109,11 +1110,12 @@ public class Player extends Character {
     @Override
     public int porn(Porn source) {
         int gain = super.porn(source);
-        source.next();
+        gui.clearText();
         gui.clearCommand();
         CommandPanelOption o = new CommandPanelOption("Next",
             event -> {
-                source.visit("Next");
+                source.done(true);
+                gui.clearText();
             });
         gui.addToCommandPanel(o);
         source.showScene(source.pickScene(gain));

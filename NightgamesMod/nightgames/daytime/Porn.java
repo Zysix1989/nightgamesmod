@@ -21,11 +21,7 @@ public class Porn extends Activity {
     @Override
     public void visit(String choice) {
         Global.gui().clearText();
-        if (page == 0) {
-            player.porn(this);
-        } else {
-            done(true);
-        }
+        player.porn(this);
     }
 
     @Override
