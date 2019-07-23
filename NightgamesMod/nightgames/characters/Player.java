@@ -1092,7 +1092,13 @@ public class Player extends Character {
     @Override
     public int exercise(Exercise source) {
         int gain = super.exercise(source);
-        Global.gui().next(source);
+        source.next();
+        gui.clearCommand();
+        CommandPanelOption o = new CommandPanelOption("Next",
+            event -> {
+                source.visit("Next");
+            });
+        gui.addToCommandPanel(o);
         source.showScene(source.pickScene(gain));
         if (gain > 0) {
             Global.gui().message("<b>Your maximum stamina has increased by " + gain + ".</b>");
@@ -1103,7 +1109,13 @@ public class Player extends Character {
     @Override
     public int porn(Porn source) {
         int gain = super.porn(source);
-        Global.gui().next(source);
+        source.next();
+        gui.clearCommand();
+        CommandPanelOption o = new CommandPanelOption("Next",
+            event -> {
+                source.visit("Next");
+            });
+        gui.addToCommandPanel(o);
         source.showScene(source.pickScene(gain));
         if (gain > 0) {
             Global.gui().message("<b>Your maximum arousal has increased by " + gain + ".</b>");
