@@ -37,11 +37,9 @@ public class AddictionRemoval extends Activity {
                                   + "\n\n(this is a placeholder -- note that these treatments only affect your current"
                                   + " strongest addiction)");
             if (player.money >= 5000) {
-                Global.gui()
-                      .choose(this, UNSAFE_OPT);
+                player.chooseActivity(this, UNSAFE_OPT);
                 if (player.money >= 15000) {
-                    Global.gui()
-                          .choose(this, SAFE_OPT);
+                    player.chooseActivity(this, SAFE_OPT);
                 } else {
                     Global.gui()
                           .message("\n\nA quick look at your finances reveal that only the risky option is"
@@ -68,7 +66,7 @@ public class AddictionRemoval extends Activity {
             done(true);
             return;
         }
-        Global.gui().choose(this, "Leave");
+        player.chooseActivity(this, "Leave");
 
     }
 

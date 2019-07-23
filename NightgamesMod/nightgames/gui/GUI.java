@@ -413,13 +413,6 @@ public class GUI extends JFrame implements Observer {
         commandPanel.refresh();
     }
 
-    public void choose(Activity activity, String choice) {
-        addToCommandPanel(new CommandPanelOption(choice,
-            event -> {
-                activity.visit(choice);
-            }));
-    }
-
     public void prompt(String message, List<KeyableButton> choices) {
         clearText();
         clearCommand();
@@ -492,15 +485,6 @@ public class GUI extends JFrame implements Observer {
             button.getButton().setToolTipText(option.toolTipText);
         }
         return button;
-    }
-
-    private KeyableButton eventButton(Activity activity, String choice, String tooltip) {
-        CommandPanelOption o = new CommandPanelOption(choice,
-            tooltip,
-            event -> {
-                activity.visit(choice);
-        });
-        return optionButton(o);
     }
 
     public void changeClothes(Character player, Activity event, String backOption) {

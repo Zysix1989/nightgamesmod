@@ -90,10 +90,10 @@ public abstract class BaseNPCTime extends Activity {
             int moneyCost = option.moneyCost.apply(this.player);
             if (!hasAll) {
                 Global.gui().message(Global.format(noRequestedItems, npc, player));
-                Global.gui().choose(this, "Back");
+                player.chooseActivity(this, "Back");
             } else if (player.money < moneyCost) {
                 Global.gui().message(Global.format(notEnoughMoney, npc, player));
-                Global.gui().choose(this, "Back");
+                player.chooseActivity(this, "Back");
             } else {
                 Global.gui().message(Global.format(option.scene, npc, player));
                 option.ingredients.entrySet().stream().forEach(entry -> player.consume(entry.getKey(), entry.getValue(), false));
@@ -101,7 +101,7 @@ public abstract class BaseNPCTime extends Activity {
                 if (moneyCost > 0) {
                     player.modMoney(- moneyCost);
                 }
-                Global.gui().choose(this, "Leave");
+                player.chooseActivity(this, "Leave");
             }
         } else if (optionalGiftOption.isPresent()) {
             Global.gui().message(Global.format(giftedString, npc, player));
@@ -113,11 +113,12 @@ public abstract class BaseNPCTime extends Activity {
             }
             player.gainAffection(npc, 2);
             npc.gainAffection(player, 2);
-            Global.gui().choose(this, "Back");
+            player.chooseActivity(this, "Back");
         } else if (choice.equals("Gift")) {
             Global.gui().message(Global.format(giftString, npc, player));
-            giftables.stream().forEach(loot -> Global.gui().choose(this, Global.capitalizeFirstLetter(loot.getName())));
-            Global.gui().choose(this, "Back");
+            giftables.stream().forEach(
+                loot -> player.chooseActivity(this, Global.capitalizeFirstLetter(loot.getName())));
+            player.chooseActivity(this, "Back");
         } else if (choice.equals("Change Outfit")) {
             Global.gui().changeClothes(npc, this, "Back");
         } else if (choice.equals(transformationOptionString)) {
@@ -147,31 +148,31 @@ public abstract class BaseNPCTime extends Activity {
                     allowed &= meets;
                 }
                 if (allowed) {
-                    Global.gui().choose(this, opt.option);
+                    player.chooseActivity(this, opt.option);
                 }
                 Global.gui().message("<br/>");
             });
-            Global.gui().choose(this, "Back");
+            player.chooseActivity(this, "Back");
         } else if (choice.equals("Start") || choice.equals("Back")) {
             if (npc.getAffection(player) > 25 && (advTrait == null || npc.has(advTrait))) {
                 Global.gui().message(Global.format(loveIntro, npc, player));
-                Global.gui().choose(this, "Games");
-                Global.gui().choose(this, "Sparring");
-                Global.gui().choose(this, "Sex");
+                player.chooseActivity(this, "Games");
+                player.chooseActivity(this, "Sparring");
+                player.chooseActivity(this, "Sex");
                 if (!transformationOptions.isEmpty()) {
-                    Global.gui().choose(this, transformationOptionString);
+                    player.chooseActivity(this, transformationOptionString);
                 }
                 if (npc.getAffection(player) > 30) {
-                    Global.gui().choose(this, "Gift");
+                    player.chooseActivity(this, "Gift");
                 }
                 if (npc.getAffection(player) > 35) {
-                    Global.gui().choose(this, "Change Outfit");
+                    player.chooseActivity(this, "Change Outfit");
                 }
                 Optional<String> addictionOpt = getAddictionOption();
                 if (addictionOpt.isPresent()) {
-                    Global.gui().choose(this, addictionOpt.get());
+                    player.chooseActivity(this, addictionOpt.get());
                 }
-                Global.gui().choose(this, "Leave");
+                player.chooseActivity(this, "Leave");
             } else {
                 subVisitIntro(choice);
             }

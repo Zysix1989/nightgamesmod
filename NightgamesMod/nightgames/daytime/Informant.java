@@ -147,26 +147,28 @@ public class Informant extends Activity {
         Global.everyone().stream()
               .filter(c -> !c.human())
               .filter(c -> !Global.checkCharacterDisabledFlag(c))
-              .forEach(character -> Global.gui().choose(this, String.format(REMOVE_PREFIX + "%s", character.getTrueName())));
+            .forEach(character -> player.chooseActivity(this,
+                String.format(REMOVE_PREFIX + "%s", character.getTrueName())));
         Global.everyone().stream()
               .filter(c -> !c.human())
               .filter(c -> Global.checkCharacterDisabledFlag(c) && !c.getType().equals("Yui"))
-              .forEach(character -> Global.gui().choose(this, String.format(RETURN_PREFIX + "%s", character.getTrueName())));
-        Global.gui().choose(this, "Back");
+            .forEach(character -> player.chooseActivity(this,
+                String.format(RETURN_PREFIX + "%s", character.getTrueName())));
+        player.chooseActivity(this, "Back");
     }
     
     private void removeCompetitor(String choice) {
         String name = choice.substring(REMOVE_PREFIX.length());
         Global.gui().message("Got it, I'll see about sending " + name+ " to another session.");
         Global.setCharacterDisabledFlag(Global.getParticipantsByName(name));
-        Global.gui().choose(this, "Select Competitors");
+        player.chooseActivity(this, "Select Competitors");
     }
     
     private void returnCompetitor(String choice) {
         String name = choice.substring(RETURN_PREFIX.length());
         Global.gui().message("Missing " + name+ " already? I'll see what I can do.");
         Global.unsetCharacterDisabledFlag(Global.getParticipantsByName(name));
-        Global.gui().choose(this, "Select Competitors");
+        player.chooseActivity(this, "Select Competitors");
     }
     
     private void addChoices() {
@@ -175,33 +177,31 @@ public class Informant extends Activity {
         
         for (CostlyOption option : buildOptions()) {
             if (option.available()) {
-                Global.gui().choose(this, option.name());
+                player.chooseActivity(this, option.name());
             }
         }
         
         if (Global.checkFlag(Flag.rank1)) {
-            Global.gui().choose(this, "More Competitors");
+            player.chooseActivity(this, "More Competitors");
         }
 
         if (Global.checkFlag(Flag.girlAdvice)) {
-            Global.gui().choose(this, "Competition Info");
-            Global.gui().choose(this, "Select Competitors");
+            player.chooseActivity(this, "Competition Info");
+            player.chooseActivity(this, "Select Competitors");
         }
         if (Global.getPlayer().checkAddiction()) {
-            Global.gui().choose(this, "Help with Addiction");
+            player.chooseActivity(this, "Help with Addiction");
         }
-        Global.gui().choose(this, "Leave");
+        player.chooseActivity(this, "Leave");
     }
     
     /** Adds tutorial selections to the menu */
     private void buildTutorialSelections() {
         if (!Global.checkFlag(Flag.basicStores)) {
-            Global.gui()
-                  .choose(this, "Purchasing supplies");
+            player.chooseActivity(this, "Purchasing supplies");
         }
         if (!Global.checkFlag(Flag.girlAdvice)) {
-            Global.gui()
-                  .choose(this, "The Competition");
+            player.chooseActivity(this, "The Competition");
         }
     }
     
@@ -239,7 +239,7 @@ public class Informant extends Activity {
                         + "more often.\"</i><br/>Aesop suddenly looks at his phone and stands up. <i>\"Sorry, I need to run for now. "
                         + "Shoot me a text when you're interested in some more advice. I'll meet you here again.\"</i>"));
       Global.flag(Flag.metBroker);
-      Global.gui().choose(this, "Leave");
+        player.chooseActivity(this, "Leave");
       acted = true;
     }
     
@@ -289,7 +289,7 @@ public class Informant extends Activity {
                         + "advice. You were half expecting the address of an abandoned building and a password.<br/><i>\"Oh there's that too, "
                         + "but it'll cost you. If you ever need some more illicit goods, I can sell you a location later.\"</i>");
          Global.flag(Flag.basicStores);
-         Global.gui().choose(this, "Leave");
+        player.chooseActivity(this, "Leave");
          acted = true;
     }
     
@@ -311,7 +311,7 @@ public class Informant extends Activity {
                         + "Who knows, you might even get a relationship out of this. It's not wholly unprecedented.\"</i>",
                         player.bitchOrBastard()));
         Global.flag(Flag.girlAdvice);
-        Global.gui().choose(this, "Leave");
+        player.chooseActivity(this, "Leave");
         acted = true;
     }
     
@@ -324,7 +324,7 @@ public class Informant extends Activity {
                                   + "enough to sever the link between her and the summoner. No one was seriously hurt, but it did cause a major fuss. Rin isn't allowed to sell such strong items anymore without "
                                   + "special permission. The summoner was suspended from matches for a couple weeks. Someone with some pull must have taken a liking to Reyka though, since no one has tried to "
                                   + "banish her and someone's paying her living expenses. She's pretty aggressive, but probably not actually dangerous... probably.\"</i><br/><br/>");
-            Global.gui().choose(this, "Reyka: $1000");
+            player.chooseActivity(this, "Reyka: $1000");
         }
         if (!Global.checkFlag(Flag.Airi) && Global.checkFlag(Flag.workshop)) {
             Global.gui()
@@ -334,7 +334,7 @@ public class Informant extends Activity {
                          + "but she's definitely came out a bit... stranger than before. I think she was worried about her lack of presence, but I'd say she's even more... formless than before. "
                          + "\"</i> Aesop guffaws at his own joke that you don't understand. <i>\""
                          + "She's definitely still a cutie though. So whaddaya say, want me to try and talk to her for you?\"</i><br/><br/>");
-            Global.gui().choose(this, "Airi: $1000");
+            player.chooseActivity(this, "Airi: $1000");
         }
         if (!Global.checkFlag(Flag.Kat) && Global.checkFlag(Flag.magicstore)) {
             Global.gui()
@@ -346,7 +346,7 @@ public class Informant extends Activity {
                                   + "by channelling an animal spirit. She's got cat ears, a tail, a kinda cute verbal tic, the whole deal. The cat instincts have made her a lot more capable of holding her own "
                                   + "in a match. She never became the strongest in her year, but she'd be a good match for yours. Just don't dismiss her because she looks young. She is actually a year older "
                                   + "than you.\"</i><br/><br/>");
-            Global.gui().choose(this, "Kat: $1000");
+            player.chooseActivity(this, "Kat: $1000");
         }
         if (!Global.checkFlag(Flag.Eve) && Global.checkFlag(Flag.blackMarketPlus) && player.getRank() >= 2) {
             Global.gui()
@@ -366,7 +366,7 @@ public class Informant extends Activity {
                                   + "To be honest though, I'd be perfectly happy to never deal with her "
                                   + "again.\"</i><br/><br/>");
 
-            Global.gui().choose(this, "Eve: $1000");
+            player.chooseActivity(this, "Eve: $1000");
         }
         for (Character c : Global.allNPCs()) {
             if (c.isCustomNPC() && !Global.everyone().contains(c)) {
@@ -375,11 +375,11 @@ public class Informant extends Activity {
                 if (data.requirement.stream().allMatch((req) -> req.meets(null, player, null))) {
                     Global.gui().message("<i>\"" + data.introduction + "\"</i><br/><br/>");
                     customNPCChoices.put(data.action, npc);
-                    Global.gui().choose(this, data.action);
+                    player.chooseActivity(this, data.action);
                 }
             }
         }
-        Global.gui().choose(this, "Back");
+        player.chooseActivity(this, "Back");
     }
     
     private void handleCustomNpcRecruitment(String choice) {
@@ -532,7 +532,7 @@ public class Informant extends Activity {
             player.money -= cost();
             run();
             setOnRun().ifPresent((Flag f) -> Global.flag(f));
-            Global.gui().choose(Informant.this, "Leave");
+            player.chooseActivity(Informant.this, "Leave");
             acted = true;
             return true;
         }

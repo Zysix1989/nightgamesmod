@@ -29,6 +29,7 @@ import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
 import nightgames.combat.CombatantData;
 import nightgames.combat.Result;
+import nightgames.daytime.Activity;
 import nightgames.daytime.BodyShop;
 import nightgames.daytime.Store;
 import nightgames.global.DebugFlags;
@@ -991,5 +992,9 @@ public class NPC extends Character {
 
     @Override
     public void sceneNext(Scene s) {
+    }
+
+    @Override
+    public void chooseActivity(Activity activity, String choice) {
     }
 }

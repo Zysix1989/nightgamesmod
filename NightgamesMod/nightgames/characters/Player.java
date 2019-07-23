@@ -1201,4 +1201,11 @@ public class Player extends Character {
         });
         gui.addToCommandPanel(o);
     }
+
+    public void chooseActivity(Activity activity, String choice) {
+        gui.addToCommandPanel(new CommandPanelOption(choice,
+            event -> {
+                activity.visit(choice);
+            }));
+    }
 }

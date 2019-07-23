@@ -150,12 +150,12 @@ public class XxxStore extends Store {
             if (Global.checkFlag(Flag.AliceAvailable)) {
                 Global.gui().message(
                                 "You see Alice hanging around near the bondage gear. You aren't sure whether she's waiting for you or not.");
-                Global.gui().choose(this, "Talk to Alice");
+                player.chooseActivity(this, "Talk to Alice");
             }
             if (player.getLevel() >= 5 && !Global.checkFlag(Flag.metAlice) && !Global.checkFlag(Flag.victory)) {
-                Global.gui().choose(this, "Learn to be Submissive");
+                player.chooseActivity(this, "Learn to be Submissive");
             }
-            Global.gui().choose(this, "Leave");
+            player.chooseActivity(this, "Leave");
         }
     }
 

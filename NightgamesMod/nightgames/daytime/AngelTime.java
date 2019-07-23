@@ -188,16 +188,12 @@ public class AngelTime extends BaseNPCTime {
                                   + "Angel doesn't usually run off to fix her make-up just because she's meeting a " + Global.getPlayer().guyOrGirl() + ". I think she really likes you.\"</i><br/><br/>With perfect timing, Angel arrives. Caroline "
                                   + "stops talking, but gives you an encouraging wink. Angel takes the seat next to you that Mei just vacated and kisses you on the cheek in greeting. <i>\"Hello lover. "
                                   + "What sexy and scandalous plans do you have for us today?\"</i>");
-            Global.gui()
-                  .choose(this, "Games");
-            Global.gui()
-                  .choose(this, "Sparring");
-            Global.gui()
-                  .choose(this, "Sex");
+            player.chooseActivity(this, "Games");
+            player.chooseActivity(this, "Sparring");
+            player.chooseActivity(this, "Sex");
             if (Global.getPlayer()
                       .checkAddiction(AddictionType.ZEAL)) {
-                Global.gui()
-                      .choose(this, "Worship");
+                player.chooseActivity(this, "Worship");
             }
         } else if (Global.getPlayer()
                          .checkAddiction(AddictionType.ZEAL)) {
@@ -209,15 +205,11 @@ public class AngelTime extends BaseNPCTime {
             } else {
                 npc.gainAffection(player, 1);
                 player.gainAffection(npc, 1);
-                Global.gui()
-                      .choose(this, "Games");
-                Global.gui()
-                      .choose(this, "Sparring");
-                Global.gui()
-                      .choose(this, "Sex");
+                player.chooseActivity(this, "Games");
+                player.chooseActivity(this, "Sparring");
+                player.chooseActivity(this, "Sex");
             }
-            Global.gui()
-                  .choose(this, "Worship");
+            player.chooseActivity(this, "Worship");
         } else if (npc.getAttraction(player) < 15) {
             Global.gui()
                   .message("While walking through the quad, you spot Angel talking with three other girls. They're too far away to hear what they are talking about, but "
@@ -246,19 +238,14 @@ public class AngelTime extends BaseNPCTime {
                                   + "long as you don't mention your nightly activities, it's probably fine.");
             npc.gainAffection(player, 1);
             player.gainAffection(npc, 1);
-            Global.gui()
-                  .choose(this, "Games");
-            Global.gui()
-                  .choose(this, "Sparring");
-            Global.gui()
-                  .choose(this, "Sex");
+            player.chooseActivity(this, "Games");
+            player.chooseActivity(this, "Sparring");
+            player.chooseActivity(this, "Sex");
             if (npc.has(Trait.zealinspiring)) {
-                Global.gui()
-                      .choose(this, "Worship");
+                player.chooseActivity(this, "Worship");
             }
         }
-        Global.gui()
-              .choose(this, "Leave");
+        player.chooseActivity(this, "Leave");
     }
 
     @Override
@@ -320,8 +307,7 @@ public class AngelTime extends BaseNPCTime {
                                       + " annoyance this time at being left blue-balled. Not enough to do something about it,"
                                       + " though, so you leave Angel and hurry home to fix it yourself. ");
             }
-            Global.gui()
-                  .choose(this, "Leave");
+            player.chooseActivity(this, "Leave");
             Global.getPlayer()
                   .addict(null, AddictionType.ZEAL, npc, Addiction.MED_INCREASE);
             Global.getPlayer().getAddiction(AddictionType.ZEAL).ifPresent(Addiction::flagDaytime);
@@ -397,8 +383,7 @@ public class AngelTime extends BaseNPCTime {
                                       + "while grasping your lubricated dick again. <i>\"We just need to rub it all off.\"</i> In the end it takes more than thirty minutes - and a few more orgasms - before you're both clean, but you "
                                       + "don't regret it.");
             }
-            Global.gui()
-                  .choose(this, "Leave");
+            player.chooseActivity(this, "Leave");
             Daytime.train(player, npc, Attribute.Seduction);
             npc.gainAffection(player, 1);
             player.gainAffection(npc, 1);
@@ -463,8 +448,7 @@ public class AngelTime extends BaseNPCTime {
                                       + "You decline her offer to tug you off for everyone's entertainment, but since she's the winner, you let her remove your boxers. You spend about 20 minutes just hanging out and chatting. "
                                       + "No one is allowed to get dressed and you get the lion's share of the interest, but you feel strangely comfortable with most of the girls in similar states of undress. ");
             }
-            Global.gui()
-                  .choose(this, "Leave");
+            player.chooseActivity(this, "Leave");
             Daytime.train(player, npc, Attribute.Cunning);
             npc.gainAffection(player, 1);
             player.gainAffection(npc, 1);
@@ -528,8 +512,7 @@ public class AngelTime extends BaseNPCTime {
                                       + "jerking you off that you realize you're completely hard. You blush in embarrassment when you realize Angel is showing you off to her friends, but you can't resist the pleasure she's giving "
                                       + "you. In no time, you disgracefully cum in front of four horny girls, leaving your balls even more sore than before.");
             }
-            Global.gui()
-                  .choose(this, "Leave");
+            player.chooseActivity(this, "Leave");
             Daytime.train(player, npc, Attribute.Power);
             npc.gainAffection(player, 1);
             player.gainAffection(npc, 1);

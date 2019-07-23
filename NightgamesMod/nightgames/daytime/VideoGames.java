@@ -26,8 +26,8 @@ public class VideoGames extends Activity {
             if (player.money >= 50) {
                 Global.gui().message(
                                 "Do you want to purchase a new game? Your old games are still good, but you're unlikely to learn as much from replaying them.");
-                Global.gui().choose(this, "Yes: $50");
-                Global.gui().choose(this, "No");
+                player.chooseActivity(this, "Yes: $50");
+                player.chooseActivity(this, "No");
             } else {
                 visit("No");
             }
@@ -350,7 +350,7 @@ public class VideoGames extends Activity {
                 Global.modCounter(Flag.CarolineAffection, 1.0F);
         }
 
-        Global.gui().choose(this, "Leave");
+        player.chooseActivity(this, "Leave");
     }
 
     private Scene pickScene() {

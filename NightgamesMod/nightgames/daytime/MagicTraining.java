@@ -75,7 +75,7 @@ public class MagicTraining extends Activity {
             } else {
                 Global.gui().message("You don't have enough money for training.");
             }
-            Global.gui().choose(this, "Leave");
+            player.chooseActivity(this, "Leave");
         } else if (choice.startsWith("Animism")) {
             if (player.money >= 500 + 500 * (player.getPure(Attribute.Animism) + 1)) {
                 player.money -= 500 + 500 * (player.getPure(Attribute.Animism) + 1);
@@ -90,7 +90,7 @@ public class MagicTraining extends Activity {
             } else {
                 Global.gui().message("You don't have enough money for training.");
             }
-            Global.gui().choose(this, "Leave");
+            player.chooseActivity(this, "Leave");
         } else if (choice.startsWith("Ask about Animal Spirit")) {
             Global.flag(Flag.furry);
             Global.gui().message("You bring up the topic of Kat's animal spirit and "
@@ -123,9 +123,10 @@ public class MagicTraining extends Activity {
                             + " even ask such a thing?!\"</i> She doesn't appear likely to budge"
                             + " to you alone. If you really want this power, you'll probably "
                             + "need to rely on Kat's help.");
-            Global.gui().choose(this, "Get Animal Spirit");
-            Global.gui().choose(this, "Lesson: $" + (500 + 500 * (player.getPure(Attribute.Arcane) + 1)));
-            Global.gui().choose(this, "Leave");
+            player.chooseActivity(this, "Get Animal Spirit");
+            player.chooseActivity(this,
+                "Lesson: $" + (500 + 500 * (player.getPure(Attribute.Arcane) + 1)));
+            player.chooseActivity(this, "Leave");
         } else if (choice.startsWith("Get Animal Spirit")) {
             getAnimalSpirit();
         } else if (choice.startsWith("Buy a minor scroll: $200")) {
@@ -154,20 +155,21 @@ public class MagicTraining extends Activity {
     }
 
     private void presentOptions() {
-        Global.gui().choose(this, "Lesson: $" + 1000 * (player.getPure(Attribute.Arcane) + 1));
+        player.chooseActivity(this, "Lesson: $" + 1000 * (player.getPure(Attribute.Arcane) + 1));
         if (player.getPure(Attribute.Animism) >= 1) {
-            Global.gui().choose(this, "Animism training: $" + (500 + 500 * (player.getPure(Attribute.Animism) + 1)));
+            player.chooseActivity(this,
+                "Animism training: $" + (500 + 500 * (player.getPure(Attribute.Animism) + 1)));
         }
         if (Global.checkFlag(Flag.catspirit) && !Global.checkFlag(Flag.furry)) {
-            Global.gui().choose(this, "Ask about Animal Spirit");
+            player.chooseActivity(this, "Ask about Animal Spirit");
         }
         if (Global.checkFlag(Flag.furry) && player.getPure(Attribute.Animism) == 0) {
-            Global.gui().choose(this, "Get Animal Spirit");
+            player.chooseActivity(this, "Get Animal Spirit");
         }
         if (player.getPure(Attribute.Arcane) >= 2 && player.money >= 200) {
-            Global.gui().choose(this, "Buy a minor scroll: $200");
+            player.chooseActivity(this, "Buy a minor scroll: $200");
         }
-        Global.gui().choose(this, "Leave");
+        player.chooseActivity(this, "Leave");
     }
     
     private void meetAisha() {
@@ -211,8 +213,8 @@ public class MagicTraining extends Activity {
         
         Global.gui().message(prefix + magic + message);
         Global.flag(Flag.metAisha);
-        Global.gui().choose(this, "Lesson: $" + 1000 * (player.getPure(Attribute.Arcane) + 1));
-        Global.gui().choose(this, "Leave");
+        player.chooseActivity(this, "Lesson: $" + 1000 * (player.getPure(Attribute.Arcane) + 1));
+        player.chooseActivity(this, "Leave");
         acted = true;
     }
     
@@ -494,6 +496,6 @@ public class MagicTraining extends Activity {
         player.modAttributeDontSaveData(Attribute.Animism, 1);
         Global.flag("Trained" + Attribute.Animism.name());
         acted = true;
-        Global.gui().choose(this, "Leave");
+        player.chooseActivity(this, "Leave");
     }
 }

@@ -555,7 +555,7 @@ public class BodyShop extends Activity {
                 Global.gui().message(s.choice + ": $" + s.price);
             }
         }
-        Global.gui().choose(this, "Leave");
+        player.chooseActivity(this, "Leave");
     }
 
     @Override
