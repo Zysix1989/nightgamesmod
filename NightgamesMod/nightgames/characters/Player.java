@@ -1124,4 +1124,13 @@ public class Player extends Character {
         }
         return gain;
     }
+
+    public void chooseTarget(Action action, String displayText) {
+        gui.choose(action, displayText, this);
+
+    }
+
+    public void leaveAction(Action action) {
+        gui.choose(action, "Leave", this);
+    }
 }

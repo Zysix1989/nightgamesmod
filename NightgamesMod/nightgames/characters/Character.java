@@ -4728,4 +4728,8 @@ public abstract class Character extends Observable implements Cloneable {
         arousal.gain(gain);
         return gain;
     }
+
+    public abstract void chooseTarget(Action action, String displayText);
+
+    public abstract void leaveAction(Action action);
 }

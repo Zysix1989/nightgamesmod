@@ -955,4 +955,14 @@ public class NPC extends Character {
         return lines;
     }
 
+    public void chooseTarget(Action action, String displayText) {
+        throw new UnsupportedOperationException(
+            String.format("attempted to choose target %s for %s",
+                displayText, action.toString()));
+    }
+
+    public void leaveAction(Action action) {
+        throw new UnsupportedOperationException(
+            String.format("attempted to leave %s", action.toString()));
+    }
 }
