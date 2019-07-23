@@ -23,12 +23,7 @@ public class Exercise extends Activity {
     public void visit(String choice) {
         Global.gui().clearText();
         if (page == 0) {
-            Global.gui().next(this);
-            int gain = player.exercise();
-            showScene(pickScene(gain));
-            if (gain > 0) {
-                Global.gui().message("<b>Your maximum stamina has increased by " + gain + ".</b>");
-            }
+            player.exercise(this);
         } else {
             done(true);
         }
@@ -36,10 +31,10 @@ public class Exercise extends Activity {
 
     @Override
     public void shop(Character npc, int budget) {
-        npc.exercise();
+        npc.exercise(this);
     }
 
-    private void showScene(Scene chosen) {
+    public void showScene(Scene chosen) {
         switch (chosen) {
             case restricted:
                 Global.gui().message(
@@ -170,7 +165,7 @@ public class Exercise extends Activity {
         }
     }
 
-    private Scene pickScene(int gain) {
+    public Scene pickScene(int gain) {
         ArrayList<Scene> available = new ArrayList<Scene>();
         if(player.getRank()>=1&&!Global.checkFlag(Flag.metYui)){
             available.add(Scene.yuiintro1);
@@ -199,7 +194,7 @@ public class Exercise extends Activity {
         return available.get(Global.random(available.size()));
     }
 
-    private static enum Scene {
+    public enum Scene {
         basic1,
         basic2,
         basic3,

@@ -22,6 +22,7 @@ import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.GooeyMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
+import nightgames.daytime.Exercise;
 import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -1087,6 +1088,15 @@ public class Player extends Character {
         return levelsToGain;
     }
 
-    
+    @Override
+    public int exercise(Exercise source) {
+        int gain = super.exercise(source);
+        Global.gui().next(source);
+        source.showScene(source.pickScene(gain));
+        if (gain > 0) {
+            Global.gui().message("<b>Your maximum stamina has increased by " + gain + ".</b>");
+        }
+        return gain;
+    }
 
 }

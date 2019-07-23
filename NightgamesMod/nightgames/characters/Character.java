@@ -42,7 +42,9 @@ import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatantData;
 import nightgames.combat.Result;
+import nightgames.daytime.Exercise;
 import nightgames.global.Challenge;
+import nightgames.global.Configuration;
 import nightgames.global.DebugFlags;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -4702,7 +4704,7 @@ public abstract class Character extends Observable implements Cloneable {
         return Global.format("{self:SUBJECT-ACTION:try} smiles in satisfaction with their victory.", this, target);
     }
 
-    public int exercise() {
+    public int exercise(Exercise source) {
         int maximumStaminaForLevel = Configuration.getMaximumStaminaPossible(this);
         int gain = 1 + Global.random(2);
         if (has(Trait.fitnessNut)) {
