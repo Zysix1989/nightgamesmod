@@ -1155,6 +1155,9 @@ public class Player extends Character {
     }
 
     public void sceneNext() {
-        Global.gui().choose("Next");
+        gui.addToCommandPanel(new CommandPanelOption(
+            "Next",
+            event -> Global.current.respond("Next")
+        ));
     }
 }
