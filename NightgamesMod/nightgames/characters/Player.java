@@ -23,6 +23,7 @@ import nightgames.characters.body.mods.GooeyMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.daytime.Exercise;
+import nightgames.daytime.Porn;
 import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -1099,4 +1100,14 @@ public class Player extends Character {
         return gain;
     }
 
+    @Override
+    public int porn(Porn source) {
+        int gain = super.porn(source);
+        Global.gui().next(source);
+        source.showScene(source.pickScene(gain));
+        if (gain > 0) {
+            Global.gui().message("<b>Your maximum arousal has increased by " + gain + ".</b>");
+        }
+        return gain;
+    }
 }

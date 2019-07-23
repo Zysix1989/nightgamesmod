@@ -22,32 +22,18 @@ public class Porn extends Activity {
     public void visit(String choice) {
         Global.gui().clearText();
         if (page == 0) {
-            int gain = gainArousal(player);
-            showScene(pickScene(gain));
-            Global.gui().next(this);
-            Global.gui().message("<b>Your maximum arousal has increased by " + gain + ".</b>");
+            player.porn(this);
         } else {
             done(true);
         }
     }
 
-    private int gainArousal(Character self) {
-        int maximumArousalForLevel = Configuration.getMaximumArousalPossible(self);
-        int gain = 1 + Global.random(2);
-        if (player.has(Trait.expertGoogler)) {
-            gain = gain + Global.random(2);
-        }
-        gain = (int) Math.max(0, (int) Math.min(maximumArousalForLevel, self.getArousal().trueMax() + gain) - self.getArousal().trueMax());
-        self.getArousal().gain(gain);
-        return gain;
-    }
-
     @Override
     public void shop(Character npc, int budget) {
-        gainArousal(npc);
+        npc.porn(this);
     }
 
-    private void showScene(Scene chosen) {
+    public void showScene(Scene chosen) {
         switch (chosen) {
             case basic3:
                 Global.gui().message(
@@ -93,7 +79,7 @@ public class Porn extends Activity {
         }
     }
 
-    private Scene pickScene(int gain) {
+    public Scene pickScene(int gain) {
         ArrayList<Scene> available = new ArrayList<Scene>();
         if (gain == 0) {
             available.add(Scene.none);            
@@ -115,7 +101,7 @@ public class Porn extends Activity {
         return available.get(Global.random(available.size()));
     }
 
-    private static enum Scene {
+    public enum Scene {
         basic1,
         basic2,
         basic3,

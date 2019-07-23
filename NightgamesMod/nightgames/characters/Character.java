@@ -43,6 +43,7 @@ import nightgames.combat.Combat;
 import nightgames.combat.CombatantData;
 import nightgames.combat.Result;
 import nightgames.daytime.Exercise;
+import nightgames.daytime.Porn;
 import nightgames.global.Challenge;
 import nightgames.global.Configuration;
 import nightgames.global.DebugFlags;
@@ -4713,6 +4714,18 @@ public abstract class Character extends Observable implements Cloneable {
         gain = Math.max(0,
             (int) (Math.min(maximumStaminaForLevel, stamina.trueMax() + gain) - stamina.trueMax()));
         stamina.gain(gain);
+        return gain;
+    }
+
+    public int porn(Porn source) {
+        int maximumArousalForLevel = Configuration.getMaximumArousalPossible(this);
+        int gain = 1 + Global.random(2);
+        if (has(Trait.expertGoogler)) {
+            gain = gain + Global.random(2);
+        }
+        gain = (int) Math.max(0,
+            (int) Math.min(maximumArousalForLevel, arousal.trueMax() + gain) - arousal.trueMax());
+        arousal.gain(gain);
         return gain;
     }
 }
