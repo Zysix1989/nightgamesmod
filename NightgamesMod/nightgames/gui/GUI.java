@@ -408,9 +408,16 @@ public class GUI extends JFrame implements Observer {
     }
 
     public void addAction(Action action, Character user) {
-        commandPanel.add(new ActionButton(action, user));
+        addToCommandPanel(new CommandPanelOption(
+            action.toString(),
+            event -> {
+                action.execute(user);
+                if (!action.freeAction()) {
+                    Global.getMatch().resume();
+                }
+            }
+        ));
         Global.getMatch().pause();
-        commandPanel.refresh();
     }
 
     public void prompt(String message, List<KeyableButton> choices) {
