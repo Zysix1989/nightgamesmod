@@ -29,8 +29,7 @@ public class StripMinor extends Skill {
     @Override
     public boolean usable(Combat c, Character target) {
         // ignore target for now... because yup I don't want to refactor subchoices just yet.
-        List<Clothing> strippable = getStrippableArticles(c);
-        return getSelf().canAct() && !strippable.isEmpty();
+        return getSelf().canAct() && !subChoices(c).isEmpty();
     }
 
     @Override
