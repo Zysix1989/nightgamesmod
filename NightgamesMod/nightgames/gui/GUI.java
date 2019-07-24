@@ -28,18 +28,13 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import javax.swing.border.CompoundBorder;
-import nightgames.actions.Action;
-import nightgames.actions.Locate;
 import nightgames.characters.Character;
 import nightgames.characters.Player;
 import nightgames.combat.Combat;
-import nightgames.combat.CombatSceneChoice;
 import nightgames.daytime.Activity;
-import nightgames.daytime.Store;
 import nightgames.global.DebugFlags;
 import nightgames.global.Flag;
 import nightgames.global.Global;
-import nightgames.items.Loot;
 import nightgames.skills.Skill;
 import nightgames.skills.TacticGroup;
 
