@@ -19,4 +19,12 @@ public class CommandPanelOption {
         this.toolTipText = toolTipText;
         this.action = action;
     }
+
+    KeyableButton toButton() {
+        RunnableButton button = new RunnableButton(displayText, action);
+        if (toolTipText != null) {
+            button.getButton().setToolTipText(toolTipText);
+        }
+        return button;
+    }
 }

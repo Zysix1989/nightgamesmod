@@ -404,7 +404,7 @@ public class GUI extends JFrame implements Observer {
                 option.action.actionPerformed(event);
                 refresh();
             });
-        addToCommandPanel(optionButton(wrappedOption));
+        addToCommandPanel(wrappedOption.toButton());
     }
 
     public void prompt(String message, List<KeyableButton> choices) {
@@ -471,14 +471,6 @@ public class GUI extends JFrame implements Observer {
                 combat.combatMessageChanged = false;
             }
         }
-    }
-
-    private KeyableButton optionButton(CommandPanelOption option) {
-        RunnableButton button = new RunnableButton(option.displayText, option.action);
-        if (option.toolTipText != null) {
-            button.getButton().setToolTipText(option.toolTipText);
-        }
-        return button;
     }
 
     public void changeClothes(Character player, Activity event, String backOption) {
