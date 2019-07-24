@@ -433,7 +433,7 @@ public class Player extends Character {
                 Move compelled = findPath(master.location());
                 gui.message("You feel an irresistible compulsion to head to the <b>" + master.location().name + "</b>");
                 if (compelled != null) {
-                    gui.addAction(compelled, this);
+                    chooseAction(compelled, this);
                 }
             }
         } else if (state == State.shower || state == State.lostclothes) {
@@ -474,7 +474,7 @@ public class Player extends Character {
             detect();
             if (!location.encounter(this)) {
                 if (!allowedActions().isEmpty()) {
-                    allowedActions().forEach(a -> gui.addAction(a, this));
+                    allowedActions().forEach(a -> chooseAction(a, this));
                 } else {
                     List<Action> possibleActions = new ArrayList<>();
                     if (Global.getMatch().canMoveOutOfCombat(this)) {
@@ -497,7 +497,7 @@ public class Player extends Character {
                     for (Action act : possibleActions) {
                         if (act.usable(this) 
                                         && Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
-                            gui.addAction(act, this);
+                            chooseAction(act, this);
                         }
                     }
                 }
@@ -1207,5 +1207,18 @@ public class Player extends Character {
             event -> {
                 activity.visit(choice);
             }));
+    }
+
+    private void chooseAction(Action action, Character user) {
+        gui.addToCommandPanel(new CommandPanelOption(
+            action.toString(),
+            event -> {
+                action.execute(user);
+                if (!action.freeAction()) {
+                    Global.getMatch().resume();
+                }
+            }
+        ));
+        Global.getMatch().pause();
     }
 }
