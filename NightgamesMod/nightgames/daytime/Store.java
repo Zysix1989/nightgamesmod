@@ -44,14 +44,14 @@ public abstract class Store extends Activity {
     protected void displayClothes() {
         for (Clothing i : clothingstock.keySet()) {
             if (!player.has(i)) {
-                player.shopOptions(this, i);
+                player.addShopOption(this, i);
             }
         }
     }
 
     protected void displayItems() {
         for (Item i : stock.keySet()) {
-            player.shopOptions(this, i);
+            player.addShopOption(this, i);
         }
     }
 

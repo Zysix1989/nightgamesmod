@@ -103,12 +103,12 @@ public class XxxStore extends Store {
                 }
             }
             Global.gui().message("You have :$" + player.money + " to spend.");
-            player.shopOptions(this, Item.Lubricant);
+            player.addShopOption(this, Item.Lubricant);
 
             if (player.has(Item.Dildo)) {
                 Global.gui().message("You already have a perfectly serviceable dildo. You don't need another.");
             } else {
-                player.shopOptions(this, Item.Dildo);
+                player.addShopOption(this, Item.Dildo);
             }
 
             if (player.has(Item.Onahole)) {
@@ -116,7 +116,7 @@ public class XxxStore extends Store {
             } else if (player.has(Item.Onahole2)) {
                 Global.gui().message("You already have the best onahole you can dream of.");
             } else {
-                player.shopOptions(this, Item.Onahole);
+                player.addShopOption(this, Item.Onahole);
             }
 
             if (player.has(Item.Crop)) {
@@ -124,7 +124,7 @@ public class XxxStore extends Store {
             } else if (player.has(Item.Crop2)) {
                 Global.gui().message("Your current riding crop is already overkill.");
             } else {
-                player.shopOptions(this, Item.Crop);
+                player.addShopOption(this, Item.Crop);
             }
 
             if (player.has(Item.Tickler)) {
@@ -132,7 +132,7 @@ public class XxxStore extends Store {
             } else if (player.has(Item.Tickler2)) {
                 Global.gui().message("Nothing on sale is half as good as your current tickler.");
             } else {
-                player.shopOptions(this, Item.Tickler);
+                player.addShopOption(this, Item.Tickler);
             }
 
             if (player.hasDick()) {
@@ -143,9 +143,9 @@ public class XxxStore extends Store {
             } else if (player.has(Item.Strapon2)) {
                 Global.gui().message("Your strapon is even better than the real thing already.");
             } else {
-                player.shopOptions(this, Item.Strapon);
+                player.addShopOption(this, Item.Strapon);
             }
-            player.shopOptions(this, Item.Blindfold);
+            player.addShopOption(this, Item.Blindfold);
             displayClothes();
             if (Global.checkFlag(Flag.AliceAvailable)) {
                 Global.gui().message(
