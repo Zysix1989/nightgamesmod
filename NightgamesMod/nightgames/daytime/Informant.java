@@ -101,12 +101,13 @@ public class Informant extends Activity {
             player.chooseActivitySubchoices(this, choices);
             return true;
         }
-        player.chooseActivitySubchoices(this, choices);
 
         if (choice.startsWith(RETURN_PREFIX)) {
-            returnCompetitor(choice);
+            choices.addAll(returnCompetitor(choice));
+            player.chooseActivitySubchoices(this, choices);
             return true;
         }
+        player.chooseActivitySubchoices(this, choices);
 
         if (choice.equals("More Competitors")) {
             addMoreCompetitorsChoices();
@@ -187,12 +188,14 @@ public class Informant extends Activity {
         choices.add("Select Competitors");
         return choices;
     }
-    
-    private void returnCompetitor(String choice) {
+
+    private List<String> returnCompetitor(String choice) {
         String name = choice.substring(RETURN_PREFIX.length());
         Global.gui().message("Missing " + name+ " already? I'll see what I can do.");
         Global.unsetCharacterDisabledFlag(Global.getParticipantsByName(name));
-        player.chooseActivity(this, "Select Competitors");
+        ArrayList<String> choices = new ArrayList<>();
+        choices.add("Select Competitors");
+        return choices;
     }
     
     private void addChoices() {
