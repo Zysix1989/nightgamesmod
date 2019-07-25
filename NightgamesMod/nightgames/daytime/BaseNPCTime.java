@@ -83,6 +83,7 @@ public abstract class BaseNPCTime extends Activity {
         Optional<Loot> optionalGiftOption = giftables.stream()
                         .filter(gift -> choice.equals(Global.capitalizeFirstLetter(gift.getName()))).findFirst();
 
+        ArrayList<String> choices = new ArrayList<>();
         if (optionalOption.isPresent()) {
             TransformationOption option = optionalOption.get();
             boolean hasAll = option.ingredients.entrySet().stream()
@@ -90,10 +91,10 @@ public abstract class BaseNPCTime extends Activity {
             int moneyCost = option.moneyCost.apply(this.player);
             if (!hasAll) {
                 Global.gui().message(Global.format(noRequestedItems, npc, player));
-                player.chooseActivity(this, "Back");
+                choices.add("Back");
             } else if (player.money < moneyCost) {
                 Global.gui().message(Global.format(notEnoughMoney, npc, player));
-                player.chooseActivity(this, "Back");
+                choices.add("Back");
             } else {
                 Global.gui().message(Global.format(option.scene, npc, player));
                 option.ingredients.entrySet().stream().forEach(entry -> player.consume(entry.getKey(), entry.getValue(), false));
@@ -101,7 +102,7 @@ public abstract class BaseNPCTime extends Activity {
                 if (moneyCost > 0) {
                     player.modMoney(- moneyCost);
                 }
-                player.chooseActivity(this, "Leave");
+                choices.add("Leave");
             }
         } else if (optionalGiftOption.isPresent()) {
             Global.gui().message(Global.format(giftedString, npc, player));
@@ -113,12 +114,12 @@ public abstract class BaseNPCTime extends Activity {
             }
             player.gainAffection(npc, 2);
             npc.gainAffection(player, 2);
-            player.chooseActivity(this, "Back");
+            choices.add("Back");
         } else if (choice.equals("Gift")) {
             Global.gui().message(Global.format(giftString, npc, player));
             giftables.stream().forEach(
-                loot -> player.chooseActivity(this, Global.capitalizeFirstLetter(loot.getName())));
-            player.chooseActivity(this, "Back");
+                loot -> choices.add(Global.capitalizeFirstLetter(loot.getName())));
+            choices.add("Back");
         } else if (choice.equals("Change Outfit")) {
             Global.gui().changeClothes(npc, this, "Back");
         } else if (choice.equals(transformationOptionString)) {
@@ -148,31 +149,31 @@ public abstract class BaseNPCTime extends Activity {
                     allowed &= meets;
                 }
                 if (allowed) {
-                    player.chooseActivity(this, opt.option);
+                    choices.add(opt.option);
                 }
                 Global.gui().message("<br/>");
             });
-            player.chooseActivity(this, "Back");
+            choices.add("Back");
         } else if (choice.equals("Start") || choice.equals("Back")) {
             if (npc.getAffection(player) > 25 && (advTrait == null || npc.has(advTrait))) {
                 Global.gui().message(Global.format(loveIntro, npc, player));
-                player.chooseActivity(this, "Games");
-                player.chooseActivity(this, "Sparring");
-                player.chooseActivity(this, "Sex");
+                choices.add("Games");
+                choices.add("Sparring");
+                choices.add("Sex");
                 if (!transformationOptions.isEmpty()) {
-                    player.chooseActivity(this, transformationOptionString);
+                    choices.add(transformationOptionString);
                 }
                 if (npc.getAffection(player) > 30) {
-                    player.chooseActivity(this, "Gift");
+                    choices.add("Gift");
                 }
                 if (npc.getAffection(player) > 35) {
-                    player.chooseActivity(this, "Change Outfit");
+                    choices.add("Change Outfit");
                 }
                 Optional<String> addictionOpt = getAddictionOption();
                 if (addictionOpt.isPresent()) {
-                    player.chooseActivity(this, addictionOpt.get());
+                    choices.add(addictionOpt.get());
                 }
-                player.chooseActivity(this, "Leave");
+                choices.add("Leave");
             } else {
                 subVisitIntro(choice);
             }
@@ -181,6 +182,7 @@ public abstract class BaseNPCTime extends Activity {
         } else {
             subVisit(choice);
         }
+        player.chooseActivitySubchoices(this, choices);
     }
 
     @Override
