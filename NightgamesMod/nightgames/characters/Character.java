@@ -4735,6 +4735,11 @@ public abstract class Character extends Observable implements Cloneable {
         return gain;
     }
 
+    public void chooseLocateTarget(Locate action, Collection<Character> potentialTargets) {
+        throw new UnsupportedOperationException(
+            String.format("attempted to choose target for %s", action.toString()));
+    }
+
     public void chooseTarget(Locate action, String displayText) {
         throw new UnsupportedOperationException(
             String.format("attempted to choose target %s for %s",

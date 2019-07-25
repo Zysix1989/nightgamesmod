@@ -2,6 +2,7 @@ package nightgames.actions;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.stream.Collectors;
 import nightgames.areas.Area;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -48,11 +49,10 @@ public class Locate extends Action {
         Character target;
         GUI gui = Global.gui();
         if (choice.equals("Start")) {
-            Global.getMatch().getCombatants().stream().filter(c -> self.getAffection(c) >= MINIMUM_SCRYING_REQUIREMENT)
-                            .forEach((character) -> {
-                                self.chooseTarget(this, character.getTrueName());
-                            });
-            self.leaveAction(this);
+            self.chooseLocateTarget(this,
+                Global.getMatch().getCombatants().stream()
+                    .filter(c -> self.getAffection(c) >= MINIMUM_SCRYING_REQUIREMENT)
+                    .collect(Collectors.toList()));
         } else if (choice.equals("Leave")) {
             gui.clearText();
             gui.clearCommand();

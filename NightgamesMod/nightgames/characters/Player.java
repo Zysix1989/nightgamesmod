@@ -2,6 +2,7 @@ package nightgames.characters;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -1137,6 +1138,14 @@ public class Player extends Character {
             Global.gui().message("<b>Your maximum arousal has increased by " + gain + ".</b>");
         }
         return gain;
+    }
+
+    @Override
+    public void chooseLocateTarget(Locate action, Collection<Character> potentialTargets) {
+        potentialTargets.forEach((character) -> {
+            chooseTarget(action, character.getTrueName());
+        });
+        leaveAction(action);
     }
 
     @Override
