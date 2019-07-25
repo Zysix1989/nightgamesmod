@@ -1179,13 +1179,19 @@ public class Player extends Character {
         gui.presentOptions(options);
     }
 
+    // displayTexts and prices are expected to be 1:1
     @Override
-    public void bodyShopOptions(BodyShop shop, String displayText, int price) {
-        gui.addToCommandPanel(new CommandPanelOption(displayText,
-            "Price: $" + price,
-            event -> {
-                shop.visit(displayText);
-            }));
+    public void chooseBodyShopOption(BodyShop shop, List<String> displayTexts,
+        List<Integer> prices) {
+        assert displayTexts.size() == prices.size();
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
+        for (Integer i = 0; i < displayTexts.size(); i++) {
+            final String displayText = displayTexts.get(i);
+            options.add(new CommandPanelOption(
+                displayText,
+                "Price: $" + prices.get(i),
+                event -> shop.visit(displayText)));
+        }
     }
 
     @Override

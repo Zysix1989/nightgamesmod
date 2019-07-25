@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import java.util.stream.Collectors;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
@@ -549,12 +550,17 @@ public class BodyShop extends Activity {
 
     private void displaySelection() {
         Global.gui().message("You have :$" + player.money + " to spend.");
-        for (ShopSelection s : selection) {
-            if (s.available(player) && player.money >= s.price) {
-                player.bodyShopOptions(this, s.choice, s.price);
-                Global.gui().message(s.choice + ": $" + s.price);
-            }
+        List<ShopSelection> available = selection.stream()
+            .filter(s -> s.available(player) && player.money >= s.price)
+            .collect(Collectors.toList());
+        ArrayList<String> displayTexts = new ArrayList<>();
+        ArrayList<Integer> prices = new ArrayList<>();
+        for (ShopSelection s : available) {
+            displayTexts.add(s.choice);
+            prices.add(s.price);
+            Global.gui().message(s.choice + ": $" + s.price);
         }
+        player.chooseBodyShopOption(this, displayTexts, prices);
         player.chooseActivity(this, "Leave");
     }
 
