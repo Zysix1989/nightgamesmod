@@ -107,12 +107,13 @@ public class Informant extends Activity {
             player.chooseActivitySubchoices(this, choices);
             return true;
         }
-        player.chooseActivitySubchoices(this, choices);
 
         if (choice.equals("More Competitors")) {
-            addMoreCompetitorsChoices();
+            choices.addAll(addMoreCompetitorsChoices());
+            player.chooseActivitySubchoices(this, choices);
             return true;
         }
+        player.chooseActivitySubchoices(this, choices);
 
         if (customNPCChoices.containsKey(choice)) {
             handleCustomNpcRecruitment(choice);
@@ -352,8 +353,9 @@ public class Informant extends Activity {
         acted = true;
         return choices;
     }
-    
-    private void addMoreCompetitorsChoices() {
+
+    private List<String> addMoreCompetitorsChoices() {
+        ArrayList<String> choices = new ArrayList<>();
         if (!Global.checkFlag(Flag.Reyka) && Global.checkFlag(Flag.blackMarketPlus)) {
             Global.gui()
                   .message("<i>\"Let me tell you the story of a succubus named Reyka. So a while back a competitor decides it's a good idea to save up a bunch of money and buy the most "
@@ -362,7 +364,7 @@ public class Informant extends Activity {
                                   + "enough to sever the link between her and the summoner. No one was seriously hurt, but it did cause a major fuss. Rin isn't allowed to sell such strong items anymore without "
                                   + "special permission. The summoner was suspended from matches for a couple weeks. Someone with some pull must have taken a liking to Reyka though, since no one has tried to "
                                   + "banish her and someone's paying her living expenses. She's pretty aggressive, but probably not actually dangerous... probably.\"</i><br/><br/>");
-            player.chooseActivity(this, "Reyka: $1000");
+            choices.add("Reyka: $1000");
         }
         if (!Global.checkFlag(Flag.Airi) && Global.checkFlag(Flag.workshop)) {
             Global.gui()
@@ -372,7 +374,7 @@ public class Informant extends Activity {
                          + "but she's definitely came out a bit... stranger than before. I think she was worried about her lack of presence, but I'd say she's even more... formless than before. "
                          + "\"</i> Aesop guffaws at his own joke that you don't understand. <i>\""
                          + "She's definitely still a cutie though. So whaddaya say, want me to try and talk to her for you?\"</i><br/><br/>");
-            player.chooseActivity(this, "Airi: $1000");
+            choices.add("Airi: $1000");
         }
         if (!Global.checkFlag(Flag.Kat) && Global.checkFlag(Flag.magicstore)) {
             Global.gui()
@@ -384,7 +386,7 @@ public class Informant extends Activity {
                                   + "by channelling an animal spirit. She's got cat ears, a tail, a kinda cute verbal tic, the whole deal. The cat instincts have made her a lot more capable of holding her own "
                                   + "in a match. She never became the strongest in her year, but she'd be a good match for yours. Just don't dismiss her because she looks young. She is actually a year older "
                                   + "than you.\"</i><br/><br/>");
-            player.chooseActivity(this, "Kat: $1000");
+            choices.add("Kat: $1000");
         }
         if (!Global.checkFlag(Flag.Eve) && Global.checkFlag(Flag.blackMarketPlus) && player.getRank() >= 2) {
             Global.gui()
@@ -404,7 +406,7 @@ public class Informant extends Activity {
                                   + "To be honest though, I'd be perfectly happy to never deal with her "
                                   + "again.\"</i><br/><br/>");
 
-            player.chooseActivity(this, "Eve: $1000");
+            choices.add("Eve: $1000");
         }
         for (Character c : Global.allNPCs()) {
             if (c.isCustomNPC() && !Global.everyone().contains(c)) {
@@ -413,11 +415,12 @@ public class Informant extends Activity {
                 if (data.requirement.stream().allMatch((req) -> req.meets(null, player, null))) {
                     Global.gui().message("<i>\"" + data.introduction + "\"</i><br/><br/>");
                     customNPCChoices.put(data.action, npc);
-                    player.chooseActivity(this, data.action);
+                    choices.add(data.action);
                 }
             }
         }
-        player.chooseActivity(this, "Back");
+        choices.add("Back");
+        return choices;
     }
     
     private void handleCustomNpcRecruitment(String choice) {
