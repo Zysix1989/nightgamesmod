@@ -45,6 +45,10 @@ public class Informant extends Activity {
         if (!result.terminal) {
             result.choices.addAll(addChoices());
         }
+        if (result.done) {
+            done(acted);
+            return;
+        }
         player.chooseActivitySubchoices(this, result.choices);
     }
 
@@ -56,11 +60,17 @@ public class Informant extends Activity {
     private class VisitResult {
 
         public boolean terminal;
+        public boolean done;
         public List<String> choices;
 
         public VisitResult(boolean terminal, List<String> choices) {
             this.terminal = terminal;
             this.choices = choices;
+        }
+
+        public VisitResult(boolean terminal, boolean done) {
+            this.terminal = terminal;
+            this.done = done;
         }
     }
 
@@ -72,8 +82,7 @@ public class Informant extends Activity {
         List<String> choices = result.choices;
 
         if (choice.equals("Leave")) {
-            done(acted);
-            return new VisitResult(true, choices);
+            return new VisitResult(true, true);
         }
 
         result = checkForTutorialSelections(choice);
