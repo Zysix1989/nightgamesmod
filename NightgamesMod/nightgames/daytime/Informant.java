@@ -65,21 +65,25 @@ public class Informant extends Activity {
     }
 
     private boolean handleChoice(String choice) {
-
         VisitResult result = doIntro(choice);
         if (result.terminal) {
             player.chooseActivitySubchoices(this, result.choices);
             return true;
         }
+        List<String> choices = result.choices;
 
         if (choice.equals("Leave")) {
             done(acted);
             return true;
         }
 
-        if (checkForTutorialSelections(choice)) {
+        result = checkForTutorialSelections(choice);
+        choices.addAll(result.choices);
+        if (result.terminal) {
+            player.chooseActivitySubchoices(this, result.choices);
             return true;
         }
+        player.chooseActivitySubchoices(this, result.choices);
 
         if (handleCostlyOptions(choice)) {
             return true;
@@ -143,15 +147,13 @@ public class Informant extends Activity {
     }
     
     /** Checks to see if the player's selected a free option, returning true if so */
-    private boolean checkForTutorialSelections(String choice) {
+    private VisitResult checkForTutorialSelections(String choice) {
         if (choice.equals("Purchasing supplies")) {
-            handleSupplies();
-            return true;
+            return new VisitResult(true, handleSupplies());
         } else if (choice.equals("The Competition")) {
-            handleCompetition();
-            return true;
+            return new VisitResult(true, handleCompetition());
         }
-        return false;
+        return new VisitResult(false, Collections.emptyList());
     }
     
     private void selectCompetitors() {
@@ -294,9 +296,9 @@ public class Informant extends Activity {
                         player.bitchOrBastard(), player.possessiveAdjective(), player.possessiveAdjective()));
         Global.flag(Flag.rank1);
     }
-    
-    
-    private void handleSupplies() {
+
+
+    private List<String> handleSupplies() {
         Global.gui().message("<i>\"As you were probably told when you entered, there are rules restricting the clothes you can wear to a match. "
                         + "If everyone wore a bunch of hard to remove layers, it would bog the matches down. Other than that, you're allowed to "
                         + "bring just about any tools and toys you want. Most of the higher rank players carry an arsenal of various useful "
@@ -310,11 +312,13 @@ public class Informant extends Activity {
                         + "advice. You were half expecting the address of an abandoned building and a password.<br/><i>\"Oh there's that too, "
                         + "but it'll cost you. If you ever need some more illicit goods, I can sell you a location later.\"</i>");
          Global.flag(Flag.basicStores);
-        player.chooseActivity(this, "Leave");
+        List<String> choices = new ArrayList<>();
+        choices.add("Leave");
          acted = true;
+        return choices;
     }
-    
-    private void handleCompetition() {
+
+    private List<String> handleCompetition() {
         Player player = Global.getPlayer();
         Global.gui().message(String.format(
                         "<i>\"Looking for advice about the competition? If you don't have any older siblings to ask, I might be able to help.\""
@@ -332,8 +336,10 @@ public class Informant extends Activity {
                         + "Who knows, you might even get a relationship out of this. It's not wholly unprecedented.\"</i>",
                         player.bitchOrBastard()));
         Global.flag(Flag.girlAdvice);
-        player.chooseActivity(this, "Leave");
+        List<String> choices = new ArrayList<>();
+        choices.add("Leave");
         acted = true;
+        return choices;
     }
     
     private void addMoreCompetitorsChoices() {
