@@ -1,6 +1,7 @@
 package nightgames.daytime;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import nightgames.characters.Character;
@@ -68,7 +69,7 @@ public abstract class Store extends Activity {
     }
 
     protected void displayGoods() {
-        Set<Loot> purchasableLoot = getClothes().stream().collect(Collectors.toSet());
+        HashSet<Loot> purchasableLoot = new HashSet<>(getClothes());
         purchasableLoot.addAll(getItems());
         purchasableLoot.stream().forEach(i -> player.addShopOption(this, i));
     }
