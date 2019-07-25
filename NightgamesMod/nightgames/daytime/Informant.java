@@ -41,11 +41,11 @@ public class Informant extends Activity {
         Global.gui().clearText();
         Global.gui().clearCommand();
 
-        if (handleChoice(choice)) {
-            return;
+        VisitResult result = handleChoice(choice);
+        if (!result.terminal) {
+            result.choices.addAll(addChoices());
         }
-        
-        addChoices();
+        player.chooseActivitySubchoices(this, result.choices);
     }
 
     @Override
@@ -64,53 +64,46 @@ public class Informant extends Activity {
         }
     }
 
-    private boolean handleChoice(String choice) {
+    private VisitResult handleChoice(String choice) {
         VisitResult result = doIntro(choice);
         if (result.terminal) {
-            player.chooseActivitySubchoices(this, result.choices);
-            return true;
+            return result;
         }
         List<String> choices = result.choices;
 
         if (choice.equals("Leave")) {
             done(acted);
-            return true;
+            return new VisitResult(true, choices);
         }
 
         result = checkForTutorialSelections(choice);
         choices.addAll(result.choices);
         if (result.terminal) {
-            player.chooseActivitySubchoices(this, result.choices);
-            return true;
+            return new VisitResult(true, choices);
         }
 
-
         if (handleCostlyOptions(choice)) {
-            return true;
+            return new VisitResult(true, choices);
         }
 
         if (choice.equals("Select Competitors")) {
             choices.addAll(selectCompetitors());
-            player.chooseActivitySubchoices(this, choices);
-            return true;
+            return new VisitResult(true, choices);
         }
 
         if (choice.startsWith(REMOVE_PREFIX)) {
             choices.addAll(removeCompetitor(choice));
-            player.chooseActivitySubchoices(this, choices);
-            return true;
+            return new VisitResult(true, choices);
         }
 
         if (choice.startsWith(RETURN_PREFIX)) {
             choices.addAll(returnCompetitor(choice));
-            player.chooseActivitySubchoices(this, choices);
-            return true;
+            return new VisitResult(true, choices);
         }
 
         if (choice.equals("More Competitors")) {
             choices.addAll(addMoreCompetitorsChoices());
-            player.chooseActivitySubchoices(this, choices);
-            return true;
+            return new VisitResult(true, choices);
         }
 
         if (customNPCChoices.containsKey(choice)) {
@@ -126,8 +119,7 @@ public class Informant extends Activity {
         } 
 
         handleNewCompetitorChoices(choice);
-        player.chooseActivitySubchoices(this, choices);
-        return false;
+        return new VisitResult(false, choices);
     }
     
     /** Displays the first text seen when visiting the Informant. Returns true if the visit
@@ -197,8 +189,8 @@ public class Informant extends Activity {
         choices.add("Select Competitors");
         return choices;
     }
-    
-    private void addChoices() {
+
+    private List<String> addChoices() {
 
         List<String> choices = getTutorialSelections();
 
@@ -220,7 +212,7 @@ public class Informant extends Activity {
             choices.add("Help with Addiction");
         }
         choices.add("Leave");
-        player.chooseActivitySubchoices(this, choices);
+        return choices;
     }
 
     /**
