@@ -1221,6 +1221,16 @@ public class Player extends Character {
         gui.addToCommandPanel(o);
     }
 
+    @Override
+    public void chooseActivitySubchoices(Activity activity, List<String> choices) {
+        gui.presentOptions(choices.stream().map(
+            choice -> new CommandPanelOption(
+                choice,
+                event -> activity.visit(choice)))
+            .collect(Collectors.toList()));
+    }
+
+    @Override
     public void chooseActivity(Activity activity, String choice) {
         gui.addToCommandPanel(new CommandPanelOption(choice,
             event -> {
