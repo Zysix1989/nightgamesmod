@@ -1,6 +1,7 @@
 package nightgames.daytime;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class Informant extends Activity {
     public void visit(String choice) {
         Global.gui().clearText();
         Global.gui().clearCommand();
- 
+
         if (handleChoice(choice)) {
             return;
         }
@@ -51,13 +52,26 @@ public class Informant extends Activity {
     public void shop(Character npc, int budget) {
         // Unsure what NPCs would be buying here, so no-op
     }
-    
+
+    private class VisitResult {
+
+        public boolean terminal;
+        public List<String> choices;
+
+        public VisitResult(boolean terminal, List<String> choices) {
+            this.terminal = terminal;
+            this.choices = choices;
+        }
+    }
+
     private boolean handleChoice(String choice) {
- 
-        if (doIntro(choice)) {
+
+        VisitResult result = doIntro(choice);
+        if (result.terminal) {
+            player.chooseActivitySubchoices(this, result.choices);
             return true;
         }
-        
+
         if (choice.equals("Leave")) {
             done(acted);
             return true;
@@ -109,10 +123,10 @@ public class Informant extends Activity {
     
     /** Displays the first text seen when visiting the Informant. Returns true if the visit
      * should be cut short, false otherwise. */
-    private boolean doIntro(String choice) {
+    private VisitResult doIntro(String choice) {
         if (!Global.checkFlag(Flag.metBroker)) {
-            meetBroker();
-            return true;
+            List<String> choices = meetBroker();
+            return new VisitResult(true, choices);
         }
 
         if (player.getRank() >= 1 && !Global.checkFlag(Flag.rank1)) {
@@ -125,7 +139,7 @@ public class Informant extends Activity {
                             + "are you looking for today?\"</i>");
             acted = false;
         }
-        return false;
+        return new VisitResult(false, Collections.emptyList());
     }
     
     /** Checks to see if the player's selected a free option, returning true if so */
@@ -209,8 +223,8 @@ public class Informant extends Activity {
         }
         return choices;
     }
-    
-    private void meetBroker() {
+
+    private List<String> meetBroker() {
         Global.gui().message(String.format(
                         "It's almost strange seeing the Quad bustling with people knowing how completely deserted it is at night. "
                         + "Of course, you've been here more during the day than at night, so the unsettling feeling you have is "
@@ -244,8 +258,10 @@ public class Informant extends Activity {
                         + "more often.\"</i><br/>Aesop suddenly looks at his phone and stands up. <i>\"Sorry, I need to run for now. "
                         + "Shoot me a text when you're interested in some more advice. I'll meet you here again.\"</i>"));
       Global.flag(Flag.metBroker);
-        player.chooseActivity(this, "Leave");
+        ArrayList<String> choices = new ArrayList<>();
+        choices.add("Leave");
       acted = true;
+        return choices;
     }
     
     private void rankOneEvent() {
