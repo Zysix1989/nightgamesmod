@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import java.util.stream.Collectors;
 import nightgames.characters.Airi;
 import nightgames.characters.Character;
@@ -113,7 +112,6 @@ public class Informant extends Activity {
             player.chooseActivitySubchoices(this, choices);
             return true;
         }
-        player.chooseActivitySubchoices(this, choices);
 
         if (customNPCChoices.containsKey(choice)) {
             handleCustomNpcRecruitment(choice);
@@ -128,6 +126,7 @@ public class Informant extends Activity {
         } 
 
         handleNewCompetitorChoices(choice);
+        player.chooseActivitySubchoices(this, choices);
         return false;
     }
     
