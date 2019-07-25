@@ -140,7 +140,7 @@ public class Informant extends Activity {
                             + "are you looking for today?\"</i>");
             acted = false;
         }
-        return new VisitResult(false, Collections.emptyList());
+        return new VisitResult(false, new ArrayList<>());
     }
     
     /** Checks to see if the player's selected a free option, returning true if so */
@@ -150,7 +150,7 @@ public class Informant extends Activity {
         } else if (choice.equals("The Competition")) {
             return new VisitResult(true, handleCompetition());
         }
-        return new VisitResult(false, Collections.emptyList());
+        return new VisitResult(false, new ArrayList<>());
     }
 
     private List<String> selectCompetitors() {
