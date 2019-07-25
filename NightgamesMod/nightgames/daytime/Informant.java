@@ -91,7 +91,9 @@ public class Informant extends Activity {
             return new VisitResult(true, choices);
         }
 
-        if (handleCostlyOptions(choice)) {
+        result = handleCostlyOptions(choice);
+        choices.addAll(result.choices);
+        if (result.terminal) {
             return new VisitResult(true, choices);
         }
 
@@ -534,13 +536,13 @@ public class Informant extends Activity {
      * the choice. Returns true if the player has enough money and the option has been
      * run, false otherwise.
      */
-    private boolean handleCostlyOptions(String choice) {
+    private VisitResult handleCostlyOptions(String choice) {
         for(CostlyOption option : buildOptions()) {
             if (option.name().equals(choice)) {
                 return option.onSelect();
             }
         }
-        return false;
+        return new VisitResult(false, new ArrayList<>());
     }
     
     /** Convenience for informant options that require money. Remember to add child classes
@@ -564,18 +566,19 @@ public class Informant extends Activity {
         
         /** Checks if the player can afford this option. If so, deducts funds, calls
          * run(), and returns true.  Else calls printNoMoney() and returns false. */
-        public final boolean onSelect() {
+        public final VisitResult onSelect() {
             if (player.money < cost()) {
                 printNoMoney();
-                return false;
+                return new VisitResult(false, new ArrayList<>());
             }
             
             player.money -= cost();
             run();
             setOnRun().ifPresent((Flag f) -> Global.flag(f));
-            player.chooseActivity(Informant.this, "Leave");
+            ArrayList<String> choices = new ArrayList<>();
+            choices.add("Leave");
             acted = true;
-            return true;
+            return new VisitResult(true, choices);
         }
         
         /** Returns an optional flag that will be set to true when this Option
