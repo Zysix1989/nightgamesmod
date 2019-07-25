@@ -2,6 +2,8 @@ package nightgames.daytime;
 
 import java.util.Map;
 
+import java.util.Set;
+import java.util.stream.Collectors;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Flag;
@@ -52,6 +54,13 @@ public class HWStore extends Store {
             displayGoods();
             player.chooseActivity(this, "Leave");
         }
+    }
+
+    @Override
+    protected Set<Item> getItems() {
+        return stock.keySet().stream()
+            .filter(i -> i != Item.EmptyBottle || player.getRank() > 0)
+            .collect(Collectors.toSet());
     }
 
     @Override

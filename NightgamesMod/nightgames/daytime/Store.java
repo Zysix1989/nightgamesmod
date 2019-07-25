@@ -1,10 +1,12 @@
 package nightgames.daytime;
 
 import java.util.HashMap;
-
+import java.util.Set;
+import java.util.stream.Collectors;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
 
 public abstract class Store extends Activity {
@@ -41,12 +43,22 @@ public abstract class Store extends Activity {
         return clothingstock;
     }
 
+    protected Set<Clothing> getClothes() {
+        return clothingstock.keySet().stream()
+            .filter(clothing -> !player.has(clothing))
+            .collect(Collectors.toSet());
+    }
+
     protected void displayClothes() {
         for (Clothing i : clothingstock.keySet()) {
             if (!player.has(i)) {
                 player.addShopOption(this, i);
             }
         }
+    }
+
+    protected Set<Item> getItems() {
+        return stock.keySet();
     }
 
     protected void displayItems() {
@@ -56,8 +68,9 @@ public abstract class Store extends Activity {
     }
 
     protected void displayGoods() {
-        displayClothes();
-        displayItems();
+        Set<Loot> purchasableLoot = getClothes().stream().collect(Collectors.toSet());
+        purchasableLoot.addAll(getItems());
+        purchasableLoot.stream().forEach(i -> player.addShopOption(this, i));
     }
 
     protected boolean checkSale(String name) {
