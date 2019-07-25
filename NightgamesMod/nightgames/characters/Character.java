@@ -4758,11 +4758,14 @@ public abstract class Character extends Observable implements Cloneable {
     }
 
     public void nextCombat(Combat c) {
+        // Can't be sure this isn't used at the moment
     }
 
     public void sceneNext(Scene s) {
+        // Can't be sure this isn't used at the moment
     }
 
     public void chooseActivity(Activity activity, String choice) {
+        // Can't be sure this isn't used at the moment
     }
 }
