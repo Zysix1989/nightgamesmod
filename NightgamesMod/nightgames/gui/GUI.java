@@ -402,6 +402,11 @@ public class GUI extends JFrame implements Observer {
         addToCommandPanel(wrappedOption.toButton());
     }
 
+    public void presentOptions(final List<CommandPanelOption> options) {
+        clearCommand();
+        options.forEach(this::addToCommandPanel);
+    }
+
     public void prompt(String message, List<KeyableButton> choices) {
         clearText();
         clearCommand();

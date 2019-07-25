@@ -351,11 +351,12 @@ public class Player extends Character {
                         + "</b> and you both hesitate for a moment, deciding whether to attack or retreat.");
         assessOpponent(opponent);
         gui.message("<br/>");
-        gui.clearCommand();
-        gui.addToCommandPanel(new CommandPanelOption("Fight",
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
+        options.add(new CommandPanelOption("Fight",
             encounterOption(enc, opponent, Encs.fight)));
-        gui.addToCommandPanel(new CommandPanelOption("Flee",
+        options.add(new CommandPanelOption("Flee",
             encounterOption(enc, opponent, Encs.flee)));
+        gui.presentOptions(options);
         Global.getMatch().pause();
     }
 
@@ -406,13 +407,13 @@ public class Player extends Character {
         assessOpponent(opponent);
         gui.message("<br/>");
 
-        gui.clearCommand();
-        gui.addToCommandPanel(new CommandPanelOption("Attack " + opponent.getName(),
-            encounterOption(enc, opponent, Encs.ambush)));
-        gui.addToCommandPanel(new CommandPanelOption("Wait",
-            encounterOption(enc, opponent, Encs.wait)));
-        gui.addToCommandPanel(new CommandPanelOption("Flee",
-            encounterOption(enc, opponent, Encs.fleehidden)));
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
+        options.add(new CommandPanelOption("Fight",
+            encounterOption(enc, opponent, Encs.fight)));
+        options.add(new CommandPanelOption("Flee",
+            encounterOption(enc, opponent, Encs.flee)));
+        gui.presentOptions(options);
+
         Global.getMatch().pause();
     }
 
@@ -522,25 +523,26 @@ public class Player extends Character {
     public void handleLevelUp() {
         if (availableAttributePoints > 0) {
             gui.message(this, availableAttributePoints + " Attribute Points remain.</br>");
-            gui.clearCommand();
-            for (Attribute att : att.keySet()) {
-                if (Attribute.isTrainable(this, att) && getPure(att) > 0) {
-                    gui.addToCommandPanel(optionToSelectAttribute(att));
-                }
-            }
-            gui.addToCommandPanel(optionToSelectAttribute(Attribute.Willpower));
+
+            List<CommandPanelOption> options = att.keySet().stream()
+                .filter(a -> Attribute.isTrainable(this, a) && getPure(a) > 0)
+                .map(a -> optionToSelectAttribute(a))
+                .collect(Collectors.toList());
+            options.add(optionToSelectAttribute(Attribute.Willpower));
+            gui.presentOptions(options);
+
             if (Global.getMatch() != null) {
                 Global.getMatch().pause();
             }
         } else if (traitPoints > 0 && !skippedFeat) {
-            gui.clearCommand();
             gui.message(this, "You've earned a new perk. Select one below.</br>");
-            for (Trait feat : Global.getFeats(this)) {
-                if (!this.has(feat)) {
-                    gui.addToCommandPanel(optionToSelectTrait(feat));
-                }
-            }
-            gui.addToCommandPanel(optionToSelectTrait(null));
+
+            List<CommandPanelOption> options = Global.getFeats(this).stream()
+                .filter(t -> !has(t))
+                .map(t -> optionToSelectTrait(t))
+                .collect(Collectors.toList());
+            options.add(optionToSelectTrait(null));
+            gui.presentOptions(options);
         } else {
             skippedFeat = false;
             gui.clearCommand();
@@ -749,19 +751,20 @@ public class Player extends Character {
         assessOpponent(target);
         gui.message("<br/>");
 
-        gui.clearCommand();
-        gui.addToCommandPanel(new CommandPanelOption("Surprise Her",
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
+        options.add(new CommandPanelOption("Surprise Her",
             encounterOption(encounter, target, Encs.showerattack)));
         if (!target.mostlyNude()) {
-            gui.addToCommandPanel(new CommandPanelOption("Steal Clothes",
+            options.add(new CommandPanelOption("Steal Clothes",
                 encounterOption(encounter, target, Encs.stealclothes)));
         }
         if (has(Item.Aphrodisiac)) {
-            gui.addToCommandPanel(new CommandPanelOption("Use Aphrodisiac",
+            options.add(new CommandPanelOption("Use Aphrodisiac",
                 encounterOption(encounter, target, Encs.aphrodisiactrick)));
         }
-        gui.addToCommandPanel(new CommandPanelOption("Do Nothing",
+        options.add(new CommandPanelOption("Do Nothing",
             encounterOption(encounter, target, Encs.wait)));
+        gui.presentOptions(options);
         Global.getMatch().pause();
     }
 
@@ -772,16 +775,17 @@ public class Player extends Character {
         gui.message("Then again, you could just wait and see which one of them comes out on top. It'd be entertaining,"
                         + " at the very least.");
 
-        gui.clearCommand();
-        gui.addToCommandPanel(new CommandPanelOption("Help " + p1.getName(), event -> {
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
+        options.add(new CommandPanelOption("Help " + p1.getName(), event -> {
             enc.intrude(Global.getPlayer(), p1);
         }));
-        gui.addToCommandPanel(new CommandPanelOption("Help " + p2.getName(), event -> {
+        options.add(new CommandPanelOption("Help " + p2.getName(), event -> {
             enc.intrude(Global.getPlayer(), p2);
         }));
-        gui.addToCommandPanel(new CommandPanelOption("Watch them fight", event -> {
+        options.add(new CommandPanelOption("Watch them fight", event -> {
             enc.watch();
         }));
+        gui.presentOptions(options);
         Global.getMatch().pause();
     }
 
@@ -856,13 +860,14 @@ public class Player extends Character {
         assessOpponent(target);
         gui.message("<br/>");
 
-        gui.clearCommand();
-        gui.addToCommandPanel(new CommandPanelOption("Attack " + target.getName(), event -> {
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
+        options.add(new CommandPanelOption("Attack " + target.getName(), event -> {
             enc.parse(Encs.capitalize, Global.getPlayer(), target, trap);
             Global.getMatch().resume();
         }));
-        gui.addToCommandPanel(new CommandPanelOption("Wait",
+        options.add(new CommandPanelOption("Wait",
             encounterOption(enc, target, Encs.wait)));
+        gui.presentOptions(options);
         Global.getMatch().pause();
     }
 
@@ -1100,13 +1105,14 @@ public class Player extends Character {
     public int exercise(Exercise source) {
         int gain = super.exercise(source);
         gui.clearText();
-        gui.clearCommand();
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
         CommandPanelOption o = new CommandPanelOption("Next",
             event -> {
                 source.done(true);
                 gui.clearText();
             });
-        gui.addToCommandPanel(o);
+        options.add(o);
+        gui.presentOptions(options);
         source.showScene(source.pickScene(gain));
         if (gain > 0) {
             Global.gui().message("<b>Your maximum stamina has increased by " + gain + ".</b>");
@@ -1118,13 +1124,14 @@ public class Player extends Character {
     public int porn(Porn source) {
         int gain = super.porn(source);
         gui.clearText();
-        gui.clearCommand();
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
         CommandPanelOption o = new CommandPanelOption("Next",
             event -> {
                 source.done(true);
                 gui.clearText();
             });
-        gui.addToCommandPanel(o);
+        options.add(o);
+        gui.presentOptions(options);
         source.showScene(source.pickScene(gain));
         if (gain > 0) {
             Global.gui().message("<b>Your maximum arousal has increased by " + gain + ".</b>");
