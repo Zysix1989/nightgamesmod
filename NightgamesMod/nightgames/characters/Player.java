@@ -1171,10 +1171,12 @@ public class Player extends Character {
 
     @Override
     public void sceneNext(Scene source) {
-        gui.addToCommandPanel(new CommandPanelOption(
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
+        options.add(new CommandPanelOption(
             "Next",
             event -> source.respond("Next")
         ));
+        gui.presentOptions(options);
     }
 
     @Override
