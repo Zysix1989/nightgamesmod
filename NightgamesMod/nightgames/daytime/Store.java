@@ -57,7 +57,7 @@ public abstract class Store extends Activity {
     protected void displayGoods() {
         HashSet<Loot> purchasableLoot = new HashSet<>(getClothes());
         purchasableLoot.addAll(getItems());
-        purchasableLoot.stream().forEach(i -> player.addShopOption(this, i));
+        player.chooseShopOption(this, purchasableLoot);
     }
 
     protected boolean checkSale(String name) {
