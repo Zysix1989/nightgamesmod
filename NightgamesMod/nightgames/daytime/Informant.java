@@ -173,36 +173,41 @@ public class Informant extends Activity {
     
     private void addChoices() {
 
-        buildTutorialSelections();
-        
+        List<String> choices = getTutorialSelections();
+
         for (CostlyOption option : buildOptions()) {
             if (option.available()) {
-                player.chooseActivity(this, option.name());
+                choices.add(option.name());
             }
         }
         
         if (Global.checkFlag(Flag.rank1)) {
-            player.chooseActivity(this, "More Competitors");
+            choices.add("More Competitors");
         }
 
         if (Global.checkFlag(Flag.girlAdvice)) {
-            player.chooseActivity(this, "Competition Info");
-            player.chooseActivity(this, "Select Competitors");
+            choices.add("Competition Info");
+            choices.add("Select Competitors");
         }
         if (Global.getPlayer().checkAddiction()) {
-            player.chooseActivity(this, "Help with Addiction");
+            choices.add("Help with Addiction");
         }
-        player.chooseActivity(this, "Leave");
+        choices.add("Leave");
+        player.chooseActivitySubchoices(this, choices);
     }
-    
-    /** Adds tutorial selections to the menu */
-    private void buildTutorialSelections() {
+
+    /**
+     * Adds tutorial selections to the menu
+     */
+    private List<String> getTutorialSelections() {
+        ArrayList<String> choices = new ArrayList<>();
         if (!Global.checkFlag(Flag.basicStores)) {
-            player.chooseActivity(this, "Purchasing supplies");
+            choices.add("Purchasing supplies");
         }
         if (!Global.checkFlag(Flag.girlAdvice)) {
-            player.chooseActivity(this, "The Competition");
+            choices.add("The Competition");
         }
+        return choices;
     }
     
     private void meetBroker() {
