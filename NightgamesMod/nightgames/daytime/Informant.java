@@ -59,16 +59,16 @@ public class Informant extends Activity {
 
     private class VisitResult {
 
-        public boolean terminal;
-        public boolean done;
-        public List<String> choices;
+        boolean terminal;
+        boolean done;
+        List<String> choices;
 
-        public VisitResult(boolean terminal, List<String> choices) {
+        VisitResult(boolean terminal, List<String> choices) {
             this.terminal = terminal;
             this.choices = choices;
         }
 
-        public VisitResult(boolean terminal, boolean done) {
+        VisitResult(boolean terminal, boolean done) {
             this.terminal = terminal;
             this.done = done;
         }
