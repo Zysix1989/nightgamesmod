@@ -95,12 +95,13 @@ public class Informant extends Activity {
             player.chooseActivitySubchoices(this, choices);
             return true;
         }
-        player.chooseActivitySubchoices(this, choices);
 
         if (choice.startsWith(REMOVE_PREFIX)) {
-            removeCompetitor(choice);
+            choices.addAll(removeCompetitor(choice));
+            player.chooseActivitySubchoices(this, choices);
             return true;
         }
+        player.chooseActivitySubchoices(this, choices);
 
         if (choice.startsWith(RETURN_PREFIX)) {
             returnCompetitor(choice);
@@ -177,12 +178,14 @@ public class Informant extends Activity {
         choices.add("Back");
         return choices;
     }
-    
-    private void removeCompetitor(String choice) {
+
+    private List<String> removeCompetitor(String choice) {
         String name = choice.substring(REMOVE_PREFIX.length());
         Global.gui().message("Got it, I'll see about sending " + name+ " to another session.");
         Global.setCharacterDisabledFlag(Global.getParticipantsByName(name));
-        player.chooseActivity(this, "Select Competitors");
+        ArrayList<String> choices = new ArrayList<>();
+        choices.add("Select Competitors");
+        return choices;
     }
     
     private void returnCompetitor(String choice) {
