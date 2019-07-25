@@ -92,6 +92,7 @@ public class AiriTime extends BaseNPCTime {
 
     @Override
     public void subVisitIntro(String choice) {
+        ArrayList<String> choices = new ArrayList<>();
         if (npc.getAffection(player) > 0) {
             Global.gui()
                   .message("You have some free time, so you decide to text Airi to see if she wants to meet up. You receive an answer in a few minutes with instructions to her flat off campus. "
@@ -100,9 +101,9 @@ public class AiriTime extends BaseNPCTime {
                                   + "<br/><br/>"
                                   + "You're a bit nervous, but you quickly find yourself standing outside a posh entrance ringing the bell. The sound of foot steps ring out from behind the door and you a flushed Airi welcoming you inside. "
                                   + "She's in human form again, wearing an elegant but sexy blouse and skirt set instead of her usual down to earth lab gear. You smile wryly at her as you realize that she's been getting ready for you.");
-            player.chooseActivity(this, "Games");
-            player.chooseActivity(this, "Sparring");
-            player.chooseActivity(this, "Sex");
+            choices.add("Games");
+            choices.add("Sparring");
+            choices.add("Sex");
         } else if (npc.getAttraction(player) < 15) {
             Global.gui().loadPortrait("airi_human.jpg");
             Global.gui().showPortrait();
@@ -134,14 +135,16 @@ public class AiriTime extends BaseNPCTime {
                             + "Throwing your caution to the winds, you rush over to her and ask her if she's OK.");
             npc.gainAffection(player, 1);
             player.gainAffection(npc, 1);
-            player.chooseActivity(this, "Rush over");
+            choices.add("Rush over");
             return;
         }
-        player.chooseActivity(this, "Leave");
+        choices.add("Leave");
+        player.chooseActivitySubchoices(this, choices);
     }
 
     @Override
     public void subVisit(String choice) {
+        ArrayList<String> choices = new ArrayList<>();
         if (choice.equals("Rush over")) {
             Global.gui().loadPortrait("airi_mostly_human.jpg");
             Global.gui().showPortrait();
@@ -152,7 +155,7 @@ public class AiriTime extends BaseNPCTime {
                             + "Airi finally notices you standing next to her. After a momentary conflicted look passes her eyes, Airi softly mouths to you, <i>\"Please... help...\"</i> "
                             + "Well you're not one to leave a suffering girl alone; you quickly nod your agreement and ask Airi what she needs you to do. Airi answers with scarlet (now increasily translucent) cheeks,"
                             + "<i>\"I um... just need... to drink...\"</i> Well that seems like a simple enough request. You make a motion to stand up and grab your water bottle.");
-            player.chooseActivity(this, "Stand Up");
+            choices.add("Stand Up");
         } else if (choice.equals("Stand Up")) {
             Global.gui().loadPortrait("airi_mostly_slime.jpg");
             Global.gui().showPortrait();
@@ -194,7 +197,7 @@ public class AiriTime extends BaseNPCTime {
                             + "That leaves her the choices of either becoming a cannibal... or having a lot of sex. It's pretty clear what she chose. It's not too inconvinient for her now, but apparently in slime form, her mind regresses back into an instinctive state, and it's hard to keep herself in check."
                             + "<br/><br/>"
                             + "Blushing a bit, Airi thanks you again for helping her out, as she was about to revert back into slime form again, and promises to keep in contact.");
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
         } else if (choice.equals("Sex")) {
             Global.gui().loadPortrait("airi_mostly_slime.jpg");
             Global.gui().showPortrait();
@@ -227,7 +230,7 @@ public class AiriTime extends BaseNPCTime {
                 player.add(Trait.Clingy);
                 npc.getGrowth().addTrait(0, Trait.Clingy);
             }
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
         } else if (choice.equals("Sparring")) {
             Global.gui().loadPortrait("airi_mostly_slime.jpg");
             Global.gui().showPortrait();
@@ -255,7 +258,7 @@ public class AiriTime extends BaseNPCTime {
                 player.add(Trait.fakeout);
                 npc.getGrowth().addTrait(0, Trait.fakeout);
             }
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
         } else if (choice.equals("Games")) {
             Global.gui().loadPortrait("airi_human.jpg");
             Global.gui().showPortrait();
@@ -268,10 +271,11 @@ public class AiriTime extends BaseNPCTime {
                 player.add(Trait.fakeout);
                 npc.getGrowth().addTrait(0, Trait.fakeout);
             }
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
         } else {
             done(true);
         }
+        player.chooseActivitySubchoices(this, choices);
     }
     
     @Override
