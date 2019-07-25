@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import java.util.stream.Collectors;
 import nightgames.characters.Airi;
 import nightgames.characters.Character;
 import nightgames.characters.Eve;
@@ -83,16 +84,18 @@ public class Informant extends Activity {
             player.chooseActivitySubchoices(this, result.choices);
             return true;
         }
-        player.chooseActivitySubchoices(this, result.choices);
+
 
         if (handleCostlyOptions(choice)) {
             return true;
         }
 
         if (choice.equals("Select Competitors")) {
-            selectCompetitors();
+            choices.addAll(selectCompetitors());
+            player.chooseActivitySubchoices(this, choices);
             return true;
         }
+        player.chooseActivitySubchoices(this, choices);
 
         if (choice.startsWith(REMOVE_PREFIX)) {
             removeCompetitor(choice);
@@ -155,22 +158,24 @@ public class Informant extends Activity {
         }
         return new VisitResult(false, Collections.emptyList());
     }
-    
-    private void selectCompetitors() {
+
+    private List<String> selectCompetitors() {
         Global.gui().message(
                         "Haha, feeling the heat? That's okay, I can talk to the organizers about redirecting some of the competitors "
                         + "to other sessions. Just let me know who is becoming too much for you.");
-        Global.everyone().stream()
-              .filter(c -> !c.human())
-              .filter(c -> !Global.checkCharacterDisabledFlag(c))
-            .forEach(character -> player.chooseActivity(this,
-                String.format(REMOVE_PREFIX + "%s", character.getTrueName())));
-        Global.everyone().stream()
-              .filter(c -> !c.human())
-              .filter(c -> Global.checkCharacterDisabledFlag(c) && !c.getType().equals("Yui"))
-            .forEach(character -> player.chooseActivity(this,
-                String.format(RETURN_PREFIX + "%s", character.getTrueName())));
-        player.chooseActivity(this, "Back");
+        ArrayList<String> choices = new ArrayList<>();
+        choices.addAll(Global.everyone().stream()
+            .filter(c -> !c.human())
+            .filter(c -> !Global.checkCharacterDisabledFlag(c))
+            .map(character -> String.format(REMOVE_PREFIX + "%s", character.getTrueName()))
+            .collect(Collectors.toList()));
+        choices.addAll(Global.everyone().stream()
+            .filter(c -> !c.human())
+            .filter(c -> Global.checkCharacterDisabledFlag(c) && !c.getType().equals("Yui"))
+            .map(character -> String.format(RETURN_PREFIX + "%s", character.getTrueName()))
+            .collect(Collectors.toList()));
+        choices.add("Back");
+        return choices;
     }
     
     private void removeCompetitor(String choice) {
