@@ -64,15 +64,6 @@ public class HWStore extends Store {
     }
 
     @Override
-    protected void displayItems() {
-        for (Item i : stock.keySet()) {
-            if (i != Item.EmptyBottle || player.getRank() > 0) {
-                player.addShopOption(this, i);
-            }
-        }
-    }
-
-    @Override
     public void shop(Character npc, int budget) {
         int remaining = budget;
         int bored = 0;

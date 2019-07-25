@@ -50,22 +50,8 @@ public abstract class Store extends Activity {
             .collect(Collectors.toSet());
     }
 
-    protected void displayClothes() {
-        for (Clothing i : clothingstock.keySet()) {
-            if (!player.has(i)) {
-                player.addShopOption(this, i);
-            }
-        }
-    }
-
     protected Set<Item> getItems() {
         return stock.keySet();
-    }
-
-    protected void displayItems() {
-        for (Item i : stock.keySet()) {
-            player.addShopOption(this, i);
-        }
     }
 
     protected void displayGoods() {
