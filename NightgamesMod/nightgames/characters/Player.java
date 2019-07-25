@@ -1143,18 +1143,15 @@ public class Player extends Character {
     @Override
     public void chooseLocateTarget(Locate action, Collection<Character> potentialTargets) {
         potentialTargets.forEach((character) -> {
-            chooseTarget(action, character.getTrueName());
+            CommandPanelOption o = new CommandPanelOption(character.getTrueName(), event -> {
+                action.handleEvent(this, getTrueName());
+            });
+            gui.addToCommandPanel(o);
         });
-        leaveAction(action);
-    }
-
-    @Override
-    public void chooseTarget(Locate action, String displayText) {
-        CommandPanelOption o = new CommandPanelOption(displayText, event -> {
-            action.handleEvent(this, displayText);
+        CommandPanelOption o = new CommandPanelOption("Leave", event -> {
+            action.handleEvent(this, "Leave");
         });
         gui.addToCommandPanel(o);
-
     }
 
     @Override
