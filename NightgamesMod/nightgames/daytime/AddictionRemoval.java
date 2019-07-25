@@ -1,5 +1,6 @@
 package nightgames.daytime;
 
+import java.util.ArrayList;
 import nightgames.characters.Character;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -25,6 +26,8 @@ public class AddictionRemoval extends Activity {
               .clearText();
         Global.gui()
               .clearCommand();
+
+        ArrayList<String> choices = new ArrayList<>();
         if (choice.equals("Start")) {
             Global.gui()
                   .message("You walk to the place Aesop told you about "
@@ -37,9 +40,9 @@ public class AddictionRemoval extends Activity {
                                   + "\n\n(this is a placeholder -- note that these treatments only affect your current"
                                   + " strongest addiction)");
             if (player.money >= 5000) {
-                player.chooseActivity(this, UNSAFE_OPT);
+                choices.add(UNSAFE_OPT);
                 if (player.money >= 15000) {
-                    player.chooseActivity(this, SAFE_OPT);
+                    choices.add(SAFE_OPT);
                 } else {
                     Global.gui()
                           .message("\n\nA quick look at your finances reveal that only the risky option is"
@@ -47,7 +50,8 @@ public class AddictionRemoval extends Activity {
                 }
             } else {
                 Global.gui()
-                      .message("\n\nUnfortunately, you don't have the cash for either option right now.");
+                    .message(
+                        "\n\nUnfortunately, you don't have the cash for either option right now.");
             }
         } else if (choice.equals(UNSAFE_OPT)) {
             player.money -= 5000;
@@ -66,8 +70,9 @@ public class AddictionRemoval extends Activity {
             done(true);
             return;
         }
-        player.chooseActivity(this, "Leave");
+        choices.add("Leave");
 
+        player.chooseActivitySubchoices(this, choices);
     }
 
     @Override
