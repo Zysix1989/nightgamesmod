@@ -1161,16 +1161,12 @@ public class Player extends Character {
     }
 
     public void chooseShopOption(Store shop, Collection<Loot> items) {
-        items.forEach(item -> addShopOption(shop, item));
-    }
-
-    @Override
-    public void addShopOption(Store shop, Loot item) {
-        gui.addToCommandPanel(new CommandPanelOption(Global.capitalizeFirstLetter(item.getName()),
+        items.forEach(item -> gui
+            .addToCommandPanel(new CommandPanelOption(Global.capitalizeFirstLetter(item.getName()),
             item.getDesc(),
             event -> {
                 shop.visit(item.getName());
-            }));
+            })));
     }
 
     @Override

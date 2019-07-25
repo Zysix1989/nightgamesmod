@@ -4750,11 +4750,6 @@ public abstract class Character extends Observable implements Cloneable {
             String.format("attempted to choose options in shop %s", shop.toString()));
     }
 
-    public void addShopOption(Store shop, Loot item) {
-        throw new UnsupportedOperationException(
-            String.format("attempted to access item %s in %s", item.getName(), shop.toString()));
-    }
-
     public void bodyShopOptions(BodyShop shop, String displayText, int price) {
         throw new UnsupportedOperationException(
             String.format("attempted to access item %s in %s", displayText, shop.toString()));
