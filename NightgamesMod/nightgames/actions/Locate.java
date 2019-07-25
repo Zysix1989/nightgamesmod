@@ -76,7 +76,6 @@ public class Locate extends Action {
                                 + "purple flames, the smoke flowing from your nose straight to your crotch and setting another fire there.");
             }
             self.addNonCombat(new Horny(self, self.getArousal().max() / 10, 10, "Scrying Ritual"));
-            gui.clearCommand();
             self.leaveAction(this);
         } else {
             StringWriter writer = new StringWriter();
@@ -87,7 +86,6 @@ public class Locate extends Action {
                             + " below to The Silver Bard at his wordpress blog or Fenoxo's Forum: " + "\n\nSelf: "
                             + self.getTrueName() + "(" + self.human() + ")\n" + "Choice: " + choice + "\nStacktrace:\n"
                             + writer.toString());
-            gui.clearCommand();
             self.leaveAction(this);
         }
     }

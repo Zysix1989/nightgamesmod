@@ -1153,10 +1153,11 @@ public class Player extends Character {
 
     @Override
     public void leaveAction(Locate action) {
-        CommandPanelOption o = new CommandPanelOption("Leave", event -> {
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
+        options.add(new CommandPanelOption("Leave", event -> {
             action.handleEvent(this, "Leave");
-        });
-        gui.addToCommandPanel(o);
+        }));
+        gui.presentOptions(options);
     }
 
     @Override
