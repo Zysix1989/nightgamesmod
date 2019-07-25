@@ -960,41 +960,4 @@ public class NPC extends Character {
     public Map<String, List<CharacterLine>> getLines() {
         return lines;
     }
-
-    @Override
-    public void chooseTarget(Locate action, String displayText) {
-        throw new UnsupportedOperationException(
-            String.format("attempted to choose target %s for %s",
-                displayText, action.toString()));
-    }
-
-    @Override
-    public void leaveAction(Locate action) {
-        throw new UnsupportedOperationException(
-            String.format("attempted to leave %s", action.toString()));
-    }
-
-    @Override
-    public void shopOptions(Store shop, Loot item) {
-        throw new UnsupportedOperationException(
-            String.format("attempted to access item %s in %s", item.getName(), shop.toString()));
-    }
-
-    @Override
-    public void bodyShopOptions(BodyShop shop, String displayText, int price) {
-        throw new UnsupportedOperationException(
-            String.format("attempted to access item %s in %s", displayText, shop.toString()));
-    }
-
-    @Override
-    public void nextCombat(Combat c) {
-    }
-
-    @Override
-    public void sceneNext(Scene s) {
-    }
-
-    @Override
-    public void chooseActivity(Activity activity, String choice) {
-    }
 }

@@ -4735,17 +4735,33 @@ public abstract class Character extends Observable implements Cloneable {
         return gain;
     }
 
-    public abstract void chooseTarget(Locate action, String displayText);
+    public void chooseTarget(Locate action, String displayText) {
+        throw new UnsupportedOperationException(
+            String.format("attempted to choose target %s for %s",
+                displayText, action.toString()));
+    }
 
-    public abstract void leaveAction(Locate action);
+    public void leaveAction(Locate action) {
+        throw new UnsupportedOperationException(
+            String.format("attempted to leave %s", action.toString()));
+    }
 
-    public abstract void shopOptions(Store shop, Loot i);
+    public void shopOptions(Store shop, Loot item) {
+        throw new UnsupportedOperationException(
+            String.format("attempted to access item %s in %s", item.getName(), shop.toString()));
+    }
 
-    public abstract void bodyShopOptions(BodyShop shop, String displayText, int price);
+    public void bodyShopOptions(BodyShop shop, String displayText, int price) {
+        throw new UnsupportedOperationException(
+            String.format("attempted to access item %s in %s", displayText, shop.toString()));
+    }
 
-    public abstract void nextCombat(Combat c);
+    public void nextCombat(Combat c) {
+    }
 
-    public abstract void sceneNext(Scene source);
+    public void sceneNext(Scene s) {
+    }
 
-    public abstract void chooseActivity(Activity activity, String choice);
+    public void chooseActivity(Activity activity, String choice) {
+    }
 }
