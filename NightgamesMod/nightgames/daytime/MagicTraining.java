@@ -1,5 +1,7 @@
 package nightgames.daytime;
 
+import java.util.ArrayList;
+import java.util.List;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Player;
@@ -22,15 +24,17 @@ public class MagicTraining extends Activity {
 
     @Override
     public void visit(String choice) {
+        ArrayList<String> choices = new ArrayList<>();
         Global.gui().clearText();
         Global.gui().clearCommand();
         if (!Global.checkFlag(Flag.metAisha)) {
-            meetAisha();
+            choices.addAll(meetAisha());
         } else if (choice.equals("Start")) {
-            presentOptions();
+            choices.addAll(getOptions());
             acted = false;
         } else if (choice.equals("Leave")) {
             done(acted);
+            return;
         } else if (choice.startsWith("Lesson")) {
             if (player.money >= 1000 * (player.getPure(Attribute.Arcane) + 1)) {
                 int scene;
@@ -75,7 +79,7 @@ public class MagicTraining extends Activity {
             } else {
                 Global.gui().message("You don't have enough money for training.");
             }
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
         } else if (choice.startsWith("Animism")) {
             if (player.money >= 500 + 500 * (player.getPure(Attribute.Animism) + 1)) {
                 player.money -= 500 + 500 * (player.getPure(Attribute.Animism) + 1);
@@ -90,7 +94,7 @@ public class MagicTraining extends Activity {
             } else {
                 Global.gui().message("You don't have enough money for training.");
             }
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
         } else if (choice.startsWith("Ask about Animal Spirit")) {
             Global.flag(Flag.furry);
             Global.gui().message("You bring up the topic of Kat's animal spirit and "
@@ -123,12 +127,11 @@ public class MagicTraining extends Activity {
                             + " even ask such a thing?!\"</i> She doesn't appear likely to budge"
                             + " to you alone. If you really want this power, you'll probably "
                             + "need to rely on Kat's help.");
-            player.chooseActivity(this, "Get Animal Spirit");
-            player.chooseActivity(this,
-                "Lesson: $" + (500 + 500 * (player.getPure(Attribute.Arcane) + 1)));
-            player.chooseActivity(this, "Leave");
+            choices.add("Get Animal Spirit");
+            choices.add("Lesson: $" + (500 + 500 * (player.getPure(Attribute.Arcane) + 1)));
+            choices.add("Leave");
         } else if (choice.startsWith("Get Animal Spirit")) {
-            getAnimalSpirit();
+            choices.addAll(getAnimalSpirit());
         } else if (choice.startsWith("Buy a minor scroll: $200")) {
             Global.gui().message("You purchase a minor scroll. With the correct spell, "
                             + "you can use it to summon a team of fairies.");
@@ -136,8 +139,9 @@ public class MagicTraining extends Activity {
             assert player.money >= 0;
             player.gain(Item.MinorScroll);
             acted = true;
-            presentOptions();
+            choices.addAll(getOptions());
         }
+        player.chooseActivitySubchoices(this, choices);
     }
 
     @Override
@@ -154,25 +158,27 @@ public class MagicTraining extends Activity {
         }
     }
 
-    private void presentOptions() {
-        player.chooseActivity(this, "Lesson: $" + 1000 * (player.getPure(Attribute.Arcane) + 1));
+    private List<String> getOptions() {
+        ArrayList<String> choices = new ArrayList<>();
+        choices.add("Lesson: $" + 1000 * (player.getPure(Attribute.Arcane) + 1));
         if (player.getPure(Attribute.Animism) >= 1) {
-            player.chooseActivity(this,
-                "Animism training: $" + (500 + 500 * (player.getPure(Attribute.Animism) + 1)));
+            choices
+                .add("Animism training: $" + (500 + 500 * (player.getPure(Attribute.Animism) + 1)));
         }
         if (Global.checkFlag(Flag.catspirit) && !Global.checkFlag(Flag.furry)) {
-            player.chooseActivity(this, "Ask about Animal Spirit");
+            choices.add("Ask about Animal Spirit");
         }
         if (Global.checkFlag(Flag.furry) && player.getPure(Attribute.Animism) == 0) {
-            player.chooseActivity(this, "Get Animal Spirit");
+            choices.add("Get Animal Spirit");
         }
         if (player.getPure(Attribute.Arcane) >= 2 && player.money >= 200) {
-            player.chooseActivity(this, "Buy a minor scroll: $200");
+            choices.add("Buy a minor scroll: $200");
         }
-        player.chooseActivity(this, "Leave");
+        choices.add("Leave");
+        return choices;
     }
-    
-    private void meetAisha() {
+
+    private List<String> meetAisha() {
         String prefix = "Aisha apparently spends most of her time in a mostly abandoned creative writing reference room in the back of the liberal arts building. On paper, she "
                         + "apparently runs a fantasy writing workshop. You're not sure if she is serious about writing, but it makes a good cover.<br/><br/>When you get to the reference room, she's the "
                         + "only one there. She's slightly taller than you with large, soft breasts. She has coffee colored skin and dark brown, long, wavy hair. When you introduce yourself she "
@@ -213,9 +219,11 @@ public class MagicTraining extends Activity {
         
         Global.gui().message(prefix + magic + message);
         Global.flag(Flag.metAisha);
-        player.chooseActivity(this, "Lesson: $" + 1000 * (player.getPure(Attribute.Arcane) + 1));
-        player.chooseActivity(this, "Leave");
+        ArrayList<String> choices = new ArrayList<>();
+        choices.add("Lesson: $" + 1000 * (player.getPure(Attribute.Arcane) + 1));
+        choices.add("Leave");
         acted = true;
+        return choices;
     }
     
     private void magicMissileScene() {
@@ -386,8 +394,8 @@ public class MagicTraining extends Activity {
         
         Global.gui().message(message);
     }
-    
-    private void getAnimalSpirit() {
+
+    private List<String> getAnimalSpirit() {
         
         String message = "Kat agrees to come to the creative writing reference"
                         + " room to try to convince Aisha. Aisha is delighted to see her and "
@@ -496,6 +504,8 @@ public class MagicTraining extends Activity {
         player.modAttributeDontSaveData(Attribute.Animism, 1);
         Global.flag("Trained" + Attribute.Animism.name());
         acted = true;
-        player.chooseActivity(this, "Leave");
+        ArrayList<String> choices = new ArrayList<>();
+        choices.add("Leave");
+        return choices;
     }
 }
