@@ -1216,10 +1216,11 @@ public class Player extends Character {
         }));
     }
 
-    public void activityChoice(Activity activity) {
-        gui.addToCommandPanel(new CommandPanelOption(activity.toString(), event -> {
-            activity.visit("Start");
-        }));
+    public void chooseActivity(List<Activity> activities) {
+        gui.presentOptions(activities.stream()
+            .map(activity -> new CommandPanelOption(activity.toString(),
+                event -> activity.visit("Start")))
+            .collect(Collectors.toList()));
     }
 
     public void chooseCombatScene(Combat c, Character npc, String message,

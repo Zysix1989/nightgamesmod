@@ -2,6 +2,7 @@ package nightgames.daytime;
 
 import java.util.ArrayList;
 
+import java.util.stream.Collectors;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.NPC;
@@ -122,11 +123,9 @@ public class Daytime {
                   .clearCommand();
             if (eventMgr.playRegularScene())
                 return;
-            for (Activity act : activities) {
-                if (act.known() && act.time() + time <= 22) {
-                    player.activityChoice(act);
-                }
-            }
+            player.chooseActivity(activities.stream()
+                .filter(act -> act.known() && act.time() + time <= 22)
+                .collect(Collectors.toList()));
         } else {
             for (Character npc : Global.everyone()) {
                 if (!npc.human() && npc instanceof NPC) {
