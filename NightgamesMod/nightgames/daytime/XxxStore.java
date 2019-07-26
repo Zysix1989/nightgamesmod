@@ -1,5 +1,6 @@
 package nightgames.daytime;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import nightgames.characters.Attribute;
@@ -7,6 +8,7 @@ import nightgames.characters.Character;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 
@@ -105,17 +107,19 @@ public class XxxStore extends Store {
                 }
             }
             Global.gui().message("You have :$" + player.money + " to spend.");
-            displayGoods();
+            Set<Loot> purchasableItems = getGoods();
+            ArrayList<String> choices = new ArrayList<>();
             if (Global.checkFlag(Flag.AliceAvailable)) {
                 Global.gui().message(
                     "You see Alice hanging around near the bondage gear. You aren't sure whether she's waiting for you or not.");
-                player.chooseActivity(this, "Talk to Alice");
+                choices.add("Talk to Alice");
             }
             if (player.getLevel() >= 5 && !Global.checkFlag(Flag.metAlice) && !Global
                 .checkFlag(Flag.victory)) {
-                player.chooseActivity(this, "Learn to be Submissive");
+                choices.add("Learn to be Submissive");
             }
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
+            player.chooseShopOption(this, purchasableItems, choices);
         }
     }
 

@@ -34,6 +34,7 @@ import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.global.Scene;
+import nightgames.gui.CommandPanel;
 import nightgames.gui.CommandPanelOption;
 import nightgames.gui.GUI;
 import nightgames.items.Item;
@@ -42,6 +43,7 @@ import nightgames.items.clothing.Clothing;
 import nightgames.match.Encounter;
 import nightgames.match.MatchType;
 import nightgames.match.ftc.FTCMatch;
+import nightgames.skills.Command;
 import nightgames.skills.Nothing;
 import nightgames.skills.Skill;
 import nightgames.skills.Stage;
@@ -1160,13 +1162,19 @@ public class Player extends Character {
         gui.presentOptions(options);
     }
 
-    public void chooseShopOption(Store shop, Collection<Loot> items) {
-        gui.presentOptions(items.stream()
+    @Override
+    public void chooseShopOption(Store shop, Collection<Loot> items,
+        List<String> additionalChoices) {
+        List<CommandPanelOption> options = items.stream()
             .map(item -> new CommandPanelOption(
                 Global.capitalizeFirstLetter(item.getName()),
                 item.getDesc(),
                 event -> shop.visit(item.getName())))
+            .collect(Collectors.toList());
+        options.addAll(additionalChoices.stream()
+            .map(choice -> newActivitySubchoice(shop, choice))
             .collect(Collectors.toList()));
+        gui.presentOptions(options);
     }
 
     @Override

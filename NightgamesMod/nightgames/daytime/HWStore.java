@@ -1,5 +1,6 @@
 package nightgames.daytime;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import java.util.Set;
@@ -9,6 +10,7 @@ import nightgames.characters.Trait;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.items.Loot;
 
 public class HWStore extends Store {
     public HWStore(Character player) {
@@ -51,8 +53,10 @@ public class HWStore extends Store {
                 }
             }
             Global.gui().message("You have : $" + player.money + " to spend.");
-            displayGoods();
-            player.chooseActivity(this, "Leave");
+            Set<Loot> purchasableItems = getGoods();
+            ArrayList<String> choices = new ArrayList<>();
+            choices.add("Leave");
+            player.chooseShopOption(this, purchasableItems, choices);
         }
     }
 

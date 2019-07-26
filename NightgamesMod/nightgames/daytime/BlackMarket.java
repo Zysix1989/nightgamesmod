@@ -1,12 +1,15 @@
 package nightgames.daytime;
 
+import java.util.ArrayList;
 import java.util.Map;
 
+import java.util.Set;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.items.Loot;
 
 public class BlackMarket extends Store {
     private boolean trained;
@@ -48,6 +51,7 @@ public class BlackMarket extends Store {
         }
         checkSale(choice);
         if (player.human()) {
+            ArrayList<String> choices = new ArrayList<>();
             if (Global.checkFlag(Flag.blackMarketPlus)) {
                 if (!Global.checkFlag(Flag.metRin)) {
                     meetRin();
@@ -109,16 +113,14 @@ public class BlackMarket extends Store {
                 }
                 if (!trained) {
                     if (!Global.checkFlag(Flag.darkness)) {
-                        player.chooseActivity(this, "Cursed Artifacts");
+                        choices.add("Cursed Artifacts");
                     } else {
-                        player.chooseActivity(this,
-                            "Dark Power: $" + 1000 * (player.getPure(Attribute.Dark) + 1));
+                        choices.add("Dark Power: $" + 1000 * (player.getPure(Attribute.Dark) + 1));
                     }
                     if (!Global.checkFlag(Flag.fetishism)) {
-                        player.chooseActivity(this, "S&M Gear");
+                        choices.add("S&M Gear");
                     } else {
-                        player.chooseActivity(this,
-                            "Fetishism: $" + 1000 * (player.getPure(Attribute.Fetish) + 1));
+                        choices.add("Fetishism: $" + 1000 * (player.getPure(Attribute.Fetish) + 1));
                     }
                 }
             } else {
@@ -138,8 +140,9 @@ public class BlackMarket extends Store {
                 }
             }
             Global.gui().message("You have : $" + player.money + " to spend.");
-            displayGoods();
-            player.chooseActivity(this, "Leave");
+            Set<Loot> purchasableItems = getGoods();
+            choices.add("Leave");
+            player.chooseShopOption(this, purchasableItems, choices);
         }
     }
     

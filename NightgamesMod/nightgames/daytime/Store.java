@@ -54,10 +54,10 @@ public abstract class Store extends Activity {
         return stock.keySet();
     }
 
-    protected void displayGoods() {
+    protected Set<Loot> getGoods() {
         HashSet<Loot> purchasableLoot = new HashSet<>(getClothes());
         purchasableLoot.addAll(getItems());
-        player.chooseShopOption(this, purchasableLoot);
+        return purchasableLoot;
     }
 
     protected boolean checkSale(String name) {

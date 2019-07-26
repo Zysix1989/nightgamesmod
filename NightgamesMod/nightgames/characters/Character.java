@@ -4745,7 +4745,8 @@ public abstract class Character extends Observable implements Cloneable {
             String.format("attempted to leave %s", action.toString()));
     }
 
-    public void chooseShopOption(Store shop, Collection<Loot> items) {
+    public void chooseShopOption(Store shop, Collection<Loot> items,
+        List<String> additionalChoices) {
         throw new UnsupportedOperationException(
             String.format("attempted to choose options in shop %s", shop.toString()));
     }

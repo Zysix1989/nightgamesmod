@@ -1,8 +1,11 @@
 package nightgames.daytime;
 
+import java.util.ArrayList;
+import java.util.Set;
 import nightgames.characters.Character;
 import nightgames.global.Flag;
 import nightgames.global.Global;
+import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
 
 public class Boutique extends Store {
@@ -38,8 +41,10 @@ public class Boutique extends Store {
                 Global.gui().message(i.getName() + ": " + i.getPrice() + (player.has(i) ? " (Owned)" : ""));
             }
             Global.gui().message("You have: $" + player.money + " available to spend.");
-            displayGoods();
-            player.chooseActivity(this, "Leave");
+            Set<Loot> purchasableItems = getGoods();
+            ArrayList<String> choices = new ArrayList<>();
+            choices.add("Leave");
+            player.chooseShopOption(this, purchasableItems, choices);
         }
     }
 
