@@ -1200,10 +1200,12 @@ public class Player extends Character {
     public void nextCombat(Combat c) {
         gui.clearCommand();
         Global.getMatch().pause();
-        gui.addToCommandPanel(new CommandPanelOption("Next", event -> {
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
+        options.add(new CommandPanelOption("Next", event -> {
             gui.clearCommand();
             c.resume();
         }));
+        gui.presentOptions(options);
     }
 
     public void chooseActivity(List<Activity> activities) {
