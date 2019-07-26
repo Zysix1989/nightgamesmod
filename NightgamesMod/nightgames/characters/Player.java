@@ -3,6 +3,7 @@ package nightgames.characters;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -34,7 +35,6 @@ import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.global.Scene;
-import nightgames.gui.CommandPanel;
 import nightgames.gui.CommandPanelOption;
 import nightgames.gui.GUI;
 import nightgames.items.Item;
@@ -43,7 +43,6 @@ import nightgames.items.clothing.Clothing;
 import nightgames.match.Encounter;
 import nightgames.match.MatchType;
 import nightgames.match.ftc.FTCMatch;
-import nightgames.skills.Command;
 import nightgames.skills.Nothing;
 import nightgames.skills.Skill;
 import nightgames.skills.Stage;
@@ -62,7 +61,7 @@ import nightgames.trap.Trap;
 public class Player extends Character {
 
     private GUI gui;
-    public int traitPoints;
+    int traitPoints;
     private int levelsToGain;
     private boolean skippedFeat;
 
@@ -131,8 +130,7 @@ public class Player extends Character {
             b.append("<br/>Traits:<br/>");
             List<Trait> traits = new ArrayList<>(getTraits());
             traits.removeIf(t -> t.isOverridden(this));
-            traits.sort((first, second) -> first.toString()
-                                                .compareTo(second.toString()));
+            traits.sort(Comparator.comparing(Trait::toString));
             b.append(traits.stream()
                            .map(Object::toString)
                            .collect(Collectors.joining(", ")));
@@ -140,7 +138,7 @@ public class Player extends Character {
         if (status.size() > 0) {
             b.append("<br/><br/>Statuses:<br/>");
             List<Status> statuses = new ArrayList<>(status);
-            statuses.sort((first, second) -> first.name.compareTo(second.name));
+            statuses.sort(Comparator.comparing(status -> status.name));
             b.append(statuses.stream()
                              .map(s -> s.name)
                              .collect(Collectors.joining(", ")));
@@ -529,7 +527,7 @@ public class Player extends Character {
 
             List<CommandPanelOption> options = att.keySet().stream()
                 .filter(a -> Attribute.isTrainable(this, a) && getPure(a) > 0)
-                .map(a -> optionToSelectAttribute(a))
+                .map(this::optionToSelectAttribute)
                 .collect(Collectors.toList());
             options.add(optionToSelectAttribute(Attribute.Willpower));
             gui.presentOptions(options);
@@ -542,7 +540,7 @@ public class Player extends Character {
 
             List<CommandPanelOption> options = Global.getFeats(this).stream()
                 .filter(t -> !has(t))
-                .map(t -> optionToSelectTrait(t))
+                .map(this::optionToSelectTrait)
                 .collect(Collectors.toList());
             options.add(optionToSelectTrait(null));
             gui.presentOptions(options);
@@ -569,9 +567,7 @@ public class Player extends Character {
     }
 
     private CommandPanelOption optionToSelectAttribute(Attribute a) {
-        return new CommandPanelOption(a.name(), event -> {
-            increaseAttribute(a);
-        });
+        return new CommandPanelOption(a.name(), event -> increaseAttribute(a));
     }
 
     private CommandPanelOption optionToSelectTrait(Trait t) {
@@ -582,9 +578,7 @@ public class Player extends Character {
                 handleLevelUp();
             });
         if (t != null) {
-            o = new CommandPanelOption(t.toString(), t.getDesc(), event -> {
-                grantTrait(t);
-            });
+            o = new CommandPanelOption(t.toString(), t.getDesc(), event -> grantTrait(t));
         }
         return o;
     }
@@ -779,15 +773,12 @@ public class Player extends Character {
                         + " at the very least.");
 
         ArrayList<CommandPanelOption> options = new ArrayList<>();
-        options.add(new CommandPanelOption("Help " + p1.getName(), event -> {
-            enc.intrude(Global.getPlayer(), p1);
-        }));
-        options.add(new CommandPanelOption("Help " + p2.getName(), event -> {
-            enc.intrude(Global.getPlayer(), p2);
-        }));
-        options.add(new CommandPanelOption("Watch them fight", event -> {
-            enc.watch();
-        }));
+        options.add(new CommandPanelOption("Help " + p1.getName(),
+            event -> enc.intrude(Global.getPlayer(), p1)));
+        options.add(new CommandPanelOption("Help " + p2.getName(),
+            event -> enc.intrude(Global.getPlayer(), p2)));
+        options.add(new CommandPanelOption("Watch them fight",
+            event -> enc.watch()));
         gui.presentOptions(options);
         Global.getMatch().pause();
     }
@@ -1100,7 +1091,7 @@ public class Player extends Character {
                 addTemporaryTrait(Trait.strongwilled, 999);
         }
 
-    public int getLevelsToGain() {
+    private int getLevelsToGain() {
         return levelsToGain;
     }
 
@@ -1156,9 +1147,8 @@ public class Player extends Character {
     @Override
     public void leaveAction(Locate action) {
         ArrayList<CommandPanelOption> options = new ArrayList<>();
-        options.add(new CommandPanelOption("Leave", event -> {
-            action.handleEvent(this, "Leave");
-        }));
+        options.add(new CommandPanelOption("Leave",
+            event -> action.handleEvent(this, "Leave")));
         gui.presentOptions(options);
     }
 
@@ -1193,7 +1183,7 @@ public class Player extends Character {
         List<Integer> prices, List<String> additionalChoices) {
         assert displayTexts.size() == prices.size();
         ArrayList<CommandPanelOption> options = new ArrayList<>();
-        for (Integer i = 0; i < displayTexts.size(); i++) {
+        for (int i = 0; i < displayTexts.size(); i++) {
             final String displayText = displayTexts.get(i);
             options.add(new CommandPanelOption(
                 displayText,
