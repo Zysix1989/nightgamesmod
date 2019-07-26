@@ -125,18 +125,19 @@ public class JewelTime extends BaseNPCTime {
 
     @Override
     public void subVisitIntro(String choice) {
+        ArrayList<String> choices = new ArrayList<>();
         if (npc.getAffection(player) > 0) {
             Global.gui()
                   .message("You plan to intercept Jewel on her run again, but when you get to the gardens, you find her already there, sitting on a low stone wall. She smiles "
                                   + "when she sees you and stands up to meet you. Apparently she was waiting for you, but you hadn't made plans to meet. How long was she waiting here?<br/><i>\"I just got here a "
                                   + "few minutes ago. I had a feeling you were going to come here to see me. I've learned to always trust my intuition.\"</i> Her instincts are impressive and apparently convenient. "
                                   + "When you're within reach, she plants a light kiss on your lips. <i>\"If you came looking for me, I assume you're eager for some training. Tell me what you have in mind.\"</i>");
-            player.chooseActivity(this, "Games");
-            player.chooseActivity(this, "Sparring");
-            player.chooseActivity(this, "Sex");
+            choices.add("Games");
+            choices.add("Sparring");
+            choices.add("Sex");
             if (Global.getPlayer()
                       .checkAddiction(AddictionType.DOMINANCE, npc)) {
-                player.chooseActivity(this, "Ask about Dominance");
+                choices.add("Ask about Dominance");
             }
         } else if (npc.getAttraction(player) < 15) {
             Global.gui()
@@ -165,15 +166,17 @@ public class JewelTime extends BaseNPCTime {
                                   + "more one-on-one competition. She shivers at your touch and kisses you firmly. <i>\"You know exactly how to make me wet. I'll accept your challenge anytime.\"</i>");
             npc.gainAffection(player, 1);
             player.gainAffection(npc, 1);
-            player.chooseActivity(this, "Games");
-            player.chooseActivity(this, "Sparring");
-            player.chooseActivity(this, "Sex");
+            choices.add("Games");
+            choices.add("Sparring");
+            choices.add("Sex");
         }
-        player.chooseActivity(this, "Leave");
+        choices.add("Leave");
+        player.chooseActivitySubchoices(this, choices);
     }
 
     @Override
     public void subVisit(String choice) {
+        ArrayList<String> choices = new ArrayList<>();
         if (choice.contains("Dominance")) {
             Global.gui()
                   .message("You cautiously ask about Jewel's dominant manner in the Games. \"Oh, just the nights aren't"
@@ -236,7 +239,7 @@ public class JewelTime extends BaseNPCTime {
             Global.getPlayer()
                   .getAddiction(AddictionType.DOMINANCE)
                   .ifPresent(Addiction::flagDaytime);
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
         }
         if (choice.equals("Sex")) {
             if (npc.getAffection(player) >= 16 && (!player.has(Trait.spiral) || Global.random(2) == 1)) {
@@ -299,7 +302,7 @@ public class JewelTime extends BaseNPCTime {
                                       + "Jewel's vagina, but she looks no worse for wear. <i>\"Well worth a bit of a hike, don't you think?\"</i> she asks, smiling. <i>\"We should probably both wash up a bit before we "
                                       + "head back.\"</i>");
             }
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
             Daytime.train(player, npc, Attribute.Seduction);
             npc.gainAffection(player, 1);
             player.gainAffection(npc, 1);
@@ -335,7 +338,7 @@ public class JewelTime extends BaseNPCTime {
                                       + "problem is that Jewel's fetish for competition prevents you from finishing long games. Whenever a tense game's climax starts to drag on, she inevitably attacks you and tears "
                                       + "off your clothes. Honestly, as far as problems go, you could do much worse.");
             }
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
             Daytime.train(player, npc, Attribute.Cunning);
             npc.gainAffection(player, 1);
             player.gainAffection(npc, 1);
@@ -378,13 +381,15 @@ public class JewelTime extends BaseNPCTime {
                                       + "penalty applies to them too. They've long since stopped making fun of you when their clothes start coming off. By the time training is over, you still don't know either girl's name "
                                       + "but you feel a faint sense of solidarity with them, even though Jewel let them keep their panties on.");
             }
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
             Daytime.train(player, npc, Attribute.Power);
             npc.gainAffection(player, 1);
             player.gainAffection(npc, 1);
         } else if (choice.equals("Leave")) {
             done(true);
+            return;
         }
+        player.chooseActivitySubchoices(this, choices);
     }
 
     @Override
