@@ -1224,18 +1224,13 @@ public class Player extends Character {
     @Override
     public void chooseActivitySubchoices(Activity activity, List<String> choices) {
         gui.presentOptions(choices.stream().map(
-            choice -> new CommandPanelOption(
-                choice,
-                event -> activity.visit(choice)))
+            choice -> newActivitySubchoice(activity, choice))
             .collect(Collectors.toList()));
     }
 
     @Override
     public void chooseActivity(Activity activity, String choice) {
-        gui.addToCommandPanel(new CommandPanelOption(choice,
-            event -> {
-                activity.visit(choice);
-            }));
+        gui.addToCommandPanel(newActivitySubchoice(activity, choice));
     }
 
     private void chooseAction(Action action, Character user) {
@@ -1249,5 +1244,9 @@ public class Player extends Character {
             }
         ));
         Global.getMatch().pause();
+    }
+
+    private static CommandPanelOption newActivitySubchoice(Activity activity, String choice) {
+        return new CommandPanelOption(choice, event -> activity.visit(choice));
     }
 }
