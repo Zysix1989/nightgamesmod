@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 import nightgames.global.Global;
+import nightgames.gui.GUI;
 import nightgames.gui.KeyableButton;
-import nightgames.gui.SaveButton;
 import nightgames.gui.SceneButton;
 import nightgames.modifier.Modifier;
 import nightgames.modifier.standard.NoModifier;
@@ -26,7 +26,8 @@ public abstract class PrematchEvent {
         this.message = message;
         this.type = type;
         this.buttons = new ArrayList<>(buttons);
-        this.buttons.add(new SaveButton());
+        KeyableButton saveButton = GUI.saveButton();
+        this.buttons.add(saveButton);
     }
 
     protected final void run() {

@@ -448,7 +448,7 @@ public class GUI extends JFrame implements Observer {
             Global.startDay();
         });
         addToCommandPanel(o);
-        commandPanel.add(new SaveButton());
+        commandPanel.add(saveButton());
         commandPanel.refresh();
     }
 
@@ -503,5 +503,13 @@ public class GUI extends JFrame implements Observer {
         groupBox.removeAll();
         currentTactics = group;
         Global.gui().showSkills();
+    }
+
+    public static KeyableButton saveButton() {
+        CommandPanelOption option = new CommandPanelOption(
+            "Save",
+            event -> Global.saveWithDialog()
+        );
+        return option.toButton();
     }
 }
