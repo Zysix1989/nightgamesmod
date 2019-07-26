@@ -1,5 +1,7 @@
 package nightgames.daytime;
 
+import java.util.ArrayList;
+import java.util.List;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Flag;
@@ -26,17 +28,18 @@ public class Meditation extends Activity {
         }
         Global.gui().clearText();
         Global.gui().clearCommand();
+        ArrayList<String> choices = new ArrayList<>();
         if (Global.checkFlag(Flag.dojo) && choice.equals("Start")) {
             if (!Global.checkFlag(Flag.metSuzume)) {
-               meetSuzume();
+                choices.addAll(meetSuzume());
             } else {
                 Global.gui().message(
                                 "You go to the Suzuki dojo and remove your shoes out of respect. Suzume (or Suzuki-shisho as she's instructed you to call her) give you a friendly "
                                                 + "smile as you bow. <i>\"Welcome apprentice. Are you ready to continue your training or are you here to meditate?\"</i>");
-                player.chooseActivity(this, "Train: $" + 1000 * (player.get(Attribute.Ki) + 1));
-                player.chooseActivity(this, "Sharpen Senses");
-                player.chooseActivity(this, "Shut Out Sensation");
-                player.chooseActivity(this, "Leave");
+                choices.add("Train: $" + 1000 * (player.get(Attribute.Ki) + 1));
+                choices.add("Sharpen Senses");
+                choices.add("Shut Out Sensation");
+                choices.add("Leave");
             }
         } else if (choice.equals("Start")) {
             Global.gui().message(
@@ -47,9 +50,9 @@ public class Meditation extends Activity {
                                             + "<i>\"Now I need to be clear that hypnotic suggestion is not an exact science and there's no guarantee there will be any noticeable change in your sensitivity. If we are "
                                             + "successful, there will still be a drawback. Making yourself less sensitive can also cause you to miss fine details, and making yourself more perceptive can turn you into "
                                             + "a quick shot in bed. So knowing all that, do you still want to go through with this?\"</i>");
-            player.chooseActivity(this, "Sharpen Senses");
-            player.chooseActivity(this, "Shut Out Sensation");
-            player.chooseActivity(this, "Leave");
+            choices.add("Sharpen Senses");
+            choices.add("Shut Out Sensation");
+            choices.add("Leave");
         } else if (choice.equals("Leave")) {
             done(acted);
         } else if (choice.startsWith("Train")) {
@@ -65,12 +68,12 @@ public class Meditation extends Activity {
                 if (!player.has(Clothing.getByID("gi"))) {
                     player.gain(Clothing.getByID("gi"));
                 }
-                player.chooseActivity(this, "Leave");
+                choices.add("Leave");
             } else {
                 Global.gui().message("You don't have enough money for training.");
-                player.chooseActivity(this, "Sharpen Senses");
-                player.chooseActivity(this, "Shut Out Sensation");
-                player.chooseActivity(this, "Leave");
+                choices.add("Sharpen Senses");
+                choices.add("Shut Out Sensation");
+                choices.add("Leave");
             }
         } else if (choice.equals("Sharpen Senses")) {
             if (Global.random(100) >= 50) {
@@ -90,7 +93,7 @@ public class Meditation extends Activity {
                                                 + "If you want, we can try again another time, but for now you need some time to recover.\"</i>");
             }
             acted = true;
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
         } else if (choice.equals("Shut Out Sensation")) {
             if (Global.random(100) >= 50) {
                 shutOutSensesSucceed();
@@ -105,8 +108,9 @@ public class Meditation extends Activity {
                                                 + "don't think we can salvage this session. Give me a call if you want to try again.\"</i>");
             }
             acted = true;
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
         }
+        player.chooseActivitySubchoices(this, choices);
     }
 
     @Override
@@ -136,8 +140,9 @@ public class Meditation extends Activity {
             npc.modAttributeDontSaveData(Attribute.Perception, -1);
         }
     }
-    
-    private void meetSuzume() {
+
+    private List<String> meetSuzume() {
+        ArrayList<String> choices = new ArrayList<>();
         String message = "You go to the Suzuki dojo to meet Suzume. She looks like she's trying to looks like project the air of a dignified martial arts master, but "
                         + "you can tell she's excited at the prospect of getting a student. <i>\"Aesop tells me you're interested in becoming my apprentice. Sorry I didn't offer to "
                         + "train you earlier, but Aesop was very insistent that I wait.\"</i> She walks past you and locks the dojo door. <i>\"We have some privacy, so take off your clothes "
@@ -164,10 +169,11 @@ public class Meditation extends Activity {
         
         Global.gui().message(message);
         Global.flag(Flag.metSuzume);
-        player.chooseActivity(this, "Train: $" + 1000 * (player.get(Attribute.Ki) + 1));
-        player.chooseActivity(this, "Sharpen Senses");
-        player.chooseActivity(this, "Shut Out Sensation");
-        player.chooseActivity(this, "Leave");
+        choices.add("Train: $" + 1000 * (player.get(Attribute.Ki) + 1));
+        choices.add("Sharpen Senses");
+        choices.add("Shut Out Sensation");
+        choices.add("Leave");
+        return choices;
     }
     
     private void sharpenSensesSucceed() {
