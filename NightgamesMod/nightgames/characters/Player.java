@@ -421,6 +421,7 @@ public class Player extends Character {
     @Override
     public void move() {
         gui.clearCommand();
+        List<Action> actionChoices = new ArrayList<>();
 
         if (state == State.combat) {
             if (!location.fight.battle()) {
@@ -435,7 +436,7 @@ public class Player extends Character {
                 Move compelled = findPath(master.location());
                 gui.message("You feel an irresistible compulsion to head to the <b>" + master.location().name + "</b>");
                 if (compelled != null) {
-                    chooseAction(compelled, this);
+                    actionChoices.add(compelled);
                 }
             }
         } else if (state == State.shower || state == State.lostclothes) {
@@ -476,7 +477,7 @@ public class Player extends Character {
             detect();
             if (!location.encounter(this)) {
                 if (!allowedActions().isEmpty()) {
-                    allowedActions().forEach(a -> chooseAction(a, this));
+                    actionChoices.addAll(allowedActions());
                 } else {
                     List<Action> possibleActions = new ArrayList<>();
                     if (Global.getMatch().canMoveOutOfCombat(this)) {
@@ -499,11 +500,15 @@ public class Player extends Character {
                     for (Action act : possibleActions) {
                         if (act.usable(this) 
                                         && Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
-                            chooseAction(act, this);
+                            actionChoices.add(act);
                         }
                     }
                 }
             }
+        }
+        if (!actionChoices.isEmpty()) {
+            // Otherwise someone else is going to provide choices
+            chooseActions(actionChoices);
         }
     }
 
@@ -1233,16 +1238,16 @@ public class Player extends Character {
             .collect(Collectors.toList()));
     }
 
-    private void chooseAction(Action action, Character user) {
-        gui.addToCommandPanel(new CommandPanelOption(
+    private void chooseActions(List<Action> actions) {
+        gui.presentOptions(actions.stream()
+            .map(action -> new CommandPanelOption(
             action.toString(),
             event -> {
-                action.execute(user);
+                action.execute(this);
                 if (!action.freeAction()) {
                     Global.getMatch().resume();
                 }
-            }
-        ));
+            })).collect(Collectors.toList()));
         Global.getMatch().pause();
     }
 
