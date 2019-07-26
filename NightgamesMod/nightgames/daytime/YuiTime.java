@@ -1,5 +1,6 @@
 package nightgames.daytime;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 import nightgames.characters.Attribute;
@@ -33,6 +34,7 @@ public class YuiTime extends BaseNPCTime {
               .clearText();
         Global.gui()
               .clearCommand();
+        ArrayList<String> choices = new ArrayList<>();
         if (choice.equals("Start")) {
             acted = false;
             if (Global.checkFlag(Flag.YuiAvailable)) {
@@ -50,7 +52,7 @@ public class YuiTime extends BaseNPCTime {
                                           + "any sexual request you could think of. However, knowing Yui's sincerity and "
                                           + "innocence, your conscience won't let you take advantage of her loyalty.");
                 }
-                player.chooseActivity(this, "Train with Yui");
+                choices.add("Train with Yui");
                 npc.gainAffection(player, Math.min(Math.max(0, 20 - npc.getAffection(player)), 5));
                 player.gainAffection(npc, Math.min(Math.max(0, 20 - player.getAffection(npc)), 5));
                 Global.unflag(Flag.YuiAvailable);
@@ -68,17 +70,19 @@ public class YuiTime extends BaseNPCTime {
                       .message("You head to Yui's hideout, but find it empty. She must be out doing something. It would be a lot easier to track her down if she "
                                       + "had a phone.");
             }
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
         } else if (choice.equals("Leave")) {
             done(acted);
+            return;
         } else if (choice.startsWith("Train")) {
             Global.gui()
                   .message("Yui's skills at subterfuge turn out to be as strong as she claimed. She's also quite a good teacher. Apparently she helped train her "
                                   + "younger sister, so she's used to it. Nothing she teaches you is overtly sexual, but you can see some useful applications for the Games.");
             player.modAttributeDontSaveData(Attribute.Ninjutsu, 1);
             Global.flag("Trained" + Attribute.Ninjutsu.name());
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
         }
+        player.chooseActivitySubchoices(this, choices);
     }
 
     @Override
