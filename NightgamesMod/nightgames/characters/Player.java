@@ -1182,7 +1182,7 @@ public class Player extends Character {
     // displayTexts and prices are expected to be 1:1
     @Override
     public void chooseBodyShopOption(BodyShop shop, List<String> displayTexts,
-        List<Integer> prices) {
+        List<Integer> prices, List<String> additionalChoices) {
         assert displayTexts.size() == prices.size();
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         for (Integer i = 0; i < displayTexts.size(); i++) {
@@ -1192,6 +1192,9 @@ public class Player extends Character {
                 "Price: $" + prices.get(i),
                 event -> shop.visit(displayText)));
         }
+        options.addAll(additionalChoices.stream()
+            .map(choice -> newActivitySubchoice(shop, choice))
+            .collect(Collectors.toList()));
         gui.presentOptions(options);
     }
 

@@ -4752,7 +4752,7 @@ public abstract class Character extends Observable implements Cloneable {
 
     // displayTexts and prices are expected to be 1:1
     public void chooseBodyShopOption(BodyShop shop, List<String> displayText,
-        List<Integer> prices) {
+        List<Integer> prices, List<String> additionalChoices) {
         throw new UnsupportedOperationException(
             String.format("attempted to access options from %s", shop.toString()));
     }

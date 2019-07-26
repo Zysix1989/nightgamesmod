@@ -560,8 +560,9 @@ public class BodyShop extends Activity {
             prices.add(s.price);
             Global.gui().message(s.choice + ": $" + s.price);
         }
-        player.chooseBodyShopOption(this, displayTexts, prices);
-        player.chooseActivity(this, "Leave");
+        ArrayList<String> additionalChoices = new ArrayList<>();
+        additionalChoices.add("Leave");
+        player.chooseBodyShopOption(this, displayTexts, prices, additionalChoices);
     }
 
     @Override
