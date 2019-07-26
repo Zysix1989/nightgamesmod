@@ -42,7 +42,7 @@ public class HWStore extends Store {
                             "Nothing at the hardware store is designed for the sort of activities you have in mind, but there are components you could use to make some "
                                             + "effective traps.");
             Map<Item, Integer> MyInventory = this.player.getInventory();
-            for (Item i : stock.keySet()) {
+            for (Item i : getItems()) {
                 if (MyInventory.get(i) == null || MyInventory.get(i) == 0) {
                     Global.gui().message(i.getName() + ": $" + i.getPrice());
                 } else {
