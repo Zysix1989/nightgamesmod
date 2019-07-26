@@ -1192,6 +1192,7 @@ public class Player extends Character {
                 "Price: $" + prices.get(i),
                 event -> shop.visit(displayText)));
         }
+        gui.presentOptions(options);
     }
 
     @Override
