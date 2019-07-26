@@ -1213,15 +1213,15 @@ public class Player extends Character {
             .collect(Collectors.toList()));
     }
 
-    public void chooseCombatScene(Combat c, Character npc, String message,
-        CombatSceneChoice choice) {
-        CommandPanelOption o = new CommandPanelOption(message, event -> {
-            c.write("<br/>");
-            choice.choose(c, npc);
-            c.updateMessage();
-            nextCombat(c);
-        });
-        gui.addToCommandPanel(o);
+    public void chooseCombatScene(Combat c, Character npc, List<CombatSceneChoice> choices) {
+        gui.presentOptions(choices.stream()
+            .map(choice -> new CommandPanelOption(choice.getChoice(), event -> {
+                c.write("<br/>");
+                choice.choose(c, npc);
+                c.updateMessage();
+                nextCombat(c);
+            }))
+            .collect(Collectors.toList()));
     }
 
     @Override

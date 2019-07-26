@@ -27,8 +27,7 @@ public class CombatScene {
         c.write("<br/>");
         c.write(message.provide(c, npc, c.getOpponent(npc)));
         c.updateAndClearMessage();
-        choices.forEach(
-            choice -> Global.getPlayer().chooseCombatScene(c, npc, choice.getChoice(), choice));
+        Global.getPlayer().chooseCombatScene(c, npc, choices);
     }
 
     public boolean meetsRequirements(Combat c, NPC npc) {
