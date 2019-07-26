@@ -1,5 +1,6 @@
 package nightgames.daytime;
 
+import java.util.ArrayList;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Flag;
@@ -22,6 +23,7 @@ public class Workshop extends Activity {
 
     @Override
     public void visit(String choice) {
+        ArrayList<String> choices = new ArrayList<>();
         Global.gui().clearText();
         Global.gui().clearCommand();
         if (!Global.checkFlag(Flag.metJett)) {
@@ -38,14 +40,12 @@ public class Workshop extends Activity {
                                             + "and I'm not helping you for free. No offence, but I'm rooting for your opponents. Male solidarity is fine and well, but they're a lot more attractive than you.\"</i>");
             Global.flag(Flag.metJett);
             acted = true;
-            player.chooseActivity(this,
-                "Lecture: $" + 1000 * (player.getPure(Attribute.Science) + 1));
+            choices.add("Lecture: $" + 1000 * (player.getPure(Attribute.Science) + 1));
         } else if (choice.equals("Start")) {
             Global.gui().message(
                             "You head to Jett's workshop. He sets down the parts he was working on and turns to face you. <i>\"You need something? I hope you brought your "
                                             + "wallet.\"</i>");
-            player.chooseActivity(this,
-                "Lecture: $" + 1000 * (player.getPure(Attribute.Science) + 1));
+            choices.add("Lecture: $" + 1000 * (player.getPure(Attribute.Science) + 1));
             acted = false;
         } else if (choice.equals("Upgrade Dildo: $2000")) {
             if (player.money >= Item.Dildo2.getPrice()) {
@@ -149,22 +149,22 @@ public class Workshop extends Activity {
             acted = true;
         }
         if (player.has(Item.Dildo)) {
-            player.chooseActivity(this, "Upgrade Dildo: $2000");
+            choices.add("Upgrade Dildo: $2000");
         }
         if (player.has(Item.Tickler)) {
-            player.chooseActivity(this, "Upgrade Tickler: $3000");
+            choices.add("Upgrade Tickler: $3000");
         }
         if (player.has(Item.Crop)) {
-            player.chooseActivity(this, "Upgrade Riding Crop: $1500");
+            choices.add("Upgrade Riding Crop: $1500");
         }
         if (player.has(Item.Onahole)) {
-            player.chooseActivity(this, "Upgrade Onahole: $3000");
+            choices.add("Upgrade Onahole: $3000");
         }
         if (player.has(Item.Strapon)) {
-            player.chooseActivity(this, "Upgrade Strapon: $2500");
+            choices.add("Upgrade Strapon: $2500");
         }
-        player.chooseActivity(this, "Leave");
-
+        choices.add("Leave");
+        player.chooseActivitySubchoices(this, choices);
     }
 
     @Override
