@@ -390,7 +390,6 @@ public class GUI extends JFrame implements Observer {
         commandPanel.refresh();
     }
 
-    // New code should use this one
     public void addToCommandPanel(final CommandPanelOption option) {
         CommandPanelOption wrappedOption = new CommandPanelOption(option.displayText,
             option.toolTipText,
@@ -402,6 +401,7 @@ public class GUI extends JFrame implements Observer {
         addToCommandPanel(wrappedOption.toButton());
     }
 
+    // New code should use this one
     public void presentOptions(final List<CommandPanelOption> options) {
         clearCommand();
         options.forEach(this::addToCommandPanel);
