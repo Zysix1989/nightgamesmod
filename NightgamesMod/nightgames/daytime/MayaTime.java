@@ -64,17 +64,18 @@ public class MayaTime extends BaseNPCTime {
 
     @Override
     public void subVisitIntro(String choice) {
+        ArrayList<String> choices = new ArrayList<>();
         if (npc.getAffection(player) > 0) {
             Global.gui().message("You go to a nearby post-doctoral office to find Maya.");
-            player.chooseActivity(this, "Games");
-            player.chooseActivity(this, "Sparring");
-            player.chooseActivity(this, "Sex");
+            choices.add("Games");
+            choices.add("Sparring");
+            choices.add("Sex");
             
             if(player.getPure(Attribute.Hypnosis)>=3){
-                player.chooseActivity(this, "Faerie play");
+                choices.add("Faerie play");
             }
             if (Global.getPlayer().checkAddiction(AddictionType.MIND_CONTROL)) {
-                player.chooseActivity(this, "Confront about control");
+                choices.add("Confront about control");
             }
         } else if (Global.getPlayer().checkAddiction(AddictionType.MIND_CONTROL)) {
             Global.gui().message("Maya low-affection addiction intro");
@@ -84,11 +85,11 @@ public class MayaTime extends BaseNPCTime {
             } else {
                 npc.gainAffection(player, 1);
                 player.gainAffection(npc, 1);
-                player.chooseActivity(this, "Games");
-                player.chooseActivity(this, "Sparring");
-                //player.chooseActivity(this, "Sex");
+                choices.add("Games");
+                choices.add("Sparring");
+                //choices.add("Sex");
             }
-            player.chooseActivity(this, "Get Hypnotized");
+            choices.add("Get Hypnotized");
         } else if (npc.getAttraction(player) < 15) {
             Global.gui().message("You eventually find Maya in one of the post-doctoral research offices, engrossed with work. Maya's office is perfectly arranged, and her face seems to be engrossed in reading and writing.<br/><br/>"
                             + "<i>\"Oh, hello, " + player.getTrueName() + ".\"</i> She doesn't bother looking at you, but continues typing while going through some kind of book. "
@@ -116,15 +117,17 @@ public class MayaTime extends BaseNPCTime {
                             + "It seems Maya's harder to get to open up than the other girls, but she's definitely very interesting.<br/>");
             npc.gainAffection(player, 1);
             player.gainAffection(npc, 1);
-            player.chooseActivity(this, "Games");
-            player.chooseActivity(this, "Sparring");
-            //player.chooseActivity(this, "Sex");
+            choices.add("Games");
+            choices.add("Sparring");
+            //choices.add("Sex");
         }
-        player.chooseActivity(this, "Leave");
+        choices.add("Leave");
+        player.chooseActivitySubchoices(this, choices);
     }
 
     @Override
     public void subVisit(String choice) {
+        ArrayList<String> choices = new ArrayList<>();
         if (choice.equals("Get Hypnotized")) {
             if (npc.getAffection(player) == 0) {
                 Global.gui().message("[Placeholder] Maya has some fun making you do embarassing things in front of her. You feel like she enjoys being just a little cruel to you to amuse herself.");
@@ -134,7 +137,7 @@ public class MayaTime extends BaseNPCTime {
             } /*else {
                
             }*/
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
             Global.getPlayer().addict(null, AddictionType.MIND_CONTROL, npc, Addiction.MED_INCREASE);
             Global.getPlayer().getAddiction(AddictionType.MIND_CONTROL).ifPresent(Addiction::flagDaytime);
         }
@@ -153,7 +156,7 @@ public class MayaTime extends BaseNPCTime {
                 Global.gui().message("[Placeholder] Maya Sex Scene - If you even ever have the chance to get it.");
 
             }
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
             Daytime.train(player, npc, Attribute.Seduction);
             npc.gainAffection(player, 1);
             player.gainAffection(npc, 1);
@@ -172,7 +175,7 @@ public class MayaTime extends BaseNPCTime {
             } else {
                 Global.gui().message("[Placeholder] Maya games scene - normal version.");
             }
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
             Daytime.train(player, npc, Attribute.Cunning);
             npc.gainAffection(player, 1);
             player.gainAffection(npc, 1);
@@ -191,7 +194,7 @@ public class MayaTime extends BaseNPCTime {
                 Global.gui().message("[Placeholder] Maya Sparring scene - normal version.");
 
             }
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
             Daytime.train(player, npc, Attribute.Power);
             npc.gainAffection(player, 1);
             player.gainAffection(npc, 1);
@@ -204,14 +207,14 @@ public class MayaTime extends BaseNPCTime {
                 //player.add(Trait.faefriend);
             }
             */
-            player.chooseActivity(this, "Leave");
+            choices.add("Leave");
             npc.gainAffection(player,1);
             player.gainAffection(npc,1);
         } else if (choice.equals("Leave")) {
             done(true);
-        } else {
-
+            return;
         }
+        player.chooseActivitySubchoices(this, choices);
     }
     
     @Override
