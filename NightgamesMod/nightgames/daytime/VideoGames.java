@@ -2,6 +2,7 @@ package nightgames.daytime;
 
 import java.util.ArrayList;
 
+import java.util.List;
 import nightgames.characters.Character;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -22,12 +23,13 @@ public class VideoGames extends Activity {
     public void visit(String choice) {
         Global.gui().clearText();
         Global.gui().clearCommand();
+        ArrayList<String> choices = new ArrayList<>();
         if (choice.equals("Start")) {
             if (player.money >= 50) {
                 Global.gui().message(
                                 "Do you want to purchase a new game? Your old games are still good, but you're unlikely to learn as much from replaying them.");
-                player.chooseActivity(this, "Yes: $50");
-                player.chooseActivity(this, "No");
+                choices.add("Yes: $50");
+                choices.add("No");
             } else {
                 visit("No");
             }
@@ -41,7 +43,7 @@ public class VideoGames extends Activity {
             } else if (choice.startsWith("No")) {
                 paid = false;
             }
-            showScene(pickScene());
+            choices.addAll(showScene(pickScene()));
             if (paid) {
                 if (Global.random(3) == 0) {
                     Global.gui().message("<br/><br/><b>You feel like your experiences have grown from playing the game.</b>");
@@ -50,6 +52,7 @@ public class VideoGames extends Activity {
                 }
             }
         }
+        player.chooseActivitySubchoices(this, choices);
     }
 
     @Override
@@ -59,7 +62,7 @@ public class VideoGames extends Activity {
         }
     }
 
-    private void showScene(Scene chosen) {
+    private List<String> showScene(Scene chosen) {
         switch (chosen) {
             case basic1:
                 Global.gui().message(
@@ -349,8 +352,9 @@ public class VideoGames extends Activity {
                                 + "dick. <i>\"You're welcome.\"</i>");
                 Global.modCounter(Flag.CarolineAffection, 1.0F);
         }
-
-        player.chooseActivity(this, "Leave");
+        ArrayList<String> choices = new ArrayList<>();
+        choices.add("Leave");
+        return choices;
     }
 
     private Scene pickScene() {
