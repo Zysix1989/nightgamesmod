@@ -1240,11 +1240,6 @@ public class Player extends Character {
             .collect(Collectors.toList()));
     }
 
-    @Override
-    public void chooseActivity(Activity activity, String choice) {
-        gui.addToCommandPanel(newActivitySubchoice(activity, choice));
-    }
-
     private void chooseAction(Action action, Character user) {
         gui.addToCommandPanel(new CommandPanelOption(
             action.toString(),

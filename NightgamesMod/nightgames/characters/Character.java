@@ -4769,8 +4769,4 @@ public abstract class Character extends Observable implements Cloneable {
     public void chooseActivitySubchoices(Activity activity, List<String> choices) {
         // Can't be sure this isn't used at the moment
     }
-
-    public void chooseActivity(Activity activity, String choice) {
-        // Can't be sure this isn't used at the moment
-    }
 }
