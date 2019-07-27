@@ -211,7 +211,7 @@ public class DefaultEncounter implements Encounter {
     
     private void doFightOrFlight() {
         if (p1ff && p2ff) {
-            startFight();
+            startFight(p1, p2);
         } else if (p1ff) {
             fightOrFlee(p1, p2);
         } else if (p2ff) {
@@ -220,8 +220,8 @@ public class DefaultEncounter implements Encounter {
             bothFlee();
         }
     }
-    
-    private void startFight() {
+
+    private void startFight(Character p1, Character p2) {
         startFightTimer();
         if (p1.human() || p2.human()) {
             this.fight = Global.gui().beginCombat(p1, p2);
