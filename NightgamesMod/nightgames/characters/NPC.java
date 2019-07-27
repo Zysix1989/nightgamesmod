@@ -388,10 +388,6 @@ public class NPC extends Character {
         return fakeHuman;
     }
 
-    public void setFakeHuman(boolean val) {
-        fakeHuman = val;
-    }
-
     @Override
     public void draw(Combat c, Result flag) {
         Character target;
