@@ -56,14 +56,13 @@ class GUILeftPanel {
             int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85);
             int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85);
 
-            String imagepath = enemy.getPortrait(c);
-            if (imagepath != null && new File("assets/" + imagepath).canRead()) {
-                BufferedImage face = null;
+            String imagePath = enemy.getPortrait(c);
+            if (imagePath != null && new File("assets/" + imagePath).canRead()) {
                 try {
-                    face = ImageIO
-                        .read(ResourceLoader.getFileResourceAsStream("assets/" + imagepath));
+                    BufferedImage face = ImageIO
+                        .read(ResourceLoader.getFileResourceAsStream("assets/" + imagePath));
                     if (Global.isDebugOn(DebugFlags.DEBUG_IMAGES)) {
-                        System.out.println("Loading Portrait " + imagepath + " \n");
+                        System.out.println("Loading Portrait " + imagePath + " \n");
                     }
                     portrait.setIcon(null);
 
