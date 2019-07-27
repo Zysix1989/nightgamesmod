@@ -355,12 +355,13 @@ public class GUI extends JFrame implements Observer {
         commandPanel.reset();
     }
 
-    public void addSkill(Combat com, Skill action, Character target) {
-        SkillButton btn = new SkillButton(com, action, target);
-        skills.get(action.type(com).getGroup()).add(btn);
-    }
 
-    public void showSkills() {
+    public void chooseSkills(Combat com, Character target, List<Skill> skills) {
+        skills.forEach(skill -> {
+            SkillButton btn = new SkillButton(com, skill, target);
+            this.skills.get(skill.type(com).getGroup()).add(btn);
+        });
+
         commandPanel.reset();
         int i = 1;
         for (TacticGroup group : TacticGroup.values()) {
@@ -372,12 +373,13 @@ public class GUI extends JFrame implements Observer {
         }
         List<SkillButton> flatList = new ArrayList<>();
         for (TacticGroup group : TacticGroup.values()) {
-            skills.get(group).forEach(flatList::add);
+            this.skills.get(group).forEach(flatList::add);
         }
-        if (currentTactics == TacticGroup.all || flatList.size() <= 6 || skills.get(currentTactics).size() == 0) {
+        if (currentTactics == TacticGroup.all || flatList.size() <= 6
+            || this.skills.get(currentTactics).size() == 0) {
             flatList.forEach(this::addToCommandPanel);
         } else {
-            for (SkillButton button : skills.get(currentTactics)) {
+            for (SkillButton button : this.skills.get(currentTactics)) {
                 addToCommandPanel(button);
             }
         }
@@ -498,7 +500,6 @@ public class GUI extends JFrame implements Observer {
     public void switchTactics(TacticGroup group) {
         groupBox.removeAll();
         currentTactics = group;
-        Global.gui().showSkills();
     }
 
     private static KeyableButton saveButton() {

@@ -256,37 +256,20 @@ public class Player extends Character {
                 misc.add(a);
             }
         }
+        ArrayList<Skill> orderedSkills = new ArrayList<>();
         if (lastUsed != null) {
-            gui.addSkill(c, lastUsed, target);
+            orderedSkills.add(lastUsed);
         }
-        for (Skill a : stripping) {
-            gui.addSkill(c, a, target);
-        }
-        for (Skill a : position) {
-            gui.addSkill(c, a, target);
-        }
-        for (Skill a : fucking) {
-            gui.addSkill(c, a, target);
-        }
-        for (Skill a : pleasure) {
-            gui.addSkill(c, a, target);
-        }
-        for (Skill a : damage) {
-            gui.addSkill(c, a, target);
-        }
-        for (Skill a : debuff) {
-            gui.addSkill(c, a, target);
-        }
-        for (Skill a : summoning) {
-            gui.addSkill(c, a, target);
-        }
-        for (Skill a : recovery) {
-            gui.addSkill(c, a, target);
-        }
-        for (Skill a : misc) {
-            gui.addSkill(c, a, target);
-        }
-        gui.showSkills();
+        orderedSkills.addAll(stripping);
+        orderedSkills.addAll(position);
+        orderedSkills.addAll(fucking);
+        orderedSkills.addAll(pleasure);
+        orderedSkills.addAll(damage);
+        orderedSkills.addAll(debuff);
+        orderedSkills.addAll(summoning);
+        orderedSkills.addAll(recovery);
+        orderedSkills.addAll(misc);
+        gui.chooseSkills(c, target, orderedSkills);
     }
 
 
