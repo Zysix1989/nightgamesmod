@@ -1363,6 +1363,11 @@ public class Combat extends Observable implements Cloneable {
                 if (!paused) {
                     p1.nextCombat(this);
                     p2.nextCombat(this);
+                    // This is a horrible hack to catch the case where the player is watching or
+                    // has intervened in the combat
+                    if (!(p1.human() || p2.human()) && beingObserved) {
+                        Global.getPlayer().nextCombat(this);
+                    }
                 }
                 return true;
             }
@@ -1456,6 +1461,11 @@ public class Combat extends Observable implements Cloneable {
             } else {
                 p1.nextCombat(this);
                 p2.nextCombat(this);
+                // This is a horrible hack to catch the case where the player is watching or
+                // has intervened in the combat
+                if (!(p1.human() || p2.human()) && beingObserved) {
+                    Global.getPlayer().nextCombat(this);
+                }
             }
         }
         processedEnding = true;
