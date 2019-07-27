@@ -14,16 +14,17 @@ class GUILeftPanel {
 
     private JPanel leftPanel;
     private GUIPortraitPanel portraitPanel;
+    private ShrinkingCardLayout layout;
     private JComponent map;
 
     private final static String USE_PORTRAIT = "PORTRAIT";
     private final static String USE_MAP = "MAP";
     private final static String USE_NONE = "NONE";
 
-
     GUILeftPanel() {
         leftPanel = new JPanel();
-        leftPanel.setLayout(new ShrinkingCardLayout());
+        layout = new ShrinkingCardLayout();
+        leftPanel.setLayout(layout);
         leftPanel.setBackground(GUIColors.bgDark);
 
         portraitPanel = new GUIPortraitPanel();
@@ -44,8 +45,7 @@ class GUILeftPanel {
 
     void showPortrait() {
         System.out.println("Show portrait");
-        CardLayout portraitLayout = (CardLayout) (leftPanel.getLayout());
-        portraitLayout.show(leftPanel, USE_PORTRAIT);
+        layout.show(leftPanel, USE_PORTRAIT);
     }
 
     void showMap() {
@@ -53,18 +53,15 @@ class GUILeftPanel {
             System.out.println("Show map");
         }
         map.setPreferredSize(new Dimension(300, 385));
-        CardLayout portraitLayout = (CardLayout) (leftPanel.getLayout());
-        portraitLayout.show(leftPanel, USE_MAP);
+        layout.show(leftPanel, USE_MAP);
     }
 
     void showNone() {
         if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
             System.out.println("Show none");
         }
-        CardLayout portraitLayout = (CardLayout) (leftPanel.getLayout());
-        portraitLayout.show(leftPanel, USE_NONE);
+        layout.show(leftPanel, USE_NONE);
     }
-
 
     JPanel getPanel() {
         return leftPanel;
