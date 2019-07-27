@@ -390,7 +390,7 @@ public class GUI extends JFrame implements Observer {
         commandPanel.refresh();
     }
 
-    public void addToCommandPanel(final CommandPanelOption option) {
+    private void addToCommandPanel(final CommandPanelOption option) {
         CommandPanelOption wrappedOption = new CommandPanelOption(option.displayText,
             option.toolTipText,
             event -> {
