@@ -239,9 +239,6 @@ public class GUI extends JFrame implements Observer {
     public void clearPortrait() {
         portraitPanel.clearPortrait();
     }
-    public void loadPortrait(String imagepath) {
-        portraitPanel.loadPortrait(imagepath);
-    }
 
     // portrait loader
     public void loadPortrait(Combat c, NPC enemy) {
