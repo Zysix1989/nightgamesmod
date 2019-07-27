@@ -20,7 +20,7 @@ import nightgames.global.Global;
 
 class GUILeftPanel {
 
-    private JPanel portraitPanel;
+    private JPanel leftPanel;
     private JComponent map;
     private JLabel portrait;
 
@@ -30,18 +30,17 @@ class GUILeftPanel {
 
 
     GUILeftPanel() {
-        portraitPanel = new JPanel();
+        leftPanel = new JPanel();
+        leftPanel.setLayout(new ShrinkingCardLayout());
 
-        portraitPanel.setLayout(new ShrinkingCardLayout());
-
-        portraitPanel.setBackground(GUIColors.bgDark);
+        leftPanel.setBackground(GUIColors.bgDark);
         portrait = new JLabel("");
         portrait.setVerticalAlignment(SwingConstants.TOP);
-        portraitPanel.add(portrait, USE_PORTRAIT);
+        leftPanel.add(portrait, USE_PORTRAIT);
 
         map = new MapComponent();
-        portraitPanel.add(map, USE_MAP);
-        portraitPanel.add(Box.createGlue(), USE_NONE);
+        leftPanel.add(map, USE_MAP);
+        leftPanel.add(Box.createGlue(), USE_NONE);
     }
 
     void clearPortrait() {
@@ -74,12 +73,12 @@ class GUILeftPanel {
             System.out.println("Show map");
         }
         map.setPreferredSize(new Dimension(300, 385));
-        CardLayout portraitLayout = (CardLayout) (portraitPanel.getLayout());
-        portraitLayout.show(portraitPanel, USE_MAP);
+        CardLayout portraitLayout = (CardLayout) (leftPanel.getLayout());
+        portraitLayout.show(leftPanel, USE_MAP);
     }
 
     JPanel getPanel() {
-        return portraitPanel;
+        return leftPanel;
     }
 
     void refresh() {
