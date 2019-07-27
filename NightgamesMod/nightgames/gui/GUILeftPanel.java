@@ -64,21 +64,9 @@ class GUILeftPanel {
         }
         File imageFile = new File("assets/" + imagePath);
         try {
-            BufferedImage face = ImageIO.read(imageFile);
-
-            int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85);
-            int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85);
-            if (width > 720) {
-                portrait.setIcon(new ImageIcon(face));
-                portrait.setVerticalAlignment(SwingConstants.TOP);
-            } else {
-                Image scaledFace = face.getScaledInstance(width / 6,
-                    height / 4,
-                    Image.SCALE_SMOOTH);
-                portrait.setIcon(new ImageIcon(scaledFace));
-                portrait.setVerticalAlignment(SwingConstants.TOP);
-                System.out.println("Portrait resizing active.");
-            }
+            Image face = ImageIO.read(imageFile);
+            portrait.setIcon(new ImageIcon(face));
+            portrait.setVerticalAlignment(SwingConstants.TOP);
         } catch (IOException e) {
             System.out.println(String.format("Error loading %s", "assets/" + imagePath));
             e.printStackTrace();
