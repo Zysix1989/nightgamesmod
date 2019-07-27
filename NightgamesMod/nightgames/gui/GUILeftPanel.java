@@ -2,20 +2,12 @@ package nightgames.gui;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.Box;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import nightgames.characters.NPC;
 import nightgames.combat.Combat;
 import nightgames.global.DebugFlags;
-import nightgames.global.Flag;
 import nightgames.global.Global;
 
 class GUILeftPanel {
