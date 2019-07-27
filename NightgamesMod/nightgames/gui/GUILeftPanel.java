@@ -52,7 +52,6 @@ class GUILeftPanel {
     }
 
     void loadPortrait(String imagepath) {
-
         int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85);
         int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85);
 
@@ -82,24 +81,11 @@ class GUILeftPanel {
         }
     }
 
-    // portrait loader
     void loadPortrait(Combat c, Player player, NPC enemy) {
-        if (!Global.checkFlag(Flag.noportraits) && c != null && c.isBeingObserved()) {
-            if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-                System.out.println("Load portraits");
-            }
-            String imagepath = null;
-            if (!player.human()) {
-                imagepath = player.getPortrait(c);
-            } else if (!enemy.human()) {
-                imagepath = enemy.getPortrait(c);
-            }
-            loadPortrait(imagepath);
+        if (!Global.checkFlag(Flag.noportraits)) {
+            loadPortrait(enemy.getPortrait(c));
         } else {
             clearPortrait();
-            if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-                System.out.println("No portraits");
-            }
         }
     }
 
