@@ -66,7 +66,6 @@ public class NPC extends Character {
     public HashMap<Emotion, Integer> emotes;
     public Emotion mood;
     public Plan plan;
-    private boolean fakeHuman;
     public boolean isStartCharacter = false;
     private List<CombatStrategy> personalStrategies;
     private List<CombatScene> postCombatScenes;
@@ -76,7 +75,6 @@ public class NPC extends Character {
         super(name, level);
         this.ai = ai;
         this.lines = new HashMap<>();
-        fakeHuman = false;
         emotes = new HashMap<>();
         for (Emotion e : Emotion.values()) {
             emotes.put(e, 0);
@@ -385,7 +383,7 @@ public class NPC extends Character {
 
     @Override
     public boolean human() {
-        return fakeHuman;
+        return false;
     }
 
     @Override
