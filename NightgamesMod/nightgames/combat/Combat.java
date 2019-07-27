@@ -216,9 +216,6 @@ public class Combat extends Observable implements Cloneable {
 
     public Combat(Character p1, Character p2, Area loc, int code) {
         this(p1, p2, loc);
-        stance = new Neutral(p1, p2);
-        message = "";
-        timer = 0;
         switch (code) {
             case 1:
                 p2.undress(this);
@@ -226,8 +223,6 @@ public class Combat extends Observable implements Cloneable {
                 p2.emote(Emotion.nervous, 50);
             default:
         }
-        p1.state = State.combat;
-        p2.state = State.combat;
     }
 
     private void applyCombatStatuses(Character self, Character other) {

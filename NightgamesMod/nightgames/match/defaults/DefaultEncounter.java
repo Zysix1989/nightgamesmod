@@ -322,6 +322,7 @@ public class DefaultEncounter implements Encounter {
         startFightTimer();
         target.addNonCombat(new Flatfooted(target, 3));
         if (p1.human() || p2.human()) {
+            startFight(attacker, target);
             fight = Global.gui().beginCombat(attacker, target, 0);
             Global.gui().message(Global.format("{self:SUBJECT-ACTION:catch|catches} {other:name-do} by surprise and {self:action:attack|attacks}!", attacker, target));
         } else {
