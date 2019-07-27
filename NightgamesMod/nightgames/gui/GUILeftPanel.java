@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import nightgames.Resources.ResourceLoader;
 import nightgames.characters.Character;
+import nightgames.characters.NPC;
+import nightgames.characters.Player;
 import nightgames.combat.Combat;
 import nightgames.global.*;
 
@@ -81,7 +83,7 @@ class GUILeftPanel {
     }
 
     // portrait loader
-    void loadPortrait(Combat c, Character player, Character enemy) {
+    void loadPortrait(Combat c, Player player, NPC enemy) {
         if (!Global.checkFlag(Flag.noportraits) && c != null && c.isBeingObserved()) {
             if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
                 System.out.println("Load portraits");

@@ -756,8 +756,10 @@ public class Combat extends Observable implements Cloneable {
     }
 
     private boolean turn() {
-        if (!cloned && isBeingObserved()) {
-            Global.gui().loadPortrait(this, p1, p2);
+        if (p1 instanceof Player && p2 instanceof NPC) {
+            Global.gui().loadPortrait(this, (Player) p1, (NPC) p2);
+        } else if (p2 instanceof Player && p1 instanceof NPC) {
+            Global.gui().loadPortrait(this, (Player) p2, (NPC) p1);
         }
         if (phase != CombatPhase.FINISHED_SCENE && phase != CombatPhase.RESULTS_SCENE && checkLosses(false)) {
             phase = determinePostCombatPhase();
