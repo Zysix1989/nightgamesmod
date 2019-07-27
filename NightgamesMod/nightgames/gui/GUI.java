@@ -508,11 +508,10 @@ public class GUI extends JFrame implements Observer {
     }
 
     public static CommandPanelOption saveOption() {
-        CommandPanelOption option = new CommandPanelOption(
+        return new CommandPanelOption(
             "Save",
             event -> Global.saveWithDialog()
         );
-        return option;
     }
 
     public static CommandPanelOption sceneOption(String displayText) {
