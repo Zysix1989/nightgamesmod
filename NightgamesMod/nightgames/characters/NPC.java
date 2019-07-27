@@ -791,9 +791,6 @@ public class NPC extends Character {
                 mood = e;
                 Global.ifDebuggingPrintf(DebugFlags.DEBUG_MOOD,
                     "Moodswing: %s is now %s\n", getTrueName(), mood.name());
-                if (c.p1.human() || c.p2.human()) {
-                    Global.gui().loadPortrait(c, c.p1, c.p2);
-                }
                 return e;
             }
         }
