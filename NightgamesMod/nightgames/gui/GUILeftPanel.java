@@ -52,6 +52,7 @@ class GUILeftPanel {
     }
 
     void loadPortrait(Combat c, NPC enemy) {
+        clearPortrait();
         if (!Global.checkFlag(Flag.noportraits)) {
             int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85);
             int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85);
@@ -80,8 +81,6 @@ class GUILeftPanel {
                     e.printStackTrace();
                 }
             }
-        } else {
-            clearPortrait();
         }
     }
 
