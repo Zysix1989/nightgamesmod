@@ -4,36 +4,33 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import nightgames.global.Global;
+import nightgames.gui.CommandPanelOption;
 import nightgames.gui.GUI;
-import nightgames.gui.KeyableButton;
-import nightgames.gui.SceneButton;
 import nightgames.modifier.Modifier;
 import nightgames.modifier.standard.NoModifier;
 
 public abstract class PrematchEvent {
 
     protected String message;
-    protected List<KeyableButton> buttons;
+    protected List<CommandPanelOption> options;
     protected Modifier type;
 
     protected PrematchEvent() {
         this("", offer(), new ArrayList<>());
     }
 
-    protected PrematchEvent(String message, Modifier type, List<KeyableButton> buttons) {
+    protected PrematchEvent(String message, Modifier type, List<CommandPanelOption> options) {
         this.message = message;
         this.type = type;
-        this.buttons = new ArrayList<>(buttons);
-        KeyableButton saveButton = GUI.saveButton();
-        this.buttons.add(saveButton);
+        this.options = new ArrayList<>(options);
+        this.options.add(GUI.saveOption());
     }
 
     protected final void run() {
         extraEffects();
         Global.gui()
-              .prompt(message, buttons);
+            .prompt(message, options);
     }
 
     protected abstract void extraEffects();
@@ -60,10 +57,10 @@ public abstract class PrematchEvent {
                             + type.intro();
             if (type.name()
                     .equals("normal")) {
-                buttons.add(new SceneButton("Start The Match"));
+                options.add(GUI.sceneOption("Start The Match"));
             } else {
-                buttons.add(new SceneButton("Do it"));
-                buttons.add(new SceneButton("Not interested"));
+                options.add(GUI.sceneOption("Do it"));
+                options.add(GUI.sceneOption("Not interested"));
             }
         }
 

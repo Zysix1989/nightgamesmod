@@ -1,9 +1,8 @@
 package nightgames.match.team;
 
 import java.util.Arrays;
-
 import nightgames.global.Global;
-import nightgames.gui.SceneButton;
+import nightgames.gui.GUI;
 import nightgames.match.Prematch;
 import nightgames.match.PrematchEvent;
 import nightgames.modifier.standard.NoModifier;
@@ -46,8 +45,8 @@ public class TeamPrematch extends Prematch {
                             + " the winning team gets three points, or both get one in case of a draw."
                             + " At the end of the night, everyone gets paid according to the amount"
                             + " of points their teams scored. I'll try to balance the teams in terms"
-                            + " of skill, but no promises there. Now, any further questions?\"</i>", 
-                            new NoModifier(), Arrays.asList(new SceneButton(START_MATCH_CHOICE)));
+                            + " of skill, but no promises there. Now, any further questions?\"</i>",
+                new NoModifier(), Arrays.asList(GUI.sceneOption(START_MATCH_CHOICE)));
         }
         
         @Override
@@ -68,7 +67,7 @@ public class TeamPrematch extends Prematch {
             super("Lilly seems to have a special spring in her step as she walks into the Student"
                   + " Union, where the rest of you were already waiting. We're going to do another team"
                   + " match today! You know the drill, line up and I'll give you your team assignment!"
-                  , new NoModifier(), Arrays.asList(new SceneButton(START_MATCH_CHOICE)));
+                , new NoModifier(), Arrays.asList(GUI.sceneOption(START_MATCH_CHOICE)));
         }
         
         @Override

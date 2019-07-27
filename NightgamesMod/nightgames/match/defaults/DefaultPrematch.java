@@ -7,8 +7,8 @@ import java.util.List;
 
 import nightgames.global.Flag;
 import nightgames.global.Global;
-import nightgames.gui.KeyableButton;
-import nightgames.gui.SceneButton;
+import nightgames.gui.CommandPanelOption;
+import nightgames.gui.GUI;
 import nightgames.match.Prematch;
 import nightgames.match.PrematchEvent;
 import nightgames.modifier.standard.MayaModifier;
@@ -24,7 +24,7 @@ public class DefaultPrematch extends Prematch {
     @Override
     public void respond(String response) {
         String message = "";
-        List<KeyableButton> choice = new ArrayList<KeyableButton>();
+        List<CommandPanelOption> choice = new ArrayList<>();
         if (response.startsWith("Start")) {
             Global.setUpMatch(type);
         } else if (response.startsWith("Not")) {
@@ -32,7 +32,7 @@ public class DefaultPrematch extends Prematch {
             Global.setUpMatch(type);
         } else if (response.startsWith("Do")) {
             message += type.acceptance();
-            choice.add(new SceneButton("Start The Match"));
+            choice.add(GUI.sceneOption("Start The Match"));
             Global.gui().prompt(message, choice);
         }
     }
@@ -43,7 +43,7 @@ public class DefaultPrematch extends Prematch {
             super("You arrive at the student union a few minutes before the start of the match. "
                             + "You have enough time to check in and make idle chat with your opponents before "
                             + "you head to your assigned starting point and wait. At exactly 10:00, the match is on.",
-                            new NoModifier(), Collections.singletonList(new SceneButton("Start the Match")));
+                new NoModifier(), Collections.singletonList(GUI.sceneOption("Start the Match")));
         }
 
         @Override
@@ -82,7 +82,7 @@ public class DefaultPrematch extends Prematch {
                             + "agree to this, I'll throw an extra $" + new UnderwearOnlyModifier().bonus()
                             + " on top of your normal prize for each point you score. Interested?\"</i>",
                             new UnderwearOnlyModifier(),
-                            Arrays.asList(new SceneButton("Do It"), new SceneButton("Not Interested")));
+                Arrays.asList(GUI.sceneOption("Do It"), GUI.sceneOption("Not Interested")));
         }
 
         @Override
@@ -122,7 +122,7 @@ public class DefaultPrematch extends Prematch {
                             + "Maya cum, I'll give you multiple points for it. Otherwise you can just"
                             + " consider this a learning opportunity and a chance to experience an "
                             + "orgasm at the hands of a master.\"</i><br/><br/>\n\n", new MayaModifier(),
-                            Collections.singletonList(new SceneButton("Start the Match")));
+                Collections.singletonList(GUI.sceneOption("Start the Match")));
         }
 
         @Override
@@ -152,10 +152,10 @@ public class DefaultPrematch extends Prematch {
                             + "<b>Airi has entered the games.</b><br/><br/>";
             if (type.name()
                     .equals("normal")) {
-                buttons.add(new SceneButton("Start The Match"));
+                options.add(GUI.sceneOption("Start The Match"));
             } else {
-                buttons.add(new SceneButton("Do it"));
-                buttons.add(new SceneButton("Not interested"));
+                options.add(GUI.sceneOption("Do it"));
+                options.add(GUI.sceneOption("Not interested"));
             }
         }
 

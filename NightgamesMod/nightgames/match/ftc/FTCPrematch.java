@@ -3,12 +3,11 @@ package nightgames.match.ftc;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import nightgames.characters.Character;
 import nightgames.global.Flag;
 import nightgames.global.Global;
-import nightgames.gui.KeyableButton;
-import nightgames.gui.SceneButton;
+import nightgames.gui.CommandPanelOption;
+import nightgames.gui.GUI;
 import nightgames.match.Prematch;
 import nightgames.match.PrematchEvent;
 import nightgames.modifier.standard.FTCModifier;
@@ -72,8 +71,8 @@ public class FTCPrematch extends Prematch {
                                     + "get to your bases and await Lilly's signal.";
                 }
             }
-            List<KeyableButton> choices = new ArrayList<>();
-            choices.add(new SceneButton("Start the Match"));
+            List<CommandPanelOption> choices = new ArrayList<>();
+            choices.add(GUI.sceneOption("Start the Match"));
             Global.gui().prompt(message, choices);
         }
     }
@@ -104,7 +103,7 @@ public class FTCPrematch extends Prematch {
                             + " point for every 15 minutes they hold on to the Flag, plus three points for every"
                             + " fight they win. Everyone will get $100 per point at the end of the night."
                             + " So, anyone want to volunteer to be our first Prey?\"", null,
-                            Arrays.asList(new SceneButton("Volunteer"), new SceneButton("Keep Silent")));
+                Arrays.asList(GUI.sceneOption("Volunteer"), GUI.sceneOption("Keep Silent")));
         }
         
         @Override
@@ -125,7 +124,7 @@ public class FTCPrematch extends Prematch {
             super("You find a note in the student union saying that tonight's match will"
                             + " take place in the forest again. When you get to the van, Lilly asks the"
                             + " assembled competitors who wants to be the Prey tonight.\"", null,
-                            Arrays.asList(new SceneButton("Volunteer"), new SceneButton("Keep Silent")));
+                Arrays.asList(GUI.sceneOption("Volunteer"), GUI.sceneOption("Keep Silent")));
         }
         
         @Override

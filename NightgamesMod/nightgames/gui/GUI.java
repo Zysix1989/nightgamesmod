@@ -407,14 +407,10 @@ public class GUI extends JFrame implements Observer {
         options.forEach(this::addToCommandPanel);
     }
 
-    public void prompt(String message, List<KeyableButton> choices) {
+    public void prompt(String message, List<CommandPanelOption> choices) {
         clearText();
-        clearCommand();
         message(message);
-        for (KeyableButton button : choices) {
-            commandPanel.add(button);
-        }
-        commandPanel.refresh();
+        presentOptions(choices);
     }
 
     public void endCombat() {
@@ -505,11 +501,20 @@ public class GUI extends JFrame implements Observer {
         Global.gui().showSkills();
     }
 
-    public static KeyableButton saveButton() {
+    private static KeyableButton saveButton() {
+        CommandPanelOption option = saveOption();
+        return option.toButton();
+    }
+
+    public static CommandPanelOption saveOption() {
         CommandPanelOption option = new CommandPanelOption(
             "Save",
             event -> Global.saveWithDialog()
         );
-        return option.toButton();
+        return option;
+    }
+
+    public static CommandPanelOption sceneOption(String displayText) {
+        return new CommandPanelOption(displayText, event -> Global.current.respond(displayText));
     }
 }

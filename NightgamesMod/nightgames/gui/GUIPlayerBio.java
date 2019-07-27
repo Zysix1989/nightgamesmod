@@ -27,7 +27,7 @@ class GUIPlayerBio {
     private JLabel time;
     private JLabel cash;
 
-    // These live here because their status buttons are on the
+    // These live here because their status options are on the
     // bio panel and they are otherwise independent.
     private GUIPlayerInventory inventory;
     private GUIPlayerAttributes attributes;

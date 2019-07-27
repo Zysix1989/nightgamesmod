@@ -1,10 +1,9 @@
 package nightgames.global.start;
 
 import java.util.Arrays;
-
 import nightgames.global.Global;
 import nightgames.global.Scene;
-import nightgames.gui.SceneButton;
+import nightgames.gui.GUI;
 import nightgames.modifier.standard.NoModifier;
 
 public class TutorialStart implements GameStarter, Scene {
@@ -15,7 +14,7 @@ public class TutorialStart implements GameStarter, Scene {
         switch (response) {
             case "Start":
                 Global.gui().prompt("Would you like to play the tutorial sequence?",
-                                Arrays.asList(new SceneButton("Yes"), new SceneButton("No")));
+                    Arrays.asList(GUI.sceneOption("Yes"), GUI.sceneOption("No")));
                 break;
             case "Yes":
                 Global.gui()
@@ -33,7 +32,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + " get to skip to the best part straight away; you need to"
                                       + " get them and yourself worked up a little, first. So that's"
                                       + " where we are going to begin. Get yourselves ready.\"</i>"),
-                                      Arrays.asList(new SceneButton("Get Ready")));
+                          Arrays.asList(GUI.sceneOption("Get Ready")));
                 break;
             case "Get Ready":
                 Global.gui()
@@ -46,7 +45,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + " but Cassie sidesteps you and tickles your sides as you"
                                       + " pass. You barely manage to keep your balance, but soon"
                                       + " you recover and tickle her right back. "),
-                                      Arrays.asList(new SceneButton("Tickle")));
+                          Arrays.asList(GUI.sceneOption("Tickle")));
                 break;
             case "Tickle":
                 Global.gui()
@@ -60,7 +59,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "some mojo', as the kids call it these days. Once you're a bit "
                                       + "more at ease you can start trying some more adventureous things."
                                       + " Which brings us to the next portion of the proceedings.\"</i>"),
-                                      Arrays.asList(new SceneButton("Continue")));
+                          Arrays.asList(GUI.sceneOption("Continue")));
                 break;
             case "Continue":
                 Global.gui()
@@ -72,7 +71,8 @@ public class TutorialStart implements GameStarter, Scene {
                                       + " are trying to give them pleasure. So at some point, you are"
                                       + " going to have to get your opponent naked. Now that you've"
                                       + " all warmed up some, you can try getting some clothes off"
-                                      + " your opponent. Go!\"</i> "), Arrays.asList(new SceneButton("Strip Bottoms")));
+                              + " your opponent. Go!\"</i> "),
+                          Arrays.asList(GUI.sceneOption("Strip Bottoms")));
                 break;
             case "Strip Bottoms":
                 Global.gui()
@@ -87,7 +87,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "takes some doing. You'll have a much better chance if you, for "
                                       + "example, distract your opponent first.\"</i> Getting the hint, you"
                                       + " stealthily move behind Jewel as Maya drones on."),
-                                      Arrays.asList(new SceneButton("Strip Top")));
+                          Arrays.asList(GUI.sceneOption("Strip Top")));
                 break;
             case "Strip Top":
                 Global.gui()
@@ -110,7 +110,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "references<i>}{self:if-female:Which would be very surprising, "
                                       + "considering the fact you've got a fine pair of them yourself}. Anyway,"
                                       + " now that we are all back on Earth, let's proceed, shall we?\"</i>"),
-                                      Arrays.asList(new SceneButton("Positioning")));
+                          Arrays.asList(GUI.sceneOption("Positioning")));
                 break;
             case "Positioning":
                 Global.gui()
@@ -141,7 +141,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "stomach and the occasional tickle for a while, and you are"
                                       + " both getting out of breath. Then Mara draws back, panting"
                                       + ". How do you react?"),
-                                      Arrays.asList(new SceneButton("Slap"), new SceneButton("Tackle")));
+                          Arrays.asList(GUI.sceneOption("Slap"), GUI.sceneOption("Tackle")));
                 break;
             case "Slap":
                 Global.gui()
@@ -156,7 +156,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "distraction. Mara looks down at you confidently, <i>\"I think "
                                       + "I like it up here, {self:name}. If we meet during the real match"
                                       + " tonight, I'm going to make sure we revisit this.\"</i>"),
-                                      Arrays.asList(new SceneButton("In Trouble")));
+                          Arrays.asList(GUI.sceneOption("In Trouble")));
                 break;
             case "Tackle":
                 Global.gui()
@@ -171,7 +171,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "finished, we can move on.\"</i> Looking to the side, sure enough, Angel"
                                       + " is dangling her sumptuous busom in front of Cassie's face as she "
                                       + "sits atop her, pinning her hands over her head"),
-                                      Arrays.asList(new SceneButton("On Top")));
+                          Arrays.asList(GUI.sceneOption("On Top")));
                 break;
             case "On Top":
                 Global.gui()
@@ -200,7 +200,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + " I think you're going to do just fine in these games. {self:name}, there's"
                                       + " not much you can do with your hands tied, so you will have to get that"
                                       + " zip tie off. Meanwhile, of course, Mara can do as she pleases to you.\"</i>"),
-                                      Arrays.asList(new SceneButton("Bound")));
+                          Arrays.asList(GUI.sceneOption("Bound")));
                 break;
             case "In Trouble":
                 Global.gui()
@@ -209,7 +209,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + " can do pretty much whatever they like. To escape, they could try to "
                                       + "exhaust their opponent, shove them off, or just squirm out from underneath"
                                       + " them. Let's see what they try, shall we?\"</i>"),
-                                      Arrays.asList(new SceneButton("Escape")));
+                          Arrays.asList(GUI.sceneOption("Escape")));
                 break;
             case "Escape":
                 Global.gui()
@@ -227,7 +227,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "very bad thing. You're going to have to get that tie off before you can"
                                       + " fight back. Mara, of course, does not have to just sit back and watch"
                                       + " you escape. She gets to do what she wants to you.\"</i>"),
-                                      Arrays.asList(new SceneButton("Bound")));
+                          Arrays.asList(GUI.sceneOption("Bound")));
                 break;
             case "Bound":
                 Global.gui()
@@ -240,7 +240,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "take some getting used to. Mara doesn't give you a chance to ponder"
                                       + " this, as she starts petting and fondling your {self:main-genitals},"
                                       + " quietly murmering something to herself."),
-                                      Arrays.asList(new SceneButton("Struggle")));
+                          Arrays.asList(GUI.sceneOption("Struggle")));
                 break;
             case "Struggle":
                 Global.gui()
@@ -255,7 +255,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "difference being that you are now completely naked. <i>\"Okay, now "
                                       + "that {self:name} is no longer a poor helpless naked {self:boy},"
                                       + " just a naked one, we can continue.\"</i>"),
-                                      Arrays.asList(new SceneButton("On we go")));
+                          Arrays.asList(GUI.sceneOption("On we go")));
                 break;
             case "On we go":
                 Global.gui()
@@ -298,7 +298,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "the same thing, of course, and this is only one of many ways in which"
                                       + " you can debilitate your opponent. Okay, we're almost done. Just "
                                       + "two things left to explain.\"</i>"),
-                                      Arrays.asList(new SceneButton("The first thing")));
+                          Arrays.asList(GUI.sceneOption("The first thing")));
                 break;
             case "The first thing":
                 Global.gui()
@@ -318,7 +318,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + " one for the team, please?\"</i> Angel hesitates for a few moments - "
                                       + "wisely, you figure - but then agrees. <i>\"Great! Okay, {self:name}, just"
                                       + " throw some of that stuff onto her breasts, and we'll observe the results.\"</i>"),
-                                      Arrays.asList(new SceneButton("Throw Draft")));
+                          Arrays.asList(GUI.sceneOption("Throw Draft")));
                 break;
             case "Throw Draft":
                 Global.gui()
@@ -338,7 +338,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "filled with a cloudy blue liquid, smiling at you.<i> \"I just wanted to"
                                       + " see what this one does,\"</i> she says, <i>\"For science, you know?\"</i>. Maya"
                                       + " giggles. <i>\"Oh, this is going to be good!\"</i>"),
-                                      Arrays.asList(new SceneButton(Global.getPlayer()
+                          Arrays.asList(GUI.sceneOption(Global.getPlayer()
                                                                           .hasDick() ? "Oh, wow!" : "Oh, shit!")));
                 break;
             case "Oh, wow!":
@@ -354,7 +354,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "just got about an inch and a half more popular around here. Sorry to"
                                       + " disappoint, but it will go back to normal in a little while. For "
                                       + "now, though, what do you say we give it a test run?\"</i> Uhh. Duh."),
-                                      Arrays.asList(new SceneButton("Sexytimes")));
+                          Arrays.asList(GUI.sceneOption("Sexytimes")));
                 break;
             case "Oh, shit!":
                 Global.gui()
@@ -370,7 +370,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + " time to take it for a test ride, don't you figure?\"</i> You feel extremely "
                                       + "uncomfortable with the whole situation. But... You are also curious what "
                                       + "it would feel like, so you agree."),
-                                      Arrays.asList(new SceneButton("Sexytimes")));
+                          Arrays.asList(GUI.sceneOption("Sexytimes")));
                 break;
             case "Sexytimes":
                 Global.gui()
@@ -390,7 +390,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "opponent a hard time. You could use your hands or mouth, and even just "
                                       + "struggling will cause *ahem* friction. Alright, then, Angel and {self:name},"
                                       + " up here please.\"</i>"),
-                                      Arrays.asList(new SceneButton(Global.getPlayer()
+                          Arrays.asList(GUI.sceneOption(Global.getPlayer()
                                                                           .hasDick() ? "Let's Go!"
                                                                                           : "Here goes nothing...")));
                 break;
@@ -401,7 +401,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "before - but you'll have an audience looking over your shoulder. Those "
                                       + "irregularities are easily offset by the look of Angel laying down in front "
                                       + "of you on her back and opening her legs to you. Your dick is definitely "
-                                      + "starting to respond, now. "), Arrays.asList(new SceneButton("Fuck")));
+                          + "starting to respond, now. "), Arrays.asList(GUI.sceneOption("Fuck")));
                 break;
             case "Here goes nothing...":
                 Global.gui()
@@ -410,7 +410,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "intrigued to see how it's going to feel from this end, the other part is terrified "
                                       + "at the whole situation. This is not what you had in mind when you woke up this "
                                       + "morning. The curiosity wins out eventually, and you take a deep breath to steel "
-                                      + "yourself."), Arrays.asList(new SceneButton("Mount")));
+                          + "yourself."), Arrays.asList(GUI.sceneOption("Mount")));
                 break;
             case "Mount":
                 Global.gui()
@@ -423,7 +423,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + " touch, it's not long before you have grown completely hard. {self:if-female:It"
                                       + " feels... odd. Not like you had expected at all, yet weirdly good. A pressure"
                                       + " emanates from the rigid shaft, and you notice an instinctual need to stick it"
-                                      + " somewhere.}"), Arrays.asList(new SceneButton("Fuck")));
+                          + " somewhere.}"), Arrays.asList(GUI.sceneOption("Fuck")));
                 break;
             case "Fuck":
                 Global.gui()
@@ -433,7 +433,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + " mind is awash with the strange new sensations, but while you can't really"
                                       + " think straight some primal part of you is ordering your hips to start "
                                       + "thrusting.}{self:if-male:Well, just have to make sure she comes before that.} "),
-                                      Arrays.asList(new SceneButton("Thrust")));
+                          Arrays.asList(GUI.sceneOption("Thrust")));
                 break;
             case "Thrust":
                 Global.gui()
@@ -444,7 +444,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + " good instincts, or you have a natural gift}{self:if-male:I don't know how"
                                       + " good you were before that strange potion}, {self:name}, but I could "
                                       + "certainly get used to this. But this isn't all you've got, is it?\"</i>"),
-                                      Arrays.asList(new SceneButton("Piston")));
+                          Arrays.asList(GUI.sceneOption("Piston")));
                 break;
             case "Piston":
                 Global.gui()
@@ -468,7 +468,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + "her heavy breathing, <i>\"we are going to be doing that a lot more. And it's"
                                       + " going to end with you losing every time.\"</i> You agree with the first half"
                                       + " of her assertion, but don't respond."),
-                                      Arrays.asList(new SceneButton("Recover")));
+                          Arrays.asList(GUI.sceneOption("Recover")));
                 break;
             case "Recover":
                 Global.gui()
@@ -486,7 +486,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + " body, leaving only smooth flesh behind. <i>\"Aww,\"</i> Angel pouts, <i>\"I was "
                                       + "starting to like him!\"</i>}{self:if-male:your dick shrinks back to its"
                                       + " original, though still respectable size, earning a few strange looks "
-                                      + "from the girls.}"), Arrays.asList(new SceneButton("Awww")));
+                          + "from the girls.}"), Arrays.asList(GUI.sceneOption("Awww")));
                 break;
             case "Awww":
                 Global.gui()
@@ -499,7 +499,7 @@ public class TutorialStart implements GameStarter, Scene {
                                       + " your clothes back in order and exchange some final pleasantries before "
                                       + "leaving. Somehow, it seems as if you've gotten yourself in <i>way</i> over"
                                       + " your head. Will it work out, or be a complete disaster? Only time will tell."),
-                                      Arrays.asList(new SceneButton("Done")));
+                          Arrays.asList(GUI.sceneOption("Done")));
                 break;
             case "Done":
             case "No":
