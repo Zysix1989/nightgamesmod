@@ -37,6 +37,7 @@ import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.global.Scene;
+import nightgames.gui.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
@@ -522,7 +523,7 @@ public class NPC extends Character {
             state = State.ready;
         } else if (state == State.masturbating) {
             masturbate();
-        } else if (!location.encounter(this)) {
+        } else if (!location.encounter(this).exclusive) {
             HashSet<Action> moves = new HashSet<>();
             HashSet<IMovement> radar = new HashSet<>();
             FTCMatch match;
@@ -634,13 +635,14 @@ public class NPC extends Character {
     }
 
     @Override
-    public void intervene(Encounter enc, Character p1, Character p2) {
+    public List<CommandPanelOption> intervene(Encounter enc, Character p1, Character p2) {
         if (Global.random(20) + getAffection(p1) + (p1.has(Trait.sympathetic) ? 10 : 0) >= Global.random(20)
                         + getAffection(p2) + (p2.has(Trait.sympathetic) ? 10 : 0)) {
             enc.intrude(this, p1);
         } else {
             enc.intrude(this, p2);
         }
+        return new ArrayList<>();
     }
 
     @Override

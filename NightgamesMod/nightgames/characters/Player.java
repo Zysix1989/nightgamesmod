@@ -16,6 +16,7 @@ import nightgames.actions.Locate;
 import nightgames.actions.Move;
 import nightgames.actions.Shortcut;
 import nightgames.areas.Area;
+import nightgames.areas.Area.EncounterResult;
 import nightgames.areas.Deployable;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
@@ -402,9 +403,10 @@ public class Player extends Character {
 
     @Override
     public void move() {
+        System.out.println("move called");
         gui.clearCommand();
         List<Action> actionChoices = new ArrayList<>();
-
+        List<CommandPanelOption> optionChoices = new ArrayList<>();
         if (state == State.combat) {
             if (!location.fight.battle()) {
                 Global.getMatch().resume();
@@ -457,7 +459,9 @@ public class Player extends Character {
                 gui.message("You have found a hiding spot and are waiting for someone to pounce upon.");
             }
             detect();
-            if (!location.encounter(this)) {
+            EncounterResult result = location.encounter(this);
+            optionChoices.addAll(result.options);
+            if (!result.exclusive) {
                 if (!allowedActions().isEmpty()) {
                     actionChoices.addAll(allowedActions());
                 } else {
@@ -488,9 +492,20 @@ public class Player extends Character {
                 }
             }
         }
-        if (!actionChoices.isEmpty()) {
+        optionChoices.addAll(actionChoices.stream()
+            .map(action -> new CommandPanelOption(
+                action.toString(),
+                event -> {
+                    action.execute(this);
+                    if (!action.freeAction()) {
+                        Global.getMatch().resume();
+                    }
+                })).collect(Collectors.toList()));
+
+        if (!optionChoices.isEmpty()) {
             // Otherwise someone else is going to provide choices
-            chooseActions(actionChoices);
+            gui.presentOptions(optionChoices);
+            Global.getMatch().pause();
         }
     }
 
@@ -753,7 +768,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void intervene(Encounter enc, Character p1, Character p2) {
+    public List<CommandPanelOption> intervene(Encounter enc, Character p1, Character p2) {
         gui.message("You find <b>" + p1.getName() + "</b> and <b>" + p2.getName()
                         + "</b> fighting too intensely to notice your arrival. If you intervene now, it'll essentially decide the winner.");
         gui.message("Then again, you could just wait and see which one of them comes out on top. It'd be entertaining,"
@@ -766,8 +781,8 @@ public class Player extends Character {
             event -> enc.intrude(Global.getPlayer(), p2)));
         options.add(new CommandPanelOption("Watch them fight",
             event -> enc.watch()));
-        gui.presentOptions(options);
         Global.getMatch().pause();
+        return options;
     }
 
     @Override
@@ -1218,19 +1233,6 @@ public class Player extends Character {
         gui.presentOptions(choices.stream().map(
             choice -> newActivitySubchoice(activity, choice))
             .collect(Collectors.toList()));
-    }
-
-    private void chooseActions(List<Action> actions) {
-        gui.presentOptions(actions.stream()
-            .map(action -> new CommandPanelOption(
-            action.toString(),
-            event -> {
-                action.execute(this);
-                if (!action.freeAction()) {
-                    Global.getMatch().resume();
-                }
-            })).collect(Collectors.toList()));
-        Global.getMatch().pause();
     }
 
     private static CommandPanelOption newActivitySubchoice(Activity activity, String choice) {

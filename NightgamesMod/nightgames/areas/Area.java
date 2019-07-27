@@ -7,6 +7,8 @@ import java.util.List;
 
 import nightgames.actions.Movement;
 import nightgames.characters.Character;
+import nightgames.gui.CommandPanel;
+import nightgames.gui.CommandPanelOption;
 import nightgames.match.Encounter;
 import nightgames.global.DebugFlags;
 import nightgames.global.Global;
@@ -119,26 +121,37 @@ public class Area implements Serializable {
         }
     }
 
+    public class EncounterResult {
+        public boolean exclusive;
+        public List<CommandPanelOption> options;
+
+        EncounterResult(boolean exclusive, List<CommandPanelOption> options) {
+            this.exclusive = exclusive;
+            this.options = options;
+        }
+    }
+
     /**
      * Runs the given Character through any situations that might arise as the result
      * of entering the Area (such as starting a fight, catching someone showering, etc),
      * returning true if something has come up that prevents the Character from moving
      * being presented with the normal campus Actions.
      */
-    public boolean encounter(Character p) {
+    public EncounterResult encounter(Character p) {
+        List<CommandPanelOption> options = new ArrayList<>();
         // We can't run encounters if a fight is already occurring.
         if (fight != null && fight.checkIntrude(p)) {
-            p.intervene(fight, fight.getPlayer(1), fight.getPlayer(2));
+            options = p.intervene(fight, fight.getPlayer(1), fight.getPlayer(2));
         } else if (present.size() > 1 && canFight(p)) {
             for (Character opponent : Global.getMatch().getCombatants()) {
                 if (present.contains(opponent) && opponent != p
                                 && canFight(opponent)) {
                     fight = Global.getMatch().buildEncounter(p, opponent, this);
-                    return fight.spotCheck();
+                    return new EncounterResult(fight.spotCheck(), new ArrayList<>());
                 }
             }
         }
-        return false;
+        return new EncounterResult(false, options);
     }
 
     private boolean canFight(Character c) {         //FIXME: This method has same name as Match.canFight() and they are used in the same method. Change both - DSM

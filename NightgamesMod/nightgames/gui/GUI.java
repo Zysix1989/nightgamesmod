@@ -405,6 +405,7 @@ public class GUI extends JFrame implements Observer {
 
     // New code should use this one
     public void presentOptions(final List<CommandPanelOption> options) {
+        System.out.println("presented new options");
         clearCommand();
         options.forEach(this::addToCommandPanel);
     }

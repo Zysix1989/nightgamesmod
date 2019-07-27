@@ -54,6 +54,7 @@ import nightgames.global.DebugFlags;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.global.Scene;
+import nightgames.gui.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
@@ -1953,7 +1954,7 @@ public abstract class Character extends Observable implements Cloneable {
 
     public abstract String taunt(Combat c, Character target);
 
-    public abstract void intervene(Encounter fight, Character p1, Character p2);
+    public abstract List<CommandPanelOption> intervene(Encounter fight, Character p1, Character p2);
 
     public abstract void showerScene(Character target, Encounter encounter);
 
