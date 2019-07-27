@@ -6,6 +6,7 @@ import nightgames.actions.Movement;
 import nightgames.areas.Area;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.NPC;
 import nightgames.characters.Player;
 import nightgames.characters.State;
 import nightgames.characters.Trait;
@@ -224,8 +225,10 @@ public class DefaultEncounter implements Encounter {
 
     protected void startFight(Character p1, Character p2) {
         startFightTimer();
-        if (p1 instanceof Player || p2 instanceof Player) {
-            this.fight = Global.gui().beginCombat(p1, p2);
+        if (p1 instanceof Player && p2 instanceof NPC) {
+            this.fight = Global.gui().beginCombat((Player) p1, (NPC) p2);
+        } else if (p2 instanceof Player && p1 instanceof NPC) {
+            this.fight = Global.gui().beginCombat((Player) p2, (NPC) p1);
         } else {
             this.fight = new Combat(p1, p2, location);
         }
