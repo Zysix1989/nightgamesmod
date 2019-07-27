@@ -214,7 +214,7 @@ public class GUI extends JFrame implements Observer {
         combat = new Combat(player, enemy, player.location());
         combat.addObserver(this);
         combat.setBeingObserved(true);
-        loadPortrait(combat, player, enemy);
+        loadPortrait(combat, enemy);
         showPortrait();
         return combat;
     }
@@ -244,8 +244,8 @@ public class GUI extends JFrame implements Observer {
     }
 
     // portrait loader
-    public void loadPortrait(Combat c, Player player, NPC enemy) {
-        portraitPanel.loadPortrait(c, player, enemy);
+    public void loadPortrait(Combat c, NPC enemy) {
+        portraitPanel.loadPortrait(c, enemy);
     }
 
     private void showMap() {

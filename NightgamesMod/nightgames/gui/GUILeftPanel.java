@@ -81,7 +81,7 @@ class GUILeftPanel {
         }
     }
 
-    void loadPortrait(Combat c, Player player, NPC enemy) {
+    void loadPortrait(Combat c, NPC enemy) {
         if (!Global.checkFlag(Flag.noportraits)) {
             loadPortrait(enemy.getPortrait(c));
         } else {
