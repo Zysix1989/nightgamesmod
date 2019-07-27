@@ -242,6 +242,7 @@ public class GUI extends JFrame implements Observer {
     // portrait loader
     public void loadPortrait(Combat c, NPC enemy) {
         portraitPanel.loadPortrait(c, enemy);
+        portraitPanel.showPortrait();
     }
 
     private void showMap() {
@@ -249,11 +250,11 @@ public class GUI extends JFrame implements Observer {
     }
 
     public void showPortrait() {
-        menuBar.showPortrait();
+        portraitPanel.showPortrait();
     }
 
-    private void showNone() {
-        menuBar.showNone();
+    void showNone() {
+        portraitPanel.showNone();
     }
 
     // Combat spectate ???

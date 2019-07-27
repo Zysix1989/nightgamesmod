@@ -21,8 +21,8 @@ import nightgames.global.Global;
 class GUILeftPanel {
 
     private JPanel leftPanel;
+    private GUIPortraitPanel portraitPanel;
     private JComponent map;
-    private JLabel portrait;
 
     private final static String USE_PORTRAIT = "PORTRAIT";
     private final static String USE_MAP = "MAP";
@@ -32,11 +32,10 @@ class GUILeftPanel {
     GUILeftPanel() {
         leftPanel = new JPanel();
         leftPanel.setLayout(new ShrinkingCardLayout());
-
         leftPanel.setBackground(GUIColors.bgDark);
-        portrait = new JLabel("");
-        portrait.setVerticalAlignment(SwingConstants.TOP);
-        leftPanel.add(portrait, USE_PORTRAIT);
+
+        portraitPanel = new GUIPortraitPanel();
+        leftPanel.add(portraitPanel, USE_PORTRAIT);
 
         map = new MapComponent();
         leftPanel.add(map, USE_MAP);
@@ -44,28 +43,17 @@ class GUILeftPanel {
     }
 
     void clearPortrait() {
-        portrait.setIcon(null);
+        portraitPanel.clearPortrait();
     }
 
     void loadPortrait(Combat c, NPC enemy) {
-        clearPortrait();
+        portraitPanel.loadPortrait(c, enemy);
+    }
 
-        if (Global.checkFlag(Flag.noportraits)) {
-            return;
-        }
-        String imagePath = enemy.getPortrait(c);
-        if (imagePath == null) {
-            return;
-        }
-        File imageFile = new File("assets/" + imagePath);
-        try {
-            Image face = ImageIO.read(imageFile);
-            portrait.setIcon(new ImageIcon(face));
-            portrait.setVerticalAlignment(SwingConstants.TOP);
-        } catch (IOException e) {
-            System.out.println(String.format("Error loading %s", "assets/" + imagePath));
-            e.printStackTrace();
-        }
+    void showPortrait() {
+        System.out.println("Show portrait");
+        CardLayout portraitLayout = (CardLayout) (leftPanel.getLayout());
+        portraitLayout.show(leftPanel, USE_PORTRAIT);
     }
 
     void showMap() {
@@ -76,6 +64,15 @@ class GUILeftPanel {
         CardLayout portraitLayout = (CardLayout) (leftPanel.getLayout());
         portraitLayout.show(leftPanel, USE_MAP);
     }
+
+    void showNone() {
+        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
+            System.out.println("Show none");
+        }
+        CardLayout portraitLayout = (CardLayout) (leftPanel.getLayout());
+        portraitLayout.show(leftPanel, USE_NONE);
+    }
+
 
     JPanel getPanel() {
         return leftPanel;

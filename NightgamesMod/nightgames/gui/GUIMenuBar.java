@@ -341,7 +341,7 @@ class GUIMenuBar {
                 Global.setFlag(Flag.NPCFemalePronounsOnly, rdNPCPronounFemale.isSelected());
                 Global.setFlag(Flag.PCFemalePronounsOnly, rdPronounFemale.isSelected());
                 if (!rdporon.isSelected()) {
-                    showNone();
+                    Global.gui().showNone();
                 }
                 if (rdimgon.isSelected()) {
                     Global.unflag(Flag.noimage);
@@ -419,21 +419,6 @@ class GUIMenuBar {
             }
         });
 
-    }
-    void showPortrait() {
-        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-            System.out.println("Show portrait");
-        }
-        CardLayout portraitLayout = (CardLayout) (portraitPanel.getLayout());
-        portraitLayout.show(portraitPanel, USE_PORTRAIT);
-    }
-
-    void showNone() {
-        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-            System.out.println("Show none");
-        }
-        CardLayout portraitLayout = (CardLayout) (portraitPanel.getLayout());
-        portraitLayout.show(portraitPanel, USE_NONE);
     }
 
     void setOptionsEnabled(boolean b) {
