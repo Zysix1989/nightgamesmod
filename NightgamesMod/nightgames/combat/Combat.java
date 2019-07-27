@@ -214,17 +214,6 @@ public class Combat extends Observable implements Cloneable {
         stance = starting;
     }
 
-    public Combat(Character p1, Character p2, Area loc, int code) {
-        this(p1, p2, loc);
-        switch (code) {
-            case 1:
-                p2.undress(this);
-                p1.emote(Emotion.dominant, 50);
-                p2.emote(Emotion.nervous, 50);
-            default:
-        }
-    }
-
     private void applyCombatStatuses(Character self, Character other) {
         if (other.human()) {
             write(self.challenge(other));

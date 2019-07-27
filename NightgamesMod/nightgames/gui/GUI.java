@@ -29,6 +29,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import javax.swing.border.CompoundBorder;
 import nightgames.characters.Character;
+import nightgames.characters.Emotion;
 import nightgames.characters.NPC;
 import nightgames.characters.Player;
 import nightgames.combat.Combat;
@@ -257,19 +258,6 @@ public class GUI extends JFrame implements Observer {
 
     private void showNone() {
         menuBar.showNone();
-    }
-
-    // Combat GUI
-
-    public Combat beginCombat(Character player, Character enemy, int code) {
-        showPortrait();
-        combat = new Combat(player, enemy, player.location(), code);
-        combat.addObserver(this);
-        combat.setBeingObserved(true);
-        message(combat.getMessage());
-        loadPortrait(combat, player, enemy);
-        showPortrait();
-        return combat;
     }
 
     // Combat spectate ???

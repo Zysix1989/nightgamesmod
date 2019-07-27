@@ -51,7 +51,7 @@ public class FTCEncounter extends DefaultEncounter {
         else
             victim.addNonCombat(new Bound(victim, 50, "zip-tie"));
         if (p1.human() || p2.human()) {
-            fight = Global.gui().beginCombat(attacker, victim, 0);
+            startFight(attacker, victim);
             fight.setStance(new Pin(attacker, victim));
             String message = "";
             if (victim.human()) {
@@ -82,7 +82,7 @@ public class FTCEncounter extends DefaultEncounter {
             Global.gui().message(Global.format(message, attacker, victim));
         } else {
             Global.gui().refresh();
-            fight = new Combat(attacker, victim, location, 0);
+            fight = new Combat(attacker, victim, location);
             fight.setStance(new Pin(attacker, victim));
         }
     }
@@ -95,7 +95,7 @@ public class FTCEncounter extends DefaultEncounter {
         else
             victim.addNonCombat(new Bound(victim, 50, "zip-tie"));
         if (p1.human() || p2.human()) {
-            fight = Global.gui().beginCombat(attacker, victim, 0);
+            startFight(attacker, victim);
             fight.setStance(new Mount(attacker, victim));
             String message = "";
             if (victim.human()) {
@@ -118,7 +118,7 @@ public class FTCEncounter extends DefaultEncounter {
             Global.gui().message(Global.format(message, attacker, victim));
         } else {
             Global.gui().refresh();
-            fight = new Combat(attacker, victim, location, 0);
+            fight = new Combat(attacker, victim, location);
             fight.setStance(new Pin(attacker, victim));
         }
     }

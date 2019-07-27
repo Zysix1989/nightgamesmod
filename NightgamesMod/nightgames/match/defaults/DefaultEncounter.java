@@ -6,6 +6,7 @@ import nightgames.actions.Movement;
 import nightgames.areas.Area;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.Emotion;
 import nightgames.characters.NPC;
 import nightgames.characters.Player;
 import nightgames.characters.State;
@@ -323,10 +324,9 @@ public class DefaultEncounter implements Encounter {
         target.addNonCombat(new Flatfooted(target, 3));
         if (p1.human() || p2.human()) {
             startFight(attacker, target);
-            fight = Global.gui().beginCombat(attacker, target, 0);
             Global.gui().message(Global.format("{self:SUBJECT-ACTION:catch|catches} {other:name-do} by surprise and {self:action:attack|attacks}!", attacker, target));
         } else {
-            fight = new Combat(attacker, target, location, 0);
+            fight = new Combat(attacker, target, location);
         }
     }
 
@@ -340,9 +340,12 @@ public class DefaultEncounter implements Encounter {
         }
         
         if (p1.human() || p2.human()) {
-            fight = Global.gui().beginCombat(p1, p2, 1);
+            startFight(p1, p2);
+            p2.undress(fight);
+            p1.emote(Emotion.dominant, 50);
+            p2.emote(Emotion.nervous, 50);
         } else {
-            fight = new Combat(p1, p2, location, 0);
+            fight = new Combat(p1, p2, location);
         }
         
         target.add(fight, new Flatfooted(target, 4));
