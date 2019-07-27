@@ -3,10 +3,7 @@ package nightgames.gui;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Box;
@@ -15,12 +12,11 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import nightgames.Resources.ResourceLoader;
-import nightgames.characters.Character;
 import nightgames.characters.NPC;
-import nightgames.characters.Player;
 import nightgames.combat.Combat;
-import nightgames.global.*;
+import nightgames.global.DebugFlags;
+import nightgames.global.Flag;
+import nightgames.global.Global;
 
 class GUILeftPanel {
 

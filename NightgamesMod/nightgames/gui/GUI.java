@@ -29,7 +29,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import javax.swing.border.CompoundBorder;
 import nightgames.characters.Character;
-import nightgames.characters.Emotion;
 import nightgames.characters.NPC;
 import nightgames.characters.Player;
 import nightgames.combat.Combat;
