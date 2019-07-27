@@ -1915,8 +1915,6 @@ public abstract class Character extends Observable implements Cloneable {
         return !(stunned() || distracted() || is(Stsflag.enthralled));
     }
 
-    public abstract void detect();
-
     public abstract void faceOff(Character opponent, Encounter enc);
 
     public abstract void spy(Character opponent, Encounter enc);

@@ -319,8 +319,7 @@ public class Player extends Character {
         };
     }
 
-    @Override
-    public void detect() {
+    private void detect() {
         for (Area adjacent : location.adjacent) {
             if (adjacent.ping(get(Attribute.Perception))) {
                 gui.message("You hear something in the <b>" + adjacent.name + "</b>.");

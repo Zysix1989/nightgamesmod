@@ -482,11 +482,6 @@ public class NPC extends Character {
     public String loserLiner(Combat c, Character target) {
         return getRandomLineFor(CharacterLine.LOSER_LINER, c, target);
     }
-
-    @Override
-    public void detect() {
-    }
-
     
     /**This method determines what happens when a character moves.
      * 
