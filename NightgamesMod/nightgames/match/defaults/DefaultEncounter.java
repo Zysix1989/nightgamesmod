@@ -6,6 +6,7 @@ import nightgames.actions.Movement;
 import nightgames.areas.Area;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.Player;
 import nightgames.characters.State;
 import nightgames.characters.Trait;
 import nightgames.combat.Combat;
@@ -221,9 +222,9 @@ public class DefaultEncounter implements Encounter {
         }
     }
 
-    private void startFight(Character p1, Character p2) {
+    protected void startFight(Character p1, Character p2) {
         startFightTimer();
-        if (p1.human() || p2.human()) {
+        if (p1 instanceof Player || p2 instanceof Player) {
             this.fight = Global.gui().beginCombat(p1, p2);
         } else {
             this.fight = new Combat(p1, p2, location);
@@ -240,8 +241,7 @@ public class DefaultEncounter implements Encounter {
             if (fighter.human() || fleer.human()) {
                 Global.gui().message(fighterGuaranteed.get());
             }
-            startFightTimer();
-            this.fight = Global.gui().beginCombat(fighter, fleer);
+            startFight(fighter, fleer);
             return;
         }
 
@@ -261,22 +261,18 @@ public class DefaultEncounter implements Encounter {
             }
             fleer.flee(location);
         } else {
-            startFightTimer();
             if (fighter.human() || fleer.human()) {
                 if (fighter.human()) {
                     Global.gui().message(String.format(
-                                    "%s tries to run, but you stay right on %s heels and catch %s.",
-                                    fleer.getName(), fleer.possessiveAdjective(), fleer.directObject()));
+                        "%s tries to run, but you stay right on %s heels and catch %s.",
+                        fleer.getName(), fleer.possessiveAdjective(), fleer.directObject()));
                 } else {
                     Global.gui().message(String.format(
-                                    "You quickly try to escape, but %s is quicker. %s corners you and attacks.",
-                                    fighter.getName(), Global.capitalizeFirstLetter(fighter.pronoun())));
+                        "You quickly try to escape, but %s is quicker. %s corners you and attacks.",
+                        fighter.getName(), Global.capitalizeFirstLetter(fighter.pronoun())));
                 }
-                this.fight = Global.gui()
-                                   .beginCombat(fighter, fleer);
-            } else {
-                this.fight = new Combat(fighter, fleer, location);
             }
+            startFight(fighter, fleer);
         }
     }
     

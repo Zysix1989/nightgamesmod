@@ -142,7 +142,7 @@ public class FTCEncounter extends DefaultEncounter {
                                 + " other side. The impact knocks the wind out of you, putting you"
                                 + " at a disadvantage.";
             }
-            fight = Global.gui().beginCombat(attacker, victim);
+            startFight(attacker, victim);
             victim.addNonCombat(new Flatfooted(victim, 3));
         } else {
             if (attacker.human()) {
@@ -162,7 +162,7 @@ public class FTCEncounter extends DefaultEncounter {
                                 + " Then, you throw {self:direct-object} to the side, causing"
                                 + " {self:direct-object} to fall to the ground.";
             }
-            fight = Global.gui().beginCombat(attacker, victim);
+            startFight(attacker, victim);
             attacker.addNonCombat(new Flatfooted(attacker, 3));
         }
         if (attacker.human() || victim.human()) {
