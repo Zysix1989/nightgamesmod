@@ -62,10 +62,6 @@ class GUILeftPanel {
                 try {
                     face = ImageIO
                         .read(ResourceLoader.getFileResourceAsStream("assets/" + imagepath));
-                } catch (IOException | IllegalArgumentException e) {
-                    e.printStackTrace();
-                }
-                if (face != null) {
                     if (Global.isDebugOn(DebugFlags.DEBUG_IMAGES)) {
                         System.out.println("Loading Portrait " + imagepath + " \n");
                     }
@@ -81,6 +77,8 @@ class GUILeftPanel {
                         portrait.setVerticalAlignment(SwingConstants.TOP);
                         System.out.println("Portrait resizing active.");
                     }
+                } catch (IOException | IllegalArgumentException e) {
+                    e.printStackTrace();
                 }
             }
         } else {
