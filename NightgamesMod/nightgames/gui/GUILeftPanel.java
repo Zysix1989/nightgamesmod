@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Box;
@@ -53,34 +54,34 @@ class GUILeftPanel {
 
     void loadPortrait(Combat c, NPC enemy) {
         clearPortrait();
-        if (!Global.checkFlag(Flag.noportraits)) {
+
+        if (Global.checkFlag(Flag.noportraits)) {
+            return;
+        }
+        String imagePath = enemy.getPortrait(c);
+        if (imagePath == null) {
+            return;
+        }
+        File imageFile = new File("assets/" + imagePath);
+        try {
+            BufferedImage face = ImageIO.read(imageFile);
+
             int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85);
             int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85);
-
-            String imagePath = enemy.getPortrait(c);
-            if (imagePath != null && new File("assets/" + imagePath).canRead()) {
-                try {
-                    BufferedImage face = ImageIO
-                        .read(ResourceLoader.getFileResourceAsStream("assets/" + imagePath));
-                    if (Global.isDebugOn(DebugFlags.DEBUG_IMAGES)) {
-                        System.out.println("Loading Portrait " + imagePath + " \n");
-                    }
-                    portrait.setIcon(null);
-
-                    if (width > 720) {
-                        portrait.setIcon(new ImageIcon(face));
-                        portrait.setVerticalAlignment(SwingConstants.TOP);
-                    } else {
-                        Image scaledFace = face
-                            .getScaledInstance(width / 6, height / 4, Image.SCALE_SMOOTH);
-                        portrait.setIcon(new ImageIcon(scaledFace));
-                        portrait.setVerticalAlignment(SwingConstants.TOP);
-                        System.out.println("Portrait resizing active.");
-                    }
-                } catch (IOException | IllegalArgumentException e) {
-                    e.printStackTrace();
-                }
+            if (width > 720) {
+                portrait.setIcon(new ImageIcon(face));
+                portrait.setVerticalAlignment(SwingConstants.TOP);
+            } else {
+                Image scaledFace = face.getScaledInstance(width / 6,
+                    height / 4,
+                    Image.SCALE_SMOOTH);
+                portrait.setIcon(new ImageIcon(scaledFace));
+                portrait.setVerticalAlignment(SwingConstants.TOP);
+                System.out.println("Portrait resizing active.");
             }
+        } catch (IOException e) {
+            System.out.println(String.format("Error loading %s", "assets/" + imagePath));
+            e.printStackTrace();
         }
     }
 
