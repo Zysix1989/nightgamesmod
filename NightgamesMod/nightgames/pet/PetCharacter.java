@@ -19,6 +19,7 @@ import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.DebugFlags;
 import nightgames.global.Global;
+import nightgames.gui.CommandPanelOption;
 import nightgames.match.Encounter;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.skills.Skill;
@@ -150,9 +151,6 @@ public class PetCharacter extends Character {
         getGrowth().levelUp(this);
         distributePoints(Arrays.asList());
     }
-
-    @Override
-    public void detect() {}
 
     @Override
     public String describe(int per, Combat c) {
@@ -297,7 +295,9 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void intervene(Encounter fight, Character p1, Character p2) {}
+    public List<CommandPanelOption> intervene(Encounter fight, Character p1, Character p2) {
+        return new ArrayList<>();
+    }
 
     @Override
     public void showerScene(Character target, Encounter encounter) {}

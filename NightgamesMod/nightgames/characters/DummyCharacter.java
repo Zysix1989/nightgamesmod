@@ -1,10 +1,13 @@
 package nightgames.characters;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
+import java.util.List;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
+import nightgames.gui.CommandPanelOption;
 import nightgames.match.Encounter;
 import nightgames.skills.Tactics;
 import nightgames.trap.Trap;
@@ -21,9 +24,6 @@ public class DummyCharacter extends Character {
 
     @Override
     public void ding(Combat c) {}
-
-    @Override
-    public void detect() {}
 
     @Override
     public void faceOff(Character opponent, Encounter enc) {}
@@ -90,7 +90,9 @@ public class DummyCharacter extends Character {
     }
 
     @Override
-    public void intervene(Encounter fight, Character p1, Character p2) {}
+    public List<CommandPanelOption> intervene(Encounter fight, Character p1, Character p2) {
+        return new ArrayList<>();
+    }
 
     @Override
     public void showerScene(Character target, Encounter encounter) {}
