@@ -32,6 +32,8 @@ import nightgames.match.defaults.DefaultEncounter;
 import nightgames.match.defaults.DefaultPostmatch;
 import nightgames.modifier.Modifier;
 import nightgames.status.addiction.Addiction;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class Match {
     
@@ -181,13 +183,24 @@ public class Match {
     }
 
     public void score(Character combatant, int amt, Optional<String> message) {
+        System.out.println(String.format("called score for %s", combatant.getTrueName()));
         score.put(combatant, score.get(combatant) + amt);
         if (message.isPresent() && (combatant.human() || combatant.location()
                                                                   .humanPresent())) {
-            Global.gui()
-                  .message(Global.format("<u>{self:SUBJECT} scored %d %s%s.</u>", combatant, Global.noneCharacter(),
-                                  amt, amt == 1 ? "point" : "points", message.orElse("")));
+            Global.gui().message(scoreString(combatant, score.get(combatant), message));
         }
+    }
+
+    private String scoreString(Character combatant, int amt, Optional<String> message) {
+        System.out.println(String.format("called score for %s", combatant.getTrueName()));
+        JtwigModel model = new JtwigModel()
+            .with("self", combatant)
+            .with("score", amt)
+            .with("message", message);
+        JtwigTemplate template = JtwigTemplate.inlineTemplate(
+            "{{- self.subject() }} scored {{ score }} point {{- (score != 1) ? 's' : '' }}" +
+                "{{ (message.isPresent()) ? message : '' }}.");
+        return template.render(model);
     }
     
     public boolean canFight(Character initiator, Character opponent) {      //FIXME: This method has same name as Area.canFight() and they are used in the same method. Change both - DSM
@@ -307,10 +320,8 @@ public class Match {
         Player player = Global.getPlayer();
 
         for (Character combatant : score.keySet()) {
-            sb.append(combatant.getTrueName())
-              .append(" scored ")
-              .append(score.get(combatant))
-              .append(" points.<br/>");
+            sb.append(scoreString(combatant, score.get(combatant), Optional.empty()));
+            sb.append("<br/>");
             combatant.modMoney(score.get(combatant) * combatant.prize());
             combatant.modMoney(calculateReward(combatant, sb));
 
