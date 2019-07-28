@@ -121,21 +121,21 @@ public abstract class Character extends Observable implements Cloneable {
     protected Area location;                        //What does this do? Is it the characters Current Location? This should be stored as a String or implemented as a token on a larger GameMap - DSM
     private CopyOnWriteArrayList<Skill> skills;     //Skills are unlikely objects to mutate tow warrant this - just opinion. - DSM
     public List<Status> status;                     //List is not Serializable.  Marge into StatusEffect- DSM
-    public Set<Stsflag> statusFlags;                //Can be merged into a StatusEffect object and made serializable. - DSM
+    private Set<Stsflag> statusFlags;                //Can be merged into a StatusEffect object and made serializable. - DSM
     private CopyOnWriteArrayList<Trait> traits;     //If traits are implemented like all the skills are, then this can just be an ArrayList. - DSM
-    protected Map<Trait, Integer> temporaryAddedTraits;
-    protected Map<Trait, Integer> temporaryRemovedTraits;
+    private Map<Trait, Integer> temporaryAddedTraits;
+    private Map<Trait, Integer> temporaryRemovedTraits;
     public Set<Status> removelist;                  //Rename for clarity? - DSM 
     public Set<Status> addlist;                     //Rename for clarity?   -DSM
-    public Map<String, Integer> cooldowns;          //May not require this if we add new Skills to characters and they may track their own requirements and cooldowns. - DSM
+    private Map<String, Integer> cooldowns;          //May not require this if we add new Skills to characters and they may track their own requirements and cooldowns. - DSM
     private CopyOnWriteArrayList<String> mercy;     //Can be changed into a flag that is stored in flags. -DSM
-    protected Map<Item, Integer> inventory;         
+    private Map<Item, Integer> inventory;
     private Map<String, Integer> flags;             //Needs to be more strongly leveraged in mechanics.  -DSM
     protected Item trophy;                          
     public State state;                             //State of character - tracked between in combat and out of combat. - DSM
     protected int busy;                             //Merge into some object tracking the character on the logical game map. - DSM
-    protected Map<String, Integer> attractions;     
-    protected Map<String, Integer> affections;
+    protected Map<String, Integer> attractions;
+    private Map<String, Integer> affections;
     public HashSet<Clothing> closet;
     public List<Challenge> challenges;
     public Body body;
