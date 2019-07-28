@@ -14,7 +14,7 @@ class GUILeftPanel {
 
     private JPanel leftPanel;
     private GUIAppearancePanel appearancePanel;
-    private ShrinkingCardLayout layout;
+    private CardLayout layout;
     private JComponent map;
 
     private final static String USE_PORTRAIT = "PORTRAIT";
@@ -23,7 +23,7 @@ class GUILeftPanel {
 
     GUILeftPanel() {
         leftPanel = new JPanel();
-        layout = new ShrinkingCardLayout();
+        layout = new CardLayout();
         leftPanel.setLayout(layout);
         leftPanel.setBackground(GUIColors.bgDark);
 
