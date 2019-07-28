@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile fileTree('NightgamesMod') { include '*.jar' }
+    compile fileTree('NightgamesTests') { include '*.jar' }
+
+    testImplementation('junit:junit:4.12')
+}
+
+sourceSets {
+    main{
+        java {
+            srcDir 'NightgamesMod'
+        }
+        resources {
+            srcDir 'NightgamesMod/assets'
+        }
+    }
+
+    test{
+        java {
+            srcDir 'NightgamesTests'
+        }
+    }
+}
+
+mainClassName = 'nightgames.global.Global'
