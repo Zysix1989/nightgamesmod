@@ -2903,7 +2903,6 @@ public abstract class Character extends Observable implements Cloneable {
             heal(null, Global.random(4, 7), " (Quick Recovery)");
         }
         update();
-        notifyObservers();
     }
     
     /**Outputs a debug message.*/
@@ -2929,7 +2928,7 @@ public abstract class Character extends Observable implements Cloneable {
 
     public void gain(Clothing item) {
         closet.add(item);
-        setChanged();
+        update();
     }
 
     public void gain(Item item, int q) {
@@ -2938,7 +2937,7 @@ public abstract class Character extends Observable implements Cloneable {
             amt = count(item);
         }
         inventory.put(item, Math.max(0, amt + q));
-        setChanged();
+        update();
     }
 
     public boolean has(Item item) {
@@ -3114,13 +3113,13 @@ public abstract class Character extends Observable implements Cloneable {
         status.clear();
         stamina.fill();
         state = State.ready;
-        setChanged();
+        update();
     }
 
     public void masturbate() {
         arousal.empty();
         state = State.ready;
-        setChanged();
+        update();
     }
 
     /**Performs the craft function on the map - the item this character gets is random.
@@ -3167,7 +3166,7 @@ public abstract class Character extends Observable implements Cloneable {
             }
         }
         state = State.ready;
-        setChanged();
+        update();
     }
 
     /**Searches the area for an item. Provides a random item of a hardcoded set. */
@@ -3534,7 +3533,7 @@ public abstract class Character extends Observable implements Cloneable {
         cooldowns.clear();
         dropStatus(null, null);
         orgasms = 0;
-        setChanged();
+        update();
         if (has(ClothingTrait.heels)) {
             setFlag("heelsTraining", getFlag("heelsTraining") + 1);
         }
