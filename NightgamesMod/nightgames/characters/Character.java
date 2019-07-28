@@ -147,7 +147,6 @@ public abstract class Character extends Observable implements Cloneable {
     public int cloned;
     private Map<Integer, LevelUpData> levelPlan;
     private Growth growth;
-    private BodyPart lastOrgasmPart;                //Merge into tracker object for combat session. - DSM 
     
     //TODO: Merge orgasms, cloned, pleasured, location, and lastorgasmpart in this CombatStats object.
     //protected CombatStats combatStats;          //TODO: Finish class and implement - Constructors, clones, and being able to serialize members. - DSM
@@ -155,8 +154,6 @@ public abstract class Character extends Observable implements Cloneable {
     
     //TODO: Merge various pieces of data into a MatchStats object. busy, state, location, challenges, mercy, victories, etc.
     //protected MatchStats matchStats;
-    
-    
     
     
     
@@ -4690,15 +4687,6 @@ public abstract class Character extends Observable implements Cloneable {
     
     public boolean checkAddiction(AddictionType type, Character cause) {
         return getAddiction(type).map(addiction -> addiction.isActive() && addiction.wasCausedBy(cause)).orElse(false);
-    }
-
-    
-    public void setLastOrgasmPart(BodyPart part) {
-        lastOrgasmPart=part;
-    }
-    
-    public BodyPart getLastOrgasmPart() {
-        return lastOrgasmPart;
     }
 
     public String loserLiner(Combat c, Character target) {
