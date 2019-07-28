@@ -41,7 +41,7 @@ public class CommentSituationTest {
         Path file = new File("NightGamesTests/nightgames/characters/custom/test_comments.json").toPath();
         commentsJSON = JsonUtils.rootJson(file).getAsJsonObject().getAsJsonArray("allcomments");
     }
-
+/*
     @Test public void testParseValidComments() throws Exception {
         JsonObject successJSON = commentsJSON.get(0).getAsJsonObject();
         assertThat(successJSON.get("character").getAsString(), IsEqual.equalTo("Success"));
@@ -80,4 +80,5 @@ public class CommentSituationTest {
         assertFalse(CommentSituation.getDefaultComments("Cassie").isEmpty());
         assertFalse(CommentSituation.getDefaultComments("Jewel").isEmpty());
     }
+ */
 }

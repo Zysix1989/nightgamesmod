@@ -14,6 +14,7 @@ import nightgames.combat.Combat;
 import nightgames.daytime.Daytime;
 import nightgames.global.DebugFlags;
 import nightgames.global.Global;
+import nightgames.gui.TestGUI;
 import nightgames.modifier.standard.NoModifier;
 
 public class CombatStats {
@@ -194,7 +195,7 @@ public class CombatStats {
                     Daytime.train(partner, c, (Attribute) Global.pickRandom(c.att.keySet().toArray()).get());
                 }
                 c.modMoney(level * 500);
-                Global.day = new Daytime(new Player("<player>"), null);
+                Global.day = new Daytime(new Player("<player>", new TestGUI()));
                 Global.day.advance(999);
                 Global.day.plan();
             });

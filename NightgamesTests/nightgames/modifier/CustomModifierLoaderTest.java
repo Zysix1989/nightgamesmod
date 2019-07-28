@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import nightgames.actions.Locate;
 import nightgames.characters.Player;
 import nightgames.global.Global;
+import nightgames.gui.TestGUI;
 import nightgames.json.JsonUtils;
 import nightgames.items.clothing.Clothing;
 import nightgames.modifier.status.StatusModifier;
@@ -38,7 +39,7 @@ public class CustomModifierLoaderTest {
         Global.buildParser();
         Global.buildModifierPool();
         Global.buildActionPool();
-        player = new Player("player");
+        player = new Player("player", new TestGUI());
         Global.buildSkillPool(player);
     }
 

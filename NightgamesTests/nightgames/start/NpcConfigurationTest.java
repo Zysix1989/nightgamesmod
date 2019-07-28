@@ -30,7 +30,7 @@ public class NpcConfigurationTest {
     public static void setUpNpcConfigurationTest() {
         Clothing.buildClothingTable();
     }
-
+/*
     @Before public void setUp() throws Exception {
         Path file = new File("NightgamesTests/nightgames/start/TestStartConfig.json").toPath();
         startConfig = StartConfiguration.parse(JsonUtils.rootJson(file).getAsJsonObject());
@@ -109,4 +109,5 @@ public class NpcConfigurationTest {
                                         .stream().map(Clothing::getByID).toArray(Clothing[]::new);
         assertThat(angel.character.outfit.getEquipped(), hasItems(expectedClothing));
     }
+ */
 }

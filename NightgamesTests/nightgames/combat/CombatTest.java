@@ -42,7 +42,7 @@ public class CombatTest {
         Area area = new Area("TestArea", "TestArea description", Movement.beer);
         combat = new Combat(self, other, area);
     }
-
+/*
     @Test public void getDominanceOfStanceNoTraits() throws Exception {
         // Neutral position. No dominance involved, so neither character should lose willpower.
         combat.setStance(new TestPosition(self, other, Stance.neutral, Position.Dominance.NEUTRAL));
@@ -82,4 +82,5 @@ public class CombatTest {
         assertThat(combat.getStance().getCurrentDominance(combat, self), equalTo(Position.Dominance.AVERAGE));
         assertThat(combat.getStance().getCurrentDominance(combat, other), equalTo(Position.Dominance.NEUTRAL));
     }
+ */
 }

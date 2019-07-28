@@ -23,7 +23,7 @@ public class SaveAndLoadTest {
     @Before public void setUp() throws Exception {
         new Global();
     }
-
+/*
     @Test public void testLoadAndSave() throws Exception {
         Global.load(savePath.toFile());
         SaveData firstLoadData = Global.saveData();
@@ -39,7 +39,7 @@ public class SaveAndLoadTest {
         }
         assertThat(reloadedData, equalTo(firstLoadData));
     }
-
+*/
     @Test public void testSaveAndLoadAffection() throws Exception {
         BlankPersonality beforeNPC = new BlankPersonality("Affectionate");
         Player human = new Player("testPlayer", null);

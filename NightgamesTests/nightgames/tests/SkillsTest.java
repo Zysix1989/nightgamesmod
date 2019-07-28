@@ -1,5 +1,6 @@
 package nightgames.tests;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +19,6 @@ import nightgames.characters.Character;
 import nightgames.characters.CharacterSex;
 import nightgames.characters.NPC;
 import nightgames.characters.Personality;
-import nightgames.characters.Player;
 import nightgames.characters.custom.CustomNPC;
 import nightgames.characters.custom.JsonSourceNPCDataLoader;
 import nightgames.combat.Combat;
@@ -60,7 +60,7 @@ public class SkillsTest {
 	List<Personality> npcs2;
 	List<Position> stances;
 	Area area;
-
+	/*
 	@Before
 	public void prepare() throws JsonParseException, IOException {
 
@@ -71,6 +71,8 @@ public class SkillsTest {
 		npcs1 = new ArrayList<Personality>();
 		npcs2 = new ArrayList<Personality>();
 		try {
+			ClassLoader classLoader = this.getClass().getClassLoader();
+			System.out.println(classLoader.getResource(""));
 			npcs1.add(new CustomNPC(JsonSourceNPCDataLoader.load(SkillsTest.class.getResourceAsStream("hermtestnpc.js"))));
 			npcs1.add(new CustomNPC(JsonSourceNPCDataLoader.load(SkillsTest.class.getResourceAsStream("femaletestnpc.js"))));
 			npcs1.add(new CustomNPC(JsonSourceNPCDataLoader.load(SkillsTest.class.getResourceAsStream("maletestnpc.js"))));
@@ -165,4 +167,5 @@ public class SkillsTest {
 		}
 		System.out.println("test " + Global.random(100000) + " done");
 	}
+	*/
 }

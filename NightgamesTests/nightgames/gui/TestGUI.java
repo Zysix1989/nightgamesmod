@@ -1,10 +1,13 @@
 package nightgames.gui;
 
 import java.io.File;
+import java.util.List;
 import java.util.Observable;
 import java.util.Optional;
 
 import nightgames.characters.Character;
+import nightgames.characters.NPC;
+import nightgames.characters.Player;
 import nightgames.combat.Combat;
 import nightgames.match.Encounter;
 import nightgames.skills.Skill;
@@ -29,7 +32,7 @@ public class TestGUI extends GUI {
     }
 
     @Override
-    public Combat beginCombat(Character p1, Character p2) {
+    public Combat beginCombat(Player p1, NPC p2) {
         combat = new Combat(p1, p2, p1.location());
         combat.addObserver(this);
         combat.setBeingObserved(true);
@@ -46,13 +49,12 @@ public class TestGUI extends GUI {
     public void clearCommand() {}
 
     @Override
-    public void addSkill(Combat com, Skill action, Character target) {}
+    public void chooseSkills(Combat com, Character target, List<Skill> skills) {
+    }
 
     @Override
-    public void next(Combat combat) {}
-
-    @Override
-    public void promptAmbush(Encounter enc, Character target) {}
+    public void presentOptions(final List<CommandPanelOption> options) {
+    }
 
     @Override
     public void update(Observable arg0, Object arg1) {}
