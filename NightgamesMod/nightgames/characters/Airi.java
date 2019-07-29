@@ -11,7 +11,6 @@ import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.GenericBodyPart;
-import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.GooeyMod;
 import nightgames.characters.body.mods.SizeMod;
@@ -698,16 +697,16 @@ public class Airi extends BasePersonality {
         if (character.has(Trait.slime)) {
             SlimeMimicry mimicry = (SlimeMimicry) character.getStatus(Stsflag.mimicry);
             if (mimicry != null) {
-                return "airi_" + mimicry.getMimickedName() + "_slime.jpg";
+                return "airi/portraits/" + mimicry.getMimickedName() + "_slime.jpg";
             } else {
                 return super.image(c);
             }
         } else if (character.getWillpower().percent() > 90) {
-            return "airi_human.jpg";
+            return "airi/portraits/human.jpg";
         } else if (character.getWillpower().percent() > 75) {
-            return "airi_mostly_human.jpg";
+            return "airi/portraits/mostly_human.jpg";
         } else {
-            return "airi_mostly_slime.jpg";
+            return "airi/portraits/mostly_slime.jpg";
         }
     }
 }

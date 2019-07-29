@@ -1,8 +1,8 @@
 package nightgames.gui;
 
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -37,13 +37,17 @@ class GUIPortraitPanel extends JPanel {
         if (imagePath == null) {
             return;
         }
-        File imageFile = new File("assets/" + imagePath);
+        InputStream imageStream = this.getClass().getClassLoader().getResourceAsStream(imagePath);
+        if (imageStream == null) {
+            System.out.println(String.format("Missing image: %s", imagePath));
+            return;
+        }
         try {
-            Image face = ImageIO.read(imageFile);
+            Image face = ImageIO.read(imageStream);
             image.setIcon(new ImageIcon(face));
             image.setVerticalAlignment(SwingConstants.TOP);
         } catch (IOException e) {
-            System.out.println(String.format("Error loading %s", "assets/" + imagePath));
+            System.out.println(String.format("Error loading %s", imagePath));
             e.printStackTrace();
         }
     }

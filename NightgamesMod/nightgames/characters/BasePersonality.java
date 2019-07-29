@@ -170,7 +170,7 @@ public abstract class BasePersonality implements Personality {
     @Override
     public String image(Combat c) {
         String fname = character.getTrueName().toLowerCase()
-                        + "_" + character.mood.name() + ".jpg";
+                        + "/portraits/" + character.mood.name() + ".jpg";
         return fname;
     }
 

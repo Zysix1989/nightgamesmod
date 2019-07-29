@@ -105,7 +105,7 @@ public class AiriTime extends BaseNPCTime {
             choices.add("Sparring");
             choices.add("Sex");
         } else if (npc.getAttraction(player) < 15) {
-            //Global.gui().loadPortrait("airi_human.jpg");
+            //Global.gui().loadPortrait("human.jpg");
             //Global.gui().showPortrait();
             Global.gui()
                   .message("You have late homework to do for your chemistry 102, so you head to the university lab. Upon entering, you notice someone has gotten here before you. "
@@ -116,7 +116,7 @@ public class AiriTime extends BaseNPCTime {
             npc.gainAttraction(player, 2);
             player.gainAttraction(npc, 2);
         } else if (npc.getAttraction(player) < 25) {
-            //Global.gui().loadPortrait("airi_human.jpg");
+            //Global.gui().loadPortrait("human.jpg");
             //Global.gui().showPortrait();
             Global.gui()
                   .message("You decide to go looking for the mysterious Airi. You know she's a student at the university, but everything else is a blank to you."
@@ -128,7 +128,7 @@ public class AiriTime extends BaseNPCTime {
             npc.gainAttraction(player, 2);
             player.gainAttraction(npc, 2);
         } else {
-            //Global.gui().loadPortrait("airi_human.jpg");
+            //Global.gui().loadPortrait("human.jpg");
             //Global.gui().showPortrait();
             Global.gui().message("Once again, you chanced upon Airi in the university lab. You wrestle with yourself whether you should try approaching her again, seeing how well your last few attempts went. "
                             + "You glance up at the lithe asian girl, and you immediately notice something wrong. Airi has collapsed on her table with her face flushed and her skin moist with sweat."
@@ -146,7 +146,7 @@ public class AiriTime extends BaseNPCTime {
     public void subVisit(String choice) {
         ArrayList<String> choices = new ArrayList<>();
         if (choice.equals("Rush over")) {
-            //Global.gui().loadPortrait("airi_mostly_human.jpg");
+            //Global.gui().loadPortrait("mostly_human.jpg");
             //Global.gui().showPortrait();
             Global.gui().message("She doesn't immediately respond to you, so you try to examine her to see if there's something you can do. As you try to turn her head to check if she's conscious, "
                             + "you fingers sink into her face. You yell in surprise and quickly withdraw your hand. Coating your fingers are pieces of moist transparent slime that you've become "
@@ -157,7 +157,7 @@ public class AiriTime extends BaseNPCTime {
                             + "<i>\"I um... just need... to drink...\"</i> Well that seems like a simple enough request. You make a motion to stand up and grab your water bottle.");
             choices.add("Stand Up");
         } else if (choice.equals("Stand Up")) {
-            //Global.gui().loadPortrait("airi_mostly_slime.jpg");
+            //Global.gui().loadPortrait("mostly_slime.jpg");
             //Global.gui().showPortrait();
             Global.gui().message("As you're about to walk away, you are suddenly knocked to the floor from behind. When you try to turn around to see what's the big deal, you find Airi's crimson staring into yours."
                             + "<i>\"No... you can't leave... I won't let you... I'm so... thirsty...\"</i> Oh crap, she has turned back into the slime girl you remember from the games. Her face remains the same, but her "
@@ -199,7 +199,7 @@ public class AiriTime extends BaseNPCTime {
                             + "Blushing a bit, Airi thanks you again for helping her out, as she was about to revert back into slime form again, and promises to keep in contact.");
             choices.add("Leave");
         } else if (choice.equals("Sex")) {
-            //Global.gui().loadPortrait("airi_mostly_slime.jpg");
+            //Global.gui().loadPortrait("mostly_slime.jpg");
             //Global.gui().showPortrait();
             Global.gui().message(Global.format("You know that Airi, while appearing kind of shy at first, has an incredible appetite for sex thanks to her condition. You try broaching the subject with her, hoping that she can help you with the boner that's been developing "
                             + "ever since the cute girl greated you. You're not sure if she's conscious of it, but every time she walks past you, some part of her brushes against <i>that</i> part, successfully teasing you to full mast. "
@@ -232,7 +232,7 @@ public class AiriTime extends BaseNPCTime {
             }
             choices.add("Leave");
         } else if (choice.equals("Sparring")) {
-            //Global.gui().loadPortrait("airi_mostly_slime.jpg");
+            //Global.gui().loadPortrait("mostly_slime.jpg");
             //Global.gui().showPortrait();
             Global.gui().message(Global.format("You suggest doing some practice to Airi, seeing how she's not incredibly physically fit. You tell her that being a bit stronger will help her in the night games when she doesn't make use of her slime form. Airi seems a bit hesistant at first but agrees when "
                             + "you promise her an nice date at the nice french resturaunt near campus if she can win once. It turns out sitting in the lab every day does not make her very fast nor very strong. You easily wrestle her to the ground every time. Airi tries everything from kicking you when you "
@@ -260,7 +260,7 @@ public class AiriTime extends BaseNPCTime {
             }
             choices.add("Leave");
         } else if (choice.equals("Games")) {
-            //Global.gui().loadPortrait("airi_human.jpg");
+            //Global.gui().loadPortrait("human.jpg");
             //Global.gui().showPortrait();
             Global.gui().message(Global.format("[Placeholder]You play monster hunter with Airi.", Global.getCharacterByType("Airi"), Global.getPlayer()));
             Daytime.train(player, npc, Attribute.Cunning);
