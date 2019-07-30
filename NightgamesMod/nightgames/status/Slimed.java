@@ -10,6 +10,8 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class Slimed extends DurationStatus {
     private static final int MAX_STACKS = 10;
@@ -71,30 +73,49 @@ public class Slimed extends DurationStatus {
     @Override
     public void tick(Combat c) {
     	super.tick(c);
+        JtwigModel model = JtwigModel.newModel()
+            .with("affected", affected)
+            .with("origin", origin);
     	if (affected.is(Stsflag.plasticized)) {
-            Global.writeFormattedIfCombat(c, "The slime just slides off {self:possessive} plastic-wrapped form.", affected, origin);
+            JtwigTemplate template = JtwigTemplate.inlineTemplate(
+                "The slime just slides off {{ affected.possessiveAdjective() }} plastic-wrapped form.");
+            Global.writeIfCombat(c, affected, template.render(model));
             affected.removeStatus(this);
             return;
     	}
         if (getDuration() <= 0) {
         	stacks = Math.max(0, stacks - 10);
         	if (stacks == 0) {
-        		Global.writeFormattedIfCombat(c, "{self:SUBJECT-ACTION:finally shake|finally shakes} off all of {other:name-possessive} slime!", affected, origin);
-        		affected.removeStatus(this);
+        	    JtwigTemplate template = JtwigTemplate.inlineTemplate(
+                    "{{ affected.subjectAction('finally shake', 'finally shakes')}} off all of " +
+                        "{{ origin.nameOrPossessivePronoun() }} slime!");
+                Global.writeIfCombat(c, affected, template.render(model));
+                affected.removeStatus(this);
         	} else {
-	    		Global.writeFormattedIfCombat(c, "{self:SUBJECT-ACTION:shake|shakes} off some of {other:name-possessive} sticky slime.", affected, origin);
+        	    JtwigTemplate template = JtwigTemplate.inlineTemplate(
+                    "{{ affected.subjectAction(shake,shakes) }} off some of " +
+                        "{{ origin.nameOrPossessivePronoun() }} sticky slime.");
+                Global.writeIfCombat(c, affected, template.render(model));
 	    		// be lazy and use the same function as the constructor to set the durations
 	        	setDuration((new Slimed(affected, origin, 1)).getDuration());
         	}
         }
         if (stacks >= MAX_STACKS && origin.has(Trait.PetrifyingPolymers)) {
-        	Global.writeFormattedIfCombat(c, "There's so much slime on {self:name-do} that it solidifies into a sheet of hard plastic!.", affected, origin);
+            JtwigTemplate template = JtwigTemplate.inlineTemplate(
+                "There's so much slime on {{ affected.nameDirectObject }} that it " +
+                    "solidifies into a sheet of hard plastic!.");
+            Global.writeIfCombat(c, affected, template.render(model));
         	stacks = 0;
         	affected.removeStatus(this);
         	affected.add(c, new Plasticized(affected));
         }
         if (stacks >= 0 && origin.has(Trait.ParasiticBond)) {
-            Global.writeFormattedIfCombat(c, "While not connected directly to {other:direct-object}, {other:name-possessive} slime seems to be eroding {self:name-possessive} stamina while energizing {other:direct-object}", affected, origin);
+            JtwigTemplate template = JtwigTemplate.inlineTemplate(
+                "While not connected directly to {{ origin.directObject() }}, " +
+                    "{{ origin.nameOrPossessivePronoun() }} slime seems to be eroding " +
+                    "{{ affected.nameOrPossessivePronoun() }} stamina while energizing " +
+                    "{{ origin.directObject() }}");
+            Global.writeIfCombat(c, affected, template.render(model));
             affected.drainStaminaAsMojo(c, origin, 2 + stacks / 4, 1.0f);
         }
     }

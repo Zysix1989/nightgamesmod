@@ -6,6 +6,8 @@ import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class PartModEffect extends ItemEffect {
     private String affectedType;
@@ -29,7 +31,14 @@ public class PartModEffect extends ItemEffect {
         if (oldPart != null && oldPart instanceof GenericBodyPart && !oldPart.moddedPartCountsAs(user, mod)) {
             user.body.temporaryAddPartMod(affectedType, mod, selfDuration);
             BodyPart newPart = user.body.getRandom(affectedType);
-            Global.writeFormattedIfCombat(c, "<b>{self:NAME-POSSESSIVE} %s turned into a %s!</b>", user, opponent, oldPart.describe(user), newPart.describe(user));
+            JtwigTemplate template = JtwigTemplate.inlineTemplate(
+                "<b>{{ user.nameOrPossessivePronoun() }} {{ oldPart.describe(user) }} turned " +
+                    "into a {{ newPart.describe(user) }}!</b>");
+            JtwigModel model = JtwigModel.newModel()
+                .with("user", user)
+                .with("oldPart", oldPart)
+                .with("newPart", newPart);
+            Global.writeIfCombat(c, user, template.render(model));
             return true;
         }
         return false;

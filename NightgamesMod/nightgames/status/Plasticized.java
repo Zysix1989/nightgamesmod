@@ -10,6 +10,8 @@ import nightgames.characters.Emotion;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 /**
  * A special stun
@@ -58,7 +60,12 @@ public class Plasticized extends DurationStatus {
 
     @Override
     public void onRemove(Combat c, Character other) {
-        Global.writeFormattedIfCombat(c, "{self:SUBJECT-ACTION:are|is} finally freed of {self:possessive} plastic prison!", affected, other);
+        JtwigTemplate template = JtwigTemplate.inlineTemplate(
+            "{{ affected.subjectAction('are', 'is') }} finally freed of " +
+                "{{ affected.possessiveAdjective() }} plastic prison!");
+        JtwigModel model = JtwigModel.newModel()
+            .with("affected", affected);
+        Global.writeIfCombat(c, affected, template.render(model));
     }
 
     @Override

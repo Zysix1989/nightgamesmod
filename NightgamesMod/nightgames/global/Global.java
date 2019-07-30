@@ -1953,15 +1953,6 @@ public class Global {
 		}
 	}
 
-	public static void writeFormattedIfCombat(Combat c, String string, Character self, Character other, Object ...args) {
-		if (c == null) {
-			gui().message(format(string, self, other, args));
-		} else {
-			c.write(self, format(string, self, other, args));
-		}
-	}
-
-
 	public static Optional<String> getFlagStartingWith(Collection<String> collection,
 	                String start) {
         return collection.stream().filter(s -> s.startsWith(start)).findFirst();
