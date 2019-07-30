@@ -10,6 +10,8 @@ import nightgames.characters.Emotion;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class Winded extends DurationStatus {
     public Winded(Character affected) {
@@ -77,25 +79,47 @@ public class Winded extends DurationStatus {
 
     @Override
     public int damage(Combat c, int x) {
-        Global.writeIfCombat(c, affected, Global.format("Since {self:subject-action:are} already downed, there's not much more that can be done.", affected, affected));
+        JtwigTemplate template = JtwigTemplate.inlineTemplate(
+            "Since {{ affected.subjectAction('are', 'is') }} already downed, there's not " +
+                "much more that can be done."
+        );
+        JtwigModel model = JtwigModel.newModel()
+            .with("affected", affected);
+        Global.writeIfCombat(c, affected, template.render(model));
         return -x;
     }
 
     @Override
     public int weakened(Combat c, int x) {
-        Global.writeIfCombat(c, affected, Global.format("Since {self:subject-action:are} already downed, there's not much more that can be done.", affected, affected));
+        JtwigTemplate template = JtwigTemplate.inlineTemplate(
+            "Since {{ affected.subjectAction('are', 'is') }} already downed, there's not much more that can be done."
+        );
+        JtwigModel model = JtwigModel.newModel()
+            .with("affected", affected);
+        Global.writeIfCombat(c, affected, template.render(model));
         return -x;
     }
 
     @Override
     public int drained(Combat c, int x) {
-        Global.writeIfCombat(c, affected, Global.format("Since {self:subject-action:are} already downed, there's not much to take.", affected, affected));
+        JtwigTemplate template = JtwigTemplate.inlineTemplate(
+            "Since {{ affected.subjectAction('are', 'is') }} already downed, there's not much to take."
+        );
+        JtwigModel model = JtwigModel.newModel()
+            .with("affected", affected);
+        Global.writeIfCombat(c, affected, template.render(model));
         return -x;
     }
 
     @Override
     public int tempted(Combat c, int x) {
-        Global.writeIfCombat(c, affected, Global.format("%s, {self:subject-action:are} already unconscious.", affected, affected, affected.human() ? "Fortunately" : "Unfortunately"));
+        JtwigTemplate template = JtwigTemplate.inlineTemplate(
+            "{% if affected.human() -%} Fortunately {%- else -%} Unfortunately {%- endif -%}" +
+            ", {{ affected.subjectAction('are', 'is') }} already unconscious."
+        );
+        JtwigModel model = JtwigModel.newModel()
+            .with("affected", affected);
+        Global.writeIfCombat(c, affected, template.render(model));
         return -x;
     }
 
