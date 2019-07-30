@@ -44,6 +44,8 @@ import nightgames.status.Charmed;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
 import nightgames.status.addiction.AddictionType;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class Body implements Cloneable {
     static class PartReplacement {
@@ -247,60 +249,16 @@ public class Body implements Cloneable {
     }
 
     private String formatHotnessText(Character other) {
-        double hotness = getHotness(other);
-        String message;
         int topLayer = Optional.ofNullable(character.getOutfit().getTopOfSlot(ClothingSlot.top)).map(Clothing::getLayer).orElse(-1);
         int bottomLayer = Optional.ofNullable(character.getOutfit().getTopOfSlot(ClothingSlot.bottom)).map(Clothing::getLayer).orElse(-1);
-
-        String bodyString = "body";
-        String startString = "Overall, ";
-        if (topLayer >= 2 && bottomLayer >= 2) {
-            bodyString = "clothed form";
-            startString = "Even though much of it is hidden away, ";
-        } else if (topLayer < 0 && bottomLayer < 0){
-            startString = "Nude and on full display, ";
-            bodyString = "naked body";
-        } else if (topLayer <= 1 && topLayer >= 0) {
-            if (bottomLayer <= 1) {
-                bodyString = "underwear-clad body";
-            } else {
-                bodyString = "shirtless body";
-            }
-        } else if (bottomLayer == 1 && bottomLayer >= 0) {
-            if (topLayer <= 1) {
-                bodyString = "underwear-clad body";
-            } else {
-                bodyString = "bare-legged body";
-            }
-        } else if (bottomLayer >= 0 && topLayer >= 0) {
-            bodyString = "half-clothed figure";
-        } else {
-            bodyString = "half-naked figure";
-        }
-
-        if (hotness > 3.2) {
-            message = "%s{self:possessive} %s is <font color='rgb(100,255,250)'>absolute perfection</font>, "
-                            + "as if perfectly sculpted by a divine hand.";
-        } else if (hotness > 2.6){
-            message = "%s{self:possessive} %s is <font color='rgb(85,185,255)'>exquisitely beautiful</font>. "
-                            + "There aren't many like {self:direct-object} in the world.";
-        } else if (hotness > 2.1){
-            message = "%s{self:pronoun-action:have|has} a <font color='rgb(210,130,250)'>{self:if-female:lovely}{self:if-male:handsome} %s</font>"
-                            + "{other:if-human: that definitely ignites a fire between your legs}.";
-        } else if (hotness > 1.6){
-            message = "%s{self:possessive} %s is <font color='rgb(250,130,220)'>quite attractive</font>, "
-                            + "although not particularly outstanding in any regard.";
-        } else if (hotness > 1.0) {
-            message = "%s{self:possessive} %s is <font color='rgb(255,130,150)'>so-so</font>. "
-                            + "{self:PRONOUN} would blend in with all the other {self:guy}s on campus.";
-        } else {
-            message = "%s{self:possessive} %s is <font color='rgb(255,105,105)'>not very attractive</font>... "
-                            + "Hopefully {self:pronoun} can make up for it in technique.";
-        }
-        if (Global.checkFlag(Flag.systemMessages)) {
-            message += String.format(" (%.01f)", hotness);
-        }
-        return Global.format(message, character, other, startString, bodyString);
+        JtwigTemplate template = JtwigTemplate.classpathTemplate("templates/hotness_text.twig");
+        JtwigModel model = JtwigModel.newModel()
+            .with("self", character)
+            .with("other", other)
+            .with("hotness", getHotness(other))
+            .with("topLayer", topLayer)
+            .with("bottomLayer", bottomLayer);
+        return template.render(model).replace(System.lineSeparator(), "");
     }
     private static final BodyPartSorter SORTER = new BodyPartSorter();
     public void describeBodyText(StringBuilder b, Character other, boolean notableOnly) {

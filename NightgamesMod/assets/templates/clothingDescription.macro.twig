@@ -1,0 +1,17 @@
+{% macro clothingDescription(topLayer, bottomLayer) %}
+{% if (topLayer >= 2 and bottomLayer >= 2) %}
+clothed form
+{% elseif (topLayer < 0 and bottomLayer < 0) %}
+naked body
+{% elseif (topLayer <= 1 and bottomLayer < 0) %}
+shirtless body
+{% elseif (topLayer < 0 and bottomLayer <= 1) %}
+bare-legged body
+{% elseif (topLayer <= 1 and bottomLayer <= 1) %}
+underwear-clad body
+{% elseif (bottomLayer >= 0 and topLayer >= 0) %}
+half-clothed figure
+{% else %}
+half-naked figure
+{% endif %}
+{% endmacro %}

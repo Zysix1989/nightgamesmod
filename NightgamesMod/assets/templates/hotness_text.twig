@@ -1,0 +1,43 @@
+{% import 'clothingDescription.macro.twig' as macros %}
+
+{% if (topLayer < 0 and bottomLayer < 0) %}
+Nude and on fully display
+{% elseif (topLayer >= 2 and bottomLayer >= 2) %}
+Even though much of it is hidden away
+{% else %}
+Overall
+{% endif %}
+,
+{% if (hotness > 3.2) %}
+ {{ self.possessiveAdjective() }} {{ macros.clothingDescription(topLayer, bottomLayer) }} is
+ <font color='rgb(100,255,250)'>absolute perfection</font>, as if perfectly sculpted by
+ a divine hand.
+{% elseif (hotness > 2.6) %}
+ {{ self.possessiveAdjective() }} {{ macros.clothingDescription(topLayer, bottomLayer) }} is
+ <font color='rgb(85,185,255)'>exquisitely beautiful</font>.
+ There aren't many like {{ self.directObject() }} in the world.
+{% elseif (hotness > 2.1) %}
+ {{ self.pronoun() }} has a <font color='rgb(210,130,250)'>
+    {%- if self.useMalePronouns -%}
+    handsome
+    {%- else -%}
+    lovely
+    {%- endif %}
+</font> {{ macros.clothingDescription(topLayer, bottomLayer) }}
+{% if (other.human()) %}
+ that definitely ignites a fire between your legs.
+{% endif %}
+{% elseif (hotness > 1.6) %}
+ {{ self.possessiveAdjective() }} {{ macros.clothingDescription(topLayer, bottomLayer) }} is
+ <font color='rgb(250,130,220)'>quite attractive</font>
+ although not particularly outstanding in any regard.
+{% elseif (hotness > 1.0) %}
+ {{ self.possessiveAdjective() }} {{ macros.clothingDescription(topLayer, bottomLayer) }} is
+ <font color='rgb(255,130,150)'>so-so</font>.
+ {{ self.pronoun() }} would blend in with all the other {{ self.guyOrGirl() }}s on campus.
+{% else %}
+ {{ self.possessiveAdjective() }} {{ macros.clothingDescription(topLayer, bottomLayer) }} is
+ <font color='rgb(255,105,105)'>not very attractive</font>...
+ Hopefully {{ self.pronoun() }} can make up for it in technique.
+{% endif %}
+ ({{ (format('%.01f', hotness)) }})
