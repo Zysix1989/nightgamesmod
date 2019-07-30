@@ -40,6 +40,7 @@ import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
+import nightgames.match.DefaultMatchEndListener;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.pet.Pet;
 import nightgames.pet.PetCharacter;
@@ -207,6 +208,7 @@ public class Combat extends Observable implements Cloneable {
             log = new CombatLog(this);
         }
         listeners = new ArrayList<>();
+        listeners.add(new DefaultMatchEndListener(this));
     }
 
     public Combat(Character p1, Character p2, Area loc, Position starting) {

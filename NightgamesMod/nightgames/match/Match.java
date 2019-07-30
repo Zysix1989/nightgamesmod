@@ -205,6 +205,7 @@ public class Match {
 
     public void haveMercy(Character victor, Character loser) {
         mercy.get(victor).add(loser);
+        score.put(victor, score.get(victor) + 1);
     }
 
     public final void round() {
