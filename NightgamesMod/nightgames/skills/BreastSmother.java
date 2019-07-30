@@ -301,7 +301,7 @@ public class BreastSmother extends Skill {
 
     @Override
     public Skill copy(Character user) {
-        return new BreastSmotherSuperSucc(user);
+        return new BreastSmother(user);
     }
 
     @Override

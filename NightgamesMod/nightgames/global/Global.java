@@ -515,7 +515,7 @@ public class Global {
         getSkillPool().add(new TailJob(ch));
         getSkillPool().add(new FaceSit(ch));
         getSkillPool().add(new Smother(ch));
-        getSkillPool().add(new BreastSmother(ch));
+        //getSkillPool().add(new BreastSmother(ch));
         getSkillPool().add(new MutualUndress(ch));
         getSkillPool().add(new Surrender(ch));
         getSkillPool().add(new ReverseFuck(ch));
@@ -654,8 +654,8 @@ public class Global {
         getSkillPool().add(new Kneel(ch));
         getSkillPool().add(new OfferAss(ch));
         
-        getSkillPool().add(new BreastSmotherSuperSucc(ch));
-        getSkillPool().add(new FutaFight(ch));
+        //getSkillPool().add(new BreastSmotherSuperSucc(ch));
+        //getSkillPool().add(new FutaFight(ch));
 
         if (Global.isDebugOn(DebugFlags.DEBUG_SKILLS)) {
             getSkillPool().add(new SelfStun(ch));
