@@ -1,5 +1,6 @@
 package nightgames.characters.body.mods;
 
+import java.util.ArrayList;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockMod;
@@ -9,6 +10,8 @@ import nightgames.status.Frenzied;
 import nightgames.status.IgnoreOrgasm;
 import nightgames.status.Pheromones;
 import nightgames.status.Stsflag;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class FeralMod extends PartMod {
     public static final FeralMod INSTANCE = new FeralMod();
@@ -22,9 +25,15 @@ public class FeralMod extends PartMod {
                             .getReal() / 50);
             if (!self.is(Stsflag.frenzied) && !self.is(Stsflag.cynical) && target.isType("cock")
                       && Global.random(chance) == 0) {
-                c.write(self, String.format(
-                              "A cloud of lust descends over %s and %s, clearing both of your thoughts of all matters except to fuck. Hard.",
-                              opponent.subject(), self.subject()));
+                JtwigModel model = JtwigModel.newModel()
+                    .with("self", self)
+                    .with("opponent", opponent);
+                JtwigTemplate template = JtwigTemplate.inlineTemplate(
+                    "A cloud of lust descends over {{ opponent.getName() }} and " 
+                        + "{{ self.getName() }}, clearing both of your thoughts of all matters " 
+                        + "except to fuck. Hard."
+                );
+                c.write(self, template.render(model));
                 self.add(c, new IgnoreOrgasm(opponent, 3));
                 self.add(c, new Frenzied(self, 3));
                 opponent.add(c, new Frenzied(opponent, 3));
@@ -35,18 +44,32 @@ public class FeralMod extends PartMod {
 
     public double applyReceiveBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
         if (c.getStance().distance() < 2) {
-            c.write(self, String.format("Musk emanating from %s %s leaves %s reeling.", self.possessiveAdjective(),
-                            part.describe(self), opponent.directObject()));
+            JtwigModel model = JtwigModel.newModel()
+                .with("self", self)
+                .with("opponent", opponent)
+                .with("part", part)
+                .with("target", target);
+            ArrayList<JtwigTemplate> templates = new ArrayList<>();
+            templates.add(JtwigTemplate.inlineTemplate(
+                "Musk emanating from {{ self.possessiveAdjective() }} {{ part.describe(self) }} "
+                    + "leaves {{ opponent.directObject() }} reeling."
+            ));
             double base = 3;
             if (target.moddedPartCountsAs(opponent, CockMod.runic)) {
-                c.write(self, String.format(
-                                "The wild scent overwhelms %s carefully layered enchantments, instantly sweeping %s away.",
-                                opponent.nameOrPossessivePronoun(), opponent.directObject()));
+                templates.add(JtwigTemplate.inlineTemplate(
+                    "The wild scent overwhelms {{ opponent.nameOrPossessivePronoun() }} "
+                        + "carefully layered enchantments, instantly sweeping them away."
+                ));
                 base *= 2.5;
             } else if (target.moddedPartCountsAs(opponent, CockMod.incubus)) {
-                c.write(self, String.format("Whilst certainly invigorating, the scent leaves %s largely unaffected.",
-                                opponent.subject()));
+                templates.add(JtwigTemplate.inlineTemplate(
+                    "Whilst certainly invigorating, the scent leaves {{ opponent.subject() }} "
+                        + "largely unaffected."
+                ));
                 base /= 2;
+            }
+            for (JtwigTemplate template : templates) {
+                c.write(self, template.render(model));
             }
             opponent.add(c, Pheromones.getWith(self, opponent, (float) base, 5, " feral musk"));
         }
@@ -55,9 +78,17 @@ public class FeralMod extends PartMod {
 
     public void onOrgasm(Combat c, Character self, Character opponent, BodyPart part) {
         if (c.getStance().distance() < 2) {
-            c.write(self, Global.format(
-                            "As {self:SUBJECT-ACTION:cum|cums} hard, a literal explosion of pheromones hits {other:name-do}. {other:POSSESSIVE} entire body flushes in arousal; {other:subject} better finish this fast!",
-                            self, opponent));
+            JtwigModel model = JtwigModel.newModel()
+                .with("self", self)
+                .with("opponent", opponent)
+                .with("part", part);
+            JtwigTemplate template = JtwigTemplate.inlineTemplate(
+                "As {{ self.subject() }} {{{ self.action('cum') }} hard, a literal explosion of "
+                    + "pheromones hits {{ other.nameDirectObject() }}. "
+                    + "{{ other.possessiveAdjective() }} entire body flushes in arousal; "
+                    + "{{ other.subject() }} better finish this fast!"
+            );
+            c.write(self, template.render(model));
             opponent.add(c, Pheromones.getWith(self, opponent, 10, 5, " orgasmic secretions"));
         }
     }
