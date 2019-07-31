@@ -111,7 +111,7 @@ public class DataBackedNPCData implements NPCData {
         List<CustomStringEntry> lines = characterLines.get(type);
         for (CustomStringEntry line : lines) {
             if (line.meetsRequirements(c, self, other)) {
-                return line.getLine(c, self, other);
+                return line.getLine(self, other);
             }
         }
         return "";
@@ -144,7 +144,7 @@ public class DataBackedNPCData implements NPCData {
     public String getPortraitName(Combat c, Character self, Character other) {
         for (CustomStringEntry line : portraits) {
             if (line.meetsRequirements(c, self, other)) {
-                return line.getLine(c, self, other);
+                return line.getLine(self, other);
             }
         }
         return "";

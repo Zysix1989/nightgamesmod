@@ -80,7 +80,7 @@ public class CustomSkill extends Skill {
         Optional<CustomStringEntry> picked = data.labels.stream()
                         .filter(entry -> entry.meetsRequirements(c, getSelf(), c.getOpponent(getSelf()))).findFirst();
         if (picked.isPresent()) {
-            return picked.get().getLine(c, getSelf(), c.getOpponent(getSelf()));
+            return picked.get().getLine(getSelf(), c.getOpponent(getSelf()));
         }
         return getName(c);
     }

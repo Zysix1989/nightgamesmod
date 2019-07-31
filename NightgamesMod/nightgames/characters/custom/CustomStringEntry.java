@@ -2,10 +2,8 @@ package nightgames.characters.custom;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
-import nightgames.global.Global;
 import nightgames.requirements.Requirement;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
@@ -18,7 +16,7 @@ public class CustomStringEntry {
     String line;
     List<Requirement> requirements;
 
-    public CustomStringEntry(String line) {
+    CustomStringEntry(String line) {
         this.line = line;
         requirements = new ArrayList<>();
     }
@@ -32,16 +30,12 @@ public class CustomStringEntry {
         return true;
     }
 
-    public String getLine(Combat c, Character self, Character other) {
+    public String getLine(Character self, Character other) {
         JtwigTemplate template = JtwigTemplate.inlineTemplate(line);
         JtwigModel model = JtwigModel.newModel()
             .with("self", self)
             .with("other", other);
         return template.render(model);
-    }
-    
-    public String getRawLine() {
-        return line;
     }
     
     public List<Requirement> getRequirements() {
