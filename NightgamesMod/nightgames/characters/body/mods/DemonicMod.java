@@ -2,7 +2,6 @@ package nightgames.characters.body.mods;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -137,8 +136,14 @@ public class DemonicMod extends PartMod {
         return 0;
     }
 
-    public int counterValue(BodyPart part, BodyPart otherPart, Character self, Character other) { 
-        return otherPart.moddedPartCountsAs(other, CockMod.runic) ? -1 : otherPart.moddedPartCountsAs(other, CockMod.enlightened) ? 1 : 0;
+    public int counterValue(BodyPart part, BodyPart otherPart, Character self, Character other) {
+        if (otherPart.moddedPartCountsAs(other, CockMod.runic)) {
+            return -1;
+        } else if (otherPart.moddedPartCountsAs(other, CockMod.enlightened)) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     @Override
