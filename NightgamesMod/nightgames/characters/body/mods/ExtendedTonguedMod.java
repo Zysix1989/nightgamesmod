@@ -4,7 +4,6 @@ import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.combat.Combat;
-import nightgames.global.Global;
 import nightgames.status.CockBound;
 import nightgames.status.Stsflag;
 import org.jtwig.JtwigModel;
@@ -13,7 +12,7 @@ import org.jtwig.JtwigTemplate;
 public class ExtendedTonguedMod extends PartMod {
     public static final PartMod INSTANCE = new ExtendedTonguedMod();
 
-    public ExtendedTonguedMod() {
+    private ExtendedTonguedMod() {
         super("extendedtongue", .3, 1.2, 0, 4);
     }
 
