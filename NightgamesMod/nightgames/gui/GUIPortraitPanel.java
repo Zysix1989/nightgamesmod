@@ -27,7 +27,6 @@ class GUIPortraitPanel extends JPanel {
     }
 
     void loadPortrait(Combat c, NPC source) {
-        System.out.println("loading portrait");
         clearPortrait();
 
         if (Global.checkFlag(Flag.noportraits)) {
