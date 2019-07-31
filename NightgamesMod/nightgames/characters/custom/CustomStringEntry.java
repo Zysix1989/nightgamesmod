@@ -37,7 +37,7 @@ public class CustomStringEntry {
         JtwigModel model = JtwigModel.newModel()
             .with("self", self)
             .with("other", other);
-        return Global.format(template.render(model), self, other);
+        return template.render(model);
     }
     
     public String getRawLine() {
