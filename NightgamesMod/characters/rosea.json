@@ -209,11 +209,11 @@
 			}
 		],
 		"naked" : [{
-				"text" : "{self:subject} seems unperturbed. While making no effort to cover herself, she beckons to you, <b>\"Like what you see? Step a little closer and I'll show you a whole new world.\"</b>"
+				"text" : "{{ self.subject() }} seems unperturbed. While making no effort to cover herself, she beckons to you, <b>\"Like what you see? Step a little closer and I'll show you a whole new world.\"</b>"
 			}
 		],
 		"stunned" : [{
-				"text" : "<b>{self:subject} crumples onto the ground, \"You will pay for this...\"</b>"
+				"text" : "<b>{{ self.subject() }} crumples onto the ground, \"You will pay for this...\"</b>"
 			}
 		],
 		"taunt" : [{
@@ -257,7 +257,7 @@
 			}
 		],
 		"describe" : [{
-				"text" : "{self:name} can only be described as an green amazoness sprouting from a tree.<br/>While her body beneath her thighs are invisible to you, her voluptuous upper body extends out from a giant flower blooming on the side of the large tree in the courtyard. Her long hair is a deeper shade of green and extends down to the small of her back. Numerous fleshy red flowers adorn her body, each one lewdly slightly opening and closing as if breathing. <br/>She looks at you with a hungry look in her eyes."
+				"text" : "{{ self.getName() }} can only be described as an green amazoness sprouting from a tree.<br/>While her body beneath her thighs are invisible to you, her voluptuous upper body extends out from a giant flower blooming on the side of the large tree in the courtyard. Her long hair is a deeper shade of green and extends down to the small of her back. Numerous fleshy red flowers adorn her body, each one lewdly slightly opening and closing as if breathing. <br/>She looks at you with a hungry look in her eyes."
 			}
 		],
 		"startBattle" : [{
@@ -265,7 +265,7 @@
 			}
 		],
 		"night" : [{
-				"text" : "Tired after the night's games, you start trudging back to your place. As you're about to leave the grounds however, you smell a sweet scent in the air. The aroma seems to arouse you, but at the same time making your accumulated fatigue disappear like magic. You grin and thank {self:name-do} in your mind."
+				"text" : "Tired after the night's games, you start trudging back to your place. As you're about to leave the grounds however, you smell a sweet scent in the air. The aroma seems to arouse you, but at the same time making your accumulated fatigue disappear like magic. You grin and thank {{ self.nameDirectObject() }} in your mind."
 			}
 		],
 		"victory" : [{
@@ -302,18 +302,18 @@
 			}
 		],
 		"victory3p" : [{
-				"text" : "{self:name} brings you to an orgasm while {other:subject} holds you down."
+				"text" : "{{ self.getName() }} brings you to an orgasm while {{ other.subject() }} holds you down."
 			}],
 		"victory3pAssist" :[{
-				"text" : "{self:name} brings {other:name-do} to an orgasm while you hold {other:direct-object} down."
+				"text" : "{{ self.getName() }} brings {{ other.nameDirectObject() }} to an orgasm while you hold {{ other.directObject() }} down."
 			}
 		],
 		"intervene3p" : [{
-				"text" : "While the fight is happening between you and {other:subject}, {self:name} sneaks up behind you and holds you down."
+				"text" : "While the fight is happening between you and {{ other.subject() }}, {{ self.getName() }} sneaks up behind you and holds you down."
 			}
 		],
 		"intervene3pAssist": [{
-				"text" : "While the fight is happening, {self:name} sneaks behind {other:name-do} and holds {other:direct-object} down."
+				"text" : "While the fight is happening, {{ self.getName() }} sneaks behind {{ other.nameDirectObject() }} and holds {{ other.directObject() }} down."
 			}
 		]
 	},

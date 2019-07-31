@@ -7,6 +7,8 @@ import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.requirements.Requirement;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class CustomStringEntry {
     /**
@@ -31,7 +33,11 @@ public class CustomStringEntry {
     }
 
     public String getLine(Combat c, Character self, Character other) {
-        return Global.format(line, self, other);
+        JtwigTemplate template = JtwigTemplate.inlineTemplate(line);
+        JtwigModel model = JtwigModel.newModel()
+            .with("self", self)
+            .with("other", other);
+        return Global.format(template.render(model), self, other);
     }
     
     public String getRawLine() {
