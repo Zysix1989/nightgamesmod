@@ -1,14 +1,14 @@
 package nightgames.characters.body.mods;
 
 import java.util.Optional;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.combat.Combat;
-import nightgames.global.Global;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class FieryMod extends PartMod {
     public static final FieryMod INSTANCE = new FieryMod();
@@ -27,61 +27,72 @@ public class FieryMod extends PartMod {
         return "red-hot";
     }
 
+    private JtwigTemplate tickDamage(Combat c, Character self, Character opponent, BodyPart target) {
+
+        JtwigTemplate template;
+        if (target.moddedPartCountsAs(opponent, CockMod.primal)) {
+            template = JtwigTemplate.inlineTemplate(
+                "The intense heat emanating from {{ self.nameOrPossessivePronoun() }} "
+                    + "{{ part.describe(self) }} only serves to enflame "
+                    + "{{ opponent.nameOrPossessivePronoun() }} primal passion.");
+            opponent.buildMojo(c, 7);
+        } else if (target.moddedPartCountsAs(opponent, CockMod.bionic)) {
+            template = JtwigTemplate.inlineTemplate(
+                "The heat emanating from {{ self.nameOrPossessivePronoun() }} "
+                    + "{{ part.describe(self) }} is extremely hazardous for "
+                    + "{{ opponent.nameOrPossessivePronoun() }} {{ target.describe(opponent) }}, "
+                    + "nearly burning through its circuitry and definitely causing intense pain.");
+            opponent.pain(c, self, Math.max(30, 20 + self.get(Attribute.Ki)));
+        } else {
+            template = JtwigTemplate.inlineTemplate(
+                "Plunging {{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }} "
+                    + "into {{ self.possessiveAdjective() }} {{ part.describe(self) }} leaves "
+                    + "{{ opponent.directObject() }} gasping from the heat.");
+            opponent.pain(c, self, 20 + self.get(Attribute.Ki) / 2);
+        }
+        return template;
+    }
+
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) { 
         if (target.isType("strapon")) {
             return 0;
         }
-        if (!opponent.stunned()) {
-            if (target.moddedPartCountsAs(opponent, CockMod.primal)) {
-                c.write(self, String.format(
-                                "The intense heat emanating from %s %s only serves to enflame %s primal passion.",
-                                self.nameOrPossessivePronoun(), part.describe(self), opponent.nameOrPossessivePronoun()));
-                opponent.buildMojo(c, 7);
-            } else if (target.moddedPartCountsAs(opponent, CockMod.bionic)) {
-                c.write(self, String.format(
-                                "The heat emanating from %s %s is extremely hazardous for %s %s, nearly burning through its circuitry and definitely causing intense pain.",
-                                self.nameOrPossessivePronoun(), part.describe(self), opponent.nameOrPossessivePronoun(),
-                                target.describe(opponent)));
-                opponent.pain(c, self, Math.max(30, 20 + self.get(Attribute.Ki)));
-            } else {
-                c.write(self, String.format("Plunging %s %s into %s %s leaves %s gasping from the heat.",
-                                opponent.possessiveAdjective(), target.describe(opponent), self.possessiveAdjective(),
-                                part.describe(self), opponent.directObject()));
-                opponent.pain(c, self, 20 + self.get(Attribute.Ki) / 2);
-            }
+        double strength = 0;
+        JtwigModel model = JtwigModel.newModel()
+            .with("self", self)
+            .with("opponent", opponent)
+            .with("part", part)
+            .with("target", target);
+        JtwigTemplate template;
+        if (opponent.stunned()) {
+            template = JtwigTemplate.inlineTemplate(
+                "The intense heat emanating from {{ self.possessiveAdjective() }} " 
+                    + "{{ part.getType() }} overpowers {{ opponent.possessiveAdjective() }} senses " 
+                    + "now and {{ opponent.pronoun() }} cannot respond.");
+            strength = 20;
         } else {
-            c.write(self, Global.format(
-                            "The intense heat emanating from {self:possessive} %s overpowers {other:possessive} senses now that {other:pronoun} cannot respond.", self, opponent, part.getType()));
-            return 20;
+            template = tickDamage(c, self, opponent, target);
         }
-        return 0;
+        c.write(self, template.render(model));
+        return strength;
     }
 
-    public void tickHolding(Combat c, Character self, Character opponent, BodyPart part, BodyPart otherOrgan) {
+    public void tickHolding(Combat c, Character self, Character opponent, BodyPart part, BodyPart opponentOrgan) {
         Optional<BodyPart> targetPart = c.getStance().getPartsFor(c, opponent, self).stream().findAny();
         if (targetPart.isPresent()) {
             BodyPart target = targetPart.get();
-            if (target.moddedPartCountsAs(opponent, CockMod.primal)) {
-                c.write(self, String.format(
-                                "The intense heat emanating from %s %s only serves to enflame %s primal passion.",
-                                self.nameOrPossessivePronoun(), part.describe(self), opponent.nameOrPossessivePronoun()));
-                opponent.buildMojo(c, 7);
-            } else if (target.moddedPartCountsAs(opponent, CockMod.bionic)) {
-                c.write(self, String.format(
-                                "The heat emanating from %s %s is extremely hazardous for %s %s, nearly burning through its circuitry and definitely causing intense pain.",
-                                self.nameOrPossessivePronoun(), part.describe(self), opponent.nameOrPossessivePronoun(),
-                                target.describe(opponent)));
-                opponent.pain(c, self, Math.max(30, 20 + self.get(Attribute.Ki)));
-            } else {
-                c.write(self, String.format("The heat from %s %s leaves %s gasping.",
-                                self.possessiveAdjective(), part.describe(self), opponent.directObject()));
-                opponent.pain(c, self, 20 + self.get(Attribute.Ki) / 2);
-            }
+            JtwigModel model = JtwigModel.newModel()
+                .with("self", self)
+                .with("opponent", opponent)
+                .with("part", part)
+                .with("target", target);
+            JtwigTemplate template = tickDamage(c, self, opponent, target);
+            c.write(self, template.render(model));
         }
     }
 
-    public int counterValue(BodyPart part, BodyPart otherPart, Character self, Character other) { 
-        return otherPart.moddedPartCountsAs(other, CockMod.bionic) ? 1 : otherPart.moddedPartCountsAs(other, CockMod.primal) ? -1 : 0;
+    public int counterValue(BodyPart part, BodyPart opponentPart, Character self, Character opponent) { 
+        return opponentPart.moddedPartCountsAs(opponent, CockMod.bionic) ? 1 : opponentPart.moddedPartCountsAs(opponent, CockMod.primal) ? -1 : 0;
     }
 
     @Override
