@@ -1,5 +1,6 @@
 package nightgames.characters.body.mods;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 
 import nightgames.characters.Attribute;
@@ -13,6 +14,8 @@ import nightgames.global.Global;
 import nightgames.pet.PetCharacter;
 import nightgames.skills.damage.DamageType;
 import nightgames.status.Drained;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class DemonicMod extends PartMod {
     public static final DemonicMod INSTANCE = new DemonicMod();
@@ -34,35 +37,65 @@ public class DemonicMod extends PartMod {
     }
 
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
+        JtwigModel model = JtwigModel.newModel()
+            .with("self", self)
+            .with("opponent", opponent)
+            .with("part", part)
+            .with("target", target);
+        ArrayList<JtwigTemplate> templates = new ArrayList<>();
         if (opponent.has(Trait.succubus)) {
-            c.write(self, Global.format(
-                            "{self:NAME-POSSESSIVE} %s does nothing special against one of {self:possessive} own kind.", self, opponent, part.describe(self)));
+            JtwigTemplate template = JtwigTemplate.inlineTemplate(
+                "{{ self.nameOrPossessivePronoun() }} {{ part.describe(self) }} does " 
+                    + "nothing special against one of {{ self.possessiveAdjective() }} own kind."
+            );
+            c.write(template.render(model));
             return 0;
         }
-        boolean fucking = c.getStance().isPartFuckingPartInserted(c, opponent, target, self, part);
         if (target.moddedPartCountsAs(opponent, CockMod.runic)) {
-            c.write(self, String.format(
-                            "Putting in great effort, %s %s to draw upon %s power, but the fae enchantments in %s %s keep it locked away.",
-                            self.nameOrPossessivePronoun(), self.human() ? "try" : " tries",
-                            opponent.nameOrPossessivePronoun(), opponent.possessiveAdjective(),
-                            target.describe(opponent)));
+            templates.add(JtwigTemplate.inlineTemplate(
+                "Putting in great effort, {{ self.nameOrPossessivePronoun() }} "
+                    + "{{ self.action('try', 'tries') }} to draw upon "
+                    + "{{ opponent.nameOrPossessivePronoun() }} power, but the fae enchantments "
+                    + "in {{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }} "
+                    + "keep it locked away."));
         } else {
             boolean bottomless = self.has(Trait.BottomlessPit);
-            String domSubText = c.getStance().dom(self) ? ("{self:pronoun-action:" + (part.isType("mouth") ? "suck" : "ride") + "} {other:direct-object}") : "{other:pronoun-action:fuck} {self:direct-object}";
-            String fuckingText = Global.format("{self:POSSESSIVE} hot flesh kneads {other:possessive} %s as " + domSubText + ", drawing ", self, opponent, target.describe(opponent));
-            String normalText = Global.format("As {self:possessive} %s touches {other:poss-pronoun}, {self:pronoun-action:draw} large ", self, opponent, part.getType(), target.describe(opponent));
-            c.write(self, (fucking ? fuckingText : normalText) + String.format("gouts of life energy out of %s %s which is %sabsorbed by %s %s%s.",
-                            opponent.possessiveAdjective(), target.describe(opponent),
-                            bottomless ? "greedily " : "",
-                            self.possessiveAdjective(),
-                            bottomless ? "seemingly bottomless " : "",
-                            part.describe(self)));
+            model.with("fucking", c.getStance()
+                .isPartFuckingPartInserted(c, opponent, target, self, part));
+            model.with("dom", c.getStance().dom(self));
+            templates.add(JtwigTemplate.inlineTemplate(
+                "{% if (fucking) %}"
+                    + "{{ self.possessiveAdjective() }} hot flesh kneads "
+                    + "{{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }} as "
+                    + "{% if part.isType('mouth') %}"
+                    + "{{ ((dom) ? self : opponent).pronoun() }} "
+                    + "{{ ((dom) ? self : opponent).action('suck') }} "
+                    + "{{ ((dom) ? opponent : self).pronoun() }} "
+                    + "{% else %}"
+                    + "{{ self.pronoun() }} "
+                    + "{{ self.action((dom) ? 'fuck' : 'ride') }} "
+                    + "{{ opponent.possessivePronoun() }} "
+                    + "{% endif %}"
+                    + ", drawing "
+                    + "{% else %}"
+                    + "As {{ self.possessiveAdjective() }} "
+                    + "touches {{ opponent.possessivePronoun() }} {{ target.describe(opponent) }} "
+                    + ", {{ self.pronoun() }} {{ self.action('draw') }} large "
+                    + "{% endif %}"
+                    + "gouts of life energy out of "
+                    + "{{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }}, "
+                    + "which is {{ (bottomless) ? 'greedily ' : '' -}} absorbed by "
+                    + "{{ self.possessiveAdjective() }} "
+                    + "{{ bottomless ? 'seemingly bottomless ' : ''\"\"'' }}"
+                    + "{{ part.describe(self) }}."));
             int strength;
             if (target.moddedPartCountsAs(opponent, CockMod.enlightened)) {
-                c.write(self, String.format(
-                                "Since %s had focused so much of %s in %s %s, there is much more for %s to take.",
-                                opponent.subject(), opponent.reflectivePronoun(), opponent.possessiveAdjective(),
-                                target.describe(opponent), self.subject()));
+                templates.add(JtwigTemplate.inlineTemplate(
+                    "Since {{ opponent.subject() }} had focused so much of "
+                        + "{{ opponent.reflectivePronoun() }} in "
+                        + "{{ opponent.possessiveAdjective() }} "
+                        + "{{ target.describe(opponent) }}, there is much more for "
+                        + "{{ self.subject() }} to take."));
                 strength = Global.random(20, 31);
             } else {
                 strength = Global.random(10, 21);
@@ -74,11 +107,18 @@ public class DemonicMod extends PartMod {
             opponent.drain(c, self, strength);
             if (self.isPet()) {
                 Character master = ((PetCharacter) self).getSelf().owner();
-                c.write(self, Global.format("The stolen strength seems to be shared with {self:possessive} {other:master} through {self:possessive} infernal connection.", self, master));
+                model.with("master", master);
+                templates.add(JtwigTemplate.inlineTemplate(
+                    "The stolen strength seems to be shared with "
+                        + "{{ self.possessiveAdjective() }} "
+                        + "{{ (master.useFemalePronouns()) ? 'mistress' : 'master' }} through "
+                        + "{{ self.possessiveAdjective() }} infernal connection."));
                 master.heal(c, strength);
             }
             for (int i = 0; i < 10; i++) {
-                Attribute canBeStolen[] = EnumSet.complementOf(EnumSet.of(Attribute.Speed, Attribute.Perception)).stream().filter(a -> opponent.get(a) > 0).toArray(size -> new Attribute[size]);
+                Attribute[] canBeStolen =
+                    EnumSet.complementOf(EnumSet.of(Attribute.Speed, Attribute.Perception))
+                        .stream().filter(a -> opponent.get(a) > 0).toArray(Attribute[]::new);
                 Attribute stolen = Global.pickRandom(canBeStolen).orElse(null);
                 if (stolen != null) {
                     int stolenStrength = Math.min(strength / 10, opponent.get(stolen));
@@ -90,6 +130,9 @@ public class DemonicMod extends PartMod {
                     break;
                 }
             }
+        }
+        for (JtwigTemplate template : templates) {
+            c.write(template.render(model));
         }
         return 0;
     }
