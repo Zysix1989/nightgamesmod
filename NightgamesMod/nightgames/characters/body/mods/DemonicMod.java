@@ -131,7 +131,7 @@ public class DemonicMod extends PartMod {
             }
         }
         for (JtwigTemplate template : templates) {
-            c.write(template.render(model));
+            c.write(self, template.render(model));
         }
         return 0;
     }

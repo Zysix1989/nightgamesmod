@@ -93,7 +93,7 @@ public class ArcaneMod extends PartMod {
                     + "{{ target.describe(opponent) }}"));
         }
         for (JtwigTemplate template : templates) {
-            c.write(template.render(model));
+            c.write(self, template.render(model));
         }
         return 0;
     }
