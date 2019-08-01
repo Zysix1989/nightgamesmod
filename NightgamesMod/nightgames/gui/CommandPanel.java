@@ -16,9 +16,14 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
+import nightgames.characters.Character;
+import nightgames.combat.Combat;
+import nightgames.global.Global;
+import nightgames.skills.Skill;
+import nightgames.skills.TacticGroup;
 
 public class CommandPanel {
-    private static final List<Character> POSSIBLE_HOTKEYS = Arrays.asList(
+    private static final List<java.lang.Character> POSSIBLE_HOTKEYS = Arrays.asList(
                     'q', 'w', 'e', 'r', 't', 'y',
                     'a', 's', 'd', 'f' , 'g', 'h',
                     'z', 'x', 'c', 'v', 'b', 'n'); 
@@ -26,17 +31,25 @@ public class CommandPanel {
     private static final int ROW_LIMIT = 6;
 
     private JPanel panel;
+    private Box groupBox;
+    private TacticGroup currentTactics;
+    private JPanel commandPanel;
     private int index;
     private int page;
-    private Map<Character, KeyableButton> hotkeyMapping;
+    private Map<java.lang.Character, KeyableButton> hotkeyMapping;
     private List<KeyableButton> buttons;
     private JPanel[] rows;
+
+    private Map<TacticGroup, ArrayList<Skill>> skills;
+    private Character target;
+    private Combat combat;
+
     CommandPanel(int width) {
-        panel = new JPanel();
-        panel.setBackground(GUIColors.bgDark);
-        panel.setPreferredSize(new Dimension(width, 160));
-        panel.setMinimumSize(new Dimension(width, 160));
-        panel.setBorder(new CompoundBorder());
+        commandPanel = new JPanel();
+        commandPanel.setBackground(GUIColors.bgDark);
+        commandPanel.setPreferredSize(new Dimension(width, 160));
+        commandPanel.setMinimumSize(new Dimension(width, 160));
+        commandPanel.setBorder(new CompoundBorder());
         hotkeyMapping = new HashMap<>();
         rows = new JPanel[POSSIBLE_HOTKEYS.size() / ROW_LIMIT];
         rows[0] = new JPanel();
@@ -51,14 +64,27 @@ public class CommandPanel {
             row.setOpaque(false);
             row.setBorder(BorderFactory.createEmptyBorder());
             row.setPreferredSize(new Dimension(0, 20));
-            panel.add(row);
+            commandPanel.add(row);
         }
-        BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
-        panel.setLayout(layout);
-        panel.add(Box.createVerticalGlue());
-        panel.add(Box.createVerticalStrut(2));
+        BoxLayout layout = new BoxLayout(commandPanel, BoxLayout.Y_AXIS);
+        commandPanel.setLayout(layout);
+        commandPanel.add(Box.createVerticalGlue());
+        commandPanel.add(Box.createVerticalStrut(2));
         buttons = new ArrayList<>();
         index = 0;
+
+        // commandPanel - visible, contains the player's command buttons
+        groupBox = Box.createHorizontalBox();
+        groupBox.setBackground(GUIColors.bgDark);
+        groupBox.setBorder(new CompoundBorder());
+        panel = new JPanel();
+        panel.add(groupBox);
+        panel.add(commandPanel);
+        panel.setBackground(GUIColors.bgDark);
+        panel.setBorder(new CompoundBorder());
+
+        skills = new HashMap<>();
+        currentTactics = TacticGroup.all;
     }
 
     public JPanel getPanel() {
@@ -66,6 +92,9 @@ public class CommandPanel {
     }
 
     public void reset() {
+        skills.clear();
+        Arrays.stream(TacticGroup.values()).forEach(tactic -> skills.put(tactic, new ArrayList<>()));
+        groupBox.removeAll();
         buttons.clear();
         hotkeyMapping.clear();
         clear();
@@ -81,8 +110,8 @@ public class CommandPanel {
     }
 
     public void refresh() {
-        panel.repaint();
-        panel.revalidate();
+        commandPanel.repaint();
+        commandPanel.revalidate();
     }
 
     public void add(KeyableButton button) {
@@ -98,7 +127,7 @@ public class CommandPanel {
             int rowIndex = Math.min(rows.length - 1, effectiveIndex / ROW_LIMIT);
             JPanel row = rows[rowIndex];
             row.add(button);
-            Character hotkey = POSSIBLE_HOTKEYS.get(effectiveIndex);
+            java.lang.Character hotkey = POSSIBLE_HOTKEYS.get(effectiveIndex);
             register(hotkey, button);
             if (DEFAULT_CHOICES.contains(button.getText()) && !hotkeyMapping.containsKey(' ')) {
                 hotkeyMapping.put(' ', button); 
@@ -126,8 +155,65 @@ public class CommandPanel {
         return Optional.ofNullable(hotkeyMapping.get(keyChar));
     }
 
-    void register(Character hotkey, KeyableButton button) {
+    private void register(java.lang.Character hotkey, KeyableButton button) {
         button.setHotkeyTextTo(hotkey.toString().toUpperCase());
         hotkeyMapping.put(hotkey, button);
+    }
+
+    private void addSkillToGroup(TacticGroup group, Skill skill) {
+        if (!this.skills.containsKey(group)) {
+            this.skills.put(group, new ArrayList<>());
+        }
+        this.skills.get(group).add(skill);
+    }
+
+    void chooseSkills(Combat com, nightgames.characters.Character target, List<Skill> skills) {
+        reset();
+        if (skills.isEmpty()) {
+            throw new IllegalArgumentException("skills cannot be empty");
+        }
+        combat = com;
+        this.target = target;
+        skills.forEach(skill -> addSkillToGroup(skill.type(com).getGroup(), skill));
+
+        // Order matters for TacticGroup.all
+        for (TacticGroup group : TacticGroup.values()) {
+            skills.stream().filter(skill -> skill.type(com).getGroup() == group)
+                .forEach(skill -> addSkillToGroup(TacticGroup.all, skill));
+        }
+
+        int i = 1;
+        for (TacticGroup group : TacticGroup.values()) {
+            SwitchTacticsButton tacticsButton = new SwitchTacticsButton(group);
+            register(java.lang.Character.forDigit(i % 10, 10), tacticsButton);
+            groupBox.add(tacticsButton);
+            groupBox.add(Box.createHorizontalStrut(4));
+            i += 1;
+        }
+
+        switchTactics(TacticGroup.all);
+        Global.getMatch().pause();
+        refresh();
+    }
+
+    int nSkillsForGroup(TacticGroup group) {
+        return skills.get(group).size();
+    }
+
+
+    void switchTactics(TacticGroup group) {
+        if (this.skills.get(group).isEmpty()) {
+            assert group != TacticGroup.all;
+            switchTactics(TacticGroup.all);
+        }
+
+        clear();
+        this.skills.get(group).forEach(skill -> {
+            SkillButton button = new SkillButton(combat, skill, target);
+            add(button);
+        });
+
+        currentTactics = group;
+        refresh();
     }
 }

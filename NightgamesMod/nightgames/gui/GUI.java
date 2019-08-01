@@ -43,8 +43,6 @@ import nightgames.skills.TacticGroup;
 public class GUI extends JFrame implements Observer {
     private static final long serialVersionUID = 451431916952047183L;
     public Combat combat;
-    private Map<TacticGroup, List<SkillButton>> skills;
-    private TacticGroup currentTactics;
     CommandPanel commandPanel;
     private GUIPlayerStatus playerStatus;
     private GUIPlayerBio playerBio;
@@ -67,7 +65,6 @@ public class GUI extends JFrame implements Observer {
     public int fontsize;
     private boolean skippedFeat;
     public NgsChooser saveFileChooser;
-    private Box groupBox;
     private JFrame inventoryFrame;
 
     private static final String USE_MAIN_TEXT_UI = "MAIN_TEXT";
@@ -158,23 +155,10 @@ public class GUI extends JFrame implements Observer {
         JButton debug = new JButton("Debug");
         debug.addActionListener(arg0 -> Global.getMatch().resume());
 
-        // commandPanel - visible, contains the player's command buttons
-        groupBox = Box.createHorizontalBox();
-        groupBox.setBackground(GUIColors.bgDark);
-        groupBox.setBorder(new CompoundBorder());
-        JPanel groupPanel = new JPanel();
-        gamePanel.add(groupPanel);
-
         commandPanel = new CommandPanel(width);
-        groupPanel.add(groupBox);
-        groupPanel.add(commandPanel.getPanel());
-        gamePanel.add(groupPanel);
-        groupPanel.setBackground(GUIColors.bgDark);
-        groupPanel.setBorder(new CompoundBorder());
+        gamePanel.add(commandPanel.getPanel());
 
-        skills = new HashMap<>();
         clearCommand();
-        currentTactics = TacticGroup.all;
         setVisible(true);
         pack();
         JPanel panel = (JPanel) getContentPane();
@@ -332,42 +316,12 @@ public class GUI extends JFrame implements Observer {
     }
 
     public void clearCommand() {
-        skills.clear();
-        Arrays.stream(TacticGroup.values()).forEach(tactic -> skills.put(tactic, new ArrayList<>()));
-        groupBox.removeAll();
         commandPanel.reset();
     }
 
 
     public void chooseSkills(Combat com, Character target, List<Skill> skills) {
-        skills.forEach(skill -> {
-            SkillButton btn = new SkillButton(com, skill, target);
-            this.skills.get(skill.type(com).getGroup()).add(btn);
-        });
-
-        commandPanel.reset();
-        int i = 1;
-        for (TacticGroup group : TacticGroup.values()) {
-            SwitchTacticsButton tacticsButton = new SwitchTacticsButton(group);
-            commandPanel.register(java.lang.Character.forDigit(i % 10, 10), tacticsButton);
-            groupBox.add(tacticsButton);
-            groupBox.add(Box.createHorizontalStrut(4));
-            i += 1;
-        }
-        List<SkillButton> flatList = new ArrayList<>();
-        for (TacticGroup group : TacticGroup.values()) {
-            this.skills.get(group).forEach(flatList::add);
-        }
-        if (currentTactics == TacticGroup.all || flatList.size() <= 6
-            || this.skills.get(currentTactics).size() == 0) {
-            flatList.forEach(this::addToCommandPanel);
-        } else {
-            for (SkillButton button : this.skills.get(currentTactics)) {
-                addToCommandPanel(button);
-            }
-        }
-        Global.getMatch().pause();
-        commandPanel.refresh();
+        commandPanel.chooseSkills(com, target, skills);
     }
 
     private void addToCommandPanel(KeyableButton button) {
@@ -478,12 +432,11 @@ public class GUI extends JFrame implements Observer {
     }
 
     public int nSkillsForGroup(TacticGroup group) {
-        return skills.get(group).size();
+        return commandPanel.nSkillsForGroup(group);
     }
 
-    public void switchTactics(TacticGroup group) {
-        groupBox.removeAll();
-        currentTactics = group;
+    void switchTactics(TacticGroup group) {
+        commandPanel.switchTactics(group);
     }
 
     private static KeyableButton saveButton() {
