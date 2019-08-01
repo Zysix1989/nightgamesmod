@@ -1,11 +1,11 @@
 package nightgames.characters.body.mods;
 
 import java.util.Optional;
-
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
-import nightgames.global.Global;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class SecondPussyMod extends PartMod {
     public static final SecondPussyMod INSTANCE = new SecondPussyMod();
@@ -24,12 +24,21 @@ public class SecondPussyMod extends PartMod {
     }
 
     public String getLongDescriptionOverride(Character self, BodyPart part, String previousDescription) {
+        JtwigModel model = JtwigModel.newModel()
+            .with("self", self)
+            .with("part", part);
+        JtwigTemplate template;
         if (part.isType("ass")) {
-            return Global.format("Instead of a normal sphincter, {self:possessive} round butt is crowned by a slobbering second pussy.", self, self);
+            template = JtwigTemplate.inlineTemplate("Instead of a normal sphincter, {{ self.possessiveAdjective() }} round butt "
+                + "is crowned by a slobbering second pussy.");
         } else if (part.isType("mouth")) {
-            return Global.format("When {self:pronoun} opens {self:possessive} mouth, you can see soft pulsating folds lining {self:possessive} inner mouth, tailor made to suck cocks.", self, self);
+            template = JtwigTemplate.inlineTemplate("When {{ self.pronoun() }} opens "
+                + "{{ self.possessiveAdjective() }} mouth, you can see soft pulsating folds "
+                + "lining {{ self.possessiveAdjective() }} inner mouth, tailor made to suck cocks.");
+        } else {
+            template = JtwigTemplate.inlineTemplate(previousDescription);
         }
-        return previousDescription;
+        return template.render(model);
     }
 
     public Optional<String> getDescriptionOverride(Character self, BodyPart part) {
