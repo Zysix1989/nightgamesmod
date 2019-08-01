@@ -3,7 +3,8 @@ package nightgames.characters.body.mods;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
-import nightgames.global.Global;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class TrainedMod extends PartMod {
     public static final TrainedMod INSTANCE = new TrainedMod();
@@ -14,9 +15,15 @@ public class TrainedMod extends PartMod {
 
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) { 
         if (opponent.human()) {
-            c.write(self,
-                        Global.format("{self:POSSESSIVE} trained %s feels positively exquisite. It's taking all your concentration not to instantly shoot your load.",
-                        self, opponent, part.getType()));
+            JtwigModel model = JtwigModel.newModel()
+                .with("self", self)
+                .with("opponent", opponent)
+                .with("part", part)
+                .with("target", target);
+            JtwigTemplate template = JtwigTemplate.inlineTemplate(
+                "{{ self.possessiveAdjective() }} trained {{ part.getType() }} feels positively exquisite. "
+                    + "It's taking all your concentration not to instantly shoot your load.");
+            c.write(self, template.render(model));
         }
         return 0;
     }
