@@ -44,7 +44,6 @@ class GUILeftPanel {
     }
 
     void showPortrait() {
-        System.out.println("Show portrait");
         layout.show(leftPanel, USE_PORTRAIT);
     }
 

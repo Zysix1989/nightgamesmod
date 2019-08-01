@@ -80,7 +80,6 @@ class GUIAppearanceDescriptionPanel extends JPanel {
         text.setPreferredSize(new Dimension(getParent().getWidth(), getParent().getHeight()));
         StringBuilder buf = new StringBuilder();
         character.body.describe(buf, Global.getPlayer(), " ");
-        System.out.println(buf.toString());
         text.setText("<font face='Georgia' color='white' size='4'>" + buf.toString()
             + "</font>");
         System.out.println(document.getLength());
