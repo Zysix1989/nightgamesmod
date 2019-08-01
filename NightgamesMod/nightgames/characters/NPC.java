@@ -320,7 +320,7 @@ public class NPC extends Character {
         if (available.size() == 0) {
             available.add(new Nothing(this));
         }
-        c.act(this, ai.act(available, c), "");
+        c.act(this, ai.act(available, c));
         return false;
     }
 

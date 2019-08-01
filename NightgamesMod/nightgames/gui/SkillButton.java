@@ -54,7 +54,7 @@ public class SkillButton extends KeyableButton {
         combat = c;
         getButton().addActionListener(arg0 -> {
             if (action.subChoices(c).size() == 0) {
-                combat.act(SkillButton.this.action.user(), SkillButton.this.action, "");
+                combat.act(SkillButton.this.action.user(), SkillButton.this.action);
                 combat.resume();
             } else {
                 Global.gui().commandPanel.reset();
