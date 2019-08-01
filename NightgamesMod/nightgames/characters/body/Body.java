@@ -824,10 +824,7 @@ public class Body implements Cloneable {
         } else {
             double effectiveSeduction = character.get(Attribute.Seduction);
             if (c.getStance().dom(character) && character.has(Trait.brutesCharisma)) {
-
-
                 effectiveSeduction += (character.get(Attribute.Power) / 5.0 + character.get(Attribute.Ki) / 5.0);
-
             }
 
             if (character.has(Trait.PrimalHeat) && character.is(Stsflag.frenzied)) {
