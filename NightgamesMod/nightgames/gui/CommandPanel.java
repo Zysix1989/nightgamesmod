@@ -30,8 +30,8 @@ public class CommandPanel {
     private int page;
     private Map<Character, KeyableButton> hotkeyMapping;
     private List<KeyableButton> buttons;
-    private JPanel rows[];
-    public CommandPanel(int width) {
+    private JPanel[] rows;
+    CommandPanel(int width) {
         panel = new JPanel();
         panel.setBackground(GUIColors.bgDark);
         panel.setPreferredSize(new Dimension(width, 160));
@@ -115,18 +115,18 @@ public class CommandPanel {
         index += 1;
     }
 
-    public void setPage(int page) {
+    private void setPage(int page) {
         this.page = page;
         clear();
         buttons.forEach(this::use);
         refresh();
     }
 
-    public Optional<KeyableButton> getButtonForHotkey(char keyChar) {
+    Optional<KeyableButton> getButtonForHotkey(char keyChar) {
         return Optional.ofNullable(hotkeyMapping.get(keyChar));
     }
 
-    public void register(Character hotkey, KeyableButton button) {
+    void register(Character hotkey, KeyableButton button) {
         button.setHotkeyTextTo(hotkey.toString().toUpperCase());
         hotkeyMapping.put(hotkey, button);
     }
