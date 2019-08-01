@@ -79,7 +79,7 @@ public class UseDraft extends Skill {
         Item used = null;
         if (getSelf().human()) {
             for (Item i : getSelf().getInventory().keySet()) {
-                if (i.getName().equals(choice)) {
+                if (i.getName().equals(getChoice())) {
                     used = i;
                     break;
                 }

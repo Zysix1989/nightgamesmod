@@ -85,7 +85,7 @@ public class StripMinor extends Skill {
         if (getSelf().human()) {
             articleToStrip = target.getOutfit().getEquipped()
                                                    .stream()
-                                                   .filter(article -> article.getName().toLowerCase().equals(choice.toLowerCase()))
+                                                   .filter(article -> article.getName().toLowerCase().equals(getChoice().toLowerCase()))
                                                    .findAny();
         } else {
             articleToStrip = Global.pickRandom(getStrippableArticles(c));

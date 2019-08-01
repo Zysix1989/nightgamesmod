@@ -988,7 +988,7 @@ public class Combat extends Observable implements Cloneable {
         if (c == p2) {
             p2act = action;
         }
-        action.choice = choice;
+        action.setChoice(choice);
     }
 
     private CombatPhase doPetActions() {

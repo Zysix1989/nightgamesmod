@@ -26,7 +26,7 @@ public abstract class Skill {
     private Character self;
     private int cooldown;
     private Set<SkillTag> tags;
-    public String choice;
+    private String choice;
     private Staleness staleness;
 
     public Skill(String name, Character self) {
@@ -43,6 +43,14 @@ public abstract class Skill {
         this.staleness = staleness;
         choice = "";
         tags = new HashSet<>();
+    }
+
+    public String getChoice() {
+        return choice;
+    }
+
+    public void setChoice(String choice) {
+        this.choice = choice;
     }
 
     public final boolean requirements(Combat c, Character target) {
