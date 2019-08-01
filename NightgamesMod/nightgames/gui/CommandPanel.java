@@ -32,7 +32,6 @@ public class CommandPanel {
 
     private JPanel panel;
     private Box groupBox;
-    private TacticGroup currentTactics;
     private JPanel commandPanel;
     private int index;
     private int page;
@@ -84,7 +83,6 @@ public class CommandPanel {
         panel.setBorder(new CompoundBorder());
 
         skills = new HashMap<>();
-        currentTactics = TacticGroup.all;
     }
 
     public JPanel getPanel() {
@@ -204,8 +202,6 @@ public class CommandPanel {
             SkillButton button = new SkillButton(combat, skill, target);
             add(button);
         });
-
-        currentTactics = group;
         refresh();
     }
 }
