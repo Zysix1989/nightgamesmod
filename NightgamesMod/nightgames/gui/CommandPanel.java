@@ -184,7 +184,9 @@ public class CommandPanel {
 
         int i = 1;
         for (TacticGroup group : TacticGroup.values()) {
-            SwitchTacticsButton tacticsButton = new SwitchTacticsButton(group);
+            SwitchTacticsButton tacticsButton = new SwitchTacticsButton(group,
+                event -> switchTactics(group),
+                this.skills.get(group).isEmpty());
             register(java.lang.Character.forDigit(i % 10, 10), tacticsButton);
             groupBox.add(tacticsButton);
             groupBox.add(Box.createHorizontalStrut(4));
@@ -196,17 +198,7 @@ public class CommandPanel {
         refresh();
     }
 
-    int nSkillsForGroup(TacticGroup group) {
-        return skills.get(group).size();
-    }
-
-
-    void switchTactics(TacticGroup group) {
-        if (this.skills.get(group).isEmpty()) {
-            assert group != TacticGroup.all;
-            switchTactics(TacticGroup.all);
-        }
-
+    private void switchTactics(TacticGroup group) {
         clear();
         this.skills.get(group).forEach(skill -> {
             SkillButton button = new SkillButton(combat, skill, target);

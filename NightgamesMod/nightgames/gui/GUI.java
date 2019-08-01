@@ -431,14 +431,6 @@ public class GUI extends JFrame implements Observer {
         }
     }
 
-    public int nSkillsForGroup(TacticGroup group) {
-        return commandPanel.nSkillsForGroup(group);
-    }
-
-    void switchTactics(TacticGroup group) {
-        commandPanel.switchTactics(group);
-    }
-
     private static KeyableButton saveButton() {
         CommandPanelOption option = saveOption();
         return option.toButton();

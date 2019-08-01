@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import java.awt.event.ActionListener;
 import javax.swing.border.LineBorder;
 
 import nightgames.global.Global;
@@ -14,7 +15,7 @@ import nightgames.skills.Tactics;
 public class SwitchTacticsButton extends KeyableButton {
     private static final long serialVersionUID = -3949203523669294068L;
     private String label;
-    public SwitchTacticsButton(TacticGroup group) {
+    SwitchTacticsButton(TacticGroup group, ActionListener response, boolean disabled) {
         super(Global.capitalizeFirstLetter(group.name()));
         label = Global.capitalizeFirstLetter(group.name());
         getButton().setBorderPainted(false);
@@ -32,17 +33,13 @@ public class SwitchTacticsButton extends KeyableButton {
         getButton().setMinimumSize(new Dimension(0, 20));
         getButton().setForeground(foregroundColor(bgColor));
         setBorder(new LineBorder(getButton().getBackground(), 3));
-        int nSkills = Global.gui().nSkillsForGroup(group);
-        getButton().setText(Global.capitalizeFirstLetter(group.name()) + " [" + nSkills + "]");
-        if (nSkills == 0 && group != TacticGroup.all) {
+        if (disabled) {
             getButton().setEnabled(false);
             getButton().setForeground(Color.WHITE);
             getButton().setBackground(getButton().getBackground().darker());
         }
 
-        getButton().addActionListener(arg0 -> {
-            Global.gui().switchTactics(group);
-        });
+        getButton().addActionListener(response);
         setLayout(new BorderLayout());
         add(getButton());
     }
