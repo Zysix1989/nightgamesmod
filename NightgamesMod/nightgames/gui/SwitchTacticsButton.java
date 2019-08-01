@@ -45,7 +45,7 @@ public class SwitchTacticsButton extends KeyableButton {
     }
 
     private static Color foregroundColor(Color bgColor) {
-        float hsb[] = new float[3];
+        float[] hsb = new float[3];
         Color.RGBtoHSB(bgColor.getRed(), bgColor.getGreen(), bgColor.getRed(), hsb);
         if (hsb[2] < .6) {
             return Color.WHITE;

@@ -28,10 +28,6 @@ public abstract class KeyableButton extends JPanel {
         button.setText(String.format("%s [%s]", getText(), string));
     }
 
-    public void clearHotkeyText() {
-        button.setText(getText());
-    }
-
     public JButton getButton() {
         return button;
     }
