@@ -71,14 +71,6 @@ public abstract class PartMod implements BodyPartMod, Comparable<PartMod> {
         return getBaseSensitivity();
     }
 
-    protected String lowerOrRear(BodyPart part) {
-        if (part.isType("ass")) {
-            return "rear";
-        } else {
-            return "lower";
-        }
-    }
-
     public Optional<String> getFluids() {
         return Optional.empty();
     }

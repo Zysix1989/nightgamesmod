@@ -6,6 +6,8 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.CockBound;
 import nightgames.status.Stsflag;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class TentacledMod extends PartMod {
     public static final TentacledMod INSTANCE = new TentacledMod();
@@ -14,40 +16,52 @@ public class TentacledMod extends PartMod {
         super("tentacled", 0, 1, .2, 4);
     }
 
-    public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) { 
+    public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
+        double strength = 0;
         if (c.getStance().isPartFuckingPartInserted(c, opponent, target, self, part)) {
-            String partType = part.getType();
+            JtwigModel model = JtwigModel.newModel()
+                .with("self", self)
+                .with("opponent", opponent)
+                .with("part", part)
+                .with("target", target);
+            JtwigTemplate template;
             if (!opponent.is(Stsflag.cockbound)) {
                 if (!self.human()) {
-                    c.write(self, Global.format(
-                                    "Deep inside {self:name-possessive} %s, soft walls pulse and strain against your cock. "
-                                                    + "You suddenly feel hundreds of thin tentacles, probing like fingers, dancing over every inch of your pole. "
-                                                    + "A thicker tentacle wraps around your cock, preventing any escape",
-                                    self, opponent, partType));
+                    template = JtwigTemplate.inlineTemplate(
+                        "Deep inside {{ self.nameOrPossessivePronoun() }} {{ part.getType() }}, "
+                            + "soft walls pulse and strain against your cock. You suddenly feel "
+                            + "hundreds of thin tentacles, probing like fingers, dancing over "
+                            + "every inch of your pole. A thicker tentacle wraps around "
+                            + "your cock, preventing any escape");
                 } else {
-                    c.write(self, Global.format(
-                                    "As {other:name-possessive} cock pumps into you, you focus your mind on your %s entrance. "
-                                                    + "You mentally command the tentacles inside your tunnel to constrict and massage {other:possessive} cock. "
-                                                    + "{other:name} almost starts hyperventilating from the sensations.",
-                                    self, opponent, lowerOrRear(part)));
+                    template = JtwigTemplate.inlineTemplate(
+                        "As {{ other.nameOrPossessivePronoun() }} cock pumps into you, "
+                            + "you focus your mind on your "
+                            + "{{ part.isType('ass') ? 'lower' : 'rear' }} entrance. You mentally "
+                            + "command the tentacles inside your tunnel to constrict and massage "
+                            + "{{ other.possessiveAdjective() }} cock. {{ opponent.getName() }} "
+                            + "almost starts hyperventilating from the sensations.");
                 }
                 opponent.add(c, new CockBound(opponent, 10, self.nameOrPossessivePronoun() + " " + part.adjective() + " tentacles"));
             } else {
                 if (!self.human()) {
-                    c.write(self, Global.format(
-                                    "As you thrust into {self:name-possessive} %s, hundreds of tentacles squirm against the motions of your cock, "
-                                                    + "making each motion feel like it will push you over the edge.",
-                                    self, opponent, partType));
+                    template = JtwigTemplate.inlineTemplate(
+                        "As you thrust into {{ self.nameOrPossessivePronoun() }} "
+                            + "{{ part.getType() }}, hundreds of tentacles squirm against "
+                            + "the motions of your cock, making each motion feel like it will "
+                            + "push you over the edge.");
                 } else {
-                    c.write(self, Global.format(
-                                    "As {other:name-possessive} cock pumps into you, your %s tentacles reflexively curl around the intruding object, rhythmically"
-                                                    + "squeezing and milking it constantly.",
-                                    self, opponent, part.adjective()));
+                    template = JtwigTemplate.inlineTemplate(
+                        "As {{ other.nameOrPossessivePronoun() }} cock pumps into you, your "
+                            + "{{ part.adjective() }} tentacles reflexively curl around "
+                            + "the intruding object, rhythmically squeezing to milk the hot cum "
+                            + "out of it.");
                 }
-                return 5 + Global.random(4);
+                strength = 5 + Global.random(4);
             }
+            c.write(self, template.render(model));
         }
-        return 0;
+        return strength;
     }
 
     @Override
