@@ -262,7 +262,7 @@ public class Body implements Cloneable {
     }
     private static final BodyPartSorter SORTER = new BodyPartSorter();
     public void describeBodyText(StringBuilder b, Character other, boolean notableOnly) {
-        b.append(Global.format("{self:POSSESSIVE} body has ", character, null));
+        b.append(character.possessiveAdjective() + " body has ");
         BodyPart previous = null;
         List<BodyPart> sortedParts = new ArrayList<>(getCurrentParts());
         sortedParts.sort(SORTER);
@@ -1185,7 +1185,7 @@ public class Body implements Cloneable {
             LinkedList<BodyPart> added = new LinkedList<>(r.added);
             LinkedList<BodyPart> removed = new LinkedList<>(r.removed);
             if (added.size() > 0 && removed.size() == 0) {
-                sb.append(Global.format("{self:NAME-POSSESSIVE} ", character, character));
+                sb.append(character.nameOrPossessivePronoun() + " ");
                 for (BodyPart p : added.subList(0, added.size() - 1)) {
                     sb.append(p.fullDescribe(character))
                       .append(", ");
@@ -1197,7 +1197,7 @@ public class Body implements Cloneable {
                                .fullDescribe(character));
                 sb.append(" disappeared.");
             } else if (removed.size() > 0 && added.size() == 0) {
-                sb.append(Global.format("{self:NAME-POSSESSIVE} ", character, character));
+                sb.append(character.nameOrPossessivePronoun() + " ");
                 for (BodyPart p : removed.subList(0, removed.size() - 1)) {
                     sb.append(p.fullDescribe(character))
                       .append(", ");
@@ -1209,7 +1209,7 @@ public class Body implements Cloneable {
                                  .fullDescribe(character));
                 sb.append(" reappeared.");
             } else if (removed.size() > 0 && added.size() > 0) {
-                sb.append(Global.format("{self:NAME-POSSESSIVE} ", character, character));
+                sb.append(character.nameOrPossessivePronoun());
                 for (BodyPart p : added.subList(0, added.size() - 1)) {
                     sb.append(p.fullDescribe(character))
                       .append(", ");
