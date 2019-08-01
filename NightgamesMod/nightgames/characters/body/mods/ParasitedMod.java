@@ -10,7 +10,7 @@ import org.jtwig.JtwigTemplate;
 public class ParasitedMod extends PartMod {
     public static final ParasitedMod INSTANCE = new ParasitedMod();
 
-    public ParasitedMod() {
+    private ParasitedMod() {
         super("parasited", 0, 0, 0, -1000);
     }
 
