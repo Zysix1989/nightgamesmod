@@ -20,7 +20,8 @@ public class SubSkillButton extends KeyableButton {
         this.action = action;
         getButton().setBackground(new Color(200, 200, 200));
         getButton().addActionListener(arg0 -> {
-            c.act(action.user(), action, choice);
+            action.setChoice(choice);
+            c.act(action.user(), action);
             c.resume();
         });
     }

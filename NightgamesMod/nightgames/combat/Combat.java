@@ -981,14 +981,13 @@ public class Combat extends Observable implements Cloneable {
         return results;
     }
 
-    public void act(Character c, Skill action, String choice) {
+    public void act(Character c, Skill action) {
         if (c == p1) {
             p1act = action;
         }
         if (c == p2) {
             p2act = action;
         }
-        action.setChoice(choice);
     }
 
     private CombatPhase doPetActions() {
