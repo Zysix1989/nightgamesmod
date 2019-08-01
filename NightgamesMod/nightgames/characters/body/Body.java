@@ -1317,7 +1317,7 @@ public class Body implements Cloneable {
                 c.write(opponent, Global.format("After {other:name-possessive} gooey cum fills {self:name-possessive} %s, "
                                 + "{self:pronoun-action:feel|feels} {self:possessive} belly suddenly churn and inflate. "
                                 + "The faux-semen seems to be multiplying inside {self:direct-object}! "
-                                + "Without warning, the sticky liquid makes a quick exit out of {self:possessive} orfice "
+                                + "Without warning, the sticky liquid makes a quick exit out of {self:possessive} orifice "
                                 + "and reforms itself into a copy of {other:name-do}!", character, opponent, part.describe(character)));
                 c.addPet(opponent, Divide.makeClone(c, opponent).getSelf());
             }
