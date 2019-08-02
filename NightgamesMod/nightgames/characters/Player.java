@@ -224,6 +224,7 @@ public class Player extends Character {
         HashSet<Skill> position = new HashSet<>();
         HashSet<Skill> debuff = new HashSet<>();
         HashSet<Skill> recovery = new HashSet<>();
+        HashSet<Skill> calming = new HashSet<>();
         HashSet<Skill> summoning = new HashSet<>();
         HashSet<Skill> stripping = new HashSet<>();
         HashSet<Skill> misc = new HashSet<>();
@@ -247,8 +248,10 @@ public class Player extends Character {
                 position.add(a);
             } else if (a.type(c) == Tactics.debuff) {
                 debuff.add(a);
-            } else if (a.type(c) == Tactics.recovery || a.type(c) == Tactics.calming) {
+            } else if (a.type(c) == Tactics.recovery) {
                 recovery.add(a);
+            } else if (a.type(c) == Tactics.calming) {
+                calming.add(a);
             } else if (a.type(c) == Tactics.summoning) {
                 summoning.add(a);
             } else if (a.type(c) == Tactics.stripping) {
@@ -269,6 +272,7 @@ public class Player extends Character {
         orderedSkills.addAll(debuff);
         orderedSkills.addAll(summoning);
         orderedSkills.addAll(recovery);
+        orderedSkills.addAll(calming);
         orderedSkills.addAll(misc);
         gui.chooseSkills(c, target, orderedSkills);
     }
