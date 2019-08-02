@@ -2,8 +2,7 @@ package nightgames.gui;
 
 import java.awt.Color;
 import java.awt.Font;
-
-import nightgames.combat.Combat;
+import java.awt.event.ActionListener;
 import nightgames.skills.Skill;
 
 public class SubSkillButton extends KeyableButton {
@@ -11,19 +10,14 @@ public class SubSkillButton extends KeyableButton {
     protected Skill action;
     private String choice;
 
-    public SubSkillButton(final Skill action, final String choice, Combat c) {
+    public SubSkillButton(final String choice, ActionListener listener) {
         super(choice);
         this.choice = choice;        
         getButton().setOpaque(true);
         getButton().setBorderPainted(false);
         getButton().setFont(new Font("Baskerville Old Face", Font.PLAIN, 18));
-        this.action = action;
         getButton().setBackground(new Color(200, 200, 200));
-        getButton().addActionListener(arg0 -> {
-            action.setChoice(choice);
-            c.act(action.user(), action);
-            c.resume();
-        });
+        getButton().addActionListener(listener);
     }
 
     @Override

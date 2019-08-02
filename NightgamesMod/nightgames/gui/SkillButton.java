@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import java.awt.event.ActionListener;
 import javax.swing.border.LineBorder;
 
 import nightgames.characters.Character;
@@ -59,7 +60,12 @@ public class SkillButton extends KeyableButton {
             } else {
                 Global.gui().commandPanel.reset();
                 for (String choice : action.subChoices(c)) {
-                    Global.gui().commandPanel.add(new SubSkillButton(action, choice, combat));
+                    ActionListener listener = event -> {
+                        action.setChoice(choice);
+                        c.act(action.user(), action);
+                        c.resume();
+                    };
+                    Global.gui().commandPanel.add(new SubSkillButton(choice, listener));
                 }
                 Global.gui().commandPanel.refresh();
             }
