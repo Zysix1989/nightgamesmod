@@ -234,11 +234,8 @@ public class Player extends Character {
         }
         available.addAll(cds);
         gui.clearCommand();
-        Skill lastUsed = null;
         for (Skill a : available) {
-            if (a.getName().equals(c.getCombatantData(this).getLastUsedSkillName())) {
-                lastUsed = a;
-            } else if (a.type(c) == Tactics.damage) {
+            if (a.type(c) == Tactics.damage) {
                 damage.add(a);
             } else if (a.type(c) == Tactics.pleasure) {
                 pleasure.add(a);
@@ -261,9 +258,6 @@ public class Player extends Character {
             }
         }
         ArrayList<Skill> orderedSkills = new ArrayList<>();
-        if (lastUsed != null) {
-            orderedSkills.add(lastUsed);
-        }
         orderedSkills.addAll(stripping);
         orderedSkills.addAll(position);
         orderedSkills.addAll(fucking);
