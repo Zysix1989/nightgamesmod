@@ -161,7 +161,7 @@ public class CommandPanel {
 
         int i = 1;
         for (Tactics tactic : Tactics.values()) {
-            if (this.skills.get(tactic).skills.isEmpty()) continue;
+            if (!this.skills.containsKey(tactic)) continue;
             SwitchTacticsButton tacticsButton = new SwitchTacticsButton(tactic,
                 event -> switchTactics(tactic));
             register(java.lang.Character.forDigit(i % 10, 10), tacticsButton);

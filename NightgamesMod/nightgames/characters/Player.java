@@ -219,56 +219,21 @@ public class Player extends Character {
                 }
             }
         }
-        HashSet<Skill> damage = new HashSet<>();
-        HashSet<Skill> pleasure = new HashSet<>();
-        HashSet<Skill> fucking = new HashSet<>();
-        HashSet<Skill> position = new HashSet<>();
-        HashSet<Skill> debuff = new HashSet<>();
-        HashSet<Skill> recovery = new HashSet<>();
-        HashSet<Skill> calming = new HashSet<>();
-        HashSet<Skill> summoning = new HashSet<>();
-        HashSet<Skill> stripping = new HashSet<>();
-        HashSet<Skill> misc = new HashSet<>();
+        HashMap<Tactics, HashSet<Skill>> skillMap = new HashMap<>();
         Skill.filterAllowedSkills(c, available, this, target);
         if (available.size() == 0) {
             available.add(new Nothing(this));
         }
         available.addAll(cds);
         gui.clearCommand();
-        for (Skill a : available) {
-            if (a.type(c) == Tactics.damage) {
-                damage.add(a);
-            } else if (a.type(c) == Tactics.pleasure) {
-                pleasure.add(a);
-            } else if (a.type(c) == Tactics.fucking) {
-                fucking.add(a);
-            } else if (a.type(c) == Tactics.positioning) {
-                position.add(a);
-            } else if (a.type(c) == Tactics.debuff) {
-                debuff.add(a);
-            } else if (a.type(c) == Tactics.recovery) {
-                recovery.add(a);
-            } else if (a.type(c) == Tactics.calming) {
-                calming.add(a);
-            } else if (a.type(c) == Tactics.summoning) {
-                summoning.add(a);
-            } else if (a.type(c) == Tactics.stripping) {
-                stripping.add(a);
-            } else {
-                misc.add(a);
+        available.forEach(skill -> {
+            if (!skillMap.containsKey(skill.type(c))) {
+                skillMap.put(skill.type(c), new HashSet<>());
             }
-        }
+            skillMap.get(skill.type(c)).add(skill);
+        });
         ArrayList<SkillGroup> skillGroups = new ArrayList<>();
-        skillGroups.add(new SkillGroup(Tactics.damage, damage));
-        skillGroups.add(new SkillGroup(Tactics.positioning, position));
-        skillGroups.add(new SkillGroup(Tactics.fucking, fucking));
-        skillGroups.add(new SkillGroup(Tactics.pleasure, pleasure));
-        skillGroups.add(new SkillGroup(Tactics.stripping, stripping));
-        skillGroups.add(new SkillGroup(Tactics.debuff, debuff));
-        skillGroups.add(new SkillGroup(Tactics.summoning, summoning));
-        skillGroups.add(new SkillGroup(Tactics.recovery, recovery));
-        skillGroups.add(new SkillGroup(Tactics.calming, calming));
-        skillGroups.add(new SkillGroup(Tactics.misc, misc));
+        skillMap.forEach((tactic, skills) -> skillGroups.add(new SkillGroup(tactic, skills)));
 
         gui.chooseSkills(c, target, skillGroups);
     }
