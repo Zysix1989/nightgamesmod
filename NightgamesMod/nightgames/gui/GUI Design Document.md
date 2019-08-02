@@ -275,7 +275,7 @@ find what they're looking for.  It occupies the bottom portion of the screen.
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ```
 1. The selection panel lays out the options in the currently selected category.  These may be things
-that have an effect on the game world itself, or they could be categories.
+that have an effect on the game world themselves, or they could be categories.
 1. The category panel both displays the player's currently engaged category and acts as a "back"
 button to return to the previous selection group.
 
