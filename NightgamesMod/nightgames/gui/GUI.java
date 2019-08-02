@@ -10,16 +10,11 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,7 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
-import javax.swing.border.CompoundBorder;
 import nightgames.characters.Character;
 import nightgames.characters.NPC;
 import nightgames.characters.Player;
@@ -36,8 +30,7 @@ import nightgames.daytime.Activity;
 import nightgames.global.DebugFlags;
 import nightgames.global.Flag;
 import nightgames.global.Global;
-import nightgames.skills.Skill;
-import nightgames.skills.TacticGroup;
+import nightgames.skills.SkillGroup;
 
 @SuppressWarnings("unused")
 public class GUI extends JFrame implements Observer {
@@ -320,7 +313,7 @@ public class GUI extends JFrame implements Observer {
     }
 
 
-    public void chooseSkills(Combat com, Character target, List<Skill> skills) {
+    public void chooseSkills(Combat com, Character target, List<SkillGroup> skills) {
         commandPanel.chooseSkills(com, target, skills);
     }
 

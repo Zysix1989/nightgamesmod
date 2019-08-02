@@ -4,34 +4,24 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-
 import java.awt.event.ActionListener;
 import javax.swing.border.LineBorder;
-
 import nightgames.global.Global;
-import nightgames.skills.TacticGroup;
 import nightgames.skills.Tactics;
 
 public class SwitchTacticsButton extends KeyableButton {
     private static final long serialVersionUID = -3949203523669294068L;
     private String label;
-    SwitchTacticsButton(TacticGroup group, ActionListener response, boolean disabled) {
-        super(Global.capitalizeFirstLetter(group.name()));
-        label = Global.capitalizeFirstLetter(group.name());
+    SwitchTacticsButton(Tactics tactic, ActionListener response, boolean disabled) {
+        super(Global.capitalizeFirstLetter(tactic.name()));
+        label = Global.capitalizeFirstLetter(tactic.name());
         getButton().setBorderPainted(false);
         getButton().setOpaque(true);
         getButton().setFont(new Font("Baskerville Old Face", Font.PLAIN, 14));
-        Color bgColor = new Color(80, 220, 120);
-        for (Tactics tactic : Tactics.values()) {
-            if (tactic.getGroup() == group) {
-                bgColor = tactic.getColor();
-                break;
-            }
-        }
 
-        getButton().setBackground(bgColor);
+        getButton().setBackground(tactic.getColor());
         getButton().setMinimumSize(new Dimension(0, 20));
-        getButton().setForeground(foregroundColor(bgColor));
+        getButton().setForeground(foregroundColor(tactic.getColor()));
         setBorder(new LineBorder(getButton().getBackground(), 3));
         if (disabled) {
             getButton().setEnabled(false);

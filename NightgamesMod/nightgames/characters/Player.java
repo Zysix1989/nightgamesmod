@@ -46,6 +46,7 @@ import nightgames.match.MatchType;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.skills.Nothing;
 import nightgames.skills.Skill;
+import nightgames.skills.SkillGroup;
 import nightgames.skills.Stage;
 import nightgames.skills.Tactics;
 import nightgames.skills.damage.DamageType;
@@ -257,18 +258,19 @@ public class Player extends Character {
                 misc.add(a);
             }
         }
-        ArrayList<Skill> orderedSkills = new ArrayList<>();
-        orderedSkills.addAll(stripping);
-        orderedSkills.addAll(position);
-        orderedSkills.addAll(fucking);
-        orderedSkills.addAll(pleasure);
-        orderedSkills.addAll(damage);
-        orderedSkills.addAll(debuff);
-        orderedSkills.addAll(summoning);
-        orderedSkills.addAll(recovery);
-        orderedSkills.addAll(calming);
-        orderedSkills.addAll(misc);
-        gui.chooseSkills(c, target, orderedSkills);
+        ArrayList<SkillGroup> skillGroups = new ArrayList<>();
+        skillGroups.add(new SkillGroup(Tactics.damage, damage));
+        skillGroups.add(new SkillGroup(Tactics.positioning, position));
+        skillGroups.add(new SkillGroup(Tactics.fucking, fucking));
+        skillGroups.add(new SkillGroup(Tactics.pleasure, pleasure));
+        skillGroups.add(new SkillGroup(Tactics.stripping, stripping));
+        skillGroups.add(new SkillGroup(Tactics.debuff, debuff));
+        skillGroups.add(new SkillGroup(Tactics.summoning, summoning));
+        skillGroups.add(new SkillGroup(Tactics.recovery, recovery));
+        skillGroups.add(new SkillGroup(Tactics.calming, calming));
+        skillGroups.add(new SkillGroup(Tactics.misc, misc));
+
+        gui.chooseSkills(c, target, skillGroups);
     }
 
 

@@ -5,12 +5,9 @@ import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -19,8 +16,8 @@ import javax.swing.border.CompoundBorder;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
-import nightgames.skills.Skill;
-import nightgames.skills.TacticGroup;
+import nightgames.skills.SkillGroup;
+import nightgames.skills.Tactics;
 
 public class CommandPanel {
     private static final List<java.lang.Character> POSSIBLE_HOTKEYS = Arrays.asList(
@@ -38,7 +35,7 @@ public class CommandPanel {
     private List<KeyableButton> buttons;
     private JPanel[] rows;
 
-    private Map<TacticGroup, ArrayList<Skill>> skills;
+    private Map<Tactics, SkillGroup> skills;
     private Character target;
     private Combat combat;
 
@@ -90,7 +87,6 @@ public class CommandPanel {
 
     public void reset() {
         skills.clear();
-        Arrays.stream(TacticGroup.values()).forEach(tactic -> skills.put(tactic, new ArrayList<>()));
         groupBox.removeAll();
         buttons.clear();
         hotkeyMapping.clear();
@@ -154,47 +150,32 @@ public class CommandPanel {
         hotkeyMapping.put(hotkey, button);
     }
 
-    private void addSkillToGroup(TacticGroup group, Skill skill) {
-        if (!this.skills.containsKey(group)) {
-            this.skills.put(group, new ArrayList<>());
-        }
-        this.skills.get(group).add(skill);
-    }
-
-    void chooseSkills(Combat com, nightgames.characters.Character target, List<Skill> skills) {
+    void chooseSkills(Combat com, nightgames.characters.Character target, List<SkillGroup> skills) {
         reset();
         if (skills.isEmpty()) {
             throw new IllegalArgumentException("skills cannot be empty");
         }
         combat = com;
         this.target = target;
-        skills.forEach(skill -> addSkillToGroup(skill.type(com).getGroup(), skill));
-
-        // Order matters for TacticGroup.all
-        for (TacticGroup group : TacticGroup.values()) {
-            skills.stream().filter(skill -> skill.type(com).getGroup() == group)
-                .forEach(skill -> addSkillToGroup(TacticGroup.all, skill));
-        }
+        skills.forEach(group -> this.skills.put(group.tactics, group));
 
         int i = 1;
-        for (TacticGroup group : TacticGroup.values()) {
-            SwitchTacticsButton tacticsButton = new SwitchTacticsButton(group,
-                event -> switchTactics(group),
-                this.skills.get(group).isEmpty());
+        for (Tactics tactic : Tactics.values()) {
+            SwitchTacticsButton tacticsButton = new SwitchTacticsButton(tactic,
+                event -> switchTactics(tactic),
+                this.skills.get(tactic).skills.isEmpty());
             register(java.lang.Character.forDigit(i % 10, 10), tacticsButton);
             groupBox.add(tacticsButton);
             groupBox.add(Box.createHorizontalStrut(4));
             i += 1;
         }
-
-        switchTactics(TacticGroup.all);
         Global.getMatch().pause();
         refresh();
     }
 
-    private void switchTactics(TacticGroup group) {
+    private void switchTactics(Tactics tactics) {
         clear();
-        this.skills.get(group).forEach(skill -> {
+        this.skills.get(tactics).skills.forEach(skill -> {
             SkillButton button = new SkillButton(combat, skill, target);
             add(button);
         });
