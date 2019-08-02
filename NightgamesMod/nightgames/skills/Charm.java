@@ -22,7 +22,7 @@ public class Charm extends Skill {
 
     @Override
     public int getMojoCost(Combat c) {
-        if (isPurr(c)) {
+        if (isPurr()) {
             return 0;
         }
         return 30;
@@ -30,7 +30,7 @@ public class Charm extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        if (isPurr(c)) {
+        if (isPurr()) {
             return resolvePurr(c, target);
         }
         if (target.is(Stsflag.blinded)) {
@@ -76,7 +76,7 @@ public class Charm extends Skill {
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
-        return (user.get(Attribute.Cunning) >= 8 && user.get(Attribute.Seduction) > 16) || isPurr(c);
+        return (user.get(Attribute.Cunning) >= 8 && user.get(Attribute.Seduction) > 16) || isPurr();
     }
 
     @Override
@@ -94,7 +94,7 @@ public class Charm extends Skill {
         return Tactics.debuff;
     }
 
-    private boolean isPurr(Combat c) {
+    private boolean isPurr() {
         return getSelf().get(Attribute.Animism) >= 9 && getSelf().getArousal().percent() >= 20;
     }
 
@@ -164,7 +164,7 @@ public class Charm extends Skill {
 
     @Override
     public String getLabel(Combat c) {
-        if (isPurr(c)) {
+        if (isPurr()) {
             return "Purr";
         }
         return getName(c);
