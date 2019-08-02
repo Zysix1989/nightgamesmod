@@ -4,10 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-
-import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.border.LineBorder;
-
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -58,16 +57,16 @@ public class SkillButton extends KeyableButton {
                 combat.act(SkillButton.this.action.user(), SkillButton.this.action);
                 combat.resume();
             } else {
-                Global.gui().commandPanel.reset();
-                for (String choice : action.subChoices(c)) {
-                    ActionListener listener = event -> {
-                        action.setChoice(choice);
-                        c.act(action.user(), action);
-                        c.resume();
-                    };
-                    Global.gui().commandPanel.add(new SubSkillButton(choice, listener));
-                }
-                Global.gui().commandPanel.refresh();
+                List<CommandPanelOption> options = action.subChoices(c).stream()
+                    .map(choice -> new CommandPanelOption(
+                        choice,
+                        event -> {
+                            action.setChoice(choice);
+                            c.act(action.user(), action);
+                            c.resume();
+                        }
+                    )).collect(Collectors.toList());
+                Global.gui().presentOptions(options);
             }
         });
         setLayout(new BorderLayout());
