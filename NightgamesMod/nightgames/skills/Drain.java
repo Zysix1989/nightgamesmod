@@ -34,10 +34,10 @@ public class Drain extends Skill {
 
     @Override
     public int getMojoCost(Combat c) {
-        return drainsAttributes(c) ? 30 : 0;
+        return drainsAttributes() ? 30 : 0;
     }
 
-    private boolean drainsAttributes(Combat c) {
+    private boolean drainsAttributes() {
         return getSelf().getMojo().get() >= 30;
     }
 
@@ -64,7 +64,7 @@ public class Drain extends Skill {
         int strength = Math.max(10, 1 + getSelf().get(Attribute.Dark) / 4);
         int staminaStrength = 50;
         int type = Math.max(1, Global.centeredrandom(6, getSelf().get(Attribute.Dark) / 3.0, 3));
-        if (!drainsAttributes(c) && type > 2) {
+        if (!drainsAttributes() && type > 2) {
             type = 1;
             staminaStrength /= 2;
         }
