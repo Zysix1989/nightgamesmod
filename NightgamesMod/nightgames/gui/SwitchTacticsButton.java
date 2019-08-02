@@ -12,7 +12,7 @@ import nightgames.skills.Tactics;
 public class SwitchTacticsButton extends KeyableButton {
     private static final long serialVersionUID = -3949203523669294068L;
     private String label;
-    SwitchTacticsButton(Tactics tactic, ActionListener response, boolean disabled) {
+    SwitchTacticsButton(Tactics tactic, ActionListener response) {
         super(Global.capitalizeFirstLetter(tactic.name()));
         label = Global.capitalizeFirstLetter(tactic.name());
         getButton().setBorderPainted(false);
@@ -23,11 +23,6 @@ public class SwitchTacticsButton extends KeyableButton {
         getButton().setMinimumSize(new Dimension(0, 20));
         getButton().setForeground(foregroundColor(tactic.getColor()));
         setBorder(new LineBorder(getButton().getBackground(), 3));
-        if (disabled) {
-            getButton().setEnabled(false);
-            getButton().setForeground(Color.WHITE);
-            getButton().setBackground(getButton().getBackground().darker());
-        }
 
         getButton().addActionListener(response);
         setLayout(new BorderLayout());

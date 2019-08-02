@@ -161,9 +161,9 @@ public class CommandPanel {
 
         int i = 1;
         for (Tactics tactic : Tactics.values()) {
+            if (this.skills.get(tactic).skills.isEmpty()) continue;
             SwitchTacticsButton tacticsButton = new SwitchTacticsButton(tactic,
-                event -> switchTactics(tactic),
-                this.skills.get(tactic).skills.isEmpty());
+                event -> switchTactics(tactic));
             register(java.lang.Character.forDigit(i % 10, 10), tacticsButton);
             groupBox.add(tacticsButton);
             groupBox.add(Box.createHorizontalStrut(4));
