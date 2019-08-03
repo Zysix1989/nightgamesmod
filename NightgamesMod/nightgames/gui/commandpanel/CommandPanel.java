@@ -118,6 +118,15 @@ public class CommandPanel {
         add(option.toButton());
     }
 
+    void addNoReset(List<CommandPanelOption> options) {
+        groupBox.removeAll();
+        buttons.clear();
+        hotkeyMapping.clear();
+        clear();
+        refresh();
+        options.forEach(o -> add(o));
+    }
+
     private void use(KeyableButton button) {
         int effectiveIndex = index - page * POSSIBLE_HOTKEYS.size();
         int currentPage = page;
@@ -181,7 +190,7 @@ public class CommandPanel {
     private void switchTactics(Tactics tactics) {
         clear();
         this.skills.get(tactics).skills.forEach(skill -> {
-            SkillButton button = new SkillButton(combat, skill, target);
+            SkillButton button = new SkillButton(combat, skill, target, this);
             add(button);
         });
         refresh();

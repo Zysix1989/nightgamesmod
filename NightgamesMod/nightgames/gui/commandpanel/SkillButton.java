@@ -17,9 +17,11 @@ public class SkillButton extends KeyableButton {
     private static final long serialVersionUID = -1253735466299929203L;
     protected Skill action;
     protected Combat combat;
+    private CommandPanel commandPanel;
 
-    public SkillButton(Combat c, final Skill action, Character target) {
+    SkillButton(Combat c, final Skill action, Character target, CommandPanel panel) {
         super(action.getLabel(c));
+        this.commandPanel = panel;
         getButton().setBorderPainted(false);
         getButton().setOpaque(true);
         getButton().setFont(fontForStage(action.getStage()));
@@ -66,7 +68,7 @@ public class SkillButton extends KeyableButton {
                             c.resume();
                         }
                     )).collect(Collectors.toList());
-                Global.gui().presentOptions(options);
+                commandPanel.addNoReset(options);
             }
         });
         setLayout(new BorderLayout());
