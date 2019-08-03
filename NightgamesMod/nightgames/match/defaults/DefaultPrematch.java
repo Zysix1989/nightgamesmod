@@ -7,7 +7,7 @@ import java.util.List;
 
 import nightgames.global.Flag;
 import nightgames.global.Global;
-import nightgames.gui.CommandPanelOption;
+import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.gui.GUI;
 import nightgames.match.Prematch;
 import nightgames.match.PrematchEvent;

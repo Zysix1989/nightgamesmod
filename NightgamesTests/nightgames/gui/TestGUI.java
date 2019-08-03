@@ -9,7 +9,7 @@ import nightgames.characters.Character;
 import nightgames.characters.NPC;
 import nightgames.characters.Player;
 import nightgames.combat.Combat;
-import nightgames.match.Encounter;
+import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.skills.Skill;
 
 public class TestGUI extends GUI {

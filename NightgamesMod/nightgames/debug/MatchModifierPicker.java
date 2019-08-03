@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import nightgames.global.Global;
 import nightgames.global.Scene;
-import nightgames.gui.CommandPanelOption;
+import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.MatchType;
 import nightgames.modifier.Modifier;
 

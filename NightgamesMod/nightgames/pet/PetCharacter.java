@@ -19,7 +19,7 @@ import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.DebugFlags;
 import nightgames.global.Global;
-import nightgames.gui.CommandPanelOption;
+import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Encounter;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.skills.Skill;

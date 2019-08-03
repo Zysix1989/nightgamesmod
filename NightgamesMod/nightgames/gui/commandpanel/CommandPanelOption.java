@@ -1,6 +1,9 @@
-package nightgames.gui;
+package nightgames.gui.commandpanel;
 
 import java.awt.event.ActionListener;
+import nightgames.actions.Action;
+import nightgames.gui.commandpanel.KeyableButton;
+import nightgames.gui.commandpanel.RunnableButton;
 
 public class CommandPanelOption {
 
@@ -26,5 +29,16 @@ public class CommandPanelOption {
             button.getButton().setToolTipText(toolTipText);
         }
         return button;
+    }
+
+    public CommandPanelOption wrap(ActionListener before, ActionListener after) {
+        return new CommandPanelOption(
+            displayText,
+            toolTipText,
+            event -> {
+                before.actionPerformed(event);
+                action.actionPerformed(event);
+                after.actionPerformed(event);
+            });
     }
 }

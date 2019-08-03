@@ -30,6 +30,9 @@ import nightgames.daytime.Activity;
 import nightgames.global.DebugFlags;
 import nightgames.global.Flag;
 import nightgames.global.Global;
+import nightgames.gui.commandpanel.CommandPanel;
+import nightgames.gui.commandpanel.CommandPanelOption;
+import nightgames.gui.commandpanel.KeyableButton;
 import nightgames.skills.SkillGroup;
 
 @SuppressWarnings("unused")
@@ -323,14 +326,10 @@ public class GUI extends JFrame implements Observer {
     }
 
     private void addToCommandPanel(final CommandPanelOption option) {
-        CommandPanelOption wrappedOption = new CommandPanelOption(option.displayText,
-            option.toolTipText,
-            event -> {
-                clearText();
-                option.action.actionPerformed(event);
-                refresh();
-            });
-        addToCommandPanel(wrappedOption.toButton());
+        commandPanel.add(option.wrap(
+            event -> clearText(),
+            event -> refresh()));
+        commandPanel.refresh();
     }
 
     // New code should use this one
@@ -377,7 +376,7 @@ public class GUI extends JFrame implements Observer {
             Global.startDay();
         });
         addToCommandPanel(o);
-        commandPanel.add(saveButton());
+        commandPanel.add(saveOption());
         commandPanel.refresh();
     }
 
@@ -422,11 +421,6 @@ public class GUI extends JFrame implements Observer {
         if (Global.checkFlag(Flag.systemMessages)) {
             message(string);
         }
-    }
-
-    private static KeyableButton saveButton() {
-        CommandPanelOption option = saveOption();
-        return option.toButton();
     }
 
     public static CommandPanelOption saveOption() {

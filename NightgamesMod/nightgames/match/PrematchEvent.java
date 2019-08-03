@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import nightgames.global.Global;
-import nightgames.gui.CommandPanelOption;
+import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.gui.GUI;
 import nightgames.modifier.Modifier;
 import nightgames.modifier.standard.NoModifier;

@@ -2,13 +2,12 @@ package nightgames.debug;
 
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import nightgames.global.Global;
 import nightgames.global.Scene;
-import nightgames.gui.CommandPanelOption;
-import nightgames.gui.KeyableButton;
+import nightgames.gui.commandpanel.CommandPanelOption;
+import nightgames.gui.commandpanel.KeyableButton;
 import nightgames.match.MatchType;
 
 public class MatchTypePicker implements Scene {

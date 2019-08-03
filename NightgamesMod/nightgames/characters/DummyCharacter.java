@@ -7,7 +7,7 @@ import java.util.List;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
-import nightgames.gui.CommandPanelOption;
+import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Encounter;
 import nightgames.skills.Tactics;
 import nightgames.trap.Trap;

@@ -1,4 +1,4 @@
-package nightgames.gui;
+package nightgames.gui.commandpanel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import javax.swing.border.LineBorder;
 import nightgames.global.Global;
+import nightgames.gui.commandpanel.KeyableButton;
 import nightgames.skills.Tactics;
 
 public class SwitchTacticsButton extends KeyableButton {

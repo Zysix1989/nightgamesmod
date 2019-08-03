@@ -7,8 +7,7 @@ import java.util.List;
 
 import nightgames.actions.Movement;
 import nightgames.characters.Character;
-import nightgames.gui.CommandPanel;
-import nightgames.gui.CommandPanelOption;
+import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Encounter;
 import nightgames.global.DebugFlags;
 import nightgames.global.Global;

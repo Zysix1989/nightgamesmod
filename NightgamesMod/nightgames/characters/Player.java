@@ -36,7 +36,7 @@ import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.global.Scene;
-import nightgames.gui.CommandPanelOption;
+import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.gui.GUI;
 import nightgames.items.Item;
 import nightgames.items.Loot;

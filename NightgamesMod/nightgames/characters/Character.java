@@ -54,7 +54,7 @@ import nightgames.global.DebugFlags;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.global.Scene;
-import nightgames.gui.CommandPanelOption;
+import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;

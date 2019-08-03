@@ -1,4 +1,4 @@
-package nightgames.gui;
+package nightgames.gui.commandpanel;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -16,6 +16,7 @@ import javax.swing.border.CompoundBorder;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
+import nightgames.gui.GUIColors;
 import nightgames.skills.SkillGroup;
 import nightgames.skills.Tactics;
 
@@ -39,7 +40,7 @@ public class CommandPanel {
     private Character target;
     private Combat combat;
 
-    CommandPanel(int width) {
+    public CommandPanel(int width) {
         commandPanel = new JPanel();
         commandPanel.setBackground(GUIColors.bgDark);
         commandPanel.setPreferredSize(new Dimension(width, 160));
@@ -113,6 +114,10 @@ public class CommandPanel {
         use(button);
     }
 
+    public void add(CommandPanelOption option) {
+        add(option.toButton());
+    }
+
     private void use(KeyableButton button) {
         int effectiveIndex = index - page * POSSIBLE_HOTKEYS.size();
         int currentPage = page;
@@ -141,7 +146,7 @@ public class CommandPanel {
         refresh();
     }
 
-    Optional<KeyableButton> getButtonForHotkey(char keyChar) {
+    public Optional<KeyableButton> getButtonForHotkey(char keyChar) {
         return Optional.ofNullable(hotkeyMapping.get(keyChar));
     }
 
@@ -150,7 +155,7 @@ public class CommandPanel {
         hotkeyMapping.put(hotkey, button);
     }
 
-    void chooseSkills(Combat com, nightgames.characters.Character target, List<SkillGroup> skills) {
+    public void chooseSkills(Combat com, nightgames.characters.Character target, List<SkillGroup> skills) {
         reset();
         if (skills.isEmpty()) {
             throw new IllegalArgumentException("skills cannot be empty");

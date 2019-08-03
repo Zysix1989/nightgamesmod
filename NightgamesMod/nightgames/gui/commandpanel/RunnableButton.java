@@ -1,9 +1,9 @@
-package nightgames.gui;
+package nightgames.gui.commandpanel;
 
 import java.awt.Font;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import nightgames.gui.commandpanel.KeyableButton;
 import org.apache.commons.lang3.text.WordUtils;
 
 class RunnableButton extends KeyableButton {
