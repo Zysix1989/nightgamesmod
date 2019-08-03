@@ -13,7 +13,7 @@ import nightgames.global.Global;
 import nightgames.skills.Skill;
 import nightgames.skills.Stage;
 
-public class SkillButton extends KeyableButton {
+class SkillButton extends KeyableButton {
     private static final long serialVersionUID = -1253735466299929203L;
     protected Skill action;
     protected Combat combat;

@@ -10,7 +10,7 @@ import nightgames.global.Global;
 import nightgames.gui.commandpanel.KeyableButton;
 import nightgames.skills.Tactics;
 
-public class SwitchTacticsButton extends KeyableButton {
+class SwitchTacticsButton extends KeyableButton {
     private static final long serialVersionUID = -3949203523669294068L;
     private String label;
     SwitchTacticsButton(Tactics tactic, ActionListener response) {

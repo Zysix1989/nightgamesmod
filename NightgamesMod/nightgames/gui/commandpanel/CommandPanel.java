@@ -20,7 +20,7 @@ import nightgames.gui.GUIColors;
 import nightgames.skills.SkillGroup;
 import nightgames.skills.Tactics;
 
-public class CommandPanel {
+public class CommandPanel{
     private static final List<java.lang.Character> POSSIBLE_HOTKEYS = Arrays.asList(
                     'q', 'w', 'e', 'r', 't', 'y',
                     'a', 's', 'd', 'f' , 'g', 'h',
