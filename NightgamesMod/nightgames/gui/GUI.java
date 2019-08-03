@@ -320,11 +320,6 @@ public class GUI extends JFrame implements Observer {
         commandPanel.chooseSkills(com, target, skills);
     }
 
-    private void addToCommandPanel(KeyableButton button) {
-        commandPanel.add(button);
-        commandPanel.refresh();
-    }
-
     private void addToCommandPanel(final CommandPanelOption option) {
         commandPanel.add(option.wrap(
             event -> clearText(),
