@@ -124,7 +124,7 @@ public class CommandPanel{
         hotkeyMapping.clear();
         clear();
         refresh();
-        options.forEach(o -> add(o));
+        options.forEach(this::add);
     }
 
     private void use(KeyableButton button) {
