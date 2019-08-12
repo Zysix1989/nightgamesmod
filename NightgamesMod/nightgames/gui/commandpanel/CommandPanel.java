@@ -129,7 +129,6 @@ public class CommandPanel{
 
     private void use(KeyableButton button) {
         int effectiveIndex = index - page * POSSIBLE_HOTKEYS.size();
-        int currentPage = page;
         if (effectiveIndex >= 0 && effectiveIndex < POSSIBLE_HOTKEYS.size()) {
             int rowIndex = Math.min(rows.length - 1, effectiveIndex / ROW_LIMIT);
             JPanel row = rows[rowIndex];
@@ -137,11 +136,11 @@ public class CommandPanel{
             java.lang.Character hotkey = POSSIBLE_HOTKEYS.get(effectiveIndex);
             register(hotkey, button);
         } else if (effectiveIndex == -1) {
-            KeyableButton leftPage = new RunnableButton("<<<", () -> setPage(currentPage - 1));
+            KeyableButton leftPage = new RunnableButton("<<<", () -> setPage(page - 1));
             rows[0].add(leftPage, 0);
             register('~', leftPage);
         } else if (effectiveIndex == POSSIBLE_HOTKEYS.size()){
-            KeyableButton rightPage = new RunnableButton(">>>", () -> setPage(currentPage + 1));
+            KeyableButton rightPage = new RunnableButton(">>>", () -> setPage(page + 1));
             rows[0].add(rightPage);
             register('`', rightPage);
         }
