@@ -44,7 +44,6 @@ public class BlackMarket extends Store {
             trained = false;
         }
         Global.gui().clearText();
-        Global.gui().clearCommand();
         if (choice.equals("Leave")) {
             done(acted);
             return;

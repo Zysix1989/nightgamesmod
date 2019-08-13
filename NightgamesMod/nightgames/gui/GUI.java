@@ -149,7 +149,6 @@ public class GUI extends JFrame implements Observer {
         commandPanel = new CommandPanel(width);
         gamePanel.add(commandPanel.getPanel());
 
-        clearCommand();
         setVisible(true);
         pack();
         JPanel panel = (JPanel) getContentPane();
@@ -266,7 +265,6 @@ public class GUI extends JFrame implements Observer {
     public void purgePlayer() {
         getContentPane().remove(gamePanel);
         clearText();
-        clearCommand();
         showNone();
         clearImage();
         menuBar.setQuitMatchEnabled(false);
@@ -286,10 +284,6 @@ public class GUI extends JFrame implements Observer {
         story.message(speaker, text);
     }
 
-    public void clearCommand() {
-        commandPanel.reset();
-    }
-
 
     public void chooseSkills(Combat com, Character target, List<SkillGroup> skills) {
         commandPanel.chooseSkills(com, target, skills);
@@ -303,7 +297,6 @@ public class GUI extends JFrame implements Observer {
 
     // New code should use this one
     public void presentOptions(final List<CommandPanelOption> options) {
-        clearCommand();
         commandPanel.present(options.stream().map(this::clearingOption).collect(Collectors.toList()));
     }
 
@@ -315,9 +308,11 @@ public class GUI extends JFrame implements Observer {
 
     public void promptWithSave(String message, List<CommandPanelOption> choices) {
         message(message);
-        choices = choices.stream().map(this::clearingOption).collect(Collectors.toList());
+        choices = choices.stream().map(this::clearingOption)
+            .map(option -> option.wrap(event -> commandPanel.reset(), event -> {}))
+            .collect(Collectors.toList());
         choices.add(saveOption());
-        commandPanel.present(choices);
+        commandPanel.presentNoReset(choices);
     }
 
     public void endCombat() {
@@ -343,7 +338,6 @@ public class GUI extends JFrame implements Observer {
             System.out.println("Match end");
         }
         combat = null;
-        clearCommand();
         showNone();
         menuBar.setQuitMatchEnabled(false);
         Global.endNightForSave();

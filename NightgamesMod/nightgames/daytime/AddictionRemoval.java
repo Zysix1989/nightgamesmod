@@ -24,8 +24,6 @@ public class AddictionRemoval extends Activity {
     public void visit(String choice) {
         Global.gui()
               .clearText();
-        Global.gui()
-              .clearCommand();
 
         ArrayList<String> choices = new ArrayList<>();
         if (choice.equals("Start")) {

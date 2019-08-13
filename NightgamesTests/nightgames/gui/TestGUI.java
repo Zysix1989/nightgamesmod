@@ -45,9 +45,6 @@ public class TestGUI extends GUI {
     public void message(String text) {}
 
     @Override
-    public void clearCommand() {}
-
-    @Override
     public void chooseSkills(Combat com, Character target, List<SkillGroup> skills) {
     }
 

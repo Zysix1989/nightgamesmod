@@ -39,7 +39,6 @@ public class Informant extends Activity {
     @Override
     public void visit(String choice) {
         Global.gui().clearText();
-        Global.gui().clearCommand();
 
         VisitResult result = handleChoice(choice);
         if (!result.terminal) {

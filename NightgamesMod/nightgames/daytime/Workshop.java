@@ -25,7 +25,6 @@ public class Workshop extends Activity {
     public void visit(String choice) {
         ArrayList<String> choices = new ArrayList<>();
         Global.gui().clearText();
-        Global.gui().clearCommand();
         if (!Global.checkFlag(Flag.metJett)) {
             Global.gui().message(
                             "You head to Jett's workshop. Apparently he has an implicit claim on this workshop in the same way that Mara does on her computer room. "

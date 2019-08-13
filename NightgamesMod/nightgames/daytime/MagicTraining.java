@@ -26,7 +26,6 @@ public class MagicTraining extends Activity {
     public void visit(String choice) {
         ArrayList<String> choices = new ArrayList<>();
         Global.gui().clearText();
-        Global.gui().clearCommand();
         if (!Global.checkFlag(Flag.metAisha)) {
             choices.addAll(meetAisha());
         } else if (choice.equals("Start")) {

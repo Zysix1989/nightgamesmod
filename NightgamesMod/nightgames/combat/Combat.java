@@ -1487,7 +1487,6 @@ public class Combat extends Observable implements Cloneable {
         Optional<CombatScene> possibleScene = Global.pickRandom(availableScenes);
         if (possibleScene.isPresent()) {
             Global.gui().clearText();
-            Global.gui().clearCommand();
             possibleScene.get().visit(this, npc);
             return true;
         } else {

@@ -76,7 +76,6 @@ public abstract class BaseNPCTime extends Activity {
     @Override
     public void visit(String choice) {
         Global.gui().clearText();
-        Global.gui().clearCommand();
         List<Loot> giftables = getGiftables();
         Optional<TransformationOption> optionalOption =
                         transformationOptions.stream().filter(opt -> choice.equals(opt.option)).findFirst();

@@ -30,7 +30,6 @@ public class HWStore extends Store {
     @Override
     public void visit(String choice) {
         Global.gui().clearText();
-        Global.gui().clearCommand();
         if (choice.equals("Start")) {
             acted = false;
         }

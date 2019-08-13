@@ -27,7 +27,6 @@ public class Meditation extends Activity {
             acted = false;
         }
         Global.gui().clearText();
-        Global.gui().clearCommand();
         ArrayList<String> choices = new ArrayList<>();
         if (Global.checkFlag(Flag.dojo) && choice.equals("Start")) {
             if (!Global.checkFlag(Flag.metSuzume)) {

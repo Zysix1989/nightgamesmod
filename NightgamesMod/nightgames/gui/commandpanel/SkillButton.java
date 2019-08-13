@@ -56,7 +56,7 @@ class SkillButton extends KeyableButton {
         combat = c;
         getButton().addActionListener(arg0 -> {
             if (action.subChoices(c).size() == 0) {
-                commandPanel.clear();
+                commandPanel.reset();
                 combat.act(SkillButton.this.action.user(), SkillButton.this.action);
                 combat.resume();
             } else {
@@ -64,6 +64,7 @@ class SkillButton extends KeyableButton {
                     .map(choice -> new CommandPanelOption(
                         choice,
                         event -> {
+                            commandPanel.reset();
                             action.setChoice(choice);
                             c.act(action.user(), action);
                             c.resume();

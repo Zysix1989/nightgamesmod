@@ -35,7 +35,6 @@ public class Locate extends Action {
     @Override
     public IMovement execute(Character self) {
         GUI gui = Global.gui();
-        gui.clearCommand();
         gui.clearText();
         gui.validate();
         if (self.human()) {
@@ -55,7 +54,6 @@ public class Locate extends Action {
                     .collect(Collectors.toList()));
         } else if (choice.equals("Leave")) {
             gui.clearText();
-            gui.clearCommand();
             Global.getMatch().resume();
         } else if ((target = Global.getParticipantsByName(choice)) != null) {
             Area area = target.location();

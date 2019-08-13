@@ -115,6 +115,13 @@ public class CommandPanel{
     }
 
     public void present(List<CommandPanelOption> options) {
+        clear();
+        options.forEach(option -> add(option.wrap(event -> reset(), event -> {}).toButton()));
+        refresh();
+    }
+
+    public void presentNoReset(List<CommandPanelOption> options) {
+        clear();
         options.forEach(option -> add(option.toButton()));
         refresh();
     }
@@ -123,7 +130,6 @@ public class CommandPanel{
         groupBox.removeAll();
         buttons.clear();
         hotkeyMapping.clear();
-        clear();
         present(options);
     }
 

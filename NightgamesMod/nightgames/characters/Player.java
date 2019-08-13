@@ -225,7 +225,6 @@ public class Player extends Character {
             available.add(new Nothing(this));
         }
         available.addAll(cds);
-        gui.clearCommand();
         available.forEach(skill -> {
             if (!skillMap.containsKey(skill.type(c))) {
                 skillMap.put(skill.type(c), new HashSet<>());
@@ -369,7 +368,6 @@ public class Player extends Character {
     @Override
     public void move() {
         System.out.println("move called");
-        gui.clearCommand();
         List<Action> actionChoices = new ArrayList<>();
         List<CommandPanelOption> optionChoices = new ArrayList<>();
         if (state == State.combat) {
@@ -513,7 +511,6 @@ public class Player extends Character {
             gui.presentOptions(options);
         } else {
             skippedFeat = false;
-            gui.clearCommand();
             Global.gainSkills(this);
             levelsToGain -= 1;
             if (getLevelsToGain() > 0) {
@@ -1165,11 +1162,9 @@ public class Player extends Character {
 
     @Override
     public void nextCombat(Combat c) {
-        gui.clearCommand();
         Global.getMatch().pause();
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Next", event -> {
-            gui.clearCommand();
             c.resume();
         }));
         gui.presentOptions(options);

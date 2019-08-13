@@ -38,7 +38,6 @@ public class XxxStore extends Store {
             acted = false;
         }
         Global.gui().clearText();
-        Global.gui().clearCommand();
         if (choice.equals("Leave")) {
             done(acted);
             return;

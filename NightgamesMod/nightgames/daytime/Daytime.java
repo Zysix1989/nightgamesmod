@@ -119,8 +119,6 @@ public class Daytime {
                   .message("It is currently " + displayTime() + ". Your next match starts at 10:00pm.");
             Global.gui()
                   .refresh();
-            Global.gui()
-                  .clearCommand();
             if (eventMgr.playRegularScene())
                 return;
             player.chooseActivity(activities.stream()

@@ -22,7 +22,6 @@ public class VideoGames extends Activity {
     @Override
     public void visit(String choice) {
         Global.gui().clearText();
-        Global.gui().clearCommand();
         ArrayList<String> choices = new ArrayList<>();
         if (choice.equals("Start")) {
             if (player.money >= 50) {
