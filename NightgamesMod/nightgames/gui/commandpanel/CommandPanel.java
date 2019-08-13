@@ -114,8 +114,9 @@ public class CommandPanel{
         use(button);
     }
 
-    public void add(CommandPanelOption option) {
-        add(option.toButton());
+    public void present(List<CommandPanelOption> options) {
+        options.forEach(option -> add(option.toButton()));
+        refresh();
     }
 
     void addNoReset(List<CommandPanelOption> options) {
@@ -123,8 +124,7 @@ public class CommandPanel{
         buttons.clear();
         hotkeyMapping.clear();
         clear();
-        refresh();
-        options.forEach(this::add);
+        present(options);
     }
 
     private void use(KeyableButton button) {

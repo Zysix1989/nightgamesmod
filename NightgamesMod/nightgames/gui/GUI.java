@@ -322,11 +322,6 @@ public class GUI extends JFrame implements Observer {
         commandPanel.chooseSkills(com, target, skills);
     }
 
-    private void addToCommandPanel(final CommandPanelOption option) {
-        commandPanel.add(option);
-        commandPanel.refresh();
-    }
-
     private CommandPanelOption clearingOption(final CommandPanelOption option) {
         return option.wrap(
                 event -> clearText(),
@@ -336,7 +331,7 @@ public class GUI extends JFrame implements Observer {
     // New code should use this one
     public void presentOptions(final List<CommandPanelOption> options) {
         clearCommand();
-        options.stream().map(this::clearingOption).forEach(this::addToCommandPanel);
+        commandPanel.present(options.stream().map(this::clearingOption).collect(Collectors.toList()));
     }
 
     public void prompt(String message, List<CommandPanelOption> choices) {
@@ -348,8 +343,9 @@ public class GUI extends JFrame implements Observer {
     public void promptWithSave(String message, List<CommandPanelOption> choices) {
         clearText();
         message(message);
+        choices = choices.stream().map(this::clearingOption).collect(Collectors.toList());
         choices.add(saveOption());
-        presentOptions(choices);
+        commandPanel.present(choices);
     }
 
     public void endCombat() {
@@ -380,11 +376,10 @@ public class GUI extends JFrame implements Observer {
         menuBar.setQuitMatchEnabled(false);
         Global.endNightForSave();
         List<CommandPanelOption> options = new ArrayList<>();
-        options.add(clearingOption(new CommandPanelOption("Go to sleep", event -> {
+        options.add(new CommandPanelOption("Go to sleep", event -> {
             Global.startDay();
-        })));
-        options.add(saveOption());
-        options.forEach(this::addToCommandPanel);
+        }));
+        promptWithSave("", options);
     }
 
     public void refresh() {
