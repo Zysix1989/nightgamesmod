@@ -10,11 +10,13 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -321,22 +323,32 @@ public class GUI extends JFrame implements Observer {
     }
 
     private void addToCommandPanel(final CommandPanelOption option) {
-        commandPanel.add(option.wrap(
-            event -> clearText(),
-            event -> refresh()));
+        commandPanel.add(option);
         commandPanel.refresh();
+    }
+
+    private CommandPanelOption clearingOption(final CommandPanelOption option) {
+        return option.wrap(
+                event -> clearText(),
+                event -> refresh());
     }
 
     // New code should use this one
     public void presentOptions(final List<CommandPanelOption> options) {
-        System.out.println("presented new options");
         clearCommand();
-        options.forEach(this::addToCommandPanel);
+        options.stream().map(this::clearingOption).forEach(this::addToCommandPanel);
     }
 
     public void prompt(String message, List<CommandPanelOption> choices) {
         clearText();
         message(message);
+        presentOptions(choices);
+    }
+
+    public void promptWithSave(String message, List<CommandPanelOption> choices) {
+        clearText();
+        message(message);
+        choices.add(saveOption());
         presentOptions(choices);
     }
 
@@ -367,12 +379,12 @@ public class GUI extends JFrame implements Observer {
         showNone();
         menuBar.setQuitMatchEnabled(false);
         Global.endNightForSave();
-        CommandPanelOption o = new CommandPanelOption("Go to sleep", event -> {
+        List<CommandPanelOption> options = new ArrayList<>();
+        options.add(clearingOption(new CommandPanelOption("Go to sleep", event -> {
             Global.startDay();
-        });
-        addToCommandPanel(o);
-        commandPanel.add(saveOption());
-        commandPanel.refresh();
+        })));
+        options.add(saveOption());
+        options.forEach(this::addToCommandPanel);
     }
 
     public void refresh() {
