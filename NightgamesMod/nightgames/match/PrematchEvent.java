@@ -24,13 +24,12 @@ public abstract class PrematchEvent {
         this.message = message;
         this.type = type;
         this.options = new ArrayList<>(options);
-        this.options.add(GUI.saveOption());
     }
 
     protected final void run() {
         extraEffects();
         Global.gui()
-            .prompt(message, options);
+            .promptWithSave(message, options);
     }
 
     protected abstract void extraEffects();
