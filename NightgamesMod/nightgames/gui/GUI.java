@@ -11,7 +11,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -37,20 +36,18 @@ import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.gui.commandpanel.KeyableButton;
 import nightgames.skills.SkillGroup;
 
-@SuppressWarnings("unused")
+
 public class GUI extends JFrame implements Observer {
     private static final long serialVersionUID = 451431916952047183L;
     public Combat combat;
-    CommandPanel commandPanel;
+    private CommandPanel commandPanel;
     private GUIPlayerStatus playerStatus;
     private GUIPlayerBio playerBio;
     private JPanel topPanel;
-    private Panel panel0;
     protected CreationGUI creation;
     private JPanel gamePanel;
     private JPanel mainPanel;
     private JPanel clothesPanel;
-    private JPanel optionsPanel;
     private GUILeftPanel portraitPanel;
     private JPanel centerPanel;
 
@@ -58,12 +55,8 @@ public class GUI extends JFrame implements Observer {
     private GUIStory story;
     private GUIStoryImage storyImage;
 
-    private int width;
-    private int height;
     public int fontsize;
-    private boolean skippedFeat;
-    public NgsChooser saveFileChooser;
-    private JFrame inventoryFrame;
+    private NgsChooser saveFileChooser;
 
     private static final String USE_MAIN_TEXT_UI = "MAIN_TEXT";
     private static final String USE_CLOSET_UI = "CLOSET";
@@ -85,8 +78,8 @@ public class GUI extends JFrame implements Observer {
 
         // resolution resolver
 
-        height = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85);
-        width = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85);
+        int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85);
+        int width = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.85);
 
         setPreferredSize(new Dimension(width, height));
 
@@ -100,7 +93,7 @@ public class GUI extends JFrame implements Observer {
 
         this.setLocation(x1, y1);
 
-        getContentPane().setLayout(new BoxLayout(getContentPane(), 1));
+        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         // panel layouts
 
@@ -108,13 +101,13 @@ public class GUI extends JFrame implements Observer {
 
         gamePanel = new JPanel();
         getContentPane().add(gamePanel);
-        gamePanel.setLayout(new BoxLayout(gamePanel, 1));
+        gamePanel.setLayout(new BoxLayout(gamePanel, BoxLayout.Y_AXIS));
 
         // panel0 - invisible, only handles topPanel
 
-        panel0 = new Panel();
+        Panel panel0 = new Panel();
         gamePanel.add(panel0);
-        panel0.setLayout(new BoxLayout(panel0, 0));
+        panel0.setLayout(new BoxLayout(panel0, BoxLayout.X_AXIS));
 
         // topPanel - invisible, menus
 
@@ -168,9 +161,7 @@ public class GUI extends JFrame implements Observer {
             @Override
             public void keyReleased(KeyEvent e) {
                 Optional<KeyableButton> buttonOptional = commandPanel.getButtonForHotkey(e.getKeyChar());
-                if (buttonOptional.isPresent()) {
-                    buttonOptional.get().call();
-                }
+                buttonOptional.ifPresent(KeyableButton::call);
             }
 
             @Override
@@ -200,16 +191,6 @@ public class GUI extends JFrame implements Observer {
         return combat;
     }
 
-    public static void setUIFont (javax.swing.plaf.FontUIResource f){
-        Enumeration<Object> keys = UIManager.getDefaults().keys();
-        while (keys.hasMoreElements()) {
-          Object key = keys.nextElement();
-          Object value = UIManager.get (key);
-          if (value != null && value instanceof javax.swing.plaf.FontUIResource)
-            UIManager.put (key, f);
-          }
-    }
-
     public void displayImage(String path, String artist) {
         storyImage.displayImage(path, artist);
     }
@@ -231,7 +212,7 @@ public class GUI extends JFrame implements Observer {
         portraitPanel.showMap();
     }
 
-    public void showPortrait() {
+    private void showPortrait() {
         portraitPanel.showPortrait();
     }
 
@@ -305,14 +286,6 @@ public class GUI extends JFrame implements Observer {
         story.message(speaker, text);
     }
 
-    public void message(Combat c, Character character, String text) {
-        story.message(character, text);
-    }
-
-    public void combatMessage(String text) {
-        story.message(text);
-    }
-
     public void clearCommand() {
         commandPanel.reset();
     }
@@ -375,9 +348,7 @@ public class GUI extends JFrame implements Observer {
         menuBar.setQuitMatchEnabled(false);
         Global.endNightForSave();
         List<CommandPanelOption> options = new ArrayList<>();
-        options.add(new CommandPanelOption("Go to sleep", event -> {
-            Global.startDay();
-        }));
+        options.add(new CommandPanelOption("Go to sleep", event -> Global.startDay()));
         promptWithSave("", options);
     }
 
@@ -409,7 +380,7 @@ public class GUI extends JFrame implements Observer {
         layout.show(centerPanel, USE_CLOSET_UI);
     }
 
-    public void removeClosetGUI() {
+    void removeClosetGUI() {
         if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
             System.out.println("remove closet gui");
         }
@@ -424,7 +395,7 @@ public class GUI extends JFrame implements Observer {
         }
     }
 
-    public static CommandPanelOption saveOption() {
+    private static CommandPanelOption saveOption() {
         return new CommandPanelOption(
             "Save",
             event -> Global.saveWithDialog()
