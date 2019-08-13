@@ -103,12 +103,12 @@ public class CommandPanel{
         index = 0;  
     }
 
-    public void refresh() {
+    private void refresh() {
         commandPanel.repaint();
         commandPanel.revalidate();
     }
 
-    public void add(KeyableButton button) {
+    private void add(KeyableButton button) {
         page = 0;
         buttons.add(button);
         use(button);
