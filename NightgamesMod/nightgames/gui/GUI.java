@@ -341,7 +341,6 @@ public class GUI extends JFrame implements Observer {
     }
 
     public void promptWithSave(String message, List<CommandPanelOption> choices) {
-        clearText();
         message(message);
         choices = choices.stream().map(this::clearingOption).collect(Collectors.toList());
         choices.add(saveOption());
