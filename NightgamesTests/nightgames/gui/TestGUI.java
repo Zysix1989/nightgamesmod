@@ -4,13 +4,12 @@ import java.io.File;
 import java.util.List;
 import java.util.Observable;
 import java.util.Optional;
-
 import nightgames.characters.Character;
 import nightgames.characters.NPC;
 import nightgames.characters.Player;
 import nightgames.combat.Combat;
 import nightgames.gui.commandpanel.CommandPanelOption;
-import nightgames.skills.Skill;
+import nightgames.skills.SkillGroup;
 
 public class TestGUI extends GUI {
     /**
@@ -49,7 +48,7 @@ public class TestGUI extends GUI {
     public void clearCommand() {}
 
     @Override
-    public void chooseSkills(Combat com, Character target, List<Skill> skills) {
+    public void chooseSkills(Combat com, Character target, List<SkillGroup> skills) {
     }
 
     @Override
