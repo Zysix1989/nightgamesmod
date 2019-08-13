@@ -56,6 +56,7 @@ class SkillButton extends KeyableButton {
         combat = c;
         getButton().addActionListener(arg0 -> {
             if (action.subChoices(c).size() == 0) {
+                commandPanel.clear();
                 combat.act(SkillButton.this.action.user(), SkillButton.this.action);
                 combat.resume();
             } else {
@@ -77,7 +78,7 @@ class SkillButton extends KeyableButton {
     }
 
     private static Color foregroundColor(Color bgColor) {
-        float hsb[] = new float[3];
+        float[] hsb = new float[3];
         Color.RGBtoHSB(bgColor.getRed(), bgColor.getGreen(), bgColor.getRed(), hsb);
         if (hsb[2] < .6) {
             return Color.WHITE;
