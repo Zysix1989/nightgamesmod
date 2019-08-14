@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -110,9 +111,9 @@ public class CommandPanel{
     }
 
     public void present(List<CommandPanelOption> options) {
-        clear();
-        options.forEach(option -> add(option.wrap(event -> reset(), event -> {}).toButton()));
-        refresh();
+        presentNoReset(options.stream()
+            .map(option -> option.wrap(event -> reset(), event -> {}))
+            .collect(Collectors.toList()));
     }
 
     public void presentNoReset(List<CommandPanelOption> options) {
