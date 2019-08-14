@@ -151,24 +151,6 @@ public class GUI extends JFrame implements Observer {
 
         setVisible(true);
         pack();
-        JPanel panel = (JPanel) getContentPane();
-        panel.setFocusable(true);
-        panel.addKeyListener(new KeyListener() {
-            /**
-             * Space bar will select the first option, unless they are in the default actions list.
-             */
-            @Override
-            public void keyReleased(KeyEvent e) {
-                Optional<KeyableButton> buttonOptional = commandPanel.getButtonForHotkey(e.getKeyChar());
-                buttonOptional.ifPresent(KeyableButton::call);
-            }
-
-            @Override
-            public void keyTyped(KeyEvent e) {}
-
-            @Override
-            public void keyPressed(KeyEvent e) {}
-        });
 
         // Use this for making save dialogs
         saveFileChooser = new NgsChooser(this);

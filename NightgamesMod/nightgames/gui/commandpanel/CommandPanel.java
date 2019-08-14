@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -32,7 +31,6 @@ public class CommandPanel{
     private JPanel commandPanel;
     private int index;
     private int page;
-    private Map<java.lang.Character, KeyableButton> hotkeyMapping;
     private List<KeyableButton> buttons;
     private JPanel[] rows;
 
@@ -46,7 +44,6 @@ public class CommandPanel{
         commandPanel.setPreferredSize(new Dimension(width, 160));
         commandPanel.setMinimumSize(new Dimension(width, 160));
         commandPanel.setBorder(new CompoundBorder());
-        hotkeyMapping = new HashMap<>();
         rows = new JPanel[POSSIBLE_HOTKEYS.size() / ROW_LIMIT];
         rows[0] = new JPanel();
         rows[1] = new JPanel();
@@ -90,7 +87,6 @@ public class CommandPanel{
         skills.clear();
         groupBox.removeAll();
         buttons.clear();
-        hotkeyMapping.clear();
         clear();
         refresh();
     }
@@ -99,7 +95,6 @@ public class CommandPanel{
         for (JPanel row : rows) {
             row.removeAll();
         }
-        POSSIBLE_HOTKEYS.forEach(hotkeyMapping::remove);
         index = 0;  
     }
 
@@ -129,7 +124,6 @@ public class CommandPanel{
     void addNoReset(List<CommandPanelOption> options) {
         groupBox.removeAll();
         buttons.clear();
-        hotkeyMapping.clear();
         present(options);
     }
 
@@ -139,16 +133,12 @@ public class CommandPanel{
             int rowIndex = Math.min(rows.length - 1, effectiveIndex / ROW_LIMIT);
             JPanel row = rows[rowIndex];
             row.add(button);
-            java.lang.Character hotkey = POSSIBLE_HOTKEYS.get(effectiveIndex);
-            register(hotkey, button);
         } else if (effectiveIndex == -1) {
             KeyableButton leftPage = new RunnableButton("<<<", () -> setPage(page - 1));
             rows[0].add(leftPage, 0);
-            register('~', leftPage);
         } else if (effectiveIndex == POSSIBLE_HOTKEYS.size()){
             KeyableButton rightPage = new RunnableButton(">>>", () -> setPage(page + 1));
             rows[0].add(rightPage);
-            register('`', rightPage);
         }
         index += 1;
     }
@@ -160,15 +150,6 @@ public class CommandPanel{
         refresh();
     }
 
-    public Optional<KeyableButton> getButtonForHotkey(char keyChar) {
-        return Optional.ofNullable(hotkeyMapping.get(keyChar));
-    }
-
-    private void register(java.lang.Character hotkey, KeyableButton button) {
-        button.setHotkeyTextTo(hotkey.toString().toUpperCase());
-        hotkeyMapping.put(hotkey, button);
-    }
-
     public void chooseSkills(Combat com, nightgames.characters.Character target, List<SkillGroup> skills) {
         reset();
         if (skills.isEmpty()) {
@@ -178,15 +159,12 @@ public class CommandPanel{
         this.target = target;
         skills.forEach(group -> this.skills.put(group.tactics, group));
 
-        int i = 1;
         for (Tactics tactic : Tactics.values()) {
             if (!this.skills.containsKey(tactic)) continue;
             SwitchTacticsButton tacticsButton = new SwitchTacticsButton(tactic,
                 event -> switchTactics(tactic));
-            register(java.lang.Character.forDigit(i % 10, 10), tacticsButton);
             groupBox.add(tacticsButton);
             groupBox.add(Box.createHorizontalStrut(4));
-            i += 1;
         }
         Global.getMatch().pause();
         refresh();
