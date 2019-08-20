@@ -7,8 +7,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +31,6 @@ import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanel;
 import nightgames.gui.commandpanel.CommandPanelOption;
-import nightgames.gui.commandpanel.KeyableButton;
 import nightgames.skills.SkillGroup;
 
 
@@ -146,7 +143,7 @@ public class GUI extends JFrame implements Observer {
         JButton debug = new JButton("Debug");
         debug.addActionListener(arg0 -> Global.getMatch().resume());
 
-        commandPanel = new CommandPanel(width);
+        commandPanel = new CommandPanel();
         gamePanel.add(commandPanel.getPanel());
 
         setVisible(true);

@@ -74,7 +74,6 @@ class SkillButton extends KeyableButton {
             }
         });
         setLayout(new BorderLayout());
-        setMaximumSize(new Dimension(500, 20));
         add(getButton());
     }
 
