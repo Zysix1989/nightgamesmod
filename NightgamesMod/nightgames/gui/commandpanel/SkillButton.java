@@ -97,8 +97,7 @@ class SkillButton extends KeyableButton {
         } else {
             setBorder(new LineBorder(getButton().getBackground(), 3));
         }
-        if (!action.user()
-            .cooldownAvailable(action)) {
+        if (!action.user().cooldownAvailable(action)) {
             getButton().setEnabled(false);
             text += String.format("<br/>Remaining Cooldown: %d turns", action.user()
                 .getCooldown(action));
