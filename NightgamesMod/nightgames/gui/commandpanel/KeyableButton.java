@@ -17,8 +17,8 @@ public abstract class KeyableButton extends JPanel {
         this.setBorder(BorderFactory.createEmptyBorder());
     }
 
-    public void call() {
-        button.doClick();
+    protected void setText(String s) {
+        button.setText(s);
     }
 
     public abstract String getText();
