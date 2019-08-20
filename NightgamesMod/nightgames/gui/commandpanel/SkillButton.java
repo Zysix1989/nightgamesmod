@@ -2,7 +2,6 @@ package nightgames.gui.commandpanel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,43 +16,26 @@ class SkillButton extends KeyableButton {
     private static final long serialVersionUID = -1253735466299929203L;
     protected Skill action;
     protected Combat combat;
+    private Character target;
     private CommandPanel commandPanel;
 
     SkillButton(Combat c, final Skill action, Character target, CommandPanel panel) {
         super(action.getLabel(c));
         this.commandPanel = panel;
+        this.target = target;
+        combat = c;
+        this.action = action;
+
+        setText(getText());
+
         getButton().setBorderPainted(false);
         getButton().setOpaque(true);
         getButton().setFont(fontForStage(action.getStage()));
-        this.action = action;
-        int actualAccuracy = target.getChanceToHit(action.getSelf(), c, action.accuracy(c, target));
-        int clampedAccuracy = Math.min(100, Math.max(0, actualAccuracy));
-        String text = "<html>" + action.describe(c) + " <br/><br/>Accuracy: " + (actualAccuracy >=150 ? "---" : clampedAccuracy + "%") + "</p>";
         Color bgColor = action.type(c).getColor();
         getButton().setBackground(bgColor);
         getButton().setForeground(foregroundColor(bgColor));
 
-        if (action.getMojoCost(c) > 0) {
-            setBorder(new LineBorder(Color.RED, 3));
-            text += "<br/>Mojo cost: " + action.getMojoCost(c);
-        } else if (action.getMojoBuilt(c) > 0) {
-            setBorder(new LineBorder(new Color(53, 201, 255), 3));
-            text += "<br/>Mojo generated: " + action.getMojoBuilt(c) + "%";
-        } else {
-            setBorder(new LineBorder(getButton().getBackground(), 3));
-        }
-        if (!action.user()
-                   .cooldownAvailable(action)) {
-            getButton().setEnabled(false);
-            text += String.format("<br/>Remaining Cooldown: %d turns", action.user()
-                                                                            .getCooldown(action));
-            getButton().setForeground(Color.WHITE);
-            getButton().setBackground(getBackground().darker());
-        }
-
-        text += "</html>";
-        getButton().setToolTipText(text);
-        combat = c;
+        getButton().setToolTipText(getText());
         getButton().addActionListener(arg0 -> {
             if (action.subChoices(c).size() == 0) {
                 commandPanel.reset();
@@ -101,6 +83,29 @@ class SkillButton extends KeyableButton {
 
     @Override
     public String getText() {
-        return action.getLabel(combat);
+        int actualAccuracy = target.getChanceToHit(action.getSelf(), combat, action.accuracy(combat, target));
+        int clampedAccuracy = Math.min(100, Math.max(0, actualAccuracy));
+        String text = "<html>" + "<p><b>" + action.getLabel(combat) + "</b><br/>" +
+            action.describe(combat) + "<br/><br/>Accuracy: " +
+            (actualAccuracy >=150 ? "---" : clampedAccuracy + "%") + "</p>";
+        if (action.getMojoCost(combat) > 0) {
+            setBorder(new LineBorder(Color.RED, 3));
+            text += "<br/>Mojo cost: " + action.getMojoCost(combat);
+        } else if (action.getMojoBuilt(combat) > 0) {
+            setBorder(new LineBorder(new Color(53, 201, 255), 3));
+            text += "<br/>Mojo generated: " + action.getMojoBuilt(combat) + "%";
+        } else {
+            setBorder(new LineBorder(getButton().getBackground(), 3));
+        }
+        if (!action.user()
+            .cooldownAvailable(action)) {
+            getButton().setEnabled(false);
+            text += String.format("<br/>Remaining Cooldown: %d turns", action.user()
+                .getCooldown(action));
+            getButton().setForeground(Color.WHITE);
+            getButton().setBackground(getBackground().darker());
+        }
+        text += "</html>";
+        return text;
     }
 }
