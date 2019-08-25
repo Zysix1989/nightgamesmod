@@ -47,7 +47,7 @@ public class CommandPanel{
 
         panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.add(groupBox, BorderLayout.NORTH);
+        panel.add(groupBox, BorderLayout.PAGE_START);
         panel.add(scrollPane, BorderLayout.CENTER);
         panel.setBackground(GUIColors.bgDark);
         panel.setBorder(new CompoundBorder());
