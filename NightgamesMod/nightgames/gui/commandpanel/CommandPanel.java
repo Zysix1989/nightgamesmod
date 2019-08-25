@@ -38,12 +38,12 @@ public class CommandPanel{
         JScrollPane scrollPane = new JScrollPane(commandPanel);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
+        scrollPane.getViewport().setLayout(ViewportLayout.SHARED_INSTANCE);
+        scrollPane.getViewport().setBackground(GUIColors.bgDark);
         // commandPanel - visible, contains the player's command buttons
         groupBox = Box.createHorizontalBox();
         groupBox.setBackground(GUIColors.bgDark);
         groupBox.setBorder(new CompoundBorder());
-
 
         panel = new JPanel();
         panel.setLayout(new BorderLayout());
