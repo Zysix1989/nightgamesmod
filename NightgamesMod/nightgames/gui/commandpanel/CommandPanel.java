@@ -32,7 +32,7 @@ public class CommandPanel{
 
     public CommandPanel() {
         commandPanel = new JPanel();
-        commandPanel.setBackground(GUIColors.bgDark);
+        commandPanel.setOpaque(false);
         commandPanel.setLayout(new GroupLayout(commandPanel));
 
         JScrollPane scrollPane = new JScrollPane(commandPanel);
@@ -42,14 +42,14 @@ public class CommandPanel{
         scrollPane.getViewport().setBackground(GUIColors.bgDark);
         // commandPanel - visible, contains the player's command buttons
         groupBox = Box.createHorizontalBox();
-        groupBox.setBackground(GUIColors.bgDark);
+        groupBox.setOpaque(false);
         groupBox.setBorder(new CompoundBorder());
 
         panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.add(groupBox, BorderLayout.PAGE_START);
         panel.add(scrollPane, BorderLayout.CENTER);
-        panel.setBackground(GUIColors.bgDark);
+        panel.setOpaque(false);
         panel.setBorder(new CompoundBorder());
 
         skills = new HashMap<>();
