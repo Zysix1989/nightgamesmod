@@ -68,12 +68,12 @@ public class CommandPanel{
 
     private void clear() {
         commandPanel.removeAll();
-        commandPanel.revalidate();
+        refresh();
     }
 
     private void refresh() {
-        commandPanel.repaint();
-        commandPanel.revalidate();
+        panel.repaint();
+        panel.revalidate();
     }
 
     private void add(List<KeyableButton> buttons) {
