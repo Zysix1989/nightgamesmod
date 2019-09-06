@@ -53,6 +53,7 @@ class SkillButton extends KeyableButton {
                         }
                     )).collect(Collectors.toList());
                 commandPanel.addNoReset(options);
+                commandPanel.setSelectedSkill(action);
             }
         });
         setLayout(new BorderLayout());
