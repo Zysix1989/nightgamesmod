@@ -18,9 +18,9 @@ class RunnableButton extends KeyableButton {
 
     private void resetFontSize() {
         if (getButton().getText().contains("<br/>")) {
-            getButton().setFont(new Font("Baskerville Old Face", 0, 14));
+            getButton().setFont(new Font("Baskerville Old Face", Font.PLAIN, 14));
         } else {
-            getButton().setFont(new Font("Baskerville Old Face", 0, 18));            
+            getButton().setFont(new Font("Baskerville Old Face", Font.PLAIN, 18));
         }
     }
 
