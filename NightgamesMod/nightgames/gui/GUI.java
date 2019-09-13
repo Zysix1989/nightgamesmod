@@ -144,7 +144,7 @@ public class GUI extends JFrame implements Observer {
         debug.addActionListener(arg0 -> Global.getMatch().resume());
 
         commandPanel = new CommandPanel();
-        gamePanel.add(commandPanel.getPanel());
+        gamePanel.add(commandPanel);
 
         setVisible(true);
         pack();

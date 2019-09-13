@@ -86,10 +86,6 @@ public class CommandPanel extends JPanel{
         skills = new HashMap<>();
     }
 
-    public JPanel getPanel() {
-        return this;
-    }
-
     public void reset() {
         skills.clear();
         backButton.setVisible(false);
