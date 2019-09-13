@@ -25,8 +25,7 @@ import nightgames.skills.Skill;
 import nightgames.skills.SkillGroup;
 import nightgames.skills.Tactics;
 
-public class CommandPanel{
-    private JPanel panel;
+public class CommandPanel extends JPanel{
     private JPanel commandPanel;
 
     private Map<Tactics, SkillGroup> skills;
@@ -78,18 +77,17 @@ public class CommandPanel{
         });
         backButton.setVisible(false);
 
-        panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        panel.add(scrollPane, BorderLayout.CENTER);
-        panel.add(backButton, BorderLayout.PAGE_END);
-        panel.setOpaque(false);
-        panel.setBorder(new CompoundBorder());
+        setLayout(new BorderLayout());
+        add(scrollPane, BorderLayout.CENTER);
+        add(backButton, BorderLayout.PAGE_END);
+        setOpaque(false);
+        setBorder(new CompoundBorder());
 
         skills = new HashMap<>();
     }
 
     public JPanel getPanel() {
-        return panel;
+        return this;
     }
 
     public void reset() {
@@ -105,8 +103,8 @@ public class CommandPanel{
     }
 
     private void refresh() {
-        panel.repaint();
-        panel.revalidate();
+        repaint();
+        revalidate();
     }
 
     private void add(List<KeyableButton> buttons) {
