@@ -3,11 +3,11 @@ package nightgames.gui.commandpanel;
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import javax.swing.Box;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout.ParallelGroup;
@@ -27,7 +27,6 @@ import nightgames.skills.Tactics;
 
 public class CommandPanel{
     private JPanel panel;
-    private Box groupBox;
     private JPanel commandPanel;
 
     private Map<Tactics, SkillGroup> skills;
@@ -47,10 +46,6 @@ public class CommandPanel{
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.getViewport().setLayout(ViewportLayout.SHARED_INSTANCE);
         scrollPane.getViewport().setBackground(GUIColors.bgDark);
-        // commandPanel - visible, contains the player's command buttons
-        groupBox = Box.createHorizontalBox();
-        groupBox.setOpaque(false);
-        groupBox.setBorder(new CompoundBorder());
 
         backButton = new JButton();
         backButton.setText("back");
@@ -85,7 +80,6 @@ public class CommandPanel{
 
         panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.add(groupBox, BorderLayout.PAGE_START);
         panel.add(scrollPane, BorderLayout.CENTER);
         panel.add(backButton, BorderLayout.PAGE_END);
         panel.setOpaque(false);
@@ -100,7 +94,6 @@ public class CommandPanel{
 
     public void reset() {
         skills.clear();
-        groupBox.removeAll();
         backButton.setVisible(false);
         clear();
         refresh();
@@ -146,14 +139,12 @@ public class CommandPanel{
     }
 
     void addNoReset(List<CommandPanelOption> options) {
-        groupBox.removeAll();
         present(options);
     }
 
     private void upOneLevel() {
         if (selectedSkill != null) {
             selectedSkill = null;
-            addTactics();
             switchTactics(selectedTactic);
             return;
         }
@@ -168,13 +159,10 @@ public class CommandPanel{
     }
 
     private void addTactics() {
-        for (Tactics tactic : Tactics.values()) {
-            if (!this.skills.containsKey(tactic)) continue;
-            SwitchTacticsButton tacticsButton = new SwitchTacticsButton(tactic,
-                event -> switchTactics(tactic));
-            groupBox.add(tacticsButton);
-            groupBox.add(Box.createHorizontalStrut(4));
-        }
+        add(Arrays.stream(Tactics.values())
+            .filter(t -> this.skills.containsKey(t))
+            .map(t -> new SwitchTacticsButton(t, event -> switchTactics(t)))
+            .collect(Collectors.toList()));
     }
 
     public void chooseSkills(Combat com, nightgames.characters.Character target, List<SkillGroup> skills) {
@@ -198,6 +186,8 @@ public class CommandPanel{
                 .map(skill -> new SkillButton(combat, skill, target, this))
                 .collect(Collectors.toList()));
             selectedTactic = tactics;
+        } else {
+            addTactics();
         }
         refresh();
     }
