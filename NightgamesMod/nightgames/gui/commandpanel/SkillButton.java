@@ -82,8 +82,7 @@ class SkillButton extends KeyableButton {
         }
     }
 
-    @Override
-    public String getText() {
+    private String getText() {
         int actualAccuracy = target.getChanceToHit(action.getSelf(), combat, action.accuracy(combat, target));
         int clampedAccuracy = Math.min(100, Math.max(0, actualAccuracy));
         String text = "<html>" + "<p><b>" + action.getLabel(combat) + "</b><br/>" +

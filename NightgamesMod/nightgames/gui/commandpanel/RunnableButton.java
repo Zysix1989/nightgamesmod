@@ -6,11 +6,9 @@ import org.apache.commons.lang3.text.WordUtils;
 
 class RunnableButton extends KeyableButton {
     private static final long serialVersionUID = 5435929681634872672L;
-    private String text;
 
     RunnableButton(String text, ActionListener action) {
         super(formatHTMLMultiline(text));
-        this.text = text;
         resetFontSize();
 
         getButton().addActionListener(action);
@@ -29,10 +27,4 @@ class RunnableButton extends KeyableButton {
         // do not word wrap the hotkey extras, since it looks pretty bad.
         return String.format("<html><center>%s</center></html>", out);
     }
-
-    @Override
-    public String getText() {
-        return text;
-    }
-
 }

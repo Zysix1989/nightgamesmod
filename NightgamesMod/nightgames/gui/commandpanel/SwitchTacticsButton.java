@@ -12,10 +12,9 @@ import nightgames.skills.Tactics;
 
 class SwitchTacticsButton extends KeyableButton {
     private static final long serialVersionUID = -3949203523669294068L;
-    private String label;
+
     SwitchTacticsButton(Tactics tactic, ActionListener response) {
         super(Global.capitalizeFirstLetter(tactic.name()));
-        label = Global.capitalizeFirstLetter(tactic.name());
         getButton().setBorderPainted(false);
         getButton().setOpaque(true);
         getButton().setFont(new Font("Baskerville Old Face", Font.PLAIN, 14));
@@ -38,10 +37,5 @@ class SwitchTacticsButton extends KeyableButton {
         } else {
             return Color.BLACK;
         }
-    }
-
-    @Override
-    public String getText() {
-        return label;
     }
 }
