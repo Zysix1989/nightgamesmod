@@ -13,7 +13,6 @@ import nightgames.characters.NPC;
 import nightgames.characters.Trait;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
-import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.ItemEffect;
@@ -70,11 +69,6 @@ public class ThrowDraft extends Skill {
             });
             checks.put(item, rating);
         });
-        if (Global.isDebugOn(DebugFlags.DEBUG_SKILLS)) {
-            checks.entrySet().stream().forEach(entry -> {
-                System.out.println("Item " + entry.getKey() + ": " + entry.getValue());
-            });
-        }
         Item best = checks.entrySet().stream().min((first, second) -> {
             double test = second.getValue() - first.getValue();
             if (test < 0) {

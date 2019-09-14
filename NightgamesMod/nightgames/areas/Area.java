@@ -9,7 +9,6 @@ import nightgames.actions.Movement;
 import nightgames.characters.Character;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Encounter;
-import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
@@ -154,7 +153,8 @@ public class Area implements Serializable {
     }
 
     private boolean canFight(Character c) {         //FIXME: This method has same name as Match.canFight() and they are used in the same method. Change both - DSM
-        return !c.human() || !Global.isDebugOn(DebugFlags.DEBUG_SPECTATE);
+        c.human();
+        return true;
     }
     
     public boolean opportunity(Character target, Trap trap) {

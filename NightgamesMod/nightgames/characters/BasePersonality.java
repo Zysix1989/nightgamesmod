@@ -18,7 +18,6 @@ import nightgames.characters.custom.CharacterLine;
 import nightgames.characters.custom.CommentSituation;
 import nightgames.characters.custom.RecruitmentData;
 import nightgames.combat.Combat;
-import nightgames.global.DebugFlags;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -108,9 +107,6 @@ public abstract class BasePersonality implements Personality {
                     addiction.aggravate(null, Addiction.MED_INCREASE);
                     addiction.flagDaytime();
                     character.gainAffection(cause, 1);
-                    if (Global.isDebugOn(DebugFlags.DEBUG_ADDICTION)) {
-                        System.out.printf("%s did daytime for %s (%s), chance = %f\n", character.getTrueName(), addiction.getType().name(), cause.getTrueName(), chanceToDoDaytime);
-                    }
                 }
             }
         }

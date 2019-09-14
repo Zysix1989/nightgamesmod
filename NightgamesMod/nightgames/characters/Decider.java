@@ -13,7 +13,6 @@ import nightgames.actions.Movement;
 import nightgames.characters.custom.effect.CustomEffect;
 import nightgames.combat.Combat;
 import nightgames.daytime.Daytime;
-import nightgames.global.DebugFlags;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -309,21 +308,9 @@ public class Decider {
         if (sum == 0 || moveList.size() == 0) {
             return null;
         }
-        // Debug
-        if (Global.isDebugOn(DebugFlags.DEBUG_SKILLS)) {
-            String s = "Pet choices: ";
-            for (WeightedSkill entry : moveList) {
-                s += String.format("\n(%.1f\t\t%.1f\t\tculm: %.1f\t\t/ %.1f)\t\t-> %s", entry.raw_rating, entry.rating,
-                                entry.weight, entry.rating * 100.0f / sum, entry.skill.getLabel(c));
-            }
-            System.out.println(s);
-        }
         // Select
         double s = Global.randomdouble() * sum;
         for (WeightedSkill entry : moveList) {
-            if (Global.isDebugOn(DebugFlags.DEBUG_SKILLS)) {
-                System.out.printf("%.1f/%.1f %s\n", entry.weight, s, entry.skill.toString());
-            }
             if (entry.weight > s) {
                 return entry;
             }
@@ -374,21 +361,9 @@ public class Decider {
         if (sum == 0 || moveList.size() == 0) {
             return null;
         }
-        // Debug
-        if (Global.isDebugOn(DebugFlags.DEBUG_SKILLS)) {
-            String s = "AI choices: ";
-            for (WeightedSkill entry : moveList) {
-                s += String.format("\n(%.1f\t\t%.1f\t\tculm: %.1f\t\t/ %.1f)\t\t-> %s", entry.raw_rating, entry.rating,
-                                entry.weight, entry.rating * 100.0f / sum, entry.skill.getLabel(c));
-            }
-            System.out.println(s);
-        }
         // Select
         double s = Global.randomdouble() * sum;
         for (WeightedSkill entry : moveList) {
-            if (Global.isDebugOn(DebugFlags.DEBUG_SKILLS)) {
-                System.out.printf("%.1f/%.1f %s\n", entry.weight, s, entry.skill.toString());
-            }
             if (entry.weight > s) {
                 return entry.skill;
             }
@@ -397,11 +372,6 @@ public class Decider {
     }
 
     private static double ratePetMove(PetCharacter self, Skill skill, Character target, Combat c, double masterFit, double otherFit) {
-        // Clone ourselves a new combat... This should clone our characters, too
-        if (Global.isDebugOn(DebugFlags.DEBUG_SKILLS_RATING) && (c.p1.human() || c.p2.human())) {
-            System.out.println("===> Rating " + skill);
-            System.out.println("Before:\n" + c.debugMessage());
-        }
         return rateActionWithObserver(self, self.getSelf().owner(), target, c, masterFit, otherFit, (combat, selfCopy, other) -> {
             skill.setSelf(selfCopy);
             skill.resolve(combat, other);
@@ -412,11 +382,6 @@ public class Decider {
 
     //TODO: Document this method.
     private static double rateMove(Character self, Skill skill, Combat c, double selfFit, double otherFit) {
-        // Clone ourselves a new combat... This should clone our characters, too
-        if (Global.isDebugOn(DebugFlags.DEBUG_SKILLS_RATING) && (c.p1.human() || c.p2.human())) {
-            System.out.println("===> Rating " + skill);
-            System.out.println("Before:\n" + c.debugMessage());
-        }
         return rateAction(self, c, selfFit, otherFit, (combat, selfCopy, other) -> {
             skill.setSelf(selfCopy);
             skill.resolve(combat, other);
@@ -466,9 +431,6 @@ public class Decider {
         Global.debugSimulation -= 1;
         double selfFitnessDelta = newObserver.getFitness(c) - selfFit;
         double otherFitnessDelta = newObserver.getOtherFitness(c, newOpponent) - otherFit;
-        if (Global.isDebugOn(DebugFlags.DEBUG_SKILLS_RATING) && (c2.p1.human() || c2.p2.human())) {
-            System.out.println("After:\n" + c2.debugMessage());
-        }
         return selfFitnessDelta - otherFitnessDelta;
     }
 }

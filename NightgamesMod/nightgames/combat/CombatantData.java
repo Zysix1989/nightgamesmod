@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import nightgames.characters.Character;
-import nightgames.global.DebugFlags;
-import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.pet.arms.ArmManager;
@@ -122,9 +120,6 @@ public class CombatantData implements Cloneable {
     public CombatStrategy setStrategy(Combat c, Character self, CombatStrategy strategy) {
         this.strategy = Optional.ofNullable(strategy);
         this.strategyDuration = strategy.initialDuration(c, self);
-        if (Global.isDebugOn(DebugFlags.DEBUG_STRATEGIES)) {
-            System.out.printf("%s is now using %s\n", self.getTrueName(), strategy.getClass().getSimpleName());
-        }
         return this.strategy.get();
     }
 
@@ -133,9 +128,6 @@ public class CombatantData implements Cloneable {
         if (strategyDuration <= 0) {
             strategyDuration = 0;
             strategy = Optional.empty();
-        }
-        if (Global.isDebugOn(DebugFlags.DEBUG_STRATEGIES)) {
-            System.out.printf("%s is now at %s\n", strategy.orElse(new DefaultStrategy()).getClass().getSimpleName(), String.valueOf(strategyDuration));
         }
         for (Skill skill : moveModifiers.keySet()) {
             if (!lastUsedSkillName.equals(skill.getName())) {

@@ -28,7 +28,6 @@ import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
 import nightgames.combat.CombatantData;
 import nightgames.combat.Result;
-import nightgames.global.DebugFlags;
 import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -285,24 +284,13 @@ public class NPC extends Character {
         // if the strategy is out of moves, try getting a new one.
         Collection<Skill> possibleSkills = strategy.nextSkills(c, this);
         if (possibleSkills.isEmpty()) {
-            Global.ifDebuggingPrintf(DebugFlags.DEBUG_STRATEGIES,
-                "%s has no moves available for strategy %s, picking a new one\n",
-                this.getTrueName(), strategy.getClass().getSimpleName());
             strategy = combatantData.setStrategy(c, this, pickStrategy(c));
             possibleSkills = strategy.nextSkills(c, this);
         }
-        Global.ifDebuggingPrintln(DebugFlags.DEBUG_STRATEGIES, "next skills: " +  possibleSkills);
 
         // if there are still no moves, just use all available skills for this turn and try again next turn.
         if (possibleSkills.isEmpty()) {
-            Global.ifDebuggingPrintf(DebugFlags.DEBUG_STRATEGIES,
-                "%s has no moves available for strategy %s\n",
-                this.getTrueName(), strategy.getClass().getSimpleName());
             possibleSkills = getSkills();
-        } else {
-            Global.ifDebuggingPrintf(DebugFlags.DEBUG_STRATEGIES,
-                            "%s is using strategy %s\n",
-                            this.getTrueName(), strategy.getClass().getSimpleName());
         }
         HashSet<Skill> available = new HashSet<>();
         for (Skill act : possibleSkills) {
@@ -325,7 +313,6 @@ public class NPC extends Character {
      */
     private CombatStrategy pickStrategy(Combat c) {
         if (Global.random(100) < 60 ) {
-            Global.ifDebuggingPrintln(DebugFlags.DEBUG_STRATEGIES, "Using default strategy");
             // most of the time don't bother using a strategy.
             return new DefaultStrategy();
         }
@@ -343,8 +330,6 @@ public class NPC extends Character {
             lastWeight += strat.weight(c, this);
             stratsWithCumulativeWeights.put(lastWeight, strat);
         }
-        Global.ifDebuggingPrintln(DebugFlags.DEBUG_STRATEGIES,
-            "Available strategies: "+ stratsWithCumulativeWeights);
         double random = Global.randomdouble() * lastWeight;
         for (Map.Entry<Double, CombatStrategy> entry: stratsWithCumulativeWeights.entrySet()) {
             if (random < entry.getKey()) {
@@ -478,16 +463,10 @@ public class NPC extends Character {
      * */
     @Override
     public void move() {
-        Global.ifDebuggingPrintln(DebugFlags.DEBUG_SCENE,
-            getTrueName() + " is moving with state " + state);
         if (state == State.combat) {
             if (location != null && location.fight != null) {
-                Global.ifDebuggingPrintln(DebugFlags.DEBUG_SCENE,
-                    getTrueName() + " is battling in the " + location.name);
                 location.fight.battle();
             } else {
-                Global.ifDebuggingPrintln(DebugFlags.DEBUG_SCENE,
-                    getTrueName() + " is done battling in the " + location.name);
             }
         } else if (busy > 0) {
             busy--;
@@ -519,15 +498,9 @@ public class NPC extends Character {
                 match = (FTCMatch) Global.getMatch();
                 if (match.isPrey(this) && match.getFlagHolder() == null) {
                     moves.add(findPath(match.gps("Central Camp").get()));
-                    Global.ifDebuggingPrintln(DebugFlags.DEBUG_FTC,
-                        getTrueName() + " moving to get flag (prey)");
                 } else if (!match.isPrey(this) && has(Item.Flag) && !match.isBase(this, location)) {
                     moves.add(findPath(match.getBase(this)));
-                    Global.ifDebuggingPrintln(DebugFlags.DEBUG_FTC,
-                        getTrueName() + " moving to deliver flag (hunter)");
                 } else if (!match.isPrey(this) && has(Item.Flag) && match.isBase(this, location)) {
-                    Global.ifDebuggingPrintln(DebugFlags.DEBUG_FTC,
-                        getTrueName() + " delivering flag (hunter)");
                     new Resupply().execute(this);
                     return;
                 }
@@ -635,7 +608,7 @@ public class NPC extends Character {
 
     @Override
     public void promptTrap(Encounter enc, Character target, Trap trap) {
-        if (ai.attack(target) && (!target.human() || !Global.isDebugOn(DebugFlags.DEBUG_SPECTATE))) {
+        if (ai.attack(target) && (!target.human() || !false)) {
             enc.trap(this, target, trap);
         } else {
             location.endEncounter();
@@ -744,7 +717,6 @@ public class NPC extends Character {
         for (WeightedSkill wskill : plist) {
             sum += wskill.weight;
             wlist.add(new WeightedSkill(sum, wskill.skill));
-            Global.ifDebuggingPrintf(DebugFlags.DEBUG_SKILLS, "%.1f %s\n", sum, wskill.skill);
         }
 
         if (wlist.isEmpty()) {
@@ -752,8 +724,6 @@ public class NPC extends Character {
         }
         double s = Global.randomdouble() * sum;
         for (WeightedSkill wskill : wlist) {
-            Global.ifDebuggingPrintf(DebugFlags.DEBUG_SKILLS,
-                "%.1f/%.1f %s\n", wskill.weight, s, wskill.skill);
             if (wskill.weight > s) {
                 return wskill.skill;
             }
@@ -763,8 +733,6 @@ public class NPC extends Character {
 
     @Override
     public void emote(Emotion emo, int amt) {
-        Global.ifDebuggingPrintf(DebugFlags.DEBUG_MOOD, 
-            "%s: %+d %s", getTrueName(), amt, emo.name());
         if (emo == mood) {
             // if already this mood, cut gain by half
             amt = Math.max(1, amt / 2);
@@ -783,8 +751,6 @@ public class NPC extends Character {
                     emotes.put(e2, emotes.get(e2) / 2);
                 }
                 mood = e;
-                Global.ifDebuggingPrintf(DebugFlags.DEBUG_MOOD,
-                    "Moodswing: %s is now %s\n", getTrueName(), mood.name());
                 return e;
             }
         }

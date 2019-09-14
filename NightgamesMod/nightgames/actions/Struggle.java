@@ -2,7 +2,6 @@ package nightgames.actions;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.status.Bound;
 import nightgames.status.Stsflag;
@@ -22,9 +21,6 @@ public class Struggle extends Action {
     public IMovement execute(Character user) {
         Bound status = (Bound) user.getStatus(Stsflag.bound);
         int difficulty = 20 - user.getEscape(null, null);
-        if (Global.isDebugOn(DebugFlags.DEBUG_SCENE)) {
-            System.out.println(user.getTrueName() + " struggles with difficulty " + difficulty);
-        }
         if (user.check(Attribute.Power, difficulty)) {
             if (user.human()) {
                 if (status != null) {

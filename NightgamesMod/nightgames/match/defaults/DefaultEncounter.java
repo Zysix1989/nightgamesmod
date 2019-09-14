@@ -12,7 +12,6 @@ import nightgames.characters.Player;
 import nightgames.characters.State;
 import nightgames.characters.Trait;
 import nightgames.combat.Combat;
-import nightgames.global.DebugFlags;
 import nightgames.global.Encs;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -504,9 +503,6 @@ public class DefaultEncounter implements Encounter {
     }
 
     public void parse(Encs choice, Character self, Character target, Trap trap) {
-        if (Global.isDebugOn(DebugFlags.DEBUG_SCENE)) {
-            System.out.println(Global.format("{self:true-name} uses %s (%s) on {other:true-name}", self, target, choice, trap));
-        }
         switch (choice) {
             case ambush:
                 ambush(self, target);

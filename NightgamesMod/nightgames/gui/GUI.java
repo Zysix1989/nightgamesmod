@@ -26,7 +26,6 @@ import nightgames.characters.NPC;
 import nightgames.characters.Player;
 import nightgames.combat.Combat;
 import nightgames.daytime.Activity;
-import nightgames.global.DebugFlags;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanel;
@@ -295,9 +294,6 @@ public class GUI extends JFrame implements Observer {
     }
 
     public void endCombat() {
-        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-            System.out.println("End Combat");
-        }
         combat = null;
         clearText();
         clearImage();
@@ -313,9 +309,6 @@ public class GUI extends JFrame implements Observer {
     }
 
     public void endMatch() {
-        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-            System.out.println("Match end");
-        }
         combat = null;
         showNone();
         menuBar.setQuitMatchEnabled(false);
@@ -354,9 +347,6 @@ public class GUI extends JFrame implements Observer {
     }
 
     void removeClosetGUI() {
-        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-            System.out.println("remove closet gui");
-        }
         clothesPanel.removeAll();
         CardLayout layout = (CardLayout) centerPanel.getLayout();
         layout.show(centerPanel, USE_MAIN_TEXT_UI);

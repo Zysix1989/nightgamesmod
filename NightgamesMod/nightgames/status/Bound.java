@@ -9,7 +9,6 @@ import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
-import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.trap.Trap;
 
@@ -103,9 +102,6 @@ public class Bound extends Status {
     @Override
     public void struggle(Character self) {
         int struggleAmount = (int) (5 + Math.sqrt((self.getLevel() + self.get(Attribute.Power) + self.get(Attribute.Cunning))));
-        if (Global.isDebugOn(DebugFlags.DEBUG_DAMAGE)) {
-            System.out.println("Strugged for " + struggleAmount);
-        }
         toughness = Math.max(toughness - struggleAmount, 0);
     }
 

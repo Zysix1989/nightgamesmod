@@ -53,10 +53,6 @@ class GUIStory {
     }
 
     void clearText() {
-        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-            System.out.println("Clearing messages");
-            DebugHelper.printStackFrame(5, 1);
-        }
         textPane.setText("");
     }
 

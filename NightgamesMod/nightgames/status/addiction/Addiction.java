@@ -7,7 +7,6 @@ import com.google.gson.JsonObject;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.combat.Combat;
-import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
@@ -162,9 +161,6 @@ public abstract class Addiction extends Status {
         if (!didDaytime || overloading) {
             if (!overloading) {
                 float amount = Global.randomfloat() / 4.f;
-                if (Global.isDebugOn(DebugFlags.DEBUG_ADDICTION)) {
-                    System.out.println("Alleviating addiction " + this.getType() + " by " + amount);
-                }
                 alleviate(null, amount);
             }
             if (isActive()) {

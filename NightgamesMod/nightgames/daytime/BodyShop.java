@@ -18,7 +18,6 @@ import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.SecondPussyMod;
 import nightgames.characters.body.mods.SizeMod;
-import nightgames.global.DebugFlags;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 
@@ -627,9 +626,6 @@ public class BodyShop extends Activity {
             npc.money -= choice.price;
             budget -= choice.price;
             choice.buy(npc);
-            if (Global.isDebugOn(DebugFlags.DEBUG_PLANNING) && !choice.choice.contains("none")) {
-                System.out.println(npc.getTrueName() + " purchased " + choice.choice);
-            }
         }
     }
 }

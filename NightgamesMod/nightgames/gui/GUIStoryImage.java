@@ -37,9 +37,6 @@ class GUIStoryImage {
         if (Global.checkFlag(Flag.noimage)) {
             return;
         }
-        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-            System.out.println("Display image: " + path);
-        }
         if (!(new File("assets/" + path).canRead())) {
             return;
         }
@@ -58,9 +55,6 @@ class GUIStoryImage {
     }
 
     void clearImage() {
-        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-            System.out.println("Reset image");
-        }
         label.setIcon(null);
     }
 }

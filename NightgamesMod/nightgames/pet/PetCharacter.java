@@ -17,7 +17,6 @@ import nightgames.characters.WeightedSkill;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
-import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Encounter;
@@ -197,30 +196,16 @@ public class PetCharacter extends Character {
         WeightedSkill bestEnemySkill = Decider.prioritizePet(this, target, allowedEnemySkills, c);
         WeightedSkill bestMasterSkill = Decider.prioritizePet(this, getSelf().owner, allowedMasterSkills, c);
 
-        if (Global.isDebugOn(DebugFlags.DEBUG_PET)) {
-            System.out.println("Available Enemy Skills " + allowedEnemySkills);
-            System.out.println("Available Master Skills " + allowedMasterSkills);
-        }
-
         // don't let the ratings be negative.
         double masterSkillRating = Math.max(.001, bestMasterSkill.rating);
         double enemySkillRating = Math.max(.001, bestEnemySkill.rating);
 
         double roll = Global.randomdouble(masterSkillRating + enemySkillRating) - masterSkillRating;
-        if (Global.isDebugOn(DebugFlags.DEBUG_PET)) {
-            System.out.printf("Rolled %s for master skill: %s [%.2f] and %s [%.2f]\n", roll, bestMasterSkill.skill.getLabel(c), -masterSkillRating, bestEnemySkill.skill.getLabel(c), enemySkillRating);
-        }
         if (roll >= 0) {
-            if (Global.isDebugOn(DebugFlags.DEBUG_PET)) {
-                System.out.println("Using enemy skill " + bestEnemySkill.skill.getLabel(c));
-            }
             c.write(this, String.format("<b>%s uses %s against %s</b>\n", getTrueName(), 
                             bestEnemySkill.skill.getLabel(c), target.nameDirectObject()));
             Skill.resolve(bestEnemySkill.skill, c, target);
         } else {
-            if (Global.isDebugOn(DebugFlags.DEBUG_PET)) {
-                System.out.println("Using master skill " + bestMasterSkill.skill.getLabel(c));
-            }
             c.write(this, String.format("<b>%s uses %s against %s</b>\n", 
                             getTrueName(), bestMasterSkill.skill.getLabel(c), target.nameDirectObject()));
             Skill.resolve(bestMasterSkill.skill, c, self.owner());

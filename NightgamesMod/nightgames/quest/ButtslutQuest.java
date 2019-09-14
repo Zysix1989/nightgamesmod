@@ -12,7 +12,6 @@ import nightgames.characters.*;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
-import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.stance.Position;
 import nightgames.status.Abuff;
@@ -114,7 +113,6 @@ public class ButtslutQuest extends Quest {
     }
     
     public double applyReceiveBonusesAnal(Combat c, Character opponent, BodyPart ass) {
-        if (Global.isDebugOn(DebugFlags.DEBUG_SCENE)) {System.out.println("Doing attribute conversion");}
         //attribute converting text copied from Corruption
         int strength = (int) (getPointsForOfType(Global.getPlayer(),13) * STATS_CONVERTED_TO_SUB_PER_POINT13);
         Map<Attribute, Integer> buffs = new HashMap<>();

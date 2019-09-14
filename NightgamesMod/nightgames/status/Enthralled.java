@@ -9,7 +9,6 @@ import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
-import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.pet.PetCharacter;
 
@@ -115,9 +114,6 @@ public class Enthralled extends DurationStatus {
     public void tick(Combat c) {
         if (affected.check(Attribute.Cunning, master.get(Attribute.Seduction) / 2 + master.get(Attribute.Arcane) / 2
                         + master.get(Attribute.Dark) / 2 + 10 + 10 * (getDuration() - timesRefreshed))) {
-            if (Global.isDebugOn(DebugFlags.DEBUG_SCENE)) {
-                System.out.println("Escaped from Enthralled");
-            }
             setDuration(0);
         }
         affected.loseMojo(c, 5, " (Enthralled)");

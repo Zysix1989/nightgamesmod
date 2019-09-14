@@ -255,22 +255,6 @@ public class Global {
         return getTraitRequirements().meetsRequirements(c, t);
     }
 
-    public static boolean isDebugOn(DebugFlags flag) {
-        return false;
-    }
-    
-    public static void ifDebuggingPrintf(DebugFlags flag, String formatted, Object... args) {
-        if (isDebugOn(flag)) {
-            System.out.printf(formatted, args);
-        }
-    }
-    
-    public static void ifDebuggingPrintln(DebugFlags flag, String output) {
-        if (isDebugOn(flag)) {
-            System.out.println(output);
-        }
-    }
-
     /**Begins a new game, given the various conditions for start. Builds all required sets and members of the player and participating characters.
      * 
      * @param playerName
@@ -656,10 +640,6 @@ public class Global {
         
         //getSkillPool().add(new BreastSmotherSuperSucc(ch));
         //getSkillPool().add(new FutaFight(ch));
-
-        if (Global.isDebugOn(DebugFlags.DEBUG_SKILLS)) {
-            getSkillPool().add(new SelfStun(ch));
-        }
     }
 
     /**
@@ -745,16 +725,12 @@ public class Global {
                     Modifier mod = CustomModifierLoader.readModifier(object);
                     if (!mod.name().equals("DEMO"))
                         modifierPool.add(mod);
-                    if (isDebugOn(DebugFlags.DEBUG_LOADING))
-                        System.out.println("Loaded custom modifier: " + mod.name());
                 }
             } catch (IOException e) {
                 System.out.println("Error loading custom modifiers: " + e);
                 e.printStackTrace();
             }
         }
-        if (isDebugOn(DebugFlags.DEBUG_LOADING))
-            System.out.println("Done loading modifiers");
     }
 
     public static Set<Action> getActions() {
@@ -876,17 +852,9 @@ public class Global {
 
     
     public static void startNight() {
-        if (isDebugOn(DebugFlags.DEBUG_MATCHTYPES)) {
-        current = new MatchTypePicker();
-        current.respond("Start");
-        } else if (isDebugOn(DebugFlags.DEBUG_MATCHMODIFIERS)) {
-        current = new MatchModifierPicker();
-        current.respond("Start");
-        } else {
         currentMatchType = decideMatchType();
         currentMatchType.runPrematch();
-        }
-        }
+    }
 
     public static List<Character> getMatchParticipantsInAffectionOrder() {
         if (match == null) {

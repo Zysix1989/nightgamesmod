@@ -11,7 +11,6 @@ import nightgames.characters.Decider;
 import nightgames.characters.NPC;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
-import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
 import nightgames.nskills.tags.SkillTag;
@@ -73,11 +72,6 @@ public class StripSelf extends Skill {
                 });
                 checks.put(article, rating);
             });
-            if (Global.isDebugOn(DebugFlags.DEBUG_SKILLS)) {
-                checks.entrySet().stream().forEach(entry -> {
-                    System.out.println("Stripping " + entry.getKey() + ": " + entry.getValue());
-                });
-            }
             Clothing best = checks.entrySet().stream().max((first, second) -> {
                 double test = second.getValue() - first.getValue();
                 if (test < 0) {

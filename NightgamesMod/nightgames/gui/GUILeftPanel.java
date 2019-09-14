@@ -7,8 +7,6 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import nightgames.characters.NPC;
 import nightgames.combat.Combat;
-import nightgames.global.DebugFlags;
-import nightgames.global.Global;
 
 class GUILeftPanel {
 
@@ -48,17 +46,11 @@ class GUILeftPanel {
     }
 
     void showMap() {
-        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-            System.out.println("Show map");
-        }
         map.setPreferredSize(new Dimension(300, 385));
         layout.show(leftPanel, USE_MAP);
     }
 
     void showNone() {
-        if (Global.isDebugOn(DebugFlags.DEBUG_GUI)) {
-            System.out.println("Show none");
-        }
         layout.show(leftPanel, USE_NONE);
     }
 

@@ -14,7 +14,6 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.SizeMod;
 import nightgames.combat.Combat;
-import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
@@ -216,10 +215,6 @@ public class GenericBodyPart implements BodyPart {
 
     @Override
     public void onStartPenetration(Combat c, Character self, Character opponent, BodyPart target) {
-        if (Global.isDebugOn(DebugFlags.DEBUG_SCENE)) {
-            System.out.printf("Starting Penetration for %s -> (%s, %s, %s)\n", describe(self), self, opponent,
-                            target.describe(opponent));
-        }
         for (PartMod mod : mods) {
             mod.onStartPenetration(c, self, opponent, this, target);
         }
@@ -241,10 +236,6 @@ public class GenericBodyPart implements BodyPart {
 
     @Override
     public void onOrgasmWith(Combat c, Character self, Character opponent, BodyPart other, boolean selfCame) {
-        if (Global.isDebugOn(DebugFlags.DEBUG_SCENE)) {
-            System.out.printf("Processing OrgasmWith for %s -> (%s, %s, %s, %s)\n", describe(self), self, opponent,
-                            other.describe(opponent), Boolean.toString(selfCame));
-        }
         for (PartMod mod : mods) {
             mod.onOrgasmWith(c, self, opponent, this, other, selfCame);
         }

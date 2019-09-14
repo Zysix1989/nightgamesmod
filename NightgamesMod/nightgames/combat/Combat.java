@@ -33,7 +33,6 @@ import nightgames.characters.body.mods.FieryMod;
 import nightgames.characters.body.mods.GooeyMod;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.PlantMod;
-import nightgames.global.DebugFlags;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -160,7 +159,6 @@ public class Combat extends Observable implements Cloneable {
         int reverseresult = (result==3?3:(result==1?2:0));
         p1p2Results.set(result, 1+p1p2Results.get(result));
         p2p1Results.set(reverseresult, 1+p2p1Results.get(reverseresult));
-        if(Global.isDebugOn(DebugFlags.DEBUG_SCENE)) {System.out.println("The combat record for "+p1.getName()+" against "+p2.getName()+" is: "+p1p2Results.get(1)+" wins, "+p1p2Results.get(2)+" losses, and "+p1p2Results.get(3)+" draws.");}
     }
     
     public static void printResultsTracker() {
@@ -966,9 +964,6 @@ public class Combat extends Observable implements Cloneable {
         listen(l -> l.preAction(self, target, action));
         
         Skill skill = checkWorship(self, target, action);
-        if (Global.isDebugOn(DebugFlags.DEBUG_SCENE)) {
-            System.out.println(self.getTrueName() + " uses " + action.getLabel(this));
-        }
         if (skill != action) {
             listen(l -> l.onActionTurnedToWorship(self, target, action, skill));
         }
@@ -1622,21 +1617,8 @@ public class Combat extends Observable implements Cloneable {
                     write(initiator, Global.format("{self:SUBJECT-ACTION:take|takes} the chance to send {other:name-do} sprawling to the ground", initiator, newStance.bottom));
                     newStance.bottom.add(this, new Falling(newStance.bottom));
                 }
-            } else {
-                if (Global.isDebugOn(DebugFlags.DEBUG_SCENE)) {
-                    System.out.printf("Tried to change stance without both players, stopping: %s -> %s\n",
-                                    stance.getClass().getName(),
-                                    newStance.getClass().getName());
-                    Thread.dumpStack();
-                }
             }
             return;
-        }
-        if (Global.isDebugOn(DebugFlags.DEBUG_SCENE)) {
-            System.out.printf("Stance Change: %s -> %s\n", stance.getClass()
-                                                                 .getName(),
-                            newStance.getClass()
-                                     .getName());
         }
         if (initiator != null) {
             Character otherCharacter = getOpponent(initiator);
@@ -1672,9 +1654,6 @@ public class Combat extends Observable implements Cloneable {
                 if (initiator != null) {
                     getCombatantData(initiator).setIntegerFlag("ChoseToFuck", 1);
                     getCombatantData(getOpponent(initiator)).setIntegerFlag("ChoseToFuck", -1);
-                }
-                if (Global.isDebugOn(DebugFlags.DEBUG_SCENE)) {
-                    System.out.println(initiator + " initiated penetration, voluntary=" + voluntary);
                 }
             }
             checkBreeder(p1, voluntary);
@@ -1751,9 +1730,6 @@ public class Combat extends Observable implements Cloneable {
 
     public void setBeingObserved(boolean beingObserved) {
         this.beingObserved = beingObserved;
-        if (beingObserved && log == null && Global.isDebugOn(DebugFlags.DEBUG_SPECTATE)) {
-            log = new CombatLog(this);
-        }
     }
     
     public boolean shouldPrintReceive(Character ch, Combat c) {

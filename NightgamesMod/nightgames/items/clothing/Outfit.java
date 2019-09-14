@@ -20,7 +20,6 @@ import java.util.stream.Stream;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.combat.Combat;
-import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 
 public class Outfit {
@@ -310,12 +309,6 @@ public class Outfit {
             }
         }
         sb.append("<br/>");
-        if (Global.isDebugOn(DebugFlags.DEBUG_CLOTHING)) {
-            for (Clothing article : equipped) {
-                sb.append(article);
-                sb.append("<br/>");
-            }
-        }
         return Global.capitalizeFirstLetter(Global.format(sb.toString(), c, c));
     }
 

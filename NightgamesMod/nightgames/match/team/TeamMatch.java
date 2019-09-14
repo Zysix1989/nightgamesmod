@@ -19,7 +19,6 @@ import nightgames.areas.MapDrawHint;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatListener;
-import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.match.Encounter;
 import nightgames.match.Match;
@@ -62,9 +61,6 @@ public class TeamMatch extends Match {
             } while (kicked.human());
             combatants.remove(kicked);
             byLevel.remove(kicked);
-            if (Global.isDebugOn(DebugFlags.DEBUG_SCENE)) {
-                System.out.println(kicked.getTrueName() + " was kicked to balance the teams.");
-            }
             makePairs(byLevel);
         }
 
