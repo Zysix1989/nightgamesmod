@@ -161,7 +161,6 @@ public class GUI extends JFrame implements Observer {
     public Combat beginCombat(Player player, NPC enemy) {
         showPortrait();
         combat = new Combat(player, enemy, player.location());
-        combat.addObserver(this);
         combat.setBeingObserved(true);
         loadPortrait(combat, enemy);
         showPortrait();
@@ -200,7 +199,6 @@ public class GUI extends JFrame implements Observer {
     // Combat spectate ???
     public void watchCombat(Combat c) {
         combat = c;
-        combat.addObserver(this);
         c.setBeingObserved(true);
     }
 
@@ -331,12 +329,6 @@ public class GUI extends JFrame implements Observer {
     @Override
     public void update(Observable arg0, Object arg1) {
         refresh();
-        if (combat != null) {
-            if (combat.combatMessageChanged) {
-                message(combat.getMessage());
-                combat.combatMessageChanged = false;
-            }
-        }
     }
 
     public void changeClothes(Character player, Activity event, String backOption) {

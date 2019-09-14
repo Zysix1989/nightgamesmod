@@ -95,7 +95,7 @@ import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.Addiction.Severity;
 import nightgames.status.addiction.AddictionType;
 
-public class Combat extends Observable {
+public class Combat {
     private static final int NPC_TURN_LIMIT = 75;
     private static final double NPC_DRAW_ERROR_MARGIN = .15;
     
@@ -453,11 +453,9 @@ public class Combat extends Observable {
         doStanceTick(p1);
         doStanceTick(p2);
 
-        List<Character> team1 = new ArrayList<>();
-        team1.addAll(getPetsFor(p1));
+        List<Character> team1 = new ArrayList<>(getPetsFor(p1));
         team1.add(p1);
-        List<Character> team2 = new ArrayList<>();
-        team2.addAll(getPetsFor(p2));
+        List<Character> team2 = new ArrayList<>(getPetsFor(p2));
         team2.add(p2);
         team1.forEach(self -> doAuraTick(self, team1, team2));
         team2.forEach(self -> doAuraTick(self, team2, team1));
@@ -1244,15 +1242,21 @@ public class Combat extends Observable {
 
     public void updateMessage() {
         combatMessageChanged = true;
-        setChanged();
-        this.notifyObservers();
+        Global.gui().refresh();
+        if (beingObserved && combatMessageChanged) {
+            Global.gui().message(message);
+            combatMessageChanged = false;
+        }
     }
 
     public void updateAndClearMessage() {
         Global.gui().clearText();
         combatMessageChanged = true;
-        setChanged();
-        this.notifyObservers();
+        Global.gui().refresh();
+        if (beingObserved && combatMessageChanged) {
+            Global.gui().message(message);
+            combatMessageChanged = false;
+        }
     }
 
     public void write(Character user, String text) {
