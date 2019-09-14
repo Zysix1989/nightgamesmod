@@ -95,7 +95,7 @@ import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.Addiction.Severity;
 import nightgames.status.addiction.AddictionType;
 
-public class Combat extends Observable implements Cloneable {
+public class Combat extends Observable {
     private static final int NPC_TURN_LIMIT = 75;
     private static final double NPC_DRAW_ERROR_MARGIN = .15;
     
