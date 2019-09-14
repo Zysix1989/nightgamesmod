@@ -26,7 +26,30 @@ class SkillButton extends KeyableButton {
         combat = c;
         this.action = action;
 
-        setText(getText());
+        int actualAccuracy = this.target.getChanceToHit(
+            this.action.getSelf(), combat, this.action.accuracy(combat, this.target));
+        int clampedAccuracy = Math.min(100, Math.max(0, actualAccuracy));
+        String text = "<html>" + "<p><b>" + this.action.getLabel(combat) + "</b><br/>" +
+            this.action.describe(combat) + "<br/><br/>Accuracy: " +
+            (actualAccuracy >=150 ? "---" : clampedAccuracy + "%") + "</p>";
+        if (this.action.getMojoCost(combat) > 0) {
+            setBorder(new LineBorder(Color.RED, 3));
+            text += "<br/>Mojo cost: " + this.action.getMojoCost(combat);
+        } else if (this.action.getMojoBuilt(combat) > 0) {
+            setBorder(new LineBorder(new Color(53, 201, 255), 3));
+            text += "<br/>Mojo generated: " + this.action.getMojoBuilt(combat) + "%";
+        } else {
+            setBorder(new LineBorder(getButton().getBackground(), 3));
+        }
+        if (!this.action.user().cooldownAvailable(this.action)) {
+            getButton().setEnabled(false);
+            text += String.format("<br/>Remaining Cooldown: %d turns", this.action.user()
+                .getCooldown(this.action));
+            getButton().setForeground(Color.WHITE);
+            getButton().setBackground(getBackground().darker());
+        }
+        text += "</html>";
+        setText(text);
 
         getButton().setBorderPainted(false);
         getButton().setOpaque(true);
@@ -81,29 +104,4 @@ class SkillButton extends KeyableButton {
         }
     }
 
-    private String getText() {
-        int actualAccuracy = target.getChanceToHit(action.getSelf(), combat, action.accuracy(combat, target));
-        int clampedAccuracy = Math.min(100, Math.max(0, actualAccuracy));
-        String text = "<html>" + "<p><b>" + action.getLabel(combat) + "</b><br/>" +
-            action.describe(combat) + "<br/><br/>Accuracy: " +
-            (actualAccuracy >=150 ? "---" : clampedAccuracy + "%") + "</p>";
-        if (action.getMojoCost(combat) > 0) {
-            setBorder(new LineBorder(Color.RED, 3));
-            text += "<br/>Mojo cost: " + action.getMojoCost(combat);
-        } else if (action.getMojoBuilt(combat) > 0) {
-            setBorder(new LineBorder(new Color(53, 201, 255), 3));
-            text += "<br/>Mojo generated: " + action.getMojoBuilt(combat) + "%";
-        } else {
-            setBorder(new LineBorder(getButton().getBackground(), 3));
-        }
-        if (!action.user().cooldownAvailable(action)) {
-            getButton().setEnabled(false);
-            text += String.format("<br/>Remaining Cooldown: %d turns", action.user()
-                .getCooldown(action));
-            getButton().setForeground(Color.WHITE);
-            getButton().setBackground(getBackground().darker());
-        }
-        text += "</html>";
-        return text;
-    }
 }
