@@ -69,26 +69,26 @@ public class Blowjob extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        int m = 10 + Global.random(8);
+        int arousalToTarget = 10 + Global.random(8);
         boolean facesitting = isFacesitting(c, target);
         if (getSelf().has(Trait.silvertongue)) {
-            m += 4;
+            arousalToTarget += 4;
         }
         if (isVaginal(c, target)) {
-            m += 4;
-            writeOutput(c, m, Result.intercourse, target);
-            target.body.pleasure(getSelf(), getSelf().body.getRandom("pussy"), target.body.getRandom("cock"), m, c, this);
+            arousalToTarget += 4;
+            writeOutput(c, arousalToTarget, Result.intercourse, target);
+            target.body.pleasure(getSelf(), getSelf().body.getRandom("pussy"), target.body.getRandom("cock"), arousalToTarget, c, this);
         } else if (facesitting) {
-            writeOutput(c, m, Result.reverse, target);
-            target.body.pleasure(getSelf(), getSelf().body.getRandom("mouth"), target.body.getRandom("cock"), m, c, this);
+            writeOutput(c, arousalToTarget, Result.reverse, target);
+            target.body.pleasure(getSelf(), getSelf().body.getRandom("mouth"), target.body.getRandom("cock"), arousalToTarget, c, this);
             target.buildMojo(c, 10);
         } else if (target.roll(getSelf(), c, accuracy(c, target))) {
-            writeOutput(c, m, getSelf().has(Trait.silvertongue) ? Result.special : Result.normal, target);
+            writeOutput(c, arousalToTarget, getSelf().has(Trait.silvertongue) ? Result.special : Result.normal, target);
             BodyPart mouth = getSelf().body.getRandom("mouth");
             BodyPart cock = target.body.getRandom("cock");
-            target.body.pleasure(getSelf(), mouth, cock, m, c, this);
+            target.body.pleasure(getSelf(), mouth, cock, arousalToTarget, c, this);
             if (mouth.isErogenous()) {
-                getSelf().body.pleasure(target, cock, mouth, m, c, this);
+                getSelf().body.pleasure(target, cock, mouth, arousalToTarget, c, this);
             }
 
             if (ReverseMount.class.isInstance(c.getStance())) {

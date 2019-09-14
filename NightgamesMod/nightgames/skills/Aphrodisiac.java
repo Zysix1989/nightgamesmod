@@ -51,7 +51,7 @@ public class Aphrodisiac extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        float magnitude = 10;
+        float arousalToTarget = 10;
         String type = " aphrodisiacs";
         if (!target.roll(getSelf(), c, accuracy(c, target))) {
 
@@ -59,7 +59,7 @@ public class Aphrodisiac extends Skill {
             return false;
         } else if (!getSelf().body.getCurrentPartsThatMatch(hasSuccubusPussy).isEmpty()
                         && getSelf().getArousal().percent() >= 15) {
-            writeOutput(c, (int) magnitude, Result.strong, target);
+            writeOutput(c, (int) arousalToTarget, Result.strong, target);
             type = " aphrodisiac juices";
             target.emote(Emotion.horny, 20);
         } else if (getSelf().has(Item.Aersolizer)) {
@@ -67,11 +67,11 @@ public class Aphrodisiac extends Skill {
             getSelf().consume(Item.Aphrodisiac, 1);
             type = " aphrodisiac spray";
         } else {
-            writeOutput(c, (int) magnitude, Result.normal, target);
+            writeOutput(c, (int) arousalToTarget, Result.normal, target);
             target.emote(Emotion.horny, 20);
             getSelf().consume(Item.Aphrodisiac, 1);
         }
-        target.add(c, Horny.getWithBiologicalType(getSelf(), target, magnitude, 8, getSelf().nameOrPossessivePronoun() + type));
+        target.add(c, Horny.getWithBiologicalType(getSelf(), target, arousalToTarget, 8, getSelf().nameOrPossessivePronoun() + type));
         target.emote(Emotion.horny, 20);
         return true;
     }

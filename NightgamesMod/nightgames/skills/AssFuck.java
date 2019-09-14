@@ -78,9 +78,9 @@ public class AssFuck extends Fuck {
         }
         c.write(getSelf(), Global.format(premessage, getSelf(), target));
 
-        int m = Global.random(10, 15);
+        int arousalToSelf = Global.random(10, 15);
         if (getSelf().has(Trait.strapped) && getSelf().has(Item.Strapon2)) {
-            m += 3;
+            arousalToSelf += 3;
         }
         if (getSelf().human()) {
             c.write(getSelf(), deal(c, premessage.length(), Result.normal, target));
@@ -88,7 +88,7 @@ public class AssFuck extends Fuck {
             if (!c.getStance().behind(getSelf()) && getSelf().has(Trait.strapped)) {
                 c.write(getSelf(), receive(c, premessage.length(), Result.upgrade, target));
             } else if (getSelf().getType().equals("Eve") && c.getStance().behind(getSelf())) {
-                m += 5;
+                arousalToSelf += 5;
                 c.write(getSelf(), receive(c, premessage.length(), Result.special, target));
             } else {
                 c.write(getSelf(), receive(c, premessage.length(), Result.normal, target));
@@ -112,13 +112,13 @@ public class AssFuck extends Fuck {
         } else {
             c.setStance(new AnalProne(getSelf(), target), getSelf(), voluntary);
         }
-        int otherm = m;
+        int arousalToTarget = arousalToSelf;
         if (getSelf().has(Trait.insertion)) {
-            otherm += Math.min(getSelf().get(Attribute.Seduction) / 4, 40);
+            arousalToTarget += Math.min(getSelf().get(Attribute.Seduction) / 4, 40);
         }
-        target.body.pleasure(getSelf(), getSelfOrgan(), getTargetOrgan(target), otherm, c, this);
+        target.body.pleasure(getSelf(), getSelfOrgan(), getTargetOrgan(target), arousalToTarget, c, this);
         if (!getSelf().has(Trait.strapped)) {
-            getSelf().body.pleasure(target, getTargetOrgan(target), getSelfOrgan(), m / 2, c, this);
+            getSelf().body.pleasure(target, getTargetOrgan(target), getSelfOrgan(), arousalToSelf / 2, c, this);
         }
         getSelf().emote(Emotion.dominant, 100);
         if (!target.has(Trait.analTraining1) && !target.has(Trait.shameless)) {

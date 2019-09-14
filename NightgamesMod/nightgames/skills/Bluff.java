@@ -33,12 +33,12 @@ public class Bluff extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        int m = 20 + Global.random(25);
+        int staminaToSelf = 20 + Global.random(25);
         writeOutput(c, Result.normal, target);
         if (!getSelf().getArousal().isFull()) {
             getSelf().add(c, new IgnoreOrgasm(getSelf(), 2));
         }
-        getSelf().heal(c, m);
+        getSelf().heal(c, staminaToSelf);
         getSelf().calm(c, getSelf().getArousal().max() / 4);
         getSelf().add(c, new Unreadable(getSelf()));
         getSelf().emote(Emotion.confident, 30);

@@ -60,38 +60,38 @@ public class Anilingus extends Skill {
     public boolean resolve(Combat c, Character target) {
         AssPart targetAss = (AssPart) target.body.getRandom("ass");
         Result result = Result.normal;
-        int m = 10;
-        int n = 0;
-        int selfm = 0;
+        int arousalToTarget = 10;
+        int mojoToTarget = 0;
+        int arousalToSelf = 0;
         if (isWorship(c, target)) {
             result = Result.sub;
-            m += 4 + Global.random(6);
-            n = 20;
-            selfm = 20;
+            arousalToTarget += 4 + Global.random(6);
+            mojoToTarget = 20;
+            arousalToSelf = 20;
         } else if (c.getStance().isBeingFaceSatBy(c, getSelf(), target)) {
             result = Result.reverse;
-            m += Global.random(6);
-            n = 10;
+            arousalToTarget += Global.random(6);
+            mojoToTarget = 10;
         } else if (!c.getStance().mobile(target) || target.roll(getSelf(), c, accuracy(c, target))) {
-            m += Global.random(6);
+            arousalToTarget += Global.random(6);
             if (getSelf().has(Trait.silvertongue)) {
-                m += 4;
+                arousalToTarget += 4;
                 result = Result.special;
             }
         } else {
-            m = 0;
-            n = 0;
+            arousalToTarget = 0;
+            mojoToTarget = 0;
             result = Result.miss;
         }
-        writeOutput(c, m, result, target);
-        if (m > 0) {
-            target.body.pleasure(getSelf(), getSelf().body.getRandom("mouth"), targetAss, m, c, this);
+        writeOutput(c, arousalToTarget, result, target);
+        if (arousalToTarget > 0) {
+            target.body.pleasure(getSelf(), getSelf().body.getRandom("mouth"), targetAss, arousalToTarget, c, this);
         }
-        if (n > 0) {
-            target.buildMojo(c, n);
+        if (mojoToTarget > 0) {
+            target.buildMojo(c, mojoToTarget);
         }
-        if (selfm > 0) {
-            getSelf().temptWithSkill(c, target, target.body.getRandom("ass"), selfm, this);
+        if (arousalToSelf > 0) {
+            getSelf().temptWithSkill(c, target, target.body.getRandom("ass"), arousalToSelf, this);
         }
         if (target.has(Trait.temptingass) && !getSelf().bound()) {
             c.write(target, Global.format("Servicing {other:possessive} perfect behind makes {self:direct-object} almost unconsciously touch {self:reflective}.", getSelf(), target));

@@ -48,21 +48,21 @@ public class AssJob extends Skill {
     public boolean resolve(Combat c, Character target) {
         if (c.getStance().behind(target)) {
             writeOutput(c, Result.special, target);
-            int m = Global.random(10, 14);
+            int arousalToTarget = Global.random(10, 14);
             int fetishChance = 20 + getSelf().get(Attribute.Fetish) / 2;
             if (target.crotchAvailable()) {
                 if (getSelf().crotchAvailable()) {
-                    m += 6;
+                    arousalToTarget += 6;
                     fetishChance += 30;
                 } else {
-                    m += 3;
+                    arousalToTarget += 3;
                     fetishChance += 15;
                 }
                 if (getSelf().has(Trait.bewitchingbottom)) {
                     fetishChance *= 2;
                 }
             }
-            target.body.pleasure(getSelf(), getSelf().body.getRandomAss(), target.body.getRandomCock(), m, c, this);
+            target.body.pleasure(getSelf(), getSelf().body.getRandomAss(), target.body.getRandomCock(), arousalToTarget, c, this);
 
             if (Global.random(100) < fetishChance) {
                 target.add(c, new BodyFetish(target, getSelf(), "ass", .1 + getSelf().get(Attribute.Fetish) * .05));
@@ -70,14 +70,14 @@ public class AssJob extends Skill {
         } else if (target.roll(getSelf(), c, accuracy(c, target))) {
             if (c.getStance().en == Stance.reversemount) {
                 writeOutput(c, Result.strong, target);
-                int m = Global.random(14, 19);
+                int arousalToTarget = Global.random(14, 19);
                 int fetishChance = 20 + getSelf().get(Attribute.Fetish) / 2;
                 if (target.crotchAvailable()) {
                     if (getSelf().crotchAvailable()) {
-                        m += 6;
+                        arousalToTarget += 6;
                         fetishChance += 30;
                     } else {
-                        m += 3;
+                        arousalToTarget += 3;
                         fetishChance += 15;
                     }
                     if (getSelf().has(Trait.bewitchingbottom)) {
@@ -85,9 +85,9 @@ public class AssJob extends Skill {
                     }
                 }
                 if (target.body.getRandomCock().isReady(target)) {
-                    target.body.pleasure(getSelf(), getSelf().body.getRandomAss(), target.body.getRandomCock(), m, c, this);
+                    target.body.pleasure(getSelf(), getSelf().body.getRandomAss(), target.body.getRandomCock(), arousalToTarget, c, this);
                 } else {
-                    target.temptWithSkill(c, getSelf(), getSelf().body.getRandomAss(), m, this);
+                    target.temptWithSkill(c, getSelf(), getSelf().body.getRandomAss(), arousalToTarget, this);
                 }
 
                 if (Global.random(100) < fetishChance) {
@@ -95,15 +95,15 @@ public class AssJob extends Skill {
                 }
             } else {
                 writeOutput(c, Result.normal, target);
-                int m = Global.random(10, 14);
+                int arousalToTarget = Global.random(10, 14);
                 if (target.crotchAvailable()) {
                     if (getSelf().crotchAvailable()) {
-                        m += 6;
+                        arousalToTarget += 6;
                     } else {
-                        m += 3;
+                        arousalToTarget += 3;
                     }
                 }
-                target.body.pleasure(getSelf(), getSelf().body.getRandomAss(), target.body.getRandomCock(), m, c, this);
+                target.body.pleasure(getSelf(), getSelf().body.getRandomAss(), target.body.getRandomCock(), arousalToTarget, c, this);
             }
         } else {
             writeOutput(c, Result.miss, target);
