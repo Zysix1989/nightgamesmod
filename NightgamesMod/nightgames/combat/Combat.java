@@ -762,7 +762,6 @@ public class Combat {
             phase = determinePostCombatPhase();
             return next();
         }
-        listen(CombatListener::preTurn);
         if ((p1.orgasmed || p2.orgasmed) && phase != CombatPhase.RESULTS_SCENE && SKIPPABLE_PHASES.contains(phase)) {
             phase = CombatPhase.UPKEEP;
         }
@@ -776,7 +775,6 @@ public class Combat {
                 phase = CombatPhase.SKILL_SELECTION;
                 return false;
             case SKILL_SELECTION:
-                listen(CombatListener::preSkillSelection);
                 return pickSkills();
             case PET_ACTIONS:
                 phase = doPetActions();
@@ -833,7 +831,6 @@ public class Combat {
             return p2.act(this);
         } else {
             phase = CombatPhase.PET_ACTIONS;
-            listen(l -> l.postSkillSelection(p1act, p2act));
             return false;
         }
     }
@@ -958,18 +955,13 @@ public class Combat {
     }
 
     public boolean doAction(Character self, Character target, Skill action) {
-        listen(l -> l.preAction(self, target, action));
-        
+
         Skill skill = checkWorship(self, target, action);
-        if (skill != action) {
-            listen(l -> l.onActionTurnedToWorship(self, target, action, skill));
-        }
 
         boolean results = resolveSkill(skill, target);
         this.write("<br/>");
         updateMessage();
-        
-        listen(l -> l.postAction(self, target, skill));
+
         return results;
     }
 
@@ -983,7 +975,6 @@ public class Combat {
     }
 
     private CombatPhase doPetActions() {
-        listen(CombatListener::prePetActions);
         Set<PetCharacter> alreadyBattled = new HashSet<>();
         if (otherCombatants.size() > 0) {
             if (!Global.checkFlag("NoPetBattles")) {
@@ -995,7 +986,6 @@ public class Combat {
                         if (!pet.getSelf().owner().equals(otherPet.getSelf().owner()) && Global.random(2) == 0) {
                             listen(l -> l.prePetBattle(pet, otherPet));
                             petbattle(pet.getSelf(), otherPet.getSelf());
-                            listen(l -> l.postPetBattle(pet, otherPet));
                             alreadyBattled.add(pet);
                             alreadyBattled.add(otherPet);
                         }
@@ -1004,20 +994,16 @@ public class Combat {
             }
             List<PetCharacter> actingPets = new ArrayList<>(otherCombatants);
             actingPets.stream().filter(pet -> !alreadyBattled.contains(pet)).forEach(pet -> {
-                listen(l -> l.prePetAction(pet));
                 pet.act(this, pickTarget(pet));
                 write("<br/>");
                 if (pet.getSelf().owner().has(Trait.devoteeFervor) && Global.random(2) == 0) {
                     write(pet, Global.format("{self:SUBJECT} seems to have gained a second wind from {self:possessive} religious fervor!", pet, pet.getSelf().owner()));
                     pet.act(this, pickTarget(pet));
                 }
-                listen(l -> l.postPetAction(pet));
             });
             write("<br/>");
-            listen(l -> l.postPetActions(true));
             return CombatPhase.DETERMINE_SKILL_ORDER;
         }
-        listen(l -> l.postPetActions(false));
         return CombatPhase.DETERMINE_SKILL_ORDER;
     }
 
@@ -1188,16 +1174,10 @@ public class Combat {
             checkStamina(skill.user());
             orgasmed = checkOrgasm(skill.user(), target, skill);
             lastFailed = false;
-            if (success) {
-                listen(l -> l.onActionSuccess(skill.getSelf(), target, skill));
-            } else {
-                listen(l -> l.onActionCountered(skill.getSelf(), target, skill));
-            }
         } else {
             write(skill.user()
                        .possessiveAdjective() + " " + skill.getLabel(this) + " failed.");
             lastFailed = true;
-            listen(l -> l.onActionFailed(skill.getSelf(), target, skill));
         }
         return orgasmed;
     }
@@ -1222,7 +1202,6 @@ public class Combat {
     }
 
     protected CombatPhase determineSkillOrder() {
-        listen(CombatListener::preActions);
         if (p1.init() + p1act.speed() >= p2.init() + p2act.speed()) {
             return CombatPhase.P1_ACT_FIRST;
         } else {
@@ -1273,7 +1252,6 @@ public class Combat {
     public void checkStamina(Character p) {
         if (p.getStamina()
              .isEmpty() && !p.is(Stsflag.stunned)) {
-            listen(l -> l.onWinded(p));
             p.add(this, new Winded(p, 3));
             if (p.isPet()){
                 // pets don't get stance changes
@@ -1415,7 +1393,6 @@ public class Combat {
      * @return true if it should end the fight, false if there are still more scenes
      */
     public void end() {
-        listen(CombatListener::preEnd);
         p1.state = State.ready;
         p2.state = State.ready;
         if (processedEnding) {
@@ -1665,7 +1642,6 @@ public class Combat {
             initiator.add(this, new Alluring(initiator, 1));
         }
         Position t = newStance; // because it must be final down vv here vv
-        listen(l -> l.onStanceChange(stance, t, initiator, voluntary));
         stance = newStance;
         offerImage(stance.image(), "");
     }
@@ -1768,7 +1744,6 @@ public class Combat {
         }
         getCombatantData(self).setBooleanFlag("resurrected", false);
         otherCombatants.remove(self);
-        listen(l -> l.onPetRemoved(self));
     }
 
     public void addPet(Character master, PetCharacter self) {
@@ -1805,7 +1780,6 @@ public class Combat {
                                         master, self, self.getLevel()));
         otherCombatants.add(self);
         this.write(self, self.challenge(getOpponent(self)));
-        listen(l -> l.onPetAdded(self));
     }
 
     public List<PetCharacter> getOtherCombatants() {

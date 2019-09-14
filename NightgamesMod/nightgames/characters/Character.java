@@ -929,9 +929,7 @@ public abstract class Character extends Observable implements Cloneable {
         // pleasure = 0;
         arousal.restoreNoLimit(pleasure);
         if (checkOrgasm()) {
-            c.listen(l -> l.preOrgasm(this, source, selfPart, opponentPart));
             doOrgasm(c, source, selfPart, opponentPart);
-            c.listen(l -> l.postOrgasm(this, source, selfPart, opponentPart));
         }
         return pleasure;
     }
