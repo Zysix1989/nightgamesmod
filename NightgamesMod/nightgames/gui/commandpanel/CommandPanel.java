@@ -155,7 +155,7 @@ public class CommandPanel extends JPanel{
     private void addTactics() {
         add(Arrays.stream(Tactics.values())
             .filter(t -> this.skills.containsKey(t))
-            .map(t -> new SwitchTacticsButton(t, event -> switchTactics(t)))
+            .map(t -> KeyableButton.SwitchTacticsButton(t, event -> switchTactics(t)))
             .collect(Collectors.toList()));
     }
 

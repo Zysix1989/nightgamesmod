@@ -1,11 +1,16 @@
 package nightgames.gui.commandpanel;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+import nightgames.global.Global;
+import nightgames.skills.Tactics;
 import org.apache.commons.lang3.text.WordUtils;
 
 class KeyableButton extends JPanel {
@@ -39,6 +44,30 @@ class KeyableButton extends JPanel {
         }
         button.button.setFont(new Font("Baskerville Old Face", Font.PLAIN, fontSize));
         button.button.addActionListener(action);
+        return button;
+    }
+
+    private static Color textColorForBackground(Color backgroundColor) {
+        float[] hsb = new float[3];
+        Color.RGBtoHSB(
+            backgroundColor.getRed(),
+            backgroundColor.getGreen(),
+            backgroundColor.getRed(),
+            hsb);
+        if (hsb[2] < .6) {
+            return Color.WHITE;
+        } else {
+            return Color.BLACK;
+        }
+    }
+
+    static KeyableButton SwitchTacticsButton(Tactics tactic, ActionListener action) {
+        var button = BasicButton(Global.capitalizeFirstLetter(tactic.name()), action);
+
+        button.button.setBackground(tactic.getColor());
+        button.button.setMinimumSize(new Dimension(0, 20));
+        button.button.setForeground(textColorForBackground(tactic.getColor()));
+        button.setBorder(new LineBorder(tactic.getColor(), 3));
         return button;
     }
 
