@@ -1,9 +1,6 @@
 package nightgames.gui.commandpanel;
 
 import java.awt.event.ActionListener;
-import nightgames.actions.Action;
-import nightgames.gui.commandpanel.KeyableButton;
-import nightgames.gui.commandpanel.RunnableButton;
 
 public class CommandPanelOption {
 
@@ -24,7 +21,7 @@ public class CommandPanelOption {
     }
 
     KeyableButton toButton() {
-        RunnableButton button = new RunnableButton(displayText, action);
+        var button = KeyableButton.BasicButton(displayText, action);
         if (toolTipText != null) {
             button.getButton().setToolTipText(toolTipText);
         }
