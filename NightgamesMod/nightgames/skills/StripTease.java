@@ -18,7 +18,7 @@ public class StripTease extends Skill {
         addTag(SkillTag.mojoBuilding);
     }
 
-    public StripTease(String string, Character self) {
+    StripTease(String string, Character self) {
         super(string, self);
     }
 
