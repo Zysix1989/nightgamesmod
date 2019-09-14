@@ -177,7 +177,7 @@ public class CommandPanel extends JPanel{
         clear();
         if (tactics != null) {
             add(this.skills.get(tactics).skills.stream()
-                .map(skill -> new SkillButton(combat, skill, target, this))
+                .map(skill -> KeyableButton.SkillButton(combat, skill, target, this))
                 .collect(Collectors.toList()));
             selectedTactic = tactics;
         } else {

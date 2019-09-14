@@ -5,11 +5,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+import nightgames.actions.Action;
+import nightgames.combat.Combat;
+import nightgames.characters.Character;
 import nightgames.global.Global;
+import nightgames.skills.Skill;
+import nightgames.skills.Stage;
 import nightgames.skills.Tactics;
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -17,7 +24,7 @@ class KeyableButton extends JPanel {
     private static final long serialVersionUID = -2379908542190189603L;
     private final JButton button;
 
-    KeyableButton(String text) {
+    private KeyableButton(String text) {
         this.button = new JButton(text);
         this.setLayout(new BorderLayout());
         this.add(button);
@@ -26,13 +33,7 @@ class KeyableButton extends JPanel {
     }
 
     private static String formatHTMLMultiline(String original) {
-        String out = WordUtils
-            .wrap(original.replace("<", "&lt")
-                    .replace(">", "&gt"),
-                Math.max(30, original.length() * 2 / 3),
-                "<br/>",
-                false);
-        return String.format("<html><center>%s</center></html>", out);
+        return String.format("<html><center>%s</center></html>", original);
     }
 
     static KeyableButton BasicButton(String text, ActionListener action) {
@@ -71,8 +72,79 @@ class KeyableButton extends JPanel {
         return button;
     }
 
-    protected void setText(String s) {
-        button.setText(s);
+    private static Font fontForStage(Stage stage) {
+        switch (stage) {
+            case FINISHER:
+                return new Font("Baskerville Old Face", Font.BOLD, 3 * Global.gui().fontsize);
+            case FOREPLAY:
+                return new Font("Baskerville Old Face", Font.ITALIC, 3 * Global.gui().fontsize);
+            default:
+                return new Font("Baskerville Old Face", Font.PLAIN, 3 * Global.gui().fontsize);
+
+        }
+    }
+
+    static KeyableButton SkillButton (
+        Combat combat,
+        Skill action,
+        Character target,
+        CommandPanel commandPanel) {
+
+        LineBorder border;
+        int actualAccuracy = target.getChanceToHit(action.getSelf(), combat, action.accuracy(combat, target));
+        int clampedAccuracy = Math.min(100, Math.max(0, actualAccuracy));
+        String text = "<p><b>" + action.getLabel(combat) + "</b><br/>" +
+            action.describe(combat) +
+            "<br/><br/>Accuracy: " +
+            (actualAccuracy >=150 ? "---" : clampedAccuracy + "%") + "</p>";
+        if (action.getMojoCost(combat) > 0) {
+            border = new LineBorder(Color.RED, 3);
+            text += "<br/>Mojo cost: " + action.getMojoCost(combat);
+        } else if (action.getMojoBuilt(combat) > 0) {
+            border = new LineBorder(new Color(53, 201, 255), 3);
+            text += "<br/>Mojo generated: " + action.getMojoBuilt(combat) + "%";
+        } else {
+            border = new LineBorder(action.type(combat).getColor(), 3);
+        }
+        boolean onCoolDown = false;
+        if (!action.user().cooldownAvailable(action)) {
+            onCoolDown = true;
+            text += String.format("<br/>Remaining Cooldown: %d turns",
+                action.user().getCooldown(action));
+        }
+
+        ActionListener actionListener = arg0 -> {
+            if (action.subChoices(combat).size() == 0) {
+                commandPanel.reset();
+                combat.act(action.user(), action);
+                combat.resume();
+            } else {
+                List<CommandPanelOption> options = action.subChoices(combat).stream()
+                    .map(choice -> new CommandPanelOption(
+                        choice,
+                        event -> {
+                            commandPanel.reset();
+                            action.setChoice(choice);
+                            combat.act(action.user(), action);
+                            combat.resume();
+                        }
+                    )).collect(Collectors.toList());
+                commandPanel.addNoReset(options);
+                commandPanel.setSelectedSkill(action);
+            }
+        };
+
+        var button = BasicButton(text, actionListener);
+        button.button.setFont(fontForStage(action.getStage()));
+        button.button.setBorder(border);
+        Color bgColor = action.type(combat).getColor();
+        if (onCoolDown) {
+            bgColor = action.type(combat).getColor().darker();
+            button.button.setEnabled(false);
+        }
+        button.button.setBackground(bgColor);
+        button.button.setForeground(textColorForBackground(bgColor));
+        return button;
     }
 
     public JButton getButton() {
