@@ -78,14 +78,8 @@ public abstract class Skill {
         // From the list of possible actions, possibly restricted by stance, we check Status
         // effect to see if anything is forcing or preventing remaining skill choices.
         Set<Skill> forcedGivenStatus = new HashSet<Skill>();
-        Set<Skill> statusBlacklist = new HashSet<Skill>();
         for (Status st : user.status) {
-            for (Skill sk : st.skillWhitelist(c)) {
-                forcedGivenStatus.add(sk);
-            }
-            for (Skill sk: st.skillBlacklist(c)) {
-                statusBlacklist.add(sk);
-            }
+            forcedGivenStatus.addAll(st.skillWhitelist(c));
         }
         
         // We don't take the blacklist into account when deciding whether skills were restricted
@@ -137,17 +131,6 @@ public abstract class Skill {
                         && !allureRestricted && !modifierRestricted;
         return usable;
     }
-
-    public static boolean skillIsUsableWithMoreMojo(Combat c, Skill s, Character target, int mojodiff) {
-        boolean charmRestricted = (s.getSelf().is(Stsflag.charmed))
-                        && s.type(c) != Tactics.fucking && s.type(c) != Tactics.pleasure && s.type(c) != Tactics.misc;
-        boolean allureRestricted =
-                        target.is(Stsflag.alluring) && (s.type(c) == Tactics.damage || s.type(c) == Tactics.debuff);
-        boolean modifierRestricted = !Global.getMatch().getCondition().getSkillModifier().allowedSkill(c,s);
-        boolean usable = s.usable(c, target) && s.getSelf().canSpend(s.getMojoCost(c)-mojodiff) && !charmRestricted
-                        && !allureRestricted && !modifierRestricted;
-        return usable;
-    }
     
     public int getMojoBuilt(Combat c) {
         return 0;
@@ -170,10 +153,6 @@ public abstract class Skill {
     public abstract String deal(Combat c, int damage, Result modifier, Character target);
 
     public abstract String receive(Combat c, int damage, Result modifier, Character target);
-
-    public boolean isReverseFuck(Character target) {
-        return target.hasDick() && getSelf().hasPussy();
-    }
 
     public float priorityMod(Combat c) {
         return 0.0f;
