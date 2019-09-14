@@ -31,13 +31,14 @@ public class StripTease extends Skill {
     @Override
     public boolean usable(Combat c, Character target) {
         Character self = getSelf();
-        return self.stripDifficulty(target) == 0 && !self.has(Trait.strapped) && self.canAct() && c.getStance()
-                                                                                                   .mobile(self)
-                        && !self.mostlyNude() && !c.getStance()
-                                                   .prone(self)
-                        && c.getStance()
-                            .front(self)
-                        && (!self.breastsAvailable() || !self.crotchAvailable());
+        return self.stripDifficulty(target) == 0
+            && !self.has(Trait.strapped)
+            && self.canAct()
+            && c.getStance().mobile(self)
+            && !self.mostlyNude()
+            && !c.getStance().prone(self)
+            && c.getStance().front(self)
+            && (!self.breastsAvailable() || !self.crotchAvailable());
     }
 
     @Override

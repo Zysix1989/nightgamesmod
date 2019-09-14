@@ -1601,14 +1601,15 @@ public class Combat extends Observable implements Cloneable {
 
     public void setStance(Position newStance, Character initiator, boolean voluntary) {
         if ((newStance.top.isPet() && newStance.bottom.isPet())
-                        || ((newStance.top.isPet() || newStance.bottom.isPet()) 
-                                        && getStance().en != Stance.neutral
-                                        && !newStance.isThreesome())) {
+            || ((newStance.top.isPet() || newStance.bottom.isPet())
+            && getStance().en != Stance.neutral
+            && !newStance.isThreesome())) {
             // Pets don't get into stances with each other, and they don't usurp stances.
             // Threesomes are exceptions to this.
             return;
         }
-        if ((newStance.top != getStance().bottom && newStance.top != getStance().top) || (newStance.bottom != getStance().bottom && newStance.bottom != getStance().top)) {
+        if ((newStance.top != getStance().bottom && newStance.top != getStance().top)
+            || (newStance.bottom != getStance().bottom && newStance.bottom != getStance().top)) {
             if (initiator != null && initiator.isPet() && newStance.top == initiator) {
                 PetInitiatedThreesome threesomeSkill = new PetInitiatedThreesome(initiator);
                 if (newStance.havingSex(this)) {
