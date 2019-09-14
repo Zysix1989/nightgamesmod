@@ -12,8 +12,6 @@ import nightgames.match.MatchType;
 
 public class MatchTypePicker implements Scene {
 
-
-
     @Override
     public void respond(String response) {
         if (response.equals("Start")) {
@@ -26,28 +24,6 @@ public class MatchTypePicker implements Scene {
                             type.runPrematch();
                         }))
                     .collect(Collectors.toList()));
-        }
-    }
-
-    private static class MTButton extends KeyableButton {
-        
-        private static final long serialVersionUID = -3158804202952673759L;
-        private final MatchType type;
-
-        public MTButton(MatchType type) {
-            super(type.name());
-            this.type = type;
-            getButton().addActionListener(this::startMatch);
-        }
-
-        @Override
-        public String getText() {
-            return type.name();
-        }
-
-        private void startMatch(ActionEvent e) {
-            Global.currentMatchType = type;
-            type.runPrematch();
         }
     }
 
