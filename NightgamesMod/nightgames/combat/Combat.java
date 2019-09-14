@@ -1238,16 +1238,6 @@ public class Combat {
         message = message + Global.colorizeMessage(user, text);
         wroteMessage = true;
     }
-    
-    public String getMessage() {
-        return message;
-    }
-
-    public String debugMessage() {
-        return "Stance: " + getStance().getClass()
-                                       .getName()
-                        + "\np1: " + p1.debugMessage(this, getStance()) + "\np2: " + p2.debugMessage(this, getStance());
-    }
 
     public void checkStamina(Character p) {
         if (p.getStamina()
