@@ -120,7 +120,7 @@ public abstract class Skill {
      * prevents the use of non-pleasure skills. */
 
     public static boolean isUsable(Combat c, Skill s) {
-        return isUsableOn(c, s, null);
+        return isUsableOn(c, s, s.getDefaultTarget(c));
     }
 
 
@@ -128,9 +128,6 @@ public abstract class Skill {
      * prevents the use of non-pleasure skills. */
 
     public static boolean isUsableOn(Combat c, Skill s, Character target) {
-        if (target == null) {
-            target = s.getDefaultTarget(c);
-        }
         boolean charmRestricted = (s.getSelf().is(Stsflag.charmed))
                         && s.type(c) != Tactics.fucking && s.type(c) != Tactics.pleasure && s.type(c) != Tactics.misc;
         boolean allureRestricted =
