@@ -1251,12 +1251,7 @@ public class Combat {
 
     public void updateAndClearMessage() {
         Global.gui().clearText();
-        combatMessageChanged = true;
-        Global.gui().refresh();
-        if (beingObserved && combatMessageChanged) {
-            Global.gui().message(message);
-            combatMessageChanged = false;
-        }
+        updateMessage();
     }
 
     public void write(Character user, String text) {
