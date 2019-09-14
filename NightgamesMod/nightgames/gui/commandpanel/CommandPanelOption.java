@@ -20,8 +20,8 @@ public class CommandPanelOption {
         this.action = action;
     }
 
-    KeyableButton toButton() {
-        var button = KeyableButton.BasicButton(displayText, action);
+    CommandPanelButton toButton() {
+        var button = CommandPanelButton.BasicButton(displayText, action);
         if (toolTipText != null) {
             button.getButton().setToolTipText(toolTipText);
         }

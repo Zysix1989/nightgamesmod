@@ -11,20 +11,18 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-import nightgames.actions.Action;
-import nightgames.combat.Combat;
 import nightgames.characters.Character;
+import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.skills.Skill;
 import nightgames.skills.Stage;
 import nightgames.skills.Tactics;
-import org.apache.commons.lang3.text.WordUtils;
 
-class KeyableButton extends JPanel {
+class CommandPanelButton extends JPanel {
     private static final long serialVersionUID = -2379908542190189603L;
     private final JButton button;
 
-    private KeyableButton(String text) {
+    private CommandPanelButton(String text) {
         this.button = new JButton(text);
         this.setLayout(new BorderLayout());
         this.add(button);
@@ -36,9 +34,9 @@ class KeyableButton extends JPanel {
         return String.format("<html><center>%s</center></html>", original);
     }
 
-    static KeyableButton BasicButton(String text, ActionListener action) {
+    static CommandPanelButton BasicButton(String text, ActionListener action) {
         text = formatHTMLMultiline(text);
-        var button = new KeyableButton(text);
+        var button = new CommandPanelButton(text);
         var fontSize = 18;
         if (text.contains("<br/>")) {
             fontSize = 14;
@@ -62,7 +60,7 @@ class KeyableButton extends JPanel {
         }
     }
 
-    static KeyableButton SwitchTacticsButton(Tactics tactic, ActionListener action) {
+    static CommandPanelButton SwitchTacticsButton(Tactics tactic, ActionListener action) {
         var button = BasicButton(Global.capitalizeFirstLetter(tactic.name()), action);
 
         button.button.setBackground(tactic.getColor());
@@ -84,7 +82,7 @@ class KeyableButton extends JPanel {
         }
     }
 
-    static KeyableButton SkillButton (
+    static CommandPanelButton SkillButton (
         Combat combat,
         Skill action,
         Character target,

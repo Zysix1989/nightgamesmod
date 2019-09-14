@@ -103,7 +103,7 @@ public class CommandPanel extends JPanel{
         revalidate();
     }
 
-    private void add(List<KeyableButton> buttons) {
+    private void add(List<CommandPanelButton> buttons) {
         GroupLayout layout = new GroupLayout(commandPanel);
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
@@ -155,7 +155,7 @@ public class CommandPanel extends JPanel{
     private void addTactics() {
         add(Arrays.stream(Tactics.values())
             .filter(t -> this.skills.containsKey(t))
-            .map(t -> KeyableButton.SwitchTacticsButton(t, event -> switchTactics(t)))
+            .map(t -> CommandPanelButton.SwitchTacticsButton(t, event -> switchTactics(t)))
             .collect(Collectors.toList()));
     }
 
@@ -177,7 +177,7 @@ public class CommandPanel extends JPanel{
         clear();
         if (tactics != null) {
             add(this.skills.get(tactics).skills.stream()
-                .map(skill -> KeyableButton.SkillButton(combat, skill, target, this))
+                .map(skill -> CommandPanelButton.SkillButton(combat, skill, target, this))
                 .collect(Collectors.toList()));
             selectedTactic = tactics;
         } else {
