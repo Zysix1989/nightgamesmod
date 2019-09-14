@@ -179,15 +179,17 @@ public class Global {
     private static Set<Character> resting;
     private static Set<String> flags;                               //Global flags - 
     private static Map<String, Float> counters;
+    public static Player human;                                     //Useful for many reasons, redundant in a game where all elements are stored equally. There's many ways to get the player. - DSM
+    private static Match match;                                     //Only a complete program flow restructure would change this, but many matches are going on as the player may be fighting - DSM
 
-    public static Player human;
-    private static Match match;
-
-    private static TraitTree traitRequirements;
-    private static Character noneCharacter = new NPC("none", 1, null);
-    private static HashMap<String, MatchAction> matchActions;
-
-    private static List<Quest> quests = new ArrayList<Quest>();    
+    //public static Map<Trait, Resistance> RESISTANCEMAP;
+    //public static Resistance nullResistance;                      //Why is this required? 
+    //public static final Map<Trait, Collection<Trait>> OVERRIDES;  
+    private static TraitTree traitRequirements;                     //Traits can and probably should carry their own requirements with them. -DSM
+    private static HashMap<String, MatchAction> matchActions;           //Static Naming conventions -DSM
+    private static List<Quest> quests = new ArrayList<Quest>();
+    
+     private static Character noneCharacter = new NPC("none", 1, null);     
      
     static {
         hookLogwriter();

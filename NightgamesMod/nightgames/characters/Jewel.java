@@ -183,38 +183,6 @@ public class Jewel extends BasePersonality {
                             return true;
                         })
         )));
-
-        character.addCombatScene(new CombatScene((c, self, other) -> {
-            return character.getLevel() >= 20 && !Global.checkFlag(JEWEL_MENTAL_FOCUS)
-                            && !Global.checkFlag(JEWEL_PHYSICAL_FOCUS)
-                            && (Global.checkFlag(JEWEL_MARTIAL_FOCUS) || Global.checkFlag(JEWEL_ANAL_FOCUS));
-        }, (c, self, player) -> "Jewel stands over you after the fight while looking at you rather coldly, <i>\"So, "
-                        + player.getName() + ". You're going to be doing what I tell"
-                        + " you. No, don't interrupt. You are. My question is, are you just going"
-                        + " to listen to me, or am I going to have to physically force you?\"</i>",
-                        Arrays.asList(new CombatSceneChoice("No, No! I'll listen!", (c, self, other) -> {
-                            c.write("She smiles, <i>\"Good. Remember that. Because I </i>will<i>"
-                                            + " be making demands.\"</i>");
-                            useMental();
-                            return true;
-                        }), new CombatSceneChoice("Yeah. No. Try me.", (c, self, other) -> {
-                            c.write("Jewel lets a dirty smirk slide onto her face, <i>\"Oh ho ho! Think you're tough, do you? I am already looking"
-                                            + " forward to knocking those balls you've apparently found"
-                                            + " somewhere all the way up to your throat! And I'll make sure"
-                                            + " you enjoy it too.\"</i>");
-                            usePhysical();
-                            return true;
-                        }), new CombatSceneChoice("Make fun of her. [Hard Mode]", (c, self, other) -> {
-                            c.write("You can't believe your ears. Jewel thinks you're going to just lie down and be her bitch? There's no way that's happening! "
-                                            + "You let her know what you think, and that there's no way some little girl is going to make you do anything. Jewel's eyes narrow dangerously, "
-                                            + "<i>\"" + other.getName() + ", I think you just dug your own grave. We'll see if this <b>little girl</b> can change your mind the next time we meet.\"</i>");
-                            useMental();
-                            usePhysical();
-                            character.getGrowth().extraAttributes += 1;
-                            // some compensation for the added difficulty. She gets 4 traits and 3 attribute points/level, and you only get 2 traits, but you are fighting more people than just her.
-                            Global.getPlayer().getGrowth().addTraitPoints(new int[] {1, 57}, Global.getPlayer());
-                            return true;
-                        }))));
         this.addSecondFocusScene();
 
         preferredAttributes.add(c -> c.get(Attribute.Ki) < 15 ? Optional.of(Attribute.Ki) : Optional.empty());

@@ -135,27 +135,18 @@ public abstract class Character extends Observable implements Cloneable {
     protected int busy;                             //Merge into some object tracking the character on the logical game map. - DSM
     protected Map<String, Integer> attractions;
     private Map<String, Integer> affections;
-    public HashSet<Clothing> closet;
-    public List<Challenge> challenges;
-    public Body body;
-    public int availableAttributePoints;
-    public boolean orgasmed;
-    public boolean custom;
-    private boolean pleasured;
-    public int orgasms;
-    public int cloned;
-    private Map<Integer, LevelUpData> levelPlan;
-    private Growth growth;
-    
-    //TODO: Merge orgasms, cloned, pleasured, location, and lastorgasmpart in this CombatStats object.
-    //protected CombatStats combatStats;          //TODO: Finish class and implement - Constructors, clones, and being able to serialize members. - DSM
-    
-    
-    //TODO: Merge various pieces of data into a MatchStats object. busy, state, location, challenges, mercy, victories, etc.
-    //protected MatchStats matchStats;
-    
-    
-    
+    public HashSet<Clothing> closet;                //If clothing can be destroyed, it should stand to reason that characters should purchase replace. Consider reworking - DSM            
+    public List<Challenge> challenges;      
+    public Body body;                               //While current implementation allows for many kinds of parts - it means controlling and finding them gets difficult. - DSM 
+    public int availableAttributePoints;            
+    public boolean orgasmed;                        //Merge into tracker object for combat session. -DSM
+    public boolean custom;                          //This is not necessary. Every character should be based off custom implementation and added as a configuration is chosen. -DSM
+    private boolean pleasured;                      //Merge into tracker object for combat session. - DSM
+    public int orgasms;                             //Merge into tracker object for combat session. - DSM
+    public int cloned;                              //Merge into tracker object for combat session. - DSM 
+    private Map<Integer, LevelUpData> levelPlan;    //This has bloated save files quite a bit, making an XML save file mod very desireable for editing and reading. - DSM
+    private Growth growth;                          //FIXME: Growth, as well as a host of many variables in many classes, have many public variables. Move to protected or private and implement mutators. The compliler is your friend. - DSM
+    private BodyPart lastOrgasmPart;                //Merge into tracker object for combat session. - DSM
     
     /**Constructor for a character - creates a character off of a name and level. Base Attributes start at 5 and other stats are derived from that. 
      * @param name
@@ -1433,7 +1424,6 @@ public abstract class Character extends Observable implements Cloneable {
             }
         }
     }
-
 
     public void tick(Combat c) {            
         body.tick(c);
@@ -4637,6 +4627,14 @@ public abstract class Character extends Observable implements Cloneable {
     
     public boolean checkAddiction(AddictionType type, Character cause) {
         return getAddiction(type).map(addiction -> addiction.isActive() && addiction.wasCausedBy(cause)).orElse(false);
+    }
+
+    public void setLastOrgasmPart(BodyPart part) {
+        lastOrgasmPart=part;
+    }
+    
+    public BodyPart getLastOrgasmPart() {
+        return lastOrgasmPart;
     }
 
     public String loserLiner(Combat c, Character target) {
