@@ -434,7 +434,6 @@ public class Combat extends Observable {
     }
 
     private void doEndOfTurnUpkeep() {
-        listen(l -> l.postActions(p1act, p2act));
         p1.eot(this, p2);
         p2.eot(this, p1);
         // iterate through all the pets here so we don't get concurrent modification issues

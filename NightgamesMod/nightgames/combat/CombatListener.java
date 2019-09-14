@@ -84,10 +84,6 @@ public abstract class CombatListener {
         
     }
     
-    public void postActions(Skill p1Chosen, Skill p2Chosen) {
-        
-    }
-    
     public void postTurn() {
         
     }
