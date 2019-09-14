@@ -35,7 +35,6 @@ class SkillButton extends KeyableButton {
         getButton().setBackground(bgColor);
         getButton().setForeground(foregroundColor(bgColor));
 
-        getButton().setToolTipText(getText());
         getButton().addActionListener(arg0 -> {
             if (action.subChoices(c).size() == 0) {
                 commandPanel.reset();
