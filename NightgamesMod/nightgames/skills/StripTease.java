@@ -22,12 +22,15 @@ public class StripTease extends Skill {
         super(string, self);
     }
 
-    public static boolean hasRequirements(Character user) {
+    @Override
+    public boolean requirements(Combat c, Character user, Character target) {
         return user.get(Attribute.Seduction) >= 24 && !user.has(Trait.direct) && !user.has(Trait.shy)
                         && !user.has(Trait.temptress);
     }
 
-    public static boolean isUsable(Combat c, Character self, Character target) {
+    @Override
+    public boolean usable(Combat c, Character target) {
+        Character self = getSelf();
         return self.stripDifficulty(target) == 0 && !self.has(Trait.strapped) && self.canAct() && c.getStance()
                                                                                                    .mobile(self)
                         && !self.mostlyNude() && !c.getStance()
@@ -35,16 +38,6 @@ public class StripTease extends Skill {
                         && c.getStance()
                             .front(self)
                         && (!self.breastsAvailable() || !self.crotchAvailable());
-    }
-
-    @Override
-    public boolean requirements(Combat c, Character user, Character target) {
-        return hasRequirements(user);
-    }
-
-    @Override
-    public boolean usable(Combat c, Character target) {
-        return isUsable(c, getSelf(), target);
     }
 
     @Override
