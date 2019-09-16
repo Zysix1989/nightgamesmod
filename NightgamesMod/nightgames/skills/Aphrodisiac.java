@@ -48,30 +48,33 @@ public class Aphrodisiac extends Skill {
     @Override
     public boolean resolve(Combat c, Character target) {
         float arousalToTarget = 10;
-        String type = " aphrodisiacs";
+        String type;
+        Result result;
         if (!target.roll(getSelf(), c, accuracy(c, target))) {
             writeOutput(c, Result.miss, target);
             return false;
         } else if (!getSelf().body.getCurrentPartsThatMatch(hasSuccubusPussy).isEmpty()
             && getSelf().getArousal().percent() >= 15) {
-            writeOutput(c, (int) arousalToTarget, Result.strong, target);
-            type = " aphrodisiac juices";
-            target.emote(Emotion.horny, 20);
-        } else if (getSelf().has(Item.Aersolizer)) {
-            writeOutput(c, Result.special, target);
-            getSelf().consume(Item.Aphrodisiac, 1);
-            type = " aphrodisiac spray";
+            result = Result.strong;
+            type = "aphrodisiac juices";
         } else {
-            writeOutput(c, (int) arousalToTarget, Result.normal, target);
-            target.emote(Emotion.horny, 20);
+            if (getSelf().has(Item.Aersolizer)) {
+                result = Result.special;
+                type = "aphrodisiac spray";
+            } else {
+                result = Result.normal;
+                type = "aphrodisiacs";
+            }
             getSelf().consume(Item.Aphrodisiac, 1);
         }
+
+        target.emote(Emotion.horny, 20);
+        writeOutput(c, (int) arousalToTarget, result, target);
         target.add(c, Horny.getWithBiologicalType(getSelf(),
             target,
             arousalToTarget,
             8,
-            getSelf().nameOrPossessivePronoun() + type));
-        target.emote(Emotion.horny, 20);
+            getSelf().nameOrPossessivePronoun() + " " + type));
         return true;
     }
 
