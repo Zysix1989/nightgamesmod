@@ -30,17 +30,13 @@ public class Aphrodisiac extends Skill {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        boolean canMove = c.getStance()
-                           .mobile(getSelf())
-                        && getSelf().canAct();
+        boolean canMove = c.getStance().mobile(getSelf())
+            && getSelf().canAct();
         boolean hasItem = getSelf().has(Item.Aphrodisiac);
-        boolean canGetFromOwnBody = !(getSelf().body.getCurrentPartsThatMatch(hasSuccubusPussy)
-                                                    .isEmpty())
-                        && getSelf().getArousal()
-                                    .get() >= 10
-                        && !c.getStance()
-                             .prone(getSelf());
-
+        boolean canGetFromOwnBody =
+            !(getSelf().body.getCurrentPartsThatMatch(hasSuccubusPussy).isEmpty())
+                        && getSelf().getArousal().get() >= 10
+                        && !c.getStance().prone(getSelf());
         return canMove && (hasItem || canGetFromOwnBody);
     }
 
@@ -71,7 +67,11 @@ public class Aphrodisiac extends Skill {
             target.emote(Emotion.horny, 20);
             getSelf().consume(Item.Aphrodisiac, 1);
         }
-        target.add(c, Horny.getWithBiologicalType(getSelf(), target, arousalToTarget, 8, getSelf().nameOrPossessivePronoun() + type));
+        target.add(c, Horny.getWithBiologicalType(getSelf(),
+            target,
+            arousalToTarget,
+            8,
+            getSelf().nameOrPossessivePronoun() + type));
         target.emote(Emotion.horny, 20);
         return true;
     }
@@ -90,65 +90,87 @@ public class Aphrodisiac extends Skill {
     public String deal(Combat c, int damage, Result modifier, Character target) {
         if (modifier == Result.special) {
             return String.format(
-                            "You pop an Aphrodisiac into your Aerosolizer and spray %s"
-                                            + " with a cloud of mist. %s flushes and %s eyes fill with lust as it takes hold.",
-                            target.getName(), Global.capitalizeFirstLetter(target.pronoun()), target.possessiveAdjective());
+                "You pop an Aphrodisiac into your Aerosolizer and spray %s"
+                    + " with a cloud of mist. %s flushes and %s eyes fill with lust as it takes hold.",
+                target.getName(),
+                Global.capitalizeFirstLetter(target.pronoun()),
+                target.possessiveAdjective());
         } else if (modifier == Result.miss) {
-            return "You throw an Aphrodisiac at " + target.getName() + ", but " + target.pronoun()
-                            + " ducks out of the way and it splashes harmlessly on the ground. What a waste.";
+            return "You throw an Aphrodisiac at "
+                + target.getName()
+                + ", but "
+                + target.pronoun()
+                + " ducks out of the way and it splashes harmlessly on the ground. What a waste.";
         } else if (modifier == Result.strong) {
-            return getSelf().subjectAction("dip") + " a finger " + (getSelf().crotchAvailable() ? ""
-                            : "under " + getSelf().possessiveAdjective() + " " + getSelf().getOutfit()
-                                                                                        .getTopOfSlot(ClothingSlot.bottom)
-                                                                                        .getName()
-                                            + " and ")
-                            + "into " + getSelf().possessiveAdjective() + " pussy. Once "
-                            + getSelf().subjectAction("have", "has") + " collected a drop of "
-                            + getSelf().possessiveAdjective() + " juices" + " on " + getSelf().possessiveAdjective()
-                            + " fingertip, " + getSelf().subjectAction("pull") + " it out and flicks it at "
-                            + target.directObject() + "," + " skillfully depositing it in " + target.possessiveAdjective()
-                            + " open mouth. " + Global.capitalizeFirstLetter(target.subject()) + " immediately feel"
-                            + " a flash of heat spread through " + target.directObject()
-                            + " and only a small part of it results from the anger caused by "
-                            + getSelf().possessiveAdjective() + " dirty move.";
+            return getSelf().subjectAction("dip")
+                + " a finger "
+                + (getSelf().crotchAvailable() ? "" : "under "
+                + getSelf().possessiveAdjective()
+                + " " + getSelf().getOutfit().getTopOfSlot(ClothingSlot.bottom).getName()
+                + " and ")
+                + "into " + getSelf().possessiveAdjective() + " pussy. Once "
+                + getSelf().subjectAction("have", "has")
+                + " collected a drop of "
+                + getSelf().possessiveAdjective()
+                + " juices" + " on "
+                + getSelf().possessiveAdjective()
+                + " fingertip, "
+                + getSelf().subjectAction("pull")
+                + " it out and flicks it at "
+                + target.directObject()
+                + "," + " skillfully depositing it in "
+                + target.possessiveAdjective()
+                + " open mouth. "
+                + Global.capitalizeFirstLetter(target.subject())
+                + " immediately feel"
+                + " a flash of heat spread through "
+                + target.directObject()
+                + " and only a small part of it results from the anger caused by "
+                + getSelf().possessiveAdjective()
+                + " dirty move.";
         } else {
-            return "You uncap a small bottle of Aphrodisiac and splash it in " + target.getName()
-                            + "'s face. For a second, " + target.pronoun()
-                            + " is just surprised, but gradually a growing desire " + "starts to make "
-                            + target.directObject() + " weak in the knees.";
+            return "You uncap a small bottle of Aphrodisiac and splash it in "
+                + target.getName() + "'s face. For a second, " + target.pronoun()
+                + " is just surprised, but gradually a growing desire " + "starts to make "
+                + target.directObject() + " weak in the knees.";
         }
-
     }
 
     @Override
     public String receive(Combat c, int damage, Result modifier, Character target) {
         if (modifier == Result.miss) {
-            return getSelf().subjectAction("splash", "splashes") + " a bottle of liquid in "
-                            + target.nameOrPossessivePronoun() + " direction, but none of it hits "
-                            + target.directObject() + ".";
+            return getSelf().subjectAction("splash", "splashes")
+                + " a bottle of liquid in "
+                + target.nameOrPossessivePronoun()
+                + " direction, but none of it hits "
+                + target.directObject() + ".";
         } else if (modifier == Result.special) {
             return String.format(
-                            "%s inserts a bottle into the attachment on %s arm. %s suddenly surrounded by a sweet smelling cloud of mist. %s %s %s blood boil "
-                                            + "with desire as the unnatural gas takes effect.",
-                            getSelf().getName(), getSelf().possessiveAdjective(),
-                            Global.capitalizeFirstLetter(target.subjectAction("are", "is")),
-                            Global.capitalizeFirstLetter(target.pronoun()), target.action("feel"),
-                            target.possessiveAdjective());
+                "%s inserts a bottle into the attachment on %s arm. %s suddenly surrounded by a "
+                    + "sweet smelling cloud of mist. %s %s %s blood boil "
+                    + "with desire as the unnatural gas takes effect.",
+                getSelf().getName(), getSelf().possessiveAdjective(),
+                Global.capitalizeFirstLetter(target.subjectAction("are", "is")),
+                Global.capitalizeFirstLetter(target.pronoun()), target.action("feel"),
+                target.possessiveAdjective());
         } else if (modifier == Result.strong) {
-            return getSelf().subjectAction("dip") + " a finger " + (getSelf().crotchAvailable() ? ""
-                            : "under " + getSelf().possessiveAdjective() + " " + getSelf().getOutfit()
-                                                                                        .getTopOfSlot(ClothingSlot.bottom)
-                                                                                        .getName()
-                                            + " and ")
-                            + "into " + getSelf().possessiveAdjective() + " pussy. Once "
-                            + getSelf().subjectAction("have", "has") + " collected a drop of "
-                            + getSelf().possessiveAdjective() + " juices" + " on " + getSelf().possessiveAdjective()
-                            + " fingertip, " + getSelf().subjectAction("pull") + " it out and flicks it at "
-                            + target.directObject() + "," + " skillfully depositing it in " + target.possessiveAdjective()
-                            + " open mouth. " + Global.capitalizeFirstLetter(target.subject()) + " immediately feel"
-                            + " a flash of heat spread through " + target.directObject()
-                            + " and only a small part of it" + " results from the anger caused by "
-                            + getSelf().possessiveAdjective() + " dirty move.";
+            return getSelf().subjectAction("dip")
+                + " a finger "
+                + (getSelf().crotchAvailable() ? "" : "under "
+                + getSelf().possessiveAdjective()
+                + " " + getSelf().getOutfit().getTopOfSlot(ClothingSlot.bottom).getName()
+                + " and ")
+                + "into " + getSelf().possessiveAdjective() + " pussy. Once "
+                + getSelf().subjectAction("have", "has") + " collected a drop of "
+                + getSelf().possessiveAdjective()
+                + " juices on " + getSelf().possessiveAdjective()
+                + " fingertip, " + getSelf().subjectAction("pull") + " it out and flicks it at "
+                + target.directObject() + "," + " skillfully depositing it in "
+                + target.possessiveAdjective() + " open mouth. "
+                + Global.capitalizeFirstLetter(target.subject()) + " immediately feel"
+                + " a flash of heat spread through " + target.directObject()
+                + " and only a small part of it" + " results from the anger caused by "
+                + getSelf().possessiveAdjective() + " dirty move.";
         } else {
             String part;
             if (target.hasDick())
@@ -158,9 +180,12 @@ public class Aphrodisiac extends Skill {
             else
                 part = "nipples";
             return String.format("%s throws a strange, sweet-smelling liquid in %s face."
-                            + " An unnatural warmth spreads through %s body and gathers in %s %s like a fire.",
-                            getSelf().getName(), target.nameOrPossessivePronoun(), target.possessiveAdjective(),
-                             target.possessiveAdjective(), part);
+                    + " An unnatural warmth spreads through %s body and gathers "
+                    + "in %s %s like a fire.",
+                getSelf().getName(),
+                target.nameOrPossessivePronoun(),
+                target.possessiveAdjective(),
+                target.possessiveAdjective(), part);
         }
     }
 
