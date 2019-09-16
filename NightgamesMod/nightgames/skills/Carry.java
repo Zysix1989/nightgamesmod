@@ -30,9 +30,15 @@ public class Carry extends Fuck {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return fuckable(c, target) && !target.wary() && getTargetOrgan(target).isReady(target) && getSelf().canAct()
-                        && c.getStance().mobile(getSelf()) && !c.getStance().prone(getSelf())
-                        && !c.getStance().prone(target) && c.getStance().facing(getSelf(), target) && getSelf().getStamina().get() >= 15;
+        return fuckable(c, target)
+            && !target.wary()
+            && getTargetOrgan(target).isReady(target)
+            && getSelf().canAct()
+            && c.getStance().mobile(getSelf())
+            && !c.getStance().prone(getSelf())
+            && !c.getStance().prone(target)
+            && c.getStance().facing(getSelf(), target)
+            && getSelf().getStamina().get() >= 15;
     }
 
     @Override

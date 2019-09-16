@@ -28,9 +28,13 @@ public class Fly extends Fuck {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return fuckable(c, target) && !target.wary() && getSelf().canAct() && c.getStance().mobile(getSelf())
-                        && !c.getStance().prone(getSelf()) && c.getStance().facing(getSelf(), target)
-                        && getSelf().getStamina().get() >= 15;
+        return fuckable(c, target)
+            && !target.wary()
+            && getSelf().canAct()
+            && c.getStance().mobile(getSelf())
+            && !c.getStance().prone(getSelf())
+            && c.getStance().facing(getSelf(), target)
+            && getSelf().getStamina().get() >= 15;
     }
 
     @Override

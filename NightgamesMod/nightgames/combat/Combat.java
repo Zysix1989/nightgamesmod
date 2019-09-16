@@ -1562,9 +1562,9 @@ public class Combat {
 
     public void setStance(Position newStance, Character initiator, boolean voluntary) {
         if ((newStance.top.isPet() && newStance.bottom.isPet())
-            || ((newStance.top.isPet() || newStance.bottom.isPet())
-            && getStance().en != Stance.neutral
-            && !newStance.isThreesome())) {
+                || ((newStance.top.isPet() || newStance.bottom.isPet())
+                    && getStance().en != Stance.neutral
+                    && !newStance.isThreesome())) {
             // Pets don't get into stances with each other, and they don't usurp stances.
             // Threesomes are exceptions to this.
             return;
@@ -1584,7 +1584,11 @@ public class Combat {
         }
         if (initiator != null) {
             Character otherCharacter = getOpponent(initiator);
-            if (voluntary && newStance.en == Stance.neutral && getStance().en != Stance.kneeling && otherCharacter.has(Trait.genuflection) && rollWorship(initiator, otherCharacter)) {
+            if (voluntary
+                && newStance.en == Stance.neutral
+                && getStance().en != Stance.kneeling
+                && otherCharacter.has(Trait.genuflection)
+                && rollWorship(initiator, otherCharacter)) {
                 write(initiator, Global.format("While trying to get back up, {self:name-possessive} eyes accidentally met {other:name-possessive} gaze. "
                                 + "Like a deer in headlights, {self:possessive} body involuntarily stops moving and kneels down before {other:direct-object}.", initiator, otherCharacter));
                 newStance = new Kneeling(otherCharacter, initiator);

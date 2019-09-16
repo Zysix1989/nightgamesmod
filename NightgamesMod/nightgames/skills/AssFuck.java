@@ -42,15 +42,18 @@ public class AssFuck extends Fuck {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return fuckable(c, target) && c.getStance().mobile(getSelf())
-                        && (c.getStance().behind(getSelf())
-                                        || (c.getStance().prone(target) && !c.getStance().mobile(target)))
-                        && getSelf().canAct()
-                        && c.getStance().reachBottom(getSelf())
-                        && (getTargetOrgan(target).isReady(target) || target.has(Trait.buttslut) || getSelf().has(Item.Lubricant)
-                                        || getSelf().getArousal().percent() > 50 || getSelf().has(Trait.alwaysready)
-                                        || getSelf().has(Trait.assmaster))
-                        && (!target.hasPussy() || !PullOut.blockedByAddiction(getSelf()));
+        return fuckable(c, target)
+            && c.getStance().mobile(getSelf())
+            && (c.getStance().behind(getSelf())
+                || (c.getStance().prone(target) && !c.getStance().mobile(target)))
+            && getSelf().canAct()
+            && c.getStance().reachBottom(getSelf())
+            && (getTargetOrgan(target).isReady(target)
+                || target.has(Trait.buttslut)
+                || getSelf().has(Item.Lubricant)
+                || getSelf().getArousal().percent() > 50 || getSelf().has(Trait.alwaysready)
+                || getSelf().has(Trait.assmaster))
+            && (!target.hasPussy() || !PullOut.blockedByAddiction(getSelf()));
     }
 
     @Override

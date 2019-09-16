@@ -80,9 +80,11 @@ public class Fuck extends Skill {
     @Override
     public boolean usable(Combat c, Character target) {
         return fuckable(c, target)
-                        && (c.getStance().insert(c, getSelf(), getSelf()) != c.getStance()
-                                        || c.getStance().insert(c, target, getSelf()) != c.getStance())
-                        && c.getStance().mobile(getSelf()) && !c.getStance().mobile(target) && getSelf().canAct();
+            && (c.getStance().insert(c, getSelf(), getSelf()) != c.getStance()
+                || c.getStance().insert(c, target, getSelf()) != c.getStance())
+            && c.getStance().mobile(getSelf())
+            && !c.getStance().mobile(target)
+            && getSelf().canAct();
     }
 
     protected String premessage(Combat c, Character target) {
