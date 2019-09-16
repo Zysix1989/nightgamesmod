@@ -50,11 +50,10 @@ public class Aphrodisiac extends Skill {
         float arousalToTarget = 10;
         String type = " aphrodisiacs";
         if (!target.roll(getSelf(), c, accuracy(c, target))) {
-
             writeOutput(c, Result.miss, target);
             return false;
         } else if (!getSelf().body.getCurrentPartsThatMatch(hasSuccubusPussy).isEmpty()
-                        && getSelf().getArousal().percent() >= 15) {
+            && getSelf().getArousal().percent() >= 15) {
             writeOutput(c, (int) arousalToTarget, Result.strong, target);
             type = " aphrodisiac juices";
             target.emote(Emotion.horny, 20);
