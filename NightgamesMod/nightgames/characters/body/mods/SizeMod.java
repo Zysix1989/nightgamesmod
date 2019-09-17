@@ -103,10 +103,6 @@ public class SizeMod extends PartMod {
         this.size = size;
     }
 
-    public SizeMod() {
-        this(0);
-    }
-
     public String adjective(GenericBodyPart part) {
         if (part.getType().equals("cock")) {
             return COCK_SIZE_DESCRIPTIONS.get(size);
