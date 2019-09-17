@@ -6,8 +6,8 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 
 class BodyReplaceEffect extends BodyModEffect {
-    BodyReplaceEffect(String selfverb, String otherverb, BodyPart affected) {
-        super(selfverb, otherverb, affected);
+    BodyReplaceEffect(String selfVerb, String otherVerb, BodyPart affected) {
+        super(selfVerb, otherVerb, affected);
     }
 
     @Override

@@ -7,8 +7,8 @@ import nightgames.global.Global;
 
 class BodyGrowthPlusEffect extends BodyModEffect {
 
-    BodyGrowthPlusEffect(String selfverb, String otherverb, BodyPart affected) {
-        super(selfverb, otherverb, affected);
+    BodyGrowthPlusEffect(String selfVerb, String otherVerb, BodyPart affected) {
+        super(selfVerb, otherVerb, affected);
     }
 
     @Override

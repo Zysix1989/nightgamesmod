@@ -6,12 +6,12 @@ abstract class BodyModEffect extends ItemEffect {
     protected BodyPart affected;
     protected int selfDuration;
 
-    public BodyModEffect(String selfverb, String otherverb, BodyPart affected) {
-        this(selfverb, otherverb, affected, -1);
+    public BodyModEffect(String selfVerb, String otherVerb, BodyPart affected) {
+        this(selfVerb, otherVerb, affected, -1);
     }
 
-    public BodyModEffect(String selfverb, String otherverb, BodyPart affected, int duration) {
-        super(selfverb, otherverb, true, true);
+    public BodyModEffect(String selfVerb, String otherVerb, BodyPart affected, int duration) {
+        super(selfVerb, otherVerb, true, true);
         this.affected = affected;
         selfDuration = duration;
     }
