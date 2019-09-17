@@ -96,8 +96,6 @@ public class SizeMod extends PartMod {
         return new JsonPrimitive(size);
     }
 
-    public static final SizeMod INSTANCE = new SizeMod(0);
-
     private int size;
 
     public SizeMod(int size) {
