@@ -229,4 +229,8 @@ public class AssPart extends GenericBodyPart {
     public void addBonusSensitivity(double bonusSensitivity) {
         this.bonusSensitivity += bonusSensitivity;
     }
+
+    public AssPart newWithSize(int size) {
+        return (AssPart) applyMod(new SizeMod(size));
+    }
 }
