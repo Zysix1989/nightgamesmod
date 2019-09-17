@@ -10,11 +10,6 @@ public class BodyDowngradeEffect extends BodyModEffect {
         super(selfverb, otherverb, affected);
     }
 
-    public BodyDowngradeEffect(String selfverb, String otherverb, BodyPart affected, int duration) {
-        super(selfverb, otherverb, affected, duration);
-    }
-
-
     @Override
     public boolean use(Combat c, Character user, Character opponent, Item item) {
         BodyPart original = user.body.getRandom(affected.getType());
