@@ -244,4 +244,8 @@ public class BreastsPart extends GenericBodyPart {
     public BodyPart downgrade() {
         return this.applyMod(new SizeMod(SizeMod.clampToValidSize(this, getSize() - 1)));
     }
+
+    public BreastsPart newWithSize(int size) {
+        return (BreastsPart) applyMod(new SizeMod(size));
+    }
 }
