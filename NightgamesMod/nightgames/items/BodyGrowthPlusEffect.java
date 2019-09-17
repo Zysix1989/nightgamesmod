@@ -11,7 +11,7 @@ public class BodyGrowthPlusEffect extends BodyModEffect {
         super(selfverb, otherverb, affected);
     }
 
-    public BodyGrowthPlusEffect(String selfverb, String otherverb, BodyPart affected, Effect effect, int duration) {
+    public BodyGrowthPlusEffect(String selfverb, String otherverb, BodyPart affected, int duration) {
         super(selfverb, otherverb,affected, duration);
     }
 

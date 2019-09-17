@@ -9,15 +9,6 @@ public abstract class BodyModEffect extends ItemEffect {
     protected BodyPart affected;
     protected int selfDuration;
 
-    public enum Effect {
-        upgrade,
-        downgrade,
-        replace,
-        grow,
-        growMultiple,
-        growplus,
-    }
-
     public BodyModEffect(String selfverb, String otherverb, BodyPart affected) {
         this(selfverb, otherverb, affected, -1);
     }
