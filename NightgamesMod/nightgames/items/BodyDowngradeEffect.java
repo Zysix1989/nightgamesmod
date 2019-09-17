@@ -7,11 +7,11 @@ import nightgames.global.Global;
 
 public class BodyDowngradeEffect extends BodyModEffect {
     public BodyDowngradeEffect(String selfverb, String otherverb, BodyPart affected) {
-        super(selfverb, otherverb, affected, Effect.downgrade);
+        super(selfverb, otherverb, affected);
     }
 
     public BodyDowngradeEffect(String selfverb, String otherverb, BodyPart affected, int duration) {
-        super(selfverb, otherverb, affected, Effect.downgrade, duration);
+        super(selfverb, otherverb, affected, duration);
     }
 
 

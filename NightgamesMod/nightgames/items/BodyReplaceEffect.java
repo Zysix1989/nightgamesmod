@@ -7,13 +7,12 @@ import nightgames.global.Global;
 
 public class BodyReplaceEffect extends BodyModEffect {
     public BodyReplaceEffect(String selfverb, String otherverb, BodyPart affected) {
-        super(selfverb, otherverb, affected, Effect.replace);
+        super(selfverb, otherverb, affected);
     }
 
     public BodyReplaceEffect(String selfverb, String otherverb, BodyPart affected, int duration) {
-        super(selfverb, otherverb, affected, Effect.replace, duration);
+        super(selfverb, otherverb, affected, duration);
     }
-
 
     @Override
     public boolean use(Combat c, Character user, Character opponent, Item item) {

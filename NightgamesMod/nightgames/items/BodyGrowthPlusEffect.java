@@ -8,11 +8,11 @@ import nightgames.global.Global;
 public class BodyGrowthPlusEffect extends BodyModEffect {
 
     public BodyGrowthPlusEffect(String selfverb, String otherverb, BodyPart affected) {
-        super(selfverb, otherverb, affected, Effect.growplus);
+        super(selfverb, otherverb, affected);
     }
 
     public BodyGrowthPlusEffect(String selfverb, String otherverb, BodyPart affected, Effect effect, int duration) {
-        super(selfverb, otherverb,affected,Effect.growplus, duration);
+        super(selfverb, otherverb,affected, duration);
     }
 
 

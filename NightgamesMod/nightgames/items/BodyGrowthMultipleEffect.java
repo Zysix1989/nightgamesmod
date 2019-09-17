@@ -7,11 +7,11 @@ import nightgames.global.Global;
 
 public class BodyGrowthMultipleEffect extends BodyModEffect {
     public BodyGrowthMultipleEffect(String selfverb, String otherverb, BodyPart affected) {
-        super(selfverb, otherverb, affected, Effect.growMultiple);
+        super(selfverb, otherverb, affected);
     }
 
     public BodyGrowthMultipleEffect(String selfverb, String otherverb, BodyPart affected, int duration) {
-        super(selfverb, otherverb, affected, Effect.growMultiple, duration);
+        super(selfverb, otherverb, affected, duration);
     }
 
 
