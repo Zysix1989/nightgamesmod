@@ -1019,41 +1019,50 @@ public class Player extends Character {
     protected void resolveOrgasm(Combat c, Character opponent, BodyPart selfPart, BodyPart opponentPart, int times,
                     int totalTimes) {
         super.resolveOrgasm(c, opponent, selfPart, opponentPart, times, totalTimes);
-        //if (has(Trait.slimification) && times == totalTimes && getWillpower().percent() < 60 && !has(Trait.slime)) {
-            c.write(this, Global.format("A powerful shiver runs through your entire body. Oh boy, you know where this"
-                            + " is headed... Sure enough, you look down to see your skin seemingly <i>melt</i>,"
-                            + " turning a translucent blue. You legs fuse together and collapse into a puddle."
-                            + " It only takes a few seconds for you to regain some semblance of control over"
-                            + " your amorphous body, but you're not going to switch back to your human"
-                            + " form before this fight is over...", this, opponent));
+        if (has(Trait.slimification) && times == totalTimes && getWillpower().percent() < 60
+            && !has(Trait.slime)) {
+            c.write(this, Global.format(
+                "A powerful shiver runs through your entire body. Oh boy, you know where this"
+                    + " is headed... Sure enough, you look down to see your skin seemingly <i>melt</i>,"
+                    + " turning a translucent blue. You legs fuse together and collapse into a puddle."
+                    + " It only takes a few seconds for you to regain some semblance of control over"
+                    + " your amorphous body, but you're not going to switch back to your human"
+                    + " form before this fight is over...", this, opponent));
             nudify();
             purge(c);
             addTemporaryTrait(Trait.slime, 999);
             add(c, new PlayerSlimeDummy(this));
             if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(this, GooeyMod.INSTANCE)) {
-                //body.temporaryAddOrReplacePartWithType(body.getRandomPussy().applyMod(GooeyMod.INSTANCE), 999);
-                body.temporaryAddOrReplacePartWithType(new TentaclePart("slime filaments", "pussy", "slime", 0.0, 1.0, 1.0), 999);
+                body.temporaryAddOrReplacePartWithType(
+                    body.getRandomPussy().applyMod(GooeyMod.INSTANCE), 999);
+                body.temporaryAddOrReplacePartWithType(
+                    new TentaclePart("slime filaments", "pussy", "slime", 0.0, 1.0, 1.0), 999);
             }
-            //if (hasDick() && !body.getRandomCock().moddedPartCountsAs(this, CockMod.slimy)) {
-                //body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(CockMod.slimy), 999);
-            //}
+            if (hasDick() && !body.getRandomCock().moddedPartCountsAs(this, CockMod.slimy)) {
+                body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(CockMod.slimy),
+                    999);
+            }
             BreastsPart part = body.getBreastsBelow(BreastsPart.H_CUP);
-            if (part != null && body.getRandomBreasts() != BreastsPart.flat) {
+            if (part != null
+                && body.getRandomBreasts() != BreastsPart.flat) {
                 body.temporaryAddOrReplacePartWithType(part.upgrade(), 999);
             }
-            body.temporaryAddOrReplacePartWithType(new GenericBodyPart("gooey skin", .6, 1.5, .8, "skin", ""), 999);
-            body.temporaryAddOrReplacePartWithType(new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);
-                addTemporaryTrait(Trait.Sneaky, 999);
-                addTemporaryTrait(Trait.shameless, 999);
-                addTemporaryTrait(Trait.lactating, 999);
-                addTemporaryTrait(Trait.addictivefluids, 999);
-                addTemporaryTrait(Trait.autonomousPussy, 999);
-                addTemporaryTrait(Trait.enthrallingjuices, 999);
-                addTemporaryTrait(Trait.energydrain, 999);
-                addTemporaryTrait(Trait.desensitized, 999);
-                addTemporaryTrait(Trait.steady, 999);
-                addTemporaryTrait(Trait.strongwilled, 999);
+            body.temporaryAddOrReplacePartWithType(
+                new GenericBodyPart("gooey skin", .6, 1.5, .8, "skin", ""), 999);
+            body.temporaryAddOrReplacePartWithType(
+                new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);
+            addTemporaryTrait(Trait.Sneaky, 999);
+            addTemporaryTrait(Trait.shameless, 999);
+            addTemporaryTrait(Trait.lactating, 999);
+            addTemporaryTrait(Trait.addictivefluids, 999);
+            addTemporaryTrait(Trait.autonomousPussy, 999);
+            addTemporaryTrait(Trait.enthrallingjuices, 999);
+            addTemporaryTrait(Trait.energydrain, 999);
+            addTemporaryTrait(Trait.desensitized, 999);
+            addTemporaryTrait(Trait.steady, 999);
+            addTemporaryTrait(Trait.strongwilled, 999);
         }
+    }
 
     private int getLevelsToGain() {
         return levelsToGain;
