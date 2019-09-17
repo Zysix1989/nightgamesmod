@@ -865,7 +865,7 @@ public class Body implements Cloneable {
 
     public double getFemininity() {
         double femininity = baseFemininity;
-        femininity += SizeMod.getMaximumSize("breasts") / ((double) BreastsPart.maximumSize().getSize());
+        femininity += SizeMod.getMaximumSize("breasts") / ((double) BreastsPart.maximumSize());
         femininity += getCurrentParts().stream()
                                        .mapToDouble(part -> part.getFemininity(character))
                                        .sum();

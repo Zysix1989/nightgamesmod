@@ -57,7 +57,7 @@ public class BreastsPart extends GenericBodyPart {
 
     @Override
     public double getFemininity(Character c) {
-        return 3 * ((double) getSize()) / maximumSize().getSize();
+        return 3 * ((double) getSize()) / maximumSize();
     }
 
     @Override
@@ -86,8 +86,8 @@ public class BreastsPart extends GenericBodyPart {
    }
 
 
-    public static BreastsPart maximumSize() {
-        return h;
+    public static int maximumSize() {
+        return H_CUP;
     }
 
     @Override
