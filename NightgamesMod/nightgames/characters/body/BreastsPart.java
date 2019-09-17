@@ -165,8 +165,7 @@ public class BreastsPart extends GenericBodyPart {
                                     self, opponent));
     
                 }
-                if (addiction != null)
-                    opponent.temptNoSkill(c, self, this, (int) (15 + addiction.getMagnitude() * 35));
+                opponent.temptNoSkill(c, self, this, (int) (15 + addiction.getMagnitude() * 35));
     
                 if (opponent.is(Stsflag.magicmilkcraving)) {
                     // temporarily relieve craving
