@@ -179,11 +179,11 @@ public class CockPart extends GenericBodyPart {
     }
 
     public BodyPart upgrade() {
-        return this.applyMod(new SizeMod(SizeMod.clampToValidSize(this, getSize() + 1)));
+        return this.newWithSize(SizeMod.clampToValidSize(this, getSize() + 1));
     }
 
     public BodyPart downgrade() {
-        return this.applyMod(new SizeMod(SizeMod.clampToValidSize(this, getSize() - 1)));
+        return this.newWithSize(SizeMod.clampToValidSize(this, getSize() - 1));
     }
     
     

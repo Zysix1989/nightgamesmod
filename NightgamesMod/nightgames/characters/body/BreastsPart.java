@@ -29,13 +29,13 @@ public class BreastsPart extends GenericBodyPart {
 
     //FIXME: Why are breasts the only part that are set up like this? - DSM
     //TODO: Copy this to Cocks or create some unifying structure to manage this mess.
-    public static BreastsPart flat = (BreastsPart) new BreastsPart().applyMod(new SizeMod(FLAT_CHEST));
-    public static BreastsPart a = (BreastsPart) new BreastsPart().applyMod(new SizeMod(A_CUP));
-    public static BreastsPart b = (BreastsPart) new BreastsPart().applyMod(new SizeMod(B_CUP));
-    public static BreastsPart c = (BreastsPart) new BreastsPart().applyMod(new SizeMod(C_CUP));
-    public static BreastsPart d = (BreastsPart) new BreastsPart().applyMod(new SizeMod(D_CUP));
-    public static BreastsPart dd = (BreastsPart) new BreastsPart().applyMod(new SizeMod(DD_CUP));
-    public static BreastsPart f = (BreastsPart) new BreastsPart().applyMod(new SizeMod(F_CUP));
+    public static BreastsPart flat = new BreastsPart().newWithSize(FLAT_CHEST);
+    public static BreastsPart a = new BreastsPart().newWithSize(A_CUP);
+    public static BreastsPart b = new BreastsPart().newWithSize(B_CUP);
+    public static BreastsPart c = new BreastsPart().newWithSize(C_CUP);
+    public static BreastsPart d = new BreastsPart().newWithSize(D_CUP);
+    public static BreastsPart dd = new BreastsPart().newWithSize(DD_CUP);
+    public static BreastsPart f = new BreastsPart().newWithSize(F_CUP);
     
     private double bonusSensitivity = 0;
 
@@ -238,11 +238,11 @@ public class BreastsPart extends GenericBodyPart {
     }
 
     public BodyPart upgrade() {
-        return this.applyMod(new SizeMod(SizeMod.clampToValidSize(this, getSize() + 1)));
+        return this.newWithSize(SizeMod.clampToValidSize(this, getSize() + 1));
     }
 
     public BodyPart downgrade() {
-        return this.applyMod(new SizeMod(SizeMod.clampToValidSize(this, getSize() - 1)));
+        return this.newWithSize(SizeMod.clampToValidSize(this, getSize() - 1));
     }
 
     public BreastsPart newWithSize(int size) {
