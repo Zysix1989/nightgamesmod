@@ -36,7 +36,6 @@ public class BreastsPart extends GenericBodyPart {
     public static BreastsPart d = (BreastsPart) new BreastsPart().applyMod(new SizeMod(D_CUP));
     public static BreastsPart dd = (BreastsPart) new BreastsPart().applyMod(new SizeMod(DD_CUP));
     public static BreastsPart f = (BreastsPart) new BreastsPart().applyMod(new SizeMod(F_CUP));
-    public static BreastsPart h = (BreastsPart) new BreastsPart().applyMod(new SizeMod(H_CUP));
     
     private double bonusSensitivity = 0;
 
