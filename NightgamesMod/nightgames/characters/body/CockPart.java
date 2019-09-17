@@ -58,8 +58,8 @@ public class CockPart extends GenericBodyPart {
     }
     
     
-    public static CockPart maximumSize() {
-        return inch12;
+    public static int maximumSize() {
+        return 12;
     }
 
 
