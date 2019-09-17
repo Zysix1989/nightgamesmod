@@ -183,9 +183,9 @@ public enum Item implements Loot {
             new AddTraitEffect("drink", "throw", Trait.succubus),
             new PartModEffect("drink", "throw", "pussy", DemonicMod.INSTANCE, 15),
             new PartModEffect("drink", "throw", "cock", CockMod.incubus, 15),
-            new BodyModEffect("drink", "throw", EarPart.pointed, BodyModEffect.Effect.replace),
-            new BodyModEffect("drink", "throw", WingsPart.demonic, BodyModEffect.Effect.replace),
-            new BodyModEffect("drink", "throw", TailPart.demonic, BodyModEffect.Effect.replace),
+            new BodyReplaceEffect("drink", "throw", EarPart.pointed),
+            new BodyReplaceEffect("drink", "throw", WingsPart.demonic),
+            new BodyReplaceEffect("drink", "throw", TailPart.demonic),
             new BodyGrowthPlusEffect("drink", "throw", BreastsPart.dd)),
         RequirementShortcuts.rev(RequirementShortcuts.noTrait(Trait.succubus)),
         15),
@@ -198,9 +198,9 @@ public enum Item implements Loot {
             new AddTraitEffect("drink", "throw", Trait.incubus),
             new PartModEffect("drink", "throw", "cock", DemonicMod.INSTANCE, 15),
             //TODO: Grow a cock if you don't already have one.
-            new BodyModEffect("drink", "throw", EarPart.pointed, BodyModEffect.Effect.replace),
-            new BodyModEffect("drink", "throw", WingsPart.demonic, BodyModEffect.Effect.replace),
-            new BodyModEffect("drink", "throw", TailPart.demonic, BodyModEffect.Effect.replace)
+            new BodyReplaceEffect("drink", "throw", EarPart.pointed),
+            new BodyReplaceEffect("drink", "throw", WingsPart.demonic),
+            new BodyReplaceEffect("drink", "throw", TailPart.demonic)
             //new BodyModEffect("drink", "throw", BreastsPart.dd, BodyModEffect.Effect.growplus)
         ),
         RequirementShortcuts.rev(RequirementShortcuts.noTrait(Trait.succubus)),
@@ -214,9 +214,9 @@ public enum Item implements Loot {
             new AddTraitEffect("drink", "throw", Trait.incubus),
             new PartModEffect("drink", "throw", "cock", DemonicMod.INSTANCE, 15),
             //TODO: Grow a cock if you don't already have one.
-            new BodyModEffect("drink", "throw", EarPart.pointed, BodyModEffect.Effect.replace),
-            new BodyModEffect("drink", "throw", WingsPart.demonic, BodyModEffect.Effect.replace),
-            new BodyModEffect("drink", "throw", TailPart.demonic, BodyModEffect.Effect.replace),
+            new BodyReplaceEffect("drink", "throw", EarPart.pointed),
+            new BodyReplaceEffect("drink", "throw", WingsPart.demonic),
+            new BodyReplaceEffect("drink", "throw", TailPart.demonic),
             new BodyGrowthPlusEffect("drink", "throw", BreastsPart.dd)),
         RequirementShortcuts.rev(RequirementShortcuts.noTrait(Trait.succubus)),
         15),
