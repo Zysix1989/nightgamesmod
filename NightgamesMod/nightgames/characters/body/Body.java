@@ -99,7 +99,7 @@ public class Body implements Cloneable {
     public static Set<String> pluralParts = new HashSet<>(Arrays.asList("hands", "feet", "wings", "breasts", "balls"));
     final static BodyPart requiredParts[] = {new GenericBodyPart("hands", 0, 1, 1, "hands", ""),
                     new GenericBodyPart("feet", 0, 1, 1, "feet", ""), new GenericBodyPart("skin", 0, 1, 1, "skin", ""),
-                    AssPart.generateGeneric().newWithSize(SizeMod.ASS_SIZE_NORMAL), new MouthPart(), new BreastsPart().applyMod(new SizeMod(0)), EarPart.normal};
+                    AssPart.generateGeneric().newWithSize(SizeMod.ASS_SIZE_NORMAL), new MouthPart(), new BreastsPart().newWithSize(0), EarPart.normal};
     final static String fetishParts[] = {"ass", "feet", "cock", "wings", "tail", "tentacles", "breasts"};
 
     LinkedHashSet<BodyPart> bodyParts;
@@ -1053,12 +1053,12 @@ public class Body implements Cloneable {
                 break;
             case herm:
                 femininity = Math.max(1, femininity);
-                addEquivalentCockAndPussy(new CockPart().applyMod(new SizeMod(SizeMod.COCK_SIZE_BIG)));
+                addEquivalentCockAndPussy(new CockPart().newWithSize(SizeMod.COCK_SIZE_BIG));
                 growBreastsUpTo(BreastsPart.b);
                 break;
             case shemale:
                 femininity = Math.max(1, femininity);
-                replacePussyWithCock(new CockPart().applyMod(new SizeMod(SizeMod.COCK_SIZE_BIG)));
+                replacePussyWithCock(new CockPart().newWithSize(SizeMod.COCK_SIZE_BIG));
                 growBreastsUpTo(BreastsPart.d);
                 addBallsIfNeeded();
                 break;
