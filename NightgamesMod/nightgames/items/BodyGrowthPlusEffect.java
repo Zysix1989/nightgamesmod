@@ -29,16 +29,23 @@ class BodyGrowthPlusEffect extends BodyModEffect {
                 newPart = affected;
             }
             if (newPart == original) {
-                boolean eventful = user.body
-                    .temporaryAddOrReplacePartWithType(newPart, original, item.duration);
-                message = eventful ? Global
-                    .format(String.format("{self:NAME-POSSESSIVE} %s was reenforced",
-                        original.fullDescribe(user)), user, opponent) : "";
+                boolean eventful = user.body.temporaryAddOrReplacePartWithType(
+                    newPart,
+                    original,
+                    item.duration);
+                message = eventful ?
+                    Global.format(String.format("{self:NAME-POSSESSIVE} %s was reenforced",
+                        original.fullDescribe(user)), user, opponent)
+                    : "";
             } else {
                 user.body.temporaryAddOrReplacePartWithType(newPart, original, item.duration);
-                message = Global.format(String.format("{self:NAME-POSSESSIVE} %s grew into %s%s",
-                    original.fullDescribe(user), newPart.prefix(), newPart.fullDescribe(user)),
-                    user, opponent);
+                message = Global.format(
+                    String.format("{self:NAME-POSSESSIVE} %s grew into %s%s",
+                        original.fullDescribe(user),
+                        newPart.prefix(),
+                        newPart.fullDescribe(user)),
+                    user,
+                    opponent);
             }
         }
         if (c != null && !message.isEmpty()) {
