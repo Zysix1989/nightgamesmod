@@ -64,7 +64,7 @@ public class Nurse extends Skill {
             getSelf().emote(Emotion.dominant, 10);
         }
         if (Global.random(100) < 5 + 2 * getSelf().get(Attribute.Fetish)) {
-            target.add(c, new BodyFetish(target, getSelf(), BreastsPart.a.getType(), 2.5));
+            target.add(c, new BodyFetish(target, getSelf(), BreastsPart.TYPE, 2.5));
         }
         return true;
     }

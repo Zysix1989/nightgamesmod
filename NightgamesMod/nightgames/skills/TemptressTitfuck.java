@@ -72,7 +72,7 @@ public class TemptressTitfuck extends Paizuri {
                     
                     target.body.pleasure(getSelf(), getSelf().body.getRandom("breasts"), target.body.getRandom("cock"), m, c, this);
                     if (Global.random(100) < fetishChance) {
-                        target.add(c, new BodyFetish(target, getSelf(), BreastsPart.a.getType(), .05 + (0.01 * breasts.getSize()) + getSelf().get(Attribute.Fetish) * .01));
+                        target.add(c, new BodyFetish(target, getSelf(), BreastsPart.TYPE, .05 + (0.01 * breasts.getSize()) + getSelf().get(Attribute.Fetish) * .01));
                     }
                 } else {
                     // Was flaccid, still is
@@ -90,7 +90,7 @@ public class TemptressTitfuck extends Paizuri {
                 getSelf().add(c, new FiredUp(getSelf(), target, "breasts"));
                 
                 if (Global.random(100) < fetishChance) {
-                    target.add(c, new BodyFetish(target, getSelf(), BreastsPart.a.getType(), .05 + (0.01 * breasts.getSize()) + getSelf().get(Attribute.Fetish) * .01));
+                    target.add(c, new BodyFetish(target, getSelf(), BreastsPart.TYPE, .05 + (0.01 * breasts.getSize()) + getSelf().get(Attribute.Fetish) * .01));
                 }
             }
         } else {
