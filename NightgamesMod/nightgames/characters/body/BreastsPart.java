@@ -51,7 +51,7 @@ public class BreastsPart extends GenericBodyPart {
 
     @Override
     public boolean isVisible(Character c) {
-        return c.crotchAvailable() || getSize() > 0;
+        return c.breastsAvailable() || getSize() > 0;
     }
 
     @Override
