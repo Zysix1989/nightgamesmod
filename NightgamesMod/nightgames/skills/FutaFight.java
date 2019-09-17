@@ -136,7 +136,7 @@ public class FutaFight extends Skill {
                 if (partC != null) {
                     target.body.addReplace(partC.upgrade().upgrade().upgrade().upgrade().upgrade(), 1);
                 } else {
-                    target.body.addReplace(new CockPart().applyMod(new SizeMod(SizeMod.COCK_SIZE_SMALL)).upgrade().upgrade().upgrade().upgrade().upgrade(), 1);
+                    target.body.addReplace(new CockPart().newWithSize(SizeMod.COCK_SIZE_SMALL).upgrade().upgrade().upgrade().upgrade().upgrade(), 1);
                 }
                 
             
@@ -144,7 +144,7 @@ public class FutaFight extends Skill {
                 if (partD != null) {
                     getSelf().body.addReplace(partD.upgrade().upgrade().upgrade().upgrade().upgrade(), 1);
                 } else {
-                    getSelf().body.addReplace(new CockPart().applyMod(new SizeMod(SizeMod.COCK_SIZE_SMALL)).upgrade().upgrade().upgrade().upgrade().upgrade(), 1);
+                    getSelf().body.addReplace(new CockPart().newWithSize(SizeMod.COCK_SIZE_SMALL).upgrade().upgrade().upgrade().upgrade().upgrade(), 1);
                 }
                 
                 

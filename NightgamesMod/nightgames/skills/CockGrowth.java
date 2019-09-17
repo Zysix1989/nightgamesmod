@@ -61,13 +61,13 @@ public class CockGrowth extends Skill {
                 if (part != null) {
                     target.body.addReplace(part.upgrade().upgrade().upgrade().upgrade().upgrade(), 1);
                 } else {
-                    target.body.addReplace(new CockPart().applyMod(new SizeMod(SizeMod.COCK_SIZE_SMALL)), 1);
+                    target.body.addReplace(new CockPart().newWithSize(SizeMod.COCK_SIZE_SMALL), 1);
                 }
             } else {
                 if (part != null) {
                     target.body.temporaryAddOrReplacePartWithType(part.upgrade().upgrade().upgrade().upgrade().upgrade(), 10);
                 } else {
-                    target.body.temporaryAddPart(new CockPart().applyMod(new SizeMod(SizeMod.COCK_SIZE_SMALL)), 10);
+                    target.body.temporaryAddPart(new CockPart().newWithSize(SizeMod.COCK_SIZE_SMALL), 10);
                 }
             }
         }

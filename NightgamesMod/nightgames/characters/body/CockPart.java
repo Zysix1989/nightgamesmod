@@ -196,4 +196,8 @@ public class CockPart extends GenericBodyPart {
         }
         return (PussyPart)newPart;
     }
+
+    public CockPart newWithSize(int size) {
+        return (CockPart) applyMod(new SizeMod(size));
+    }
 }
