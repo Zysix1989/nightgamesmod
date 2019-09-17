@@ -6,7 +6,7 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 
 public class BodyDowngradeEffect extends BodyModEffect {
-    public BodyDowngradeEffect(String selfverb, String otherverb, BodyPart affected) {
+    BodyDowngradeEffect(String selfverb, String otherverb, BodyPart affected) {
         super(selfverb, otherverb, affected);
     }
 

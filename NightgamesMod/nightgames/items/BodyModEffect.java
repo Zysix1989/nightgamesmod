@@ -1,11 +1,8 @@
 package nightgames.items;
 
-import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
-import nightgames.combat.Combat;
-import nightgames.global.Global;
 
-public abstract class BodyModEffect extends ItemEffect {
+abstract class BodyModEffect extends ItemEffect {
     protected BodyPart affected;
     protected int selfDuration;
 

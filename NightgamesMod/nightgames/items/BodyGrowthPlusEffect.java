@@ -5,9 +5,9 @@ import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
-public class BodyGrowthPlusEffect extends BodyModEffect {
+class BodyGrowthPlusEffect extends BodyModEffect {
 
-    public BodyGrowthPlusEffect(String selfverb, String otherverb, BodyPart affected) {
+    BodyGrowthPlusEffect(String selfverb, String otherverb, BodyPart affected) {
         super(selfverb, otherverb, affected);
     }
 

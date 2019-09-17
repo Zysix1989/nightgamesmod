@@ -5,8 +5,8 @@ import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
-public class BodyGrowthMultipleEffect extends BodyModEffect {
-    public BodyGrowthMultipleEffect(String selfverb, String otherverb, BodyPart affected, int duration) {
+class BodyGrowthMultipleEffect extends BodyModEffect {
+    BodyGrowthMultipleEffect(String selfverb, String otherverb, BodyPart affected, int duration) {
         super(selfverb, otherverb, affected, duration);
     }
 
