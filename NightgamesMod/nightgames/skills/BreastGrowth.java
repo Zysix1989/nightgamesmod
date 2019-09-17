@@ -60,7 +60,7 @@ public class BreastGrowth extends Skill {
         writeOutput(c, permanent ? 1 : 0, res, target);
         if (res != Result.miss) {
             target.add(c, new Hypersensitive(target, 10));
-            BreastsPart part = target.body.getBreastsBelow(BreastsPart.f.getSize());
+            BreastsPart part = target.body.getBreastsBelow(BreastsPart.F_CUP);
             if (permanent) {
                 if (part != null) {
                     target.body.addReplace(part.upgrade().upgrade().upgrade().upgrade().upgrade(), 1);

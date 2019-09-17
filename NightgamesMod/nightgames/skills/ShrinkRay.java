@@ -67,7 +67,7 @@ public class ShrinkRay extends Skill {
                     target.body.remove(target.body.getRandomCock());
                 }
             } else {
-                BreastsPart part = target.body.getBreastsAbove(BreastsPart.flat.getSize());
+                BreastsPart part = target.body.getBreastsAbove(BreastsPart.FLAT_CHEST);
                 if (part != null) {
                     target.body.addReplace(part.downgrade(), 1);
                 }
@@ -81,7 +81,7 @@ public class ShrinkRay extends Skill {
                     target.body.temporaryRemovePart(target.body.getRandom("cock"), 10);
                 }
             } else {
-                BreastsPart part = target.body.getBreastsAbove(BreastsPart.flat.getSize());
+                BreastsPart part = target.body.getBreastsAbove(BreastsPart.FLAT_CHEST);
                 if (part != null) {
                     target.body.temporaryAddOrReplacePartWithType(part.downgrade(), part, 10);
                 }

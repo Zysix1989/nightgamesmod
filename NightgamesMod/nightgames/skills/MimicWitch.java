@@ -71,7 +71,7 @@ public class MimicWitch extends Skill {
         getSelf().addTemporaryTrait(Trait.lactating, 10);
         getSelf().addTemporaryTrait(Trait.beguilingbreasts, 10);
         getSelf().addTemporaryTrait(Trait.sedativecream, 10);
-        BreastsPart part = getSelf().body.getBreastsBelow(BreastsPart.h.getSize());
+        BreastsPart part = getSelf().body.getBreastsBelow(BreastsPart.H_CUP);
         if (part != null) {
             getSelf().body.temporaryAddOrReplacePartWithType(part.upgrade(), 10);
         }

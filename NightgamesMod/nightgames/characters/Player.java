@@ -1037,7 +1037,7 @@ public class Player extends Character {
             //if (hasDick() && !body.getRandomCock().moddedPartCountsAs(this, CockMod.slimy)) {
                 //body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(CockMod.slimy), 999);
             //}
-            BreastsPart part = body.getBreastsBelow(BreastsPart.h.getSize());
+            BreastsPart part = body.getBreastsBelow(BreastsPart.H_CUP);
             if (part != null && body.getRandomBreasts() != BreastsPart.flat) {
                 body.temporaryAddOrReplacePartWithType(part.upgrade(), 999);
             }

@@ -42,7 +42,7 @@ public class BreastRay extends Skill {
         boolean permanent = true;
         writeOutput(c, permanent ? 1 : 0, Result.normal, target);
         target.add(c, new Hypersensitive(target, 10));
-        BreastsPart part = target.body.getBreastsBelow(BreastsPart.f.getSize());
+        BreastsPart part = target.body.getBreastsBelow(BreastsPart.F_CUP);
         if (permanent) {
             if (part != null) {
                 target.body.addReplace(part.upgrade().upgrade().upgrade().upgrade().upgrade(), 1);

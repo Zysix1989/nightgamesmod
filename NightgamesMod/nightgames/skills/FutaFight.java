@@ -127,7 +127,7 @@ public class FutaFight extends Skill {
             getSelf().addTemporaryTrait(Trait.sedativecream, 100);
             getSelf().body.temporaryAddPartMod("mouth", ArcaneMod.INSTANCE, 100);
             
-            BreastsPart partB = getSelf().body.getBreastsBelow(BreastsPart.h.getSize());
+            BreastsPart partB = getSelf().body.getBreastsBelow(BreastsPart.H_CUP);
             if (partB != null) {
                 getSelf().body.temporaryAddOrReplacePartWithType(partB.upgrade().upgrade().upgrade().upgrade(), 100);
             }

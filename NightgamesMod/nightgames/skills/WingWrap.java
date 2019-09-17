@@ -80,7 +80,7 @@ public class WingWrap extends Skill {
             case cowgirl:
                 desc = "{self:SUBJECT-ACTION:lean|leans} down over {other:name-do}, "
                                 + "{self:possessive} {self:body-part:breasts}"
-                                + (getSelf().body.getLargestBreasts().getSize() > BreastsPart.c.getSize()
+                                + (getSelf().body.getLargestBreasts().getSize() > BreastsPart.C_CUP
                                                 ? "rubbing delightfully into {other:possessive}"
                                                                 + " {other:body-part:breasts}."
                                                 : "hanging enticingly above {other:direct-object}")

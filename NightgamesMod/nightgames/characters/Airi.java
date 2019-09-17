@@ -449,7 +449,7 @@ public class Airi extends BasePersonality {
             if (self.hasDick() && !self.body.getRandomCock().moddedPartCountsAs(self, CockMod.slimy)) {
                 self.body.temporaryAddOrReplacePartWithType(self.body.getRandomCock().applyMod(CockMod.slimy), 999);
             }
-            BreastsPart part = self.body.getBreastsBelow(BreastsPart.h.getSize());
+            BreastsPart part = self.body.getBreastsBelow(BreastsPart.H_CUP);
             if (part != null) {
                 self.body.temporaryAddOrReplacePartWithType(part.upgrade(), 10);
             }

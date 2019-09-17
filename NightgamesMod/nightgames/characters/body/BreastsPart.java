@@ -16,21 +16,27 @@ import nightgames.status.addiction.AddictionType;
 
 public class BreastsPart extends GenericBodyPart {
 
+    public static int FLAT_CHEST = 0;
+    public static int A_CUP = 1;
+    public static int B_CUP = 2;
+    public static int C_CUP = 3;
+    public static int D_CUP = 4;
+    public static int DD_CUP = 5;
+    public static int E_CUP = 6;
+    public static int F_CUP = 7;
+    public static int G_CUP = 8;
+    public static int H_CUP = 9;
+
     //FIXME: Why are breasts the only part that are set up like this? - DSM
     //TODO: Copy this to Cocks or create some unifying structure to manage this mess.
-    public static BreastsPart flat = (BreastsPart) new BreastsPart().applyMod(new SizeMod(0));
-    public static BreastsPart a = (BreastsPart) new BreastsPart().applyMod(new SizeMod(1));
-    public static BreastsPart b = (BreastsPart) new BreastsPart().applyMod(new SizeMod(2));
-    public static BreastsPart c = (BreastsPart) new BreastsPart().applyMod(new SizeMod(3));
-    public static BreastsPart d = (BreastsPart) new BreastsPart().applyMod(new SizeMod(4));
-    public static BreastsPart dd = (BreastsPart) new BreastsPart().applyMod(new SizeMod(5));
-    public static BreastsPart e = (BreastsPart) new BreastsPart().applyMod(new SizeMod(6));
-    public static BreastsPart f = (BreastsPart) new BreastsPart().applyMod(new SizeMod(7));
-    public static BreastsPart g = (BreastsPart) new BreastsPart().applyMod(new SizeMod(8));
-    public static BreastsPart h = (BreastsPart) new BreastsPart().applyMod(new SizeMod(9));
-    
-    public static BreastsPart i = (BreastsPart) new BreastsPart().applyMod(new SizeMod(10));
-    public static BreastsPart j = (BreastsPart) new BreastsPart().applyMod(new SizeMod(11));
+    public static BreastsPart flat = (BreastsPart) new BreastsPart().applyMod(new SizeMod(FLAT_CHEST));
+    public static BreastsPart a = (BreastsPart) new BreastsPart().applyMod(new SizeMod(A_CUP));
+    public static BreastsPart b = (BreastsPart) new BreastsPart().applyMod(new SizeMod(B_CUP));
+    public static BreastsPart c = (BreastsPart) new BreastsPart().applyMod(new SizeMod(C_CUP));
+    public static BreastsPart d = (BreastsPart) new BreastsPart().applyMod(new SizeMod(D_CUP));
+    public static BreastsPart dd = (BreastsPart) new BreastsPart().applyMod(new SizeMod(DD_CUP));
+    public static BreastsPart f = (BreastsPart) new BreastsPart().applyMod(new SizeMod(F_CUP));
+    public static BreastsPart h = (BreastsPart) new BreastsPart().applyMod(new SizeMod(H_CUP));
     
     private double bonusSensitivity = 0;
 

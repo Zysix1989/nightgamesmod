@@ -998,7 +998,7 @@ public class Body implements Cloneable {
         } else if (getRandomCock() == null && getRandomPussy() != null) {
             return CharacterSex.female;
         } else {
-            if (SizeMod.getMaximumSize("breasts") > BreastsPart.a.getSize() && getFace().getFemininity(character) > 0) {
+            if (SizeMod.getMaximumSize("breasts") > BreastsPart.A_CUP && getFace().getFemininity(character) > 0) {
                 return CharacterSex.shemale;
             } else if (getFace().getFemininity(character) >= 1) {
                 return CharacterSex.trap;
