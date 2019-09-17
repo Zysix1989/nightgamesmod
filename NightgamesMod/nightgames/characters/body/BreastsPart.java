@@ -105,7 +105,7 @@ public class BreastsPart extends GenericBodyPart {
 
     @Override
     public void describeLong(StringBuilder b, Character c) {
-        if (c.hasPussy() || getSize() > 0) {
+        if (c.hasPussy() || getSize() > BreastsPart.FLAT_CHEST) {
             b.append(Global.capitalizeFirstLetter(fullDescribe(c)));
             b.append(" adorn " + c.nameOrPossessivePronoun() + " chest.");
         }
