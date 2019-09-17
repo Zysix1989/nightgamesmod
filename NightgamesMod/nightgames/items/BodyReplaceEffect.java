@@ -13,24 +13,23 @@ class BodyReplaceEffect extends BodyModEffect {
     @Override
     public boolean use(Combat c, Character user, Character opponent, Item item) {
         BodyPart original = user.body.getRandom(affected.getType());
-        int duration = selfDuration >= 0 ? selfDuration : item.duration;
 
         String message;
 
         if (original == affected) {
             boolean eventful = user.body
-                .temporaryAddOrReplacePartWithType(affected, original, duration);
+                .temporaryAddOrReplacePartWithType(affected, original, item.duration);
             message =
                 eventful ? Global.format(String.format("{self:NAME-POSSESSIVE} %s was reenforced",
                     original.fullDescribe(user)), user, opponent) : "";
         } else if (original != null) {
-            user.body.temporaryAddOrReplacePartWithType(affected, original, duration);
+            user.body.temporaryAddOrReplacePartWithType(affected, original, item.duration);
             message = Global.format(String.format("{self:NAME-POSSESSIVE} %s turned into %s",
                 original.fullDescribe(user),
                 Global.prependPrefix(affected.prefix(), affected.fullDescribe(user))), user,
                 opponent);
         } else {
-            user.body.temporaryAddPart(affected, duration);
+            user.body.temporaryAddPart(affected, item.duration);
             message = Global.format(String.format("{self:SUBJECT} grew %s",
                 Global.prependPrefix(affected.prefix(), affected.fullDescribe(user))), user,
                 opponent);

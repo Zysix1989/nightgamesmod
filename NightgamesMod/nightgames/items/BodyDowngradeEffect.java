@@ -13,19 +13,18 @@ public class BodyDowngradeEffect extends BodyModEffect {
     @Override
     public boolean use(Combat c, Character user, Character opponent, Item item) {
         BodyPart original = user.body.getRandom(affected.getType());
-        int duration = selfDuration >= 0 ? selfDuration : item.duration;
 
         String message;
         if (original != null) {
             BodyPart newPart = original.downgrade();
             if (newPart == original) {
                 boolean eventful = user.body
-                    .temporaryAddOrReplacePartWithType(newPart, original, duration);
+                    .temporaryAddOrReplacePartWithType(newPart, original, item.duration);
                 message = eventful ? Global
                     .format(String.format("{self:NAME-POSSESSIVE} %s was reenforced",
                         original.fullDescribe(user)), user, opponent) : "";
             } else {
-                user.body.temporaryAddOrReplacePartWithType(newPart, original, duration);
+                user.body.temporaryAddOrReplacePartWithType(newPart, original, item.duration);
                 message = Global.format(
                     String.format("{self:NAME-POSSESSIVE} %s shrunk into %s",
                         original.fullDescribe(user), Global.prependPrefix(
