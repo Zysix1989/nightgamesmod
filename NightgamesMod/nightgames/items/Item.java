@@ -165,8 +165,7 @@ public enum Item implements Loot {
         15),
     FemDraft("Fem Draft", 150, "Temporarily grow a pussy", "a ", Arrays.asList(
         (ItemEffect) new BodyGrowthPlusEffect("drink", "throw", BreastsPart.c),
-        (ItemEffect) new BodyModEffect("drink", "throw", PussyPart.generic,
-            BodyModEffect.Effect.replace)),
+        (ItemEffect) new BodyReplaceEffect("drink", "throw", PussyPart.generic)),
         (c, self, target) -> !self.hasPussy(),
         15),
     Lactaid("Lactaid", 100, "Temporarily start lactating", "",
