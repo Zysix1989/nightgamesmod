@@ -1044,7 +1044,7 @@ public class Player extends Character {
             }
             BreastsPart part = body.getBreastsBelow(BreastsPart.H_CUP);
             if (part != null
-                && body.getRandomBreasts() != BreastsPart.flat) {
+                && body.getRandomBreasts().getSize() != BreastsPart.FLAT_CHEST) {
                 body.temporaryAddOrReplacePartWithType(part.upgrade(), 999);
             }
             body.temporaryAddOrReplacePartWithType(

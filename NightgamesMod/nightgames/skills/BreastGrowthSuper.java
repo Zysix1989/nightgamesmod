@@ -52,7 +52,7 @@ public class BreastGrowthSuper extends Skill {
         System.out.println("starting to resolve SuperBreastGrowth");
         Result res;
         if (target.roll(getSelf(), c, accuracy(c,target))) {
-            if (target.body.getRandomBreasts() == BreastsPart.flat) {
+            if (target.body.getRandomBreasts().getSize() == BreastsPart.FLAT_CHEST) {
                 res = Result.special;
             } else {
                 res = Result.normal;

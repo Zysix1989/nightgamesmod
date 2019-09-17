@@ -12,7 +12,7 @@ public class SuccubusEmbrace extends FemdomSexStance {
     }
 
     private boolean hasBreasts(Character c) {
-        return c.body.getLargestBreasts() != BreastsPart.flat;
+        return c.body.getLargestBreasts().getSize() != BreastsPart.FLAT_CHEST;
     }
 
     @Override
