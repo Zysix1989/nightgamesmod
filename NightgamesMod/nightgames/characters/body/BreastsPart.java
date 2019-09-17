@@ -123,11 +123,6 @@ public class BreastsPart extends GenericBodyPart {
     }
 
     @Override
-    public void tickHolding(Combat c, Character self, Character opponent, BodyPart otherOrgan) {
-        super.tickHolding(c, self, opponent, otherOrgan);
-    }
-
-    @Override
     public double applyReceiveBonuses(Character self, Character opponent, BodyPart target, double damage, Combat c) {
         double bonus = super.applyReceiveBonuses(self, opponent, target, damage, c);
         if (self.has(Trait.lactating) && target.isType("mouth")) {
