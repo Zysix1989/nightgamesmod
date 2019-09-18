@@ -490,7 +490,7 @@ public class BodyShop extends Activity {
             @Override
             boolean available(Character buyer) {
                 Optional<BodyPart> optTarget =
-                                buyer.body.get("cock").stream().filter(c -> !((CockPart) c).isGeneric(buyer)).findAny();
+                                buyer.body.get("cock").stream().filter(c -> !c.isGeneric(buyer)).findAny();
                 return optTarget.isPresent();
             }
 
