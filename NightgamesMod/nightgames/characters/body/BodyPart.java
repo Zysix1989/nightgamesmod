@@ -9,6 +9,7 @@ import com.google.gson.JsonObject;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.mods.PartMod;
 import nightgames.combat.Combat;
 
 public interface BodyPart {
@@ -142,7 +143,7 @@ public interface BodyPart {
         return parts.stream().allMatch(part -> part.isType(type));
     }
 
-    public default boolean moddedPartCountsAs(Character self, BodyPartMod comparedMod) {
+    public default boolean moddedPartCountsAs(Character self, PartMod comparedMod) {
         return getMods().stream().anyMatch(mod -> mod.countsAs(self, comparedMod));
     }
 
