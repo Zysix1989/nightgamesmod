@@ -45,11 +45,6 @@ public class CockMod extends PartMod {
         super(name, hotness, pleasure, sensitivity, 0);
     }
 
-    // public constructor for adapter
-    public CockMod() {
-        super("error", 0, 1, 1, 0);
-    }
-
     @Override
     public void loadData(JsonElement element) {
         Optional<CockMod> other = getFromType(element.getAsString());
