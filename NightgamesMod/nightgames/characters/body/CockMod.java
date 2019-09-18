@@ -14,6 +14,7 @@ import nightgames.characters.body.mods.DemonicMod;
 import nightgames.characters.body.mods.FeralMod;
 import nightgames.characters.body.mods.FieryMod;
 import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.body.mods.SlimyCockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.pet.PetCharacter;
@@ -32,7 +33,7 @@ import nightgames.status.Winded;
 
 public class CockMod extends PartMod {
     public static final CockMod error = new CockMod("error", 1.0, 1.0, 1.0);
-    public static final CockMod slimy = new CockMod("slimy", .5, 1.5, .7);
+    public static final CockMod slimy = new SlimyCockMod("slimy", .5, 1.5, .7);
     public static final CockMod runic= new CockMod("runic", 2.0, 1.0, 1.0);
     public static final CockMod blessed = new CockMod("blessed", 1.0, 1.0, .75);
     public static final CockMod incubus= new CockMod("incubus", 1.25, 1.3, .9);
@@ -41,7 +42,7 @@ public class CockMod extends PartMod {
     public static final CockMod enlightened = new CockMod("enlightened", 1.0, 1.2, .8);
     public static final List<CockMod> ALL_MODS = Arrays.asList(slimy, runic, blessed, incubus, primal, bionic, enlightened);
 
-    private CockMod(String name, double hotness, double pleasure, double sensitivity) {
+    protected CockMod(String name, double hotness, double pleasure, double sensitivity) {
         super(name, hotness, pleasure, sensitivity, 0);
     }
 
@@ -283,14 +284,6 @@ public class CockMod extends PartMod {
     }
 
     public void onEndPenetration(Combat c, Character self, Character opponent, BodyPart part, BodyPart target) {
-        if (this.equals(slimy)) {
-            c.write(self, Global.format(
-                            "As {self:possessive} {self:body-part:cock} leaves {other:possessive} "
-                                            + target.describe(opponent)
-                                            + ", a small bit of slime stays behind, vibrating inside of {other:direct-object}.",
-                            self, opponent));
-            opponent.add(c, new Horny(opponent, Math.max(4, opponent.getArousal().max() / 20), 10, self.nameOrPossessivePronoun() + " slimy residue"));
-        }
     }
 
     public static Optional<CockMod> getFromType(String type) {
@@ -305,8 +298,6 @@ public class CockMod extends PartMod {
             return "holy aura";
         } else if (this.equals(enlightened)) {
             return "imposing presence";
-        } else if (this.equals(slimy)) {
-            return "slimy transparency";
         } else if (this.equals(runic)) {
             return "runic symbols";
         } else if (this.equals(primal)) {
