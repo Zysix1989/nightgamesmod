@@ -134,11 +134,4 @@ public class StartConfiguration {
         }
         return res;
     }
-
-    public static void main(String[] args) throws IOException, JsonParseException {
-        Clothing.buildClothingTable();
-        Path path = new File("starts/Male Start.json").toPath();
-        StartConfiguration cfg = parse(JsonUtils.rootJson(path).getAsJsonObject());
-        System.out.println(cfg);
-    }
 }
