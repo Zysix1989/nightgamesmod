@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -308,7 +307,8 @@ public class Combat {
     private boolean checkBottleCollection(Character victor, Character loser, PartMod mod) {
         return victor.has(Item.EmptyBottle, 1) && loser.body.get("pussy")
                                                             .stream()
-                                                            .anyMatch(part -> part.moddedPartCountsAs(loser, mod));
+                                                            .anyMatch(part -> part.moddedPartCountsAs(
+                                                                mod));
     }
 
     public void doVictory(Character victor, Character loser) {

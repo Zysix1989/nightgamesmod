@@ -197,9 +197,9 @@ public class Struggle extends Skill {
             partner = c.getStance().bottom;
         }
         target = partner;
-        if (c.getStance().insertedPartFor(c, target).moddedPartCountsAs(target, CockMod.enlightened)) {
+        if (c.getStance().insertedPartFor(c, target).moddedPartCountsAs(CockMod.enlightened)) {
             diffMod = 15;
-        } else if (c.getStance().insertedPartFor(c, getSelf()).moddedPartCountsAs(getSelf(), CockMod.enlightened)) {
+        } else if (c.getStance().insertedPartFor(c, getSelf()).moddedPartCountsAs(CockMod.enlightened)) {
             diffMod = -15;
         }
         if (target.has(Trait.grappler)) {

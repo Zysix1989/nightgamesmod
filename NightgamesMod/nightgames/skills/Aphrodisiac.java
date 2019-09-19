@@ -26,7 +26,8 @@ public class Aphrodisiac extends Skill {
         return true;
     }
 
-    private final Predicate<BodyPart> hasSuccubusPussy = (bodyPart) -> bodyPart.isType("pussy") && bodyPart.moddedPartCountsAs(getSelf(), DemonicMod.INSTANCE);
+    private final Predicate<BodyPart> hasSuccubusPussy = (bodyPart) -> bodyPart.isType("pussy") && bodyPart.moddedPartCountsAs(
+        DemonicMod.INSTANCE);
 
     @Override
     public boolean usable(Combat c, Character target) {

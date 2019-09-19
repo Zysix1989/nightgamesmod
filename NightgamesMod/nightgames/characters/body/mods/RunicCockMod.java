@@ -20,7 +20,7 @@ public class RunicCockMod extends CockMod {
         double bonus = super.applyBonuses(c, self, opponent, part, target, damage);
 
         String message = "";
-        if (target.moddedPartCountsAs(opponent, DemonicMod.INSTANCE)) {
+        if (target.moddedPartCountsAs(DemonicMod.INSTANCE)) {
             message += String.format(
                 "The fae energies inside %s %s radiate outward and into %s, causing %s %s to grow much more sensitive. ",
                 self.nameOrPossessivePronoun(), part.describe(self),

@@ -72,7 +72,7 @@ public class Fuck extends Skill {
     private boolean canGetToCrotch(Character target) {
         if (target.crotchAvailable())
             return true;
-        if (!getSelfOrgan().moddedPartCountsAs(getSelf(), CockMod.slimy))
+        if (!getSelfOrgan().moddedPartCountsAs(CockMod.slimy))
             return false;
         return target.outfit.getTopOfSlot(ClothingSlot.bottom).getLayer() == 0;
     }
@@ -111,7 +111,7 @@ public class Fuck extends Skill {
                             bottomMessage);
         }
 
-        if (!target.crotchAvailable() && getSelfOrgan().moddedPartCountsAs(getSelf(), CockMod.slimy)) {
+        if (!target.crotchAvailable() && getSelfOrgan().moddedPartCountsAs(CockMod.slimy)) {
             Clothing destroyed = target.strip(ClothingSlot.bottom, c);
             assert target.outfit.slotEmpty(ClothingSlot.bottom);
             String start;

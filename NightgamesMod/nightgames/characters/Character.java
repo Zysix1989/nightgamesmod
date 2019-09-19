@@ -4094,8 +4094,8 @@ public abstract class Character extends Observable implements Cloneable {
      * Returns true if They have a demonic mod on their pussy or cock, or has the succubus trait.*/
     public boolean isDemonic() {
         return has(Trait.succubus) || body.get("pussy").stream()
-                        .anyMatch(part -> part.moddedPartCountsAs(this, DemonicMod.INSTANCE)) || body.get("cock")
-                        .stream().anyMatch(part -> part.moddedPartCountsAs(this, CockMod.incubus));
+                        .anyMatch(part -> part.moddedPartCountsAs(DemonicMod.INSTANCE)) || body.get("cock")
+                        .stream().anyMatch(part -> part.moddedPartCountsAs(CockMod.incubus));
     }
 
     public int baseDisarm() {

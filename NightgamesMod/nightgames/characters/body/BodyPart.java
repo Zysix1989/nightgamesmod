@@ -143,8 +143,8 @@ public interface BodyPart {
         return parts.stream().allMatch(part -> part.isType(type));
     }
 
-    public default boolean moddedPartCountsAs(Character self, PartMod comparedMod) {
-        return getMods().stream().anyMatch(mod -> mod.countsAs(self, comparedMod));
+    public default boolean moddedPartCountsAs(PartMod comparedMod) {
+        return getMods().stream().anyMatch(mod -> mod.countsAs(comparedMod));
     }
 
     static List<String> genitalTypes = Arrays.asList("pussy", "cock", "ass");

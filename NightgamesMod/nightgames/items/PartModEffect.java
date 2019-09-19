@@ -28,7 +28,7 @@ public class PartModEffect extends ItemEffect {
     @Override
     public boolean use(Combat c, Character user, Character opponent, Item item) {
         BodyPart oldPart = user.body.getRandom(affectedType);
-        if (oldPart != null && oldPart instanceof GenericBodyPart && !oldPart.moddedPartCountsAs(user, mod)) {
+        if (oldPart != null && oldPart instanceof GenericBodyPart && !oldPart.moddedPartCountsAs(mod)) {
             user.body.temporaryAddPartMod(affectedType, mod, selfDuration);
             BodyPart newPart = user.body.getRandom(affectedType);
             JtwigTemplate template = JtwigTemplate.inlineTemplate(

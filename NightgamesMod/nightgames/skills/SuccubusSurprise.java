@@ -42,7 +42,7 @@ public class SuccubusSurprise extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        boolean oppHasBlessed = c.getStance().insertedPartFor(c, target).moddedPartCountsAs(target, CockMod.blessed);
+        boolean oppHasBlessed = c.getStance().insertedPartFor(c, target).moddedPartCountsAs(CockMod.blessed);
         if (getSelf().human()) {
             if (oppHasBlessed) {
                 c.write(getSelf(), deal(c, 0, Result.weak, target));

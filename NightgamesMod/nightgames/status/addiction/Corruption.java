@@ -73,7 +73,8 @@ public class Corruption extends Addiction {
                      Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes {self:name-do} even further, and a set of black bat wings grows from {self:possessive} back!</b>", affected, cause));
                 }
                 affected.body.temporaryAddOrReplacePartWithType(WingsPart.demonic, Global.random(15, 40));
-            } else if (affected.hasPussy() && !affected.body.getRandomPussy().moddedPartCountsAs(affected, DemonicMod.INSTANCE)) {
+            } else if (affected.hasPussy() && !affected.body.getRandomPussy().moddedPartCountsAs(
+                DemonicMod.INSTANCE)) {
                 if (affected.human() == true) { 
                     Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes {self:name-do} even further, and {self:possessive} pussy begins to drip with a vile corruption that transforms it into that of a succubus!</b>", affected, cause));
                 } else {
@@ -81,7 +82,8 @@ public class Corruption extends Addiction {
                                     "<b>The dark taint changes {self:name-do} even further, and {self:possessive} pussy turns into that of a succubus!</b>", affected, cause));
                 }            
                 affected.body.temporaryAddPartMod("pussy", DemonicMod.INSTANCE, Global.random(15, 40));
-            } else if (affected.hasDick() && !affected.body.getRandomCock().moddedPartCountsAs(affected, CockMod.incubus)) {
+            } else if (affected.hasDick() && !affected.body.getRandomCock().moddedPartCountsAs(
+                CockMod.incubus)) {
                 if (affected.human() == true) { 
                     Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes {self:name-do} even further, and {self:possessive} cock hardens and swells with vile powers that warp and transform it - turning it into that of an incubus!</b>", affected, cause));
                 } else {
@@ -111,7 +113,7 @@ public class Corruption extends Addiction {
                                     "<b>The dark taint changes {self:name-do} even further, and an incubus's cock forms between {self:possessive} legs!</b>", affected, cause));
                 }
                 affected.body.temporaryAddOrReplacePartWithType(new CockPart().newWithSize(SizeMod.COCK_SIZE_BIG).applyMod(CockMod.incubus), Global.random(15, 40));
-            } else if (!affected.body.getRandomAss().moddedPartCountsAs(affected, DemonicMod.INSTANCE)) {
+            } else if (!affected.body.getRandomAss().moddedPartCountsAs(DemonicMod.INSTANCE)) {
                 if (affected.human() == true) { 
                     Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes {self:name-do} even further, and {self:possessive} asshole itches and burns with the corrupting power. It darkens with corruption!</b>", affected, cause));
                 } else {
@@ -119,7 +121,7 @@ public class Corruption extends Addiction {
                                     "<b>The dark taint changes {self:name-do} even further, and {self:possessive} asshole darkens with corruption!</b>", affected, cause));
                 }
                 affected.body.temporaryAddPartMod("ass", DemonicMod.INSTANCE, Global.random(15, 40));
-            } else if (!affected.body.getRandom("mouth").moddedPartCountsAs(affected, DemonicMod.INSTANCE)) {
+            } else if (!affected.body.getRandom("mouth").moddedPartCountsAs(DemonicMod.INSTANCE)) {
                 if (affected.human() == true) { 
                     Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes {self:name-do} even further; this time into {self:possessive} mouth! You feel {self:possessive} lush lips darken with the corruption spreading into them; they've turned black!</b>", affected, cause));
                 } else {

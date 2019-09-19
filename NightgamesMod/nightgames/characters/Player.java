@@ -914,13 +914,13 @@ public class Player extends Character {
             opponent.temptNoSkillNoSource(c, this, opponent.arousal.max() / 25);
         }
         if (has(Trait.slime)) {
-            if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(this, GooeyMod.INSTANCE)) {
+            if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(GooeyMod.INSTANCE)) {
                 body.temporaryAddOrReplacePartWithType(body.getRandomPussy().applyMod(GooeyMod.INSTANCE), 999);
                 c.write(this, 
                                 Global.format("{self:NAME-POSSESSIVE} %s turned back into a gooey pussy.",
                                                 this, opponent, body.getRandomPussy()));
             }
-            if (hasDick() && !body.getRandomCock().moddedPartCountsAs(this, CockMod.slimy)) {
+            if (hasDick() && !body.getRandomCock().moddedPartCountsAs(CockMod.slimy)) {
                 body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(CockMod.slimy), 999);
                 c.write(this, 
                                 Global.format("{self:NAME-POSSESSIVE} %s turned back into a gooey pussy.",
@@ -1032,13 +1032,13 @@ public class Player extends Character {
             purge(c);
             addTemporaryTrait(Trait.slime, 999);
             add(c, new PlayerSlimeDummy(this));
-            if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(this, GooeyMod.INSTANCE)) {
+            if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(GooeyMod.INSTANCE)) {
                 body.temporaryAddOrReplacePartWithType(
                     body.getRandomPussy().applyMod(GooeyMod.INSTANCE), 999);
                 body.temporaryAddOrReplacePartWithType(
                     new TentaclePart("slime filaments", "pussy", "slime", 0.0, 1.0, 1.0), 999);
             }
-            if (hasDick() && !body.getRandomCock().moddedPartCountsAs(this, CockMod.slimy)) {
+            if (hasDick() && !body.getRandomCock().moddedPartCountsAs(CockMod.slimy)) {
                 body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(CockMod.slimy),
                     999);
             }

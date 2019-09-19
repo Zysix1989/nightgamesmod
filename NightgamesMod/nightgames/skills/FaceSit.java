@@ -32,7 +32,7 @@ public class FaceSit extends Skill {
     public float priorityMod(Combat c) {
         return getSelf().has(Trait.lacedjuices) || getSelf().has(Trait.addictivefluids)
                         || (getSelf().body.has("pussy") && getSelf().body.
-                                        getRandomPussy().moddedPartCountsAs(getSelf(), FeralMod.INSTANCE)) ? 2.5f : 0;
+                                        getRandomPussy().moddedPartCountsAs(FeralMod.INSTANCE)) ? 2.5f : 0;
     }
 
     @Override

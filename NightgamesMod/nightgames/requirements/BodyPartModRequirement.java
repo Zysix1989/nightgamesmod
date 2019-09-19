@@ -17,7 +17,7 @@ public class BodyPartModRequirement extends BaseRequirement {
     }
 
     @Override public boolean meets(Combat c, Character self, Character other) {
-        return self.body.has(type) && self.body.getRandom(type).moddedPartCountsAs(self, mod);
+        return self.body.has(type) && self.body.getRandom(type).moddedPartCountsAs(mod);
     }
 
     @Override public boolean equals(Object o) {

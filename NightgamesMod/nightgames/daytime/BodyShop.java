@@ -128,7 +128,8 @@ public class BodyShop extends Activity {
 
             @Override
             boolean available(Character buyer) {
-                return buyer.body.get(partType).stream().anyMatch(part -> !part.moddedPartCountsAs(buyer, mod));
+                return buyer.body.get(partType).stream().anyMatch(part -> !part.moddedPartCountsAs(
+                    mod));
             }
 
             @Override
@@ -145,7 +146,8 @@ public class BodyShop extends Activity {
 
             @Override
             boolean available(Character buyer) {
-                return buyer.body.get(partType).stream().anyMatch(part -> part.moddedPartCountsAs(buyer, mod));
+                return buyer.body.get(partType).stream().anyMatch(part -> part.moddedPartCountsAs(
+                    mod));
             }
 
             @Override

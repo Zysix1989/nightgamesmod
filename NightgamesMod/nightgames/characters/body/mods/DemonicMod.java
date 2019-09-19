@@ -50,7 +50,7 @@ public class DemonicMod extends PartMod {
             c.write(template.render(model));
             return 0;
         }
-        if (target.moddedPartCountsAs(opponent, CockMod.runic)) {
+        if (target.moddedPartCountsAs(CockMod.runic)) {
             templates.add(JtwigTemplate.inlineTemplate(
                 "Putting in great effort, {{ self.nameOrPossessivePronoun() }} "
                     + "{{ self.action('try', 'tries') }} to draw upon "
@@ -88,7 +88,7 @@ public class DemonicMod extends PartMod {
                     + "{{ bottomless ? 'seemingly bottomless ' : ''\"\"'' }}"
                     + "{{ part.describe(self) }}."));
             int strength;
-            if (target.moddedPartCountsAs(opponent, CockMod.enlightened)) {
+            if (target.moddedPartCountsAs(CockMod.enlightened)) {
                 templates.add(JtwigTemplate.inlineTemplate(
                     "Since {{ opponent.subject() }} had focused so much of "
                         + "{{ opponent.reflectivePronoun() }} in "
@@ -137,9 +137,9 @@ public class DemonicMod extends PartMod {
     }
 
     public int counterValue(BodyPart part, BodyPart otherPart, Character self, Character other) {
-        if (otherPart.moddedPartCountsAs(other, CockMod.runic)) {
+        if (otherPart.moddedPartCountsAs(CockMod.runic)) {
             return -1;
-        } else if (otherPart.moddedPartCountsAs(other, CockMod.enlightened)) {
+        } else if (otherPart.moddedPartCountsAs(CockMod.enlightened)) {
             return 1;
         } else {
             return 0;

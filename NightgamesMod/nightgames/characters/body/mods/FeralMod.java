@@ -55,13 +55,13 @@ public class FeralMod extends PartMod {
                     + "leaves {{ opponent.directObject() }} reeling."
             ));
             double base = 3;
-            if (target.moddedPartCountsAs(opponent, CockMod.runic)) {
+            if (target.moddedPartCountsAs(CockMod.runic)) {
                 templates.add(JtwigTemplate.inlineTemplate(
                     "The wild scent overwhelms {{ opponent.nameOrPossessivePronoun() }} "
                         + "carefully layered enchantments, instantly sweeping them away."
                 ));
                 base *= 2.5;
-            } else if (target.moddedPartCountsAs(opponent, CockMod.incubus)) {
+            } else if (target.moddedPartCountsAs(CockMod.incubus)) {
                 templates.add(JtwigTemplate.inlineTemplate(
                     "Whilst certainly invigorating, the scent leaves {{ opponent.subject() }} "
                         + "largely unaffected."
@@ -94,7 +94,8 @@ public class FeralMod extends PartMod {
     }
 
     public int counterValue(BodyPart part, BodyPart otherPart, Character self, Character other) { 
-        return otherPart.moddedPartCountsAs(other, CockMod.runic) ? 1 : otherPart.moddedPartCountsAs(other, CockMod.incubus) ? -1 : 0;
+        return otherPart.moddedPartCountsAs(CockMod.runic) ? 1 : otherPart.moddedPartCountsAs(
+            CockMod.incubus) ? -1 : 0;
     }
 
     @Override
