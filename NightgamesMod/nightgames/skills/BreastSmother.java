@@ -70,90 +70,32 @@ public class BreastSmother extends Skill {
 
         double n = 20 + Global.random(5) + getSelf().body.getLargestBreasts().getSize();
 
-        //if (target.has(Trait.temptingtits)) {
+        if (target.has(Trait.temptingtits)) {
             n += Global.random(5, 10);
-        //}
-        //if (target.has(Trait.beguilingbreasts)) {
+        }
+        if (target.has(Trait.beguilingbreasts)) {
             n *= 1.5;
             target.add(c, new Charmed(target));
-        //}
-        //if (target.has(Trait.imagination)) {
+        }
+        if (target.has(Trait.imagination)) {
             n *= 1.5;
-        //}
+        }
 
         target.temptWithSkill(c, getSelf(), getSelf().body.getRandom("breasts"), (int) Math.round(n / 2), this);
         target.weaken(c, (int) getSelf().modifyDamage(DamageType.physical, target, Global.random(5, 15)));
 
         target.loseWillpower(c, Math.min(5, target.getWillpower().max() * 10 / 100 ));     
 
-        //if (special) {
-            //c.setStance(new BreastSmothering(getSelf(), target), getSelf(), true);      
+        if (special) {
+            c.setStance(new BreastSmothering(getSelf(), target), getSelf(), true);
             getSelf().emote(Emotion.dominant, 20);
-        //} else {
-            //getSelf().emote(Emotion.dominant, 10);
-        //}
-        //if (Global.random(100) < 15 + 2 * getSelf().get(Attribute.Fetish)) {
+        } else {
+            getSelf().emote(Emotion.dominant, 10);
+        }
+        if (Global.random(100) < 15 + 2 * getSelf().get(Attribute.Fetish)) {
             target.add(c, new BodyFetish(target, getSelf(), "breasts", 10));
-        //}
-            
-            target.add(c, new Hypersensitive(target));
-            BreastsPart part = target.body.getRandomBreasts();
-            if (part != null) {
-                BreastsPart realPart = target.body.getRandomBreasts();
-                target.body.addReplace((BreastsPart)(realPart.upgrade().upgrade().upgrade()), 1);
-            }
-            
-            getSelf().add(c, new FiredUp(getSelf(), target, "breasts"));
-            
-            target.add(c, new Abuff(target, Attribute.Power, -2, 5));
-            new Suckle(target).resolve(c, getSelf(), true);
-            
-            c.setStance(new HeldPaizuri(getSelf(), target), getSelf(), true);
-            new Paizuri(getSelf()).resolve(c, target);
-            
-            target.add(c, new nightgames.status.OrgasmSeal(target, 50));
-            
-            getSelf().addTemporaryTrait(Trait.witch, 100);
-            getSelf().addTemporaryTrait(Trait.lactating, 100);
-            getSelf().addTemporaryTrait(Trait.responsive, 100);
-            getSelf().addTemporaryTrait(Trait.temptingtits, 100);
-            getSelf().addTemporaryTrait(Trait.beguilingbreasts, 100);
-            getSelf().addTemporaryTrait(Trait.sedativecream, 100);
-            getSelf().body.temporaryAddPartMod("mouth", ArcaneMod.INSTANCE, 100);
-            
-            BreastsPart partB = getSelf().body.getBreastsBelow(BreastsPart.H_CUP);
-            if (partB != null) {
-                getSelf().body.temporaryAddOrReplacePartWithType(partB.upgrade(), 100);
-            }
-            
-            getSelf().addTemporaryTrait(Trait.divinity, 100);
-            getSelf().addTemporaryTrait(Trait.objectOfWorship, 100);
-            getSelf().addTemporaryTrait(Trait.lastStand, 100);
-            getSelf().addTemporaryTrait(Trait.erophage, 100);
-            getSelf().addTemporaryTrait(Trait.sacrosanct, 100);
-            getSelf().addTemporaryTrait(Trait.genuflection, 100);
-            getSelf().addTemporaryTrait(Trait.revered, 100);
-            
-            getSelf().addTemporaryTrait(Trait.ImitatedStrength, 999);
-            getSelf().addTemporaryTrait(Trait.succubus, 999);
-            getSelf().addTemporaryTrait(Trait.energydrain, 999);
-                getSelf().addTemporaryTrait(Trait.spiritphage, 999);
-                getSelf().addTemporaryTrait(Trait.lacedjuices, 999);
-                getSelf().addTemporaryTrait(Trait.RawSexuality, 999);
-                getSelf().addTemporaryTrait(Trait.soulsucker, 999);
-                getSelf().addTemporaryTrait(Trait.gluttony, 999);
-                getSelf().body.temporaryAddPartMod("ass", DemonicMod.INSTANCE, 999);
-                getSelf().body.temporaryAddPartMod("hands", DemonicMod.INSTANCE, 999);
-                getSelf().body.temporaryAddPartMod("feet", DemonicMod.INSTANCE, 999);
-                getSelf().body.temporaryAddPartMod("mouth", DemonicMod.INSTANCE, 999);
-        getSelf().addTemporaryTrait(Trait.succubus, 999);
-        getSelf().addTemporaryTrait(Trait.soulsucker, 999);
-        getSelf().addTemporaryTrait(Trait.energydrain, 999);
-        getSelf().addTemporaryTrait(Trait.spiritphage, 999);
-        getSelf().body.temporaryAddOrReplacePartWithType(WingsPart.demonic, 999);
-        getSelf().body.temporaryAddOrReplacePartWithType(TailPart.demonic, 999);
-        getSelf().body.temporaryAddOrReplacePartWithType(EarPart.pointed, 999);
-        
+        }
+
         Pairing pair = Pairing.findPairing(getSelf(), target);
         double base = 10.0 + Math.min(20, Global.random(getSelf().get(Attribute.Slime) / 3 + getSelf().get(Attribute.Seduction) / 5));
         int selfDmg = (int) ((base * pair.modPleasure(true)) / (getSelf().has(Trait.experienced) ? 2.0 : 3.0));
@@ -275,11 +217,11 @@ public class BreastSmother extends Skill {
                 getSelf().body.pleasure(target, bpart, getSelf().body.getRandomCock(), selfDmg, c, this);
                 break;
         }
-        
-        
-        
+
+
+
         target.add(c, new WingWrapped(target, getSelf()));
-        
+
         getSelf().emote(Emotion.dominant, 50);
         getSelf().emote(Emotion.horny, 30);
         target.emote(Emotion.desperate, 50);
@@ -290,7 +232,7 @@ public class BreastSmother extends Skill {
             otherm += Math.min(getSelf().get(Attribute.Seduction) / 4, 40);
         }
         c.setStance(new FlyingCarry(getSelf(), target), getSelf(), getSelf().canMakeOwnDecision());
-            
+
         return true;
     }
 
