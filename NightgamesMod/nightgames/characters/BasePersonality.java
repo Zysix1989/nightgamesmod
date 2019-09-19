@@ -13,6 +13,7 @@ import nightgames.actions.IMovement;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.mods.ErrorMod;
 import nightgames.characters.custom.AiModifiers;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.characters.custom.CommentSituation;
@@ -34,7 +35,7 @@ public abstract class BasePersonality implements Personality {
     private String type;
     public NPC character;
     protected List<PreferredAttribute> preferredAttributes;
-    protected CockMod preferredCockMod;
+    protected String preferredCockModType;
     protected AiModifiers mods;
     
     protected int dominance=0;
@@ -45,7 +46,7 @@ public abstract class BasePersonality implements Personality {
         type = getClass().getSimpleName();
         character = new NPC(name, 1, this);
         character.isStartCharacter = isStartCharacter;
-        preferredCockMod = CockMod.error;
+        preferredCockModType = ErrorMod.TYPE;
         preferredAttributes = new ArrayList<PreferredAttribute>();
     }
 
@@ -84,16 +85,16 @@ public abstract class BasePersonality implements Personality {
 
     @Override
     public void rest(int time) {
-        if (!preferredCockMod.equals(CockMod.error) && character.rank > 0) {
+        if (!preferredCockModType.equals(ErrorMod.TYPE) && character.rank > 0) {
             Optional<BodyPart> optDick = character.body.get("cock")
                                                        .stream()
                                                        .filter(part -> part.moddedPartCountsAs(
-                                                           preferredCockMod))
+                                                           preferredCockModType))
                                                        .findAny();
             if (optDick.isPresent()) {
                 CockPart part = (CockPart) optDick.get();
                 character.body.remove(part);
-                character.body.add(part.applyMod(preferredCockMod));
+                character.body.add(part.applyMod(CockMod.getFromType(preferredCockModType).orElseThrow()));
             }
         }
         for (Addiction addiction : character.getAddictions()) {

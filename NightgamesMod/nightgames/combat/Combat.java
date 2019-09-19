@@ -308,7 +308,7 @@ public class Combat {
         return victor.has(Item.EmptyBottle, 1) && loser.body.get("pussy")
                                                             .stream()
                                                             .anyMatch(part -> part.moddedPartCountsAs(
-                                                                mod));
+                                                                mod.getModType()));
     }
 
     public void doVictory(Character victor, Character loser) {

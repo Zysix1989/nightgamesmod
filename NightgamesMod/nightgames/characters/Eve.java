@@ -8,6 +8,7 @@ import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.mods.ErrorMod;
 import nightgames.characters.body.mods.SizeMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
@@ -75,7 +76,7 @@ public class Eve extends BasePersonality {
         // somewhat androgynous face
         self.body.add(new FacePart(.1, .9));
         self.initialGender = CharacterSex.shemale;
-        preferredCockMod = CockMod.error;
+        preferredCockModType = ErrorMod.TYPE;
     }
 
     @Override

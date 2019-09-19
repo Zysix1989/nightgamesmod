@@ -37,6 +37,7 @@ import nightgames.characters.body.CockMod;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.ToysPart;
 import nightgames.characters.body.mods.DemonicMod;
+import nightgames.characters.body.mods.IncubusCockMod;
 import nightgames.characters.body.mods.SizeMod;
 import nightgames.characters.custom.AiModifiers;
 import nightgames.characters.custom.CharacterLine;
@@ -4094,8 +4095,8 @@ public abstract class Character extends Observable implements Cloneable {
      * Returns true if They have a demonic mod on their pussy or cock, or has the succubus trait.*/
     public boolean isDemonic() {
         return has(Trait.succubus) || body.get("pussy").stream()
-                        .anyMatch(part -> part.moddedPartCountsAs(DemonicMod.INSTANCE)) || body.get("cock")
-                        .stream().anyMatch(part -> part.moddedPartCountsAs(CockMod.incubus));
+                        .anyMatch(part -> part.moddedPartCountsAs(DemonicMod.TYPE)) || body.get("cock")
+                        .stream().anyMatch(part -> part.moddedPartCountsAs(IncubusCockMod.TYPE));
     }
 
     public int baseDisarm() {

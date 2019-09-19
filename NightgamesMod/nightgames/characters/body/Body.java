@@ -1499,7 +1499,7 @@ public class Body implements Cloneable {
     }
 
     public void removeMod(String partType, PartMod mod) {
-        Optional<BodyPart> part = getPure(partType).stream().filter(p -> p.moddedPartCountsAs(mod)).findAny();
+        Optional<BodyPart> part = getPure(partType).stream().filter(p -> p.moddedPartCountsAs(mod.getModType())).findAny();
         if (part.isPresent() && part.get() instanceof GenericBodyPart) {
             GenericBodyPart genericPart = (GenericBodyPart) part.get();
             addReplace(genericPart.removeMod(mod), 1);

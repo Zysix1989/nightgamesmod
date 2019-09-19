@@ -6,6 +6,7 @@ import java.util.Optional;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
+import nightgames.characters.body.mods.BionicCockMod;
 import nightgames.characters.body.mods.CyberneticMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
@@ -174,7 +175,7 @@ public class Mara extends BasePersonality {
 
     @Override
     public void applyBasicStats(Character self) {
-        preferredCockMod = CockMod.bionic;
+        preferredCockModType = BionicCockMod.TYPE;
         self.outfitPlan.add(Clothing.getByID("bra"));
         self.outfitPlan.add(Clothing.getByID("Tshirt"));
         self.outfitPlan.add(Clothing.getByID("underwear"));

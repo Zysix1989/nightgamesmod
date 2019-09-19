@@ -101,6 +101,6 @@ public class ToggleSlimePussy extends Skill {
     }
 
     private boolean hasSlimePussy() {
-        return getSelf().hasPussy() && getSelf().body.getRandomPussy().moddedPartCountsAs(GooeyMod.INSTANCE);
+        return getSelf().hasPussy() && getSelf().body.getRandomPussy().moddedPartCountsAs(GooeyMod.TYPE);
     }
 }

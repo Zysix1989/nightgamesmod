@@ -13,6 +13,7 @@ import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.mods.ArcaneMod;
 import nightgames.characters.body.mods.ExtendedTonguedMod;
+import nightgames.characters.body.mods.RunicCockMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
@@ -182,7 +183,7 @@ public class Cassie extends BasePersonality {
 
     @Override
     public void applyBasicStats(Character self) {
-        preferredCockMod = CockMod.runic;
+        preferredCockModType = RunicCockMod.TYPE;
         self.outfitPlan.add(Clothing.getByID("bra"));
         self.outfitPlan.add(Clothing.getByID("blouse"));
         self.outfitPlan.add(Clothing.getByID("panties"));

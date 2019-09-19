@@ -3,6 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Character;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.CockMod;
+import nightgames.characters.body.mods.PrimalCockMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -23,7 +24,7 @@ public class ToggleKnot extends Skill {
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
         return user.human() || user.body.get("cock").stream().anyMatch(cock -> cock.moddedPartCountsAs(
-            CockMod.primal));
+            PrimalCockMod.TYPE));
     }
 
     @Override

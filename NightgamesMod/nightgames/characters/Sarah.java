@@ -9,6 +9,7 @@ import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.WingsPart;
+import nightgames.characters.body.mods.ErrorMod;
 import nightgames.characters.body.mods.FieryMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
@@ -35,7 +36,7 @@ public class Sarah extends BasePersonality {
 
     @Override
     public void applyBasicStats(Character self) {
-        preferredCockMod = CockMod.error;
+        preferredCockModType = ErrorMod.TYPE;
         character.outfitPlan.add(Clothing.getByID("frillybra"));
         character.outfitPlan.add(Clothing.getByID("frillypanties"));
 

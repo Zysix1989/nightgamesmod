@@ -50,7 +50,7 @@ public class Blowjob extends Skill {
     public boolean isVaginal(Combat c, Character target) {
         return c.getStance().isPartFuckingPartInserted(c, target, target.body.getRandomCock(), getSelf(), getSelf().body.getRandomPussy())
                         && !c.getOpponent(getSelf()).has(Trait.strapped) && getSelf().body.getRandomPussy().moddedPartCountsAs(
-            ExtendedTonguedMod.INSTANCE);
+            ExtendedTonguedMod.TYPE);
     }
 
     public boolean isFacesitting(Combat c, Character target) {

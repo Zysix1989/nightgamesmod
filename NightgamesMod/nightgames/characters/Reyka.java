@@ -12,6 +12,7 @@ import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.DemonicMod;
 import nightgames.characters.body.mods.ExtendedTonguedMod;
+import nightgames.characters.body.mods.IncubusCockMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
@@ -58,7 +59,7 @@ public class Reyka extends BasePersonality {
 
     @Override
     public void applyBasicStats(Character self) {
-        preferredCockMod = CockMod.incubus;
+        preferredCockModType = IncubusCockMod.TYPE;
         self.outfitPlan.add(Clothing.getByID("tanktop"));
         self.outfitPlan.add(Clothing.getByID("miniskirt"));
         self.outfitPlan.add(Clothing.getByID("garters"));

@@ -5,6 +5,7 @@ import nightgames.characters.Character;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.mods.SizeMod;
+import nightgames.characters.body.mods.SlimyCockMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -94,6 +95,7 @@ public class ToggleSlimeCock extends Skill {
     }
 
     private boolean hasSlimeCock() {
-        return getSelf().hasDick() && getSelf().body.getRandomCock().moddedPartCountsAs(CockMod.slimy);
+        return getSelf().hasDick() && getSelf().body.getRandomCock().moddedPartCountsAs(
+            SlimyCockMod.TYPE);
     }
 }

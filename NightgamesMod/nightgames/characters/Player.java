@@ -24,6 +24,7 @@ import nightgames.characters.body.CockMod;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.GooeyMod;
+import nightgames.characters.body.mods.SlimyCockMod;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatSceneChoice;
 import nightgames.combat.Result;
@@ -914,13 +915,13 @@ public class Player extends Character {
             opponent.temptNoSkillNoSource(c, this, opponent.arousal.max() / 25);
         }
         if (has(Trait.slime)) {
-            if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(GooeyMod.INSTANCE)) {
+            if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(GooeyMod.TYPE)) {
                 body.temporaryAddOrReplacePartWithType(body.getRandomPussy().applyMod(GooeyMod.INSTANCE), 999);
                 c.write(this, 
                                 Global.format("{self:NAME-POSSESSIVE} %s turned back into a gooey pussy.",
                                                 this, opponent, body.getRandomPussy()));
             }
-            if (hasDick() && !body.getRandomCock().moddedPartCountsAs(CockMod.slimy)) {
+            if (hasDick() && !body.getRandomCock().moddedPartCountsAs(SlimyCockMod.TYPE)) {
                 body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(CockMod.slimy), 999);
                 c.write(this, 
                                 Global.format("{self:NAME-POSSESSIVE} %s turned back into a gooey pussy.",
@@ -1032,13 +1033,13 @@ public class Player extends Character {
             purge(c);
             addTemporaryTrait(Trait.slime, 999);
             add(c, new PlayerSlimeDummy(this));
-            if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(GooeyMod.INSTANCE)) {
+            if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(GooeyMod.TYPE)) {
                 body.temporaryAddOrReplacePartWithType(
                     body.getRandomPussy().applyMod(GooeyMod.INSTANCE), 999);
                 body.temporaryAddOrReplacePartWithType(
                     new TentaclePart("slime filaments", "pussy", "slime", 0.0, 1.0, 1.0), 999);
             }
-            if (hasDick() && !body.getRandomCock().moddedPartCountsAs(CockMod.slimy)) {
+            if (hasDick() && !body.getRandomCock().moddedPartCountsAs(SlimyCockMod.TYPE)) {
                 body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(CockMod.slimy),
                     999);
             }

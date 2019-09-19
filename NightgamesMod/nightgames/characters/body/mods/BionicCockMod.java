@@ -39,7 +39,7 @@ public class BionicCockMod extends CockMod {
             opponent.add(c, new FluidAddiction(opponent, self, 1, 2));
             opponent.add(c, new FluidAddiction(opponent, self, 1, 2));
             bonus -= 3; // Didn't actually move around too much
-        } else if (target.moddedPartCountsAs(FieryMod.INSTANCE)) {
+        } else if (target.moddedPartCountsAs(FieryMod.TYPE)) {
             message += String.format(
                 "Sensing the flesh around it, %s %s starts spinning rapidly, vastly increasing the friction against the walls of %s %s.",
                 self.nameOrPossessivePronoun(), part.describe(self),

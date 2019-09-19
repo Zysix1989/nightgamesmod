@@ -25,12 +25,12 @@ public class IncubusCockMod extends CockMod {
                 self.nameOrPossessivePronoun(), opponent.nameOrPossessivePronoun(),
                 self.reflectivePronoun());
         int amtDrained;
-        if (target.moddedPartCountsAs(FeralMod.INSTANCE)) {
+        if (target.moddedPartCountsAs(FeralMod.TYPE)) {
             message += String.format(" %s %s gladly gives it up, eager for more pleasure.",
                 opponent.possessiveAdjective(), target.describe(opponent));
             amtDrained = 5;
             bonus += 2;
-        } else if (target.moddedPartCountsAs(CyberneticMod.INSTANCE)) {
+        } else if (target.moddedPartCountsAs(CyberneticMod.TYPE)) {
             message += String.format(
                 " %s %s does not oblige, instead sending a pulse of electricity through %s %s and up %s spine",
                 opponent.nameOrPossessivePronoun(), target.describe(opponent),
@@ -63,7 +63,7 @@ public class IncubusCockMod extends CockMod {
     public void onOrgasmWith(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, boolean selfCame) {
         if (this.equals(incubus) && c.getStance().inserted(self)) {
             if (selfCame) {
-                if (target.moddedPartCountsAs(CyberneticMod.INSTANCE)) {
+                if (target.moddedPartCountsAs(CyberneticMod.TYPE)) {
                     c.write(self, String.format(
                         "%s demonic seed splashes pointlessly against the walls of %s %s, failing even in %s moment of defeat.",
                         self.nameOrPossessivePronoun(), opponent.nameOrPossessivePronoun(),
@@ -74,7 +74,7 @@ public class IncubusCockMod extends CockMod {
                         "The moment %s erupts inside %s, %s mind goes completely blank, leaving %s pliant and ready.",
                         self.subject(), opponent.subject(), opponent.possessiveAdjective(),
                         opponent.directObject());
-                    if (target.moddedPartCountsAs(FeralMod.INSTANCE)) {
+                    if (target.moddedPartCountsAs(FeralMod.TYPE)) {
                         message += String.format(" %s no resistance to the subversive seed.",
                             Global.capitalizeFirstLetter(opponent.subjectAction("offer", "offers")));
                         duration += 2;
@@ -83,13 +83,13 @@ public class IncubusCockMod extends CockMod {
                     c.write(self, message);
                 }
             } else {
-                if (!target.moddedPartCountsAs(CyberneticMod.INSTANCE)) {
+                if (!target.moddedPartCountsAs(CyberneticMod.TYPE)) {
                     c.write(self, String.format(
                         "Sensing %s moment of passion, %s %s greedily draws upon the rampant flows of orgasmic energy within %s, transferring the power back into %s.",
                         opponent.nameOrPossessivePronoun(), self.nameOrPossessivePronoun(),
                         part.describe(self), opponent.directObject(), self.directObject()));
-                    int attDamage = target.moddedPartCountsAs(FeralMod.INSTANCE) ? 10 : 5;
-                    int willDamage = target.moddedPartCountsAs(FeralMod.INSTANCE) ? 10 : 5;
+                    int attDamage = target.moddedPartCountsAs(FeralMod.TYPE) ? 10 : 5;
+                    int willDamage = target.moddedPartCountsAs(FeralMod.TYPE) ? 10 : 5;
                     Drained.drain(c, self, opponent, Attribute.Power, attDamage, 20, true);
                     Drained.drain(c, self, opponent, Attribute.Cunning, attDamage, 20, true);
                     Drained.drain(c, self, opponent, Attribute.Seduction, attDamage, 20, true);

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.mods.IncubusCockMod;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.SizeMod;
 import nightgames.combat.Combat;
@@ -76,7 +77,7 @@ public class CockPart extends GenericBodyPart {
     @Override
     protected String modlessDescription(Character c) {
         String syn = Global.pickRandom(synonyms).get();
-        return (c != null && c.hasPussy() && !moddedPartCountsAs(CockMod.incubus) ? "girl-" : "") + syn;
+        return (c != null && c.hasPussy() && !moddedPartCountsAs(IncubusCockMod.TYPE) ? "girl-" : "") + syn;
     }
 
     @Override

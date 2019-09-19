@@ -10,6 +10,7 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
+import nightgames.characters.body.mods.EnlightenedCockMod;
 import nightgames.characters.body.mods.FieryMod;
 import nightgames.characters.body.mods.TrainedMod;
 import nightgames.characters.custom.CharacterLine;
@@ -61,7 +62,7 @@ public class Jewel extends BasePersonality {
 
     @Override
     public void applyBasicStats(Character self) {
-        preferredCockMod = CockMod.enlightened;
+        preferredCockModType = EnlightenedCockMod.TYPE;
         self.outfitPlan.add(Clothing.getByID("bra"));
         self.outfitPlan.add(Clothing.getByID("tanktop"));
         self.outfitPlan.add(Clothing.getByID("panties"));
@@ -231,10 +232,10 @@ public class Jewel extends BasePersonality {
             }
         }
         if (character.getLevel() >= 40 && Global.checkFlag(JEWEL_ANAL_FOCUS)) {
-            if (!character.body.getRandomAss().getMods().stream().anyMatch(mod -> mod.countsAs(new TrainedMod()))) {
+            if (!character.body.getRandomAss().getMods().stream().anyMatch(mod -> mod.countsAs(TrainedMod.TYPE))) {
                 character.body.addReplace(character.body.getRandomAss().applyMod(new TrainedMod()), 1);
             }
-        } else if (character.body.getRandomAss().getMods().stream().anyMatch(mod -> mod.countsAs(new TrainedMod()))) {
+        } else if (character.body.getRandomAss().getMods().stream().anyMatch(mod -> mod.countsAs(TrainedMod.TYPE))) {
             character.body.addReplace(AssPart.generateGeneric(), 1);
         }
         super.rest(time);

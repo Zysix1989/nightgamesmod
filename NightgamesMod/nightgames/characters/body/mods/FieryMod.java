@@ -31,13 +31,13 @@ public class FieryMod extends PartMod {
     private JtwigTemplate tickDamage(Combat c, Character self, Character opponent, BodyPart target) {
 
         JtwigTemplate template;
-        if (target.moddedPartCountsAs(CockMod.primal)) {
+        if (target.moddedPartCountsAs(PrimalCockMod.TYPE)) {
             template = JtwigTemplate.inlineTemplate(
                 "The intense heat emanating from {{ self.nameOrPossessivePronoun() }} "
                     + "{{ part.describe(self) }} only serves to enflame "
                     + "{{ opponent.nameOrPossessivePronoun() }} primal passion.");
             opponent.buildMojo(c, 7);
-        } else if (target.moddedPartCountsAs(CockMod.bionic)) {
+        } else if (target.moddedPartCountsAs(BionicCockMod.TYPE)) {
             template = JtwigTemplate.inlineTemplate(
                 "The heat emanating from {{ self.nameOrPossessivePronoun() }} "
                     + "{{ part.describe(self) }} is extremely hazardous for "
@@ -93,8 +93,8 @@ public class FieryMod extends PartMod {
     }
 
     public int counterValue(BodyPart part, BodyPart opponentPart, Character self, Character opponent) { 
-        return opponentPart.moddedPartCountsAs(CockMod.bionic) ? 1 : opponentPart.moddedPartCountsAs(
-            CockMod.primal) ? -1 : 0;
+        return opponentPart.moddedPartCountsAs(BionicCockMod.TYPE) ? 1 : opponentPart.moddedPartCountsAs(
+            PrimalCockMod.TYPE) ? -1 : 0;
     }
 
     @Override

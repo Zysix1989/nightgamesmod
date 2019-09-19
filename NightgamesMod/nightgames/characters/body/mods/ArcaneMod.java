@@ -41,8 +41,8 @@ public class ArcaneMod extends PartMod {
             .with("part", part)
             .with("target", target);
         ArrayList<JtwigTemplate> templates = new ArrayList<>();
-        if (!target.moddedPartCountsAs(CockMod.bionic)) {
-            if (target.moddedPartCountsAs(CockMod.primal)) {
+        if (!target.moddedPartCountsAs(BionicCockMod.TYPE)) {
+            if (target.moddedPartCountsAs(PrimalCockMod.TYPE)) {
                 templates.add(JtwigTemplate.inlineTemplate(
                     " {{ if part.isType('mouth') -}} The arcane lipstick painted on "
                         + "{{ else - }}The tattoos around {{ endif -}}"
@@ -100,8 +100,8 @@ public class ArcaneMod extends PartMod {
     }
 
     public int counterValue(BodyPart part, BodyPart otherPart, Character self, Character other) { 
-        return otherPart.moddedPartCountsAs(CockMod.primal) ? 1 : otherPart.moddedPartCountsAs(
-            CockMod.bionic) ? -1 : 0;
+        return otherPart.moddedPartCountsAs(PrimalCockMod.TYPE) ? 1 : otherPart.moddedPartCountsAs(
+            BionicCockMod.TYPE) ? -1 : 0;
     }
 
     @Override

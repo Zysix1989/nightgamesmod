@@ -11,6 +11,7 @@ import nightgames.characters.body.FacePart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.DemonicMod;
+import nightgames.characters.body.mods.ErrorMod;
 import nightgames.characters.body.mods.ExtendedTonguedMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
@@ -37,7 +38,7 @@ public class Mei extends BasePersonality {
 
     @Override
     public void applyBasicStats(Character self) {
-        preferredCockMod = CockMod.error;
+        preferredCockModType = ErrorMod.TYPE;
         character.outfitPlan.add(Clothing.getByID("negligee"));
         character.outfitPlan.add(Clothing.getByID("lacythong"));
         character.outfitPlan.add(Clothing.getByID("garters"));

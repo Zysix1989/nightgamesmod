@@ -1,6 +1,7 @@
 package nightgames.characters;
 
 import nightgames.characters.body.*;
+import nightgames.characters.body.mods.BlessedCockMod;
 import nightgames.characters.body.mods.DivineMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -78,7 +79,7 @@ public class TestAngel extends BasePersonality {
     }
 
     public void applyBasicStats(Character self) {
-        preferredCockMod = CockMod.blessed;
+        preferredCockModType = BlessedCockMod.TYPE;
         self.outfitPlan.add(Clothing.getByID("Tshirt"));
         self.outfitPlan.add(Clothing.getByID("bra"));
         self.outfitPlan.add(Clothing.getByID("thong"));

@@ -7,13 +7,13 @@ import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.WingsPart;
+import nightgames.characters.body.mods.BlessedCockMod;
 import nightgames.characters.body.mods.DivineMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
 import nightgames.combat.CombatSceneChoice;
 import nightgames.combat.Result;
-import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
@@ -41,7 +41,7 @@ public class Angel extends BasePersonality {
     }
 
     public void applyBasicStats(Character self) {
-        preferredCockMod = CockMod.blessed;
+        preferredCockModType = BlessedCockMod.TYPE;
         self.outfitPlan.add(Clothing.getByID("Tshirt"));
         self.outfitPlan.add(Clothing.getByID("bra"));
         self.outfitPlan.add(Clothing.getByID("thong"));

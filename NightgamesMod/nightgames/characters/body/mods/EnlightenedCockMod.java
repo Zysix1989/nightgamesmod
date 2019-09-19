@@ -20,7 +20,7 @@ public class EnlightenedCockMod extends CockMod {
         double bonus = super.applyBonuses(c, self, opponent, part, target, damage);
 
         String message = "";
-        if (target.moddedPartCountsAs(DemonicMod.INSTANCE)) {
+        if (target.moddedPartCountsAs(DemonicMod.TYPE)) {
             message = String.format(
                 "Almost instinctively, %s %s entire being into %s %s. While this would normally be a good thing,"
                     + " whilst fucking a succubus it is very, very bad indeed.",

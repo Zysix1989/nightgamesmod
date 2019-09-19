@@ -9,6 +9,7 @@ import nightgames.actions.Movement;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
+import nightgames.characters.body.mods.ErrorMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -42,7 +43,7 @@ public class Yui extends BasePersonality {
 
     @Override
     public void applyBasicStats(Character self) {
-        preferredCockMod = CockMod.error;
+        preferredCockModType = ErrorMod.TYPE;
         character.outfitPlan.add(Clothing.getByID("sarashi"));
         character.outfitPlan.add(Clothing.getByID("shinobigarb"));
         character.outfitPlan.add(Clothing.getByID("loincloth"));
