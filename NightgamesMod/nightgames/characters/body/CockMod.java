@@ -9,6 +9,7 @@ import com.google.gson.JsonPrimitive;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.mods.BlessedCockMod;
 import nightgames.characters.body.mods.CyberneticMod;
 import nightgames.characters.body.mods.DemonicMod;
 import nightgames.characters.body.mods.FeralMod;
@@ -36,7 +37,7 @@ public class CockMod extends PartMod {
     public static final CockMod error = new CockMod("error", 1.0, 1.0, 1.0);
     public static final CockMod slimy = new SlimyCockMod("slimy", .5, 1.5, .7);
     public static final CockMod runic= new RunicCockMod("runic", 2.0, 1.0, 1.0);
-    public static final CockMod blessed = new CockMod("blessed", 1.0, 1.0, .75);
+    public static final CockMod blessed = new BlessedCockMod("blessed", 1.0, 1.0, .75);
     public static final CockMod incubus= new CockMod("incubus", 1.25, 1.3, .9);
     public static final CockMod primal = new CockMod("primal", 1.0, 1.4, 1.2);
     public static final CockMod bionic = new CockMod("bionic", .8, 1.3, .5);
