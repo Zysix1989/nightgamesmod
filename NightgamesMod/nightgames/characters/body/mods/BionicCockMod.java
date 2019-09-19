@@ -60,34 +60,6 @@ public class BionicCockMod extends CockMod {
         return Optional.of("artificial lubricant");
     }
 
-    public double applyReceiveBonuses(Combat c, Character self, Character opponent, BodyPart part,
-        BodyPart target, double damage) {
-        return 0;
-    }
-
-    @Override
-    public void onOrgasmWith(Combat c, Character self, Character opponent, BodyPart part,
-        BodyPart target, boolean selfCame) {
-    }
-
-    @Override
-    public void tickHolding(Combat c, Character self, Character opponent, BodyPart otherOrgan,
-        BodyPart part) {
-    }
-
-    @Override
-    public void onStartPenetration(Combat c, Character self, Character opponent, BodyPart part,
-        BodyPart target) {
-    }
-
-    public void onEndPenetration(Combat c, Character self, Character opponent, BodyPart part,
-        BodyPart target) {
-    }
-
-    public static Optional<CockMod> getFromType(String type) {
-        return ALL_MODS.stream().filter(mod -> mod.getModType().equals(type)).findAny();
-    }
-
     @Override
     public String describeAdjective(String partType) {
         return "bionic implants";

@@ -1,6 +1,5 @@
 package nightgames.characters.body.mods;
 
-import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
@@ -59,14 +58,6 @@ public class IncubusCockMod extends CockMod {
         return bonus;
     }
 
-    public Optional<String> getFluids() {
-        return Optional.empty();
-    }
-
-    public double applyReceiveBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
-        return 0;
-    }
-
     @Override
     public void onOrgasmWith(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, boolean selfCame) {
         if (this.equals(incubus) && c.getStance().inserted(self)) {
@@ -105,17 +96,6 @@ public class IncubusCockMod extends CockMod {
                 }
             }
         }
-    }
-
-    @Override
-    public void tickHolding(Combat c, Character self, Character opponent, BodyPart otherOrgan, BodyPart part) {
-    }
-
-    @Override
-    public void onStartPenetration(Combat c, Character self, Character opponent, BodyPart part, BodyPart target) {
-    }
-
-    public void onEndPenetration(Combat c, Character self, Character opponent, BodyPart part, BodyPart target) {
     }
 
     @Override

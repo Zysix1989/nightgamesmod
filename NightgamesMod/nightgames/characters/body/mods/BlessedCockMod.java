@@ -1,6 +1,5 @@
 package nightgames.characters.body.mods;
 
-import java.util.Optional;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockMod;
@@ -28,10 +27,6 @@ public class BlessedCockMod extends CockMod {
         return bonus;
     }
 
-    public Optional<String> getFluids() {
-        return Optional.empty();
-    }
-
     public double applyReceiveBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
         if (c.getStance().inserted(self)) {
             DivineCharge charge = (DivineCharge) self.getStatus(Stsflag.divinecharge);
@@ -53,14 +48,6 @@ public class BlessedCockMod extends CockMod {
     }
 
     @Override
-    public void onOrgasmWith(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, boolean selfCame) {
-    }
-
-    @Override
-    public void tickHolding(Combat c, Character self, Character opponent, BodyPart otherOrgan, BodyPart part) {
-    }
-
-    @Override
     public void onStartPenetration(Combat c, Character self, Character opponent, BodyPart part, BodyPart target) {
         if (target.isErogenous()) {
             if (!self.human()) {
@@ -70,9 +57,6 @@ public class BlessedCockMod extends CockMod {
                     self, opponent));
             }
         }
-    }
-
-    public void onEndPenetration(Combat c, Character self, Character opponent, BodyPart part, BodyPart target) {
     }
 
     @Override

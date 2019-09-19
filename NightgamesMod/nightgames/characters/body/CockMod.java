@@ -46,29 +46,6 @@ public class CockMod extends PartMod {
         return new JsonPrimitive(getModType());
     }
 
-    public Optional<String> getFluids() {
-        return Optional.empty();
-    }
-
-    public double applyReceiveBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
-        return 0;
-    }
-
-    @Override
-    public void onOrgasmWith(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, boolean selfCame) {
-    }
-
-    @Override
-    public void tickHolding(Combat c, Character self, Character opponent, BodyPart otherOrgan, BodyPart part) {
-    }
-
-    @Override
-    public void onStartPenetration(Combat c, Character self, Character opponent, BodyPart part, BodyPart target) {
-    }
-
-    public void onEndPenetration(Combat c, Character self, Character opponent, BodyPart part, BodyPart target) {
-    }
-
     public static Optional<CockMod> getFromType(String type) {
         return ALL_MODS.stream().filter(mod -> mod.getModType().equals(type)).findAny();
     }
