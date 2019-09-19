@@ -639,9 +639,6 @@ public class Global {
         getSkillPool().add(new BreastGrowthSuper(ch));
         getSkillPool().add(new Kneel(ch));
         getSkillPool().add(new OfferAss(ch));
-        
-        //getSkillPool().add(new BreastSmotherSuperSucc(ch));
-        //getSkillPool().add(new FutaFight(ch));
     }
 
     /**
