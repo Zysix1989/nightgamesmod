@@ -110,14 +110,6 @@ public class GenericBodyPart implements BodyPart {
         return getModDescriptorString(c) + normalDescription;
     }
 
-    SizeMod getSizeMod() {
-        return ((SizeMod)mods.stream().filter(mod -> mod instanceof SizeMod).findAny().orElse(new SizeMod(SizeMod.getMinimumSize(getType()))));
-    }
-
-    public int getSize() {
-        return getSizeMod().getSize();
-    }
-    
     @Override
     public double priority(Character c) {
         return (getPleasure(c, null) - 1) * 3;

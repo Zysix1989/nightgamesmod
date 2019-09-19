@@ -201,4 +201,12 @@ public class CockPart extends GenericBodyPart {
     public CockPart newWithSize(int size) {
         return (CockPart) applyMod(new SizeMod(size));
     }
+
+    SizeMod getSizeMod() {
+        return ((SizeMod)mods.stream().filter(mod -> mod instanceof SizeMod).findAny().orElse(new SizeMod(SizeMod.getMinimumSize(getType()))));
+    }
+
+    public int getSize() {
+        return getSizeMod().getSize();
+    }
 }

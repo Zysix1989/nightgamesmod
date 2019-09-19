@@ -233,4 +233,12 @@ public class AssPart extends GenericBodyPart {
     public AssPart newWithSize(int size) {
         return (AssPart) applyMod(new SizeMod(size));
     }
+
+    SizeMod getSizeMod() {
+        return ((SizeMod)mods.stream().filter(mod -> mod instanceof SizeMod).findAny().orElse(new SizeMod(SizeMod.getMinimumSize(getType()))));
+    }
+
+    public int getSize() {
+        return getSizeMod().getSize();
+    }
 }
