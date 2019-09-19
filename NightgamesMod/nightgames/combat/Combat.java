@@ -304,11 +304,11 @@ public class Combat {
         return combatantData.get(character.getTrueName());
     }
 
-    private boolean checkBottleCollection(Character victor, Character loser, PartMod mod) {
+    private boolean checkBottleCollection(Character victor, Character loser, String modType) {
         return victor.has(Item.EmptyBottle, 1) && loser.body.get("pussy")
                                                             .stream()
                                                             .anyMatch(part -> part.moddedPartCountsAs(
-                                                                mod.getModType()));
+                                                                modType));
     }
 
     public void doVictory(Character victor, Character loser) {
@@ -1818,56 +1818,56 @@ public class Combat {
             victor.gain(Item.semen, 1);
         }
          
-        if (checkBottleCollection(victor, loser, DivineMod.INSTANCE)) {
+        if (checkBottleCollection(victor, loser, DivineMod.TYPE)) {
             write(victor, Global.format(
                             "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:name-possessive} divine pussy juices in an empty bottle</b>",
                             victor, loser));
             victor.consume(Item.EmptyBottle, 1, false);
             victor.gain(Item.HolyWater, 1);
         }
-        if (checkBottleCollection(victor, loser, DemonicMod.INSTANCE)) {
+        if (checkBottleCollection(victor, loser, DemonicMod.TYPE)) {
             write(victor, Global.format(
                             "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:name-possessive} demonic pussy juices in an empty bottle</b>",
                             victor, loser));
             victor.consume(Item.EmptyBottle, 1, false);
             victor.gain(Item.ExtremeAphrodisiac, 1);
         }
-        if (checkBottleCollection(victor, loser, PlantMod.INSTANCE)) {
+        if (checkBottleCollection(victor, loser, PlantMod.TYPE)) {
             write(victor, Global.format(
                             "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} nectar in an empty bottle</b>",
                             victor, loser));
             victor.consume(Item.EmptyBottle, 1, false);
             victor.gain(Item.nectar, 3);
         }
-        if (checkBottleCollection(victor, loser, CyberneticMod.INSTANCE)) {
+        if (checkBottleCollection(victor, loser, CyberneticMod.TYPE)) {
             write(victor, Global.format(
                             "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} artificial lubricant in an empty bottle</b>",
                             victor, loser));
             victor.consume(Item.EmptyBottle, 1, false);
             victor.gain(Item.LubricatingOils, 1);
         }
-        if (checkBottleCollection(victor, loser, ArcaneMod.INSTANCE)) {
+        if (checkBottleCollection(victor, loser, ArcaneMod.TYPE)) {
             write(victor, Global.format(
                             "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of the floating mana wisps ejected from {other:possessive} orgasm in an empty bottle</b>",
                             victor, loser));
             victor.consume(Item.EmptyBottle, 1, false);
             victor.gain(Item.RawAether, 1);
         }
-        if (checkBottleCollection(victor, loser, FeralMod.INSTANCE)) {
+        if (checkBottleCollection(victor, loser, FeralMod.TYPE)) {
             write(victor, Global.format(
                             "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} musky juices in an empty bottle</b>",
                             victor, loser));
             victor.consume(Item.EmptyBottle, 1, false);
             victor.gain(Item.FeralMusk, 1);
         }
-        if (checkBottleCollection(victor, loser, GooeyMod.INSTANCE)) {
+        if (checkBottleCollection(victor, loser, GooeyMod.TYPE)) {
             write(victor, Global.format(
                             "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} goo in an empty bottle</b>",
                             victor, loser));
             victor.consume(Item.EmptyBottle, 1, false);
             victor.gain(Item.BioGel, 1);
         }
-        if (checkBottleCollection(victor, loser, FieryMod.INSTANCE)) {
+        if (checkBottleCollection(victor, loser, FieryMod.TYPE)) {
             write(victor, Global.format(
                             "<br/><b>{other:SUBJECT-ACTION:shoot|shoots} {self:name-do} a dirty look as {self:subject-action:move|moves} to collect some of {other:possessive} excitement in an empty bottle</b>",
                             victor, loser));
