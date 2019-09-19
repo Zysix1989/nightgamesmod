@@ -16,6 +16,7 @@ import nightgames.characters.body.mods.FeralMod;
 import nightgames.characters.body.mods.FieryMod;
 import nightgames.characters.body.mods.IncubusCockMod;
 import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.body.mods.PrimalCockMod;
 import nightgames.characters.body.mods.RunicCockMod;
 import nightgames.characters.body.mods.SlimyCockMod;
 import nightgames.combat.Combat;
@@ -40,7 +41,7 @@ public class CockMod extends PartMod {
     public static final CockMod runic= new RunicCockMod("runic", 2.0, 1.0, 1.0);
     public static final CockMod blessed = new BlessedCockMod("blessed", 1.0, 1.0, .75);
     public static final CockMod incubus= new IncubusCockMod("incubus", 1.25, 1.3, .9);
-    public static final CockMod primal = new CockMod("primal", 1.0, 1.4, 1.2);
+    public static final CockMod primal = new PrimalCockMod("primal", 1.0, 1.4, 1.2);
     public static final CockMod bionic = new CockMod("bionic", .8, 1.3, .5);
     public static final CockMod enlightened = new CockMod("enlightened", 1.0, 1.2, .8);
     public static final List<CockMod> ALL_MODS = Arrays.asList(slimy, runic, blessed, incubus, primal, bionic, enlightened);
@@ -148,13 +149,6 @@ public class CockMod extends PartMod {
 
     @Override
     public void tickHolding(Combat c, Character self, Character opponent, BodyPart otherOrgan, BodyPart part) {
-        if (this.equals(primal)) {
-            c.write(self, String.format("Raw sexual energy flows from %s %s into %s %s, enflaming %s lust",
-                            self.nameOrPossessivePronoun(), part.describe(self), opponent.nameOrPossessivePronoun(),
-                            otherOrgan.describe(opponent), opponent.possessiveAdjective()));
-            opponent.add(c, Pheromones.getWith(self, opponent, Global.random(3) + 1, 3, " primal passion"));
-
-        }
     }
 
     @Override
@@ -174,8 +168,6 @@ public class CockMod extends PartMod {
             return "bionic implants";
         } else if (this.equals(enlightened)) {
             return "imposing presence";
-        } else if (this.equals(primal)) {
-            return "primal musk";
         }
         return "weirdness (ERROR)";
     }
