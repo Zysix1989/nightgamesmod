@@ -12,8 +12,8 @@ import nightgames.status.Drained;
 import nightgames.status.Enthralled;
 
 public class IncubusCockMod extends CockMod {
-    public IncubusCockMod(String name, double hotness, double pleasure, double sensitivity) {
-        super(name, hotness, pleasure, sensitivity);
+    public IncubusCockMod() {
+        super("incubus", 1.25, 1.3, .9);
     }
 
     @Override

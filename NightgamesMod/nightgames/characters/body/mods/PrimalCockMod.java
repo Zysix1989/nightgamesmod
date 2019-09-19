@@ -9,8 +9,8 @@ import nightgames.status.Pheromones;
 
 public class PrimalCockMod extends CockMod {
 
-    public PrimalCockMod(String name, double hotness, double pleasure, double sensitivity) {
-        super(name, hotness, pleasure, sensitivity);
+    public PrimalCockMod() {
+        super("primal", 1.0, 1.4, 1.2);
     }
 
     @Override

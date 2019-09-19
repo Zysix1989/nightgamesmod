@@ -12,8 +12,8 @@ import nightgames.status.Winded;
 
 public class BionicCockMod extends CockMod {
 
-    public BionicCockMod(String name, double hotness, double pleasure, double sensitivity) {
-        super(name, hotness, pleasure, sensitivity);
+    public BionicCockMod() {
+        super("bionic", .8, 1.3, .5);
     }
 
     @Override

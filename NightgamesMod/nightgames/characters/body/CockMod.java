@@ -18,13 +18,13 @@ import nightgames.combat.Combat;
 
 public class CockMod extends PartMod {
     public static final CockMod error = new CockMod("error", 1.0, 1.0, 1.0);
-    public static final CockMod slimy = new SlimyCockMod("slimy", .5, 1.5, .7);
-    public static final CockMod runic= new RunicCockMod("runic", 2.0, 1.0, 1.0);
-    public static final CockMod blessed = new BlessedCockMod("blessed", 1.0, 1.0, .75);
-    public static final CockMod incubus= new IncubusCockMod("incubus", 1.25, 1.3, .9);
-    public static final CockMod primal = new PrimalCockMod("primal", 1.0, 1.4, 1.2);
-    public static final CockMod bionic = new BionicCockMod("bionic", .8, 1.3, .5);
-    public static final CockMod enlightened = new EnlightenedCockMod("enlightened", 1.0, 1.2, .8);
+    public static final CockMod slimy = new SlimyCockMod();
+    public static final CockMod runic= new RunicCockMod();
+    public static final CockMod blessed = new BlessedCockMod();
+    public static final CockMod incubus= new IncubusCockMod();
+    public static final CockMod primal = new PrimalCockMod();
+    public static final CockMod bionic = new BionicCockMod();
+    public static final CockMod enlightened = new EnlightenedCockMod();
     public static final List<CockMod> ALL_MODS = Arrays.asList(slimy, runic, blessed, incubus, primal, bionic, enlightened);
 
     protected CockMod(String name, double hotness, double pleasure, double sensitivity) {

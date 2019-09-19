@@ -11,8 +11,8 @@ import nightgames.status.Stsflag;
 
 public class RunicCockMod extends CockMod {
 
-    public RunicCockMod(String name, double hotness, double pleasure, double sensitivity) {
-        super(name, hotness, pleasure, sensitivity);
+    public RunicCockMod() {
+        super("runic", 2.0, 1.0, 1.0);
     }
 
     @Override

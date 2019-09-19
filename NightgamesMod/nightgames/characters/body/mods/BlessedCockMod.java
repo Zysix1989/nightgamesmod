@@ -9,8 +9,8 @@ import nightgames.status.DivineCharge;
 import nightgames.status.Stsflag;
 
 public class BlessedCockMod extends CockMod {
-    public BlessedCockMod(String name, double hotness, double pleasure, double sensitivity) {
-        super(name, hotness, pleasure, sensitivity);
+    public BlessedCockMod() {
+        super("blessed", 1.0, 1.0, .75);
     }
 
     @Override

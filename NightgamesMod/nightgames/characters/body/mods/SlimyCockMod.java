@@ -7,8 +7,8 @@ import nightgames.combat.Combat;
 
 public class SlimyCockMod extends CockMod {
 
-    public SlimyCockMod(String name, double hotness, double pleasure, double sensitivity) {
-        super(name, hotness, pleasure, sensitivity);
+    public SlimyCockMod() {
+        super("slimy", .5, 1.5, .7);
     }
 
     @Override
