@@ -9,10 +9,12 @@ import nightgames.global.Global;
 import nightgames.status.Shamed;
 
 public class CyberneticMod extends PartMod {
+    public static final String TYPE = "cybernetic";
+
     public static final CyberneticMod INSTANCE = new CyberneticMod();
 
     public CyberneticMod() {
-        super("cybernetic", -.1, .8, -.5, 0);
+        super(TYPE, -.1, .8, -.5, 0);
     }
 
 

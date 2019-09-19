@@ -8,9 +8,9 @@ import nightgames.global.Global;
 import nightgames.status.Pheromones;
 
 public class PrimalCockMod extends CockMod {
-
+    public static final String TYPE = "primal";
     public PrimalCockMod() {
-        super("primal", 1.0, 1.4, 1.2);
+        super(TYPE, 1.0, 1.4, 1.2);
     }
 
     @Override

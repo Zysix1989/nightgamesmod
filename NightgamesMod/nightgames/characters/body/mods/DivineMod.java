@@ -6,6 +6,7 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
+import nightgames.skills.Tactics;
 import nightgames.status.DivineCharge;
 import nightgames.status.Stsflag;
 import nightgames.status.addiction.Addiction;
@@ -14,10 +15,11 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class DivineMod extends PartMod {
+    public static final String TYPE = "divine";
     public static final DivineMod INSTANCE = new DivineMod();
 
     public DivineMod() {
-        super("divine", 0, 1.0, 0.0, -10);
+        super(TYPE, 0, 1.0, 0.0, -10);
     }
 
     public String adjective(GenericBodyPart part) {

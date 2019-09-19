@@ -12,10 +12,11 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class GooeyMod extends PartMod {
+    public static final String TYPE = "gooey";
     public static final GooeyMod INSTANCE = new GooeyMod();
 
     public GooeyMod() {
-        super("gooey", .2, .5, .2, 2);
+        super(TYPE, .2, .5, .2, 2);
     }
 
     public void onOrgasmWith(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, boolean selfCame) {

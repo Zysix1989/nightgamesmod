@@ -7,10 +7,11 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class TrainedMod extends PartMod {
+    public static final String TYPE = "trained";
     public static final TrainedMod INSTANCE = new TrainedMod();
 
     public TrainedMod() {
-        super("trained", .2, .2, -.2, -100);
+        super(TYPE, .2, .2, -.2, -100);
     }
 
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) { 

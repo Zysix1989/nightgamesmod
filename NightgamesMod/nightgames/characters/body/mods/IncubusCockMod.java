@@ -12,8 +12,9 @@ import nightgames.status.Drained;
 import nightgames.status.Enthralled;
 
 public class IncubusCockMod extends CockMod {
+    public static final String TYPE = "incubus";
     public IncubusCockMod() {
-        super("incubus", 1.25, 1.3, .9);
+        super(TYPE, 1.25, 1.3, .9);
     }
 
     @Override

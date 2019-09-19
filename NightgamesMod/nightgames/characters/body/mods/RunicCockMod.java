@@ -10,9 +10,9 @@ import nightgames.status.Enthralled;
 import nightgames.status.Stsflag;
 
 public class RunicCockMod extends CockMod {
-
+    public static final String TYPE = "runic";
     public RunicCockMod() {
-        super("runic", 2.0, 1.0, 1.0);
+        super(TYPE, 2.0, 1.0, 1.0);
     }
 
     @Override

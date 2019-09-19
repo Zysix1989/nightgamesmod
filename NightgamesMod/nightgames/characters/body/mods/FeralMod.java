@@ -14,10 +14,11 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class FeralMod extends PartMod {
+    public static final String TYPE = "feral";
     public static final FeralMod INSTANCE = new FeralMod();
 
     public FeralMod() {
-        super("feral", .2, .3, .2, -8);
+        super(TYPE, .2, .3, .2, -8);
     }
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) { 
         if (c.getStance().isPartFuckingPartInserted(c, opponent, target, self, part)) {

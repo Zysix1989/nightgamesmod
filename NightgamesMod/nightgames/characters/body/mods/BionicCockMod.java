@@ -11,9 +11,10 @@ import nightgames.status.Hypersensitive;
 import nightgames.status.Winded;
 
 public class BionicCockMod extends CockMod {
+    public static final String TYPE = "bionic";
 
     public BionicCockMod() {
-        super("bionic", .8, 1.3, .5);
+        super(TYPE, .8, 1.3, .5);
     }
 
     @Override

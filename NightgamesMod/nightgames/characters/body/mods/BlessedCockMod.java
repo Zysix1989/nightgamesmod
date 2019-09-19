@@ -9,8 +9,10 @@ import nightgames.status.DivineCharge;
 import nightgames.status.Stsflag;
 
 public class BlessedCockMod extends CockMod {
+    public static final String TYPE = "blessed";
+
     public BlessedCockMod() {
-        super("blessed", 1.0, 1.0, .75);
+        super(TYPE, 1.0, 1.0, .75);
     }
 
     @Override

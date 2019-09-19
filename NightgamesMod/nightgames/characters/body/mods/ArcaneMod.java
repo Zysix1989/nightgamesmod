@@ -13,10 +13,11 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class ArcaneMod extends PartMod {
+    public static final String TYPE = "arcane";
     public static final ArcaneMod INSTANCE = new ArcaneMod();
 
     public ArcaneMod() {
-        super("arcane", .05, .1, 0, -5);
+        super(TYPE, .05, .1, 0, -5);
     }
 
     public void onOrgasmWith(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, boolean selfCame) {

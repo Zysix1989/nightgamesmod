@@ -8,10 +8,11 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class SecondPussyMod extends PartMod {
+    public static final String TYPE = "secondpussy";
     public static final SecondPussyMod INSTANCE = new SecondPussyMod();
 
     public SecondPussyMod() {
-        super("secondpussy", .2, .2, .3, 999);
+        super(TYPE, .2, .2, .3, 999);
     }
 
     @Override

@@ -9,8 +9,9 @@ import nightgames.global.Global;
 import nightgames.status.Abuff;
 
 public class EnlightenedCockMod extends CockMod {
+    public static final String TYPE = "enlightened";
     public EnlightenedCockMod() {
-        super("enlightened", 1.0, 1.2, .8);
+        super(TYPE, 1.0, 1.2, .8);
     }
 
     @Override

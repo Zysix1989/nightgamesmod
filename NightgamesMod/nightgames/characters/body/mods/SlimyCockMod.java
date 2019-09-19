@@ -6,9 +6,9 @@ import nightgames.characters.body.CockMod;
 import nightgames.combat.Combat;
 
 public class SlimyCockMod extends CockMod {
-
+    public static final String TYPE = "slimy";
     public SlimyCockMod() {
-        super("slimy", .5, 1.5, .7);
+        super(TYPE, .5, 1.5, .7);
     }
 
     @Override

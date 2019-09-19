@@ -17,9 +17,10 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class DemonicMod extends PartMod {
+    public static final String TYPE = "demonic";
     public static final DemonicMod INSTANCE = new DemonicMod();
     public DemonicMod() {
-        super("demonic", .1, .5, .2, 5);
+        super(TYPE, .1, .5, .2, 5);
     }
 
     public String adjective(GenericBodyPart part) {

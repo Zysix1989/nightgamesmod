@@ -10,10 +10,11 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class TentacledMod extends PartMod {
+    public static final String TYPE = "tentacled";
     public static final TentacledMod INSTANCE = new TentacledMod();
 
     public TentacledMod() {
-        super("tentacled", 0, 1, .2, 4);
+        super(TYPE, 0, 1, .2, 4);
     }
 
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {

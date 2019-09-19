@@ -10,10 +10,11 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class ExtendedTonguedMod extends PartMod {
+    public static final String TYPE = "extendedtongue";
     public static final PartMod INSTANCE = new ExtendedTonguedMod();
 
     private ExtendedTonguedMod() {
-        super("extendedtongue", .3, 1.2, 0, 4);
+        super(TYPE, .3, 1.2, 0, 4);
     }
 
     @Override

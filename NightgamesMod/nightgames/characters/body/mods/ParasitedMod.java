@@ -8,10 +8,11 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class ParasitedMod extends PartMod {
+    public static final String TYPE = "parasited";
     public static final ParasitedMod INSTANCE = new ParasitedMod();
 
     private ParasitedMod() {
-        super("parasited", 0, 0, 0, -1000);
+        super(TYPE, 0, 0, 0, -1000);
     }
 
     public double applyReceiveBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {

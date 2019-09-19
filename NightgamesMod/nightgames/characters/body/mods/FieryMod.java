@@ -11,10 +11,11 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class FieryMod extends PartMod {
+    public static final String TYPE = "fiery";
     public static final FieryMod INSTANCE = new FieryMod();
 
     public FieryMod() {
-        super("fiery", 0, .3, .2, -11);
+        super(TYPE, 0, .3, .2, -11);
     }
 
     public String adjective(GenericBodyPart part) {

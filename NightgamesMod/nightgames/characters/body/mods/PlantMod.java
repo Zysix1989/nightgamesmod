@@ -9,10 +9,11 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class PlantMod extends PartMod {
+    public static final String TYPE = "plant";
     public static final PlantMod INSTANCE = new PlantMod();
 
     public PlantMod() {
-        super("plant", .3, 1, .2, 10);
+        super(TYPE, .3, 1, .2, 10);
     }
 
     public double applyReceiveBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
