@@ -92,8 +92,6 @@
 		]
 	},
 	"npcs": [
-<<<<<<< HEAD
-=======
 		{
 			"type":"Airi",
 			"start":true,
@@ -457,7 +455,6 @@
 				"stilettopumps"
 			]
 		}
->>>>>>> branch 'master' of https://github.com/nergantre/nightgamesmod.git
 	],
 	"all_npcs":{},
 	"flags":["hardmode", "FutaTime"]
