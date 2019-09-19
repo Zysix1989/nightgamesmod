@@ -1,0 +1,84 @@
+package nightgames.characters.body.mods;
+
+import java.util.Optional;
+import nightgames.characters.Character;
+import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockMod;
+import nightgames.combat.Combat;
+import nightgames.global.Global;
+import nightgames.status.CockBound;
+import nightgames.status.Enthralled;
+import nightgames.status.Stsflag;
+
+public class RunicCockMod extends CockMod {
+
+    public RunicCockMod(String name, double hotness, double pleasure, double sensitivity) {
+        super(name, hotness, pleasure, sensitivity);
+    }
+
+    @Override
+    public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
+        double bonus = super.applyBonuses(c, self, opponent, part, target, damage);
+
+        String message = "";
+        if (target.moddedPartCountsAs(opponent, DemonicMod.INSTANCE)) {
+            message += String.format(
+                "The fae energies inside %s %s radiate outward and into %s, causing %s %s to grow much more sensitive. ",
+                self.nameOrPossessivePronoun(), part.describe(self),
+                opponent.nameOrPossessivePronoun(),
+                opponent.possessiveAdjective(), target.describe(opponent));
+            bonus += damage * 0.5; // +50% damage
+        }
+        if (Global.random(8) == 0 && !opponent.wary()) {
+            message += String
+                .format("Power radiates out from %s %s, seeping into %s and subverting %s will. ",
+                    self.nameOrPossessivePronoun(), part.describe(self),
+                    opponent.nameOrPossessivePronoun(),
+                    opponent.directObject());
+            opponent.add(c, new Enthralled(opponent, self, 3));
+        }
+        if (self.hasStatus(Stsflag.cockbound)) {
+            String binding = ((CockBound) self.getStatus(Stsflag.cockbound)).binding;
+            message += String.format(
+                "With the merest of thoughts, %s %s out a pulse of energy from %s %s, freeing it from %s %s. ",
+                self.subject(), self.human() ? "send" : "sends", self.possessiveAdjective(),
+                part.describe(self), opponent.nameOrPossessivePronoun(), binding);
+            self.removeStatus(Stsflag.cockbound);
+        }
+        c.write(self, message);
+        return bonus;
+    }
+
+    @Override
+    public Optional<String> getFluids() {
+        return Optional.empty();
+    }
+
+    @Override
+    public double applyReceiveBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
+        return 0;
+    }
+
+    @Override
+    public void onOrgasmWith(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, boolean selfCame) {
+    }
+
+    @Override
+    public void tickHolding(Combat c, Character self, Character opponent, BodyPart otherOrgan, BodyPart part) {
+    }
+
+    @Override
+    public void onStartPenetration(Combat c, Character self, Character opponent, BodyPart part, BodyPart target) {
+    }
+
+    @Override
+    public void onEndPenetration(Combat c, Character self, Character opponent, BodyPart part, BodyPart target) {
+    }
+
+
+    @Override
+    public String describeAdjective(String partType) {
+        return "runic symbols";
+    }
+
+}

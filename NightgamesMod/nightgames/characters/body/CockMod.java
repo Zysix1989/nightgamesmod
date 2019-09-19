@@ -14,6 +14,7 @@ import nightgames.characters.body.mods.DemonicMod;
 import nightgames.characters.body.mods.FeralMod;
 import nightgames.characters.body.mods.FieryMod;
 import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.body.mods.RunicCockMod;
 import nightgames.characters.body.mods.SlimyCockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -34,7 +35,7 @@ import nightgames.status.Winded;
 public class CockMod extends PartMod {
     public static final CockMod error = new CockMod("error", 1.0, 1.0, 1.0);
     public static final CockMod slimy = new SlimyCockMod("slimy", .5, 1.5, .7);
-    public static final CockMod runic= new CockMod("runic", 2.0, 1.0, 1.0);
+    public static final CockMod runic= new RunicCockMod("runic", 2.0, 1.0, 1.0);
     public static final CockMod blessed = new CockMod("blessed", 1.0, 1.0, .75);
     public static final CockMod incubus= new CockMod("incubus", 1.25, 1.3, .9);
     public static final CockMod primal = new CockMod("primal", 1.0, 1.4, 1.2);
