@@ -49,15 +49,13 @@ public class BodyPartAdapter implements JsonSerializer<BodyPart>, JsonDeserializ
                     JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         JsonObject obj = jsonElement.getAsJsonObject();
         String classType = obj.get("class").getAsString();
-        return prototypes.get(classType)
-                         .load(obj);
+        return prototypes.get(classType).load(obj);
     }
 
     @Override
     public JsonElement serialize(BodyPart part, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonObject obj = part.save();
-        obj.addProperty("class", part.getClass()
-                             .getCanonicalName());
+        obj.addProperty("class", part.getClass().getCanonicalName());
         return obj;
     }
 }
