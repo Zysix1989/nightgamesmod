@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 import nightgames.actions.Movement;
 import nightgames.characters.Character;
+import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Encounter;
-import nightgames.global.Global;
 import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
@@ -30,6 +30,7 @@ public class Area implements Serializable {
     public transient MapDrawHint drawHint;
     private Movement enumerator;
     private boolean pinged;
+    private Set<AreaAttribute> attributes;
 
     public Area(String name, String description, Movement enumerator) {
         this(name, description, enumerator, new MapDrawHint());
@@ -49,6 +50,11 @@ public class Area implements Serializable {
         this.drawHint = drawHint;
     }
 
+    public Area(String name, String description, Movement enumerator, MapDrawHint drawHint, Set<AreaAttribute> attributes) {
+        this(name, description, enumerator, drawHint);
+        this.attributes = attributes;
+    }
+
     public void link(Area adj) {
         adjacent.add(adj);
     }
@@ -62,38 +68,35 @@ public class Area implements Serializable {
     }
 
     public boolean open() {
-        return enumerator == Movement.quad || enumerator == Movement.ftcCenter;
+        return attributes.contains(AreaAttribute.Open);
     }
 
     public boolean corridor() {
-        return enumerator == Movement.bridge || enumerator == Movement.tunnel || enumerator == Movement.ftcTrail
-                        || enumerator == Movement.ftcPass || enumerator == Movement.ftcPath;
+        return attributes.contains(AreaAttribute.Corridor);
     }
 
     public boolean materials() {
-        return enumerator == Movement.workshop || enumerator == Movement.storage || enumerator == Movement.ftcCabin
-                        || enumerator == Movement.ftcDump;
+        return attributes.contains(AreaAttribute.Materials);
     }
 
     public boolean potions() {
-        return enumerator == Movement.lab || enumerator == Movement.kitchen || enumerator == Movement.ftcLodge;
+        return attributes.contains(AreaAttribute.Potions);
     }
 
     public boolean bath() {
-        return enumerator == Movement.shower || enumerator == Movement.pool || enumerator == Movement.ftcPond
-                        || enumerator == Movement.ftcWaterfall;
+        return attributes.contains(AreaAttribute.Bathe);
     }
 
     public boolean resupply() {
-        return enumerator == Movement.dorm || enumerator == Movement.union;
+        return attributes.contains(AreaAttribute.Resupply);
     }
 
     public boolean recharge() {
-        return enumerator == Movement.workshop || enumerator == Movement.ftcCabin;
+        return attributes.contains(AreaAttribute.Recharge);
     }
 
     public boolean mana() {
-        return enumerator == Movement.la || enumerator == Movement.ftcOak;
+        return attributes.contains(AreaAttribute.Mana);
     }
 
     public boolean ping(int perception) {

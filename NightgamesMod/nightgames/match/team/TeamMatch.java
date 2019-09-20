@@ -15,6 +15,7 @@ import java.util.Set;
 import nightgames.actions.Action;
 import nightgames.actions.Movement;
 import nightgames.areas.Area;
+import nightgames.areas.AreaAttribute;
 import nightgames.areas.MapDrawHint;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
@@ -104,7 +105,7 @@ public class TeamMatch extends Match {
                         "You are in the <b>Quad</b> that sits in the center of the Dorm, the Dining Hall, the Engineering Building, and the Liberal Arts Building. There's "
                                         + "no one around at this time of night, but the Quad is well-lit and has no real cover. You can probably be spotted from any of the surrounding buildings, it may "
                                         + "not be a good idea to hang out here for long.",
-                        Movement.quad, new MapDrawHint(new Rectangle(10, 3, 7, 9), "Quad", false));
+                        Movement.quad, new MapDrawHint(new Rectangle(10, 3, 7, 9), "Quad", false), Set.of(AreaAttribute.Open));
         Area dorm = new Area("Dorm",
                         "You are in the <b>Dorm</b>. Everything is quieter than it would be in any other dorm this time of night. You've been told the entire first floor "
                                         + "is empty during match hours, but you wouldn't be surprised if a few of the residents are hiding in their rooms, peeking at the fights. You've stashed some clothes "
@@ -113,7 +114,7 @@ public class TeamMatch extends Match {
         Area shower = new Area("Showers",
                         "You are in the first floor <b>Showers</b>. There are a half-dozen stalls shared by the residents on this floor. They aren't very big, but there's "
                                         + "room to hide if need be. A hot shower would help you recover after a tough fight, but you'd be vulnerable if someone finds you.",
-                        Movement.shower, new MapDrawHint(new Rectangle(13, 17, 4, 2), "Showers", false));
+                        Movement.shower, new MapDrawHint(new Rectangle(13, 17, 4, 2), "Showers", false), Set.of(AreaAttribute.Bathe));
         Area laundry = new Area("Laundry Room",
                         "You are in the <b>Laundry Room</b> in the basement of the Dorm. Late night is prime laundry time in your dorm, but none of these machines "
                                         + "are running. You're a bit jealous when you notice that the machines here are free, while yours are coin-op. There's a tunnel here that connects to the basement of the "
@@ -127,12 +128,13 @@ public class TeamMatch extends Match {
                         "You are in a <b>Storage Room</b> under the Dining Hall. It's always unlocked and receives a fair bit of foot traffic from students "
                                         + "using the tunnel to and from the Dorm, so no one keeps anything important in here. There's enough junk down here to provide some hiding places and there's a chance "
                                         + "you could find something useable in one of these boxes.",
-                        Movement.storage, new MapDrawHint(new Rectangle(21, 6, 4, 5), "Storage", false));
+                        Movement.storage, new MapDrawHint(new Rectangle(21, 6, 4, 5), "Storage", false), Set.of(AreaAttribute.Materials));
         Area tunnel = new Area("Tunnel",
                         "You are in the <b>Tunnel</b> connecting the dorm to the dining hall. It doesn't get a lot of use during the day and most of the freshmen "
                                         + "aren't even aware of its existence, but many upperclassmen have been thankful for it on cold winter days and it's proven to be a major tactical asset. The "
                                         + "tunnel is well-lit and doesn't offer any hiding places.",
-                        Movement.tunnel, new MapDrawHint(new Rectangle(23, 11, 2, 4), "Tunnel", true));
+                        Movement.tunnel, new MapDrawHint(new Rectangle(23, 11, 2, 4), "Tunnel", true), Set.of(
+            AreaAttribute.Corridor));
         quad.link(dining);
         quad.link(dorm);
         dining.link(quad);
