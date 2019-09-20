@@ -39,11 +39,11 @@ public class Area implements Serializable {
         this.name = name;
         this.description = description;
         this.enumerator = enumerator;
-        adjacent = new HashSet<Area>();
-        shortcut = new HashSet<Area>();
-        jump = new HashSet<Area>();
-        present = new ArrayList<Character>();
-        env = new ArrayList<Deployable>();
+        adjacent = new HashSet<>();
+        shortcut = new HashSet<>();
+        jump = new HashSet<>();
+        present = new ArrayList<>();
+        env = new ArrayList<>();
         alarm = false;
         fight = null;
         this.drawHint = drawHint;
