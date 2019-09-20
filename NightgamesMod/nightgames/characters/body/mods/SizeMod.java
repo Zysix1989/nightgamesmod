@@ -98,6 +98,16 @@ public class SizeMod extends PartMod {
 
     private int size;
 
+    public static SizeMod fromJSON(JsonElement e) {
+        var s = new SizeMod();
+        s.loadData(e);
+        return s;
+    }
+
+    private SizeMod() {
+        this(0);
+    }
+
     public SizeMod(int size) {
         super("size:" + size, 0, 0, 0, -100000);
         this.size = size;
