@@ -29,14 +29,14 @@ public class DefaultEncounter implements Encounter {
     protected Character p1;
     protected Character p2;
     
-    protected boolean p1ff;
-    protected boolean p2ff;
+    private boolean p1ff;
+    private boolean p2ff;
     
-    protected transient Optional<String> p1Guaranteed;
-    protected transient Optional<String> p2Guaranteed;
+    private transient Optional<String> p1Guaranteed;
+    private transient Optional<String> p2Guaranteed;
     protected Area location;
     protected transient Combat fight;
-    protected int checkin;
+    private int checkin;
     protected int fightTime;
 
     public DefaultEncounter(Character first, Character second, Area location) {
@@ -51,7 +51,7 @@ public class DefaultEncounter implements Encounter {
         checkEnthrall(p2, p1);
     }
 
-    protected void checkEnthrall(Character p1, Character p2) {
+    private void checkEnthrall(Character p1, Character p2) {
         Status enthrall = p1.getStatus(Stsflag.enthralled);
         if (enthrall != null) {
             if (((Enthralled) enthrall).master != p2) {
