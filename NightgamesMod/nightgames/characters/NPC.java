@@ -466,7 +466,6 @@ public class NPC extends Character {
         if (state == State.combat) {
             if (location != null && location.fight != null) {
                 location.fight.battle();
-            } else {
             }
         } else if (busy > 0) {
             busy--;
@@ -476,7 +475,6 @@ public class NPC extends Character {
             Move compelled = findPath(master.location);
             if (compelled != null) {
                 compelled.execute(this);
-                return;
             }
         } else if (state == State.shower || state == State.lostclothes) {
             bathe();
@@ -523,7 +521,6 @@ public class NPC extends Character {
                     }
                 }
             }
-            
             pickAndDoAction(allowedActions(), moves, radar);
         }
     }
