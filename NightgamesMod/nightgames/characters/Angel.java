@@ -418,9 +418,9 @@ public class Angel extends BasePersonality {
 
         String message = "";
 
-        if (c.getStance()
-             .anallyPenetrated(c, opponent) && !opponent.hasStatus(Stsflag.buttsluttraining)
-                        && !opponent.has(Trait.buttslut)) {
+        if (c.getStance().anallyPenetrated(c, opponent)
+            && !opponent.hasStatus(Stsflag.buttsluttraining)
+            && !opponent.has(Trait.buttslut)) {
             dominance += 1;
 
             message = "Angel leans over you as she grinds her hips against yours. <i>\"You're going to come for me, aren't you?\"</i> she purrs into your ear. You shake your head; "
@@ -440,9 +440,9 @@ public class Angel extends BasePersonality {
                             + "stand and ready yourself to move on. You wouldn't put past Angel to tell her girlfriends regardless of how well you performed, you just hope that's as "
                             + "far as that information goes.";
 
-        } else if (c.getStance()
-                    .anallyPenetrated(c, opponent) && opponent.hasStatus(Stsflag.buttsluttraining)
-                        && !opponent.has(Trait.buttslut)) {
+        } else if (c.getStance().anallyPenetrated(c, opponent)
+            && opponent.hasStatus(Stsflag.buttsluttraining)
+            && !opponent.has(Trait.buttslut)) {
             // This is supposed to be a mini-quest where the girls try to train you into a buttslut and you try to resist them. Every time you gain a level of the buttslut training status, you get
             // 1 point in submissive, and every time you win by fucking one of them who is training you in the pussy from a dominant position, you gain a point of power (Jewel), cunning (Mara),
             // seduction(angel) or willpower (Cassie). Losing to them by them fucking your ass gets you one step (of five) closer to irreversibly becoming a full buttslut, and causes you to present
@@ -505,10 +505,8 @@ public class Angel extends BasePersonality {
                                 + "person who likes giving my friends what they want- and what you want is someone to fill that cute ass, and Mei and Caroline have decided they'd like to break you in- so "
                                 + "you're coming home with me tonight, kay? Caroline and Mei will take good care of you <i>all</i> night.\"";
             }
-        } else if (c.getStance()
-                    .inserted(character)
-                        && character.getWillpower()
-                                    .percent() < 0.5) {
+        } else if (c.getStance().inserted(character)
+            && character.getWillpower().percent() < 0.5) {
             dominance += 1;
 
             message = "Angel stares you in the eye, while expertly thrusting in and out of your slobbering pussy. Your needy cunt quivers as she leans close and gives you a long steamy kiss, "
@@ -573,8 +571,7 @@ public class Angel extends BasePersonality {
                             + "predicting it- and continues \"Good cock slut. Now third, whenever a cock slut has a cock in its cock hole, it clenches to try to keep the cock "
                             + "inside on every thrust, and unclenches whenever anything tries to get inside.\"<p>INCOMPLETE";
 
-        } else if (c.getStance()
-                    .inserted(opponent)) {
+        } else if (c.getStance().inserted(opponent)) {
 
             message = "Angel rides your cock passionately, pushing you inevitably closer to ejaculation. Her hot pussy is wrapped around your shaft like... well, exactly "
                             + "what it is. More importantly, she's a master with her hip movements and you've held out against her as long as you can. You can only hope her own orgasm is equally "
@@ -613,8 +610,7 @@ public class Angel extends BasePersonality {
     public String defeat(Combat c, Result flag) {
         Character opponent = c.getOpponent(character);
 
-        if (c.getStance()
-             .vaginallyPenetrated(c, character)) {
+        if (c.getStance().vaginallyPenetrated(c, character)) {
             dominance=Math.max(dominance-1, minDominance);
 
             return "You thrust your cock continously into Angel's dripping pussy. Her hot insides feel amazing, but you're sure you have enough of an advantage to risk "
