@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import nightgames.actions.Action;
+import nightgames.actions.Leap;
+import nightgames.actions.Move;
 import nightgames.actions.Movement;
+import nightgames.actions.Shortcut;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
@@ -239,5 +243,19 @@ public class Area implements Serializable {
 
     public boolean isTrapped() {
         return env.stream().anyMatch(d -> d instanceof Trap);
+    }
+
+    public List<Action> possibleActions() {
+        var res = new ArrayList<Action>();
+        for (Area path : adjacent) {
+            res.add(new Move(path));
+        }
+        for (Area path : shortcut) {
+            res.add(new Shortcut(path));
+        }
+        for (Area path : jump) {
+            res.add(new Leap(path));
+        }
+        return res;
     }
 }

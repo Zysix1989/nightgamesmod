@@ -505,17 +505,11 @@ public class NPC extends Character {
             }
             if (!has(Trait.immobile) && moves.isEmpty()) {
                 for (Area path : location.adjacent) {
-                    moves.add(new Move(path));
                     if (path.ping(get(Attribute.Perception))) {
                         radar.add(path.id());
                     }
                 }
-                for (Area path : location.shortcut) {
-                    moves.add(new Shortcut(path));
-                }
-                for (Area path : location.jump) {
-                    moves.add(new Leap(path));
-                }
+                moves.addAll(location.possibleActions());
             }
             pickAndDoAction(allowedActions(), moves, radar);
         }

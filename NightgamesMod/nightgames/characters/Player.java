@@ -431,15 +431,7 @@ public class Player extends Character {
                 } else {
                     List<Action> possibleActions = new ArrayList<>();
                     if (Global.getMatch().canMoveOutOfCombat(this)) {
-                        for (Area path : location.adjacent) {
-                            possibleActions.add(new Move(path));
-                        }
-                        for (Area path : location.shortcut) {
-                            possibleActions.add(new Shortcut(path));
-                        }
-                        for (Area path : location.jump) {
-                            possibleActions.add(new Leap(path));
-                        }
+                        possibleActions.addAll(location.possibleActions());
                     }
                     possibleActions.addAll(Global.getMatch().getAvailableActions(this));
                     for (Action act : possibleActions) {
