@@ -48,6 +48,7 @@ public class Area implements Serializable {
         alarm = false;
         fight = null;
         this.drawHint = drawHint;
+        this.attributes = Set.of();
     }
 
     public Area(String name, String description, Movement enumerator, MapDrawHint drawHint, Set<AreaAttribute> attributes) {
