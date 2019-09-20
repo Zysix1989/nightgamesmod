@@ -434,16 +434,11 @@ public class Player extends Character {
                         for (Area path : location.adjacent) {
                             possibleActions.add(new Move(path));
                         }
-                        if (getPure(Attribute.Cunning) >= 28) {
-                            for (Area path : location.shortcut) {
-                                possibleActions.add(new Shortcut(path));
-                            }
+                        for (Area path : location.shortcut) {
+                            possibleActions.add(new Shortcut(path));
                         }
-
-                        if(getPure(Attribute.Ninjutsu)>=5){
-                            for(Area path:location.jump){
-                                possibleActions.add(new Leap(path));
-                            }
+                        for (Area path : location.jump) {
+                            possibleActions.add(new Leap(path));
                         }
                     }
                     possibleActions.addAll(Global.getMatch().getAvailableActions(this));

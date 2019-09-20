@@ -510,15 +510,11 @@ public class NPC extends Character {
                         radar.add(path.id());
                     }
                 }
-                if (getPure(Attribute.Cunning) >= 28) {
-                    for (Area path : location.shortcut) {
-                        moves.add(new Shortcut(path));
-                    }
+                for (Area path : location.shortcut) {
+                    moves.add(new Shortcut(path));
                 }
-                if(getPure(Attribute.Ninjutsu)>=5){
-                    for(Area path:location.jump){
-                        moves.add(new Leap(path));
-                    }
+                for (Area path : location.jump) {
+                    moves.add(new Leap(path));
                 }
             }
             pickAndDoAction(allowedActions(), moves, radar);
