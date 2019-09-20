@@ -449,7 +449,7 @@ public class Player extends Character {
                     possibleActions.addAll(Global.getMatch().getAvailableActions(this));
                     for (Action act : possibleActions) {
                         if (act.usable(this) 
-                                        && Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
+                            && Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
                             actionChoices.add(act);
                         }
                     }

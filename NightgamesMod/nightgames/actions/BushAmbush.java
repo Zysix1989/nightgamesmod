@@ -9,6 +9,7 @@ public class BushAmbush extends Action {
 
     private static final long serialVersionUID = 2384434976695344978L;
 
+
     public BushAmbush() {
         super("Hide in Bushes");
     }
@@ -16,8 +17,8 @@ public class BushAmbush extends Action {
     @Override
     public boolean usable(Character user) {
         return user.location().id() == Movement.ftcPath
-                        && (user.get(Attribute.Cunning) >= 20 || user.get(Attribute.Animism) >= 10)
-                        && user.state != State.inBushes && !user.bound();
+            && (user.get(Attribute.Cunning) >= 20 || user.get(Attribute.Animism) >= 10)
+            && user.state != State.inBushes && !user.bound();
     }
 
     @Override
