@@ -27,6 +27,8 @@ public class BreastsPart extends GenericBodyPart {
     public static int G_CUP = 8;
     public static int H_CUP = 9;
 
+    public static String TYPE = "breasts";
+
     //FIXME: Why are breasts the only part that are set up like this? - DSM
     //TODO: Copy this to Cocks or create some unifying structure to manage this mess.
     public static BreastsPart flat = new BreastsPart().newWithSize(FLAT_CHEST);
@@ -43,7 +45,6 @@ public class BreastsPart extends GenericBodyPart {
         return new BreastsPart();
     }
 
-    public static String TYPE = "breasts";
 
     public BreastsPart() {
         super("breasts", "", 0.0, 1.0, 1.0, true, TYPE, "");
