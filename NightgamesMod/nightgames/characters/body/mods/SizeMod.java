@@ -110,7 +110,6 @@ public class SizeMod extends PartMod {
 
     public SizeMod(JsonElement js) {
         this();
-        System.out.println(js);
         size = js.getAsInt();
     }
 
