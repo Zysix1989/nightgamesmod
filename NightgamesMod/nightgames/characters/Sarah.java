@@ -6,7 +6,6 @@ import java.util.Optional;
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.ErrorMod;
@@ -53,7 +52,7 @@ public class Sarah extends BasePersonality {
         character.getMojo().setMax(90);
 
         character.setTrophy(Item.HolyWater);
-        character.body.add(BreastsPart.d);
+        character.body.add(new BreastsPart().newWithSize(BreastsPart.D_CUP));
         character.initialGender = CharacterSex.female;
     }
 

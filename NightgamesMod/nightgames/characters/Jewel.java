@@ -77,7 +77,7 @@ public class Jewel extends BasePersonality {
             .setMax(80);
 
         self.setTrophy(Item.JewelTrophy);
-        self.body.add(BreastsPart.c);
+        self.body.add(new BreastsPart().newWithSize(BreastsPart.C_CUP));
 
         // fairly feminine face
         self.body.add(new FacePart(.1, 1.9));

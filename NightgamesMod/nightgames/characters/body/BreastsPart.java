@@ -30,16 +30,6 @@ public class BreastsPart extends GenericBodyPart {
 
     public static String TYPE = "breasts";
 
-    //FIXME: Why are breasts the only part that are set up like this? - DSM
-    //TODO: Copy this to Cocks or create some unifying structure to manage this mess.
-    public static BreastsPart flat = new BreastsPart().newWithSize(FLAT_CHEST);
-    public static BreastsPart a = new BreastsPart().newWithSize(A_CUP);
-    public static BreastsPart b = new BreastsPart().newWithSize(B_CUP);
-    public static BreastsPart c = new BreastsPart().newWithSize(C_CUP);
-    public static BreastsPart d = new BreastsPart().newWithSize(D_CUP);
-    public static BreastsPart dd = new BreastsPart().newWithSize(DD_CUP);
-    public static BreastsPart f = new BreastsPart().newWithSize(F_CUP);
-    
     private double bonusSensitivity = 0;
 
     public BreastsPart() {

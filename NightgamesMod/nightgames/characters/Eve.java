@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
@@ -66,7 +65,7 @@ public class Eve extends BasePersonality {
         self.modAttributeDontSaveData(Attribute.Seduction, 2);
         Global.gainSkills(self);
         self.setTrophy(Item.EveTrophy);
-        self.body.add(BreastsPart.d);
+        self.body.add(new BreastsPart().newWithSize(BreastsPart.D_CUP));
         self.body.add(new CockPart().newWithSize(SizeMod.COCK_SIZE_BIG));
         self.body.add(PussyPart.generic);
         self.getMojo().setMax(120);

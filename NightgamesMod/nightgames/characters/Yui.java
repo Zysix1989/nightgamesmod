@@ -7,7 +7,6 @@ import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.actions.Movement;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.mods.ErrorMod;
 import nightgames.characters.custom.CharacterLine;
@@ -64,7 +63,7 @@ public class Yui extends BasePersonality {
         character.getMojo().setMax(130);
 
         character.setTrophy(Item.YuiTrophy);
-        character.body.add(BreastsPart.c);
+        character.body.add(new BreastsPart().newWithSize(BreastsPart.C_CUP));
         character.initialGender = CharacterSex.female;
     }
 
