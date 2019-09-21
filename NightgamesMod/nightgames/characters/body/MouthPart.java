@@ -13,10 +13,6 @@ import nightgames.status.Stsflag;
 import nightgames.status.Trance;
 
 public class MouthPart extends GenericBodyPart {
-    /**
-     *
-     */
-    public static final MouthPart generic = new MouthPart();
 
     public MouthPart() {
         super("mouth", 0, 1, 1, "mouth", "a ");
