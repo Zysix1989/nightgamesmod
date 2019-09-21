@@ -18,11 +18,6 @@ public class MouthPart extends GenericBodyPart {
      */
     public static final MouthPart generic = new MouthPart("mouth", 0, 1, 1);
 
-    public MouthPart(String desc, String descLong, double hotness, double pleasure, double sensitivity, boolean notable,
-                    String prefix) {
-        super(desc, descLong, hotness, pleasure, sensitivity, notable, "mouth", prefix);
-    }
-
     public MouthPart(String desc, double hotness, double pleasure, double sensitivity) {
         super(desc, hotness, pleasure, sensitivity, "mouth", "a ");
     }
