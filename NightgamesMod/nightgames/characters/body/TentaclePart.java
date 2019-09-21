@@ -11,7 +11,7 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 
 public class TentaclePart extends GenericBodyPart {
-    public static final GenericBodyPart DUMMY_PART = new GenericBodyPart("tentacles", 1.0, 1.0, 0.0, "tentacles", "");
+    public static final TentaclePart DUMMY_PART = new TentaclePart();
     public String attachpoint;
     String fluids;
     private boolean printSynonym;
@@ -40,8 +40,7 @@ public class TentaclePart extends GenericBodyPart {
         } else {
             type = "back";
         }
-        TentaclePart part = new TentaclePart(desc, type, fluids, hotness, pleasure, sensitivity);
-        return part;
+        return new TentaclePart(desc, type, fluids, hotness, pleasure, sensitivity);
     }
 
     public TentaclePart(String desc, String attachpoint, String fluids, double hotness, double pleasure,
@@ -58,7 +57,7 @@ public class TentaclePart extends GenericBodyPart {
     }
 
     public TentaclePart() {
-        super(DUMMY_PART);
+        super("tentacles", 1.0, 1.0, 0.0, "tentacles", "");
     }
 
     public static String synonyms[] = {"mass", "clump", "nest", "group",};
