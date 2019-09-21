@@ -1,5 +1,6 @@
 package nightgames.characters.body;
 
+import com.google.gson.JsonObject;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -16,6 +17,11 @@ public class MouthPart extends GenericBodyPart {
 
     public MouthPart() {
         super("mouth", 0, 1, 1, "mouth", "a ");
+    }
+
+    public MouthPart(JsonObject js) {
+        this();
+        load(js);
     }
 
     @Override
