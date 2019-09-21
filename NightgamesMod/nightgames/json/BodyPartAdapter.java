@@ -39,7 +39,7 @@ public class BodyPartAdapter implements JsonSerializer<BodyPart>, JsonDeserializ
         prototypes.put(WingsPart.class.getCanonicalName(), WingsPart.demonic::load);
         prototypes.put(TailPart.class.getCanonicalName(), TailPart.cat::load);
         prototypes.put(EarPart.class.getCanonicalName(), EarPart.normal::load);
-        prototypes.put(StraponPart.class.getCanonicalName(), new StraponPart()::load);
+        prototypes.put(StraponPart.class.getCanonicalName(), StraponPart::new);
         prototypes.put(TentaclePart.class.getCanonicalName(), TentaclePart::new);
         prototypes.put(AssPart.class.getCanonicalName(), AssPart::new);
         prototypes.put(MouthPart.class.getCanonicalName(), MouthPart::new);
