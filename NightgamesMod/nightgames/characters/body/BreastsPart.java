@@ -32,7 +32,7 @@ public class BreastsPart extends GenericBodyPart {
     public static String TYPE = "breasts";
 
     private double bonusSensitivity = 0;
-    private SizeMod sizeMod;
+    private Integer size;
 
     public BreastsPart() {
         super("breasts", "", 0.0, 1.0, 1.0, true, TYPE, "");
@@ -40,12 +40,12 @@ public class BreastsPart extends GenericBodyPart {
 
     public BreastsPart(JsonObject js) {
         super(js);
-        sizeMod = new SizeMod(js.get("size"));
+        size = js.get("size").getAsInt();
     }
 
     public BreastsPart(int size) {
         this();
-        sizeMod = new SizeMod(size);
+        this.size = size;
     }
 
     @Override
@@ -244,11 +244,7 @@ public class BreastsPart extends GenericBodyPart {
         return new BreastsPart(SizeMod.clampToValidSize(this, getSize() - 1));
     }
 
-    private SizeMod getSizeMod() {
-        return sizeMod;
-    }
-
     public int getSize() {
-        return getSizeMod().getSize();
+        return size;
     }
 }
