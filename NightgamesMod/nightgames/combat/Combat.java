@@ -1631,7 +1631,6 @@ public class Combat {
                             initiator, getOpponent(initiator)));
             initiator.add(this, new Alluring(initiator, 1));
         }
-        Position t = newStance; // because it must be final down vv here vv
         stance = newStance;
         offerImage(stance.image(), "");
     }
