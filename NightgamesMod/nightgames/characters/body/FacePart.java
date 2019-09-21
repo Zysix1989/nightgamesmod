@@ -1,5 +1,6 @@
 package nightgames.characters.body;
 
+import com.google.gson.JsonObject;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 
@@ -11,6 +12,11 @@ public class FacePart extends GenericBodyPart {
     public FacePart(double hotness, double femininity) {
         super("", hotness, 0, 0, true, "face", "a ");
         this.femininity = femininity;
+    }
+
+    public FacePart(JsonObject js) {
+        this(0, 0);
+        load(js);
     }
 
     @Override
