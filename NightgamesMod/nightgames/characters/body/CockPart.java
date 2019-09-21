@@ -36,11 +36,6 @@ public class CockPart extends GenericBodyPart {
         return SizeMod.COCK_SIZE_SMALL - getSize();
     }
     
-    @Override
-    public double getMasculinity(Character c) {
-        return getSize() - SizeMod.COCK_SIZE_SMALL;     //TODO: Implement Masculinity Mechanic From BodyPart down to all parts. -DSM
-    }
-    
     
     public static int maximumSize() {
         return 12;
