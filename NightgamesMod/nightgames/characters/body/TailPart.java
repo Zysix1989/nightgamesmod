@@ -93,7 +93,7 @@ public enum TailPart implements BodyPart,BodyPartMod {
         return obj;
     }
 
-    @Override public BodyPart load(JsonObject obj) {
+    public BodyPart load(JsonObject obj) {
         return TailPart.valueOf(obj.get("enum").getAsString());
     }
 

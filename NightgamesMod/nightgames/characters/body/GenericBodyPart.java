@@ -201,7 +201,7 @@ public class GenericBodyPart implements BodyPart {
         return toJson();
     }
 
-    @Override public BodyPart load(JsonObject obj) {
+    public BodyPart load(JsonObject obj) {
         return fromJson(obj);
     }
 

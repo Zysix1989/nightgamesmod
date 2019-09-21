@@ -95,7 +95,7 @@ public enum WingsPart implements BodyPart,BodyPartMod {
         return obj;
     }
 
-    @Override public BodyPart load(JsonObject obj) {
+    public BodyPart load(JsonObject obj) {
         return WingsPart.valueOf(obj.get("enum").getAsString());
     }
 

@@ -97,7 +97,7 @@ public enum ToysPart implements BodyPart,BodyPartMod {
         return obj;
     }
 
-    @Override public BodyPart load(JsonObject obj) {
+    public BodyPart load(JsonObject obj) {
         return ToysPart.valueOf(obj.get("enum").getAsString());
     }
 

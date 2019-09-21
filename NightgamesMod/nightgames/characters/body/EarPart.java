@@ -102,7 +102,7 @@ public enum EarPart implements BodyPart, BodyPartMod {
         return obj;
     }
 
-    @Override public BodyPart load(JsonObject obj) {
+    public BodyPart load(JsonObject obj) {
         return EarPart.valueOf(obj.get("enum").getAsString());
     }
 

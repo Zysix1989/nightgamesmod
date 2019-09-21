@@ -75,8 +75,6 @@ public interface BodyPart {
 
     public int mod(Attribute a, int total);
 
-    public BodyPart load(JsonObject obj);
-
     public void tickHolding(Combat c, Character self, Character opponent, BodyPart otherOrgan);
 
     public default boolean present() {
