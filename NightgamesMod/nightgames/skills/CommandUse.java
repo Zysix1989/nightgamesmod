@@ -15,11 +15,9 @@ import nightgames.status.Stsflag;
 public class CommandUse extends PlayerCommand {
 
     public static final List<Item> CANDIDATES = Arrays.asList(Item.Lubricant, Item.SPotion);
-    private Item used;
 
     public CommandUse(Character self) {
         super("Force Item Use", self);
-        used = null;
     }
 
     @Override
@@ -52,6 +50,7 @@ public class CommandUse extends PlayerCommand {
 
     @Override
     public boolean resolve(Combat c, Character target) {
+        Item used;
         do {
             used = CANDIDATES.get(Global.random(Item.values().length));
             boolean hasStatus = false;
@@ -82,7 +81,6 @@ public class CommandUse extends PlayerCommand {
                 throw new IllegalStateException("fell off end of conditional");
         }
         target.consume(used, 1);
-        used = null;
         return true;
     }
 
