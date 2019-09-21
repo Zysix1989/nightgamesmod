@@ -23,15 +23,11 @@ public class CockPart extends GenericBodyPart {
     public static String synonyms[] = {"cock", "dick", "shaft", "phallus"};
 
     public static CockPart generateGeneric() {
-        return new CockPart(0, 1.2, 1);
-    }
-
-    public CockPart(double hotness, double pleasure, double sensitivity) {
-        super("cock", "", hotness, pleasure, sensitivity, false, "cock", "a ");
+        return new CockPart();
     }
 
     public CockPart() {
-        this(0, 1.2, 1);
+        super("cock", "", 0, 1.2, 1, false, "cock", "a ");
     }
 
     @Override
