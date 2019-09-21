@@ -15,7 +15,7 @@ public class FacePart extends GenericBodyPart {
 
     public FacePart(JsonObject js) {
         super(js);
-
+        this.femininity = js.get("femininity").getAsDouble();
     }
 
     @Override
