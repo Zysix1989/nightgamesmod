@@ -22,10 +22,6 @@ public class CockPart extends GenericBodyPart {
     
     public static String synonyms[] = {"cock", "dick", "shaft", "phallus"};
 
-    public static CockPart generateGeneric() {
-        return new CockPart();
-    }
-
     public CockPart() {
         super("cock", "", 0, 1.2, 1, false, "cock", "a ");
     }
