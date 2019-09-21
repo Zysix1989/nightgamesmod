@@ -185,8 +185,6 @@ public class CockPart extends GenericBodyPart {
     public BodyPart downgrade() {
         return new CockPart(SizeMod.clampToValidSize(this, getSize() - 1));
     }
-    
-    
 
     public PussyPart getEquivalentPussy() {
         List<PartMod> newMods = getPartMods().stream().map(BodyUtils.EQUIVALENT_MODS::get).filter(mod -> mod != null).distinct().collect(Collectors.toList());
