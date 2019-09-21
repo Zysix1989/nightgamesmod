@@ -871,14 +871,6 @@ public class Body implements Cloneable {
                                        .sum();
         return femininity;
     }
-    
-    public double getMasculinity() {
-        double masc = this.baseMasculinity;
-        masc += SizeMod.getMaximumSize("cock") + ((double) CockPart.maximumSize());
-       // masc += SizeMod.getMaximumSize("balls") / ((double) BallsPart.maximumSize().getSize());
-        masc += getCurrentParts().stream().mapToDouble(part -> part.getMasculinity(character)).sum();
-        return masc;
-    }
 
     public void finishBody(CharacterSex sex) {
         switch (sex) {

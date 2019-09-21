@@ -6,7 +6,6 @@ import nightgames.global.Global;
 
 public class FacePart extends GenericBodyPart {
     private double femininity;
-    private double masculinity;
 
     /* femininity goes from [-5, 5] */
     public FacePart(double hotness, double femininity) {
@@ -16,6 +15,7 @@ public class FacePart extends GenericBodyPart {
 
     public FacePart(JsonObject js) {
         super(js);
+
     }
 
     @Override
@@ -43,10 +43,6 @@ public class FacePart extends GenericBodyPart {
     @Override
     public double getFemininity(Character c) {
         return femininity;
-    }
-    @Override
-    public double getMasculinity(Character c) {
-        return this.masculinity;
     }
 
     @Override

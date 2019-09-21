@@ -101,10 +101,6 @@ public interface BodyPart {
     public default double getFemininity(Character self) {
         return 0;
     }
-    
-    public default double getMasculinity(Character self) {
-        return 0;
-    }
 
     // Should be called whenever a combatant is penetrated in any way
     public default void onStartPenetration(Combat c, Character self, Character opponent, BodyPart target) {
