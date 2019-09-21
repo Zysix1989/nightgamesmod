@@ -54,7 +54,7 @@ public class CassieTime extends BaseNPCTime {
             growCock.option = "Cassie: Grow a cock";
             growCock.scene = "[Placeholder]<br/>Cassie hesistantly drinks the 3 priapus drafts and grows a large runic cock.";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart().newWithSize(SizeMod.COCK_SIZE_BIG).applyMod(CockMod.runic));
+                other.body.add(new CockPart(SizeMod.COCK_SIZE_BIG).applyMod(CockMod.runic));
                 return true;
             };
             transformationOptions.add(growCock);

@@ -55,7 +55,7 @@ public class JewelTime extends BaseNPCTime {
             growCock.option = "Jewel: Grow a cock";
             growCock.scene = "[Placeholder]<br/>Jewel chugs down the three priapus drafts one after the other, making her clit grow into a large enlightened cock.";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart().newWithSize(SizeMod.COCK_SIZE_BIG).applyMod(CockMod.enlightened));
+                other.body.add(new CockPart(SizeMod.COCK_SIZE_BIG).applyMod(CockMod.enlightened));
                 return true;
             };
             transformationOptions.add(growCock);

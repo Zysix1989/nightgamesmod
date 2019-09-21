@@ -278,7 +278,7 @@ class BodyConfiguration {
         }
 
         private CockPart build() {
-            CockPart generic = new CockPart().newWithSize(length);
+            CockPart generic = new CockPart(length);
             return type.isPresent() ? (CockPart) generic.applyMod(type.get()) : generic;
         }
     }

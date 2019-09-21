@@ -41,7 +41,7 @@ public class MayaTime extends BaseNPCTime {
             growCock.option = "Maya: Grow a cock";
             growCock.scene = "[Placeholder]<br/>Maya does some sort of thing and grows a cock.";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart().newWithSize(SizeMod.COCK_SIZE_BIG).applyMod(CockMod.bionic));
+                other.body.add(new CockPart(SizeMod.COCK_SIZE_BIG).applyMod(CockMod.bionic));
                 return true;
             };
             transformationOptions.add(growCock);

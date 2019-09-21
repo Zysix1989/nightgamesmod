@@ -124,7 +124,7 @@ public class RequirementTest {
     }
 
     @Test public void insertedTest() throws Exception {
-        self.body.addReplace(new CockPart().newWithSize(SizeMod.COCK_SIZE_HUGE), 1);
+        self.body.addReplace(new CockPart(SizeMod.COCK_SIZE_HUGE), 1);
         combat.setStance(new FlyingCarry(self, other));
         assertThat(inserted().meets(combat, self, other), is(true));
         assertThat(inserted().meets(combat, other, self), is(false));

@@ -51,7 +51,7 @@ public class AiriTime extends BaseNPCTime {
                             + "blue viscous cum all over your hand. The cock's coloring fades back into her pale flesh tone as it softens, "
                             + "but you know that she now packs a powerful new weapon!";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart().newWithSize(SizeMod.COCK_SIZE_BIG));
+                other.body.add(new CockPart(SizeMod.COCK_SIZE_BIG));
                 return true;
             };
             transformationOptions.add(growCock);

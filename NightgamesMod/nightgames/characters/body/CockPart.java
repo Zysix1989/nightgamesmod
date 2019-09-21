@@ -33,6 +33,11 @@ public class CockPart extends GenericBodyPart {
         super(js);
     }
 
+    public CockPart(int size) {
+        this();
+        sizeMod = new SizeMod(size);
+    }
+
     @Override
     public double getFemininity(Character c) {
         return SizeMod.COCK_SIZE_SMALL - getSize();
@@ -172,11 +177,11 @@ public class CockPart extends GenericBodyPart {
     }
 
     public BodyPart upgrade() {
-        return new CockPart().newWithSize(SizeMod.clampToValidSize(this, getSize() + 1));
+        return new CockPart(SizeMod.clampToValidSize(this, getSize() + 1));
     }
 
     public BodyPart downgrade() {
-        return new CockPart().newWithSize(SizeMod.clampToValidSize(this, getSize() - 1));
+        return new CockPart(SizeMod.clampToValidSize(this, getSize() - 1));
     }
     
     
@@ -188,11 +193,6 @@ public class CockPart extends GenericBodyPart {
             newPart = (GenericBodyPart)newPart.applyMod(mod);
         }
         return (PussyPart)newPart;
-    }
-
-    public CockPart newWithSize(int size) {
-        sizeMod = new SizeMod(size);
-        return this;
     }
 
     private SizeMod getSizeMod() {

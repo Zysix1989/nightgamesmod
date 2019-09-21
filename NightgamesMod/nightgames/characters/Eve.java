@@ -66,7 +66,7 @@ public class Eve extends BasePersonality {
         Global.gainSkills(self);
         self.setTrophy(Item.EveTrophy);
         self.body.add(new BreastsPart().newWithSize(BreastsPart.D_CUP));
-        self.body.add(new CockPart().newWithSize(SizeMod.COCK_SIZE_BIG));
+        self.body.add(new CockPart(SizeMod.COCK_SIZE_BIG));
         self.body.add(PussyPart.generic);
         self.getMojo().setMax(120);
 
