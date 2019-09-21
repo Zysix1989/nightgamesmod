@@ -44,15 +44,10 @@ public class TentaclePart extends GenericBodyPart {
 
     public TentaclePart(String desc, String attachpoint, String fluids, double hotness, double pleasure,
                     double sensitivity) {
-        this(desc, attachpoint, fluids, hotness, pleasure, sensitivity, true);
-    }
-
-    public TentaclePart(String desc, String attachpoint, String fluids, double hotness, double pleasure,
-                    double sensitivity, boolean printSynonym) {
         super(desc, "", hotness, pleasure, sensitivity, true, "tentacles", "");
         this.attachpoint = attachpoint;
         this.fluids = fluids;
-        this.printSynonym = printSynonym;
+        this.printSynonym = true;
     }
 
     public TentaclePart() {
