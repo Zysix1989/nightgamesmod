@@ -27,21 +27,25 @@ import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.WingsPart;
 
 public class BodyPartAdapter implements JsonSerializer<BodyPart>, JsonDeserializer<BodyPart> {
-    static private Map<String, BodyPart> prototypes;
+    private interface BodyPartLoader {
+        BodyPart newFromJSON(JsonObject js);
+    }
+
+    static private Map<String, BodyPartLoader> prototypes;
     static {
         prototypes = new HashMap<>();
-        prototypes.put(PussyPart.class.getCanonicalName(), new PussyPart());
-        prototypes.put(BreastsPart.class.getCanonicalName(), new BreastsPart());
-        prototypes.put(WingsPart.class.getCanonicalName(), WingsPart.demonic);
-        prototypes.put(TailPart.class.getCanonicalName(), TailPart.cat);
-        prototypes.put(EarPart.class.getCanonicalName(), EarPart.normal);
-        prototypes.put(StraponPart.class.getCanonicalName(), StraponPart.generic);
-        prototypes.put(TentaclePart.class.getCanonicalName(), new TentaclePart("tentacles", "back", "semen", 0, 1, 1));
-        prototypes.put(AssPart.class.getCanonicalName(), new AssPart("ass", 0, 1, 1));
-        prototypes.put(MouthPart.class.getCanonicalName(), new MouthPart("mouth", 0, 1, 1));
-        prototypes.put(CockPart.class.getCanonicalName(), new CockPart());
-        prototypes.put(GenericBodyPart.class.getCanonicalName(), new GenericBodyPart("", 0, 1, 1, "none", "none"));
-        prototypes.put(FacePart.class.getCanonicalName(), new FacePart(.1, 2.3));
+        prototypes.put(PussyPart.class.getCanonicalName(), js -> new PussyPart().load(js));
+        prototypes.put(BreastsPart.class.getCanonicalName(), js -> new BreastsPart().load(js));
+        prototypes.put(WingsPart.class.getCanonicalName(), WingsPart.demonic::load);
+        prototypes.put(TailPart.class.getCanonicalName(), TailPart.cat::load);
+        prototypes.put(EarPart.class.getCanonicalName(), EarPart.normal::load);
+        prototypes.put(StraponPart.class.getCanonicalName(), StraponPart.generic::load);
+        prototypes.put(TentaclePart.class.getCanonicalName(), js -> new TentaclePart("tentacles", "back", "semen", 0, 1, 1).load(js));
+        prototypes.put(AssPart.class.getCanonicalName(), js -> new AssPart("ass", 0, 1, 1).load(js));
+        prototypes.put(MouthPart.class.getCanonicalName(), js -> new MouthPart("mouth", 0, 1, 1).load(js));
+        prototypes.put(CockPart.class.getCanonicalName(), js -> new CockPart().load(js));
+        prototypes.put(GenericBodyPart.class.getCanonicalName(), js -> new GenericBodyPart("", 0, 1, 1, "none", "none").load(js));
+        prototypes.put(FacePart.class.getCanonicalName(), js -> new FacePart(.1, 2.3).load(js));
     }
 
     @Override
@@ -51,7 +55,7 @@ public class BodyPartAdapter implements JsonSerializer<BodyPart>, JsonDeserializ
         JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         JsonObject obj = jsonElement.getAsJsonObject();
         String classType = obj.get("class").getAsString();
-        return prototypes.get(classType).load(obj);
+        return prototypes.get(classType).newFromJSON(obj);
     }
 
     @Override
