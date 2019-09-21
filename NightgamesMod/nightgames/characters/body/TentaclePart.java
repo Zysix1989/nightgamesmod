@@ -1,5 +1,6 @@
 package nightgames.characters.body;
 
+import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -49,6 +50,11 @@ public class TentaclePart extends GenericBodyPart {
 
     public TentaclePart() {
         super("tentacles", 1.0, 1.0, 0.0, "tentacles", "");
+    }
+
+    public TentaclePart(JsonObject js) {
+        this("tentacles", "back", "semen", 0, 1, 1);
+        load(js);
     }
 
     public static String synonyms[] = {"mass", "clump", "nest", "group",};
