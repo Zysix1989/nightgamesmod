@@ -41,10 +41,6 @@ public class BreastsPart extends GenericBodyPart {
     
     private double bonusSensitivity = 0;
 
-    public static BreastsPart generateGeneric() {
-        return new BreastsPart();
-    }
-
 
     public BreastsPart() {
         super("breasts", "", 0.0, 1.0, 1.0, true, TYPE, "");
