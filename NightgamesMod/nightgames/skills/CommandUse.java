@@ -79,8 +79,7 @@ public class CommandUse extends PlayerCommand {
                 c.write(getSelf(), deal(c, 0, Result.special, target));
                 break;
             default:
-                c.write(getSelf(), "<<This should not be displayed, please inform The" + " Silver Bard: CommandUse-resolve>>");
-                return false;
+                throw new IllegalStateException("fell off end of conditional");
         }
         target.consume(used, 1);
         used = null;
