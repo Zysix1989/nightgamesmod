@@ -12,7 +12,7 @@ public class UseEnergyDrink extends Action {
 
     @Override
     public boolean usable(Character user) {
-        return user.has(Item.EnergyDrink) && !user.bound();
+        return !user.bound();
     }
 
     @Override

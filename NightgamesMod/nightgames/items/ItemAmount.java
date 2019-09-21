@@ -22,7 +22,6 @@ public class ItemAmount {
         ItemAmount that = (ItemAmount) o;
 
         return amount == that.amount && item == that.item;
-
     }
 
     @Override public int hashCode() {

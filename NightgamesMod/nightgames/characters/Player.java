@@ -433,6 +433,7 @@ public class Player extends Character {
                     if (Global.getMatch().canMoveOutOfCombat(this)) {
                         possibleActions.addAll(location.possibleActions());
                     }
+                    possibleActions.addAll(getItemActions());
                     possibleActions.addAll(Global.getMatch().getAvailableActions(this));
                     for (Action act : possibleActions) {
                         if (act.usable(this) 

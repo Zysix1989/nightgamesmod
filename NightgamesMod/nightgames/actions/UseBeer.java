@@ -13,7 +13,7 @@ public class UseBeer extends Action {
 
     @Override
     public boolean usable(Character user) {
-        return user.has(Item.Beer) && !user.bound();
+        return !user.bound();
     }
 
     @Override

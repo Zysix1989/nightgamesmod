@@ -900,9 +900,6 @@ public class Global {
         actionPool.add(new Bathe());
         actionPool.add(new Scavenge());
         actionPool.add(new Craft());
-        actionPool.add(new UseLubricant());
-        actionPool.add(new UseEnergyDrink());
-        actionPool.add(new UseBeer());
         actionPool.add(new Recharge());
         actionPool.add(new Locate());
         actionPool.add(new MasturbateAction());

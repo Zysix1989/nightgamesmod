@@ -18,6 +18,9 @@ import nightgames.actions.Leap;
 import nightgames.actions.Move;
 import nightgames.actions.Resupply;
 import nightgames.actions.Shortcut;
+import nightgames.actions.UseBeer;
+import nightgames.actions.UseEnergyDrink;
+import nightgames.actions.UseLubricant;
 import nightgames.actions.Wait;
 import nightgames.areas.Area;
 import nightgames.characters.body.BodyPart;
@@ -514,9 +517,10 @@ public class NPC extends Character {
             pickAndDoAction(allowedActions(), moves, radar);
         }
     }
-    
+
     private void pickAndDoAction(Collection<Action> available, Collection<Action> moves, Collection<IMovement> radar) {
         if (available.isEmpty()) {
+            available.addAll(getItemActions());
             available.addAll(Global.getMatch().getAvailableActions(this));
             if (Global.getMatch().canMoveOutOfCombat(this)) {
                 available.addAll(moves);

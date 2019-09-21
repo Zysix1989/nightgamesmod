@@ -29,6 +29,9 @@ import nightgames.actions.Action;
 import nightgames.actions.Locate;
 import nightgames.actions.Move;
 import nightgames.actions.Movement;
+import nightgames.actions.UseBeer;
+import nightgames.actions.UseEnergyDrink;
+import nightgames.actions.UseLubricant;
 import nightgames.areas.Area;
 import nightgames.areas.NinjaStash;
 import nightgames.characters.body.Body;
@@ -4701,5 +4704,23 @@ public abstract class Character extends Observable implements Cloneable {
 
     public void chooseActivitySubchoices(Activity activity, List<String> choices) {
         // Can't be sure this isn't used at the moment
+    }
+
+    protected Set<Action> getItemActions() {
+        var res = new HashSet<Action>();
+        var inv = getInventory();
+        for (Item i: inv.keySet()) {
+            if (inv.get(i) > 0) {
+                switch (i) {
+                    case Beer:
+                        res.add(new UseBeer());
+                    case Lubricant:
+                        res.add(new UseLubricant());
+                    case EnergyDrink:
+                        res.add(new UseEnergyDrink());
+                }
+            }
+        }
+        return res;
     }
 }

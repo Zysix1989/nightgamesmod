@@ -13,7 +13,7 @@ public class UseLubricant extends Action {
 
     @Override
     public boolean usable(Character user) {
-        return user.has(Item.Lubricant) && !user.bound();
+        return !user.bound();
     }
 
     @Override
