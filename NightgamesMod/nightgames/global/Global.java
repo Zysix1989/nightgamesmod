@@ -2094,12 +2094,6 @@ public class Global {
         return modifierPool;
     }
 
-    public static HashSet<Skill> getByTactics(Combat c, Tactics tact) {
-        HashSet<Skill> result = new HashSet<>(skillPool);
-        result.removeIf(skill -> skill.type(c) != tact);
-        return result;
-    }
-
     public static MatchType decideMatchType() {
         if (getPlayer().getLevel() >= 15 && random(10) < 2) {
             return MatchType.TEAM;
