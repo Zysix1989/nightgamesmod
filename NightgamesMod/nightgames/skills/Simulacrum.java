@@ -23,8 +23,11 @@ public class Simulacrum extends Skill {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return getSelf().canAct() && c.getStance().mobile(getSelf()) && !c.getStance().prone(getSelf())
-                        && c.getPetsFor(getSelf()).size() < getSelf().getPetLimit() && !target.isPet();
+        return getSelf().canAct()
+            && c.getStance().mobile(getSelf())
+            && !c.getStance().prone(getSelf())
+            && c.getPetsFor(getSelf()).size() < getSelf().getPetLimit()
+            && !target.isPet();
     }
 
     @Override
@@ -45,9 +48,9 @@ public class Simulacrum extends Skill {
 
         String cloneName = String.format("%s clone", target.nameOrPossessivePronoun());
         if (target instanceof Player) {
-            pet = new CharacterPet(cloneName, getSelf(), (Player)target, power, ac);
+            pet = new CharacterPet(cloneName, getSelf(), target, power, ac);
         } else if (target instanceof NPC) {
-            pet = new CharacterPet(cloneName, getSelf(), (NPC)target, power, ac);
+            pet = new CharacterPet(cloneName, getSelf(), target, power, ac);
         } else {
             c.write(getSelf(), formatMessage(Result.miss, CharacterSex.asexual, CharacterSex.asexual, target));
             return false;
