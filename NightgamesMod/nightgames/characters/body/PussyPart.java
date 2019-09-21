@@ -181,7 +181,7 @@ public class PussyPart extends GenericBodyPart {
     public CockPart getEquivalentCock() {
         List<PartMod> newMods = getPartMods().stream()
                         .map(mod -> BodyUtils.getKeyFromValue(BodyUtils.EQUIVALENT_MODS, mod))
-                        .filter(mod -> mod.isPresent())
+                        .filter(Optional::isPresent)
                         .map(Optional::get)
                         .distinct()
                         .collect(Collectors.toList());
