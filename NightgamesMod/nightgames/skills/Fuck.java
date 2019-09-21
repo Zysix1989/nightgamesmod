@@ -4,7 +4,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.CockMod;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.mods.SlimyCockMod;
 import nightgames.combat.Combat;
@@ -30,7 +29,7 @@ public class Fuck extends Skill {
     public BodyPart getSelfOrgan() {
         BodyPart res = getSelf().body.getRandomCock();
         if (res == null && getSelf().has(Trait.strapped)) {
-            res = StraponPart.generic;
+            res = new StraponPart();
         }
         return res;
     }

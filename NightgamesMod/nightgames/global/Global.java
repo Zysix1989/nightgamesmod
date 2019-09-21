@@ -62,9 +62,6 @@ import nightgames.actions.Resupply;
 import nightgames.actions.Scavenge;
 import nightgames.actions.SetTrap;
 import nightgames.actions.TreeAmbush;
-import nightgames.actions.UseBeer;
-import nightgames.actions.UseEnergyDrink;
-import nightgames.actions.UseLubricant;
 import nightgames.actions.Wait;
 import nightgames.areas.Area;
 import nightgames.areas.AreaAttribute;
@@ -328,7 +325,6 @@ import nightgames.skills.SummonYui;
 import nightgames.skills.Surrender;
 import nightgames.skills.SweetScent;
 import nightgames.skills.Tackle;
-import nightgames.skills.Tactics;
 import nightgames.skills.TailJob;
 import nightgames.skills.TailPeg;
 import nightgames.skills.TailSuck;
@@ -1916,7 +1912,7 @@ public class Global {
             if (self != null && third != null) {
                 BodyPart part = self.body.getRandom(third);
                 if (part == null && third.equals("cock") && self.has(Trait.strapped)) {
-                    part = StraponPart.generic;
+                    part = new StraponPart();
                 }
                 if (part != null) {
                     return part.describe(self);

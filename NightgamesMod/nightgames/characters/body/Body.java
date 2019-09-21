@@ -526,7 +526,7 @@ public class Body implements Cloneable {
     public BodyPart getRandomInsertable() {
         BodyPart part = getRandomCock();
         if (part == null && character.has(Trait.strapped)) {
-            part = StraponPart.generic;
+            part = new StraponPart();
         }
         return part;
     }

@@ -48,7 +48,8 @@ public class Frottage extends Skill {
     public boolean resolve(Combat c, Character target) {
         int m = 6 + Global.random(8);
         BodyPart receiver = target.hasDick() ? target.body.getRandomCock() : target.body.getRandomPussy();
-        BodyPart dealer = getSelf().hasDick() ? getSelf().body.getRandomCock() : getSelf().has(Trait.strapped) ? StraponPart.generic : getSelf().body.getRandomPussy();
+        BodyPart dealer = getSelf().hasDick() ? getSelf().body.getRandomCock() : getSelf().has(Trait.strapped) ? new StraponPart()
+            : getSelf().body.getRandomPussy();
         if (getSelf().human()) {
             if (target.hasDick()) {
                 c.write(getSelf(), deal(c, m, Result.special, target));
