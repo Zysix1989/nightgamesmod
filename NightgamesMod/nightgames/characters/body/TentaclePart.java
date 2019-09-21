@@ -6,19 +6,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 import nightgames.characters.Character;
-import nightgames.characters.DummyCharacter;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
 public class TentaclePart extends GenericBodyPart {
-    public static final TentaclePart DUMMY_PART = new TentaclePart();
+
     public String attachpoint;
     String fluids;
     private boolean printSynonym;
     static String allowedAttachTypes[] = {"ass", "mouth", "pussy", "hands", "feet", "tail", "cock"};
 
     public static void pleasureWithTentacles(Combat c, Character target, int strength, BodyPart targetPart) {
-        target.body.pleasure(c.getOpponent(target), DUMMY_PART, targetPart, strength, c);
+        target.body.pleasure(c.getOpponent(target), new TentaclePart(), targetPart, strength, c);
     }
 
     public static TentaclePart randomTentacle(String desc, Body body, String fluids, double hotness, double pleasure,
