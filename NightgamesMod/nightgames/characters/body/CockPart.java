@@ -23,6 +23,8 @@ public class CockPart extends GenericBodyPart {
     
     public static String synonyms[] = {"cock", "dick", "shaft", "phallus"};
 
+    private SizeMod sizeMod;
+
     public CockPart() {
         super("cock", "", 0, 1.2, 1, false, "cock", "a ");
     }
@@ -189,11 +191,12 @@ public class CockPart extends GenericBodyPart {
     }
 
     public CockPart newWithSize(int size) {
-        return (CockPart) applyMod(new SizeMod(size));
+        sizeMod = new SizeMod(size);
+        return this;
     }
 
     private SizeMod getSizeMod() {
-        return ((SizeMod)mods.stream().filter(mod -> mod instanceof SizeMod).findAny().orElse(new SizeMod(SizeMod.getMinimumSize(getType()))));
+        return sizeMod;
     }
 
     public int getSize() {
