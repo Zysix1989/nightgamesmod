@@ -42,8 +42,8 @@ public class CommandGive extends PlayerCommand {
     @Override
     public boolean resolve(Combat c, Character target) {
         do {
-            transfer = Item.values()[Global.random(Item.values().length)];
-            if (!(target.has(transfer) && TRANSFERABLES.contains(transfer))) {
+            transfer = TRANSFERABLES.get(Global.random(Item.values().length));
+            if (!(target.has(transfer))) {
                 transfer = null;
             }
         } while (transfer == null);
