@@ -1,5 +1,6 @@
 package nightgames.characters.body;
 
+import com.google.gson.JsonObject;
 import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
@@ -20,6 +21,11 @@ public class AssPart extends GenericBodyPart {
 
     public AssPart() {
         super("ass", "", 0, 1.2, 1, false, "ass", "a ");
+    }
+
+    public AssPart(JsonObject js) {
+        this();
+        load(js);
     }
 
     @Override

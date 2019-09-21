@@ -34,14 +34,14 @@ public class BodyPartAdapter implements JsonSerializer<BodyPart>, JsonDeserializ
     static private Map<String, BodyPartLoader> prototypes;
     static {
         prototypes = new HashMap<>();
-        prototypes.put(PussyPart.class.getCanonicalName(), js -> new PussyPart().load(js));
+        prototypes.put(PussyPart.class.getCanonicalName(), PussyPart::new);
         prototypes.put(BreastsPart.class.getCanonicalName(), js -> new BreastsPart().load(js));
         prototypes.put(WingsPart.class.getCanonicalName(), WingsPart.demonic::load);
         prototypes.put(TailPart.class.getCanonicalName(), TailPart.cat::load);
         prototypes.put(EarPart.class.getCanonicalName(), EarPart.normal::load);
         prototypes.put(StraponPart.class.getCanonicalName(), StraponPart.generic::load);
         prototypes.put(TentaclePart.class.getCanonicalName(), js -> new TentaclePart("tentacles", "back", "semen", 0, 1, 1).load(js));
-        prototypes.put(AssPart.class.getCanonicalName(), js -> new AssPart().load(js));
+        prototypes.put(AssPart.class.getCanonicalName(), AssPart::new);
         prototypes.put(MouthPart.class.getCanonicalName(), js -> new MouthPart("mouth", 0, 1, 1).load(js));
         prototypes.put(CockPart.class.getCanonicalName(), CockPart::new);
         prototypes.put(GenericBodyPart.class.getCanonicalName(), js -> new GenericBodyPart("", 0, 1, 1, "none", "none").load(js));

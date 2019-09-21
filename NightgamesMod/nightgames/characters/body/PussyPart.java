@@ -1,5 +1,6 @@
 package nightgames.characters.body;
 
+import com.google.gson.JsonObject;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,11 @@ public class PussyPart extends GenericBodyPart {
 
     public PussyPart() {
         super("pussy", "", 0, 1.2, 1, true, "pussy", "a ");
+    }
+
+    public PussyPart(JsonObject js) {
+        this();
+        load(js);
     }
 
     @Override
