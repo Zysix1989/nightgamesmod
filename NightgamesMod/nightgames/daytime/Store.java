@@ -36,10 +36,6 @@ public abstract class Store extends Activity {
         clothingstock.put(item, item.getPrice());
     }
 
-    public HashMap<Item, Integer> stock() {
-        return stock;
-    }
-
     public HashMap<Clothing, Integer> clothing() {
         return clothingstock;
     }

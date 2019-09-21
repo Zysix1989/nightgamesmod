@@ -432,10 +432,6 @@ public class Match {
         }
     }
 
-    public Collection<Movement> getResupplyAreas(Character ch) {
-        return Arrays.asList(Movement.union, Movement.dorm);
-    }
-
     public final Collection<Area> getAreas() {
         return map.values();
     }

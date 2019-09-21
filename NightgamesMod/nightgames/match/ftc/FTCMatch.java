@@ -248,12 +248,6 @@ public class FTCMatch extends Match {
     }
 
     @Override
-    public Collection<Movement> getResupplyAreas(Character ch) {
-        Area base = bases.get(ch);
-        return Collections.singleton(Movement.ftcBaseMovement(base));
-    }
-    
-    @Override
     public String genericRoomDescription() {
         return "area";
     }
