@@ -19,7 +19,7 @@ import nightgames.status.Trance;
 
 public class AssPart extends GenericBodyPart {
     private double bonusSensitivity;
-    private SizeMod sizeMod;
+    private Integer size;
 
     private AssPart() {
         super("ass", "", 0, 1.2, 1, false, "ass", "a ");
@@ -27,12 +27,12 @@ public class AssPart extends GenericBodyPart {
 
     public AssPart(JsonObject js) {
         super(js);
-        sizeMod = new SizeMod(js.get("size"));
+        size = js.get("size").getAsInt();
     }
 
     public AssPart(int size) {
         this();
-        sizeMod = new SizeMod(size);
+        this.size = size;
     }
 
     @Override
@@ -226,12 +226,7 @@ public class AssPart extends GenericBodyPart {
         this.bonusSensitivity += bonusSensitivity;
     }
 
-
-    private SizeMod getSizeMod() {
-        return sizeMod;
-    }
-
     public int getSize() {
-        return getSizeMod().getSize();
+        return size;
     }
 }
