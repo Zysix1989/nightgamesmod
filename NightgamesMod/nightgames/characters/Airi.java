@@ -79,7 +79,7 @@ public class Airi extends BasePersonality {
         self.getWillpower().setMax(80);
         self.initialGender = CharacterSex.female;
         self.body.add(new FacePart(.1, 3.0));
-        self.body.add(AssPart.generateGeneric().upgrade());
+        self.body.add(new AssPart().upgrade());
     }
 
     private void constructLines() {

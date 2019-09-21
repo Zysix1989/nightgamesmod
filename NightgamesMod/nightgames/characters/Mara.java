@@ -192,7 +192,7 @@ public class Mara extends BasePersonality {
         Global.gainSkills(self);
         self.setTrophy(Item.MaraTrophy);
         self.body.add(new FacePart(.1, 1.1));
-        self.body.add(AssPart.generateGeneric().upgrade());
+        self.body.add(new AssPart().upgrade());
         self.initialGender = CharacterSex.female;
     }
 

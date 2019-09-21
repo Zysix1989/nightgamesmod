@@ -97,9 +97,9 @@ public class Body implements Cloneable {
     // yeah i know :(
     public static BodyPart nonePart = new GenericBodyPart("none", 0, 1, 1, "none", "");
     public static Set<String> pluralParts = new HashSet<>(Arrays.asList("hands", "feet", "wings", "breasts", "balls"));
-    final static BodyPart requiredParts[] = {new GenericBodyPart("hands", 0, 1, 1, "hands", ""),
+    final static BodyPart[] requiredParts = {new GenericBodyPart("hands", 0, 1, 1, "hands", ""),
                     new GenericBodyPart("feet", 0, 1, 1, "feet", ""), new GenericBodyPart("skin", 0, 1, 1, "skin", ""),
-                    AssPart.generateGeneric().newWithSize(SizeMod.ASS_SIZE_NORMAL), new MouthPart(), new BreastsPart().newWithSize(0), EarPart.normal};
+                    new AssPart().newWithSize(SizeMod.ASS_SIZE_NORMAL), new MouthPart(), new BreastsPart().newWithSize(0), EarPart.normal};
     final static String fetishParts[] = {"ass", "feet", "cock", "wings", "tail", "tentacles", "breasts"};
 
     LinkedHashSet<BodyPart> bodyParts;
@@ -891,7 +891,7 @@ public class Body implements Cloneable {
                     add(BreastsPart.b);
                 }
                 if (get("ass").size() == 0) {
-                    add(AssPart.generateGeneric().upgrade().upgrade());
+                    add(new AssPart().upgrade().upgrade());
                 }
                 break;
             case male:
@@ -906,7 +906,7 @@ public class Body implements Cloneable {
                     add(new FacePart(0, 2));
                 }
                 if (get("ass").size() == 0) {
-                    add(AssPart.generateGeneric().upgrade());
+                    add(new AssPart().upgrade());
                 }
                 break;
             case herm:
@@ -918,7 +918,7 @@ public class Body implements Cloneable {
                     add(BreastsPart.b);
                 }
                 if (get("ass").size() == 0) {
-                    add(AssPart.generateGeneric().upgrade().upgrade());
+                    add(new AssPart().upgrade().upgrade());
                 }
                 break;
             case shemale:
@@ -930,7 +930,7 @@ public class Body implements Cloneable {
                     add(BreastsPart.d);
                 }
                 if (get("ass").size() == 0) {
-                    add(AssPart.generateGeneric().upgrade().upgrade());
+                    add(new AssPart().upgrade().upgrade());
                 }
                 break;
             case asexual:

@@ -30,7 +30,6 @@ import nightgames.characters.body.mods.FeralMod;
 import nightgames.characters.body.mods.GooeyMod;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.SecondPussyMod;
-import nightgames.characters.body.mods.SizeMod;
 import nightgames.json.JsonUtils;
 
 class BodyConfiguration {
@@ -80,7 +79,8 @@ class BodyConfiguration {
             config.breasts = Optional.of(new BreastsPart().newWithSize(obj.get("breasts").getAsInt()));
         if (obj.has("ass"))
             config.ass = Optional.of(obj.get("ass").getAsString()
-                                           .equals("basic") ? AssPart.generateGeneric() : (AssPart)AssPart.generateGeneric().applyMod(new SecondPussyMod()));
+                                           .equals("basic") ? new AssPart()
+                : (AssPart) new AssPart().applyMod(new SecondPussyMod()));
 
         if (obj.has("ears"))
             config.ears = Optional.of(EarPart.valueOf(obj.get("ears").getAsString()

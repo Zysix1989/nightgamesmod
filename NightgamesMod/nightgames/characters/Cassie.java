@@ -201,7 +201,7 @@ public class Cassie extends BasePersonality {
         Global.gainSkills(self);
         self.setTrophy(Item.CassieTrophy);
         self.body.add(BreastsPart.c);
-        self.body.add(AssPart.generateGeneric().upgrade().upgrade().upgrade());
+        self.body.add(new AssPart().upgrade().upgrade().upgrade());
         self.initialGender = CharacterSex.female;
     }
 

@@ -236,7 +236,7 @@ public class Jewel extends BasePersonality {
                 character.body.addReplace(character.body.getRandomAss().applyMod(new TrainedMod()), 1);
             }
         } else if (character.body.getRandomAss().getMods().stream().anyMatch(mod -> mod.countsAs(TrainedMod.TYPE))) {
-            character.body.addReplace(AssPart.generateGeneric(), 1);
+            character.body.addReplace(new AssPart(), 1);
         }
         super.rest(time);
         if (!(character.has(Item.Crop) || character.has(Item.Crop2)) && character.money >= 200) {

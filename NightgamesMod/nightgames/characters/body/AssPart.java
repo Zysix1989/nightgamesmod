@@ -18,10 +18,6 @@ import nightgames.status.Trance;
 public class AssPart extends GenericBodyPart {
     private double bonusSensitivity;
 
-    public static AssPart generateGeneric() {
-        return new AssPart();
-    }
-    
     public AssPart(String desc, double hotness, double pleasure, double sensitivity) {
         super(desc, "", hotness, pleasure, sensitivity, false, "ass", "a ");
     }
