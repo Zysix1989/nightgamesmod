@@ -60,6 +60,11 @@ public class GenericBodyPart implements BodyPart {
         this("generic", "a generic body part", 0, 0, 0, false, "generic", "");
     }
 
+    public GenericBodyPart(JsonObject js) {
+        this();
+        load(js);
+    }
+
     @Override
     public String canonicalDescription() {
         return mods.stream().sorted().map(PartMod::getModType).collect(Collectors.joining(" ")) + " " + desc;
