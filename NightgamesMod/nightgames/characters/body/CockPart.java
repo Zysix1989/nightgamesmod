@@ -20,26 +20,56 @@ import nightgames.items.clothing.ClothingSlot;
 import nightgames.status.Sensitized;
 
 public class CockPart extends GenericBodyPart {
-    
+    public enum Size implements Comparable<Size> {
+        Tiny(3),
+        Small(4),
+        Little(5),
+        Average(6),
+        Large(7),
+        Big(8),
+        Huge(9),
+        Massive(10),
+        Colossal(11),
+        Mammoth(12);
+
+        private static HashMap<Integer, Size> map = new HashMap<>();
+
+        static {
+            for (Size s : Size.values()) {
+                map.put(s.value, s);
+            }
+        }
+
+        private static Optional<Size> fromValue(int v) {
+            return Optional.of(map.get(v));
+        }
+
+        private int value;
+
+        Size(int v) {
+            value = v;
+        }
+    }
+
     //FIXME: Sort out how Breast got support for mutation completely separate from cocks.
     
     public static String synonyms[] = {"cock", "dick", "shaft", "phallus"};
 
-    private static final Map<Integer, String> COCK_SIZE_DESCRIPTIONS = new HashMap<>();
+    private static final Map<Size, String> COCK_SIZE_DESCRIPTIONS = new HashMap<>();
     static {
-        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_TINY, "tiny ");
-        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_SMALL, "small ");
-        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_LITTLE, "small ");
-        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_AVERAGE, "");
-        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_LARGE, "big ");
-        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_BIG, "huge ");
-        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_HUGE, "gigantic ");
-        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_MASSIVE, "massive ");
-        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_COLOSSAL, "colossal ");
-        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_MAMMOTH, "mammoth ");
+        COCK_SIZE_DESCRIPTIONS.put(Size.Tiny, "tiny ");
+        COCK_SIZE_DESCRIPTIONS.put(Size.Small, "small ");
+        COCK_SIZE_DESCRIPTIONS.put(Size.Little, "small ");
+        COCK_SIZE_DESCRIPTIONS.put(Size.Average, "");
+        COCK_SIZE_DESCRIPTIONS.put(Size.Large, "big ");
+        COCK_SIZE_DESCRIPTIONS.put(Size.Big, "huge ");
+        COCK_SIZE_DESCRIPTIONS.put(Size.Huge, "gigantic ");
+        COCK_SIZE_DESCRIPTIONS.put(Size.Massive, "massive ");
+        COCK_SIZE_DESCRIPTIONS.put(Size.Colossal, "colossal ");
+        COCK_SIZE_DESCRIPTIONS.put(Size.Mammoth, "mammoth ");
     }
 
-    private Integer size;
+    private Size size;
 
     public CockPart() {
         super("cock", "", 0, 1.2, 1, false, "cock", "a ");
@@ -47,28 +77,28 @@ public class CockPart extends GenericBodyPart {
 
     public CockPart(JsonObject js) {
         super(js);
-        size = js.get("size").getAsInt();
+        size = Size.fromValue(js.get("size").getAsInt()).orElseThrow();
     }
 
     public CockPart(int size) {
         this();
-        this.size = size;
+        this.size = Size.fromValue(size).orElseThrow();
     }
 
     @Override
     public double getFemininity(Character c) {
-        return SizeMod.COCK_SIZE_SMALL - getSize();
+        return Size.Small.value - getSize();
     }
 
     @Override
     public int mod(Attribute a, int total) { 
         int bonus = super.mod(a, total);
         int size = getSize();
-        if (size > SizeMod.COCK_SIZE_AVERAGE & a == Attribute.Seduction) {
-            bonus += (size - SizeMod.COCK_SIZE_AVERAGE) * 2;
+        if (size > Size.Average.value & a == Attribute.Seduction) {
+            bonus += (size - Size.Average.value) * 2;
         }
-        if (size > SizeMod.COCK_SIZE_BIG & a == Attribute.Speed) {
-            bonus += (size - SizeMod.COCK_SIZE_BIG);
+        if (size > Size.Big.value & a == Attribute.Speed) {
+            bonus += (size - Size.Big.value);
         }
         return bonus;
     }
@@ -158,7 +188,7 @@ public class CockPart extends GenericBodyPart {
 
     @Override
     public boolean isVisible(Character c) {
-        return c.crotchAvailable() || getSize() > SizeMod.COCK_SIZE_AVERAGE;
+        return c.crotchAvailable() || getSize() > Size.Average.value;
     }
 
     @Override
@@ -209,6 +239,6 @@ public class CockPart extends GenericBodyPart {
     }
 
     public int getSize() {
-        return size;
+        return size.value;
     }
 }
