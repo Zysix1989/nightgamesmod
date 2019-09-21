@@ -15,7 +15,6 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
-import nightgames.json.JsonUtils;
 import nightgames.status.Sensitized;
 
 public class CockPart extends GenericBodyPart {
@@ -167,7 +166,7 @@ public class CockPart extends GenericBodyPart {
             b.append(c.nameOrPossessivePronoun());
             b.append(" legs.");
         } else {
-            b.append(getSizeMod().adjective(this));
+            b.append(sizeMod.adjective(this));
             b.append(" bulge in ");
             b.append(c.possessiveAdjective());
             b.append(" ");
@@ -195,11 +194,7 @@ public class CockPart extends GenericBodyPart {
         return (PussyPart)newPart;
     }
 
-    private SizeMod getSizeMod() {
-        return sizeMod;
-    }
-
     public int getSize() {
-        return getSizeMod().getSize();
+        return sizeMod.getSize();
     }
 }
