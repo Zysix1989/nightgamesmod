@@ -1,7 +1,9 @@
 package nightgames.characters.body;
 
 import com.google.gson.JsonObject;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -23,7 +25,21 @@ public class CockPart extends GenericBodyPart {
     
     public static String synonyms[] = {"cock", "dick", "shaft", "phallus"};
 
-    private SizeMod sizeMod;
+    private static final Map<Integer, String> COCK_SIZE_DESCRIPTIONS = new HashMap<>();
+    static {
+        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_TINY, "tiny ");
+        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_SMALL, "small ");
+        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_LITTLE, "small ");
+        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_AVERAGE, "");
+        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_LARGE, "big ");
+        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_BIG, "huge ");
+        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_HUGE, "gigantic ");
+        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_MASSIVE, "massive ");
+        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_COLOSSAL, "colossal ");
+        COCK_SIZE_DESCRIPTIONS.put(SizeMod.COCK_SIZE_MAMMOTH, "mammoth ");
+    }
+
+    private Integer size;
 
     public CockPart() {
         super("cock", "", 0, 1.2, 1, false, "cock", "a ");
@@ -31,12 +47,12 @@ public class CockPart extends GenericBodyPart {
 
     public CockPart(JsonObject js) {
         super(js);
-        sizeMod = new SizeMod(js.get("size"));
+        size = js.get("size").getAsInt();
     }
 
     public CockPart(int size) {
         this();
-        sizeMod = new SizeMod(size);
+        this.size = size;
     }
 
     @Override
@@ -166,7 +182,7 @@ public class CockPart extends GenericBodyPart {
             b.append(c.nameOrPossessivePronoun());
             b.append(" legs.");
         } else {
-            b.append(sizeMod.adjective(this));
+            b.append(sizeAdjective());
             b.append(" bulge in ");
             b.append(c.possessiveAdjective());
             b.append(" ");
@@ -175,6 +191,10 @@ public class CockPart extends GenericBodyPart {
             b.append(c.possessiveAdjective());
             b.append(" crotch is.");
         }
+    }
+
+    private String sizeAdjective() {
+        return COCK_SIZE_DESCRIPTIONS.get(size);
     }
 
     public BodyPart upgrade() {
@@ -195,6 +215,6 @@ public class CockPart extends GenericBodyPart {
     }
 
     public int getSize() {
-        return sizeMod.getSize();
+        return size;
     }
 }

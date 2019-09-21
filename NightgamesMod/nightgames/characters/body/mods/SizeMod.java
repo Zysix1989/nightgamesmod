@@ -27,19 +27,7 @@ public class SizeMod extends PartMod {
     public static int COCK_SIZE_COLOSSAL = 11;
     public static int COCK_SIZE_MAMMOTH = 12;
     
-    private static final Map<Integer, String> COCK_SIZE_DESCRIPTIONS = new HashMap<>(); 
-    static {
-        COCK_SIZE_DESCRIPTIONS.put(COCK_SIZE_TINY, "tiny ");
-        COCK_SIZE_DESCRIPTIONS.put(COCK_SIZE_SMALL, "small ");
-        COCK_SIZE_DESCRIPTIONS.put(COCK_SIZE_LITTLE, "small ");
-        COCK_SIZE_DESCRIPTIONS.put(COCK_SIZE_AVERAGE, "");
-        COCK_SIZE_DESCRIPTIONS.put(COCK_SIZE_LARGE, "big ");
-        COCK_SIZE_DESCRIPTIONS.put(COCK_SIZE_BIG, "huge ");
-        COCK_SIZE_DESCRIPTIONS.put(COCK_SIZE_HUGE, "gigantic ");
-        COCK_SIZE_DESCRIPTIONS.put(COCK_SIZE_MASSIVE, "massive ");
-        COCK_SIZE_DESCRIPTIONS.put(COCK_SIZE_COLOSSAL, "colossal ");
-        COCK_SIZE_DESCRIPTIONS.put(COCK_SIZE_MAMMOTH, "mammoth ");
-    }
+
     public static int ASS_SIZE_SMALL = 0;
     public static int ASS_SIZE_NORMAL = 1;
     public static int ASS_SIZE_GIRLISH = 2;
@@ -119,9 +107,6 @@ public class SizeMod extends PartMod {
     }
 
     public String adjective(GenericBodyPart part) {
-        if (part.getType().equals("cock")) {
-            return COCK_SIZE_DESCRIPTIONS.get(size);
-        }
         if (part.getType().equals("ass")) {
             return ASS_SIZE_DESCRIPTIONS.get(size);
         }
