@@ -18,12 +18,8 @@ import nightgames.status.Trance;
 public class AssPart extends GenericBodyPart {
     private double bonusSensitivity;
 
-    public AssPart(String desc, double hotness, double pleasure, double sensitivity) {
-        super(desc, "", hotness, pleasure, sensitivity, false, "ass", "a ");
-    }
-
     public AssPart() {
-        this("ass", 0, 1.2, 1);
+        super("ass", "", 0, 1.2, 1, false, "ass", "a ");
     }
 
     @Override
