@@ -13,7 +13,6 @@ public class TentaclePart extends GenericBodyPart {
 
     public String attachpoint;
     private String fluids;
-    private boolean printSynonym;
     private static String[] allowedAttachTypes = {"ass", "mouth", "pussy", "hands", "feet", "tail", "cock"};
 
     public static void pleasureWithTentacles(Combat c, Character target, int strength, BodyPart targetPart) {
@@ -47,7 +46,6 @@ public class TentaclePart extends GenericBodyPart {
         super(desc, "", hotness, pleasure, sensitivity, true, "tentacles", "");
         this.attachpoint = attachpoint;
         this.fluids = fluids;
-        this.printSynonym = true;
     }
 
     public TentaclePart() {
@@ -58,10 +56,7 @@ public class TentaclePart extends GenericBodyPart {
 
     @Override
     public void describeLong(StringBuilder b, Character c) {
-        if (printSynonym)
-            b.append("A " + Global.pickRandom(synonyms).get() + " of ");
-        else
-            b.append("A ");
+        b.append("A " + Global.pickRandom(synonyms).get() + " of ");
         b.append(describe(c));
         if (c.body.has(attachpoint)) {
             b.append(" sprouts from " + c.nameOrPossessivePronoun() + " " + attachpoint + ".");
