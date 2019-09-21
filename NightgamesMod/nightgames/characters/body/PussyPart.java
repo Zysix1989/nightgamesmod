@@ -23,6 +23,10 @@ public class PussyPart extends GenericBodyPart {
         super("pussy", "", hotness, pleasure, sensitivity, true, "pussy", "a ");
     }
 
+    public PussyPart() {
+        this(0, 1.2, 1);
+    }
+
     @Override
     public void describeLong(StringBuilder b, Character c) {
         Optional<String> override = getPartMods().stream()
@@ -48,10 +52,6 @@ public class PussyPart extends GenericBodyPart {
         b.append(describe(c));
         b.append(' ');
         b.append("is nested between " + c.nameOrPossessivePronoun() + " legs.");
-    }
-
-    public PussyPart() {
-        this(0, 1.2, 1);
     }
 
     @Override
