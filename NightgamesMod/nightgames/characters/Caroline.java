@@ -53,7 +53,7 @@ public class Caroline extends BasePersonality {
         character.getMojo().setMax(110);
 
         character.setTrophy(Item.ExtremeAphrodisiac);
-        character.body.add(new BreastsPart().newWithSize(BreastsPart.B_CUP));
+        character.body.add(new BreastsPart(BreastsPart.B_CUP));
         character.initialGender = CharacterSex.female;
     }
 

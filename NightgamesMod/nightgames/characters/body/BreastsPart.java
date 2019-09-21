@@ -9,6 +9,7 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
+import nightgames.json.JsonUtils;
 import nightgames.status.Abuff;
 import nightgames.status.Charmed;
 import nightgames.status.Stsflag;
@@ -31,6 +32,7 @@ public class BreastsPart extends GenericBodyPart {
     public static String TYPE = "breasts";
 
     private double bonusSensitivity = 0;
+    private SizeMod sizeMod;
 
     public BreastsPart() {
         super("breasts", "", 0.0, 1.0, 1.0, true, TYPE, "");
@@ -38,6 +40,12 @@ public class BreastsPart extends GenericBodyPart {
 
     public BreastsPart(JsonObject js) {
         super(js);
+        sizeMod = JsonUtils.getGson().fromJson(js.get("sizeMod"), SizeMod.class);
+    }
+
+    public BreastsPart(int size) {
+        this();
+        sizeMod = new SizeMod(size);
     }
 
     @Override
@@ -229,15 +237,11 @@ public class BreastsPart extends GenericBodyPart {
     }
 
     public BodyPart upgrade() {
-        return this.newWithSize(SizeMod.clampToValidSize(this, getSize() + 1));
+        return new BreastsPart(SizeMod.clampToValidSize(this, getSize() + 1));
     }
 
     public BodyPart downgrade() {
-        return this.newWithSize(SizeMod.clampToValidSize(this, getSize() - 1));
-    }
-
-    public BreastsPart newWithSize(int size) {
-        return (BreastsPart) applyMod(new SizeMod(size));
+        return new BreastsPart(SizeMod.clampToValidSize(this, getSize() - 1));
     }
 
     private SizeMod getSizeMod() {

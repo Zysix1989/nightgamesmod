@@ -99,7 +99,7 @@ public class Body implements Cloneable {
     public static Set<String> pluralParts = new HashSet<>(Arrays.asList("hands", "feet", "wings", "breasts", "balls"));
     final static BodyPart[] requiredParts = {new GenericBodyPart("hands", 0, 1, 1, "hands", ""),
                     new GenericBodyPart("feet", 0, 1, 1, "feet", ""), new GenericBodyPart("skin", 0, 1, 1, "skin", ""),
-                    new AssPart().newWithSize(SizeMod.ASS_SIZE_NORMAL), new MouthPart(), new BreastsPart().newWithSize(0), EarPart.normal};
+                    new AssPart().newWithSize(SizeMod.ASS_SIZE_NORMAL), new MouthPart(), new BreastsPart(0), EarPart.normal};
     final static String fetishParts[] = {"ass", "feet", "cock", "wings", "tail", "tentacles", "breasts"};
 
     LinkedHashSet<BodyPart> bodyParts;
@@ -331,7 +331,7 @@ public class Body implements Cloneable {
 
     public BreastsPart getLargestBreasts() {
         List<BodyPart> parts = get("breasts");
-        BreastsPart breasts = new BreastsPart().newWithSize(BreastsPart.FLAT_CHEST);
+        BreastsPart breasts = new BreastsPart(BreastsPart.FLAT_CHEST);
         for (BodyPart part : parts) {
             BreastsPart b = (BreastsPart) part;
             if (b.getSize() > breasts.getSize()) {
@@ -880,7 +880,7 @@ public class Body implements Cloneable {
                     add(new FacePart(0, 2));
                 }
                 if (get("breasts").size() == 0) {
-                    add(new BreastsPart().newWithSize(BreastsPart.B_CUP));
+                    add(new BreastsPart(BreastsPart.B_CUP));
                 }
                 if (get("ass").size() == 0) {
                     add(new AssPart().upgrade().upgrade());
@@ -907,7 +907,7 @@ public class Body implements Cloneable {
                     add(new FacePart(0, 1));
                 }
                 if (get("breasts").size() == 0) {
-                    add(new BreastsPart().newWithSize(BreastsPart.B_CUP));
+                    add(new BreastsPart(BreastsPart.B_CUP));
                 }
                 if (get("ass").size() == 0) {
                     add(new AssPart().upgrade().upgrade());
@@ -919,7 +919,7 @@ public class Body implements Cloneable {
                     add(new FacePart(0, 1));
                 }
                 if (get("breasts").size() == 0) {
-                    add(new BreastsPart().newWithSize(BreastsPart.D_CUP));
+                    add(new BreastsPart(BreastsPart.D_CUP));
                 }
                 if (get("ass").size() == 0) {
                     add(new AssPart().upgrade().upgrade());
@@ -1036,28 +1036,28 @@ public class Body implements Cloneable {
                 femininity = Math.min(0, femininity);
                 replacePussyWithCock(new CockPart(SizeMod.COCK_SIZE_AVERAGE));
                 addBallsIfNeeded();
-                addReplace(new BreastsPart().newWithSize(BreastsPart.FLAT_CHEST), 1);
+                addReplace(new BreastsPart(BreastsPart.FLAT_CHEST), 1);
                 break;
             case female:
                 femininity = Math.max(2, femininity);
                 replaceCockWithPussy();
-                growBreastsUpTo(new BreastsPart().newWithSize(BreastsPart.C_CUP));
+                growBreastsUpTo(new BreastsPart(BreastsPart.C_CUP));
                 break;
             case herm:
                 femininity = Math.max(1, femininity);
                 addEquivalentCockAndPussy(new CockPart(SizeMod.COCK_SIZE_BIG));
-                growBreastsUpTo(new BreastsPart().newWithSize(BreastsPart.B_CUP));
+                growBreastsUpTo(new BreastsPart(BreastsPart.B_CUP));
                 break;
             case shemale:
                 femininity = Math.max(1, femininity);
                 replacePussyWithCock(new CockPart(SizeMod.COCK_SIZE_BIG));
-                growBreastsUpTo(new BreastsPart().newWithSize(BreastsPart.D_CUP));
+                growBreastsUpTo(new BreastsPart(BreastsPart.D_CUP));
                 addBallsIfNeeded();
                 break;
             case trap:
                 femininity = Math.max(2, femininity);
                 replacePussyWithCock(new CockPart(SizeMod.COCK_SIZE_SMALL));
-                addReplace(new BreastsPart().newWithSize(BreastsPart.FLAT_CHEST), 1);
+                addReplace(new BreastsPart(BreastsPart.FLAT_CHEST), 1);
                 addBallsIfNeeded();
                 break;
             case asexual:

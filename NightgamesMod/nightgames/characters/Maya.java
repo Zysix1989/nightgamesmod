@@ -74,7 +74,7 @@ public class Maya extends BasePersonality {
         Global.gainSkills(self);
         self.setTrophy(Item.MayaTrophy);
 
-        self.body.add(new BreastsPart().newWithSize(BreastsPart.D_CUP));
+        self.body.add(new BreastsPart(BreastsPart.D_CUP));
         self.initialGender = CharacterSex.female;
         preferredCockModType = ErrorMod.TYPE;
     }

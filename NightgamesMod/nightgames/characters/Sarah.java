@@ -52,7 +52,7 @@ public class Sarah extends BasePersonality {
         character.getMojo().setMax(90);
 
         character.setTrophy(Item.HolyWater);
-        character.body.add(new BreastsPart().newWithSize(BreastsPart.D_CUP));
+        character.body.add(new BreastsPart(BreastsPart.D_CUP));
         character.initialGender = CharacterSex.female;
     }
 

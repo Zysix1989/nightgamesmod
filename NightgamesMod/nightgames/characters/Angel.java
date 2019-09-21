@@ -60,7 +60,7 @@ public class Angel extends BasePersonality {
         self.setTrophy(Item.AngelTrophy);
         if (self instanceof NPC) {
         }
-        self.body.add(new BreastsPart().newWithSize(BreastsPart.DD_CUP));
+        self.body.add(new BreastsPart(BreastsPart.DD_CUP));
         // very feminine face
         self.body.add(new FacePart(0.3, 4.2));
         self.initialGender = CharacterSex.female;

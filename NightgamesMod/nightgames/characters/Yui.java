@@ -63,7 +63,7 @@ public class Yui extends BasePersonality {
         character.getMojo().setMax(130);
 
         character.setTrophy(Item.YuiTrophy);
-        character.body.add(new BreastsPart().newWithSize(BreastsPart.C_CUP));
+        character.body.add(new BreastsPart(BreastsPart.C_CUP));
         character.initialGender = CharacterSex.female;
     }
 

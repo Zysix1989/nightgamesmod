@@ -76,7 +76,7 @@ class BodyConfiguration {
         if (obj.has("archetype"))
             config.type = Optional.of(Archetype.valueOf(obj.get("archetype").getAsString().toUpperCase()));
         if (obj.has("breasts"))
-            config.breasts = Optional.of(new BreastsPart().newWithSize(obj.get("breasts").getAsInt()));
+            config.breasts = Optional.of(new BreastsPart(obj.get("breasts").getAsInt()));
         if (obj.has("ass"))
             config.ass = Optional.of(obj.get("ass").getAsString()
                                            .equals("basic") ? new AssPart()
