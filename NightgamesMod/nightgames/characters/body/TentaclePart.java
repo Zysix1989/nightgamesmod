@@ -12,9 +12,9 @@ import nightgames.global.Global;
 public class TentaclePart extends GenericBodyPart {
 
     public String attachpoint;
-    String fluids;
+    private String fluids;
     private boolean printSynonym;
-    static String allowedAttachTypes[] = {"ass", "mouth", "pussy", "hands", "feet", "tail", "cock"};
+    private static String[] allowedAttachTypes = {"ass", "mouth", "pussy", "hands", "feet", "tail", "cock"};
 
     public static void pleasureWithTentacles(Combat c, Character target, int strength, BodyPart targetPart) {
         target.body.pleasure(c.getOpponent(target), new TentaclePart(), targetPart, strength, c);
