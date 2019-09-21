@@ -53,7 +53,7 @@ public class CommandUse extends PlayerCommand {
     @Override
     public boolean resolve(Combat c, Character target) {
         do {
-            used = Item.values()[Global.random(Item.values().length)];
+            used = CANDIDATES.get(Global.random(Item.values().length));
             boolean hasStatus = false;
             switch (used) {
                 case Lubricant:
@@ -65,7 +65,7 @@ public class CommandUse extends PlayerCommand {
                 default:
                     break;
             }
-            if (!(CANDIDATES.contains(used) && target.has(used)) && !hasStatus) {
+            if (target.has(used) && !hasStatus) {
                 used = null;
             }
         } while (used == null);
