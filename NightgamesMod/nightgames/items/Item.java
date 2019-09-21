@@ -37,7 +37,7 @@ import nightgames.status.Shield;
 import nightgames.status.Stunned;
 import nightgames.status.Trance;
 
-public enum Item implements Loot {
+public enum Item implements Consumable {
 
     // Trap components
     Tripwire("Trip Wire", 10, "A strong wire used to trigger traps", "a "),
@@ -400,6 +400,7 @@ public enum Item implements Loot {
         this.req = req;
     }
 
+    @Override
     public List<ItemEffect> getEffects() {
         return effect;
     }
@@ -408,10 +409,12 @@ public enum Item implements Loot {
         return name();
     }
 
+    @Override
     public ItemAmount amount(int amount) {
         return new ItemAmount(this, amount);
     }
 
+    @Override
     public boolean usable(Combat c, Character self, Character target) {
         return req.meets(c, self, target);
     }
