@@ -133,12 +133,9 @@
             "pleasure": 1.0,
             "descLong": "",
             "notable": true,
-            "mods": [
-              {
-                "value": 6,
-                "_type": "nightgames.characters.body.mods.SizeMod"
-              }
-            ],
+            "sizeMod": {
+              "value": 6
+             },
             "class": "nightgames.characters.body.BreastsPart"
           },
           {
@@ -154,7 +151,7 @@
               {
                 "_type": "nightgames.characters.body.mods.PlantMod"
               }
-			],
+			      ],
             "class": "nightgames.characters.body.PussyPart"
           },
           {

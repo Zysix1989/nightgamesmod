@@ -133,12 +133,9 @@
             "pleasure": 1.0,
             "descLong": "",
             "notable": true,
-            "mods": [
-              {
-                "value": 0,
-                "_type": "nightgames.characters.body.mods.SizeMod"
-              }
-            ],
+            "sizeMod": {
+              "value": 0
+            },
             "class": "nightgames.characters.body.BreastsPart"
           },
           {
