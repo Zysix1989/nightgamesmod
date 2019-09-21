@@ -1,10 +1,6 @@
 package nightgames.characters.body;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import java.util.Optional;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -14,12 +10,7 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
-
 import nightgames.quest.ButtslutQuest;
-import nightgames.pet.PetCharacter;
-import nightgames.quest.ButtslutQuest;
-import nightgames.status.Abuff;
-
 import nightgames.status.Drained;
 import nightgames.status.Stsflag;
 import nightgames.status.Trance;
