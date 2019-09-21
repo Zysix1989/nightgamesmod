@@ -19,12 +19,8 @@ public class PussyPart extends GenericBodyPart {
         return new PussyPart();
     }
 
-    public PussyPart(double hotness, double pleasure, double sensitivity) {
-        super("pussy", "", hotness, pleasure, sensitivity, true, "pussy", "a ");
-    }
-
     public PussyPart() {
-        this(0, 1.2, 1);
+        super("pussy", "", 0, 1.2, 1, true, "pussy", "a ");
     }
 
     @Override
