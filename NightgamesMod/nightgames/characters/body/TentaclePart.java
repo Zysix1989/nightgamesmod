@@ -22,8 +22,8 @@ public class TentaclePart extends GenericBodyPart {
 
     public static TentaclePart randomTentacle(String desc, Body body, String fluids, double hotness, double pleasure,
                     double sensitivity) {
-        Set<String> avail = new HashSet<String>(Arrays.asList(allowedAttachTypes));
-        Set<String> parts = new HashSet<String>();
+        Set<String> avail = new HashSet<>(Arrays.asList(allowedAttachTypes));
+        Set<String> parts = new HashSet<>();
         for (BodyPart p : body.getCurrentParts()) {
             if (p instanceof TentaclePart) {
                 avail.remove(((TentaclePart) p).attachpoint);
