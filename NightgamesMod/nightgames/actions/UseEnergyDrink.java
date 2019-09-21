@@ -7,8 +7,7 @@ import nightgames.items.Item;
 public class UseEnergyDrink extends Action {
 
     public UseEnergyDrink() {
-        super("Use " + Item.EnergyDrink);
-        name = "Energy Drink";
+        super("Energy Drink");
     }
 
     @Override

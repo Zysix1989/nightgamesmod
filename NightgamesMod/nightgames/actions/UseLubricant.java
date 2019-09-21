@@ -8,8 +8,7 @@ import nightgames.status.Oiled;
 public class UseLubricant extends Action {
 
     public UseLubricant() {
-        super("Use " + Item.Lubricant.getName());
-        name = "Oil up";
+        super("Oil up");
     }
 
     @Override

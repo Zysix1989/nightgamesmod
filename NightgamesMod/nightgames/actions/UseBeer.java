@@ -8,8 +8,7 @@ import nightgames.status.Buzzed;
 public class UseBeer extends Action {
 
     public UseBeer() {
-        super("Use " + Item.Beer.getName());
-        name = "Beer";
+        super( "Beer");
     }
 
     @Override
