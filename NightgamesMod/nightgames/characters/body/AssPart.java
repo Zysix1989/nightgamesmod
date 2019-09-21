@@ -17,7 +17,7 @@ import nightgames.status.Trance;
 
 public class AssPart extends GenericBodyPart {
     private double bonusSensitivity;
-    public static AssPart generic = generateGeneric();
+
     public static AssPart generateGeneric() {
         return new AssPart();
     }
