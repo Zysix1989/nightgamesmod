@@ -53,8 +53,7 @@ public class TentaclePart extends GenericBodyPart {
     }
 
     public TentaclePart(JsonObject js) {
-        this("tentacles", "back", "semen", 0, 1, 1);
-        load(js);
+        super(js);
     }
 
     public static String synonyms[] = {"mass", "clump", "nest", "group",};

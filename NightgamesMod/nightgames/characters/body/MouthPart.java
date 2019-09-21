@@ -20,8 +20,7 @@ public class MouthPart extends GenericBodyPart {
     }
 
     public MouthPart(JsonObject js) {
-        this();
-        load(js);
+        super(js);
     }
 
     @Override

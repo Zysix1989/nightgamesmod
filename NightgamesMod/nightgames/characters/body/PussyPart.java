@@ -25,8 +25,7 @@ public class PussyPart extends GenericBodyPart {
     }
 
     public PussyPart(JsonObject js) {
-        this();
-        load(js);
+        super(js);
     }
 
     @Override

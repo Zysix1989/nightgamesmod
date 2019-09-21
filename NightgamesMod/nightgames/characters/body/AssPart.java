@@ -24,8 +24,7 @@ public class AssPart extends GenericBodyPart {
     }
 
     public AssPart(JsonObject js) {
-        this();
-        load(js);
+        super(js);
     }
 
     @Override

@@ -28,8 +28,7 @@ public class CockPart extends GenericBodyPart {
     }
 
     public CockPart(JsonObject js) {
-        this();
-        load(js);
+        super(js);
     }
 
     @Override

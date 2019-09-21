@@ -47,8 +47,7 @@ public class BreastsPart extends GenericBodyPart {
     }
 
     public BreastsPart(JsonObject js) {
-        this();
-        load(js);
+        super(js);
     }
 
     @Override

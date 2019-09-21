@@ -15,8 +15,7 @@ public class FacePart extends GenericBodyPart {
     }
 
     public FacePart(JsonObject js) {
-        this(0, 0);
-        load(js);
+        super(js);
     }
 
     @Override
