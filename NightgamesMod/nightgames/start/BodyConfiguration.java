@@ -79,8 +79,8 @@ class BodyConfiguration {
             config.breasts = Optional.of(new BreastsPart(obj.get("breasts").getAsInt()));
         if (obj.has("ass"))
             config.ass = Optional.of(obj.get("ass").getAsString()
-                                           .equals("basic") ? new AssPart()
-                : (AssPart) new AssPart().applyMod(new SecondPussyMod()));
+                                           .equals("basic") ? new AssPart(0)
+                : (AssPart) new AssPart(0).applyMod(new SecondPussyMod()));
 
         if (obj.has("ears"))
             config.ears = Optional.of(EarPart.valueOf(obj.get("ears").getAsString()

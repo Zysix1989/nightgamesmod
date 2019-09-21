@@ -69,7 +69,7 @@ public class Kat extends BasePersonality {
 
         self.body.add(new BreastsPart(BreastsPart.A_CUP));
         self.body.add(PussyPart.generic.applyMod(FeralMod.INSTANCE));
-        self.body.add(new AssPart().upgrade());
+        self.body.add(new AssPart(0).upgrade());
         self.body.add(TailPart.cat);
         self.body.add(EarPart.cat);
         // mostly feminine face
