@@ -59,12 +59,6 @@ public class CockPart extends GenericBodyPart {
     public double getFemininity(Character c) {
         return SizeMod.COCK_SIZE_SMALL - getSize();
     }
-    
-    
-    public static int maximumSize() {
-        return 12;
-    }
-
 
     @Override
     public int mod(Attribute a, int total) { 
