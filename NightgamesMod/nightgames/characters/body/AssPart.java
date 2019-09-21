@@ -21,13 +21,13 @@ public class AssPart extends GenericBodyPart {
     private double bonusSensitivity;
     private SizeMod sizeMod;
 
-    public AssPart() {
+    private AssPart() {
         super("ass", "", 0, 1.2, 1, false, "ass", "a ");
     }
 
     public AssPart(JsonObject js) {
         super(js);
-        sizeMod = JsonUtils.getGson().fromJson(js.get("sizeMod"), SizeMod.class);
+        sizeMod = new SizeMod(js.get("size"));
     }
 
     public AssPart(int size) {

@@ -883,7 +883,7 @@ public class Body implements Cloneable {
                     add(new BreastsPart(BreastsPart.B_CUP));
                 }
                 if (get("ass").size() == 0) {
-                    add(new AssPart().upgrade().upgrade());
+                    add(new AssPart(0).upgrade().upgrade());
                 }
                 break;
             case male:
@@ -898,7 +898,7 @@ public class Body implements Cloneable {
                     add(new FacePart(0, 2));
                 }
                 if (get("ass").size() == 0) {
-                    add(new AssPart().upgrade());
+                    add(new AssPart(0).upgrade());
                 }
                 break;
             case herm:
@@ -910,7 +910,7 @@ public class Body implements Cloneable {
                     add(new BreastsPart(BreastsPart.B_CUP));
                 }
                 if (get("ass").size() == 0) {
-                    add(new AssPart().upgrade().upgrade());
+                    add(new AssPart(0).upgrade().upgrade());
                 }
                 break;
             case shemale:
@@ -922,7 +922,7 @@ public class Body implements Cloneable {
                     add(new BreastsPart(BreastsPart.D_CUP));
                 }
                 if (get("ass").size() == 0) {
-                    add(new AssPart().upgrade().upgrade());
+                    add(new AssPart(0).upgrade().upgrade());
                 }
                 break;
             case asexual:

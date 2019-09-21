@@ -32,7 +32,7 @@ public class CockPart extends GenericBodyPart {
 
     public CockPart(JsonObject js) {
         super(js);
-        sizeMod = JsonUtils.getGson().fromJson(js.get("sizeMod"), SizeMod.class);
+        sizeMod = new SizeMod(js.get("size"));
     }
 
     public CockPart(int size) {
