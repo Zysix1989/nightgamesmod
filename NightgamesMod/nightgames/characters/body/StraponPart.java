@@ -11,7 +11,4 @@ public class StraponPart extends GenericBodyPart {
         super("strap-on", 1, 1, -999, "strapon", "a ");
     }
 
-    public static boolean isStrapon(BodyPart part) {
-        return part != null && part.isType("strapon");
-    }
 }
