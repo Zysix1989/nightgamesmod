@@ -150,11 +150,10 @@
             "pleasure": 1.2,
             "descLong": "",
             "notable": false,
+            "sizeMod": {
+              "value": 6
+            }
             "mods": [
-              {
-                "value": 6,
-                "_type": "nightgames.characters.body.mods.SizeMod"
-              },
               {
                 "value": "bionic",
                 "_type": "nightgames.characters.body.CockMod"

@@ -33,7 +33,6 @@ public class TestGUI extends GUI {
     @Override
     public Combat beginCombat(Player p1, NPC p2) {
         combat = new Combat(p1, p2, p1.location());
-        combat.addObserver(this);
         combat.setBeingObserved(true);
         return combat;
     }

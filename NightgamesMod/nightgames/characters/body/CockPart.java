@@ -15,6 +15,7 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
+import nightgames.json.JsonUtils;
 import nightgames.status.Sensitized;
 
 public class CockPart extends GenericBodyPart {
@@ -31,6 +32,7 @@ public class CockPart extends GenericBodyPart {
 
     public CockPart(JsonObject js) {
         super(js);
+        sizeMod = JsonUtils.getGson().fromJson(js.get("sizeMod"), SizeMod.class);
     }
 
     public CockPart(int size) {
