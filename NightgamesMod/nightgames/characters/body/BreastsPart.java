@@ -1,5 +1,6 @@
 package nightgames.characters.body;
 
+import com.google.gson.JsonObject;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -41,9 +42,13 @@ public class BreastsPart extends GenericBodyPart {
     
     private double bonusSensitivity = 0;
 
-
     public BreastsPart() {
         super("breasts", "", 0.0, 1.0, 1.0, true, TYPE, "");
+    }
+
+    public BreastsPart(JsonObject js) {
+        this();
+        load(js);
     }
 
     @Override
