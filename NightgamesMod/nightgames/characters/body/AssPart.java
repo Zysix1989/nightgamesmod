@@ -11,6 +11,7 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
+import nightgames.json.JsonUtils;
 import nightgames.quest.ButtslutQuest;
 import nightgames.status.Drained;
 import nightgames.status.Stsflag;
@@ -18,6 +19,7 @@ import nightgames.status.Trance;
 
 public class AssPart extends GenericBodyPart {
     private double bonusSensitivity;
+    private SizeMod sizeMod;
 
     public AssPart() {
         super("ass", "", 0, 1.2, 1, false, "ass", "a ");
@@ -25,6 +27,12 @@ public class AssPart extends GenericBodyPart {
 
     public AssPart(JsonObject js) {
         super(js);
+        sizeMod = JsonUtils.getGson().fromJson(js.get("sizeMod"), SizeMod.class);
+    }
+
+    public AssPart(int size) {
+        this();
+        sizeMod = new SizeMod(size);
     }
 
     @Override
@@ -193,11 +201,11 @@ public class AssPart extends GenericBodyPart {
     }
 
     public BodyPart upgrade() {
-        return new AssPart().newWithSize(SizeMod.clampToValidSize(this, getSize() + 1));
+        return new AssPart(SizeMod.clampToValidSize(this, getSize() + 1));
     }
 
     public BodyPart downgrade() {
-        return new AssPart().newWithSize(SizeMod.clampToValidSize(this, getSize() - 1));
+        return new AssPart(SizeMod.clampToValidSize(this, getSize() - 1));
     }
     @Override
     public double getSensitivity(Character self, BodyPart target) {
@@ -218,12 +226,9 @@ public class AssPart extends GenericBodyPart {
         this.bonusSensitivity += bonusSensitivity;
     }
 
-    public AssPart newWithSize(int size) {
-        return (AssPart) applyMod(new SizeMod(size));
-    }
 
     private SizeMod getSizeMod() {
-        return ((SizeMod)mods.stream().filter(mod -> mod instanceof SizeMod).findAny().orElse(new SizeMod(SizeMod.getMinimumSize(getType()))));
+        return sizeMod;
     }
 
     public int getSize() {
