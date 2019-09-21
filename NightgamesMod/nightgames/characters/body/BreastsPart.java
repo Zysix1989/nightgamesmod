@@ -250,7 +250,7 @@ public class BreastsPart extends GenericBodyPart {
         return (BreastsPart) applyMod(new SizeMod(size));
     }
 
-    SizeMod getSizeMod() {
+    private SizeMod getSizeMod() {
         return ((SizeMod)mods.stream().filter(mod -> mod instanceof SizeMod).findAny().orElse(new SizeMod(SizeMod.getMinimumSize(getType()))));
     }
 
