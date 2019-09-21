@@ -952,13 +952,13 @@ public class Body implements Cloneable {
     private void replacePussyWithCock(BodyPart basicCock) {
         PussyPart pussy = getRandomPussy();
         removeAll("pussy");
-        add(pussy == null ? CockPart.generic : pussy.getEquivalentCock());
+        add(pussy == null ? basicCock : pussy.getEquivalentCock());
     }
 
     private void replaceCockWithPussy() {
         CockPart cock = getRandomCock();
         removeAll("cock");
-        add(cock == null ? PussyPart.generic : cock.getEquivalentPussy());
+        add(cock == null ? new PussyPart() : cock.getEquivalentPussy());
     }
 
     private void addEquivalentCockAndPussy(BodyPart basicCock) {
@@ -966,11 +966,11 @@ public class Body implements Cloneable {
         boolean hasCock = getRandomCock() != null;
         if (!hasPussy) {
             CockPart cock = getRandomCock();
-            add(cock == null ? PussyPart.generic : cock.getEquivalentPussy());
+            add(cock == null ? new PussyPart() : cock.getEquivalentPussy());
         }
         if (!hasCock) {
             PussyPart pussy = getRandomPussy();
-            add(pussy == null ? CockPart.generic : pussy.getEquivalentCock());
+            add(pussy == null ? basicCock : pussy.getEquivalentCock());
         }
     }
 
