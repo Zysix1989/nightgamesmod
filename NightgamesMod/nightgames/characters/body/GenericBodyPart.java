@@ -12,7 +12,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.mods.PartMod;
-import nightgames.characters.body.mods.SizeMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.ClothingSlot;
@@ -62,7 +61,7 @@ public class GenericBodyPart implements BodyPart {
 
     public GenericBodyPart(JsonObject js) {
         this();
-        load(js);
+        fromJson(js);
     }
 
     @Override
@@ -199,10 +198,6 @@ public class GenericBodyPart implements BodyPart {
 
     @Override public JsonObject save() {
         return toJson();
-    }
-
-    public BodyPart load(JsonObject obj) {
-        return fromJson(obj);
     }
 
     @Override
