@@ -12,7 +12,6 @@ import nightgames.global.Global;
 
 public class TentaclePart extends GenericBodyPart {
     public static final GenericBodyPart DUMMY_PART = new GenericBodyPart("tentacles", 1.0, 1.0, 0.0, "tentacles", "");
-    public static final Character DUMMY_CHARACTER = new DummyCharacter("summoned tentacles", "tentaclesdummy", 1, DUMMY_PART);
     public String attachpoint;
     String fluids;
     private boolean printSynonym;
