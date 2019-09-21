@@ -43,7 +43,7 @@ public class BodyPartAdapter implements JsonSerializer<BodyPart>, JsonDeserializ
         prototypes.put(TentaclePart.class.getCanonicalName(), js -> new TentaclePart("tentacles", "back", "semen", 0, 1, 1).load(js));
         prototypes.put(AssPart.class.getCanonicalName(), js -> new AssPart("ass", 0, 1, 1).load(js));
         prototypes.put(MouthPart.class.getCanonicalName(), js -> new MouthPart("mouth", 0, 1, 1).load(js));
-        prototypes.put(CockPart.class.getCanonicalName(), js -> new CockPart().load(js));
+        prototypes.put(CockPart.class.getCanonicalName(), CockPart::new);
         prototypes.put(GenericBodyPart.class.getCanonicalName(), js -> new GenericBodyPart("", 0, 1, 1, "none", "none").load(js));
         prototypes.put(FacePart.class.getCanonicalName(), js -> new FacePart(.1, 2.3).load(js));
     }

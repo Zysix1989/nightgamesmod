@@ -1,5 +1,6 @@
 package nightgames.characters.body;
 
+import com.google.gson.JsonObject;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,6 +25,11 @@ public class CockPart extends GenericBodyPart {
 
     public CockPart() {
         super("cock", "", 0, 1.2, 1, false, "cock", "a ");
+    }
+
+    public CockPart(JsonObject js) {
+        this();
+        load(js);
     }
 
     @Override
