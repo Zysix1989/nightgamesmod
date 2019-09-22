@@ -7,9 +7,19 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import nightgames.characters.*;
+import nightgames.characters.Airi;
+import nightgames.characters.Angel;
+import nightgames.characters.Attribute;
+import nightgames.characters.Cassie;
 import nightgames.characters.Character;
+import nightgames.characters.Eve;
+import nightgames.characters.Jewel;
+import nightgames.characters.Kat;
+import nightgames.characters.Mara;
+import nightgames.characters.NPC;
+import nightgames.characters.Personality;
+import nightgames.characters.Player;
+import nightgames.characters.Reyka;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -22,7 +32,6 @@ public class ButtslutQuest extends Quest {
     private static final Attribute[] WHICH_ATTR = {Attribute.Science, Attribute.Seduction, Attribute.Arcane, Attribute.Fetish, Attribute.Power, Attribute.Animism, Attribute.Cunning, Attribute.Dark};
     @SuppressWarnings("rawtypes")
     private static final Class[] WHICH_CHARACTER ={Airi.class,        Angel.class,         Cassie.class,     Eve.class,        Jewel.class,     Kat.class,         Mara.class,        Reyka.class};
-    private static final int ASS_SIZE_INCREASE_THRESHOLD_REDUCTION_POINT8 = 1;
     private static final double ANAL_STRUGGLE_DIFFMOD_PER_POINT8 = 1.0;
     private static final double ASS_PRESENT_CHANCE_PER_POINT9 = 0.05;
     private static final double ENTHRALL_DURATION_PER_POINT10 = 1.0;
@@ -62,7 +71,7 @@ public class ButtslutQuest extends Quest {
         int opponentIndex = Arrays.asList(WHICH_CHARACTER).indexOf(opponent.getClass());
         super.pointTo(Global.getPlayer(), opponentIndex + 8);
         if(opponent.getClass()==Mara.class) {Global.getPlayer().body.getRandomAss().addBonusSensitivity(BONUS_SENS_PER_POINT14);}
-        if(opponent.getClass()==Airi.class && Math.pow(Global.getPlayer().body.getRandomAss().getSize()-ASS_SIZE_INCREASE_THRESHOLD_REDUCTION_POINT8,2) > getPointsForOfType(Global.getPlayer(),8)){
+        if(opponent.getClass()==Airi.class){
             Global.getPlayer().body.getRandomAss().upgrade();
             //Should probably be a message here
         }
