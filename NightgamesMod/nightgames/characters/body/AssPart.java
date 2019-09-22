@@ -1,6 +1,7 @@
 package nightgames.characters.body;
 
 import com.google.gson.JsonObject;
+import java.util.HashMap;
 import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
@@ -11,15 +12,43 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
-import nightgames.json.JsonUtils;
 import nightgames.quest.ButtslutQuest;
 import nightgames.status.Drained;
 import nightgames.status.Stsflag;
 import nightgames.status.Trance;
 
 public class AssPart extends GenericBodyPart {
+    public enum Size {
+        Small(0,"small"),
+        Normal(1, ""),
+        Girlish(2, "girlish"),
+        Flared(3, "flared"),
+        Large(4, "large"),
+        Huge(5, "huge");
+
+        private static HashMap<Integer, Size> map = new HashMap<>();
+
+        static {
+            for (Size s : Size.values()) {
+                map.put(s.value, s);
+            }
+        }
+
+        private static Optional<Size> fromValue(int v) {
+            return Optional.of(map.get(v));
+        }
+
+        private int value;
+        private String description;
+
+        Size(int v, String description) {
+            value = v;
+            this.description = description;
+        }
+    }
+
     private double bonusSensitivity;
-    private Integer size;
+    private Size size;
 
     private AssPart() {
         super("ass", "", 0, 1.2, 1, false, "ass", "a ");
@@ -27,12 +56,12 @@ public class AssPart extends GenericBodyPart {
 
     public AssPart(JsonObject js) {
         super(js);
-        size = js.get("size").getAsInt();
+        size = Size.fromValue(js.get("size").getAsInt()).orElseThrow();
     }
 
     public AssPart(int size) {
         this();
-        this.size = size;
+        this.size = Size.fromValue(size).orElseThrow();
     }
 
     @Override
@@ -227,6 +256,6 @@ public class AssPart extends GenericBodyPart {
     }
 
     public int getSize() {
-        return size;
+        return size.value;
     }
 }
