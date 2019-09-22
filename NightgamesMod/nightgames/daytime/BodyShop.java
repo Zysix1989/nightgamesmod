@@ -195,7 +195,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Ass Expansion", 1500) {
             @Override
             void buy(Character buyer) {
-                AssPart target = buyer.body.getAssBelow(AssPart.Size.Huge);
+                AssPart target = buyer.body.getAssBelow(AssPart.Size.max());
                 assert target != null;
                 buyer.body.remove(target);
                 buyer.body.addReplace(target.upgrade(), 1);
@@ -203,7 +203,7 @@ public class BodyShop extends Activity {
 
             @Override
             boolean available(Character buyer) {
-                AssPart target = buyer.body.getAssBelow(AssPart.Size.Huge);
+                AssPart target = buyer.body.getAssBelow(AssPart.Size.max());
                 return target != null;
             }
 
@@ -216,7 +216,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Ass Reduction", 1500) {
             @Override
             void buy(Character buyer) {
-                AssPart target = buyer.body.getAssAbove(AssPart.Size.Small);
+                AssPart target = buyer.body.getAssAbove(AssPart.Size.min());
                 assert target != null;
                 buyer.body.remove(target);
                 buyer.body.addReplace(target.downgrade(), 1);
@@ -224,7 +224,7 @@ public class BodyShop extends Activity {
 
             @Override
             boolean available(Character buyer) {
-                AssPart target = buyer.body.getAssAbove(AssPart.Size.Small);
+                AssPart target = buyer.body.getAssAbove(AssPart.Size.min());
                 return target != null;
             }
 
