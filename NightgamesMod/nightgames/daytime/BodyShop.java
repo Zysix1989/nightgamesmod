@@ -17,7 +17,6 @@ import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.SecondPussyMod;
-import nightgames.characters.body.mods.SizeMod;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 

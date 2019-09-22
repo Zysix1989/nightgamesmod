@@ -6,7 +6,6 @@ import nightgames.characters.Growth;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
-import nightgames.characters.body.mods.SizeMod;
 import nightgames.combat.Combat;
 import nightgames.skills.Grind;
 import nightgames.skills.Piston;

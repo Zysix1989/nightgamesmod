@@ -14,7 +14,6 @@ import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.FeralMod;
-import nightgames.characters.body.mods.SizeMod;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;

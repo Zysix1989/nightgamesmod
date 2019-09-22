@@ -7,7 +7,6 @@ import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.mods.PartMod;
-import nightgames.characters.body.mods.SizeMod;
 import nightgames.requirements.RequirementShortcuts;
 
 public class ApplyPartModOption extends TransformationOption {
@@ -16,10 +15,7 @@ public class ApplyPartModOption extends TransformationOption {
             BodyPart part = c.body.getRandom(type);
             long nMods = 0;
             if (part != null) {
-                nMods = part.getMods()
-                            .stream()
-                            .filter(mod -> !(mod instanceof SizeMod))
-                            .count();
+                nMods = part.getMods().size();
             }
             return 1600 * (int)Math.pow(5, nMods);
         };

@@ -1,6 +1,5 @@
 package nightgames.json;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 
 import com.google.gson.JsonDeserializationContext;
@@ -13,7 +12,6 @@ import com.google.gson.JsonSerializer;
 
 import nightgames.characters.body.mods.ErrorMod;
 import nightgames.characters.body.mods.PartMod;
-import nightgames.characters.body.mods.SizeMod;
 
 public class PartModAdapter implements JsonSerializer<PartMod>, JsonDeserializer<PartMod> {
     @Override public PartMod deserialize(JsonElement jsonElement, Type type,

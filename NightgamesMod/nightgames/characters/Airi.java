@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.BodyPart;
@@ -15,7 +14,6 @@ import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.ErrorMod;
 import nightgames.characters.body.mods.GooeyMod;
-import nightgames.characters.body.mods.SizeMod;
 import nightgames.characters.body.mods.SlimyCockMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;

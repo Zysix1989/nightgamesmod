@@ -8,7 +8,6 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
-import nightgames.characters.body.mods.SizeMod;
 import nightgames.global.Global;
 import nightgames.requirements.BodyPartRequirement;
 import nightgames.requirements.NotRequirement;
