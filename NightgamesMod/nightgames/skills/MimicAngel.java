@@ -69,7 +69,7 @@ public class MimicAngel extends Skill {
             }
         }
         getSelf().body.temporaryAddOrReplacePartWithType(WingsPart.angelicslime, 10);
-        BreastsPart part = getSelf().body.getBreastsBelow(Size.HCup);
+        BreastsPart part = getSelf().body.getBreastsBelow(Size.max());
         if (part != null) {
             getSelf().body.temporaryAddOrReplacePartWithType(part.upgrade().upgrade(), 10);
         }

@@ -333,7 +333,7 @@ public class Body implements Cloneable {
 
     public BreastsPart getLargestBreasts() {
         List<BodyPart> parts = get("breasts");
-        BreastsPart breasts = new BreastsPart(BreastsPart.Size.FlatChest);
+        BreastsPart breasts = new BreastsPart(BreastsPart.Size.min());
         for (BodyPart part : parts) {
             BreastsPart b = (BreastsPart) part;
             if (b.getSize().compareTo(breasts.getSize()) > 0) {
@@ -865,15 +865,6 @@ public class Body implements Cloneable {
         }
     }
 
-    public double getFemininity() {
-        double femininity = baseFemininity;
-        femininity += SizeMod.getMaximumSize("breasts") / ((double) BreastsPart.maximumSize());
-        femininity += getCurrentParts().stream()
-                                       .mapToDouble(part -> part.getFemininity(character))
-                                       .sum();
-        return femininity;
-    }
-
     public void finishBody(CharacterSex sex) {
         switch (sex) {
             case female:
@@ -975,7 +966,7 @@ public class Body implements Cloneable {
     }
 
     private void growBreastsUpTo(BreastsPart part) {
-        if (BreastsPart.Size.HCup.compareTo(part.getSize()) < 0) {
+        if (BreastsPart.Size.max().compareTo(part.getSize()) < 0) {
             addReplace(part, 1);
         }
     }
@@ -992,7 +983,7 @@ public class Body implements Cloneable {
         } else if (getRandomCock() == null && getRandomPussy() != null) {
             return CharacterSex.female;
         } else {
-            if (BreastsPart.Size.HCup.compareTo(BreastsPart.Size.ACup) > 0 && getFace().getFemininity(character) > 0) {
+            if (getRandomBreasts().getSize().compareTo(BreastsPart.Size.ACup) > 0 && getFace().getFemininity(character) > 0) {
                 return CharacterSex.shemale;
             } else if (getFace().getFemininity(character) >= 1) {
                 return CharacterSex.trap;

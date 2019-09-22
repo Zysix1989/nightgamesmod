@@ -163,7 +163,7 @@ public enum Item implements Loot {
     BustDraft("Bust Draft", 80, "Temporarily grow breasts", "a ", Collections.singleton(
         (ItemEffect) new BodyGrowthPlusEffect("drink", "throw",
             new BreastsPart(BreastsPart.Size.CCup))),
-        (c, self, target) -> self.body.getBreastsBelow(BreastsPart.Size.HCup) != null,
+        (c, self, target) -> self.body.getBreastsBelow(BreastsPart.Size.max()) != null,
         15),
     FemDraft("Fem Draft", 150, "Temporarily grow a pussy", "a ", Arrays.asList(
         (ItemEffect) new BodyGrowthPlusEffect("drink", "throw",

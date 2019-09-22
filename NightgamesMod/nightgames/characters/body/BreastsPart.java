@@ -50,6 +50,12 @@ public class BreastsPart extends GenericBodyPart {
         public static Size coerceFromInt(int v) {
             return fromValue(v).orElseThrow();
         }
+        public static Size max() {
+            return JCup;
+        }
+        public static Size min() {
+            return FlatChest;
+        }
 
         private int value;
         private String description;
@@ -93,7 +99,7 @@ public class BreastsPart extends GenericBodyPart {
 
     @Override
     public double getFemininity(Character c) {
-        return 3 * ((double) getSize().value) / maximumSize();
+        return 3 * ((double) getSize().value) / Size.max().value;
     }
 
     @Override
@@ -121,11 +127,6 @@ public class BreastsPart extends GenericBodyPart {
         return (.75 + getSize().value * .2 + bonusSensitivity)* super.getSensitivity(self, target);
    }
 
-
-    public static int maximumSize() {
-        return Size.HCup.value;
-    }
-
     @Override
     public int mod(Attribute a, int total) {
         switch (a) {
@@ -142,7 +143,7 @@ public class BreastsPart extends GenericBodyPart {
 
     @Override
     public void describeLong(StringBuilder b, Character c) {
-        if (c.hasPussy() || getSize().value > Size.FlatChest.value) {
+        if (c.hasPussy() || getSize().value > Size.min().value) {
             b.append(Global.capitalizeFirstLetter(fullDescribe(c)));
             b.append(" adorn " + c.nameOrPossessivePronoun() + " chest.");
         }

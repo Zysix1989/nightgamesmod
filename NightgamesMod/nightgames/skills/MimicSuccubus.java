@@ -69,7 +69,7 @@ public class MimicSuccubus extends Skill {
         getSelf().body.temporaryAddOrReplacePartWithType(WingsPart.demonicslime, 999);
         getSelf().body.temporaryAddOrReplacePartWithType(TailPart.demonicslime, 999);
         getSelf().body.temporaryAddOrReplacePartWithType(EarPart.pointed, 999);
-        BreastsPart part = getSelf().body.getBreastsBelow(Size.HCup);
+        BreastsPart part = getSelf().body.getBreastsBelow(Size.max());
         if (part != null) {
             getSelf().body.temporaryAddOrReplacePartWithType(part.upgrade().upgrade().upgrade().upgrade(), 999);
         }

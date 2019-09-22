@@ -81,7 +81,7 @@ public class BreastRay extends Skill {
     @Override
     public String receive(Combat c, int damage, Result modifier, Character target) {
         String message;
-        boolean plural = target.body.getRandomBreasts().getSize().compareTo(Size.FlatChest) > 0 || target.get(Attribute.Power) > 25;
+        boolean plural = target.body.getRandomBreasts().getSize().compareTo(Size.min()) > 0 || target.get(Attribute.Power) > 25;
         message = String.format("%s a device at %s chest and giggles as %s %s"
                         + " %s ballooning up. %s %s and %s to cover %s, but the increased sensitivity "
                         + "distracts %s in a delicious way.",

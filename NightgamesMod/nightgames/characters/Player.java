@@ -1032,9 +1032,9 @@ public class Player extends Character {
                 body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(CockMod.slimy),
                     999);
             }
-            BreastsPart part = body.getBreastsBelow(BreastsPart.Size.HCup);
+            BreastsPart part = body.getBreastsBelow(BreastsPart.Size.max());
             if (part != null
-                && body.getRandomBreasts().getSize() != Size.FlatChest) {
+                && body.getRandomBreasts().getSize() != Size.min()) {
                 body.temporaryAddOrReplacePartWithType(part.upgrade(), 999);
             }
             body.temporaryAddOrReplacePartWithType(

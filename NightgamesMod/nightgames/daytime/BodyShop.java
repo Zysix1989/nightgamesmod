@@ -237,7 +237,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Breast Expansion", 1500) {
             @Override
             void buy(Character buyer) {
-                BreastsPart target = buyer.body.getBreastsBelow(BreastsPart.Size.HCup);
+                BreastsPart target = buyer.body.getBreastsBelow(BreastsPart.Size.max());
                 assert target != null;
                 buyer.body.remove(target);
                 buyer.body.addReplace(target.upgrade(), 1);
@@ -245,7 +245,7 @@ public class BodyShop extends Activity {
 
             @Override
             boolean available(Character buyer) {
-                BreastsPart target = buyer.body.getBreastsBelow(BreastsPart.Size.HCup);
+                BreastsPart target = buyer.body.getBreastsBelow(BreastsPart.Size.max());
                 return target != null;
             }
 
@@ -258,7 +258,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Breast Reduction", 1500) {
             @Override
             void buy(Character buyer) {
-                BreastsPart target = buyer.body.getBreastsAbove(BreastsPart.Size.FlatChest);
+                BreastsPart target = buyer.body.getBreastsAbove(BreastsPart.Size.min());
                 assert target != null;
                 buyer.body.remove(target);
                 buyer.body.addReplace(target.downgrade(), 1);
@@ -266,7 +266,7 @@ public class BodyShop extends Activity {
 
             @Override
             boolean available(Character buyer) {
-                BreastsPart target = buyer.body.getBreastsAbove(BreastsPart.Size.FlatChest);
+                BreastsPart target = buyer.body.getBreastsAbove(BreastsPart.Size.min());
                 return target != null;
             }
 

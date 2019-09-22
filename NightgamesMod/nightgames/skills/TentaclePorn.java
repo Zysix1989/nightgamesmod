@@ -133,7 +133,7 @@ public class TentaclePorn extends Skill {
                 actions += String.format("%scaress %s clit", actions.length() > 0 ? ", " : "", 
                                 target.possessiveAdjective());
             
-            if (target.body.getRandomBreasts().getSize() != Size.FlatChest)
+            if (target.body.getRandomBreasts().getSize().compareTo(Size.FlatChest) > 0)
                 actions += String.format("%sknead %s %s" ,actions.length() > 0 ? ", " : "", 
                                 target.possessiveAdjective(),
                                 target.body.getRandomBreasts().describe(target));
