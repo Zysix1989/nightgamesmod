@@ -235,9 +235,9 @@ public class GenericBodyPart implements BodyPart {
             bonus += mod.applyBonuses(c, self, opponent, this, target, damage);
         }
         if (self.has(ClothingTrait.nursegloves) && type.equals("hands")) {
-            c.write(self, Global
-                            .format("{self:name-possessive} rubber gloves provide a unique sensation as {self:subject-action:run|runs} {self:possessive} hands over {other:possessive} "
-                                            + target.describe(opponent) + ".", self, opponent));
+            c.write(self, Global.format("{self:name-possessive} rubber gloves provide a "
+                + "unique sensation as {self:subject-action:run|runs} {self:possessive} "
+                + "hands over {other:possessive} " + target.describe(opponent) + ".", self, opponent));
             bonus += 5 + Global.random(5);
             if (Global.random(5) == 0) {
                 c.write(self, "Unfortunately, the gloves wear out with their usage.");
@@ -245,15 +245,15 @@ public class GenericBodyPart implements BodyPart {
             }
         }
         if (type.equals("hands") && self.has(Trait.defthands)) {
-            c.write(self, Global
-                            .format("{self:name-possessive} hands dance across {other:possessive} "
-                                            + target.describe(opponent) + ", hitting all the right spots.", self, opponent));
+            c.write(self, Global.format("{self:name-possessive} hands dance "
+                + "across {other:possessive} " + target.describe(opponent) +
+                ", hitting all the right spots.", self, opponent));
             bonus += Global.random(2, 6);
         }
         if (type.equals("feet") && self.has(Trait.nimbletoes)) {
-            c.write(self, Global
-                            .format("{self:name-possessive} nimble toes adeptly massage {other:possessive} "
-                                            + target.describe(opponent) + " elicting a quiet gasp.", self, opponent));
+            c.write(self, Global.format("{self:name-possessive} nimble toes adeptly "
+                + "massage {other:possessive} " + target.describe(opponent)
+                + " elicting a quiet gasp.", self, opponent));
             bonus += Global.random(2, 6);
         }
         return bonus;
