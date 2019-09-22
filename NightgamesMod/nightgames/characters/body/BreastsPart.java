@@ -138,7 +138,7 @@ public class BreastsPart extends GenericBodyPart {
         }
     }
 
-    private static String synonyms[] = {"breasts", "tits", "boobs"};
+    private static String[] synonyms = {"breasts", "tits", "boobs"};
 
     @Override
     public void describeLong(StringBuilder b, Character c) {
