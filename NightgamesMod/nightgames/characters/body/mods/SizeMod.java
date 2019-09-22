@@ -19,22 +19,7 @@ public class SizeMod extends PartMod {
     private static int COCK_SIZE_TINY = 3;
     private static int COCK_SIZE_MAMMOTH = 12;
 
-
-    public static int ASS_SIZE_SMALL = 0;
-    public static int ASS_SIZE_NORMAL = 1;
-    public static int ASS_SIZE_GIRLISH = 2;
-    public static int ASS_SIZE_FLARED = 3;
-    public static int ASS_SIZE_LARGE = 4;
-    public static int ASS_SIZE_HUGE = 5;
-    private static final Map<Integer, String> ASS_SIZE_DESCRIPTIONS = new HashMap<>(); 
-    static {
-        ASS_SIZE_DESCRIPTIONS.put(ASS_SIZE_SMALL, "small ");
-        ASS_SIZE_DESCRIPTIONS.put(ASS_SIZE_NORMAL, "");
-        ASS_SIZE_DESCRIPTIONS.put(ASS_SIZE_GIRLISH, "girlish ");
-        ASS_SIZE_DESCRIPTIONS.put(ASS_SIZE_FLARED, "flared ");
-        ASS_SIZE_DESCRIPTIONS.put(ASS_SIZE_LARGE, "large ");
-        ASS_SIZE_DESCRIPTIONS.put(ASS_SIZE_HUGE, "huge ");
-    }
+    private static int ASS_SIZE_HUGE = 5;
 
     private static final Map<Integer, String> BREAST_SIZE_DESCRIPTIONS = new HashMap<>();
     private static final Map<Integer, String> BREAST_SIZE_CUPS = new HashMap<>();
@@ -99,9 +84,6 @@ public class SizeMod extends PartMod {
     }
 
     public String adjective(GenericBodyPart part) {
-        if (part.getType().equals("ass")) {
-            return ASS_SIZE_DESCRIPTIONS.get(size);
-        }
         if (part.getType().equals("breasts")) {
             if (Global.random(2) == 0) {
                 return BREAST_SIZE_DESCRIPTIONS.get(size);
