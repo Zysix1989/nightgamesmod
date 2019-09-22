@@ -20,7 +20,7 @@ import nightgames.items.clothing.ClothingSlot;
 import nightgames.status.Sensitized;
 
 public class CockPart extends GenericBodyPart {
-    public enum Size implements Comparable<Size> {
+    public enum Size {
         Tiny(3, "tiny"),
         Small(4,"tiny"),
         Little(5, "small"),
