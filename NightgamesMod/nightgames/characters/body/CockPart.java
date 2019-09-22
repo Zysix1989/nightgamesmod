@@ -21,16 +21,16 @@ import nightgames.status.Sensitized;
 
 public class CockPart extends GenericBodyPart {
     public enum Size implements Comparable<Size> {
-        Tiny(3),
-        Small(4),
-        Little(5),
-        Average(6),
-        Large(7),
-        Big(8),
-        Huge(9),
-        Massive(10),
-        Colossal(11),
-        Mammoth(12);
+        Tiny(3, "tiny"),
+        Small(4,"tiny"),
+        Little(5, "small"),
+        Average(6, ""),
+        Large(7, "big"),
+        Big(8, "huge"),
+        Huge(9, "gigantic"),
+        Massive(10, "massive"),
+        Colossal(11, "colossal"),
+        Mammoth(12, "mammoth");
 
         private static HashMap<Integer, Size> map = new HashMap<>();
 
@@ -45,29 +45,15 @@ public class CockPart extends GenericBodyPart {
         }
 
         private int value;
+        private String description;
 
-        Size(int v) {
+        Size(int v, String description) {
             value = v;
+            this.description = description;
         }
     }
-
-    //FIXME: Sort out how Breast got support for mutation completely separate from cocks.
     
     public static String synonyms[] = {"cock", "dick", "shaft", "phallus"};
-
-    private static final Map<Size, String> COCK_SIZE_DESCRIPTIONS = new HashMap<>();
-    static {
-        COCK_SIZE_DESCRIPTIONS.put(Size.Tiny, "tiny ");
-        COCK_SIZE_DESCRIPTIONS.put(Size.Small, "small ");
-        COCK_SIZE_DESCRIPTIONS.put(Size.Little, "small ");
-        COCK_SIZE_DESCRIPTIONS.put(Size.Average, "");
-        COCK_SIZE_DESCRIPTIONS.put(Size.Large, "big ");
-        COCK_SIZE_DESCRIPTIONS.put(Size.Big, "huge ");
-        COCK_SIZE_DESCRIPTIONS.put(Size.Huge, "gigantic ");
-        COCK_SIZE_DESCRIPTIONS.put(Size.Massive, "massive ");
-        COCK_SIZE_DESCRIPTIONS.put(Size.Colossal, "colossal ");
-        COCK_SIZE_DESCRIPTIONS.put(Size.Mammoth, "mammoth ");
-    }
 
     private Size size;
 
@@ -218,7 +204,7 @@ public class CockPart extends GenericBodyPart {
     }
 
     private String sizeAdjective() {
-        return COCK_SIZE_DESCRIPTIONS.get(size);
+        return size.description + " ";
     }
 
     public BodyPart upgrade() {
