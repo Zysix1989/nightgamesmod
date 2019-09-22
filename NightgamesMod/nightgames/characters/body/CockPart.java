@@ -71,15 +71,20 @@ public class CockPart extends GenericBodyPart {
         this.size = Size.fromValue(size).orElseThrow();
     }
 
+    public CockPart(Size size) {
+        this();
+        this.size = size;
+    }
+
     @Override
     public double getFemininity(Character c) {
-        return Size.Small.value - getSize();
+        return Size.Small.value - getSize().value;
     }
 
     @Override
     public int mod(Attribute a, int total) { 
         int bonus = super.mod(a, total);
-        int size = getSize();
+        int size = getSize().value;
         if (size > Size.Average.value & a == Attribute.Seduction) {
             bonus += (size - Size.Average.value) * 2;
         }
@@ -174,7 +179,7 @@ public class CockPart extends GenericBodyPart {
 
     @Override
     public boolean isVisible(Character c) {
-        return c.crotchAvailable() || getSize() > Size.Average.value;
+        return c.crotchAvailable() || getSize().compareTo(Size.Average) > 0;
     }
 
     @Override
@@ -208,11 +213,11 @@ public class CockPart extends GenericBodyPart {
     }
 
     public BodyPart upgrade() {
-        return new CockPart(SizeMod.clampToValidSize(this, getSize() + 1));
+        return new CockPart(SizeMod.clampToValidSize(this, getSize().value + 1));
     }
 
     public BodyPart downgrade() {
-        return new CockPart(SizeMod.clampToValidSize(this, getSize() - 1));
+        return new CockPart(SizeMod.clampToValidSize(this, getSize().value - 1));
     }
 
     public PussyPart getEquivalentPussy() {
@@ -224,7 +229,7 @@ public class CockPart extends GenericBodyPart {
         return (PussyPart)newPart;
     }
 
-    public int getSize() {
-        return size.value;
+    public Size getSize() {
+        return size;
     }
 }

@@ -12,6 +12,7 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
@@ -151,13 +152,13 @@ public enum Item implements Loot {
     TinyDraft("Tiny Draft", 100, "Temporarily shrink a penis", "a ",
         Collections.singleton((ItemEffect) new BodyDowngradeEffect("drink", "throw",
             new CockPart(SizeMod.COCK_SIZE_AVERAGE))),
-        (c, self, target) -> self.body.getCockAbove(SizeMod.COCK_SIZE_TINY) != null,
+        (c, self, target) -> self.body.getCockAbove(Size.Tiny) != null,
         15),
     PriapusDraft("Priapus Draft", 150, "Temporarily grow a penis", "a ",
         Collections.singleton((ItemEffect) new BodyGrowthPlusEffect("drink", "throw",
             new CockPart(SizeMod.COCK_SIZE_AVERAGE))),
         (c, self, target) -> !self.hasDick()
-            || self.body.getCockBelow(SizeMod.COCK_SIZE_MASSIVE) != null,
+            || self.body.getCockBelow(Size.Massive) != null,
         15),
     BustDraft("Bust Draft", 80, "Temporarily grow breasts", "a ", Collections.singleton(
         (ItemEffect) new BodyGrowthPlusEffect("drink", "throw",

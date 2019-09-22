@@ -24,6 +24,7 @@ import nightgames.characters.Character;
 import nightgames.characters.CharacterSex;
 import nightgames.characters.Player;
 import nightgames.characters.Trait;
+import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.SizeMod;
 import nightgames.combat.Combat;
@@ -346,20 +347,20 @@ public class Body implements Cloneable {
         if (parts.size() == 0) {
             return null;
         }
-        CockPart largest = new CockPart(SizeMod.COCK_SIZE_TINY);
+        CockPart largest = new CockPart(Size.Tiny);
         for (BodyPart part : parts) {
             CockPart cock = (CockPart) part;
-            largest = cock.getSize() >= largest.getSize() ? cock : largest;
+            largest = cock.getSize().compareTo(largest.getSize()) >= 0 ? cock : largest;
         }
         return largest;
     }
 
-    public CockPart getCockBelow(double size) {
+    public CockPart getCockBelow(Size size) {
         List<BodyPart> parts = get("cock");
         List<CockPart> upgradable = new ArrayList<>();
         for (BodyPart part : parts) {
             CockPart cock = (CockPart) part;
-            if (cock.getSize() < size) {
+            if (cock.getSize().compareTo(size) < 0) {
                 upgradable.add(cock);
             }
         }
@@ -370,12 +371,12 @@ public class Body implements Cloneable {
         return upgradable.get(Global.random(upgradable.size()));
     }
 
-    public CockPart getCockAbove(double size) {
+    public CockPart getCockAbove(Size size) {
         List<BodyPart> parts = get("cock");
         List<CockPart> upgradable = new ArrayList<>();
         for (BodyPart part : parts) {
             CockPart b = (CockPart) part;
-            if (b.getSize() > size) {
+            if (b.getSize().compareTo(size) > 0) {
                 upgradable.add(b);
             }
         }

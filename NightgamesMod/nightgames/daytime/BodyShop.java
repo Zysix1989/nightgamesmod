@@ -3,7 +3,6 @@ package nightgames.daytime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import java.util.stream.Collectors;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -12,6 +11,7 @@ import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
@@ -433,7 +433,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Cock Expansion", 1500) {
             @Override
             void buy(Character buyer) {
-                CockPart target = buyer.body.getCockBelow(SizeMod.COCK_SIZE_MASSIVE);
+                CockPart target = buyer.body.getCockBelow(Size.Massive);
                 assert target != null;
                 buyer.body.remove(target);
                 buyer.body.addReplace(target.upgrade(), 1);
@@ -441,7 +441,7 @@ public class BodyShop extends Activity {
 
             @Override
             boolean available(Character buyer) {
-                CockPart target = buyer.body.getCockBelow(SizeMod.COCK_SIZE_MASSIVE);
+                CockPart target = buyer.body.getCockBelow(Size.Massive);
                 return target != null;
             }
 
@@ -449,7 +449,7 @@ public class BodyShop extends Activity {
             double priority(Character buyer) {
                 CockPart part = buyer.body.getRandomCock();
                 if (part != null) {
-                    return SizeMod.COCK_SIZE_BIG > part.getSize() ? 10 : 3;
+                    return Size.Big.compareTo(part.getSize()) > 0 ? 10 : 3;
                 }
                 return 0;
             }
@@ -458,7 +458,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Cock Reduction", 1500) {
             @Override
             void buy(Character buyer) {
-                CockPart target = buyer.body.getCockAbove(SizeMod.COCK_SIZE_TINY);
+                CockPart target = buyer.body.getCockAbove(Size.Tiny);
                 assert target != null;
                 buyer.body.remove(target);
                 buyer.body.addReplace(target.downgrade(), 1);
@@ -466,7 +466,7 @@ public class BodyShop extends Activity {
 
             @Override
             boolean available(Character buyer) {
-                CockPart target = buyer.body.getCockAbove(SizeMod.COCK_SIZE_TINY);
+                CockPart target = buyer.body.getCockAbove(Size.Tiny);
                 return target != null;
             }
 
@@ -474,7 +474,7 @@ public class BodyShop extends Activity {
             double priority(Character buyer) {
                 CockPart part = buyer.body.getRandomCock();
                 if (part != null) {
-                    return SizeMod.COCK_SIZE_SMALL < part.getSize() ? 3 : 0;
+                    return Size.Small.compareTo(part.getSize()) < 0 ? 3 : 0;
                 }
                 return 0;
             }

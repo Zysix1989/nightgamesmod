@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.mods.SizeMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -56,7 +57,7 @@ public class CockGrowth extends Skill {
 
         if (res != Result.miss) {
             target.add(c, new Hypersensitive(target, 10));
-            CockPart part = target.body.getCockBelow(SizeMod.getMaximumSize("cock"));
+            CockPart part = target.body.getCockBelow(Size.Mammoth);
             if (permanent) {
                 if (part != null) {
                     target.body.addReplace(part.upgrade().upgrade().upgrade().upgrade().upgrade(), 1);
