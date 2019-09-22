@@ -53,7 +53,7 @@ public class CockPart extends GenericBodyPart {
         }
     }
     
-    public static String synonyms[] = {"cock", "dick", "shaft", "phallus"};
+    public static String[] synonyms = {"cock", "dick", "shaft", "phallus"};
 
     private Size size;
 
