@@ -57,7 +57,7 @@ public class CockGrowth extends Skill {
 
         if (res != Result.miss) {
             target.add(c, new Hypersensitive(target, 10));
-            CockPart part = target.body.getCockBelow(Size.Mammoth);
+            CockPart part = target.body.getCockBelow(Size.max());
             if (permanent) {
                 if (part != null) {
                     target.body.addReplace(part.upgrade().upgrade().upgrade().upgrade().upgrade(), 1);

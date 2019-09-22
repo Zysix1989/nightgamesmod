@@ -433,7 +433,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Cock Expansion", 1500) {
             @Override
             void buy(Character buyer) {
-                CockPart target = buyer.body.getCockBelow(Size.Massive);
+                CockPart target = buyer.body.getCockBelow(Size.max());
                 assert target != null;
                 buyer.body.remove(target);
                 buyer.body.addReplace(target.upgrade(), 1);
@@ -441,7 +441,7 @@ public class BodyShop extends Activity {
 
             @Override
             boolean available(Character buyer) {
-                CockPart target = buyer.body.getCockBelow(Size.Massive);
+                CockPart target = buyer.body.getCockBelow(Size.max());
                 return target != null;
             }
 
@@ -458,7 +458,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Cock Reduction", 1500) {
             @Override
             void buy(Character buyer) {
-                CockPart target = buyer.body.getCockAbove(Size.Tiny);
+                CockPart target = buyer.body.getCockAbove(Size.min());
                 assert target != null;
                 buyer.body.remove(target);
                 buyer.body.addReplace(target.downgrade(), 1);
@@ -466,7 +466,7 @@ public class BodyShop extends Activity {
 
             @Override
             boolean available(Character buyer) {
-                CockPart target = buyer.body.getCockAbove(Size.Tiny);
+                CockPart target = buyer.body.getCockAbove(Size.min());
                 return target != null;
             }
 

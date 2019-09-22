@@ -43,7 +43,12 @@ public class CockPart extends GenericBodyPart {
         private static Optional<Size> fromValue(int v) {
             return Optional.of(map.get(v));
         }
-
+        public static Size max() {
+            return Mammoth;
+        }
+        public static Size min() {
+            return Tiny;
+        }
         private int value;
         private String description;
 

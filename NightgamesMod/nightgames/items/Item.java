@@ -152,13 +152,13 @@ public enum Item implements Loot {
     TinyDraft("Tiny Draft", 100, "Temporarily shrink a penis", "a ",
         Collections.singleton((ItemEffect) new BodyDowngradeEffect("drink", "throw",
             new CockPart(Size.Average))),
-        (c, self, target) -> self.body.getCockAbove(Size.Tiny) != null,
+        (c, self, target) -> self.body.getCockAbove(Size.min()) != null,
         15),
     PriapusDraft("Priapus Draft", 150, "Temporarily grow a penis", "a ",
         Collections.singleton((ItemEffect) new BodyGrowthPlusEffect("drink", "throw",
             new CockPart(Size.Average))),
         (c, self, target) -> !self.hasDick()
-            || self.body.getCockBelow(Size.Massive) != null,
+            || self.body.getCockBelow(Size.max()) != null,
         15),
     BustDraft("Bust Draft", 80, "Temporarily grow breasts", "a ", Collections.singleton(
         (ItemEffect) new BodyGrowthPlusEffect("drink", "throw",

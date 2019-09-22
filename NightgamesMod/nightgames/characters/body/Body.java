@@ -348,7 +348,7 @@ public class Body implements Cloneable {
         if (parts.size() == 0) {
             return null;
         }
-        CockPart largest = new CockPart(CockPart.Size.Tiny);
+        CockPart largest = new CockPart(CockPart.Size.min());
         for (BodyPart part : parts) {
             CockPart cock = (CockPart) part;
             largest = cock.getSize().compareTo(largest.getSize()) >= 0 ? cock : largest;
