@@ -7,7 +7,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.mods.PartMod;
-import nightgames.characters.body.mods.SizeMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
@@ -235,13 +234,17 @@ public class AssPart extends GenericBodyPart {
     }
 
     public BodyPart upgrade() {
-        return new AssPart(Size.fromValue(
-            SizeMod.clampToValidSize(this, getSize().value + 1)).orElseThrow());
+        return new AssPart(Size.fromValue(Global.clamp(
+            getSize().value + 1,
+            Size.min().value,
+            Size.max().value)).orElseThrow());
     }
 
     public BodyPart downgrade() {
-        return new AssPart(Size.fromValue(
-            SizeMod.clampToValidSize(this, getSize().value - 1)).orElseThrow());
+        return new AssPart(Size.fromValue(Global.clamp(
+            getSize().value - 1,
+            Size.min().value,
+            Size.max().value)).orElseThrow());
     }
     @Override
     public double getSensitivity(Character self, BodyPart target) {

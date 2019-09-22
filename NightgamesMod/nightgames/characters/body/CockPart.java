@@ -3,16 +3,13 @@ package nightgames.characters.body;
 import com.google.gson.JsonObject;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.mods.IncubusCockMod;
 import nightgames.characters.body.mods.PartMod;
-import nightgames.characters.body.mods.SizeMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
@@ -219,11 +216,17 @@ public class CockPart extends GenericBodyPart {
     }
 
     public BodyPart upgrade() {
-        return new CockPart(Size.fromValue(SizeMod.clampToValidSize(this, getSize().value + 1)).orElseThrow());
+        return new CockPart(Size.fromValue(Global.clamp(
+            getSize().value + 1,
+            Size.min().value,
+            Size.max().value)).orElseThrow());
     }
 
     public BodyPart downgrade() {
-        return new CockPart(Size.fromValue(SizeMod.clampToValidSize(this, getSize().value - 1)).orElseThrow());
+        return new CockPart(Size.fromValue(Global.clamp(
+            getSize().value - 1,
+            Size.min().value,
+            Size.max().value)).orElseThrow());
     }
 
     public PussyPart getEquivalentPussy() {

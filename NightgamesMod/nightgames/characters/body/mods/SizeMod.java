@@ -14,13 +14,6 @@ import nightgames.characters.body.GenericBodyPart;
 import nightgames.global.Global;
 
 public class SizeMod extends PartMod {
-
-    //FIXME: Why are cocks not treated the same way as boobs?! - DSM
-    private static int COCK_SIZE_TINY = 3;
-    private static int COCK_SIZE_MAMMOTH = 12;
-
-    private static int ASS_SIZE_HUGE = 5;
-
     private static final Map<Integer, String> BREAST_SIZE_DESCRIPTIONS = new HashMap<>();
     private static final Map<Integer, String> BREAST_SIZE_CUPS = new HashMap<>();
 
@@ -94,10 +87,6 @@ public class SizeMod extends PartMod {
         return "";
     }
 
-    public static int clampToValidSize(BodyPart part, int size) {
-        return Global.clamp(size, getMinimumSize(part.getType()), getMaximumSize(part.getType()));
-    }
-
     @Override
     public String getVariant() {
         return "sizemod";
@@ -124,24 +113,5 @@ public class SizeMod extends PartMod {
     @Override
     public String describeAdjective(String partType) {
         return "some of its volume";
-    }
-
-    public static int getMaximumSize(String type) {
-        switch (type) {
-            case "breasts":
-                return 11;
-            case "cock":
-                return COCK_SIZE_MAMMOTH;
-            case "ass":
-                return ASS_SIZE_HUGE;
-        }
-        return 0;
-    }
-
-    public static int getMinimumSize(String type) {
-        if (type.equals("cock")) {
-            return COCK_SIZE_TINY;
-        }
-        return 0;
     }
 }

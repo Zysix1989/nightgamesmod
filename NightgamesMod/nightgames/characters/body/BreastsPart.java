@@ -6,13 +6,10 @@ import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.AssPart.Size;
-import nightgames.characters.body.mods.SizeMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
-import nightgames.json.JsonUtils;
 import nightgames.status.Abuff;
 import nightgames.status.Charmed;
 import nightgames.status.Stsflag;
@@ -276,11 +273,17 @@ public class BreastsPart extends GenericBodyPart {
     }
 
     public BodyPart upgrade() {
-        return new BreastsPart(SizeMod.clampToValidSize(this, getSize().value + 1));
+        return new BreastsPart(Size.fromValue(Global.clamp(
+            getSize().value + 1,
+            Size.min().value,
+            Size.max().value)).orElseThrow());
     }
 
     public BodyPart downgrade() {
-        return new BreastsPart(SizeMod.clampToValidSize(this, getSize().value - 1));
+        return new BreastsPart(Size.fromValue(Global.clamp(
+            getSize().value - 1,
+            Size.min().value,
+            Size.max().value)).orElseThrow());
     }
 
     public Size getSize() {
