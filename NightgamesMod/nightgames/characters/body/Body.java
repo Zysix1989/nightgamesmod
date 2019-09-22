@@ -1433,12 +1433,12 @@ public class Body implements Cloneable {
         }
     }
 
-    public AssPart getAssBelow(int size) {
+    public AssPart getAssBelow(Size size) {
         List<BodyPart> parts = get("ass");
         List<AssPart> upgradable = new ArrayList<>();
         for (BodyPart part : parts) {
             AssPart b = (AssPart) part;
-            if (b.getSize() < size) {
+            if (b.getSize().compareTo(size) < 0) {
                 upgradable.add(b);
             }
         }
@@ -1448,12 +1448,12 @@ public class Body implements Cloneable {
         return Global.pickRandom(upgradable).get();
     }
 
-    public AssPart getAssAbove(int size) {
+    public AssPart getAssAbove(Size size) {
         List<BodyPart> parts = get("ass");
         List<AssPart> downgradable = new ArrayList<>();
         for (BodyPart part : parts) {
             AssPart b = (AssPart) part;
-            if (b.getSize() > size) {
+            if (b.getSize().compareTo(size) < 0) {
                 downgradable.add(b);
             }
         }

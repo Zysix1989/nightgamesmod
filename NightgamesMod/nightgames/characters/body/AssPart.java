@@ -66,7 +66,7 @@ public class AssPart extends GenericBodyPart {
 
     @Override
     public double getFemininity(Character c) {
-        return getSize() - SizeMod.ASS_SIZE_GIRLISH;
+        return getSize().value - Size.Girlish.value;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class AssPart extends GenericBodyPart {
         double hotness = super.getHotness(self, opponent);
 
         Clothing top = self.getOutfit().getTopOfSlot(ClothingSlot.bottom);
-        hotness += -.1 + Math.sqrt(getSize()) * .2 * self.getOutfit()
+        hotness += -.1 + Math.sqrt(getSize().value) * .2 * self.getOutfit()
                                                 .getExposure(ClothingSlot.bottom);
         if (!opponent.hasDick()) {
             hotness /= 2;
@@ -88,11 +88,11 @@ public class AssPart extends GenericBodyPart {
     @Override
     public int mod(Attribute a, int total) { 
         int bonus = super.mod(a, total);
-        if (getSize() > SizeMod.ASS_SIZE_NORMAL & a == Attribute.Seduction) {
-            bonus += (getSize() - SizeMod.ASS_SIZE_NORMAL) * 2;
+        if (getSize().value > Size.Normal.value & a == Attribute.Seduction) {
+            bonus += (getSize().value - Size.Normal.value) * 2;
         }
-        if (getSize() > SizeMod.ASS_SIZE_FLARED & a == Attribute.Speed) {
-            bonus += (getSize() - SizeMod.ASS_SIZE_FLARED);
+        if (getSize().value > Size.Flared.value & a == Attribute.Speed) {
+            bonus += (getSize().value - Size.Flared.value);
         }
         return bonus;
     }
@@ -231,12 +231,12 @@ public class AssPart extends GenericBodyPart {
 
     public BodyPart upgrade() {
         return new AssPart(Size.fromValue(
-            SizeMod.clampToValidSize(this, getSize() + 1)).orElseThrow());
+            SizeMod.clampToValidSize(this, getSize().value + 1)).orElseThrow());
     }
 
     public BodyPart downgrade() {
         return new AssPart(Size.fromValue(
-            SizeMod.clampToValidSize(this, getSize() - 1)).orElseThrow());
+            SizeMod.clampToValidSize(this, getSize().value - 1)).orElseThrow());
     }
     @Override
     public double getSensitivity(Character self, BodyPart target) {
@@ -257,7 +257,7 @@ public class AssPart extends GenericBodyPart {
         this.bonusSensitivity += bonusSensitivity;
     }
 
-    public int getSize() {
-        return size.value;
+    public Size getSize() {
+        return size;
     }
 }
