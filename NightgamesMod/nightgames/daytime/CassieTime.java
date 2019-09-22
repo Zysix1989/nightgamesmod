@@ -8,6 +8,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.mods.ArcaneMod;
 import nightgames.characters.body.mods.SecondPussyMod;
 import nightgames.characters.body.mods.SizeMod;
@@ -54,7 +55,7 @@ public class CassieTime extends BaseNPCTime {
             growCock.option = "Cassie: Grow a cock";
             growCock.scene = "[Placeholder]<br/>Cassie hesistantly drinks the 3 priapus drafts and grows a large runic cock.";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart(SizeMod.COCK_SIZE_BIG).applyMod(CockMod.runic));
+                other.body.add(new CockPart(Size.Big).applyMod(CockMod.runic));
                 return true;
             };
             transformationOptions.add(growCock);

@@ -15,6 +15,7 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
@@ -113,7 +114,7 @@ public class Corruption extends Addiction {
                     Global.writeIfCombat(c, affected, Global.format(
                                     "<b>The dark taint changes {self:name-do} even further, and an incubus's cock forms between {self:possessive} legs!</b>", affected, cause));
                 }
-                affected.body.temporaryAddOrReplacePartWithType(new CockPart(SizeMod.COCK_SIZE_BIG).applyMod(CockMod.incubus), Global.random(15, 40));
+                affected.body.temporaryAddOrReplacePartWithType(new CockPart(Size.Big).applyMod(CockMod.incubus), Global.random(15, 40));
             } else if (!affected.body.getRandomAss().moddedPartCountsAs(DemonicMod.TYPE)) {
                 if (affected.human()) {
                     Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes {self:name-do} even further, and {self:possessive} asshole itches and burns with the corrupting power. It darkens with corruption!</b>", affected, cause));

@@ -66,6 +66,7 @@ public class CockPart extends GenericBodyPart {
         size = Size.fromValue(js.get("size").getAsInt()).orElseThrow();
     }
 
+    @Deprecated
     public CockPart(int size) {
         this();
         this.size = Size.fromValue(size).orElseThrow();
@@ -213,11 +214,11 @@ public class CockPart extends GenericBodyPart {
     }
 
     public BodyPart upgrade() {
-        return new CockPart(SizeMod.clampToValidSize(this, getSize().value + 1));
+        return new CockPart(Size.fromValue(SizeMod.clampToValidSize(this, getSize().value + 1)).orElseThrow());
     }
 
     public BodyPart downgrade() {
-        return new CockPart(SizeMod.clampToValidSize(this, getSize().value - 1));
+        return new CockPart(Size.fromValue(SizeMod.clampToValidSize(this, getSize().value - 1)).orElseThrow());
     }
 
     public PussyPart getEquivalentPussy() {

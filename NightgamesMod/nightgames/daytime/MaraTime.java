@@ -8,6 +8,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.mods.CyberneticMod;
 import nightgames.characters.body.mods.SizeMod;
 import nightgames.global.Global;
@@ -54,7 +55,7 @@ public class MaraTime extends BaseNPCTime {
             growCock.option = "Mara: Install a cock";
             growCock.scene = "[Placeholder]<br/>Mara makes some modifications to the dildo and manages to attach it to her own body through methods unknown to you.";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart(SizeMod.COCK_SIZE_BIG).applyMod(CockMod.bionic));
+                other.body.add(new CockPart(Size.Big).applyMod(CockMod.bionic));
                 return true;
             };
             transformationOptions.add(growCock);
