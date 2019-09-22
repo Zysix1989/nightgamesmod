@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import nightgames.characters.body.AssPart;
+import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.mods.BionicCockMod;
@@ -192,7 +193,7 @@ public class Mara extends BasePersonality {
         Global.gainSkills(self);
         self.setTrophy(Item.MaraTrophy);
         self.body.add(new FacePart(.1, 1.1));
-        self.body.add(new AssPart(0).upgrade());
+        self.body.add(new AssPart(Size.Normal));
         self.initialGender = CharacterSex.female;
     }
 

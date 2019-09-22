@@ -1,6 +1,7 @@
 package nightgames.characters;
 
 import nightgames.characters.body.*;
+import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.mods.BlessedCockMod;
 import nightgames.characters.body.mods.DivineMod;
 import nightgames.combat.Combat;
@@ -54,7 +55,7 @@ public class TestAngel extends BasePersonality {
         baseChar.body.add(new GenericBodyPart("hands", 0, 1, 1, "hands", ""));
         baseChar.body.add(new GenericBodyPart("feet", 0, 1, 1, "feet", ""));
         baseChar.body.add(new GenericBodyPart("skin", 0, 1, 1, "skin", ""));
-        baseChar.body.add(new AssPart(0));
+        baseChar.body.add(new AssPart(Size.Small));
         baseChar.body.add(EarPart.normal);
         baseChar.body.baseFemininity = 2;
 

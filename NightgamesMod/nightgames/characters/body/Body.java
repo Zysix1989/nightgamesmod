@@ -24,7 +24,8 @@ import nightgames.characters.Character;
 import nightgames.characters.CharacterSex;
 import nightgames.characters.Player;
 import nightgames.characters.Trait;
-import nightgames.characters.body.CockPart.Size;
+import nightgames.characters.body.AssPart.Size;
+import nightgames.characters.body.CockPart;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.SizeMod;
 import nightgames.combat.Combat;
@@ -100,7 +101,7 @@ public class Body implements Cloneable {
     public static Set<String> pluralParts = new HashSet<>(Arrays.asList("hands", "feet", "wings", "breasts", "balls"));
     final static BodyPart[] requiredParts = {new GenericBodyPart("hands", 0, 1, 1, "hands", ""),
                     new GenericBodyPart("feet", 0, 1, 1, "feet", ""), new GenericBodyPart("skin", 0, 1, 1, "skin", ""),
-                    new AssPart(SizeMod.ASS_SIZE_NORMAL), new MouthPart(), new BreastsPart(0), EarPart.normal};
+                    new AssPart(AssPart.Size.Normal), new MouthPart(), new BreastsPart(0), EarPart.normal};
     final static String fetishParts[] = {"ass", "feet", "cock", "wings", "tail", "tentacles", "breasts"};
 
     LinkedHashSet<BodyPart> bodyParts;
@@ -347,7 +348,7 @@ public class Body implements Cloneable {
         if (parts.size() == 0) {
             return null;
         }
-        CockPart largest = new CockPart(Size.Tiny);
+        CockPart largest = new CockPart(CockPart.Size.Tiny);
         for (BodyPart part : parts) {
             CockPart cock = (CockPart) part;
             largest = cock.getSize().compareTo(largest.getSize()) >= 0 ? cock : largest;
@@ -355,7 +356,7 @@ public class Body implements Cloneable {
         return largest;
     }
 
-    public CockPart getCockBelow(Size size) {
+    public CockPart getCockBelow(CockPart.Size size) {
         List<BodyPart> parts = get("cock");
         List<CockPart> upgradable = new ArrayList<>();
         for (BodyPart part : parts) {
@@ -371,7 +372,7 @@ public class Body implements Cloneable {
         return upgradable.get(Global.random(upgradable.size()));
     }
 
-    public CockPart getCockAbove(Size size) {
+    public CockPart getCockAbove(CockPart.Size size) {
         List<BodyPart> parts = get("cock");
         List<CockPart> upgradable = new ArrayList<>();
         for (BodyPart part : parts) {
@@ -884,7 +885,7 @@ public class Body implements Cloneable {
                     add(new BreastsPart(BreastsPart.B_CUP));
                 }
                 if (get("ass").size() == 0) {
-                    add(new AssPart(0).upgrade().upgrade());
+                    add(new AssPart(Size.Flared));
                 }
                 break;
             case male:
@@ -899,7 +900,7 @@ public class Body implements Cloneable {
                     add(new FacePart(0, 2));
                 }
                 if (get("ass").size() == 0) {
-                    add(new AssPart(0).upgrade());
+                    add(new AssPart(Size.Normal));
                 }
                 break;
             case herm:
@@ -911,7 +912,7 @@ public class Body implements Cloneable {
                     add(new BreastsPart(BreastsPart.B_CUP));
                 }
                 if (get("ass").size() == 0) {
-                    add(new AssPart(0).upgrade().upgrade());
+                    add(new AssPart(Size.Girlish));
                 }
                 break;
             case shemale:
@@ -923,7 +924,7 @@ public class Body implements Cloneable {
                     add(new BreastsPart(BreastsPart.D_CUP));
                 }
                 if (get("ass").size() == 0) {
-                    add(new AssPart(0).upgrade().upgrade());
+                    add(new AssPart(Size.Girlish));
                 }
                 break;
             case asexual:
@@ -1035,7 +1036,7 @@ public class Body implements Cloneable {
         switch (newSex) {
             case male:
                 femininity = Math.min(0, femininity);
-                replacePussyWithCock(new CockPart(Size.Average));
+                replacePussyWithCock(new CockPart(CockPart.Size.Average));
                 addBallsIfNeeded();
                 addReplace(new BreastsPart(BreastsPart.FLAT_CHEST), 1);
                 break;
@@ -1046,18 +1047,18 @@ public class Body implements Cloneable {
                 break;
             case herm:
                 femininity = Math.max(1, femininity);
-                addEquivalentCockAndPussy(new CockPart(Size.Big));
+                addEquivalentCockAndPussy(new CockPart(CockPart.Size.Big));
                 growBreastsUpTo(new BreastsPart(BreastsPart.B_CUP));
                 break;
             case shemale:
                 femininity = Math.max(1, femininity);
-                replacePussyWithCock(new CockPart(Size.Big));
+                replacePussyWithCock(new CockPart(CockPart.Size.Big));
                 growBreastsUpTo(new BreastsPart(BreastsPart.D_CUP));
                 addBallsIfNeeded();
                 break;
             case trap:
                 femininity = Math.max(2, femininity);
-                replacePussyWithCock(new CockPart(Size.Small));
+                replacePussyWithCock(new CockPart(CockPart.Size.Small));
                 addReplace(new BreastsPart(BreastsPart.FLAT_CHEST), 1);
                 addBallsIfNeeded();
                 break;
@@ -1083,7 +1084,7 @@ public class Body implements Cloneable {
         }
         if (sex.hasCock()) {
             if (!has("cock")) {
-                add(new CockPart(Size.Average));
+                add(new CockPart(CockPart.Size.Average));
             }
         }
         if (sex.hasBalls()) {

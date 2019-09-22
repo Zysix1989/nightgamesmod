@@ -59,9 +59,9 @@ public class AssPart extends GenericBodyPart {
         size = Size.fromValue(js.get("size").getAsInt()).orElseThrow();
     }
 
-    public AssPart(int size) {
+    public AssPart(Size size) {
         this();
-        this.size = Size.fromValue(size).orElseThrow();
+        this.size = size;
     }
 
     @Override
@@ -230,11 +230,13 @@ public class AssPart extends GenericBodyPart {
     }
 
     public BodyPart upgrade() {
-        return new AssPart(SizeMod.clampToValidSize(this, getSize() + 1));
+        return new AssPart(Size.fromValue(
+            SizeMod.clampToValidSize(this, getSize() + 1)).orElseThrow());
     }
 
     public BodyPart downgrade() {
-        return new AssPart(SizeMod.clampToValidSize(this, getSize() - 1));
+        return new AssPart(Size.fromValue(
+            SizeMod.clampToValidSize(this, getSize() - 1)).orElseThrow());
     }
     @Override
     public double getSensitivity(Character self, BodyPart target) {

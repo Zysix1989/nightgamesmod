@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import nightgames.characters.body.AssPart;
+import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockMod;
@@ -79,7 +80,7 @@ public class Airi extends BasePersonality {
         self.getWillpower().setMax(80);
         self.initialGender = CharacterSex.female;
         self.body.add(new FacePart(.1, 3.0));
-        self.body.add(new AssPart(0).upgrade());
+        self.body.add(new AssPart(Size.Normal));
     }
 
     private void constructLines() {

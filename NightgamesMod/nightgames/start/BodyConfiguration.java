@@ -11,6 +11,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import nightgames.characters.body.AssPart;
+import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
@@ -79,8 +80,8 @@ class BodyConfiguration {
             config.breasts = Optional.of(new BreastsPart(obj.get("breasts").getAsInt()));
         if (obj.has("ass"))
             config.ass = Optional.of(obj.get("ass").getAsString()
-                                           .equals("basic") ? new AssPart(0)
-                : (AssPart) new AssPart(0).applyMod(new SecondPussyMod()));
+                                           .equals("basic") ? new AssPart(Size.Small)
+                : (AssPart) new AssPart(Size.Small).applyMod(new SecondPussyMod()));
 
         if (obj.has("ears"))
             config.ears = Optional.of(EarPart.valueOf(obj.get("ears").getAsString()
