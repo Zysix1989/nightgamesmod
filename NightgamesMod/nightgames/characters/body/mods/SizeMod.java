@@ -14,19 +14,11 @@ import nightgames.characters.body.GenericBodyPart;
 import nightgames.global.Global;
 
 public class SizeMod extends PartMod {
-    
+
     //FIXME: Why are cocks not treated the same way as boobs?! - DSM
-    public static int COCK_SIZE_TINY = 3;
-    public static int COCK_SIZE_SMALL = 4;
-    public static int COCK_SIZE_LITTLE = 5;
-    public static int COCK_SIZE_AVERAGE = 6;
-    public static int COCK_SIZE_LARGE = 7;
-    public static int COCK_SIZE_BIG = 8;
-    public static int COCK_SIZE_HUGE = 9;
-    public static int COCK_SIZE_MASSIVE = 10;
-    public static int COCK_SIZE_COLOSSAL = 11;
-    public static int COCK_SIZE_MAMMOTH = 12;
-    
+    private static int COCK_SIZE_TINY = 3;
+    private static int COCK_SIZE_MAMMOTH = 12;
+
 
     public static int ASS_SIZE_SMALL = 0;
     public static int ASS_SIZE_NORMAL = 1;
