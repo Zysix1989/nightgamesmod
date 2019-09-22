@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.WingsPart;
@@ -60,7 +61,7 @@ public class Angel extends BasePersonality {
         self.setTrophy(Item.AngelTrophy);
         if (self instanceof NPC) {
         }
-        self.body.add(new BreastsPart(BreastsPart.DD_CUP));
+        self.body.add(new BreastsPart(Size.DDCup));
         // very feminine face
         self.body.add(new FacePart(0.3, 4.2));
         self.initialGender = CharacterSex.female;

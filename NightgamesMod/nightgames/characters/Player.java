@@ -20,6 +20,7 @@ import nightgames.areas.Area.EncounterResult;
 import nightgames.areas.Deployable;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.TentaclePart;
@@ -1031,9 +1032,9 @@ public class Player extends Character {
                 body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(CockMod.slimy),
                     999);
             }
-            BreastsPart part = body.getBreastsBelow(BreastsPart.H_CUP);
+            BreastsPart part = body.getBreastsBelow(BreastsPart.Size.HCup);
             if (part != null
-                && body.getRandomBreasts().getSize() != BreastsPart.FLAT_CHEST) {
+                && body.getRandomBreasts().getSize() != Size.FlatChest) {
                 body.temporaryAddOrReplacePartWithType(part.upgrade(), 999);
             }
             body.temporaryAddOrReplacePartWithType(

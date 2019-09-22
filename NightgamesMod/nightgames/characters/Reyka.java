@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.EarPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
@@ -74,7 +75,7 @@ public class Reyka extends BasePersonality {
         self.getArousal().setMax(120);
         self.getMojo().setMax(110);
 
-        self.body.add(new BreastsPart(BreastsPart.DD_CUP));
+        self.body.add(new BreastsPart(Size.DDCup));
         self.body.add(PussyPart.generic.applyMod(DemonicMod.INSTANCE));
         self.body.add(TailPart.demonic);
         self.body.add(WingsPart.demonic);

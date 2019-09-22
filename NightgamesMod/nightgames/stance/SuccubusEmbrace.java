@@ -2,6 +2,7 @@ package nightgames.stance;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
@@ -12,7 +13,7 @@ public class SuccubusEmbrace extends FemdomSexStance {
     }
 
     private boolean hasBreasts(Character c) {
-        return c.body.getLargestBreasts().getSize() != BreastsPart.FLAT_CHEST;
+        return c.body.getLargestBreasts().getSize().compareTo(Size.FlatChest) > 0;
     }
 
     @Override

@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -27,12 +28,12 @@ public class Paizuri extends Skill {
         addTag(SkillTag.usesBreasts);
     }
 
-    static int MIN_REQUIRED_BREAST_SIZE = 3;
+    static BreastsPart.Size MIN_REQUIRED_BREAST_SIZE = Size.CCup;
 
     @Override
     public boolean usable(Combat c, Character target) {
         return getSelf().hasBreasts()
-                        && getSelf().body.getLargestBreasts().getSize() >= MIN_REQUIRED_BREAST_SIZE
+                        && getSelf().body.getLargestBreasts().getSize().compareTo(MIN_REQUIRED_BREAST_SIZE) >= 0
                         && target.hasDick() && getSelf().breastsAvailable() && target.crotchAvailable()
                         && c.getStance().paizuri(getSelf(), target)
                         && c.getStance().front(getSelf()) && getSelf().canAct()
@@ -51,15 +52,15 @@ public class Paizuri extends Skill {
         // largest.
         for (int i = 0; i < 3; i++) {
             BreastsPart otherbreasts = getSelf().body.getRandomBreasts();
-            if (otherbreasts.getSize() > MIN_REQUIRED_BREAST_SIZE) {
+            if (otherbreasts.getSize().compareTo(MIN_REQUIRED_BREAST_SIZE) > 0) {
                 breasts = otherbreasts;
                 break;
             }
         }
         
-        int fetishChance = 7 + breasts.getSize() + getSelf().get(Attribute.Fetish) / 2;
+        int fetishChance = 7 + getSelf().get(Attribute.Fetish) / 2;
 
-        int m = 5 + Global.random(5) + breasts.getSize();
+        int m = 5 + breasts.mod(Attribute.Seduction,Global.random(5));
         
         if(getSelf().is(Stsflag.oiled)) {
             m += Global.random(2, 5);
@@ -87,9 +88,9 @@ public class Paizuri extends Skill {
             c.write(getSelf(), deal(c, 0, Result.normal, target));
         }
         target.body.pleasure(getSelf(), getSelf().body.getRandom("breasts"), target.body.getRandom("cock"), m, c, this);
-        //if (Global.random(100) < fetishChance) {
-            target.add(c, new BodyFetish(target, getSelf(), BreastsPart.TYPE, 1.5 + (0.1 * breasts.getSize()) + getSelf().get(Attribute.Fetish) * .1));
-        //}
+        if (Global.random(100) < fetishChance) {
+            target.add(c, new BodyFetish(target, getSelf(), BreastsPart.TYPE, 1.5 + getSelf().get(Attribute.Fetish) * .1));
+        }
         if (getSelf().has(Trait.temptingtits)) {
             target.temptWithSkill(c, getSelf(), getSelf().body.getRandom("breasts"), m/5, this);
         }

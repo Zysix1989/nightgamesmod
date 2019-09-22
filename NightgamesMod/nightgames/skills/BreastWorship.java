@@ -2,6 +2,7 @@ package nightgames.skills;
 
 import java.util.Optional;
 
+import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.combat.Combat;
@@ -45,7 +46,8 @@ public class BreastWorship extends Skill {
             getSelf().body.pleasure(getSelf(), getSelf().body.getRandom("hands"), getSelf().body.getRandomHole(), m, c, this);
         }
         if (results == Result.special) {
-            getSelf().temptWithSkill(c, target, target.body.getRandomBreasts(), (3 + target.body.getRandomBreasts().getSize()) * 2, this);
+            getSelf().temptWithSkill(c, target, target.body.getRandomBreasts(), (target.body.getRandomBreasts().mod(
+                Attribute.Seduction,3)) * 2, this);
             target.buildMojo(c, 10);
         } else {
             target.buildMojo(c, 5);

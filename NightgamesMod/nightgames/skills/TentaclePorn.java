@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.TentaclePart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -132,7 +133,7 @@ public class TentaclePorn extends Skill {
                 actions += String.format("%scaress %s clit", actions.length() > 0 ? ", " : "", 
                                 target.possessiveAdjective());
             
-            if (target.body.getRandomBreasts().getSize() != BreastsPart.FLAT_CHEST)
+            if (target.body.getRandomBreasts().getSize() != Size.FlatChest)
                 actions += String.format("%sknead %s %s" ,actions.length() > 0 ? ", " : "", 
                                 target.possessiveAdjective(),
                                 target.body.getRandomBreasts().describe(target));

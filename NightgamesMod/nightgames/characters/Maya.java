@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.mods.ErrorMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
@@ -74,7 +75,7 @@ public class Maya extends BasePersonality {
         Global.gainSkills(self);
         self.setTrophy(Item.MayaTrophy);
 
-        self.body.add(new BreastsPart(BreastsPart.D_CUP));
+        self.body.add(new BreastsPart(Size.DCup));
         self.initialGender = CharacterSex.female;
         preferredCockModType = ErrorMod.TYPE;
     }

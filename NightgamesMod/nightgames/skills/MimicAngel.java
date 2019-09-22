@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.DivineMod;
@@ -68,7 +69,7 @@ public class MimicAngel extends Skill {
             }
         }
         getSelf().body.temporaryAddOrReplacePartWithType(WingsPart.angelicslime, 10);
-        BreastsPart part = getSelf().body.getBreastsBelow(BreastsPart.H_CUP);
+        BreastsPart part = getSelf().body.getBreastsBelow(Size.HCup);
         if (part != null) {
             getSelf().body.temporaryAddOrReplacePartWithType(part.upgrade().upgrade(), 10);
         }

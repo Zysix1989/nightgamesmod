@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import nightgames.characters.body.BreastsPart;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -75,7 +76,7 @@ public class TraitTree {
             } else if (qName.equals("NoTraitReq")) {
                 reqs.add(c -> !c.has(Trait.valueOf(val.trim())));
             } else if (qName.equals("BreastsReq")) {
-                reqs.add(c -> c.body.getLargestBreasts().getSize() >= Integer.valueOf(val.trim()));
+                reqs.add(c -> c.body.getLargestBreasts().getSize().compareTo(BreastsPart.Size.coerceFromInt(Integer.valueOf(val.trim()))) >= 0);
             } else if (qName.equals("AttributeReq")) {
                 final Attribute attribute = att;
                 reqs.add(c -> c.getPure(attribute) > Integer.valueOf(val.trim()));

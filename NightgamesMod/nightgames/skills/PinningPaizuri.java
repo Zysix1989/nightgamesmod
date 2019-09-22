@@ -2,6 +2,8 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -20,7 +22,7 @@ public class PinningPaizuri extends Skill {
     }
 
     
-    static int MIN_REQUIRED_BREAST_SIZE = 3;
+    static BreastsPart.Size MIN_REQUIRED_BREAST_SIZE = Size.CCup;
     
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
@@ -36,7 +38,7 @@ public class PinningPaizuri extends Skill {
                 && target.crotchAvailable() && getSelf().canAct()
                 && !c.getStance().connected(c)
                 && c.getStance().en != Stance.paizuripin
-                && getSelf().hasBreasts() && getSelf().body.getLargestBreasts().getSize() >= MIN_REQUIRED_BREAST_SIZE
+                && getSelf().hasBreasts() && getSelf().body.getLargestBreasts().getSize().compareTo(MIN_REQUIRED_BREAST_SIZE) >= 0
                 && target.hasDick() && getSelf().breastsAvailable() && target.crotchAvailable();
     }
 

@@ -1,9 +1,12 @@
 package nightgames.characters.body;
 
 import com.google.gson.JsonObject;
+import java.util.HashMap;
+import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.mods.SizeMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -17,22 +20,52 @@ import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.AddictionType;
 
 public class BreastsPart extends GenericBodyPart {
+    public enum Size {
+        FlatChest(0, "", "flat"),
+        ACup(1, "A", "tiny"),
+        BCup(2, "B", "smallish"),
+        CCup(3, "C", "modest"),
+        DCup(4, "D", "round"),
+        DDCup(5, "DD", "large"),
+        ECup(6, "E", "huge"),
+        FCup(7, "F", "glorious"),
+        GCup(8, "G", "massive"),
+        HCup(9, "H", "colossal"),
+        ICup(10, "I", "mammoth"),
+        JCup(11, "J", "godly");
 
-    public static int FLAT_CHEST = 0;
-    public static int A_CUP = 1;
-    public static int B_CUP = 2;
-    public static int C_CUP = 3;
-    public static int D_CUP = 4;
-    public static int DD_CUP = 5;
-    public static int E_CUP = 6;
-    public static int F_CUP = 7;
-    public static int G_CUP = 8;
-    public static int H_CUP = 9;
+        private static HashMap<Integer, Size> map = new HashMap<>();
+
+        static {
+            for (Size s : Size.values()) {
+                map.put(s.value, s);
+            }
+        }
+
+        private static Optional<Size> fromValue(int v) {
+            return Optional.of(map.get(v));
+        }
+
+        @Deprecated
+        public static Size coerceFromInt(int v) {
+            return fromValue(v).orElseThrow();
+        }
+
+        private int value;
+        private String description;
+        private String cupSize;
+
+        Size(int v, String cupSize, String description) {
+            value = v;
+            this.description = description;
+            this.cupSize = cupSize;
+        }
+    }
 
     public static String TYPE = "breasts";
 
     private double bonusSensitivity = 0;
-    private Integer size;
+    private Size size;
 
     public BreastsPart() {
         super("breasts", "", 0.0, 1.0, 1.0, true, TYPE, "");
@@ -40,29 +73,34 @@ public class BreastsPart extends GenericBodyPart {
 
     public BreastsPart(JsonObject js) {
         super(js);
-        size = js.get("size").getAsInt();
+        size = Size.fromValue(js.get("size").getAsInt()).orElseThrow();
     }
 
     public BreastsPart(int size) {
+        this();
+        this.size = Size.fromValue(size).orElseThrow();
+    }
+
+    public BreastsPart(Size size) {
         this();
         this.size = size;
     }
 
     @Override
     public boolean isVisible(Character c) {
-        return c.breastsAvailable() || getSize() > 0;
+        return c.breastsAvailable() || getSize().value > 0;
     }
 
     @Override
     public double getFemininity(Character c) {
-        return 3 * ((double) getSize()) / maximumSize();
+        return 3 * ((double) getSize().value) / maximumSize();
     }
 
     @Override
     public double getHotness(Character self, Character opponent) {
         double hotness = super.getHotness(self, opponent);
         Clothing top = self.getOutfit().getTopOfSlot(ClothingSlot.top);
-        hotness += -.1 + Math.sqrt(getSize()) * .15 * self.getOutfit()
+        hotness += -.1 + Math.sqrt(getSize().value) * .15 * self.getOutfit()
                                                 .getExposure(ClothingSlot.top);
         if (!opponent.hasDick()) {
             hotness /= 2;
@@ -75,26 +113,26 @@ public class BreastsPart extends GenericBodyPart {
 
     @Override
     public double getPleasure(Character self, BodyPart target) {
-        return (.25 + getSize() * .35) * super.getPleasure(self, target);
+        return (.25 + getSize().value * .35) * super.getPleasure(self, target);
     }
 
     @Override
     public double getSensitivity(Character self, BodyPart target) {
-        return (.75 + getSize() * .2 + bonusSensitivity)* super.getSensitivity(self, target);   
+        return (.75 + getSize().value * .2 + bonusSensitivity)* super.getSensitivity(self, target);
    }
 
 
     public static int maximumSize() {
-        return H_CUP;
+        return Size.HCup.value;
     }
 
     @Override
     public int mod(Attribute a, int total) {
         switch (a) {
             case Speed:
-                return -Math.max(getSize() - 3, 0) / 2;
+                return -Math.max(getSize().value - 3, 0) / 2;
             case Seduction:
-                return Math.max(getSize() - 3, 0);
+                return Math.max(getSize().value - 3, 0);
             default:
                 return 0;
         }
@@ -104,7 +142,7 @@ public class BreastsPart extends GenericBodyPart {
 
     @Override
     public void describeLong(StringBuilder b, Character c) {
-        if (c.hasPussy() || getSize() > BreastsPart.FLAT_CHEST) {
+        if (c.hasPussy() || getSize().value > Size.FlatChest.value) {
             b.append(Global.capitalizeFirstLetter(fullDescribe(c)));
             b.append(" adorn " + c.nameOrPossessivePronoun() + " chest.");
         }
@@ -117,7 +155,7 @@ public class BreastsPart extends GenericBodyPart {
     @Override
     public double applyBonuses(Character self, Character opponent, BodyPart target, double damage, Combat c) {
         double bonus = super.applyBonuses(self, opponent, target, damage, c);
-        bonus += Math.max(5, getSize()) + Global.random(Math.min(0, getSize() - 4));
+        bonus += Math.max(5, getSize().value) + Global.random(Math.min(0, getSize().value - 4));
         return bonus;
     }
 
@@ -237,14 +275,14 @@ public class BreastsPart extends GenericBodyPart {
     }
 
     public BodyPart upgrade() {
-        return new BreastsPart(SizeMod.clampToValidSize(this, getSize() + 1));
+        return new BreastsPart(SizeMod.clampToValidSize(this, getSize().value + 1));
     }
 
     public BodyPart downgrade() {
-        return new BreastsPart(SizeMod.clampToValidSize(this, getSize() - 1));
+        return new BreastsPart(SizeMod.clampToValidSize(this, getSize().value - 1));
     }
 
-    public int getSize() {
+    public Size getSize() {
         return size;
     }
 }

@@ -3,6 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -80,7 +81,7 @@ public class WingWrap extends Skill {
             case cowgirl:
                 desc = "{self:SUBJECT-ACTION:lean|leans} down over {other:name-do}, "
                                 + "{self:possessive} {self:body-part:breasts}"
-                                + (getSelf().body.getLargestBreasts().getSize() > BreastsPart.C_CUP
+                                + (getSelf().body.getLargestBreasts().getSize().compareTo(Size.CCup) > 0
                                                 ? "rubbing delightfully into {other:possessive}"
                                                                 + " {other:body-part:breasts}."
                                                 : "hanging enticingly above {other:direct-object}")

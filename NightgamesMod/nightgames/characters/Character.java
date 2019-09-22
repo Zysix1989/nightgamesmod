@@ -36,6 +36,7 @@ import nightgames.areas.Area;
 import nightgames.areas.NinjaStash;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.ToysPart;
@@ -3831,7 +3832,7 @@ public abstract class Character extends Observable implements Cloneable {
     public boolean useFemalePronouns() {
         return hasPussy() 
                         || !hasDick() 
-                        || (body.getLargestBreasts().getSize() > SizeMod.getMinimumSize("breasts") && body.getFace().getFemininity(this) > 0) 
+                        || (body.getLargestBreasts().getSize().compareTo(Size.FlatChest) > 0 && body.getFace().getFemininity(this) > 0)
                         || (body.getFace().getFemininity(this) >= 1.5) 
                         || (human() && Global.checkFlag(Flag.PCFemalePronounsOnly))
                         || (!human() && Global.checkFlag(Flag.NPCFemalePronounsOnly));

@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -30,7 +31,7 @@ public class SuccubusNurse extends Skill {
     @Override
     public boolean usable(Combat c, Character target) {
         return getSelf().canAct()
-            && getSelf().body.getLargestBreasts().getSize() != BreastsPart.FLAT_CHEST
+            && getSelf().body.getLargestBreasts().getSize() != Size.FlatChest
             && c.getStance().en == Stance.succubusembrace;
     }
 

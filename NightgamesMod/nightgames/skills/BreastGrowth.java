@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -60,7 +61,7 @@ public class BreastGrowth extends Skill {
         writeOutput(c, permanent ? 1 : 0, res, target);
         if (res != Result.miss) {
             target.add(c, new Hypersensitive(target, 10));
-            BreastsPart part = target.body.getBreastsBelow(BreastsPart.F_CUP);
+            BreastsPart part = target.body.getBreastsBelow(Size.FCup);
             if (permanent) {
                 if (part != null) {
                     target.body.addReplace(part.upgrade().upgrade().upgrade().upgrade().upgrade(), 1);

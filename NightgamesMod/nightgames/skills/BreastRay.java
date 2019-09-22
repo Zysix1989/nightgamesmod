@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -42,7 +43,7 @@ public class BreastRay extends Skill {
         boolean permanent = true;
         writeOutput(c, permanent ? 1 : 0, Result.normal, target);
         target.add(c, new Hypersensitive(target, 10));
-        BreastsPart part = target.body.getBreastsBelow(BreastsPart.F_CUP);
+        BreastsPart part = target.body.getBreastsBelow(Size.FCup);
         if (permanent) {
             if (part != null) {
                 target.body.addReplace(part.upgrade().upgrade().upgrade().upgrade().upgrade(), 1);
@@ -80,7 +81,7 @@ public class BreastRay extends Skill {
     @Override
     public String receive(Combat c, int damage, Result modifier, Character target) {
         String message;
-        boolean plural = target.body.getRandomBreasts().getSize() > 0 || target.get(Attribute.Power) > 25;
+        boolean plural = target.body.getRandomBreasts().getSize().compareTo(Size.FlatChest) > 0 || target.get(Attribute.Power) > 25;
         message = String.format("%s a device at %s chest and giggles as %s %s"
                         + " %s ballooning up. %s %s and %s to cover %s, but the increased sensitivity "
                         + "distracts %s in a delicious way.",

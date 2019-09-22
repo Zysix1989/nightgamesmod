@@ -5,6 +5,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -32,7 +33,7 @@ public class Nurse extends Skill {
     @Override
     public boolean usable(Combat c, Character target) {
         return getSelf().breastsAvailable() && c.getStance().reachTop(getSelf()) && c.getStance().front(getSelf())
-                        && getSelf().body.getLargestBreasts().getSize() >= BreastsPart.C_CUP
+                        && getSelf().body.getLargestBreasts().getSize().compareTo(Size.CCup) >= 0
                         && c.getStance().mobile(getSelf())
                         && (!c.getStance().mobile(target) || c.getStance().prone(target)) && getSelf().canAct();
     }

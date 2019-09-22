@@ -6,6 +6,7 @@ import java.util.Optional;
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
@@ -56,7 +57,7 @@ public class Mei extends BasePersonality {
         character.getMojo().setMax(110);
 
         character.setTrophy(Item.ExtremeAphrodisiac);
-        character.body.add(new BreastsPart(BreastsPart.B_CUP));
+        character.body.add(new BreastsPart(Size.BCup));
         character.initialGender = CharacterSex.female;
     }
 

@@ -41,16 +41,16 @@ public class TemptressTitfuck extends Paizuri {
         BreastsPart breasts = getSelf().body.getLargestBreasts();
         for (int i = 0; i < 3; i++) {
             BreastsPart otherbreasts = getSelf().body.getRandomBreasts();
-            if (otherbreasts.getSize() > MIN_REQUIRED_BREAST_SIZE) {
+            if (otherbreasts.getSize().compareTo(MIN_REQUIRED_BREAST_SIZE) > 0) {
                 breasts = otherbreasts;
                 break;
             }
         }
         
 
-        int fetishChance = 7 + breasts.getSize() + getSelf().get(Attribute.Fetish) / 2;
+        int fetishChance = 7 + getSelf().get(Attribute.Fetish) / 2;
 
-        int m = 7 + Global.random(getSelf().get(Attribute.Technique) / 2) + breasts.getSize();
+        int m = 7 + Global.random(getSelf().get(Attribute.Technique) / 2);
         
         if(getSelf().is(Stsflag.oiled)) {
             m += Global.random(2, 5);
@@ -72,7 +72,7 @@ public class TemptressTitfuck extends Paizuri {
                     
                     target.body.pleasure(getSelf(), getSelf().body.getRandom("breasts"), target.body.getRandom("cock"), m, c, this);
                     if (Global.random(100) < fetishChance) {
-                        target.add(c, new BodyFetish(target, getSelf(), BreastsPart.TYPE, .05 + (0.01 * breasts.getSize()) + getSelf().get(Attribute.Fetish) * .01));
+                        target.add(c, new BodyFetish(target, getSelf(), BreastsPart.TYPE, .05 + getSelf().get(Attribute.Fetish) * .01));
                     }
                 } else {
                     // Was flaccid, still is
@@ -90,7 +90,7 @@ public class TemptressTitfuck extends Paizuri {
                 getSelf().add(c, new FiredUp(getSelf(), target, "breasts"));
                 
                 if (Global.random(100) < fetishChance) {
-                    target.add(c, new BodyFetish(target, getSelf(), BreastsPart.TYPE, .05 + (0.01 * breasts.getSize()) + getSelf().get(Attribute.Fetish) * .01));
+                    target.add(c, new BodyFetish(target, getSelf(), BreastsPart.TYPE, .05 +  getSelf().get(Attribute.Fetish) * .01));
                 }
             }
         } else {

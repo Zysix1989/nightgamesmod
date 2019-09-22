@@ -5,6 +5,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Reyka;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.EarPart;
 import nightgames.characters.body.TailPart;
@@ -68,7 +69,7 @@ public class MimicSuccubus extends Skill {
         getSelf().body.temporaryAddOrReplacePartWithType(WingsPart.demonicslime, 999);
         getSelf().body.temporaryAddOrReplacePartWithType(TailPart.demonicslime, 999);
         getSelf().body.temporaryAddOrReplacePartWithType(EarPart.pointed, 999);
-        BreastsPart part = getSelf().body.getBreastsBelow(BreastsPart.H_CUP);
+        BreastsPart part = getSelf().body.getBreastsBelow(Size.HCup);
         if (part != null) {
             getSelf().body.temporaryAddOrReplacePartWithType(part.upgrade().upgrade().upgrade().upgrade(), 999);
         }

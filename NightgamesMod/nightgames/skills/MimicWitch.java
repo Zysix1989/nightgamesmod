@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.mods.ArcaneMod;
 import nightgames.combat.Combat;
@@ -71,7 +72,7 @@ public class MimicWitch extends Skill {
         getSelf().addTemporaryTrait(Trait.lactating, 10);
         getSelf().addTemporaryTrait(Trait.beguilingbreasts, 10);
         getSelf().addTemporaryTrait(Trait.sedativecream, 10);
-        BreastsPart part = getSelf().body.getBreastsBelow(BreastsPart.H_CUP);
+        BreastsPart part = getSelf().body.getBreastsBelow(Size.HCup);
         if (part != null) {
             getSelf().body.temporaryAddOrReplacePartWithType(part.upgrade(), 10);
         }

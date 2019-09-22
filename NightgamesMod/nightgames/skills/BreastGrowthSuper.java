@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -52,7 +53,7 @@ public class BreastGrowthSuper extends Skill {
         System.out.println("starting to resolve SuperBreastGrowth");
         Result res;
         if (target.roll(getSelf(), c, accuracy(c,target))) {
-            if (target.body.getRandomBreasts().getSize() == BreastsPart.FLAT_CHEST) {
+            if (target.body.getRandomBreasts().getSize() == Size.FlatChest) {
                 res = Result.special;
             } else {
                 res = Result.normal;
