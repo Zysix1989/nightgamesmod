@@ -48,7 +48,7 @@ public class TestAngel extends BasePersonality {
         baseChar.trophy = Item.AngelTrophy;
 
         baseChar.body = new Body(baseChar, 1);
-        baseChar.body.add(new BreastsPart(BreastsPart.DD_CUP));
+        baseChar.body.add(new BreastsPart(BreastsPart.Size.DDCup));
         baseChar.body.add(new FacePart(.1, 4.2));
         baseChar.body.add(PussyPart.generic);
         baseChar.body.add(new MouthPart());
@@ -94,7 +94,7 @@ public class TestAngel extends BasePersonality {
         self.add(Trait.undisciplined);
         self.add(Trait.lickable);
         self.setTrophy(Item.AngelTrophy);
-        self.body.add(new BreastsPart(BreastsPart.DD_CUP));
+        self.body.add(new BreastsPart(BreastsPart.Size.DDCup));
         // very feminine face
         self.body.add(new FacePart(.1, 4.2));
         self.body.add(PussyPart.generic);
