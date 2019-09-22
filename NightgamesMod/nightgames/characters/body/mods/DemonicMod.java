@@ -19,6 +19,7 @@ import org.jtwig.JtwigTemplate;
 public class DemonicMod extends PartMod {
     public static final String TYPE = "demonic";
     public static final DemonicMod INSTANCE = new DemonicMod();
+
     public DemonicMod() {
         super(TYPE, .1, .5, .2, 5);
     }
@@ -44,58 +45,21 @@ public class DemonicMod extends PartMod {
             .with("target", target);
         ArrayList<JtwigTemplate> templates = new ArrayList<>();
         if (opponent.has(Trait.succubus)) {
-            JtwigTemplate template = JtwigTemplate.inlineTemplate(
-                "{{ self.nameOrPossessivePronoun() }} {{ part.describe(self) }} does " 
-                    + "nothing special against one of {{ self.possessiveAdjective() }} own kind."
-            );
-            c.write(template.render(model));
+            c.write(BONUS_AGAINST_SUCCUBUS_TEMPLATE.render(model));
             return 0;
         }
         if (target.moddedPartCountsAs(RunicCockMod.TYPE)) {
-            templates.add(JtwigTemplate.inlineTemplate(
-                "Putting in great effort, {{ self.nameOrPossessivePronoun() }} "
-                    + "{{ self.action('try', 'tries') }} to draw upon "
-                    + "{{ opponent.nameOrPossessivePronoun() }} power, but the fae enchantments "
-                    + "in {{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }} "
-                    + "keep it locked away."));
+            templates.add(BONUS_AGAINST_RUNIC_TEMPLATE);
         } else {
             boolean bottomless = self.has(Trait.BottomlessPit);
             model.with("fucking", c.getStance()
                 .isPartFuckingPartInserted(c, opponent, target, self, part));
             model.with("dom", c.getStance().dom(self));
-            templates.add(JtwigTemplate.inlineTemplate(
-                "{% if (fucking) %}"
-                    + "{{ self.possessiveAdjective() }} hot flesh kneads "
-                    + "{{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }} as "
-                    + "{% if part.isType('mouth') %}"
-                    + "{{ ((dom) ? self : opponent).pronoun() }} "
-                    + "{{ ((dom) ? self : opponent).action('suck') }} "
-                    + "{{ ((dom) ? opponent : self).pronoun() }} "
-                    + "{% else %}"
-                    + "{{ self.pronoun() }} "
-                    + "{{ self.action((dom) ? 'fuck' : 'ride') }} "
-                    + "{{ opponent.possessivePronoun() }} "
-                    + "{% endif %}"
-                    + ", drawing "
-                    + "{% else %}"
-                    + "As {{ self.possessiveAdjective() }} "
-                    + "touches {{ opponent.possessivePronoun() }} {{ target.describe(opponent) }} "
-                    + ", {{ self.pronoun() }} {{ self.action('draw') }} large "
-                    + "{% endif %}"
-                    + "gouts of life energy out of "
-                    + "{{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }}, "
-                    + "which is {{ (bottomless) ? 'greedily ' : '' -}} absorbed by "
-                    + "{{ self.possessiveAdjective() }} "
-                    + "{{ bottomless ? 'seemingly bottomless ' : ''\"\"'' }}"
-                    + "{{ part.describe(self) }}."));
+            model.with("bottomless", bottomless);
+            templates.add(BONUS_TEMPLATE);
             int strength;
             if (target.moddedPartCountsAs(EnlightenedCockMod.TYPE)) {
-                templates.add(JtwigTemplate.inlineTemplate(
-                    "Since {{ opponent.subject() }} had focused so much of "
-                        + "{{ opponent.reflectivePronoun() }} in "
-                        + "{{ opponent.possessiveAdjective() }} "
-                        + "{{ target.describe(opponent) }}, there is much more for "
-                        + "{{ self.subject() }} to take."));
+                templates.add(BONUS_AGAINST_ENLIGHTENED_TEMPLATE);
                 strength = Global.random(20, 31);
             } else {
                 strength = Global.random(10, 21);
@@ -108,11 +72,7 @@ public class DemonicMod extends PartMod {
             if (self.isPet()) {
                 Character master = ((PetCharacter) self).getSelf().owner();
                 model.with("master", master);
-                templates.add(JtwigTemplate.inlineTemplate(
-                    "The stolen strength seems to be shared with "
-                        + "{{ self.possessiveAdjective() }} "
-                        + "{{ (master.useFemalePronouns()) ? 'mistress' : 'master' }} through "
-                        + "{{ self.possessiveAdjective() }} infernal connection."));
+                templates.add(BONUS_PET_TEMPLATE);
                 master.heal(c, strength);
             }
             for (int i = 0; i < 10; i++) {
@@ -151,4 +111,55 @@ public class DemonicMod extends PartMod {
     public String describeAdjective(String partType) {
         return "demonic nature";
     }
+
+    private static final JtwigTemplate BONUS_AGAINST_SUCCUBUS_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "{{ self.nameOrPossessivePronoun() }} {{ part.describe(self) }} does "
+            + "nothing special against one of {{ self.possessiveAdjective() }} own kind."
+    );
+
+    private static final JtwigTemplate BONUS_AGAINST_RUNIC_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "Putting in great effort, {{ self.nameOrPossessivePronoun() }} "
+            + "{{ self.action('try', 'tries') }} to draw upon "
+            + "{{ opponent.nameOrPossessivePronoun() }} power, but the fae enchantments "
+            + "in {{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }} "
+            + "keep it locked away.");
+
+    private static final JtwigTemplate BONUS_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "{% if (fucking) %}"
+            + "{{ self.possessiveAdjective() }} hot flesh kneads "
+            + "{{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }} as "
+            + "{% if part.isType('mouth') %}"
+            + "{{ ((dom) ? self : opponent).pronoun() }} "
+            + "{{ ((dom) ? self : opponent).action('suck') }} "
+            + "{{ ((dom) ? opponent : self).pronoun() }} "
+            + "{% else %}"
+            + "{{ self.pronoun() }} "
+            + "{{ self.action((dom) ? 'fuck' : 'ride') }} "
+            + "{{ opponent.possessivePronoun() }} "
+            + "{% endif %}"
+            + ", drawing "
+            + "{% else %}"
+            + "As {{ self.possessiveAdjective() }} "
+            + "touches {{ opponent.possessivePronoun() }} {{ target.describe(opponent) }} "
+            + ", {{ self.pronoun() }} {{ self.action('draw') }} large "
+            + "{% endif %}"
+            + "gouts of life energy out of "
+            + "{{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }}, "
+            + "which is {{ (bottomless) ? 'greedily ' : '' -}} absorbed by "
+            + "{{ self.possessiveAdjective() }} "
+            + "{{ bottomless ? 'seemingly bottomless ' : ''\"\"'' }}"
+            + "{{ part.describe(self) }}.");
+
+    private static final JtwigTemplate BONUS_AGAINST_ENLIGHTENED_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "Since {{ opponent.subject() }} had focused so much of "
+            + "{{ opponent.reflectivePronoun() }} in "
+            + "{{ opponent.possessiveAdjective() }} "
+            + "{{ target.describe(opponent) }}, there is much more for "
+            + "{{ self.subject() }} to take.");
+
+    private static final JtwigTemplate BONUS_PET_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "The stolen strength seems to be shared with "
+            + "{{ self.possessiveAdjective() }} "
+            + "{{ (master.useFemalePronouns()) ? 'mistress' : 'master' }} through "
+            + "{{ self.possessiveAdjective() }} infernal connection.");
 }
