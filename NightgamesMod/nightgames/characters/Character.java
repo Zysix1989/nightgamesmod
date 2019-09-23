@@ -820,9 +820,7 @@ public abstract class Character extends Observable implements Cloneable {
      * 
      * @param drainer
      * the character that is performing the drain on this character.
-     * 
-     * @param i
-     * The base value to drain this character's drain.
+     *
      * */
     public void superdrain(Combat c, Character drainer, Attribute att, int value, int duration, boolean write) {
         
