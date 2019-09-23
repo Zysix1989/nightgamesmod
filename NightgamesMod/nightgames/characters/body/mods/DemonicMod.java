@@ -152,7 +152,7 @@ public class DemonicMod extends PartMod {
 
     private static final JtwigTemplate BONUS_AGAINST_ENLIGHTENED_TEMPLATE = JtwigTemplate.inlineTemplate(
         "Since {{ opponent.subject() }} had focused so much of "
-            + "{{ opponent.reflectivePronoun() }} in "
+            + "{{ opponent.reflexivePronoun() }} in "
             + "{{ opponent.possessiveAdjective() }} "
             + "{{ target.describe(opponent) }}, there is much more for "
             + "{{ self.subject() }} to take.");
