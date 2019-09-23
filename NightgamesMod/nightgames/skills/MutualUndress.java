@@ -78,9 +78,9 @@ public class MutualUndress extends Skill {
                         + "%s asks %s if %s %s to join %s in feeling good, and before %s it "
                         + "%s has got %s naked as well.", getSelf().subject(), getSelf().possessiveAdjective(),
                         target.subject(), getSelf().subject(), getSelf().possessiveAdjective(),
-                        Global.capitalizeFirstLetter(getSelf().pronoun()), target.directObject(),
-                        target.pronoun(), target.action("want"), getSelf().directObject(),
+                        Global.capitalizeFirstLetter(getSelf().pronoun()), target.objectPronoun(),
+                        target.pronoun(), target.action("want"), getSelf().objectPronoun(),
                         target.subjectAction("realize"), getSelf().subject(),
-                        target.directObject());
+                        target.objectPronoun());
     }
 }

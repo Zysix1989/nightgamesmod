@@ -115,7 +115,7 @@ public class UseCrop extends Skill {
             if (!target.has(Item.Crop)) {
                 return String.format("%s out of the way, as %s swings %s riding crop at %s.",
                                 target.subjectAction("duck"), getSelf().subject(),
-                                getSelf().possessiveAdjective(), target.directObject());
+                                getSelf().possessiveAdjective(), target.objectPronoun());
             } else {
                 return String.format("%s swings %s riding crop, but %s %s own crop and %s it.",
                                 getSelf().subject(), getSelf().possessiveAdjective(),

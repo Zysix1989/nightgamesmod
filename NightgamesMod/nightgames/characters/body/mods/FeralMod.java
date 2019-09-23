@@ -53,7 +53,7 @@ public class FeralMod extends PartMod {
             ArrayList<JtwigTemplate> templates = new ArrayList<>();
             templates.add(JtwigTemplate.inlineTemplate(
                 "Musk emanating from {{ self.possessiveAdjective() }} {{ part.describe(self) }} "
-                    + "leaves {{ opponent.directObject() }} reeling."
+                    + "leaves {{ opponent.objectPronoun() }} reeling."
             ));
             double base = 3;
             if (target.moddedPartCountsAs(RunicCockMod.TYPE)) {

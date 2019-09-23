@@ -66,7 +66,7 @@ public class Unstrip extends Skill {
                                         + "In the second %s looked away, how did %s "
                                         + "find the time to put %s clothes on?!",
                         target.subjectAction("lose"), getSelf().getName(), target.action("do", "does"),
-                        target.pronoun(), target.action("see"), getSelf().directObject(),
+                        target.pronoun(), target.action("see"), getSelf().objectPronoun(),
                         target.pronoun(), getSelf().pronoun(), getSelf().possessiveAdjective());
     }
 

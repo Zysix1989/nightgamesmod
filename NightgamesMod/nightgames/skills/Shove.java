@@ -138,7 +138,7 @@ public class Shove extends Skill {
                         target.nameDirectObject(), getSelf().possessiveAdjective(),
                         target.possessiveAdjective(), target.nameOrPossessivePronoun(),
                         target.getOutfit().getTopOfSlot(ClothingSlot.top).getName(),
-                        target.directObject());
+                        target.objectPronoun());
     }
 
     @Override

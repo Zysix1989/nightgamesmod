@@ -92,15 +92,15 @@ public class Beg extends Skill {
         if (modifier == Result.miss) {
             return String.format("%s gives %s a pleading look and asks %s to go light on %s."+
                             "%s is cute, but %s is not getting away that easily.", getSelf().getName(), target.subject(),
-                            target.directObject(), getSelf().directObject(), Global.capitalizeFirstLetter(getSelf().pronoun()),
+                            target.objectPronoun(), getSelf().objectPronoun(), Global.capitalizeFirstLetter(getSelf().pronoun()),
                             getSelf().pronoun());
         }
         if (modifier == Result.special) {
             return getSelf().getName() + " begs you for a taste of your addictive fluids, looking almost ready to cry. Maybe you should give "
-                            + getSelf().directObject() + " a break...?";
+                            + getSelf().objectPronoun() + " a break...?";
         }
         return getSelf().getName() + " begs you for mercy, looking ready to cry. Maybe you should give "
-                        + getSelf().directObject() + " a break.";
+                        + getSelf().objectPronoun() + " a break.";
 
     }
 

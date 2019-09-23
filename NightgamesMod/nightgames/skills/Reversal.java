@@ -93,7 +93,7 @@ public class Reversal extends Skill {
             return "You try to get on top of " + target.getName()
                             + ", but "+ target.pronoun()+ "'s apparently more ready for it than you realized.";
         } else {
-            return "You take advantage of " + target.getName() + "'s distraction and put " + target.directObject() + " in a pin.";
+            return "You take advantage of " + target.getName() + "'s distraction and put " + target.objectPronoun() + " in a pin.";
         }
     }
 
@@ -103,7 +103,7 @@ public class Reversal extends Skill {
             return String.format("%s tries to reverse %s hold, but %s %s %s.",
                             getSelf().subject(), target.nameOrPossessivePronoun(),
                             target.pronoun(), target.action("stop"),
-                            getSelf().directObject());
+                            getSelf().objectPronoun());
         } else {
             return String.format("%s rolls %s over and ends up on top.",
                             getSelf().subject(), target.nameDirectObject());

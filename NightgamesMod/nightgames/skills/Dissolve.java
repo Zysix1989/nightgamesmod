@@ -108,7 +108,7 @@ public class Dissolve extends Skill {
                             Global.capitalizeFirstLetter(attacker.nameOrPossessivePronoun()));
         } else if (modifier == Result.miss) {
             return String.format("%s splashes a bottle of liquid in %s direction, but none of it hits %s.",
-                            getSelf().subject(), attacker.nameOrPossessivePronoun(), attacker.directObject());
+                            getSelf().subject(), attacker.nameOrPossessivePronoun(), attacker.objectPronoun());
         } else {
             return String.format("%s covers you with a clear liquid. %s clothes dissolve away, but it doesn't do anything to %s skin.",
                             getSelf().subject(), Global.capitalizeFirstLetter(attacker.subject()), attacker.possessiveAdjective());

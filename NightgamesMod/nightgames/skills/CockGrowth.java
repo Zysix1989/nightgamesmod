@@ -122,7 +122,7 @@ public class CockGrowth extends Skill {
                                 target.possessiveAdjective(),
                                 Global.capitalizeFirstLetter(target.pronoun()), target.pronoun(), target.action("are", "is"), 
                                 target.body.getRandomCock().describe(target),
-                                target.possessiveAdjective(), target.directObject());
+                                target.possessiveAdjective(), target.objectPronoun());
             } else {
                 message = String.format("%s moving and begins chanting. %s feel %s cock grow hot, and start expanding! "
                                 + "%s try to hold it back with your hands, but the growth continues until it's much larger than before. "
@@ -130,7 +130,7 @@ public class CockGrowth extends Skill {
                                 getSelf().subjectAction("stop"), Global.capitalizeFirstLetter(target.subjectAction("start")),
                                 target.possessiveAdjective(),
                                 Global.capitalizeFirstLetter(target.pronoun()),
-                                target.possessiveAdjective(), target.directObject());
+                                target.possessiveAdjective(), target.objectPronoun());
             }
             if (damage > 0) {
                 message += " You realize the effects are permanent!";

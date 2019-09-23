@@ -94,10 +94,10 @@ public class SuccubusSurprise extends Skill {
                         target.getName(), target.pronoun(), target.pronoun());
         if (isArmLock(c.getStance())) {
             result += String.format("grab %s hands and pull %s deeper into you. ", target.possessiveAdjective(),
-                            target.directObject());
+                            target.objectPronoun());
         } else {
-            result += String.format("wrap your legs around %s, trapping %s within.", target.directObject(),
-                            target.directObject());
+            result += String.format("wrap your legs around %s, trapping %s within.", target.objectPronoun(),
+                            target.objectPronoun());
         }
         if (modifier == Result.weak) {
             result += String.format(
@@ -107,7 +107,7 @@ public class SuccubusSurprise extends Skill {
         } else {
             result += String.format("Realizing what is going on, %s frantically tries to pull out, "
                             + "but your hold is unrelenting. You grind against %s, and soon the "
-                            + "energy starts flowing.", target.getName(), target.directObject());
+                            + "energy starts flowing.", target.getName(), target.objectPronoun());
         }
         return result;
     }
@@ -122,22 +122,22 @@ public class SuccubusSurprise extends Skill {
                         + " %s to pull out, but ", target.nameOrPossessivePronoun(),
                         getSelf().getName(), getSelf().subject(), getSelf().possessiveAdjective(),
                         target.subjectAction("follow"), getSelf().possessiveAdjective(), 
-                        target.possessiveAdjective(), getSelf().getName(), getSelf().directObject(),
+                        target.possessiveAdjective(), getSelf().getName(), getSelf().objectPronoun(),
                         getSelf().pronoun(), Global.capitalizeFirstLetter(getSelf().possessiveAdjective()),
                         getSelf().possessiveAdjective(), 
                         Global.capitalizeFirstLetter(target.subjectAction("try", "tries")));
         if (isArmLock(c.getStance())) {
             result += String.format("%s grabs %s hands tightly to %s body, holding %s in place. ",
                             getSelf().subject(), target.possessiveAdjective(), 
-                            getSelf().possessiveAdjective(), target.directObject());
+                            getSelf().possessiveAdjective(), target.objectPronoun());
         } else {
             result += String.format("%s wraps %s lithe legs around %s waist, keeping %s inside.",
                             getSelf().subject(), getSelf().possessiveAdjective(),
-                            target.possessiveAdjective(), target.directObject());
+                            target.possessiveAdjective(), target.objectPronoun());
         }
         if (modifier == Result.weak) {
             result += String.format(" Luckily%s, the blessings on %s cock prevent any serious damage.",
-                            target.human() ? "" : " for " + target.directObject(), 
+                            target.human() ? "" : " for " + target.objectPronoun(),
                                             target.nameOrPossessivePronoun());
         } else {
             result += String.format(" %s fears are confirmed as %s %s a terrible suction starting "

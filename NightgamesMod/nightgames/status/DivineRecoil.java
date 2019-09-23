@@ -26,7 +26,7 @@ public class DivineRecoil extends DurationStatus {
         if (!replacement.isPresent()) {
             return String.format(
                             "Some leftover divine energy is rampaging through %s body, leaving %s incredibly sensitive.\n",
-                            affected.nameOrPossessivePronoun(), affected.directObject());
+                            affected.nameOrPossessivePronoun(), affected.objectPronoun());
         }
         return "";
     }
@@ -34,7 +34,7 @@ public class DivineRecoil extends DurationStatus {
     @Override
     public String describe(Combat c) {
         return String.format("Divine energy rampages through %s body, leaving %s incredibly sensitive.\n",
-                        affected.nameOrPossessivePronoun(), affected.directObject());
+                        affected.nameOrPossessivePronoun(), affected.objectPronoun());
 
     }
 

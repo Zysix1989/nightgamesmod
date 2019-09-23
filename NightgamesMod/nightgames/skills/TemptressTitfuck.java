@@ -132,7 +132,7 @@ public class TemptressTitfuck extends Paizuri {
                                         "%s strokes %s %s with her %s in slow circular motions while"
                                                         + " lightly licking the tip, causing %s to groan in pleasure.",
                                         getSelf().getName(), target.nameOrPossessivePronoun(),
-                                        target.body.getRandomCock().describe(target), getSelf().body.getLargestBreasts().fullDescribe(getSelf()), target.directObject());
+                                        target.body.getRandomCock().describe(target), getSelf().body.getLargestBreasts().fullDescribe(getSelf()), target.objectPronoun());
                     case 1:
                         return String.format("%s tongue loops around the head of %s hard %s "
                                         + "and %s the shaft with her %s, constantly increasing in intensity.",

@@ -160,17 +160,17 @@ public class FaceSit extends Skill {
                 return String.format("%s straddles %s head and dominates %s by putting %s balls in %s mouth. "
                                 + "For some reason, %s mind seems to cloud over and %s %s "
                                 + "desperate to please %s. %s gives a superior smile as %s obediently %s on %s nuts.",
-                                getSelf().subject(), target.nameOrPossessivePronoun(), target.directObject(),
+                                getSelf().subject(), target.nameOrPossessivePronoun(), target.objectPronoun(),
                                 getSelf().possessiveAdjective(), target.possessiveAdjective(),
                                 target.nameOrPossessivePronoun(), target.pronoun(),
-                                target.action("are", "is"), getSelf().directObject(),
+                                target.action("are", "is"), getSelf().objectPronoun(),
                                 Global.capitalizeFirstLetter(getSelf().subject()),
                                 target.subject(), target.action("suck"), getSelf().possessiveAdjective());
             } else if (modifier == Result.strong) {
                 return String.format("%s straddles %s head and dominates %s by putting %s balls in %s mouth. "
                                 + "Despite the humiliation, %s scent is turning %s on incredibly. "
                                 + "%s gives a superior smile as %s obediently %s on %s nuts.",
-                                getSelf().subject(), target.nameOrPossessivePronoun(), target.directObject(),
+                                getSelf().subject(), target.nameOrPossessivePronoun(), target.objectPronoun(),
                                 getSelf().possessiveAdjective(), target.possessiveAdjective(),
                                 getSelf().nameOrPossessivePronoun(), target.subject(),
                                 Global.capitalizeFirstLetter(getSelf().subject()),
@@ -178,7 +178,7 @@ public class FaceSit extends Skill {
             } else {
                 return String.format("%s straddles %s head and dominates %s by putting %s balls in %s mouth. "
                                 + "%s gives a superior smile as %s obediently %s on %s nuts.",
-                                getSelf().subject(), target.nameOrPossessivePronoun(), target.directObject(),
+                                getSelf().subject(), target.nameOrPossessivePronoun(), target.objectPronoun(),
                                 getSelf().possessiveAdjective(),
                                 target.possessiveAdjective(),
                                 Global.capitalizeFirstLetter(getSelf().subject()), 
@@ -193,7 +193,7 @@ public class FaceSit extends Skill {
                                 getSelf().subject(), target.nameOrPossessivePronoun(), getSelf().possessiveAdjective(),
                                 target.possessiveAdjective(), target.subjectAction("open"), target.possessiveAdjective(),
                                 target.action("start"), getSelf().possessiveAdjective(), getSelf().pronoun(),
-                                target.directObject(), target.pronoun(),
+                                target.objectPronoun(), target.pronoun(),
                                 target.action("drink"), getSelf().possessiveAdjective(),
                                 target.subjectAction("feel"), getSelf().nameOrPossessivePronoun(), 
                                 target.possessiveAdjective(),
@@ -208,9 +208,9 @@ public class FaceSit extends Skill {
                                 + "the source!", getSelf().subject(), target.nameOrPossessivePronoun(),
                                 getSelf().possessiveAdjective(), target.possessiveAdjective(), target.subjectAction("open"),
                                 target.possessiveAdjective(), getSelf().nameDirectObject(), getSelf().pronoun(),
-                                 target.directObject(), Global.capitalizeFirstLetter(target.subjectAction("feel")),
+                                 target.objectPronoun(), Global.capitalizeFirstLetter(target.subjectAction("feel")),
                                  target.possessiveAdjective(), getSelf().nameOrPossessivePronoun(), target.possessiveAdjective(),
-                                 getSelf().pronoun(), getSelf().action("are", "is"), target.directObject());
+                                 getSelf().pronoun(), getSelf().action("are", "is"), target.objectPronoun());
             } else {
                 return String.format("%s straddles %s face and presses %s pussy against %s mouth. %s "
                                 + "%s mouth and start to lick %s freely offered muff, but %s just smiles "
@@ -218,7 +218,7 @@ public class FaceSit extends Skill {
                                 + " to demonstrate %s superiority.",getSelf().subject(), target.nameOrPossessivePronoun(),
                                 getSelf().possessiveAdjective(), target.possessiveAdjective(), target.subjectAction("open"),
                                 target.possessiveAdjective(), getSelf().nameDirectObject(), getSelf().pronoun(),
-                                 target.directObject(), Global.capitalizeFirstLetter(getSelf().pronoun()), getSelf().possessiveAdjective());
+                                 target.objectPronoun(), Global.capitalizeFirstLetter(getSelf().pronoun()), getSelf().possessiveAdjective());
             }
         }
     }

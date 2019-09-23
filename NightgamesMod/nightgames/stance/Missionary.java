@@ -21,7 +21,7 @@ public class Missionary extends MaledomSexStance {
         } else {
             return String.format("%s between %s legs, fucking %s in the traditional Missionary position.",
                             top.subjectAction("are", "is"), bottom.nameOrPossessivePronoun(),
-                            bottom.directObject());
+                            bottom.objectPronoun());
         }
     }
 

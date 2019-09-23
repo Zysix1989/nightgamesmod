@@ -73,7 +73,7 @@ public class IncubusCockMod extends CockMod {
                     String message = String.format(
                         "The moment %s erupts inside %s, %s mind goes completely blank, leaving %s pliant and ready.",
                         self.subject(), opponent.subject(), opponent.possessiveAdjective(),
-                        opponent.directObject());
+                        opponent.objectPronoun());
                     if (target.moddedPartCountsAs(FeralMod.TYPE)) {
                         message += String.format(" %s no resistance to the subversive seed.",
                             Global.capitalizeFirstLetter(opponent.subjectAction("offer", "offers")));
@@ -87,7 +87,7 @@ public class IncubusCockMod extends CockMod {
                     c.write(self, String.format(
                         "Sensing %s moment of passion, %s %s greedily draws upon the rampant flows of orgasmic energy within %s, transferring the power back into %s.",
                         opponent.nameOrPossessivePronoun(), self.nameOrPossessivePronoun(),
-                        part.describe(self), opponent.directObject(), self.directObject()));
+                        part.describe(self), opponent.objectPronoun(), self.objectPronoun()));
                     int attDamage = target.moddedPartCountsAs(FeralMod.TYPE) ? 10 : 5;
                     int willDamage = target.moddedPartCountsAs(FeralMod.TYPE) ? 10 : 5;
                     Drained.drain(c, self, opponent, Attribute.Power, attDamage, 20, true);

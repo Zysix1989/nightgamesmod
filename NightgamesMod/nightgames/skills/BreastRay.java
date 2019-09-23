@@ -90,7 +90,7 @@ public class BreastRay extends Skill {
                                         Global.capitalizeFirstLetter(target.pronoun()), 
                                         target.action("flush", "flushes"),
                                         target.action("try", "tries"),
-                                        target.reflexivePronoun(), target.directObject());;
+                                        target.reflexivePronoun(), target.objectPronoun());;
         if (damage > 0) {
             message += " You realize the effects are permanent!";
         }

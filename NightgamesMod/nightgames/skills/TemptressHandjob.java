@@ -99,7 +99,7 @@ public class TemptressHandjob extends Handjob {
                         return String.format(
                                         "%s latched on to %s %s with both hands now, twisting them in a fierce milking movement and eliciting pleasured groans from %s.",
                                         getSelf().subjectAction("have", "has"), target.nameOrPossessivePronoun(),
-                                        target.body.getRandomCock().describe(target), target.directObject());
+                                        target.body.getRandomCock().describe(target), target.objectPronoun());
                 }
         }
     }

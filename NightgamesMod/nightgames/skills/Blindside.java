@@ -65,8 +65,8 @@ public class Blindside extends Skill {
                         "You move up to %s and kiss %s strongly. "
                                         + "While %s is distracted, you throw %s down and plant "
                                         + "yourself on top of %s.",
-                        target.getName(), target.directObject(), target.pronoun(), target.directObject(),
-                        target.directObject());
+                        target.getName(), target.objectPronoun(), target.pronoun(), target.objectPronoun(),
+                        target.objectPronoun());
     }
 
     @Override
@@ -77,11 +77,11 @@ public class Blindside extends Skill {
                                         + " %s mouth. %s are so absorbed in kissing back, that %s only notice %s ulterior motive"
                                         + " once %s has already swept %s legs out from under %s and %s has landed on top of %s.",
                         getSelf().possessiveAdjective(), getSelf().getName(), target.subject(),
-                        Global.capitalizeFirstLetter(getSelf().possessiveAdjective()), target.directObject(),
-                        getSelf().pronoun(), target.directObject(), getSelf().possessiveAdjective(),
+                        Global.capitalizeFirstLetter(getSelf().possessiveAdjective()), target.objectPronoun(),
+                        getSelf().pronoun(), target.objectPronoun(), getSelf().possessiveAdjective(),
                         target.possessiveAdjective(), Global.capitalizeFirstLetter(target.pronoun()), target.pronoun(),
                         getSelf().possessiveAdjective(), getSelf().pronoun(), target.possessiveAdjective(),
-                        target.directObject(), getSelf().pronoun(), target.directObject());
+                        target.objectPronoun(), getSelf().pronoun(), target.objectPronoun());
     }
 
 }

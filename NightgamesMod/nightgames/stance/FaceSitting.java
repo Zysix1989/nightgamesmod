@@ -241,7 +241,7 @@ public class FaceSitting extends AbstractBehindStance {
                             + "over %s face again, forcing %s to service %s.", struggler.subject(),
                             top.nameDirectObject(), top.pronoun(), top.action("drop"),
                             top.possessiveAdjective(), struggler.possessiveAdjective(),
-                            struggler.directObject(), top.directObject()));
+                            struggler.objectPronoun(), top.objectPronoun()));
         }
         if (top.hasPussy() && !top.has(Trait.temptingass)) {
             new Cunnilingus(struggler).resolve(c, top);

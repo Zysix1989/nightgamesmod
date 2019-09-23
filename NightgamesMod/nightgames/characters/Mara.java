@@ -644,7 +644,7 @@ public class Mara extends BasePersonality {
                             target.possessiveAdjective(), target.possessiveAdjective(), target.getName(), target.pronoun(),
                             target.possessiveAdjective(), target.possessiveAdjective(),
                             Global.capitalizeFirstLetter(target.possessiveAdjective()), target.getName(),
-                            target.possessiveAdjective(), target.directObject(), target.pronoun(),
+                            target.possessiveAdjective(), target.objectPronoun(), target.pronoun(),
                             Global.capitalizeFirstLetter(target.possessiveAdjective()));
         }
         return "Mara approaches " + target.getName()

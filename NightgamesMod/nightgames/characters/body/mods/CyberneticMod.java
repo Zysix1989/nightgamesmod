@@ -81,5 +81,5 @@ public class CyberneticMod extends PartMod {
             + "{{ target.describe(opponent) }}. At the same time "
             + "{{ opponent.pronounAction('feel') }} a thin filament sliding "
             + "into opponent.possessiveAdjective(), filling "
-            + "{{ opponent.directObject }} with both pleasure and shame.");
+            + "{{ opponent.objectPronoun }} with both pleasure and shame.");
 }

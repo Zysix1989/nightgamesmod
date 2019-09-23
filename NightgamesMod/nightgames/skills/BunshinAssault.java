@@ -116,7 +116,7 @@ public class BunshinAssault extends Skill {
         if(modifier==Result.miss){
             return String.format("%s dodges one of your shadow clones.",target.getName());
         }else if(modifier==Result.weak){
-            return String.format("Your shadow clone gets behind %s and slaps %s hard on the ass.",target.getName(),target.directObject());
+            return String.format("Your shadow clone gets behind %s and slaps %s hard on the ass.",target.getName(),target.objectPronoun());
         }else if(modifier==Result.strong){
             if(target.hasBalls()){
                 return String.format("One of your clones gets grabs and squeezes %s's balls.",target.getName());

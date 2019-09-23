@@ -109,7 +109,7 @@ public class StripTop extends Skill {
         } else {
             String msg = String.format("%s grabs a hold of %s %s and yanks it off before %s can stop %s.",
                             getSelf().subject(), target.nameOrPossessivePronoun(), stripped.getName(),
-                            target.pronoun(), getSelf().directObject());
+                            target.pronoun(), getSelf().objectPronoun());
             if (modifier == Result.critical && extra != null) {
                 msg += String.format(" Before %s can react, %s also strips off %s %s!", 
                                 target.subject(), getSelf().subject(), 

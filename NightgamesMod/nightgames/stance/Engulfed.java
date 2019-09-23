@@ -129,7 +129,7 @@ public class Engulfed extends Position {
         if (writeMessage) {
             c.write(bottom, String.format("%s loose from %s slimy grip and %s away from %s.", 
                             bottom.subjectAction("struggles", "struggle"), top.nameOrPossessivePronoun(),
-                            bottom.action("stagger", "staggers"), top.directObject()));
+                            bottom.action("stagger", "staggers"), top.objectPronoun()));
         }
         return new Neutral(top, bottom);
     }

@@ -57,7 +57,7 @@ public class Masochism extends Skill {
     public String receive(Combat c, int damage, Result modifier, Character target) {
         return String.format("%s shivers in arousal. %s suddenly bombarded with thoughts of "
                         + "letting %s hurt %s in wonderful ways.", getSelf().subject(),
-                        target.subjectAction("are", "is"), getSelf().subject(), target.directObject());
+                        target.subjectAction("are", "is"), getSelf().subject(), target.objectPronoun());
     }
 
 }

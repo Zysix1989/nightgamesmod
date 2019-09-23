@@ -79,7 +79,7 @@ public class LeechSeed extends Skill {
     @Override
     public String deal(Combat c, int damage, Result modifier, Character target) {
         if (modifier == Result.miss) {
-            return "You try to plant a seed in " + target.directObject() + ", but she dodges out of the way (maybe you should pin her down?).";
+            return "You try to plant a seed in " + target.objectPronoun() + ", but she dodges out of the way (maybe you should pin her down?).";
         }
         String hole = "pussy";
         if (modifier == Result.anal) {

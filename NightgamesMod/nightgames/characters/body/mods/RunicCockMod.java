@@ -33,7 +33,7 @@ public class RunicCockMod extends CockMod {
                 .format("Power radiates out from %s %s, seeping into %s and subverting %s will. ",
                     self.nameOrPossessivePronoun(), part.describe(self),
                     opponent.nameOrPossessivePronoun(),
-                    opponent.directObject());
+                    opponent.objectPronoun());
             opponent.add(c, new Enthralled(opponent, self, 3));
         }
         if (self.hasStatus(Stsflag.cockbound)) {

@@ -306,7 +306,7 @@ public class Corruption extends Addiction {
         if (inWithdrawal) {
             return "The blackness resonates with " + cause.getName() + ", growing even more powerful and troublesome than before.";
         }
-        return "The blackness " + cause.getName() + " places in you resonates with " + cause.directObject() + ". You can"
+        return "The blackness " + cause.getName() + " places in you resonates with " + cause.objectPronoun() + ". You can"
                         + " feel it starting to corrupt " + affected.possessiveAdjective() + " mind and body!";
     }
 
@@ -405,7 +405,7 @@ public class Corruption extends Addiction {
 
     @Override
     public String informantsOverview() {
-        return "Dude. Not cool. I like " + cause.getName() + " shaking " + cause.directObject() + " evil ass around at night as much"
+        return "Dude. Not cool. I like " + cause.getName() + " shaking " + cause.objectPronoun() + " evil ass around at night as much"
                         + " as the next guy, but the evil should stay there, you know? Now, the"
                         + " rest of the competitors will not appreciate {self:possessive} new attitude either."
                         + " I don't see them jumping to {self:possessive} defence any time soon. You should also"

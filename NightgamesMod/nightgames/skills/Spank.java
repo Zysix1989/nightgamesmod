@@ -88,7 +88,7 @@ public class Spank extends Skill {
         }
         if (modifier == Result.special) {
             return "You bend " + target.getName()
-                            + " over your knee and spank "+target.directObject()+", alternating between hitting "+target.possessiveAdjective()+" soft butt cheek and "+target.possessiveAdjective()+" sensitive pussy.";
+                            + " over your knee and spank "+target.objectPronoun()+", alternating between hitting "+target.possessiveAdjective()+" soft butt cheek and "+target.possessiveAdjective()+" sensitive pussy.";
         } else {
             return "You spank " + target.getName() + " on "+target.possessiveAdjective()+" naked butt cheek.";
         }

@@ -130,7 +130,7 @@ public class Finger extends Skill {
             } else if (target.getArousal().percent() < 80) {
                 return String.format("%s locates %s clitoris and caress it directly, causing"
                                 + " %s to tremble from the powerful stimulation.",
-                                getSelf().subject(), target.nameOrPossessivePronoun(), target.directObject());
+                                getSelf().subject(), target.nameOrPossessivePronoun(), target.objectPronoun());
             } else {
                 return String.format("%s stirs %s increasingly soaked pussy with %s fingers and "
                                 + "rubs %s clit directly with %s thumb.",

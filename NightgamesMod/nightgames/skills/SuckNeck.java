@@ -135,7 +135,7 @@ public class SuckNeck extends Skill {
                             + " is being sucked out through "
                             + "%s skin.", getSelf().subject(), getSelf().possessiveAdjective(),
                             target.nameOrPossessivePronoun(), getSelf().subject(),
-                            target.directObject(), target.possessiveAdjective(), target.possessiveAdjective(),
+                            target.objectPronoun(), target.possessiveAdjective(), target.possessiveAdjective(),
                             target.possessiveAdjective());
         } else if (modifier == Result.critical) {
             if (target.hasDick()) {

@@ -66,7 +66,7 @@ public class FaerieSwarm extends Skill {
                         + "They eagerly take advantage of " + target.getName()
                         + "'s naked body, teasing and tickling every exposed erogenous zone. "
                         + Global.capitalizeFirstLetter(target.pronoun()) + " tries in vain to defend "
-                        + target.directObject() + "self, but there are too many of them and they're too quick. "
+                        + target.objectPronoun() + "self, but there are too many of them and they're too quick. "
                         + Global.capitalizeFirstLetter(target.pronoun())
                         + "'s reduced to writhing and giggling in pleasure until "
                         + "the brief summoning spell exires.";
@@ -78,7 +78,7 @@ public class FaerieSwarm extends Skill {
             return String.format("%s pulls out a scroll and a swarm of butterfly-winged faeries burst "
                             + "forth to attack %s. They mischeviously grab at %s clothes, using magical assistance "
                             + "to efficiently strip %s naked.", getSelf().subject(), target.nameDirectObject(),
-                            target.possessiveAdjective(), target.directObject());
+                            target.possessiveAdjective(), target.objectPronoun());
         }
         String parts = target.hasDick() ? "dick and balls" : target.hasPussy() ? "pussy and clit" : "ass and chest";
         return String.format("%s pulls out a scroll and a swarm of butterfly-winged faeries burst forth to attack %s."
@@ -88,9 +88,9 @@ public class FaerieSwarm extends Skill {
                         + "doesn't actaully last very long, but from %s perspective, it feels"
                         + " like minutes of delightful torture.", getSelf().subject(),
                         target.nameDirectObject(), target.possessiveAdjective(),
-                        target.directObject(), target.possessiveAdjective(),
+                        target.objectPronoun(), target.possessiveAdjective(),
                         target.possessiveAdjective(),
-                        parts, target.directObject(), target.nameOrPossessivePronoun());
+                        parts, target.objectPronoun(), target.nameOrPossessivePronoun());
     }
 
 }

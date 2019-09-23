@@ -187,7 +187,7 @@ public class Tickle extends Skill {
             return String.format("%s teases %s privates with %s feather tickler. After %s stops,"
                             + " %s an unnatural sensitivity where the feathers touched %s.", getSelf().subject(),
                             target.nameDirectObject(), getSelf().possessiveAdjective(), getSelf().pronoun(),
-                            target.subjectAction("feel"), target.directObject());
+                            target.subjectAction("feel"), target.objectPronoun());
         } else if (modifier == Result.strong) {
             return String.format("%s brushes %s tickler over %s balls and teases the sensitive head of %s penis.",
                             getSelf().subject(), getSelf().possessiveAdjective(),
@@ -202,7 +202,7 @@ public class Tickle extends Skill {
         } else {
             return String.format("%s suddenly springs toward %s and tickles %s"
                             + " relentlessly until %s can barely breathe.", getSelf().subject(),
-                            target.nameDirectObject(), target.directObject(), target.pronoun());
+                            target.nameDirectObject(), target.objectPronoun(), target.pronoun());
         }
     }
 

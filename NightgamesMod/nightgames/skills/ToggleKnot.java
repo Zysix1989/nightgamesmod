@@ -77,7 +77,7 @@ public class ToggleKnot extends Skill {
                 if (c.getStance().dom(getSelf())) {
                     firstPart = String.format("%s bottoms out inside of %s, and something quickly feels off%s.",
                                     getSelf().subject(), target.nameDirectObject(),
-                                    c.isBeingObserved() ? " to " + target.directObject() : "");
+                                    c.isBeingObserved() ? " to " + target.objectPronoun() : "");
                 } else {
                     firstPart = String.format("%s pulls %s all the way onto %s cock. "
                                     + "As soon as %s pelvis touches %s, something starts happening.",

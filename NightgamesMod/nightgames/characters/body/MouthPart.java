@@ -28,7 +28,7 @@ public class MouthPart extends GenericBodyPart {
         double bonus = super.applyBonuses(self, opponent, target, damage, c);
         if (target.isErogenous() && opponent.has(Trait.lickable)) {
             c.write(opponent, Global.capitalizeFirstLetter(opponent.subjectAction("shudder", "shudders"))
-                            + " when licked by " + self.directObject() + ".");
+                            + " when licked by " + self.objectPronoun() + ".");
             bonus += Global.random(2, 4) + opponent.getLevel() / 20;
             if (target.isGenital()) {
                 bonus += Global.random(2, 4) + Math.max(0, opponent.getLevel() / 20 - 2);

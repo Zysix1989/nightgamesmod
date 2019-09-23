@@ -32,7 +32,7 @@ public class BionicCockMod extends CockMod {
                 target.describe(opponent), self.possessiveAdjective(), part.describe(self),
                 opponent.possessiveAdjective(), self.possessiveAdjective(),
                 opponent.possessiveAdjective(),
-                opponent.directObject());
+                opponent.objectPronoun());
             opponent.add(c, new Hypersensitive(opponent));
             // Instantly addict
             opponent.add(c, new FluidAddiction(opponent, self, 1, 2));
@@ -49,7 +49,7 @@ public class BionicCockMod extends CockMod {
             if (Global.random(5) == 0) {
                 message += String.format(
                     " The intense sensations cause %s to forget to breathe for a moment, leaving %s literally breathless.",
-                    opponent.subject(), opponent.directObject());
+                    opponent.subject(), opponent.objectPronoun());
                 opponent.add(c, new Winded(opponent, 1));
             }
         }

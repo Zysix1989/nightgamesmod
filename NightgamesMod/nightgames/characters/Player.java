@@ -966,7 +966,7 @@ public class Player extends Character {
     }
 
     @Override
-    public String directObject() {
+    public String objectPronoun() {
         return "you";
     }
 

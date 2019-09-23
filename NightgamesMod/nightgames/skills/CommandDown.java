@@ -56,7 +56,7 @@ public class CommandDown extends PlayerCommand {
         return String.format("%s tells %s to remain still and"
                                         + " gracefully lies down on %s, %s face right above %ss.",
                                         getSelf().getName(), target.subject(), 
-                                        target.directObject(), getSelf().possessiveAdjective(),
+                                        target.objectPronoun(), getSelf().possessiveAdjective(),
                                         target.possessiveAdjective());
     }
 }

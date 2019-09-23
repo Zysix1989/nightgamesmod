@@ -142,7 +142,7 @@ public class TentacleRape extends Skill {
                             + "wriggle over %s body and coat %s in the slippery liquid.",
                             getSelf().subject(), getSelf().possessiveAdjective(), tentacles.describe(getSelf()),
                             target.nameDirectObject(), target.possessiveAdjective(),
-                            target.nameOrPossessivePronoun(), target.directObject());
+                            target.nameOrPossessivePronoun(), target.objectPronoun());
         } else {
             return String.format("%s %s cover %s helpless body, tease %s genitals, and probe %s ass.",
                             getSelf().nameOrPossessivePronoun(), tentacles.describe(getSelf()),

@@ -82,17 +82,17 @@ public class Sedate extends Skill {
                             target.possessiveAdjective(), target.possessiveAdjective());
         } else if (modifier == Result.miss) {
             return String.format("%s splashes a bottle of liquid in %s direction, but none of it hits %s.",
-                            getSelf().subject(), target.nameOrPossessivePronoun(), target.directObject());
+                            getSelf().subject(), target.nameOrPossessivePronoun(), target.objectPronoun());
         } else {
             return String.format("%s hits %s with a flask of liquid. Even the fumes make %s feel"
                             + " sluggish and %s limbs become heavy.",
                             getSelf().subject(), target.nameDirectObject(),
-                            target.directObject(), target.possessiveAdjective());
+                            target.objectPronoun(), target.possessiveAdjective());
         }
     }
 
     @Override
     public String describe(Combat c) {
-        return "Throw a sedative at your opponent, weakening " + c.getOpponent(getSelf()).directObject();
+        return "Throw a sedative at your opponent, weakening " + c.getOpponent(getSelf()).objectPronoun();
     }
 }

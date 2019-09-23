@@ -195,9 +195,9 @@ public class Thrust extends Skill {
                             + "Despite the slow pace, the sensation of %s hot %s surrounding "
                             + "%s dick is gradually driving %s to %s limit.", getSelf().subject(),
                             getSelf().possessiveAdjective(), target.nameDirectObject(),
-                            target.directObject(), getSelf().nameOrPossessivePronoun(),
+                            target.objectPronoun(), getSelf().nameOrPossessivePronoun(),
                             getSelfOrgan(c, target).describe(getSelf()),
-                            target.nameOrPossessivePronoun(), target.directObject(),
+                            target.nameOrPossessivePronoun(), target.objectPronoun(),
                             target.possessiveAdjective());
         } else {
             return Global.format(

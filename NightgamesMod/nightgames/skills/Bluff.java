@@ -67,7 +67,7 @@ public class Bluff extends Skill {
         return String.format("Despite %s best efforts, %s is still looking as calm and composed as ever."
                         + " Either %s %s getting to %s at all, or %s %s really good at hiding it.", 
                         target.nameOrPossessivePronoun(), getSelf().subject(), target.pronoun(),
-                        target.action("aren't", "isn't"), getSelf().directObject(), getSelf().pronoun(),
+                        target.action("aren't", "isn't"), getSelf().objectPronoun(), getSelf().pronoun(),
                         getSelf().action("are", "is"));
     }
 

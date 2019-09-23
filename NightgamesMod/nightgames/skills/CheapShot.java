@@ -75,20 +75,20 @@ public class CheapShot extends Skill {
                                 "You freeze time briefly, giving you a chance to circle around %s. When time resumes, %s looks around in "
                                                 + "confusion, completely unguarded. You capitalize on your advantage by crouching behind %s and delivering a decisive "
                                                 + "uppercut to %s dangling balls.",
-                                target.getName(), target.pronoun(), target.directObject(), target.possessiveAdjective());
+                                target.getName(), target.pronoun(), target.objectPronoun(), target.possessiveAdjective());
             } else {
                 return String.format(
                                 "You freeze time briefly, giving you a chance to circle around %s. When time resumes, %s looks around in "
                                                 + "confusion, completely unguarded. You capitalize on your advantage by crouching behind %s and delivering a swift, but "
                                                 + "painful cunt punt.",
-                                target.getName(), target.pronoun(), target.directObject());
+                                target.getName(), target.pronoun(), target.objectPronoun());
             }
         } else {
             return String.format(
                             "You freeze time briefly, giving you a chance to circle around %s. When time resumes, %s looks around in "
                                             + "confusion, completely unguarded. You capitalize on your advantage by crouching behind %s and delivering a decisive "
                                             + "uppercut to the groin.",
-                            target.getName(), target.pronoun(), target.directObject());
+                            target.getName(), target.pronoun(), target.objectPronoun());
         }
     }
 

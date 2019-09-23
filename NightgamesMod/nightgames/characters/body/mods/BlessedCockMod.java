@@ -77,14 +77,14 @@ public class BlessedCockMod extends CockMod {
                     .with("opponent", opponent)
                     .with("part", part);
                 var template = JtwigTemplate.inlineTemplate(
-                    "As soon as {{ self.subject() }} penetrates {{ opponent.directObject() }}, "
+                    "As soon as {{ self.subject() }} penetrates {{ opponent.objectPronoun() }}, "
                         + "{{ opponent.subject() }} realize "
                         + "{{ opponent.subjectAction('are', 'is') }} screwed. "
                         + "Both literally and figuratively. While it looks innocuous enough, "
                         + "{{ self.nameOrPossessivePronoun }} {{ part.describe(self) }} "
                         + "feels like pure ecstasy. {{ self.subject() }} hasn't even begun moving yet, "
-                        + "but {{ self.nameOrPossessivePronoun() }} cock simply sitting within {{ opponent.directObject() }} "
-                        + "radiates a heat that has {{ opponent.directObject() }} squirming uncontrollably."
+                        + "but {{ self.nameOrPossessivePronoun() }} cock simply sitting within {{ opponent.objectPronoun() }} "
+                        + "radiates a heat that has {{ opponent.objectPronoun() }} squirming uncontrollably."
                 );
                 c.write(self, template.render(model));
             }

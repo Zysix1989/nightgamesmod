@@ -111,10 +111,10 @@ public class Slimed extends DurationStatus {
         }
         if (stacks >= 0 && origin.has(Trait.ParasiticBond)) {
             JtwigTemplate template = JtwigTemplate.inlineTemplate(
-                "While not connected directly to {{ origin.directObject() }}, " +
+                "While not connected directly to {{ origin.objectPronoun() }}, " +
                     "{{ origin.nameOrPossessivePronoun() }} slime seems to be eroding " +
                     "{{ affected.nameOrPossessivePronoun() }} stamina while energizing " +
-                    "{{ origin.directObject() }}");
+                    "{{ origin.objectPronoun() }}");
             Global.writeIfCombat(c, affected, template.render(model));
             affected.drainStaminaAsMojo(c, origin, 2 + stacks / 4, 1.0f);
         }

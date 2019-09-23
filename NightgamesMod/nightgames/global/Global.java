@@ -1898,7 +1898,7 @@ public class Global {
         });
         matchActions.put("direct-object", (self, first, second, third) -> {
             if (self != null) {
-                return self.directObject();
+                return self.objectPronoun();
             }
             return "";
         });

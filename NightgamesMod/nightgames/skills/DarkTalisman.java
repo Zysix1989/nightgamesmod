@@ -90,7 +90,7 @@ public class DarkTalisman extends Skill {
         } else {
             return String.format("%s holds up a strange talisman. %s a tiny tug on %s consciousness, but it doesn't really affect %s much.",
                             getSelf().getName(), Global.capitalizeFirstLetter(target.subjectAction("feel")), target.possessiveAdjective(),
-                            target.directObject());
+                            target.objectPronoun());
         }
     }
 

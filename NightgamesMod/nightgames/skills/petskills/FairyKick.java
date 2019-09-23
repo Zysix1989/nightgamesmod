@@ -42,7 +42,7 @@ public class FairyKick extends SimpleEnemySkill {
                             getSelf().subject(), target.nameDirectObject(),
                             target.pronoun(), target.action("catch", "catches"),
                             getSelf().possessiveAdjective(),
-                            target.directObject()));
+                            target.objectPronoun()));
             return false;
         }
         return true;

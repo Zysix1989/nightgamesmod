@@ -94,7 +94,7 @@ public class PerfectTouch extends Skill {
                             + "%s tosses aside a handful of clothes, "
                             + "at which point %s %s %s "
                             + "naked. How the hell did %s manage that?",
-                            getSelf().subject(), target.nameDirectObject(), target.directObject(),
+                            getSelf().subject(), target.nameDirectObject(), target.objectPronoun(),
                             getSelf().subject(), target.subjectAction("realize"), target.pronoun(),
                             target.action("are", "is"), getSelf().pronoun());
         }

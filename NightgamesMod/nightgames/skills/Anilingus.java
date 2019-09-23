@@ -137,7 +137,7 @@ public class Anilingus extends Skill {
                             + "You dimly realize that this is probably arousing you as much as " + target.getName()
                             + ", but worshipping "+target.possessiveAdjective()+" sublime derriere seems much higher on your priorities than winning.";
         }
-        return "You thrust your tongue into " + target.getName() + "'s ass and lick it, making "+target.directObject()+" yelp in surprise.";
+        return "You thrust your tongue into " + target.getName() + "'s ass and lick it, making "+target.objectPronoun()+" yelp in surprise.";
     }
 
     @Override

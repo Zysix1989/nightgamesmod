@@ -85,21 +85,21 @@ public class ReverseFly extends Fly {
                             + " %s %s %s as %s approaches and send %s sprawling to the floor.",
                             getSelf().subject(), target.nameDirectObject(), getSelf().possessiveAdjective(),
                             target.subjectAction("have", "has"), Global.capitalizeFirstLetter(target.pronoun()),
-                            target.action("trip"), getSelf().directObject(), getSelf().pronoun(),
-                            getSelf().directObject());
+                            target.action("trip"), getSelf().objectPronoun(), getSelf().pronoun(),
+                            getSelf().objectPronoun());
         } else {
             return String.format("Suddenly, %s leaps at %s, embracing %s tightly. %s then flaps %s %s"
                             + " hard and before %s %s it,"
                             + " %s twenty feet in the sky held up by %s arms and legs."
                             + " Somehow, %s dick ended up inside of %s in the process and"
                             + " the rhythmic movements of %s flying arouse %s to no end.",
-                            getSelf().subject(), target.nameDirectObject(), target.directObject(),
+                            getSelf().subject(), target.nameDirectObject(), target.objectPronoun(),
                             Global.capitalizeFirstLetter(getSelf().pronoun()),
                             getSelf().possessiveAdjective(), getSelf().body.getRandomWings().describe(getSelf()),
                             target.pronoun(), target.action("know"), target.subjectAction("are", "is"),
                             getSelf().possessiveAdjective(), target.nameOrPossessivePronoun(),
                             getSelf().nameDirectObject(), getSelf().possessiveAdjective(),
-                            target.directObject());
+                            target.objectPronoun());
         }
     }
 

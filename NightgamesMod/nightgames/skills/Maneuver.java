@@ -99,19 +99,19 @@ public class Maneuver extends Skill {
         if (modifier == Result.miss) {
             return String.format("%s tries to slip behind %s, but %s %s able to keep %s in sight.",
                             getSelf().subject(), target.nameDirectObject(), target.pronoun(),
-                            target.action("are", "is"), getSelf().directObject());
+                            target.action("are", "is"), getSelf().objectPronoun());
         } else if (modifier == Result.special) {
             return String.format("%s starts to move and suddenly vanishes. %s for a"
                             + " second and feel %s grab %s from behind.",
                             getSelf().subject(), target.subjectAction("hesitate"),
-                            getSelf().subject(), target.directObject());
+                            getSelf().subject(), target.objectPronoun());
         } else {
             return String.format("%s lunges at %s, but when %s %s to grab %s, %s ducks out of sight. "
                             + "Suddenly %s arms are wrapped around %ss. How did %s get behind %s?",
                             getSelf().subject(), target.nameDirectObject(), target.pronoun(),
-                            target.action("try", "tries"), target.directObject(), getSelf().pronoun(),
+                            target.action("try", "tries"), target.objectPronoun(), getSelf().pronoun(),
                             getSelf().nameOrPossessivePronoun(), target.nameOrPossessivePronoun(),
-                            getSelf().pronoun(), target.directObject());
+                            getSelf().pronoun(), target.objectPronoun());
         }
     }
 

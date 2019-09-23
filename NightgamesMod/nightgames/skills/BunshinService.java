@@ -125,7 +125,7 @@ public class BunshinService extends Skill {
         if(modifier==Result.miss){
             return String.format("%s dodges your clone's groping hands.",target.getName());
         }else if(modifier==Result.weak){
-            return String.format("Your clone darts close to %s and kisses %s on the lips.",target.getName(),target.directObject());
+            return String.format("Your clone darts close to %s and kisses %s on the lips.",target.getName(),target.objectPronoun());
         }else if(modifier==Result.strong){
             if(target.hasDick()){
                 return String.format("Your shadow clone grabs %s's dick and strokes it.",target.getName());
@@ -150,7 +150,7 @@ public class BunshinService extends Skill {
                             target.subjectAction("manage"));
         }else if(modifier==Result.weak){
             return String.format("One of the %ss grabs %s and kisses %s enthusiastically.",getSelf().getName(),
-                            target.subject(), target.directObject());
+                            target.subject(), target.objectPronoun());
         }else if(modifier==Result.strong){
             if(target.hasBalls()){
                 return String.format("A clone gently grasps and massages %s sensitive balls.",

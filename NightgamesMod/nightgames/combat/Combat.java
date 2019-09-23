@@ -1256,8 +1256,8 @@ public class Combat {
                     } else {
                         write(p, String.format("%s slumps in %s arms, but %s %s %s to keep %s from collapsing.",
                                         p.subject(), other.nameOrPossessivePronoun(),
-                                        other.pronoun(), other.action("support"), p.directObject(),
-                                        p.directObject()));
+                                        other.pronoun(), other.action("support"), p.objectPronoun(),
+                                        p.objectPronoun()));
                     }
                 } else if (getStance().havingSex(this, p) && getStance().dom(p) && getStance().reversable(this)) {
                     write(getOpponent(p), Global.format("{other:SUBJECT-ACTION:take|takes} the chance to shift into a more dominant position.", p, getOpponent(p)));
@@ -1282,7 +1282,7 @@ public class Combat {
                 if (p.hasAddiction(AddictionType.DOMINANCE)) {
                     write(other, String.format("Being dominated by %s again reinforces %s"
                                     + " submissiveness towards %s.", other.getName(), p.nameOrPossessivePronoun(),
-                                    other.directObject()));
+                                    other.objectPronoun()));
                 } else {
                     write(other, Global.format("There's something about the way {other:subject-action:know} just"
                                     + " how and where to hurt {self:name-do} which some part of {self:possessive}"

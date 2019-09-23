@@ -84,7 +84,7 @@ public class Restrain extends Skill {
         } else {
             return String.format("%s pounces on %s and pins %s arms in place, leaving %s at %s mercy.",
                             getSelf().subject(), target.nameDirectObject(), target.possessiveAdjective(),
-                            target.directObject(), getSelf().directObject());
+                            target.objectPronoun(), getSelf().objectPronoun());
         }
     }
 

@@ -112,7 +112,7 @@ public class Nurse extends Skill {
                             + " vocalizes a confused little yelp, and you take advantage of it to force your nipples between her lips.";
         } else {
             return "You gently stroke " + target.nameOrPossessivePronoun() + " hair as you feed your nipples to "
-                            + target.directObject() + ". " + "Even though she is reluctant at first, you soon have "
+                            + target.objectPronoun() + ". " + "Even though she is reluctant at first, you soon have "
                             + target.getName() + " sucking your teats like a newborn.";
         }
     }

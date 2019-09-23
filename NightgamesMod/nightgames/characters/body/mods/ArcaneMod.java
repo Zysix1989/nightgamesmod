@@ -51,8 +51,8 @@ public class ArcaneMod extends PartMod {
                         + "{{ self.possessiveAdjective() }} {{ part.getType() }} light up with "
                         + "arcane energy as "
                         + "{% if (fucking) %} {{ opponent.subjectAction('are', 'is') }} inside "
-                        + "{{ self.directObject() }}"
-                        + "{% else %}{{ self.subjectAction('touch') }} {{ opponent.directObject() }}"
+                        + "{{ self.objectPronoun() }}"
+                        + "{% else %}{{ self.subjectAction('touch') }} {{ opponent.objectPronoun() }}"
                         + "{% endif %} channeling some of {{ opponent.possessiveAdjective() }} "
                         + "energies back to its master."));
                 strength = 5 + self.get(Attribute.Arcane) / 6;
@@ -62,7 +62,7 @@ public class ArcaneMod extends PartMod {
                 Character master = ((PetCharacter) self).getSelf().owner();
                 model.with("master", master);
                 templates.add(JtwigTemplate.inlineTemplate(
-                    "The energy seems to flow through {{ self.directObject() }} and into "
+                    "The energy seems to flow through {{ self.objectPronoun() }} and into "
                         + "{{ self.possessiveAdjective() }} "
                         + "{{ (master.useFemalePronouns()) ? 'mistress' : 'master' }}." ));
                 master.buildMojo(c, strength);
@@ -70,7 +70,7 @@ public class ArcaneMod extends PartMod {
             if (Global.random(8) == 0 && !opponent.wary()) {
                 templates.add(JtwigTemplate.inlineTemplate(
                     "The light seems to seep into {{ opponent.possessiveAdjective() }} "
-                        + " {{ target.describe(opponent) }} leaving {{ opponent.directObject() }} "
+                        + " {{ target.describe(opponent) }} leaving {{ opponent.objectPronoun() }} "
                         + "enthralled to {{ self.possessiveAdjective() }} will."));
                 opponent.add(c, new Enthralled(opponent, self, 3));
             }

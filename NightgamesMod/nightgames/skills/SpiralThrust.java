@@ -109,7 +109,7 @@ public class SpiralThrust extends Thrust {
                             getSelf().subject(), getSelf().possessiveAdjective(),
                             target.nameOrPossessivePronoun(), getSelf().possessiveAdjective(),
                             (selfO.isType("pussy") ? "slippery pussy walls" : " steaming asshole"),
-                            target.directObject(), target.pronoun());
+                            target.objectPronoun(), target.pronoun());
         }
     }
 

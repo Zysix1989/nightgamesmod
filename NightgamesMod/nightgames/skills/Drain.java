@@ -126,7 +126,7 @@ public class Drain extends Skill {
             String base = "You put your powerful " + muscDesc + " muscles to work whilst" + " transfixing "
                             + target.getName() + "'s gaze with your own, goading " + target.possessiveAdjective()
                             + " energy into " + target.possessiveAdjective() + " cock."
-                            + " Soon it erupts from "+ target.directObject() + " into your " + partDesc + ", ";
+                            + " Soon it erupts from "+ target.objectPronoun() + " into your " + partDesc + ", ";
             switch (damage) {
                 case 4:
                     return base + "and you can feel " + target.possessiveAdjective() + " strength pumping into you.";
@@ -144,7 +144,7 @@ public class Drain extends Skill {
                                     + target.possessiveAdjective() + " energy traversing the space between you.";
                 case 6:
                     return base + "far more powerfully than you even thought possible." + " You feel a fragment of "
-                                    + target.possessiveAdjective() + " soul break away from "+target.directObject()+" and"
+                                    + target.possessiveAdjective() + " soul break away from "+target.objectPronoun()+" and"
                                     + " gush into you, taking along a portion of " + target.possessiveAdjective()
                                     + " strength," + " skill and wits, merging with your own. You have clearly"
                                     + " won this fight, and a lot more than that.";
@@ -199,23 +199,23 @@ public class Drain extends Skill {
                             + " something far more precious than semen into her %s; "
                             + "as more of the ethereal fluid leaves %s, %s ", 
                             target.subjectAction("feel"), getSelf().nameOrPossessivePronoun(),
-                            muscDesc, target.directObject(), getSelf().subject(),
-                            target.possessiveAdjective(), target.directObject(),
+                            muscDesc, target.objectPronoun(), getSelf().subject(),
+                            target.possessiveAdjective(), target.objectPronoun(),
                             target.subjectAction("feel"), target.reflexivePronoun(), getSelf().nameDirectObject(),
                             target.pronoun(), target.action("realize"), target.pronoun(), target.action("are", "is"),
-                            partDesc, target.directObject(), target.subjectAction("feel"));
+                            partDesc, target.objectPronoun(), target.subjectAction("feel"));
             switch (damage) {
                 case 4:
                     return base + String.format("%s strength leaving %s with it, "
                                     + "making %s more tired than %s have ever felt.",
-                                    target.possessiveAdjective(), target.directObject(),
-                                    target.directObject(), target.pronoun());
+                                    target.possessiveAdjective(), target.objectPronoun(),
+                                    target.objectPronoun(), target.pronoun());
                 case 5:
                     return base + String.format("memories of previous sexual experiences escape %s mind,"
                                     + " numbing %s skills, rendering %s more sensitive and"
                                     + " perilously close to the edge of climax.",
                                     target.possessiveAdjective(), target.possessiveAdjective(),
-                                    target.directObject());
+                                    target.objectPronoun());
                 case 3:
                     return base + String.format("%s mind go numb, causing %s confidence and cunning to flow into %s.",
                                     target.possessiveAdjective(), target.possessiveAdjective(), getSelf().nameDirectObject());
@@ -224,21 +224,21 @@ public class Drain extends Skill {
                                     + "as %s can feel the walls of %s %s squirm against %s in a way "
                                     + "no human could manage, but all %s is some drowsiness.",
                                     demon, target.nameDirectObject(), target.pronoun(),
-                                    getSelf().nameOrPossessivePronoun(), partDesc, target.directObject(),
+                                    getSelf().nameOrPossessivePronoun(), partDesc, target.objectPronoun(),
                                     target.subjectAction("feel"));
                 case 2:
                     return String.format("Clearly the %s is trying to do something really special to %s, "
                                     + "as %s can feel the walls of %s %s squirm against %s in a way "
                                     + "no human could manage, but all %s is %s focus waning a bit.",
                                     demon, target.nameDirectObject(), target.pronoun(),
-                                    getSelf().nameOrPossessivePronoun(), partDesc, target.directObject(),
+                                    getSelf().nameOrPossessivePronoun(), partDesc, target.objectPronoun(),
                                     target.subjectAction("feel"), target.possessiveAdjective());
                 case 0:
                     return String.format("%s squeezes %s with %s %s and starts to milk %s,"
                                     + " but %s suddenly %s %s shudder and moan loudly."
                                     + " Looks like %s plan backfired.", getSelf().getName(), target.subject(),
-                                    getSelf().possessiveAdjective(), partDesc, target.directObject(),
-                                    target.pronoun(), target.action("feel"), getSelf().directObject(),
+                                    getSelf().possessiveAdjective(), partDesc, target.objectPronoun(),
+                                    target.pronoun(), target.action("feel"), getSelf().objectPronoun(),
                                     target.nameOrPossessivePronoun());
                 case 6:
                     return base + String.format("something snap loose inside of %s and it seems to flow right "
@@ -248,7 +248,7 @@ public class Drain extends Skill {
                                     + " %s has kept on thrusting and %s right on the edge of climax."
                                     + " %s defeat appears imminent, but %s %s already lost something"
                                     + " far more valuable than a simple sex fight...",
-                                    target.directObject(), target.possessiveAdjective(), getSelf().nameDirectObject(),
+                                    target.objectPronoun(), target.possessiveAdjective(), getSelf().nameDirectObject(),
                                     target.subjectAction("feel"), getSelf().subject(), getSelf().pronoun(),
                                     target.subjectAction("are", "is"), Global.capitalizeFirstLetter(target.possessiveAdjective()),
                                     target.pronoun(), target.action("have", "has"));
@@ -264,14 +264,14 @@ public class Drain extends Skill {
                 case 4:
                     return base + String.format("%s strength leaving %s with it, "
                                     + "making %s more tired than %s have ever felt.",
-                                    target.possessiveAdjective(), target.directObject(),
-                                    target.directObject(), target.pronoun());
+                                    target.possessiveAdjective(), target.objectPronoun(),
+                                    target.objectPronoun(), target.pronoun());
                 case 5:
                     return base + String.format("memories of previous sexual experiences escape %s mind,"
                                     + " numbing %s skills, rendering %s more sensitive and"
                                     + " perilously close to the edge of climax.",
                                     target.possessiveAdjective(), target.possessiveAdjective(),
-                                    target.directObject());
+                                    target.objectPronoun());
                 case 3:
                     return base + String.format("%s mind go numb, causing %s confidence and cunning to flow into %s.",
                                     target.possessiveAdjective(), target.possessiveAdjective(), getSelf().nameDirectObject());
@@ -280,14 +280,14 @@ public class Drain extends Skill {
                                     + "as %s can feel %s cock thrust against %s in a way "
                                     + "no human could manage, but all %s is some drowsiness.",
                                     demon, target.nameDirectObject(), target.pronoun(),
-                                    getSelf().nameOrPossessivePronoun(), target.directObject(),
+                                    getSelf().nameOrPossessivePronoun(), target.objectPronoun(),
                                     target.subjectAction("feel"));
                 case 2:
                     return String.format("Clearly the %s is trying to do something really special to %s, "
                                     + "as %s can feel %s cock thrust against %s in a way "
                                     + "no human could manage, but all %s is %s focus waning a bit.",
                                     demon, target.nameDirectObject(), target.pronoun(),
-                                    getSelf().nameOrPossessivePronoun(), target.directObject(),
+                                    getSelf().nameOrPossessivePronoun(), target.objectPronoun(),
                                     target.subjectAction("feel"), target.possessiveAdjective());
                 case 0:
                     return String.format("%s draws upon %s will through %s connection, but %s"
@@ -304,7 +304,7 @@ public class Drain extends Skill {
                                     + " %s has kept on thrusting and %s right on the edge of climax."
                                     + " %s defeat appears imminent, but %s %s already lost something"
                                     + " far more valuable than a simple sex fight...",
-                                    target.directObject(), target.possessiveAdjective(), getSelf().nameDirectObject(),
+                                    target.objectPronoun(), target.possessiveAdjective(), getSelf().nameDirectObject(),
                                     target.subjectAction("feel"), getSelf().subject(), getSelf().pronoun(),
                                     target.subjectAction("are", "is"), Global.capitalizeFirstLetter(target.possessiveAdjective()),
                                     target.pronoun(), target.action("have", "has"));

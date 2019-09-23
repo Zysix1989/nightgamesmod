@@ -123,13 +123,13 @@ public class Fly extends Fuck {
                             + " %s twenty feet in the sky held up by %s arms and legs."
                             + " Somehow, %s dick ended up inside of %s in the process and"
                             + " the rhythmic movements of %s flying arouse %s to no end.",
-                            subject, target.nameDirectObject(), target.directObject(),
+                            subject, target.nameDirectObject(), target.objectPronoun(),
                             getSelf().subject(), getSelf().possessiveAdjective(),
                             getSelf().body.getRandomWings().describe(getSelf()),
                             target.pronoun(), target.subjectAction("are", "is"),
                             getSelf().nameOrPossessivePronoun(), target.nameOrPossessivePronoun(),
                             getSelf().possessiveAdjective(), getSelf().possessiveAdjective(),
-                            target.directObject());
+                            target.objectPronoun());
         }
     }
 

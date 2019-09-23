@@ -169,23 +169,23 @@ public class LevelDrain extends Drain {
                         + " %s %s %s erupt into %s, but %s %s %s %s shooting"
                         + " something far more precious than semen into %s; as more of the ethereal"
                         + " fluid leaves %s, %s ",
-                        target.subjectAction("feel"), demon, target.directObject(),
-                        getSelf().subject(), target.possessiveAdjective(), target.directObject(),
+                        target.subjectAction("feel"), demon, target.objectPronoun(),
+                        getSelf().subject(), target.possessiveAdjective(), target.objectPronoun(),
                         target.subject(), target.action("feel"), target.reflexivePronoun(),
-                        getSelf().directObject(), target.pronoun(), target.action("realize"),
+                        getSelf().objectPronoun(), target.pronoun(), target.action("realize"),
                         target.pronoun(), target.action("are", "is"), getSelf().nameDirectObject(),
-                        target.directObject(), target.subjectAction("feel"));
+                        target.objectPronoun(), target.subjectAction("feel"));
         switch (damage) {
             case 0:
                 return String.format("%s squeezes %s with %s pussy and starts to milk %s, "
                                 + "but %s suddenly %s %s shudder and moan loudly. "
                                 + "Looks like %s plan backfired.", getSelf().subject(),
                                 target.nameDirectObject(), getSelf().possessiveAdjective(),
-                                target.directObject(), target.pronoun(), target.action("feel"),
-                                getSelf().directObject(), getSelf().possessiveAdjective());
+                                target.objectPronoun(), target.pronoun(), target.action("feel"),
+                                getSelf().objectPronoun(), getSelf().possessiveAdjective());
             case 1:
                 return base + String.format("%s experiences and memories escape %s mind and flowing into %s.",
-                                target.possessiveAdjective(), target.possessiveAdjective(), getSelf().directObject());
+                                target.possessiveAdjective(), target.possessiveAdjective(), getSelf().objectPronoun());
             case 2:
                 return base + String.format("%s very being snap loose inside of %s and it seems to flow right "
                                 + "through %s dick and into %s. When it is over %s... empty "
@@ -194,7 +194,7 @@ public class LevelDrain extends Drain {
                                 + " %s has kept on thrusting and %s right on the edge of climax."
                                 + " %s defeat appears imminent, but %s %s already lost something"
                                 + " far more valuable than a simple sex fight...",
-                                target.possessiveAdjective(), target.directObject(), target.possessiveAdjective(),
+                                target.possessiveAdjective(), target.objectPronoun(), target.possessiveAdjective(),
                                 getSelf().subject(), target.subjectAction("feel"), getSelf().subject(),
                                 getSelf().pronoun(), target.subjectAction("are", "is"), 
                                 Global.capitalizeFirstLetter(target.possessiveAdjective()),

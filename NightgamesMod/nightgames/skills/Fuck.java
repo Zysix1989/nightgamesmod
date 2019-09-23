@@ -203,7 +203,7 @@ public class Fuck extends Skill {
         BodyPart targetO = getTargetOrgan(target);
         if (modifier == Result.normal) {
             return "you rub the head of your " + selfO.describe(getSelf()) + " around " + target.getName()
-                            + "'s entrance, causing "+target.directObject()+" to shiver with anticipation. Once you're sufficiently lubricated "
+                            + "'s entrance, causing "+target.objectPronoun()+" to shiver with anticipation. Once you're sufficiently lubricated "
                             + "with "+target.possessiveAdjective()+" wetness, you thrust into "+target.possessiveAdjective()+" " + targetO.describe(target)
                             + ". " + target.getName()
                             + " tries to stifle "+target.possessiveAdjective()+" pleasured moan as you fill "+target.possessiveAdjective()+" in an instant.";
@@ -214,7 +214,7 @@ public class Fuck extends Skill {
             } else if (!targetO.isReady(target)) {
                 return "you position your " + selfO.describe(getSelf()) + " at the entrance to " + target.getName()
                                 + ", but find that "+target.pronoun()+"'s not nearly wet enough to allow a comfortable insertion. You'll need "
-                                + "to arouse "+target.directObject()+" more or you'll risk hurting "+target.directObject()+".";
+                                + "to arouse "+target.objectPronoun()+" more or you'll risk hurting "+target.objectPronoun()+".";
             } else if (!selfO.isReady(getSelf())) {
                 return "you're ready and willing to claim " + target.getName() + "'s eager "
                                 + targetO.describe(target) + ", but your shriveled "

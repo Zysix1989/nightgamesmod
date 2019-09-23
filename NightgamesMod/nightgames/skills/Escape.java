@@ -77,7 +77,7 @@ public class Escape extends Skill {
                                                 + ". As soon as %s %s, %s bolts out of %s weakened hold. "
                                                 + "It was a trick!",
                                 getSelf().getName(), target.subjectAction("take"),
-                                target.possessiveAdjective(), getSelf().directObject(),
+                                target.possessiveAdjective(), getSelf().objectPronoun(),
                                 target.pronoun(), target.action("move"), getSelf().pronoun(),
                                 target.possessiveAdjective()));
             }

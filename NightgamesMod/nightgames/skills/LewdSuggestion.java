@@ -82,7 +82,7 @@ public class LewdSuggestion extends Skill {
                             new Object[] {target.nameOrPossessivePronoun()});
         }
         return String.format("You plant an erotic suggestion in %s's mind, distracting %s with lewd fantasies.",
-                        new Object[] {target.getName(), target.directObject()});
+                        new Object[] {target.getName(), target.objectPronoun()});
     }
 
     @Override

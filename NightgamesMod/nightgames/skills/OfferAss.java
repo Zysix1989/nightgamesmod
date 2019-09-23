@@ -85,7 +85,7 @@ public class OfferAss extends Skill {
                                                 + "your shoulders on the ground and your ass in the air, pointing towards %s."
                                                 + " Reaching back, you spread your butt and softly whimper an invitation for %s"
                                                 + " to stick %s %s into your ass. %s takes pity on you, and plunges in.",
-                                target.getName(), target.directObject(), target.possessiveAdjective(),
+                                target.getName(), target.objectPronoun(), target.possessiveAdjective(),
                                 target.body.getRandomInsertable().describe(target),
                                 Global.capitalizeFirstLetter(target.pronoun()));
             default: // special
@@ -109,7 +109,7 @@ public class OfferAss extends Skill {
                                                 + " is still disappointed over not getting the fucking %s wanted.",
                                 getSelf().getName(), getSelf().possessiveAdjective(), target.nameDirectObject(),
                                 Global.capitalizeFirstLetter(target.subjectAction("are","is")),
-                                target.action("spank"), getSelf().directObject(),
+                                target.action("spank"), getSelf().objectPronoun(),
                                 Global.capitalizeFirstLetter(getSelf().pronoun()), getSelf().pronoun());
             case anal:
                 return String.format(
@@ -117,7 +117,7 @@ public class OfferAss extends Skill {
                                                 + " practically begging %s to fuck %s. Well, someone has to do it. %s on %s"
                                                 + " knees and %s to it.",
                                 getSelf().getName(), getSelf().possessiveAdjective(), target.nameOrPossessivePronoun(),
-                                target.directObject(), getSelf().directObject(), 
+                                target.objectPronoun(), getSelf().objectPronoun(),
                                 Global.capitalizeFirstLetter(target.subjectAction("get")),
                                 target.possessiveAdjective(), target.action("get"));
             default: // special
@@ -130,7 +130,7 @@ public class OfferAss extends Skill {
                                 getSelf().possessiveAdjective(), getSelf().possessiveAdjective(),
                                 target.nameDirectObject(),
                                 Global.capitalizeFirstLetter(getSelf().possessiveAdjective()), target.possessiveAdjective(),
-                                target.body.getRandomCock().describe(target), target.directObject(),
+                                target.body.getRandomCock().describe(target), target.objectPronoun(),
                                 target.pronoun(), getSelf().possessiveAdjective(), getSelf().possessiveAdjective());
         }
     }

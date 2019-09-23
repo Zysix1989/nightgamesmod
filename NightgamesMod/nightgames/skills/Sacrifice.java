@@ -60,7 +60,7 @@ public class Sacrifice extends Skill {
         return String.format("%s pinches %s nipples hard while screaming in pain. %s %s "
                         + "stagger in exhaustion, but %s seems much less aroused.",
                         getSelf().subject(), getSelf().nameOrPossessivePronoun(),
-                        Global.capitalizeFirstLetter(target.subjectAction("see")), getSelf().directObject(),
+                        Global.capitalizeFirstLetter(target.subjectAction("see")), getSelf().objectPronoun(),
                         getSelf().pronoun());
     }
 }

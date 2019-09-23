@@ -68,7 +68,7 @@ public class Cowardice extends Skill {
     public String receive(Combat c, int damage, Result modifier, Character target) {
         return String.format("%s tries to sprint away, but %s quickly %s %s from behind before %s can escape", 
                             getSelf().subject(), target.subject(), target.action("grab"), 
-                            getSelf().directObject(), getSelf().pronoun());
+                            getSelf().objectPronoun(), getSelf().pronoun());
     }
 
 }

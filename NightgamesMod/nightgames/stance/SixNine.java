@@ -172,7 +172,7 @@ public class SixNine extends AbstractBehindStance {
     public void struggle(Combat c, Character struggler) {
         c.write(struggler, String.format("%s to gain a more dominant position, but with"
                         + " %s on top of %s sitting on %s chest, there is nothing %s can do.",
-                        struggler.subjectAction("struggle"), top.subject(), struggler.directObject(),
+                        struggler.subjectAction("struggle"), top.subject(), struggler.objectPronoun(),
                         struggler.possessiveAdjective(), struggler.pronoun()));
         super.struggle(c, struggler);
     }

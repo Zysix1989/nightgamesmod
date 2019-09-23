@@ -120,7 +120,7 @@ public class Flick extends Skill {
                             + "It startles %s more than anything, but it does hurt and "
                             + "%s seemingly carefree abuse of %s jewels destroys %s confidence.",
                             getSelf().subject(), target.nameDirectObject(), target.possessiveAdjective(),
-                            getSelf().possessiveAdjective(), target.directObject(), getSelf().nameOrPossessivePronoun(),
+                            getSelf().possessiveAdjective(), target.objectPronoun(), getSelf().nameOrPossessivePronoun(),
                             target.nameOrPossessivePronoun(), target.possessiveAdjective());
         }
     }

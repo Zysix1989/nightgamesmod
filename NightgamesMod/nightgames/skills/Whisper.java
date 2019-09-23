@@ -94,7 +94,7 @@ public class Whisper extends Skill {
                             Global.capitalizeFirstLetter(getSelf().possessiveAdjective()),
                                             target.possessiveAdjective(), target.pronoun(),
                                             target.action("feel"), getSelf().subject(),
-                                            target.directObject());
+                                            target.objectPronoun());
         } else {
             return String.format("%s whispers some deliciously seductive suggestions in %s ear.",
                             getSelf().subject(), target.nameOrPossessivePronoun());

@@ -69,8 +69,8 @@ public class TortoiseWrap extends Skill {
                         + "%s wraps %s in a way that only "
                         + "slightly hinders %s movement. However, the discomfort of "
                         + "the rope wrapping around %s seems to make %s sense of touch more pronounced.",
-                        getSelf().getName(), target.nameDirectObject(), target.directObject(),
-                        getSelf().pronoun(), target.directObject(), target.possessiveAdjective(),
+                        getSelf().getName(), target.nameDirectObject(), target.objectPronoun(),
+                        getSelf().pronoun(), target.objectPronoun(), target.possessiveAdjective(),
                         target.pronoun(), target.possessiveAdjective());
     }
 

@@ -17,7 +17,7 @@ public class StandingOver extends AbstractFacingStance {
         } else {
             return String.format("%s flat on %s back, while %s stands over %s.",
                             bottom.subjectAction("are", "is"), bottom.possessiveAdjective(),
-                            top.subject(), bottom.directObject());
+                            top.subject(), bottom.objectPronoun());
         }
     }
 

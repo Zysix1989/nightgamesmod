@@ -3809,7 +3809,7 @@ public abstract class Character extends Observable implements Cloneable {
         }
     }
 
-    public String directObject() {
+    public String objectPronoun() {
         if (useFemalePronouns()) {
             return "her";
         } else {

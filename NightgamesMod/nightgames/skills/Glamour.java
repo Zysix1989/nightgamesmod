@@ -60,7 +60,7 @@ public class Glamour extends Skill {
                         + "naked copies of %s. %s can still tell which %s is real,"
                         + " but it's still a distraction. At the same "
                         + "time, %s suddenly looks irresistible.", getSelf().subject(),
-                        target.nameOrPossessivePronoun(), getSelf().directObject(),
+                        target.nameOrPossessivePronoun(), getSelf().objectPronoun(),
                         Global.capitalizeFirstLetter(target.pronoun()), getSelf().getName(),
                         getSelf().nameDirectObject());
     }

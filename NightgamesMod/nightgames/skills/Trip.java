@@ -130,7 +130,7 @@ public class Trip extends Skill {
                             getSelf().getName(), target.action("conjure"), target.nameOrPossessivePronoun(), target.action("sweep"), getSelf().reflexivePronoun(), target.nameOrPossessivePronoun(),
                             target.pronoun(), target.action("fail"), target.possessiveAdjective(), target.action("topple"));
         } else {
-            return "You catch " + target.getName() + " off balance and trip " + target.directObject() + ".";
+            return "You catch " + target.getName() + " off balance and trip " + target.objectPronoun() + ".";
         }
     }
 
@@ -144,7 +144,7 @@ public class Trip extends Skill {
                             "%s shoves a mass of %s slime under %s feet, destabilizing %s. With a few"
                                             + " pulls, %s throws %s onto %s back.",
                             getSelf().getName(), getSelf().possessiveAdjective(), target.nameOrPossessivePronoun(),
-                            target.directObject(), getSelf().pronoun(), target.directObject(),
+                            target.objectPronoun(), getSelf().pronoun(), target.objectPronoun(),
                             target.possessiveAdjective());
         } else if (modifier == Result.weak) {
             return String.format(
@@ -154,8 +154,8 @@ public class Trip extends Skill {
                             Global.capitalizeFirstLetter(target.pronoun()), target.action("jump"), getSelf().pronoun());
         } else {
             return String.format("%s takes %s feet out from under %s and sends %s sprawling to the floor.",
-                            getSelf().subject(), target.nameOrPossessivePronoun(), target.directObject(),
-                            target.directObject());
+                            getSelf().subject(), target.nameOrPossessivePronoun(), target.objectPronoun(),
+                            target.objectPronoun());
         }
     }
     

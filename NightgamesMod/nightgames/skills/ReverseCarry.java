@@ -87,7 +87,7 @@ public class ReverseCarry extends Carry {
         if (modifier == Result.miss) {
             return String.format("%sjumps onto %s, but %s %s %s back onto the floor.",
                             subject, target.nameDirectObject(), target.pronoun(),
-                            target.action("deposit"), getSelf().directObject());
+                            target.action("deposit"), getSelf().objectPronoun());
         } else {
             return String.format("%sleaps into %s arms and impales %s on %s cock. "
                             + "%s wraps %s legs around %s torso and %s quickly %s %s so %s doesn't "
@@ -96,7 +96,7 @@ public class ReverseCarry extends Carry {
                             getSelf().subject(), getSelf().possessiveAdjective(), target.nameOrPossessivePronoun(),
                             target.pronoun(), target.action("support"), getSelf().pronoun(),
                             getSelf().pronoun(),
-                            getSelf().reflexivePronoun(), target.directObject());
+                            getSelf().reflexivePronoun(), target.objectPronoun());
         }
     }
 

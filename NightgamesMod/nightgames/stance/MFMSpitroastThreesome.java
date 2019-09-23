@@ -96,7 +96,7 @@ public class MFMSpitroastThreesome extends MaledomSexStance {
             return "";
         } else {
             return String.format("%s is fucking %s face while %s taking %s from behind.",
-                            top.subject(), bottom.nameOrPossessivePronoun(), domSexCharacter(c).subjectAction("are", "is"), bottom.directObject());
+                            top.subject(), bottom.nameOrPossessivePronoun(), domSexCharacter(c).subjectAction("are", "is"), bottom.objectPronoun());
         }
     }
 

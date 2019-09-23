@@ -21,7 +21,7 @@ public class Jumped extends FemdomSexStance {
                             + "with %s thighs while %s uses the leverage to ride %s.",
                             top.subjectAction("are", "is"), bottom.nameOrPossessivePronoun(),
                             bottom.possessiveAdjective(), top.possessiveAdjective(),
-                            top.pronoun(), bottom.directObject());
+                            top.pronoun(), bottom.objectPronoun());
         }
     }
 

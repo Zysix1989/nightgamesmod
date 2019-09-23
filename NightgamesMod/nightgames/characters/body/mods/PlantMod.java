@@ -19,7 +19,7 @@ public class PlantMod extends PartMod {
     public double applyReceiveBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
         if (damage > self.getArousal().max()/ 5.0 && Global.random(4) == 0) {
             c.write(self, String.format("An intoxicating scent emanating from %s %s leaves %s in a trance!",
-            self.possessiveAdjective(), part.describe(self), opponent.directObject()));
+            self.possessiveAdjective(), part.describe(self), opponent.objectPronoun()));
             opponent.add(c, new Trance(opponent));
         }
         return 0;
@@ -38,7 +38,7 @@ public class PlantMod extends PartMod {
                 "The small rough fibrous filaments inside {{ self.nameOrPossessivePronoun() }} "
                     + "flower {{ part.getType() }} wrap around "
                     + "{{ other.nameOrPossessivePronoun() }} cock. A profound exhaustion settles "
-                    + "on {{ other.directObject() }}, as {{ other.subject() }} "
+                    + "on {{ other.objectPronoun() }}, as {{ other.subject() }} "
                     + "{{ other.action('feel') }} {{ self.nameOrPossessivePronoun() }} insidious "
                     + "flower leeching {{ other.possessiveAdjective() }} strength.");
             c.write(self, template.render(model));

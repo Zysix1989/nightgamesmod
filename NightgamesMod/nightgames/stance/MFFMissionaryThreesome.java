@@ -83,7 +83,7 @@ public class MFFMissionaryThreesome extends MaledomSexStance {
             return "";
         } else {
             return String.format("%s is holding %s down while %s fucking %s in the missionary position.",
-                            top.subject(), bottom.nameDirectObject(), domSexCharacter(c).subjectAction("are", "is"), bottom.directObject());
+                            top.subject(), bottom.nameDirectObject(), domSexCharacter(c).subjectAction("are", "is"), bottom.objectPronoun());
         }
     }
 

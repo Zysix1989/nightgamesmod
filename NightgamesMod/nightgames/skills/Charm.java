@@ -101,7 +101,7 @@ public class Charm extends Skill {
     @Override
     public String deal(Combat c, int damage, Result modifier, Character target) {
         if (modifier == Result.miss) {
-            return "You flash a dazzling smile at " + target.directObject() + ", but it wasn't very effective.";
+            return "You flash a dazzling smile at " + target.objectPronoun() + ", but it wasn't very effective.";
         } else if (modifier == Result.weak){
             return "You let out a soft purr and give " + target.getName()
             + " your best puppy dog eyes. She smiles, but then aims a quick punch at your groin, which you barely avoid. "
@@ -119,14 +119,14 @@ public class Charm extends Skill {
                             + " {other:pronoun} is unable to see it, your efforts are wasted.", 
                             getSelf(), target);
         } else {
-            return getSelf().getName() + " flashes a dazzling smile at "+target.nameDirectObject()+", charming " + target.directObject() + " instantly";
+            return getSelf().getName() + " flashes a dazzling smile at "+target.nameDirectObject()+", charming " + target.objectPronoun() + " instantly";
         }
     }
 
     @Override
     public String receive(Combat c, int damage, Result modifier, Character target) {
         if (modifier == Result.miss) {
-            return getSelf().getName() + " flashes a dazzling smile at "+target.directObject() + ", but it wasn't very effective.";
+            return getSelf().getName() + " flashes a dazzling smile at "+target.objectPronoun() + ", but it wasn't very effective.";
         } else if (modifier == Result.weak){
             return String.format("%s slumps submissively and purrs. It's cute, but %s's not going "
                             + "to get the better of %s.", getSelf().subject(), getSelf().pronoun(),
@@ -137,7 +137,7 @@ public class Charm extends Skill {
                             + "Maybe %s should let her get some "
                             + "attacks in while %s %s watching %s earnest efforts.",
                             getSelf().subject(), target.nameDirectObject(),
-                            getSelf().pronoun(), getSelf().directObject(), target.subject(),
+                            getSelf().pronoun(), getSelf().objectPronoun(), target.subject(),
                             target.pronoun(), target.action("enjoy"), getSelf().possessiveAdjective());
             if (damage > 0) {
                 message += String.format("\nYou're not sure if this was intentional, but %s flushed "
@@ -153,7 +153,7 @@ public class Charm extends Skill {
                             + " but blinded as you are you don't have a clue as to what"
                             + " it might be.", getSelf(), target);
         } else {
-            return getSelf().getName() + " flashes a dazzling smile at "+target.nameDirectObject()+", charming " + target.directObject() + " instantly.";
+            return getSelf().getName() + " flashes a dazzling smile at "+target.nameDirectObject()+", charming " + target.objectPronoun() + " instantly.";
         }
     }
 

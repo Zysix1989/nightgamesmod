@@ -74,7 +74,7 @@ public class Stumble extends Skill {
                                         + "%s can't keep %s balance and %s %s on top of %s. Maybe that's not so unfortunate.",
                         getSelf().getName(), target.nameDirectObject(), getSelf().reflexivePronoun(),
                         target.subject(), target.possessiveAdjective(), target.pronoun(),
-                        target.action("fall"), getSelf().directObject());
+                        target.action("fall"), getSelf().objectPronoun());
     }
 
 }

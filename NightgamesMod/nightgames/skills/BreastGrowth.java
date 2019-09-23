@@ -104,7 +104,7 @@ public class BreastGrowth extends Skill {
                             "You channel your arcane energies into %s flat chest, "
                                             + "causing small mounds to rapidly grow on %s. %s knees buckle with the"
                                             + " sensitivity you bestowed on %s new boobs.",
-                            target.nameOrPossessivePronoun(), target.directObject(),
+                            target.nameOrPossessivePronoun(), target.objectPronoun(),
                             Global.capitalizeFirstLetter(target.possessiveAdjective()), target.possessiveAdjective());
             if (damage > 0) {
                 message += " You realize the effects are permanent!";
@@ -128,7 +128,7 @@ public class BreastGrowth extends Skill {
                                             + " bigger than before. The new sensations from %s substantially larger breasts make %s tremble.",
                             getSelf().subjectAction("start"), Global.capitalizeFirstLetter(target.subjectAction("feel")),
                             target.possessiveAdjective(), Global.capitalizeFirstLetter(target.subjectAction("try", "tries")),
-                            target.possessiveAdjective(), target.possessiveAdjective(), target.directObject());
+                            target.possessiveAdjective(), target.possessiveAdjective(), target.objectPronoun());
             if (damage > 0) {
                 message += Global.capitalizeFirstLetter(target.subjectAction("realize"))
                                 + " the effects are permanent!";
@@ -140,7 +140,7 @@ public class BreastGrowth extends Skill {
                                             + " The new sensations from %s new breasts make %s tremble.",
                             getSelf().getName(), Global.capitalizeFirstLetter(target.subjectAction("feel")),
                             target.possessiveAdjective(), Global.capitalizeFirstLetter(target.pronoun()),
-                            target.action("try", "tries"), target.possessiveAdjective(), target.directObject());
+                            target.action("try", "tries"), target.possessiveAdjective(), target.objectPronoun());
         } else {
             message = String.format(
                             "%s moving and begins chanting. %s feeling some tingling in %s breasts, "

@@ -168,12 +168,12 @@ public class TailPeg extends Skill {
                                 + target.possessiveAdjective() + " tight hole.";
             case special:
                 return "You smile down at " + target.getName() + " and move your flexible tail behind "
-                                + target.directObject() + ". You spread " + target.possessiveAdjective()
+                                + target.objectPronoun() + ". You spread " + target.possessiveAdjective()
                                 + " cheeks with your tail and plunge it into " + target.possessiveAdjective()
                                 + " tight pucker. " + target.getName() + " moans loudly at the sudden intrusion.";
             case intercourse:
                 return "You smile down at " + target.getName() + " and move your flexible tail behind "
-                                + target.directObject() + ". You spread " + target.possessiveAdjective()
+                                + target.objectPronoun() + ". You spread " + target.possessiveAdjective()
                                 + " legs with your tail and plunge it into " + target.possessiveAdjective()
                                 + " wet slit. " + target.getName() + " moans loudly at the sudden intrusion.";
             case strong:
@@ -226,7 +226,7 @@ public class TailPeg extends Skill {
                                 + " at the same time.", getSelf().subject(), getSelf().possessiveAdjective(),
                                 target.nameOrPossessivePronoun(),
                                 Global.capitalizeFirstLetter(target.pronoun()), target.action("look"),
-                                target.action("see"), target.directObject(), 
+                                target.action("see"), target.objectPronoun(),
                                 Global.capitalizeFirstLetter(target.subjectAction("try", "tries")),
                                 target.possessiveAdjective(), getSelf().nameOrPossessivePronoun(),
                                 target.possessiveAdjective(), target.possessiveAdjective(),
@@ -243,7 +243,7 @@ public class TailPeg extends Skill {
                                 + " %s breaks %s concentration, so the tail slides smoothly into %s pussy.",
                                 getSelf().subject(), getSelf().possessiveAdjective(), 
                                 target.nameDirectObject(), Global.capitalizeFirstLetter(target.pronoun()),
-                                target.action("look"), target.action("see"), target.directObject(),
+                                target.action("look"), target.action("see"), target.objectPronoun(),
                                 target.action("panic"),
                                 Global.capitalizeFirstLetter(target.subjectAction("try", "tries")),
                                 target.possessiveAdjective(), getSelf().nameOrPossessivePronoun(),

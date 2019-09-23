@@ -16,7 +16,7 @@ public class Pin extends AbstractFacingStance {
             return "You're sitting on " + bottom.getName() + ", holding her arms in place.";
         } else {
             return String.format("%s is pinning %s down, leaving %s helpless.",
-                            top.subject(), bottom.nameDirectObject(), bottom.directObject());
+                            top.subject(), bottom.nameDirectObject(), bottom.objectPronoun());
         }
     }
 
@@ -119,7 +119,7 @@ public class Pin extends AbstractFacingStance {
     public void struggle(Combat c, Character struggler) {
         c.write(struggler, String.format("%s to gain a more dominant position, but with"
                         + " %s behind %s holding %s wrists behind %s waist firmly, there is little %s can do.",
-                        struggler.subjectAction("struggle"), top.subject(), struggler.directObject(),
+                        struggler.subjectAction("struggle"), top.subject(), struggler.objectPronoun(),
                         struggler.possessiveAdjective(), struggler.possessiveAdjective(), struggler.pronoun()));
         super.struggle(c, struggler);
     }

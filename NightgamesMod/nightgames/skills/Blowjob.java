@@ -165,7 +165,7 @@ public class Blowjob extends Skill {
         if (modifier == Result.miss) {
             m += String.format("%s tries to suck %s cock, but %s %s %s hips back to avoid %s.",
                             getSelf().getName(), target.nameOrPossessivePronoun(), target.pronoun(),
-                            target.action("pull"), target.possessiveAdjective(), getSelf().directObject());
+                            target.action("pull"), target.possessiveAdjective(), getSelf().objectPronoun());
         } else if (modifier == Result.special) {
             m += String.format("%s soft lips and talented tongue work over %s dick, drawing out"
                             + " dangerously irresistible pleasure with each touch.", 
@@ -176,8 +176,8 @@ public class Blowjob extends Skill {
                             + "Her lower tongue runs up and down %s shaft causing %s to shudder with arousal.",
                             getSelf().nameOrPossessivePronoun(), target.subjectAction("feel"),
                             target.possessiveAdjective(),
-                            Global.capitalizeFirstLetter(target.pronoun()), target.directObject(),
-                            target.possessiveAdjective(), target.directObject());
+                            Global.capitalizeFirstLetter(target.pronoun()), target.objectPronoun(),
+                            target.possessiveAdjective(), target.objectPronoun());
         } else if (modifier == Result.reverse) {
             m += String.format("Faced with %s dick sitting squarely in front of %s face, %s"
                             + " obediently tongues %s cock in defeat.", target.nameOrPossessivePronoun(),
@@ -215,7 +215,7 @@ public class Blowjob extends Skill {
         if (modifier != Result.miss && getSelf().body.getRandom("mouth").isErogenous()) {
             m += String.format("<br/>Unfortunately for %s, as %s mouth fucks %s cock %s sensitive"
                             + " modifier mouth pussy sends spasms of pleasure into %s as well.", 
-                            getSelf().directObject(), getSelf().subject(), target.nameOrPossessivePronoun(),
+                            getSelf().objectPronoun(), getSelf().subject(), target.nameOrPossessivePronoun(),
                             getSelf().possessiveAdjective(), getSelf().reflexivePronoun());
         }
         return m;

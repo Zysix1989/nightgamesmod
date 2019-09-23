@@ -622,7 +622,7 @@ public class Cassie extends BasePersonality {
                             + "from her embrace. <br/><br/><i>\"Thanks. Not that I'm happy about losing, but that felt amazing.\"</i> Cassie smiles "
                             + "sheepishly and takes hold of your still-hard cock. <i>\"I'm the one who got you this turned on, right? Then I'm going to take responsibility and finish you off.\"</i> "
                             + "You're slightly skeptical of her reasoning, not that you're going to turn down her offer. <br/><br/><i>\"It would be a disgrace to get a " + c.getOpponent(character).boyOrGirl() + " all hot and bothered, "
-                            + "only to have another girl make " + opponent.directObject() + " cum.\"</i> She explains. She sets to licking and stroking your dick, showing no less enthusiasm than she did during the fight. "
+                            + "only to have another girl make " + opponent.objectPronoun() + " cum.\"</i> She explains. She sets to licking and stroking your dick, showing no less enthusiasm than she did during the fight. "
                             + "The delightful sensations from her fingers and tongue soon bring you to a messy climax on her face. You thank her as you collect your clothes and hers, "
                             + "leaving her naked, but still in good spirits.";
         } else {

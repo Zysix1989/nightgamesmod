@@ -65,7 +65,7 @@ public class FFMCowgirlThreesome extends FemdomSexStance {
             return "";
         } else {
             return String.format("%s is holding %s down while %s fucking %s in the Cowgirl position.",
-                            top.subject(), bottom.nameDirectObject(), domSexCharacter(c).subjectAction("are", "is"), bottom.directObject());
+                            top.subject(), bottom.nameDirectObject(), domSexCharacter(c).subjectAction("are", "is"), bottom.objectPronoun());
         }
     }
 

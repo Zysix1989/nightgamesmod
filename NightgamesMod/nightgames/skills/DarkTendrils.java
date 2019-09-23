@@ -87,13 +87,13 @@ public class DarkTendrils extends Skill {
         if (modifier == Result.miss) {
             return String.format("%s makes a gesture and evil looking tentacles pop up around %s. %s %s out of the way as they try to grab %s.",
                             getSelf().subject(), target.subject(), Global.capitalizeFirstLetter(target.pronoun()),
-                            target.action("dive"), target.directObject());
+                            target.action("dive"), target.objectPronoun());
         } else if (modifier == Result.weak) {
             return String.format("%s shadow seems to come to life as dark tendrils wrap around %s legs and bring %s to the floor.",
-                            target.nameOrPossessivePronoun(), target.possessiveAdjective(), target.directObject());
+                            target.nameOrPossessivePronoun(), target.possessiveAdjective(), target.objectPronoun());
         } else {
             return String.format("%s summons shadowy tentacles which snare %s arms and hold %s in place.", 
-                            getSelf().subject(), target.nameOrPossessivePronoun(), target.directObject());
+                            getSelf().subject(), target.nameOrPossessivePronoun(), target.objectPronoun());
         }
     }
 

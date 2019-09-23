@@ -38,7 +38,7 @@ public class PacifistModifier extends BaseModifier {
                         + "any way.\"</i> As you try to ignore a growing sense of dread, she leans close to your ear and whispers, <i>\"Good luck.\"</i>",
                         player.getTrueName(),
                         player.pronoun(),
-                        player.directObject(), player.directObject(), player.directObject(),
+                        player.objectPronoun(), player.objectPronoun(), player.objectPronoun(),
                         player.pronoun());
     }
 

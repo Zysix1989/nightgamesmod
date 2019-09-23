@@ -43,8 +43,8 @@ public class MindControl extends Addiction {
     protected String describeIncrease() {
         switch (getSeverity()) {
             case HIGH:
-                return cause.getName() + " has you completely in " + cause.directObject() + " grasp. Your body moves "
-                        + "automatically to obey " + cause.directObject() + " commands, now.";
+                return cause.getName() + " has you completely in " + cause.objectPronoun() + " grasp. Your body moves "
+                        + "automatically to obey " + cause.objectPronoun() + " commands, now.";
             case LOW:
                 return "You feel a tug on your mind every time " + cause.getName() + " speaks, pushing you to do as "
                         + cause.pronoun() + " says.";
@@ -60,11 +60,11 @@ public class MindControl extends Addiction {
     protected String describeDecrease() {
         switch (getSeverity()) {
             case LOW:
-                return cause.getName() + "'s control is weakening, and only " + cause.directObject() + " strongest commands"
+                return cause.getName() + "'s control is weakening, and only " + cause.objectPronoun() + " strongest commands"
                         + " have a noticable effect.";
             case MED:
                 return "You feel as if " + cause.getName() + "'s words do not bury themselves as deeply into your psyche as before."
-                        + " Can you resist " + cause.directObject() + "?";
+                        + " Can you resist " + cause.objectPronoun() + "?";
             case NONE:
                 return "At last that invisible string tying you to " + cause.getName() + " snaps, and you are back in control"
                         + " of your mind.";
@@ -103,19 +103,19 @@ public class MindControl extends Addiction {
 
     @Override
     public String informantsOverview() {
-        return "Oh, that is just nasty. You've got to hand it to " + cause.directObject() + ", though, " + cause.pronoun()
-                + " got you good. It looks like " + cause.directObject() + " control somehow bypasses your mind and goes"
+        return "Oh, that is just nasty. You've got to hand it to " + cause.objectPronoun() + ", though, " + cause.pronoun()
+                + " got you good. It looks like " + cause.objectPronoun() + " control somehow bypasses your mind and goes"
                 + " straight to your motor functions. That's a special kind of mean, because you'll be entirely"
                 + " conscious for the whole thing, not turned into some kind of willing slave. There's"
                 + " two ways you can go about this: You can do what " + cause.pronoun() + " wants you to do, but on your"
-                + " terms, or you can try to defy " + cause.directObject() + " as long as you can and beat "
-                + cause.directObject() + " quickly. If you play along, by laying down or whacking off or something, then"
+                + " terms, or you can try to defy " + cause.objectPronoun() + " as long as you can and beat "
+                + cause.objectPronoun() + " quickly. If you play along, by laying down or whacking off or something, then"
                 + " that will obviously be bad for you but it would also mean you stay more or less in control of it all."
-                + " If you fight " + cause.directObject() + " control, you'll be able to function normally for a while,"
+                + " If you fight " + cause.objectPronoun() + " control, you'll be able to function normally for a while,"
                 + " but you will eventually break. When you do, " + cause.pronoun() + "'ll have total control until you"
-                + " recover, which would be far worse. Resisting " + cause.directObject() + " commands will take"
+                + " recover, which would be far worse. Resisting " + cause.objectPronoun() + " commands will take"
                 + " some serious effort, so it would probably leave you quite tired. So my advice is: don't cum inside"
-                + " of " + cause.directObject() + " again while " + cause.pronoun() + " can look you in the eyes. It's that simple.";
+                + " of " + cause.objectPronoun() + " again while " + cause.pronoun() + " can look you in the eyes. It's that simple.";
     }
 
     @Override
@@ -136,7 +136,7 @@ public class MindControl extends Addiction {
     public String initialMessage(Combat c, Optional<Status> replacement) {
         if (inWithdrawal) {
             return "There " + cause.pronoun() + " is! " + cause.getName() + " does not look pleased after you haven't visited "
-                    + cause.directObject() + " all day.";
+                    + cause.objectPronoun() + " all day.";
         }
         return "Your breathing accelerates when you see " + cause.getName() + "; you know what power " + cause.pronoun()
                 + " has over you...";
@@ -147,11 +147,11 @@ public class MindControl extends Addiction {
         switch (getCombatSeverity()) {
             case HIGH:
                 return "Every word " + cause.getName() + " speaks rings of truth to you, even though " + cause.pronoun() + "'s"
-                        + " telling you to submit to " + cause.directObject() + ". Your body trembles, and you will soon"
+                        + " telling you to submit to " + cause.objectPronoun() + ". Your body trembles, and you will soon"
                         + " be forced to obey.";
             case LOW:
                 return cause.getName() + " keeps saying things for you to do, and you don't know how"
-                                + " long you'll be able to resist " + cause.directObject() + ".";
+                                + " long you'll be able to resist " + cause.objectPronoun() + ".";
             case MED:
                 return cause.getName() + "'s words are starting to have a greater pull on you. You won't hold out much longer.";
             case NONE:
@@ -255,12 +255,12 @@ public class MindControl extends Addiction {
                         description = "You turn your head away as you feel your orgasm coming on, wary of " + controller.getName() + "'s"
                                         + " hypnotic eyes. " + Global.capitalizeFirstLetter(controller.pronoun()) + "'s"
                                         + " not having it, though. " + Global.capitalizeFirstLetter(controller.pronoun()) + " grabs your head"
-                                        + " and forces your eyelids open with " + controller.directObject()+ " thumbs. ";
+                                        + " and forces your eyelids open with " + controller.objectPronoun()+ " thumbs. ";
                         break;
                     case anal:
                         if(affected instanceof Player && Global.getButtslutQuest().isPresent() && pos.inserted(controller)) {
                             succeeded = true;
-                            description = "I need a description for how " + controller.getName() + " can mind control you without facing via anal sex. Maybe " + controller.directObject()
+                            description = "I need a description for how " + controller.getName() + " can mind control you without facing via anal sex. Maybe " + controller.objectPronoun()
                                             + " robo-dick has a subsonics generator or something, or maybe it's via drugged cum.";
                             break;
                         }
@@ -269,11 +269,11 @@ public class MindControl extends Addiction {
                             description = "You turn your head away as you feel your orgasm coming on, wary of " + controller.getName() + "'s"
                                             + " hypnotic eyes. " + Global.capitalizeFirstLetter(controller.pronoun()) + "'s"
                                             + " not having it, though. " + Global.capitalizeFirstLetter(controller.pronoun()) + " grabs your head"
-                                            + " and forces your eyelids open with " + controller.directObject() + " thumbs. ";
+                                            + " and forces your eyelids open with " + controller.objectPronoun() + " thumbs. ";
                             break;
                         } else if (pos instanceof Anal) {
                             succeeded = false;
-                            description = "Since you're not facing " + controller.getName() + ", " + controller.directObject()
+                            description = "Since you're not facing " + controller.getName() + ", " + controller.objectPronoun()
                                             + " hypnotic eyes cannot affect you.";
                             break;
                         }
@@ -286,10 +286,10 @@ public class MindControl extends Addiction {
                             description = "You turn your head away as you feel your orgasm coming on, wary of " + controller.getName() + "'s"
                                             + " hypnotic eyes. " + Global.capitalizeFirstLetter(controller.pronoun()) + "'s"
                                             + " not having it, though. " + Global.capitalizeFirstLetter(controller.pronoun()) + " twists your head back"
-                                            + " and forces your eyelids open with " + controller.directObject() + " thumbs. ";
+                                            + " and forces your eyelids open with " + controller.objectPronoun() + " thumbs. ";
                         } else {
                             description = "At the moment of your orgasm, " + controller.getName() + " pulls herself up by"
-                                            + " your neck and touches " + controller.directObject() + " nose to yours."
+                                            + " your neck and touches " + controller.objectPronoun() + " nose to yours."
                                             + " So close to cumming, you can't bring yourself to look away. ";
                         }
                         break;
@@ -299,7 +299,7 @@ public class MindControl extends Addiction {
                             description = "You turn your head away as you feel your orgasm coming on, wary of " + controller.getName() + "'s"
                                             + " hypnotic eyes. " + Global.capitalizeFirstLetter(controller.pronoun()) + "'s"
                                             + " not having it, though. " + Global.capitalizeFirstLetter(controller.pronoun()) + " grabs your head"
-                                            + " and forces your eyelids open with " + controller.directObject() + " thumbs. ";
+                                            + " and forces your eyelids open with " + controller.objectPronoun() + " thumbs. ";
                         } else {
                             succeeded = false;
                             description = "With " + controller.getName() + " pinned beneath you as " + controller.pronoun()
@@ -311,8 +311,8 @@ public class MindControl extends Addiction {
                         if (pos.dom(controller)) {
                             succeeded = true;
                             description = controller.getName() + " grabs a fistful of your hair and pulls your head downwards. There is"
-                                            + " nothing you can do to evade " + controller.directObject() + " hypnotic"
-                                            + " gaze as you erupt into " + controller.directObject() + " sucking mouth. ";
+                                            + " nothing you can do to evade " + controller.objectPronoun() + " hypnotic"
+                                            + " gaze as you erupt into " + controller.objectPronoun() + " sucking mouth. ";
                         } else {
                             // probably extremely rare
                             succeeded = false;
@@ -341,7 +341,7 @@ public class MindControl extends Addiction {
                         } else {
                             succeeded = false;
                             description = "Since you're not facing " + controller.getName() + ", "
-                                            + controller.directObject() + " hypnotic eyes cannot affect you.";
+                                            + controller.objectPronoun() + " hypnotic eyes cannot affect you.";
                         }
                 }
         }

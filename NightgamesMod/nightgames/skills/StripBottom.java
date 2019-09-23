@@ -90,7 +90,7 @@ public class StripBottom extends Skill {
     @Override public String deal(Combat c, int damage, Result modifier, Character target) {
         if (modifier == Result.miss) {
             return "You grab " + target.getName() + "'s " + stripped.getName() + ", but " + target.pronoun()
-                            + " scrambles away before you can strip " + target.directObject() + ".";
+                            + " scrambles away before you can strip " + target.objectPronoun() + ".";
         } else {
             String msg = "After a brief struggle, you manage to pull off " + target.getName() + "'s " + stripped.getName()
                             + ".";

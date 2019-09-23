@@ -214,10 +214,10 @@ public class Kiss extends Skill {
                             target.possessiveAdjective(), target.pronoun(), target.action("are", "is"),
                             Global.capitalizeFirstLetter(target.subjectAction("start")),
                             target.pronoun(), target.action("realize"), getSelf().subject(),
-                            target.directObject(), getSelf().possessiveAdjective(), 
+                            target.objectPronoun(), getSelf().possessiveAdjective(),
                             target.nameOrPossessivePronoun(), c.bothPossessive(target), 
                             Global.capitalizeFirstLetter(target.subjectAction("try", "tries")),
-                            getSelf().nameOrPossessivePronoun(), target.directObject());
+                            getSelf().nameOrPossessivePronoun(), target.objectPronoun());
         }
         if (modifier == Result.special) {
             return String.format("%s seductively pulls %s into a deep kiss. As first %s %s to match %s "
@@ -238,7 +238,7 @@ public class Kiss extends Skill {
                 case 0:
                     return String.format("%s grabs %s and kisses %s passionately on the mouth. "
                                     + "As %s for air, %s gently nibbles on %s bottom lip.",
-                                    getSelf().subject(), target.nameDirectObject(), target.directObject(),
+                                    getSelf().subject(), target.nameDirectObject(), target.objectPronoun(),
                                     target.subjectAction("break"), getSelf().subject(), target.possessiveAdjective());
                 case 1:
                     return String.format("%s peppers quick little kisses around %s mouth before suddenly"
@@ -249,7 +249,7 @@ public class Kiss extends Skill {
                 default:
                     return String.format("%s kisses %s softly and romantically, slowly drawing %s into %s "
                                     + "embrace. As %s part, %s teasingly brushes %s lips against %s.",
-                                    getSelf().subject(), target.nameDirectObject(), target.directObject(),
+                                    getSelf().subject(), target.nameDirectObject(), target.objectPronoun(),
                                     getSelf().possessiveAdjective(), c.bothSubject(target),
                                     getSelf().subject(), target.possessiveAdjective(),
                                     target.human() ? "yours" : target.possessiveAdjective());

@@ -62,7 +62,7 @@ public class Strapon extends Skill {
                                                 + "cock and grins at %s in a way that makes %s feel a bit nervous.",
                                                 getSelf().subject(), getSelf().possessiveAdjective(),
                                                 unequipped.get(0), target.nameDirectObject(),
-                                                target.directObject()));
+                                                target.objectPronoun()));
             } else printBlinded(c);
         }
         if (!target.is(Stsflag.blinded)) {

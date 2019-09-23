@@ -270,7 +270,7 @@ public class BreastSmother extends Skill {
         }
         else {
             b.append( "You rock " + target.getName() + "'s head between your "
-                            + getSelf().body.getRandomBreasts().fullDescribe(getSelf()) + " trying to force " + target.directObject() + " to gasp. ");                           
+                            + getSelf().body.getRandomBreasts().fullDescribe(getSelf()) + " trying to force " + target.objectPronoun() + " to gasp. ");
         }
         
         if (getSelf().has(Trait.temptingtits)) {

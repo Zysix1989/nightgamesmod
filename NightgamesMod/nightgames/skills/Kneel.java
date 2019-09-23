@@ -59,7 +59,7 @@ public class Kneel extends Skill {
 
     @Override
     public String deal(Combat c, int damage, Result modifier, Character target) {
-        return "You drop to your hands and knees in front of " + target.getName() + " and look up at "+target.directObject()+" demurely.";
+        return "You drop to your hands and knees in front of " + target.getName() + " and look up at "+target.objectPronoun()+" demurely.";
     }
 
     @Override

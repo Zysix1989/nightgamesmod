@@ -32,7 +32,7 @@ public class LegLocked extends Status {
         } else {
             return String.format("%s legs are wrapped around %s waist, preventing %s from pulling out.",
                             c.getOpponent(affected).nameOrPossessivePronoun(), affected.nameOrPossessivePronoun(),
-                            affected.directObject());
+                            affected.objectPronoun());
         }
     }
 

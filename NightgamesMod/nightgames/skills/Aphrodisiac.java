@@ -120,14 +120,14 @@ public class Aphrodisiac extends Skill {
                 + " fingertip, "
                 + getSelf().subjectAction("pull")
                 + " it out and flicks it at "
-                + target.directObject()
+                + target.objectPronoun()
                 + "," + " skillfully depositing it in "
                 + target.possessiveAdjective()
                 + " open mouth. "
                 + Global.capitalizeFirstLetter(target.subject())
                 + " immediately feel"
                 + " a flash of heat spread through "
-                + target.directObject()
+                + target.objectPronoun()
                 + " and only a small part of it results from the anger caused by "
                 + getSelf().possessiveAdjective()
                 + " dirty move.";
@@ -135,7 +135,7 @@ public class Aphrodisiac extends Skill {
             return "You uncap a small bottle of Aphrodisiac and splash it in "
                 + target.getName() + "'s face. For a second, " + target.pronoun()
                 + " is just surprised, but gradually a growing desire " + "starts to make "
-                + target.directObject() + " weak in the knees.";
+                + target.objectPronoun() + " weak in the knees.";
         }
     }
 
@@ -146,7 +146,7 @@ public class Aphrodisiac extends Skill {
                 + " a bottle of liquid in "
                 + target.nameOrPossessivePronoun()
                 + " direction, but none of it hits "
-                + target.directObject() + ".";
+                + target.objectPronoun() + ".";
         } else if (modifier == Result.special) {
             return String.format(
                 "%s inserts a bottle into the attachment on %s arm. %s suddenly surrounded by a "
@@ -168,10 +168,10 @@ public class Aphrodisiac extends Skill {
                 + getSelf().possessiveAdjective()
                 + " juices on " + getSelf().possessiveAdjective()
                 + " fingertip, " + getSelf().subjectAction("pull") + " it out and flicks it at "
-                + target.directObject() + "," + " skillfully depositing it in "
+                + target.objectPronoun() + "," + " skillfully depositing it in "
                 + target.possessiveAdjective() + " open mouth. "
                 + Global.capitalizeFirstLetter(target.subject()) + " immediately feel"
-                + " a flash of heat spread through " + target.directObject()
+                + " a flash of heat spread through " + target.objectPronoun()
                 + " and only a small part of it" + " results from the anger caused by "
                 + getSelf().possessiveAdjective() + " dirty move.";
         } else {

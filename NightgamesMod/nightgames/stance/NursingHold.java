@@ -26,7 +26,7 @@ public class NursingHold extends AbstractFacingStance {
     public String describe(Combat c) {
         if (top.human()) {
             return "You are cradling " + bottom.nameOrPossessivePronoun()
-                            + " head in your lap with your breasts dangling in front of " + bottom.directObject();
+                            + " head in your lap with your breasts dangling in front of " + bottom.objectPronoun();
         } else {
             return String.format("%s is holding %s head in %s lap, with %s enticing "
                             + "breasts right in front of %s mouth.", top.subject(),
@@ -151,7 +151,7 @@ public class NursingHold extends AbstractFacingStance {
                             + "against %s mouth again, forcing %s to suckle.", struggler.subject(),
                             top.nameDirectObject(), top.pronoun(), top.action("presses"),
                             top.possessiveAdjective(), struggler.possessiveAdjective(),
-                            struggler.directObject()));
+                            struggler.objectPronoun()));
         }
         (new Suckle(struggler)).resolve(c, top);
         super.struggle(c, struggler);

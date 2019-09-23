@@ -85,10 +85,10 @@ public class Sensitize extends Skill {
                             getSelf().possessiveAdjective(), 
                             Global.capitalizeFirstLetter(target.subjectAction("are", "is")),
                             target.possessiveAdjective(), target.possessiveAdjective(),
-                            target.directObject());
+                            target.objectPronoun());
         } else if (modifier == Result.miss) {
             return String.format("%s splashes a bottle of liquid in %s direction, but none of it hits %s.",
-                            getSelf().subject(), target.nameDirectObject(), target.directObject());
+                            getSelf().subject(), target.nameDirectObject(), target.objectPronoun());
         } else {
             return String.format("%s throws a bottle of strange liquid at %s. The skin it touches grows hot"
                             + " and oversensitive.", getSelf().subject(), target.nameDirectObject());

@@ -96,7 +96,7 @@ public class Growl extends Skill {
             return String.format("Kat growls assertively and thrusts out her hips, eyes fixed on your crotch, clearly demanding that you submit for breeding. You try to resist "
                             + "your instincts to submit, but your body yields to Kat's demands, and you fall onto your back, offering yourself up to her.",
                             getSelf().subject(), target.nameDirectObject(),
-                            getSelf().pronoun(), getSelf().directObject(), target.subject(),
+                            getSelf().pronoun(), getSelf().objectPronoun(), target.subject(),
                             target.pronoun(), target.action("enjoy"), getSelf().possessivePronoun());
         } else if (modifier == Result.reverse) {
             return String.format("Kat growls assertively and thrusts out her hips, eyes fixed on your crotch, clearly demanding that you submit for breeding. You try to resist "

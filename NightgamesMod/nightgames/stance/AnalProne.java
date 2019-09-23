@@ -20,12 +20,12 @@ public class AnalProne extends AnalSexStance {
             return String.format("%s flat on %s back with %s feet over %s head while %s pegs %s with %s strapon dildo.",
                             bottom.subjectAction("are", "is"), bottom.possessiveAdjective(),
                             bottom.possessiveAdjective(), bottom.possessiveAdjective(),
-                            top.subject(), bottom.directObject(), top.possessiveAdjective());
+                            top.subject(), bottom.objectPronoun(), top.possessiveAdjective());
         } else {
             return String.format("%s flat on %s back with %s feet over %s head while %s pegs %s with %s %s.",
                             bottom.subjectAction("are", "is"), bottom.possessiveAdjective(),
                             bottom.possessiveAdjective(), bottom.possessiveAdjective(),
-                            top.subject(), bottom.directObject(),
+                            top.subject(), bottom.objectPronoun(),
                             top.possessiveAdjective(), top.body.getRandomInsertable().describe(top));
         }
     }

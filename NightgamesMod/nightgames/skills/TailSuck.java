@@ -92,7 +92,7 @@ public class TailSuck extends Skill {
                                             + " and you feel life flowing in from your tail as well as through"
                                             + " your nose.",
                             target.nameOrPossessivePronoun(), target.body.getRandomCock().describe(target),
-                            target.directObject());
+                            target.objectPronoun());
         } else if (modifier == Result.critical) {
             return String.format(
                             "Making sure %s view is blocked, you swing your tail out in front of you, hovering over"
@@ -137,10 +137,10 @@ public class TailSuck extends Skill {
                                             + " completely. %s as if %s %s slowly getting weaker the more it"
                                             + " sucks on %s. That is not good.",
                             getSelf().getName(), getSelf().possessiveAdjective(),
-                            target.nameOrPossessivePronoun(), target.directObject(),target.directObject(),
+                            target.nameOrPossessivePronoun(), target.objectPronoun(),target.objectPronoun(),
                             target.possessiveAdjective(), target.body.getRandomCock().describe(target),
                             Global.capitalizeFirstLetter(target.subjectAction("feel")),
-                            target.pronoun(), target.action("are", "is"), target.directObject());
+                            target.pronoun(), target.action("are", "is"), target.objectPronoun());
         } else if (modifier == Result.critical) {
             return String.format(
                             "With %s nose between %s asscheeks as it is, %s some muscles at the base "
@@ -154,8 +154,8 @@ public class TailSuck extends Skill {
                             target.possessiveAdjective(), target.body.getRandomCock().describe(target), 
                             getSelf().possessiveAdjective(), user().body.getRandomPussy().describe(getSelf()),
                             target.possessiveAdjective(),
-                            getSelf().subject(), target.directObject(), target.nameOrPossessivePronoun(),
-                            target.pronoun(), target.action("feel"), target.possessiveAdjective(), target.directObject());
+                            getSelf().subject(), target.objectPronoun(), target.nameOrPossessivePronoun(),
+                            target.pronoun(), target.action("feel"), target.possessiveAdjective(), target.objectPronoun());
         } else if (modifier == Result.weak) {
             return String.format(
                             "%s grabs %s tail with both hands and aims it at"

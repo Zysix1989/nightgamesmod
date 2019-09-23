@@ -80,7 +80,7 @@ public class LickNipples extends Skill {
         if (modifier == Result.miss) {
             return String.format("%s tries to suck on %s chest, but %s %s %s.",
                             getSelf().subject(), target.nameOrPossessivePronoun(),
-                            target.pronoun(), target.action("avoid"), getSelf().directObject());
+                            target.pronoun(), target.action("avoid"), getSelf().objectPronoun());
         } else {
             return String.format("%s licks and sucks %s nipples, sending a surge of excitement straight to %s groin.",
                             getSelf().subject(), target.nameOrPossessivePronoun(), target.possessiveAdjective());

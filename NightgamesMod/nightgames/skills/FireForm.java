@@ -60,7 +60,7 @@ public class FireForm extends Skill {
     @Override
     public String receive(Combat c, int damage, Result modifier, Character target) {
         return String.format("%s powers up and %s can almost feel the energy radiating from %s.",
-                        getSelf().subject(), target.subject(), getSelf().directObject());
+                        getSelf().subject(), target.subject(), getSelf().objectPronoun());
     }
 
 }

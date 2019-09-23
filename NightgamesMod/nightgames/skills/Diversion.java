@@ -89,7 +89,7 @@ public class Diversion extends Skill {
                         + "but you find yourself holding just %s %s. Wait... what the fuck?",
                         attacker.subjectAction("lose"), getSelf().subject(), attacker.pronoun(),
                         attacker.action("see"),
-                        getSelf().directObject(), attacker.directObject(),
+                        getSelf().objectPronoun(), attacker.objectPronoun(),
                         Global.capitalizeFirstLetter(attacker.subject()), attacker.action("spin"),
                         getSelf().nameDirectObject(), getSelf().possessiveAdjective(),
                         article.getName());

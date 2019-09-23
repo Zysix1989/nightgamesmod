@@ -102,7 +102,7 @@ public class TemptressBlowjob extends Blowjob {
                                                         + " Long, slow licks along the shaft and small, swift licks"
                                                         + " around the head cause %s to groan in pleasure.",
                                         getSelf().subjectAction("go", "goes"), target.nameOrPossessivePronoun(),
-                                        target.body.getRandomCock().describe(target), target.directObject());
+                                        target.body.getRandomCock().describe(target), target.objectPronoun());
                     case 1:
                         return String.format("%s %s lips around the head of %s hard and wet %s "
                                         + "and %s on it forcefully while swirling %s tongue rapidly"

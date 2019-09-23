@@ -81,7 +81,7 @@ public class HeightenSenses extends Skill {
         if (modifier == Result.miss) {
             return String.format(
                             "You plant a suggestion in %s's head to increase %s sensitivity. Unfortunately, it didn't seem to affect %s much.",
-                            new Object[] {target.getName(), target.possessiveAdjective(), target.directObject()});
+                            new Object[] {target.getName(), target.possessiveAdjective(), target.objectPronoun()});
         }
         return String.format(
                         "You plant a suggestion in %s's head to increase %s sensitivity. %s shivers as %s sense of touch is amplified",

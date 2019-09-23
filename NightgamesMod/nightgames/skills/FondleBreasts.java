@@ -113,7 +113,7 @@ public class FondleBreasts extends Skill {
             return String.format("%s massages %s %s, and pinches %s nipples, causing %s to moan with desire.",
                             getSelf().subject(), target.nameOrPossessivePronoun(),
                             target.body.getRandomBreasts().describe(target),
-                            target.possessiveAdjective(), target.directObject());
+                            target.possessiveAdjective(), target.objectPronoun());
         } else if (modifier == Result.special) {
             return Global.format("{self:SUBJECT-ACTION:slip|slips} {self:possessive} agile fingers into {other:name-possessive} bra, massaging and pinching at {other:possessive} nipples.",
                             getSelf(), target);

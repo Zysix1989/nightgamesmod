@@ -377,7 +377,7 @@ public class TestAngel extends BasePersonality {
                                             + " You ease %s to the floor as %s goes completely limp, while Angel licks"
                                             + " the cum from her fingers.", target.getName(), target.getName(), target.getName(),
                             target.possessivePronoun(), target.getName(), target.getName(), target.pronoun(), target.getName(),
-                            target.directObject(), target.pronoun());
+                            target.objectPronoun(), target.pronoun());
         }
         return "You present " + target.getName()
                         + "'s naked, helpless form to Angel's tender minstrations. Angel licks her lips and begins licking and stroking "

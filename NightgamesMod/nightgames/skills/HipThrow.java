@@ -80,15 +80,15 @@ public class HipThrow extends Skill {
                             + "take advantage of it. The next thing %s, %s %s "
                             + "hitting the floor behind %s.",
                             getSelf().subjectAction("see"), target.nameOrPossessivePronoun(),
-                            getSelf().action("lunge"), target.directObject(),
+                            getSelf().action("lunge"), target.objectPronoun(),
                             getSelf().subjectAction("know"), getSelf().pronoun(),
-                            getSelf().action("are", "is"), target.directObject());
+                            getSelf().action("are", "is"), target.objectPronoun());
         } else {
             return String.format("%s grabs %s arm and pulls %s off balance, but %s %s"
                             + " to plant %s foot behind %s leg sweep. This gives %s a more"
                             + " stable stance than %s and %s has "
                             + "to break away to stay on %s feet.", getSelf().subject(),
-                            target.nameOrPossessivePronoun(), target.directObject(),
+                            target.nameOrPossessivePronoun(), target.objectPronoun(),
                             target.pronoun(), target.action("manage"), target.possessiveAdjective(),
                             getSelf().possessiveAdjective(), target.nameDirectObject(),
                             getSelf().nameDirectObject(), getSelf().pronoun(),

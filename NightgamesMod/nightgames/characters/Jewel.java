@@ -731,7 +731,7 @@ public class Jewel extends BasePersonality {
                             + "up moaning in pleasure. It's like penises exist just to be dominated.\""
                             + "</i> You feel a chill run down your back, watching Jewel's display of"
                             + " dominance, but you're also rock hard. %s lets out a loud moan and "
-                            + "covers Jewel's foot with cum.", target.getName(), target.directObject(),
+                            + "covers Jewel's foot with cum.", target.getName(), target.objectPronoun(),
                             target.possessiveAdjective(), target.getName(), target.getName());
         }
         return "Jewel looks over " + target.getName()

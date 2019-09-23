@@ -113,7 +113,7 @@ public class BreastGrowthSuper extends Skill {
                             "You channel your arcane energies into %s flat chest, "
                                             + "causing small mounds to rapidly grow on %s. %s knees buckle with the"
                                             + " sensitivity you bestowed on %s new boobs.",
-                            target.nameOrPossessivePronoun(), target.directObject(),
+                            target.nameOrPossessivePronoun(), target.objectPronoun(),
                             Global.capitalizeFirstLetter(target.possessivePronoun()), target.possessivePronoun());
             if (damage > 0) {
                 message += " You realize some of the effects are permanent!";
@@ -137,7 +137,7 @@ public class BreastGrowthSuper extends Skill {
 //                                            + " bigger than begore. The new sensations from %s substantially larger breasts make %s tremble.",
 //                            getSelf().name(), Global.capitalizeFirstLetter(target.subjectAction("feel")),
 //                            target.possessivePronoun(), Global.capitalizeFirstLetter(target.pronoun()),
-//                            target.action("try", "tries"), target.possessivePronoun(), target.directObject());
+//                            target.action("try", "tries"), target.possessivePronoun(), target.objectPronoun());
             message = "Cassie wraps her hands around your chest and gropes you a few times. \"You know, I've always found breasts interesting,\" she says, "
                             + "\"They're probably the most eye-catching part of the female anatomy under most circumstances, but they're not nearly as erogenous as genitals.\""
                             + " Cassie wraps her hands around your breasts, gripping your nipples between her thumb and forefinger, pushing herself against your back, her breath "
@@ -163,7 +163,7 @@ public class BreastGrowthSuper extends Skill {
                                             + " The new sensations from %s new breasts make %s tremble.",
                             getSelf().getName(), Global.capitalizeFirstLetter(target.subjectAction("feel")),
                             target.possessivePronoun(), Global.capitalizeFirstLetter(target.pronoun()),
-                            target.action("try", "tries"), target.possessivePronoun(), target.directObject());
+                            target.action("try", "tries"), target.possessivePronoun(), target.objectPronoun());
         } else {
             message = String.format(
                             "%s moving and begins chanting. %s feeling some tingling in %s breasts, "

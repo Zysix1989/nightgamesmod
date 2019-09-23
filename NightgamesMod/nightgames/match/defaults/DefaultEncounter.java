@@ -186,7 +186,7 @@ public class DefaultEncounter implements Encounter {
         Global.gui().message(String.format(
                         "You stumble onto %s with %s hand between %s legs, masturbating. Since you just fought you still can't touch %s, so "
                         + "you just watch the show until %s orgasms.",
-                        npc.getName(), npc.possessiveAdjective(), npc.possessiveAdjective(), npc.directObject(),
+                        npc.getName(), npc.possessiveAdjective(), npc.possessiveAdjective(), npc.objectPronoun(),
                         npc.pronoun()));
     }
 
@@ -268,7 +268,7 @@ public class DefaultEncounter implements Encounter {
                 if (fighter.human()) {
                     Global.gui().message(String.format(
                         "%s tries to run, but you stay right on %s heels and catch %s.",
-                        fleer.getName(), fleer.possessiveAdjective(), fleer.directObject()));
+                        fleer.getName(), fleer.possessiveAdjective(), fleer.objectPronoun()));
                 } else {
                     Global.gui().message(String.format(
                         "You quickly try to escape, but %s is quicker. %s corners you and attacks.",
@@ -379,7 +379,7 @@ public class DefaultEncounter implements Encounter {
             Global.gui().message(String.format(
                             "The relaxing water causes you to lower your guard a bit, so you don't notice %s until %s's standing over you. "
                             + "There's no chance to escape; you'll have to face %s nude.",
-                            attacker.getName(), attacker.pronoun(), attacker.directObject()));
+                            attacker.getName(), attacker.pronoun(), attacker.objectPronoun()));
         } else {
             String admireLine = target.hasBreasts() ?
                             String.format("You crouch by the edge of the jacuzzi for a few seconds and just admire %s nude body with %s breasts "
@@ -392,7 +392,7 @@ public class DefaultEncounter implements Encounter {
                                   + "up. %s opens her eyes and swears under %s breath when %s sees you. %s scrambles out of the tub, but you "
                                   + "easily catch %s before %s can get away.",
                                   target.getName(), target.possessiveAdjective(),
-                                  target.pronoun(), admireLine, target.directObject(), target.directObject(),
+                                  target.pronoun(), admireLine, target.objectPronoun(), target.objectPronoun(),
                                   Global.capitalizeFirstLetter(target.pronoun()), target.possessiveAdjective(), target.possessiveAdjective(),
                                   target.pronoun(), Global.capitalizeFirstLetter(target.pronoun()),
                                   target.possessiveAdjective(), target.pronoun()));

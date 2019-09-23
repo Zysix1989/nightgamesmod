@@ -92,17 +92,17 @@ public class TemptressRide extends Thrust {
                                 getSelf().subjectAction("are", "is"), target.nameOrPossessivePronoun(),
                                 target.body.getRandomCock().describe(target), getSelf().possessiveAdjective(),
                                 getSelf().body.getRandomPussy().describe(getSelf()), getSelf().possessiveAdjective(),
-                                getSelf().pronoun(), getSelf().action("are", "is"), target.directObject());
+                                getSelf().pronoun(), getSelf().action("are", "is"), target.objectPronoun());
             case 1:
                 return String.format(
                                 "%s down fully onto %s, squeezing %s tightly"
                                                 + " with %s %s. The muscles are wound so tight that it's nearly"
                                                 + " impossible to move at all, but %s %s down hard and eventually"
                                                 + " all of %s %s is lodged firmly inside of %s.",
-                                getSelf().subjectAction("slide"), target.subject(), target.directObject(),
+                                getSelf().subjectAction("slide"), target.subject(), target.objectPronoun(),
                                 getSelf().possessiveAdjective(), getSelf().body.getRandomPussy().describe(getSelf()),
                                 getSelf().pronoun(), getSelf().action("push", "pushes"), target.possessiveAdjective(),
-                                target.body.getRandomCock().describe(target), getSelf().directObject());
+                                target.body.getRandomCock().describe(target), getSelf().objectPronoun());
             default:
                 return String.format(
                                 "%s up and down %s rock-hard %s while the velvet vise"

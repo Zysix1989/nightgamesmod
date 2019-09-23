@@ -48,7 +48,7 @@ public class FieryMod extends PartMod {
             template = JtwigTemplate.inlineTemplate(
                 "Plunging {{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }} "
                     + "into {{ self.possessiveAdjective() }} {{ part.describe(self) }} leaves "
-                    + "{{ opponent.directObject() }} gasping from the heat.");
+                    + "{{ opponent.objectPronoun() }} gasping from the heat.");
             opponent.pain(c, self, 20 + self.get(Attribute.Ki) / 2);
         }
         return template;

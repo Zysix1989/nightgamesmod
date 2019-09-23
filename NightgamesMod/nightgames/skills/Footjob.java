@@ -137,18 +137,18 @@ public class Footjob extends Skill {
                 return String.format("%s rubs %s dick with the sole of %s soft foot. From time to time,"
                                 + " %s teases %s by pinching the glans between %s toes and jostling %s balls.",
                                 getSelf().subject(), target.nameOrPossessivePronoun(), getSelf().possessiveAdjective(),
-                                getSelf().subject(), target.directObject(), getSelf().possessiveAdjective(),
+                                getSelf().subject(), target.objectPronoun(), getSelf().possessiveAdjective(),
                                 target.possessiveAdjective());
             } else if (target.hasPussy()) {
                 return String.format("%s teases the lips of %s slit with %s foot. From time "
                                 + "to time, %s teases %s by slipping %s big toe inside and wiggling it around.",
                                 getSelf().subject(), target.nameOrPossessivePronoun(), getSelf().possessiveAdjective(),
-                                getSelf().subject(), target.directObject(), getSelf().possessiveAdjective());
+                                getSelf().subject(), target.objectPronoun(), getSelf().possessiveAdjective());
             }
             return String.format("%s teases %s asshole with %s foot. From time to time, %s "
                             + "teases %s by pressing %s big toe at %s sphincter and nudging it.",
                             getSelf().subject(), target.nameOrPossessivePronoun(), getSelf().possessiveAdjective(),
-                            getSelf().subject(), target.directObject(), getSelf().possessiveAdjective(),
+                            getSelf().subject(), target.objectPronoun(), getSelf().possessiveAdjective(),
                             target.possessiveAdjective());
         }
     }

@@ -84,7 +84,7 @@ public class TailJob extends Skill {
                             getSelf().subject(), target.nameOrPossessivePronoun(),
                             getSelf().possessiveAdjective(),
                             getSelf().body.getRandom("tail").describe(getSelf()),
-                            target.possessiveAdjective(), target.directObject());
+                            target.possessiveAdjective(), target.objectPronoun());
         }
     }
 

@@ -787,12 +787,12 @@ public class Body implements Cloneable {
 
             if (Global.random(100) < chance * with.getFetishChance()) {
                 c.write(character, character.subjectAction("now have", "now has") + " a new fetish, courtesy of "
-                                + opponent.directObject() + ".");
+                                + opponent.objectPronoun() + ".");
                 character.add(c, new BodyFetish(character, opponent, with.getType(), .25));
             }
             if (opponent.has(Trait.fetishCharmer) && Global.random(100) < 4 * Math.min(opponent.get(Attribute.Fetish), 25)) {
                 c.write(character, character.subjectAction("find yourself", "finds themself") + " hesitant to resist "
-                                + opponent.directObject() + " due to the demands of "+character.possessiveAdjective()+" fetish.");
+                                + opponent.objectPronoun() + " due to the demands of "+character.possessiveAdjective()+" fetish.");
                 character.add(c, new Charmed(character));
             }
         }

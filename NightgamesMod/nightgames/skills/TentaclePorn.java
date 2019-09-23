@@ -122,7 +122,7 @@ public class TentaclePorn extends Skill {
                             + "ground around %s, entangling %s arms and legs. The slimy appendages "
                             + "wriggle over %s body and coat %s in the slippery liquid.",
                             getSelf().subject(), target.nameDirectObject(), target.possessiveAdjective(),
-                            target.possessiveAdjective(), target.directObject());
+                            target.possessiveAdjective(), target.objectPronoun());
         } else {
             String actions = "";
             if (target.hasDick())

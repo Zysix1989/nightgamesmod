@@ -23,7 +23,7 @@ public class ParasitedMod extends PartMod {
             .with("target", target);
         JtwigTemplate template = JtwigTemplate.inlineTemplate(
             "The parasite inhabiting {{ self.nameOrPossessivePronoun() }} {{ part.getType() }} "
-                + "is making {{ self.directObject() }} <b>extremely sensitive</b>.");
+                + "is making {{ self.objectPronoun() }} <b>extremely sensitive</b>.");
         c.write(self, template.render(model));
         return 10;
     }

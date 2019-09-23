@@ -170,7 +170,7 @@ public class Stomp extends Skill {
                             target.possessiveAdjective(), getSelf().possessiveAdjective(),
                             Global.capitalizeFirstLetter(target.subjectAction("are", "is")),
                             getSelf().nameOrPossessivePronoun(), getSelf().pronoun(),
-                            target.directObject(), getSelf().pronoun(), target.possessiveAdjective(),
+                            target.objectPronoun(), getSelf().pronoun(), target.possessiveAdjective(),
                             target.subjectAction("realize"), getSelf().pronoun(),
                             getSelf().possessiveAdjective(), target.nameOrPossessivePronoun(),
                             getSelf().nameOrPossessivePronoun());

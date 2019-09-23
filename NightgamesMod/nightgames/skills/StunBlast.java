@@ -98,7 +98,7 @@ public class StunBlast extends Skill {
             return String.format("%s points a device in %s direction that glows slightly. A sudden "
                             + "flash of light disorients %s and %s ears ring from the blast.",
                             getSelf().subject(), target.nameOrPossessivePronoun(),
-                            target.directObject(), target.possessiveAdjective());
+                            target.objectPronoun(), target.possessiveAdjective());
         }
     }
 

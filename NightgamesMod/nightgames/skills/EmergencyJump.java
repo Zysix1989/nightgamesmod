@@ -79,7 +79,7 @@ public class EmergencyJump extends Skill {
         return String.format(
                         "%s thought %s had %s right where %s wanted %s, but %s seems to vanish completely and escape.",
                         target.subject(), target.pronoun(), getSelf().getName(), 
-                        target.pronoun(), getSelf().directObject(), getSelf().pronoun());
+                        target.pronoun(), getSelf().objectPronoun(), getSelf().pronoun());
     }
 
 }

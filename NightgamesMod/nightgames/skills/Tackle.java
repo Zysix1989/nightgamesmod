@@ -127,7 +127,7 @@ public class Tackle extends Skill {
     public String receive(Combat c, int damage, Result modifier, Character target) {
         if (modifier == Result.special) {
             return String.format("%s wiggles her butt cutely before leaping at %s and pinning %s to the floor.",
-                            getSelf().subject(), target.nameDirectObject(), target.directObject());
+                            getSelf().subject(), target.nameDirectObject(), target.objectPronoun());
         }
         if (modifier == Result.miss) {
             return String.format("%s tries to tackle %s, but %s %s out of the way.",

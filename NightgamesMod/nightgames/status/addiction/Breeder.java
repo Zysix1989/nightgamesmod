@@ -44,14 +44,14 @@ public class Breeder extends Addiction {
         switch (getSeverity()) {
             case HIGH:
                 return "All you can think about while fucking " + cause.getName() + " is filling up "
-                                + cause.directObject() + " pussy with your cum. That desire is seriously undermining"
+                                + cause.objectPronoun() + " pussy with your cum. That desire is seriously undermining"
                                 + " your staying power.";
             case LOW:
                 return "Whatever " + cause.getName() + " did to you, you don't seem to be able to last as long as before"
-                                + " while fucking " + cause.directObject() + ".";
+                                + " while fucking " + cause.objectPronoun() + ".";
             case MED:
                 return "Whenever you fuck " + cause.getName() + " you feel an instinctive need to pound "
-                                + cause.directObject() + " as hard and fast as you can. Of course, that does mean you"
+                                + cause.objectPronoun() + " as hard and fast as you can. Of course, that does mean you"
                                 + " won't last as long.";
             case NONE:
             default:
@@ -67,7 +67,7 @@ public class Breeder extends Addiction {
                                 + " in your mind.";
             case MED:
                 return "The need to fill " + cause.getName() + " with your seed shifts to simply fucking "
-                                + cause.directObject() + " as hard as you can. That won't be enough to last very long,"
+                                + cause.objectPronoun() + " as hard as you can. That won't be enough to last very long,"
                                 + " but it's better than before.";
             case NONE:
                 return "The animalistic instincts " + cause.getName() + " imbued in you have fully faded away.";
@@ -109,10 +109,10 @@ public class Breeder extends Addiction {
 
     @Override
     public String informantsOverview() {
-        return "<i>\"Well... I don't know " + cause.getName() + " that well, but don't you </i>always<i> want to fuck " + cause.directObject() + "?"
+        return "<i>\"Well... I don't know " + cause.getName() + " that well, but don't you </i>always<i> want to fuck " + cause.objectPronoun() + "?"
                         + " What's so special?\"</i> You explain how the desire is so much stronger than usual,"
                         + " that you just can't get it out of your mind. <i>\"Mmmm... You must be overly sensitive"
-                        + " to " + cause.directObject() + " pheromones. It happens every once in a while, just some genetic bad luck. Or"
+                        + " to " + cause.objectPronoun() + " pheromones. It happens every once in a while, just some genetic bad luck. Or"
                         + " some </i>particularly<i> naughty parents, but let's not go there. Either way, it causes"
                         + " this feedback effect, basically driving you into a rut. The good news is that you'll"
                         + " be able to cum more often, the bad news is that you WILL cum more often when fucking " + cause.getName() + "."
@@ -139,7 +139,7 @@ public class Breeder extends Addiction {
             return "Arousal rages through your body at the sight of " + c.getOpponent(affected).getName() 
                             + ", expecting a well-earned fuck.";
         }
-        return "Your instincts howl at the sight of " + cause.getName() + ", urging you to fuck " + cause.directObject() + " as soon as possible.";
+        return "Your instincts howl at the sight of " + cause.getName() + ", urging you to fuck " + cause.objectPronoun() + " as soon as possible.";
     }
 
     @Override
@@ -147,12 +147,12 @@ public class Breeder extends Addiction {
         switch (getCombatSeverity()) {
             case HIGH:
                 return "The animal part of your brain cultivated by " + cause.getName() + " is screaming for"
-                                + " you to sink your cock into " + cause.directObject() + " and fill "
-                                + cause.directObject() + " with your seed.";
+                                + " you to sink your cock into " + cause.objectPronoun() + " and fill "
+                                + cause.objectPronoun() + " with your seed.";
             case LOW:
                 return "You feel as if you've had plenty of foreplay. Time to move on.";
             case MED:
-                return cause.getName() + "'s little trick has you all geared up to fuck " + cause.directObject() + ". You can "
+                return cause.getName() + "'s little trick has you all geared up to fuck " + cause.objectPronoun() + ". You can "
                                 + "think of few things you'd like to do more.";
             case NONE:
             default:
