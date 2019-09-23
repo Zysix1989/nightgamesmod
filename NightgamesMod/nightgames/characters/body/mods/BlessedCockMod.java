@@ -25,13 +25,7 @@ public class BlessedCockMod extends CockMod {
                 var model = JtwigModel.newModel()
                     .with("self", self)
                     .with("other", opponent);
-                var template = JtwigTemplate.inlineTemplate(
-                    "{{ self.nameOrPossessivePronoun() }} concentrated divine energy in"
-                        + " {{ self.possessiveAdjective }} cock rams into "
-                        + "{{ other.nameOrPossessivePronoun }} pussy, sending unimaginable "
-                        + "pleasure directly into {{ other.possessiveAdjective }} soul."
-                );
-                c.write(self, template.render(model));
+                c.write(self, APPLY_BONUS_TEMPLATE.render(model));
             }
             // no need for any effects, the bonus is in the pleasure mod
         }
@@ -46,22 +40,10 @@ public class BlessedCockMod extends CockMod {
                 .with("opponent", opponent)
                 .with("part", part);
             if (charge == null) {
-                var template = JtwigTemplate.inlineTemplate(
-                    "{{ self.nameOrPossessivePronoun() }} {{ part.fullDescribe(self) }} radiates "
-                        + "a golden glow as {{ self.subjectAction('groan') }}. "
-                        + "{{ opponent.subjectAction('realize') }} "
-                        + "{{ self.subjectAction('are', 'is') }} feeding on "
-                        + "{{ self.possessiveAdjective }} own pleasure to charge up "
-                        + "{{ self.possessiveAdjective }} divine energy."
-                    );
-                c.write(self, template.render(model));
+                c.write(self, RECEIVE_NO_CHARGE_TEMPLATE.render(model));
                 self.add(c, new DivineCharge(self, .25));
             } else {
-                var template = JtwigTemplate.inlineTemplate(
-                    "{{ self.subjectAction('continue') }} feeding on {{ self.possessiveAdjective }}"
-                        + "own pleasure to charge up {{ self.possessiveAdjective }} divine energy."
-                );
-                c.write(self, template.render(model));
+                c.write(self, RECEIVE_WITH_CHARGE_TEMPLATE.render(model));
                 self.add(c, new DivineCharge(self, charge.magnitude));
             }
         }
@@ -76,17 +58,7 @@ public class BlessedCockMod extends CockMod {
                     .with("self", self)
                     .with("opponent", opponent)
                     .with("part", part);
-                var template = JtwigTemplate.inlineTemplate(
-                    "As soon as {{ self.subject() }} penetrates {{ opponent.objectPronoun() }}, "
-                        + "{{ opponent.subject() }} realize "
-                        + "{{ opponent.subjectAction('are', 'is') }} screwed. "
-                        + "Both literally and figuratively. While it looks innocuous enough, "
-                        + "{{ self.nameOrPossessivePronoun }} {{ part.describe(self) }} "
-                        + "feels like pure ecstasy. {{ self.subject() }} hasn't even begun moving yet, "
-                        + "but {{ self.nameOrPossessivePronoun() }} cock simply sitting within {{ opponent.objectPronoun() }} "
-                        + "radiates a heat that has {{ opponent.objectPronoun() }} squirming uncontrollably."
-                );
-                c.write(self, template.render(model));
+                c.write(self, ON_START_PENETRATION_TEMPLATE.render(model));
             }
         }
     }
@@ -95,4 +67,36 @@ public class BlessedCockMod extends CockMod {
     public String describeAdjective(String partType) {
             return "holy aura";
     }
+
+    private static final JtwigTemplate APPLY_BONUS_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "{{ self.nameOrPossessivePronoun() }} concentrated divine energy in"
+            + " {{ self.possessiveAdjective }} cock rams into "
+            + "{{ other.nameOrPossessivePronoun }} pussy, sending unimaginable "
+            + "pleasure directly into {{ other.possessiveAdjective }} soul."
+    );
+
+    private static final JtwigTemplate RECEIVE_NO_CHARGE_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "{{ self.nameOrPossessivePronoun() }} {{ part.fullDescribe(self) }} radiates "
+            + "a golden glow as {{ self.subjectAction('groan') }}. "
+            + "{{ opponent.subjectAction('realize') }} "
+            + "{{ self.subjectAction('are', 'is') }} feeding on "
+            + "{{ self.possessiveAdjective }} own pleasure to charge up "
+            + "{{ self.possessiveAdjective }} divine energy."
+    );
+
+    private static final JtwigTemplate RECEIVE_WITH_CHARGE_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "{{ self.subjectAction('continue') }} feeding on {{ self.possessiveAdjective }}"
+            + "own pleasure to charge up {{ self.possessiveAdjective }} divine energy."
+    );
+
+    private static final JtwigTemplate ON_START_PENETRATION_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "As soon as {{ self.subject() }} penetrates {{ opponent.objectPronoun() }}, "
+            + "{{ opponent.subject() }} realize "
+            + "{{ opponent.subjectAction('are', 'is') }} screwed. "
+            + "Both literally and figuratively. While it looks innocuous enough, "
+            + "{{ self.nameOrPossessivePronoun }} {{ part.describe(self) }} "
+            + "feels like pure ecstasy. {{ self.subject() }} hasn't even begun moving yet, "
+            + "but {{ self.nameOrPossessivePronoun() }} cock simply sitting within {{ opponent.objectPronoun() }} "
+            + "radiates a heat that has {{ opponent.objectPronoun() }} squirming uncontrollably."
+    );
 }
