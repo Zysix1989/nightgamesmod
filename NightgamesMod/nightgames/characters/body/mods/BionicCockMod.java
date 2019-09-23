@@ -48,7 +48,7 @@ public class BionicCockMod extends CockMod {
             opponent.add(c, new FluidAddiction(opponent, self, 1, 2));
             opponent.add(c, new FluidAddiction(opponent, self, 1, 2));
             bonus -= 3; // Didn't actually move around too much
-        } else if (target.moddedPartCountsAs(FieryMod.TYPE)) {
+        } else if (!target.moddedPartCountsAs(FieryMod.TYPE)) {
             var model = JtwigModel.newModel()
                 .with("self", self)
                 .with("opponent", opponent)
