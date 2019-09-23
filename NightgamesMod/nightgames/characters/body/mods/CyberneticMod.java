@@ -33,21 +33,17 @@ public class CyberneticMod extends PartMod {
         int bonus = 0;
 
         if (c.getStance().isPartFuckingPartInserted(c, opponent, target, self, part)) {
+            var model = JtwigModel.newModel()
+                .with("self", self)
+                .with("opponent", opponent)
+                .with("part", part)
+                .with("target", target)
+                .with("incubusType", IncubusCockMod.TYPE);
             if (target.moddedPartCountsAs(EnlightenedCockMod.TYPE)) {
-                var model = JtwigModel.newModel()
-                    .with("self", self)
-                    .with("opponent", opponent)
-                    .with("part", part);
                 c.write(self, BONUS_AGAINST_ENLIGHTENED_TEMPLATE.render(model));
                 bonus -= 5;
             } else {
                 if (Global.random(3) == 0 || target.moddedPartCountsAs(IncubusCockMod.TYPE)) {
-                    var model = JtwigModel.newModel()
-                        .with("self", self)
-                        .with("opponent", opponent)
-                        .with("part", part)
-                        .with("target", target)
-                        .with("incubusType", IncubusCockMod.TYPE);
                     c.write(self, BONUS_TEMPLATE.render(model));
                     bonus += 15;
                     if (target.moddedPartCountsAs(IncubusCockMod.TYPE) || Global.random(4) == 0) {
