@@ -2,7 +2,6 @@ package nightgames.characters.body.mods;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.CockMod;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -39,11 +38,7 @@ public class CyberneticMod extends PartMod {
                     .with("self", self)
                     .with("opponent", opponent)
                     .with("part", part);
-                var template = JtwigTemplate.inlineTemplate(
-                    "Despite {{ self.nameOrPossessivePronoun() }} {{ part.describe(self) }}'s best "
-                        + "efforts, {{ opponent.nameOrPossessivePronoun() }} focus does not waver, "
-                        + "and {{ opponent.pronounAction('feel') }} barely a thing.");
-                c.write(self, template.render(model));
+                c.write(self, BONUS_AGAINST_ENLIGHTENED_TEMPLATE.render(model));
                 bonus -= 5;
             } else {
                 if (Global.random(3) == 0 || target.moddedPartCountsAs(IncubusCockMod.TYPE)) {
@@ -53,19 +48,7 @@ public class CyberneticMod extends PartMod {
                         .with("part", part)
                         .with("target", target)
                         .with("incubusType", IncubusCockMod.TYPE);
-                    var template = JtwigTemplate.inlineTemplate(
-                        "{% if ( target.moddedPartCountsAs(incubusType) -%}"
-                            + "Eager to gain a sample of {{ opponent.nameOrPossessivePronoun() }}"
-                            + "exotic, demonic sperm, "
-                            + "{% endif %}"
-                            + "{{ self.possessiveAdjective() }} {{ part.describe(self) }}"
-                            + "whirls to life and starts attempting to extract all the semen "
-                            + "packed inside {{ opponent.possessiveAdjective }} "
-                            + "{{ target.describe(opponent) }}. At the same time "
-                            + "{{ opponent.pronounAction('feel') }} a thin filament sliding "
-                            + "into opponent.possessiveAdjective(), filling "
-                            + "{{ opponent.directObject }} with both pleasure and shame.");
-                    c.write(self, template.render(model));
+                    c.write(self, BONUS_TEMPLATE.render(model));
                     bonus += 15;
                     if (target.moddedPartCountsAs(IncubusCockMod.TYPE) || Global.random(4) == 0) {
                         opponent.add(c, new Shamed(opponent));
@@ -85,4 +68,22 @@ public class CyberneticMod extends PartMod {
     public String describeAdjective(String partType) {
         return "cybernetics";
     }
+
+    private static final JtwigTemplate BONUS_AGAINST_ENLIGHTENED_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "Despite {{ self.nameOrPossessivePronoun() }} {{ part.describe(self) }}'s best "
+            + "efforts, {{ opponent.nameOrPossessivePronoun() }} focus does not waver, "
+            + "and {{ opponent.pronounAction('feel') }} barely a thing.");
+
+    private static final JtwigTemplate BONUS_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "{% if ( target.moddedPartCountsAs(incubusType) -%}"
+            + "Eager to gain a sample of {{ opponent.nameOrPossessivePronoun() }}"
+            + "exotic, demonic sperm, "
+            + "{% endif %}"
+            + "{{ self.possessiveAdjective() }} {{ part.describe(self) }}"
+            + "whirls to life and starts attempting to extract all the semen "
+            + "packed inside {{ opponent.possessiveAdjective }} "
+            + "{{ target.describe(opponent) }}. At the same time "
+            + "{{ opponent.pronounAction('feel') }} a thin filament sliding "
+            + "into opponent.possessiveAdjective(), filling "
+            + "{{ opponent.directObject }} with both pleasure and shame.");
 }
