@@ -30,18 +30,7 @@ public class BionicCockMod extends CockMod {
                 .with("opponent", opponent)
                 .with("part", part)
                 .with("target", target);
-            var template = JtwigTemplate.inlineTemplate(
-                "{{ self.subject() }} {{ self.action('bottom') }} out inside "
-                    + "{{ opponent.nameOrPossessivePronoun() }} {{ target.describe(opponent) }}, "
-                    + "pressing the metallic head of "
-                    + "{{ self.possessiveAdjective() }} {{ part.describe(self) }} tightly against "
-                    + "{{ opponent.possessiveAdjective() }} cervix. "
-                    + "Then, a thin tube extends from {{ self.possessiveAdjective() }} urethra and "
-                    + "into {{ opponent.possessiveAdjective() }} womb, pumping in a powerful "
-                    + "aphrodisiac that soon has {{ opponent.objectPronoun() }} sensitive and"
-                    + " gasping for more."
-            );
-            message += template.render(model);
+            message += APPLY_BONUS_APHRODISIAC_TEMPLATE.render(model);
             opponent.add(c, new Hypersensitive(opponent));
             // Instantly addict
             opponent.add(c, new FluidAddiction(opponent, self, 1, 2));
@@ -54,20 +43,10 @@ public class BionicCockMod extends CockMod {
                 .with("opponent", opponent)
                 .with("part", part)
                 .with("target", target);
-            var template = JtwigTemplate.inlineTemplate(
-                "Sensing the flesh around it, {{ self.nameOrPossessivePronoun }} "
-                    + "{{ part.describe(self) }} starts spinning rapidly, vastly increasing the "
-                    + "friction against the walls of {{ opponent.nameOrPossessivePronoun() }} "
-                    + "{{ target.describe(opponent) }}."
-            );
-            message += template.render(model);
+            message += APPLY_BONUS_TEMPLATE.render(model);
             bonus += 5;
             if (Global.random(5) == 0) {
-                var template2 = JtwigTemplate.inlineTemplate(
-                    "The intense sensations cause {{ opponent.subject() }} to forget to breathe "
-                        + "for a moment, leaving {{ opponent.objectPronoun() }} literally breathless."
-                );
-                message += " " + template2.render(model);
+                message += " " + APPLY_BONUS_WINDED_TEMPLATE.render(model);
                 opponent.add(c, new Winded(opponent, 1));
             }
         }
@@ -83,4 +62,28 @@ public class BionicCockMod extends CockMod {
     public String describeAdjective(String partType) {
         return "bionic implants";
     }
+
+    private static final JtwigTemplate APPLY_BONUS_APHRODISIAC_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "{{ self.subject() }} {{ self.action('bottom') }} out inside "
+        + "{{ opponent.nameOrPossessivePronoun() }} {{ target.describe(opponent) }}, "
+        + "pressing the metallic head of "
+        + "{{ self.possessiveAdjective() }} {{ part.describe(self) }} tightly against "
+        + "{{ opponent.possessiveAdjective() }} cervix. "
+        + "Then, a thin tube extends from {{ self.possessiveAdjective() }} urethra and "
+        + "into {{ opponent.possessiveAdjective() }} womb, pumping in a powerful "
+        + "aphrodisiac that soon has {{ opponent.objectPronoun() }} sensitive and"
+        + " gasping for more."
+        );
+
+    private static final JtwigTemplate APPLY_BONUS_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "Sensing the flesh around it, {{ self.nameOrPossessivePronoun }} "
+            + "{{ part.describe(self) }} starts spinning rapidly, vastly increasing the "
+            + "friction against the walls of {{ opponent.nameOrPossessivePronoun() }} "
+            + "{{ target.describe(opponent) }}."
+    );
+
+    private static final JtwigTemplate APPLY_BONUS_WINDED_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "The intense sensations cause {{ opponent.subject() }} to forget to breathe "
+            + "for a moment, leaving {{ opponent.objectPronoun() }} literally breathless."
+    );
 }
