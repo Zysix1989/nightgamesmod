@@ -81,7 +81,7 @@ public class ZealAddiction extends Addiction {
                 c.write(cause, String.format(
                                 "%s tells you to roll over, and once you have done so %s sets"
                                                 + " %s down on your stomach.",
-                                cause.getName(), cause.pronoun(), cause.reflectivePronoun()));
+                                cause.getName(), cause.pronoun(), cause.reflexivePronoun()));
             } else {
                 pos = new Behind(cause, affected);
                 c.write(cause, String.format("%s motions for you to get up and then casually walks around you"

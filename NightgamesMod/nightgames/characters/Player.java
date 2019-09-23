@@ -951,11 +951,6 @@ public class Player extends Character {
     }
 
     @Override
-    public String reflectivePronoun() {
-        return "yourself";
-    }
-
-    @Override
     public String subject() {
         return "you";
     }
@@ -1196,5 +1191,10 @@ public class Player extends Character {
 
     private static CommandPanelOption newActivitySubchoice(Activity activity, String choice) {
         return new CommandPanelOption(choice, event -> activity.visit(choice));
+    }
+
+    @Override
+    public String reflexivePronoun() {
+        return "yourself";
     }
 }

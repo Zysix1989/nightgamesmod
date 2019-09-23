@@ -450,11 +450,11 @@ public class Command extends Skill {
                                                 getSelf().nameOrPossessivePronoun(), getSelf().pronoun(),
                                                 target.directObject(),
                                                 Global.capitalizeFirstLetter(target.pronoun()),
-                                                target.action("throw"), target.reflectivePronoun(), getSelf().possessiveAdjective(), 
+                                                target.action("throw"), target.reflexivePronoun(), getSelf().possessiveAdjective(),
                                                 target.action("worship"),
                                                 getSelf().body.getRandomCock().describe(target),
                                                 target.pronoun(), target.possessiveAdjective(),
-                                                target.reflectivePronoun()));
+                                                target.reflexivePronoun()));
                 getSelf().body.pleasure(target, target.body.getRandom("mouth"), getSelf().body.getRandomCock(),
                                 10 + Global.random(8), c, this);
                 if (target.hasDick())
@@ -477,11 +477,11 @@ public class Command extends Skill {
                                                 getSelf().nameOrPossessivePronoun(), getSelf().pronoun(),
                                                 target.directObject(),
                                                 Global.capitalizeFirstLetter(target.pronoun()),
-                                                target.action("throw"), target.reflectivePronoun(), getSelf().possessiveAdjective(), 
+                                                target.action("throw"), target.reflexivePronoun(), getSelf().possessiveAdjective(),
                                                 target.action("worship"),
                                                 getSelf().body.getRandomPussy().describe(target),
                                                 target.pronoun(), target.possessiveAdjective(),
-                                                target.reflectivePronoun()));
+                                                target.reflexivePronoun()));
                 getSelf().body.pleasure(target, target.body.getRandom("mouth"), getSelf().body.getRandomPussy(),
                                 10 + Global.random(8), c, this);
                 if (target.hasDick())
@@ -511,7 +511,7 @@ public class Command extends Skill {
                 break;
             case MASTER_FACESIT:
                 c.write(getSelf(), String.format("%s stands over %s face and slowly lowers %s down onto it.",
-                                getSelf().getName(), target.nameOrPossessivePronoun(), getSelf().reflectivePronoun()));
+                                getSelf().getName(), target.nameOrPossessivePronoun(), getSelf().reflexivePronoun()));
                 c.setStance(new FaceSitting(getSelf(), target), target, false);
                 break;
         }

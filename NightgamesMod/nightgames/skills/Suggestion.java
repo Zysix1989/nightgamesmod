@@ -87,7 +87,7 @@ public class Suggestion extends Skill {
                         + "hynotized in the middle of a match, right? ...Right? ..."
                         + "Why %s %s fighting %s again?", getSelf().subject(),
                         target.nameDirectObject(), target.subject(),
-                        target.reflectivePronoun(), target.action("was", "were"),
+                        target.reflexivePronoun(), target.action("was", "were"),
                         target.pronoun(), getSelf().subject());
     }
 

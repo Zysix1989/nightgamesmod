@@ -93,7 +93,7 @@ public class BreastWorship extends Skill {
         if (modifier == Result.normal) {
             return getSelf().getName()
                             + " worshipfully licks and sucks "+target.nameOrPossessivePronoun()+
-                            " nipples while uncontrollably playing with "+getSelf().reflectivePronoun()+".";
+                            " nipples while uncontrollably playing with "+getSelf().reflexivePronoun()+".";
         } else {
             return String.format("%s worshipfully licks and sucks %s nipples while uncontrollably masturbating, drawing forth "
                             + "a gush of breast milk from %s teats. %s drinks deeply of %s milk, gurgling happily "

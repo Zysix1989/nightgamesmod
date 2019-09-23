@@ -171,7 +171,7 @@ public class LevelDrain extends Drain {
                         + " fluid leaves %s, %s ",
                         target.subjectAction("feel"), demon, target.directObject(),
                         getSelf().subject(), target.possessiveAdjective(), target.directObject(),
-                        target.subject(), target.action("feel"), target.reflectivePronoun(),
+                        target.subject(), target.action("feel"), target.reflexivePronoun(),
                         getSelf().directObject(), target.pronoun(), target.action("realize"),
                         target.pronoun(), target.action("are", "is"), getSelf().nameDirectObject(),
                         target.directObject(), target.subjectAction("feel"));

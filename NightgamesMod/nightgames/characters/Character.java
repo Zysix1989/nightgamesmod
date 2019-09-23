@@ -1058,13 +1058,13 @@ public abstract class Character extends Observable implements Cloneable {
                     message = String.format("%s tempted %s for <font color='rgb(240,100,100, arg1)'>%d"
                                     + "<font color='white'>\n", 
                                   Global.capitalizeFirstLetter(tempter.subject()),
-                                  tempter == this ? reflectivePronoun() : nameDirectObject(), dmg);
+                                  tempter == this ? reflexivePronoun() : nameDirectObject(), dmg);
                 } else {
                     message = String.format(
                              "%s tempted %s for <font color='rgb(240,100,100)'>%d<font color='white'> "
                              + "(base:%d%s, charisma:%.1f%s)%s\n",
                               Global.capitalizeFirstLetter(tempter.subject()),
-                              tempter == this ? reflectivePronoun() : nameDirectObject(),
+                              tempter == this ? reflexivePronoun() : nameDirectObject(),
                               dmg, i, bonusString, temptMultiplier, stalenessString, extraMsg);
                     
                 }
@@ -3838,16 +3838,6 @@ public abstract class Character extends Observable implements Cloneable {
 
     public String nameDirectObject() {
         return getName();
-    }
-
-    public String reflectivePronoun() {
-        String self = possessiveAdjective() + "self";
-        if (self.equals("hisself")) {
-            // goddammit english.
-            return "himself";
-        } else {
-            return self;
-        }
     }
 
     public boolean clothingFuckable(BodyPart part) {

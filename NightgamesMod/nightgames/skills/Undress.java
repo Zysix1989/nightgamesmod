@@ -101,6 +101,6 @@ public class Undress extends Skill {
                             getSelf().possessiveAdjective());
         }
         return String.format("%s puts some space between %s and strips naked.", getSelf().subject(), c.isBeingObserved()
-                        ? getSelf().reflectivePronoun() + " and " + target.nameDirectObject() : "you");
+                        ? getSelf().reflexivePronoun() + " and " + target.nameDirectObject() : "you");
     }
 }

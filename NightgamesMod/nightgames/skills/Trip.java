@@ -122,12 +122,12 @@ public class Trip extends Skill {
         } else if (modifier == Result.item) {
             return String.format(
                             "%s %s a glowing bar hovering behind %s knees, and %s it towards %s. The bar pushes against %s knees, but %s %s to keep %s balance.",
-                            getSelf().getName(), target.action("conjure"), target.nameOrPossessivePronoun(), target.action("sweep"), getSelf().reflectivePronoun(), target.nameOrPossessivePronoun(), 
+                            getSelf().getName(), target.action("conjure"), target.nameOrPossessivePronoun(), target.action("sweep"), getSelf().reflexivePronoun(), target.nameOrPossessivePronoun(),
                             target.pronoun(), target.action("manage"), target.possessiveAdjective());
         } else if (modifier == Result.divine) {
             return String.format(
                             "%s %s a glowing bar hovering behind %s knees, and %s it towards %s. The bar pushes against %s knees, and %s %s to keep %s balance, and %s to the ground.",
-                            getSelf().getName(), target.action("conjure"), target.nameOrPossessivePronoun(), target.action("sweep"), getSelf().reflectivePronoun(), target.nameOrPossessivePronoun(), 
+                            getSelf().getName(), target.action("conjure"), target.nameOrPossessivePronoun(), target.action("sweep"), getSelf().reflexivePronoun(), target.nameOrPossessivePronoun(),
                             target.pronoun(), target.action("fail"), target.possessiveAdjective(), target.action("topple"));
         } else {
             return "You catch " + target.getName() + " off balance and trip " + target.directObject() + ".";

@@ -58,7 +58,7 @@ public class Shove extends Skill {
                                     + " off of you and get to your feet before she can retaliate.");
                 } else if (c.shouldPrintReceive(target, c)) {
                     c.write(getSelf(), String.format("%s shoves %s hard enough to free %s and jump up.",
-                                    getSelf().subject(), target.nameDirectObject(), getSelf().reflectivePronoun()));
+                                    getSelf().subject(), target.nameDirectObject(), getSelf().reflexivePronoun()));
                 }
                 c.setStance(new Neutral(getSelf(), c.getOpponent(getSelf())), getSelf(), true);
             } else {

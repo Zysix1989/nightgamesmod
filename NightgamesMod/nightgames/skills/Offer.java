@@ -174,7 +174,7 @@ public class Offer extends Skill {
                                                 + " to mount %s, enveloping the hard shaft in %s %s.",
                                 getSelf().getName(), getSelf().possessiveAdjective(), getSelf().possessiveAdjective(),
                                 getSelf().body.getRandomCock().describe(getSelf()), target.nameOrPossessivePronoun(),
-                                Global.capitalizeFirstLetter(target.subjectAction("admit")), target.reflectivePronoun(),
+                                Global.capitalizeFirstLetter(target.subjectAction("admit")), target.reflexivePronoun(),
                                 target.action("proceed"), getSelf().directObject(), target.possessiveAdjective(),
                                 target.body.getRandomPussy().describe(target));
             case anal:

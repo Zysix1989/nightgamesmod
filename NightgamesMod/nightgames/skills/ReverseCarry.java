@@ -92,11 +92,11 @@ public class ReverseCarry extends Carry {
             return String.format("%sleaps into %s arms and impales %s on %s cock. "
                             + "%s wraps %s legs around %s torso and %s quickly %s %s so %s doesn't "
                             + "fall and injure %s or %s.", subject, target.nameOrPossessivePronoun(),
-                            getSelf().reflectivePronoun(), target.possessiveAdjective(),
+                            getSelf().reflexivePronoun(), target.possessiveAdjective(),
                             getSelf().subject(), getSelf().possessiveAdjective(), target.nameOrPossessivePronoun(),
                             target.pronoun(), target.action("support"), getSelf().pronoun(),
                             getSelf().pronoun(),
-                            getSelf().reflectivePronoun(), target.directObject());
+                            getSelf().reflexivePronoun(), target.directObject());
         }
     }
 

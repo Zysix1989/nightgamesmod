@@ -91,7 +91,7 @@ public class ToggleKnot extends Skill {
                                                 + " getting <i>that</i> out of %s any time soon...",
                                                 firstPart, getSelf().nameOrPossessivePronoun(),
                                                 Global.capitalizeFirstLetter(target.subjectAction("are", "is")),
-                                                target.reflectivePronoun()));
+                                                target.reflexivePronoun()));
             }
             target.add(c, new Knotted(target, getSelf(), c.getStance().anallyPenetrated(c, target)));
         }

@@ -147,7 +147,7 @@ public class PullOut extends Skill {
                         } else {
                             c.write(getSelf(), String.format("%s tries to pull %s off of %s, but with "
                                             + "a gentle pull of %s hands, %s collapses back on top of %s.",
-                                            getSelf().subject(), getSelf().reflectivePronoun(),
+                                            getSelf().subject(), getSelf().reflexivePronoun(),
                                             target.nameDirectObject(), target.possessiveAdjective(),
                                             getSelf().pronoun(), target.directObject()));
                         }
@@ -161,7 +161,7 @@ public class PullOut extends Skill {
                         } else {
                             c.write(getSelf(), String.format("%s tries to pull %s out of %s %s, but %s down "
                                             + "hard on %s cock, and prevent %s from pulling out.", getSelf().subject(),
-                                            getSelf().reflectivePronoun(), target.possessiveAdjective(), partString,
+                                            getSelf().reflexivePronoun(), target.possessiveAdjective(), partString,
                                             target.subjectAction("pull"), target.possessiveAdjective(),
                                             getSelf().directObject()));
                         }

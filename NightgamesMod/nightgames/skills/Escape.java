@@ -40,7 +40,7 @@ public class Escape extends Skill {
                 if (getSelf().human()) {
                     c.write(getSelf(), "You slip your hands out of your restraints.");
                 } else if (c.shouldPrintReceive(target, c)) {
-                    c.write(getSelf(), getSelf().getName() + " manages to free " + getSelf().reflectivePronoun() + ".");
+                    c.write(getSelf(), getSelf().getName() + " manages to free " + getSelf().reflexivePronoun() + ".");
                 }
                 getSelf().free();
                 c.getCombatantData(getSelf()).setIntegerFlag(Grab.FLAG, 0);

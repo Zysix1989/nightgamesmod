@@ -1928,7 +1928,7 @@ public class Global {
         });
         matchActions.put("reflective", (self, first, second, third) -> {
             if (self != null) {
-                return self.reflectivePronoun();
+                return self.reflexivePronoun();
             }
             return "";
         });

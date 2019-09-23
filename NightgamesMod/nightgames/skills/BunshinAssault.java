@@ -64,7 +64,7 @@ public class BunshinAssault extends Skill {
         }
         else if(c.shouldPrintReceive(target, c)){
             c.write(getSelf(), String.format("%s moves in a blur and suddenly %s %d of %s approaching %s.",getSelf().getName(),
-                            target.subjectAction("see"),clones,getSelf().pronoun(),target.reflectivePronoun()));
+                            target.subjectAction("see"),clones,getSelf().pronoun(),target.reflexivePronoun()));
         }
         for(int i=0;i<clones;i++){
             if(target.roll(getSelf(), c, accuracy(c, target))) {

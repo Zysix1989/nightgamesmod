@@ -154,7 +154,7 @@ public class FaceFuck extends Skill {
                             getSelf().subject(), target.nameOrPossessivePronoun(), getSelf().possessiveAdjective(),
                             getSelf().body.getRandomCock().describe(getSelf()), target.subjectAction("are", "is"),
                             getSelf().subject(), getSelf().possessiveAdjective(), target.possessiveAdjective(),
-                            target.nameOrPossessivePronoun(), getSelf().subject(), getSelf().reflectivePronoun(),
+                            target.nameOrPossessivePronoun(), getSelf().subject(), getSelf().reflexivePronoun(),
                             getSelf().possessiveAdjective());
         } else {
             m = String.format("%s forces %s mouth open and shoves %s %s into it. %s "

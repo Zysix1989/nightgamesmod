@@ -126,7 +126,7 @@ public class Finger extends Skill {
                 return String.format("%s sensitive lower lips start to open up under"
                                 + " %s skilled touch and %s can feel %s becoming wet.",
                                 target.nameOrPossessivePronoun(), getSelf().nameOrPossessivePronoun(),
-                                target.pronoun(), target.reflectivePronoun());
+                                target.pronoun(), target.reflexivePronoun());
             } else if (target.getArousal().percent() < 80) {
                 return String.format("%s locates %s clitoris and caress it directly, causing"
                                 + " %s to tremble from the powerful stimulation.",

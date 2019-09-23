@@ -53,7 +53,7 @@ public class StoneForm extends Skill {
     @Override
     public String receive(Combat c, int damage, Result modifier, Character target) {
         return String.format("%s braces %s to resist %s attacks.",
-                        getSelf().subject(), getSelf().reflectivePronoun(),
+                        getSelf().subject(), getSelf().reflexivePronoun(),
                         target.nameOrPossessivePronoun());
     }
 

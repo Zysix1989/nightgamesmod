@@ -200,7 +200,7 @@ public class Kiss extends Skill {
                             target.action("try", "tries"), getSelf().possessiveAdjective(),
                             target.possessiveAdjective(), getSelf().subject(), getSelf().possessiveAdjective(),
                             target.nameOrPossessivePronoun(), target.possessiveAdjective(), 
-                            target.subjectAction("hold"), getSelf().reflectivePronoun());
+                            target.subjectAction("hold"), getSelf().reflexivePronoun());
         }
         if (modifier == Result.upgrade) {
             return String.format("%s seductively pulls %s into a deep kiss. As first %s %s to match %s "

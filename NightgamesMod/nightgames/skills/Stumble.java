@@ -72,7 +72,7 @@ public class Stumble extends Skill {
         return String.format(
                         "%s stumbles and falls, grabbing %s to catch %s. Unfortunately, "
                                         + "%s can't keep %s balance and %s %s on top of %s. Maybe that's not so unfortunate.",
-                        getSelf().getName(), target.nameDirectObject(), getSelf().reflectivePronoun(), 
+                        getSelf().getName(), target.nameDirectObject(), getSelf().reflexivePronoun(),
                         target.subject(), target.possessiveAdjective(), target.pronoun(),
                         target.action("fall"), getSelf().directObject());
     }

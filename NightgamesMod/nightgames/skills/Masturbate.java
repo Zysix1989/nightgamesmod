@@ -130,7 +130,7 @@ public class Masturbate extends Skill {
     public String receive(Combat c, int damage, Result modifier, Character target) {
         if (targetO == null) {
             return String.format("%s starts playing with %s, building up %s own arousal.",
-                            getSelf().subject(), getSelf().reflectivePronoun(),
+                            getSelf().subject(), getSelf().reflexivePronoun(),
                             getSelf().possessiveAdjective());
         }
         if (targetO.isType("cock")) {
@@ -143,14 +143,14 @@ public class Masturbate extends Skill {
             }
         } else if (targetO.isType("pussy")) {
             return String.format("%s slowly teases her own labia and starts playing with %s.",
-                            getSelf().subject(), getSelf().reflectivePronoun());
+                            getSelf().subject(), getSelf().reflexivePronoun());
         } else if (targetO.isType("ass")) {
             return String.format("%s teases %s own asshole and sticks a finger in.",
                             getSelf().subject(), getSelf().possessiveAdjective());
         } else {
             return String.format("%s starts playing with %s, building up %s own arousal.",
                             getSelf().subject(), getSelf().possessiveAdjective(),
-                            getSelf().reflectivePronoun());
+                            getSelf().reflexivePronoun());
         }
     }
 

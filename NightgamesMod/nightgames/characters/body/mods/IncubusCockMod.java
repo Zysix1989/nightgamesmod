@@ -23,7 +23,7 @@ public class IncubusCockMod extends CockMod {
         String message = String
             .format("%s demonic appendage latches onto %s will, trying to draw it into %s.",
                 self.nameOrPossessivePronoun(), opponent.nameOrPossessivePronoun(),
-                self.reflectivePronoun());
+                self.reflexivePronoun());
         int amtDrained;
         if (target.moddedPartCountsAs(FeralMod.TYPE)) {
             message += String.format(" %s %s gladly gives it up, eager for more pleasure.",

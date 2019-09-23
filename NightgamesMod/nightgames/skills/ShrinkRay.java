@@ -125,14 +125,14 @@ public class ShrinkRay extends Skill {
                             + "shrink. %s in shame and %s %s.", getSelf().subject(),
                             target.nameOrPossessivePronoun(), target.possessiveAdjective(),
                             Global.capitalizeFirstLetter(target.subjectAction("flush", "flushes")),
-                            target.action("cover"), target.reflectivePronoun());
+                            target.action("cover"), target.reflexivePronoun());
         } else {
             message = String.format("%s points a device at %s chest and giggles as %s %s"
                             + " shrink. %s in shame and %s %s.", getSelf().subject(),
                             target.nameOrPossessivePronoun(), target.possessiveAdjective(),
                             getSelf().body.getRandomBreasts().describe(getSelf()),
                             Global.capitalizeFirstLetter(target.subjectAction("flush", "flushes")),
-                            target.action("cover"), target.reflectivePronoun());
+                            target.action("cover"), target.reflexivePronoun());
         }
         if (damage == 0) {
             message += String.format(" The effect wears off quickly, but the"

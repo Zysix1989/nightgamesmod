@@ -201,7 +201,7 @@ public class Drain extends Skill {
                             target.subjectAction("feel"), getSelf().nameOrPossessivePronoun(),
                             muscDesc, target.directObject(), getSelf().subject(),
                             target.possessiveAdjective(), target.directObject(),
-                            target.subjectAction("feel"), target.reflectivePronoun(), getSelf().nameDirectObject(),
+                            target.subjectAction("feel"), target.reflexivePronoun(), getSelf().nameDirectObject(),
                             target.pronoun(), target.action("realize"), target.pronoun(), target.action("are", "is"),
                             partDesc, target.directObject(), target.subjectAction("feel"));
             switch (damage) {

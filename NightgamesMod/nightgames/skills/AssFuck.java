@@ -197,7 +197,7 @@ public class AssFuck extends Fuck {
                                     target.directObject());
                 } else {
                     return String.format("%s lubes up %s strap-on, positions %s behind %s, and shoves it into %s ass.", 
-                                    getSelf().getName(), getSelf().possessiveAdjective(), getSelf().reflectivePronoun(), 
+                                    getSelf().getName(), getSelf().possessiveAdjective(), getSelf().reflexivePronoun(),
                                     target.nameDirectObject(), target.possessiveAdjective());
                 }
             } else {

@@ -216,7 +216,7 @@ public class Blowjob extends Skill {
             m += String.format("<br/>Unfortunately for %s, as %s mouth fucks %s cock %s sensitive"
                             + " modifier mouth pussy sends spasms of pleasure into %s as well.", 
                             getSelf().directObject(), getSelf().subject(), target.nameOrPossessivePronoun(),
-                            getSelf().possessiveAdjective(), getSelf().reflectivePronoun());
+                            getSelf().possessiveAdjective(), getSelf().reflexivePronoun());
         }
         return m;
     }

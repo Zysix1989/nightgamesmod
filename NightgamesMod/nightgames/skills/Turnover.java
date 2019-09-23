@@ -61,7 +61,7 @@ public class Turnover extends Skill {
                         + "up, but %s takes the opportunity to get behind %s.", getSelf().subject(),
                         target.nameDirectObject(), target.possessiveAdjective(),
                         Global.capitalizeFirstLetter(target.subjectAction("push", "pushes")),
-                        target.reflectivePronoun(), getSelf().subject(), target.directObject());
+                        target.reflexivePronoun(), getSelf().subject(), target.directObject());
     }
 
     @Override

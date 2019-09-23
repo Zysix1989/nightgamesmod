@@ -141,7 +141,7 @@ public class PetThreesome extends Skill {
                                 + "Taking advantage of {other:possessive} surprise %s {other:name-possessive} "
                                 + "hard cock into %s, ending up in a erotic daisy-chain.", fucker, 
                                 target, master.subjectAction("are", "is"), master.subjectAction("slip"),
-                                master.reflectivePronoun()));
+                                master.reflexivePronoun()));
                 c.setStance(new XHFDaisyChainThreesome(fucker, master, target), getSelf(), true);
                 target.body.pleasure(master, master.body.getRandomPussy(), target.body.getRandomCock(), otherm, 0, c, false, this);
                 master.body.pleasure(target, target.body.getRandomCock(), master.body.getRandomPussy(), m, 0, c, false, this);

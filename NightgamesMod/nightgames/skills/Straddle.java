@@ -56,7 +56,7 @@ public class Straddle extends Skill {
     @Override
     public String receive(Combat c, int damage, Result modifier, Character target) {
         return String.format("%s plops %s down on top of %s stomach.",
-                        getSelf().subject(), getSelf().reflectivePronoun(),
+                        getSelf().subject(), getSelf().reflexivePronoun(),
                         target.nameOrPossessivePronoun());
     }
 

@@ -23,7 +23,7 @@ public class FlowerSex extends FemdomSexStance {
             return String.format("%s trapped in a giant flower bulb surrounding %s and %s. "
                             + "Inside, %s on top of %s with %s cock trapped in %s pussy "
                             + "and %s face smothered in %s cleavage.", bottom.subjectAction("are", "is"),
-                            bottom.human() ? "you" : bottom.reflectivePronoun(), top.subject(),
+                            bottom.human() ? "you" : bottom.reflexivePronoun(), top.subject(),
                             bottom.subjectAction("are", "is"), top.nameDirectObject(),
                             bottom.possessiveAdjective(), top.possessiveAdjective(),
                             bottom.possessiveAdjective(), top.possessiveAdjective());

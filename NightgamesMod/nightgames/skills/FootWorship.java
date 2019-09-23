@@ -101,7 +101,7 @@ public class FootWorship extends Skill {
         if (!c.getCombatantData(getSelf()).getBooleanFlag("footworshipped")) {
             return String.format("%s throws %s at %s feet. %s worshipfully grasps %s feet "
                             + "and starts licking between %s toes, all while %s face displays a mask of ecstasy.",
-                            getSelf().subject(), getSelf().reflectivePronoun(), target.nameOrPossessivePronoun(),
+                            getSelf().subject(), getSelf().reflexivePronoun(), target.nameOrPossessivePronoun(),
                             getSelf().subject(), target.possessiveAdjective(), target.possessiveAdjective(),
                             getSelf().possessiveAdjective());
         }
