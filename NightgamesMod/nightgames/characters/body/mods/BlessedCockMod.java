@@ -7,6 +7,8 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.DivineCharge;
 import nightgames.status.Stsflag;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class BlessedCockMod extends CockMod {
     public static final String TYPE = "blessed";
@@ -20,9 +22,16 @@ public class BlessedCockMod extends CockMod {
         double bonus = super.applyBonuses(c, self, opponent, part, target, damage);
         if (target.isType("cock")) {
             if (self.getStatus(Stsflag.divinecharge) != null) {
-                c.write(self, Global.format(
-                    "{self:NAME-POSSESSIVE} concentrated divine energy in {self:possessive} cock rams into {other:name-possessive} pussy, sending unimaginable pleasure directly into {other:possessive} soul.",
-                    self, opponent));
+                var model = JtwigModel.newModel()
+                    .with("self", self)
+                    .with("other", opponent);
+                var template = JtwigTemplate.inlineTemplate(
+                    "{{ self.nameOrPossessivePronoun() }} concentrated divine energy in"
+                        + " {{ self.possessiveAdjective }} cock rams into "
+                        + "{{ other.nameOrPossessivePronoun }} pussy, sending unimaginable "
+                        + "pleasure directly into {{ other.possessiveAdjective }} soul."
+                );
+                c.write(self, template.render(model));
             }
             // no need for any effects, the bonus is in the pleasure mod
         }
@@ -32,17 +41,27 @@ public class BlessedCockMod extends CockMod {
     public double applyReceiveBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
         if (c.getStance().inserted(self)) {
             DivineCharge charge = (DivineCharge) self.getStatus(Stsflag.divinecharge);
+            var model = JtwigModel.newModel()
+                .with("self", self)
+                .with("opponent", opponent)
+                .with("part", part);
             if (charge == null) {
-                c.write(self, Global.format(
-                    "{self:NAME-POSSESSIVE} " + part.fullDescribe(self)
-                        + " radiates a golden glow as {self:subject-action:groan|groans}. "
-                        + "{other:SUBJECT-ACTION:realize|realizes} {self:subject-action:are|is} feeding on {self:possessive} own pleasure to charge up {self:possessive} divine energy.",
-                    self, opponent));
+                var template = JtwigTemplate.inlineTemplate(
+                    "{{ self.nameOrPossessivePronoun() }} {{ part.fullDescribe(self) }} radiates "
+                        + "a golden glow as {{ self.subjectAction('groan') }}. "
+                        + "{{ opponent.subjectAction('realize') }} "
+                        + "{{ self.subjectAction('are', 'is') }} feeding on "
+                        + "{{ self.possessiveAdjective }} own pleasure to charge up "
+                        + "{{ self.possessiveAdjective }} divine energy."
+                    );
+                c.write(self, template.render(model));
                 self.add(c, new DivineCharge(self, .25));
             } else {
-                c.write(self, Global.format(
-                    "{self:SUBJECT-ACTION:continue|continues} feeding on {self:possessive} own pleasure to charge up {self:possessive} divine energy.",
-                    self, opponent));
+                var template = JtwigTemplate.inlineTemplate(
+                    "{{ self.subjectAction('continue') }} feeding on {{ self.possessiveAdjective }}"
+                        + "own pleasure to charge up {{ self.possessiveAdjective }} divine energy."
+                );
+                c.write(self, template.render(model));
                 self.add(c, new DivineCharge(self, charge.magnitude));
             }
         }
@@ -53,10 +72,21 @@ public class BlessedCockMod extends CockMod {
     public void onStartPenetration(Combat c, Character self, Character opponent, BodyPart part, BodyPart target) {
         if (target.isErogenous()) {
             if (!self.human()) {
-                c.write(self, Global.format(
-                    "As soon as {self:subject} penetrates you, you realize you're screwed. Both literally and figuratively. While it looks innocuous enough, {self:name-possessive} {self:body-part:cock} "
-                        + "feels like pure ecstasy. {self:SUBJECT} hasn't even begun moving yet, but {self:possessive} cock simply sitting within you radiates a heat that has you squirming uncontrollably.",
-                    self, opponent));
+                var model = JtwigModel.newModel()
+                    .with("self", self)
+                    .with("opponent", opponent)
+                    .with("part", part);
+                var template = JtwigTemplate.inlineTemplate(
+                    "As soon as {{ self.subject() }} penetrates {{ opponent.directObject() }}, "
+                        + "{{ opponent.subject() }} realize "
+                        + "{{ opponent.subjectAction('are', 'is') }} screwed. "
+                        + "Both literally and figuratively. While it looks innocuous enough, "
+                        + "{{ self.nameOrPossessivePronoun }} {{ part.describe(self) }} "
+                        + "feels like pure ecstasy. {{ self.subject() }} hasn't even begun moving yet, "
+                        + "but {{ self.nameOrPossessivePronoun() }} cock simply sitting within {{ opponent.directObject() }} "
+                        + "radiates a heat that has {{ opponent.directObject() }} squirming uncontrollably."
+                );
+                c.write(self, template.render(model));
             }
         }
     }
