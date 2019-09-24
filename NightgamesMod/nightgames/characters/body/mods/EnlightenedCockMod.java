@@ -7,6 +7,8 @@ import nightgames.characters.body.CockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.Abuff;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class EnlightenedCockMod extends CockMod {
     public static final String TYPE = "enlightened";
@@ -19,22 +21,28 @@ public class EnlightenedCockMod extends CockMod {
         BodyPart target, double damage) {
         double bonus = super.applyBonuses(c, self, opponent, part, target, damage);
 
-        String message = "";
+        var model = JtwigModel.newModel()
+            .with("self", self)
+            .with("part", part);
         if (target.moddedPartCountsAs(DemonicMod.TYPE)) {
-            message = String.format(
-                "Almost instinctively, %s %s entire being into %s %s. While this would normally be a good thing,"
-                    + " whilst fucking a succubus it is very, very bad indeed.",
-                self.subjectAction("focus", "focuses"), self.possessiveAdjective(),
-                self.possessiveAdjective(), part.describe(self));
-            c.write(self, message);
+            var template = JtwigTemplate.inlineTemplate(
+                "Almost instinctively, {{ self.subject() }} {{ self.action('focus') }} "
+                    + "{{ self.possessiveAdjective() }} entire being into "
+                    + "{{ self.possessiveAdjective() }} {{ part.describe(self) }}.  This "
+                    + "would normally be a good thing, but whilst fucking a succubus it is very, "
+                    + "very bad indeed."
+            );
+            c.write(self, template.render(model));
             // Actual bad effects are dealt with in PussyPart
         } else {
-            message = String.format(
-                "Drawing upon %s extensive training, %s %s will into %s %s, enhancing %s own abilities",
-                self.possessiveAdjective(), self.subjectAction("concentrate", "concentrates"),
-                self.possessiveAdjective(), self.possessiveAdjective(), part.describe(self),
-                self.possessiveAdjective());
-            c.write(self, message);
+            var template = JtwigTemplate.inlineTemplate(
+                "Drawing upon {{ self.possessiveAdjective() }} extensive training, "
+                    + "{{ self.subject() }} {{ self.action('concentrate') }} "
+                    + "{{ self.possessiveAdjective() }} will into {{ self.possessiveAdjective() }}"
+                    + "{{ part.describe(self) }}, enhancing {{ self.possessiveAdjective() }} own "
+                    + "abilities."
+            );
+            c.write(self, template.render(model));
             for (int i = 0; i < Math.max(2, (self.get(Attribute.Ki) + 5) / 10); i++) { // +5
                 // for
                 // rounding:
