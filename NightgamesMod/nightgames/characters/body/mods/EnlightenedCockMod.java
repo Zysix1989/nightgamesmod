@@ -25,24 +25,10 @@ public class EnlightenedCockMod extends CockMod {
             .with("self", self)
             .with("part", part);
         if (target.moddedPartCountsAs(DemonicMod.TYPE)) {
-            var template = JtwigTemplate.inlineTemplate(
-                "Almost instinctively, {{ self.subject() }} {{ self.action('focus') }} "
-                    + "{{ self.possessiveAdjective() }} entire being into "
-                    + "{{ self.possessiveAdjective() }} {{ part.describe(self) }}.  This "
-                    + "would normally be a good thing, but whilst fucking a succubus it is very, "
-                    + "very bad indeed."
-            );
-            c.write(self, template.render(model));
+            c.write(self, APPLY_BONUS_DEMONIC_TEMPLATE.render(model));
             // Actual bad effects are dealt with in PussyPart
         } else {
-            var template = JtwigTemplate.inlineTemplate(
-                "Drawing upon {{ self.possessiveAdjective() }} extensive training, "
-                    + "{{ self.subject() }} {{ self.action('concentrate') }} "
-                    + "{{ self.possessiveAdjective() }} will into {{ self.possessiveAdjective() }}"
-                    + "{{ part.describe(self) }}, enhancing {{ self.possessiveAdjective() }} own "
-                    + "abilities."
-            );
-            c.write(self, template.render(model));
+            c.write(self, APPLY_BONUS_TEMPLATE.render(model));
             for (int i = 0; i < Math.max(2, (self.get(Attribute.Ki) + 5) / 10); i++) { // +5
                 // for
                 // rounding:
@@ -63,4 +49,20 @@ public class EnlightenedCockMod extends CockMod {
     public String describeAdjective(String partType) {
             return "imposing presence";
     }
+
+    private static final JtwigTemplate APPLY_BONUS_DEMONIC_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "Almost instinctively, {{ self.subject() }} {{ self.action('focus') }} "
+            + "{{ self.possessiveAdjective() }} entire being into "
+            + "{{ self.possessiveAdjective() }} {{ part.describe(self) }}.  This "
+            + "would normally be a good thing, but whilst fucking a succubus it is very, "
+            + "very bad indeed."
+    );
+
+    private static final JtwigTemplate APPLY_BONUS_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "Drawing upon {{ self.possessiveAdjective() }} extensive training, "
+            + "{{ self.subject() }} {{ self.action('concentrate') }} "
+            + "{{ self.possessiveAdjective() }} will into {{ self.possessiveAdjective() }}"
+            + "{{ part.describe(self) }}, enhancing {{ self.possessiveAdjective() }} own "
+            + "abilities."
+    );
 }
