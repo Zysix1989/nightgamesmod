@@ -32,23 +32,13 @@ public class FieryMod extends PartMod {
 
         JtwigTemplate template;
         if (target.moddedPartCountsAs(PrimalCockMod.TYPE)) {
-            template = JtwigTemplate.inlineTemplate(
-                "The intense heat emanating from {{ self.nameOrPossessivePronoun() }} "
-                    + "{{ part.describe(self) }} only serves to enflame "
-                    + "{{ opponent.nameOrPossessivePronoun() }} primal passion.");
+            template = APPLY_BONUS_PRIMAL_TEMPLATE;
             opponent.buildMojo(c, 7);
         } else if (target.moddedPartCountsAs(BionicCockMod.TYPE)) {
-            template = JtwigTemplate.inlineTemplate(
-                "The heat emanating from {{ self.nameOrPossessivePronoun() }} "
-                    + "{{ part.describe(self) }} is extremely hazardous for "
-                    + "{{ opponent.nameOrPossessivePronoun() }} {{ target.describe(opponent) }}, "
-                    + "nearly burning through its circuitry and definitely causing intense pain.");
+            template = APPLY_BONUS_BIONIC_TEMPLATE;
             opponent.pain(c, self, Math.max(30, 20 + self.get(Attribute.Ki)));
         } else {
-            template = JtwigTemplate.inlineTemplate(
-                "Plunging {{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }} "
-                    + "into {{ self.possessiveAdjective() }} {{ part.describe(self) }} leaves "
-                    + "{{ opponent.objectPronoun() }} gasping from the heat.");
+            template = APPLY_BONUS_TEMPLATE;
             opponent.pain(c, self, 20 + self.get(Attribute.Ki) / 2);
         }
         return template;
@@ -66,10 +56,7 @@ public class FieryMod extends PartMod {
             .with("target", target);
         JtwigTemplate template;
         if (opponent.stunned()) {
-            template = JtwigTemplate.inlineTemplate(
-                "The intense heat emanating from {{ self.possessiveAdjective() }} " 
-                    + "{{ part.getType() }} overpowers {{ opponent.possessiveAdjective() }} senses " 
-                    + "now and {{ opponent.pronoun() }} cannot respond.");
+            template = APPLY_BONUS_STUNNED_TEMPLATE;
             strength = 20;
         } else {
             template = tickDamage(c, self, opponent, target);
@@ -101,4 +88,23 @@ public class FieryMod extends PartMod {
     public String describeAdjective(String partType) {
         return "molten depths";
     }
+
+    private static final JtwigTemplate APPLY_BONUS_PRIMAL_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "The intense heat emanating from {{ self.nameOrPossessivePronoun() }} "
+        + "{{ part.describe(self) }} only serves to inflame "
+        + "{{ opponent.nameOrPossessivePronoun() }} primal passion.");
+    private static final JtwigTemplate APPLY_BONUS_BIONIC_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "The heat emanating from {{ self.nameOrPossessivePronoun() }} "
+        + "{{ part.describe(self) }} is extremely hazardous for "
+        + "{{ opponent.nameOrPossessivePronoun() }} {{ target.describe(opponent) }}, "
+        + "nearly burning through its circuitry and definitely causing intense pain.");
+    private static final JtwigTemplate APPLY_BONUS_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "Plunging {{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }} "
+        + "into {{ self.possessiveAdjective() }} {{ part.describe(self) }} leaves "
+        + "{{ opponent.objectPronoun() }} gasping from the heat.");
+    private static final JtwigTemplate APPLY_BONUS_STUNNED_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "The intense heat emanating from {{ self.possessiveAdjective() }} "
+        + "{{ part.getType() }} overpowers {{ opponent.possessiveAdjective() }} senses "
+        + "now and {{ opponent.pronoun() }} cannot respond.");
+
 }
