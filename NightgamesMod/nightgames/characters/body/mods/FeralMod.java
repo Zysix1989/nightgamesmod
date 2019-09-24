@@ -29,12 +29,7 @@ public class FeralMod extends PartMod {
                 JtwigModel model = JtwigModel.newModel()
                     .with("self", self)
                     .with("opponent", opponent);
-                JtwigTemplate template = JtwigTemplate.inlineTemplate(
-                    "A cloud of lust descends over {{ opponent.getName() }} and " 
-                        + "{{ self.getName() }}, clearing both of your thoughts of all matters " 
-                        + "except to fuck. Hard."
-                );
-                c.write(self, template.render(model));
+                c.write(self, APPLY_BONUS_TEMPLATE.render(model));
                 self.add(c, new IgnoreOrgasm(opponent, 3));
                 self.add(c, new Frenzied(self, 3));
                 opponent.add(c, new Frenzied(opponent, 3));
@@ -51,22 +46,13 @@ public class FeralMod extends PartMod {
                 .with("part", part)
                 .with("target", target);
             ArrayList<JtwigTemplate> templates = new ArrayList<>();
-            templates.add(JtwigTemplate.inlineTemplate(
-                "Musk emanating from {{ self.possessiveAdjective() }} {{ part.describe(self) }} "
-                    + "leaves {{ opponent.objectPronoun() }} reeling."
-            ));
+            templates.add(RECEIVE_TEMPLATE);
             double base = 3;
             if (target.moddedPartCountsAs(RunicCockMod.TYPE)) {
-                templates.add(JtwigTemplate.inlineTemplate(
-                    "The wild scent overwhelms {{ opponent.nameOrPossessivePronoun() }} "
-                        + "carefully layered enchantments, instantly sweeping them away."
-                ));
+                templates.add(RECEIVE_RUNIC_TEMPLATE);
                 base *= 2.5;
             } else if (target.moddedPartCountsAs(IncubusCockMod.TYPE)) {
-                templates.add(JtwigTemplate.inlineTemplate(
-                    "Whilst certainly invigorating, the scent leaves {{ opponent.subject() }} "
-                        + "largely unaffected."
-                ));
+                templates.add(RECEIVE_DEMONIC_TEMPLATE);
                 base /= 2;
             }
             for (JtwigTemplate template : templates) {
@@ -83,13 +69,7 @@ public class FeralMod extends PartMod {
                 .with("self", self)
                 .with("opponent", opponent)
                 .with("part", part);
-            JtwigTemplate template = JtwigTemplate.inlineTemplate(
-                "As {{ self.subject() }} {{{ self.action('cum') }} hard, a literal explosion of "
-                    + "pheromones hits {{ other.nameDirectObject() }}. "
-                    + "{{ other.possessiveAdjective() }} entire body flushes in arousal; "
-                    + "{{ other.subject() }} better finish this fast!"
-            );
-            c.write(self, template.render(model));
+            c.write(self, ON_ORGASM_TEMPLATE.render(model));
             opponent.add(c, Pheromones.getWith(self, opponent, 10, 5, " orgasmic secretions"));
         }
     }
@@ -103,4 +83,32 @@ public class FeralMod extends PartMod {
     public String describeAdjective(String partType) {
         return "feral musk";
     }
+
+    private static final JtwigTemplate APPLY_BONUS_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "A cloud of lust descends over {{ opponent.getName() }} and "
+            + "{{ self.getName() }}, clearing both of your thoughts of all matters "
+            + "except to fuck. Hard."
+    );
+
+    private static final JtwigTemplate RECEIVE_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "Musk emanating from {{ self.possessiveAdjective() }} {{ part.describe(self) }} "
+            + "leaves {{ opponent.objectPronoun() }} reeling."
+    );
+
+    private static final JtwigTemplate RECEIVE_DEMONIC_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "Whilst certainly invigorating, the scent leaves {{ opponent.subject() }} "
+            + "largely unaffected."
+    );
+
+    private static final JtwigTemplate RECEIVE_RUNIC_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "The wild scent overwhelms {{ opponent.nameOrPossessivePronoun() }} "
+            + "carefully layered enchantments, instantly sweeping them away."
+    );
+
+    private static final JtwigTemplate ON_ORGASM_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "As {{ self.subject() }} {{{ self.action('cum') }} hard, a literal explosion of "
+            + "pheromones hits {{ other.nameDirectObject() }}. "
+            + "{{ other.possessiveAdjective() }} entire body flushes in arousal; "
+            + "{{ other.subject() }} better finish this fast!"
+    );
 }
