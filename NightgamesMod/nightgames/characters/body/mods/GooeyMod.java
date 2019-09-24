@@ -26,15 +26,7 @@ public class GooeyMod extends PartMod {
                 .with("opponent", opponent)
                 .with("part", part)
                 .with("target", target);
-            JtwigTemplate template = JtwigTemplate.inlineTemplate(
-                "{{ self.nameOrPossessivePronoun() }} {{ part.describe(self) }} clenches down hard"
-                    + " on {{ other.nameOrPossessivePronoun() }} {{ target.describe(opponent) }}. "
-                    + "The suction is so strong that the cum leaves "
-                    + "{{ opponent.possessiveAdjective() }} shaft in a constant flow rather than "
-                    + "spurts. When {{ other.possessiveAdjective() }} orgasm is over, "
-                    + "{{ other.subject() }}{{{ other.action('are') }} much more drained of cum "
-                    + "than usual.");
-            c.write(self, template.render(model));
+            c.write(self, ON_ORGASM_WITH_TEMPLATE.render(model));
             opponent.loseWillpower(c, 10 + Global.random(Math.min(20, self.get(Attribute.Bio))));
         }
     }
@@ -46,15 +38,8 @@ public class GooeyMod extends PartMod {
                 .with("opponent", opponent)
                 .with("part", part)
                 .with("target", target);
-            JtwigTemplate template = JtwigTemplate.inlineTemplate(
-                "{{ self.nameOrPossessivePronoun() }} {{ part.describe(self) }} envelops"
-                + " {{ other.possessiveAdjective() }} {{ target.describe(opponent) }} in a "
-                    + "sticky grip, making pulling out more difficult.");
-            JtwigTemplate bindingTemplate = JtwigTemplate.inlineTemplate(
-                "{{ self.nameOrPossessivePronoun() }} {{ part.describe(self) }}"
-            );
-            c.write(self, template.render(model));
-            opponent.add(c, new CockBound(opponent, 7, bindingTemplate.render(model)));
+            c.write(self, ON_START_PENETRATION_TEMPLATE.render(model));
+            opponent.add(c, new CockBound(opponent, 7, BINDING_TEMPLATE.render(model)));
         }
     }
 
@@ -64,12 +49,7 @@ public class GooeyMod extends PartMod {
             .with("opponent", opponent)
             .with("part", part)
             .with("target", target);
-        JtwigTemplate template = JtwigTemplate.inlineTemplate(
-            "The slimy filaments inside {{ self.possessiveAdjective() }} {{ part.describe(self) }} "
-                + "constantly massage {{ other.possessiveAdjective() }} "
-                + "{{ target.describe(opponent) }}, filling every inch of it with pleasure."
-        );
-        c.write(self, template.render(model));
+        c.write(self, TICK_HOLDING_TEMPLATE.render(model));
         opponent.body.pleasure(self, part, target, 1 + Global.random(7), c);
     }
 
@@ -81,4 +61,28 @@ public class GooeyMod extends PartMod {
     public String describeAdjective(String partType) {
         return "gooey consistency";
     }
+
+    private static final JtwigTemplate ON_ORGASM_WITH_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "{{ self.nameOrPossessivePronoun() }} {{ part.describe(self) }} clenches down hard"
+            + " on {{ other.nameOrPossessivePronoun() }} {{ target.describe(opponent) }}. "
+            + "The suction is so strong that the cum leaves "
+            + "{{ opponent.possessiveAdjective() }} shaft in a constant flow rather than "
+            + "spurts. When {{ other.possessiveAdjective() }} orgasm is over, "
+            + "{{ other.subject() }}{{{ other.action('are') }} much more drained of cum "
+            + "than usual.");
+
+    private static final JtwigTemplate ON_START_PENETRATION_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "{{ self.nameOrPossessivePronoun() }} {{ part.describe(self) }} envelops"
+            + " {{ other.possessiveAdjective() }} {{ target.describe(opponent) }} in a "
+            + "sticky grip, making pulling out more difficult.");
+
+    private static final JtwigTemplate BINDING_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "{{ self.nameOrPossessivePronoun() }} {{ part.describe(self) }}"
+    );
+
+    private static final JtwigTemplate TICK_HOLDING_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "The slimy filaments inside {{ self.possessiveAdjective() }} {{ part.describe(self) }} "
+            + "constantly massage {{ other.possessiveAdjective() }} "
+            + "{{ target.describe(opponent) }}, filling every inch of it with pleasure."
+    );
 }
