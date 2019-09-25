@@ -38,7 +38,6 @@ public class Mei extends BasePersonality {
 
     @Override
     public void applyBasicStats(Character self) {
-        preferredCockModType = ErrorMod.TYPE;
         character.outfitPlan.add(Clothing.getByID("negligee"));
         character.outfitPlan.add(Clothing.getByID("lacythong"));
         character.outfitPlan.add(Clothing.getByID("garters"));

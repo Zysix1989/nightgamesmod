@@ -43,7 +43,6 @@ public class Yui extends BasePersonality {
 
     @Override
     public void applyBasicStats(Character self) {
-        preferredCockModType = ErrorMod.TYPE;
         character.outfitPlan.add(Clothing.getByID("sarashi"));
         character.outfitPlan.add(Clothing.getByID("shinobigarb"));
         character.outfitPlan.add(Clothing.getByID("loincloth"));

@@ -77,7 +77,6 @@ public class Maya extends BasePersonality {
 
         self.body.add(new BreastsPart(Size.DCup));
         self.initialGender = CharacterSex.female;
-        preferredCockModType = ErrorMod.TYPE;
     }
 
     @Override

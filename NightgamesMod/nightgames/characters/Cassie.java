@@ -184,7 +184,7 @@ public class Cassie extends BasePersonality {
 
     @Override
     public void applyBasicStats(Character self) {
-        preferredCockModType = RunicCockMod.TYPE;
+        preferredCockModType = Optional.of(RunicCockMod.TYPE);
         self.outfitPlan.add(Clothing.getByID("bra"));
         self.outfitPlan.add(Clothing.getByID("blouse"));
         self.outfitPlan.add(Clothing.getByID("panties"));

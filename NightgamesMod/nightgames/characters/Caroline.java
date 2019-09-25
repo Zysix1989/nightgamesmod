@@ -36,7 +36,6 @@ public class Caroline extends BasePersonality {
 
     @Override
     public void applyBasicStats(Character self) {
-        preferredCockModType = ErrorMod.TYPE;
         character.outfitPlan.add(Clothing.getByID("lacybra"));
         character.outfitPlan.add(Clothing.getByID("lacepanties"));
         character.outfitPlan.add(Clothing.getByID("stockings"));

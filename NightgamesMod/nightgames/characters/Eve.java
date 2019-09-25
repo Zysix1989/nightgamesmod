@@ -74,7 +74,6 @@ public class Eve extends BasePersonality {
         // somewhat androgynous face
         self.body.add(new FacePart(.1, .9));
         self.initialGender = CharacterSex.shemale;
-        preferredCockModType = ErrorMod.TYPE;
     }
 
     @Override

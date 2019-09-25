@@ -51,7 +51,7 @@ public class Kat extends BasePersonality {
 
     @Override
     public void applyBasicStats(Character self) {
-        preferredCockModType = PrimalCockMod.TYPE;
+        preferredCockModType = Optional.of(PrimalCockMod.TYPE);
         self.outfitPlan.add(Clothing.getByID("bra"));
         self.outfitPlan.add(Clothing.getByID("Tshirt"));
         self.outfitPlan.add(Clothing.getByID("panties"));
