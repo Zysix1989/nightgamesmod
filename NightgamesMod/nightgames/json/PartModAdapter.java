@@ -31,7 +31,7 @@ public class PartModAdapter implements JsonSerializer<PartMod>, JsonDeserializer
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        return new ErrorMod();
+        throw new RuntimeException(String.format("could not deserialize %s", jsonElement.toString()));
     }
 
     @Override
