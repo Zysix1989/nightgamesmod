@@ -30,12 +30,9 @@ public class SecondPussyMod extends PartMod {
             .with("part", part);
         JtwigTemplate template;
         if (part.isType("ass")) {
-            template = JtwigTemplate.inlineTemplate("Instead of a normal sphincter, {{ self.possessiveAdjective() }} round butt "
-                + "is crowned by a slobbering second pussy.");
+            template = LONG_DESCRIPTION_ASS_TEMPLATE;
         } else if (part.isType("mouth")) {
-            template = JtwigTemplate.inlineTemplate("When {{ self.pronoun() }} opens "
-                + "{{ self.possessiveAdjective() }} mouth, you can see soft pulsating folds "
-                + "lining {{ self.possessiveAdjective() }} inner mouth, tailor made to suck cocks.");
+            template = LONG_DESCRIPTION_MOUTH_TEMPLATE;
         } else {
             template = JtwigTemplate.inlineTemplate(previousDescription);
         }
@@ -54,4 +51,13 @@ public class SecondPussyMod extends PartMod {
     public String describeAdjective(String partType) {
         return "vaginal aspects";
     }
+
+    private static final JtwigTemplate LONG_DESCRIPTION_ASS_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "Instead of a normal sphincter, {{ self.possessiveAdjective() }} round butt "
+            + "is crowned by a slobbering second pussy.");
+
+    private static final JtwigTemplate LONG_DESCRIPTION_MOUTH_TEMPLATE = JtwigTemplate.inlineTemplate("When {{ self.pronoun() }} opens "
+        + "{{ self.possessiveAdjective() }} mouth, you can see soft pulsating folds "
+        + "lining {{ self.possessiveAdjective() }} inner mouth, tailor made to suck cocks.");
+
 }

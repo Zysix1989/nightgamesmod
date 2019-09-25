@@ -21,10 +21,7 @@ public class TrainedMod extends PartMod {
                 .with("opponent", opponent)
                 .with("part", part)
                 .with("target", target);
-            JtwigTemplate template = JtwigTemplate.inlineTemplate(
-                "{{ self.possessiveAdjective() }} trained {{ part.getType() }} feels positively exquisite. "
-                    + "It's taking all your concentration not to instantly shoot your load.");
-            c.write(self, template.render(model));
+            c.write(self, APPLY_BONUS_TEMPLATE.render(model));
         }
         return 0;
     }
@@ -33,4 +30,9 @@ public class TrainedMod extends PartMod {
     public String describeAdjective(String partType) {
         return "expertly-trained appearance";
     }
+
+    private static final JtwigTemplate APPLY_BONUS_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "{{ self.possessiveAdjective() }} trained {{ part.getType() }} feels positively exquisite. "
+            + "It's taking all your concentration not to instantly shoot your load.");
+
 }
