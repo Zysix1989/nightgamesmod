@@ -6,6 +6,8 @@ import nightgames.characters.body.CockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.Pheromones;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class PrimalCockMod extends CockMod {
     public static final String TYPE = "primal";
@@ -16,11 +18,18 @@ public class PrimalCockMod extends CockMod {
     @Override
     public void tickHolding(Combat c, Character self, Character opponent, BodyPart part,
         BodyPart target) {
-        c.write(self,
-            String.format("Raw sexual energy flows from %s %s into %s %s, enflaming %s lust",
-                self.nameOrPossessivePronoun(), part.describe(self),
-                opponent.nameOrPossessivePronoun(),
-                target.describe(opponent), opponent.possessiveAdjective()));
+        var model = JtwigModel.newModel()
+            .with("self", self)
+            .with("opponent", opponent)
+            .with("part", part)
+            .with("target", target);
+        var template = JtwigTemplate.inlineTemplate(
+            "Raw sexual energy flows from {{ self.nameOrPossessivePronoun() }} "
+                + "{{ part.describe(self) }} into {{ opponent.nameOrPossessivePronoun() }} "
+                + "{{ target.describe(opponent) }}, inflaming {{ opponent.possiveAdjective() }} "
+                + "lust. "
+        );
+        c.write(self, template.render(model));
         opponent.add(c, Pheromones
             .getWith(self, opponent, Global.random(3) + 1, 3, " primal passion"));
     }
