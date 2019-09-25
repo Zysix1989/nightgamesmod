@@ -11,6 +11,7 @@ import org.jtwig.JtwigTemplate;
 
 public class PrimalCockMod extends CockMod {
     public static final String TYPE = "primal";
+
     public PrimalCockMod() {
         super(TYPE, 1.0, 1.4, 1.2);
     }
@@ -23,13 +24,7 @@ public class PrimalCockMod extends CockMod {
             .with("opponent", opponent)
             .with("part", part)
             .with("target", target);
-        var template = JtwigTemplate.inlineTemplate(
-            "Raw sexual energy flows from {{ self.nameOrPossessivePronoun() }} "
-                + "{{ part.describe(self) }} into {{ opponent.nameOrPossessivePronoun() }} "
-                + "{{ target.describe(opponent) }}, inflaming {{ opponent.possiveAdjective() }} "
-                + "lust. "
-        );
-        c.write(self, template.render(model));
+        c.write(self, TICK_HOLDING_TEMPLATE.render(model));
         opponent.add(c, Pheromones
             .getWith(self, opponent, Global.random(3) + 1, 3, " primal passion"));
     }
@@ -38,4 +33,11 @@ public class PrimalCockMod extends CockMod {
     public String describeAdjective(String partType) {
         return "primal musk";
     }
+
+    private static final JtwigTemplate TICK_HOLDING_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "Raw sexual energy flows from {{ self.nameOrPossessivePronoun() }} "
+            + "{{ part.describe(self) }} into {{ opponent.nameOrPossessivePronoun() }} "
+            + "{{ target.describe(opponent) }}, inflaming {{ opponent.possessiveAdjective() }} "
+            + "lust. "
+    );
 }
