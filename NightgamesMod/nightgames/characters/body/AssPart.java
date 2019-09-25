@@ -254,7 +254,7 @@ public class AssPart extends GenericBodyPart {
         double sensitivityMod = sensitivity;
         double bonus = 1.0;
         for (PartMod mod : mods) {
-            bonus += mod.modSensitivity();
+            bonus += mod.getSensitivity();
         }
         sensitivityMod += bonusSensitivity;
         return sensitivityMod * bonus;
