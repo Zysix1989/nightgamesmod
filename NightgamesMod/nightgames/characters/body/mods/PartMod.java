@@ -62,7 +62,7 @@ public abstract class PartMod implements BodyPartMod {
     }
 
     public double modHotness(Character self) {
-        return getBaseHotness();
+        return hotness;
     }
 
     public double modSensitivity(Character self) {
@@ -83,10 +83,6 @@ public abstract class PartMod implements BodyPartMod {
 
     public Optional<String> getDescriptionOverride(Character self, BodyPart part) {
         return Optional.empty();
-    }
-
-    public double getBaseHotness() {
-        return hotness;
     }
 
     public double getBasePleasure() {

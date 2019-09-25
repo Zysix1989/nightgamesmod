@@ -1044,8 +1044,8 @@ public abstract class Character extends Observable implements Cloneable {
                 }
             } else {
                 temptMultiplier *= tempter.body.getCharismaBonus(c, this);
-                if (c != null && tempter.has(Trait.obsequiousAppeal) && c.getStance()
-                                                                         .sub(tempter)) {
+                if (c != null && tempter.has(Trait.obsequiousAppeal)
+                    && c.getStance().sub(tempter)) {
                     temptMultiplier *= 2;
                 }
                 if (oblivious) {
