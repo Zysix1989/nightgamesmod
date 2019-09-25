@@ -16,16 +16,13 @@ public class PrimalCockMod extends CockMod {
     @Override
     public void tickHolding(Combat c, Character self, Character opponent, BodyPart otherOrgan,
         BodyPart part) {
-        if (this.equals(primal)) {
-            c.write(self,
-                String.format("Raw sexual energy flows from %s %s into %s %s, enflaming %s lust",
-                    self.nameOrPossessivePronoun(), part.describe(self),
-                    opponent.nameOrPossessivePronoun(),
-                    otherOrgan.describe(opponent), opponent.possessiveAdjective()));
-            opponent.add(c, Pheromones
-                .getWith(self, opponent, Global.random(3) + 1, 3, " primal passion"));
-
-        }
+        c.write(self,
+            String.format("Raw sexual energy flows from %s %s into %s %s, enflaming %s lust",
+                self.nameOrPossessivePronoun(), part.describe(self),
+                opponent.nameOrPossessivePronoun(),
+                otherOrgan.describe(opponent), opponent.possessiveAdjective()));
+        opponent.add(c, Pheromones
+            .getWith(self, opponent, Global.random(3) + 1, 3, " primal passion"));
     }
 
     @Override
