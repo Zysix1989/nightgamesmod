@@ -163,7 +163,7 @@ public class GenericBodyPart implements BodyPart {
         double sensitivityMod = sensitivity;
         double bonus = 1.0;
         for (PartMod mod : mods) {
-            bonus += mod.modSensitivity(self);
+            bonus += mod.modSensitivity();
         }
         return sensitivityMod * bonus;
     }

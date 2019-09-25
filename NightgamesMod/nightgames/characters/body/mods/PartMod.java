@@ -65,7 +65,7 @@ public abstract class PartMod implements BodyPartMod {
         return hotness;
     }
 
-    public double modSensitivity(Character self) {
+    public double modSensitivity() {
         return sensitivity;
     }
 
