@@ -46,7 +46,7 @@ public class IncubusCockMod extends CockMod {
         if (amtDrained != 0) {
             if (self.isPet()) {
                 Character master = ((PetCharacter) self).getSelf().owner();
-                model.with("master", master);
+                model = model.with("master", master);
                 c.write(self, APPLY_BONUS_PET_TEMPLATE.render(model));
                 opponent.drainWillpower(c, master, strength);
             } else {
