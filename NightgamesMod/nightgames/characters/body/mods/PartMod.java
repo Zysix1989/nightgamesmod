@@ -58,7 +58,7 @@ public abstract class PartMod implements BodyPartMod {
     public void receiveCum(Combat c, Character self, BodyPart part, Character donor, BodyPart sourcePart) {}
     
     public double modPleasure(Character self) {
-        return getBasePleasure();
+        return pleasure;
     }
 
     public double getHotness() {
@@ -66,7 +66,7 @@ public abstract class PartMod implements BodyPartMod {
     }
 
     public double modSensitivity(Character self) {
-        return getBaseSensitivity();
+        return sensitivity;
     }
 
     public Optional<String> getFluids() {
@@ -83,14 +83,6 @@ public abstract class PartMod implements BodyPartMod {
 
     public Optional<String> getDescriptionOverride(Character self, BodyPart part) {
         return Optional.empty();
-    }
-
-    public double getBasePleasure() {
-        return pleasure;
-    }
-
-    public double getBaseSensitivity() {
-        return sensitivity;
     }
 
     public abstract String describeAdjective(String partType);
