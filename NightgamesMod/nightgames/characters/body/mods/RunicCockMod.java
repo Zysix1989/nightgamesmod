@@ -8,6 +8,8 @@ import nightgames.global.Global;
 import nightgames.status.CockBound;
 import nightgames.status.Enthralled;
 import nightgames.status.Stsflag;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class RunicCockMod extends CockMod {
     public static final String TYPE = "runic";
@@ -20,28 +22,41 @@ public class RunicCockMod extends CockMod {
         double bonus = super.applyBonuses(c, self, opponent, part, target, damage);
 
         String message = "";
+        var model = JtwigModel.newModel()
+            .with("self", self)
+            .with("opponent", opponent)
+            .with("part", part)
+            .with("target", target);
         if (target.moddedPartCountsAs(DemonicMod.TYPE)) {
-            message += String.format(
-                "The fae energies inside %s %s radiate outward and into %s, causing %s %s to grow much more sensitive. ",
-                self.nameOrPossessivePronoun(), part.describe(self),
-                opponent.nameOrPossessivePronoun(),
-                opponent.possessiveAdjective(), target.describe(opponent));
+            var template = JtwigTemplate.inlineTemplate(
+                "The fae energies inside {{ self.nameOrPossessivePronoun() }} "
+                    + "{{ part.describe(self) }} radiate outward and into "
+                    + "{{ opponent.nameOrPossessivePronoun() }} causing "
+                    + "{{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }} to grow "
+                    + "much more sensitive. "
+            );
+            message += template.render(model);
             bonus += damage * 0.5; // +50% damage
         }
         if (Global.random(8) == 0 && !opponent.wary()) {
-            message += String
-                .format("Power radiates out from %s %s, seeping into %s and subverting %s will. ",
-                    self.nameOrPossessivePronoun(), part.describe(self),
-                    opponent.nameOrPossessivePronoun(),
-                    opponent.objectPronoun());
+            var template = JtwigTemplate.inlineTemplate(
+                "Power radiates out from {{ self.nameOrPossessivePronoun() }} "
+                    + "{{ part.describe(self) }}, seeping into {{ opponent.nameOrPossessivePronoun() }} "
+                    + "and subverting {{ opponent.objectPronoun() }} will. "
+            );
+            message += template.render(model);
             opponent.add(c, new Enthralled(opponent, self, 3));
         }
         if (self.hasStatus(Stsflag.cockbound)) {
             String binding = ((CockBound) self.getStatus(Stsflag.cockbound)).binding;
-            message += String.format(
-                "With the merest of thoughts, %s %s out a pulse of energy from %s %s, freeing it from %s %s. ",
-                self.subject(), self.human() ? "send" : "sends", self.possessiveAdjective(),
-                part.describe(self), opponent.nameOrPossessivePronoun(), binding);
+            model = model.with("binding", binding);
+            var template = JtwigTemplate.inlineTemplate(
+                "With the merest of thoughts, {{ self.subject() }} {{ self.action('send') }} out "
+                    + "a pulse of energy from {{ self.possessiveAdjective() }} "
+                    + "{{ part.describe(self) }}, freeing it from {{ opponent.nameOrPossessivePronoun() }} "
+                    + "{{ binding }}. "
+            );
+            message += template.render(model);
             self.removeStatus(Stsflag.cockbound);
         }
         c.write(self, message);
