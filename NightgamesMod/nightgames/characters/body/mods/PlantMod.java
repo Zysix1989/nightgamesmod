@@ -18,8 +18,11 @@ public class PlantMod extends PartMod {
 
     public double applyReceiveBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
         if (damage > self.getArousal().max()/ 5.0 && Global.random(4) == 0) {
-            c.write(self, String.format("An intoxicating scent emanating from %s %s leaves %s in a trance!",
-            self.possessiveAdjective(), part.describe(self), opponent.objectPronoun()));
+            var model = JtwigModel.newModel()
+                .with("self", self)
+                .with("opponent", opponent)
+                .with("part", part);
+            c.write(self, RECEIVE_TEMPLATE.render(model));
             opponent.add(c, new Trance(opponent));
         }
         return 0;
@@ -34,14 +37,7 @@ public class PlantMod extends PartMod {
                 .with("opponent", opponent)
                 .with("part", part)
                 .with("target", target);
-            JtwigTemplate template = JtwigTemplate.inlineTemplate(
-                "The small rough fibrous filaments inside {{ self.nameOrPossessivePronoun() }} "
-                    + "flower {{ part.getType() }} wrap around "
-                    + "{{ other.nameOrPossessivePronoun() }} cock. A profound exhaustion settles "
-                    + "on {{ other.objectPronoun() }}, as {{ other.subject() }} "
-                    + "{{ other.action('feel') }} {{ self.nameOrPossessivePronoun() }} insidious "
-                    + "flower leeching {{ other.possessiveAdjective() }} strength.");
-            c.write(self, template.render(model));
+            c.write(self, TICK_HOLDING_TEMPLATE.render(model));
             opponent.drainStaminaAsMojo(c, self, 20, 1.25f);
             opponent.loseWillpower(c, 5);
         }
@@ -51,4 +47,19 @@ public class PlantMod extends PartMod {
     public String describeAdjective(String partType) {
         return "floral appearance";
     }
+
+    private static final JtwigTemplate RECEIVE_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "An intoxicating scent emanating from {{ self.possessiveAdjective() }} "
+            + "{{ part.describe(self) }} leaves {{ opponent.objectPronoun() }} in a "
+            + "trance!"
+    );
+
+    private static final JtwigTemplate TICK_HOLDING_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "The small rough fibrous filaments inside {{ self.nameOrPossessivePronoun() }} "
+            + "flower {{ part.getType() }} wrap around "
+            + "{{ other.nameOrPossessivePronoun() }} cock. A profound exhaustion settles "
+            + "on {{ other.objectPronoun() }}, as {{ other.subject() }} "
+            + "{{ other.action('feel') }} {{ self.nameOrPossessivePronoun() }} insidious "
+            + "flower leeching {{ other.possessiveAdjective() }} strength.");
+
 }
