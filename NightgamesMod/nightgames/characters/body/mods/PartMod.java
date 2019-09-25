@@ -61,7 +61,7 @@ public abstract class PartMod implements BodyPartMod {
         return getBasePleasure();
     }
 
-    public double modHotness() {
+    public double getHotness() {
         return hotness;
     }
 
