@@ -17,7 +17,6 @@ import nightgames.characters.body.mods.SlimyCockMod;
 import nightgames.combat.Combat;
 
 public class CockMod extends PartMod {
-    public static final CockMod error = new CockMod("error", 1.0, 1.0, 1.0);
     public static final CockMod slimy = new SlimyCockMod();
     public static final CockMod runic= new RunicCockMod();
     public static final CockMod blessed = new BlessedCockMod();

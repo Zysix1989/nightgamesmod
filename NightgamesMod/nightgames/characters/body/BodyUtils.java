@@ -7,7 +7,6 @@ import nightgames.characters.body.mods.ArcaneMod;
 import nightgames.characters.body.mods.CyberneticMod;
 import nightgames.characters.body.mods.DemonicMod;
 import nightgames.characters.body.mods.DivineMod;
-import nightgames.characters.body.mods.ErrorMod;
 import nightgames.characters.body.mods.FeralMod;
 import nightgames.characters.body.mods.FieryMod;
 import nightgames.characters.body.mods.GooeyMod;
@@ -19,7 +18,6 @@ public class BodyUtils {
         EQUIVALENT_MODS.put(CockMod.bionic, CyberneticMod.INSTANCE);
         EQUIVALENT_MODS.put(CockMod.blessed, DivineMod.INSTANCE);
         EQUIVALENT_MODS.put(CockMod.enlightened, FieryMod.INSTANCE);
-        EQUIVALENT_MODS.put(CockMod.error, ErrorMod.INSTANCE);
         EQUIVALENT_MODS.put(CockMod.incubus, DemonicMod.INSTANCE);
         EQUIVALENT_MODS.put(CockMod.primal, FeralMod.INSTANCE);
         EQUIVALENT_MODS.put(CockMod.runic, ArcaneMod.INSTANCE);
