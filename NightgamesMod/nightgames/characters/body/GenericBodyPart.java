@@ -94,7 +94,7 @@ public class GenericBodyPart implements BodyPart {
     
     public String getModDescriptorString(Character c) {
         return mods.stream().sorted()
-        .filter(mod -> !mod.getDescriptionOverride(c, this).isPresent())
+        .filter(mod -> mod.getDescriptionOverride(c, this).isEmpty())
         .map(mod -> mod.adjective(this))
         .filter(s -> !s.isEmpty())
         .map(string -> string + " ")
@@ -276,7 +276,7 @@ public class GenericBodyPart implements BodyPart {
     @Override
     public final boolean isErogenous() {
         if (mods.stream().anyMatch(mod -> mod.getErogenousOverride().isPresent())) {
-            return mods.stream().map(mod -> mod.getErogenousOverride()).filter(Optional::isPresent).map(Optional::get).reduce(false, (a, b) -> a || b);            
+            return mods.stream().map(PartMod::getErogenousOverride).filter(Optional::isPresent).map(Optional::get).reduce(false, (a, b) -> a || b);
         }
         return getDefaultErogenous();
     }
@@ -385,7 +385,7 @@ public class GenericBodyPart implements BodyPart {
 
 
     public void receiveCum(Combat c, Character self, Character donor, BodyPart sourcePart) {
-        getMods().stream().forEach(mod -> ((PartMod)mod).receiveCum(c, self, this, donor, sourcePart));
+        getMods().forEach(mod -> ((PartMod)mod).receiveCum(c, self, this, donor, sourcePart));
     }
     
     @Override
