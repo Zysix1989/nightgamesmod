@@ -13,6 +13,7 @@ import org.jtwig.JtwigTemplate;
 
 public class RunicCockMod extends CockMod {
     public static final String TYPE = "runic";
+
     public RunicCockMod() {
         super(TYPE, 2.0, 1.0, 1.0);
     }
@@ -28,35 +29,17 @@ public class RunicCockMod extends CockMod {
             .with("part", part)
             .with("target", target);
         if (target.moddedPartCountsAs(DemonicMod.TYPE)) {
-            var template = JtwigTemplate.inlineTemplate(
-                "The fae energies inside {{ self.nameOrPossessivePronoun() }} "
-                    + "{{ part.describe(self) }} radiate outward and into "
-                    + "{{ opponent.nameOrPossessivePronoun() }} causing "
-                    + "{{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }} to grow "
-                    + "much more sensitive. "
-            );
-            message += template.render(model);
+            message += APPLY_BONUS_DEMONIC_TEMPLATE.render(model);
             bonus += damage * 0.5; // +50% damage
         }
         if (Global.random(8) == 0 && !opponent.wary()) {
-            var template = JtwigTemplate.inlineTemplate(
-                "Power radiates out from {{ self.nameOrPossessivePronoun() }} "
-                    + "{{ part.describe(self) }}, seeping into {{ opponent.nameOrPossessivePronoun() }} "
-                    + "and subverting {{ opponent.objectPronoun() }} will. "
-            );
-            message += template.render(model);
+            message += APPLY_BONUS_ENTHRALLED_TEMPLATE.render(model);
             opponent.add(c, new Enthralled(opponent, self, 3));
         }
         if (self.hasStatus(Stsflag.cockbound)) {
             String binding = ((CockBound) self.getStatus(Stsflag.cockbound)).binding;
             model = model.with("binding", binding);
-            var template = JtwigTemplate.inlineTemplate(
-                "With the merest of thoughts, {{ self.subject() }} {{ self.action('send') }} out "
-                    + "a pulse of energy from {{ self.possessiveAdjective() }} "
-                    + "{{ part.describe(self) }}, freeing it from {{ opponent.nameOrPossessivePronoun() }} "
-                    + "{{ binding }}. "
-            );
-            message += template.render(model);
+            message += APPLY_BONUS_COCKBOUND_TEMPLATE.render(model);
             self.removeStatus(Stsflag.cockbound);
         }
         c.write(self, message);
@@ -68,4 +51,22 @@ public class RunicCockMod extends CockMod {
         return "runic symbols";
     }
 
+    private static final JtwigTemplate APPLY_BONUS_DEMONIC_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "The fae energies inside {{ self.nameOrPossessivePronoun() }} "
+            + "{{ part.describe(self) }} radiate outward and into "
+            + "{{ opponent.nameOrPossessivePronoun() }} causing "
+            + "{{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }} to grow "
+            + "much more sensitive. "
+    );
+    private static final JtwigTemplate APPLY_BONUS_ENTHRALLED_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "Power radiates out from {{ self.nameOrPossessivePronoun() }} "
+            + "{{ part.describe(self) }}, seeping into {{ opponent.nameOrPossessivePronoun() }} "
+            + "and subverting {{ opponent.objectPronoun() }} will. "
+    );
+    private static final JtwigTemplate APPLY_BONUS_COCKBOUND_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "With the merest of thoughts, {{ self.subject() }} {{ self.action('send') }} out "
+            + "a pulse of energy from {{ self.possessiveAdjective() }} "
+            + "{{ part.describe(self) }}, freeing it from {{ opponent.nameOrPossessivePronoun() }} "
+            + "{{ binding }}. "
+    );
 }
