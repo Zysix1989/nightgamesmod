@@ -21,10 +21,7 @@ public class ParasitedMod extends PartMod {
             .with("opponent", opponent)
             .with("part", part)
             .with("target", target);
-        JtwigTemplate template = JtwigTemplate.inlineTemplate(
-            "The parasite inhabiting {{ self.nameOrPossessivePronoun() }} {{ part.getType() }} "
-                + "is making {{ self.objectPronoun() }} <b>extremely sensitive</b>.");
-        c.write(self, template.render(model));
+        c.write(self, RECEIVE_TEMPLATE.render(model));
         return 10;
     }
 
@@ -33,10 +30,7 @@ public class ParasitedMod extends PartMod {
             .with("self", self)
             .with("opponent", opponent)
             .with("part", part);
-        JtwigTemplate template = JtwigTemplate.inlineTemplate(
-            "The force of {{ self.nameOrPossessivePronoun() }} orgasm ejects the slimy lifeform "
-                + "from {{ self.possessiveAdjective() }} {{ part.describe(self) }}.");
-        c.write(self, template.render(model));
+        c.write(self, ON_ORGASM_TEMPLATE.render(model));
         self.body.removeTemporaryPartMod(part.getType(), this);
     }
 
@@ -48,4 +42,13 @@ public class ParasitedMod extends PartMod {
     public String describeAdjective(String partType) {
         return "parasite";
     }
+
+    private static final JtwigTemplate RECEIVE_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "The parasite inhabiting {{ self.nameOrPossessivePronoun() }} {{ part.getType() }} "
+            + "is making {{ self.objectPronoun() }} <b>extremely sensitive</b>.");
+
+    private static final JtwigTemplate ON_ORGASM_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "The force of {{ self.nameOrPossessivePronoun() }} orgasm ejects the slimy lifeform "
+            + "from {{ self.possessiveAdjective() }} {{ part.describe(self) }}.");
+
 }
