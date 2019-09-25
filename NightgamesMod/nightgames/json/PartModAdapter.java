@@ -22,13 +22,7 @@ public class PartModAdapter implements JsonSerializer<PartMod>, JsonDeserializer
             mod = (PartMod) Class.forName(modClass).newInstance();
             mod.loadData(jsonElement.getAsJsonObject().get("value"));
             return mod;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (ClassCastException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (ClassNotFoundException | IllegalAccessException | ClassCastException | InstantiationException e) {
             e.printStackTrace();
         }
         throw new RuntimeException(String.format("could not deserialize %s", jsonElement.toString()));
