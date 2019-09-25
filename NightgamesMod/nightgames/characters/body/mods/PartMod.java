@@ -50,7 +50,7 @@ public abstract class PartMod implements BodyPartMod {
     public double applyReceiveBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) { return 0; }
     public void onStartPenetration(Combat c, Character self, Character opponent, BodyPart part, BodyPart target) {}
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) { return 0; }
-    public int mod(Attribute a, int total) { return 0; }
+
     public void tickHolding(Combat c, Character self, Character opponent, BodyPart part, BodyPart otherOrgan) {}
     public int counterValue(BodyPart part, BodyPart otherPart, Character self, Character other) { return 0; }
     public void onOrgasm(Combat c, Character self, Character opponent, BodyPart part) {}

@@ -332,11 +332,7 @@ public class GenericBodyPart implements BodyPart {
 
     @Override
     public int mod(Attribute a, int total) {
-        int bonus = 0;
-        for (PartMod mod : mods) {
-            bonus += mod.mod(a, total);
-        }
-        return bonus;
+        return 0;
     }
 
     @Override
