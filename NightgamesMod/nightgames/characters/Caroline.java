@@ -2,7 +2,6 @@ package nightgames.characters;
 
 import java.util.Collection;
 import java.util.Optional;
-
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.characters.body.BreastsPart;
@@ -10,7 +9,6 @@ import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.ArcaneMod;
-import nightgames.characters.body.mods.ErrorMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;

@@ -3,7 +3,6 @@ package nightgames.characters.body;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
 import nightgames.characters.body.mods.ArcaneMod;
 import nightgames.characters.body.mods.CyberneticMod;
 import nightgames.characters.body.mods.DemonicMod;

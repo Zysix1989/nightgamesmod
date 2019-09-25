@@ -12,7 +12,6 @@ import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.TentaclePart;
-import nightgames.characters.body.mods.ErrorMod;
 import nightgames.characters.body.mods.GooeyMod;
 import nightgames.characters.body.mods.SlimyCockMod;
 import nightgames.characters.custom.CharacterLine;

@@ -7,13 +7,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
-import nightgames.characters.body.mods.ErrorMod;
 import nightgames.characters.custom.AiModifiers;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.characters.custom.CommentSituation;
