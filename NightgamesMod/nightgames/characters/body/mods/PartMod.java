@@ -11,19 +11,17 @@ import nightgames.characters.body.BodyPartMod;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.combat.Combat;
 
-public abstract class PartMod implements BodyPartMod, Comparable<PartMod> {
+public abstract class PartMod implements BodyPartMod {
     protected String modType;
     protected double hotness;
     protected double pleasure;
     protected double sensitivity;
-    protected int sortOrder;
 
     public PartMod(String modType, double hotness, double pleasure, double sensitivity, int sortOrder) {
         this.modType = modType;
         this.hotness = hotness;
         this.pleasure = pleasure;
         this.sensitivity = sensitivity;
-        this.sortOrder = sortOrder;
     }
 
     /*
@@ -85,15 +83,6 @@ public abstract class PartMod implements BodyPartMod, Comparable<PartMod> {
 
     public Optional<String> getDescriptionOverride(Character self, BodyPart part) {
         return Optional.empty();
-    }
-
-    @Override
-    public int compareTo(PartMod other) {
-        return Integer.compare(getSortOrder(), other.getSortOrder());
-    }
-
-    protected int getSortOrder() {
-        return sortOrder;
     }
 
     public double getBaseHotness() {
