@@ -4710,4 +4710,8 @@ public abstract class Character extends Observable implements Cloneable {
         }
         return res;
     }
+
+    public String masterOrMistress() {
+        return useFemalePronouns() ? "mistress" : "master";
+    }
 }

@@ -10,6 +10,8 @@ import nightgames.pet.PetCharacter;
 import nightgames.skills.damage.DamageType;
 import nightgames.status.Drained;
 import nightgames.status.Enthralled;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class IncubusCockMod extends CockMod {
     public static final String TYPE = "incubus";
@@ -20,36 +22,52 @@ public class IncubusCockMod extends CockMod {
     @Override
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
         double bonus = super.applyBonuses(c, self, opponent, part, target, damage);
-        String message = String
-            .format("%s demonic appendage latches onto %s will, trying to draw it into %s.",
-                self.nameOrPossessivePronoun(), opponent.nameOrPossessivePronoun(),
-                self.reflexivePronoun());
+        var model = JtwigModel.newModel()
+            .with("self", self)
+            .with("opponent", opponent);
+        var template = JtwigTemplate.inlineTemplate(
+            "{{ self.nameOrPossessivePronoun() }} demonic appendage latches onto "
+                + "{{ opponent.nameOrPossessivePronoun() }} will, trying to draw it "
+                + "into {{ self.reflexivePronoun() }}."
+        );
+        String message = template.render(model);
         int amtDrained;
         if (target.moddedPartCountsAs(FeralMod.TYPE)) {
-            message += String.format(" %s %s gladly gives it up, eager for more pleasure.",
-                opponent.possessiveAdjective(), target.describe(opponent));
+            var template2 = JtwigTemplate.inlineTemplate(
+                "{{ opponent.possessiveAdjective() }} {{ target.describe(opponent) }} gladly "
+                    + "gives it up, eager for more pleasure."
+            );
+            message += " " + template2.render(model);
             amtDrained = 5;
             bonus += 2;
         } else if (target.moddedPartCountsAs(CyberneticMod.TYPE)) {
-            message += String.format(
-                " %s %s does not oblige, instead sending a pulse of electricity through %s %s and up %s spine",
-                opponent.nameOrPossessivePronoun(), target.describe(opponent),
-                self.nameOrPossessivePronoun(), part.describe(self), self.possessiveAdjective());
+            var template2 = JtwigTemplate.inlineTemplate(
+                "{{ opponent.nameOrPossessivePronoun() }} {{ target.describe(opponent) }} does "
+                    + "not oblige, instead sending a pulse of electricity through "
+                    + "{{ self.nameOrPossessivePronoun() }} {{ part.describe(self) }} and up "
+                    + "{{ self.possessiveAdjective() }} spine."
+            );
+            message += template2.render(model);
             self.pain(c, opponent, Global.random(9) + 4);
             amtDrained = 0;
         } else {
-            message += String
-                .format(" Despite %s best efforts, some of the elusive energy passes into %s.",
-                    opponent.nameOrPossessivePronoun(), self.nameDirectObject());
+            var template2 = JtwigTemplate.inlineTemplate(
+                "Despite {{ opponent.nameOrPossessivePronoun() }} best efforts, some of the "
+                    + "elusive energy passes into {{ self.nameDirectObject() }}."
+            );
+            message += template2.render(model);
             amtDrained = 3;
         }
         int strength = (int) self.modifyDamage(DamageType.drain, opponent, amtDrained);
         if (amtDrained != 0) {
             if (self.isPet()) {
                 Character master = ((PetCharacter) self).getSelf().owner();
-                c.write(self, Global.format(
-                    "The stolen strength seems to flow through to {self:possessive} {other:master} through {self:possessive} infernal connection.",
-                    self, master));
+                model.with("master", master);
+                var template2 = JtwigTemplate.inlineTemplate(
+                    "The stolen strength seems to flow through to {{ self.possessiveAdjective }} "
+                        + "{{ master.masterOrMistress() }} through their infernal connection."
+                );
+                c.write(self, template2.render(model));
                 opponent.drainWillpower(c, master, strength);
             } else {
                 opponent.drainWillpower(c, self, strength);
@@ -62,21 +80,34 @@ public class IncubusCockMod extends CockMod {
     @Override
     public void onOrgasmWith(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, boolean selfCame) {
         if (this.equals(incubus) && c.getStance().inserted(self)) {
+            var model = JtwigModel.newModel()
+                .with("self", self)
+                .with("opponent", opponent)
+                .with("part", part)
+                .with("target", target);
             if (selfCame) {
                 if (target.moddedPartCountsAs(CyberneticMod.TYPE)) {
-                    c.write(self, String.format(
-                        "%s demonic seed splashes pointlessly against the walls of %s %s, failing even in %s moment of defeat.",
-                        self.nameOrPossessivePronoun(), opponent.nameOrPossessivePronoun(),
-                        target.describe(opponent), self.possessiveAdjective()));
+                    var template = JtwigTemplate.inlineTemplate(
+                        "{{ self.nameOrPossessivePronoun() }} demonic seed splashes pointlessly "
+                            + "against the walls of {{ opponent.nameOrPossessivePronoun() }} "
+                            + "{{ target.describe(opponent) }}, failing even in "
+                            + " {{ self.possessiveAdjective() }} moment of defeat."
+                    );
+                    c.write(self, template.render(model));
                 } else {
                     int duration = Global.random(3) + 2;
-                    String message = String.format(
-                        "The moment %s erupts inside %s, %s mind goes completely blank, leaving %s pliant and ready.",
-                        self.subject(), opponent.subject(), opponent.possessiveAdjective(),
-                        opponent.objectPronoun());
+                    var template = JtwigTemplate.inlineTemplate(
+                        "The moment {{ self.subject }} {{ self.action('erupt') }} inside "
+                            + "{{ opponent.subject() }}, {{ opponent.possessiveAdjective}} mind "
+                            + "goes completely blank, leaving {{ opponent.possessiveAdjective() }} "
+                            + "pliant and ready."
+                    );
+                    String message = template.render(model);
                     if (target.moddedPartCountsAs(FeralMod.TYPE)) {
-                        message += String.format(" %s no resistance to the subversive seed.",
-                            Global.capitalizeFirstLetter(opponent.subjectAction("offer", "offers")));
+                        var template2 = JtwigTemplate.inlineTemplate("{{ opponent.subject() }} {{ opponent.action('offer') }} "
+                            + "no resistance to the subversive seed."
+                        );
+                        message += template2.render(model);
                         duration += 2;
                     }
                     opponent.add(c, new Enthralled(opponent, self, duration));
@@ -84,10 +115,14 @@ public class IncubusCockMod extends CockMod {
                 }
             } else {
                 if (!target.moddedPartCountsAs(CyberneticMod.TYPE)) {
-                    c.write(self, String.format(
-                        "Sensing %s moment of passion, %s %s greedily draws upon the rampant flows of orgasmic energy within %s, transferring the power back into %s.",
-                        opponent.nameOrPossessivePronoun(), self.nameOrPossessivePronoun(),
-                        part.describe(self), opponent.objectPronoun(), self.objectPronoun()));
+                    var template = JtwigTemplate.inlineTemplate(
+                      "Sensing {{ opponent.nameOrPossessivePronoun() }} moment of passion, "
+                          + "{{ self.nameOrPossessivePronoun() }} {{ part.describe(self) }} "
+                          + "greedily draws upon the rampant flows of orgasmic energy within "
+                          + "{{ opponent.objectPronoun() }} transferring the power back into "
+                          + "{{ self.objectPronoun() }}."
+                    );
+                    c.write(self, template.render(model));
                     int attDamage = target.moddedPartCountsAs(FeralMod.TYPE) ? 10 : 5;
                     int willDamage = target.moddedPartCountsAs(FeralMod.TYPE) ? 10 : 5;
                     Drained.drain(c, self, opponent, Attribute.Power, attDamage, 20, true);
