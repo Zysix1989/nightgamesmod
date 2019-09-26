@@ -87,9 +87,6 @@ public class Body implements Cloneable {
         public int getDuration() {
             return duration;
         }
-        public void modDuration(int mod) {
-            this.duration += mod;
-        }
     }
 
     // yeah i know :(
