@@ -552,8 +552,7 @@ public class Body implements Cloneable {
         if (with == null) {
             with = nonePart;
         }
-        if (target.getType()
-                  .equals("strapon")) {
+        if (target.getType().equals("strapon")) {
             return 0;
         }
 
@@ -612,11 +611,13 @@ public class Body implements Cloneable {
         Optional<BodyFetish> fetish = getFetish(with.getType());
         if (fetish.isPresent()) {
             double fetishBonus = fetish.get().magnitude * 3 * with.getFetishEffectiveness();
-            if(with.getType().equals("ass") && character.has(Trait.analFanatic)) fetishBonus/=4;
+            if ( with.getType().equals("ass") && character.has(Trait.analFanatic) ) {
+                fetishBonus /= 4;
+            }
             perceptionBonus += fetishBonus;
             // if a fetish is present, the chance of it intensifying is 4 times the chance of a
             // new fetish occurring of that type with fetishtrainer
-            if(Global.random(100) > 4*100*with.getFetishChance()) {
+            if (Global.random(100) > 4*100*with.getFetishChance()) {
                 character.add(c,
                     new BodyFetish(character, opponent, with.getType(), .05));
             }
@@ -706,28 +707,56 @@ public class Body implements Cloneable {
             String dominanceString = dominance < 0.01 ? "" : String.format(" + dominance:%.2f", dominance);
             String staleString = staleness < .99 ? String.format(" x staleness: %.2f", staleness) : "";
             if (Global.checkFlag(Flag.basicSystemMessages)) {
-                String battleString = String.format("%s%s %s</font> was pleasured by %s%s</font> for"
-                                + " <font color='rgb(255,50,200)'>%d</font>.\n", firstColor, Global.capitalizeFirstLetter(character.nameOrPossessivePronoun()),
-                                target.describe(character), secondColor, pleasuredBy, result);
+                String battleString = String.format(
+                    "%s%s %s</font> was pleasured by %s%s</font> for"
+                        + " <font color='rgb(255,50,200)'>%d</font>.\n",
+                    firstColor,
+                    Global.capitalizeFirstLetter(character.nameOrPossessivePronoun()),
+                    target.describe(character),
+                    secondColor,
+                    pleasuredBy,
+                    result);
                 if (c != null) {
                     c.writeSystemMessage(battleString, true);
                 }
             } else {
                 String battleString = String.format(
-                            "%s%s %s</font> was pleasured by %s%s</font> for <font color='rgb(255,50,200)'>%d</font> "
-                                            + "base:%.1f (%.1f%s) x multiplier: %.2f (1 + sen:%.1f + ple:%.1f + per:%.1f %s %s)%s\n",
-                            firstColor, Global.capitalizeFirstLetter(character.nameOrPossessivePronoun()),
-                            target.describe(character), secondColor, pleasuredBy, result, base, magnitude, bonusString,
-                            multiplier, sensitivity - 1, pleasure - 1, perceptionBonus - 1, stageString, dominanceString, 
-                            staleString);
+                    "%s%s %s</font> was pleasured by %s%s</font> for <font color='rgb(255,50,200)'>%d</font> "
+                        + "base:%.1f (%.1f%s) x multiplier: %.2f (1 + sen:%.1f + ple:%.1f + per:%.1f %s %s)%s\n",
+                    firstColor,
+                    Global.capitalizeFirstLetter(character.nameOrPossessivePronoun()),
+                    target.describe(character),
+                    secondColor,
+                    pleasuredBy,
+                    result,
+                    base,
+                    magnitude,
+                    bonusString,
+                    multiplier,
+                    sensitivity - 1,
+                    pleasure - 1,
+                    perceptionBonus - 1,
+                    stageString,
+                    dominanceString,
+                    staleString);
                 if (c != null) {
                     c.writeSystemMessage(battleString, false);
                 }
             }
             Optional<BodyFetish> otherFetish = opponent.body.getFetish(target.getType());
-            if (otherFetish.isPresent() && otherFetish.get().magnitude > .3 && perceptionlessDamage > 0 && skill != null && skill.getSelf().equals(character) && opponent != character && opponent.canRespond()) {
-                c.write(character, Global.format("Playing with {other:possessive} {other:body-part:%s} arouses {self:direct-object} almost as much as {other:direct-object}.", opponent, character, target.getType()));
-                opponent.temptNoSkill(c, character, target, (int) Math.round(perceptionlessDamage * (otherFetish.get().magnitude - .2)));
+            if (otherFetish.isPresent()
+                && otherFetish.get().magnitude > .3
+                && perceptionlessDamage > 0
+                && skill != null
+                && skill.getSelf().equals(character)
+                && opponent != character
+                && opponent.canRespond()) {
+                c.write(character,
+                    Global.format("Playing with {other:possessive} {other:body-part:%s} "
+                        + "arouses {self:direct-object} almost as much as {other:direct-object}.",
+                        opponent, character, target.getType()));
+                opponent.temptNoSkill(c, character, target,
+                    (int) Math.round(perceptionlessDamage * (otherFetish.get().magnitude - .2)));
             }
         } else {
             String firstColor =
@@ -736,20 +765,34 @@ public class Body implements Cloneable {
                             ? String.format(" + <font color='rgb(255,100,50)'>%.1f</font>", baseBonusDamage)
                             : "";
             String battleString = String.format(
-                            "%s%s %s</font> was pleasured for <font color='rgb(255,50,200)'>%d</font> "
-                                            + "base:%.1f (%.2f%s) x multiplier: %.2f (sen:%.1f + ple:%.1f + per:%.1f)\n",
-                            firstColor, Global.capitalizeFirstLetter(character.nameOrPossessivePronoun()),
-                            target.describe(character), result, base, magnitude, bonusString, multiplier,
-                            sensitivity - 1, pleasure - 1, perceptionBonus - 1);
+                "%s%s %s</font> was pleasured for <font color='rgb(255,50,200)'>%d</font> "
+                    + "base:%.1f (%.2f%s) x multiplier: %.2f (sen:%.1f + ple:%.1f + per:%.1f)\n",
+                firstColor,
+                Global.capitalizeFirstLetter(character.nameOrPossessivePronoun()),
+                target.describe(character),
+                result,
+                base,
+                magnitude,
+                bonusString,
+                multiplier,
+                sensitivity - 1,
+                pleasure - 1,
+                perceptionBonus - 1);
             if (c != null) {
                 c.writeSystemMessage(battleString, false);
             }
         }
         if (unsatisfied) {
-            c.write(character, Global.format("Foreplay doesn't seem to do it for {self:name-do} anymore. {self:PRONOUN-ACTION:clearly need|clearly needs} to fuck!", character, opponent));
+            c.write(character,
+                Global.format("Foreplay doesn't seem to do it for {self:name-do} anymore. "
+                    + "{self:PRONOUN-ACTION:clearly need|clearly needs} to fuck!",
+                    character, opponent));
         }
         if (staleMove && skill.user().human()) {
-            c.write(opponent, Global.format("This seems to be a getting bit boring for {other:direct-object}... Maybe it's time to switch it up?", opponent, character));
+            c.write(opponent,
+                Global.format("This seems to be a getting bit boring for "
+                    + "{other:direct-object}... Maybe it's time to switch it up?",
+                    opponent, character));
         }
         double percentPleasure = 100.0 * result / character.getArousal().max();
         if (character.has(Trait.sexualDynamo)
@@ -773,19 +816,26 @@ public class Body implements Cloneable {
         if (opponent != null && Arrays.asList(fetishParts).contains(with.getType())) {
             double chance = opponent.has(Trait.fetishTrainer)?4 * Math.min(opponent.get(Attribute.Fetish), 25):0;
 
-            if (with.getType().equals("cock") && target.getType().equals("ass") 
-                            && Global.getButtslutQuest().isPresent()) {
+            if (with.getType().equals("cock")
+                && target.getType().equals("ass")
+                && Global.getButtslutQuest().isPresent()) {
                 chance += Global.getButtslutQuest().get().getBonusFetishChance();
             }
 
             if (Global.random(100) < chance * with.getFetishChance()) {
-                c.write(character, character.subjectAction("now have", "now has") + " a new fetish, courtesy of "
-                                + opponent.objectPronoun() + ".");
+                c.write(character,
+                    character.subjectAction("now have", "now has")
+                        + " a new fetish, courtesy of "
+                        + opponent.objectPronoun() + ".");
                 character.add(c, new BodyFetish(character, opponent, with.getType(), .25));
             }
-            if (opponent.has(Trait.fetishCharmer) && Global.random(100) < 4 * Math.min(opponent.get(Attribute.Fetish), 25)) {
-                c.write(character, character.subjectAction("find yourself", "finds themself") + " hesitant to resist "
-                                + opponent.objectPronoun() + " due to the demands of "+character.possessiveAdjective()+" fetish.");
+            if (opponent.has(Trait.fetishCharmer)
+                && Global.random(100) < 4 * Math.min(opponent.get(Attribute.Fetish), 25)) {
+                c.write(character,
+                    character.subjectAction("find yourself", "finds themself")
+                        + " hesitant to resist "
+                        + opponent.objectPronoun() + " due to the demands of "
+                        +character.possessiveAdjective()+" fetish.");
                 character.add(c, new Charmed(character));
             }
         }
