@@ -1670,7 +1670,8 @@ public abstract class Character extends Observable implements Cloneable {
         if (!done) {
             boolean unique = true;
             for (Status s : this.status) {
-                if (s.getClass().equals(status.getClass()) && s.getVariant().equals(status.getVariant())) {
+                if (s.getClass().equals(status.getClass())
+                    && s.getVariant().equals(status.getVariant())) {
                     if (status instanceof BodyFetish) {
                         BodyFetish bf = (BodyFetish)status;
 

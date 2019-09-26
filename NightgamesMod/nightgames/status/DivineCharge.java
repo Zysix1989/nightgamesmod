@@ -95,11 +95,8 @@ public class DivineCharge extends Status {
         assert s instanceof DivineCharge;
         DivineCharge other = (DivineCharge) s;
         magnitude = magnitude + other.magnitude;
-        // every 10 divinity past 10, you are allowed to add another stack of
-        // divine charge.
-        // this will get out of hand super quick, but eh, you shouldn't let it
-        // get
-        // that far.
+        // every 10 divinity past 10, you are allowed to add another stack of divine charge.
+        // this will get out of hand super quick, but eh, you shouldn't let it get that far.
         double maximum = Math.max(2, Math.pow(2., affected.get(Attribute.Divinity) / 5.0) * .25);
         this.magnitude = Math.min(maximum, this.magnitude);
 
