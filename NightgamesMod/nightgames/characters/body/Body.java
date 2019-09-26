@@ -106,10 +106,7 @@ public class Body implements Cloneable {
     transient Map<String, List<PartModReplacement>> modReplacements;
     transient Collection<BodyPart> currentParts;
     transient public Character character;
-    transient public BodyPart lastPleasuredBy;
-    transient public BodyPart lastPleasured;
     public double baseFemininity;
-    public double baseMasculinity;
     private double height;
 
     public Body() {
@@ -117,8 +114,6 @@ public class Body implements Cloneable {
         currentParts = new HashSet<>();
         replacements = new ArrayList<>();
         modReplacements = new HashMap<>();
-        lastPleasuredBy = nonePart;
-        lastPleasured = nonePart;
         hotness = 1.0;
         height = 170;
     }
@@ -801,8 +796,6 @@ public class Body implements Cloneable {
                 character.add(c, new Charmed(character));
             }
         }
-        lastPleasuredBy = with;
-        lastPleasured = target;
         return result;
     }
 
