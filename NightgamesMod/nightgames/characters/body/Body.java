@@ -582,16 +582,14 @@ public class Body implements Cloneable {
         final BodyPart actualWith = with, actualTarget = target;
         final double moddedSensitivity = sensitivity;
         sensitivity += character.status.stream()
-                                       .mapToDouble(status -> 
-                                           status.sensitivity(moddedSensitivity, 
-                                                           actualWith, actualTarget, skill))
-                                       .sum();
+            .mapToDouble(status ->
+                status.sensitivity(moddedSensitivity, actualWith, actualTarget, skill))
+            .sum();
         if (opponent != null) {
             sensitivity += opponent.status.stream()
-                                          .mapToDouble(status -> 
-                                            status.opponentSensitivity(moddedSensitivity,
-                                                           actualWith, actualTarget, skill))
-                                          .sum();
+                .mapToDouble(status ->
+                    status.opponentSensitivity(moddedSensitivity, actualWith, actualTarget, skill))
+                .sum();
         }
         double pleasure = 1;
         if (!with.isType("none")) {
@@ -628,8 +626,12 @@ public class Body implements Cloneable {
             double fetishBonus = fetish.get().magnitude * 3 * with.getFetishEffectiveness();
             if(with.getType().equals("ass") && character.has(Trait.analFanatic)) fetishBonus/=4;
             perceptionBonus += fetishBonus;
-            // if a fetish is present, the chance of it intensifying is 4 times the chance of a new fetish occurring of that type with fetishtrainer
-            if(Global.random(100) > 4*100*with.getFetishChance()) {character.add(c, new BodyFetish(character, opponent, with.getType(), .05));}
+            // if a fetish is present, the chance of it intensifying is 4 times the chance of a
+            // new fetish occurring of that type with fetishtrainer
+            if(Global.random(100) > 4*100*with.getFetishChance()) {
+                character.add(c,
+                    new BodyFetish(character, opponent, with.getType(), .05));
+            }
         }
         double base = baseBonusDamage + magnitude;
 
@@ -660,8 +662,6 @@ public class Body implements Cloneable {
         double dominance = 0.0;
         if (character.checkAddiction(AddictionType.DOMINANCE, opponent) && c.getStance().dom(opponent)) {
             float mag = character.getAddiction(AddictionType.DOMINANCE).get().getMagnitude();
-
-
         }
         perceptionBonus += dominance;
 
@@ -764,11 +764,16 @@ public class Body implements Cloneable {
             c.write(opponent, Global.format("This seems to be a getting bit boring for {other:direct-object}... Maybe it's time to switch it up?", opponent, character));
         }
         double percentPleasure = 100.0 * result / character.getArousal().max();
-        if (character.has(Trait.sexualDynamo) && percentPleasure >= 5 && Global.random(4) == 0) {
+        if (character.has(Trait.sexualDynamo)
+            && percentPleasure >= 5
+            && Global.random(4) == 0) {
             c.write(character, Global.format("Sexual pleasure seems only to feed {self:name-possessive} ", character, opponent));
             character.buildMojo(c, (int)Math.floor(percentPleasure));
         }
-        if (character.has(Trait.showmanship) && percentPleasure >= 5 && opponent.isPet() && ((PetCharacter)opponent).getSelf().owner().equals(character)) {
+        if (character.has(Trait.showmanship)
+            && percentPleasure >= 5
+            && opponent.isPet()
+            && ((PetCharacter)opponent).getSelf().owner().equals(character)) {
             Character voyeur = c.getOpponent(character);
             c.write(character, Global.format("{self:NAME-POSSESSIVE} moans as {other:subject-action:make|makes} a show of pleasing {other:possessive} {self:master} "
                             + "turns %s on immensely.", character, opponent, voyeur.nameDirectObject()));
