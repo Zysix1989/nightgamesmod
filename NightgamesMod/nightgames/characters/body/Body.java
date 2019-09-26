@@ -1307,31 +1307,30 @@ public class Body implements Cloneable {
         if (anal) {
             if (!pitcher) {
                 totalCounterValue += get("ass").stream()
-                                               .flatMapToInt(ass -> other.body.get("cock")
-                                                                         .stream()
-                                                                         .mapToInt(cock -> ass.counterValue(cock, self, other)))
-                                               .sum();
+                    .flatMapToInt(ass -> other.body.get("cock")
+                        .stream()
+                        .mapToInt(cock -> ass.counterValue(cock, self, other)))
+                    .sum();
             } else {
                 totalCounterValue += get("cock").stream()
-                                                .flatMapToInt(cock -> other.body.get("ass")
-                                                                           .stream()
-                                                                           .mapToInt(ass -> cock.counterValue(ass, self, other)))
-                                                .sum();
+                    .flatMapToInt(cock -> other.body.get("ass")
+                        .stream()
+                        .mapToInt(ass -> cock.counterValue(ass, self, other)))
+                    .sum();
             }
         } else {
             if (!pitcher) {
                 totalCounterValue += get("pussy").stream()
-                                                 .flatMapToInt(pussy -> other.body.get("cock")
-                                                                             .stream()
-                                                                             .mapToInt(cock -> pussy.counterValue(
-                                                                                             cock, self, other)))
-                                                 .sum();
+                    .flatMapToInt(pussy -> other.body.get("cock")
+                        .stream()
+                        .mapToInt(cock -> pussy.counterValue(cock, self, other)))
+                    .sum();
             } else {
                 totalCounterValue += get("cock").stream()
-                                                .flatMapToInt(cock -> other.body.get("pussy")
-                                                                           .stream()
-                                                                           .mapToInt(pussy -> cock.counterValue(pussy, self, other)))
-                                                .sum();
+                    .flatMapToInt(cock -> other.body.get("pussy")
+                        .stream()
+                        .mapToInt(pussy -> cock.counterValue(pussy, self, other)))
+                    .sum();
             }
         }
         return 20 * totalCounterValue;
