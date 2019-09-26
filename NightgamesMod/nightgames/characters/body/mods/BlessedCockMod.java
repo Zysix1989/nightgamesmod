@@ -24,7 +24,9 @@ public class BlessedCockMod extends CockMod {
             if (self.getStatus(Stsflag.divinecharge) != null) {
                 var model = JtwigModel.newModel()
                     .with("self", self)
-                    .with("other", opponent);
+                    .with("other", opponent)
+                    .with("part", part)
+                    .with("target", target);
                 c.write(self, APPLY_BONUS_TEMPLATE.render(model));
             }
             // no need for any effects, the bonus is in the pleasure mod
@@ -70,8 +72,8 @@ public class BlessedCockMod extends CockMod {
 
     private static final JtwigTemplate APPLY_BONUS_TEMPLATE = JtwigTemplate.inlineTemplate(
         "{{ self.nameOrPossessivePronoun() }} concentrated divine energy in"
-            + " {{ self.possessiveAdjective }} cock rams into "
-            + "{{ other.nameOrPossessivePronoun }} pussy, sending unimaginable "
+            + " {{ self.possessiveAdjective }} {{ part.describe(self) }} rams into "
+            + "{{ other.nameOrPossessivePronoun }} {{ target.describe(other) }}, sending unimaginable "
             + "pleasure directly into {{ other.possessiveAdjective }} soul."
     );
 
