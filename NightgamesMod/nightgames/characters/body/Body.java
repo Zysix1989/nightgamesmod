@@ -49,13 +49,13 @@ public class Body implements Cloneable {
         public Set<BodyPart> removed;
         public int duration;
 
-        public PartReplacement(int duration) {
+        PartReplacement(int duration) {
             added = new LinkedHashSet<>(2);
             removed = new LinkedHashSet<>(2);
             this.duration = duration;
         }
 
-        public PartReplacement(PartReplacement original) {
+        PartReplacement(PartReplacement original) {
             added = new LinkedHashSet<>(original.added);
             removed = new LinkedHashSet<>(original.removed);
             duration = original.duration;
@@ -66,13 +66,13 @@ public class Body implements Cloneable {
         private PartMod mod;
         private int duration;
 
-        public PartModReplacement(String type, PartMod mod, int duration) {
+        PartModReplacement(String type, PartMod mod, int duration) {
             this.mod = mod;
             this.type = type;
             this.duration = duration;
         }
 
-        public PartModReplacement(PartModReplacement rep) {
+        PartModReplacement(PartModReplacement rep) {
             this.mod = rep.mod;
             this.type = rep.type;
             this.duration = rep.duration;
@@ -94,17 +94,17 @@ public class Body implements Cloneable {
 
     // yeah i know :(
     public static BodyPart nonePart = new GenericBodyPart("none", 0, 1, 1, "none", "");
-    public static Set<String> pluralParts = new HashSet<>(Arrays.asList("hands", "feet", "wings", "breasts", "balls"));
-    final static BodyPart[] requiredParts = {new GenericBodyPart("hands", 0, 1, 1, "hands", ""),
+    private static Set<String> pluralParts = new HashSet<>(Arrays.asList("hands", "feet", "wings", "breasts", "balls"));
+    private final static BodyPart[] requiredParts = {new GenericBodyPart("hands", 0, 1, 1, "hands", ""),
                     new GenericBodyPart("feet", 0, 1, 1, "feet", ""), new GenericBodyPart("skin", 0, 1, 1, "skin", ""),
                     new AssPart(AssPart.Size.Normal), new MouthPart(), new BreastsPart(0), EarPart.normal};
-    final static String fetishParts[] = {"ass", "feet", "cock", "wings", "tail", "tentacles", "breasts"};
+    private final static String fetishParts[] = {"ass", "feet", "cock", "wings", "tail", "tentacles", "breasts"};
 
-    LinkedHashSet<BodyPart> bodyParts;
+    private LinkedHashSet<BodyPart> bodyParts;
     public double hotness;
-    transient Collection<PartReplacement> replacements;
-    transient Map<String, List<PartModReplacement>> modReplacements;
-    transient Collection<BodyPart> currentParts;
+    private transient Collection<PartReplacement> replacements;
+    private transient Map<String, List<PartModReplacement>> modReplacements;
+    private transient Collection<BodyPart> currentParts;
     transient public Character character;
     public double baseFemininity;
     private double height;
@@ -283,7 +283,7 @@ public class Body implements Cloneable {
         updateCharacter();
     }
 
-    public void updateCharacter() {
+    private void updateCharacter() {
         if (character != null) {
             character.update();
         }
@@ -1015,7 +1015,7 @@ public class Body implements Cloneable {
         }
     }
     
-    public void changeSex(CharacterSex newSex) {
+    private void changeSex(CharacterSex newSex) {
         FacePart face = ((FacePart)getRandom("face"));
         double femininity = face.getFemininity(character);
         switch (newSex) {
