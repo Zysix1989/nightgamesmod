@@ -381,7 +381,7 @@ public class Body implements Cloneable {
         List<BreastsPart> upgradable = new ArrayList<>();
         for (BodyPart part : parts) {
             BreastsPart b = (BreastsPart) part;
-            if (b.getSize().compareTo(size) > 0) {
+            if (b.getSize().compareTo(size) < 0) {
                 upgradable.add(b);
             }
         }
@@ -397,7 +397,7 @@ public class Body implements Cloneable {
         List<BreastsPart> upgradable = new ArrayList<>();
         for (BodyPart part : parts) {
             BreastsPart b = (BreastsPart) part;
-            if (b.getSize().compareTo(size) < 0) {
+            if (b.getSize().compareTo(size) > 0) {
                 upgradable.add(b);
             }
         }
