@@ -35,11 +35,12 @@ public class ArcaneMod extends PartMod {
                 templates.add(APPLY_BONUS_PRIMAL_TEMPLATE);
                 strength = 10 + self.get(Attribute.Arcane) / 4;
             } else {
-                model = model.with("fucking", c.getStance()
-                    .isPartFuckingPartInserted(c, opponent, target, self, part));
+                model = model.with("fucking",
+                    c.getStance().isPartFuckingPartInserted(c, opponent, target, self, part));
                 templates.add(APPLY_BONUS_TEMPLATE);
                 strength = 5 + self.get(Attribute.Arcane) / 6;
             }
+
             opponent.drainMojo(c, self, strength);
             if (self.isPet()) {
                 Character master = ((PetCharacter) self).getSelf().owner();
