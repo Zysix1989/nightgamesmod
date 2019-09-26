@@ -24,12 +24,12 @@ public class BionicCockMod extends CockMod {
         BodyPart target, double damage) {
         double bonus = super.applyBonuses(c, self, opponent, part, target, damage);
         String message = "";
+        var model = JtwigModel.newModel()
+            .with("self", self)
+            .with("opponent", opponent)
+            .with("part", part)
+            .with("target", target);
         if (Global.random(5) == 0 && target.getType().equals("pussy")) {
-            var model = JtwigModel.newModel()
-                .with("self", self)
-                .with("opponent", opponent)
-                .with("part", part)
-                .with("target", target);
             message += APPLY_BONUS_APHRODISIAC_TEMPLATE.render(model);
             opponent.add(c, new Hypersensitive(opponent));
             // Instantly addict
@@ -38,11 +38,6 @@ public class BionicCockMod extends CockMod {
             opponent.add(c, new FluidAddiction(opponent, self, 1, 2));
             bonus -= 3; // Didn't actually move around too much
         } else if (!target.moddedPartCountsAs(FieryMod.TYPE)) {
-            var model = JtwigModel.newModel()
-                .with("self", self)
-                .with("opponent", opponent)
-                .with("part", part)
-                .with("target", target);
             message += APPLY_BONUS_TEMPLATE.render(model);
             bonus += 5;
             if (Global.random(5) == 0) {
