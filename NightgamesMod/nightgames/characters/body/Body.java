@@ -292,14 +292,14 @@ public class Body implements Cloneable {
 
     public List<BodyPart> get(String type) {
         return currentParts.stream()
-                           .filter(p -> p.isType(type))
-                           .collect(Collectors.toList());
+            .filter(p -> p.isType(type))
+            .collect(Collectors.toList());
     }
 
     public List<BodyPart> getPure(String type) {
         return bodyParts.stream()
-                           .filter(p -> p.isType(type))
-                           .collect(Collectors.toList());
+            .filter(p -> p.isType(type))
+            .collect(Collectors.toList());
     }
 
     public PussyPart getRandomPussy() {
