@@ -418,11 +418,7 @@ public class Body implements Cloneable {
                                                   }
                                                   return false;
                                               }).findFirst();
-        if (fs.isPresent()) {
-            return Optional.of((BodyFetish) fs.get());
-        } else {
-            return Optional.empty();
-        }
+        return fs.map(status -> (BodyFetish) status);
     }
 
     public double getHotness(Character opponent) {
@@ -1465,7 +1461,7 @@ public class Body implements Cloneable {
 
     public void applyMod(String partType, PartMod mod) {
         BodyPart part = Global.pickRandom(getPure(partType)).orElse(null);
-        if (part != null && part instanceof GenericBodyPart) {
+        if (part instanceof GenericBodyPart) {
             GenericBodyPart genericPart = (GenericBodyPart) part;
             addReplace(genericPart.applyMod(mod), 1);
         } else {
