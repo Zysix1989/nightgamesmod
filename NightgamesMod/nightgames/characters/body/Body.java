@@ -45,9 +45,9 @@ import org.jtwig.JtwigTemplate;
 
 public class Body implements Cloneable {
     static class PartReplacement {
-        public Set<BodyPart> added;
-        public Set<BodyPart> removed;
-        public int duration;
+        private Set<BodyPart> added;
+        private Set<BodyPart> removed;
+        private int duration;
 
         PartReplacement(int duration) {
             added = new LinkedHashSet<>(2);
