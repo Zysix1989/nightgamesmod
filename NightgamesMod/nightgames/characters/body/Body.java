@@ -92,9 +92,14 @@ public class Body implements Cloneable {
     // yeah i know :(
     public static BodyPart nonePart = new GenericBodyPart("none", 0, 1, 1, "none", "");
     private static Set<String> pluralParts = new HashSet<>(Arrays.asList("hands", "feet", "wings", "breasts", "balls"));
-    private final static BodyPart[] requiredParts = {new GenericBodyPart("hands", 0, 1, 1, "hands", ""),
-                    new GenericBodyPart("feet", 0, 1, 1, "feet", ""), new GenericBodyPart("skin", 0, 1, 1, "skin", ""),
-                    new AssPart(AssPart.Size.Normal), new MouthPart(), new BreastsPart(0), EarPart.normal};
+    private final static BodyPart[] requiredParts = {
+        new GenericBodyPart("hands", 0, 1, 1, "hands", ""),
+        new GenericBodyPart("feet", 0, 1, 1, "feet", ""),
+        new GenericBodyPart("skin", 0, 1, 1, "skin", ""),
+        new AssPart(AssPart.Size.Normal),
+        new MouthPart(),
+        new BreastsPart(0),
+        EarPart.normal};
     private final static String fetishParts[] = {"ass", "feet", "cock", "wings", "tail", "tentacles", "breasts"};
 
     private LinkedHashSet<BodyPart> bodyParts;
