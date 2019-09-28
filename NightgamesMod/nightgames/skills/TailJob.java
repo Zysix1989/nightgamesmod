@@ -2,6 +2,9 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.TailPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -16,7 +19,7 @@ public class TailJob extends Skill {
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
         boolean enough = getSelf().get(Attribute.Seduction) >= 20 || getSelf().get(Attribute.Animism) >= 1;
-        return enough && user.body.get("tail").size() > 0;
+        return enough && user.body.get(TailPart.TYPE).size() > 0;
     }
 
     @Override
@@ -37,14 +40,14 @@ public class TailJob extends Skill {
                         + Math.min(getSelf().getArousal().getReal() / 20, getSelf().get(Attribute.Animism));
         String receiver;
         if (target.hasDick()) {
-            receiver = "cock";
+            receiver = CockPart.TYPE;
         } else {
-            receiver = "pussy";
+            receiver = PussyPart.TYPE;
         }
         if (Global.random(100) < 5 + 2 * getSelf().get(Attribute.Fetish)) {
-            target.add(c, new BodyFetish(target, getSelf(), "tail", .25));
+            target.add(c, new BodyFetish(target, getSelf(), TailPart.TYPE, .25));
         }
-        target.body.pleasure(getSelf(), getSelf().body.getRandom("tail"), target.body.getRandom(receiver), m, c, this);
+        target.body.pleasure(getSelf(), getSelf().body.getRandom(TailPart.TYPE), target.body.getRandom(receiver), m, c, this);
         return true;
     }
 
@@ -61,10 +64,10 @@ public class TailJob extends Skill {
     @Override
     public String deal(Combat c, int damage, Result modifier, Character target) {
         if (target.hasDick()) {
-            return "You skillfully use your flexible " + getSelf().body.getRandom("tail").describe(getSelf())
+            return "You skillfully use your flexible " + getSelf().body.getRandom(TailPart.TYPE).describe(getSelf())
                             + " to stroke and tease " + target.getName() + "'s sensitive girl-cock.";
         } else {
-            return "You skillfully use your flexible " + getSelf().body.getRandom("tail").describe(getSelf())
+            return "You skillfully use your flexible " + getSelf().body.getRandom(TailPart.TYPE).describe(getSelf())
                             + " to stroke and tease " + target.getName() + "'s sensitive girl parts.";
         }
     }
@@ -76,14 +79,14 @@ public class TailJob extends Skill {
                             + "It wraps completely around %s shaft and strokes firmly.",
                             getSelf().subject(), target.nameOrPossessivePronoun(),
                             getSelf().possessiveAdjective(),
-                            getSelf().body.getRandom("tail").describe(getSelf()),
+                            getSelf().body.getRandom(TailPart.TYPE).describe(getSelf()),
                             target.possessiveAdjective());
         } else {
             return String.format("%s teases %s sensitive pussy with %s %s. "
                             + "It runs along %s nether lips and leaves %s gasping.",
                             getSelf().subject(), target.nameOrPossessivePronoun(),
                             getSelf().possessiveAdjective(),
-                            getSelf().body.getRandom("tail").describe(getSelf()),
+                            getSelf().body.getRandom(TailPart.TYPE).describe(getSelf()),
                             target.possessiveAdjective(), target.objectPronoun());
         }
     }

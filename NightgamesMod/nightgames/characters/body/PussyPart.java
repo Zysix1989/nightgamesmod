@@ -14,6 +14,7 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 
 public class PussyPart extends GenericBodyPart {
+    public static final String TYPE = "pussy";
     public static PussyPart generic = generateGeneric();
 
     public static PussyPart generateGeneric() {
@@ -21,7 +22,7 @@ public class PussyPart extends GenericBodyPart {
     }
 
     public PussyPart() {
-        super("pussy", "", 0, 1.2, 1, true, "pussy", "a ");
+        super("pussy", "", 0, 1.2, 1, true, TYPE, "a ");
     }
 
     public PussyPart(JsonObject js) {
@@ -97,7 +98,7 @@ public class PussyPart extends GenericBodyPart {
         double bonus = super.applyBonuses(self, opponent, target, damage, c);
         if (self.canRespond() && (self.has(Trait.tight) || self.has(Trait.holecontrol)) && c.getStance()
                                                                        .vaginallyPenetrated(c, self)
-                                                                       && target.isType("cock")) {
+                                                                       && target.isType(CockPart.TYPE)) {
             String desc = "";
             if (self.has(Trait.tight)) {
                 desc += "powerful ";

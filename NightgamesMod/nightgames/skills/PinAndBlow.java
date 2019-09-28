@@ -2,6 +2,7 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.AssPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -52,7 +53,7 @@ public class PinAndBlow extends Skill {
             new Blowjob(getSelf()).resolve(c, target);
         } else if (target.hasPussy()) {
             new Cunnilingus(getSelf()).resolve(c, target);
-        } else if (target.body.has("ass")) {
+        } else if (target.body.has(AssPart.TYPE)) {
             new Anilingus(getSelf()).resolve(c, target);
         }
         return true;

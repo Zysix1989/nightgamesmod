@@ -64,7 +64,7 @@ public class ToggleSlimePussy extends Skill {
                 msg += getSelf().outfit.getTopOfSlot(ClothingSlot.bottom).getName()
                                 + " loses some of its definition, as if something that was beneath them no longer is.";
             }
-            getSelf().body.removeAll("pussy");
+            getSelf().body.removeAll(PussyPart.TYPE);
         } else {
             if (getSelf().crotchAvailable() || getSelf().human()) {
                 msg += "and a slit forms in {self:possessive} slime. The new pussy's lips shudder invitingly.";

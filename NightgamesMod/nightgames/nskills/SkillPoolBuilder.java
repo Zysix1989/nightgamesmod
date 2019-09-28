@@ -5,6 +5,8 @@ import java.util.List;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
+import nightgames.characters.body.MouthPart;
 import nightgames.nskills.effects.SkillEffectBuilder;
 import nightgames.nskills.effects.rolls.BasicNumberRoll;
 import nightgames.nskills.effects.rolls.ConstantRoll;
@@ -47,7 +49,7 @@ public class SkillPoolBuilder {
                      .addEffect(builder.write(
                                      "You thrust your tongue into {other:possessive} ass and lick it, making her yelp in surprise.")
                                        .andNPCMessage("{self:subject} licks your tight asshole, both surprising and arousing you."))
-                     .addEffectForOther(builder.pleasure("mouth", "ass")
+                     .addEffectForOther(builder.pleasure(MouthPart.TYPE, AssPart.TYPE)
                                                .addRoll(new BasicNumberRoll(10, 16)))
         // subresult for silvertongue
                      .createChildResult()
@@ -56,7 +58,7 @@ public class SkillPoolBuilder {
                      .addEffect(builder.write(
                                      "You gently rim {other:name-possessive}'s asshole with your tongue, sending shivers through her body.")
                                        .andNPCMessage("{self:SUBJECT} gently rims your asshole with her tongue, sending shivers through your body."))
-                     .addEffectForOther(builder.pleasure("mouth", "ass")
+                     .addEffectForOther(builder.pleasure(MouthPart.TYPE, AssPart.TYPE)
                                                .addRoll(new BasicNumberRoll(15, 22)));
         // facesit result
         defaultResult.createChildResult()
@@ -67,7 +69,7 @@ public class SkillPoolBuilder {
                      .addEffect(builder.write(
                                      "With {other:name-possessive} ass pressing into your face, you helplessly give in and take an experimental lick at her pucker.")
                                      .andNPCMessage("With your ass pressing into {self:name-possessive} face, she helplessly gives in and starts licking your ass."))
-                     .addEffect(builder.pleasure("mouth", "ass")
+                     .addEffect(builder.pleasure(MouthPart.TYPE, AssPart.TYPE)
                                      .addRoll(new BasicNumberRoll(10, 16))
                                      .addRoll(new TraitBonusRoll(Trait.silvertongue, 5, 5)))
                      .addEffect(builder.buildMojo().addRoll(new ConstantRoll(10)))
@@ -83,10 +85,10 @@ public class SkillPoolBuilder {
                                                      + "You dimly realize that this is probably arousing you as much as {other:direct-object}, "
                                                      + "but worshipping {other:possessive} sublime derriere seems much higher on your priorities than winning.")
                                      .andNPCMessage("As if entranced, {other:subject} buries {other:possessive} face inside your ass cheeks, licking your crack, and worshipping your anus."))
-                     .addEffect(builder.pleasure("mouth", "ass")
+                     .addEffect(builder.pleasure(MouthPart.TYPE, AssPart.TYPE)
                                      .addRoll(new BasicNumberRoll(10, 16))
                                      .addRoll(new TraitBonusRoll(Trait.silvertongue, 5, 5)))
-                     .addEffect(builder.tempt("ass").addRoll(new BasicNumberRoll(10, 16)))
+                     .addEffect(builder.tempt(AssPart.TYPE).addRoll(new BasicNumberRoll(10, 16)))
                      .addEffect(builder.buildMojo().addRoll(new ConstantRoll(20)))
                      .setLabel("Ass Worship")
                      .setDescription("Worship your opponent's ass, may not be the best idea.");

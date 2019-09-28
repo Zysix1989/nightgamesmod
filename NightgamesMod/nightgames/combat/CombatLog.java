@@ -13,6 +13,10 @@ import java.util.stream.Collectors;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.TailPart;
 import nightgames.items.clothing.Clothing;
 import nightgames.skills.Skill;
 import nightgames.stance.Position;
@@ -206,11 +210,11 @@ class CombatLog {
     }
 
     private static void describeBodyChange(Character c, Character clone, StringBuilder sb) {
-        boolean didChange = describeBodyPartChange(c, clone, false, "cock", sb);
-        didChange |= describeBodyPartChange(c, clone, didChange, "pussy", sb);
-        didChange |= describeBodyPartChange(c, clone, didChange, "breasts", sb);
+        boolean didChange = describeBodyPartChange(c, clone, false, CockPart.TYPE, sb);
+        didChange |= describeBodyPartChange(c, clone, didChange, PussyPart.TYPE, sb);
+        didChange |= describeBodyPartChange(c, clone, didChange, BreastsPart.TYPE, sb);
         didChange |= describeBodyPartChange(c, clone, didChange, "wings", sb);
-        didChange |= describeBodyPartChange(c, clone, didChange, "tail", sb);
+        didChange |= describeBodyPartChange(c, clone, didChange, TailPart.TYPE, sb);
         if (didChange) {
             sb.append(']');
         }

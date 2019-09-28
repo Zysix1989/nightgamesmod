@@ -36,7 +36,12 @@ import nightgames.areas.Area;
 import nightgames.areas.NinjaStash;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.ToysPart;
 import nightgames.characters.body.mods.DemonicMod;
@@ -1565,7 +1570,7 @@ public abstract class Character extends Observable implements Cloneable {
     }
 
     public boolean hasDick() {
-        return body.get("cock").size() > 0;
+        return body.get(CockPart.TYPE).size() > 0;
     }
 
     public boolean hasBalls() {
@@ -1573,11 +1578,11 @@ public abstract class Character extends Observable implements Cloneable {
     }
 
     public boolean hasPussy() {
-        return body.get("pussy").size() > 0;
+        return body.get(PussyPart.TYPE).size() > 0;
     }
 
     public boolean hasBreasts() {
-        return body.get("breasts").size() > 0;
+        return body.get(BreastsPart.TYPE).size() > 0;
     }
 
     public int countFeats() {
@@ -1675,7 +1680,7 @@ public abstract class Character extends Observable implements Cloneable {
                     if (status instanceof BodyFetish) {
                         BodyFetish bf = (BodyFetish)status;
 
-                        if (this instanceof Player && bf.part=="Cock" 
+                        if (this instanceof Player && bf.part==CockPart.TYPE
                                         && c.getStance().anallyPenetrated(c, this) 
                                         && Global.getButtslutQuest().isPresent()) {
                             bf.magnitude += Global.getButtslutQuest().get().getBonusFetish();
@@ -2244,7 +2249,7 @@ public abstract class Character extends Observable implements Cloneable {
                         && opponentPart != null 
                         && c.getStance().penetratedBy(c, opponent, this)
 
-                        && selfPart.isType("cock")) {
+                        && selfPart.isType(CockPart.TYPE)) {
             c.write(this, Global.format("Experiencing so much pleasure inside of {other:name-do} reinforces {self:name-possessive} faith in the lovely goddess.", this, opponent));
             addict(c, AddictionType.ZEAL, opponent, Addiction.MED_INCREASE);
         }
@@ -2253,8 +2258,8 @@ public abstract class Character extends Observable implements Cloneable {
                         && opponentPart != null 
                         && c.getStance().penetratedBy(c, this, opponent)
 
-                        && opponentPart.isType("cock") && (selfPart
-                        .isType("pussy") || selfPart.isType("ass"))) {
+                        && opponentPart.isType(CockPart.TYPE) && (selfPart
+                        .isType(PussyPart.TYPE) || selfPart.isType("ass"))) {
             c.write(this, Global.format("Experiencing so much pleasure from {other:name-possessive} cock inside {self:direct-object} reinforces {self:name-possessive} faith.", this, opponent));
             addict(c, AddictionType.ZEAL, opponent, Addiction.MED_INCREASE);
         }
@@ -2282,7 +2287,7 @@ public abstract class Character extends Observable implements Cloneable {
      * 
      * .*/
     private void resolvePreOrgasmForSolo(Combat c, Character opponent, BodyPart selfPart, int times) {
-        if (selfPart != null && selfPart.isType("cock")) {
+        if (selfPart != null && selfPart.isType(CockPart.TYPE)) {
             if (times == 1) {
                 c.write(this, Global.format(
                                 "<b>{self:NAME-POSSESSIVE} back arches as thick ropes of jizz fire from {self:possessive} dick and land on {self:reflective}.</b>",
@@ -2323,9 +2328,9 @@ public abstract class Character extends Observable implements Cloneable {
             BodyPart holePart = Global.pickRandom(c.getStance().getPartsFor(c, partner, this)).orElse(null);
             if (times == 1) {
                 String hole = "pulsing hole";
-                if (holePart != null && holePart.isType("breasts")) {
+                if (holePart != null && holePart.isType(BreastsPart.TYPE)) {
                     hole = "cleavage";
-                } else if (holePart != null && holePart.isType("mouth")) {
+                } else if (holePart != null && holePart.isType(MouthPart.TYPE)) {
                     hole = "hungry mouth";
                 }
                 c.write(this, Global.format(
@@ -2340,7 +2345,7 @@ public abstract class Character extends Observable implements Cloneable {
             if (opponentHolePart.isPresent()) {
                 partner.body.receiveCum(c, this, opponentHolePart.get());
             }
-        } else if (selfPart != null && selfPart.isType("cock") && opponentPart != null
+        } else if (selfPart != null && selfPart.isType(CockPart.TYPE) && opponentPart != null
                         && !opponentPart.isType("none")) {
             if (times == 1) {
                 c.write(this, Global.format(
@@ -2617,7 +2622,7 @@ public abstract class Character extends Observable implements Cloneable {
             if (hasBreasts()) {
                 TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandomBreasts());
             }
-            TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandom("skin"));
+            TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandom(Body.SKIN));
         }
         if (outfit.has(ClothingTrait.tentacleUnderwear)) {
             String undieName = "underwear";
@@ -2628,7 +2633,7 @@ public abstract class Character extends Observable implements Cloneable {
                             this, opponent));
             if (hasDick()) {
                 TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandomCock());
-                body.pleasure(null, null, body.getRandom("cock"), 5, c);
+                body.pleasure(null, null, body.getRandom(CockPart.TYPE), 5, c);
             }
             if (hasBalls()) {
                 TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandom("balls"));
@@ -2735,7 +2740,7 @@ public abstract class Character extends Observable implements Cloneable {
                 } else {
                     c.write(Global.format("{self:SUBJECT-ACTION:focus|focuses} {self:possessive} attentions on {other:name-do}, "
                                     + "harassing and toying with {other:possessive} body as much as {self:pronoun} can.<br/>", this, pet));
-                    pet.body.pleasure(this, body.getRandom("hands"), pet.body.getRandomGenital(), Global.random(10, 20), c);
+                    pet.body.pleasure(this, body.getRandom(Body.HANDS), pet.body.getRandomGenital(), Global.random(10, 20), c);
                 }
             }
         }
@@ -3840,14 +3845,14 @@ public abstract class Character extends Observable implements Cloneable {
     }
 
     public boolean clothingFuckable(BodyPart part) {
-        if (part.isType("strapon")) {
+        if (part.isType(StraponPart.TYPE)) {
             return true;
         }
-        if (part.isType("cock")) {
+        if (part.isType(CockPart.TYPE)) {
             return outfit.slotEmptyOrMeetsCondition(ClothingSlot.bottom,
                             (article) -> (!article.is(ClothingTrait.armored) && !article.is(ClothingTrait.bulky)
                                             && !article.is(ClothingTrait.persistent)));
-        } else if (part.isType("pussy") || part.isType("ass")) {
+        } else if (part.isType(PussyPart.TYPE) || part.isType("ass")) {
             return outfit.slotEmptyOrMeetsCondition(ClothingSlot.bottom, (article) -> {
                 return article.is(ClothingTrait.skimpy) || article.is(ClothingTrait.open)
                                 || article.is(ClothingTrait.flexible);
@@ -4085,8 +4090,8 @@ public abstract class Character extends Observable implements Cloneable {
      * @return
      * Returns true if They have a demonic mod on their pussy or cock, or has the succubus trait.*/
     public boolean isDemonic() {
-        return has(Trait.succubus) || body.get("pussy").stream()
-                        .anyMatch(part -> part.moddedPartCountsAs(DemonicMod.TYPE)) || body.get("cock")
+        return has(Trait.succubus) || body.get(PussyPart.TYPE).stream()
+                        .anyMatch(part -> part.moddedPartCountsAs(DemonicMod.TYPE)) || body.get(CockPart.TYPE)
                         .stream().anyMatch(part -> part.moddedPartCountsAs(IncubusCockMod.TYPE));
     }
 
@@ -4115,7 +4120,7 @@ public abstract class Character extends Observable implements Cloneable {
     }
 
     public boolean isPartProtected(BodyPart target) {
-        return target.isType("hands") && has(ClothingTrait.nursegloves);
+        return target.isType(Body.HANDS) && has(ClothingTrait.nursegloves);
     }
 
     /**Removes temporary traits from this character. 

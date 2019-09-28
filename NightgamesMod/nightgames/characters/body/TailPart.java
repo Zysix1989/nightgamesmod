@@ -15,6 +15,7 @@ public enum TailPart implements BodyPart,BodyPartMod {
     cat("cat's ", .08, 1.5, 1.5),
     slimeycat("slimey cat's ", .08, 1.5, 1.5);
 
+    public static final String TYPE = "tail";
     public String desc;
     public double hotness;
     public double pleasure;
@@ -59,12 +60,12 @@ public enum TailPart implements BodyPart,BodyPartMod {
 
     @Override
     public boolean isType(String type) {
-        return type.equalsIgnoreCase("tail");
+        return type.equalsIgnoreCase(TailPart.TYPE);
     }
 
     @Override
     public String getType() {
-        return "tail";
+        return TYPE;
     }
 
     @Override

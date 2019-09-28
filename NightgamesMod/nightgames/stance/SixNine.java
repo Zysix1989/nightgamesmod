@@ -6,6 +6,7 @@ import java.util.List;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
@@ -17,7 +18,7 @@ public class SixNine extends AbstractBehindStance {
     @Override
     public float priorityMod(Character self) {
         float priority = 0;
-        priority += self.body.getRandom("mouth").priority(self) * 2;
+        priority += self.body.getRandom(MouthPart.TYPE).priority(self) * 2;
         return priority;
     }
 

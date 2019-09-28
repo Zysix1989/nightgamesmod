@@ -8,6 +8,8 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.addiction.Addiction;
@@ -30,13 +32,13 @@ public class DivineCharge extends Status {
                             .inserted(affected);
         String part = "body";
         if (penetrated && !inserted) {
-            part = "pussy";
+            part = PussyPart.TYPE;
         }
         if (!penetrated && inserted) {
-            part = "cock";
+            part = CockPart.TYPE;
         }
         if (!penetrated && !inserted && affected.has(Trait.zealinspiring)) {
-            part = "pussy";
+            part = PussyPart.TYPE;
         }
         return part;
     }

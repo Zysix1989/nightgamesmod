@@ -6,9 +6,12 @@ import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
+import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.ArcaneMod;
 import nightgames.characters.body.mods.SecondPussyMod;
 import nightgames.global.Flag;
@@ -50,7 +53,7 @@ public class CassieTime extends BaseNPCTime {
         {
             TransformationOption growCock = new TransformationOption();
             growCock.ingredients.put(Item.PriapusDraft, 3);
-            growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement("cock"))), "Has no penis");
+            growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement(CockPart.TYPE))), "Has no penis");
             growCock.option = "Cassie: Grow a cock";
             growCock.scene = "[Placeholder]<br/>Cassie hesistantly drinks the 3 priapus drafts and grows a large runic cock.";
             growCock.effect = (c, self, other) -> {
@@ -62,17 +65,17 @@ public class CassieTime extends BaseNPCTime {
         {
             TransformationOption removeCock = new TransformationOption();
             removeCock.ingredients.put(Item.FemDraft, 3);
-            removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement("cock")), "Has a Penis");
+            removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement(CockPart.TYPE)), "Has a Penis");
             removeCock.option = "Cassie: Remove her cock";
             removeCock.scene = "[Placeholder]<br/>Cassie hesistantly drinks the three femdrafts and her runic cock shrinks into her normal clitoris.";
             removeCock.effect = (c, self, other) -> {
-                other.body.removeAll("cock");
+                other.body.removeAll(CockPart.TYPE);
                 return true;
             };
             transformationOptions.add(removeCock);
         }
         {
-            TransformationOption runicCock = new ApplyPartModOption("cock", CockMod.runic);
+            TransformationOption runicCock = new ApplyPartModOption(CockPart.TYPE, CockMod.runic);
             runicCock.ingredients.put(Item.PriapusDraft, 10);
             runicCock.ingredients.put(Item.BewitchingDraught, 10);
             runicCock.ingredients.put(Item.FaeScroll, 1);
@@ -81,7 +84,7 @@ public class CassieTime extends BaseNPCTime {
             transformationOptions.add(runicCock);
         }
         {
-            TransformationOption arcanePussy = new ApplyPartModOption("pussy", ArcaneMod.INSTANCE);
+            TransformationOption arcanePussy = new ApplyPartModOption(PussyPart.TYPE, ArcaneMod.INSTANCE);
             arcanePussy.ingredients.put(Item.BewitchingDraught, 15);
             arcanePussy.ingredients.put(Item.FemDraft, 10);
             arcanePussy.ingredients.put(Item.FaeScroll, 1);
@@ -90,7 +93,7 @@ public class CassieTime extends BaseNPCTime {
             transformationOptions.add(arcanePussy);
         }
         {
-            TransformationOption arcaneMouth = new ApplyPartModOption("mouth", ArcaneMod.INSTANCE);
+            TransformationOption arcaneMouth = new ApplyPartModOption(MouthPart.TYPE, ArcaneMod.INSTANCE);
             arcaneMouth.ingredients.put(Item.BewitchingDraught, 15);
             arcaneMouth.ingredients.put(Item.FaeScroll, 3);
             arcaneMouth.addRequirement((c, self, other) -> {
@@ -101,7 +104,7 @@ public class CassieTime extends BaseNPCTime {
             transformationOptions.add(arcaneMouth);
         }
         {
-            TransformationOption arcaneAss = new ApplyPartModOption("ass", ArcaneMod.INSTANCE);
+            TransformationOption arcaneAss = new ApplyPartModOption(AssPart.TYPE, ArcaneMod.INSTANCE);
             arcaneAss.ingredients.put(Item.BewitchingDraught, 15);
             arcaneAss.ingredients.put(Item.FaeScroll, 3);
             arcaneAss.addRequirement((c, self, other) -> {
@@ -112,7 +115,7 @@ public class CassieTime extends BaseNPCTime {
             transformationOptions.add(arcaneAss);
         }
         {
-            TransformationOption mouthPussy = new ApplyPartModOption("mouth", SecondPussyMod.INSTANCE);
+            TransformationOption mouthPussy = new ApplyPartModOption(MouthPart.TYPE, SecondPussyMod.INSTANCE);
 
             mouthPussy.ingredients.put(Item.BewitchingDraught, 10);
             mouthPussy.ingredients.put(Item.FemDraft, 10);

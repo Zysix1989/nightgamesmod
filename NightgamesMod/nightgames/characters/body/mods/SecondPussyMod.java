@@ -2,8 +2,10 @@ package nightgames.characters.body.mods;
 
 import java.util.Optional;
 import nightgames.characters.Character;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
+import nightgames.characters.body.MouthPart;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
@@ -29,9 +31,9 @@ public class SecondPussyMod extends PartMod {
             .with("self", self)
             .with("part", part);
         JtwigTemplate template;
-        if (part.isType("ass")) {
+        if (part.isType(AssPart.TYPE)) {
             template = LONG_DESCRIPTION_ASS_TEMPLATE;
-        } else if (part.isType("mouth")) {
+        } else if (part.isType(MouthPart.TYPE)) {
             template = LONG_DESCRIPTION_MOUTH_TEMPLATE;
         } else {
             template = JtwigTemplate.inlineTemplate(previousDescription);

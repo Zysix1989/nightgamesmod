@@ -4,6 +4,9 @@ import java.util.Optional;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.Body;
+import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -47,14 +50,15 @@ public class PussyWorship extends Skill {
         } else if (getSelf().human()) {
             c.write(getSelf(), deal(c, m, Result.normal, target));
         }
-        target.body.pleasure(getSelf(), getSelf().body.getRandom("mouth"), target.body.getRandom("pussy"), m, c, this);
+        target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandom(
+            PussyPart.TYPE), m, c, this);
         if (getSelf().hasDick() && (!getSelf().hasPussy() || Global.random(2) == 0)) {
-            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom("hands"), getSelf().body.getRandomCock(), m, c, this);
+            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), getSelf().body.getRandomCock(), m, c, this);
         } else if (getSelf().hasPussy()) {
-            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom("hands"), getSelf().body.getRandomPussy(), m,
+            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), getSelf().body.getRandomPussy(), m,
                             c, this);
         } else {
-            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom("hands"), getSelf().body.getRandomHole(), m, c, this);
+            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), getSelf().body.getRandomHole(), m, c, this);
         }
 
         target.buildMojo(c, 20);
@@ -63,7 +67,7 @@ public class PussyWorship extends Skill {
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
-        Optional<BodyFetish> fetish = getSelf().body.getFetish("pussy");
+        Optional<BodyFetish> fetish = getSelf().body.getFetish(PussyPart.TYPE);
         return user.isPetOf(target) || (fetish.isPresent() && fetish.get().magnitude >= .5);
     }
 

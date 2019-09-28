@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import nightgames.characters.Character;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -97,7 +98,7 @@ public class AnalCowgirl extends AnalSexStance {
             }
             c.setStance(insertRandom(c));
         }
-        if (inserted.body.getRandom("ass") == null) {
+        if (inserted.body.getRandom(AssPart.TYPE) == null) {
             if (inserted.human()) {
                 c.write("With your asshole suddenly disappearing, you can't continue riding " + inserter.getName()
                                 + " anymore.");

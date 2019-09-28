@@ -85,6 +85,7 @@ import nightgames.characters.Trait;
 import nightgames.characters.TraitTree;
 import nightgames.characters.Yui;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.custom.CustomNPC;
 import nightgames.characters.custom.JsonSourceNPCDataLoader;
@@ -1911,7 +1912,7 @@ public class Global {
         matchActions.put("body-part", (self, first, second, third) -> {
             if (self != null && third != null) {
                 BodyPart part = self.body.getRandom(third);
-                if (part == null && third.equals("cock") && self.has(Trait.strapped)) {
+                if (part == null && third.equals(CockPart.TYPE) && self.has(Trait.strapped)) {
                     part = new StraponPart();
                 }
                 if (part != null) {

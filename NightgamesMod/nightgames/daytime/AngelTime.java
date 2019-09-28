@@ -6,9 +6,11 @@ import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.DivineMod;
 import nightgames.global.Global;
@@ -54,7 +56,7 @@ public class AngelTime extends BaseNPCTime {
         {
             TransformationOption growCock = new TransformationOption();
             growCock.ingredients.put(Item.PriapusDraft, 3);
-            growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement("cock"))), "Angel has no penis");
+            growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement(CockPart.TYPE))), "Angel has no penis");
             growCock.option = "Angel: Grow a cock";
             growCock.scene = "[Placeholder] You hand Angel three Priapus Drafts and convince her to grow a cock.<br/><br/>"
                             + "<i>\"Okay, well you've convinced me. Having a cock for a while should be interesting. Why not?\"</i><br/><br/>"
@@ -70,7 +72,7 @@ public class AngelTime extends BaseNPCTime {
         {
             TransformationOption removeCock = new TransformationOption();
             removeCock.ingredients.put(Item.FemDraft, 3);
-            removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement("cock")), "Angel has a penis");
+            removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement(CockPart.TYPE)), "Angel has a penis");
             removeCock.option = "Angel: Remove her cock";
             removeCock.scene = "[Placeholder]<br/>"
                             + "You hand Angel three femdrafts and convince her to remove her cock.<br/><br/>"
@@ -80,13 +82,13 @@ public class AngelTime extends BaseNPCTime {
                             + "<i>\"Okay, stud, nothing in the way, so get to the sex. Right now.\"</i><br/><br/>"
                             + "The both of you make up for the loss with some sex. Exhausted with Angel's divine sexual endurance, you leave.<br/><br/>";
             removeCock.effect = (c, self, other) -> {
-                other.body.removeAll("cock");
+                other.body.removeAll(CockPart.TYPE);
                 return true;
             };
             transformationOptions.add(removeCock);
         }
         {
-            TransformationOption blessedCock = new ApplyPartModOption("cock", CockMod.blessed);
+            TransformationOption blessedCock = new ApplyPartModOption(CockPart.TYPE, CockMod.blessed);
             blessedCock.ingredients.put(Item.HolyWater, 3);
             blessedCock.addRequirement((c, self, other) -> {
                 return self.get(Attribute.Divinity) >= 10;
@@ -100,7 +102,7 @@ public class AngelTime extends BaseNPCTime {
             transformationOptions.add(blessedCock);
         }
         {
-            TransformationOption divinePussy = new ApplyPartModOption("pussy", DivineMod.INSTANCE);
+            TransformationOption divinePussy = new ApplyPartModOption(PussyPart.TYPE, DivineMod.INSTANCE);
             divinePussy.ingredients.put(Item.HolyWater, 3);
             divinePussy.addRequirement((c, self, other) -> {
                 return self.get(Attribute.Divinity) >= 10;
@@ -115,7 +117,7 @@ public class AngelTime extends BaseNPCTime {
             transformationOptions.add(divinePussy);
         }
         {
-            TransformationOption sacredAss = new ApplyPartModOption("ass", DivineMod.INSTANCE);
+            TransformationOption sacredAss = new ApplyPartModOption(AssPart.TYPE, DivineMod.INSTANCE);
             sacredAss.ingredients.put(Item.HolyWater, 6);
             sacredAss.addRequirement((c, self, other) -> {
                 return self.get(Attribute.Divinity) >= 20;

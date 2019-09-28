@@ -2,6 +2,7 @@ package nightgames.stance;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
@@ -104,7 +105,7 @@ public class AnalProne extends AnalSexStance {
             }
             c.setStance(insertRandom(c));
         }
-        if (inserted.body.getRandom("ass") == null) {
+        if (inserted.body.getRandom(AssPart.TYPE) == null) {
             if (inserted.human()) {
                 c.write("With your asshole suddenly disappearing, " + inserter.getName()
                                 + "'s dick pops out of what was once your sphincter.");

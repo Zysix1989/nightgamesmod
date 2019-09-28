@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
+import nightgames.characters.body.TailPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -20,7 +21,7 @@ public class TailSuck extends Skill {
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
         return user.get(Attribute.Seduction) >= 20 && user.get(Attribute.Dark) >= 15 && user.has(Trait.energydrain)
-                        && user.body.get("tail").size() > 0;
+                        && user.body.get(TailPart.TYPE).size() > 0;
     }
 
     @Override
@@ -37,27 +38,27 @@ public class TailSuck extends Skill {
 
     @Override
     public int accuracy(Combat c, Character target) {
-        return c.getStance().isPartFuckingPartInserted(c, target, target.body.getRandomCock(), getSelf(), getSelf().body.getRandom("tail")) ? 200 : 90;
+        return c.getStance().isPartFuckingPartInserted(c, target, target.body.getRandomCock(), getSelf(), getSelf().body.getRandom(TailPart.TYPE)) ? 200 : 90;
     }
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        if (c.getStance().isPartFuckingPartInserted(c, target, target.body.getRandomCock(), getSelf(), getSelf().body.getRandom("tail"))) {
+        if (c.getStance().isPartFuckingPartInserted(c, target, target.body.getRandomCock(), getSelf(), getSelf().body.getRandom(TailPart.TYPE))) {
             writeOutput(c, Result.special, target);
-            target.body.pleasure(getSelf(), getSelf().body.getRandom("tail"), target.body.getRandomCock(),
+            target.body.pleasure(getSelf(), getSelf().body.getRandom(TailPart.TYPE), target.body.getRandomCock(),
                             Global.random(10) + 10, c, this);
             drain(c, target);
         } else if (getSelf().roll(getSelf(), c, accuracy(c, target))) {
             Result res = c.getStance().isBeingFaceSatBy(c, target, getSelf()) ? Result.critical
                             : Result.normal;
             writeOutput(c, res, target);
-            target.body.pleasure(getSelf(), getSelf().body.getRandom("tail"), target.body.getRandomCock(),
+            target.body.pleasure(getSelf(), getSelf().body.getRandom(TailPart.TYPE), target.body.getRandomCock(),
                             Global.random(10) + 10, c, this);
             drain(c, target);
             target.add(c, new TailSucked(target, getSelf(), power()));
         } else if (target.hasBalls()) {
             writeOutput(c, Result.weak, target);
-            target.body.pleasure(getSelf(), getSelf().body.getRandom("tail"), target.body.getRandom("balls"),
+            target.body.pleasure(getSelf(), getSelf().body.getRandom(TailPart.TYPE), target.body.getRandom("balls"),
                             Global.random(5) + 5, c, this);
             return true;
         } else {

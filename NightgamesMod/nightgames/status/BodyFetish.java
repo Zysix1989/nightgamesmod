@@ -9,7 +9,11 @@ import com.google.gson.JsonObject;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.skills.Anilingus;
@@ -89,15 +93,15 @@ public class BodyFetish extends DurationStatus {
     public Collection<Skill> skillWhitelist(Combat c) {
         if (magnitude <= .99) {
             return Collections.emptySet();
-        } else if (part.equals("pussy")) {
+        } else if (part.equals(PussyPart.TYPE)) {
             return Arrays.asList((Skill) new PussyWorship(affected));
-        } else if (part.equals("breasts")) {
+        } else if (part.equals(BreastsPart.TYPE)) {
             return Arrays.asList((Skill) new BreastWorship(affected));
-        } else if (part.equals("feet")) {
+        } else if (part.equals(Body.FEET)) {
             return Arrays.asList((Skill) new FootWorship(affected));
         } else if (part.equals("ass")) {
             return Arrays.asList((Skill) new Anilingus(affected));
-        } else if (part.equals("cock")) {
+        } else if (part.equals(CockPart.TYPE)) {
             return Arrays.asList((Skill) new Blowjob(affected), new ReverseAssFuck(affected), new ReverseFly(affected),
                             new ReverseCarry(affected), new Invitation(affected), new Thrust(affected),
                             new Piston(affected), new Grind(affected), new SpiralThrust(affected),

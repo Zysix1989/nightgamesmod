@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockMod;
+import nightgames.characters.body.CockPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.Frenzied;
@@ -24,7 +25,7 @@ public class FeralMod extends PartMod {
         if (c.getStance().isPartFuckingPartInserted(c, opponent, target, self, part)) {
             int chance = Math.max(5, 10 - self.getArousal()
                             .getReal() / 50);
-            if (!self.is(Stsflag.frenzied) && !self.is(Stsflag.cynical) && target.isType("cock")
+            if (!self.is(Stsflag.frenzied) && !self.is(Stsflag.cynical) && target.isType(CockPart.TYPE)
                       && Global.random(chance) == 0) {
                 JtwigModel model = JtwigModel.newModel()
                     .with("self", self)

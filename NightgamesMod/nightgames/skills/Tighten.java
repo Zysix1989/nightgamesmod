@@ -3,6 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -24,7 +25,7 @@ public class Tighten extends Thrust {
     @Override
     public BodyPart getSelfOrgan(Combat c, Character target) {
         if (c.getStance().anallyPenetratedBy(c, getSelf(), target)) {
-            return getSelf().body.getRandom("ass");
+            return getSelf().body.getRandom(AssPart.TYPE);
         } else if (c.getStance().vaginallyPenetratedBy(c, getSelf(), target)) {
             return getSelf().body.getRandomPussy();
         } else {
@@ -78,9 +79,9 @@ public class Tighten extends Thrust {
             target.body.pleasure(getSelf(), selfO, targetO, m[0], c, this);
         if (m[1] != 0)
             getSelf().body.pleasure(target, targetO, selfO, m[1], 0, c, false, this);
-        if (selfO != null && selfO.isType("ass") 
+        if (selfO != null && selfO.isType(AssPart.TYPE)
                         && Global.random(100) < 2 + getSelf().get(Attribute.Fetish)) {
-            target.add(c, new BodyFetish(target, getSelf(), "ass", .25));
+            target.add(c, new BodyFetish(target, getSelf(), AssPart.TYPE, .25));
         }
         return true;
     }

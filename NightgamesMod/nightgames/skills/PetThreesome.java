@@ -4,6 +4,8 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -97,7 +99,7 @@ public class PetThreesome extends Skill {
         if (targetO.isReady(target)) {
             Result result = Global.random(3) == 0 ? Result.critical : Result.normal;
 
-            if (selfO.isType("pussy") && targetO.isType("cock") && target.hasPussy() 
+            if (selfO.isType(PussyPart.TYPE) && targetO.isType(CockPart.TYPE) && target.hasPussy()
                              &&  master.hasInsertable() && Global.randomBool()) {
 
                 c.write(getSelf(), Global.format("While {self:subject} is holding {other:name-do} down, "
@@ -110,7 +112,7 @@ public class PetThreesome extends Skill {
                 c.setStance(new ReverseXHFDaisyChainThreesome(fucker, master, target), getSelf(), true);
                 target.body.pleasure(master, master.body.getRandomCock(), target.body.getRandomPussy(), otherm, 0, c, false, this);
                 master.body.pleasure(target, target.body.getRandomPussy(), master.body.getRandomCock(), m, 0, c, false, this);
-            } else if (selfO.isType("pussy") && targetO.isType("pussy")) {
+            } else if (selfO.isType(PussyPart.TYPE) && targetO.isType(PussyPart.TYPE)) {
                 c.write(getSelf(), Global.format("While {master:subject:are|is} holding {other:name-do} down, "
                                 + "{self:subject-action:mount|mounts} {other:direct-object} and {self:action:press|presses} "
                                 + "{self:possessive} own pussy against {other:possessive}s.", fucker, 
@@ -118,7 +120,7 @@ public class PetThreesome extends Skill {
                 c.setStance(new FFXTribThreesome(fucker, master, target), getSelf(), true);
                 target.body.pleasure(master, master.body.getRandomCock(), target.body.getRandomPussy(), otherm, 0, c, false, this);
                 master.body.pleasure(target, target.body.getRandomPussy(), master.body.getRandomCock(), m, 0, c, false, this);
-            } else if (selfO.isType("pussy")) {
+            } else if (selfO.isType(PussyPart.TYPE)) {
                 if ((result == Result.critical || (master.hasInsertable() && target.hasPussy())) && master.useFemalePronouns()) {
                     c.write(getSelf(), Global.format("While %s holding {other:name-do} down with %s ass, "
                                     + "{self:subject} mounts {other:direct-object} and pierces "
@@ -133,7 +135,7 @@ public class PetThreesome extends Skill {
                     c.setStance(new FFMCowgirlThreesome(fucker, master, target), getSelf(), true);
                 }
 
-            } else if (selfO.isType("cock") && master.hasPussy() && target.hasDick() && Global.randomBool()) {
+            } else if (selfO.isType(CockPart.TYPE) && master.hasPussy() && target.hasDick() && Global.randomBool()) {
 
                 c.write(getSelf(), Global.format("While %s holding {other:name-do} down, "
                                 + "{self:subject} moves behind {other:direct-object} and pierces "
@@ -145,13 +147,13 @@ public class PetThreesome extends Skill {
                 c.setStance(new XHFDaisyChainThreesome(fucker, master, target), getSelf(), true);
                 target.body.pleasure(master, master.body.getRandomPussy(), target.body.getRandomCock(), otherm, 0, c, false, this);
                 master.body.pleasure(target, target.body.getRandomCock(), master.body.getRandomPussy(), m, 0, c, false, this);
-            } else if (selfO.isType("cock") && !master.hasInsertable()) {
+            } else if (selfO.isType(CockPart.TYPE) && !master.hasInsertable()) {
                 c.write(getSelf(), Global.format("While %s holding {other:name-do} down, "
                                 + "{self:subject} mounts {other:direct-object} and pierces "
                                 + "{other:direct-object} with {self:possessive} cock in the missionary position.", fucker, 
                                 target, master.subjectAction("are", "is")));
                 c.setStance(new MFFMissionaryThreesome(fucker, master, target), getSelf(), true);
-            } else if (selfO.isType("cock")) {
+            } else if (selfO.isType(CockPart.TYPE)) {
 
                 if (result == Result.critical && Global.randomBool() && master.hasPussy() && target.hasDick()) {
 

@@ -3,7 +3,9 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -38,7 +40,8 @@ public class Thrust extends Skill {
     protected boolean havingSex(Combat c, Character target) {
         return getSelfOrgan(c, target) != null && getTargetOrgan(c, target) != null && getSelf().canRespond()
                         && (c.getStance().havingSexOtherNoStrapped(c, getSelf())
-                                        || c.getStance().partsForStanceOnly(c, getSelf(), target).stream().anyMatch(part -> part.isType("cock")));
+                                        || c.getStance().partsForStanceOnly(c, getSelf(), target).stream().anyMatch(part -> part.isType(
+            CockPart.TYPE)));
     }
 
     @Override
@@ -50,7 +53,7 @@ public class Thrust extends Skill {
         if (c.getStance().penetratedBy(c, target, getSelf())) {
             return getSelf().body.getRandomInsertable();
         } else if (c.getStance().anallyPenetratedBy(c, getSelf(), target)) {
-            return getSelf().body.getRandom("ass");
+            return getSelf().body.getRandom(AssPart.TYPE);
         } else if (c.getStance().vaginallyPenetratedBy(c, getSelf(), target)) {
             return getSelf().body.getRandomPussy();
         } else {
@@ -62,7 +65,7 @@ public class Thrust extends Skill {
         if (c.getStance().penetratedBy(c, getSelf(), target)) {
             return target.body.getRandomInsertable();
         } else if (c.getStance().anallyPenetratedBy(c, target, getSelf())) {
-            return target.body.getRandom("ass");
+            return target.body.getRandom(AssPart.TYPE);
         } else if (c.getStance().vaginallyPenetratedBy(c, target, getSelf())) {
             return target.body.getRandomPussy();
         }
@@ -131,8 +134,8 @@ public class Thrust extends Skill {
         if (m[1] != 0) {
             getSelf().body.pleasure(target, targetO, selfO, m[1], c, this);
         }
-        if (selfO.isType("ass") && Global.random(100) < 2 + getSelf().get(Attribute.Fetish)) {
-            target.add(c, new BodyFetish(target, getSelf(), "ass", .25));
+        if (selfO.isType(AssPart.TYPE) && Global.random(100) < 2 + getSelf().get(Attribute.Fetish)) {
+            target.add(c, new BodyFetish(target, getSelf(), AssPart.TYPE, .25));
         }
         return true;
     }

@@ -21,8 +21,11 @@ import nightgames.characters.NPC;
 import nightgames.characters.Player;
 import nightgames.characters.State;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.CockPart;
 import nightgames.characters.body.mods.ArcaneMod;
 import nightgames.characters.body.mods.CyberneticMod;
 import nightgames.characters.body.mods.DemonicMod;
@@ -233,19 +236,19 @@ public class Combat {
         }
 
         if (self.has(Trait.footfetishist)) {
-            applyFetish(self, other, "feet");
+            applyFetish(self, other, Body.FEET);
         } 
         if(self.has(Trait.breastobsessed) && other.hasBreasts()) {
-            applyFetish(self, other, "breasts");
+            applyFetish(self, other, BreastsPart.TYPE);
         }
         if(self.has(Trait.assaddict)) {
-            applyFetish(self, other, "ass");
+            applyFetish(self, other, AssPart.TYPE);
         }
         if(self.has(Trait.pussywhipped ) && other.hasPussy()) {
             applyFetish(self, other, "pussy");
         }
         if (self.has(Trait.cockcraver)&& other.hasDick()) {
-            applyFetish(self, other, "cock");
+            applyFetish(self, other, CockPart.TYPE);
         }
         if (self.has(Trait.Pseudopod) && self.has(Trait.slime)) {
             ArmManager manager = new ArmManager();
@@ -514,19 +517,19 @@ public class Combat {
         }
 
         if (character.has(Trait.footfetishist)) {
-            fetishDisadvantageAura(character, allies, opponents, "feet", ClothingSlot.feet);
+            fetishDisadvantageAura(character, allies, opponents, Body.FEET, ClothingSlot.feet);
         }
         if (character.has(Trait.breastobsessed)) {
-            fetishDisadvantageAura(character, allies, opponents, "breasts", ClothingSlot.top);
+            fetishDisadvantageAura(character, allies, opponents, BreastsPart.TYPE, ClothingSlot.top);
         }
         if(character.has(Trait.assaddict)) {
-            fetishDisadvantageAura(character, allies, opponents, "ass", ClothingSlot.bottom);
+            fetishDisadvantageAura(character, allies, opponents, AssPart.TYPE, ClothingSlot.bottom);
         }
         if(character.has(Trait.pussywhipped ) )  {
             fetishDisadvantageAura(character, allies, opponents, "pussy", ClothingSlot.bottom);
         }
         if(character.has(Trait.cockcraver)) {
-            fetishDisadvantageAura(character, allies, opponents, "cock", ClothingSlot.bottom);
+            fetishDisadvantageAura(character, allies, opponents, CockPart.TYPE, ClothingSlot.bottom);
         }
         
         opponents.forEach(opponent -> checkIndividualAuraEffects(character, opponent));
@@ -538,15 +541,15 @@ public class Combat {
         float ifPartNotNull = 0;
        
         
-        if(fetishType == "breasts" && opponents.get(0).hasBreasts()){
+        if(fetishType == BreastsPart.TYPE && opponents.get(0).hasBreasts()){
             ifPartNotNull = 1;
         } else if(fetishType == "pussy" && opponents.get(0).hasPussy()){
             ifPartNotNull = 1;
-        } else if(fetishType == "cock" && opponents.get(0).hasDick()){
+        } else if(fetishType == CockPart.TYPE && opponents.get(0).hasDick()){
             ifPartNotNull = 1;
-        } else if(fetishType == "ass" ){
+        } else if(fetishType == AssPart.TYPE ){
             ifPartNotNull = 1;
-        } else if(fetishType == "feet" ){
+        } else if(fetishType == Body.FEET ){
             ifPartNotNull = 1;
         } else{
             ifPartNotNull = 0;
@@ -559,13 +562,13 @@ public class Combat {
             boolean seeFetish = clothes == null || clothes.getLayer() <= 1 || otherWithAura.get().getOutfit().getExposure() >= .5;
             String partDescrip;
             
-        if(fetishType == "breasts"){
+        if(fetishType == BreastsPart.TYPE){
              partDescrip = otherWithAura.get().body.getRandomBreasts().describe(otherWithAura.get()) ;
-         } else if(fetishType == "ass"){
+         } else if(fetishType == AssPart.TYPE){
              partDescrip = otherWithAura.get().body.getRandomAss().describe(otherWithAura.get()) ;
          } else if(fetishType == "pussy"){
              partDescrip = otherWithAura.get().body.getRandomPussy().describe(otherWithAura.get()) ;
-         } else if(fetishType == "cock"){
+         } else if(fetishType == CockPart.TYPE){
              partDescrip = otherWithAura.get().body.getRandomCock().describe(otherWithAura.get()) ;
          } else{
              partDescrip = fetishType;
@@ -916,7 +919,7 @@ public class Combat {
                 chance += 5;
             if (self.has(Trait.assmaster) || self.has(Trait.analFanatic))
                 chance += 5;
-            Optional<BodyFetish> fetish = self.body.getFetish("ass");
+            Optional<BodyFetish> fetish = self.body.getFetish(AssPart.TYPE);
             if (fetish.isPresent() && opponent.has(Trait.bewitchingbottom)) {
                 chance += 20 * fetish.get().magnitude;
             }

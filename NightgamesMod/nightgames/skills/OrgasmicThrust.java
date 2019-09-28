@@ -3,6 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -25,7 +26,7 @@ public class OrgasmicThrust extends Thrust {
 
     public BodyPart getSelfOrgan(Combat c, Character target) {
         BodyPart part = super.getSelfOrgan(c, target);
-        if (part != null && part.isType("cock")) {
+        if (part != null && part.isType(CockPart.TYPE)) {
             return part;
         }
         return null;

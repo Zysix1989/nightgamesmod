@@ -8,6 +8,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
+import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -85,7 +86,7 @@ public class Anilingus extends Skill {
         }
         writeOutput(c, arousalToTarget, result, target);
         if (arousalToTarget > 0) {
-            target.body.pleasure(getSelf(), getSelf().body.getRandom("mouth"), targetAss, arousalToTarget, c, this);
+            target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), targetAss, arousalToTarget, c, this);
         }
         if (mojoToTarget > 0) {
             target.buildMojo(c, mojoToTarget);

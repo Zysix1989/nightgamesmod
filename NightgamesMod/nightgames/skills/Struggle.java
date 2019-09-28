@@ -10,6 +10,9 @@ import nightgames.characters.Player;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockMod;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.mods.EnlightenedCockMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -231,8 +234,8 @@ public class Struggle extends Skill {
                                                 + " sliding against {self:possessive} cockskin leaves {self:direct-object} gasping.",
                                 getSelf(), target));
                 int m = 15;
-                getSelf().body.pleasure(target, target.body.getRandom("pussy"),
-                                getSelf().body.getRandom("cock"), m, c, this);
+                getSelf().body.pleasure(target, target.body.getRandom(PussyPart.TYPE),
+                                getSelf().body.getRandom(CockPart.TYPE), m, c, this);
                 getSelf().removeStatus(Stsflag.cockbound);
             }
             if (knotted) {
@@ -242,7 +245,7 @@ public class Struggle extends Skill {
                 getSelf().removeStatus(Stsflag.knotted);
                 getSelf().pain(c, getSelf(), 10);
             }
-            boolean reverseStrapped = BodyPart.hasOnlyType(c.getStance().getPartsFor(c, target, getSelf()), "strapon");
+            boolean reverseStrapped = BodyPart.hasOnlyType(c.getStance().getPartsFor(c, target, getSelf()), StraponPart.TYPE);
             boolean reversedStance = false;
             if (!reverseStrapped) {
                 Position reversed = c.getStance().reverse(c, true);

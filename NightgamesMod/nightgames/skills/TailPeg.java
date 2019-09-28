@@ -6,8 +6,11 @@ import java.util.List;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
+import nightgames.characters.body.AssPart;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart.Size;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -27,8 +30,8 @@ public class TailPeg extends Skill {
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
-        Collection<BodyPart> tails = user.body.get("tail");
-        boolean hasFuckableTail = tails.stream().anyMatch(p -> p.isType("tail") && p != TailPart.cat && p != TailPart.slimeycat);
+        Collection<BodyPart> tails = user.body.get(TailPart.TYPE);
+        boolean hasFuckableTail = tails.stream().anyMatch(p -> p.isType(TailPart.TYPE) && p != TailPart.cat && p != TailPart.slimeycat);
         return hasFuckableTail && (user.get(Attribute.Dark) >= 1 || user.get(Attribute.Seduction) >= 20);
     }
 
@@ -111,13 +114,15 @@ public class TailPeg extends Skill {
             }
             if (intercourse) {
                 if (!c.getStance().vaginallyPenetrated(c, target)) {
-                    target.body.pleasure(getSelf(), getSelf().body.getRandom("tail"), target.body.getRandom("pussy"),
+                    target.body.pleasure(getSelf(), getSelf().body.getRandom(TailPart.TYPE), target.body.getRandom(
+                        PussyPart.TYPE),
                                     strength, c, this);
-                    target.add(c, new TailFucked(target, getSelf(), "pussy"));
+                    target.add(c, new TailFucked(target, getSelf(), PussyPart.TYPE));
                 } else if (!c.getStance().anallyPenetrated(c, target)) {
-                    target.body.pleasure(getSelf(), getSelf().body.getRandom("tail"), target.body.getRandom("ass"),
+                    target.body.pleasure(getSelf(), getSelf().body.getRandom(TailPart.TYPE), target.body.getRandom(
+                        AssPart.TYPE),
                                     strength, c, this);
-                    target.add(c, new TailFucked(target, getSelf(), "ass"));
+                    target.add(c, new TailFucked(target, getSelf(), AssPart.TYPE));
                 }
             }
             target.pain(c, getSelf(), (int) getSelf().modifyDamage(DamageType.physical, target, strength / 2));
@@ -126,7 +131,7 @@ public class TailPeg extends Skill {
             getSelf().emote(Emotion.confident, 15);
             getSelf().emote(Emotion.dominant, 25);
             if (Global.random(100) < 5 + 2 * getSelf().get(Attribute.Fetish)) {
-                target.add(c, new BodyFetish(target, getSelf(), "tail", .25));
+                target.add(c, new BodyFetish(target, getSelf(), TailPart.TYPE, .25));
             }
         } else {
             if (target.human()) {
@@ -233,7 +238,7 @@ public class TailPeg extends Skill {
                                 target.pronoun(), target.action("lose"), target.possessiveAdjective());
             case intercourse:
                 List<BodyPart> parts = c.getStance().getPartsFor(c, getSelf(), target);
-                String part = "hands";
+                String part = Body.HANDS;
                 if (!parts.isEmpty()) {
                     part = Global.pickRandom(parts).get().describe(getSelf());
                 }

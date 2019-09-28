@@ -15,6 +15,7 @@ import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.SecondPussyMod;
 import nightgames.global.Flag;
@@ -295,7 +296,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Remove Cock", 2500) {
             @Override
             void buy(Character buyer) {
-                buyer.body.removeAll("cock");
+                buyer.body.removeAll(CockPart.TYPE);
                 buyer.body.removeAll("balls");
             }
 
@@ -313,7 +314,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Remove Pussy", 2500) {
             @Override
             void buy(Character buyer) {
-                buyer.body.removeAll("pussy");
+                buyer.body.removeAll(PussyPart.TYPE);
             }
 
             @Override
@@ -381,12 +382,12 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Remove Tail", 1000) {
             @Override
             void buy(Character buyer) {
-                buyer.body.removeAll("tail");
+                buyer.body.removeAll(TailPart.TYPE);
             }
 
             @Override
             boolean available(Character buyer) {
-                return buyer.body.has("tail");
+                return buyer.body.has(TailPart.TYPE);
             }
 
             @Override
@@ -491,7 +492,7 @@ public class BodyShop extends Activity {
             @Override
             boolean available(Character buyer) {
                 Optional<BodyPart> optTarget =
-                                buyer.body.get("cock").stream().filter(c -> !c.isGeneric(buyer)).findAny();
+                                buyer.body.get(CockPart.TYPE).stream().filter(c -> !c.isGeneric(buyer)).findAny();
                 return optTarget.isPresent();
             }
 
@@ -513,7 +514,7 @@ public class BodyShop extends Activity {
             @Override
             boolean available(Character buyer) {
                 Optional<BodyPart> optTarget =
-                                buyer.body.get("pussy").stream().filter(c -> !c.isGeneric(buyer)).findAny();
+                                buyer.body.get(PussyPart.TYPE).stream().filter(c -> !c.isGeneric(buyer)).findAny();
                 return optTarget.isPresent();
             }
 
@@ -532,14 +533,14 @@ public class BodyShop extends Activity {
         addBodyPart("Fused Boots",
                         new GenericBodyPart("Fused Boots",
                                         "{self:name-possessive} legs are wrapped in a shiny black material that look fused on.",
-                                        .3, 1.5, .7, true, "feet", ""),
-                        new GenericBodyPart("feet", 0, 1, 1, "feet", ""), 1000, 1000);
-        addBodyPartMod("Anal Pussy", SecondPussyMod.INSTANCE, "ass", 2000, 2000, 0);
+                                        .3, 1.5, .7, true, Body.FEET, ""),
+                        new GenericBodyPart("feet", 0, 1, 1, Body.FEET, ""), 1000, 1000);
+        addBodyPartMod("Anal Pussy", SecondPussyMod.INSTANCE, AssPart.TYPE, 2000, 2000, 0);
         addBodyPart("Fused Gloves",
                         new GenericBodyPart("Fused Gloves",
                                         "{self:name-possessive} arms and hands are wrapped in a shiny black material that look fused on.",
-                                        .2, 1.5, .7, true, "hands", ""),
-                        new GenericBodyPart("hands", 0, 1, 1, "hands", ""), 1000, 1000);
+                                        .2, 1.5, .7, true, Body.HANDS, ""),
+                        new GenericBodyPart("hands", 0, 1, 1, Body.HANDS, ""), 1000, 1000);
     }
 
     @Override

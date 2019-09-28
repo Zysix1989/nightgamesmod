@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -33,7 +35,7 @@ public class HeldOral extends AbstractFacingStance {
         return c == top;
     }
     public List<BodyPart> topParts(Combat c) {
-        BodyPart part = top.body.getRandom("mouth");
+        BodyPart part = top.body.getRandom(MouthPart.TYPE);
         if (part != null) {
             return Collections.singletonList(part);
         } else {
@@ -43,7 +45,7 @@ public class HeldOral extends AbstractFacingStance {
 
     public List<BodyPart> bottomParts() {
         if (bottom.hasDick()) {
-            return Collections.singletonList(bottom.body.getRandom("cock"));
+            return Collections.singletonList(bottom.body.getRandom(CockPart.TYPE));
         } else if (bottom.hasPussy()){
             return Collections.singletonList(bottom.body.getRandomPussy());
         }
@@ -124,7 +126,7 @@ public class HeldOral extends AbstractFacingStance {
     @Override
     public float priorityMod(Character self) {
         float bonus = getSubDomBonus(self, 2);
-        bonus += self.body.getRandom("mouth").priority(self);
+        bonus += self.body.getRandom(MouthPart.TYPE).priority(self);
         return bonus;
     }
 
@@ -165,13 +167,13 @@ public class HeldOral extends AbstractFacingStance {
         if (self.hasPussy()) {
             possibleActions.add(() -> {
                 c.write(self, Global.format(pussyString, self, opponent));
-                self.body.pleasure(opponent, opponent.body.getRandom("mouth"), self.body.getRandomPussy(), targM, c);
+                self.body.pleasure(opponent, opponent.body.getRandom(MouthPart.TYPE), self.body.getRandomPussy(), targM, c);
             });
         }
         if (self.hasDick()) {
             possibleActions.add(() -> {
                 c.write(self, Global.format(cockString, self, opponent));
-                self.body.pleasure(opponent, opponent.body.getRandom("mouth"), self.body.getRandomCock(), targM, c);
+                self.body.pleasure(opponent, opponent.body.getRandom(MouthPart.TYPE), self.body.getRandomCock(), targM, c);
             });
         }
         Optional<Runnable> action = Global.pickRandom(possibleActions);

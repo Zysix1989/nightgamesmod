@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import nightgames.characters.Character;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -19,8 +20,8 @@ public abstract class AnalSexStance extends Position {
     public float priorityMod(Character self) {
         float priority = 0;
         priority += getSubDomBonus(self, 4);
-        if (!inserted(self) && self.body.getRandom("ass") != null) {
-            priority += self.body.getRandom("ass").priority(self);
+        if (!inserted(self) && self.body.getRandom(AssPart.TYPE) != null) {
+            priority += self.body.getRandom(AssPart.TYPE).priority(self);
         } else if (inserted(self) && self.body.getRandomInsertable() != null) {
             priority += self.body.getRandomInsertable().priority(self);
         }

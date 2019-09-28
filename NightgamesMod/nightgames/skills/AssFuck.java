@@ -6,6 +6,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -37,7 +38,7 @@ public class AssFuck extends Fuck {
 
     @Override
     public BodyPart getTargetOrgan(Character target) {
-        return target.body.getRandom("ass");
+        return target.body.getRandom(AssPart.TYPE);
     }
 
     @Override

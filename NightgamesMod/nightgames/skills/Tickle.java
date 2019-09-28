@@ -3,6 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.Body;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -76,7 +77,7 @@ public class Tickle extends Skill {
                                     "{other:SUBJECT-ACTION:squirm|squirms} uncontrollably from {self:name-possessive} actions. Yup, definitely ticklish.",
                                     getSelf(), target));
                 }
-                target.body.pleasure(getSelf(), getSelf().body.getRandom("hands"), target.body.getRandom("skin"),
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandom(Body.SKIN),
                                 (int) getSelf().modifyDamage(type, target, 2 + Global.random(4)), bonus, c, false, this);
                 target.weaken(c, (int) getSelf().modifyDamage(type, target, weak + Global.random(10, 15)));
             } else if (hastickler() && Global.random(2) == 1) {
@@ -90,7 +91,7 @@ public class Tickle extends Skill {
                                         "{other:SUBJECT-ACTION:squirm|squirms} uncontrollably from {self:name-possessive} actions. Yup definitely ticklish.",
                                         getSelf(), target));
                     }
-                    target.body.pleasure(getSelf(), getSelf().body.getRandom("hands"), target.body.getRandom("skin"),
+                    target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandom(Body.SKIN),
                                     4 + Global.random(4), bonus, c, false, this);
                 } else {
                     writeOutput(c, Result.weak, target);
@@ -100,7 +101,7 @@ public class Tickle extends Skill {
                                         "{other:SUBJECT-ACTION:squirm|squirms} uncontrollably from {self:name-possessive} actions. Yup definitely ticklish.",
                                         getSelf(), target));
                     }
-                    target.body.pleasure(getSelf(), getSelf().body.getRandom("hands"), target.body.getRandom("skin"),
+                    target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandom(Body.SKIN),
                                     4 + Global.random(2), bonus, c, false, this);
                 }
                 target.weaken(c, (int) getSelf().modifyDamage(type, target, bonus + Global.random(5, 10)));
@@ -115,7 +116,7 @@ public class Tickle extends Skill {
                 }
                 int m = (int) Math.round((2 + Global.random(3)) * (.25 + target.getExposure()));
                 int weak = (int) Math.round(bonus / 2 * (.25 + target.getExposure()));
-                target.body.pleasure(getSelf(), getSelf().body.getRandom("hands"), target.body.getRandom("skin"), (int) getSelf().modifyDamage(type, target, m),
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandom(Body.SKIN), (int) getSelf().modifyDamage(type, target, m),
                                 bonus, c, false, this);
                 target.weaken(c, (int) getSelf().modifyDamage(type, target, weak + Global.random(4, 7)));
             }

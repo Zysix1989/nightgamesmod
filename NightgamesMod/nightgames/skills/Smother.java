@@ -3,6 +3,8 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
+import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -53,7 +55,8 @@ public class Smother extends Skill {
         if (target.has(Trait.silvertongue)) {
             m = m * 3 / 2;
         }
-        getSelf().body.pleasure(target, target.body.getRandom("mouth"), getSelf().body.getRandom("ass"), m, c, this);
+        getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandom(
+            AssPart.TYPE), m, c, this);
         double n = 14 + Global.random(4);
         if (c.getStance().front(getSelf())) {
             // opponent can see self
@@ -63,7 +66,7 @@ public class Smother extends Skill {
             n *= 1.5;
         }
 
-        target.temptWithSkill(c, getSelf(), getSelf().body.getRandom("ass"), (int) Math.round(n / 2), this);
+        target.temptWithSkill(c, getSelf(), getSelf().body.getRandom(AssPart.TYPE), (int) Math.round(n / 2), this);
         target.weaken(c, (int) getSelf().modifyDamage(DamageType.physical, target, Global.random(10, 25)));
 
         target.loseWillpower(c, Math.max(10, target.getWillpower().max() * 10 / 100 ));
@@ -72,7 +75,7 @@ public class Smother extends Skill {
             c.setStance(new Smothering(getSelf(), target), getSelf(), true);
         }
         if (Global.random(100) < 25 + 2 * getSelf().get(Attribute.Fetish)) {
-            target.add(c, new BodyFetish(target, getSelf(), "ass", .35));
+            target.add(c, new BodyFetish(target, getSelf(), AssPart.TYPE, .35));
         }
         return true;
     }

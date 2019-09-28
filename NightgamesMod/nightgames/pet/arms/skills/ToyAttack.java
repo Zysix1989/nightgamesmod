@@ -3,6 +3,9 @@ package nightgames.pet.arms.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.ToysPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -40,7 +43,7 @@ public class ToyAttack extends ArmSkill {
             target.body.pleasure(owner, ToysPart.onahole, target.body.getRandomCock(), m, c);
         } else if (c.getStance()
                     .penetrated(c, owner)) {
-            boolean anal = !target.body.has("pussy");
+            boolean anal = !target.body.has(PussyPart.TYPE);
             String cock = target.has(Trait.strapped) ? "strapon" : "{other:body-part:cock}";
             String hole = anal ? "{other:body-part:ass}" : "{other:body-part:pussy}";
             c.write(PetCharacter.DUMMY,
@@ -53,21 +56,21 @@ public class ToyAttack extends ArmSkill {
             target.body.pleasure(owner, ToysPart.dildo, target.body.getRandomHole(), m, c);
         } else {
             String part;
-            boolean pussyAvaiable = target.body.has("pussy") && !c.getStance().vaginallyPenetrated(c, target);
-            boolean cockAvaiable = target.body.has("cock") && !c.getStance().penetratedBy(c, owner, target);
+            boolean pussyAvaiable = target.body.has(PussyPart.TYPE) && !c.getStance().vaginallyPenetrated(c, target);
+            boolean cockAvaiable = target.body.has(CockPart.TYPE) && !c.getStance().penetratedBy(c, owner, target);
             
             if (pussyAvaiable && cockAvaiable) {
-                part = Global.random(3) == 0 ? "pussy" : Global.random(2) == 0 ? "cock" : "ass";
+                part = Global.random(3) == 0 ? PussyPart.TYPE : Global.random(2) == 0 ? CockPart.TYPE : AssPart.TYPE;
             } else if (cockAvaiable) {
-                part = Global.random(2) == 0 ? "cock" : "ass";
+                part = Global.random(2) == 0 ? CockPart.TYPE : AssPart.TYPE;
             } else if (pussyAvaiable) {
-                part = Global.random(2) == 0 ? "pussy" : "ass";
+                part = Global.random(2) == 0 ? PussyPart.TYPE : AssPart.TYPE;
             } else {
-                part = "ass";
+                part = AssPart.TYPE;
             }
             if (c.getStance()
                  .dom(owner) || Global.random(100) < owner.get(Attribute.Science) + owner.get(Attribute.Cunning)) {
-                if (part.equals("pussy")) {
+                if (part.equals(PussyPart.TYPE)) {
                     c.write(PetCharacter.DUMMY, Global.format("{self:NAME-POSSESSIVE} %s shapes itself"
                                     + " into a cock-like column of material and shoots straight at"
                                     + " {other:name-possessive} unprotected {other:body-part:pussy}."
@@ -75,7 +78,7 @@ public class ToyAttack extends ArmSkill {
                                     + " soft folds, and pumps rythmically in and out of the soon-sopping hole."
                                     , owner, target, arm.getName()));
                     target.body.pleasure(owner, ToysPart.dildo, target.body.getRandomPussy(), m, c);
-                } else if (part.equals("cock")) {
+                } else if (part.equals(CockPart.TYPE)) {
                     c.write(PetCharacter.DUMMY, Global.format("The particles at the tip of {self:NAME-POSSESSIVE}"
                                     + " %s arrange themselves into a cup-like shape. That cup soon settles"
                                     + " around {other:name-possessive} {other:body-part:cock}, and it"

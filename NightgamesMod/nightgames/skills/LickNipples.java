@@ -3,6 +3,8 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -41,7 +43,8 @@ public class LickNipples extends Skill {
             if (getSelf().has(Trait.silvertongue)) {
                 m += 4;
             }
-            target.body.pleasure(getSelf(), getSelf().body.getRandom("mouth"), target.body.getRandom("breasts"), m, c, this);
+            target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandom(
+                BreastsPart.TYPE), m, c, this);
 
         } else {
             writeOutput(c, Result.miss, target);

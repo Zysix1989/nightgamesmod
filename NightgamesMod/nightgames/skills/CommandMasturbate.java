@@ -1,6 +1,7 @@
 package nightgames.skills;
 
 import nightgames.characters.Character;
+import nightgames.characters.body.Body;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -25,7 +26,7 @@ public class CommandMasturbate extends PlayerCommand {
     public boolean resolve(Combat c, Character target) {
         boolean lowStart = target.getArousal().get() < 15;
         int m = 5 + Global.random(10);
-        target.body.pleasure(target, target.body.getRandom("hands"), target.body.getRandomGenital(), m, c, this);
+        target.body.pleasure(target, target.body.getRandom(Body.HANDS), target.body.getRandomGenital(), m, c, this);
 
         boolean lowEnd = target.getArousal().get() < 15;
         if (getSelf().human()) {

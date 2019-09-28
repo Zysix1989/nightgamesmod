@@ -1,6 +1,7 @@
 package nightgames.skills.petskills;
 
 import nightgames.characters.Character;
+import nightgames.characters.body.TentaclePart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.nskills.tags.SkillTag;
@@ -44,7 +45,7 @@ public class SlimeJob extends SimpleEnemySkill {
                 c.write(getSelf(), Global.format("{self:SUBJECT} grows two long slimy appendages which rises up and tweaks {other:name-possessive} "
                                 + "sensitive nipples.",
                                 getSelf(), target));
-                target.body.pleasure(getSelf(), getSelf().body.getRandom("tentacles"), target.body.getRandomBreasts(), m, c);
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(TentaclePart.TYPE), target.body.getRandomBreasts(), m, c);
                 return true;
             }
         }

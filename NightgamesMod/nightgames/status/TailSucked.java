@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.TailPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.skills.TailSuck;
@@ -49,7 +50,7 @@ public class TailSucked extends Status implements InsertedStatus {
     @Override
     public void tick(Combat c) {
         BodyPart cock = affected.body.getRandomCock();
-        BodyPart tail = sucker.body.getRandom("tail");
+        BodyPart tail = sucker.body.getRandom(TailPart.TYPE);
         if (cock == null || tail == null || c == null) {
             affected.removelist.add(this);
             return;
@@ -151,7 +152,7 @@ public class TailSucked extends Status implements InsertedStatus {
 
     @Override
     public BodyPart getHolePart() {
-        return sucker.body.getRandom("tail");
+        return sucker.body.getRandom(TailPart.TYPE);
     }
 
     @Override

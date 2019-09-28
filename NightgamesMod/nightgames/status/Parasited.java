@@ -9,6 +9,7 @@ import com.google.gson.JsonObject;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -86,7 +87,8 @@ public class Parasited extends Status {
                                     Global.format("With absolutely no warning, {self:subject-action:feel|feels} an incredible orgasm rip through {self:possessive} body.",
                                     affected, other));
                     BodyPart part = Global.pickRandom(c.getStance().getPartsFor(c, affected, other)).orElse(affected.body.getRandomGenital());
-                    BodyPart otherPart = Global.pickRandom(c.getStance().getPartsFor(c, other, other)).orElse(other.body.getRandom("skin"));
+                    BodyPart otherPart = Global.pickRandom(c.getStance().getPartsFor(c, other, other)).orElse(other.body.getRandom(
+                        Body.SKIN));
                     affected.doOrgasm(c, other, part, otherPart);
                     break;
                 case 1:

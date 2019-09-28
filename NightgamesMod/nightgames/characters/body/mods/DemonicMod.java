@@ -5,9 +5,11 @@ import java.util.EnumSet;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.GenericBodyPart;
+import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.pet.PetCharacter;
@@ -28,10 +30,10 @@ public class DemonicMod extends PartMod {
         if (part.getType().equals("pussy")) {
             return "succubus";
         }
-        if (part.getType().equals("ass")) {
+        if (part.getType().equals(AssPart.TYPE)) {
             return "devilish";
         }
-        if (part.getType().equals("mouth")) {
+        if (part.getType().equals(MouthPart.TYPE)) {
             return "tainted";
         }
         return "demonic";

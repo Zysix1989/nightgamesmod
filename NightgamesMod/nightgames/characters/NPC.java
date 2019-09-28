@@ -23,7 +23,10 @@ import nightgames.actions.UseEnergyDrink;
 import nightgames.actions.UseLubricant;
 import nightgames.actions.Wait;
 import nightgames.areas.Area;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.StraponPart;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.characters.custom.CommentSituation;
 import nightgames.characters.custom.RecruitmentData;
@@ -635,12 +638,13 @@ public class NPC extends Character {
                 if (target.hasDick()) {
                     if (target.crotchAvailable()) {
                         c.write(this, getName() + " catches you by the penis and rubs your sensitive glans.");
-                        target.body.pleasure(this, body.getRandom("hands"), target.body.getRandom("cock"),
+                        target.body.pleasure(this, body.getRandom(Body.HANDS), target.body.getRandom(
+                            CockPart.TYPE),
                                         4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                     } else {
                         c.write(this, getName() + " catches you as you approach and grinds her knee into the tent in your "
                                         + target.getOutfit().getTopOfSlot(ClothingSlot.bottom) +".");
-                        target.body.pleasure(this, body.getRandom("legs"), target.body.getRandom("cock"),
+                        target.body.pleasure(this, body.getRandom("legs"), target.body.getRandom(CockPart.TYPE),
                                         4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                     }
                 } else {
@@ -653,7 +657,7 @@ public class NPC extends Character {
             case fucking:
                 if (c.getStance().sub(this)) {
                     Position reverse = c.getStance().reverse(c, true);
-                    if (reverse != c.getStance() && !BodyPart.hasOnlyType(reverse.bottomParts(), "strapon")) {
+                    if (reverse != c.getStance() && !BodyPart.hasOnlyType(reverse.bottomParts(), StraponPart.TYPE)) {
                         c.setStance(reverse, this, false);
                     } else {
                         c.write(this, Global.format(
@@ -662,7 +666,7 @@ public class NPC extends Character {
                         c.setStance(new Neutral(this, c.getOpponent(this)), this, true);
                     }
                 } else {
-                    target.body.pleasure(this, body.getRandom("hands"), target.body.getRandomBreasts(),
+                    target.body.pleasure(this, body.getRandom(Body.HANDS), target.body.getRandomBreasts(),
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                     c.write(this, Global.format(
                                     "{self:SUBJECT-ACTION:pinch|pinches} {other:possessive} nipples with {self:possessive} hands as {other:subject-action:try|tries} to fuck {self:direct-object}. "

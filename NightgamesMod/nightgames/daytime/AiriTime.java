@@ -31,7 +31,7 @@ public class AiriTime extends BaseNPCTime {
         transformationOptions = new ArrayList<>();
         {
             TransformationOption growCock = new TransformationOption();
-            growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement("cock"))), "Airi has no penis");
+            growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement(CockPart.TYPE))), "Airi has no penis");
             growCock.option = "Airi: Grow a cock";
             growCock.scene = "<br/>You ask Airi if she would consider growing a cock. "
                             + "Surprisingly, she agrees fairly easily, considering her usual recalcitrant personality. "
@@ -58,7 +58,7 @@ public class AiriTime extends BaseNPCTime {
         }
         {
             TransformationOption removeCock = new TransformationOption();
-            removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement("cock")), "Airi has a penis");
+            removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement(CockPart.TYPE)), "Airi has a penis");
             removeCock.option = "Airi: Remove her cock";
             removeCock.scene = "<br/>Airi frowns when you ask her if she can remove her new cock, \"<i>If you didn't like it, don't ask me for one in the first place. "
                             + "I guess you {other:guy}s are fickle. Fine, I'll do it but you're going to help me...</i>\""
@@ -83,7 +83,7 @@ public class AiriTime extends BaseNPCTime {
                             + "Groaning a bit, you realize that the act of cumming probably liquified her gooey rod and sent it straight down your throat. She literally made you eat her cock. "
                             + "Before you leave, Airi gives you an apologetic pat and whispers in your ear, <i>\"Some advice... I'd recommend using the bathroom <b>alone</b> the next time you need to go...\"</i> Aw man, that's not cool.";
             removeCock.effect = (c, self, other) -> {
-                other.body.removeAll("cock");
+                other.body.removeAll(CockPart.TYPE);
                 return true;
             };
             transformationOptions.add(removeCock);

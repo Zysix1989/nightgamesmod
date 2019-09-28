@@ -78,7 +78,7 @@ public class ShrinkRay extends Skill {
                 if (part != null) {
                     target.body.temporaryAddOrReplacePartWithType(part.downgrade(), part, 10);
                 } else {
-                    target.body.temporaryRemovePart(target.body.getRandom("cock"), 10);
+                    target.body.temporaryRemovePart(target.body.getRandom(CockPart.TYPE), 10);
                 }
             } else {
                 BreastsPart part = target.body.getBreastsAbove(BreastsPart.Size.min());

@@ -11,6 +11,7 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.EnlightenedCockMod;
 import nightgames.characters.body.mods.FieryMod;
 import nightgames.characters.body.mods.TrainedMod;
@@ -98,7 +99,7 @@ public class Jewel extends BasePersonality {
         Growth growth = character.getGrowth();
         Global.flag(JEWEL_ANAL_FOCUS);
         growth.addTrait(11, Trait.powerfulcheeks);
-        growth.addBodyPartMod(25, "ass", FieryMod.INSTANCE);
+        growth.addBodyPartMod(25, AssPart.TYPE, FieryMod.INSTANCE);
         growth.addTrait(37, Trait.temptingass);
         growth.addTrait(11, Trait.polecontrol);
         growth.addTrait(25, Trait.assmaster);
@@ -388,7 +389,7 @@ public class Jewel extends BasePersonality {
             String part = Global.pickRandom(c.getStance()
                                              .getPartsFor(c, self, other))
                                 .map(bp -> bp.getType())
-                                .orElse("pussy");
+                                .orElse(PussyPart.TYPE);
             if (other.getLevel() < self.getLevel() - 5) {
                 return "Jewel smirks at you with a sadistic grin on her face as her " + self.body.getRandom(part)
                                                                                                  .describe(self)
@@ -438,7 +439,7 @@ public class Jewel extends BasePersonality {
 
         Collection<BodyPart> otherOrgans = c.getStance()
                                             .getPartsFor(c, other, other);
-        if (BodyPart.hasType(otherOrgans, "ass") && c.getStance()
+        if (BodyPart.hasType(otherOrgans, AssPart.TYPE) && c.getStance()
                                                      .anallyPenetrated(c, other)) {
             BodyPart insertable = character.body.getRandomInsertable();
             String selfODesc = insertable == null ? "[none]" : insertable.describe(character);

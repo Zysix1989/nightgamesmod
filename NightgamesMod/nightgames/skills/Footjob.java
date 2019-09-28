@@ -2,7 +2,10 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -32,7 +35,7 @@ public class Footjob extends Skill {
 
     @Override
     public float priorityMod(Combat c) {
-        BodyPart feet = getSelf().body.getRandom("feet");
+        BodyPart feet = getSelf().body.getRandom(Body.FEET);
         Character other = c.p1 == getSelf() ? c.p2 : c.p1;
         BodyPart otherpart = other.hasDick() ? other.body.getRandomCock() : other.body.getRandomPussy();
         if (feet != null) {
@@ -48,7 +51,7 @@ public class Footjob extends Skill {
 
     @Override
     public int accuracy(Combat c, Character target) {
-        return target.body.getFetish("feet").isPresent() ? 200 : 80;
+        return target.body.getFetish(Body.FEET).isPresent() ? 200 : 80;
     }
 
     @Override
@@ -61,12 +64,14 @@ public class Footjob extends Skill {
                 c.write(getSelf(), Global.format(receive(c, m, Result.normal, target), getSelf(), target));
             }
             if (target.hasDick()) {
-                target.body.pleasure(getSelf(), getSelf().body.getRandom("feet"), target.body.getRandom("cock"), m, c, this);
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.FEET), target.body.getRandom(
+                    CockPart.TYPE), m, c, this);
             } else {
-                target.body.pleasure(getSelf(), getSelf().body.getRandom("feet"), target.body.getRandom("pussy"), m, c, this);
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.FEET), target.body.getRandom(
+                    PussyPart.TYPE), m, c, this);
             }
             if (Global.random(100) < 15 + 2 * getSelf().get(Attribute.Fetish)) {
-                target.add(c, new BodyFetish(target, getSelf(), "feet", .25));
+                target.add(c, new BodyFetish(target, getSelf(), Body.FEET, .25));
             }
         } else {
             if (getSelf().human()) {

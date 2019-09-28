@@ -17,6 +17,8 @@ import nightgames.status.Stsflag;
 import nightgames.status.Trance;
 
 public class AssPart extends GenericBodyPart {
+    public static String TYPE = "ass";
+
     public enum Size {
         Small(0,"small"),
         Normal(1, ""),
@@ -55,7 +57,7 @@ public class AssPart extends GenericBodyPart {
     private Size size;
 
     private AssPart() {
-        super("ass", "", 0, 1.2, 1, false, "ass", "a ");
+        super("ass", "", 0, 1.2, 1, false, AssPart.TYPE, "a ");
     }
 
     public AssPart(JsonObject js) {
@@ -140,7 +142,7 @@ public class AssPart extends GenericBodyPart {
                 bonus /= 5;
             }
         }
-        if (self.has(Trait.drainingass) && !target.isType("strapon")) {
+        if (self.has(Trait.drainingass) && !target.isType(StraponPart.TYPE)) {
             if (Global.random(3) == 0) {
                 c.write(self, Global.format("{self:name-possessive} ass seems to <i>inhale</i>, drawing"
                                 + " great gouts of {other:name-possessive} strength from {other:possessive}"

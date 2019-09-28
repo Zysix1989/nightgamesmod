@@ -17,6 +17,8 @@ import nightgames.items.clothing.ClothingSlot;
 import nightgames.status.Sensitized;
 
 public class CockPart extends GenericBodyPart {
+    public static final String TYPE = "cock";
+
     public enum Size {
         Tiny(3, "tiny"),
         Small(4,"tiny"),
@@ -60,7 +62,7 @@ public class CockPart extends GenericBodyPart {
     private Size size;
 
     public CockPart() {
-        super("cock", "", 0, 1.2, 1, false, "cock", "a ");
+        super("cock", "", 0, 1.2, 1, false, CockPart.TYPE, "a ");
     }
 
     public CockPart(JsonObject js) {

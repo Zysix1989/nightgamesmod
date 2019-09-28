@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.pet.PetCharacter;
@@ -68,7 +69,7 @@ public class ArcaneMod extends PartMod {
 
     @Override
     public String describeAdjective(String partType) {
-        if (partType.equals("mouth")) {
+        if (partType.equals(MouthPart.TYPE)) {
             return "arcane luster";
         }
         return "arcane tattoos";

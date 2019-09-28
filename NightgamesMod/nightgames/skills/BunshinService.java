@@ -2,7 +2,9 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -72,27 +74,27 @@ public class BunshinService extends Skill {
                         break;
                     case 1:
                         r = Result.normal;
-                        target.body.pleasure(getSelf(),  getSelf().body.getRandom("hands"),target.body.getRandomBreasts(),
+                        target.body.pleasure(getSelf(),  getSelf().body.getRandom(Body.HANDS),target.body.getRandomBreasts(),
                                         Global.random(3 + getSelf().get(Attribute.Seduction) / 2)
                                                         + target.get(Attribute.Perception) / 2,
                                         c, this);
                         break;
                     case 2:
                         r = Result.strong;
-                        BodyPart targetPart = target.body.has("cock") ? target.body.getRandomCock()
+                        BodyPart targetPart = target.body.has(CockPart.TYPE) ? target.body.getRandomCock()
                                         : target.hasPussy() ? target.body.getRandomPussy()
                                                         : target.body.getRandomAss();
-                        target.body.pleasure(getSelf(), getSelf().body.getRandom("hands"),targetPart, 
+                        target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS),targetPart,
                                         Global.random(4 + getSelf().get(Attribute.Seduction))
                                                         + target.get(Attribute.Perception) / 2,
                                         c, this);
                         break;
                     default:
                         r = Result.critical;
-                        targetPart = target.body.has("cock") ? target.body.getRandomCock()
+                        targetPart = target.body.has(CockPart.TYPE) ? target.body.getRandomCock()
                                         : target.hasPussy() ? target.body.getRandomPussy()
                                                         : target.body.getRandomAss();
-                        target.body.pleasure(getSelf(),getSelf().body.getRandom("hands"), targetPart, Global.random(6)
+                        target.body.pleasure(getSelf(),getSelf().body.getRandom(Body.HANDS), targetPart, Global.random(6)
                                         + getSelf().get(Attribute.Seduction) / 2 + target.get(Attribute.Perception), c,
                                         this);
                         break;

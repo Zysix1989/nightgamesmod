@@ -1,8 +1,10 @@
 package nightgames.characters.body.mods;
 
 import nightgames.characters.Character;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.Shamed;
@@ -20,10 +22,10 @@ public class CyberneticMod extends PartMod {
 
 
     public String adjective(GenericBodyPart part) {
-        if (part.getType().equals("pussy")) {
+        if (part.getType().equals(PussyPart.TYPE)) {
             return "cybernetic";
         }
-        if (part.getType().equals("ass")) {
+        if (part.getType().equals(AssPart.TYPE)) {
             return "biomech";
         }
         return "prosthetic";

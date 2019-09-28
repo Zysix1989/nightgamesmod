@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
+import nightgames.characters.body.Body;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -81,7 +82,7 @@ public class BreastSmother extends Skill {
             n *= 1.5;
         }
 
-        target.temptWithSkill(c, getSelf(), getSelf().body.getRandom("breasts"), (int) Math.round(n / 2), this);
+        target.temptWithSkill(c, getSelf(), getSelf().body.getRandom(BreastsPart.TYPE), (int) Math.round(n / 2), this);
         target.weaken(c, (int) getSelf().modifyDamage(DamageType.physical, target, Global.random(5, 15)));
 
         target.loseWillpower(c, Math.min(5, target.getWillpower().max() * 10 / 100 ));     
@@ -93,7 +94,7 @@ public class BreastSmother extends Skill {
             getSelf().emote(Emotion.dominant, 10);
         }
         if (Global.random(100) < 15 + 2 * getSelf().get(Attribute.Fetish)) {
-            target.add(c, new BodyFetish(target, getSelf(), "breasts", 10));
+            target.add(c, new BodyFetish(target, getSelf(), BreastsPart.TYPE, 10));
         }
 
         Pairing pair = Pairing.findPairing(getSelf(), target);
@@ -119,7 +120,7 @@ public class BreastSmother extends Skill {
                                 getSelf(), target));
                 target.body.pleasure(getSelf(), getSelf().body.getRandomPussy(), target.body.getRandomCock(),
                                 targetDmg / 2, c, this);
-                target.body.pleasure(getSelf(), getSelf().body.getRandom("hands"), target.body.getRandomPussy(),
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomPussy(),
                                 targetDmg / 2, c, this);
                 getSelf().body.pleasure(target, target.body.getRandomCock(), getSelf().body.getRandomPussy(), selfDmg,
                                 c, this);
@@ -152,7 +153,7 @@ public class BreastSmother extends Skill {
                                                 + " ass.", getSelf(), target));
                 target.body.pleasure(getSelf(), getSelf().body.getRandomCock(), target.body.getRandomPussy(),
                                 targetDmg / 2, c, this);
-                target.body.pleasure(getSelf(), getSelf().body.getRandom("hands"), target.body.getRandomAss(),
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomAss(),
                                 targetDmg / 2, c, this);
                 getSelf().body.pleasure(target, target.body.getRandomPussy(), getSelf().body.getRandomCock(), selfDmg,
                                 c, this);
@@ -209,7 +210,7 @@ public class BreastSmother extends Skill {
                 }
                 c.write(getSelf(), Global.format(msg, getSelf(), target));
                 if (pair == Pairing.MALE_HERM) {
-                    target.body.pleasure(getSelf(), getSelf().body.getRandom("hands"), target.body.getRandomCock(),
+                    target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomCock(),
                                     targetDmg / 2, c, this);
                     realTargetDmg /= 2;
                 }

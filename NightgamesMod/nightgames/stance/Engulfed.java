@@ -8,7 +8,10 @@ import java.util.stream.Collectors;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.skills.damage.DamageType;
@@ -150,10 +153,10 @@ public class Engulfed extends Position {
     public List<BodyPart> topParts(Combat c) {
         List<BodyPart> parts = new ArrayList<>();
         if (slimePitches) {
-            parts.addAll(top.body.get("cock"));
+            parts.addAll(top.body.get(CockPart.TYPE));
         } else {
-            parts.addAll(top.body.get("pussy"));
-            parts.addAll(top.body.get("ass"));
+            parts.addAll(top.body.get(PussyPart.TYPE));
+            parts.addAll(top.body.get(AssPart.TYPE));
         }
         return parts.stream()
                     .filter(part -> part != null && part.present())
@@ -164,10 +167,10 @@ public class Engulfed extends Position {
     public List<BodyPart> bottomParts() {
         List<BodyPart> parts = new ArrayList<>();
         if (!slimePitches) {
-            parts.addAll(bottom.body.get("cock"));
+            parts.addAll(bottom.body.get(CockPart.TYPE));
         } else {
-            parts.addAll(bottom.body.get("pussy"));
-            parts.addAll(bottom.body.get("ass"));
+            parts.addAll(bottom.body.get(PussyPart.TYPE));
+            parts.addAll(bottom.body.get(AssPart.TYPE));
         }
         return parts.stream()
                     .filter(part -> part != null && part.present())

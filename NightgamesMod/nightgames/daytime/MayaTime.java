@@ -37,7 +37,7 @@ public class MayaTime extends BaseNPCTime {
         {
             TransformationOption growCock = new TransformationOption();
             growCock.ingredients.put(Item.PriapusDraft, 2);
-            growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement("cock"))), "Has no penis");
+            growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement(CockPart.TYPE))), "Has no penis");
             growCock.option = "Maya: Grow a cock";
             growCock.scene = "[Placeholder]<br/>Maya does some sort of thing and grows a cock.";
             growCock.effect = (c, self, other) -> {
@@ -49,11 +49,11 @@ public class MayaTime extends BaseNPCTime {
         {
             TransformationOption removeCock = new TransformationOption();
             removeCock.ingredients.put(Item.FemDraft, 2);
-            removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement("cock")), "Has a penis");
+            removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement(CockPart.TYPE)), "Has a penis");
             removeCock.option = "Maya: Remove her cock";
             removeCock.scene = "[Placeholder]<br/>Maya reverses whatever she did to get a cock to remove her cock.";
             removeCock.effect = (c, self, other) -> {
-                other.body.removeAll("cock");
+                other.body.removeAll(CockPart.TYPE);
                 return true;
             };
             transformationOptions.add(removeCock);

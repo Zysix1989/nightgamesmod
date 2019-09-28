@@ -2,6 +2,9 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.AssPart;
+import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.TentaclePart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -24,7 +27,7 @@ public class LeechSeed extends Skill {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return getSelf().canRespond() && getSelf().body.has("tentacles") && !target.is(Stsflag.seeded)
+        return getSelf().canRespond() && getSelf().body.has(TentaclePart.TYPE) && !target.is(Stsflag.seeded)
                         && !(c.getStance().anallyPenetrated(c, target) && c.getStance().vaginallyPenetrated(c, target))
                         && target.outfit.slotOpen(ClothingSlot.bottom);
     }
@@ -43,9 +46,9 @@ public class LeechSeed extends Skill {
             }
             writeOutput(c, results, target);
             if (results == Result.normal) {
-                target.add(c, new Seeded(target, getSelf(), "pussy"));
+                target.add(c, new Seeded(target, getSelf(), PussyPart.TYPE));
             } else {
-                target.add(c, new Seeded(target, getSelf(), "ass"));
+                target.add(c, new Seeded(target, getSelf(), AssPart.TYPE));
             }
         } else {
             writeOutput(c, Result.miss, target);

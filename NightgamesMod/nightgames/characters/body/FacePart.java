@@ -5,11 +5,13 @@ import nightgames.characters.Character;
 import nightgames.global.Global;
 
 public class FacePart extends GenericBodyPart {
+
+    public static final String TYPE = "face";
     private double femininity;
 
     /* femininity goes from [-5, 5] */
     public FacePart(double hotness, double femininity) {
-        super("", hotness, 0, 0, true, "face", "a ");
+        super("", hotness, 0, 0, true, TYPE, "a ");
         this.femininity = femininity;
     }
 

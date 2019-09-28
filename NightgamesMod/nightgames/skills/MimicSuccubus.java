@@ -4,10 +4,14 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Reyka;
 import nightgames.characters.Trait;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.CockMod;
+import nightgames.characters.body.CockPart;
 import nightgames.characters.body.EarPart;
+import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.DemonicMod;
@@ -59,9 +63,9 @@ public class MimicSuccubus extends Skill {
                 getSelf().addTemporaryTrait(Trait.soulsucker, 999);
                 getSelf().addTemporaryTrait(Trait.gluttony, 999);
                 getSelf().body.temporaryAddPartMod("ass", DemonicMod.INSTANCE, 999);
-                getSelf().body.temporaryAddPartMod("hands", DemonicMod.INSTANCE, 999);
-                getSelf().body.temporaryAddPartMod("feet", DemonicMod.INSTANCE, 999);
-                getSelf().body.temporaryAddPartMod("mouth", DemonicMod.INSTANCE, 999);
+                getSelf().body.temporaryAddPartMod(Body.HANDS, DemonicMod.INSTANCE, 999);
+                getSelf().body.temporaryAddPartMod(Body.FEET, DemonicMod.INSTANCE, 999);
+                getSelf().body.temporaryAddPartMod(MouthPart.TYPE, DemonicMod.INSTANCE, 999);
         getSelf().addTemporaryTrait(Trait.succubus, 999);
         getSelf().addTemporaryTrait(Trait.soulsucker, 999);
         getSelf().addTemporaryTrait(Trait.energydrain, 999);
@@ -80,8 +84,8 @@ public class MimicSuccubus extends Skill {
         }
         getSelf().add(c, new Abuff(getSelf(), Attribute.Dark, strength, 999));
         getSelf().add(c, new SlimeMimicry("succubus", getSelf(), 999));
-        getSelf().body.temporaryAddPartMod("pussy", DemonicMod.INSTANCE, 999);
-        getSelf().body.temporaryAddPartMod("cock", CockMod.incubus, 999);
+        getSelf().body.temporaryAddPartMod(PussyPart.TYPE, DemonicMod.INSTANCE, 999);
+        getSelf().body.temporaryAddPartMod(CockPart.TYPE, CockMod.incubus, 999);
 
         return true;
     }

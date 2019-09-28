@@ -2,7 +2,9 @@ package nightgames.characters.body.mods;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
 import nightgames.characters.body.GenericBodyPart;
+import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.status.CockBound;
 import nightgames.status.Stsflag;
@@ -40,7 +42,7 @@ public class ExtendedTonguedMod extends PartMod {
 
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) { 
         if (c.getStance().isPartFuckingPartInserted(c, opponent, target, self, part) && part.isType("pussy")) {
-            if (target.isType("cock") && !opponent.hasStatus(Stsflag.cockbound)) {
+            if (target.isType(CockPart.TYPE) && !opponent.hasStatus(Stsflag.cockbound)) {
                 JtwigModel model = JtwigModel.newModel()
                     .with("self", self)
                     .with("opponent", opponent)
@@ -63,7 +65,7 @@ public class ExtendedTonguedMod extends PartMod {
 
     @Override
     public String describeAdjective(String partType) {
-        if (partType.equals("mouth")) {
+        if (partType.equals(MouthPart.TYPE)) {
             return "extra length on its tongue";
         }
         return "tongue";

@@ -1,6 +1,7 @@
 package nightgames.skills.petskills;
 
 import nightgames.characters.Character;
+import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.nskills.tags.SkillTag;
@@ -43,7 +44,7 @@ public class ImpTease extends SimpleEnemySkill {
                                 + "{self:possessive} longer than average tongue until {other:pronoun-action:pull|pulls} {self:direct-object} off.",
                                 getSelf(), target));
                 m += 5;
-                target.body.pleasure(getSelf(), getSelf().body.getRandom("mouth"), target.body.getRandomBreasts(), m, c);
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandomBreasts(), m, c);
                 return true;
             }
         }

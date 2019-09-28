@@ -5,6 +5,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -69,7 +70,7 @@ public class Frottage extends Skill {
         }
         target.body.pleasure(getSelf(), dealer, receiver, m, c, this);
         if (Global.random(100) < 20 + 2 * getSelf().get(Attribute.Fetish)) {
-            target.add(c, new BodyFetish(target, getSelf(), "cock", .25));
+            target.add(c, new BodyFetish(target, getSelf(), CockPart.TYPE, .25));
         }
         getSelf().emote(Emotion.horny, 15);
         target.emote(Emotion.horny, 15);

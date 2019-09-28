@@ -6,7 +6,12 @@ import java.util.List;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.TentaclePart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -25,7 +30,7 @@ public class LeechEnergy extends Skill {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return getSelf().canRespond() && getSelf().body.has("tentacles");
+        return getSelf().canRespond() && getSelf().body.has(TentaclePart.TYPE);
     }
 
     @Override
@@ -37,9 +42,9 @@ public class LeechEnergy extends Skill {
     public boolean resolve(Combat c, Character target) {
         if (target.roll(getSelf(), c, accuracy(c, target))) {
             BodyPart part = null;
-            BodyPart selfPart = getSelf().body.getRandom("tentacles");
+            BodyPart selfPart = getSelf().body.getRandom(TentaclePart.TYPE);
             List<String> targets = new ArrayList<String>(
-                            Arrays.asList("hands", "feet", "skin", "mouth", "cock", "pussy", "balls"));
+                            Arrays.asList(Body.HANDS, Body.FEET, Body.SKIN, MouthPart.TYPE, CockPart.TYPE, PussyPart.TYPE, "balls"));
             while (!targets.isEmpty()) {
                 String type = targets.remove(Global.random(targets.size()));
                 part = target.body.getRandom(type);
@@ -54,7 +59,7 @@ public class LeechEnergy extends Skill {
             }
             String partString = selfPart.describe(getSelf());
             String partStringSingular = partString.substring(0, partString.length() - 1);
-            if (part.isType("hands")) {
+            if (part.isType(Body.HANDS)) {
                 c.write(getSelf(),
                                 Global.format("{self:name-possessive} numerous " + selfPart.describe(getSelf())
                                                 + " latch onto {other:name-possessive} hands and swallow up {other:possessive} fingers. While the "
@@ -62,7 +67,7 @@ public class LeechEnergy extends Skill {
                                                 + " are lasciviously licking {other:possessive} digits, "
                                                 + "{other:subject-action:start|starts} feeling weak as {other:possessive} energy is being drained.",
                                 getSelf(), target));
-            } else if (part.isType("feet")) {
+            } else if (part.isType(Body.FEET)) {
                 c.write(getSelf(),
                                 Global.format("{self:name-possessive} numerous " + selfPart.describe(getSelf())
                                                 + " latch onto {other:name-possessive} legs and swallow up {other:possessive} feet. While the numerous bumps and ridges inside the "
@@ -70,21 +75,21 @@ public class LeechEnergy extends Skill {
                                                 + " are squeezing and pulling on {other:possessive} ankles, "
                                                 + "{other:subject-action:start|starts} feeling weak as {other:possessive} energy is being drained through your toes.",
                                 getSelf(), target));
-            } else if (part.isType("skin")) {
+            } else if (part.isType(Body.SKIN)) {
                 c.write(getSelf(),
                                 Global.format("{self:name-possessive} numerous " + selfPart.describe(getSelf())
                                                 + " latch onto {other:name-possessive} body and coils around {other:possessive} waist. The numerous tips on the "
                                                 + selfPart.describe(getSelf())
                                                 + " feel like tiny mouths nibbling on your skin as they suck the energy from {other:possessive} body.",
                                 getSelf(), target));
-            } else if (part.isType("mouth")) {
+            } else if (part.isType(MouthPart.TYPE)) {
                 c.write(getSelf(),
                                 Global.format("A thick " + partStringSingular
                                                 + " latches onto {other:name-possessive} mouth and violates {other:possessive} oral cavity. {other:NAME-POSSESSIVE} mouth feels as if the "
                                                 + partStringSingular
                                                 + " is deep kissing {other:direct-object} as {other:possessive} energy flows through the connection.",
                                 getSelf(), target));
-            } else if (part.isType("cock")) {
+            } else if (part.isType(CockPart.TYPE)) {
                 c.write(getSelf(),
                                 Global.format("A particularly thick " + partStringSingular
                                                 + " latches onto {other:name-possessive} cock and swallows it whole. {other:SUBJECT-ACTION:gasp|gasps} in pleasure as the "
@@ -98,7 +103,7 @@ public class LeechEnergy extends Skill {
                                                 + partStringSingular
                                                 + "-mouth sucks and chews on {other:possessive} balls relentlessly, sucking out what little fight {other:subject-action:have|has}.",
                                 getSelf(), target));
-            } else if (part.isType("pussy")) {
+            } else if (part.isType(PussyPart.TYPE)) {
                 c.write(getSelf(),
                                 Global.format("A particularly thick " + partStringSingular
                                                 + " latches onto {other:name-possessive} pussy and plunges inside. {other:SUBJECT-ACTION:gasp|gasps} in pleasure as the "
@@ -154,7 +159,7 @@ public class LeechEnergy extends Skill {
     @Override
     public String deal(Combat c, int damage, Result modifier, Character target) {
         if (modifier == Result.miss) {
-            BodyPart selfPart = getSelf().body.getRandom("tentacles");
+            BodyPart selfPart = getSelf().body.getRandom(TentaclePart.TYPE);
             return "You try to drain energy with your " + selfPart.describe(getSelf()) + ", but " + target.getName()
                             + " dodges out of the way.";
         }
@@ -163,7 +168,7 @@ public class LeechEnergy extends Skill {
 
     @Override
     public String receive(Combat c, int damage, Result modifier, Character target) {
-        BodyPart selfPart = getSelf().body.getRandom("tentacles");
+        BodyPart selfPart = getSelf().body.getRandom(TentaclePart.TYPE);
 
         if (modifier == Result.miss) {
             return String.format("%s tries to drain energy with %s %s, but %s out of the way.",

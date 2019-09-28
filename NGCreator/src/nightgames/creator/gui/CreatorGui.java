@@ -675,11 +675,11 @@ public class CreatorGui extends Application {
 		pussy.getSelectionModel().select(ch.hasPussy() ? ch.body.getRandomPussy() : null);
 		ears.getSelectionModel().select((EarPart) ch.body.getRandom("ears"));
 
-		BodyPart mouthPart = ch.body.getRandom("mouth");
+		BodyPart mouthPart = ch.body.getRandom(MouthPart.TYPE);
 		MouthType type = mouthPart instanceof MouthPart ? MouthType.normal : MouthType.mouth_pussy;
 		mouth.getSelectionModel().select(type);
 
-		tail.getSelectionModel().select((TailPart) ch.body.getRandom("tail"));
+		tail.getSelectionModel().select((TailPart) ch.body.getRandom(TailPart.TYPE));
 		wings.getSelectionModel().select(ch.body.getRandomWings());
 		hotness.setText(Math.round(ch.body.getHotness(ch)) + "");
 

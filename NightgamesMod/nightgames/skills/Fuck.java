@@ -3,7 +3,10 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.mods.SlimyCockMod;
 import nightgames.combat.Combat;
@@ -46,22 +49,22 @@ public class Fuck extends Skill {
         boolean stancePossible = false;
         if (ready) {
             stancePossible = true;
-            if (selfO.isType("cock")) {
+            if (selfO.isType(CockPart.TYPE)) {
                 stancePossible &= !c.getStance().inserted(getSelf());
             }
-            if (selfO.isType("pussy")) {
+            if (selfO.isType(PussyPart.TYPE)) {
                 stancePossible &= !c.getStance().vaginallyPenetrated(c, getSelf());
             }
-            if (selfO.isType("ass")) {
+            if (selfO.isType(AssPart.TYPE)) {
                 stancePossible &= !c.getStance().anallyPenetrated(c, getSelf());
             }
-            if (targetO.isType("cock")) {
+            if (targetO.isType(CockPart.TYPE)) {
                 stancePossible &= !c.getStance().inserted(target);
             }
-            if (targetO.isType("pussy")) {
+            if (targetO.isType(PussyPart.TYPE)) {
                 stancePossible &= !c.getStance().vaginallyPenetrated(c, target);
             }
-            if (targetO.isType("ass")) {
+            if (targetO.isType(AssPart.TYPE)) {
                 stancePossible &= !c.getStance().anallyPenetrated(c, target);
             }
         }
@@ -103,10 +106,10 @@ public class Fuck extends Skill {
             bottomMessage = "";
         }
 
-        if (!bottomMessage.isEmpty() && getSelfOrgan().isType("cock")) {
+        if (!bottomMessage.isEmpty() && getSelfOrgan().isType(CockPart.TYPE)) {
             premessage = String.format("{self:SUBJECT-ACTION:pull|pulls} down {self:possessive} %s halfway and ",
                             bottomMessage);
-        } else if (!bottomMessage.isEmpty() && getSelfOrgan().isType("pussy")) {
+        } else if (!bottomMessage.isEmpty() && getSelfOrgan().isType(PussyPart.TYPE)) {
             premessage = String.format("{self:SUBJECT-ACTION:pull|pulls} {self:possessive} %s to the side and ",
                             bottomMessage);
         }
@@ -135,7 +138,7 @@ public class Fuck extends Skill {
         BodyPart selfO = getSelfOrgan();
         BodyPart targetO = getTargetOrgan(target);
         if (selfO.isReady(getSelf()) && targetO.isReady(target)) {
-            if (targetO.isType("pussy") && target.has(Trait.temptingass) && new AssFuck(getSelf()).usable(c, target)
+            if (targetO.isType(PussyPart.TYPE) && target.has(Trait.temptingass) && new AssFuck(getSelf()).usable(c, target)
                 && Global.random(3) == 1) {
                 
                 c.write(getSelf(), Global.format("%s{self:subject-action:line|lines}"
@@ -153,7 +156,7 @@ public class Fuck extends Skill {
             } else if (c.shouldPrintReceive(target, c)) {
                 c.write(getSelf(), premessage + receive(c, premessage.length(), Result.normal, target));
             }
-            if (selfO.isType("pussy")) {
+            if (selfO.isType(PussyPart.TYPE)) {
                 c.setStance(c.getStance().insert(c, target, getSelf()), getSelf(), getSelf().canMakeOwnDecision());
             } else {
                 c.setStance(c.getStance().insert(c, getSelf(), getSelf()), getSelf(), getSelf().canMakeOwnDecision());

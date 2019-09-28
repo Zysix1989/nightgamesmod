@@ -6,6 +6,8 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -183,7 +185,8 @@ public class PullOut extends Skill {
                                 target.body.getRandomPussy().describe(target),
                                 s.binding, getSelf().possessiveAdjective()));
                 int m = 8;
-                getSelf().body.pleasure(target, target.body.getRandom("pussy"), getSelf().body.getRandom("cock"), m, c, this);
+                getSelf().body.pleasure(target, target.body.getRandom(PussyPart.TYPE), getSelf().body.getRandom(
+                    CockPart.TYPE), m, c, this);
                 return false;
             } else 
                 writeOutput(c, result, target);

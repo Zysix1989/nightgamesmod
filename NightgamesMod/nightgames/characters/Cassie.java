@@ -12,6 +12,7 @@ import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.FacePart;
+import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.mods.ArcaneMod;
 import nightgames.characters.body.mods.ExtendedTonguedMod;
 import nightgames.characters.body.mods.RunicCockMod;
@@ -217,9 +218,9 @@ public class Cassie extends BasePersonality {
     private void useMouthFocus() {
         Global.flag(CASSIE_MOUTH_FOCUS);
         character.getGrowth().addTrait(11, Trait.experttongue);
-        character.getGrowth().addBodyPartMod(25, "mouth", ExtendedTonguedMod.INSTANCE);
+        character.getGrowth().addBodyPartMod(25, MouthPart.TYPE, ExtendedTonguedMod.INSTANCE);
         character.getGrowth().addTrait(38, Trait.tongueTraining3);
-        character.getGrowth().addBodyPartMod(57, "mouth", new ArcaneMod());
+        character.getGrowth().addBodyPartMod(57, MouthPart.TYPE, new ArcaneMod());
     }
     private void useEnchantressBonus() {
         Global.flag(CASSIE_ENCHANTRESS_FOCUS);

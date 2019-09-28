@@ -5,6 +5,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockMod;
+import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.mods.BlessedCockMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -31,7 +32,7 @@ public class SuccubusSurprise extends Skill {
     public boolean usable(Combat c, Character target) {
         return getSelf().canRespond() && !getSelf().has(Trait.succubus) && getSelf().has(Item.SuccubusDraft)
                         && c.getStance().inserted(target) && !c.getStance().anallyPenetrated(c)
-                        && !BodyPart.hasOnlyType(c.getStance().topParts(c), "strapon") && c.getStance().sub(getSelf())
+                        && !BodyPart.hasOnlyType(c.getStance().topParts(c), StraponPart.TYPE) && c.getStance().sub(getSelf())
                         && getSelf().canSpend(getMojoCost(c)) && !target.is(Stsflag.armlocked)
                         && !target.is(Stsflag.leglocked);
     }

@@ -2,6 +2,7 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.Body;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -23,7 +24,7 @@ public class FootSmother extends Skill {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return getSelf().footAvailable() && getSelf().body.has("feet") && c.getStance().mobile(getSelf())
+        return getSelf().footAvailable() && getSelf().body.has(Body.FEET) && c.getStance().mobile(getSelf())
                         && c.getStance().dom(getSelf()) && getSelf().canAct() && c.getStance().prone(target)
                         && !c.getStance().behind(getSelf()) && getSelf().outfit.hasNoShoes();
     }
@@ -43,9 +44,9 @@ public class FootSmother extends Skill {
         } else {
             c.write(getSelf(), Global.format(receive(c, 0, Result.normal, target), getSelf(), target));
         }
-        target.temptWithSkill(c, getSelf(), getSelf().body.getRandom("feet"), m, this);
+        target.temptWithSkill(c, getSelf(), getSelf().body.getRandom(Body.FEET), m, this);
         if (Global.random(100) < 30 + 2 * getSelf().get(Attribute.Fetish)) {
-            target.add(c, new BodyFetish(target, getSelf(), "feet", .25));
+            target.add(c, new BodyFetish(target, getSelf(), Body.FEET, .25));
         }
         return result != Result.miss;
     }

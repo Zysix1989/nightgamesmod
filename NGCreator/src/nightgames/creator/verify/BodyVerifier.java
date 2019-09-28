@@ -17,7 +17,7 @@ public class BodyVerifier implements VerifierModule {
 		Body body = Body.load(bodyObj, null);
 		checkSensibleNumber(bodyObj.get("hotness"), 1, 4, "hotness", list);
 		
-		if (!body.has("cock") && !body.has("pussy")) {
+		if (!body.has(CockPart.TYPE) && !body.has(PussyPart.TYPE)) {
 			list.add(note("No genitals were found; this tends not to play very well."));
 		}
 		

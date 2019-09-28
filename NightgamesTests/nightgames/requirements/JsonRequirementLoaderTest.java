@@ -37,7 +37,7 @@ public class JsonRequirementLoaderTest {
     @Test public void loadGoodRequirements() throws Exception {
         List<Requirement> requirements = new JsonRequirementLoader().loadRequirements(reqsJson.getAsJsonObject("good"));
         assertThat(requirements, hasItem(anal()));
-        assertThat(requirements, hasItem(and(bodypart("hands"), not(or(rev(prone()), orgasms(12))),
+        assertThat(requirements, hasItem(and(bodypart(Body.HANDS), not(or(rev(prone()), orgasms(12))),
                         attribute(Attribute.Power, 3))));
         assertThat(requirements, hasItem(attribute(Attribute.Seduction, 50)));
         assertThat(requirements, hasItem(bodypart("tail")));

@@ -2,6 +2,8 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.Body;
+import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -43,7 +45,7 @@ public class SuckNeck extends Skill {
                     writeOutput(c, Result.critical, target);
                     m *= 1.25;
                     target.drain(c, getSelf(), (int) getSelf().modifyDamage(DamageType.drain, target, m));
-                    target.body.pleasure(getSelf(), getSelf().body.getRandom("mouth"), 
+                    target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE),
                                     c.getStance().bottomParts().get(0), m, c);
                     return true;
                 } else {
@@ -54,7 +56,8 @@ public class SuckNeck extends Skill {
                 writeOutput(c, Result.normal, target);
             }
             int m = 1 + Global.random(8);
-            target.body.pleasure(getSelf(), getSelf().body.getRandom("mouth"), target.body.getRandom("skin"), m, c, this);
+            target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandom(
+                Body.SKIN), m, c, this);
         } else {
             writeOutput(c, Result.miss, target);
             return false;

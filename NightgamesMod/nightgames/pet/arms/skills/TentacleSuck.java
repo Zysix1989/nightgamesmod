@@ -3,6 +3,7 @@ package nightgames.pet.arms.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.pet.PetCharacter;
@@ -33,7 +34,7 @@ public class TentacleSuck extends TentacleArmSkill {
                             + "{other:SUBJECT-ACTION:try} pulling it off {other:reflective} with {other:possessive} hands but the vacuum-tight "
                             + "suction make it feel like {other:pronoun-action:are} giving {other:reflective} a tug-job.", owner, target, arm.getName()));
             target.body.pleasure(owner, tentaclePart, target.body.getRandomPussy(), strength, c);
-            target.add(c, new PartSucked(target, owner, tentaclePart, "cock"));
+            target.add(c, new PartSucked(target, owner, tentaclePart, CockPart.TYPE));
             return true;
         } else {
             c.write(PetCharacter.DUMMY, Global.format("A %s flies towards {other:name-possessive} crotch, "

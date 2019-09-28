@@ -4,7 +4,12 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.TentaclePart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -27,7 +32,8 @@ public class TentacleRape extends Skill {
     @Override
     public boolean usable(Combat c, Character target) {
         return !target.wary() && !c.getStance().sub(getSelf()) && !c.getStance().prone(getSelf())
-                        && !c.getStance().prone(target) && getSelf().canAct() && getSelf().body.has("tentacles");
+                        && !c.getStance().prone(target) && getSelf().canAct() && getSelf().body.has(
+            TentaclePart.TYPE);
     }
 
     @Override
@@ -49,22 +55,23 @@ public class TentacleRape extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        tentacles = getSelf().body.getRandom("tentacles");
+        tentacles = getSelf().body.getRandom(TentaclePart.TYPE);
         if (target.roll(getSelf(), c, accuracy(c, target))) {
             if (target.mostlyNude()) {
                 int m = 2 + Global.random(4);
                 if (target.bound()) {
                     writeOutput(c, Result.special, target);
                     if (target.hasDick()) {
-                        target.body.pleasure(getSelf(), tentacles, target.body.getRandom("cock"), m, c, this);
+                        target.body.pleasure(getSelf(), tentacles, target.body.getRandom(CockPart.TYPE), m, c, this);
                         m = 2 + Global.random(4);
                     }
                     if (target.hasPussy()) {
-                        target.body.pleasure(getSelf(), tentacles, target.body.getRandom("pussy"), m, c, this);
+                        target.body.pleasure(getSelf(), tentacles, target.body.getRandom(PussyPart.TYPE), m, c, this);
                         m = 2 + Global.random(4);
                     }
                     if (target.hasBreasts()) {
-                        target.body.pleasure(getSelf(), tentacles, target.body.getRandom("breasts"), m, c, this);
+                        target.body.pleasure(getSelf(), tentacles, target.body.getRandom(
+                            BreastsPart.TYPE), m, c, this);
                         m = 2 + Global.random(4);
                     }
                     if (target.body.has("ass")) {
@@ -73,7 +80,7 @@ public class TentacleRape extends Skill {
                     }
                 } else {
                     writeOutput(c, Result.normal, target);
-                    target.body.pleasure(getSelf(), tentacles, target.body.getRandom("skin"), m, c, this);
+                    target.body.pleasure(getSelf(), tentacles, target.body.getRandom(Body.SKIN), m, c, this);
                 }
                 if (!target.is(Stsflag.oiled)) {
                     target.add(c, new Oiled(target));
@@ -82,7 +89,7 @@ public class TentacleRape extends Skill {
             } else {
                 writeOutput(c, Result.weak, target);
             }
-            target.add(c, new Bound(target, 30 + 2 * Math.sqrt(getSelf().get(Attribute.Fetish) + getSelf().get(Attribute.Slime)), "tentacles"));
+            target.add(c, new Bound(target, 30 + 2 * Math.sqrt(getSelf().get(Attribute.Fetish) + getSelf().get(Attribute.Slime)), TentaclePart.TYPE));
         } else {
             writeOutput(c, Result.miss, target);
             return false;

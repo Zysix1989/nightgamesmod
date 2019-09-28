@@ -3,6 +3,8 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.FeralMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -31,7 +33,7 @@ public class FaceSit extends Skill {
     @Override
     public float priorityMod(Combat c) {
         return getSelf().has(Trait.lacedjuices) || getSelf().has(Trait.addictivefluids)
-                        || (getSelf().body.has("pussy") && getSelf().body.
+                        || (getSelf().body.has(PussyPart.TYPE) && getSelf().body.
                                         getRandomPussy().moddedPartCountsAs(FeralMod.TYPE)) ? 2.5f : 0;
     }
 
@@ -62,12 +64,13 @@ public class FaceSit extends Skill {
             m = m * 3 / 2;
         }
         if (getSelf().hasBalls()) {
-            getSelf().body.pleasure(target, target.body.getRandom("mouth"), getSelf().body.getRandom("balls"), m, c, this);
+            getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandom("balls"), m, c, this);
         } else {
-            getSelf().body.pleasure(target, target.body.getRandom("mouth"), getSelf().body.getRandom("pussy"), m, c, this);
+            getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandom(
+                PussyPart.TYPE), m, c, this);
             
             if (Global.random(100) < 1 + getSelf().get(Attribute.Fetish) / 2) {
-                target.add(c, new BodyFetish(target, getSelf(), "pussy", .05));
+                target.add(c, new BodyFetish(target, getSelf(), PussyPart.TYPE, .05));
             }
         }
         double n = 4 + Global.random(4) + getSelf().body.getHotness(target);
@@ -76,7 +79,7 @@ public class FaceSit extends Skill {
         }
 
         target.temptWithSkill(c, getSelf(), getSelf().body.getRandom("ass"), (int) Math.round(n / 2), this);
-        target.temptWithSkill(c, getSelf(), getSelf().body.getRandom("pussy"), (int) Math.round(n / 2), this);
+        target.temptWithSkill(c, getSelf(), getSelf().body.getRandom(PussyPart.TYPE), (int) Math.round(n / 2), this);
 
         target.loseWillpower(c, 5);
         target.add(c, new Shamed(target));

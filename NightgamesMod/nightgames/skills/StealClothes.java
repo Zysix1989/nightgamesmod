@@ -2,6 +2,7 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.StraponPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.items.clothing.Clothing;
@@ -35,7 +36,7 @@ public class StealClothes extends Skill {
         // Allow crossdressing for now, except for strapons and bras.
         // This may change.
         if ((getSelf().hasDick() && c.getID()
-                                     .equals("strapon"))
+                                     .equals(StraponPart.TYPE))
                         || (!getSelf().hasBreasts() && c.getSlots()
                                                         .contains(ClothingSlot.top)
                                         && c.getLayer() == 0))

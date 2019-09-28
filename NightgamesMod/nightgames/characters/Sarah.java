@@ -7,6 +7,7 @@ import nightgames.actions.IMovement;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.FacePart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.FieryMod;
 import nightgames.characters.custom.CharacterLine;
@@ -68,7 +69,7 @@ public class Sarah extends BasePersonality {
         character.getGrowth().addTrait(15, Trait.sadist);
         character.getGrowth().addTrait(20, Trait.disablingblows);
         character.getGrowth().addTrait(25, Trait.nimbletoes);
-        character.getGrowth().addBodyPartMod(30, "pussy", FieryMod.INSTANCE);
+        character.getGrowth().addBodyPartMod(30, PussyPart.TYPE, FieryMod.INSTANCE);
         character.getGrowth().addBodyPart(30, WingsPart.angelic);
         character.getGrowth().addTrait(30, Trait.valkyrie);
         character.getGrowth().addTrait(35, Trait.overwhelmingPresence);

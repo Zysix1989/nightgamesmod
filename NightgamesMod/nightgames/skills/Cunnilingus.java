@@ -3,6 +3,8 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -25,7 +27,8 @@ public class Cunnilingus extends Skill {
         boolean canUse = c.getStance().isBeingFaceSatBy(c, getSelf(), target) && getSelf().canRespond()
                         || getSelf().canAct();
         boolean pussyAvailable = target.crotchAvailable() && target.hasPussy();
-        boolean stanceAvailable = c.getStance().oral(getSelf(), target) && (!c.getStance().vaginallyPenetrated(c, target) || c.getStance().getPartsFor(c, getSelf(), target).contains(getSelf().body.getRandom("mouth")));
+        boolean stanceAvailable = c.getStance().oral(getSelf(), target) && (!c.getStance().vaginallyPenetrated(c, target) || c.getStance().getPartsFor(c, getSelf(), target).contains(getSelf().body.getRandom(
+            MouthPart.TYPE)));
         boolean usable = pussyAvailable && stanceAvailable && canUse;
         return usable;
     }
@@ -77,7 +80,8 @@ public class Cunnilingus extends Skill {
             if (ReverseMount.class.isInstance(c.getStance())) {
                 c.setStance(new SixNine(getSelf(), target), getSelf(), true);
             }
-            target.body.pleasure(getSelf(), getSelf().body.getRandom("mouth"), target.body.getRandom("pussy"), m, c, this);
+            target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandom(
+                PussyPart.TYPE), m, c, this);
         }
         return results != Result.miss;
     }

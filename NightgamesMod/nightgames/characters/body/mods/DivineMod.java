@@ -2,8 +2,11 @@ package nightgames.characters.body.mods;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
 import nightgames.characters.body.GenericBodyPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.skills.Tactics;
@@ -23,10 +26,10 @@ public class DivineMod extends PartMod {
     }
 
     public String adjective(GenericBodyPart part) {
-        if (part.getType().equals("pussy")) {
+        if (part.getType().equals(PussyPart.TYPE)) {
             return "divine";
         }
-        if (part.getType().equals("ass")) {
+        if (part.getType().equals(AssPart.TYPE)) {
             return "sacred";
         }
         return "holy";
@@ -68,7 +71,8 @@ public class DivineMod extends PartMod {
     public void receiveCum(Combat c, Character self, BodyPart part, Character opponent, BodyPart target) {
         if (self.has(Trait.zealinspiring) && Global.random(4) > -10) {
             
-            if (c.getStance().partsForStanceOnly(c, self, opponent).contains(part) && c.getStance().partsForStanceOnly(c, opponent, self).stream().anyMatch(otherPart -> otherPart.isType("cock"))) {
+            if (c.getStance().partsForStanceOnly(c, self, opponent).contains(part) && c.getStance().partsForStanceOnly(c, opponent, self).stream().anyMatch(otherPart -> otherPart.isType(
+                CockPart.TYPE))) {
                 JtwigModel model = JtwigModel.newModel()
                     .with("self", self)
                     .with("opponent", opponent)

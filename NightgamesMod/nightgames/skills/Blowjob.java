@@ -4,6 +4,9 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.ExtendedTonguedMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -82,15 +85,16 @@ public class Blowjob extends Skill {
         if (isVaginal(c, target)) {
             arousalToTarget += 4;
             writeOutput(c, arousalToTarget, Result.intercourse, target);
-            target.body.pleasure(getSelf(), getSelf().body.getRandom("pussy"), target.body.getRandom("cock"), arousalToTarget, c, this);
+            target.body.pleasure(getSelf(), getSelf().body.getRandom(PussyPart.TYPE), target.body.getRandom(
+                CockPart.TYPE), arousalToTarget, c, this);
         } else if (facesitting) {
             writeOutput(c, arousalToTarget, Result.reverse, target);
-            target.body.pleasure(getSelf(), getSelf().body.getRandom("mouth"), target.body.getRandom("cock"), arousalToTarget, c, this);
+            target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandom(CockPart.TYPE), arousalToTarget, c, this);
             target.buildMojo(c, 10);
         } else if (target.roll(getSelf(), c, accuracy(c, target))) {
             writeOutput(c, arousalToTarget, getSelf().has(Trait.silvertongue) ? Result.special : Result.normal, target);
-            BodyPart mouth = getSelf().body.getRandom("mouth");
-            BodyPart cock = target.body.getRandom("cock");
+            BodyPart mouth = getSelf().body.getRandom(MouthPart.TYPE);
+            BodyPart cock = target.body.getRandom(CockPart.TYPE);
             target.body.pleasure(getSelf(), mouth, cock, arousalToTarget, c, this);
             if (mouth.isErogenous()) {
                 getSelf().body.pleasure(target, cock, mouth, arousalToTarget, c, this);
@@ -156,7 +160,7 @@ public class Blowjob extends Skill {
                             + "'s rigid cock, but as you lick and suck on it, you discover the taste is quite palatable. Besides, "
                             + "making " + target.getName() + " squirm and moan in pleasure is well worth it.";
         }
-        if (modifier != Result.miss && getSelf().body.getRandom("mouth").isErogenous()) {
+        if (modifier != Result.miss && getSelf().body.getRandom(MouthPart.TYPE).isErogenous()) {
             m += "<br/>Unfortunately for you, your sensitive modified mouth pussy sends spasms of pleasure into you too as you mouth fuck "
                             + target.possessiveAdjective() + " cock.";
         }
@@ -216,7 +220,7 @@ public class Blowjob extends Skill {
             }
         }
 
-        if (modifier != Result.miss && getSelf().body.getRandom("mouth").isErogenous()) {
+        if (modifier != Result.miss && getSelf().body.getRandom(MouthPart.TYPE).isErogenous()) {
             m += String.format("<br/>Unfortunately for %s, as %s mouth fucks %s cock %s sensitive"
                             + " modifier mouth pussy sends spasms of pleasure into %s as well.", 
                             getSelf().objectPronoun(), getSelf().subject(), target.nameOrPossessivePronoun(),

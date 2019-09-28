@@ -39,19 +39,19 @@ public class PlayerTest {
             new ArrayList<>(),
                         selectedAttributes);
 
-        assertTrue("Male player has no cock!", playerMale.body.has("cock"));
+        assertTrue("Male player has no cock!", playerMale.body.has(CockPart.TYPE));
         assertTrue("Male player has no balls!", playerMale.body.has("balls"));
-        assertFalse("Male player has a pussy!", playerMale.body.has("pussy"));
+        assertFalse("Male player has a pussy!", playerMale.body.has(PussyPart.TYPE));
 
-        assertFalse("Female player has a cock!", playerFemale.body.has("cock"));
+        assertFalse("Female player has a cock!", playerFemale.body.has(CockPart.TYPE));
         assertFalse("Female player has balls!", playerFemale.body.has("balls"));
-        assertTrue("Female player has no pussy!", playerFemale.body.has("pussy"));
+        assertTrue("Female player has no pussy!", playerFemale.body.has(PussyPart.TYPE));
 
-        assertTrue("Herm player has no cock!", playerHerm.body.has("cock"));
+        assertTrue("Herm player has no cock!", playerHerm.body.has(CockPart.TYPE));
         assertFalse("Herm player has balls!", playerHerm.body.has("balls"));
         assertTrue("Herm player has no pussy!", playerHerm.body.has("pussy"));
 
-        assertFalse("Asexual player has a cock!", playerAsexual.body.has("cock"));
+        assertFalse("Asexual player has a cock!", playerAsexual.body.has(CockPart.TYPE));
         assertFalse("Asexual player has balls!", playerAsexual.body.has("balls"));
         assertFalse("Asexual player has a pussy!", playerAsexual.body.has("pussy"));
     }

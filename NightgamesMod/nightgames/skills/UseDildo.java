@@ -1,6 +1,7 @@
 package nightgames.skills;
 
 import nightgames.characters.Character;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -55,7 +56,7 @@ public class UseDildo extends Skill {
             }
 
             m = (int)getSelf().modifyDamage(DamageType.gadgets, target, m);
-            target.body.pleasure(getSelf(), null, target.body.getRandom("pussy"), m, c, this);
+            target.body.pleasure(getSelf(), null, target.body.getRandom(PussyPart.TYPE), m, c, this);
         } else {
             writeOutput(c, Result.miss, target);
             return false;

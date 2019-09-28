@@ -10,8 +10,13 @@ import java.util.stream.Stream;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.StraponPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.quest.ButtslutQuest;
@@ -112,7 +117,8 @@ public abstract class Position implements Cloneable {
         if (self == null || self.body.getRandomCock() == null) {
             return false;
         }
-        return inserted(self) || self.getInsertedStatus().stream().anyMatch(status -> status.getPitcher().equals(self) && status.getStickPart() != null && status.getStickPart().isType("cock"));
+        return inserted(self) || self.getInsertedStatus().stream().anyMatch(status -> status.getPitcher().equals(self) && status.getStickPart() != null && status.getStickPart().isType(
+            CockPart.TYPE));
     }
 
     public abstract String image();
@@ -205,7 +211,7 @@ public abstract class Position implements Cloneable {
             return false;
         }
         List<BodyPart> parts = partsForStanceOnly(combat, self, getPartner(combat, self));
-        return BodyPart.hasType(parts, "ass") || self.getInsertedStatus().stream().anyMatch(status -> status.getReceiver().equals(self) && status.getHolePart() != null && status.getHolePart().isType("ass"));
+        return BodyPart.hasType(parts, AssPart.TYPE) || self.getInsertedStatus().stream().anyMatch(status -> status.getReceiver().equals(self) && status.getHolePart() != null && status.getHolePart().isType(AssPart.TYPE));
     }
 
     public Position insertRandomDom(Combat c, Character target) {
@@ -246,7 +252,8 @@ public abstract class Position implements Cloneable {
     }
 
     public BodyPart insertedPartFor(Combat combat, Character c) {
-        return partsForStanceOnly(combat, c, combat.getOpponent(c)).stream().filter(part -> part.isType("cock") || part.isType("strapon")).findAny()
+        return partsForStanceOnly(combat, c, combat.getOpponent(c)).stream().filter(part -> part.isType(CockPart.TYPE) || part.isType(
+            StraponPart.TYPE)).findAny()
                         .orElse(Body.nonePart);
     }
 
@@ -260,11 +267,12 @@ public abstract class Position implements Cloneable {
     }
 
     public BodyPart pussyPartFor(Combat combat, Character self, Character other) {
-        return partsForStanceOnly(combat, self, other).stream().filter(part -> part.isType("pussy")).findAny().orElse(Body.nonePart);
+        return partsForStanceOnly(combat, self, other).stream().filter(part -> part.isType(
+            PussyPart.TYPE)).findAny().orElse(Body.nonePart);
     }
 
     public BodyPart assPartFor(Combat combat, Character self, Character other) {
-        return partsForStanceOnly(combat, self, other).stream().filter(part -> part.isType("ass")).findAny().orElse(Body.nonePart);
+        return partsForStanceOnly(combat, self, other).stream().filter(part -> part.isType(AssPart.TYPE)).findAny().orElse(Body.nonePart);
     }
 
     public List<BodyPart> getPartsFor(Combat combat, Character self, Character other) {
@@ -308,7 +316,7 @@ public abstract class Position implements Cloneable {
             return false;
         }
         List<BodyPart> parts = partsForStanceOnly(combat, self, getPartner(combat, self));
-        return (BodyPart.hasType(parts, "pussy") && inserted()) || self.getInsertedStatus().stream().anyMatch(status -> status.getReceiver().equals(self) && status.getHolePart() != null && status.getHolePart().isType("pussy"));
+        return (BodyPart.hasType(parts, PussyPart.TYPE) && inserted()) || self.getInsertedStatus().stream().anyMatch(status -> status.getReceiver().equals(self) && status.getHolePart() != null && status.getHolePart().isType(PussyPart.TYPE));
     }
 
     public boolean havingSexOtherNoStrapped(Combat c, Character self) {
@@ -342,7 +350,7 @@ public abstract class Position implements Cloneable {
         }
         List<BodyPart> parts = partsForStanceOnly(c, inserted, inserter);
         List<BodyPart> otherParts = partsForStanceOnly(c, inserter, inserted);
-        return BodyPart.hasType(parts, "pussy") && (BodyPart.hasType(otherParts, "cock") || BodyPart.hasType(otherParts, "strapon"));
+        return BodyPart.hasType(parts, PussyPart.TYPE) && (BodyPart.hasType(otherParts, CockPart.TYPE) || BodyPart.hasType(otherParts, StraponPart.TYPE));
     }
 
     public boolean anallyPenetratedBy(Combat c, Character self, Character other) {
@@ -351,8 +359,8 @@ public abstract class Position implements Cloneable {
         }
         List<BodyPart> parts = partsForStanceOnly(c, self, other);
         List<BodyPart> otherParts = partsForStanceOnly(c, other, other);
-        return (BodyPart.hasType(parts, "ass")
-                        && (BodyPart.hasType(otherParts, "cock") || BodyPart.hasType(otherParts, "strapon"))) && inserted();
+        return (BodyPart.hasType(parts, AssPart.TYPE)
+                        && (BodyPart.hasType(otherParts, CockPart.TYPE) || BodyPart.hasType(otherParts, StraponPart.TYPE))) && inserted();
     }
 
     public boolean connected(Combat c) {
@@ -451,15 +459,15 @@ public abstract class Position implements Cloneable {
         if (c == null || inserter == null || stick == null || inserted == null || hole == null) {
             return false;
         }
-        if (hole.isType("mouth") && stick.isType("cock")) {
+        if (hole.isType(MouthPart.TYPE) && stick.isType(CockPart.TYPE)) {
             // TODO fix me so this doesn't need to be true all the time.
             return true;
         }
         if (vaginallyPenetratedBy(c, inserted, inserter)) {
-            return hole.isType("pussy") && stick.isType("cock");
+            return hole.isType(PussyPart.TYPE) && stick.isType(CockPart.TYPE);
         }
         if (anallyPenetratedBy(c, inserted, inserter)) {
-            return hole.isType("ass") && stick.isType("cock");
+            return hole.isType(AssPart.TYPE) && stick.isType(CockPart.TYPE);
         }
         List<InsertedStatus> insertedStatus = Stream.concat(inserter.getInsertedStatus().stream(), inserted.getInsertedStatus().stream()).collect(Collectors.toList());
         return insertedStatus.stream().anyMatch(is -> hole.equals(is.getHolePart()) && inserted.equals(is.getReceiver()) && inserter.equals(is.getPitcher()) && stick.equals(is.getStickPart()));

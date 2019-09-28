@@ -6,9 +6,11 @@ import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.FieryMod;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -51,7 +53,7 @@ public class JewelTime extends BaseNPCTime {
         {
             TransformationOption growCock = new TransformationOption();
             growCock.ingredients.put(Item.PriapusDraft, 3);
-            growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement("cock"))), "Has no penis");
+            growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement(CockPart.TYPE))), "Has no penis");
             growCock.option = "Jewel: Grow a cock";
             growCock.scene = "[Placeholder]<br/>Jewel chugs down the three priapus drafts one after the other, making her clit grow into a large enlightened cock.";
             growCock.effect = (c, self, other) -> {
@@ -63,17 +65,17 @@ public class JewelTime extends BaseNPCTime {
         {
             TransformationOption removeCock = new TransformationOption();
             removeCock.ingredients.put(Item.FemDraft, 3);
-            removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement("cock")), "Has a penis");
+            removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement(CockPart.TYPE)), "Has a penis");
             removeCock.option = "Jewel: Remove her cock";
             removeCock.scene = "[Placeholder]<br/>Jewel drinks the three femdrafts one after another and her penis shrinks back into her normal clitoris.";
             removeCock.effect = (c, self, other) -> {
-                other.body.removeAll("cock");
+                other.body.removeAll(CockPart.TYPE);
                 return true;
             };
             transformationOptions.add(removeCock);
         }
         {
-            TransformationOption enlightenedCock = new ApplyPartModOption("cock", CockMod.enlightened);
+            TransformationOption enlightenedCock = new ApplyPartModOption(CockPart.TYPE, CockMod.enlightened);
             enlightenedCock.ingredients.put(Item.PriapusDraft, 10);
             enlightenedCock.ingredients.put(Item.EnergyDrink, 20);
             enlightenedCock.ingredients.put(Item.JuggernautJuice, 10);
@@ -82,7 +84,7 @@ public class JewelTime extends BaseNPCTime {
             transformationOptions.add(enlightenedCock);
         }
         {
-            TransformationOption fieryPussy = new ApplyPartModOption("pussy", FieryMod.INSTANCE);
+            TransformationOption fieryPussy = new ApplyPartModOption(PussyPart.TYPE, FieryMod.INSTANCE);
             fieryPussy.ingredients.put(Item.FemDraft, 10);
             fieryPussy.ingredients.put(Item.EnergyDrink, 20);
             fieryPussy.ingredients.put(Item.JuggernautJuice, 10);
@@ -91,7 +93,7 @@ public class JewelTime extends BaseNPCTime {
             transformationOptions.add(fieryPussy);
         }
         {
-            TransformationOption moltenAss = new ApplyPartModOption("ass", FieryMod.INSTANCE);
+            TransformationOption moltenAss = new ApplyPartModOption(AssPart.TYPE, FieryMod.INSTANCE);
             moltenAss.ingredients.put(Item.MoltenDrippings, 2);
             moltenAss.ingredients.put(Item.EnergyDrink, 20);
             moltenAss.ingredients.put(Item.JuggernautJuice, 10);

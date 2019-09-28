@@ -5,6 +5,7 @@ import java.util.List;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.BreastsPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
@@ -107,7 +108,7 @@ public class Titfucking extends AbstractFacingStance {
     public float priorityMod(Character self) {
         float bonus = 0;
         if (self == bottom) {
-            bonus += 2 * self.body.getRandom("breasts").priority(self);
+            bonus += 2 * self.body.getRandom(BreastsPart.TYPE).priority(self);
         }
         return bonus;
     }

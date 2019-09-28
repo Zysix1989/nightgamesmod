@@ -3,6 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.TentaclePart;
@@ -60,10 +61,10 @@ public class TentaclePorn extends Skill {
                     TentaclePart.pleasureWithTentacles(c, target, m, target.body.getRandomAss());
                 } else if (getSelf().human()) {
                     c.write(getSelf(), deal(c, 0, Result.normal, target));
-                    TentaclePart.pleasureWithTentacles(c, target, m, target.body.getRandom("skin"));
+                    TentaclePart.pleasureWithTentacles(c, target, m, target.body.getRandom(Body.SKIN));
                 } else if (c.shouldPrintReceive(target, c)) {
                     c.write(getSelf(), receive(c, 0, Result.normal, target));
-                    TentaclePart.pleasureWithTentacles(c, target, m, target.body.getRandom("skin"));
+                    TentaclePart.pleasureWithTentacles(c, target, m, target.body.getRandom(Body.SKIN));
                 }
                 if (!target.is(Stsflag.oiled)) {
                     target.add(c, new Oiled(target));
@@ -72,7 +73,7 @@ public class TentaclePorn extends Skill {
             } else {
                 writeOutput(c, Result.weak, target);
             }
-            target.add(c, new Bound(target, 30 + 2 * Math.sqrt(getSelf().get(Attribute.Fetish) + getSelf().get(Attribute.Slime)), "tentacles"));
+            target.add(c, new Bound(target, 30 + 2 * Math.sqrt(getSelf().get(Attribute.Fetish) + getSelf().get(Attribute.Slime)), TentaclePart.TYPE));
         } else {
             writeOutput(c, Result.miss, target);
             return false;

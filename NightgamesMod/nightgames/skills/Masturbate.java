@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -38,14 +41,14 @@ public class Masturbate extends Skill {
     }
 
     public BodyPart getSelfOrgan() {
-        return getSelf().body.getRandom("hands");
+        return getSelf().body.getRandom(Body.HANDS);
     }
 
     public BodyPart getTargetOrgan(Combat c, Character target) {
         ArrayList<BodyPart> parts = new ArrayList<BodyPart>();
         BodyPart cock = target.body.getRandomCock();
         BodyPart pussy = target.body.getRandomPussy();
-        BodyPart ass = target.body.getRandom("ass");
+        BodyPart ass = target.body.getRandom(AssPart.TYPE);
         if (cock != null && !c.getStance().inserted(target)) {
             parts.add(cock);
         }
@@ -111,15 +114,15 @@ public class Masturbate extends Skill {
         if (targetO == null) {
             return "You play with yourself, building up your own arousal.";
         }
-        if (targetO.isType("cock")) {
+        if (targetO.isType(CockPart.TYPE)) {
             if (modifier == Result.weak) {
                 return "You take hold of your flaccid dick, tugging and rubbing it into a full erection.";
             } else {
                 return "You jerk off, building up your own arousal.";
             }
-        } else if (targetO.isType("pussy")) {
+        } else if (targetO.isType(PussyPart.TYPE)) {
             return "You tease your own labia and finger yourself.";
-        } else if (targetO.isType("ass")) {
+        } else if (targetO.isType(AssPart.TYPE)) {
             return "You tease your own asshole.";
         } else {
             return "You play with yourself, building up your own arousal.";
@@ -133,7 +136,7 @@ public class Masturbate extends Skill {
                             getSelf().subject(), getSelf().reflexivePronoun(),
                             getSelf().possessiveAdjective());
         }
-        if (targetO.isType("cock")) {
+        if (targetO.isType(CockPart.TYPE)) {
             if (modifier == Result.weak) {
                 return String.format("%s takes hold of %s flaccid dick, tugging and rubbing it into a full erection.",
                                 getSelf().subject(), getSelf().possessiveAdjective());
@@ -141,10 +144,10 @@ public class Masturbate extends Skill {
                 return String.format("%s jerks off, building up %s own arousal.",
                                 getSelf().subject(), getSelf().possessiveAdjective());
             }
-        } else if (targetO.isType("pussy")) {
+        } else if (targetO.isType(PussyPart.TYPE)) {
             return String.format("%s slowly teases her own labia and starts playing with %s.",
                             getSelf().subject(), getSelf().reflexivePronoun());
-        } else if (targetO.isType("ass")) {
+        } else if (targetO.isType(AssPart.TYPE)) {
             return String.format("%s teases %s own asshole and sticks a finger in.",
                             getSelf().subject(), getSelf().possessiveAdjective());
         } else {

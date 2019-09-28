@@ -3,6 +3,7 @@ package nightgames.characters.body.mods;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockMod;
+import nightgames.characters.body.CockPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.DivineCharge;
@@ -20,7 +21,7 @@ public class BlessedCockMod extends CockMod {
     @Override
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {
         double bonus = super.applyBonuses(c, self, opponent, part, target, damage);
-        if (target.isType("cock")) {
+        if (target.isType(CockPart.TYPE)) {
             if (self.getStatus(Stsflag.divinecharge) != null) {
                 var model = JtwigModel.newModel()
                     .with("self", self)

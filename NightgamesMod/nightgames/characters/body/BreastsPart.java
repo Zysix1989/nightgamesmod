@@ -65,7 +65,7 @@ public class BreastsPart extends GenericBodyPart {
         }
     }
 
-    public static String TYPE = "breasts";
+    public static final String TYPE = "breasts";
 
     private double bonusSensitivity = 0;
     private Size size;
@@ -160,7 +160,7 @@ public class BreastsPart extends GenericBodyPart {
     @Override
     public double applyReceiveBonuses(Character self, Character opponent, BodyPart target, double damage, Combat c) {
         double bonus = super.applyReceiveBonuses(self, opponent, target, damage, c);
-        if (self.has(Trait.lactating) && target.isType("mouth")) {
+        if (self.has(Trait.lactating) && target.isType(MouthPart.TYPE)) {
             if (self.has(Trait.magicmilk)) {
                 float addictionLevel;
                 Addiction addiction;

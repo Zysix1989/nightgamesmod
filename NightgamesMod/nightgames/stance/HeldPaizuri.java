@@ -5,6 +5,8 @@ import java.util.List;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.CockPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
@@ -81,7 +83,7 @@ public class HeldPaizuri extends AbstractFacingStance {
     }
 
     public List<BodyPart> topParts(Combat c) {
-        BodyPart part = top.body.getRandom("breasts");
+        BodyPart part = top.body.getRandom(BreastsPart.TYPE);
         if (part != null) {
             return Collections.singletonList(part);
         } else {
@@ -91,7 +93,7 @@ public class HeldPaizuri extends AbstractFacingStance {
 
     public List<BodyPart> bottomParts() {
         if (bottom.hasDick()) {
-            return Collections.singletonList(bottom.body.getRandom("cock"));
+            return Collections.singletonList(bottom.body.getRandom(CockPart.TYPE));
         }
         return Collections.emptyList();
     }
@@ -114,7 +116,7 @@ public class HeldPaizuri extends AbstractFacingStance {
     @Override
     public float priorityMod(Character self) {
         float bonus = getSubDomBonus(self, 2);
-        bonus += self.body.getRandom("breasts").priority(self);
+        bonus += self.body.getRandom(BreastsPart.TYPE).priority(self);
         return bonus;
     }
 

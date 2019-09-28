@@ -9,10 +9,13 @@ import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarPart;
+import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.DemonicMod;
@@ -48,7 +51,7 @@ public class ReykaTime extends BaseNPCTime {
             TransformationOption growCock = new TransformationOption();
             growCock.ingredients.put(Item.PriapusDraft, 1);
             growCock.ingredients.put(Item.Talisman, 1);
-            growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement("cock"))), "Has no penis");
+            growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement(CockPart.TYPE))), "Has no penis");
             growCock.option = "Reyka: Grow a cock";
             growCock.scene = "You ask Reyka if should could grow a cock. Just for you. You wave a Priapus Draft in front of her as a gift.<br/><br/>" 
                             + "<i>\"Ohhh, really? Do you know how hard it is to drain people when you have a penis? Ohhh, well, if it's for YOU, lover. Watch closely!\"</i><br/><br/>"
@@ -64,7 +67,7 @@ public class ReykaTime extends BaseNPCTime {
         {
             TransformationOption removeCock = new TransformationOption();
             removeCock.ingredients.put(Item.FemDraft, 3);
-            removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement("cock")), "Has a penis");
+            removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement(CockPart.TYPE)), "Has a penis");
             removeCock.option = "Reyka: Remove her cock";
             removeCock.scene = "You ask Reyka if she could remove her cock, offering her 3 femdrafts as a helping hand.<br/>"
                             + ""
@@ -74,13 +77,13 @@ public class ReykaTime extends BaseNPCTime {
                             + "Soon enough though, the organ starts shrinking back into her body as if being absorbed by her lower lips. <br/>"
                             + "Finally, the cockhead retreats into her clit's fleshy hood, becoming indistinguishable from her old clitoris.<br/>";
             removeCock.effect = (c, self, other) -> {
-                other.body.removeAll("cock");
+                other.body.removeAll(CockPart.TYPE);
                 return true;
             };
             transformationOptions.add(removeCock);
         }
         {
-            TransformationOption incubusCock = new ApplyPartModOption("cock", CockMod.incubus);
+            TransformationOption incubusCock = new ApplyPartModOption(CockPart.TYPE, CockMod.incubus);
             incubusCock.ingredients.put(Item.PriapusDraft, 10);
             incubusCock.ingredients.put(Item.SuccubusDraft, 5);
             incubusCock.ingredients.put(Item.semen, 5);
@@ -134,7 +137,7 @@ public class ReykaTime extends BaseNPCTime {
         TransformationOption demonTail = new TransformationOption();
         demonTail.ingredients.put(Item.SuccubusDraft, 10);
         demonTail.ingredients.put(Item.semen, 5);
-        demonTail.addRequirement(not(bodypart("tail")), "No tail");
+        demonTail.addRequirement(not(bodypart(TailPart.TYPE)), "No tail");
         demonTail.option = "Spade Tail";
         demonTail.scene = "You ask Reyka if she could give you a spaded tail just like hers.<br/><br/>" 
                         + "<i>\"A tail? Sure! It's not just for show, you know. Come here. This will be fun!\"</i>\"<br/>" 
@@ -171,7 +174,7 @@ public class ReykaTime extends BaseNPCTime {
         };
         transformationOptions.add(pointedEars);
         {
-            TransformationOption succubusPussy = new ApplyPartModOption("pussy", DemonicMod.INSTANCE);
+            TransformationOption succubusPussy = new ApplyPartModOption(PussyPart.TYPE, DemonicMod.INSTANCE);
             succubusPussy.ingredients.put(Item.SuccubusDraft, 10);
             succubusPussy.ingredients.put(Item.BewitchingDraught, 10);
             succubusPussy.ingredients.put(Item.FemDraft, 20);
@@ -185,7 +188,7 @@ public class ReykaTime extends BaseNPCTime {
             transformationOptions.add(succubusPussy);
         }
         {
-            TransformationOption devilishAss = new ApplyPartModOption("ass", DemonicMod.INSTANCE);
+            TransformationOption devilishAss = new ApplyPartModOption(AssPart.TYPE, DemonicMod.INSTANCE);
             devilishAss.ingredients.put(Item.SuccubusDraft, 10);
             devilishAss.ingredients.put(Item.BewitchingDraught, 10);
             devilishAss.ingredients.put(Item.semen, 5);
@@ -201,7 +204,7 @@ public class ReykaTime extends BaseNPCTime {
             transformationOptions.add(devilishAss);
         }
         {
-            TransformationOption demonicMouth = new ApplyPartModOption("mouth", DemonicMod.INSTANCE);
+            TransformationOption demonicMouth = new ApplyPartModOption(MouthPart.TYPE, DemonicMod.INSTANCE);
             demonicMouth.ingredients.put(Item.SuccubusDraft, 10);
             demonicMouth.ingredients.put(Item.BewitchingDraught, 10);
             demonicMouth.ingredients.put(Item.semen, 5);

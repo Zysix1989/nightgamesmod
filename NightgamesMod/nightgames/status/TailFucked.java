@@ -10,6 +10,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.TailPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
@@ -30,7 +31,7 @@ public class TailFucked extends Status implements InsertedStatus {
     @Override
     public String initialMessage(Combat c, Optional<Status> replacement) {
         BodyPart hole = affected.body.getRandom(target);
-        BodyPart tail = other.body.getRandom("tail");
+        BodyPart tail = other.body.getRandom(TailPart.TYPE);
         if (hole == null || tail == null) {
             return "";
         }
@@ -42,7 +43,7 @@ public class TailFucked extends Status implements InsertedStatus {
     @Override
     public String describe(Combat c) {
         BodyPart hole = affected.body.getRandom(target);
-        BodyPart tail = other.body.getRandom("tail");
+        BodyPart tail = other.body.getRandom(TailPart.TYPE);
         if (hole == null || tail == null) {
             return "";
         }
@@ -64,7 +65,7 @@ public class TailFucked extends Status implements InsertedStatus {
     @Override
     public void tick(Combat c) {
         BodyPart hole = affected.body.getRandom(target);
-        BodyPart tail = other.body.getRandom("tail");
+        BodyPart tail = other.body.getRandom(TailPart.TYPE);
         if (hole == null || tail == null || c == null) {
             affected.removelist.add(this);
             return;
@@ -166,7 +167,7 @@ public class TailFucked extends Status implements InsertedStatus {
 
     @Override
     public BodyPart getStickPart() {
-        return other.body.getRandom("tail");
+        return other.body.getRandom(TailPart.TYPE);
     }
 
     @Override

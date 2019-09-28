@@ -7,7 +7,11 @@ import java.util.Optional;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.ParasitedMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -36,7 +40,7 @@ public class SlimeCloneParasite extends SimpleEnemySkill {
         return super.requirements(c, user, target) && user instanceof PetCharacter && ((PetCharacter)user).getSelf().owner().has(Trait.MimicBodyPart);
     }
 
-    private final static List<String> PARASITEABLE_PARTS = Arrays.asList("cock", "pussy", "ass", "mouth");
+    private final static List<String> PARASITEABLE_PARTS = Arrays.asList(CockPart.TYPE, PussyPart.TYPE, AssPart.TYPE, MouthPart.TYPE);
     @Override
     public boolean resolve(Combat c, Character target) {
         if (target.roll(getSelf(), c, accuracy(c, target))) {

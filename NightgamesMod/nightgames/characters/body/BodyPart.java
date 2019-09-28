@@ -141,7 +141,7 @@ public interface BodyPart {
         return getMods().stream().anyMatch(mod -> mod.countsAs(type));
     }
 
-    static List<String> genitalTypes = Arrays.asList("pussy", "cock", "ass");
+    static List<String> genitalTypes = Arrays.asList("pussy", CockPart.TYPE, AssPart.TYPE);
     
     public default boolean isGenital() {
         return genitalTypes.contains(getType());
@@ -149,7 +149,7 @@ public interface BodyPart {
 
     
     public default boolean isGenitalOrToy() {
-        return isGenital() || isType("strapon");
+        return isGenital() || isType(StraponPart.TYPE);
     }
     
     public default double getFetishChance() {

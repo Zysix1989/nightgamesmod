@@ -4,6 +4,8 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -18,7 +20,7 @@ public class TemptressRide extends Thrust {
     @Override
     public BodyPart getSelfOrgan(Combat c, Character target) {
         BodyPart part = super.getSelfOrgan(c, target);
-        if (part != null && part.isType("pussy")) {
+        if (part != null && part.isType(PussyPart.TYPE)) {
             return part;
         }
         return null;
@@ -27,7 +29,7 @@ public class TemptressRide extends Thrust {
     @Override
     public BodyPart getTargetOrgan(Combat c, Character target) {
         BodyPart part = super.getTargetOrgan(c, target);
-        if (part != null && part.isType("cock")) {
+        if (part != null && part.isType(CockPart.TYPE)) {
             return part;
         }
         return null;
@@ -59,7 +61,7 @@ public class TemptressRide extends Thrust {
             selfDmg *= 0.67;
         }
         FiredUp status = (FiredUp) getSelf().status.stream().filter(s -> s instanceof FiredUp).findAny().orElse(null);
-        int stack = status == null || !status.getPart().equals("pussy") ? 0 : status.getStack();
+        int stack = status == null || !status.getPart().equals(PussyPart.TYPE) ? 0 : status.getStack();
 
         if (getSelf().human()) {
             c.write(getSelf(), deal(c, stack, Result.normal, target));
@@ -72,7 +74,7 @@ public class TemptressRide extends Thrust {
 
         getSelf().body.pleasure(target, target.body.getRandomCock(), getSelf().body.getRandomPussy(), selfDmg, c, this);
 
-        getSelf().add(c, new FiredUp(getSelf(), target, "pussy"));
+        getSelf().add(c, new FiredUp(getSelf(), target, PussyPart.TYPE));
         return true;
     }
 

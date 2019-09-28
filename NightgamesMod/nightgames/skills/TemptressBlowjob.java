@@ -3,6 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -44,11 +45,11 @@ public class TemptressBlowjob extends Blowjob {
         if (target.roll(getSelf(), c, accuracy(c, target))) {
             if (!target.body.getRandomCock().isReady(target)) {
                 m -= 7;
-                target.body.pleasure(getSelf(), getSelf().body.getRandom("mouth"), target.body.getRandomCock(), m, c, this);
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandomCock(), m, c, this);
                 if (target.body.getRandomCock().isReady(target)) {
                     // Was flaccid, got hard
                     c.write(getSelf(), deal(c, 0, Result.special, target));
-                    getSelf().add(c, new FiredUp(getSelf(), target, "mouth"));
+                    getSelf().add(c, new FiredUp(getSelf(), target, MouthPart.TYPE));
                 } else {
                     // Was flaccid, still is
                     c.write(getSelf(), deal(c, 0, Result.weak, target));
@@ -56,11 +57,11 @@ public class TemptressBlowjob extends Blowjob {
             } else {
                 FiredUp status = (FiredUp) getSelf().status.stream().filter(s -> s instanceof FiredUp).findAny()
                                 .orElse(null);
-                int stack = status == null || !status.getPart().equals("mouth") ? 0 : status.getStack();
+                int stack = status == null || !status.getPart().equals(MouthPart.TYPE) ? 0 : status.getStack();
                 c.write(getSelf(), deal(c, stack, Result.normal, target));
-                target.body.pleasure(getSelf(), getSelf().body.getRandom("mouth"), target.body.getRandomCock(),
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandomCock(),
                                 m + m * stack / 2, c, this);
-                getSelf().add(c, new FiredUp(getSelf(), target, "mouth"));
+                getSelf().add(c, new FiredUp(getSelf(), target, MouthPart.TYPE));
             }
         } else {
             c.write(getSelf(), deal(c, 0, Result.miss, target));

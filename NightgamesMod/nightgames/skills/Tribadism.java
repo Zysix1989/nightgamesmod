@@ -2,6 +2,7 @@ package nightgames.skills;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -38,10 +39,10 @@ public class Tribadism extends Skill {
         boolean stancePossible = false;
         if (possible) {
             stancePossible = true;
-            if (selfO.isType("pussy")) {
+            if (selfO.isType(PussyPart.TYPE)) {
                 stancePossible &= !c.getStance().vaginallyPenetrated(c, getSelf());
             }
-            if (targetO.isType("pussy")) {
+            if (targetO.isType(PussyPart.TYPE)) {
                 stancePossible &= !c.getStance().vaginallyPenetrated(c, target);
             }
         }

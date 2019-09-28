@@ -76,18 +76,18 @@ class BodyConfiguration {
         BodyConfiguration config = new BodyConfiguration();
         if (obj.has("archetype"))
             config.type = Optional.of(Archetype.valueOf(obj.get("archetype").getAsString().toUpperCase()));
-        if (obj.has("breasts"))
-            config.breasts = Optional.of(new BreastsPart(obj.get("breasts").getAsInt()));
-        if (obj.has("ass"))
-            config.ass = Optional.of(obj.get("ass").getAsString()
+        if (obj.has(BreastsPart.TYPE))
+            config.breasts = Optional.of(new BreastsPart(obj.get(BreastsPart.TYPE).getAsInt()));
+        if (obj.has(AssPart.TYPE))
+            config.ass = Optional.of(obj.get(AssPart.TYPE).getAsString()
                                            .equals("basic") ? new AssPart(Size.Small)
                 : (AssPart) new AssPart(Size.Small).applyMod(new SecondPussyMod()));
 
         if (obj.has("ears"))
             config.ears = Optional.of(EarPart.valueOf(obj.get("ears").getAsString()
                                                             .toLowerCase()));
-        if (obj.has("tail") && !obj.get("tail").getAsString().equals("none"))
-            config.tail = Optional.of(TailPart.valueOf(obj.get("tail").getAsString()
+        if (obj.has(TailPart.TYPE) && !obj.get(TailPart.TYPE).getAsString().equals("none"))
+            config.tail = Optional.of(TailPart.valueOf(obj.get(TailPart.TYPE).getAsString()
                                                              .toLowerCase()));
         if (obj.has("wings") && !obj.get("wings").getAsString().equals("none"))
             config.wings = Optional.of(WingsPart.valueOf(obj.get("wings").getAsString()
@@ -97,8 +97,8 @@ class BodyConfiguration {
             config.genitals = Optional.of(GenitalConfiguration.parse(obj.getAsJsonObject("genitals")));
         
         List<TentaclePart> list = new ArrayList<>();
-        if (obj.has("tentacles")) {
-            JsonArray arr = obj.getAsJsonArray("tentacles");
+        if (obj.has(TentaclePart.TYPE)) {
+            JsonArray arr = obj.getAsJsonArray(TentaclePart.TYPE);
             for (Object o : arr) {
                 list.add(parseTentacle((JsonObject) o));
             }
@@ -146,7 +146,7 @@ class BodyConfiguration {
 
     private void applyTentacles(Body body) {
         if (tentacles.isPresent()) {
-            body.removeAll("tentacles");
+            body.removeAll(TentaclePart.TYPE);
             tentacles.get().forEach(body::add);
 
         }
@@ -237,16 +237,16 @@ class BodyConfiguration {
 
         public static GenitalConfiguration parse(JsonObject object) {
             GenitalConfiguration config = new GenitalConfiguration();
-            if (object.has("cock")) {
+            if (object.has(CockPart.TYPE)) {
                 CockConfiguration cock = new CockConfiguration();
-                JsonObject cockJson = object.getAsJsonObject("cock");
+                JsonObject cockJson = object.getAsJsonObject(CockPart.TYPE);
                 JsonUtils.getOptional(cockJson, "length").map(JsonElement::getAsInt)
                                 .ifPresent(length -> cock.length = length);
                 cock.type = JsonUtils.getOptional(cockJson, "type").flatMap(json -> CockMod.getFromType(json.getAsString()));
                 config.cock = Optional.of(cock);
             }
 
-            JsonUtils.getOptional(object, "pussy").ifPresent(modClass -> {
+            JsonUtils.getOptional(object, PussyPart.TYPE).ifPresent(modClass -> {
                 if (modClass.isJsonPrimitive() && modClass.getAsString().equals("normal")) {
                     config.pussy = Optional.of(PussyPart.generic);
                 } else {
@@ -258,8 +258,8 @@ class BodyConfiguration {
         }
 
         private void apply(Body body) {
-            body.removeAll("cock");
-            body.removeAll("pussy");
+            body.removeAll(CockPart.TYPE);
+            body.removeAll(PussyPart.TYPE);
             if (cock.isPresent())
                 body.add(cock.get()
                              .build());
@@ -301,10 +301,10 @@ class BodyConfiguration {
         }
 
         private void apply(Body body) {
-            if (body.has("cock") && this != REGULAR) {
+            if (body.has(CockPart.TYPE) && this != REGULAR) {
                 body.addReplace(body.getRandomCock().applyMod(cockMod), 1);
             }
-            if (body.has("pussy") && this != REGULAR)
+            if (body.has(PussyPart.TYPE) && this != REGULAR)
                 body.addReplace(pussy, 1);
             switch (this) {
                 case ANGEL:

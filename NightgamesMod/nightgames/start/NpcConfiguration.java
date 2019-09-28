@@ -9,6 +9,8 @@ import com.google.gson.JsonObject;
 
 import nightgames.characters.CharacterSex;
 import nightgames.characters.NPC;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.json.JsonUtils;
 
 public class NpcConfiguration extends CharacterConfiguration {
@@ -48,10 +50,10 @@ public class NpcConfiguration extends CharacterConfiguration {
             base.initialGender = sex;
             // If gender is present in config, make genitals conform to it. This will be overridden if config also supplies genitals.
             if (!sex.hasCock()) {
-                base.body.removeAll("cock");
+                base.body.removeAll(CockPart.TYPE);
             }
             if (!sex.hasPussy()) {
-                base.body.removeAll("pussy");
+                base.body.removeAll(PussyPart.TYPE);
             }
             base.body.makeGenitalOrgans(sex);
         } else {

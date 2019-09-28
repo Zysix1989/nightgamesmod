@@ -4,7 +4,10 @@ import java.util.Optional;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -45,16 +48,16 @@ public class CockWorship extends Skill {
             m += 4;
         }
         writeOutput(c, Result.normal, target);
-        BodyPart mouth = getSelf().body.getRandom("mouth");
-        BodyPart cock = target.body.getRandom("cock");
+        BodyPart mouth = getSelf().body.getRandom(MouthPart.TYPE);
+        BodyPart cock = target.body.getRandom(CockPart.TYPE);
         target.body.pleasure(getSelf(), mouth, cock, m, c, this);
         if (getSelf().hasDick() && (!getSelf().hasPussy() || Global.random(2) == 0)) {
-            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom("hands"), getSelf().body.getRandomCock(), m, c, this);
+            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), getSelf().body.getRandomCock(), m, c, this);
         } else if (getSelf().hasPussy()) {
-            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom("hands"), getSelf().body.getRandomPussy(), m,
+            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), getSelf().body.getRandomPussy(), m,
                             c, this);
         } else {
-            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom("hands"), getSelf().body.getRandomHole(), m, c, this);
+            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), getSelf().body.getRandomHole(), m, c, this);
         }
         if (mouth.isErogenous()) {
             getSelf().body.pleasure(getSelf(), cock, mouth, m, c, this);
@@ -66,7 +69,7 @@ public class CockWorship extends Skill {
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
-        Optional<BodyFetish> fetish = getSelf().body.getFetish("cock");
+        Optional<BodyFetish> fetish = getSelf().body.getFetish(CockPart.TYPE);
         return user.isPetOf(target) || (fetish.isPresent() && fetish.get().magnitude >= .5);
     }
 

@@ -12,9 +12,10 @@ import nightgames.global.Global;
 
 public class TentaclePart extends GenericBodyPart {
 
+    public static final String TYPE = "tentacles";
     public String attachpoint;
     private String fluids;
-    private static String[] allowedAttachTypes = {"ass", "mouth", "pussy", "hands", "feet", "tail", "cock"};
+    private static String[] allowedAttachTypes = {AssPart.TYPE, MouthPart.TYPE, PussyPart.TYPE, Body.HANDS, Body.FEET, TailPart.TYPE, CockPart.TYPE};
 
     public static void pleasureWithTentacles(Combat c, Character target, int strength, BodyPart targetPart) {
         target.body.pleasure(c.getOpponent(target), new TentaclePart(), targetPart, strength, c);
@@ -43,13 +44,13 @@ public class TentaclePart extends GenericBodyPart {
 
     public TentaclePart(String desc, String attachpoint, String fluids, double hotness, double pleasure,
                     double sensitivity) {
-        super(desc, "", hotness, pleasure, sensitivity, true, "tentacles", "");
+        super(desc, "", hotness, pleasure, sensitivity, true, TYPE, "");
         this.attachpoint = attachpoint;
         this.fluids = fluids;
     }
 
     public TentaclePart() {
-        super("tentacles", 1.0, 1.0, 0.0, "tentacles", "");
+        super("tentacles", 1.0, 1.0, 0.0, TentaclePart.TYPE, "");
     }
 
     public TentaclePart(JsonObject js) {

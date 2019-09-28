@@ -89,18 +89,22 @@ public class Body implements Cloneable {
         }
     }
 
+    public static final String HANDS = "hands";
+    public static final String FEET = "feet";
+    public static final String SKIN = "skin";
+
     // yeah i know :(
     public static BodyPart nonePart = new GenericBodyPart("none", 0, 1, 1, "none", "");
-    private static Set<String> pluralParts = new HashSet<>(Arrays.asList("hands", "feet", "wings", "breasts", "balls"));
+    private static Set<String> pluralParts = new HashSet<>(Arrays.asList(Body.HANDS, Body.FEET, "wings", BreastsPart.TYPE, "balls"));
     private final static BodyPart[] requiredParts = {
-        new GenericBodyPart("hands", 0, 1, 1, "hands", ""),
-        new GenericBodyPart("feet", 0, 1, 1, "feet", ""),
-        new GenericBodyPart("skin", 0, 1, 1, "skin", ""),
+        new GenericBodyPart("hands", 0, 1, 1, HANDS, ""),
+        new GenericBodyPart("feet", 0, 1, 1, FEET, ""),
+        new GenericBodyPart("skin", 0, 1, 1, SKIN, ""),
         new AssPart(AssPart.Size.Normal),
         new MouthPart(),
         new BreastsPart(0),
         EarPart.normal};
-    private final static String fetishParts[] = {"ass", "feet", "cock", "wings", "tail", "tentacles", "breasts"};
+    private final static String fetishParts[] = {AssPart.TYPE, Body.FEET, CockPart.TYPE, "wings", TailPart.TYPE, TentaclePart.TYPE, BreastsPart.TYPE};
 
     private LinkedHashSet<BodyPart> bodyParts;
     public double hotness;
@@ -317,15 +321,15 @@ public class Body implements Cloneable {
     }
 
     public AssPart getRandomAss() {
-        return (AssPart) getRandom("ass");
+        return (AssPart) getRandom(AssPart.TYPE);
     }
 
     public BreastsPart getRandomBreasts() {
-        return (BreastsPart) getRandom("breasts");
+        return (BreastsPart) getRandom(BreastsPart.TYPE);
     }
 
     public BreastsPart getLargestBreasts() {
-        List<BodyPart> parts = get("breasts");
+        List<BodyPart> parts = get(BreastsPart.TYPE);
         BreastsPart breasts = new BreastsPart(BreastsPart.Size.min());
         for (BodyPart part : parts) {
             BreastsPart b = (BreastsPart) part;
@@ -337,7 +341,7 @@ public class Body implements Cloneable {
     }
 
     public CockPart getLargestCock() {
-        List<BodyPart> parts = get("cock");
+        List<BodyPart> parts = get(CockPart.TYPE);
         if (parts.size() == 0) {
             return null;
         }
@@ -350,7 +354,7 @@ public class Body implements Cloneable {
     }
 
     public CockPart getCockBelow(CockPart.Size size) {
-        List<BodyPart> parts = get("cock");
+        List<BodyPart> parts = get(CockPart.TYPE);
         List<CockPart> upgradable = new ArrayList<>();
         for (BodyPart part : parts) {
             CockPart cock = (CockPart) part;
@@ -366,7 +370,7 @@ public class Body implements Cloneable {
     }
 
     public CockPart getCockAbove(CockPart.Size size) {
-        List<BodyPart> parts = get("cock");
+        List<BodyPart> parts = get(CockPart.TYPE);
         List<CockPart> upgradable = new ArrayList<>();
         for (BodyPart part : parts) {
             CockPart b = (CockPart) part;
@@ -382,7 +386,7 @@ public class Body implements Cloneable {
     }
 
     public BreastsPart getBreastsBelow(BreastsPart.Size size) {
-        List<BodyPart> parts = get("breasts");
+        List<BodyPart> parts = get(BreastsPart.TYPE);
         List<BreastsPart> upgradable = new ArrayList<>();
         for (BodyPart part : parts) {
             BreastsPart b = (BreastsPart) part;
@@ -398,7 +402,7 @@ public class Body implements Cloneable {
     }
 
     public BreastsPart getBreastsAbove(BreastsPart.Size size) {
-        List<BodyPart> parts = get("breasts");
+        List<BodyPart> parts = get(BreastsPart.TYPE);
         List<BreastsPart> upgradable = new ArrayList<>();
         for (BodyPart part : parts) {
             BreastsPart b = (BreastsPart) part;
@@ -506,11 +510,11 @@ public class Body implements Cloneable {
     }
 
     public CockPart getRandomCock() {
-        return (CockPart) getRandom("cock");
+        return (CockPart) getRandom(CockPart.TYPE);
     }
     
     public List<BodyPart> getAllGenitals() {
-        List<String> partTypes = Arrays.asList("cock", "pussy", "strapon", "ass");
+        List<String> partTypes = Arrays.asList(CockPart.TYPE, "pussy", StraponPart.TYPE, AssPart.TYPE);
         return getCurrentPartsThatMatch(part -> partTypes.contains(part.getType()));
     }
 
@@ -557,7 +561,7 @@ public class Body implements Cloneable {
         if (with == null) {
             with = nonePart;
         }
-        if (target.getType().equals("strapon")) {
+        if (target.getType().equals(StraponPart.TYPE)) {
             return 0;
         }
 
@@ -616,7 +620,7 @@ public class Body implements Cloneable {
         Optional<BodyFetish> fetish = getFetish(with.getType());
         if (fetish.isPresent()) {
             double fetishBonus = fetish.get().magnitude * 3 * with.getFetishEffectiveness();
-            if ( with.getType().equals("ass") && character.has(Trait.analFanatic) ) {
+            if ( with.getType().equals(AssPart.TYPE) && character.has(Trait.analFanatic) ) {
                 fetishBonus /= 4;
             }
             perceptionBonus += fetishBonus;
@@ -821,8 +825,8 @@ public class Body implements Cloneable {
         if (opponent != null && Arrays.asList(fetishParts).contains(with.getType())) {
             double chance = opponent.has(Trait.fetishTrainer)?4 * Math.min(opponent.get(Attribute.Fetish), 25):0;
 
-            if (with.getType().equals("cock")
-                && target.getType().equals("ass")
+            if (with.getType().equals(CockPart.TYPE)
+                && target.getType().equals(AssPart.TYPE)
                 && Global.getButtslutQuest().isPresent()) {
                 chance += Global.getButtslutQuest().get().getBonusFetishChance();
             }
@@ -911,58 +915,58 @@ public class Body implements Cloneable {
         switch (sex) {
             case female:
                 baseFemininity += 2;
-                if (!has("face")) {
+                if (!has(FacePart.TYPE)) {
                     add(new FacePart(0, 2));
                 }
-                if (get("breasts").size() == 0) {
+                if (get(BreastsPart.TYPE).size() == 0) {
                     add(new BreastsPart(BreastsPart.Size.BCup));
                 }
-                if (get("ass").size() == 0) {
+                if (get(AssPart.TYPE).size() == 0) {
                     add(new AssPart(Size.Flared));
                 }
                 break;
             case male:
                 baseFemininity -= 2;
-                if (!has("face")) {
+                if (!has(FacePart.TYPE)) {
                     add(new FacePart(0, -2));
                 }
                 break;
             case trap:
                 baseFemininity += 2;
-                if (!has("face")) {
+                if (!has(FacePart.TYPE)) {
                     add(new FacePart(0, 2));
                 }
-                if (get("ass").size() == 0) {
+                if (get(AssPart.TYPE).size() == 0) {
                     add(new AssPart(Size.Normal));
                 }
                 break;
             case herm:
                 baseFemininity += 1;
-                if (!has("face")) {
+                if (!has(FacePart.TYPE)) {
                     add(new FacePart(0, 1));
                 }
-                if (get("breasts").size() == 0) {
+                if (get(BreastsPart.TYPE).size() == 0) {
                     add(new BreastsPart(BreastsPart.Size.BCup));
                 }
-                if (get("ass").size() == 0) {
+                if (get(AssPart.TYPE).size() == 0) {
                     add(new AssPart(Size.Girlish));
                 }
                 break;
             case shemale:
                 baseFemininity += 1;
-                if (!has("face")) {
+                if (!has(FacePart.TYPE)) {
                     add(new FacePart(0, 1));
                 }
-                if (get("breasts").size() == 0) {
+                if (get(BreastsPart.TYPE).size() == 0) {
                     add(new BreastsPart(BreastsPart.Size.DCup));
                 }
-                if (get("ass").size() == 0) {
+                if (get(AssPart.TYPE).size() == 0) {
                     add(new AssPart(Size.Girlish));
                 }
                 break;
             case asexual:
                 baseFemininity += 0;
-                if (!has("face")) {
+                if (!has(FacePart.TYPE)) {
                     add(new FacePart(0, 0));
                 }
                 break;
@@ -984,7 +988,7 @@ public class Body implements Cloneable {
 
     private void replaceCockWithPussy() {
         CockPart cock = getRandomCock();
-        removeAll("cock");
+        removeAll(CockPart.TYPE);
         add(cock == null ? new PussyPart() : cock.getEquivalentPussy());
     }
 
@@ -1064,7 +1068,7 @@ public class Body implements Cloneable {
     }
     
     private void changeSex(CharacterSex newSex) {
-        FacePart face = ((FacePart)getRandom("face"));
+        FacePart face = ((FacePart)getRandom(FacePart.TYPE));
         double femininity = face.getFemininity(character);
         switch (newSex) {
             case male:
@@ -1116,7 +1120,7 @@ public class Body implements Cloneable {
             }
         }
         if (sex.hasCock()) {
-            if (!has("cock")) {
+            if (!has(CockPart.TYPE)) {
                 add(new CockPart(CockPart.Size.Average));
             }
         }
@@ -1172,7 +1176,7 @@ public class Body implements Cloneable {
         if (body.has("pussy")) {
             defaultFemininity += 2;
         }
-        if (body.has("cock")) {
+        if (body.has(CockPart.TYPE)) {
             defaultFemininity -= 2;
         }
         body.baseFemininity = JsonUtils.getOptional(bodyObj, "femininity").map(JsonElement::getAsDouble)
@@ -1273,7 +1277,7 @@ public class Body implements Cloneable {
     public BodyPart getRandomHole() {
         BodyPart part = getRandomPussy();
         if (part == null) {
-            part = getRandom("ass");
+            part = getRandom(AssPart.TYPE);
         }
         return part;
     }
@@ -1297,7 +1301,7 @@ public class Body implements Cloneable {
 
     public void receiveCum(Combat c, Character opponent, BodyPart part) {
         if (part == null) {
-            part = character.body.getRandom("skin");
+            part = character.body.getRandom(Body.SKIN);
         }
         part.receiveCum(c, character, opponent, part);
         if (character.has(Trait.spiritphage)) {
@@ -1321,10 +1325,10 @@ public class Body implements Cloneable {
                             character, opponent));
             character.drain(c, opponent, character.getStamina().max()/3+20);
         }
-        if (character instanceof Player && part.getType().equals("ass") && Global.getButtslutQuest().isPresent()) {
+        if (character instanceof Player && part.getType().equals(AssPart.TYPE) && Global.getButtslutQuest().isPresent()) {
             character.arouse(Global.getButtslutQuest().get().getAnalCreampieLust(), c);
         }
-        if (part.getType().equals("ass") || part.getType().equals("pussy")) {
+        if (part.getType().equals(AssPart.TYPE) || part.getType().equals("pussy")) {
             if (character.has(Trait.RapidMeiosis) && character.has(Trait.slime)) {
                 c.write(opponent, Global.format("{self:NAME-POSSESSIVE} hungry %s seems to vacuum {other:name-possessive} sperm into itself as {other:pronoun-action:cum|cums}. "
                                 + "As {other:pronoun-action:lay|lays} there heaving in exertion, {self:possessive} belly rapidly bloats up "
@@ -1354,14 +1358,14 @@ public class Body implements Cloneable {
 
         if (anal) {
             if (!pitcher) {
-                totalCounterValue += get("ass").stream()
-                    .flatMapToInt(ass -> other.body.get("cock")
+                totalCounterValue += get(AssPart.TYPE).stream()
+                    .flatMapToInt(ass -> other.body.get(CockPart.TYPE)
                         .stream()
                         .mapToInt(cock -> ass.counterValue(cock, self, other)))
                     .sum();
             } else {
-                totalCounterValue += get("cock").stream()
-                    .flatMapToInt(cock -> other.body.get("ass")
+                totalCounterValue += get(CockPart.TYPE).stream()
+                    .flatMapToInt(cock -> other.body.get(AssPart.TYPE)
                         .stream()
                         .mapToInt(ass -> cock.counterValue(ass, self, other)))
                     .sum();
@@ -1369,12 +1373,12 @@ public class Body implements Cloneable {
         } else {
             if (!pitcher) {
                 totalCounterValue += get("pussy").stream()
-                    .flatMapToInt(pussy -> other.body.get("cock")
+                    .flatMapToInt(pussy -> other.body.get(CockPart.TYPE)
                         .stream()
                         .mapToInt(cock -> pussy.counterValue(cock, self, other)))
                     .sum();
             } else {
-                totalCounterValue += get("cock").stream()
+                totalCounterValue += get(CockPart.TYPE).stream()
                     .flatMapToInt(cock -> other.body.get("pussy")
                         .stream()
                         .mapToInt(pussy -> cock.counterValue(pussy, self, other)))
@@ -1455,7 +1459,7 @@ public class Body implements Cloneable {
     }
 
     public FacePart getFace() {
-        return (FacePart)getRandom("face");
+        return (FacePart)getRandom(FacePart.TYPE);
     }
 
     public void removeTemporaryPartMod(String type, PartMod mod) {
@@ -1466,7 +1470,7 @@ public class Body implements Cloneable {
     }
 
     public AssPart getAssBelow(Size size) {
-        List<BodyPart> parts = get("ass");
+        List<BodyPart> parts = get(AssPart.TYPE);
         List<AssPart> upgradable = new ArrayList<>();
         for (BodyPart part : parts) {
             AssPart b = (AssPart) part;
@@ -1481,7 +1485,7 @@ public class Body implements Cloneable {
     }
 
     public AssPart getAssAbove(Size size) {
-        List<BodyPart> parts = get("ass");
+        List<BodyPart> parts = get(AssPart.TYPE);
         List<AssPart> downgradable = new ArrayList<>();
         for (BodyPart part : parts) {
             AssPart b = (AssPart) part;

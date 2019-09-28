@@ -6,11 +6,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockMod;
+import nightgames.characters.body.CockPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.GenericBodyPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.GooeyMod;
 import nightgames.characters.body.mods.SlimyCockMod;
@@ -122,7 +125,8 @@ public class Airi extends BasePersonality {
             }
         });
         character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
-            String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.describe(self)).orElse("pussy");
+            String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.describe(self)).orElse(
+                PussyPart.TYPE);
             if (character.has(Trait.slime)) {
                 if (other.getLevel() < self.getLevel() - 5) {
                     return "{self:SUBJECT} tousles {other:possessive} hair fondly as {other:subject} cum, \"<i>How does it feel... reduced to mere prey...? You're just food... for me now...</i>\"";
@@ -406,13 +410,13 @@ public class Airi extends BasePersonality {
     public void eot(Combat c, Character opponent) {
         if (character.has(Trait.slime)) {
             if (character.hasPussy() && !character.body.getRandomPussy().moddedPartCountsAs(GooeyMod.TYPE)) {
-                character.body.temporaryAddPartMod("pussy", GooeyMod.INSTANCE, 999);
+                character.body.temporaryAddPartMod(PussyPart.TYPE, GooeyMod.INSTANCE, 999);
                 c.write(character, 
                                 Global.format("{self:NAME-POSSESSIVE} %s re-slime-ified.",
                                                 character, opponent, character.body.getRandomPussy().describe(character)));
             }
             if (character.hasDick() && !character.body.getRandomCock().moddedPartCountsAs(SlimyCockMod.TYPE)) {
-                character.body.temporaryAddPartMod("cock", CockMod.slimy, 999);
+                character.body.temporaryAddPartMod(CockPart.TYPE, CockMod.slimy, 999);
                 c.write(character,
                                 Global.format("{self:NAME-POSSESSIVE} %s re-slime-ified.",
                                                 character, opponent, character.body.getRandomCock().describe(character)));
@@ -456,7 +460,7 @@ public class Airi extends BasePersonality {
             if (asspart != null) {
                 self.body.temporaryAddOrReplacePartWithType(asspart.upgrade().upgrade(), 10);
             }
-            self.body.temporaryAddOrReplacePartWithType(new GenericBodyPart("gooey skin", .5, 1.5, .8, "skin", ""), 999);
+            self.body.temporaryAddOrReplacePartWithType(new GenericBodyPart("gooey skin", .5, 1.5, .8, Body.SKIN, ""), 999);
             self.body.temporaryAddOrReplacePartWithType(new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);
             if (self.level >= 25) {
                 self.addTemporaryTrait(Trait.shameless, 999);

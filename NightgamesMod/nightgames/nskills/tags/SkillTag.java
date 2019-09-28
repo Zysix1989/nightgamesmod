@@ -4,6 +4,13 @@ import java.util.Optional;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
+import nightgames.characters.body.Body;
+import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.TailPart;
 import nightgames.status.Stsflag;
 
 public abstract class SkillTag {
@@ -92,14 +99,14 @@ public abstract class SkillTag {
     public final static SkillTag dominant = new NameOnlySkillTag("Dominant");
     public final static SkillTag submissive = new NameOnlySkillTag("Submissive");
     public final static SkillTag permanentEffects = new NameOnlySkillTag("permanentEffects");
-    public final static SkillTag usesCock = new BodyPartSkillTag("cock");
-    public final static SkillTag usesPussy = new BodyPartSkillTag("pussy");
-    public final static SkillTag usesAss = new BodyPartSkillTag("ass");
-    public final static SkillTag usesTail = new BodyPartSkillTag("tail");
-    public final static SkillTag usesMouth = new BodyPartSkillTag("mouth");
-    public final static SkillTag usesBreasts = new BodyPartSkillTag("breasts");
-    public final static SkillTag usesHands = new BodyPartSkillTag("hands");
-    public final static SkillTag usesFeet = new BodyPartSkillTag("feet");
+    public final static SkillTag usesCock = new BodyPartSkillTag(CockPart.TYPE);
+    public final static SkillTag usesPussy = new BodyPartSkillTag(PussyPart.TYPE);
+    public final static SkillTag usesAss = new BodyPartSkillTag(AssPart.TYPE);
+    public final static SkillTag usesTail = new BodyPartSkillTag(TailPart.TYPE);
+    public final static SkillTag usesMouth = new BodyPartSkillTag(MouthPart.TYPE);
+    public final static SkillTag usesBreasts = new BodyPartSkillTag(BreastsPart.TYPE);
+    public final static SkillTag usesHands = new BodyPartSkillTag(Body.HANDS);
+    public final static SkillTag usesFeet = new BodyPartSkillTag(Body.FEET);
     public final static SkillTag usesToy = new BodyPartSkillTag("toy");
     public final static SkillTag pleasureSelf = new NameOnlySkillTag("PleasureSelf");
     public final static SkillTag pleasure = new NameOnlySkillTag("Pleasure");

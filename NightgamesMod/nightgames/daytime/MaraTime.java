@@ -6,9 +6,12 @@ import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
+import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.CyberneticMod;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -49,7 +52,7 @@ public class MaraTime extends BaseNPCTime {
         {
             TransformationOption growCock = new TransformationOption();
             growCock.ingredients.put(Item.Dildo, 1);
-            growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement("cock"))), "Has no penis");
+            growCock.addRequirement(RequirementShortcuts.rev(new NotRequirement(new BodyPartRequirement(CockPart.TYPE))), "Has no penis");
             growCock.option = "Mara: Install a cock";
             growCock.scene = "[Placeholder]<br/>Mara makes some modifications to the dildo and manages to attach it to her own body through methods unknown to you.";
             growCock.effect = (c, self, other) -> {
@@ -61,17 +64,17 @@ public class MaraTime extends BaseNPCTime {
         {
             TransformationOption removeCock = new TransformationOption();
             removeCock.ingredients.put(Item.DisSol, 3);
-            removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement("cock")), "Has a penis");
+            removeCock.addRequirement(RequirementShortcuts.rev(new BodyPartRequirement(CockPart.TYPE)), "Has a penis");
             removeCock.option = "Mara: Remove her cock";
             removeCock.scene = "[Placeholder]<br/>Mara uses the solvent to dissolve the bond from her modified cock, making her wholly female again.";
             removeCock.effect = (c, self, other) -> {
-                other.body.removeAll("cock");
+                other.body.removeAll(CockPart.TYPE);
                 return true;
             };
             transformationOptions.add(removeCock);
         }
         {
-            TransformationOption bionicCock = new ApplyPartModOption("cock", CockMod.bionic);
+            TransformationOption bionicCock = new ApplyPartModOption(CockPart.TYPE, CockMod.bionic);
             bionicCock.ingredients.put(Item.PriapusDraft, 10);
             bionicCock.ingredients.put(Item.TinkersMix, 20);
             bionicCock.ingredients.put(Item.Lubricant, 5);
@@ -82,7 +85,7 @@ public class MaraTime extends BaseNPCTime {
             transformationOptions.add(bionicCock);
         }
         {
-            TransformationOption cyberneticPussy = new ApplyPartModOption("pussy", CyberneticMod.INSTANCE);
+            TransformationOption cyberneticPussy = new ApplyPartModOption(PussyPart.TYPE, CyberneticMod.INSTANCE);
             cyberneticPussy.ingredients.put(Item.TinkersMix, 20);
             cyberneticPussy.ingredients.put(Item.Lubricant, 5);
             cyberneticPussy.ingredients.put(Item.Spring, 5);
@@ -92,7 +95,7 @@ public class MaraTime extends BaseNPCTime {
             transformationOptions.add(cyberneticPussy);
         }
         {
-            TransformationOption biomechAss = new ApplyPartModOption("ass", CyberneticMod.INSTANCE);
+            TransformationOption biomechAss = new ApplyPartModOption(AssPart.TYPE, CyberneticMod.INSTANCE);
             biomechAss.ingredients.put(Item.TinkersMix, 20);
             biomechAss.ingredients.put(Item.Lubricant, 5);
             biomechAss.ingredients.put(Item.Spring, 5);
@@ -105,7 +108,7 @@ public class MaraTime extends BaseNPCTime {
             transformationOptions.add(biomechAss);
         }
         {
-            TransformationOption prostheticMouth = new ApplyPartModOption("mouth", CyberneticMod.INSTANCE);
+            TransformationOption prostheticMouth = new ApplyPartModOption(MouthPart.TYPE, CyberneticMod.INSTANCE);
             prostheticMouth.ingredients.put(Item.TinkersMix, 20);
             prostheticMouth.ingredients.put(Item.Lubricant, 5);
             prostheticMouth.ingredients.put(Item.Spring, 5);

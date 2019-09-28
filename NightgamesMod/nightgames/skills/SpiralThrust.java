@@ -3,6 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -108,7 +109,7 @@ public class SpiralThrust extends Thrust {
                             + " of %s cock with %s hot, %s, bringing %s more pleasure than %s thought possible.",
                             getSelf().subject(), getSelf().possessiveAdjective(),
                             target.nameOrPossessivePronoun(), getSelf().possessiveAdjective(),
-                            (selfO.isType("pussy") ? "slippery pussy walls" : " steaming asshole"),
+                            (selfO.isType(PussyPart.TYPE) ? "slippery pussy walls" : " steaming asshole"),
                             target.objectPronoun(), target.pronoun());
         }
     }

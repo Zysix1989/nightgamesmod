@@ -2,6 +2,7 @@ package nightgames.pet;
 
 import nightgames.characters.Character;
 import nightgames.characters.Growth;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.GenericBodyPart;
@@ -92,8 +93,8 @@ public class Slime extends Pet {
         PetCharacter self = new PetCharacter(this, owner().nameOrPossessivePronoun() + " " + getName(), getName(), new Growth(), getPower());
         // slimes are around 80 cm ish? comes up to about crotch level
         self.body.setHeight(80);
-        self.body.add(new GenericBodyPart("skin", 0, 1, 1, "skin", ""));
-        self.body.add(new GenericBodyPart("hands", 0, 1, 1, "hands", ""));
+        self.body.add(new GenericBodyPart("skin", 0, 1, 1, Body.SKIN, ""));
+        self.body.add(new GenericBodyPart("hands", 0, 1, 1, Body.HANDS, ""));
         self.body.add(new CockPart().applyMod(CockMod.slimy));
         self.body.add(PussyPart.generic.applyMod(GooeyMod.INSTANCE));
         self.body.add(new TentaclePart("tentacles", "body", "slime", 0, 1, 1));

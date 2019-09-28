@@ -2,6 +2,7 @@ package nightgames.skills;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -30,8 +31,8 @@ public class PussyGrind extends Skill {
     }
 
     public boolean fuckable(Combat c, Character target) {
-        return BodyPart.hasType(c.getStance().getPartsFor(c, getSelf(), target), "pussy")
-                        && BodyPart.hasType(c.getStance().getPartsFor(c, target, getSelf()), "pussy");
+        return BodyPart.hasType(c.getStance().getPartsFor(c, getSelf(), target), PussyPart.TYPE)
+                        && BodyPart.hasType(c.getStance().getPartsFor(c, target, getSelf()), PussyPart.TYPE);
     }
 
     @Override

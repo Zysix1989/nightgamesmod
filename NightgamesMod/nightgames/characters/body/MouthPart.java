@@ -15,8 +15,10 @@ import nightgames.status.Trance;
 
 public class MouthPart extends GenericBodyPart {
 
+    public static final String TYPE = "mouth";
+
     public MouthPart() {
-        super("mouth", 0, 1, 1, "mouth", "a ");
+        super("mouth", 0, 1, 1, TYPE, "a ");
     }
 
     public MouthPart(JsonObject js) {

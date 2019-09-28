@@ -3,7 +3,9 @@ package nightgames.skills;
 import java.util.Optional;
 
 import nightgames.characters.Character;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -23,13 +25,13 @@ public class FootWorship extends Skill {
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
-        Optional<BodyFetish> fetish = getSelf().body.getFetish("feet");
+        Optional<BodyFetish> fetish = getSelf().body.getFetish(Body.FEET);
         return user.isPetOf(target) || (fetish.isPresent() && fetish.get().magnitude >= .5);
     }
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return target.body.has("feet") && c.getStance().reachBottom(getSelf()) && getSelf().canAct()
+        return target.body.has(Body.FEET) && c.getStance().reachBottom(getSelf()) && getSelf().canAct()
                         && !c.getStance().behind(getSelf()) && !c.getStance().behind(target)
                         && target.outfit.hasNoShoes();
     }
@@ -46,8 +48,8 @@ public class FootWorship extends Skill {
         int n = 0;
         m = 8 + Global.random(6);
         n = 20;
-        BodyPart mouth = getSelf().body.getRandom("mouth");
-        BodyPart feet = target.body.getRandom("feet");
+        BodyPart mouth = getSelf().body.getRandom(MouthPart.TYPE);
+        BodyPart feet = target.body.getRandom(Body.FEET);
         if (getSelf().human()) {
             c.write(getSelf(), Global.format(deal(c, 0, Result.normal, target), getSelf(), target));
         } else {

@@ -84,7 +84,7 @@ public abstract class BasePersonality implements Personality {
     @Override
     public void rest(int time) {
         if (preferredCockModType.isPresent() && character.rank > 0) {
-            Optional<BodyPart> optDick = character.body.get("cock")
+            Optional<BodyPart> optDick = character.body.get(CockPart.TYPE)
                 .stream()
                 .filter(part -> part.moddedPartCountsAs(preferredCockModType.get()))
                 .findAny();

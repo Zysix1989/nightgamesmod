@@ -18,11 +18,14 @@ import nightgames.actions.Shortcut;
 import nightgames.areas.Area;
 import nightgames.areas.Area.EncounterResult;
 import nightgames.areas.Deployable;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.CockMod;
 import nightgames.characters.body.GenericBodyPart;
+import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.GooeyMod;
 import nightgames.characters.body.mods.SlimyCockMod;
@@ -839,7 +842,7 @@ public class Player extends Character {
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                 } else {
                     c.write(this, "You pull " + target.getName() + " to you and rub your thigh against her girl parts.");
-                    target.body.pleasure(this, body.getRandom("feet"), target.body.getRandomPussy(),
+                    target.body.pleasure(this, body.getRandom(Body.FEET), target.body.getRandomPussy(),
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                 }
                 break;
@@ -848,7 +851,7 @@ public class Player extends Character {
                      .sub(this)) {
                     Position reverse = c.getStance()
                                         .reverse(c, true);
-                    if (reverse != c.getStance() && !BodyPart.hasOnlyType(reverse.bottomParts(), "strapon")) {
+                    if (reverse != c.getStance() && !BodyPart.hasOnlyType(reverse.bottomParts(), StraponPart.TYPE)) {
                         c.setStance(reverse, this, false);
                     } else {
                         c.write(this, Global.format(
@@ -857,7 +860,7 @@ public class Player extends Character {
                         c.setStance(new Neutral(this, c.getOpponent(this)), this, true);
                     }
                 } else {
-                    target.body.pleasure(this, body.getRandom("hands"), target.body.getRandomBreasts(),
+                    target.body.pleasure(this, body.getRandom(Body.HANDS), target.body.getRandomBreasts(),
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                     c.write(this, Global.format(
                                     "{self:SUBJECT-ACTION:pinch|pinches} {other:possessive} nipples with {self:possessive} hands as {other:subject-action:try|tries} to fuck {self:direct-object}. "
@@ -1021,7 +1024,7 @@ public class Player extends Character {
                 body.temporaryAddOrReplacePartWithType(
                     body.getRandomPussy().applyMod(GooeyMod.INSTANCE), 999);
                 body.temporaryAddOrReplacePartWithType(
-                    new TentaclePart("slime filaments", "pussy", "slime", 0.0, 1.0, 1.0), 999);
+                    new TentaclePart("slime filaments", PussyPart.TYPE, "slime", 0.0, 1.0, 1.0), 999);
             }
             if (hasDick() && !body.getRandomCock().moddedPartCountsAs(SlimyCockMod.TYPE)) {
                 body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(CockMod.slimy),
@@ -1033,7 +1036,7 @@ public class Player extends Character {
                 body.temporaryAddOrReplacePartWithType(part.upgrade(), 999);
             }
             body.temporaryAddOrReplacePartWithType(
-                new GenericBodyPart("gooey skin", .6, 1.5, .8, "skin", ""), 999);
+                new GenericBodyPart("gooey skin", .6, 1.5, .8, Body.SKIN, ""), 999);
             body.temporaryAddOrReplacePartWithType(
                 new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);
             addTemporaryTrait(Trait.Sneaky, 999);
