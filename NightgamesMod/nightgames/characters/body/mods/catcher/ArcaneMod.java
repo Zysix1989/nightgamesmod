@@ -15,7 +15,7 @@ import nightgames.status.Enthralled;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-public class ArcaneMod extends PartMod {
+public class ArcaneMod extends CatcherMod {
     public static final String TYPE = "arcane";
     public static final ArcaneMod INSTANCE = new ArcaneMod();
 

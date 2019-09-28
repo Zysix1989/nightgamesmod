@@ -15,7 +15,7 @@ import nightgames.combat.Combat;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-public class FieryMod extends PartMod {
+public class FieryMod extends CatcherMod {
     public static final String TYPE = "fiery";
     public static final FieryMod INSTANCE = new FieryMod();
 

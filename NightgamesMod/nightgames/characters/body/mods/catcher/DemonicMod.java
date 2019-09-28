@@ -20,7 +20,7 @@ import nightgames.status.Drained;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-public class DemonicMod extends PartMod {
+public class DemonicMod extends CatcherMod {
     public static final String TYPE = "demonic";
     public static final DemonicMod INSTANCE = new DemonicMod();
 

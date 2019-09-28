@@ -12,7 +12,7 @@ import nightgames.status.CockBound;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-public class GooeyMod extends PartMod {
+public class GooeyMod extends CatcherMod {
     public static final String TYPE = "gooey";
     public static final GooeyMod INSTANCE = new GooeyMod();
 

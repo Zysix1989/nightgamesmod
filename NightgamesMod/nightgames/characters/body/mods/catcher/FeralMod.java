@@ -16,7 +16,7 @@ import nightgames.status.Stsflag;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-public class FeralMod extends PartMod {
+public class FeralMod extends CatcherMod {
     public static final String TYPE = "feral";
     public static final FeralMod INSTANCE = new FeralMod();
 

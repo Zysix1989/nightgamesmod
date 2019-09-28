@@ -17,7 +17,7 @@ import nightgames.status.addiction.AddictionType;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-public class DivineMod extends PartMod {
+public class DivineMod extends CatcherMod {
     public static final String TYPE = "divine";
     public static final DivineMod INSTANCE = new DivineMod();
 

@@ -9,7 +9,7 @@ import nightgames.status.Trance;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-public class PlantMod extends PartMod {
+public class PlantMod extends CatcherMod {
     public static final String TYPE = "plant";
     public static final PlantMod INSTANCE = new PlantMod();
 

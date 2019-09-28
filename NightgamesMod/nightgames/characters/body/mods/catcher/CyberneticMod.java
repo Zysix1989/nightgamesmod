@@ -14,7 +14,7 @@ import nightgames.status.Shamed;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-public class CyberneticMod extends PartMod {
+public class CyberneticMod extends CatcherMod {
     public static final String TYPE = "cybernetic";
 
     public static final CyberneticMod INSTANCE = new CyberneticMod();
