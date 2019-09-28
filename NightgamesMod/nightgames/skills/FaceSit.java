@@ -5,7 +5,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.mods.FeralMod;
+import nightgames.characters.body.mods.catcher.FeralMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;

@@ -12,7 +12,7 @@ import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.mods.ArcaneMod;
+import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.characters.body.mods.SecondPussyMod;
 import nightgames.global.Flag;
 import nightgames.global.Global;

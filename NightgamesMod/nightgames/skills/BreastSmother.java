@@ -13,20 +13,11 @@ import nightgames.skills.EngulfedFuck.Pairing;
 import nightgames.skills.damage.DamageType;
 import nightgames.stance.BreastSmothering;
 import nightgames.stance.FlyingCarry;
-import nightgames.stance.HeldPaizuri;
 import nightgames.stance.Stance;
-import nightgames.status.Abuff;
 import nightgames.status.BodyFetish;
 import nightgames.status.Charmed;
-import nightgames.status.FiredUp;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.EarPart;
-import nightgames.characters.body.TailPart;
-import nightgames.characters.body.WingsPart;
-import nightgames.characters.body.mods.ArcaneMod;
-import nightgames.characters.body.mods.DemonicMod;
-import nightgames.status.Hypersensitive;
 import nightgames.status.WingWrapped;
 
 public class BreastSmother extends Skill {

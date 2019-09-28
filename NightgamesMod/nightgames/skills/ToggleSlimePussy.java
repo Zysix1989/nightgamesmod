@@ -3,7 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.mods.GooeyMod;
+import nightgames.characters.body.mods.catcher.GooeyMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;

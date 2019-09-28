@@ -1,10 +1,11 @@
-package nightgames.characters.body.mods;
+package nightgames.characters.body.mods.catcher;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.combat.Combat;

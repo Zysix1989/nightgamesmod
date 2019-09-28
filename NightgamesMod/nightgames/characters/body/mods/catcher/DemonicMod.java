@@ -1,4 +1,4 @@
-package nightgames.characters.body.mods;
+package nightgames.characters.body.mods.catcher;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -9,6 +9,7 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
 import nightgames.characters.body.mods.pitcher.RunicCockMod;
 import nightgames.combat.Combat;

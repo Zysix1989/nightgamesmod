@@ -3,7 +3,7 @@ package nightgames.characters.body.mods.pitcher;
 import java.util.Optional;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.mods.FieryMod;
+import nightgames.characters.body.mods.catcher.FieryMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.FluidAddiction;

@@ -1,4 +1,4 @@
-package nightgames.characters.body.mods;
+package nightgames.characters.body.mods.catcher;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -7,9 +7,9 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.mods.PartMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
-import nightgames.skills.Tactics;
 import nightgames.status.DivineCharge;
 import nightgames.status.Stsflag;
 import nightgames.status.addiction.Addiction;

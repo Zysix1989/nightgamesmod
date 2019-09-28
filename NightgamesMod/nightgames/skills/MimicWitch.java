@@ -9,7 +9,7 @@ import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.mods.ArcaneMod;
+import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;

@@ -13,7 +13,7 @@ import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.MouthPart;
-import nightgames.characters.body.mods.ArcaneMod;
+import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.characters.body.mods.ExtendedTonguedMod;
 import nightgames.characters.body.mods.pitcher.RunicCockMod;
 import nightgames.characters.custom.CharacterLine;

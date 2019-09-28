@@ -2,7 +2,7 @@ package nightgames.characters.body.mods.pitcher;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.mods.DemonicMod;
+import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.CockBound;

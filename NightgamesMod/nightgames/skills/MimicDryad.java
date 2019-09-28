@@ -6,7 +6,7 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.EarPart;
-import nightgames.characters.body.mods.PlantMod;
+import nightgames.characters.body.mods.catcher.PlantMod;
 import nightgames.characters.body.mods.TentacledMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;

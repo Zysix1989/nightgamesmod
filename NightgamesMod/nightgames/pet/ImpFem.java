@@ -4,7 +4,7 @@ import nightgames.characters.Character;
 import nightgames.characters.CharacterSex;
 import nightgames.characters.Growth;
 import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.mods.DemonicMod;
+import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.combat.Combat;
 import nightgames.skills.Grind;
 import nightgames.skills.Piston;

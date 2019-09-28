@@ -44,7 +44,7 @@ import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.ToysPart;
-import nightgames.characters.body.mods.DemonicMod;
+import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.characters.custom.AiModifiers;
 import nightgames.characters.custom.CharacterLine;

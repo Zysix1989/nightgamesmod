@@ -13,7 +13,7 @@ import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
-import nightgames.characters.body.mods.FieryMod;
+import nightgames.characters.body.mods.catcher.FieryMod;
 import nightgames.characters.body.mods.TrainedMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;

@@ -11,7 +11,7 @@ import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.mods.FieryMod;
+import nightgames.characters.body.mods.catcher.FieryMod;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.requirements.BodyPartRequirement;

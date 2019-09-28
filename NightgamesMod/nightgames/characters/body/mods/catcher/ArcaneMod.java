@@ -1,10 +1,11 @@
-package nightgames.characters.body.mods;
+package nightgames.characters.body.mods.catcher;
 
 import java.util.ArrayList;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.BionicCockMod;
 import nightgames.characters.body.mods.pitcher.PrimalCockMod;
 import nightgames.combat.Combat;

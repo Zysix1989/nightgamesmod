@@ -1,4 +1,4 @@
-package nightgames.characters.body.mods;
+package nightgames.characters.body.mods.catcher;
 
 import java.util.Optional;
 import nightgames.characters.Attribute;
@@ -8,6 +8,7 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
+import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.BionicCockMod;
 import nightgames.characters.body.mods.pitcher.PrimalCockMod;
 import nightgames.combat.Combat;

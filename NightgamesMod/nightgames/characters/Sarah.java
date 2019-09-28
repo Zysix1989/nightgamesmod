@@ -9,7 +9,7 @@ import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.WingsPart;
-import nightgames.characters.body.mods.FieryMod;
+import nightgames.characters.body.mods.catcher.FieryMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;

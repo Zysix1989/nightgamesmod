@@ -17,7 +17,7 @@ import nightgames.characters.body.EarPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
-import nightgames.characters.body.mods.DemonicMod;
+import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.characters.body.mods.TentacledMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;

@@ -9,7 +9,7 @@ import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.pitcher.BionicCockMod;
-import nightgames.characters.body.mods.CyberneticMod;
+import nightgames.characters.body.mods.catcher.CyberneticMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;

@@ -25,7 +25,7 @@ import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.TentaclePart;
-import nightgames.characters.body.mods.GooeyMod;
+import nightgames.characters.body.mods.catcher.GooeyMod;
 import nightgames.characters.body.mods.pitcher.SlimyCockMod;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatSceneChoice;

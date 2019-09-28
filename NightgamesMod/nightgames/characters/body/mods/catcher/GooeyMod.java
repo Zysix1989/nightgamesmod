@@ -1,10 +1,11 @@
-package nightgames.characters.body.mods;
+package nightgames.characters.body.mods.catcher;
 
 import java.util.Optional;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.mods.PartMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.CockBound;

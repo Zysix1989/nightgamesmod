@@ -3,14 +3,14 @@ package nightgames.characters.body;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import nightgames.characters.body.mods.ArcaneMod;
+import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.characters.body.mods.pitcher.CockMod;
-import nightgames.characters.body.mods.CyberneticMod;
-import nightgames.characters.body.mods.DemonicMod;
-import nightgames.characters.body.mods.DivineMod;
-import nightgames.characters.body.mods.FeralMod;
-import nightgames.characters.body.mods.FieryMod;
-import nightgames.characters.body.mods.GooeyMod;
+import nightgames.characters.body.mods.catcher.CyberneticMod;
+import nightgames.characters.body.mods.catcher.DemonicMod;
+import nightgames.characters.body.mods.catcher.DivineMod;
+import nightgames.characters.body.mods.catcher.FeralMod;
+import nightgames.characters.body.mods.catcher.FieryMod;
+import nightgames.characters.body.mods.catcher.GooeyMod;
 import nightgames.characters.body.mods.PartMod;
 
 public class BodyUtils {
