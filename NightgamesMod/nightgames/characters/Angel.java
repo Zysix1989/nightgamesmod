@@ -5,10 +5,10 @@ import java.util.Optional;
 
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.mods.CockMod;
+import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.WingsPart;
-import nightgames.characters.body.mods.BlessedCockMod;
+import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.body.mods.DivineMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;

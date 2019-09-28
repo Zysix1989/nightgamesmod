@@ -3,7 +3,7 @@ package nightgames.pet;
 import nightgames.characters.Character;
 import nightgames.characters.CharacterSex;
 import nightgames.characters.Growth;
-import nightgames.characters.body.mods.CockMod;
+import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.combat.Combat;

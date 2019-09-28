@@ -10,7 +10,7 @@ import java.util.Optional;
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.mods.CockMod;
+import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.custom.AiModifiers;
 import nightgames.characters.custom.CharacterLine;

@@ -8,6 +8,8 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
+import nightgames.characters.body.mods.pitcher.BionicCockMod;
+import nightgames.characters.body.mods.pitcher.PrimalCockMod;
 import nightgames.combat.Combat;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;

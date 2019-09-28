@@ -1,4 +1,4 @@
-package nightgames.characters.body.mods;
+package nightgames.characters.body.mods.pitcher;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;

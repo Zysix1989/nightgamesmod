@@ -1,8 +1,10 @@
-package nightgames.characters.body.mods;
+package nightgames.characters.body.mods.pitcher;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.mods.CyberneticMod;
+import nightgames.characters.body.mods.FeralMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.pet.PetCharacter;

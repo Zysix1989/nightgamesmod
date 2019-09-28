@@ -9,6 +9,8 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
+import nightgames.characters.body.mods.pitcher.RunicCockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.pet.PetCharacter;

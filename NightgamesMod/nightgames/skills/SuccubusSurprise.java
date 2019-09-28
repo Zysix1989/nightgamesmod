@@ -5,7 +5,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.StraponPart;
-import nightgames.characters.body.mods.BlessedCockMod;
+import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.mods.pitcher.IncubusCockMod;
+import nightgames.characters.body.mods.pitcher.RunicCockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.Frenzied;

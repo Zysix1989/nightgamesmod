@@ -2,7 +2,7 @@ package nightgames.characters;
 
 import nightgames.characters.body.*;
 import nightgames.characters.body.AssPart.Size;
-import nightgames.characters.body.mods.BlessedCockMod;
+import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.body.mods.DivineMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;

@@ -11,7 +11,7 @@ import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.FeralMod;
-import nightgames.characters.body.mods.PrimalCockMod;
+import nightgames.characters.body.mods.pitcher.PrimalCockMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;

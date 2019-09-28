@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.mods.IncubusCockMod;
+import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;

@@ -1,10 +1,11 @@
-package nightgames.characters.body.mods;
+package nightgames.characters.body.mods.pitcher;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import nightgames.characters.body.mods.PartMod;
 
 public class CockMod extends PartMod {
     public static final CockMod slimy = new SlimyCockMod();
