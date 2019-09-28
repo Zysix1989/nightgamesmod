@@ -3,6 +3,8 @@ package nightgames.characters.body.mods.pitcher;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.mods.catcher.CatcherMod;
+import nightgames.characters.body.mods.catcher.DivineMod;
 import nightgames.combat.Combat;
 import nightgames.status.DivineCharge;
 import nightgames.status.Stsflag;
@@ -67,6 +69,11 @@ public class BlessedCockMod extends CockMod {
     @Override
     public String describeAdjective(String partType) {
             return "holy aura";
+    }
+
+    @Override
+    public CatcherMod getCorrespondingCatcherMod() {
+        return new DivineMod();
     }
 
     private static final JtwigTemplate APPLY_BONUS_TEMPLATE = JtwigTemplate.inlineTemplate(

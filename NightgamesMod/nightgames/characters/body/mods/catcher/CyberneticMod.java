@@ -6,6 +6,8 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.body.mods.pitcher.BionicCockMod;
+import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.combat.Combat;
@@ -87,4 +89,9 @@ public class CyberneticMod extends CatcherMod {
             + "{{ opponent.pronounAction('feel') }} a thin filament sliding "
             + "into opponent.possessiveAdjective(), filling "
             + "{{ opponent.objectPronoun }} with both pleasure and shame.");
+
+    @Override
+    public CockMod getCorrespondingCockMod() {
+        return new BionicCockMod();
+    }
 }

@@ -2,6 +2,8 @@ package nightgames.characters.body.mods.pitcher;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.mods.catcher.CatcherMod;
+import nightgames.characters.body.mods.catcher.FeralMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.Pheromones;
@@ -31,6 +33,11 @@ public class PrimalCockMod extends CockMod {
     @Override
     public String describeAdjective(String partType) {
         return "primal musk";
+    }
+
+    @Override
+    public CatcherMod getCorrespondingCatcherMod() {
+        return new FeralMod();
     }
 
     private static final JtwigTemplate TICK_HOLDING_TEMPLATE = JtwigTemplate.inlineTemplate(

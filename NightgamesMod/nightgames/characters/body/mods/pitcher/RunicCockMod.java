@@ -2,6 +2,8 @@ package nightgames.characters.body.mods.pitcher;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.mods.catcher.ArcaneMod;
+import nightgames.characters.body.mods.catcher.CatcherMod;
 import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -49,6 +51,11 @@ public class RunicCockMod extends CockMod {
     @Override
     public String describeAdjective(String partType) {
         return "runic symbols";
+    }
+
+    @Override
+    public CatcherMod getCorrespondingCatcherMod() {
+        return new ArcaneMod();
     }
 
     private static final JtwigTemplate APPLY_BONUS_DEMONIC_TEMPLATE = JtwigTemplate.inlineTemplate(

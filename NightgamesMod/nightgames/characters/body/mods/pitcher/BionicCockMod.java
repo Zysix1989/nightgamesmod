@@ -3,6 +3,8 @@ package nightgames.characters.body.mods.pitcher;
 import java.util.Optional;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.mods.catcher.CatcherMod;
+import nightgames.characters.body.mods.catcher.CyberneticMod;
 import nightgames.characters.body.mods.catcher.FieryMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -56,6 +58,11 @@ public class BionicCockMod extends CockMod {
     @Override
     public String describeAdjective(String partType) {
         return "bionic implants";
+    }
+
+    @Override
+    public CatcherMod getCorrespondingCatcherMod() {
+        return new CyberneticMod();
     }
 
     private static final JtwigTemplate APPLY_BONUS_APHRODISIAC_TEMPLATE = JtwigTemplate.inlineTemplate(

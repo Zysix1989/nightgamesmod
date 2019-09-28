@@ -8,6 +8,8 @@ import nightgames.characters.body.CockPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.body.mods.pitcher.BlessedCockMod;
+import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.DivineCharge;
@@ -149,4 +151,9 @@ public class DivineMod extends CatcherMod {
             + "yet, but {{ self.possessiveAdjective() }} {{ part.describe(self) }} massages "
             + "{{ opponent.possessiveAdjective() }} {{ target.getType() }}, bringing you "
             + "waves of pleasure.</b>");
+
+    @Override
+    public CockMod getCorrespondingCockMod() {
+        return new BlessedCockMod();
+    }
 }

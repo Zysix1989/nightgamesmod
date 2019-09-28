@@ -3,7 +3,9 @@ package nightgames.characters.body.mods.pitcher;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.mods.catcher.CatcherMod;
 import nightgames.characters.body.mods.catcher.DemonicMod;
+import nightgames.characters.body.mods.catcher.FieryMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.Abuff;
@@ -48,6 +50,11 @@ public class EnlightenedCockMod extends CockMod {
     @Override
     public String describeAdjective(String partType) {
             return "imposing presence";
+    }
+
+    @Override
+    public CatcherMod getCorrespondingCatcherMod() {
+        return new FieryMod();
     }
 
     private static final JtwigTemplate APPLY_BONUS_DEMONIC_TEMPLATE = JtwigTemplate.inlineTemplate(

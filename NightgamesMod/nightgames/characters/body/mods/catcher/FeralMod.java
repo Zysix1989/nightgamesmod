@@ -5,7 +5,9 @@ import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
+import nightgames.characters.body.mods.pitcher.PrimalCockMod;
 import nightgames.characters.body.mods.pitcher.RunicCockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -114,4 +116,9 @@ public class FeralMod extends CatcherMod {
             + "{{ other.possessiveAdjective() }} entire body flushes in arousal; "
             + "{{ other.subject() }} better finish this fast!"
     );
+
+    @Override
+    public CockMod getCorrespondingCockMod() {
+        return new PrimalCockMod();
+    }
 }

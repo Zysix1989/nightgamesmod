@@ -3,6 +3,7 @@ package nightgames.characters.body.mods.catcher;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.Trance;
@@ -63,4 +64,8 @@ public class PlantMod extends CatcherMod {
             + "{{ other.action('feel') }} {{ self.nameOrPossessivePronoun() }} insidious "
             + "flower leeching {{ other.possessiveAdjective() }} strength.");
 
+    @Override
+    public CockMod getCorrespondingCockMod() {
+        throw new UnsupportedOperationException();
+    }
 }

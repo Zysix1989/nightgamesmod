@@ -7,7 +7,9 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.BionicCockMod;
+import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.mods.pitcher.PrimalCockMod;
+import nightgames.characters.body.mods.pitcher.RunicCockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.pet.PetCharacter;
@@ -115,4 +117,9 @@ public class ArcaneMod extends CatcherMod {
             + "eldritch light, but they do not seem to be able to affect "
             + "{{ opponent.nameOrPossessivePronoun() }} only partially-organic "
             + "{{ target.describe(opponent) }}");
+
+    @Override
+    public CockMod getCorrespondingCockMod() {
+        return new RunicCockMod();
+    }
 }

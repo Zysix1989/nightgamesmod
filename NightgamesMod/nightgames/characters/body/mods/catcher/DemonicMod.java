@@ -10,7 +10,9 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
+import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.characters.body.mods.pitcher.RunicCockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -166,4 +168,9 @@ public class DemonicMod extends CatcherMod {
             + "{{ self.possessiveAdjective() }} "
             + "{{ (master.useFemalePronouns()) ? 'mistress' : 'master' }} through "
             + "{{ self.possessiveAdjective() }} infernal connection.");
+
+    @Override
+    public CockMod getCorrespondingCockMod() {
+        return new IncubusCockMod();
+    }
 }

@@ -6,8 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.body.mods.catcher.CatcherMod;
 
-public class CockMod extends PartMod {
+public abstract class CockMod extends PartMod {
     public static final CockMod slimy = new SlimyCockMod();
     public static final CockMod runic= new RunicCockMod();
     public static final CockMod blessed = new BlessedCockMod();
@@ -47,4 +48,6 @@ public class CockMod extends PartMod {
         } else
         return "weirdness (ERROR)";
     }
+
+    public abstract CatcherMod getCorrespondingCatcherMod();
 }

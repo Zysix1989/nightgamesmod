@@ -6,6 +6,8 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.body.mods.pitcher.CockMod;
+import nightgames.characters.body.mods.pitcher.SlimyCockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.CockBound;
@@ -86,4 +88,9 @@ public class GooeyMod extends CatcherMod {
             + "constantly massage {{ other.possessiveAdjective() }} "
             + "{{ target.describe(opponent) }}, filling every inch of it with pleasure."
     );
+
+    @Override
+    public CockMod getCorrespondingCockMod() {
+        return new SlimyCockMod();
+    }
 }

@@ -2,6 +2,8 @@ package nightgames.characters.body.mods.pitcher;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.mods.catcher.CatcherMod;
+import nightgames.characters.body.mods.catcher.GooeyMod;
 import nightgames.combat.Combat;
 
 public class SlimyCockMod extends CockMod {
@@ -21,5 +23,10 @@ public class SlimyCockMod extends CockMod {
     @Override
     public String describeAdjective(String partType) {
         return "slimy transparency";
+    }
+
+    @Override
+    public CatcherMod getCorrespondingCatcherMod() {
+        return new GooeyMod();
     }
 }

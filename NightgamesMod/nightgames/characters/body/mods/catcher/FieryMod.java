@@ -10,6 +10,8 @@ import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.BionicCockMod;
+import nightgames.characters.body.mods.pitcher.CockMod;
+import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
 import nightgames.characters.body.mods.pitcher.PrimalCockMod;
 import nightgames.combat.Combat;
 import org.jtwig.JtwigModel;
@@ -112,4 +114,8 @@ public class FieryMod extends CatcherMod {
         + "{{ part.getType() }} overpowers {{ opponent.possessiveAdjective() }} senses "
         + "now and {{ opponent.pronoun() }} cannot respond.");
 
+    @Override
+    public CockMod getCorrespondingCockMod() {
+        return new EnlightenedCockMod();
+    }
 }

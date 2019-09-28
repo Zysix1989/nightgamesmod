@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.body.mods.catcher.CatcherMod;
+import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
@@ -182,11 +184,9 @@ public class PussyPart extends GenericBodyPart {
 
     public CockPart getEquivalentCock() {
         List<PartMod> newMods = getPartMods().stream()
-                        .map(mod -> BodyUtils.getKeyFromValue(BodyUtils.EQUIVALENT_MODS, mod))
-                        .filter(Optional::isPresent)
-                        .map(Optional::get)
-                        .distinct()
-                        .collect(Collectors.toList());
+            .filter(mod -> mod instanceof CatcherMod)
+            .map(mod -> ((CatcherMod) mod).getCorrespondingCockMod())
+            .collect(Collectors.toList());
         GenericBodyPart newPart = new CockPart();
         for (PartMod mod : newMods) {
             newPart = (GenericBodyPart)newPart.applyMod(mod);
