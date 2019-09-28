@@ -2,10 +2,8 @@ package nightgames.characters.body.mods;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.combat.Combat;
-import nightgames.global.Global;
 import nightgames.status.DivineCharge;
 import nightgames.status.Stsflag;
 import org.jtwig.JtwigModel;

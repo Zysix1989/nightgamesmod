@@ -3,7 +3,6 @@ package nightgames.characters.body.mods;
 import java.util.ArrayList;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;

@@ -4,7 +4,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.CockMod;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.mods.BlessedCockMod;
 import nightgames.combat.Combat;

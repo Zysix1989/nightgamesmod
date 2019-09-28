@@ -9,7 +9,6 @@ import nightgames.characters.Character;
 import nightgames.characters.Player;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;

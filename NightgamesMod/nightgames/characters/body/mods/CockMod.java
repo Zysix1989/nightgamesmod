@@ -1,20 +1,10 @@
-package nightgames.characters.body;
+package nightgames.characters.body.mods;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import nightgames.characters.Character;
-import nightgames.characters.body.mods.BionicCockMod;
-import nightgames.characters.body.mods.BlessedCockMod;
-import nightgames.characters.body.mods.EnlightenedCockMod;
-import nightgames.characters.body.mods.IncubusCockMod;
-import nightgames.characters.body.mods.PartMod;
-import nightgames.characters.body.mods.PrimalCockMod;
-import nightgames.characters.body.mods.RunicCockMod;
-import nightgames.characters.body.mods.SlimyCockMod;
-import nightgames.combat.Combat;
 
 public class CockMod extends PartMod {
     public static final CockMod slimy = new SlimyCockMod();

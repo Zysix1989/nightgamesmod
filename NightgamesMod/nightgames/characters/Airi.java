@@ -9,7 +9,7 @@ import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.CockMod;
+import nightgames.characters.body.mods.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.GenericBodyPart;
