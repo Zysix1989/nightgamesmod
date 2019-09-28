@@ -370,16 +370,7 @@ public class Cassie extends BasePersonality {
 
     @Override
     public String victory(Combat c, Result flag) {
-
-
-        /*if (c.getOpponent(character).getLastOrgasmPart() instanceof BreastsPart 
-                        && c.getOpponent(character).body.getLargestBreasts()
-                            .getSensitivity(c.getOpponent(character), 
-                                            character.body.getRandom("hands")) > 5) {
-            character.arousal.empty();
-            return "incomplete, should be a series of scenes including one where Cassie makes the player lactate magicmilk that only affects themself and prevents breast size reduction"
-                            + "and one where Cassie gives the player a bra that reduces breast sensitivity to reasonable levels while worn, but also makes them moo on orgasm, and vibrates while fighting Cassie";
-        } else */if (c.getStance().anallyPenetrated(c,c.getOpponent(character))) {
+        if (c.getStance().anallyPenetrated(c,c.getOpponent(character))) {
             character.arousal.empty();
             dominance+=1;
 
