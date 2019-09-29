@@ -12,7 +12,7 @@ import nightgames.characters.body.GenericBodyPart;
 import nightgames.combat.Combat;
 
 public abstract class PartMod implements BodyPartMod {
-    protected String modType;
+    private String modType;
     protected double hotness;
     protected double pleasure;
     protected double sensitivity;
