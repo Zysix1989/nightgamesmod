@@ -242,7 +242,6 @@ class BodyConfiguration {
                 JsonObject cockJson = object.getAsJsonObject(CockPart.TYPE);
                 JsonUtils.getOptional(cockJson, "length").map(JsonElement::getAsInt)
                                 .ifPresent(length -> cock.length = length);
-                cock.type = JsonUtils.getOptional(cockJson, "type").flatMap(json -> CockMod.getFromType(json.getAsString()));
                 config.cock = Optional.of(cock);
             }
 
@@ -270,17 +269,15 @@ class BodyConfiguration {
     }
 
     static class CockConfiguration {
-        Optional<CockMod> type;
         int length;
 
         CockConfiguration() {
-            type = Optional.empty();
             length = 6;
         }
 
         private CockPart build() {
             CockPart generic = new CockPart(length);
-            return type.isPresent() ? (CockPart) generic.applyMod(type.get()) : generic;
+            return generic;
         }
     }
 
