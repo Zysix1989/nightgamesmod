@@ -104,7 +104,8 @@ public class ArmManager {
         }
     }
     
-    private static final List<? extends PartMod> IMPALER_MODS = Collections.unmodifiableList(CockMod.ALL_MODS);
+    private static final List<? extends PartMod> IMPALER_MODS = Collections.unmodifiableList(
+        Arrays.asList(CockMod.slimy, CockMod.runic, CockMod.blessed, CockMod.incubus, CockMod.primal, CockMod.bionic, CockMod.enlightened));
     private static final List<? extends PartMod> SUCKER_MODS = Arrays.asList(
                     new ArcaneMod(), new CyberneticMod(),
                     new DivineMod(), new FeralMod(),

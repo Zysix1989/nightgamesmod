@@ -14,7 +14,6 @@ public abstract class CockMod extends PartMod {
     public static final CockMod primal = new PrimalCockMod();
     public static final CockMod bionic = new BionicCockMod();
     public static final CockMod enlightened = new EnlightenedCockMod();
-    public static final List<CockMod> ALL_MODS = Arrays.asList(slimy, runic, blessed, incubus, primal, bionic, enlightened);
 
     protected CockMod(String name, double hotness, double pleasure, double sensitivity) {
         super(name, hotness, pleasure, sensitivity);
