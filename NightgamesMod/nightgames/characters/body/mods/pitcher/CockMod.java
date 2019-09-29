@@ -20,10 +20,6 @@ public abstract class CockMod extends PartMod {
         super(name, hotness, pleasure, sensitivity);
     }
 
-    public static Optional<CockMod> getFromType(String type) {
-        return ALL_MODS.stream().filter(mod -> mod.getModType().equals(type)).findAny();
-    }
-
     @Override
     public String describeAdjective(String partType) {
         if (this.equals(bionic)) {
