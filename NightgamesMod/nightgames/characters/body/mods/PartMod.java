@@ -24,12 +24,6 @@ public abstract class PartMod implements BodyPartMod {
         this.sensitivity = sensitivity;
     }
 
-    /*
-     * Implement these if necessary to load more data than the default construct can.
-     */
-    public void loadData(JsonElement element) {}
-    public JsonElement saveData() { return null; }
-
     /**
      * This should be overridden if there needs to be more than only one variant of the mod active at the same time.
      */

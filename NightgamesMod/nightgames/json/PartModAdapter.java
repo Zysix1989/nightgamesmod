@@ -17,7 +17,6 @@ public class PartModAdapter implements JsonSerializer<PartMod>, JsonDeserializer
             String modClass = jsonElement.getAsJsonObject().get("_type").getAsString();
             PartMod mod;
             mod = (PartMod) Class.forName(modClass).newInstance();
-            mod.loadData(jsonElement.getAsJsonObject().get("value"));
             return mod;
         } catch (ClassNotFoundException | IllegalAccessException | ClassCastException | InstantiationException e) {
             e.printStackTrace();
@@ -28,7 +27,6 @@ public class PartModAdapter implements JsonSerializer<PartMod>, JsonDeserializer
     @Override
     public JsonElement serialize(PartMod mod, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonObject object = new JsonObject();
-        object.add("value", mod.saveData());
         object.addProperty("_type", mod.getClass().getCanonicalName());
         return object;
     }

@@ -22,21 +22,6 @@ public abstract class CockMod extends PartMod {
         super(name, hotness, pleasure, sensitivity, 0);
     }
 
-    @Override
-    public void loadData(JsonElement element) {
-        Optional<CockMod> other = getFromType(element.getAsString());
-        other.ifPresent(otherMod -> {
-            this.modType = otherMod.modType;
-            this.pleasure = otherMod.pleasure;
-            this.hotness = otherMod.hotness;
-            this.sensitivity = otherMod.sensitivity;
-        });
-    }
-
-    public JsonElement saveData() {
-        return new JsonPrimitive(getModType());
-    }
-
     public static Optional<CockMod> getFromType(String type) {
         return ALL_MODS.stream().filter(mod -> mod.getModType().equals(type)).findAny();
     }
