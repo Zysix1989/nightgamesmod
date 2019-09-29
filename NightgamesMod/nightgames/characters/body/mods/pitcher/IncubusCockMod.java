@@ -62,7 +62,7 @@ public class IncubusCockMod extends CockMod {
 
     @Override
     public void onOrgasmWith(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, boolean selfCame) {
-        if (this.equals(incubus) && c.getStance().inserted(self)) {
+        if (this.equals(new IncubusCockMod()) && c.getStance().inserted(self)) {
             var model = JtwigModel.newModel()
                 .with("self", self)
                 .with("opponent", opponent)

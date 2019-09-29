@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.pitcher.BionicCockMod;
@@ -359,7 +358,7 @@ public class Mara extends BasePersonality {
         }
         if (character.hasDick()) {
             character.body.addReplace(character.body.getRandomCock()
-                                                    .applyMod(CockMod.bionic),
+                                                    .applyMod(new BionicCockMod()),
                             1);
         }
         character.unequipAllClothing();

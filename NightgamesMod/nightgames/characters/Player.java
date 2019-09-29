@@ -20,7 +20,6 @@ import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
@@ -912,7 +911,8 @@ public class Player extends Character {
                                                 this, opponent, body.getRandomPussy()));
             }
             if (hasDick() && !body.getRandomCock().moddedPartCountsAs(SlimyCockMod.TYPE)) {
-                body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(CockMod.slimy), 999);
+                body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(
+                    new SlimyCockMod()), 999);
                 c.write(this, 
                                 Global.format("{self:NAME-POSSESSIVE} %s turned back into a gooey pussy.",
                                                 this, opponent, body.getRandomPussy()));
@@ -1025,7 +1025,8 @@ public class Player extends Character {
                     new TentaclePart("slime filaments", PussyPart.TYPE, "slime", 0.0, 1.0, 1.0), 999);
             }
             if (hasDick() && !body.getRandomCock().moddedPartCountsAs(SlimyCockMod.TYPE)) {
-                body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(CockMod.slimy),
+                body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(
+                    new SlimyCockMod()),
                     999);
             }
             BreastsPart part = body.getBreastsBelow(BreastsPart.Size.max());

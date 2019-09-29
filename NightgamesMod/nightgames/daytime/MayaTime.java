@@ -6,7 +6,7 @@ import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.mods.pitcher.CockMod;
+import nightgames.characters.body.mods.pitcher.BionicCockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.global.Global;
@@ -41,7 +41,7 @@ public class MayaTime extends BaseNPCTime {
             growCock.option = "Maya: Grow a cock";
             growCock.scene = "[Placeholder]<br/>Maya does some sort of thing and grows a cock.";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart(Size.Big).applyMod(CockMod.bionic));
+                other.body.add(new CockPart(Size.Big).applyMod(new BionicCockMod()));
                 return true;
             };
             transformationOptions.add(growCock);

@@ -7,7 +7,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.mods.pitcher.CockMod;
+import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.PussyPart;
@@ -64,7 +64,7 @@ public class AngelTime extends BaseNPCTime {
                             + "After the third one goes down, you can see Angel visibly react as something begin to bluge out from behind her thong. Angel moves it out of the way before her new blessed cock grows out to its full size. She gives it a few nice rubs with a sigh.<br/><br/>"
                             + "<i>\"Wow...when it feels like this, it's no wonder that guys get a feeling of power for having a big dick. Oh yeah...Hey, does this make you horny, too? I think I want to get to using this right away, so leave or assume some kind of position.\"</i><br/>";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart(Size.Big).applyMod(CockMod.blessed));
+                other.body.add(new CockPart(Size.Big).applyMod(new BlessedCockMod()));
                 return true;
             };
             transformationOptions.add(growCock);
@@ -88,7 +88,8 @@ public class AngelTime extends BaseNPCTime {
             transformationOptions.add(removeCock);
         }
         {
-            TransformationOption blessedCock = new ApplyPartModOption(CockPart.TYPE, CockMod.blessed);
+            TransformationOption blessedCock = new ApplyPartModOption(CockPart.TYPE,
+                new BlessedCockMod());
             blessedCock.ingredients.put(Item.HolyWater, 3);
             blessedCock.addRequirement((c, self, other) -> {
                 return self.get(Attribute.Divinity) >= 10;

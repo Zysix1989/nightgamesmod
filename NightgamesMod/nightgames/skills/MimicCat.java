@@ -6,12 +6,12 @@ import nightgames.characters.Kat;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.EarPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.catcher.FeralMod;
+import nightgames.characters.body.mods.pitcher.PrimalCockMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -90,7 +90,7 @@ public class MimicCat extends Skill {
         getSelf().add(c, new Abuff(getSelf(), Attribute.Animism, strength, 10));
         getSelf().add(c, new SlimeMimicry("cat", getSelf(), 10));
         getSelf().body.temporaryAddPartMod(PussyPart.TYPE, FeralMod.INSTANCE, 10);
-        getSelf().body.temporaryAddPartMod(CockPart.TYPE, CockMod.primal, 10);
+        getSelf().body.temporaryAddPartMod(CockPart.TYPE, new PrimalCockMod(), 10);
         return true;
     }
 

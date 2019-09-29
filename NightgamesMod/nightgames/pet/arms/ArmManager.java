@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.mods.pitcher.CockMod;
+import nightgames.characters.body.mods.pitcher.BionicCockMod;
+import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.characters.body.mods.catcher.CyberneticMod;
 import nightgames.characters.body.mods.catcher.DemonicMod;
@@ -21,6 +22,11 @@ import nightgames.characters.body.mods.catcher.GooeyMod;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.catcher.PlantMod;
 import nightgames.characters.body.mods.TentacledMod;
+import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
+import nightgames.characters.body.mods.pitcher.IncubusCockMod;
+import nightgames.characters.body.mods.pitcher.PrimalCockMod;
+import nightgames.characters.body.mods.pitcher.RunicCockMod;
+import nightgames.characters.body.mods.pitcher.SlimyCockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.pet.PetCharacter;
@@ -105,7 +111,9 @@ public class ArmManager {
     }
     
     private static final List<? extends PartMod> IMPALER_MODS = Collections.unmodifiableList(
-        Arrays.asList(CockMod.slimy, CockMod.runic, CockMod.blessed, CockMod.incubus, CockMod.primal, CockMod.bionic, CockMod.enlightened));
+        Arrays.asList(new SlimyCockMod(), new RunicCockMod(), new BlessedCockMod(),
+            new IncubusCockMod(), new PrimalCockMod(), new BionicCockMod(),
+            new EnlightenedCockMod()));
     private static final List<? extends PartMod> SUCKER_MODS = Arrays.asList(
                     new ArcaneMod(), new CyberneticMod(),
                     new DivineMod(), new FeralMod(),

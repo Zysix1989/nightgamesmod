@@ -7,13 +7,13 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.characters.body.mods.SecondPussyMod;
+import nightgames.characters.body.mods.pitcher.RunicCockMod;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -57,7 +57,7 @@ public class CassieTime extends BaseNPCTime {
             growCock.option = "Cassie: Grow a cock";
             growCock.scene = "[Placeholder]<br/>Cassie hesistantly drinks the 3 priapus drafts and grows a large runic cock.";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart(Size.Big).applyMod(CockMod.runic));
+                other.body.add(new CockPart(Size.Big).applyMod(new RunicCockMod()));
                 return true;
             };
             transformationOptions.add(growCock);
@@ -75,7 +75,8 @@ public class CassieTime extends BaseNPCTime {
             transformationOptions.add(removeCock);
         }
         {
-            TransformationOption runicCock = new ApplyPartModOption(CockPart.TYPE, CockMod.runic);
+            TransformationOption runicCock = new ApplyPartModOption(CockPart.TYPE,
+                new RunicCockMod());
             runicCock.ingredients.put(Item.PriapusDraft, 10);
             runicCock.ingredients.put(Item.BewitchingDraught, 10);
             runicCock.ingredients.put(Item.FaeScroll, 1);

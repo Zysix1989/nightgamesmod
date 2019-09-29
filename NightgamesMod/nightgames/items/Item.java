@@ -10,7 +10,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarPart;
@@ -19,6 +18,7 @@ import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.characters.body.mods.TentacledMod;
+import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.requirements.Requirement;
@@ -182,7 +182,7 @@ public enum Item implements Loot {
             new AddTraitEffect("drink", "throw", Trait.addictivefluids),
             new AddTraitEffect("drink", "throw", Trait.succubus),
             new PartModEffect("drink", "throw", PussyPart.TYPE, DemonicMod.INSTANCE, 15),
-            new PartModEffect("drink", "throw", CockPart.TYPE, CockMod.incubus, 15),
+            new PartModEffect("drink", "throw", CockPart.TYPE, new IncubusCockMod(), 15),
             new BodyReplaceEffect("drink", "throw", EarPart.pointed),
             new BodyReplaceEffect("drink", "throw", WingsPart.demonic),
             new BodyReplaceEffect("drink", "throw", TailPart.demonic),

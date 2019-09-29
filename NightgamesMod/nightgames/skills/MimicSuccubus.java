@@ -7,7 +7,6 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.EarPart;
 import nightgames.characters.body.MouthPart;
@@ -15,6 +14,7 @@ import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.catcher.DemonicMod;
+import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -85,7 +85,7 @@ public class MimicSuccubus extends Skill {
         getSelf().add(c, new Abuff(getSelf(), Attribute.Dark, strength, 999));
         getSelf().add(c, new SlimeMimicry("succubus", getSelf(), 999));
         getSelf().body.temporaryAddPartMod(PussyPart.TYPE, DemonicMod.INSTANCE, 999);
-        getSelf().body.temporaryAddPartMod(CockPart.TYPE, CockMod.incubus, 999);
+        getSelf().body.temporaryAddPartMod(CockPart.TYPE, new IncubusCockMod(), 999);
 
         return true;
     }

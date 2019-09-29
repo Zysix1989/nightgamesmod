@@ -10,7 +10,6 @@ import nightgames.actions.Movement;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.mods.catcher.ArcaneMod;
@@ -424,7 +423,7 @@ public class Cassie extends BasePersonality {
             && c.getStance().vaginallyPenetrated(c,c.getOpponent(character))
             && character.has(Trait.hypnoticsemen)
             && character.has(Trait.enthrallingjuices)
-            && character.body.getLargestCock().getMods().contains(CockMod.runic)) {
+            && character.body.getLargestCock().getMods().contains(new RunicCockMod())) {
             minDominance=10;
             return "Cassie pumps her dick into your vagina faster and faster as she nears climax, but at this point it's clear you've lost. Your back arches as you orgasm, your "
                             + "vagina clenching around her magical meat. As you collapse limply to the ground, Cassie thrusts into your cunt as deep as she can go, and then "
@@ -754,7 +753,7 @@ public class Cassie extends BasePersonality {
             character.body.addReplace(character.body.getRandomPussy().applyMod(ArcaneMod.INSTANCE), 1);
         }
         if (character.hasDick()) {
-            character.body.addReplace(character.body.getRandomCock().applyMod(CockMod.runic), 1);
+            character.body.addReplace(character.body.getRandomCock().applyMod(new RunicCockMod()), 1);
         }
         character.unequipAllClothing();
         character.outfitPlan.add(Clothing.getByID("bra"));

@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.pitcher.BlessedCockMod;
@@ -756,7 +755,7 @@ public class Angel extends BasePersonality {
         }
         if (character.hasDick()) {
             character.body.addReplace(
-                character.body.getRandomCock().applyMod(CockMod.blessed),
+                character.body.getRandomCock().applyMod(new BlessedCockMod()),
                 1);
         }
         character.body.addReplace(WingsPart.angelic, 5);

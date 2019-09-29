@@ -5,11 +5,11 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.ArcaneMod;
+import nightgames.characters.body.mods.pitcher.RunicCockMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -88,7 +88,7 @@ public class MimicWitch extends Skill {
         getSelf().add(c, new SlimeMimicry("witch", getSelf(), 10));
 
         getSelf().body.temporaryAddPartMod(PussyPart.TYPE, ArcaneMod.INSTANCE, 10);
-        getSelf().body.temporaryAddPartMod(CockPart.TYPE, CockMod.runic, 10);
+        getSelf().body.temporaryAddPartMod(CockPart.TYPE, new RunicCockMod(), 10);
         return true;
     }
 

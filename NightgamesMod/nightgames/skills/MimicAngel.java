@@ -5,7 +5,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.mods.pitcher.CockMod;
+import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.WingsPart;
@@ -82,7 +82,7 @@ public class MimicAngel extends Skill {
         getSelf().add(c, new Abuff(getSelf(), Attribute.Divinity, strength, 10));
         getSelf().add(c, new SlimeMimicry("angel", getSelf(), 10));
         getSelf().body.temporaryAddPartMod(PussyPart.TYPE, DivineMod.INSTANCE, 10);
-        getSelf().body.temporaryAddPartMod(CockPart.TYPE, CockMod.blessed, 10);
+        getSelf().body.temporaryAddPartMod(CockPart.TYPE, new BlessedCockMod(), 10);
         return true;
     }
 

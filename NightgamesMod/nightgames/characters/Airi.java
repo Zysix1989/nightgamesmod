@@ -9,7 +9,6 @@ import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.GenericBodyPart;
@@ -416,7 +415,7 @@ public class Airi extends BasePersonality {
                                                 character, opponent, character.body.getRandomPussy().describe(character)));
             }
             if (character.hasDick() && !character.body.getRandomCock().moddedPartCountsAs(SlimyCockMod.TYPE)) {
-                character.body.temporaryAddPartMod(CockPart.TYPE, CockMod.slimy, 999);
+                character.body.temporaryAddPartMod(CockPart.TYPE, new SlimyCockMod(), 999);
                 c.write(character,
                                 Global.format("{self:NAME-POSSESSIVE} %s re-slime-ified.",
                                                 character, opponent, character.body.getRandomCock().describe(character)));
@@ -450,7 +449,8 @@ public class Airi extends BasePersonality {
                 self.body.temporaryAddOrReplacePartWithType(self.body.getRandomPussy().applyMod(new GooeyMod()), 999);
             }
             if (self.hasDick() && !self.body.getRandomCock().moddedPartCountsAs(SlimyCockMod.TYPE)) {
-                self.body.temporaryAddOrReplacePartWithType(self.body.getRandomCock().applyMod(CockMod.slimy), 999);
+                self.body.temporaryAddOrReplacePartWithType(self.body.getRandomCock().applyMod(
+                    new SlimyCockMod()), 999);
             }
             BreastsPart part = self.body.getBreastsBelow(BreastsPart.Size.max());
             if (part != null) {

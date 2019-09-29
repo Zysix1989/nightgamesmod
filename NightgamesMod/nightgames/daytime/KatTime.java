@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.catcher.FeralMod;
+import nightgames.characters.body.mods.pitcher.PrimalCockMod;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -83,7 +83,7 @@ public class KatTime extends BaseNPCTime {
                            + "Fortunately for you, the poor kitty seems exhausted by her new transformation and falls into a soft slumber after the exertion. "
                            + "You pick her up, depositing her onto her bed and covering her with a blanket before turning to leave. Hopefully the next time you meet in the games, she'll be a bit gentler than that.";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart(Size.Big).applyMod(CockMod.primal));
+                other.body.add(new CockPart(Size.Big).applyMod(new PrimalCockMod()));
                 return true;
             };
             transformationOptions.add(growCock);
@@ -102,7 +102,8 @@ public class KatTime extends BaseNPCTime {
             transformationOptions.add(removeCock);
         }
         {
-            TransformationOption primalCock = new ApplyPartModOption(CockPart.TYPE, CockMod.primal);
+            TransformationOption primalCock = new ApplyPartModOption(CockPart.TYPE,
+                new PrimalCockMod());
             primalCock.ingredients.put(Item.PriapusDraft, 10);
             primalCock.ingredients.put(Item.Rope, 10);
             primalCock.ingredients.put(Item.Aphrodisiac, 25);

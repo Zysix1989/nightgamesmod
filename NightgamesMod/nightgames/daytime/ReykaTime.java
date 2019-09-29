@@ -10,7 +10,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarPart;
@@ -19,6 +18,7 @@ import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.catcher.DemonicMod;
+import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.requirements.BodyPartRequirement;
@@ -59,7 +59,7 @@ public class ReykaTime extends BaseNPCTime {
                             + "The two of you wait, and soon enough, a large demonic cock sprouts out under the talisman. She then rips the talisman off; her dark transformation complete.<br/><br/>" 
                             + "<i>\"Ohhh...Like what you see? I hope so. I plan on having as much fun as possible with this.\"</i><br/>";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart(Size.Big).applyMod(CockMod.incubus));
+                other.body.add(new CockPart(Size.Big).applyMod(new IncubusCockMod()));
                 return true;
             };
             transformationOptions.add(growCock);
@@ -83,7 +83,8 @@ public class ReykaTime extends BaseNPCTime {
             transformationOptions.add(removeCock);
         }
         {
-            TransformationOption incubusCock = new ApplyPartModOption(CockPart.TYPE, CockMod.incubus);
+            TransformationOption incubusCock = new ApplyPartModOption(CockPart.TYPE,
+                new IncubusCockMod());
             incubusCock.ingredients.put(Item.PriapusDraft, 10);
             incubusCock.ingredients.put(Item.SuccubusDraft, 5);
             incubusCock.ingredients.put(Item.semen, 5);

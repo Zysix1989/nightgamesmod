@@ -2,7 +2,6 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.mods.pitcher.SlimyCockMod;
@@ -65,7 +64,8 @@ public class ToggleSlimeCock extends Skill {
             } else {
                 msg += "a sizable bulge forms in " + getSelf().outfit.getTopOfSlot(ClothingSlot.bottom).getName() + ".";
             }
-            getSelf().body.temporaryAddOrReplacePartWithType(new CockPart(Size.Big).applyMod(CockMod.slimy), 100);
+            getSelf().body.temporaryAddOrReplacePartWithType(new CockPart(Size.Big).applyMod(
+                new SlimyCockMod()), 100);
         }
         if (!target.human() || !target.is(Stsflag.blinded))
             c.write(getSelf(), Global.format(msg, getSelf(), target));

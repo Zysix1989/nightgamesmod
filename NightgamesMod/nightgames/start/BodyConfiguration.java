@@ -15,6 +15,8 @@ import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.mods.pitcher.BionicCockMod;
+import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.EarPart;
@@ -31,6 +33,10 @@ import nightgames.characters.body.mods.catcher.FeralMod;
 import nightgames.characters.body.mods.catcher.GooeyMod;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.SecondPussyMod;
+import nightgames.characters.body.mods.pitcher.IncubusCockMod;
+import nightgames.characters.body.mods.pitcher.PrimalCockMod;
+import nightgames.characters.body.mods.pitcher.RunicCockMod;
+import nightgames.characters.body.mods.pitcher.SlimyCockMod;
 import nightgames.json.JsonUtils;
 
 class BodyConfiguration {
@@ -283,12 +289,12 @@ class BodyConfiguration {
 
     enum Archetype {
         REGULAR(null, PussyPart.generic),
-        DEMON(CockMod.incubus, PussyPart.generic.applyMod(DemonicMod.INSTANCE)),
-        CAT(CockMod.primal, PussyPart.generic.applyMod(FeralMod.INSTANCE)),
-        CYBORG(CockMod.bionic, PussyPart.generic.applyMod(CyberneticMod.INSTANCE)),
-        ANGEL(CockMod.blessed, PussyPart.generic.applyMod(DivineMod.INSTANCE)),
-        WITCH(CockMod.runic, PussyPart.generic.applyMod(ArcaneMod.INSTANCE)),
-        SLIME(CockMod.slimy, PussyPart.generic.applyMod(GooeyMod.INSTANCE));
+        DEMON(new IncubusCockMod(), PussyPart.generic.applyMod(DemonicMod.INSTANCE)),
+        CAT(new PrimalCockMod(), PussyPart.generic.applyMod(FeralMod.INSTANCE)),
+        CYBORG(new BionicCockMod(), PussyPart.generic.applyMod(CyberneticMod.INSTANCE)),
+        ANGEL(new BlessedCockMod(), PussyPart.generic.applyMod(DivineMod.INSTANCE)),
+        WITCH(new RunicCockMod(), PussyPart.generic.applyMod(ArcaneMod.INSTANCE)),
+        SLIME(new SlimyCockMod(), PussyPart.generic.applyMod(GooeyMod.INSTANCE));
         private final CockMod cockMod;
         private final BodyPart pussy;
 

@@ -7,11 +7,11 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.FieryMod;
+import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.requirements.BodyPartRequirement;
@@ -57,7 +57,7 @@ public class JewelTime extends BaseNPCTime {
             growCock.option = "Jewel: Grow a cock";
             growCock.scene = "[Placeholder]<br/>Jewel chugs down the three priapus drafts one after the other, making her clit grow into a large enlightened cock.";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart(Size.Big).applyMod(CockMod.enlightened));
+                other.body.add(new CockPart(Size.Big).applyMod(new EnlightenedCockMod()));
                 return true;
             };
             transformationOptions.add(growCock);
@@ -75,7 +75,8 @@ public class JewelTime extends BaseNPCTime {
             transformationOptions.add(removeCock);
         }
         {
-            TransformationOption enlightenedCock = new ApplyPartModOption(CockPart.TYPE, CockMod.enlightened);
+            TransformationOption enlightenedCock = new ApplyPartModOption(CockPart.TYPE,
+                new EnlightenedCockMod());
             enlightenedCock.ingredients.put(Item.PriapusDraft, 10);
             enlightenedCock.ingredients.put(Item.EnergyDrink, 20);
             enlightenedCock.ingredients.put(Item.JuggernautJuice, 10);
