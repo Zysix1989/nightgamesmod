@@ -9,8 +9,5 @@ public abstract class CockMod extends PartMod {
         super(name, hotness, pleasure, sensitivity);
     }
 
-    @Override
-    public abstract String describeAdjective(String partType);
-
     public abstract CatcherMod getCorrespondingCatcherMod();
 }
