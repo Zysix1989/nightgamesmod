@@ -16,7 +16,7 @@ public class ExtendedTonguedMod extends PartMod {
     public static final PartMod INSTANCE = new ExtendedTonguedMod();
 
     private ExtendedTonguedMod() {
-        super(TYPE, .3, 1.2, 0, 4);
+        super(TYPE, .3, 1.2, 0);
     }
 
     @Override

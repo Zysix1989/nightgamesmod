@@ -1,7 +1,5 @@
 package nightgames.characters.body.mods.pitcher;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonPrimitive;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +17,7 @@ public abstract class CockMod extends PartMod {
     public static final List<CockMod> ALL_MODS = Arrays.asList(slimy, runic, blessed, incubus, primal, bionic, enlightened);
 
     protected CockMod(String name, double hotness, double pleasure, double sensitivity) {
-        super(name, hotness, pleasure, sensitivity, 0);
+        super(name, hotness, pleasure, sensitivity);
     }
 
     public static Optional<CockMod> getFromType(String type) {

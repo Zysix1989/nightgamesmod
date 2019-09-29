@@ -17,7 +17,7 @@ public abstract class PartMod implements BodyPartMod {
     protected double pleasure;
     protected double sensitivity;
 
-    public PartMod(String modType, double hotness, double pleasure, double sensitivity, int sortOrder) {
+    public PartMod(String modType, double hotness, double pleasure, double sensitivity) {
         this.modType = modType;
         this.hotness = hotness;
         this.pleasure = pleasure;

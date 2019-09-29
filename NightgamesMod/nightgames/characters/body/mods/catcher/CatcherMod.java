@@ -7,7 +7,7 @@ public abstract class CatcherMod extends PartMod {
 
     CatcherMod(String modType, double hotness, double pleasure, double sensitivity,
         int sortOrder) {
-        super(modType, hotness, pleasure, sensitivity, sortOrder);
+        super(modType, hotness, pleasure, sensitivity);
     }
 
     public abstract CockMod getCorrespondingCockMod();

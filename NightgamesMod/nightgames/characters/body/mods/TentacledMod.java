@@ -15,7 +15,7 @@ public class TentacledMod extends PartMod {
 
 
     public TentacledMod() {
-        super(TYPE, 0, 1, .2, 4);
+        super(TYPE, 0, 1, .2);
     }
 
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {

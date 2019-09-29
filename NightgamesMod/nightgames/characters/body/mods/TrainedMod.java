@@ -11,7 +11,7 @@ public class TrainedMod extends PartMod {
     public static final TrainedMod INSTANCE = new TrainedMod();
 
     public TrainedMod() {
-        super(TYPE, .2, .2, -.2, -100);
+        super(TYPE, .2, .2, -.2);
     }
 
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) { 
