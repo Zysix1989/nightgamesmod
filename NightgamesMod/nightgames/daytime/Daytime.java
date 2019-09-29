@@ -134,14 +134,6 @@ public class Daytime {
                 }
             }
             Global.endDay();
-
-            /*
-            if (Global.checkFlag(Flag.autosave)) {
-                Global.autoSave();
-            }
-            Global.decideMatchType()
-                  .buildPrematch(player);
-            */
         }
     }
 
