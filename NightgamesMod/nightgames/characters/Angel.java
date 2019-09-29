@@ -208,7 +208,7 @@ public class Angel extends BasePersonality {
     public void rest(int time) {
         if (character.rank >= 1) {
             if (!character.has(Trait.demigoddess)
-                            && (Global.checkFlag(ANGEL_SEX_FOCUS) || Global.checkFlag(ANGEL_NYMPHOMANIA_FOCUS))) {
+                && (Global.checkFlag(ANGEL_SEX_FOCUS) || Global.checkFlag(ANGEL_NYMPHOMANIA_FOCUS))) {
                 advance();
             }
         }
@@ -757,21 +757,18 @@ public class Angel extends BasePersonality {
     }
 
     public void advance() {
-        character.getGrowth()
-                 .addTrait(10, Trait.demigoddess);
-        character.getGrowth()
-                 .addTrait(10, Trait.divinity);
-        character.getGrowth()
-                 .addTrait(10, Trait.proheels);
+        character.getGrowth().addTrait(10, Trait.demigoddess);
+        character.getGrowth().addTrait(10, Trait.divinity);
+        character.getGrowth().addTrait(10, Trait.proheels);
         if (character.hasPussy()) {
-            character.body.addReplace(character.body.getRandomPussy()
-                                                    .applyMod(new DivineMod()),
-                            1);
+            character.body.addReplace(
+                character.body.getRandomPussy().applyMod(new DivineMod()),
+                1);
         }
         if (character.hasDick()) {
-            character.body.addReplace(character.body.getRandomCock()
-                                                    .applyMod(CockMod.blessed),
-                            1);
+            character.body.addReplace(
+                character.body.getRandomCock().applyMod(CockMod.blessed),
+                1);
         }
         character.body.addReplace(WingsPart.angelic, 5);
         character.unequipAllClothing();
@@ -781,9 +778,7 @@ public class Angel extends BasePersonality {
         character.outfitPlan.add(Clothing.getByID("highheels"));
         character.modAttributeDontSaveData(Attribute.Divinity, 1);
 
-        character.getGrowth()
-                 .addOrRemoveTraits(character);
-
+        character.getGrowth().addOrRemoveTraits(character);
     }
 
     @Override
