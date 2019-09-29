@@ -178,7 +178,7 @@ public class Mara extends BasePersonality {
 
     @Override
     public void applyBasicStats(Character self) {
-        preferredCockModType = Optional.of(BionicCockMod.TYPE);
+        preferredCockMod = Optional.of(new BionicCockMod());
         self.outfitPlan.add(Clothing.getByID("bra"));
         self.outfitPlan.add(Clothing.getByID("Tshirt"));
         self.outfitPlan.add(Clothing.getByID("underwear"));

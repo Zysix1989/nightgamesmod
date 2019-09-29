@@ -33,7 +33,7 @@ public abstract class BasePersonality implements Personality {
     private String type;
     public NPC character;
     protected List<PreferredAttribute> preferredAttributes;
-    protected Optional<String> preferredCockModType;
+    protected Optional<CockMod> preferredCockMod;
     protected AiModifiers mods;
     
     protected int dominance=0;
@@ -44,7 +44,7 @@ public abstract class BasePersonality implements Personality {
         type = getClass().getSimpleName();
         character = new NPC(name, 1, this);
         character.isStartCharacter = isStartCharacter;
-        preferredCockModType = Optional.empty();
+        preferredCockMod = Optional.empty();
         preferredAttributes = new ArrayList<PreferredAttribute>();
     }
 
@@ -83,15 +83,15 @@ public abstract class BasePersonality implements Personality {
 
     @Override
     public void rest(int time) {
-        if (preferredCockModType.isPresent() && character.rank > 0) {
+        if (preferredCockMod.isPresent() && character.rank > 0) {
             Optional<BodyPart> optDick = character.body.get(CockPart.TYPE)
                 .stream()
-                .filter(part -> part.moddedPartCountsAs(preferredCockModType.get()))
+                .filter(part -> part.moddedPartCountsAs(preferredCockMod.get().getModType()))
                 .findAny();
             if (optDick.isPresent()) {
                 CockPart part = (CockPart) optDick.get();
                 character.body.remove(part);
-                character.body.add(part.applyMod(CockMod.getFromType(preferredCockModType.get()).orElseThrow()));
+                character.body.add(part.applyMod(preferredCockMod.get()));
             }
         }
         for (Addiction addiction : character.getAddictions()) {
