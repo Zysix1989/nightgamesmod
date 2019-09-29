@@ -21,9 +21,6 @@ public abstract class CockMod extends PartMod {
 
     @Override
     public String describeAdjective(String partType) {
-        if (this.equals(bionic)) {
-            return "bionic implants";
-        } else
         return "weirdness (ERROR)";
     }
 
