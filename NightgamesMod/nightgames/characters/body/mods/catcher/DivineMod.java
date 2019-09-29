@@ -7,7 +7,6 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.combat.Combat;
@@ -24,7 +23,7 @@ public class DivineMod extends CatcherMod {
     public static final DivineMod INSTANCE = new DivineMod();
 
     public DivineMod() {
-        super(TYPE, 0, 1.0, 0.0, -10);
+        super(TYPE, 0, 1.0, 0.0);
     }
 
     public String adjective(GenericBodyPart part) {

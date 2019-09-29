@@ -5,7 +5,6 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.BionicCockMod;
 import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
@@ -22,7 +21,7 @@ public class CyberneticMod extends CatcherMod {
     public static final CyberneticMod INSTANCE = new CyberneticMod();
 
     public CyberneticMod() {
-        super(TYPE, -.1, .8, -.5, 0);
+        super(TYPE, -.1, .8, -.5);
     }
 
 

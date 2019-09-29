@@ -8,7 +8,6 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
-import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.BionicCockMod;
 import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
@@ -22,7 +21,7 @@ public class FieryMod extends CatcherMod {
     public static final FieryMod INSTANCE = new FieryMod();
 
     public FieryMod() {
-        super(TYPE, 0, .3, .2, -11);
+        super(TYPE, 0, .3, .2);
     }
 
     public String adjective(GenericBodyPart part) {

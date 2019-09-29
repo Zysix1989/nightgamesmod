@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
-import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.characters.body.mods.pitcher.PrimalCockMod;
@@ -23,7 +22,7 @@ public class FeralMod extends CatcherMod {
     public static final FeralMod INSTANCE = new FeralMod();
 
     public FeralMod() {
-        super(TYPE, .2, .3, .2, -8);
+        super(TYPE, .2, .3, .2);
     }
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) { 
         if (c.getStance().isPartFuckingPartInserted(c, opponent, target, self, part)) {

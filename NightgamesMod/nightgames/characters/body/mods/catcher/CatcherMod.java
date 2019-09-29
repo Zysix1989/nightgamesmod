@@ -5,8 +5,7 @@ import nightgames.characters.body.mods.pitcher.CockMod;
 
 public abstract class CatcherMod extends PartMod {
 
-    CatcherMod(String modType, double hotness, double pleasure, double sensitivity,
-        int sortOrder) {
+    CatcherMod(String modType, double hotness, double pleasure, double sensitivity) {
         super(modType, hotness, pleasure, sensitivity);
     }
 

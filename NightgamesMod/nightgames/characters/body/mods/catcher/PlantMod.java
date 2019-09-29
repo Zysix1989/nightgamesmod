@@ -2,7 +2,6 @@ package nightgames.characters.body.mods.catcher;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -15,7 +14,7 @@ public class PlantMod extends CatcherMod {
     public static final PlantMod INSTANCE = new PlantMod();
 
     public PlantMod() {
-        super(TYPE, .3, 1, .2, 10);
+        super(TYPE, .3, 1, .2);
     }
 
     public double applyReceiveBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) {

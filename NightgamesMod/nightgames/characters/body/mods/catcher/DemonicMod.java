@@ -9,7 +9,6 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
-import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
@@ -27,7 +26,7 @@ public class DemonicMod extends CatcherMod {
     public static final DemonicMod INSTANCE = new DemonicMod();
 
     public DemonicMod() {
-        super(TYPE, .1, .5, .2, 5);
+        super(TYPE, .1, .5, .2);
     }
 
     public String adjective(GenericBodyPart part) {

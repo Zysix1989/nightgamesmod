@@ -5,7 +5,6 @@ import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.mods.pitcher.SlimyCockMod;
 import nightgames.combat.Combat;
@@ -19,7 +18,7 @@ public class GooeyMod extends CatcherMod {
     public static final GooeyMod INSTANCE = new GooeyMod();
 
     public GooeyMod() {
-        super(TYPE, .2, .5, .2, 2);
+        super(TYPE, .2, .5, .2);
     }
 
     public void onOrgasmWith(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, boolean selfCame) {

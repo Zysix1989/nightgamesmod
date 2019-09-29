@@ -5,7 +5,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.MouthPart;
-import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.BionicCockMod;
 import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.mods.pitcher.PrimalCockMod;
@@ -22,7 +21,7 @@ public class ArcaneMod extends CatcherMod {
     public static final ArcaneMod INSTANCE = new ArcaneMod();
 
     public ArcaneMod() {
-        super(TYPE, .05, .1, 0, -5);
+        super(TYPE, .05, .1, 0);
     }
 
     public void onOrgasmWith(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, boolean selfCame) {
