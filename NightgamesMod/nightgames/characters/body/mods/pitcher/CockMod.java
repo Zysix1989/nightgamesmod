@@ -10,9 +10,7 @@ public abstract class CockMod extends PartMod {
     }
 
     @Override
-    public String describeAdjective(String partType) {
-        return "weirdness (ERROR)";
-    }
+    public abstract String describeAdjective(String partType);
 
     public abstract CatcherMod getCorrespondingCatcherMod();
 }
