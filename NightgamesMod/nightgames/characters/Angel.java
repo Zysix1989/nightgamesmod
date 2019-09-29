@@ -87,46 +87,35 @@ public class Angel extends BasePersonality {
         this.addSecondFocusScene();  
         
        
-        character.getGrowth()
-                 .addTrait(0, Trait.undisciplined);
-        character.getGrowth()
-                 .addTrait(0, Trait.lickable);
-        character.getGrowth()
-                 .addTrait(3, Trait.responsive);
-        character.getGrowth()
-                 .addTrait(9, Trait.sexTraining1);
+        character.getGrowth().addTrait(0, Trait.undisciplined);
+        character.getGrowth().addTrait(0, Trait.lickable);
+        character.getGrowth().addTrait(3, Trait.responsive);
+        character.getGrowth().addTrait(9, Trait.sexTraining1);
         // 12 - first choice 1
-        character.getGrowth()
-                 .addTrait(15, Trait.expertGoogler);
-        character.getGrowth()
-                 .addTrait(18, Trait.experienced);
-        character.getGrowth()
-                 .addTrait(20, Trait.skeptical);
+        character.getGrowth().addTrait(15, Trait.expertGoogler);
+        character.getGrowth().addTrait(18, Trait.experienced);
+        character.getGrowth().addTrait(20, Trait.skeptical);
         // 21 - second choice 1
-        character.getGrowth()
-                 .addTrait(24, Trait.tongueTraining1);
+        character.getGrowth().addTrait(24, Trait.tongueTraining1);
         // 27 - first choice 2
         // 30 - second choice 2
-        character.getGrowth()
-                 .addTrait(33, Trait.sexTraining2);
-        character.getGrowth()
-                 .addTrait(36, Trait.tongueTraining2);
+        character.getGrowth().addTrait(33, Trait.sexTraining2);
+        character.getGrowth().addTrait(36, Trait.tongueTraining2);
         // 39 - first choice 3
         // 42 - second choice 3
         // 45 - second choice 4
         // 48 - second choice 5
-        character.getGrowth()
-                 .addTrait(51, Trait.desensitized);
+        character.getGrowth().addTrait(51, Trait.desensitized);
         // 54 - first choice 4
-        character.getGrowth()
-                 .addTrait(57, Trait.desensitized2);
+        character.getGrowth().addTrait(57, Trait.desensitized2);
         // 60 - second choice 6
         preferredAttributes.add(
                         c -> c.get(Attribute.Divinity) < 50 ? Optional.of(Attribute.Divinity) : Optional.empty());
         preferredAttributes.add(c -> Optional.of(Attribute.Seduction));
         preferredAttributes.add(
-                        c -> (c.has(Trait.nymphomania) && c.get(Attribute.Nymphomania) < (c.getLevel() - 10) / 2)
-                                        ? Optional.of(Attribute.Nymphomania) : Optional.empty());
+                        c -> (c.has(Trait.nymphomania)
+                            && c.get(Attribute.Nymphomania) < (c.getLevel() - 10) / 2)
+                            ? Optional.of(Attribute.Nymphomania) : Optional.empty());
     }
 
     private void useSex() {

@@ -4380,11 +4380,11 @@ public abstract class Character extends Observable implements Cloneable {
             Attribute selected = null;
             // remove all the attributes that isn't in avail
             preferred = new ArrayDeque<>(preferred.stream()
-                                                  .filter(p -> {
-                                                      Optional<Attribute> att = p.getPreferred(this);
-                                                      return att.isPresent() && avail.contains(att.get());
-                                                  })
-                                                  .collect(Collectors.toList()));
+                .filter(p -> {
+                    Optional<Attribute> att = p.getPreferred(this);
+                    return att.isPresent() && avail.contains(att.get());
+                })
+                .collect(Collectors.toList()));
             if (preferred.size() > 0) {
                 if (noPrefAdded > 1) {
                     noPrefAdded = 0;
