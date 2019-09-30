@@ -104,7 +104,7 @@ public class Body implements Cloneable {
         new MouthPart(),
         new BreastsPart(0),
         EarPart.normal};
-    private final static String fetishParts[] = {AssPart.TYPE, Body.FEET, CockPart.TYPE, "wings", TailPart.TYPE, TentaclePart.TYPE, BreastsPart.TYPE};
+    private final static String[] fetishParts = {AssPart.TYPE, Body.FEET, CockPart.TYPE, "wings", TailPart.TYPE, TentaclePart.TYPE, BreastsPart.TYPE};
 
     private LinkedHashSet<BodyPart> bodyParts;
     public double hotness;
