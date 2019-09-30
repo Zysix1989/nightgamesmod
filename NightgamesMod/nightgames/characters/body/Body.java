@@ -1537,4 +1537,8 @@ public class Body implements Cloneable {
             System.err.println("Tried to remove mod " + mod + " but found non-generic part: " + part);
         }
     }
+
+    public void onOrgasm(Combat c, Character self, Character opponent) {
+        getCurrentParts().forEach(part -> part.onOrgasm(c, self, opponent));
+    }
 }

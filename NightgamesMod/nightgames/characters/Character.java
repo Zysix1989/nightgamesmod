@@ -2417,7 +2417,7 @@ public abstract class Character extends Observable implements Cloneable {
             selfPart.onOrgasmWith(c, this, opponent, opponentPart, true);
             opponentPart.onOrgasmWith(c, opponent, this, selfPart, false);
         }
-        body.getCurrentParts().forEach(part -> part.onOrgasm(c, this, opponent));
+        body.onOrgasm(c, this, opponent);
 
         if (opponent.has(Trait.erophage)) {
             c.write(Global.capitalizeFirstLetter("<b>" + opponent.subjectAction("flush", "flushes")
