@@ -182,12 +182,7 @@ public class AssPart extends GenericBodyPart {
             c.write(opponent,
                             Global.format("{other:NAME-POSSESSIVE} expert handling of {self:name-possessive} ass causes {self:subject} to shudder uncontrollably.",
                                             self, opponent));
-            if (opponent.has(Trait.asshandler)) {
-                bonus += 5;
-            }
-            if (opponent.has(Trait.anatomyknowledge)) {
-                bonus += 5;
-            }
+            bonus += 5;
         }
         if (self.has(Trait.buttslut)) {
             bonus += 10;
