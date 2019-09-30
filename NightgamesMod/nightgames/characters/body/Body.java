@@ -153,7 +153,7 @@ public class Body implements Cloneable {
             if (modReplacements.containsKey(part.getType()) && part instanceof GenericBodyPart) {
                 GenericBodyPart genericPart = (GenericBodyPart) part;
                 for (PartModReplacement replacement : modReplacements.get(part.getType())) {
-                    genericPart = (GenericBodyPart) genericPart.applyMod(replacement.getMod());
+                    genericPart = genericPart.applyMod(replacement.getMod());
                 }
                 currentParts.add(genericPart);
             } else {
