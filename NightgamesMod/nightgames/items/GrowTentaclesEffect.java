@@ -22,7 +22,9 @@ public class GrowTentaclesEffect extends ItemEffect {
         TentaclePart part = TentaclePart.randomTentacle("tentacles", user.body, "tentacle-semen");
         BodyModEffect effect = new BodyGrowthMultipleEffect(getSelfVerb(), getOtherVerb(), part, duration);
         effect.use(null, user, opponent, item);
-        c.write(part.describe(user) + " sprout from " + user.nameOrPossessivePronoun() + " " + part.attachpoint);
+        var b = new StringBuilder();
+        part.describeLong(b, user);
+        c.write(b.toString());
         return true;
     }
 }
