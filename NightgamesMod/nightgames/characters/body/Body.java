@@ -305,7 +305,7 @@ public class Body implements Cloneable {
             .collect(Collectors.toList());
     }
 
-    public List<BodyPart> getPure(String type) {
+    private List<BodyPart> getPure(String type) {
         return bodyParts.stream()
             .filter(p -> p.isType(type))
             .collect(Collectors.toList());
