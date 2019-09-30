@@ -13,33 +13,12 @@ import nightgames.global.Global;
 public class TentaclePart extends GenericBodyPart {
 
     public static final String TYPE = "tentacles";
-    public String attachpoint;
+    String attachpoint;
     private String fluids;
-    private static String[] allowedAttachTypes = {AssPart.TYPE, MouthPart.TYPE, PussyPart.TYPE, Body.HANDS, Body.FEET, TailPart.TYPE, CockPart.TYPE};
+    static final String[] allowedAttachTypes = {AssPart.TYPE, MouthPart.TYPE, PussyPart.TYPE, Body.HANDS, Body.FEET, TailPart.TYPE, CockPart.TYPE};
 
     public static void pleasureWithTentacles(Combat c, Character target, int strength, BodyPart targetPart) {
         target.body.pleasure(c.getOpponent(target), new TentaclePart(), targetPart, strength, c);
-    }
-
-    public static TentaclePart randomTentacle(String desc, Body body, String fluids) {
-        Set<String> avail = new HashSet<>(Arrays.asList(allowedAttachTypes));
-        Set<String> parts = new HashSet<>();
-        for (BodyPart p : body.getCurrentParts()) {
-            if (p instanceof TentaclePart) {
-                avail.remove(((TentaclePart) p).attachpoint);
-            }
-            parts.add(p.getType());
-        }
-
-        avail.retainAll(parts);
-        String type;
-        ArrayList<String> availList = new ArrayList<String>(avail);
-        if (avail.size() > 0) {
-            type = availList.get(Global.random(availList.size()));
-        } else {
-            type = "back";
-        }
-        return new TentaclePart(desc, type, fluids, 0, 1, 1);
     }
 
     public TentaclePart(String desc, String attachpoint, String fluids, double hotness, double pleasure,

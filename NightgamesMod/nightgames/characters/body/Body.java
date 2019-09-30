@@ -1541,4 +1541,25 @@ public class Body implements Cloneable {
     public void onOrgasm(Combat c, Character self, Character opponent) {
         getCurrentParts().forEach(part -> part.onOrgasm(c, self, opponent));
     }
+
+    public TentaclePart randomTentacle(String desc, String fluids) {
+        Set<String> avail = new HashSet<>(Arrays.asList(TentaclePart.allowedAttachTypes));
+        Set<String> parts = new HashSet<>();
+        for (BodyPart p : getCurrentParts()) {
+            if (p instanceof TentaclePart) {
+                avail.remove(((TentaclePart) p).attachpoint);
+            }
+            parts.add(p.getType());
+        }
+
+        avail.retainAll(parts);
+        String type;
+        ArrayList<String> availList = new ArrayList<>(avail);
+        if (avail.size() > 0) {
+            type = availList.get(Global.random(availList.size()));
+        } else {
+            type = "back";
+        }
+        return new TentaclePart(desc, type, fluids, 0, 1, 1);
+    }
 }

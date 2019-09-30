@@ -19,7 +19,7 @@ public class GrowTentaclesEffect extends ItemEffect {
     @Override
     public boolean use(Combat c, Character user, Character opponent, Item item) {
         int duration = selfDuration >= 0 ? selfDuration : item.duration;
-        TentaclePart part = TentaclePart.randomTentacle("tentacles", user.body, "tentacle-semen");
+        TentaclePart part = user.body.randomTentacle("tentacles", "tentacle-semen");
         BodyModEffect effect = new BodyGrowthMultipleEffect(getSelfVerb(), getOtherVerb(), part, duration);
         effect.use(null, user, opponent, item);
         var b = new StringBuilder();
