@@ -38,7 +38,7 @@ public class AssFuck extends Fuck {
 
     @Override
     public BodyPart getTargetOrgan(Character target) {
-        return target.body.getRandom(AssPart.TYPE);
+        return target.body.getRandomAss();
     }
 
     @Override

@@ -45,7 +45,7 @@ public class VibroTease extends Skill {
             }
         }
         int m = 10 + Global.random(5);
-        target.body.pleasure(getSelf(), null, target.body.getRandom(AssPart.TYPE), getSelf().modifyDamage(DamageType.gadgets, target, m), c, this);
+        target.body.pleasure(getSelf(), null, target.body.getRandomAss(), getSelf().modifyDamage(DamageType.gadgets, target, m), c, this);
         getSelf().arouse(2, c);
         return true;
     }

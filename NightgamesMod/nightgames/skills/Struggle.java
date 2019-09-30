@@ -233,8 +233,8 @@ public class Struggle extends Skill {
                                                 + " sliding against {self:possessive} cockskin leaves {self:direct-object} gasping.",
                                 getSelf(), target));
                 int m = 15;
-                getSelf().body.pleasure(target, target.body.getRandom(PussyPart.TYPE),
-                                getSelf().body.getRandom(CockPart.TYPE), m, c, this);
+                getSelf().body.pleasure(target, target.body.getRandomPussy(),
+                                getSelf().body.getRandomCock(), m, c, this);
                 getSelf().removeStatus(Stsflag.cockbound);
             }
             if (knotted) {

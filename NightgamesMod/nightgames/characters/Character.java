@@ -2633,7 +2633,7 @@ public abstract class Character extends Observable implements Cloneable {
                             this, opponent));
             if (hasDick()) {
                 TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandomCock());
-                body.pleasure(null, null, body.getRandom(CockPart.TYPE), 5, c);
+                body.pleasure(null, null, body.getRandomCock(), 5, c);
             }
             if (hasBalls()) {
                 TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandom("balls"));

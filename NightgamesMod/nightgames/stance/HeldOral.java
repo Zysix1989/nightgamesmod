@@ -45,7 +45,7 @@ public class HeldOral extends AbstractFacingStance {
 
     public List<BodyPart> bottomParts() {
         if (bottom.hasDick()) {
-            return Collections.singletonList(bottom.body.getRandom(CockPart.TYPE));
+            return Collections.singletonList(bottom.body.getRandomCock());
         } else if (bottom.hasPussy()){
             return Collections.singletonList(bottom.body.getRandomPussy());
         }

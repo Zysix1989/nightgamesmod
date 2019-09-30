@@ -53,7 +53,7 @@ public class Thrust extends Skill {
         if (c.getStance().penetratedBy(c, target, getSelf())) {
             return getSelf().body.getRandomInsertable();
         } else if (c.getStance().anallyPenetratedBy(c, getSelf(), target)) {
-            return getSelf().body.getRandom(AssPart.TYPE);
+            return getSelf().body.getRandomAss();
         } else if (c.getStance().vaginallyPenetratedBy(c, getSelf(), target)) {
             return getSelf().body.getRandomPussy();
         } else {
@@ -65,7 +65,7 @@ public class Thrust extends Skill {
         if (c.getStance().penetratedBy(c, getSelf(), target)) {
             return target.body.getRandomInsertable();
         } else if (c.getStance().anallyPenetratedBy(c, target, getSelf())) {
-            return target.body.getRandom(AssPart.TYPE);
+            return target.body.getRandomAss();
         } else if (c.getStance().vaginallyPenetratedBy(c, target, getSelf())) {
             return target.body.getRandomPussy();
         }

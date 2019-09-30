@@ -98,7 +98,7 @@ public class AnalCowgirl extends AnalSexStance {
             }
             c.setStance(insertRandom(c));
         }
-        if (inserted.body.getRandom(AssPart.TYPE) == null) {
+        if (inserted.body.getRandomAss() == null) {
             if (inserted.human()) {
                 c.write("With your asshole suddenly disappearing, you can't continue riding " + inserter.getName()
                                 + " anymore.");

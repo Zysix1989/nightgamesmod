@@ -62,20 +62,19 @@ public class TentacleRape extends Skill {
                 if (target.bound()) {
                     writeOutput(c, Result.special, target);
                     if (target.hasDick()) {
-                        target.body.pleasure(getSelf(), tentacles, target.body.getRandom(CockPart.TYPE), m, c, this);
+                        target.body.pleasure(getSelf(), tentacles, target.body.getRandomCock(), m, c, this);
                         m = 2 + Global.random(4);
                     }
                     if (target.hasPussy()) {
-                        target.body.pleasure(getSelf(), tentacles, target.body.getRandom(PussyPart.TYPE), m, c, this);
+                        target.body.pleasure(getSelf(), tentacles, target.body.getRandomPussy(), m, c, this);
                         m = 2 + Global.random(4);
                     }
                     if (target.hasBreasts()) {
-                        target.body.pleasure(getSelf(), tentacles, target.body.getRandom(
-                            BreastsPart.TYPE), m, c, this);
+                        target.body.pleasure(getSelf(), tentacles, target.body.getRandomBreasts(), m, c, this);
                         m = 2 + Global.random(4);
                     }
                     if (target.body.has("ass")) {
-                        target.body.pleasure(getSelf(), tentacles, target.body.getRandom("ass"), m, c, this);
+                        target.body.pleasure(getSelf(), tentacles, target.body.getRandomAss(), m, c, this);
                         target.emote(Emotion.horny, 10);
                     }
                 } else {

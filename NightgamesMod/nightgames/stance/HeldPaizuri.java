@@ -83,7 +83,7 @@ public class HeldPaizuri extends AbstractFacingStance {
     }
 
     public List<BodyPart> topParts(Combat c) {
-        BodyPart part = top.body.getRandom(BreastsPart.TYPE);
+        BodyPart part = top.body.getRandomBreasts();
         if (part != null) {
             return Collections.singletonList(part);
         } else {
@@ -93,7 +93,7 @@ public class HeldPaizuri extends AbstractFacingStance {
 
     public List<BodyPart> bottomParts() {
         if (bottom.hasDick()) {
-            return Collections.singletonList(bottom.body.getRandom(CockPart.TYPE));
+            return Collections.singletonList(bottom.body.getRandomCock());
         }
         return Collections.emptyList();
     }
@@ -116,7 +116,7 @@ public class HeldPaizuri extends AbstractFacingStance {
     @Override
     public float priorityMod(Character self) {
         float bonus = getSubDomBonus(self, 2);
-        bonus += self.body.getRandom(BreastsPart.TYPE).priority(self);
+        bonus += self.body.getRandomBreasts().priority(self);
         return bonus;
     }
 

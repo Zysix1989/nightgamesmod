@@ -50,8 +50,7 @@ public class PussyWorship extends Skill {
         } else if (getSelf().human()) {
             c.write(getSelf(), deal(c, m, Result.normal, target));
         }
-        target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandom(
-            PussyPart.TYPE), m, c, this);
+        target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandomPussy(), m, c, this);
         if (getSelf().hasDick() && (!getSelf().hasPussy() || Global.random(2) == 0)) {
             getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), getSelf().body.getRandomCock(), m, c, this);
         } else if (getSelf().hasPussy()) {

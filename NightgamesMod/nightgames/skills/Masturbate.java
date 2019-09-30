@@ -48,7 +48,7 @@ public class Masturbate extends Skill {
         ArrayList<BodyPart> parts = new ArrayList<BodyPart>();
         BodyPart cock = target.body.getRandomCock();
         BodyPart pussy = target.body.getRandomPussy();
-        BodyPart ass = target.body.getRandom(AssPart.TYPE);
+        BodyPart ass = target.body.getRandomAss();
         if (cock != null && !c.getStance().inserted(target)) {
             parts.add(cock);
         }

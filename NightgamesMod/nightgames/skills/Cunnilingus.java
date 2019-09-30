@@ -80,8 +80,7 @@ public class Cunnilingus extends Skill {
             if (ReverseMount.class.isInstance(c.getStance())) {
                 c.setStance(new SixNine(getSelf(), target), getSelf(), true);
             }
-            target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandom(
-                PussyPart.TYPE), m, c, this);
+            target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandomPussy(), m, c, this);
         }
         return results != Result.miss;
     }

@@ -25,7 +25,7 @@ public class Tighten extends Thrust {
     @Override
     public BodyPart getSelfOrgan(Combat c, Character target) {
         if (c.getStance().anallyPenetratedBy(c, getSelf(), target)) {
-            return getSelf().body.getRandom(AssPart.TYPE);
+            return getSelf().body.getRandomAss();
         } else if (c.getStance().vaginallyPenetratedBy(c, getSelf(), target)) {
             return getSelf().body.getRandomPussy();
         } else {

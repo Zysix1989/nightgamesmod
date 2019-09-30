@@ -39,7 +39,7 @@ public class ReverseAssFuck extends Fuck {
 
     @Override
     public BodyPart getSelfOrgan() {
-        return getSelf().body.getRandom(AssPart.TYPE);
+        return getSelf().body.getRandomAss();
     }
 
     @Override

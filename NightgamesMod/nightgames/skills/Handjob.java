@@ -51,11 +51,10 @@ public class Handjob extends Skill {
             if (getSelf().get(Attribute.Seduction) >= 8) {
                 m += 6;
                 writeOutput(c, Result.normal, target);
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandom(
-                    CockPart.TYPE), m, c, this);
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomCock(), m, c, this);
             } else {
                 writeOutput(c, Result.weak, target);
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandom(CockPart.TYPE), m, c, this);
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomCock(), m, c, this);
             }
         } else {
             writeOutput(c, Result.miss, target);

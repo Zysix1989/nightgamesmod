@@ -70,7 +70,7 @@ public class FaceFuck extends Skill {
         target.add(c, new Shamed(target));
 
         if (selfDamage > 0) {
-            getSelf().body.pleasure(target, targetMouth, getSelf().body.getRandom(CockPart.TYPE), selfDamage, c, this);
+            getSelf().body.pleasure(target, targetMouth, getSelf().body.getRandomCock(), selfDamage, c, this);
         }
         if (targetDamage > 0) {
             target.body.pleasure(target, getSelf().body.getRandomInsertable(), targetMouth, targetDamage, c, this);

@@ -108,7 +108,7 @@ public class Titfucking extends AbstractFacingStance {
     public float priorityMod(Character self) {
         float bonus = 0;
         if (self == bottom) {
-            bonus += 2 * self.body.getRandom(BreastsPart.TYPE).priority(self);
+            bonus += 2 * self.body.getRandomBreasts().priority(self);
         }
         return bonus;
     }

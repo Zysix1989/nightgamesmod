@@ -59,7 +59,7 @@ public class Anilingus extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        AssPart targetAss = (AssPart) target.body.getRandom("ass");
+        AssPart targetAss = target.body.getRandomAss();
         Result result = Result.normal;
         int arousalToTarget = 10;
         int mojoToTarget = 0;
@@ -92,7 +92,7 @@ public class Anilingus extends Skill {
             target.buildMojo(c, mojoToTarget);
         }
         if (arousalToSelf > 0) {
-            getSelf().temptWithSkill(c, target, target.body.getRandom("ass"), arousalToSelf, this);
+            getSelf().temptWithSkill(c, target, target.body.getRandomAss(), arousalToSelf, this);
         }
         if (target.has(Trait.temptingass) && !getSelf().bound()) {
             c.write(target, Global.format("Servicing {other:possessive} perfect behind makes {self:direct-object} almost unconsciously touch {self:reflective}.", getSelf(), target));
@@ -134,7 +134,7 @@ public class Anilingus extends Skill {
             return "With a terrible need coursing through you, you lower your face between "
                             + target.nameOrPossessivePronoun()
                             + " rear cheeks and plunge your tongue repeatedly in and out of "+target.possessiveAdjective()+" "
-                            + target.body.getRandom("ass").describe(target) + ". "
+                            + target.body.getRandomAss().describe(target) + ". "
                             + "You dimly realize that this is probably arousing you as much as " + target.getName()
                             + ", but worshipping "+target.possessiveAdjective()+" sublime derriere seems much higher on your priorities than winning.";
         }

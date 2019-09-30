@@ -49,7 +49,7 @@ public class CockWorship extends Skill {
         }
         writeOutput(c, Result.normal, target);
         BodyPart mouth = getSelf().body.getRandom(MouthPart.TYPE);
-        BodyPart cock = target.body.getRandom(CockPart.TYPE);
+        BodyPart cock = target.body.getRandomCock();
         target.body.pleasure(getSelf(), mouth, cock, m, c, this);
         if (getSelf().hasDick() && (!getSelf().hasPussy() || Global.random(2) == 0)) {
             getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), getSelf().body.getRandomCock(), m, c, this);

@@ -39,8 +39,7 @@ public class Finger extends Skill {
                 } else {
                     c.write(getSelf(), receive(c, 0, Result.normal, target));
                 }
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandom(
-                    PussyPart.TYPE), m,
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomPussy(), m,
                                 c, this);
             } else {
                 if (getSelf().human()) {
@@ -48,7 +47,7 @@ public class Finger extends Skill {
                 } else {
                     c.write(getSelf(), receive(c, 0, Result.weak, target));
                 }
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandom(PussyPart.TYPE), m,
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomPussy(), m,
                                 c, this);
             }
         } else {

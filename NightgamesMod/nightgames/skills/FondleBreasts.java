@@ -51,8 +51,7 @@ public class FondleBreasts extends Skill {
         }
 
         writeOutput(c, result, target);
-        target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandom(
-            BreastsPart.TYPE), m,
+        target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomBreasts(), m,
                         c, this);
 
         return true;

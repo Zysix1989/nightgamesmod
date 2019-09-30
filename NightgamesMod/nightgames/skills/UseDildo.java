@@ -56,7 +56,7 @@ public class UseDildo extends Skill {
             }
 
             m = (int)getSelf().modifyDamage(DamageType.gadgets, target, m);
-            target.body.pleasure(getSelf(), null, target.body.getRandom(PussyPart.TYPE), m, c, this);
+            target.body.pleasure(getSelf(), null, target.body.getRandomPussy(), m, c, this);
         } else {
             writeOutput(c, Result.miss, target);
             return false;

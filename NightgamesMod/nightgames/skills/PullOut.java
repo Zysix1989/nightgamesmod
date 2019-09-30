@@ -129,7 +129,7 @@ public class PullOut extends Skill {
                     writeOutput(c, result, target);
                 } else {
                     if (getSelf().hasStatus(Stsflag.leglocked)) {
-                        BodyPart part = c.getStance().anallyPenetrated(c, getSelf()) ? target.body.getRandom("ass")
+                        BodyPart part = c.getStance().anallyPenetrated(c, getSelf()) ? target.body.getRandomAss()
                                         : target.body.getRandomPussy();
                         String partString = part.describe(target);
                         if (getSelf().human()) {
@@ -154,7 +154,7 @@ public class PullOut extends Skill {
                                             getSelf().pronoun(), target.objectPronoun()));
                         }
                     } else if (target.has(Trait.tight) && c.getStance().inserted(getSelf())) {
-                        BodyPart part = c.getStance().anallyPenetrated(c, target) ? target.body.getRandom("ass")
+                        BodyPart part = c.getStance().anallyPenetrated(c, target) ? target.body.getRandomAss()
                                         : target.body.getRandomPussy();
                         String partString = part.describe(target);
                         if (getSelf().human()) {
@@ -170,7 +170,7 @@ public class PullOut extends Skill {
                     }
                     int m = 8;
                     if (c.getStance().inserted(getSelf())) {
-                        BodyPart part = c.getStance().anallyPenetrated(c, target) ? target.body.getRandom("ass")
+                        BodyPart part = c.getStance().anallyPenetrated(c, target) ? target.body.getRandomAss()
                                         : target.body.getRandomPussy();
                         getSelf().body.pleasure(target, part, getSelf().body.getRandomInsertable(), m, c, this);
                     }
@@ -185,8 +185,7 @@ public class PullOut extends Skill {
                                 target.body.getRandomPussy().describe(target),
                                 s.binding, getSelf().possessiveAdjective()));
                 int m = 8;
-                getSelf().body.pleasure(target, target.body.getRandom(PussyPart.TYPE), getSelf().body.getRandom(
-                    CockPart.TYPE), m, c, this);
+                getSelf().body.pleasure(target, target.body.getRandomPussy(), getSelf().body.getRandomCock(), m, c, this);
                 return false;
             } else 
                 writeOutput(c, result, target);

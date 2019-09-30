@@ -66,8 +66,7 @@ public class FaceSit extends Skill {
         if (getSelf().hasBalls()) {
             getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandom("balls"), m, c, this);
         } else {
-            getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandom(
-                PussyPart.TYPE), m, c, this);
+            getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandomPussy(), m, c, this);
             
             if (Global.random(100) < 1 + getSelf().get(Attribute.Fetish) / 2) {
                 target.add(c, new BodyFetish(target, getSelf(), PussyPart.TYPE, .05));
@@ -78,8 +77,8 @@ public class FaceSit extends Skill {
             n *= 1.5;
         }
 
-        target.temptWithSkill(c, getSelf(), getSelf().body.getRandom("ass"), (int) Math.round(n / 2), this);
-        target.temptWithSkill(c, getSelf(), getSelf().body.getRandom(PussyPart.TYPE), (int) Math.round(n / 2), this);
+        target.temptWithSkill(c, getSelf(), getSelf().body.getRandomAss(), (int) Math.round(n / 2), this);
+        target.temptWithSkill(c, getSelf(), getSelf().body.getRandomPussy(), (int) Math.round(n / 2), this);
 
         target.loseWillpower(c, 5);
         target.add(c, new Shamed(target));

@@ -64,11 +64,9 @@ public class Footjob extends Skill {
                 c.write(getSelf(), Global.format(receive(c, m, Result.normal, target), getSelf(), target));
             }
             if (target.hasDick()) {
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.FEET), target.body.getRandom(
-                    CockPart.TYPE), m, c, this);
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.FEET), target.body.getRandomCock(), m, c, this);
             } else {
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.FEET), target.body.getRandom(
-                    PussyPart.TYPE), m, c, this);
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.FEET), target.body.getRandomPussy(), m, c, this);
             }
             if (Global.random(100) < 15 + 2 * getSelf().get(Attribute.Fetish)) {
                 target.add(c, new BodyFetish(target, getSelf(), Body.FEET, .25));

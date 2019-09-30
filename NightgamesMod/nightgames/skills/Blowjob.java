@@ -85,16 +85,16 @@ public class Blowjob extends Skill {
         if (isVaginal(c, target)) {
             arousalToTarget += 4;
             writeOutput(c, arousalToTarget, Result.intercourse, target);
-            target.body.pleasure(getSelf(), getSelf().body.getRandom(PussyPart.TYPE), target.body.getRandom(
+            target.body.pleasure(getSelf(), getSelf().body.getRandomPussy(), target.body.getRandom(
                 CockPart.TYPE), arousalToTarget, c, this);
         } else if (facesitting) {
             writeOutput(c, arousalToTarget, Result.reverse, target);
-            target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandom(CockPart.TYPE), arousalToTarget, c, this);
+            target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandomCock(), arousalToTarget, c, this);
             target.buildMojo(c, 10);
         } else if (target.roll(getSelf(), c, accuracy(c, target))) {
             writeOutput(c, arousalToTarget, getSelf().has(Trait.silvertongue) ? Result.special : Result.normal, target);
             BodyPart mouth = getSelf().body.getRandom(MouthPart.TYPE);
-            BodyPart cock = target.body.getRandom(CockPart.TYPE);
+            BodyPart cock = target.body.getRandomCock();
             target.body.pleasure(getSelf(), mouth, cock, arousalToTarget, c, this);
             if (mouth.isErogenous()) {
                 getSelf().body.pleasure(target, cock, mouth, arousalToTarget, c, this);

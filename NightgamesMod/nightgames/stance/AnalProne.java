@@ -105,7 +105,7 @@ public class AnalProne extends AnalSexStance {
             }
             c.setStance(insertRandom(c));
         }
-        if (inserted.body.getRandom(AssPart.TYPE) == null) {
+        if (inserted.body.getRandomAss() == null) {
             if (inserted.human()) {
                 c.write("With your asshole suddenly disappearing, " + inserter.getName()
                                 + "'s dick pops out of what was once your sphincter.");

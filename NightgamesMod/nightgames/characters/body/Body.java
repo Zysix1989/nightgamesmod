@@ -1068,7 +1068,7 @@ public class Body implements Cloneable {
     }
     
     private void changeSex(CharacterSex newSex) {
-        FacePart face = ((FacePart)getRandom(FacePart.TYPE));
+        FacePart face = ((FacePart)getFace());
         double femininity = face.getFemininity(character);
         switch (newSex) {
             case male:
@@ -1277,7 +1277,7 @@ public class Body implements Cloneable {
     public BodyPart getRandomHole() {
         BodyPart part = getRandomPussy();
         if (part == null) {
-            part = getRandom(AssPart.TYPE);
+            part = getRandomAss();
         }
         return part;
     }

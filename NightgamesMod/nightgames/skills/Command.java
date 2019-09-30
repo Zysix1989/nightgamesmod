@@ -11,6 +11,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
@@ -373,7 +374,7 @@ public class Command extends Skill {
                 break;
             case MASTURBATE:
                 BodyPart pleasured =
-                                target.body.getRandom(target.hasDick() ? CockPart.TYPE : target.hasPussy() ? PussyPart.TYPE : "ass");
+                                target.body.getRandom(target.hasDick() ? CockPart.TYPE : target.hasPussy() ? PussyPart.TYPE : AssPart.TYPE);
                 c.write(getSelf(),
                                 String.format("Feeling a bit uninspired, %s just tells %s"
                                                 + " to play with %s %s for %s.", getSelf().getName(),

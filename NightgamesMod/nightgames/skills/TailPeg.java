@@ -114,13 +114,11 @@ public class TailPeg extends Skill {
             }
             if (intercourse) {
                 if (!c.getStance().vaginallyPenetrated(c, target)) {
-                    target.body.pleasure(getSelf(), getSelf().body.getRandom(TailPart.TYPE), target.body.getRandom(
-                        PussyPart.TYPE),
+                    target.body.pleasure(getSelf(), getSelf().body.getRandom(TailPart.TYPE), target.body.getRandomPussy(),
                                     strength, c, this);
                     target.add(c, new TailFucked(target, getSelf(), PussyPart.TYPE));
                 } else if (!c.getStance().anallyPenetrated(c, target)) {
-                    target.body.pleasure(getSelf(), getSelf().body.getRandom(TailPart.TYPE), target.body.getRandom(
-                        AssPart.TYPE),
+                    target.body.pleasure(getSelf(), getSelf().body.getRandom(TailPart.TYPE), target.body.getRandomAss(),
                                     strength, c, this);
                     target.add(c, new TailFucked(target, getSelf(), AssPart.TYPE));
                 }

@@ -121,7 +121,7 @@ public class Drain extends Skill {
         if (c.getStance().inserted(target)) {
             String muscDesc = c.getStance().anallyPenetrated(c, getSelf()) ? "anal" : "vaginal";
             String partDesc = c.getStance().anallyPenetrated(c, getSelf())
-                            ? getSelf().body.getRandom("ass").describe(getSelf())
+                            ? getSelf().body.getRandomAss().describe(getSelf())
                             : getSelf().body.getRandomPussy().describe(getSelf());
             String base = "You put your powerful " + muscDesc + " muscles to work whilst" + " transfixing "
                             + target.getName() + "'s gaze with your own, goading " + target.possessiveAdjective()
@@ -190,7 +190,7 @@ public class Drain extends Skill {
         if (c.getStance().inserted(target)) {
             String muscDesc = c.getStance().anallyPenetrated(c, getSelf()) ? "anal" : "vaginal";
             String partDesc = c.getStance().anallyPenetrated(c, getSelf())
-                            ? getSelf().body.getRandom("ass").describe(getSelf())
+                            ? getSelf().body.getRandomAss().describe(getSelf())
                             : getSelf().body.getRandomPussy().describe(getSelf());
 
             String base = String.format("%s %s  powerful %s muscles suddenly tighten around %s. "

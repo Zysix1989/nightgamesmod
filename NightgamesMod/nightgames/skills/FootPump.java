@@ -49,10 +49,8 @@ public class FootPump extends Skill {
         int m = 12 + Global.random(6);
         int m2 = m / 2;
         writeOutput(c, Result.normal, target);
-        target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.FEET), target.body.getRandom(
-            CockPart.TYPE), m, c, this);
-        target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandom(
-            BreastsPart.TYPE), m2, c, this);
+        target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.FEET), target.body.getRandomCock(), m, c, this);
+        target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomBreasts(), m2, c, this);
         if (c.getStance().en != Stance.behindfootjob) {
 
             c.setStance(new BehindFootjob(getSelf(), target, c.getStance().anallyPenetrated(c,target)), getSelf(), true);
