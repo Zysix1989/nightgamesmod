@@ -39,10 +39,7 @@ public class Disguise extends Action {
         NPC target = getRandomNPC(user);
         if (target != null) {
             user.addNonCombat(new Disguised(user, target));
-            user.body.clearReplacements();
-            Collection<BodyPart> currentParts = new ArrayList<>(user.body.getCurrentParts());
-            currentParts.forEach(part -> user.body.temporaryRemovePart(part, 1000));
-            target.body.getCurrentParts().forEach(part -> user.body.temporaryAddPart(part, 1000));
+            user.body.mimic(target.body);
             user.getTraits().forEach(t -> user.removeTemporaryTrait(t, 1000));
             target.getTraits().forEach(t -> user.addTemporaryTrait(t, 1000));
             user.completelyNudify(null);

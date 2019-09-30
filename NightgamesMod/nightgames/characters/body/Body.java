@@ -37,6 +37,7 @@ import nightgames.skills.Skill;
 import nightgames.status.Abuff;
 import nightgames.status.BodyFetish;
 import nightgames.status.Charmed;
+import nightgames.status.Disguised;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
 import nightgames.status.addiction.AddictionType;
@@ -1561,5 +1562,12 @@ public class Body implements Cloneable {
             type = "back";
         }
         return new TentaclePart(desc, type, fluids, 0, 1, 1);
+    }
+
+    public void mimic(Body other) {
+        clearReplacements();
+        Collection<BodyPart> currentParts = new ArrayList<>(getCurrentParts());
+        currentParts.forEach(part -> temporaryRemovePart(part, 1000));
+        other.getCurrentParts().forEach(part -> temporaryAddPart(part, 1000));
     }
 }
