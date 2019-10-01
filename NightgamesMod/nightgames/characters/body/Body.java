@@ -505,8 +505,7 @@ public class Body implements Cloneable {
 
     public void removeTemporaryParts(String type) {
         replacements.removeIf(rep -> rep.added.stream()
-                                              .anyMatch(part -> part.getType()
-                                                                    .equals(type)));
+            .anyMatch(part -> part.getType().equals(type)));
         updateCurrentParts();
     }
 
