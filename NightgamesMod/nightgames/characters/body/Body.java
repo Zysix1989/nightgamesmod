@@ -135,12 +135,12 @@ public class Body implements Cloneable {
         this.hotness = hotness;
     }
 
-    public Collection<BodyPart> getCurrentParts() {
+    private Collection<BodyPart> getCurrentParts() {
         return currentParts;
     }
 
     public List<BodyPart> getCurrentPartsThatMatch(Predicate<BodyPart> filterPredicate){
-        return currentParts.stream().filter(filterPredicate).collect(Collectors.toList());
+        return getCurrentParts().stream().filter(filterPredicate).collect(Collectors.toList());
     }
 
     private void updateCurrentParts() {
@@ -301,7 +301,7 @@ public class Body implements Cloneable {
     }
 
     public List<BodyPart> get(String type) {
-        return currentParts.stream()
+        return getCurrentParts().stream()
             .filter(p -> p.isType(type))
             .collect(Collectors.toList());
     }
@@ -1143,7 +1143,7 @@ public class Body implements Cloneable {
             reps.forEach(rep -> newBody.modReplacements.get(type).add(new PartModReplacement(rep)));
         });
         newBody.bodyParts = new LinkedHashSet<>(bodyParts);
-        newBody.currentParts = new HashSet<>(currentParts);
+        newBody.currentParts = new HashSet<>(getCurrentParts());
         return newBody;
     }
 
