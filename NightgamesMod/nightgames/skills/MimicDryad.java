@@ -63,7 +63,7 @@ public class MimicDryad extends Skill {
                 getSelf().addTemporaryTrait(Trait.addictivefluids, 10);
             }
             if (getSelf().getLevel() >= 60) {
-                getSelf().body.temporaryAddPartMod("pussy", TentacledMod.INSTANCE, 10);
+                getSelf().body.temporaryAddPartMod("pussy", new TentacledMod(), 10);
             }
         }
         getSelf().addTemporaryTrait(Trait.dryad, 10);
@@ -83,7 +83,7 @@ public class MimicDryad extends Skill {
         }
         getSelf().add(c, new Abuff(getSelf(), Attribute.Bio, strength, 10));
         getSelf().add(c, new SlimeMimicry("dryad", getSelf(), 10));
-        getSelf().body.temporaryAddPartMod("pussy", PlantMod.INSTANCE, 10);
+        getSelf().body.temporaryAddPartMod("pussy", new PlantMod(), 10);
         return true;
     }
 

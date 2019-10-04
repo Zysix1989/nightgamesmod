@@ -62,10 +62,10 @@ public class MimicSuccubus extends Skill {
                 getSelf().addTemporaryTrait(Trait.RawSexuality, 999);
                 getSelf().addTemporaryTrait(Trait.soulsucker, 999);
                 getSelf().addTemporaryTrait(Trait.gluttony, 999);
-                getSelf().body.temporaryAddPartMod("ass", DemonicMod.INSTANCE, 999);
-                getSelf().body.temporaryAddPartMod(Body.HANDS, DemonicMod.INSTANCE, 999);
-                getSelf().body.temporaryAddPartMod(Body.FEET, DemonicMod.INSTANCE, 999);
-                getSelf().body.temporaryAddPartMod(MouthPart.TYPE, DemonicMod.INSTANCE, 999);
+                getSelf().body.temporaryAddPartMod("ass", new DemonicMod(), 999);
+                getSelf().body.temporaryAddPartMod(Body.HANDS, new DemonicMod(), 999);
+                getSelf().body.temporaryAddPartMod(Body.FEET, new DemonicMod(), 999);
+                getSelf().body.temporaryAddPartMod(MouthPart.TYPE, new DemonicMod(), 999);
         getSelf().addTemporaryTrait(Trait.succubus, 999);
         getSelf().addTemporaryTrait(Trait.soulsucker, 999);
         getSelf().addTemporaryTrait(Trait.energydrain, 999);
@@ -84,7 +84,7 @@ public class MimicSuccubus extends Skill {
         }
         getSelf().add(c, new Abuff(getSelf(), Attribute.Dark, strength, 999));
         getSelf().add(c, new SlimeMimicry("succubus", getSelf(), 999));
-        getSelf().body.temporaryAddPartMod(PussyPart.TYPE, DemonicMod.INSTANCE, 999);
+        getSelf().body.temporaryAddPartMod(PussyPart.TYPE, new DemonicMod(), 999);
         getSelf().body.temporaryAddPartMod(CockPart.TYPE, new IncubusCockMod(), 999);
 
         return true;

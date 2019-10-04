@@ -18,8 +18,6 @@ import org.jtwig.JtwigTemplate;
 public class CyberneticMod extends CatcherMod {
     public static final String TYPE = "cybernetic";
 
-    public static final CyberneticMod INSTANCE = new CyberneticMod();
-
     public CyberneticMod() {
         super(TYPE, -.1, .8, -.5);
     }

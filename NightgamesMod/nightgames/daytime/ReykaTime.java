@@ -175,7 +175,8 @@ public class ReykaTime extends BaseNPCTime {
         };
         transformationOptions.add(pointedEars);
         {
-            TransformationOption succubusPussy = new ApplyPartModOption(PussyPart.TYPE, DemonicMod.INSTANCE);
+            TransformationOption succubusPussy = new ApplyPartModOption(PussyPart.TYPE,
+                new DemonicMod());
             succubusPussy.ingredients.put(Item.SuccubusDraft, 10);
             succubusPussy.ingredients.put(Item.BewitchingDraught, 10);
             succubusPussy.ingredients.put(Item.FemDraft, 20);
@@ -189,7 +190,8 @@ public class ReykaTime extends BaseNPCTime {
             transformationOptions.add(succubusPussy);
         }
         {
-            TransformationOption devilishAss = new ApplyPartModOption(AssPart.TYPE, DemonicMod.INSTANCE);
+            TransformationOption devilishAss = new ApplyPartModOption(AssPart.TYPE,
+                new DemonicMod());
             devilishAss.ingredients.put(Item.SuccubusDraft, 10);
             devilishAss.ingredients.put(Item.BewitchingDraught, 10);
             devilishAss.ingredients.put(Item.semen, 5);
@@ -205,7 +207,8 @@ public class ReykaTime extends BaseNPCTime {
             transformationOptions.add(devilishAss);
         }
         {
-            TransformationOption demonicMouth = new ApplyPartModOption(MouthPart.TYPE, DemonicMod.INSTANCE);
+            TransformationOption demonicMouth = new ApplyPartModOption(MouthPart.TYPE,
+                new DemonicMod());
             demonicMouth.ingredients.put(Item.SuccubusDraft, 10);
             demonicMouth.ingredients.put(Item.BewitchingDraught, 10);
             demonicMouth.ingredients.put(Item.semen, 5);

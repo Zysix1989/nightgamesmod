@@ -8,7 +8,6 @@ import org.jtwig.JtwigTemplate;
 
 public class TrainedMod extends PartMod {
     public static final String TYPE = "trained";
-    public static final TrainedMod INSTANCE = new TrainedMod();
 
     public TrainedMod() {
         super(TYPE, .2, .2, -.2);

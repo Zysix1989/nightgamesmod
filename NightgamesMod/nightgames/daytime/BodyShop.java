@@ -535,7 +535,7 @@ public class BodyShop extends Activity {
                                         "{self:name-possessive} legs are wrapped in a shiny black material that look fused on.",
                                         .3, 1.5, .7, true, Body.FEET, ""),
                         new GenericBodyPart("feet", 0, 1, 1, Body.FEET, ""), 1000, 1000);
-        addBodyPartMod("Anal Pussy", SecondPussyMod.INSTANCE, AssPart.TYPE, 2000, 2000, 0);
+        addBodyPartMod("Anal Pussy", new SecondPussyMod(), AssPart.TYPE, 2000, 2000, 0);
         addBodyPart("Fused Gloves",
                         new GenericBodyPart("Fused Gloves",
                                         "{self:name-possessive} arms and hands are wrapped in a shiny black material that look fused on.",

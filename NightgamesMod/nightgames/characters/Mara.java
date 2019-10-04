@@ -354,7 +354,7 @@ public class Mara extends BasePersonality {
     private void advance() {
         character.getGrowth().addTrait(10, Trait.madscientist);
         if (character.hasPussy()) {
-            character.body.addReplace(character.body.getRandomPussy().applyMod(CyberneticMod.INSTANCE), 1);
+            character.body.addReplace(character.body.getRandomPussy().applyMod(new CyberneticMod()), 1);
         }
         if (character.hasDick()) {
             character.body.addReplace(character.body.getRandomCock()

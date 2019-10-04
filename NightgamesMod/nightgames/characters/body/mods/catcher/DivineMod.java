@@ -20,7 +20,6 @@ import org.jtwig.JtwigTemplate;
 
 public class DivineMod extends CatcherMod {
     public static final String TYPE = "divine";
-    public static final DivineMod INSTANCE = new DivineMod();
 
     public DivineMod() {
         super(TYPE, 0, 1.0, 0.0);

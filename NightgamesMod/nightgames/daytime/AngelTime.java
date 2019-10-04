@@ -103,7 +103,8 @@ public class AngelTime extends BaseNPCTime {
             transformationOptions.add(blessedCock);
         }
         {
-            TransformationOption divinePussy = new ApplyPartModOption(PussyPart.TYPE, DivineMod.INSTANCE);
+            TransformationOption divinePussy = new ApplyPartModOption(PussyPart.TYPE,
+                new DivineMod());
             divinePussy.ingredients.put(Item.HolyWater, 3);
             divinePussy.addRequirement((c, self, other) -> {
                 return self.get(Attribute.Divinity) >= 10;
@@ -118,7 +119,7 @@ public class AngelTime extends BaseNPCTime {
             transformationOptions.add(divinePussy);
         }
         {
-            TransformationOption sacredAss = new ApplyPartModOption(AssPart.TYPE, DivineMod.INSTANCE);
+            TransformationOption sacredAss = new ApplyPartModOption(AssPart.TYPE, new DivineMod());
             sacredAss.ingredients.put(Item.HolyWater, 6);
             sacredAss.addRequirement((c, self, other) -> {
                 return self.get(Attribute.Divinity) >= 20;

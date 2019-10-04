@@ -9,9 +9,8 @@ import org.jtwig.JtwigTemplate;
 
 public class ParasitedMod extends PartMod {
     public static final String TYPE = "parasited";
-    public static final ParasitedMod INSTANCE = new ParasitedMod();
 
-    private ParasitedMod() {
+    public ParasitedMod() {
         super(TYPE, 0, 0, 0);
     }
 

@@ -96,7 +96,7 @@ public class RequirementTest {
 
     @Test public void bodypartTest() throws Exception {
         self.body.addReplace(PussyPart.generic, 1);
-        other.body.addReplace(PussyPart.generic.applyMod(FieryMod.INSTANCE), 1);
+        other.body.addReplace(PussyPart.generic.applyMod(new FieryMod()), 1);
         assertThat(bodypart("pussy").meets(combat, self, other), is(true));
         assertThat(bodypart("pussy").meets(combat, other, self), is(true));
         other.body.removeAll("pussy");
@@ -252,8 +252,9 @@ public class RequirementTest {
 
     @Test public void specificBodyPartTest() throws Exception {
         self.body.addReplace(PussyPart.generic, 1);
-        other.body.addReplace(PussyPart.generic.applyMod(FieryMod.INSTANCE), 1);
-        SpecificBodyPartRequirement fierypussy = specificpart(PussyPart.generic.applyMod(FieryMod.INSTANCE));
+        other.body.addReplace(PussyPart.generic.applyMod(new FieryMod()), 1);
+        SpecificBodyPartRequirement fierypussy = specificpart(PussyPart.generic.applyMod(
+            new FieryMod()));
         assertThat(fierypussy.meets(combat, self, other), is(false));
         assertThat(fierypussy.meets(combat, other, self), is(true));
         other.body.removeAll("pussy");

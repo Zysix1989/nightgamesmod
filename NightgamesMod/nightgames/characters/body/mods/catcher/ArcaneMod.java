@@ -18,7 +18,6 @@ import org.jtwig.JtwigTemplate;
 
 public class ArcaneMod extends CatcherMod {
     public static final String TYPE = "arcane";
-    public static final ArcaneMod INSTANCE = new ArcaneMod();
 
     public ArcaneMod() {
         super(TYPE, .05, .1, 0);

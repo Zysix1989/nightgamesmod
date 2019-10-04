@@ -98,7 +98,7 @@ public class Jewel extends BasePersonality {
         Growth growth = character.getGrowth();
         Global.flag(JEWEL_ANAL_FOCUS);
         growth.addTrait(11, Trait.powerfulcheeks);
-        growth.addBodyPartMod(25, AssPart.TYPE, FieryMod.INSTANCE);
+        growth.addBodyPartMod(25, AssPart.TYPE, new FieryMod());
         growth.addTrait(37, Trait.temptingass);
         growth.addTrait(11, Trait.polecontrol);
         growth.addTrait(25, Trait.assmaster);
@@ -780,7 +780,7 @@ public class Jewel extends BasePersonality {
         character.getGrowth()
                  .addTrait(10, Trait.fighter);
         if (character.hasPussy()) {
-            character.body.addReplace(character.body.getRandomPussy().applyMod(FieryMod.INSTANCE), 1);
+            character.body.addReplace(character.body.getRandomPussy().applyMod(new FieryMod()), 1);
         }
         if (character.hasDick()) {
             character.body.addReplace(character.body.getRandomCock()

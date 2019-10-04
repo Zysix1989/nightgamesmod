@@ -11,7 +11,6 @@ import org.jtwig.JtwigTemplate;
 
 public class PlantMod extends CatcherMod {
     public static final String TYPE = "plant";
-    public static final PlantMod INSTANCE = new PlantMod();
 
     public PlantMod() {
         super(TYPE, .3, 1, .2);

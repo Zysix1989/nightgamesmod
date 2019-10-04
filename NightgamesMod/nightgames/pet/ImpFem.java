@@ -93,7 +93,7 @@ public class ImpFem extends Pet {
         // imps are about as tall as goblins, maybe a bit shorter
         self.body.setHeight(110);
         if (getPower() > 30) {
-            self.body.add(PussyPart.generic.applyMod(DemonicMod.INSTANCE));            
+            self.body.add(PussyPart.generic.applyMod(new DemonicMod()));
         } else {
             self.body.add(PussyPart.generic);
         }

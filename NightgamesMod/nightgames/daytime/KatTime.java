@@ -112,7 +112,7 @@ public class KatTime extends BaseNPCTime {
             transformationOptions.add(primalCock);
         }
         {
-            TransformationOption feralPussy = new ApplyPartModOption(PussyPart.TYPE, FeralMod.INSTANCE);
+            TransformationOption feralPussy = new ApplyPartModOption(PussyPart.TYPE, new FeralMod());
             feralPussy.ingredients.put(Item.Rope, 10);
             feralPussy.ingredients.put(Item.Aphrodisiac, 25);
             feralPussy.ingredients.put(Item.FemDraft, 10);

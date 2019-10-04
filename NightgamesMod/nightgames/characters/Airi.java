@@ -409,7 +409,7 @@ public class Airi extends BasePersonality {
     public void eot(Combat c, Character opponent) {
         if (character.has(Trait.slime)) {
             if (character.hasPussy() && !character.body.getRandomPussy().moddedPartCountsAs(GooeyMod.TYPE)) {
-                character.body.temporaryAddPartMod(PussyPart.TYPE, GooeyMod.INSTANCE, 999);
+                character.body.temporaryAddPartMod(PussyPart.TYPE, new GooeyMod(), 999);
                 c.write(character, 
                                 Global.format("{self:NAME-POSSESSIVE} %s re-slime-ified.",
                                                 character, opponent, character.body.getRandomPussy().describe(character)));

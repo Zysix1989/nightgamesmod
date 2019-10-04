@@ -23,7 +23,6 @@ import org.jtwig.JtwigTemplate;
 
 public class DemonicMod extends CatcherMod {
     public static final String TYPE = "demonic";
-    public static final DemonicMod INSTANCE = new DemonicMod();
 
     public DemonicMod() {
         super(TYPE, .1, .5, .2);

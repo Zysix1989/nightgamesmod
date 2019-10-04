@@ -72,7 +72,7 @@ public class Mei extends BasePersonality {
         character.getGrowth().addTrait(15, Trait.lacedjuices);
         character.getGrowth().addTrait(20, Trait.tight);
         character.getGrowth().addTrait(25, Trait.sexTraining1);
-        character.getGrowth().addBodyPartMod(30, "pussy", DemonicMod.INSTANCE);
+        character.getGrowth().addBodyPartMod(30, "pussy", new DemonicMod());
         character.getGrowth().addBodyPart(30, TailPart.demonic);
         character.getGrowth().addBodyPart(30, WingsPart.fallenangel);
         character.getGrowth().addTrait(30, Trait.fallenAngel);

@@ -69,7 +69,7 @@ public class Sarah extends BasePersonality {
         character.getGrowth().addTrait(15, Trait.sadist);
         character.getGrowth().addTrait(20, Trait.disablingblows);
         character.getGrowth().addTrait(25, Trait.nimbletoes);
-        character.getGrowth().addBodyPartMod(30, PussyPart.TYPE, FieryMod.INSTANCE);
+        character.getGrowth().addBodyPartMod(30, PussyPart.TYPE, new FieryMod());
         character.getGrowth().addBodyPart(30, WingsPart.angelic);
         character.getGrowth().addTrait(30, Trait.valkyrie);
         character.getGrowth().addTrait(35, Trait.overwhelmingPresence);

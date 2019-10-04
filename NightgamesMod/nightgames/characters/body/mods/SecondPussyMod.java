@@ -11,7 +11,6 @@ import org.jtwig.JtwigTemplate;
 
 public class SecondPussyMod extends PartMod {
     public static final String TYPE = "secondpussy";
-    public static final SecondPussyMod INSTANCE = new SecondPussyMod();
 
     public SecondPussyMod() {
         super(TYPE, .2, .2, .3);

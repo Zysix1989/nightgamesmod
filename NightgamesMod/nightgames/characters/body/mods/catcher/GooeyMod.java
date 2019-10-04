@@ -15,7 +15,6 @@ import org.jtwig.JtwigTemplate;
 
 public class GooeyMod extends CatcherMod {
     public static final String TYPE = "gooey";
-    public static final GooeyMod INSTANCE = new GooeyMod();
 
     public GooeyMod() {
         super(TYPE, .2, .5, .2);

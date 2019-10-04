@@ -85,7 +85,8 @@ public class CassieTime extends BaseNPCTime {
             transformationOptions.add(runicCock);
         }
         {
-            TransformationOption arcanePussy = new ApplyPartModOption(PussyPart.TYPE, ArcaneMod.INSTANCE);
+            TransformationOption arcanePussy = new ApplyPartModOption(PussyPart.TYPE,
+                new ArcaneMod());
             arcanePussy.ingredients.put(Item.BewitchingDraught, 15);
             arcanePussy.ingredients.put(Item.FemDraft, 10);
             arcanePussy.ingredients.put(Item.FaeScroll, 1);
@@ -94,7 +95,8 @@ public class CassieTime extends BaseNPCTime {
             transformationOptions.add(arcanePussy);
         }
         {
-            TransformationOption arcaneMouth = new ApplyPartModOption(MouthPart.TYPE, ArcaneMod.INSTANCE);
+            TransformationOption arcaneMouth = new ApplyPartModOption(MouthPart.TYPE,
+                new ArcaneMod());
             arcaneMouth.ingredients.put(Item.BewitchingDraught, 15);
             arcaneMouth.ingredients.put(Item.FaeScroll, 3);
             arcaneMouth.addRequirement((c, self, other) -> {
@@ -105,7 +107,7 @@ public class CassieTime extends BaseNPCTime {
             transformationOptions.add(arcaneMouth);
         }
         {
-            TransformationOption arcaneAss = new ApplyPartModOption(AssPart.TYPE, ArcaneMod.INSTANCE);
+            TransformationOption arcaneAss = new ApplyPartModOption(AssPart.TYPE, new ArcaneMod());
             arcaneAss.ingredients.put(Item.BewitchingDraught, 15);
             arcaneAss.ingredients.put(Item.FaeScroll, 3);
             arcaneAss.addRequirement((c, self, other) -> {
@@ -116,7 +118,8 @@ public class CassieTime extends BaseNPCTime {
             transformationOptions.add(arcaneAss);
         }
         {
-            TransformationOption mouthPussy = new ApplyPartModOption(MouthPart.TYPE, SecondPussyMod.INSTANCE);
+            TransformationOption mouthPussy = new ApplyPartModOption(MouthPart.TYPE,
+                new SecondPussyMod());
 
             mouthPussy.ingredients.put(Item.BewitchingDraught, 10);
             mouthPussy.ingredients.put(Item.FemDraft, 10);

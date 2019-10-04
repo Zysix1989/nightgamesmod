@@ -18,7 +18,6 @@ import org.jtwig.JtwigTemplate;
 
 public class FieryMod extends CatcherMod {
     public static final String TYPE = "fiery";
-    public static final FieryMod INSTANCE = new FieryMod();
 
     public FieryMod() {
         super(TYPE, 0, .3, .2);

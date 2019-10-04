@@ -71,7 +71,7 @@ public class Caroline extends BasePersonality {
         character.getGrowth().addTrait(15, Trait.healer);
         character.getGrowth().addTrait(20, Trait.romantic);
         character.getGrowth().addTrait(25, Trait.hawkeye);
-        character.getGrowth().addBodyPartMod(30, PussyPart.TYPE, ArcaneMod.INSTANCE);
+        character.getGrowth().addBodyPartMod(30, PussyPart.TYPE, new ArcaneMod());
         character.getGrowth().addBodyPart(30, WingsPart.ethereal);
         character.getGrowth().addTrait(30, Trait.kabbalah);
         character.getGrowth().addTrait(35, Trait.protective);

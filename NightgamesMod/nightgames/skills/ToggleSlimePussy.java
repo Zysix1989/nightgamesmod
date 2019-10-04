@@ -71,7 +71,7 @@ public class ToggleSlimePussy extends Skill {
             } else {
                 msg += "but you see no outside changs. Perhaps they are hidden under {self:possessive} clothes?";
             }
-            getSelf().body.add(PussyPart.generic.applyMod(GooeyMod.INSTANCE));
+            getSelf().body.add(PussyPart.generic.applyMod(new GooeyMod()));
         }
         if (!target.human() || !target.is(Stsflag.blinded))
             c.write(getSelf(), Global.format(msg, getSelf(), target));

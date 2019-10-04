@@ -58,7 +58,7 @@ public class SlimeCloneParasite extends SimpleEnemySkill {
                                 + "{self:NAME-POSSESSIVE} gelatinous body has deformed around {other:possessive} %s and manages "
                                 + "to crawl inside {other:possessive} body somehow!",
                                 getSelf(), target, targetPart.describe(target), targetPart.getType()));
-                target.body.temporaryAddPartMod(targetPart.getType(), ParasitedMod.INSTANCE, 10);
+                target.body.temporaryAddPartMod(targetPart.getType(), new ParasitedMod(), 10);
             }
             return true;
         }

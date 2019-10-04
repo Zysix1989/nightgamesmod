@@ -289,12 +289,12 @@ class BodyConfiguration {
 
     enum Archetype {
         REGULAR(null, PussyPart.generic),
-        DEMON(new IncubusCockMod(), PussyPart.generic.applyMod(DemonicMod.INSTANCE)),
-        CAT(new PrimalCockMod(), PussyPart.generic.applyMod(FeralMod.INSTANCE)),
-        CYBORG(new BionicCockMod(), PussyPart.generic.applyMod(CyberneticMod.INSTANCE)),
-        ANGEL(new BlessedCockMod(), PussyPart.generic.applyMod(DivineMod.INSTANCE)),
-        WITCH(new RunicCockMod(), PussyPart.generic.applyMod(ArcaneMod.INSTANCE)),
-        SLIME(new SlimyCockMod(), PussyPart.generic.applyMod(GooeyMod.INSTANCE));
+        DEMON(new IncubusCockMod(), PussyPart.generic.applyMod(new DemonicMod())),
+        CAT(new PrimalCockMod(), PussyPart.generic.applyMod(new FeralMod())),
+        CYBORG(new BionicCockMod(), PussyPart.generic.applyMod(new CyberneticMod())),
+        ANGEL(new BlessedCockMod(), PussyPart.generic.applyMod(new DivineMod())),
+        WITCH(new RunicCockMod(), PussyPart.generic.applyMod(new ArcaneMod())),
+        SLIME(new SlimyCockMod(), PussyPart.generic.applyMod(new GooeyMod()));
         private final CockMod cockMod;
         private final BodyPart pussy;
 

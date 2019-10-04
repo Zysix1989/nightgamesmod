@@ -89,7 +89,7 @@ public class MimicCat extends Skill {
         }
         getSelf().add(c, new Abuff(getSelf(), Attribute.Animism, strength, 10));
         getSelf().add(c, new SlimeMimicry("cat", getSelf(), 10));
-        getSelf().body.temporaryAddPartMod(PussyPart.TYPE, FeralMod.INSTANCE, 10);
+        getSelf().body.temporaryAddPartMod(PussyPart.TYPE, new FeralMod(), 10);
         getSelf().body.temporaryAddPartMod(CockPart.TYPE, new PrimalCockMod(), 10);
         return true;
     }

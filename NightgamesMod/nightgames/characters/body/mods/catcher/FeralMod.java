@@ -19,7 +19,6 @@ import org.jtwig.JtwigTemplate;
 
 public class FeralMod extends CatcherMod {
     public static final String TYPE = "feral";
-    public static final FeralMod INSTANCE = new FeralMod();
 
     public FeralMod() {
         super(TYPE, .2, .3, .2);

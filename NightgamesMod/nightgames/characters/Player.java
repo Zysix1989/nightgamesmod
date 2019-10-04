@@ -905,7 +905,8 @@ public class Player extends Character {
         }
         if (has(Trait.slime)) {
             if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(GooeyMod.TYPE)) {
-                body.temporaryAddOrReplacePartWithType(body.getRandomPussy().applyMod(GooeyMod.INSTANCE), 999);
+                body.temporaryAddOrReplacePartWithType(body.getRandomPussy().applyMod(
+                    new GooeyMod()), 999);
                 c.write(this, 
                                 Global.format("{self:NAME-POSSESSIVE} %s turned back into a gooey pussy.",
                                                 this, opponent, body.getRandomPussy()));
@@ -1020,7 +1021,7 @@ public class Player extends Character {
             add(c, new PlayerSlimeDummy(this));
             if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(GooeyMod.TYPE)) {
                 body.temporaryAddOrReplacePartWithType(
-                    body.getRandomPussy().applyMod(GooeyMod.INSTANCE), 999);
+                    body.getRandomPussy().applyMod(new GooeyMod()), 999);
                 body.temporaryAddOrReplacePartWithType(
                     new TentaclePart("slime filaments", PussyPart.TYPE, "slime", 0.0, 1.0, 1.0), 999);
             }

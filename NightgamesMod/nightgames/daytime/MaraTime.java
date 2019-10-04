@@ -86,7 +86,8 @@ public class MaraTime extends BaseNPCTime {
             transformationOptions.add(bionicCock);
         }
         {
-            TransformationOption cyberneticPussy = new ApplyPartModOption(PussyPart.TYPE, CyberneticMod.INSTANCE);
+            TransformationOption cyberneticPussy = new ApplyPartModOption(PussyPart.TYPE,
+                new CyberneticMod());
             cyberneticPussy.ingredients.put(Item.TinkersMix, 20);
             cyberneticPussy.ingredients.put(Item.Lubricant, 5);
             cyberneticPussy.ingredients.put(Item.Spring, 5);
@@ -96,7 +97,8 @@ public class MaraTime extends BaseNPCTime {
             transformationOptions.add(cyberneticPussy);
         }
         {
-            TransformationOption biomechAss = new ApplyPartModOption(AssPart.TYPE, CyberneticMod.INSTANCE);
+            TransformationOption biomechAss = new ApplyPartModOption(AssPart.TYPE,
+                new CyberneticMod());
             biomechAss.ingredients.put(Item.TinkersMix, 20);
             biomechAss.ingredients.put(Item.Lubricant, 5);
             biomechAss.ingredients.put(Item.Spring, 5);
@@ -109,7 +111,8 @@ public class MaraTime extends BaseNPCTime {
             transformationOptions.add(biomechAss);
         }
         {
-            TransformationOption prostheticMouth = new ApplyPartModOption(MouthPart.TYPE, CyberneticMod.INSTANCE);
+            TransformationOption prostheticMouth = new ApplyPartModOption(MouthPart.TYPE,
+                new CyberneticMod());
             prostheticMouth.ingredients.put(Item.TinkersMix, 20);
             prostheticMouth.ingredients.put(Item.Lubricant, 5);
             prostheticMouth.ingredients.put(Item.Spring, 5);

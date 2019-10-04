@@ -85,7 +85,7 @@ public class JewelTime extends BaseNPCTime {
             transformationOptions.add(enlightenedCock);
         }
         {
-            TransformationOption fieryPussy = new ApplyPartModOption(PussyPart.TYPE, FieryMod.INSTANCE);
+            TransformationOption fieryPussy = new ApplyPartModOption(PussyPart.TYPE, new FieryMod());
             fieryPussy.ingredients.put(Item.FemDraft, 10);
             fieryPussy.ingredients.put(Item.EnergyDrink, 20);
             fieryPussy.ingredients.put(Item.JuggernautJuice, 10);
@@ -94,7 +94,7 @@ public class JewelTime extends BaseNPCTime {
             transformationOptions.add(fieryPussy);
         }
         {
-            TransformationOption moltenAss = new ApplyPartModOption(AssPart.TYPE, FieryMod.INSTANCE);
+            TransformationOption moltenAss = new ApplyPartModOption(AssPart.TYPE, new FieryMod());
             moltenAss.ingredients.put(Item.MoltenDrippings, 2);
             moltenAss.ingredients.put(Item.EnergyDrink, 20);
             moltenAss.ingredients.put(Item.JuggernautJuice, 10);
