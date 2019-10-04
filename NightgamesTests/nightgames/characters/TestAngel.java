@@ -80,7 +80,7 @@ public class TestAngel extends BasePersonality {
     }
 
     public void applyBasicStats(Character self) {
-        preferredCockMod = Optional.of(BlessedCockMod.TYPE);
+        preferredCockMod = Optional.of(new BlessedCockMod());
         self.outfitPlan.add(Clothing.getByID("Tshirt"));
         self.outfitPlan.add(Clothing.getByID("bra"));
         self.outfitPlan.add(Clothing.getByID("thong"));
