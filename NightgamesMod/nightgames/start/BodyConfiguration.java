@@ -47,7 +47,7 @@ class BodyConfiguration {
     protected Optional<GenitalConfiguration> genitals;
     protected Optional<BreastsPart> breasts;
     protected Optional<AssPart> ass;
-    protected Optional<EarPart> ears;
+    protected Optional<BodyPart> ears;
     protected Optional<TailPart> tail;
     protected Optional<WingsPart> wings;
     protected Optional<List<TentaclePart>> tentacles;
@@ -92,8 +92,7 @@ class BodyConfiguration {
                 : (AssPart) new AssPart(Size.Small).applyMod(new SecondPussyMod()));
 
         if (obj.has("ears"))
-            config.ears = Optional.of(EarPart.valueOf(obj.get("ears").getAsString()
-                                                            .toLowerCase()));
+            config.ears = Optional.of(EarPart.load(obj.get("ears").getAsJsonObject()));
         if (obj.has(TailPart.TYPE) && !obj.get(TailPart.TYPE).getAsString().equals("none"))
             config.tail = Optional.of(TailPart.valueOf(obj.get(TailPart.TYPE).getAsString()
                                                              .toLowerCase()));
