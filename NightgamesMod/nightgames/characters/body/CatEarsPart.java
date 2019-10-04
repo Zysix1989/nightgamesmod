@@ -1,28 +1,25 @@
 package nightgames.characters.body;
 
+import com.google.gson.JsonObject;
 import java.util.Collection;
 import java.util.Collections;
-
-import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
-import nightgames.global.Global;
 
-public enum EarPart implements BodyPart, BodyPartMod {
-    normal("normal ", 0, 1, 1);
+public class CatEarsPart implements BodyPart, BodyPartMod {
+    public static final String TYPE = "cat";
 
     public String desc;
     public double hotness;
     public double pleasure;
     public double sensitivity;
 
-    EarPart(String desc, double hotness, double pleasure, double sensitivity) {
-        this.desc = desc;
-        this.hotness = hotness;
-        this.pleasure = pleasure;
-        this.sensitivity = sensitivity;
+    public CatEarsPart() {
+        this.desc = "cat ";
+        this.hotness = .15;
+        this.pleasure = 1.5;
+        this.sensitivity = 1.5;
     }
 
     @Override
@@ -32,18 +29,12 @@ public enum EarPart implements BodyPart, BodyPartMod {
 
     @Override
     public void describeLong(StringBuilder b, Character c) {
-        switch (this) {
-            default:
-                b.append(Global.capitalizeFirstLetter(fullDescribe(c)) + " frames " + c.possessiveAdjective() + " face.");
-        }
+        b.append("Cute " + fullDescribe(c) + " tops " + c.possessiveAdjective() + " head.");
     }
 
     @Override
     public String describe(Character c) {
-        if (this != normal) {
-            return desc + "ears";
-        }
-        return "ears";
+        return desc + "ears";
     }
 
     @Override
@@ -91,20 +82,10 @@ public enum EarPart implements BodyPart, BodyPartMod {
         return true;
     }
 
-     @Override public JsonObject save() {
+    @Override public JsonObject save() {
         JsonObject obj = new JsonObject();
-        obj.addProperty("enum", name());
+        obj.addProperty("enum", TYPE);
         return obj;
-    }
-
-    public BodyPart load(JsonObject obj) {
-        if (obj.get("enum").getAsString().equals(PointedEarsPart.TYPE)) {
-            return new PointedEarsPart();
-        }
-        if (obj.get("enum").getAsString().equals(CatEarsPart.TYPE)) {
-            return new CatEarsPart();
-        }
-        return EarPart.valueOf(obj.get("enum").getAsString());
     }
 
     @Override
@@ -124,7 +105,7 @@ public enum EarPart implements BodyPart, BodyPartMod {
 
     @Override
     public boolean isNotable() {
-        return this != normal;
+        return true;
     }
 
     @Override
@@ -159,14 +140,14 @@ public enum EarPart implements BodyPart, BodyPartMod {
 
     @Override
     public double applySubBonuses(Character self, Character opponent, BodyPart with, BodyPart target, double damage,
-                    Combat c) {
+        Combat c) {
         return 0;
     }
 
     @Override
     public int mod(Attribute a, int total) {
         if (a == Attribute.Seduction) {
-            return 0;
+            return 3;
         }
         return 0;
     }
@@ -183,15 +164,12 @@ public enum EarPart implements BodyPart, BodyPartMod {
 
     @Override
     public Collection<BodyPartMod> getMods() {
-        if (this == normal) {
-            return Collections.emptySet();
-        }
         return Collections.singleton(this);
     }
 
     @Override
     public String getModType() {
-        return name();
+        return TYPE;
     }
 
     @Override

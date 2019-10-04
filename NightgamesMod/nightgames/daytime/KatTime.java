@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.BodyPartMod;
+import nightgames.characters.body.CatEarsPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarPart;
@@ -135,12 +137,14 @@ public class KatTime extends BaseNPCTime {
         catEars.ingredients.put(Item.Rope, 10);
         catEars.ingredients.put(Item.Aphrodisiac, 25);
         catEars.addRequirement((c, self, other) -> {
-            return self.body.get("ears").stream().anyMatch(part -> part != EarPart.cat) || !self.body.has("ears");
+            return self.body.get("ears").stream().anyMatch(part -> part instanceof BodyPartMod &&
+                ((BodyPartMod) part).getModType().equals(CatEarsPart.TYPE))
+                || !self.body.has("ears");
         }, "No cat ears");
         catEars.option = "Cat Ears";
         catEars.scene = "[Placeholder]<br/>Kat uses her totemic magic to grow you cat ears.";
         catEars.effect = (c, self, other) -> {
-            self.body.addReplace(EarPart.cat, 1);
+            self.body.addReplace(new CatEarsPart(), 1);
             return true;
         };
         transformationOptions.add(catEars);
