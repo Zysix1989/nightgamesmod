@@ -6,6 +6,7 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.EarPart;
+import nightgames.characters.body.PointedEarsPart;
 import nightgames.characters.body.mods.catcher.PlantMod;
 import nightgames.characters.body.mods.TentacledMod;
 import nightgames.combat.Combat;
@@ -71,7 +72,7 @@ public class MimicDryad extends Skill {
         getSelf().addTemporaryTrait(Trait.frenzyingjuices, 10);
         getSelf().addTemporaryTrait(Trait.RawSexuality, 10);
         getSelf().addTemporaryTrait(Trait.temptingtits, 10);
-        getSelf().body.temporaryAddOrReplacePartWithType(EarPart.pointed, 10);
+        getSelf().body.temporaryAddOrReplacePartWithType(new PointedEarsPart(), 10);
         BreastsPart part = getSelf().body.getBreastsBelow(Size.max());
         if (part != null) {
             getSelf().body.temporaryAddOrReplacePartWithType(part.upgrade(), 10);

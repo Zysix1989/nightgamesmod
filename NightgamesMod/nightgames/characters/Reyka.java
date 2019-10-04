@@ -7,6 +7,7 @@ import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.EarPart;
 import nightgames.characters.body.FacePart;
+import nightgames.characters.body.PointedEarsPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
@@ -79,7 +80,7 @@ public class Reyka extends BasePersonality {
         self.body.add(PussyPart.generic.applyMod(new DemonicMod()));
         self.body.add(TailPart.demonic);
         self.body.add(WingsPart.demonic);
-        self.body.add(EarPart.pointed);
+        self.body.add(new PointedEarsPart());
         self.body.add(new FacePart(0.5, 5));
         self.initialGender = CharacterSex.female;
     }

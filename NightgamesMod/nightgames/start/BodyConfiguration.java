@@ -15,6 +15,7 @@ import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.PointedEarsPart;
 import nightgames.characters.body.mods.pitcher.BionicCockMod;
 import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.body.mods.pitcher.CockMod;
@@ -320,7 +321,7 @@ class BodyConfiguration {
                 case DEMON:
                     body.add(WingsPart.demonic);
                     body.add(TailPart.demonic);
-                    body.add(EarPart.pointed);
+                    body.add(new PointedEarsPart());
                     break;
                 default:
                     break;
