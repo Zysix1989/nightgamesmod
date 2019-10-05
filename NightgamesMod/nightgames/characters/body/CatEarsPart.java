@@ -10,11 +10,6 @@ import nightgames.combat.Combat;
 public class CatEarsPart extends EarPart implements BodyPartMod {
     public static final String TYPE = "cat";
 
-    public String desc;
-    public double hotness;
-    public double pleasure;
-    public double sensitivity;
-
     public CatEarsPart() {
         this.desc = "cat ";
         this.hotness = .15;

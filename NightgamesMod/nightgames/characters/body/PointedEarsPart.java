@@ -11,11 +11,6 @@ import nightgames.global.Global;
 public class PointedEarsPart extends EarPart implements BodyPartMod {
     public static final String TYPE = "pointed";
 
-    public String desc;
-    public double hotness;
-    public double pleasure;
-    public double sensitivity;
-
     public PointedEarsPart() {
         this.desc = "pointed ";
         this.hotness = .1;
