@@ -5,6 +5,7 @@ import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.PussyPart;
@@ -79,7 +80,7 @@ public class PullOut extends Skill {
 
         if (c.getStance().en == Stance.anal) {
             if (target.has(Trait.bewitchingbottom)) {
-                Optional<BodyFetish> fetish = getSelf().body.getFetish("ass");
+                Optional<BodyFetish> fetish = getSelf().body.getFetish(AssPart.TYPE);
                 if(fetish.isPresent()) {
                     baseDifficulty += 7 * fetish.get().magnitude;
                 }

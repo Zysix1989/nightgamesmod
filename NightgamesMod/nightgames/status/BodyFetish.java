@@ -9,6 +9,7 @@ import com.google.gson.JsonObject;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
@@ -99,7 +100,7 @@ public class BodyFetish extends DurationStatus {
             return Arrays.asList((Skill) new BreastWorship(affected));
         } else if (part.equals(Body.FEET)) {
             return Arrays.asList((Skill) new FootWorship(affected));
-        } else if (part.equals("ass")) {
+        } else if (part.equals(AssPart.TYPE)) {
             return Arrays.asList((Skill) new Anilingus(affected));
         } else if (part.equals(CockPart.TYPE)) {
             return Arrays.asList((Skill) new Blowjob(affected), new ReverseAssFuck(affected), new ReverseFly(affected),

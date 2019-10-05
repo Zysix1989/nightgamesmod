@@ -266,7 +266,7 @@ public class Command extends Skill {
                 getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandomAss(),
                                 7 + Global.random(m), c, this);
                 if (Global.random(50) < getSelf().get(Attribute.Fetish) + 10) {
-                    target.add(c, new BodyFetish(target, getSelf(), "ass", .1));
+                    target.add(c, new BodyFetish(target, getSelf(), AssPart.TYPE, .1));
                 }
                 if (c.getStance().dom(target)) {
                     c.setStance(new Kneeling(getSelf(), target));

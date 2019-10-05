@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
@@ -73,7 +74,7 @@ public class TentacleRape extends Skill {
                         target.body.pleasure(getSelf(), tentacles, target.body.getRandomBreasts(), m, c, this);
                         m = 2 + Global.random(4);
                     }
-                    if (target.body.has("ass")) {
+                    if (target.body.has(AssPart.TYPE)) {
                         target.body.pleasure(getSelf(), tentacles, target.body.getRandomAss(), m, c, this);
                         target.emote(Emotion.horny, 10);
                     }

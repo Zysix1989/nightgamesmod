@@ -3,6 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.FeralMod;
@@ -90,7 +91,7 @@ public class FaceSit extends Skill {
             fetishChance *= 2;
         }
         if (Global.random(100) < fetishChance) {
-            target.add(c, new BodyFetish(target, getSelf(), "ass", .25));
+            target.add(c, new BodyFetish(target, getSelf(), AssPart.TYPE, .25));
         }
       
         return true;

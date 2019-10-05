@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Reyka;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
@@ -63,7 +64,7 @@ public class MimicSuccubus extends Skill {
                 getSelf().addTemporaryTrait(Trait.RawSexuality, 999);
                 getSelf().addTemporaryTrait(Trait.soulsucker, 999);
                 getSelf().addTemporaryTrait(Trait.gluttony, 999);
-                getSelf().body.temporaryAddPartMod("ass", new DemonicMod(), 999);
+                getSelf().body.temporaryAddPartMod(AssPart.TYPE, new DemonicMod(), 999);
                 getSelf().body.temporaryAddPartMod(Body.HANDS, new DemonicMod(), 999);
                 getSelf().body.temporaryAddPartMod(Body.FEET, new DemonicMod(), 999);
                 getSelf().body.temporaryAddPartMod(MouthPart.TYPE, new DemonicMod(), 999);

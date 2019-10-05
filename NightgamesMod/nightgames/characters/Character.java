@@ -2252,7 +2252,7 @@ public abstract class Character extends Observable implements Cloneable {
                         && c.getStance().penetratedBy(c, this, opponent)
 
                         && opponentPart.isType(CockPart.TYPE) && (selfPart
-                        .isType(PussyPart.TYPE) || selfPart.isType("ass"))) {
+                        .isType(PussyPart.TYPE) || selfPart.isType(AssPart.TYPE))) {
             c.write(this, Global.format("Experiencing so much pleasure from {other:name-possessive} cock inside {self:direct-object} reinforces {self:name-possessive} faith.", this, opponent));
             addict(c, AddictionType.ZEAL, opponent, Addiction.MED_INCREASE);
         }
@@ -2699,7 +2699,7 @@ public abstract class Character extends Observable implements Cloneable {
                 chance += 5;
             if (has(Trait.assmaster) || has(Trait.analFanatic))
                 chance += 5;
-            Optional<BodyFetish> fetish = body.getFetish("ass");
+            Optional<BodyFetish> fetish = body.getFetish(AssPart.TYPE);
             if (fetish.isPresent() && opponent.has(Trait.bewitchingbottom)) {
                 chance += 20 * fetish.get().magnitude;
             }
@@ -3845,7 +3845,7 @@ public abstract class Character extends Observable implements Cloneable {
             return outfit.slotEmptyOrMeetsCondition(ClothingSlot.bottom,
                             (article) -> (!article.is(ClothingTrait.armored) && !article.is(ClothingTrait.bulky)
                                             && !article.is(ClothingTrait.persistent)));
-        } else if (part.isType(PussyPart.TYPE) || part.isType("ass")) {
+        } else if (part.isType(PussyPart.TYPE) || part.isType(AssPart.TYPE)) {
             return outfit.slotEmptyOrMeetsCondition(ClothingSlot.bottom, (article) -> {
                 return article.is(ClothingTrait.skimpy) || article.is(ClothingTrait.open)
                                 || article.is(ClothingTrait.flexible);

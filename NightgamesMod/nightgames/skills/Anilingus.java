@@ -48,7 +48,7 @@ public class Anilingus extends Skill {
                         || getSelf().canAct();
         boolean titsBlocking = c.getStance().enumerate() == Stance.paizuripin
                         || c.getStance().enumerate() == Stance.titfucking;
-        return target.crotchAvailable() && target.body.has("ass") && c.getStance().oral(getSelf(), target) && canUse
+        return target.crotchAvailable() && target.body.has(AssPart.TYPE) && c.getStance().oral(getSelf(), target) && canUse
                         && !c.getStance().anallyPenetrated(c, target) && !titsBlocking;
     }
 
@@ -169,7 +169,7 @@ public class Anilingus extends Skill {
     }
 
     private boolean isWorship(Combat c, Character target) {
-        Optional<BodyFetish> fetish = getSelf().body.getFetish("ass");
+        Optional<BodyFetish> fetish = getSelf().body.getFetish(AssPart.TYPE);
         boolean worship = c.getOpponent(getSelf()).has(Trait.objectOfWorship);
         boolean enthralled = getSelf().is(Stsflag.enthralled);
         boolean isPet = target == null ? getSelf().isPet() : getSelf().isPetOf(target);

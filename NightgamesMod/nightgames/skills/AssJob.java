@@ -3,6 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AssPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -65,7 +66,7 @@ public class AssJob extends Skill {
             target.body.pleasure(getSelf(), getSelf().body.getRandomAss(), target.body.getRandomCock(), arousalToTarget, c, this);
 
             if (Global.random(100) < fetishChance) {
-                target.add(c, new BodyFetish(target, getSelf(), "ass", .1 + getSelf().get(Attribute.Fetish) * .05));
+                target.add(c, new BodyFetish(target, getSelf(), AssPart.TYPE, .1 + getSelf().get(Attribute.Fetish) * .05));
             }
         } else if (target.roll(getSelf(), c, accuracy(c, target))) {
             if (c.getStance().en == Stance.reversemount) {
@@ -91,7 +92,7 @@ public class AssJob extends Skill {
                 }
 
                 if (Global.random(100) < fetishChance) {
-                    target.add(c, new BodyFetish(target, getSelf(), "ass", .1 + getSelf().get(Attribute.Fetish) * .05));
+                    target.add(c, new BodyFetish(target, getSelf(), AssPart.TYPE, .1 + getSelf().get(Attribute.Fetish) * .05));
                 }
             } else {
                 writeOutput(c, Result.normal, target);
