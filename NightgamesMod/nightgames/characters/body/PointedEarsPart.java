@@ -8,7 +8,7 @@ import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
-public class PointedEarsPart implements BodyPart, BodyPartMod {
+public class PointedEarsPart extends EarPart implements BodyPartMod {
     public static final String TYPE = "pointed";
 
     public String desc;

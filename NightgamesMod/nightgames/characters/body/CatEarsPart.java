@@ -7,7 +7,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 
-public class CatEarsPart implements BodyPart, BodyPartMod {
+public class CatEarsPart extends EarPart implements BodyPartMod {
     public static final String TYPE = "cat";
 
     public String desc;

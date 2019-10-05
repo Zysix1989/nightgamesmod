@@ -2,7 +2,7 @@ package nightgames.characters.body;
 
 import com.google.gson.JsonObject;
 
-public class EarPart {
+public abstract class EarPart implements BodyPart {
     public static BodyPart load(JsonObject obj) {
         if (obj.get("enum").getAsString().equals(PointedEarsPart.TYPE)) {
             return new PointedEarsPart();
