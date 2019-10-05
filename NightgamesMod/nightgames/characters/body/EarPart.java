@@ -6,6 +6,8 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 
 public abstract class EarPart implements BodyPart {
+    public static final String TYPE = "ears";
+
     public String desc;
     public double hotness;
     public double pleasure;
@@ -84,12 +86,12 @@ public abstract class EarPart implements BodyPart {
 
     @Override
     public boolean isType(String type) {
-        return type.equalsIgnoreCase("ears");
+        return type.equalsIgnoreCase(TYPE);
     }
 
     @Override
     public String getType() {
-        return "ears";
+        return TYPE;
     }
 
     @Override

@@ -650,7 +650,7 @@ public class NPC extends Character {
                 } else {
                     c.write(this, getName()
                                     + " pulls you off balance and licks your sensitive ear. You tremble as she nibbles on your earlobe.");
-                    target.body.pleasure(this, body.getRandom("tongue"), target.body.getRandom("ears"),
+                    target.body.pleasure(this, body.getRandom("tongue"), target.body.getRandom(EarPart.TYPE),
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                 }
                 break;

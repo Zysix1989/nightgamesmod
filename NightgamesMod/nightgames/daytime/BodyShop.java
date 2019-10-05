@@ -400,13 +400,13 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Restore Ears", 1000) {
             @Override
             void buy(Character buyer) {
-                buyer.body.removeAll("ears");
+                buyer.body.removeAll(EarPart.TYPE);
                 buyer.body.add(new EarsPart());
             }
 
             @Override
             boolean available(Character buyer) {
-                return !buyer.body.getRandom("ears").getMods().isEmpty();
+                return !buyer.body.getRandom(EarPart.TYPE).getMods().isEmpty();
             }
 
             @Override

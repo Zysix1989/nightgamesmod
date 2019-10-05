@@ -159,10 +159,10 @@ public class ReykaTime extends BaseNPCTime {
         pointedEars.ingredients.put(Item.SuccubusDraft, 10);
         pointedEars.ingredients.put(Item.semen, 5);
         pointedEars.addRequirement((c, self, other) -> {
-            return self.body.get("ears")
+            return self.body.get(EarPart.TYPE)
                             .stream()
                             .anyMatch(part -> part instanceof BodyPartMod &&
-                                ((BodyPartMod) part).getModType().equals(PointedEarsPart.TYPE)) || !self.body.has("ears");
+                                ((BodyPartMod) part).getModType().equals(PointedEarsPart.TYPE)) || !self.body.has(EarPart.TYPE);
         }, "No pointed ears");
         pointedEars.option = "Pointed Ears";
         pointedEars.scene =

@@ -137,9 +137,9 @@ public class KatTime extends BaseNPCTime {
         catEars.ingredients.put(Item.Rope, 10);
         catEars.ingredients.put(Item.Aphrodisiac, 25);
         catEars.addRequirement((c, self, other) -> {
-            return self.body.get("ears").stream().anyMatch(part -> part instanceof BodyPartMod &&
+            return self.body.get(EarPart.TYPE).stream().anyMatch(part -> part instanceof BodyPartMod &&
                 ((BodyPartMod) part).getModType().equals(CatEarsPart.TYPE))
-                || !self.body.has("ears");
+                || !self.body.has(EarPart.TYPE);
         }, "No cat ears");
         catEars.option = "Cat Ears";
         catEars.scene = "[Placeholder]<br/>Kat uses her totemic magic to grow you cat ears.";

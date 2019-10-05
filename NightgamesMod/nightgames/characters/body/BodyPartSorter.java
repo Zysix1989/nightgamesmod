@@ -9,7 +9,7 @@ public class BodyPartSorter implements Comparator<BodyPart>{
     static {
         BODY_PART_ORDER.put(FacePart.TYPE, 0);
         BODY_PART_ORDER.put(MouthPart.TYPE, 1);
-        BODY_PART_ORDER.put("ears", 2);
+        BODY_PART_ORDER.put(EarPart.TYPE, 2);
         BODY_PART_ORDER.put(BreastsPart.TYPE, 3);
         BODY_PART_ORDER.put("ass", 4);
         BODY_PART_ORDER.put(PussyPart.TYPE, 5);
