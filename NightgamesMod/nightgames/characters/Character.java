@@ -982,7 +982,6 @@ public abstract class Character extends Observable implements Cloneable {
      * */
     private void tempt(Combat c, Character tempter, BodyPart with, int i, Optional<Skill> skillOptional) {
         String extraMsg = "";
-        boolean oblivious = false;
         double baseModifier = 1.0;
         if (has(Trait.oblivious)) {
             extraMsg += " (Oblivious)";
@@ -1030,9 +1029,6 @@ public abstract class Character extends Observable implements Cloneable {
             if (with != null) {
                 // triple multiplier for the body part
                 temptMultiplier *= tempter.body.getCharismaBonus(c, this) + with.getHotness(tempter, this) * 2;
-                if (oblivious) {
-                    temptMultiplier /= 10;
-                }
                 dmg = (int) Math.max(0, Math.round((i + bonus) * temptMultiplier * stalenessModifier));
                 if (Global.checkFlag(Flag.basicSystemMessages)) {
                     message = String.format("%s tempted by %s %s for <font color='rgb(240,100,100, arg1)'>%d"
@@ -1052,9 +1048,6 @@ public abstract class Character extends Observable implements Cloneable {
                 if (c != null && tempter.has(Trait.obsequiousAppeal)
                     && c.getStance().sub(tempter)) {
                     temptMultiplier *= 2;
-                }
-                if (oblivious) {
-                    temptMultiplier /= 10;
                 }
                 dmg = Math.max((int) Math.round((i + bonus) * temptMultiplier * stalenessModifier), 0);
                 if (Global.checkFlag(Flag.basicSystemMessages)) {
