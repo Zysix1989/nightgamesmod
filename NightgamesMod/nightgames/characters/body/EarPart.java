@@ -74,9 +74,10 @@ public abstract class EarPart implements BodyPart {
 
     @Override
     public void describeLong(StringBuilder b, Character c) {
-        b.append(
-            Global.capitalizeFirstLetter(fullDescribe(c)) + " frames " + c.possessiveAdjective()
-                + " face.");
+        b.append(Global.capitalizeFirstLetter(fullDescribe(c)))
+            .append(" frames ")
+            .append(c.possessiveAdjective())
+            .append(" face.");
     }
 
     @Override
