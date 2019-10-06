@@ -55,12 +55,12 @@ public class AssPart extends GenericBodyPart implements Sizable<AssPart.Size> {
             this.description = description;
         }
         @Override
-        public Size applyModifier(int modifier) {
+        public Size withModifier(int modifier) {
             return clampToValid(value + modifier);
         }
 
         @Override
-        public Size applyModifications(
+        public Size withModifications(
             Collection<TemporarySizeModification> modifications) {
             var v = value;
             v += modifications.stream()

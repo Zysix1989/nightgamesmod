@@ -12,7 +12,7 @@ class SizeTrait<SizeType extends _Size<SizeType>> {
     }
 
     void changeSize(int modifier) {
-        size = size.applyModifier(modifier);
+        size = size.withModifier(modifier);
     }
 
     void temporarilyChangeSize(int modifier, int duration) {
@@ -25,6 +25,6 @@ class SizeTrait<SizeType extends _Size<SizeType>> {
     }
 
     SizeType getSize() {
-        return size.applyModifications(sizeModifications);
+        return size.withModifications(sizeModifications);
     }
 }

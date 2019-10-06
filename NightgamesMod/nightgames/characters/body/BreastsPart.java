@@ -67,12 +67,12 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
             this.cupSize = cupSize;
         }
 
-        public Size applyModifier(int modifier) {
+        public Size withModifier(int modifier) {
             return clampToValid(value + modifier);
         }
 
         @Override
-        public Size applyModifications(
+        public Size withModifications(
             Collection<TemporarySizeModification> modifications) {
             var v = value;
             v += modifications.stream()

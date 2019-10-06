@@ -61,12 +61,12 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
         }
 
         @Override
-        public Size applyModifier(int modifier) {
+        public Size withModifier(int modifier) {
             return clampToValid(value + modifier);
         }
 
         @Override
-        public Size applyModifications(
+        public Size withModifications(
             Collection<TemporarySizeModification> modifications) {
             var v = value;
             v += modifications.stream()
