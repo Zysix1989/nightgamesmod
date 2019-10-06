@@ -403,7 +403,6 @@ public class Angel extends BasePersonality {
     public String victory(Combat c, Result flag) {
         character.arousal.empty();
         Character opponent = character.equals(c.p1) ? c.p2 : c.p1;
-        if (c.getOpponent(character) instanceof Player && Global.getButtslutQuest().isPresent() && c.getStance().anallyPenetratedBy(c, c.getOpponent(character), character)) {Global.getButtslutQuest().get().addPlayerLossPoint(character);}
 
         String message = "";
 

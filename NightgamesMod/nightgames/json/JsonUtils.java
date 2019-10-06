@@ -1,5 +1,12 @@
 package nightgames.json;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
@@ -8,23 +15,9 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Spliterator;
-import java.util.Spliterators;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonParser;
-
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.items.clothing.Clothing;
-import nightgames.quest.Quest;
 
 public class JsonUtils {
     private static Gson gson = null;
@@ -34,10 +27,6 @@ public class JsonUtils {
         return getGson().fromJson(array, type);
     }
 
-    public static Collection<Quest> loadQuests(JsonArray array) {
-        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(array.iterator(), Spliterator.ORDERED), false).map(jso -> Quest.load((JsonObject)jso)).collect(Collectors.toList());
-    }
-    
     public static JsonArray jsonFromCollection(Collection<?> collection) {
         return getGson().toJsonTree(collection).getAsJsonArray();
     }

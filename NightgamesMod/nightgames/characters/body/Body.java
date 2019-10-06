@@ -823,12 +823,6 @@ public class Body implements Cloneable {
         if (opponent != null && Arrays.asList(fetishParts).contains(with.getType())) {
             double chance = opponent.has(Trait.fetishTrainer)?4 * Math.min(opponent.get(Attribute.Fetish), 25):0;
 
-            if (with.getType().equals(CockPart.TYPE)
-                && target.getType().equals(AssPart.TYPE)
-                && Global.getButtslutQuest().isPresent()) {
-                chance += Global.getButtslutQuest().get().getBonusFetishChance();
-            }
-
             if (Global.random(100) < chance * with.getFetishChance()) {
                 c.write(character,
                     character.subjectAction("now have", "now has")
@@ -1322,9 +1316,6 @@ public class Body implements Cloneable {
                             "<br><b>{other:NAME-POSSESSIVE} boiling semen takes its toll on {self:name-possessive} stamina, rendering {self:direct-object} limp and compliant.</b>",
                             character, opponent));
             character.drain(c, opponent, character.getStamina().max()/3+20);
-        }
-        if (character instanceof Player && part.getType().equals(AssPart.TYPE) && Global.getButtslutQuest().isPresent()) {
-            character.arouse(Global.getButtslutQuest().get().getAnalCreampieLust(), c);
         }
         if (part.getType().equals(AssPart.TYPE) || part.getType().equals("pussy")) {
             if (character.has(Trait.RapidMeiosis) && character.has(Trait.slime)) {

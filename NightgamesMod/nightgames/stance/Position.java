@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
@@ -19,7 +18,6 @@ import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
-import nightgames.quest.ButtslutQuest;
 import nightgames.skills.Skill;
 import nightgames.skills.damage.DamageType;
 import nightgames.status.InsertedStatus;
@@ -416,13 +414,7 @@ public abstract class Position implements Cloneable {
             // Rescales stance dominance values from 0-1-2-3-4-5 to 0-0-1-1-2-3
             stanceDominance = Double.valueOf(Math.floor(stanceDominance * 0.6)).intValue();
         }
-        Optional<ButtslutQuest> bsq = Global.getButtslutQuest();
 
-        if (bsq.isPresent() && this.anallyPenetrated(c, c.getOpponent(self)) 
-                        && c.getOpponent(self) == Global.getPlayer()) {
-            stanceDominance += bsq.get().getBonusDominance(this);
-        }
-        
         // Rescale in case our calculation has gone beyond valid Dominance values
         stanceDominance = Math.min(Dominance.values().length - 1, stanceDominance);
         return stanceDominance < 0 ? (Dominance) Dominance.NEUTRAL : (Dominance) Dominance.values()[stanceDominance];

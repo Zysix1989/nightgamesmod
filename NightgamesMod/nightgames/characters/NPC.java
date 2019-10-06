@@ -207,8 +207,7 @@ public class NPC extends Character {
         c.write(ai.victory(c, flag));
         gainAttraction(target, 1);
         target.gainAttraction(this, 2);
-        if (target instanceof Player && Global.getButtslutQuest().isPresent() && c.getStance().anallyPenetratedBy(c, this, target)) {Global.getButtslutQuest().get().addPlayerLossPoint(this);}
-    }
+   }
 
     @Override
     public void defeat(Combat c, Result flag) {

@@ -11,7 +11,6 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
-import nightgames.quest.ButtslutQuest;
 import nightgames.status.Drained;
 import nightgames.status.Stsflag;
 import nightgames.status.Trance;
@@ -195,13 +194,8 @@ public class AssPart extends GenericBodyPart {
             c.write(opponent, Global.format(
                             "The foreign object rummaging around inside {self:name-possessive} ass feels so <i>right</i>. {self:SUBJECT} can't help moaning in time with the swelling pleasure.",
                                             self, opponent));
-            Optional<ButtslutQuest> bsq = Global.getButtslutQuest();
-            if (bsq.isPresent() && self==Global.getPlayer()) {
-                bonus += bsq.get().applyReceiveBonusesAnal(c, opponent, target);
-            }
+
         }
-        Optional<ButtslutQuest> bsq = Global.getButtslutQuest();
-        if (bsq.isPresent() && self==Global.getPlayer()) {bonus += bsq.get().applyReceiveBonusesAnal(c, opponent, target);}
         return bonus;
     }
 

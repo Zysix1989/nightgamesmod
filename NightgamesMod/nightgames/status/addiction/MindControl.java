@@ -258,12 +258,6 @@ public class MindControl extends Addiction {
                                         + " and forces your eyelids open with " + controller.objectPronoun()+ " thumbs. ";
                         break;
                     case anal:
-                        if(affected instanceof Player && Global.getButtslutQuest().isPresent() && pos.inserted(controller)) {
-                            succeeded = true;
-                            description = "I need a description for how " + controller.getName() + " can mind control you without facing via anal sex. Maybe " + controller.objectPronoun()
-                                            + " robo-dick has a subsonics generator or something, or maybe it's via drugged cum.";
-                            break;
-                        }
                         if (pos instanceof AnalCowgirl) {
                             succeeded = true;
                             description = "You turn your head away as you feel your orgasm coming on, wary of " + controller.getName() + "'s"

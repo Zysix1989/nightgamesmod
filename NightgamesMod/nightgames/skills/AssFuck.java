@@ -1,24 +1,18 @@
 package nightgames.skills;
 
-import java.util.Optional;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
-import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.items.Item;
-import nightgames.quest.ButtslutQuest;
 import nightgames.stance.Anal;
 import nightgames.stance.AnalProne;
 import nightgames.stance.BehindFootjob;
 import nightgames.stance.Stance;
-import nightgames.status.Enthralled;
-import nightgames.status.Flatfooted;
 import nightgames.status.Frenzied;
 import nightgames.status.IgnoreOrgasm;
 import nightgames.status.Oiled;
@@ -31,8 +25,7 @@ public class AssFuck extends Fuck {
 
     @Override
     public float priorityMod(Combat c) {
-        return 0.0f + (getSelf().getMood() == Emotion.dominant ? 1.0f : 0)
-                        + (Global.getButtslutQuest().isPresent() ? 5 : 0);
+        return 0.0f + (getSelf().getMood() == Emotion.dominant ? 1.0f : 0);
 
     }
 

@@ -148,9 +148,6 @@ public class Struggle extends Skill {
         if (getSelf().has(Trait.nymphomania)) {
             diffMod+=getSelf().get(Attribute.Nymphomania)/4;
         }
-        if (getSelf() instanceof Player && Global.getButtslutQuest().isPresent()) {
-            diffMod += Global.getButtslutQuest().get().getStruggleDiffMod();
-        }
         if (getSelf().check(Attribute.Power,target.getStamina().get() / 2 - getSelf().getStamina().get() / 2+ target.get(Attribute.Power) - getSelf().get(Attribute.Power)
                         - getSelf().getEscape(c, target) + diffMod)) {
 

@@ -250,10 +250,5 @@ public abstract class BasePersonality implements Personality {
     }
     
     public void handleQuests(Combat c) {
-        if (Global.getButtslutQuest().isPresent() 
-                        && c.getStance().anallyPenetratedBy(c, Global.getPlayer(),
-                                        character)) {
-            Global.getButtslutQuest().get().addPlayerLossPoint(character);
-        }
     }
 }

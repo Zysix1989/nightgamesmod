@@ -176,16 +176,8 @@ public class Player extends Character {
         }
         if (c.p1.human()) {
             c.p2.defeat(c, flag);
-
-            if (Global.getButtslutQuest().isPresent()) {
-                Global.getButtslutQuest().get().addPlayerWonPoint(c.p2);
-            }
         } else {
             c.p1.defeat(c, flag);
-            if (Global.getButtslutQuest().isPresent()) {
-                Global.getButtslutQuest().get().addPlayerWonPoint(c.p1);
-            }
-
         }
     }
 

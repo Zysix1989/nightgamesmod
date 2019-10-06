@@ -1671,15 +1671,6 @@ public abstract class Character extends Observable implements Cloneable {
             for (Status s : this.status) {
                 if (s.getClass().equals(status.getClass())
                     && s.getVariant().equals(status.getVariant())) {
-                    if (status instanceof BodyFetish) {
-                        BodyFetish bf = (BodyFetish)status;
-
-                        if (this instanceof Player && bf.part==CockPart.TYPE
-                                        && c.getStance().anallyPenetrated(c, this) 
-                                        && Global.getButtslutQuest().isPresent()) {
-                            bf.magnitude += Global.getButtslutQuest().get().getBonusFetish();
-                        }
-                    }
                     s.replace(status);
                     message = s.initialMessage(c, Optional.of(status));
                     done = true;

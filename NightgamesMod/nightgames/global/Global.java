@@ -115,8 +115,6 @@ import nightgames.modifier.standard.VibrationModifier;
 import nightgames.modifier.standard.VulnerableModifier;
 import nightgames.pet.PetCharacter;
 import nightgames.pet.Ptype;
-import nightgames.quest.ButtslutQuest;
-import nightgames.quest.Quest;
 import nightgames.skills.Anilingus;
 import nightgames.skills.Aphrodisiac;
 import nightgames.skills.ArmBar;
@@ -433,8 +431,7 @@ public class Global {
     //public static final Map<Trait, Collection<Trait>> OVERRIDES;  
     private static TraitTree traitRequirements;                     //Traits can and probably should carry their own requirements with them. -DSM
     private static HashMap<String, MatchAction> matchActions;           //Static Naming conventions -DSM
-    private static List<Quest> quests = new ArrayList<Quest>();
-    
+
      private static Character noneCharacter = new NPC("none", 1, null);     
      
     static {
@@ -442,7 +439,6 @@ public class Global {
         rng = new Random();
         flags = new HashSet<>();
         players = new HashSet<>();
-        quests = new ArrayList<>();
         debugChars = new HashSet<>();
         resting = new HashSet<>();
         counters = new HashMap<>();
@@ -547,23 +543,6 @@ public class Global {
             for (DebugFlags db:cfgDebugFlags.stream().collect(Collectors.toSet())) {
             }
         }
-        quests=new ArrayList<Quest>();
-        System.out.println("quests were: "+quests.toString());
-        if (flags.contains("ButtslutQuesting") && !getButtslutQuest().isPresent()) {quests.add(new ButtslutQuest());}
-        if (flags.contains("ButtslutQuestingTesting") && getButtslutQuest().isPresent()) {
-            System.out.println("Adding five loss points to each (unlocked) character");
-            ButtslutQuest bsq = getButtslutQuest().get();
-            for(Character ch:players) {
-                if (ch instanceof Player) {continue;}
-                bsq.addPlayerLossPoint(ch);
-                bsq.addPlayerLossPoint(ch);
-                bsq.addPlayerLossPoint(ch);
-                bsq.addPlayerLossPoint(ch);
-                bsq.addPlayerLossPoint(ch);
-
-            }
-        }
-        System.out.println("quests are: "+quests.toString());
 
         time = Time.NIGHT;
         date = 1;
@@ -1484,7 +1463,6 @@ public class Global {
         data.players.addAll(players);
         data.flags.addAll(flags);
         data.counters.putAll(counters);
-        data.quests.addAll(quests);
         data.time = time;
         data.date = date;
         data.fontsize = gui.fontsize;
@@ -1635,7 +1613,6 @@ public class Global {
                         c -> characterPool.put(c.getType(), (NPC) c));
         flags.addAll(data.flags);
         counters.putAll(data.counters);
-        quests.addAll(data.quests);
         date = data.date;
         time = data.time;
         gui.fontsize = data.fontsize;
@@ -2180,9 +2157,6 @@ public class Global {
         rng = FROZEN_RNG;
     }
 
-    public static Optional<ButtslutQuest> getButtslutQuest() {
-        return quests.stream().filter(q -> q instanceof ButtslutQuest).map(q -> (ButtslutQuest)q).findFirst();
-    }
     public static boolean randomBool() {
         return rng.nextBoolean();
     }
