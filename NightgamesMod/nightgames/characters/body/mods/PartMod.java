@@ -75,7 +75,7 @@ public abstract class PartMod implements BodyPartMod {
         return previousDescription;
     }
 
-    public Optional<String> getDescriptionOverride(Character self, BodyPart part) {
+    public Optional<String> getDescriptionOverride(BodyPart part) {
         return Optional.empty();
     }
 

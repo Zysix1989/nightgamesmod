@@ -94,7 +94,7 @@ public class GenericBodyPart implements BodyPart {
     
     public String getModDescriptorString(Character c) {
         return mods.stream().sorted()
-        .filter(mod -> mod.getDescriptionOverride(c, this).isEmpty())
+        .filter(mod -> mod.getDescriptionOverride(this).isEmpty())
         .map(mod -> mod.adjective(this))
         .filter(s -> !s.isEmpty())
         .map(string -> string + " ")
@@ -103,7 +103,7 @@ public class GenericBodyPart implements BodyPart {
 
     @Override
     public String describe(Character c) {
-        Optional<String> override = mods.stream().map(mod -> mod.getDescriptionOverride(c, this)).filter(Optional::isPresent).findFirst().flatMap(Function.identity());
+        Optional<String> override = mods.stream().map(mod -> mod.getDescriptionOverride(this)).filter(Optional::isPresent).findFirst().flatMap(Function.identity());
         String normalDescription = override.orElseGet(() -> modlessDescription(c));
 
         return getModDescriptorString(c) + normalDescription;

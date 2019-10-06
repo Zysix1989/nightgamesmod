@@ -34,7 +34,7 @@ public class PussyPart extends GenericBodyPart {
     @Override
     public void describeLong(StringBuilder b, Character c) {
         Optional<String> override = getPartMods().stream()
-                        .map(mod -> mod.getDescriptionOverride(c, this))
+                        .map(mod -> mod.getDescriptionOverride(this))
                         .filter(Optional::isPresent).findFirst().flatMap(Function.identity());
         if (override.isPresent()) {
             b.append(override);

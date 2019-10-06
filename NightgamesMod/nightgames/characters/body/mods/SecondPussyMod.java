@@ -40,7 +40,7 @@ public class SecondPussyMod extends PartMod {
         return template.render(model);
     }
 
-    public Optional<String> getDescriptionOverride(Character self, BodyPart part) {
+    public Optional<String> getDescriptionOverride(BodyPart part) {
         return Optional.of(part.adjective() + " pussy");
     }
 
