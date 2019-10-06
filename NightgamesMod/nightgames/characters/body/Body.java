@@ -1317,7 +1317,7 @@ public class Body implements Cloneable {
                             character, opponent));
             character.drain(c, opponent, character.getStamina().max()/3+20);
         }
-        if (part.getType().equals(AssPart.TYPE) || part.getType().equals("pussy")) {
+        if (part.getType().equals(AssPart.TYPE) || part.getType().equals(PussyPart.TYPE)) {
             if (character.has(Trait.RapidMeiosis) && character.has(Trait.slime)) {
                 c.write(opponent, Global.format("{self:NAME-POSSESSIVE} hungry %s seems to vacuum {other:name-possessive} sperm into itself as {other:pronoun-action:cum|cums}. "
                                 + "As {other:pronoun-action:lay|lays} there heaving in exertion, {self:possessive} belly rapidly bloats up "
