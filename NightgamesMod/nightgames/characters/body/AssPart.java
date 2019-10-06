@@ -42,6 +42,7 @@ public class AssPart extends GenericBodyPart {
         public static Size min() {
             return Small;
         }
+
         private int value;
         private String description;
 
