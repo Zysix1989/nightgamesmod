@@ -24,15 +24,12 @@ class BodyGrowthPlusEffect extends BodyModEffect {
         } else {
             BodyPart newPart = original.upgrade();
             if (newPart == original) {
-                boolean eventful = true;
                 user.body.temporaryAddOrReplacePartWithType(
                     newPart,
                     original,
                     item.duration);
-                message = eventful ?
-                    Global.format(String.format("{self:NAME-POSSESSIVE} %s was reenforced",
-                        original.fullDescribe(user)), user, opponent)
-                    : "";
+                message = Global.format(String.format("{self:NAME-POSSESSIVE} %s was reenforced",
+                        original.fullDescribe(user)), user, opponent);
             } else {
                 user.body.temporaryAddOrReplacePartWithType(newPart, original, item.duration);
                 message = Global.format(

@@ -17,11 +17,10 @@ class BodyReplaceEffect extends BodyModEffect {
         String message;
 
         if (original == affected) {
-            boolean eventful = true;
             user.body.temporaryAddOrReplacePartWithType(affected, original, item.duration);
             message =
-                eventful ? Global.format(String.format("{self:NAME-POSSESSIVE} %s was reenforced",
-                    original.fullDescribe(user)), user, opponent) : "";
+                Global.format(String.format("{self:NAME-POSSESSIVE} %s was reenforced",
+                    original.fullDescribe(user)), user, opponent);
         } else if (original != null) {
             user.body.temporaryAddOrReplacePartWithType(affected, original, item.duration);
             message = Global.format(String.format("{self:NAME-POSSESSIVE} %s turned into %s",
