@@ -28,7 +28,6 @@ public class EarsPart extends EarPart implements BodyPartMod {
         return false;
     }
 
-
     @Override
     public int mod(Attribute a, int total) {
         return 0;
