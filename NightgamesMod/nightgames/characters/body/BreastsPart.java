@@ -299,8 +299,8 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
             Size.max().value)).orElseThrow());
     }
 
-    public void temporarySizeChange(int modifier, int duration) {
-        sizeTrait.temporarySizeChange(modifier, duration);
+    public void temporarilyChangeSize(int modifier, int duration) {
+        sizeTrait.temporarilyChangeSize(modifier, duration);
     }
 
     public void timePasses() {

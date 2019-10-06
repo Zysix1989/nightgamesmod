@@ -64,7 +64,7 @@ public class CockGrowth extends Skill {
                 }
             } else {
                 if (part != null) {
-                    part.temporarySizeChange(4, 10);
+                    part.temporarilyChangeSize(4, 10);
                 } else {
                     target.body.temporaryAddPart(new CockPart(Size.Small), 10);
                 }

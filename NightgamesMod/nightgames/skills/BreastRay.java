@@ -2,7 +2,6 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.combat.Combat;
@@ -47,11 +46,11 @@ public class BreastRay extends Skill {
         if (permanent) {
             if (part != null) {
                 target.body.addReplace(part.upgrade().upgrade().upgrade().upgrade().upgrade(), 1);
-                part.temporarySizeChange(3, 10);
+                part.temporarilyChangeSize(3, 10);
             }
         } else {
             if (part != null) {
-                part.temporarySizeChange(3, 10);
+                part.temporarilyChangeSize(3, 10);
             }
         }
         return true;

@@ -257,8 +257,8 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
         return (PussyPart)newPart;
     }
 
-    public void temporarySizeChange(int modifier, int duration) {
-        sizeTrait.temporarySizeChange(modifier, duration);
+    public void temporarilyChangeSize(int modifier, int duration) {
+        sizeTrait.temporarilyChangeSize(modifier, duration);
     }
 
     public void timePasses() {

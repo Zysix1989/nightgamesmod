@@ -77,7 +77,7 @@ public class MimicWitch extends Skill {
         getSelf().addTemporaryTrait(Trait.sedativecream, 10);
         BreastsPart part = getSelf().body.getBreastsBelow(Size.max());
         if (part != null) {
-            part.temporarySizeChange(1, 10);
+            part.temporarilyChangeSize(1, 10);
         }
 
         int strength = Math.max(10, getSelf().get(Attribute.Slime)) * 2 / 3;

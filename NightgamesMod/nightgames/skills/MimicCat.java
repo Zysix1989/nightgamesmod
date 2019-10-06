@@ -8,7 +8,6 @@ import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.CatEarsPart;
 import nightgames.characters.body.CockPart;
-import nightgames.characters.body.EarPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.catcher.FeralMod;
@@ -81,7 +80,7 @@ public class MimicCat extends Skill {
         getSelf().body.temporaryAddOrReplacePartWithType(new CatEarsPart(), 10);
         BreastsPart part = getSelf().body.getBreastsAbove(Size.ACup);
         if (part != null) {
-            part.temporarySizeChange(-1, 10);
+            part.temporarilyChangeSize(-1, 10);
         }
 
         int strength = Math.max(10, getSelf().get(Attribute.Slime)) * 2 / 3;

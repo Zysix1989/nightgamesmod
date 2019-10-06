@@ -9,7 +9,6 @@ import nightgames.characters.body.Body;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.CockPart;
-import nightgames.characters.body.EarPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PointedEarsPart;
 import nightgames.characters.body.PussyPart;
@@ -77,7 +76,7 @@ public class MimicSuccubus extends Skill {
         getSelf().body.temporaryAddOrReplacePartWithType(new PointedEarsPart(), 999);
         BreastsPart part = getSelf().body.getBreastsBelow(Size.max());
         if (part != null) {
-            part.temporarySizeChange(4, 999);
+            part.temporarilyChangeSize(4, 999);
         }
 
         int strength = Math.max(10, getSelf().get(Attribute.Slime)) * 2 / 3;

@@ -1027,7 +1027,7 @@ public class Player extends Character {
             BreastsPart part = body.getBreastsBelow(BreastsPart.Size.max());
             if (part != null
                 && body.getRandomBreasts().getSize() != Size.min()) {
-                part.temporarySizeChange(1, 999);
+                part.temporarilyChangeSize(1, 999);
             }
             body.temporaryAddOrReplacePartWithType(
                 new GenericBodyPart("gooey skin", .6, 1.5, .8, Body.SKIN, ""), 999);

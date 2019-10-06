@@ -245,8 +245,8 @@ public class AssPart extends GenericBodyPart implements Sizable<AssPart.Size> {
         return new AssPart(Size.clampToValid(getSize().value - 1));
     }
 
-    public void temporarySizeChange(int modifier, int duration) {
-        sizeTrait.temporarySizeChange(modifier, duration);
+    public void temporarilyChangeSize(int modifier, int duration) {
+        sizeTrait.temporarilyChangeSize(modifier, duration);
     }
 
     public void timePasses() {

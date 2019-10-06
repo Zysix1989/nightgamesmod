@@ -73,7 +73,7 @@ public class MimicAngel extends Skill {
         getSelf().body.temporaryAddOrReplacePartWithType(WingsPart.angelicslime, 10);
         BreastsPart part = getSelf().body.getBreastsBelow(Size.max());
         if (part != null) {
-            part.temporarySizeChange(2, 10);
+            part.temporarilyChangeSize(2, 10);
         }
         int strength = Math.max(10, getSelf().get(Attribute.Slime)) * 2 / 3;
         if (getSelf().has(Trait.Masquerade)) {

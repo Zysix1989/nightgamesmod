@@ -454,11 +454,11 @@ public class Airi extends BasePersonality {
             }
             BreastsPart part = self.body.getBreastsBelow(BreastsPart.Size.max());
             if (part != null) {
-                part.temporarySizeChange(1, 10);
+                part.temporarilyChangeSize(1, 10);
             }
             AssPart asspart = self.body.getAssBelow(Size.max());
             if (asspart != null) {
-                asspart.temporarySizeChange(2, 10);
+                asspart.temporarilyChangeSize(2, 10);
             }
             self.body.temporaryAddOrReplacePartWithType(new GenericBodyPart("gooey skin", .5, 1.5, .8, Body.SKIN, ""), 999);
             self.body.temporaryAddOrReplacePartWithType(new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);

@@ -26,7 +26,7 @@ class BodyGrowthPlusEffect extends BodyModEffect {
             var sz = (Sizable) original;
             var startingSize = sz.getSize();
             var originalDescription = original.fullDescribe(user);
-            sz.temporarySizeChange(1, item.duration);
+            sz.temporarilyChangeSize(1, item.duration);
             var finalSize = sz.getSize();
             switch (finalSize.compareTo(startingSize)) {
                 case 0:

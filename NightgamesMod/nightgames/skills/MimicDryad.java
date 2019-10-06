@@ -5,7 +5,6 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.EarPart;
 import nightgames.characters.body.PointedEarsPart;
 import nightgames.characters.body.mods.catcher.PlantMod;
 import nightgames.characters.body.mods.TentacledMod;
@@ -75,7 +74,7 @@ public class MimicDryad extends Skill {
         getSelf().body.temporaryAddOrReplacePartWithType(new PointedEarsPart(), 10);
         BreastsPart part = getSelf().body.getBreastsBelow(Size.max());
         if (part != null) {
-            part.temporarySizeChange(1, 10);
+            part.temporarilyChangeSize(1, 10);
         }
 
         int strength = Math.max(10, getSelf().get(Attribute.Slime)) * 2 / 3;
