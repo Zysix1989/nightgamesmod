@@ -10,10 +10,7 @@ public class EarsPart extends EarPart implements BodyPartMod {
     public static final String TYPE = "normal";
 
     public EarsPart() {
-        this.desc = "normal ";
-        this.hotness = 0;
-        this.pleasure = 1;
-        this.sensitivity = 1;
+        super("normal ", 0, 1, 1);
     }
 
     @Override

@@ -10,10 +10,7 @@ public class PointedEarsPart extends EarPart implements BodyPartMod {
     public static final String TYPE = "pointed";
 
     public PointedEarsPart() {
-        this.desc = "pointed ";
-        this.hotness = .1;
-        this.pleasure = 1.2;
-        this.sensitivity = 1;
+        super("pointed ", .1, 1.2, 1);
     }
 
     @Override

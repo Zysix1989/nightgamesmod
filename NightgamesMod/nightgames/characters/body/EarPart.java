@@ -26,6 +26,13 @@ public abstract class EarPart implements BodyPart {
         throw new IllegalArgumentException("expected an enum field with one of the ear types");
     }
 
+    protected EarPart(String desc, double hotness, double pleasure, double sensitivity) {
+        this.desc = desc;
+        this.hotness = hotness;
+        this.pleasure = pleasure;
+        this.sensitivity = sensitivity;
+    }
+
     @Override
     public String canonicalDescription() {
         return desc + "ears";

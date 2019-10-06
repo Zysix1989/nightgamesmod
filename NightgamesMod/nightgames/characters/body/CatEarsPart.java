@@ -10,10 +10,7 @@ public class CatEarsPart extends EarPart implements BodyPartMod {
     public static final String TYPE = "cat";
 
     public CatEarsPart() {
-        this.desc = "cat ";
-        this.hotness = .15;
-        this.pleasure = 1.5;
-        this.sensitivity = 1.5;
+        super("cat ", .15, 1.5, 1.5);
     }
 
     @Override
