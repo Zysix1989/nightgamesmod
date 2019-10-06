@@ -46,24 +46,7 @@ class BodyGrowthPlusEffect extends BodyModEffect {
                     throw new RuntimeException("Upgrading did not result in an upgrade");
             }
         } else {
-            BodyPart newPart = original.upgrade();
-            if (newPart == original) {
-                user.body.temporaryAddOrReplacePartWithType(
-                    newPart,
-                    original,
-                    item.duration);
-                message = Global.format(String.format("{self:NAME-POSSESSIVE} %s was reenforced",
-                        original.fullDescribe(user)), user, opponent);
-            } else {
-                user.body.temporaryAddOrReplacePartWithType(newPart, original, item.duration);
-                message = Global.format(
-                    String.format("{self:NAME-POSSESSIVE} %s grew into %s%s",
-                        original.fullDescribe(user),
-                        newPart.prefix(),
-                        newPart.fullDescribe(user)),
-                    user,
-                    opponent);
-            }
+            throw new RuntimeException("unreachable");
         }
         if (c != null && !message.isEmpty()) {
             c.write(message);

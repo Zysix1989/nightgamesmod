@@ -41,20 +41,7 @@ public class BodyDowngradeEffect extends BodyModEffect {
                     throw new RuntimeException("Downgrading did not result in an downgrade");
             }
         } else if (original != null) {
-            BodyPart newPart = original.downgrade();
-            if (newPart == original) {
-                user.body.temporaryAddOrReplacePartWithType(newPart, original, item.duration);
-                message = Global
-                    .format(String.format("{self:NAME-POSSESSIVE} %s was reenforced",
-                        original.fullDescribe(user)), user, opponent);
-            } else {
-                user.body.temporaryAddOrReplacePartWithType(newPart, original, item.duration);
-                message = Global.format(
-                    String.format("{self:NAME-POSSESSIVE} %s shrunk into %s",
-                        original.fullDescribe(user), Global.prependPrefix(
-                            newPart.prefix(), newPart.fullDescribe(user))),
-                    user, opponent);
-            }
+            throw new RuntimeException("unreachable");
         } else {
             message = "";
         }
