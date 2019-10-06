@@ -125,7 +125,7 @@ public class Growth implements Cloneable {
             parts.forEach(part -> {
                 BodyPart existingPart = character.body.getRandom(part.getType());
                 String existingPartDesc = existingPart == null ? "NO_EXISTING_PART" : existingPart.canonicalDescription();
-                String loadedPartDesc = part == null ? "NO_LOADED_PART" : part.canonicalDescription();
+                String loadedPartDesc = part.canonicalDescription();
                 // only add parts if the level matches
                 if (level <= character.getLevel()) {
                     if (existingPart == null || !existingPartDesc.equals(loadedPartDesc)) {
