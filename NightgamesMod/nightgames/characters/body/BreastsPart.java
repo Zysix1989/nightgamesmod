@@ -84,7 +84,6 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
 
     public static final String TYPE = "breasts";
 
-    private double bonusSensitivity = 0;
     private SizeTrait<BreastsPart.Size> sizeTrait;
 
     public BreastsPart() {
@@ -138,7 +137,7 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
 
     @Override
     public double getSensitivity(Character self, BodyPart target) {
-        return (.75 + getSize().value * .2 + bonusSensitivity)* super.getSensitivity(self, target);
+        return (.75 + getSize().value * .2)* super.getSensitivity(self, target);
    }
 
     @Override
