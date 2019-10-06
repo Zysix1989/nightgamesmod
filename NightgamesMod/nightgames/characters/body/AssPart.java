@@ -52,7 +52,6 @@ public class AssPart extends GenericBodyPart {
         }
     }
 
-    private double bonusSensitivity;
     private Size size;
 
     private AssPart() {
@@ -247,12 +246,7 @@ public class AssPart extends GenericBodyPart {
         for (PartMod mod : mods) {
             bonus += mod.getSensitivity();
         }
-        sensitivityMod += bonusSensitivity;
         return sensitivityMod * bonus;
-    }
-
-    public void addBonusSensitivity(double bonusSensitivity) {
-        this.bonusSensitivity += bonusSensitivity;
     }
 
     public Size getSize() {

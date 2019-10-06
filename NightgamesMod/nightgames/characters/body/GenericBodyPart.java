@@ -382,8 +382,6 @@ public class GenericBodyPart implements BodyPart {
         return mods;
     }
 
-
-
     public void receiveCum(Combat c, Character self, Character donor, BodyPart sourcePart) {
         getMods().forEach(mod -> ((PartMod)mod).receiveCum(c, self, this, donor, sourcePart));
     }
