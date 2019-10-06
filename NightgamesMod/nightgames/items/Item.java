@@ -12,7 +12,6 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
-import nightgames.characters.body.EarPart;
 import nightgames.characters.body.PointedEarsPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
@@ -168,7 +167,7 @@ public enum Item implements Loot {
     FemDraft("Fem Draft", 150, "Temporarily grow a pussy", "a ", Arrays.asList(
         (ItemEffect) new BodyGrowthPlusEffect("drink", "throw",
             new BreastsPart(BreastsPart.Size.CCup)),
-        (ItemEffect) new BodyReplaceEffect("drink", "throw", PussyPart.generic)),
+        (ItemEffect) new BodyReplaceEffect("drink", "throw", new PussyPart())),
         (c, self, target) -> !self.hasPussy(),
         15),
     Lactaid("Lactaid", 100, "Temporarily start lactating", "",

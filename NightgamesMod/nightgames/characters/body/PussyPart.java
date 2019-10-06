@@ -11,17 +11,11 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.catcher.CatcherMod;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
 public class PussyPart extends GenericBodyPart {
     public static final String TYPE = "pussy";
-    public static PussyPart generic = generateGeneric();
-
-    public static PussyPart generateGeneric() {
-        return new PussyPart();
-    }
 
     public PussyPart() {
         super("pussy", "", 0, 1.2, 1, true, TYPE, "a ");

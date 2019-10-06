@@ -254,10 +254,10 @@ class BodyConfiguration {
 
             JsonUtils.getOptional(object, PussyPart.TYPE).ifPresent(modClass -> {
                 if (modClass.isJsonPrimitive() && modClass.getAsString().equals("normal")) {
-                    config.pussy = Optional.of(PussyPart.generic);
+                    config.pussy = Optional.of(new PussyPart());
                 } else {
                     PartMod pussyMod = JsonUtils.getGson().fromJson(modClass, PartMod.class);
-                    config.pussy = Optional.of((PussyPart)PussyPart.generic.applyMod(pussyMod));
+                    config.pussy = Optional.of((PussyPart) new PussyPart().applyMod(pussyMod));
                 }
             });
             return config;
@@ -289,13 +289,13 @@ class BodyConfiguration {
     }
 
     enum Archetype {
-        REGULAR(null, PussyPart.generic),
-        DEMON(new IncubusCockMod(), PussyPart.generic.applyMod(new DemonicMod())),
-        CAT(new PrimalCockMod(), PussyPart.generic.applyMod(new FeralMod())),
-        CYBORG(new BionicCockMod(), PussyPart.generic.applyMod(new CyberneticMod())),
-        ANGEL(new BlessedCockMod(), PussyPart.generic.applyMod(new DivineMod())),
-        WITCH(new RunicCockMod(), PussyPart.generic.applyMod(new ArcaneMod())),
-        SLIME(new SlimyCockMod(), PussyPart.generic.applyMod(new GooeyMod()));
+        REGULAR(null, new PussyPart()),
+        DEMON(new IncubusCockMod(), new PussyPart().applyMod(new DemonicMod())),
+        CAT(new PrimalCockMod(), new PussyPart().applyMod(new FeralMod())),
+        CYBORG(new BionicCockMod(), new PussyPart().applyMod(new CyberneticMod())),
+        ANGEL(new BlessedCockMod(), new PussyPart().applyMod(new DivineMod())),
+        WITCH(new RunicCockMod(), new PussyPart().applyMod(new ArcaneMod())),
+        SLIME(new SlimyCockMod(), new PussyPart().applyMod(new GooeyMod()));
         private final CockMod cockMod;
         private final BodyPart pussy;
 

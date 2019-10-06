@@ -50,7 +50,7 @@ public class TestAngel extends BasePersonality {
         baseChar.body = new Body(baseChar, 1);
         baseChar.body.add(new BreastsPart(BreastsPart.Size.DDCup));
         baseChar.body.add(new FacePart(.1, 4.2));
-        baseChar.body.add(PussyPart.generic);
+        baseChar.body.add(new PussyPart());
         baseChar.body.add(new MouthPart());
         baseChar.body.add(new GenericBodyPart("hands", 0, 1, 1, Body.HANDS, ""));
         baseChar.body.add(new GenericBodyPart("feet", 0, 1, 1, Body.FEET, ""));
@@ -97,7 +97,7 @@ public class TestAngel extends BasePersonality {
         self.body.add(new BreastsPart(BreastsPart.Size.DDCup));
         // very feminine face
         self.body.add(new FacePart(.1, 4.2));
-        self.body.add(PussyPart.generic);
+        self.body.add(new PussyPart());
         self.initialGender = CharacterSex.female;
     }
 
@@ -421,7 +421,7 @@ public class TestAngel extends BasePersonality {
         character.add(Trait.demigoddess);
         character.add(Trait.divinity);
         character.add(Trait.proheels);
-        character.body.addReplace(PussyPart.generic.applyMod(new DivineMod()), 1);
+        character.body.addReplace(new PussyPart().applyMod(new DivineMod()), 1);
         character.body.addReplace(WingsPart.angelic, 5);
         character.unequipAllClothing();
         character.outfitPlan.add(Clothing.getByID("translucentshawl"));

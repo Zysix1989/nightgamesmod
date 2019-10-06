@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.CharacterSex;
-import nightgames.characters.Player;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.mods.PartMod;
@@ -37,7 +36,6 @@ import nightgames.skills.Skill;
 import nightgames.status.Abuff;
 import nightgames.status.BodyFetish;
 import nightgames.status.Charmed;
-import nightgames.status.Disguised;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
 import nightgames.status.addiction.AddictionType;
@@ -1108,7 +1106,7 @@ public class Body implements Cloneable {
     public void makeGenitalOrgans(CharacterSex sex) {
         if (sex.hasPussy()) {
             if (!has("pussy")) {
-                add(PussyPart.generic);
+                add(new PussyPart());
             }
         }
         if (sex.hasCock()) {

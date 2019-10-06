@@ -7,7 +7,6 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CatEarsPart;
-import nightgames.characters.body.EarPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
@@ -70,7 +69,7 @@ public class Kat extends BasePersonality {
         self.getMojo().setMax(80);
 
         self.body.add(new BreastsPart(BreastsPart.Size.ACup));
-        self.body.add(PussyPart.generic.applyMod(new FeralMod()));
+        self.body.add(new PussyPart().applyMod(new FeralMod()));
         self.body.add(new AssPart(Size.Normal));
         self.body.add(TailPart.cat);
         self.body.add(new CatEarsPart());

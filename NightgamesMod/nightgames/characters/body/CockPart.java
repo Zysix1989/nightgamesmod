@@ -237,7 +237,7 @@ public class CockPart extends GenericBodyPart {
             .filter(mod -> mod instanceof CockMod)
             .map(mod -> ((CockMod) mod).getCorrespondingCatcherMod())
             .collect(Collectors.toList());
-        GenericBodyPart newPart = PussyPart.generateGeneric();
+        GenericBodyPart newPart = new PussyPart();
 
         for (PartMod mod : newMods) {
             newPart = (GenericBodyPart)newPart.applyMod(mod);

@@ -107,7 +107,7 @@ public class Corruption extends Addiction {
                      Global.writeIfCombat(c, affected, Global.format(
                                 "<b>The dark taint changes {self:name-do} even further, and a succubus's pussy forms between {self:possessive} legs!</b>", affected, cause));
                 }
-                affected.body.temporaryAddOrReplacePartWithType(PussyPart.generic.applyMod(
+                affected.body.temporaryAddOrReplacePartWithType(new PussyPart().applyMod(
                     new DemonicMod()), Global.random(15, 40));
             } else if (!affected.hasDick()) {
                 if (affected.human()) {

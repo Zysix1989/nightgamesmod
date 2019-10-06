@@ -417,7 +417,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Grow Pussy", 2500) {
             @Override
             void buy(Character buyer) {
-                buyer.body.addReplace(PussyPart.generic, 1);
+                buyer.body.addReplace(new PussyPart(), 1);
             }
 
             @Override
@@ -509,7 +509,7 @@ public class BodyShop extends Activity {
                 PussyPart target = buyer.body.getRandomPussy();
                 assert target != null;
                 buyer.body.remove(target);
-                buyer.body.addReplace(PussyPart.generic, 1);
+                buyer.body.addReplace(new PussyPart(), 1);
             }
 
             @Override
