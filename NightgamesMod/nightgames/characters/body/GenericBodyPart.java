@@ -55,7 +55,7 @@ public class GenericBodyPart implements BodyPart {
         this(desc, "", hotness, pleasure, sensitivity, notable, type, prefix);
     }
 
-    public GenericBodyPart() {
+    private GenericBodyPart() {
         this("generic", "a generic body part", 0, 0, 0, false, "generic", "");
     }
 
