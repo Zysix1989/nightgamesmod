@@ -139,11 +139,6 @@ public enum TailPart implements BodyPart,BodyPartMod {
     }
 
     @Override
-    public int compare(BodyPart other) {
-        return 0;
-    }
-
-    @Override
     public boolean isVisible(Character c) {
         return true;
     }

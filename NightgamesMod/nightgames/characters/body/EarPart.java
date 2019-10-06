@@ -131,11 +131,6 @@ public abstract class EarPart implements BodyPart {
     public void tickHolding(Combat c, Character self, Character opponent, BodyPart otherOrgan) { }
 
     @Override
-    public int compare(BodyPart other) {
-        return 0;
-    }
-
-    @Override
     public double applyBonuses(Character self, Character opponent, BodyPart target, double damage, Combat c) {
         return 0;
     }

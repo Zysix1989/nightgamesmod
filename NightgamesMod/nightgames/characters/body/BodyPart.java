@@ -62,8 +62,6 @@ public interface BodyPart {
     public BodyPart upgrade();
     public BodyPart downgrade();
 
-    public int compare(BodyPart other);
-
 
     double applyReceiveBonuses(Character self, Character opponent, BodyPart target, double damage, Combat c);
 

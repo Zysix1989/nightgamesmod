@@ -22,12 +22,7 @@ class BodyGrowthPlusEffect extends BodyModEffect {
                 Global.prependPrefix(affected.prefix(), affected.fullDescribe(user))), user,
                 opponent);
         } else {
-            BodyPart newPart;
-            if (affected.compare(original) <= 0) {
-                newPart = original.upgrade();
-            } else {
-                newPart = affected;
-            }
+            BodyPart newPart = original.upgrade();
             if (newPart == original) {
                 boolean eventful = user.body.temporaryAddOrReplacePartWithType(
                     newPart,
