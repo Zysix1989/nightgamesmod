@@ -20,6 +20,7 @@ import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
+import nightgames.characters.body.EarPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
@@ -835,7 +836,8 @@ public class Player extends Character {
                 if (!target.crotchAvailable() || !target.hasPussy()) {
                     c.write(this, "You pull " + target.getName()
                                     + " off balance and lick her sensitive ear. She trembles as you nibble on her earlobe.");
-                    target.body.pleasure(this, body.getRandom("tongue"), target.body.getRandom(EarPart.TYPE),
+                    target.body.pleasure(this, body.getRandom("tongue"), target.body.getRandom(
+                        EarPart.TYPE),
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                 } else {
                     c.write(this, "You pull " + target.getName() + " to you and rub your thigh against her girl parts.");

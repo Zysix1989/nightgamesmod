@@ -26,6 +26,7 @@ import nightgames.areas.Area;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.EarPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.characters.custom.CommentSituation;
@@ -650,7 +651,8 @@ public class NPC extends Character {
                 } else {
                     c.write(this, getName()
                                     + " pulls you off balance and licks your sensitive ear. You tremble as she nibbles on your earlobe.");
-                    target.body.pleasure(this, body.getRandom("tongue"), target.body.getRandom(EarPart.TYPE),
+                    target.body.pleasure(this, body.getRandom("tongue"), target.body.getRandom(
+                        EarPart.TYPE),
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                 }
                 break;

@@ -34,6 +34,7 @@ import nightgames.actions.UseEnergyDrink;
 import nightgames.actions.UseLubricant;
 import nightgames.areas.Area;
 import nightgames.areas.NinjaStash;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
