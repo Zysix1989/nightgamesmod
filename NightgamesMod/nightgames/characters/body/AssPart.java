@@ -54,6 +54,10 @@ public class AssPart extends GenericBodyPart implements Sizable<AssPart.Size> {
             value = v;
             this.description = description;
         }
+        @Override
+        public Size applyModifier(int modifier) {
+            return clampToValid(value + modifier);
+        }
 
         @Override
         public Size applyModifications(
@@ -243,6 +247,10 @@ public class AssPart extends GenericBodyPart implements Sizable<AssPart.Size> {
 
     public BodyPart downgrade() {
         return new AssPart(Size.clampToValid(getSize().value - 1));
+    }
+
+    public void changeSize(int modifier) {
+        sizeTrait.changeSize(modifier);
     }
 
     public void temporarilyChangeSize(int modifier, int duration) {

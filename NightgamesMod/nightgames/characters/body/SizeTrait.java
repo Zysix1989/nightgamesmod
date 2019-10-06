@@ -11,6 +11,10 @@ class SizeTrait<SizeType extends _Size<SizeType>> {
         sizeModifications = new ArrayList<>();
     }
 
+    void changeSize(int modifier) {
+        size = size.applyModifier(modifier);
+    }
+
     void temporarilyChangeSize(int modifier, int duration) {
         sizeModifications.add(new TemporarySizeModification(modifier, duration));
     }

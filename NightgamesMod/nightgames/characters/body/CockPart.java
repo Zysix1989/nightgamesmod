@@ -61,6 +61,11 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
         }
 
         @Override
+        public Size applyModifier(int modifier) {
+            return clampToValid(value + modifier);
+        }
+
+        @Override
         public Size applyModifications(
             Collection<TemporarySizeModification> modifications) {
             var v = value;
@@ -255,6 +260,10 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
             newPart = (GenericBodyPart)newPart.applyMod(mod);
         }
         return (PussyPart)newPart;
+    }
+
+    public void changeSize(int modifier) {
+        sizeTrait.changeSize(modifier);
     }
 
     public void temporarilyChangeSize(int modifier, int duration) {

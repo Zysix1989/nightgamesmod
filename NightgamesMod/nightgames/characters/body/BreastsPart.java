@@ -67,6 +67,10 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
             this.cupSize = cupSize;
         }
 
+        public Size applyModifier(int modifier) {
+            return clampToValid(value + modifier);
+        }
+
         @Override
         public Size applyModifications(
             Collection<TemporarySizeModification> modifications) {
@@ -297,6 +301,10 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
             getSize().value - 1,
             Size.min().value,
             Size.max().value)).orElseThrow());
+    }
+
+    public void changeSize(int modifier) {
+        sizeTrait.changeSize(modifier);
     }
 
     public void temporarilyChangeSize(int modifier, int duration) {
