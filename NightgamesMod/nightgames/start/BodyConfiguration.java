@@ -17,6 +17,7 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CatEarsPart;
 import nightgames.characters.body.PointedEarsPart;
+import nightgames.characters.body.mods.catcher.CatcherMod;
 import nightgames.characters.body.mods.pitcher.BionicCockMod;
 import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.body.mods.pitcher.CockMod;
@@ -289,19 +290,19 @@ class BodyConfiguration {
     }
 
     enum Archetype {
-        REGULAR(null, new PussyPart()),
-        DEMON(new IncubusCockMod(), new PussyPart().withMod(new DemonicMod())),
-        CAT(new PrimalCockMod(), new PussyPart().withMod(new FeralMod())),
-        CYBORG(new BionicCockMod(), new PussyPart().withMod(new CyberneticMod())),
-        ANGEL(new BlessedCockMod(), new PussyPart().withMod(new DivineMod())),
-        WITCH(new RunicCockMod(), new PussyPart().withMod(new ArcaneMod())),
-        SLIME(new SlimyCockMod(), new PussyPart().withMod(new GooeyMod()));
+        REGULAR(null, null),
+        DEMON(new IncubusCockMod(), new DemonicMod()),
+        CAT(new PrimalCockMod(), new FeralMod()),
+        CYBORG(new BionicCockMod(), new CyberneticMod()),
+        ANGEL(new BlessedCockMod(), new DivineMod()),
+        WITCH(new RunicCockMod(), new ArcaneMod()),
+        SLIME(new SlimyCockMod(), new GooeyMod());
         private final CockMod cockMod;
-        private final BodyPart pussy;
+        private final CatcherMod pussyMod;
 
-        Archetype(CockMod cockMod, BodyPart pussy) {
+        Archetype(CockMod cockMod, CatcherMod pussyMod) {
             this.cockMod = cockMod;
-            this.pussy = pussy;
+            this.pussyMod = pussyMod;
         }
 
         private void apply(Body body) {
@@ -309,7 +310,7 @@ class BodyConfiguration {
                 body.addReplace(body.getRandomCock().withMod(cockMod), 1);
             }
             if (body.has(PussyPart.TYPE) && this != REGULAR)
-                body.addReplace(pussy, 1);
+                body.addReplace(body.getRandomPussy().withMod(pussyMod), 1);
             switch (this) {
                 case ANGEL:
                     body.add(WingsPart.angelic);
