@@ -6,7 +6,6 @@ import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.mods.PartMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
@@ -238,15 +237,6 @@ public class AssPart extends GenericBodyPart {
             getSize().value - 1,
             Size.min().value,
             Size.max().value)).orElseThrow());
-    }
-    @Override
-    public double getSensitivity(Character self, BodyPart target) {
-        double sensitivityMod = sensitivity;
-        double bonus = 1.0;
-        for (PartMod mod : mods) {
-            bonus += mod.getSensitivity();
-        }
-        return sensitivityMod * bonus;
     }
 
     public Size getSize() {
