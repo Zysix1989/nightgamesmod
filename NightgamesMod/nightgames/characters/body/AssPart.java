@@ -36,6 +36,9 @@ public class AssPart extends GenericBodyPart {
         private static Optional<Size> fromValue(int v) {
             return Optional.of(map.get(v));
         }
+        private static Size clampToValid(int v) {
+            return fromValue(Global.clamp(v, min().value, max().value)).orElseThrow();
+        }
         public static Size max() {
             return Huge;
         }
@@ -227,17 +230,11 @@ public class AssPart extends GenericBodyPart {
     }
 
     public BodyPart upgrade() {
-        return new AssPart(Size.fromValue(Global.clamp(
-            getSize().value + 1,
-            Size.min().value,
-            Size.max().value)).orElseThrow());
+        return new AssPart(Size.clampToValid(getSize().value + 1));
     }
 
     public BodyPart downgrade() {
-        return new AssPart(Size.fromValue(Global.clamp(
-            getSize().value - 1,
-            Size.min().value,
-            Size.max().value)).orElseThrow());
+        return new AssPart(Size.clampToValid(getSize().value - 1));
     }
 
     public Size getSize() {
