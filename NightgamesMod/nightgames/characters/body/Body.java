@@ -540,9 +540,7 @@ public class Body implements Cloneable {
     }
     
     public BodyPart getRandomErogenous() {
-
         return Global.pickRandom(getCurrentPartsThatMatch(BodyPart::isErogenous)).get();
-
     }
 
     public int pleasure(Character opponent, BodyPart with, BodyPart target, double magnitude, Combat c) {
