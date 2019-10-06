@@ -3,6 +3,7 @@ package nightgames.requirements;
 import nightgames.actions.Movement;
 import nightgames.areas.Area;
 import nightgames.characters.*;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.PussyPart;
