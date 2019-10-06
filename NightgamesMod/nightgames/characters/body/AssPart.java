@@ -1,6 +1,8 @@
 package nightgames.characters.body;
 
 import com.google.gson.JsonObject;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Optional;
 import nightgames.characters.Attribute;
@@ -14,7 +16,7 @@ import nightgames.status.Drained;
 import nightgames.status.Stsflag;
 import nightgames.status.Trance;
 
-public class AssPart extends GenericBodyPart {
+public class AssPart extends GenericBodyPart implements Sizable<AssPart.Size> {
     public static String TYPE = "ass";
 
     public enum Size {
@@ -46,24 +48,51 @@ public class AssPart extends GenericBodyPart {
             return Small;
         }
 
-        private int value;
-        private String description;
+        private final int value;
+        private final String description;
 
         Size(int v, String description) {
             value = v;
             this.description = description;
         }
+
+        private Size applyModifications(Collection<TemporarySizeModification> modifications) {
+            var v = value;
+            v += modifications.stream().mapToInt(mod -> mod.modifier).sum();
+            return clampToValid(v);
+        }
+    }
+
+    private static class TemporarySizeModification {
+        private int modifier;
+        private int duration;
+
+        TemporarySizeModification(int modifier, int duration) {
+            this.modifier = modifier;
+            this.duration = duration;
+        }
+
+        private void reduceDuration() {
+            duration--;
+        }
+
+        private boolean isExpired() {
+            return duration < 0;
+        }
     }
 
     private Size size;
+    private ArrayList<TemporarySizeModification> sizeModifications;
 
     private AssPart() {
         super("ass", "", 0, 1.2, 1, false, AssPart.TYPE, "a ");
+        sizeModifications = new ArrayList<>();
     }
 
     public AssPart(JsonObject js) {
         super(js);
         size = Size.fromValue(js.get("size").getAsInt()).orElseThrow();
+        sizeModifications = new ArrayList<>();
     }
 
     public AssPart(Size size) {
@@ -237,7 +266,16 @@ public class AssPart extends GenericBodyPart {
         return new AssPart(Size.clampToValid(getSize().value - 1));
     }
 
+    public void temporarySizeChange(int modifier, int duration) {
+        sizeModifications.add(new TemporarySizeModification(modifier, duration));
+    }
+
+    public void timePasses() {
+        sizeModifications.forEach(TemporarySizeModification::reduceDuration);
+        sizeModifications.removeIf(TemporarySizeModification::isExpired);
+    }
+
     public Size getSize() {
-        return size;
+        return size.applyModifications(sizeModifications);
     }
 }

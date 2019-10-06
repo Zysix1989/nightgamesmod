@@ -1176,6 +1176,10 @@ public class Body implements Cloneable {
     }
 
     private void advancedTemporaryParts(Combat c) {
+        bodyParts.stream()
+            .filter(p -> p instanceof Sizable)
+            .forEach(p -> ((Sizable) p).timePasses());
+
         ArrayList<PartReplacement> expired = new ArrayList<>();
         ArrayList<PartModReplacement> expiredMods = new ArrayList<>();
         for (PartReplacement r : replacements) {
