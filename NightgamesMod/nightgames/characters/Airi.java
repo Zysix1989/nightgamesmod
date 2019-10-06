@@ -454,7 +454,7 @@ public class Airi extends BasePersonality {
             }
             BreastsPart part = self.body.getBreastsBelow(BreastsPart.Size.max());
             if (part != null) {
-                self.body.temporaryAddOrReplacePartWithType(part.upgrade(), 10);
+                part.temporarySizeChange(1, 10);
             }
             AssPart asspart = self.body.getAssBelow(Size.max());
             if (asspart != null) {

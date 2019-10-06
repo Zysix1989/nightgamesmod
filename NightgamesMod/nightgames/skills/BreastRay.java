@@ -47,11 +47,11 @@ public class BreastRay extends Skill {
         if (permanent) {
             if (part != null) {
                 target.body.addReplace(part.upgrade().upgrade().upgrade().upgrade().upgrade(), 1);
-                target.body.temporaryAddOrReplacePartWithType(part.upgrade().upgrade().upgrade(), 10);
+                part.temporarySizeChange(3, 10);
             }
         } else {
             if (part != null) {
-                target.body.temporaryAddOrReplacePartWithType(part.upgrade().upgrade().upgrade(), 10);
+                part.temporarySizeChange(3, 10);
             }
         }
         return true;

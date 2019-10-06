@@ -56,7 +56,7 @@ public class BodyDowngradeEffect extends BodyModEffect {
         } else {
             message = "";
         }
-       if (c != null && !message.isEmpty()) {
+        if (c != null && !message.isEmpty()) {
             c.write(message);
         }
         return !message.isEmpty();

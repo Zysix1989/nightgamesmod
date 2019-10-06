@@ -81,7 +81,7 @@ public class MimicCat extends Skill {
         getSelf().body.temporaryAddOrReplacePartWithType(new CatEarsPart(), 10);
         BreastsPart part = getSelf().body.getBreastsAbove(Size.ACup);
         if (part != null) {
-            getSelf().body.temporaryAddOrReplacePartWithType(part.downgrade(), 10);
+            part.temporarySizeChange(-1, 10);
         }
 
         int strength = Math.max(10, getSelf().get(Attribute.Slime)) * 2 / 3;

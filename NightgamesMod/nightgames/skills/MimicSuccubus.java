@@ -77,7 +77,7 @@ public class MimicSuccubus extends Skill {
         getSelf().body.temporaryAddOrReplacePartWithType(new PointedEarsPart(), 999);
         BreastsPart part = getSelf().body.getBreastsBelow(Size.max());
         if (part != null) {
-            getSelf().body.temporaryAddOrReplacePartWithType(part.upgrade().upgrade().upgrade().upgrade(), 999);
+            part.temporarySizeChange(4, 999);
         }
 
         int strength = Math.max(10, getSelf().get(Attribute.Slime)) * 2 / 3;
