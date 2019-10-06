@@ -1,6 +1,7 @@
 package nightgames.characters.body;
 
 import com.google.gson.JsonObject;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Optional;
 import nightgames.characters.Attribute;
@@ -16,8 +17,8 @@ import nightgames.status.Stsflag;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.AddictionType;
 
-public class BreastsPart extends GenericBodyPart {
-    public enum Size {
+public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.Size> {
+    public enum Size implements _Size<Size> {
         FlatChest(0, "", "flat"),
         ACup(1, "A", "tiny"),
         BCup(2, "B", "smallish"),
@@ -42,7 +43,9 @@ public class BreastsPart extends GenericBodyPart {
         private static Optional<Size> fromValue(int v) {
             return Optional.of(map.get(v));
         }
-
+        private static Size clampToValid(int v) {
+            return fromValue(Global.clamp(v, min().value, max().value)).orElseThrow();
+        }
         @Deprecated
         public static Size coerceFromInt(int v) {
             return fromValue(v).orElseThrow();
@@ -63,12 +66,22 @@ public class BreastsPart extends GenericBodyPart {
             this.description = description;
             this.cupSize = cupSize;
         }
+
+        @Override
+        public Size applyModifications(
+            Collection<TemporarySizeModification> modifications) {
+            var v = value;
+            v += modifications.stream()
+                .mapToInt(TemporarySizeModification::getModifier)
+                .sum();
+            return clampToValid(v);
+        }
     }
 
     public static final String TYPE = "breasts";
 
     private double bonusSensitivity = 0;
-    private Size size;
+    private SizeTrait<BreastsPart.Size> sizeTrait;
 
     public BreastsPart() {
         super("breasts", "", 0.0, 1.0, 1.0, true, TYPE, "");
@@ -76,17 +89,17 @@ public class BreastsPart extends GenericBodyPart {
 
     public BreastsPart(JsonObject js) {
         super(js);
-        size = Size.fromValue(js.get("size").getAsInt()).orElseThrow();
+        var size = Size.fromValue(js.get("size").getAsInt()).orElseThrow();
+        sizeTrait = new SizeTrait<>(size);
     }
 
     public BreastsPart(int size) {
-        this();
-        this.size = Size.fromValue(size).orElseThrow();
+        this(Size.fromValue(size).orElseThrow());
     }
 
     public BreastsPart(Size size) {
         this();
-        this.size = size;
+        sizeTrait = new SizeTrait<>(size);
     }
 
     @Override
@@ -286,7 +299,15 @@ public class BreastsPart extends GenericBodyPart {
             Size.max().value)).orElseThrow());
     }
 
+    public void temporarySizeChange(int modifier, int duration) {
+        sizeTrait.temporarySizeChange(modifier, duration);
+    }
+
+    public void timePasses() {
+        sizeTrait.timePasses();
+    }
+
     public Size getSize() {
-        return size;
+        return sizeTrait.getSize();
     }
 }

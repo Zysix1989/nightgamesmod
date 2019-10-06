@@ -1,6 +1,7 @@
 package nightgames.characters.body;
 
 import com.google.gson.JsonObject;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -8,19 +9,19 @@ import java.util.stream.Collectors;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
-import nightgames.characters.body.mods.PartMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.status.Sensitized;
 
-public class CockPart extends GenericBodyPart {
+public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> {
     public static final String TYPE = "cock";
 
-    public enum Size {
+    public enum Size implements _Size<Size> {
         Tiny(3, "tiny"),
         Small(4,"tiny"),
         Little(5, "small"),
@@ -39,9 +40,11 @@ public class CockPart extends GenericBodyPart {
                 map.put(s.value, s);
             }
         }
-
         private static Optional<Size> fromValue(int v) {
             return Optional.of(map.get(v));
+        }
+        private static Size clampToValid(int v) {
+            return fromValue(Global.clamp(v, min().value, max().value)).orElseThrow();
         }
         public static Size max() {
             return Mammoth;
@@ -56,30 +59,39 @@ public class CockPart extends GenericBodyPart {
             value = v;
             this.description = description;
         }
+
+        @Override
+        public Size applyModifications(
+            Collection<TemporarySizeModification> modifications) {
+            var v = value;
+            v += modifications.stream()
+                .mapToInt(TemporarySizeModification::getModifier)
+                .sum();
+            return clampToValid(v);
+        }
     }
     
     public static String[] synonyms = {"cock", "dick", "shaft", "phallus"};
 
-    private Size size;
+    private SizeTrait<Size> sizeTrait;
 
     public CockPart() {
-        super("cock", "", 0, 1.2, 1, false, CockPart.TYPE, "a ");
+        this(Size.Average);
     }
 
     public CockPart(JsonObject js) {
         super(js);
-        size = Size.fromValue(js.get("size").getAsInt()).orElseThrow();
+        sizeTrait = new SizeTrait<>(Size.fromValue(js.get("size").getAsInt()).orElseThrow());
     }
 
     @Deprecated
     public CockPart(int size) {
-        this();
-        this.size = Size.fromValue(size).orElseThrow();
+        this(Size.fromValue(size).orElseThrow());
     }
 
     public CockPart(Size size) {
-        this();
-        this.size = size;
+        super("cock", "", 0, 1.2, 1, false, CockPart.TYPE, "a ");
+        sizeTrait = new SizeTrait<>(size);
     }
 
     @Override
@@ -215,7 +227,7 @@ public class CockPart extends GenericBodyPart {
     }
 
     private String sizeAdjective() {
-        return size.description + " ";
+        return sizeTrait.getSize().description + " ";
     }
 
     public BodyPart upgrade() {
@@ -245,7 +257,15 @@ public class CockPart extends GenericBodyPart {
         return (PussyPart)newPart;
     }
 
+    public void temporarySizeChange(int modifier, int duration) {
+        sizeTrait.temporarySizeChange(modifier, duration);
+    }
+
+    public void timePasses() {
+        sizeTrait.timePasses();
+    }
+
     public Size getSize() {
-        return size;
+        return sizeTrait.getSize();
     }
 }
