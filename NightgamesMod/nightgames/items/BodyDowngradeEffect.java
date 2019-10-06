@@ -18,8 +18,8 @@ public class BodyDowngradeEffect extends BodyModEffect {
         if (original != null) {
             BodyPart newPart = original.downgrade();
             if (newPart == original) {
-                boolean eventful = user.body
-                    .temporaryAddOrReplacePartWithType(newPart, original, item.duration);
+                boolean eventful = true;
+                user.body.temporaryAddOrReplacePartWithType(newPart, original, item.duration);
                 message = eventful ? Global
                     .format(String.format("{self:NAME-POSSESSIVE} %s was reenforced",
                         original.fullDescribe(user)), user, opponent) : "";

@@ -24,7 +24,8 @@ class BodyGrowthPlusEffect extends BodyModEffect {
         } else {
             BodyPart newPart = original.upgrade();
             if (newPart == original) {
-                boolean eventful = user.body.temporaryAddOrReplacePartWithType(
+                boolean eventful = true;
+                user.body.temporaryAddOrReplacePartWithType(
                     newPart,
                     original,
                     item.duration);
