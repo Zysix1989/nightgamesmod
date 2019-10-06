@@ -198,8 +198,7 @@ public class BodyShop extends Activity {
             void buy(Character buyer) {
                 AssPart target = buyer.body.getAssBelow(AssPart.Size.max());
                 assert target != null;
-                buyer.body.remove(target);
-                buyer.body.addReplace(target.upgrade(), 1);
+                target.changeSize(1);
             }
 
             @Override
@@ -219,8 +218,7 @@ public class BodyShop extends Activity {
             void buy(Character buyer) {
                 AssPart target = buyer.body.getAssAbove(AssPart.Size.min());
                 assert target != null;
-                buyer.body.remove(target);
-                buyer.body.addReplace(target.downgrade(), 1);
+                target.changeSize(-1);
             }
 
             @Override
@@ -240,8 +238,7 @@ public class BodyShop extends Activity {
             void buy(Character buyer) {
                 BreastsPart target = buyer.body.getBreastsBelow(BreastsPart.Size.max());
                 assert target != null;
-                buyer.body.remove(target);
-                buyer.body.addReplace(target.upgrade(), 1);
+                target.changeSize(1);
             }
 
             @Override
@@ -261,8 +258,7 @@ public class BodyShop extends Activity {
             void buy(Character buyer) {
                 BreastsPart target = buyer.body.getBreastsAbove(BreastsPart.Size.min());
                 assert target != null;
-                buyer.body.remove(target);
-                buyer.body.addReplace(target.downgrade(), 1);
+                target.changeSize(-1);
             }
 
             @Override
@@ -436,8 +432,7 @@ public class BodyShop extends Activity {
             void buy(Character buyer) {
                 CockPart target = buyer.body.getCockBelow(Size.max());
                 assert target != null;
-                buyer.body.remove(target);
-                buyer.body.addReplace(target.upgrade(), 1);
+                target.changeSize(1);
             }
 
             @Override
@@ -461,8 +456,7 @@ public class BodyShop extends Activity {
             void buy(Character buyer) {
                 CockPart target = buyer.body.getCockAbove(Size.min());
                 assert target != null;
-                buyer.body.remove(target);
-                buyer.body.addReplace(target.downgrade(), 1);
+                target.changeSize(-1);
             }
 
             @Override

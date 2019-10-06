@@ -118,16 +118,6 @@ public abstract class EarPart implements BodyPart {
     }
 
     @Override
-    public BodyPart upgrade() {
-        return this;
-    }
-
-    @Override
-    public BodyPart downgrade() {
-        return this;
-    }
-
-    @Override
     public void tickHolding(Combat c, Character self, Character opponent, BodyPart otherOrgan) { }
 
     @Override

@@ -300,16 +300,6 @@ public class GenericBodyPart implements BodyPart {
     }
 
     @Override
-    public BodyPart upgrade() {
-        return this;
-    }
-
-    @Override
-    public BodyPart downgrade() {
-        return this;
-    }
-
-    @Override
     public String prefix() {
         return prefix;
     }

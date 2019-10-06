@@ -289,20 +289,6 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
         return "breast";
     }
 
-    public BodyPart upgrade() {
-        return new BreastsPart(Size.fromValue(Global.clamp(
-            getSize().value + 1,
-            Size.min().value,
-            Size.max().value)).orElseThrow());
-    }
-
-    public BodyPart downgrade() {
-        return new BreastsPart(Size.fromValue(Global.clamp(
-            getSize().value - 1,
-            Size.min().value,
-            Size.max().value)).orElseThrow());
-    }
-
     public void changeSize(int modifier) {
         sizeTrait.changeSize(modifier);
     }

@@ -45,7 +45,7 @@ public class BreastRay extends Skill {
         BreastsPart part = target.body.getBreastsBelow(Size.FCup);
         if (permanent) {
             if (part != null) {
-                target.body.addReplace(part.upgrade().upgrade().upgrade().upgrade().upgrade(), 1);
+                part.changeSize(5);
                 part.temporarilyChangeSize(3, 10);
             }
         } else {

@@ -59,10 +59,6 @@ public interface BodyPart {
 
     public boolean isNotable();
 
-    public BodyPart upgrade();
-    public BodyPart downgrade();
-
-
     double applyReceiveBonuses(Character self, Character opponent, BodyPart target, double damage, Combat c);
 
     public String prefix();

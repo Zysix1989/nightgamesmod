@@ -235,20 +235,6 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
         return sizeTrait.getSize().description + " ";
     }
 
-    public BodyPart upgrade() {
-        return new CockPart(Size.fromValue(Global.clamp(
-            getSize().value + 1,
-            Size.min().value,
-            Size.max().value)).orElseThrow());
-    }
-
-    public BodyPart downgrade() {
-        return new CockPart(Size.fromValue(Global.clamp(
-            getSize().value - 1,
-            Size.min().value,
-            Size.max().value)).orElseThrow());
-    }
-
     public PussyPart getEquivalentPussy() {
         List<PartMod> newMods = getPartMods().stream()
             .filter(mod -> mod instanceof CockMod)

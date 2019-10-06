@@ -125,16 +125,6 @@ public enum WingsPart implements BodyPart,BodyPartMod {
     }
 
     @Override
-    public BodyPart upgrade() {
-        return this;
-    }
-
-    @Override
-    public BodyPart downgrade() {
-        return this;
-    }
-
-    @Override
     public String prefix() {
         return "";
     }

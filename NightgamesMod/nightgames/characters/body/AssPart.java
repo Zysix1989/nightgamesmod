@@ -241,14 +241,6 @@ public class AssPart extends GenericBodyPart implements Sizable<AssPart.Size> {
         return "anal";
     }
 
-    public BodyPart upgrade() {
-        return new AssPart(Size.clampToValid(getSize().value + 1));
-    }
-
-    public BodyPart downgrade() {
-        return new AssPart(Size.clampToValid(getSize().value - 1));
-    }
-
     public void changeSize(int modifier) {
         sizeTrait.changeSize(modifier);
     }
