@@ -89,7 +89,7 @@ class BodyConfiguration {
         if (obj.has(AssPart.TYPE))
             config.ass = Optional.of(obj.get(AssPart.TYPE).getAsString()
                                            .equals("basic") ? new AssPart(Size.Small)
-                : (AssPart) new AssPart(Size.Small).applyMod(new SecondPussyMod()));
+                : (AssPart) new AssPart(Size.Small).withMod(new SecondPussyMod()));
 
         if (obj.has(EarPart.TYPE))
             config.ears = Optional.of(EarPart.load(obj.get(EarPart.TYPE).getAsJsonObject()));
@@ -257,7 +257,7 @@ class BodyConfiguration {
                     config.pussy = Optional.of(new PussyPart());
                 } else {
                     PartMod pussyMod = JsonUtils.getGson().fromJson(modClass, PartMod.class);
-                    config.pussy = Optional.of((PussyPart) new PussyPart().applyMod(pussyMod));
+                    config.pussy = Optional.of((PussyPart) new PussyPart().withMod(pussyMod));
                 }
             });
             return config;
@@ -290,12 +290,12 @@ class BodyConfiguration {
 
     enum Archetype {
         REGULAR(null, new PussyPart()),
-        DEMON(new IncubusCockMod(), new PussyPart().applyMod(new DemonicMod())),
-        CAT(new PrimalCockMod(), new PussyPart().applyMod(new FeralMod())),
-        CYBORG(new BionicCockMod(), new PussyPart().applyMod(new CyberneticMod())),
-        ANGEL(new BlessedCockMod(), new PussyPart().applyMod(new DivineMod())),
-        WITCH(new RunicCockMod(), new PussyPart().applyMod(new ArcaneMod())),
-        SLIME(new SlimyCockMod(), new PussyPart().applyMod(new GooeyMod()));
+        DEMON(new IncubusCockMod(), new PussyPart().withMod(new DemonicMod())),
+        CAT(new PrimalCockMod(), new PussyPart().withMod(new FeralMod())),
+        CYBORG(new BionicCockMod(), new PussyPart().withMod(new CyberneticMod())),
+        ANGEL(new BlessedCockMod(), new PussyPart().withMod(new DivineMod())),
+        WITCH(new RunicCockMod(), new PussyPart().withMod(new ArcaneMod())),
+        SLIME(new SlimyCockMod(), new PussyPart().withMod(new GooeyMod()));
         private final CockMod cockMod;
         private final BodyPart pussy;
 
@@ -306,7 +306,7 @@ class BodyConfiguration {
 
         private void apply(Body body) {
             if (body.has(CockPart.TYPE) && this != REGULAR) {
-                body.addReplace(body.getRandomCock().applyMod(cockMod), 1);
+                body.addReplace(body.getRandomCock().withMod(cockMod), 1);
             }
             if (body.has(PussyPart.TYPE) && this != REGULAR)
                 body.addReplace(pussy, 1);

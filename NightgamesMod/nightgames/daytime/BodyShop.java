@@ -481,7 +481,7 @@ public class BodyShop extends Activity {
                 CockPart target = buyer.body.getRandomCock();
                 assert target != null;
                 buyer.body.remove(target);
-                buyer.body.addReplace(target.removeAllMods(), 1);
+                buyer.body.addReplace(target.withoutAllMods(), 1);
             }
 
             @Override

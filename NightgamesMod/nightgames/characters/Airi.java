@@ -446,10 +446,10 @@ public class Airi extends BasePersonality {
             self.removeTemporaryTrait(Trait.repressed, 999);
             self.removeTemporaryTrait(Trait.softheart, 999);
             if (self.hasPussy() && !self.body.getRandomPussy().moddedPartCountsAs(GooeyMod.TYPE)) {
-                self.body.temporaryAddOrReplacePartWithType(self.body.getRandomPussy().applyMod(new GooeyMod()), 999);
+                self.body.temporaryAddOrReplacePartWithType(self.body.getRandomPussy().withMod(new GooeyMod()), 999);
             }
             if (self.hasDick() && !self.body.getRandomCock().moddedPartCountsAs(SlimyCockMod.TYPE)) {
-                self.body.temporaryAddOrReplacePartWithType(self.body.getRandomCock().applyMod(
+                self.body.temporaryAddOrReplacePartWithType(self.body.getRandomCock().withMod(
                     new SlimyCockMod()), 999);
             }
             BreastsPart part = self.body.getBreastsBelow(BreastsPart.Size.max());

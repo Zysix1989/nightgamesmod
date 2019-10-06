@@ -899,14 +899,14 @@ public class Player extends Character {
         }
         if (has(Trait.slime)) {
             if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(GooeyMod.TYPE)) {
-                body.temporaryAddOrReplacePartWithType(body.getRandomPussy().applyMod(
+                body.temporaryAddOrReplacePartWithType(body.getRandomPussy().withMod(
                     new GooeyMod()), 999);
                 c.write(this, 
                                 Global.format("{self:NAME-POSSESSIVE} %s turned back into a gooey pussy.",
                                                 this, opponent, body.getRandomPussy()));
             }
             if (hasDick() && !body.getRandomCock().moddedPartCountsAs(SlimyCockMod.TYPE)) {
-                body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(
+                body.temporaryAddOrReplacePartWithType(body.getRandomCock().withMod(
                     new SlimyCockMod()), 999);
                 c.write(this, 
                                 Global.format("{self:NAME-POSSESSIVE} %s turned back into a gooey pussy.",
@@ -1015,12 +1015,12 @@ public class Player extends Character {
             add(c, new PlayerSlimeDummy(this));
             if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(GooeyMod.TYPE)) {
                 body.temporaryAddOrReplacePartWithType(
-                    body.getRandomPussy().applyMod(new GooeyMod()), 999);
+                    body.getRandomPussy().withMod(new GooeyMod()), 999);
                 body.temporaryAddOrReplacePartWithType(
                     new TentaclePart("slime filaments", PussyPart.TYPE, "slime", 0.0, 1.0, 1.0), 999);
             }
             if (hasDick() && !body.getRandomCock().moddedPartCountsAs(SlimyCockMod.TYPE)) {
-                body.temporaryAddOrReplacePartWithType(body.getRandomCock().applyMod(
+                body.temporaryAddOrReplacePartWithType(body.getRandomCock().withMod(
                     new SlimyCockMod()),
                     999);
             }

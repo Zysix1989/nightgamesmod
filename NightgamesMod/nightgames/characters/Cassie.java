@@ -750,10 +750,10 @@ public class Cassie extends BasePersonality {
     public void advance() {
         character.getGrowth().addTrait(10, Trait.witch);
         if (character.hasPussy()) {
-            character.body.addReplace(character.body.getRandomPussy().applyMod(new ArcaneMod()), 1);
+            character.body.addReplace(character.body.getRandomPussy().withMod(new ArcaneMod()), 1);
         }
         if (character.hasDick()) {
-            character.body.addReplace(character.body.getRandomCock().applyMod(new RunicCockMod()), 1);
+            character.body.addReplace(character.body.getRandomCock().withMod(new RunicCockMod()), 1);
         }
         character.unequipAllClothing();
         character.outfitPlan.add(Clothing.getByID("bra"));

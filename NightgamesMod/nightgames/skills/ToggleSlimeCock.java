@@ -64,7 +64,7 @@ public class ToggleSlimeCock extends Skill {
             } else {
                 msg += "a sizable bulge forms in " + getSelf().outfit.getTopOfSlot(ClothingSlot.bottom).getName() + ".";
             }
-            getSelf().body.temporaryAddOrReplacePartWithType(new CockPart(Size.Big).applyMod(
+            getSelf().body.temporaryAddOrReplacePartWithType(new CockPart(Size.Big).withMod(
                 new SlimyCockMod()), 100);
         }
         if (!target.human() || !target.is(Stsflag.blinded))

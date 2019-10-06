@@ -6,8 +6,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
@@ -141,7 +139,7 @@ public class Growth implements Cloneable {
                     BodyPart existingPart = character.body.getRandom(mod.getBodyPartType());
                     if (existingPart instanceof GenericBodyPart) {
                         GenericBodyPart part = (GenericBodyPart) existingPart;
-                        GenericBodyPart newPart = part.applyMod(mod.getMod());
+                        GenericBodyPart newPart = part.withMod(mod.getMod());
                         if (newPart.canonicalDescription().equals(existingPart.canonicalDescription())) {
                             character.body.addReplace(newPart, 1);
                         }

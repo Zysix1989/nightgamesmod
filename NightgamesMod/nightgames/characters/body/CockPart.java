@@ -243,7 +243,7 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
         GenericBodyPart newPart = new PussyPart();
 
         for (PartMod mod : newMods) {
-            newPart = (GenericBodyPart)newPart.applyMod(mod);
+            newPart = (GenericBodyPart)newPart.withMod(mod);
         }
         return (PussyPart)newPart;
     }

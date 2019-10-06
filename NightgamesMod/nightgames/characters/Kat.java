@@ -69,7 +69,7 @@ public class Kat extends BasePersonality {
         self.getMojo().setMax(80);
 
         self.body.add(new BreastsPart(BreastsPart.Size.ACup));
-        self.body.add(new PussyPart().applyMod(new FeralMod()));
+        self.body.add(new PussyPart().withMod(new FeralMod()));
         self.body.add(new AssPart(Size.Normal));
         self.body.add(TailPart.cat);
         self.body.add(new CatEarsPart());

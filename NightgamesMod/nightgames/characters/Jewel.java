@@ -234,7 +234,7 @@ public class Jewel extends BasePersonality {
         }
         if (character.getLevel() >= 40 && Global.checkFlag(JEWEL_ANAL_FOCUS)) {
             if (!character.body.getRandomAss().getMods().stream().anyMatch(mod -> mod.countsAs(TrainedMod.TYPE))) {
-                character.body.addReplace(character.body.getRandomAss().applyMod(new TrainedMod()), 1);
+                character.body.addReplace(character.body.getRandomAss().withMod(new TrainedMod()), 1);
             }
         } else if (character.body.getRandomAss().getMods().stream().anyMatch(mod -> mod.countsAs(TrainedMod.TYPE))) {
             character.body.addReplace(new AssPart(Size.Small), 1);
@@ -779,11 +779,11 @@ public class Jewel extends BasePersonality {
         character.getGrowth()
                  .addTrait(10, Trait.fighter);
         if (character.hasPussy()) {
-            character.body.addReplace(character.body.getRandomPussy().applyMod(new FieryMod()), 1);
+            character.body.addReplace(character.body.getRandomPussy().withMod(new FieryMod()), 1);
         }
         if (character.hasDick()) {
             character.body.addReplace(character.body.getRandomCock()
-                                                    .applyMod(new EnlightenedCockMod()),
+                                                    .withMod(new EnlightenedCockMod()),
                             1);
         }
         character.unequipAllClothing();

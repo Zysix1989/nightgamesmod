@@ -152,7 +152,7 @@ public class Body implements Cloneable {
             if (modReplacements.containsKey(part.getType()) && part instanceof GenericBodyPart) {
                 GenericBodyPart genericPart = (GenericBodyPart) part;
                 for (PartModReplacement replacement : modReplacements.get(part.getType())) {
-                    genericPart = genericPart.applyMod(replacement.getMod());
+                    genericPart = genericPart.withMod(replacement.getMod());
                 }
                 currentParts.add(genericPart);
             } else {
@@ -1512,7 +1512,7 @@ public class Body implements Cloneable {
         BodyPart part = Global.pickRandom(getPure(partType)).orElse(null);
         if (part instanceof GenericBodyPart) {
             GenericBodyPart genericPart = (GenericBodyPart) part;
-            addReplace(genericPart.applyMod(mod), 1);
+            addReplace(genericPart.withMod(mod), 1);
         } else {
             System.err.println("Tried to apply mod " + mod + " but found non-generic part: " + part);
         }
@@ -1522,7 +1522,7 @@ public class Body implements Cloneable {
         Optional<BodyPart> part = getPure(partType).stream().filter(p -> p.moddedPartCountsAs(mod.getModType())).findAny();
         if (part.isPresent() && part.get() instanceof GenericBodyPart) {
             GenericBodyPart genericPart = (GenericBodyPart) part.get();
-            addReplace(genericPart.removeMod(mod), 1);
+            addReplace(genericPart.withoutMod(mod), 1);
         } else {
             System.err.println("Tried to remove mod " + mod + " but found non-generic part: " + part);
         }

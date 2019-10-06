@@ -85,7 +85,7 @@ public class KatTime extends BaseNPCTime {
                            + "Fortunately for you, the poor kitty seems exhausted by her new transformation and falls into a soft slumber after the exertion. "
                            + "You pick her up, depositing her onto her bed and covering her with a blanket before turning to leave. Hopefully the next time you meet in the games, she'll be a bit gentler than that.";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart(Size.Big).applyMod(new PrimalCockMod()));
+                other.body.add(new CockPart(Size.Big).withMod(new PrimalCockMod()));
                 return true;
             };
             transformationOptions.add(growCock);

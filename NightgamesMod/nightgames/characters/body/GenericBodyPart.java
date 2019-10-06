@@ -339,20 +339,20 @@ public class GenericBodyPart implements BodyPart {
         return this.fromJson(this.toJson());
     }
 
-    public GenericBodyPart applyMod(PartMod mod) {
+    public GenericBodyPart withMod(PartMod mod) {
         GenericBodyPart newPart = (GenericBodyPart) instance();
         newPart.mods.removeIf(otherMod -> otherMod.getVariant().equals(mod.getVariant()));
         newPart.mods.add(mod);
         return newPart;
     }
 
-    public GenericBodyPart removeMod(PartMod mod) {
+    public GenericBodyPart withoutMod(PartMod mod) {
         GenericBodyPart newPart = (GenericBodyPart) instance();
         newPart.mods.removeIf(otherMod -> otherMod.getVariant().equals(mod.getVariant()));
         return newPart;
     }
 
-    public BodyPart removeAllMods() {
+    public BodyPart withoutAllMods() {
         GenericBodyPart part = (GenericBodyPart) instance();
         part.mods.clear();
         return part;

@@ -29,7 +29,7 @@ public class ApplyPartModOption extends TransformationOption {
         effect = (c, self, other) -> {
             GenericBodyPart target = (GenericBodyPart) self.body.getRandom(type);
             self.body.remove(target);
-            self.body.add(target.applyMod(mod));
+            self.body.add(target.withMod(mod));
             return true;
         };
     }

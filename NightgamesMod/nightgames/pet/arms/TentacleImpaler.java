@@ -19,7 +19,7 @@ public class TentacleImpaler extends TentacleArm {
         super(manager, ArmType.TENTACLE_IMPALER);
         part = new TentaclePart("impaler tentacle", "back", "slime", 0.0, 1.0, 0.0);
         if (mod.isPresent()) {
-            part = (TentaclePart) part.applyMod(mod.get());
+            part = (TentaclePart) part.withMod(mod.get());
         }
     }
 
