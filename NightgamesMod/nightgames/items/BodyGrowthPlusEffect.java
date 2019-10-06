@@ -32,6 +32,7 @@ class BodyGrowthPlusEffect extends BodyModEffect {
                 case 0:
                     message = Global.format(String.format("{self:NAME-POSSESSIVE} %s was reinforced",
                         original.fullDescribe(user)), user, opponent);
+                    break;
                 case 1:
                     message = Global.format(
                         String.format("{self:NAME-POSSESSIVE} %s grew into %s%s",
@@ -40,6 +41,7 @@ class BodyGrowthPlusEffect extends BodyModEffect {
                             original.fullDescribe(user)),
                         user,
                         opponent);
+                    break;
                 default:
                     throw new RuntimeException("Upgrading did not result in an upgrade");
             }

@@ -27,6 +27,7 @@ public class BodyDowngradeEffect extends BodyModEffect {
                     message = Global
                         .format(String.format("{self:NAME-POSSESSIVE} %s was reinforced",
                             original.fullDescribe(user)), user, opponent);
+                    break;
                 case 1:
                     message = Global.format(
                         String.format("{self:NAME-POSSESSIVE} %s shrank into %s%s",
@@ -35,6 +36,7 @@ public class BodyDowngradeEffect extends BodyModEffect {
                             original.fullDescribe(user)),
                         user,
                         opponent);
+                    break;
                 default:
                     throw new RuntimeException("Downgrading did not result in an downgrade");
             }
