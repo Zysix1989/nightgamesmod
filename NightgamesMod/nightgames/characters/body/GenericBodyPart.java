@@ -22,15 +22,15 @@ public class GenericBodyPart implements BodyPart {
     /**
      *
      */
-    public final String type;
-    public final String desc;
-    public final String prefix;
+    private final String type;
+    final String desc;
+    private final String prefix;
     public final double hotness;
-    public final double sensitivity;
-    public final double pleasure;
-    public final String descLong;
+    private final double sensitivity;
+    private final double pleasure;
+    private final String descLong;
     private final boolean notable;
-    protected List<PartMod> mods;
+    private List<PartMod> mods;
 
     public GenericBodyPart(String desc, String descLong, double hotness, double pleasure, double sensitivity,
                     boolean notable, String type, String prefix) {
