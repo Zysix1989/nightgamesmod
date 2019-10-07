@@ -367,12 +367,6 @@ public class GenericBodyPart implements BodyPart {
         return newPart;
     }
 
-    public BodyPart withoutAllMods() {
-        GenericBodyPart part = copy();
-        part.mods.clear();
-        return part;
-    }
-
     @SuppressWarnings({"rawtypes", "unchecked"})
     public List<BodyPartMod> getMods() {
         return (List<BodyPartMod>) (List)getPartMods();
@@ -425,7 +419,7 @@ public class GenericBodyPart implements BodyPart {
         temporaryMods.removeIf(TemporaryModApplication::isExpired);
     }
 
-    void purge() {
+    public void purge() {
         temporaryMods.clear();
     }
 }
