@@ -142,12 +142,11 @@ public class GenericBodyPart implements BodyPart {
 
     @Override
     public double getHotness(Character self, Character opponent) {
-        double hotnessMod = hotness;
         double bonus = 1.0;
         for (PartMod mod : getPartMods()) {
             bonus += mod.getHotness();
         }
-        return hotnessMod * bonus;
+        return hotness * bonus;
     }
 
     @Override
@@ -172,12 +171,11 @@ public class GenericBodyPart implements BodyPart {
 
     @Override
     public double getSensitivity(Character self, BodyPart target) {
-        double sensitivityMod = sensitivity;
         double bonus = 1.0;
         for (PartMod mod : getPartMods()) {
             bonus += mod.getSensitivity();
         }
-        return sensitivityMod * bonus;
+        return sensitivity * bonus;
     }
 
     @Override
