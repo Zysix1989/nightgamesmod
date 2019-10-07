@@ -78,7 +78,7 @@ public class GenericBodyPart implements BodyPart {
 
     public GenericBodyPart(JsonObject js) {
         this();
-        fromJson(js);
+        JsonUtils.getGson().fromJson(js, this.getClass());
     }
 
     protected GenericBodyPart(GenericBodyPart original) {
@@ -215,16 +215,8 @@ public class GenericBodyPart implements BodyPart {
         return (type + ":" + canonicalDescription()).hashCode();
     }
 
-    public JsonObject toJson() {
-        return JsonUtils.getGson().toJsonTree(this, this.getClass()).getAsJsonObject();
-    }
-
-    public BodyPart fromJson(JsonObject object) {
-        return JsonUtils.getGson().fromJson(object, this.getClass());
-    }
-
     @Override public JsonObject save() {
-        return toJson();
+        return JsonUtils.getGson().toJsonTree(this, this.getClass()).getAsJsonObject();
     }
 
     @Override
