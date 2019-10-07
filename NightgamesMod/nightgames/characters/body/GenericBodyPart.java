@@ -390,6 +390,10 @@ public class GenericBodyPart implements BodyPart {
         return new GenericBodyPart(this);
     }
 
+    public void addMod(PartMod mod) {
+        mods.add(mod);
+    }
+
     public void addTemporaryMod(PartMod mod, int duration) {
         temporaryMods.add(new TemporaryModApplication(mod, duration));
     }

@@ -307,10 +307,10 @@ class BodyConfiguration {
 
         private void apply(Body body) {
             if (body.has(CockPart.TYPE) && this != REGULAR) {
-                body.addReplace(body.getRandomCock().withMod(cockMod), 1);
+                body.getRandomCock().addMod(cockMod);
             }
             if (body.has(PussyPart.TYPE) && this != REGULAR)
-                body.addReplace(body.getRandomPussy().withMod(pussyMod), 1);
+                body.getRandomPussy().addMod(pussyMod);
             switch (this) {
                 case ANGEL:
                     body.add(WingsPart.angelic);

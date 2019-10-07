@@ -90,8 +90,7 @@ public abstract class BasePersonality implements Personality {
                 .findAny();
             if (optDick.isPresent()) {
                 CockPart part = (CockPart) optDick.get();
-                character.body.remove(part);
-                character.body.add(part.withMod(preferredCockMod.get()));
+                part.addMod(preferredCockMod.get());
             }
         }
         for (Addiction addiction : character.getAddictions()) {

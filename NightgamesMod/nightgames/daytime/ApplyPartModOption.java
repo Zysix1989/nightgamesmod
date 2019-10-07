@@ -28,8 +28,7 @@ public class ApplyPartModOption extends TransformationOption {
         addRequirement(RequirementShortcuts.noPartmod(type, mod), "Mod not applied");
         effect = (c, self, other) -> {
             GenericBodyPart target = (GenericBodyPart) self.body.getRandom(type);
-            self.body.remove(target);
-            self.body.add(target.withMod(mod));
+            target.addMod(mod);
             return true;
         };
     }
