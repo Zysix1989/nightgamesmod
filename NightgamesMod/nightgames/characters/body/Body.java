@@ -1130,7 +1130,16 @@ public class Body implements Cloneable {
             newBody.modReplacements.put(type, new ArrayList<>());
             reps.forEach(rep -> newBody.modReplacements.get(type).add(new PartModReplacement(rep)));
         });
-        newBody.bodyParts = new LinkedHashSet<>(bodyParts);
+        newBody.bodyParts = bodyParts.stream()
+            .map(bp -> {
+                if (bp instanceof GenericBodyPart) {
+                    return ((GenericBodyPart) bp).copy();
+                } else {
+                    return bp;
+                }
+            })
+            .collect(Collectors.toCollection(LinkedHashSet::new));
+
         newBody.currentParts = new HashSet<>(getCurrentParts());
         return newBody;
     }

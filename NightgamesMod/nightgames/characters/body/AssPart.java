@@ -83,6 +83,11 @@ public class AssPart extends GenericBodyPart implements Sizable<AssPart.Size> {
         sizeTrait = new SizeTrait<>(size);
     }
 
+    protected AssPart(AssPart original) {
+        super(original);
+        sizeTrait = new SizeTrait<>(original.sizeTrait);
+    }
+
     @Override
     public double getFemininity(Character c) {
         return getSize().value - Size.Girlish.value;
@@ -255,5 +260,10 @@ public class AssPart extends GenericBodyPart implements Sizable<AssPart.Size> {
 
     public Size getSize() {
         return sizeTrait.getSize();
+    }
+
+    @Override
+    public AssPart copy() {
+        return new AssPart(this);
     }
 }

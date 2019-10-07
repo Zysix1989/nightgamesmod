@@ -20,6 +20,11 @@ public class FacePart extends GenericBodyPart {
         this.femininity = js.get("femininity").getAsDouble();
     }
 
+    protected FacePart(FacePart original) {
+        super(original);
+        femininity = original.femininity;
+    }
+
     @Override
     public void describeLong(StringBuilder b, Character c) {
         String desc;
@@ -76,5 +81,10 @@ public class FacePart extends GenericBodyPart {
     @Override
     public String adjective() {
         return "facial";
+    }
+
+    @Override
+    public FacePart copy() {
+        return new FacePart(this);
     }
 }

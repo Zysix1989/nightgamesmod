@@ -99,6 +99,11 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
         sizeTrait = new SizeTrait<>(size);
     }
 
+    protected CockPart(CockPart original) {
+        super(original);
+        sizeTrait = new SizeTrait<>(original.sizeTrait);
+    }
+
     @Override
     public double getFemininity(Character c) {
         return Size.Small.value - getSize().value;
@@ -262,5 +267,10 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
 
     public Size getSize() {
         return sizeTrait.getSize();
+    }
+
+    @Override
+    public CockPart copy() {
+        return new CockPart(this);
     }
 }

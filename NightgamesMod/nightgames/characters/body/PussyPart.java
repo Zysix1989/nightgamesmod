@@ -25,6 +25,8 @@ public class PussyPart extends GenericBodyPart {
         super(js);
     }
 
+    protected PussyPart(PussyPart original) { super(original); }
+
     @Override
     public void describeLong(StringBuilder b, Character c) {
         Optional<String> override = getPartMods().stream()
@@ -186,5 +188,10 @@ public class PussyPart extends GenericBodyPart {
             newPart = (GenericBodyPart)newPart.withMod(mod);
         }
         return (CockPart)newPart;
+    }
+
+    @Override
+    public PussyPart copy() {
+        return new PussyPart(this);
     }
 }

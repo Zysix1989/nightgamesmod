@@ -105,6 +105,11 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
         sizeTrait = new SizeTrait<>(size);
     }
 
+    protected BreastsPart(BreastsPart original) {
+        super(original);
+        sizeTrait = new SizeTrait<>(original.sizeTrait);
+    }
+
     @Override
     public boolean isVisible(Character c) {
         return c.breastsAvailable() || getSize().value > 0;
@@ -302,5 +307,10 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
 
     public Size getSize() {
         return sizeTrait.getSize();
+    }
+
+    @Override
+    public BreastsPart copy() {
+        return new BreastsPart(this);
     }
 }

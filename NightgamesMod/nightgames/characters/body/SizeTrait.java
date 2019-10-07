@@ -11,6 +11,11 @@ class SizeTrait<SizeType extends _Size<SizeType>> {
         sizeModifications = new ArrayList<>();
     }
 
+    SizeTrait( SizeTrait<SizeType> original) {
+        this.size = original.size;
+        this.sizeModifications = new ArrayList<>(original.sizeModifications);
+    }
+
     void changeSize(int modifier) {
         size = size.withModifier(modifier);
     }

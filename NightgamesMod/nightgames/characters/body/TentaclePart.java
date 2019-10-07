@@ -36,6 +36,12 @@ public class TentaclePart extends GenericBodyPart {
         super(js);
     }
 
+    protected TentaclePart(TentaclePart original) {
+        super(original);
+        attachpoint = original.attachpoint;
+        fluids = original.fluids;
+    }
+
     public static String synonyms[] = {"mass", "clump", "nest", "group",};
 
     @Override
@@ -79,5 +85,10 @@ public class TentaclePart extends GenericBodyPart {
     @Override
     public String getFluids(Character c) {
         return fluids;
+    }
+
+    @Override
+    public TentaclePart copy() {
+        return new TentaclePart(this);
     }
 }

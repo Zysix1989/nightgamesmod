@@ -64,6 +64,18 @@ public class GenericBodyPart implements BodyPart {
         fromJson(js);
     }
 
+    protected GenericBodyPart(GenericBodyPart original) {
+        this.desc = original.desc;
+        this.descLong = original.descLong;
+        this.hotness = original.hotness;
+        this.pleasure = original.pleasure;
+        this.sensitivity = original.sensitivity;
+        this.type = original.type;
+        this.notable = original.notable;
+        this.prefix = original.prefix;
+        this.mods = new ArrayList<>(original.mods);
+    }
+
     @Override
     public String canonicalDescription() {
         return getPartMods().stream().sorted().map(PartMod::getModType).collect(Collectors.joining(" ")) + " " + desc;
@@ -379,5 +391,9 @@ public class GenericBodyPart implements BodyPart {
     @Override
     public double getFetishChance() {
         return sensitivity==0?0.1:0.25;
+    }
+
+    public GenericBodyPart copy() {
+        return new GenericBodyPart(this);
     }
 }

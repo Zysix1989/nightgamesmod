@@ -12,4 +12,13 @@ public class StraponPart extends GenericBodyPart {
     public StraponPart(JsonObject js) {
         super(js);
     }
+
+    protected StraponPart(StraponPart original) {
+        super(original);
+    }
+
+    @Override
+    public StraponPart copy() {
+        return new StraponPart(this);
+    }
 }

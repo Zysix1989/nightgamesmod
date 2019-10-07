@@ -25,6 +25,8 @@ public class MouthPart extends GenericBodyPart {
         super(js);
     }
 
+    protected MouthPart(MouthPart original) { super(original); }
+
     @Override
     public double applyBonuses(Character self, Character opponent, BodyPart target, double damage, Combat c) {
         double bonus = super.applyBonuses(self, opponent, target, damage, c);
@@ -150,5 +152,10 @@ public class MouthPart extends GenericBodyPart {
     @Override
     public String adjective() {
         return "oral";
+    }
+
+    @Override
+    public MouthPart copy() {
+        return new MouthPart(this);
     }
 }
