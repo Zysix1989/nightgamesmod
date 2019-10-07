@@ -16,6 +16,7 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
+import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
@@ -82,9 +83,8 @@ public class Corruption extends Addiction {
                 } else {
                     Global.writeIfCombat(c, affected, Global.format(
                                     "<b>The dark taint changes {self:name-do} even further, and {self:possessive} pussy turns into that of a succubus!</b>", affected, cause));
-                }            
-                affected.body.temporaryAddPartMod(PussyPart.TYPE,
-                    new DemonicMod(), Global.random(15, 40));
+                }
+                affected.body.getRandomPussy().addTemporaryMod(new DemonicMod(), Global.random(15, 40));
             } else if (affected.hasDick() && !affected.body.getRandomCock().moddedPartCountsAs(
                 IncubusCockMod.TYPE)) {
                 if (affected.human()) {
@@ -92,8 +92,7 @@ public class Corruption extends Addiction {
                 } else {
                     Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes {self:name-do} even further, and {self:possessive} cock turns into that of an incubus!</b>", affected, cause));
                 }
-                affected.body.temporaryAddPartMod(CockPart.TYPE,
-                    new IncubusCockMod(), Global.random(15, 40));
+                affected.body.getRandomCock().addTemporaryMod(new IncubusCockMod(), Global.random(15, 40));
             } else if (!atLeast(Severity.HIGH)) {
                 if (affected.human()) {
                     Global.writeIfCombat(c, affected, Global.format("The corruption is churning within {self:name-do}, but it seems that it's done all it can for now.", affected, cause));
@@ -126,16 +125,14 @@ public class Corruption extends Addiction {
                     Global.writeIfCombat(c, affected, Global.format(
                                     "<b>The dark taint changes {self:name-do} even further, and {self:possessive} asshole darkens with corruption!</b>", affected, cause));
                 }
-                affected.body.temporaryAddPartMod(
-                    AssPart.TYPE, new DemonicMod(), Global.random(15, 40));
+                affected.body.getRandomAss().addTemporaryMod(new DemonicMod(), Global.random(15, 40));
             } else if (!affected.body.getRandom(MouthPart.TYPE).moddedPartCountsAs(DemonicMod.TYPE)) {
                 if (affected.human()) {
                     Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes {self:name-do} even further; this time into {self:possessive} mouth! You feel {self:possessive} lush lips darken with the corruption spreading into them; they've turned black!</b>", affected, cause));
                 } else {
                     Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes {self:name-do} even further, and {self:possessive} lush lips turns black!</b>", affected, cause));
-                }  
-                affected.body.temporaryAddPartMod(MouthPart.TYPE,
-                    new DemonicMod(), Global.random(15, 40));
+                }
+                ((GenericBodyPart) affected.body.getRandom(MouthPart.TYPE)).addTemporaryMod(new DemonicMod(), Global.random(15, 40));
             } else {
                 if (affected.human()) {
                     Global.writeIfCombat(c, affected, Global.format("The corruption is churning within {self:name-do}, but it seems that it's done all it can for now.", affected, cause));

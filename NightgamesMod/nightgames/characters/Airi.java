@@ -409,13 +409,13 @@ public class Airi extends BasePersonality {
     public void eot(Combat c, Character opponent) {
         if (character.has(Trait.slime)) {
             if (character.hasPussy() && !character.body.getRandomPussy().moddedPartCountsAs(GooeyMod.TYPE)) {
-                character.body.temporaryAddPartMod(PussyPart.TYPE, new GooeyMod(), 999);
+                character.body.getRandomPussy().addTemporaryMod(new GooeyMod(), 999);
                 c.write(character, 
                                 Global.format("{self:NAME-POSSESSIVE} %s re-slime-ified.",
                                                 character, opponent, character.body.getRandomPussy().describe(character)));
             }
             if (character.hasDick() && !character.body.getRandomCock().moddedPartCountsAs(SlimyCockMod.TYPE)) {
-                character.body.temporaryAddPartMod(CockPart.TYPE, new SlimyCockMod(), 999);
+                character.body.getRandomCock().addTemporaryMod(new SlimyCockMod(), 999);
                 c.write(character,
                                 Global.format("{self:NAME-POSSESSIVE} %s re-slime-ified.",
                                                 character, opponent, character.body.getRandomCock().describe(character)));

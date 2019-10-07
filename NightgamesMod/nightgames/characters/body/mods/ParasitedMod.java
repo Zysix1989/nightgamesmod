@@ -3,6 +3,7 @@ package nightgames.characters.body.mods;
 import java.util.Optional;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.GenericBodyPart;
 import nightgames.combat.Combat;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
@@ -30,7 +31,7 @@ public class ParasitedMod extends PartMod {
             .with("opponent", opponent)
             .with("part", part);
         c.write(self, ON_ORGASM_TEMPLATE.render(model));
-        self.body.removeTemporaryPartMod(part.getType(), this);
+        ((GenericBodyPart) part).removeTemporaryMod(this);
     }
 
     public Optional<String> getFluids() {

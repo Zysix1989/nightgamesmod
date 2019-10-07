@@ -6,6 +6,7 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.ArcaneMod;
@@ -66,7 +67,7 @@ public class MimicWitch extends Skill {
                 getSelf().addTemporaryTrait(Trait.enchantingVoice, 10);
             }
             if (getSelf().getLevel() >= 60) {
-                getSelf().body.temporaryAddPartMod(MouthPart.TYPE, new ArcaneMod(), 10);
+                ((GenericBodyPart) getSelf().body.getRandom(MouthPart.TYPE)).addTemporaryMod(new ArcaneMod(), 10);
             }
         }
         getSelf().addTemporaryTrait(Trait.witch, 10);
@@ -87,8 +88,8 @@ public class MimicWitch extends Skill {
         getSelf().add(c, new Abuff(getSelf(), Attribute.Arcane, strength, 10));
         getSelf().add(c, new SlimeMimicry("witch", getSelf(), 10));
 
-        getSelf().body.temporaryAddPartMod(PussyPart.TYPE, new ArcaneMod(), 10);
-        getSelf().body.temporaryAddPartMod(CockPart.TYPE, new RunicCockMod(), 10);
+        getSelf().body.getRandomPussy().addTemporaryMod(new ArcaneMod(), 10);
+        getSelf().body.getRandomCock().addTemporaryMod(new RunicCockMod(), 10);
         return true;
     }
 

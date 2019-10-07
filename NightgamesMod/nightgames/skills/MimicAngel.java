@@ -81,8 +81,8 @@ public class MimicAngel extends Skill {
         }
         getSelf().add(c, new Abuff(getSelf(), Attribute.Divinity, strength, 10));
         getSelf().add(c, new SlimeMimicry("angel", getSelf(), 10));
-        getSelf().body.temporaryAddPartMod(PussyPart.TYPE, new DivineMod(), 10);
-        getSelf().body.temporaryAddPartMod(CockPart.TYPE, new BlessedCockMod(), 10);
+        getSelf().body.getRandomPussy().addTemporaryMod(new DivineMod(), 10);
+        getSelf().body.getRandomCock().addTemporaryMod(new BlessedCockMod(), 10);
         return true;
     }
 

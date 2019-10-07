@@ -19,9 +19,25 @@ import nightgames.items.clothing.ClothingTrait;
 import nightgames.json.JsonUtils;
 
 public class GenericBodyPart implements BodyPart {
-    /**
-     *
-     */
+
+    private static class TemporaryModApplication {
+        private PartMod mod;
+        private int duration;
+
+        private TemporaryModApplication(PartMod mod, int duration) {
+            this.mod = mod;
+            this.duration = duration;
+        }
+
+        private void timePasses() {
+            duration--;
+        }
+
+        private boolean isExpired() {
+            return duration < 0;
+        }
+    }
+
     private final String type;
     final String desc;
     private final String prefix;
@@ -31,6 +47,7 @@ public class GenericBodyPart implements BodyPart {
     private final String descLong;
     private final boolean notable;
     private List<PartMod> mods;
+    private ArrayList<TemporaryModApplication> temporaryMods = new ArrayList<>();
 
     public GenericBodyPart(String desc, String descLong, double hotness, double pleasure, double sensitivity,
                     boolean notable, String type, String prefix) {
@@ -374,7 +391,9 @@ public class GenericBodyPart implements BodyPart {
     }
 
     protected List<PartMod> getPartMods() {
-        return mods;
+        var result = new ArrayList<>(mods);
+        result.addAll(temporaryMods.stream().map(app -> app.mod).collect(Collectors.toList()));
+        return result;
     }
 
     public void receiveCum(Combat c, Character self, Character donor, BodyPart sourcePart) {
@@ -393,5 +412,32 @@ public class GenericBodyPart implements BodyPart {
 
     public GenericBodyPart copy() {
         return new GenericBodyPart(this);
+    }
+
+    public void addTemporaryMod(PartMod mod, int duration) {
+        temporaryMods.add(new TemporaryModApplication(mod, duration));
+    }
+
+    public void removeTemporaryMod(PartMod target) {
+        final var startingSize = temporaryMods.size();
+        temporaryMods.removeIf(app -> app.mod == target);
+        if (startingSize >= temporaryMods.size()) {
+            throw new UnsupportedOperationException("couldn't find mod to remove");
+        }
+    }
+
+    public void timePasses(Combat c, Character self) {
+        temporaryMods.forEach(TemporaryModApplication::timePasses);
+        temporaryMods.stream()
+            .filter(app -> !app.isExpired())
+            .forEachOrdered(app ->
+                Global.writeIfCombat(c, self,
+                    Global.format("{self:NAME-POSSESSIVE} %s lost its %s.",
+                        self, self, getType(), app.mod.describeAdjective(getType()))));
+        temporaryMods.removeIf(TemporaryModApplication::isExpired);
+    }
+
+    public void purge() {
+        temporaryMods.clear();
     }
 }

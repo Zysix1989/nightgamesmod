@@ -10,6 +10,7 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.ParasitedMod;
@@ -58,7 +59,7 @@ public class SlimeCloneParasite extends SimpleEnemySkill {
                                 + "{self:NAME-POSSESSIVE} gelatinous body has deformed around {other:possessive} %s and manages "
                                 + "to crawl inside {other:possessive} body somehow!",
                                 getSelf(), target, targetPart.describe(target), targetPart.getType()));
-                target.body.temporaryAddPartMod(targetPart.getType(), new ParasitedMod(), 10);
+                ((GenericBodyPart) targetPart).addTemporaryMod(new ParasitedMod(), 10);
             }
             return true;
         }

@@ -60,33 +60,6 @@ public class Body implements Cloneable {
             duration = original.duration;
         }
     }
-    static class PartModReplacement {
-        private String type;
-        private PartMod mod;
-        private int duration;
-
-        PartModReplacement(String type, PartMod mod, int duration) {
-            this.mod = mod;
-            this.type = type;
-            this.duration = duration;
-        }
-
-        PartModReplacement(PartModReplacement rep) {
-            this.mod = rep.mod;
-            this.type = rep.type;
-            this.duration = rep.duration;
-        }
-
-        public PartMod getMod() {
-            return mod;
-        }
-        public String getType() {
-            return type;
-        }
-        public int getDuration() {
-            return duration;
-        }
-    }
 
     public static final String HANDS = "hands";
     public static final String FEET = "feet";
@@ -108,7 +81,6 @@ public class Body implements Cloneable {
     private LinkedHashSet<BodyPart> bodyParts;
     public double hotness;
     private transient Collection<PartReplacement> replacements;
-    private transient Map<String, List<PartModReplacement>> modReplacements;
     private transient Collection<BodyPart> currentParts;
     transient public Character character;
     public double baseFemininity;
@@ -118,7 +90,6 @@ public class Body implements Cloneable {
         bodyParts = new LinkedHashSet<>();
         currentParts = new HashSet<>();
         replacements = new ArrayList<>();
-        modReplacements = new HashMap<>();
         hotness = 1.0;
         height = 170;
     }
@@ -142,22 +113,11 @@ public class Body implements Cloneable {
     }
 
     private void updateCurrentParts() {
-        LinkedHashSet<BodyPart> parts = new LinkedHashSet<>(bodyParts);
-        for (PartReplacement r : replacements) {
-            parts.removeAll(r.removed);
-            parts.addAll(r.added);
-        }
         currentParts.clear();
-        for (BodyPart part : parts) {
-            if (modReplacements.containsKey(part.getType()) && part instanceof GenericBodyPart) {
-                GenericBodyPart genericPart = (GenericBodyPart) part;
-                for (PartModReplacement replacement : modReplacements.get(part.getType())) {
-                    genericPart = genericPart.withMod(replacement.getMod());
-                }
-                currentParts.add(genericPart);
-            } else {
-                currentParts.add(part);
-            }
+        currentParts.addAll(bodyParts);
+        for (PartReplacement r : replacements) {
+            currentParts.removeAll(r.removed);
+            currentParts.addAll(r.added);
         }
     }
 
@@ -1026,15 +986,6 @@ public class Body implements Cloneable {
             return CharacterSex.male;
         }
     }
-    
-    public void temporaryAddPartMod(String partType, PartMod mod, int duration) {
-        modReplacements.computeIfAbsent(partType, type -> new ArrayList<>());
-        modReplacements.get(partType).add(new PartModReplacement(partType, mod, duration));
-        updateCurrentParts();
-        if (character != null) {
-            updateCharacter();
-        }
-    }
 
     public void autoTG() {
         CharacterSex currentSex = guessCharacterSex();
@@ -1125,11 +1076,6 @@ public class Body implements Cloneable {
         Body newBody = (Body) super.clone();
         newBody.replacements = new ArrayList<>();
         replacements.forEach(rep -> newBody.replacements.add(new PartReplacement(rep)));
-        newBody.modReplacements = new HashMap<>();
-        modReplacements.forEach((type, reps) -> {
-            newBody.modReplacements.put(type, new ArrayList<>());
-            reps.forEach(rep -> newBody.modReplacements.get(type).add(new PartModReplacement(rep)));
-        });
         newBody.bodyParts = bodyParts.stream()
             .map(bp -> {
                 if (bp instanceof GenericBodyPart) {
@@ -1189,17 +1135,10 @@ public class Body implements Cloneable {
             .forEach(p -> ((Sizable) p).timePasses());
 
         ArrayList<PartReplacement> expired = new ArrayList<>();
-        ArrayList<PartModReplacement> expiredMods = new ArrayList<>();
         for (PartReplacement r : replacements) {
             r.duration -= 1;
             if (r.duration <= 0) {
                 expired.add(r);
-            }
-        }
-        for (PartModReplacement r : modReplacements.values().stream().flatMap(List::stream).collect(Collectors.toList())) {
-            r.duration -= 1;
-            if (r.duration <= 0) {
-                expiredMods.add(r);
             }
         }
         Collections.reverse(expired);
@@ -1263,9 +1202,11 @@ public class Body implements Cloneable {
             }
             Global.writeIfCombat(c, character, sb.toString());
         }
-        for (PartModReplacement r : expiredMods) {
-            Global.writeIfCombat(c, character, Global.format("{self:NAME-POSSESSIVE} %s lost its %s.", character, character, r.getType(), r.getMod().describeAdjective(r.getType())));
-            modReplacements.get(r.getType()).remove(r);
+
+        for (var bp : currentParts) {
+            if (bp instanceof GenericBodyPart) {
+                ((GenericBodyPart) bp).timePasses(c, character);
+            }
         }
     }
 
@@ -1286,11 +1227,13 @@ public class Body implements Cloneable {
 
     public void clearReplacements() {
         replacements.clear();
-        modReplacements.clear();
         updateCurrentParts();
         if (character != null) {
             updateCharacter();
         }
+        bodyParts.stream()
+            .filter(bp -> bp instanceof GenericBodyPart)
+            .forEach(bp -> ((GenericBodyPart) bp).purge());
     }
 
     public int mod(Attribute a, int total) {
@@ -1394,15 +1337,13 @@ public class Body implements Cloneable {
     }
 
     public void purge(Combat c) {
-        for (List<PartModReplacement> replacements : modReplacements.values()) {
-            for (PartModReplacement r : replacements) {
-                r.duration = 0;
-            }
-        }
         for (PartReplacement r : replacements) {
             r.duration = 0;
         }
         advancedTemporaryParts(c);
+        bodyParts.stream()
+            .filter(bp -> bp instanceof GenericBodyPart)
+            .forEach(bp -> ((GenericBodyPart) bp).purge());
     }
 
     public BodyPart getRandomGenital() {
@@ -1459,13 +1400,6 @@ public class Body implements Cloneable {
 
     public FacePart getFace() {
         return (FacePart)getRandom(FacePart.TYPE);
-    }
-
-    public void removeTemporaryPartMod(String type, PartMod mod) {
-        List<PartModReplacement> replacements = modReplacements.get(type);
-        if (replacements != null) {
-            replacements.removeIf(r -> r.mod.equals(mod));
-        }
     }
 
     public AssPart getAssBelow(Size size) {

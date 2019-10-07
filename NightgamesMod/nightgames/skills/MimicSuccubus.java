@@ -9,6 +9,7 @@ import nightgames.characters.body.Body;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PointedEarsPart;
 import nightgames.characters.body.PussyPart;
@@ -63,10 +64,10 @@ public class MimicSuccubus extends Skill {
                 getSelf().addTemporaryTrait(Trait.RawSexuality, 999);
                 getSelf().addTemporaryTrait(Trait.soulsucker, 999);
                 getSelf().addTemporaryTrait(Trait.gluttony, 999);
-                getSelf().body.temporaryAddPartMod(AssPart.TYPE, new DemonicMod(), 999);
-                getSelf().body.temporaryAddPartMod(Body.HANDS, new DemonicMod(), 999);
-                getSelf().body.temporaryAddPartMod(Body.FEET, new DemonicMod(), 999);
-                getSelf().body.temporaryAddPartMod(MouthPart.TYPE, new DemonicMod(), 999);
+                getSelf().body.getRandomAss().addTemporaryMod(new DemonicMod(), 999);
+                ((GenericBodyPart) getSelf().body.getRandom(Body.HANDS)).addTemporaryMod(new DemonicMod(), 999);
+                ((GenericBodyPart) getSelf().body.getRandom(Body.FEET)).addTemporaryMod(new DemonicMod(), 999);
+                ((GenericBodyPart) getSelf().body.getRandom(MouthPart.TYPE)).addTemporaryMod(new DemonicMod(), 999);
         getSelf().addTemporaryTrait(Trait.succubus, 999);
         getSelf().addTemporaryTrait(Trait.soulsucker, 999);
         getSelf().addTemporaryTrait(Trait.energydrain, 999);
@@ -85,8 +86,8 @@ public class MimicSuccubus extends Skill {
         }
         getSelf().add(c, new Abuff(getSelf(), Attribute.Dark, strength, 999));
         getSelf().add(c, new SlimeMimicry("succubus", getSelf(), 999));
-        getSelf().body.temporaryAddPartMod(PussyPart.TYPE, new DemonicMod(), 999);
-        getSelf().body.temporaryAddPartMod(CockPart.TYPE, new IncubusCockMod(), 999);
+        getSelf().body.getRandomPussy().addTemporaryMod(new DemonicMod(), 999);
+        getSelf().body.getRandomCock().addTemporaryMod(new IncubusCockMod(), 999);
 
         return true;
     }
