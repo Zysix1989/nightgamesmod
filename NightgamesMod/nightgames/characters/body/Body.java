@@ -1461,16 +1461,6 @@ public class Body implements Cloneable {
         }
     }
 
-    public void removeMod(String partType, PartMod mod) {
-        Optional<BodyPart> part = getPure(partType).stream().filter(p -> p.moddedPartCountsAs(mod.getModType())).findAny();
-        if (part.isPresent() && part.get() instanceof GenericBodyPart) {
-            GenericBodyPart genericPart = (GenericBodyPart) part.get();
-            addReplace(genericPart.withoutMod(mod), 1);
-        } else {
-            System.err.println("Tried to remove mod " + mod + " but found non-generic part: " + part);
-        }
-    }
-
     public void onOrgasm(Combat c, Character self, Character opponent) {
         getCurrentParts().forEach(part -> part.onOrgasm(c, self, opponent));
     }

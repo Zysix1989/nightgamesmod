@@ -361,12 +361,6 @@ public class GenericBodyPart implements BodyPart {
         return newPart;
     }
 
-    public GenericBodyPart withoutMod(PartMod mod) {
-        GenericBodyPart newPart = copy();
-        newPart.mods.removeIf(otherMod -> otherMod.getVariant().equals(mod.getVariant()));
-        return newPart;
-    }
-
     @SuppressWarnings({"rawtypes", "unchecked"})
     public List<BodyPartMod> getMods() {
         return (List<BodyPartMod>) (List)getPartMods();
@@ -421,5 +415,13 @@ public class GenericBodyPart implements BodyPart {
 
     public void purge() {
         temporaryMods.clear();
+    }
+
+    public void purge(String modType) {
+        final var startingSize = mods.size();
+        mods.removeIf(mod -> mod.getModType().equals(modType));
+        if (startingSize <= mods.size()) {
+            throw new UnsupportedOperationException(String.format("no mod with type %s", modType));
+        }
     }
 }

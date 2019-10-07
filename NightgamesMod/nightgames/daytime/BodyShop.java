@@ -142,7 +142,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Remove " + name, removePrice) {
             @Override
             void buy(Character buyer) {
-                buyer.body.removeMod(partType, mod);
+                ((GenericBodyPart) buyer.body.get(partType)).purge(mod.getModType());
             }
 
             @Override
