@@ -426,7 +426,7 @@ public class GenericBodyPart implements BodyPart {
         }
     }
 
-    public void timePasses(Combat c, Character self) {
+    void timePasses(Combat c, Character self) {
         temporaryMods.forEach(TemporaryModApplication::timePasses);
         temporaryMods.stream()
             .filter(app -> !app.isExpired())
@@ -437,7 +437,7 @@ public class GenericBodyPart implements BodyPart {
         temporaryMods.removeIf(TemporaryModApplication::isExpired);
     }
 
-    public void purge() {
+    void purge() {
         temporaryMods.clear();
     }
 }
