@@ -3,6 +3,7 @@ package nightgames.characters.body.mods.pitcher;
 import java.util.Optional;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.CatcherMod;
 import nightgames.characters.body.mods.catcher.CyberneticMod;
 import nightgames.characters.body.mods.catcher.FieryMod;
@@ -31,7 +32,7 @@ public class BionicCockMod extends CockMod {
             .with("opponent", opponent)
             .with("part", part)
             .with("target", target);
-        if (Global.random(5) == 0 && target.getType().equals("pussy")) {
+        if (Global.random(5) == 0 && target.getType().equals(PussyPart.TYPE)) {
             message += APPLY_BONUS_APHRODISIAC_TEMPLATE.render(model);
             opponent.add(c, new Hypersensitive(opponent));
             // Instantly addict

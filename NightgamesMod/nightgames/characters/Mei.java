@@ -7,6 +7,7 @@ import nightgames.actions.IMovement;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.FacePart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.catcher.DemonicMod;
@@ -72,14 +73,14 @@ public class Mei extends BasePersonality {
         character.getGrowth().addTrait(15, Trait.lacedjuices);
         character.getGrowth().addTrait(20, Trait.tight);
         character.getGrowth().addTrait(25, Trait.sexTraining1);
-        character.getGrowth().addBodyPartMod(30, "pussy", new DemonicMod());
+        character.getGrowth().addBodyPartMod(30, PussyPart.TYPE, new DemonicMod());
         character.getGrowth().addBodyPart(30, TailPart.demonic);
         character.getGrowth().addBodyPart(30, WingsPart.fallenangel);
         character.getGrowth().addTrait(30, Trait.fallenAngel);
         character.getGrowth().addTrait(35, Trait.energydrain);
         character.getGrowth().addTrait(40, Trait.soulsucker);
         character.getGrowth().addTrait(45, Trait.gluttony);
-        character.getGrowth().addBodyPartMod(50, "pussy", ExtendedTonguedMod.INSTANCE);
+        character.getGrowth().addBodyPartMod(50, PussyPart.TYPE, ExtendedTonguedMod.INSTANCE);
         character.getGrowth().addTrait(55, Trait.carnalvirtuoso);
         preferredAttributes.add(c -> Optional.of(Attribute.Seduction));
 

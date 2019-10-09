@@ -26,6 +26,7 @@ import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.characters.body.mods.catcher.CyberneticMod;
 import nightgames.characters.body.mods.catcher.DemonicMod;
@@ -244,7 +245,7 @@ public class Combat {
             applyFetish(self, other, AssPart.TYPE);
         }
         if(self.has(Trait.pussywhipped ) && other.hasPussy()) {
-            applyFetish(self, other, "pussy");
+            applyFetish(self, other, PussyPart.TYPE);
         }
         if (self.has(Trait.cockcraver)&& other.hasDick()) {
             applyFetish(self, other, CockPart.TYPE);
@@ -307,7 +308,7 @@ public class Combat {
     }
 
     private boolean checkBottleCollection(Character victor, Character loser, String modType) {
-        return victor.has(Item.EmptyBottle, 1) && loser.body.get("pussy")
+        return victor.has(Item.EmptyBottle, 1) && loser.body.get(PussyPart.TYPE)
                                                             .stream()
                                                             .anyMatch(part -> part.moddedPartCountsAs(
                                                                 modType));
@@ -500,7 +501,7 @@ public class Combat {
             fetishDisadvantageAura(character, allies, opponents, AssPart.TYPE, ClothingSlot.bottom);
         }
         if(character.has(Trait.pussywhipped ) )  {
-            fetishDisadvantageAura(character, allies, opponents, "pussy", ClothingSlot.bottom);
+            fetishDisadvantageAura(character, allies, opponents, PussyPart.TYPE, ClothingSlot.bottom);
         }
         if(character.has(Trait.cockcraver)) {
             fetishDisadvantageAura(character, allies, opponents, CockPart.TYPE, ClothingSlot.bottom);
@@ -517,7 +518,7 @@ public class Combat {
         
         if(fetishType == BreastsPart.TYPE && opponents.get(0).hasBreasts()){
             ifPartNotNull = 1;
-        } else if(fetishType == "pussy" && opponents.get(0).hasPussy()){
+        } else if(fetishType == PussyPart.TYPE && opponents.get(0).hasPussy()){
             ifPartNotNull = 1;
         } else if(fetishType == CockPart.TYPE && opponents.get(0).hasDick()){
             ifPartNotNull = 1;
@@ -540,7 +541,7 @@ public class Combat {
              partDescrip = otherWithAura.get().body.getRandomBreasts().describe(otherWithAura.get()) ;
          } else if(fetishType == AssPart.TYPE){
              partDescrip = otherWithAura.get().body.getRandomAss().describe(otherWithAura.get()) ;
-         } else if(fetishType == "pussy"){
+         } else if(fetishType == PussyPart.TYPE){
              partDescrip = otherWithAura.get().body.getRandomPussy().describe(otherWithAura.get()) ;
          } else if(fetishType == CockPart.TYPE){
              partDescrip = otherWithAura.get().body.getRandomCock().describe(otherWithAura.get()) ;

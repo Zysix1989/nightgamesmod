@@ -94,7 +94,7 @@ public class NpcConfigurationTest {
         angelConfig.gender = Optional.of(CharacterSex.male);
         TestAngel angel = new TestAngel(Optional.of(angelConfig), Optional.of(startConfig.npcCommon));
 
-        assertFalse(angel.character.body.has("pussy"));
+        assertFalse(angel.character.body.has(PussyPart.TYPE));
         assertTrue(angel.character.body.has(CockPart.TYPE));
         // Changing gender should not change (e.g.) breast size.
         assertThat(angel.character.body.getLargestBreasts(),

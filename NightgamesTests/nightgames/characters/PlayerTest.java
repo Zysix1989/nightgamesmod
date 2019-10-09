@@ -49,10 +49,10 @@ public class PlayerTest {
 
         assertTrue("Herm player has no cock!", playerHerm.body.has(CockPart.TYPE));
         assertFalse("Herm player has balls!", playerHerm.body.has("balls"));
-        assertTrue("Herm player has no pussy!", playerHerm.body.has("pussy"));
+        assertTrue("Herm player has no pussy!", playerHerm.body.has(PussyPart.TYPE));
 
         assertFalse("Asexual player has a cock!", playerAsexual.body.has(CockPart.TYPE));
         assertFalse("Asexual player has balls!", playerAsexual.body.has("balls"));
-        assertFalse("Asexual player has a pussy!", playerAsexual.body.has("pussy"));
+        assertFalse("Asexual player has a pussy!", playerAsexual.body.has(PussyPart.TYPE));
     }
 }

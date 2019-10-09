@@ -98,10 +98,10 @@ public class RequirementTest {
     @Test public void bodypartTest() throws Exception {
         self.body.addReplace(new PussyPart(), 1);
         other.body.addReplace(new PussyPart().withMod(new FieryMod()), 1);
-        assertThat(bodypart("pussy").meets(combat, self, other), is(true));
-        assertThat(bodypart("pussy").meets(combat, other, self), is(true));
-        other.body.removeAll("pussy");
-        assertThat(bodypart("pussy").meets(combat, other, self), is(false));
+        assertThat(bodypart(PussyPart.TYPE).meets(combat, self, other), is(true));
+        assertThat(bodypart(PussyPart.TYPE).meets(combat, other, self), is(true));
+        other.body.removeAll(PussyPart.TYPE);
+        assertThat(bodypart(PussyPart.TYPE).meets(combat, other, self), is(false));
     }
 
     @Test public void domTest() throws Exception {
@@ -258,7 +258,7 @@ public class RequirementTest {
             new FieryMod()));
         assertThat(fierypussy.meets(combat, self, other), is(false));
         assertThat(fierypussy.meets(combat, other, self), is(true));
-        other.body.removeAll("pussy");
+        other.body.removeAll(PussyPart.TYPE);
         assertThat(fierypussy.meets(combat, other, self), is(false));
     }
 

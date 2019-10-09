@@ -112,7 +112,7 @@ public class Reyka extends BasePersonality {
         character.getGrowth().addTrait(36, Trait.addictivefluids);
         character.getGrowth().addTrait(43, Trait.energydrain);
         character.getGrowth().addTrait(46, Trait.sexTraining2);
-        character.getGrowth().addBodyPartMod(46, "pussy", ExtendedTonguedMod.INSTANCE);
+        character.getGrowth().addBodyPartMod(46, PussyPart.TYPE, ExtendedTonguedMod.INSTANCE);
         character.getGrowth().addTrait(49, Trait.soulsucker);
         character.getGrowth().addTrait(55, Trait.desensitized2);
         character.getGrowth().addTrait(58, Trait.carnalvirtuoso);

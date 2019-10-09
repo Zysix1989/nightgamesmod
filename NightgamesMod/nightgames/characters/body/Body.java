@@ -931,7 +931,7 @@ public class Body implements Cloneable {
 
     private void replacePussyWithCock(BodyPart basicCock) {
         PussyPart pussy = getRandomPussy();
-        removeAll("pussy");
+        removeAll(PussyPart.TYPE);
         add(pussy == null ? basicCock : pussy.getEquivalentCock());
     }
 
@@ -1055,7 +1055,7 @@ public class Body implements Cloneable {
 
     public void makeGenitalOrgans(CharacterSex sex) {
         if (sex.hasPussy()) {
-            if (!has("pussy")) {
+            if (!has(PussyPart.TYPE)) {
                 add(new PussyPart());
             }
         }
@@ -1117,7 +1117,7 @@ public class Body implements Cloneable {
         Body body = new Body(character, hotness);
         body.loadParts(bodyObj.getAsJsonArray("parts"));
         double defaultFemininity = 0;
-        if (body.has("pussy")) {
+        if (body.has(PussyPart.TYPE)) {
             defaultFemininity += 2;
         }
         if (body.has(CockPart.TYPE)) {
@@ -1314,14 +1314,14 @@ public class Body implements Cloneable {
             }
         } else {
             if (!pitcher) {
-                totalCounterValue += get("pussy").stream()
+                totalCounterValue += get(PussyPart.TYPE).stream()
                     .flatMapToInt(pussy -> other.body.get(CockPart.TYPE)
                         .stream()
                         .mapToInt(cock -> pussy.counterValue(cock, self, other)))
                     .sum();
             } else {
                 totalCounterValue += get(CockPart.TYPE).stream()
-                    .flatMapToInt(cock -> other.body.get("pussy")
+                    .flatMapToInt(cock -> other.body.get(PussyPart.TYPE)
                         .stream()
                         .mapToInt(pussy -> cock.counterValue(pussy, self, other)))
                     .sum();

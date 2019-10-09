@@ -5,6 +5,7 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.status.CockBound;
 import nightgames.status.Stsflag;
@@ -41,7 +42,8 @@ public class ExtendedTonguedMod extends PartMod {
     }
 
     public double applyBonuses(Combat c, Character self, Character opponent, BodyPart part, BodyPart target, double damage) { 
-        if (c.getStance().isPartFuckingPartInserted(c, opponent, target, self, part) && part.isType("pussy")) {
+        if (c.getStance().isPartFuckingPartInserted(c, opponent, target, self, part) && part.isType(
+            PussyPart.TYPE)) {
             if (target.isType(CockPart.TYPE) && !opponent.hasStatus(Stsflag.cockbound)) {
                 JtwigModel model = JtwigModel.newModel()
                     .with("self", self)

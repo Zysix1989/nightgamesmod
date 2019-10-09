@@ -87,7 +87,7 @@ public class JsonSourceNPCDataLoaderTest {
         List<Requirement> orList = new ArrayList<>();
         orList.add(new BodyPartRequirement(CockPart.TYPE));
         List<Requirement> andList = new ArrayList<>();
-        andList.add(new BodyPartRequirement("pussy"));
+        andList.add(new BodyPartRequirement(PussyPart.TYPE));
         andList.add(new NotRequirement(new BodyPartRequirement("balls")));
         orList.add(new AndRequirement(andList));
         expectedReqs.add(new OrRequirement(orList));
