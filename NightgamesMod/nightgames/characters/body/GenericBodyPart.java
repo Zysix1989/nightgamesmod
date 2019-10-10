@@ -87,8 +87,10 @@ public class GenericBodyPart implements BodyPart {
         descLong = js.get("descLong").getAsString();
         notable = js.get("notable").getAsBoolean();
         mods = new ArrayList<>();
-        for (var e : js.get("mods").getAsJsonArray()) {
-            mods.add(JsonUtils.getGson().fromJson(e, PartMod.class));
+        if (js.has("mods")) {
+            for (var e : js.get("mods").getAsJsonArray()) {
+                mods.add(JsonUtils.getGson().fromJson(e, PartMod.class));
+            }
         }
     }
 

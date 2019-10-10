@@ -139,11 +139,15 @@
             "class": "nightgames.characters.body.AssPart"
           },
           {
-          	"class":"nightgames.characters.body.MouthPart",
-          	"desc":"mouth",
-          	"hotness":0.0,
-          	"pleasure":1.0,
-          	"sensitivity":1.0
+						"type": "mouth",
+						"class":"nightgames.characters.body.MouthPart",
+						"descLong": "",
+						"notable": false,
+						"prefix": "a ",
+						"desc":"mouth",
+						"hotness":0.0,
+						"pleasure":1.0,
+						"sensitivity":1.0
           },
           {
             "descLong":"",
