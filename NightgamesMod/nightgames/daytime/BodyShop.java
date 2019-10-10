@@ -123,8 +123,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection(name, growPrice) {
             @Override
             void buy(Character buyer) {
-                Body body = buyer.body;
-                body.applyMod(partType, mod);
+                ((GenericBodyPart) buyer.body.get(partType)).addMod(mod);
             }
 
             @Override
