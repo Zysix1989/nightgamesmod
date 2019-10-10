@@ -29,6 +29,11 @@ public class GenericBodyPart implements BodyPart {
             this.duration = duration;
         }
 
+        private TemporaryModApplication(TemporaryModApplication original) {
+            mod = original.mod;
+            duration = original.duration;
+        }
+
         private void timePasses() {
             duration--;
         }
@@ -97,6 +102,9 @@ public class GenericBodyPart implements BodyPart {
         this.notable = original.notable;
         this.prefix = original.prefix;
         this.mods = new ArrayList<>(original.mods);
+        this.temporaryMods = original.temporaryMods.stream()
+            .map(TemporaryModApplication::new)
+            .collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Override
