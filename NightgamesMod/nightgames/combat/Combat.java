@@ -260,7 +260,11 @@ public class Combat {
     public void applyFetish(Character self, Character other, String FetishType) {
         if ( !other.body.get(FetishType).isEmpty() && !self.body.getFetish(FetishType).isPresent()) {
             if (self.human()) {
-                write(self, "As your first battle of the night begins, you can't help but think about " + other.nameOrPossessivePronoun() + " " + FetishType + " and how " + Body.partPronoun(FetishType) + " would feel on your skin.");
+                write(self,
+                    "As your first battle of the night begins, you can't help but think about "
+                    + other.nameOrPossessivePronoun() + " " + FetishType
+                    + " and how " + Body.partPronoun(FetishType)
+                    + " would feel on your skin.");
             } 
             self.add(this, new BodyFetish(self, null, FetishType, .25));
         }
