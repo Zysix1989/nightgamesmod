@@ -2,40 +2,38 @@ package nightgames.start;
 
 import static nightgames.start.ConfigurationUtils.mergeOptionals;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CatEarsPart;
-import nightgames.characters.body.PointedEarsPart;
-import nightgames.characters.body.mods.catcher.CatcherMod;
-import nightgames.characters.body.mods.pitcher.BionicCockMod;
-import nightgames.characters.body.mods.pitcher.BlessedCockMod;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.EarPart;
 import nightgames.characters.body.FacePart;
+import nightgames.characters.body.PointedEarsPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.WingsPart;
+import nightgames.characters.body.mods.AnalPussyMod;
+import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.body.mods.catcher.ArcaneMod;
+import nightgames.characters.body.mods.catcher.CatcherMod;
 import nightgames.characters.body.mods.catcher.CyberneticMod;
 import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.characters.body.mods.catcher.DivineMod;
 import nightgames.characters.body.mods.catcher.FeralMod;
 import nightgames.characters.body.mods.catcher.GooeyMod;
-import nightgames.characters.body.mods.PartMod;
-import nightgames.characters.body.mods.AdditionalPussyMod;
+import nightgames.characters.body.mods.pitcher.BionicCockMod;
+import nightgames.characters.body.mods.pitcher.BlessedCockMod;
+import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.characters.body.mods.pitcher.PrimalCockMod;
 import nightgames.characters.body.mods.pitcher.RunicCockMod;
@@ -90,7 +88,7 @@ class BodyConfiguration {
         if (obj.has(AssPart.TYPE))
             config.ass = Optional.of(obj.get(AssPart.TYPE).getAsString()
                                            .equals("basic") ? new AssPart(Size.Small)
-                : (AssPart) new AssPart(Size.Small).withMod(new AdditionalPussyMod()));
+                : (AssPart) new AssPart(Size.Small).withMod(new AnalPussyMod()));
 
         if (obj.has(EarPart.TYPE))
             config.ears = Optional.of(EarPart.load(obj.get(EarPart.TYPE).getAsJsonObject()));

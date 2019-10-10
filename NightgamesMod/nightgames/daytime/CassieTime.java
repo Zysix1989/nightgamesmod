@@ -2,7 +2,6 @@ package nightgames.daytime;
 
 import java.util.ArrayList;
 import java.util.Optional;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -11,8 +10,8 @@ import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.mods.OralPussyMod;
 import nightgames.characters.body.mods.catcher.ArcaneMod;
-import nightgames.characters.body.mods.AdditionalPussyMod;
 import nightgames.characters.body.mods.pitcher.RunicCockMod;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -118,8 +117,7 @@ public class CassieTime extends BaseNPCTime {
             transformationOptions.add(arcaneAss);
         }
         {
-            TransformationOption mouthPussy = new ApplyPartModOption(MouthPart.TYPE,
-                new AdditionalPussyMod());
+            TransformationOption mouthPussy = new ApplyPartModOption(MouthPart.TYPE, new OralPussyMod());
 
             mouthPussy.ingredients.put(Item.BewitchingDraught, 10);
             mouthPussy.ingredients.put(Item.FemDraft, 10);
