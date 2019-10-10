@@ -500,8 +500,7 @@ public class BodyShop extends Activity {
             void buy(Character buyer) {
                 PussyPart target = buyer.body.getRandomPussy();
                 assert target != null;
-                buyer.body.remove(target);
-                buyer.body.addReplace(new PussyPart(), 1);
+                buyer.body.getRandomPussy().purge();
             }
 
             @Override
