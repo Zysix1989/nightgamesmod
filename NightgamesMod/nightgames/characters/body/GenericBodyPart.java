@@ -72,13 +72,19 @@ public class GenericBodyPart implements BodyPart {
         this(desc, "", hotness, pleasure, sensitivity, notable, type, prefix);
     }
 
-    private GenericBodyPart() {
-        this("generic", "a generic body part", 0, 0, 0, false, "generic", "");
-    }
-
     public GenericBodyPart(JsonObject js) {
-        this();
-        JsonUtils.getGson().fromJson(js, this.getClass());
+        type = js.get("type").getAsString();
+        desc = js.get("desc").getAsString();
+        prefix = js.get("prefix").getAsString();
+        hotness = js.get("hotness").getAsDouble();
+        sensitivity = js.get("sensitivity").getAsDouble();
+        pleasure = js.get("pleasure").getAsDouble();
+        descLong = js.get("descLong").getAsString();
+        notable = js.get("notable").getAsBoolean();
+        mods = new ArrayList<>();
+        for (var e : js.get("mods").getAsJsonArray()) {
+            mods.add(JsonUtils.getGson().fromJson(e, PartMod.class));
+        }
     }
 
     protected GenericBodyPart(GenericBodyPart original) {
