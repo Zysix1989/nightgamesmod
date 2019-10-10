@@ -9,10 +9,10 @@ import nightgames.characters.body.MouthPart;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-public class SecondPussyMod extends PartMod {
+public class AdditionalPussyMod extends PartMod {
     public static final String TYPE = "secondpussy";
 
-    public SecondPussyMod() {
+    public AdditionalPussyMod() {
         super(TYPE, .2, .2, .3);
     }
 

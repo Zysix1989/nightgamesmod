@@ -18,7 +18,7 @@ import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.PartMod;
-import nightgames.characters.body.mods.SecondPussyMod;
+import nightgames.characters.body.mods.AdditionalPussyMod;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 
@@ -527,7 +527,7 @@ public class BodyShop extends Activity {
                                         "{self:name-possessive} legs are wrapped in a shiny black material that look fused on.",
                                         .3, 1.5, .7, true, Body.FEET, ""),
                         new GenericBodyPart("feet", 0, 1, 1, Body.FEET, ""), 1000, 1000);
-        addBodyPartMod("Anal Pussy", new SecondPussyMod(), AssPart.TYPE, 2000, 2000, 0);
+        addBodyPartMod("Anal Pussy", new AdditionalPussyMod(), AssPart.TYPE, 2000, 2000, 0);
         addBodyPart("Fused Gloves",
                         new GenericBodyPart("Fused Gloves",
                                         "{self:name-possessive} arms and hands are wrapped in a shiny black material that look fused on.",

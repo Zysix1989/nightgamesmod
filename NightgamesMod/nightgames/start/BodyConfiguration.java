@@ -35,7 +35,7 @@ import nightgames.characters.body.mods.catcher.DivineMod;
 import nightgames.characters.body.mods.catcher.FeralMod;
 import nightgames.characters.body.mods.catcher.GooeyMod;
 import nightgames.characters.body.mods.PartMod;
-import nightgames.characters.body.mods.SecondPussyMod;
+import nightgames.characters.body.mods.AdditionalPussyMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.characters.body.mods.pitcher.PrimalCockMod;
 import nightgames.characters.body.mods.pitcher.RunicCockMod;
@@ -90,7 +90,7 @@ class BodyConfiguration {
         if (obj.has(AssPart.TYPE))
             config.ass = Optional.of(obj.get(AssPart.TYPE).getAsString()
                                            .equals("basic") ? new AssPart(Size.Small)
-                : (AssPart) new AssPart(Size.Small).withMod(new SecondPussyMod()));
+                : (AssPart) new AssPart(Size.Small).withMod(new AdditionalPussyMod()));
 
         if (obj.has(EarPart.TYPE))
             config.ears = Optional.of(EarPart.load(obj.get(EarPart.TYPE).getAsJsonObject()));
