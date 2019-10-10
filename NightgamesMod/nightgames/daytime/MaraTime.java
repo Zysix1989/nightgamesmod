@@ -56,7 +56,9 @@ public class MaraTime extends BaseNPCTime {
             growCock.option = "Mara: Install a cock";
             growCock.scene = "[Placeholder]<br/>Mara makes some modifications to the dildo and manages to attach it to her own body through methods unknown to you.";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart(Size.Big).withMod(new BionicCockMod()));
+                var cock = new CockPart(Size.Big);
+                cock.addMod(new BionicCockMod());
+                other.body.add(cock);
                 return true;
             };
             transformationOptions.add(growCock);

@@ -85,11 +85,13 @@ class BodyConfiguration {
             config.type = Optional.of(Archetype.valueOf(obj.get("archetype").getAsString().toUpperCase()));
         if (obj.has(BreastsPart.TYPE))
             config.breasts = Optional.of(new BreastsPart(obj.get(BreastsPart.TYPE).getAsInt()));
-        if (obj.has(AssPart.TYPE))
-            config.ass = Optional.of(obj.get(AssPart.TYPE).getAsString()
-                                           .equals("basic") ? new AssPart(Size.Small)
-                : (AssPart) new AssPart(Size.Small).withMod(new AnalPussyMod()));
-
+        if (obj.has(AssPart.TYPE)) {
+            var ass = new AssPart(Size.Small);
+            if (!obj.get(AssPart.TYPE).getAsString().equals("basic")) {
+                ass.addMod(new AnalPussyMod());
+            }
+            config.ass = Optional.of(ass);
+        }
         if (obj.has(EarPart.TYPE))
             config.ears = Optional.of(EarPart.load(obj.get(EarPart.TYPE).getAsJsonObject()));
         if (obj.has(TailPart.TYPE) && !obj.get(TailPart.TYPE).getAsString().equals("none"))
@@ -256,7 +258,9 @@ class BodyConfiguration {
                     config.pussy = Optional.of(new PussyPart());
                 } else {
                     PartMod pussyMod = JsonUtils.getGson().fromJson(modClass, PartMod.class);
-                    config.pussy = Optional.of((PussyPart) new PussyPart().withMod(pussyMod));
+                    var pussy = new PussyPart();
+                    pussy.addMod(pussyMod);
+                    config.pussy = Optional.of(pussy);
                 }
             });
             return config;

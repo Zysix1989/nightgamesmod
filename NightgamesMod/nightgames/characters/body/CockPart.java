@@ -245,12 +245,12 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
             .filter(mod -> mod instanceof CockMod)
             .map(mod -> ((CockMod) mod).getCorrespondingCatcherMod())
             .collect(Collectors.toList());
-        GenericBodyPart newPart = new PussyPart();
+        PussyPart newPart = new PussyPart();
 
         for (PartMod mod : newMods) {
-            newPart = (GenericBodyPart)newPart.withMod(mod);
+            newPart.addMod(mod);
         }
-        return (PussyPart)newPart;
+        return newPart;
     }
 
     public void changeSize(int modifier) {

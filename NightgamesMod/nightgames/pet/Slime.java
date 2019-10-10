@@ -95,8 +95,12 @@ public class Slime extends Pet {
         self.body.setHeight(80);
         self.body.add(new GenericBodyPart("skin", 0, 1, 1, Body.SKIN, ""));
         self.body.add(new GenericBodyPart("hands", 0, 1, 1, Body.HANDS, ""));
-        self.body.add(new CockPart().withMod(new SlimyCockMod()));
-        self.body.add(new PussyPart().withMod(new GooeyMod()));
+        var cock = new CockPart();
+        cock.addMod(new SlimyCockMod());
+        self.body.add(cock);
+        var pussy = new PussyPart();
+        pussy.addMod(new GooeyMod());
+        self.body.add(pussy);
         self.body.add(new TentaclePart("tentacles", "body", "slime", 0, 1, 1));
         // don't finish the body as a slime, it wont have normal body parts.
         self.learn(new SlimeJob(self));

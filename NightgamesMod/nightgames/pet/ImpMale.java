@@ -85,7 +85,9 @@ public class ImpMale extends Pet {
         // imps are about as tall as goblins, maybe a bit shorter
         self.body.setHeight(115);
         if (getPower() > 30) {
-            self.body.add(new CockPart(Size.Big).withMod(new IncubusCockMod()));
+            var cock = new CockPart();
+            cock.addMod(new IncubusCockMod());
+            self.body.add(cock);
         } else {
             self.body.add(new CockPart(Size.Big));
         }

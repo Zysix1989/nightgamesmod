@@ -61,7 +61,9 @@ public class ReykaTime extends BaseNPCTime {
                             + "The two of you wait, and soon enough, a large demonic cock sprouts out under the talisman. She then rips the talisman off; her dark transformation complete.<br/><br/>" 
                             + "<i>\"Ohhh...Like what you see? I hope so. I plan on having as much fun as possible with this.\"</i><br/>";
             growCock.effect = (c, self, other) -> {
-                other.body.add(new CockPart(Size.Big).withMod(new IncubusCockMod()));
+                var cock = new CockPart(Size.Big);
+                cock.addMod(new IncubusCockMod());
+                other.body.add(cock);
                 return true;
             };
             transformationOptions.add(growCock);

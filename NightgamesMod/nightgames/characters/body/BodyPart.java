@@ -121,7 +121,7 @@ public interface BodyPart {
     public default void receiveCum(Combat c, Character self, Character donor, BodyPart sourcePart) {
     }
 
-    public Collection<BodyPartMod> getMods();
+    public Collection<? extends BodyPartMod> getMods();
 
     public static boolean hasType(Collection<BodyPart> parts, String type) {
         return parts.stream().anyMatch(part -> part.isType(type));

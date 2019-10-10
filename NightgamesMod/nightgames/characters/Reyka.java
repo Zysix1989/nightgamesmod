@@ -76,7 +76,9 @@ public class Reyka extends BasePersonality {
         self.getMojo().setMax(110);
 
         self.body.add(new BreastsPart(Size.DDCup));
-        self.body.add(new PussyPart().withMod(new DemonicMod()));
+        var pussy = new PussyPart();
+        pussy.addMod(new DemonicMod());
+        self.body.add(pussy);
         self.body.add(TailPart.demonic);
         self.body.add(WingsPart.demonic);
         self.body.add(new PointedEarsPart());

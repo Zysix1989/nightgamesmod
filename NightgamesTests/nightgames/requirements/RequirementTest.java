@@ -16,6 +16,7 @@ import nightgames.items.clothing.Clothing;
 import nightgames.modifier.standard.NoModifier;
 import nightgames.stance.*;
 import nightgames.status.Alert;
+import nightgames.status.FiredUp;
 import nightgames.status.Stsflag;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -97,7 +98,9 @@ public class RequirementTest {
 
     @Test public void bodypartTest() throws Exception {
         self.body.addReplace(new PussyPart(), 1);
-        other.body.addReplace(new PussyPart().withMod(new FieryMod()), 1);
+        var pussy = new PussyPart();
+        pussy.addMod(new FieryMod());
+        other.body.addReplace(pussy, 1);
         assertThat(bodypart(PussyPart.TYPE).meets(combat, self, other), is(true));
         assertThat(bodypart(PussyPart.TYPE).meets(combat, other, self), is(true));
         other.body.removeAll(PussyPart.TYPE);
@@ -253,9 +256,10 @@ public class RequirementTest {
 
     @Test public void specificBodyPartTest() throws Exception {
         self.body.addReplace(new PussyPart(), 1);
-        other.body.addReplace(new PussyPart().withMod(new FieryMod()), 1);
-        SpecificBodyPartRequirement fierypussy = specificpart(new PussyPart().withMod(
-            new FieryMod()));
+        var pussy = new PussyPart();
+        pussy.addMod(new FieryMod());
+        other.body.addReplace(pussy, 1);
+        SpecificBodyPartRequirement fierypussy = specificpart(pussy);
         assertThat(fierypussy.meets(combat, self, other), is(false));
         assertThat(fierypussy.meets(combat, other, self), is(true));
         other.body.removeAll(PussyPart.TYPE);

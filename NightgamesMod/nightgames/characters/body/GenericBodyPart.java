@@ -370,16 +370,8 @@ public class GenericBodyPart implements BodyPart {
         return type;
     }
 
-    public GenericBodyPart withMod(PartMod mod) {
-        GenericBodyPart newPart = copy();
-        newPart.mods.removeIf(otherMod -> otherMod.getVariant().equals(mod.getVariant()));
-        newPart.mods.add(mod);
-        return newPart;
-    }
-
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    public List<BodyPartMod> getMods() {
-        return (List<BodyPartMod>) (List)getPartMods();
+    public List<? extends PartMod> getMods() {
+        return getPartMods();
     }
 
     protected List<PartMod> getPartMods() {
