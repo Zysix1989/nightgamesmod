@@ -56,7 +56,7 @@ public class TestAngel extends BasePersonality {
         baseChar.body.add(new GenericBodyPart("feet", 0, 1, 1, Body.FEET, ""));
         baseChar.body.add(new GenericBodyPart("skin", 0, 1, 1, Body.SKIN, ""));
         baseChar.body.add(new AssPart(Size.Small));
-        baseChar.body.add(new EarsPart());
+        baseChar.body.add(new EarPart());
         baseChar.body.baseFemininity = 2;
 
         baseChar.outfitPlan.add(Clothing.getByID("Tshirt"));

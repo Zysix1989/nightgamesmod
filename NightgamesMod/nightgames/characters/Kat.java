@@ -6,8 +6,8 @@ import java.util.Optional;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.EarPart;
 import nightgames.characters.body.mods.CatEarsMod;
-import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
@@ -75,7 +75,7 @@ public class Kat extends BasePersonality {
         self.body.add(pussy);
         self.body.add(new AssPart(Size.Normal));
         self.body.add(TailPart.cat);
-        var ears = new EarsPart();
+        var ears = new EarPart();
         ears.addMod(new CatEarsMod());
         self.body.add(ears);
         // mostly feminine face

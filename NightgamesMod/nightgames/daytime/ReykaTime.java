@@ -14,7 +14,6 @@ import nightgames.characters.body.BodyPartMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarPart;
-import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.PussyPart;
@@ -176,7 +175,7 @@ public class ReykaTime extends BaseNPCTime {
                                         + "good twenty minutes of pinching and pulling on them, Reyka lets you know that she's done and gives you a mirror. You confirm that yes, you are now a proud owner of a set of "
                                         + "pointed fey-looking ears!";
         pointedEars.effect = (c, self, other) -> {
-            var ears = new EarsPart();
+            var ears = new EarPart();
             ears.addMod(new PointedEarsMod());
             self.body.addReplace(ears, 1);
             return true;

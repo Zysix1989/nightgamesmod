@@ -6,8 +6,9 @@ import nightgames.characters.body.mods.CatEarsMod;
 import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.global.Global;
 
-public abstract class EarPart extends GenericBodyPart {
+public class EarPart extends GenericBodyPart {
     public static final String TYPE = "ears";
+    private static final String NORMAL_TYPE = "normal";
 
     public String desc;
     public double hotness;
@@ -16,23 +17,23 @@ public abstract class EarPart extends GenericBodyPart {
 
     public static BodyPart load(JsonObject obj) {
         if (obj.get("enum").getAsString().equals(PointedEarsMod.TYPE)) {
-            var ears = new EarsPart();
+            var ears = new EarPart();
             ears.addMod(new PointedEarsMod());
             return ears;
         }
         if (obj.get("enum").getAsString().equals(CatEarsMod.TYPE)) {
-            var ears = new EarsPart();
+            var ears = new EarPart();
             ears.addMod(new CatEarsMod());
             return ears;
         }
-        if (obj.get("enum").getAsString().equals(EarsPart.TYPE)) {
-            return new EarsPart();
+        if (obj.get("enum").getAsString().equals(NORMAL_TYPE)) {
+            return new EarPart();
         }
         throw new IllegalArgumentException("expected an enum field with one of the ear types");
     }
 
-    protected EarPart(String desc, double hotness, double pleasure, double sensitivity) {
-        super(desc, hotness, pleasure, sensitivity, TYPE, "");
+    public EarPart() {
+        super("normal ", 0, 1, 1, TYPE, "");
     }
 
     @Override
@@ -56,5 +57,11 @@ public abstract class EarPart extends GenericBodyPart {
     @Override
     public String adjective() {
         return "otic";
+    }
+
+    @Override public JsonObject save() {
+        JsonObject obj = new JsonObject();
+        obj.addProperty("enum", getMods().stream().map(m -> m.getModType()).findAny().orElse(NORMAL_TYPE));
+        return obj;
     }
 }
