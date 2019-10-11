@@ -137,7 +137,7 @@ public class GenericBodyPart implements BodyPart {
         return desc;
     }
     
-    public String getModDescriptorString(Character c) {
+    private String getModDescriptorString() {
         return getMods().stream().sorted()
         .filter(mod -> mod.getDescriptionOverride(this).isEmpty())
         .map(mod -> mod.adjective(this))
@@ -151,7 +151,7 @@ public class GenericBodyPart implements BodyPart {
         Optional<String> override = getMods().stream().map(mod -> mod.getDescriptionOverride(this)).filter(Optional::isPresent).findFirst().flatMap(Function.identity());
         String normalDescription = override.orElseGet(() -> modlessDescription(c));
 
-        return getModDescriptorString(c) + normalDescription;
+        return getModDescriptorString() + normalDescription;
     }
 
     @Override
@@ -378,7 +378,7 @@ public class GenericBodyPart implements BodyPart {
     }
 
     public void receiveCum(Combat c, Character self, Character donor, BodyPart sourcePart) {
-        getMods().forEach(mod -> ((PartMod)mod).receiveCum(c, self, this, donor, sourcePart));
+        getMods().forEach(mod -> mod.receiveCum(c, self, this, donor, sourcePart));
     }
     
     @Override
