@@ -23,9 +23,4 @@ public class EarsPart extends EarPart {
         obj.addProperty("enum", TYPE);
         return obj;
     }
-
-    @Override
-    public int mod(Attribute a, int total) {
-        return 0;
-    }
 }
