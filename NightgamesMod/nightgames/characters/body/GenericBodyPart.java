@@ -352,7 +352,7 @@ public class GenericBodyPart implements BodyPart {
     }
 
     @Override
-    public int mod(Attribute a) {
+    public int attributeModifier(Attribute a) {
         return mods.stream()
             .mapToInt(m -> m.attributeModifier(a).orElse(0))
             .sum();
@@ -409,7 +409,7 @@ public class GenericBodyPart implements BodyPart {
         final var startingSize = temporaryMods.size();
         temporaryMods.removeIf(app -> app.mod == target);
         if (startingSize >= temporaryMods.size()) {
-            throw new UnsupportedOperationException("couldn't find mod to remove");
+            throw new UnsupportedOperationException("couldn't find attributeModifier to remove");
         }
     }
 
@@ -432,7 +432,7 @@ public class GenericBodyPart implements BodyPart {
         final var startingSize = mods.size();
         mods.removeIf(mod -> mod.getModType().equals(modType));
         if (startingSize <= mods.size()) {
-            throw new UnsupportedOperationException(String.format("no mod with type %s", modType));
+            throw new UnsupportedOperationException(String.format("no attributeModifier with type %s", modType));
         }
     }
 }

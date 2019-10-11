@@ -25,7 +25,7 @@ public abstract class PartMod implements BodyPartMod {
     }
 
     /**
-     * This should be overridden if there needs to be more than only one variant of the mod active at the same time.
+     * This should be overridden if there needs to be more than only one variant of the attributeModifier active at the same time.
      */
     public String getVariant() {
         return modType;

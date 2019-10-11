@@ -60,7 +60,7 @@ public class Paizuri extends Skill {
         
         int fetishChance = 7 + getSelf().get(Attribute.Fetish) / 2;
 
-        int m = 5 + breasts.mod(Attribute.Seduction);
+        int m = 5 + breasts.attributeModifier(Attribute.Seduction);
         
         if(getSelf().is(Stsflag.oiled)) {
             m += Global.random(2, 5);

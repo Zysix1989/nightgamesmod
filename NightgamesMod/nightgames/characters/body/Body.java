@@ -1232,7 +1232,7 @@ public class Body implements Cloneable {
     public int mod(Attribute a, int total) {
         int res = 0;
         for (BodyPart p : getCurrentParts()) {
-            total += p.mod(a);
+            total += p.attributeModifier(a);
         }
         return res;
     }

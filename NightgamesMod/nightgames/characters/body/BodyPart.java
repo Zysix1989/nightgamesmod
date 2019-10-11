@@ -66,7 +66,7 @@ public interface BodyPart {
 
     double priority(Character c);
 
-    public int mod(Attribute a);
+    public int attributeModifier(Attribute a);
 
     public void tickHolding(Combat c, Character self, Character opponent, BodyPart otherOrgan);
 

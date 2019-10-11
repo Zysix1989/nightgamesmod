@@ -44,7 +44,7 @@ public class DivineMod extends CatcherMod {
             .with("target", target);
             c.write(self, APPLY_BONUS_TEMPLATE.render(model));
         }
-        // no need for any effects, the bonus is in the pleasure mod
+        // no need for any effects, the bonus is in the pleasure attributeModifier
         return 0;
     }
 

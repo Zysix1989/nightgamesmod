@@ -110,8 +110,8 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
     }
 
     @Override
-    public int mod(Attribute a) {
-        int bonus = super.mod(a);
+    public int attributeModifier(Attribute a) {
+        int bonus = super.attributeModifier(a);
         int size = getSize().value;
         if (size > Size.Average.value & a == Attribute.Seduction) {
             bonus += (size - Size.Average.value) * 2;

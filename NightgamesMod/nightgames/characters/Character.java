@@ -153,7 +153,7 @@ public abstract class Character extends Observable implements Cloneable {
     private boolean pleasured;                      //Merge into tracker object for combat session. - DSM
     public int orgasms;                             //Merge into tracker object for combat session. - DSM
     public int cloned;                              //Merge into tracker object for combat session. - DSM 
-    private Map<Integer, LevelUpData> levelPlan;    //This has bloated save files quite a bit, making an XML save file mod very desireable for editing and reading. - DSM
+    private Map<Integer, LevelUpData> levelPlan;    //This has bloated save files quite a bit, making an XML save file attributeModifier very desireable for editing and reading. - DSM
     private Growth growth;                          //FIXME: Growth, as well as a host of many variables in many classes, have many public variables. Move to protected or private and implement mutators. The compliler is your friend. - DSM
     private BodyPart lastOrgasmPart;                //Merge into tracker object for combat session. - DSM
     
@@ -4073,7 +4073,7 @@ public abstract class Character extends Observable implements Cloneable {
      *  FIXME: Shouldn't the Incubus Trait also exist and be added to this?
      *  
      * @return
-     * Returns true if They have a demonic mod on their pussy or cock, or has the succubus trait.*/
+     * Returns true if They have a demonic attributeModifier on their pussy or cock, or has the succubus trait.*/
     public boolean isDemonic() {
         return has(Trait.succubus) || body.get(PussyPart.TYPE).stream()
                         .anyMatch(part -> part.moddedPartCountsAs(DemonicMod.TYPE)) || body.get(CockPart.TYPE)
