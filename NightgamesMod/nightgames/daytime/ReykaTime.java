@@ -13,7 +13,7 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPartMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
-import nightgames.characters.body.EarPart;
+import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.PussyPart;
@@ -161,10 +161,11 @@ public class ReykaTime extends BaseNPCTime {
         pointedEars.ingredients.put(Item.SuccubusDraft, 10);
         pointedEars.ingredients.put(Item.semen, 5);
         pointedEars.addRequirement((c, self, other) -> {
-            return self.body.get(EarPart.TYPE)
+            return self.body.get(EarsPart.TYPE)
                             .stream()
                             .anyMatch(part -> part instanceof BodyPartMod &&
-                                ((BodyPartMod) part).getModType().equals(PointedEarsMod.TYPE)) || !self.body.has(EarPart.TYPE);
+                                ((BodyPartMod) part).getModType().equals(PointedEarsMod.TYPE)) || !self.body.has(
+                EarsPart.TYPE);
         }, "No pointed ears");
         pointedEars.option = "Pointed Ears";
         pointedEars.scene =
@@ -175,7 +176,7 @@ public class ReykaTime extends BaseNPCTime {
                                         + "good twenty minutes of pinching and pulling on them, Reyka lets you know that she's done and gives you a mirror. You confirm that yes, you are now a proud owner of a set of "
                                         + "pointed fey-looking ears!";
         pointedEars.effect = (c, self, other) -> {
-            var ears = new EarPart();
+            var ears = new EarsPart();
             ears.addMod(new PointedEarsMod());
             self.body.addReplace(ears, 1);
             return true;

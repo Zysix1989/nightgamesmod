@@ -74,7 +74,7 @@ public class Body implements Cloneable {
         new AssPart(AssPart.Size.Normal),
         new MouthPart(),
         new BreastsPart(0),
-        new EarPart()};
+        new EarsPart()};
     private final static String[] fetishParts = {AssPart.TYPE, Body.FEET, CockPart.TYPE, "wings", TailPart.TYPE, TentaclePart.TYPE, BreastsPart.TYPE};
 
     private LinkedHashSet<BodyPart> bodyParts;

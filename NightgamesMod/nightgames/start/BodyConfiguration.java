@@ -13,9 +13,9 @@ import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.mods.CatEarsMod;
 import nightgames.characters.body.CockPart;
-import nightgames.characters.body.EarPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.PussyPart;
@@ -92,8 +92,8 @@ class BodyConfiguration {
             }
             config.ass = Optional.of(ass);
         }
-        if (obj.has(EarPart.TYPE))
-            config.ears = Optional.of(EarPart.load(obj.get(EarPart.TYPE).getAsJsonObject()));
+        if (obj.has(EarsPart.TYPE))
+            config.ears = Optional.of(EarsPart.load(obj.get(EarsPart.TYPE).getAsJsonObject()));
         if (obj.has(TailPart.TYPE) && !obj.get(TailPart.TYPE).getAsString().equals("none"))
             config.tail = Optional.of(TailPart.valueOf(obj.get(TailPart.TYPE).getAsString()
                                                              .toLowerCase()));
@@ -319,14 +319,14 @@ class BodyConfiguration {
                     break;
                 case CAT:
                     body.add(TailPart.cat);
-                    var ears = new EarPart();
+                    var ears = new EarsPart();
                     ears.addMod(new CatEarsMod());
                     body.add(ears);
                     break;
                 case DEMON:
                     body.add(WingsPart.demonic);
                     body.add(TailPart.demonic);
-                    ears = new EarPart();
+                    ears = new EarsPart();
                     ears.addMod(new PointedEarsMod());
                     body.add(ears);
                     break;

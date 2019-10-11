@@ -6,28 +6,28 @@ import nightgames.characters.body.mods.CatEarsMod;
 import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.global.Global;
 
-public class EarPart extends GenericBodyPart {
+public class EarsPart extends GenericBodyPart {
     public static final String TYPE = "ears";
     private static final String NORMAL_TYPE = "normal";
 
     public static BodyPart load(JsonObject obj) {
         if (obj.get("enum").getAsString().equals(PointedEarsMod.TYPE)) {
-            var ears = new EarPart();
+            var ears = new EarsPart();
             ears.addMod(new PointedEarsMod());
             return ears;
         }
         if (obj.get("enum").getAsString().equals(CatEarsMod.TYPE)) {
-            var ears = new EarPart();
+            var ears = new EarsPart();
             ears.addMod(new CatEarsMod());
             return ears;
         }
         if (obj.get("enum").getAsString().equals(NORMAL_TYPE)) {
-            return new EarPart();
+            return new EarsPart();
         }
         throw new IllegalArgumentException("expected an enum field with one of the ear types");
     }
 
-    public EarPart() {
+    public EarsPart() {
         super("normal ", 0, 1, 1, TYPE, "");
     }
 

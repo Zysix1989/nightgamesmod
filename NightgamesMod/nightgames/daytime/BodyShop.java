@@ -12,7 +12,7 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
-import nightgames.characters.body.EarPart;
+import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
@@ -394,13 +394,13 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Restore Ears", 1000) {
             @Override
             void buy(Character buyer) {
-                buyer.body.removeAll(EarPart.TYPE);
-                buyer.body.add(new EarPart());
+                buyer.body.removeAll(EarsPart.TYPE);
+                buyer.body.add(new EarsPart());
             }
 
             @Override
             boolean available(Character buyer) {
-                return !buyer.body.getRandom(EarPart.TYPE).getMods().isEmpty();
+                return !buyer.body.getRandom(EarsPart.TYPE).getMods().isEmpty();
             }
 
             @Override

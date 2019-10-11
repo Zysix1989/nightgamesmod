@@ -14,19 +14,14 @@ import java.util.stream.Collectors;
 
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
-import nightgames.actions.Leap;
 import nightgames.actions.Move;
 import nightgames.actions.Resupply;
-import nightgames.actions.Shortcut;
-import nightgames.actions.UseBeer;
-import nightgames.actions.UseEnergyDrink;
-import nightgames.actions.UseLubricant;
 import nightgames.actions.Wait;
 import nightgames.areas.Area;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
-import nightgames.characters.body.EarPart;
+import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.characters.custom.CommentSituation;
@@ -651,7 +646,7 @@ public class NPC extends Character {
                     c.write(this, getName()
                                     + " pulls you off balance and licks your sensitive ear. You tremble as she nibbles on your earlobe.");
                     target.body.pleasure(this, body.getRandom("tongue"), target.body.getRandom(
-                        EarPart.TYPE),
+                        EarsPart.TYPE),
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                 }
                 break;

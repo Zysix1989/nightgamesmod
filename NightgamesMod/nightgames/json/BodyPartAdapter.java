@@ -16,7 +16,7 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
-import nightgames.characters.body.EarPart;
+import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
@@ -38,7 +38,7 @@ public class BodyPartAdapter implements JsonSerializer<BodyPart>, JsonDeserializ
         prototypes.put(BreastsPart.class.getCanonicalName(), BreastsPart::new);
         prototypes.put(WingsPart.class.getCanonicalName(), WingsPart.demonic::load);
         prototypes.put(TailPart.class.getCanonicalName(), TailPart.cat::load);
-        prototypes.put(EarPart.class.getCanonicalName(), EarPart::load);
+        prototypes.put(EarsPart.class.getCanonicalName(), EarsPart::load);
         prototypes.put(StraponPart.class.getCanonicalName(), StraponPart::new);
         prototypes.put(TentaclePart.class.getCanonicalName(), TentaclePart::new);
         prototypes.put(AssPart.class.getCanonicalName(), AssPart::new);
