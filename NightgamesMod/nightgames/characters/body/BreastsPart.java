@@ -147,14 +147,16 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
 
     @Override
     public int mod(Attribute a, int total) {
+        var res = super.mod(a, total);
         switch (a) {
             case Speed:
-                return -Math.max(getSize().value - 3, 0) / 2;
+                res -= Math.max(getSize().value - 3, 0) / 2;
+                break;
             case Seduction:
-                return Math.max(getSize().value - 3, 0);
-            default:
-                return 0;
+                res += Math.max(getSize().value - 3, 0);
+                break;
         }
+        return res;
     }
 
     private static String[] synonyms = {"breasts", "tits", "boobs"};

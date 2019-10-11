@@ -353,7 +353,9 @@ public class GenericBodyPart implements BodyPart {
 
     @Override
     public int mod(Attribute a, int total) {
-        return 0;
+        return mods.stream()
+            .mapToInt(m -> m.attributeModifier(a).orElse(0))
+            .sum();
     }
 
     @Override

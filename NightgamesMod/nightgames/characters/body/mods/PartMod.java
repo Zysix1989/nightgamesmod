@@ -98,4 +98,8 @@ public abstract class PartMod implements BodyPartMod {
     public int hashCode() {
         return toString().hashCode();
     }
+
+    public Optional<Integer> attributeModifier(Attribute a) {
+        return Optional.empty();
+    }
 }
