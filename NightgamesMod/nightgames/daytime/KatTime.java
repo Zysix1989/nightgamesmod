@@ -13,6 +13,7 @@ import nightgames.characters.body.CatEarsPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarPart;
+import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.catcher.FeralMod;
@@ -146,7 +147,9 @@ public class KatTime extends BaseNPCTime {
         catEars.option = "Cat Ears";
         catEars.scene = "[Placeholder]<br/>Kat uses her totemic magic to grow you cat ears.";
         catEars.effect = (c, self, other) -> {
-            self.body.addReplace(new CatEarsPart(), 1);
+            var ears = new EarsPart();
+            ears.addMod(new CatEarsPart());
+            self.body.addReplace(ears, 1);
             return true;
         };
         transformationOptions.add(catEars);

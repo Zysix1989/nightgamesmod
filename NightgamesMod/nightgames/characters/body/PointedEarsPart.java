@@ -3,53 +3,28 @@ package nightgames.characters.body;
 import com.google.gson.JsonObject;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.mods.PartMod;
 
-public class PointedEarsPart extends EarPart implements BodyPartMod {
-    public static final String TYPE = "pointed";
+public class PointedEarsPart extends PartMod {
+    public static final String TYPE = "pointed ears";
 
     public PointedEarsPart() {
-        super("pointed ", .1, 1.2, 1);
+        super(TYPE, .1, .2, 0);
     }
 
     @Override
-    public String describe(Character c) {
-            return desc + "ears";
+    public String describeAdjective(String partType) {
+            return "pointed";
     }
 
     @Override
-    public boolean isReady(Character self) {
-        return true;
-    }
-
-    @Override public JsonObject save() {
-        JsonObject obj = new JsonObject();
-        obj.addProperty("enum", TYPE);
-        return obj;
-    }
-
-    @Override
-    public boolean isNotable() {
-        return true;
-    }
-
-    @Override
-    public int mod(Attribute a, int total) {
+    public Optional<Integer> attributeModifier(Attribute a) {
         if (a == Attribute.Seduction) {
-                    return 2;
+            return Optional.of(2);
         }
-        return 0;
+        return Optional.empty();
     }
-
-    @Override
-    public Collection<BodyPartMod> getMods() {
-        return Collections.singleton(this);
-    }
-
-    @Override
-    public String getModType() {
-        return TYPE;
-    }
-
 }

@@ -1,54 +1,35 @@
 package nightgames.characters.body;
 
-import com.google.gson.JsonObject;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.mods.PartMod;
 
-public class CatEarsPart extends EarPart implements BodyPartMod {
-    public static final String TYPE = "cat";
+public class CatEarsPart extends PartMod {
+    public static final String TYPE = "cat ears";
 
     public CatEarsPart() {
-        super("cat ", .15, 1.5, 1.5);
+        super(TYPE, .15, .5, .5);
     }
 
     @Override
-    public void describeLong(StringBuilder b, Character c) {
-        b.append("Cute " + fullDescribe(c) + " tops " + c.possessiveAdjective() + " head.");
+    public String describeAdjective(String partType) {
+        return "cat";
     }
 
     @Override
-    public String describe(Character c) {
-        return desc + "ears";
-    }
-
-    @Override public JsonObject save() {
-        JsonObject obj = new JsonObject();
-        obj.addProperty("enum", TYPE);
-        return obj;
-    }
-
-    @Override
-    public boolean isNotable() {
-        return true;
-    }
-
-    @Override
-    public int mod(Attribute a, int total) {
+    public Optional<Integer> attributeModifier(Attribute a) {
         if (a == Attribute.Seduction) {
-            return 3;
+            return Optional.of(3);
         }
-        return 0;
+        return Optional.empty();
     }
 
     @Override
-    public Collection<BodyPartMod> getMods() {
-        return Collections.singleton(this);
-    }
-
-    @Override
-    public String getModType() {
-        return TYPE;
+    public String getLongDescriptionOverride(
+        Character self,
+        BodyPart part,
+        String previousDescription) {
+        return "Cute " + part.fullDescribe(self) + " tops " + self.possessiveAdjective() + " head.";
     }
 }

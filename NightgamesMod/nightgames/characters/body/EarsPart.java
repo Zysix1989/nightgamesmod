@@ -6,7 +6,7 @@ import java.util.Collections;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 
-public class EarsPart extends EarPart implements BodyPartMod {
+public class EarsPart extends EarPart {
     public static final String TYPE = "normal";
 
     public EarsPart() {
@@ -23,24 +23,9 @@ public class EarsPart extends EarPart implements BodyPartMod {
         obj.addProperty("enum", TYPE);
         return obj;
     }
-    @Override
-    public boolean isNotable() {
-        return false;
-    }
 
     @Override
     public int mod(Attribute a, int total) {
         return 0;
     }
-
-    @Override
-    public Collection<BodyPartMod> getMods() {
-        return Collections.emptySet();
-    }
-
-    @Override
-    public String getModType() {
-        return TYPE;
-    }
-
 }

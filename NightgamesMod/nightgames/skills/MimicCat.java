@@ -8,6 +8,8 @@ import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.CatEarsPart;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.EarPart;
+import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.catcher.FeralMod;
@@ -77,7 +79,7 @@ public class MimicCat extends Skill {
         getSelf().addTemporaryTrait(Trait.catstongue, 10);
         getSelf().addTemporaryTrait(Trait.FrenzyScent, 10);
         getSelf().body.temporaryAddOrReplacePartWithType(TailPart.slimeycat, 10);
-        getSelf().body.temporaryAddOrReplacePartWithType(new CatEarsPart(), 10);
+        ((GenericBodyPart) getSelf().body.get(EarPart.TYPE)).addTemporaryMod(new CatEarsPart(), 10);
         BreastsPart part = getSelf().body.getBreastsAbove(Size.ACup);
         if (part != null) {
             part.temporarilyChangeSize(-1, 10);
