@@ -4,16 +4,13 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Reyka;
 import nightgames.characters.Trait;
-import nightgames.characters.body.AssPart;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.CockPart;
 import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
-import nightgames.characters.body.PointedEarsPart;
-import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.catcher.DemonicMod;
@@ -75,7 +72,7 @@ public class MimicSuccubus extends Skill {
         getSelf().addTemporaryTrait(Trait.spiritphage, 999);
         getSelf().body.temporaryAddOrReplacePartWithType(WingsPart.demonicslime, 999);
         getSelf().body.temporaryAddOrReplacePartWithType(TailPart.demonicslime, 999);
-        ((GenericBodyPart) getSelf().body.get(EarsPart.TYPE)).addTemporaryMod(new PointedEarsPart(), 999);
+        ((GenericBodyPart) getSelf().body.get(EarsPart.TYPE)).addTemporaryMod(new PointedEarsMod(), 999);
         BreastsPart part = getSelf().body.getBreastsBelow(Size.max());
         if (part != null) {
             part.temporarilyChangeSize(4, 999);

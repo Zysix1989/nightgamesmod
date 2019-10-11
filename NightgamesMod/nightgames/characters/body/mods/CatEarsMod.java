@@ -1,14 +1,14 @@
-package nightgames.characters.body;
+package nightgames.characters.body.mods;
 
 import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.body.BodyPart;
 
-public class CatEarsPart extends PartMod {
+public class CatEarsMod extends PartMod {
     public static final String TYPE = "cat ears";
 
-    public CatEarsPart() {
+    public CatEarsMod() {
         super(TYPE, .15, .5, .5);
     }
 

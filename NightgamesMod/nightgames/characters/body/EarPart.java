@@ -2,7 +2,8 @@ package nightgames.characters.body;
 
 import com.google.gson.JsonObject;
 import nightgames.characters.Character;
-import nightgames.combat.Combat;
+import nightgames.characters.body.mods.CatEarsMod;
+import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.global.Global;
 
 public abstract class EarPart extends GenericBodyPart {
@@ -14,14 +15,14 @@ public abstract class EarPart extends GenericBodyPart {
     public double sensitivity;
 
     public static BodyPart load(JsonObject obj) {
-        if (obj.get("enum").getAsString().equals(PointedEarsPart.TYPE)) {
+        if (obj.get("enum").getAsString().equals(PointedEarsMod.TYPE)) {
             var ears = new EarsPart();
-            ears.addMod(new PointedEarsPart());
+            ears.addMod(new PointedEarsMod());
             return ears;
         }
-        if (obj.get("enum").getAsString().equals(CatEarsPart.TYPE)) {
+        if (obj.get("enum").getAsString().equals(CatEarsMod.TYPE)) {
             var ears = new EarsPart();
-            ears.addMod(new CatEarsPart());
+            ears.addMod(new CatEarsMod());
             return ears;
         }
         if (obj.get("enum").getAsString().equals(EarsPart.TYPE)) {

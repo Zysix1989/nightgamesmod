@@ -13,12 +13,12 @@ import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.CatEarsPart;
+import nightgames.characters.body.mods.CatEarsMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.EarPart;
 import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.FacePart;
-import nightgames.characters.body.PointedEarsPart;
+import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.TentaclePart;
@@ -321,14 +321,14 @@ class BodyConfiguration {
                 case CAT:
                     body.add(TailPart.cat);
                     var ears = new EarsPart();
-                    ears.addMod(new CatEarsPart());
+                    ears.addMod(new CatEarsMod());
                     body.add(ears);
                     break;
                 case DEMON:
                     body.add(WingsPart.demonic);
                     body.add(TailPart.demonic);
                     ears = new EarsPart();
-                    ears.addMod(new PointedEarsPart());
+                    ears.addMod(new PointedEarsMod());
                     body.add(ears);
                     break;
                 default:

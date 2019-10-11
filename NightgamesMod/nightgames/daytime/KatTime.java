@@ -9,7 +9,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPartMod;
-import nightgames.characters.body.CatEarsPart;
+import nightgames.characters.body.mods.CatEarsMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarPart;
@@ -141,14 +141,14 @@ public class KatTime extends BaseNPCTime {
         catEars.ingredients.put(Item.Aphrodisiac, 25);
         catEars.addRequirement((c, self, other) -> {
             return self.body.get(EarPart.TYPE).stream().anyMatch(part -> part instanceof BodyPartMod &&
-                ((BodyPartMod) part).getModType().equals(CatEarsPart.TYPE))
+                ((BodyPartMod) part).getModType().equals(CatEarsMod.TYPE))
                 || !self.body.has(EarPart.TYPE);
         }, "No cat ears");
         catEars.option = "Cat Ears";
         catEars.scene = "[Placeholder]<br/>Kat uses her totemic magic to grow you cat ears.";
         catEars.effect = (c, self, other) -> {
             var ears = new EarsPart();
-            ears.addMod(new CatEarsPart());
+            ears.addMod(new CatEarsMod());
             self.body.addReplace(ears, 1);
             return true;
         };

@@ -13,7 +13,7 @@ import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarsPart;
-import nightgames.characters.body.PointedEarsPart;
+import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
@@ -184,7 +184,7 @@ public enum Item implements Loot {
             new AddTraitEffect("drink", "throw", Trait.succubus),
             new PartModEffect("drink", "throw", PussyPart.TYPE, new DemonicMod(), 15),
             new PartModEffect("drink", "throw", CockPart.TYPE, new IncubusCockMod(), 15),
-            new PartModEffect("drink", "throw", EarsPart.TYPE, new PointedEarsPart(), 15),
+            new PartModEffect("drink", "throw", EarsPart.TYPE, new PointedEarsMod(), 15),
             new BodyReplaceEffect("drink", "throw", WingsPart.demonic),
             new BodyReplaceEffect("drink", "throw", TailPart.demonic),
             new BodyGrowthPlusEffect("drink", "throw",
@@ -200,7 +200,7 @@ public enum Item implements Loot {
             new AddTraitEffect("drink", "throw", Trait.incubus),
             new PartModEffect("drink", "throw", CockPart.TYPE, new DemonicMod(), 15),
             //TODO: Grow a cock if you don't already have one.
-            new PartModEffect("drink", "throw", EarsPart.TYPE, new PointedEarsPart(), 15),
+            new PartModEffect("drink", "throw", EarsPart.TYPE, new PointedEarsMod(), 15),
             new BodyReplaceEffect("drink", "throw", WingsPart.demonic),
             new BodyReplaceEffect("drink", "throw", TailPart.demonic)
             //new BodyModEffect("drink", "throw", BreastsPart.dd, BodyModEffect.Effect.growplus)
@@ -216,7 +216,7 @@ public enum Item implements Loot {
             new AddTraitEffect("drink", "throw", Trait.incubus),
             new PartModEffect("drink", "throw", CockPart.TYPE, new DemonicMod(), 15),
             //TODO: Grow a cock if you don't already have one.
-            new PartModEffect("drink", "throw", EarsPart.TYPE, new PointedEarsPart(), 15),
+            new PartModEffect("drink", "throw", EarsPart.TYPE, new PointedEarsMod(), 15),
             new BodyReplaceEffect("drink", "throw", WingsPart.demonic),
             new BodyReplaceEffect("drink", "throw", TailPart.demonic),
             new BodyGrowthPlusEffect("drink", "throw",

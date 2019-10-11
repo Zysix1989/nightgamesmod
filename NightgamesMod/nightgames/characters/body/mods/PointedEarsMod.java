@@ -1,17 +1,12 @@
-package nightgames.characters.body;
+package nightgames.characters.body.mods;
 
-import com.google.gson.JsonObject;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
-import nightgames.characters.body.mods.PartMod;
 
-public class PointedEarsPart extends PartMod {
+public class PointedEarsMod extends PartMod {
     public static final String TYPE = "pointed ears";
 
-    public PointedEarsPart() {
+    public PointedEarsMod() {
         super(TYPE, .1, .2, 0);
     }
 
