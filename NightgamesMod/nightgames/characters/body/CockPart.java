@@ -241,7 +241,7 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
     }
 
     public PussyPart getEquivalentPussy() {
-        List<PartMod> newMods = getPartMods().stream()
+        List<PartMod> newMods = getMods().stream()
             .filter(mod -> mod instanceof CockMod)
             .map(mod -> ((CockMod) mod).getCorrespondingCatcherMod())
             .collect(Collectors.toList());

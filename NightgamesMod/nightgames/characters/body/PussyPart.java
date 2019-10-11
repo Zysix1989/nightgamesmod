@@ -29,7 +29,7 @@ public class PussyPart extends GenericBodyPart {
 
     @Override
     public void describeLong(StringBuilder b, Character c) {
-        Optional<String> override = getPartMods().stream()
+        Optional<String> override = getMods().stream()
                         .map(mod -> mod.getDescriptionOverride(this))
                         .filter(Optional::isPresent).findFirst().flatMap(Function.identity());
         if (override.isPresent()) {
@@ -179,7 +179,7 @@ public class PussyPart extends GenericBodyPart {
     }
 
     public CockPart getEquivalentCock() {
-        List<PartMod> newMods = getPartMods().stream()
+        List<PartMod> newMods = getMods().stream()
             .filter(mod -> mod instanceof CatcherMod)
             .map(mod -> ((CatcherMod) mod).getCorrespondingCockMod())
             .collect(Collectors.toList());
