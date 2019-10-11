@@ -10,11 +10,6 @@ public class EarPart extends GenericBodyPart {
     public static final String TYPE = "ears";
     private static final String NORMAL_TYPE = "normal";
 
-    public String desc;
-    public double hotness;
-    public double pleasure;
-    public double sensitivity;
-
     public static BodyPart load(JsonObject obj) {
         if (obj.get("enum").getAsString().equals(PointedEarsMod.TYPE)) {
             var ears = new EarPart();
