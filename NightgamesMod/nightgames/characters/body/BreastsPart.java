@@ -146,8 +146,8 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
    }
 
     @Override
-    public int mod(Attribute a, int total) {
-        var res = super.mod(a, total);
+    public int mod(Attribute a) {
+        var res = super.mod(a);
         switch (a) {
             case Speed:
                 res -= Math.max(getSize().value - 3, 0) / 2;

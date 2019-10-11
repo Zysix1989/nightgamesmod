@@ -110,8 +110,8 @@ public class AssPart extends GenericBodyPart implements Sizable<AssPart.Size> {
     }
 
     @Override
-    public int mod(Attribute a, int total) { 
-        int bonus = super.mod(a, total);
+    public int mod(Attribute a) {
+        int bonus = super.mod(a);
         if (getSize().value > Size.Normal.value & a == Attribute.Seduction) {
             bonus += (getSize().value - Size.Normal.value) * 2;
         }

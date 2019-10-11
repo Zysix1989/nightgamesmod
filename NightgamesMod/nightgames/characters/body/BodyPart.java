@@ -9,7 +9,6 @@ import com.google.gson.JsonObject;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.mods.PartMod;
 import nightgames.combat.Combat;
 
 public interface BodyPart {
@@ -67,7 +66,7 @@ public interface BodyPart {
 
     double priority(Character c);
 
-    public int mod(Attribute a, int total);
+    public int mod(Attribute a);
 
     public void tickHolding(Combat c, Character self, Character opponent, BodyPart otherOrgan);
 

@@ -143,7 +143,7 @@ public enum ToysPart implements BodyPart,BodyPartMod {
     }
 
     @Override
-    public int mod(Attribute a, int total) {
+    public int mod(Attribute a) {
         return 0;
     }
 

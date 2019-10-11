@@ -22,7 +22,6 @@ import nightgames.characters.Character;
 import nightgames.characters.CharacterSex;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart.Size;
-import nightgames.characters.body.mods.PartMod;
 import nightgames.combat.Combat;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -1233,7 +1232,7 @@ public class Body implements Cloneable {
     public int mod(Attribute a, int total) {
         int res = 0;
         for (BodyPart p : getCurrentParts()) {
-            total += p.mod(a, total);
+            total += p.mod(a);
         }
         return res;
     }

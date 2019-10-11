@@ -5,7 +5,6 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.CockPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -61,7 +60,7 @@ public class Paizuri extends Skill {
         
         int fetishChance = 7 + getSelf().get(Attribute.Fetish) / 2;
 
-        int m = 5 + breasts.mod(Attribute.Seduction,Global.random(5));
+        int m = 5 + breasts.mod(Attribute.Seduction);
         
         if(getSelf().is(Stsflag.oiled)) {
             m += Global.random(2, 5);
