@@ -95,7 +95,7 @@ public class Slime extends Pet {
         // slimes are around 80 cm ish? comes up to about crotch level
         self.body.setHeight(80);
         self.body.add(new GenericBodyPart("skin", 0, 1, 1, Body.SKIN, ""));
-        self.body.add(new GenericBodyPart("hands", 0, 1, 1, HandsPart.TYPE, ""));
+        self.body.add(new HandsPart());
         var cock = new CockPart();
         cock.addMod(new SlimyCockMod());
         self.body.add(cock);
