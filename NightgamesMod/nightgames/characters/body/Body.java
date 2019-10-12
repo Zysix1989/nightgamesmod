@@ -65,7 +65,7 @@ public class Body implements Cloneable {
     // yeah i know :(
     public static BodyPart nonePart = new GenericBodyPart("none", 0, 1, 1, "none", "");
     private static Set<String> pluralParts = new HashSet<>(Arrays.asList(HandsPart.TYPE,
-        FeetPart.TYPE, "wings", BreastsPart.TYPE, "balls"));
+        FeetPart.TYPE, WingsPart.TYPE, BreastsPart.TYPE, "balls"));
     private final static BodyPart[] requiredParts = {
         new HandsPart(),
         new FeetPart(),
