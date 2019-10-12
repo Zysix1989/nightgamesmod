@@ -1569,7 +1569,7 @@ public abstract class Character extends Observable implements Cloneable {
     }
 
     public boolean hasBalls() {
-        return body.get("balls").size() > 0;
+        return body.get(Body.BALLS).size() > 0;
     }
 
     public boolean hasPussy() {
@@ -2622,7 +2622,7 @@ public abstract class Character extends Observable implements Cloneable {
                 body.pleasure(null, null, body.getRandomCock(), 5, c);
             }
             if (hasBalls()) {
-                TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandom("balls"));
+                TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandom(Body.BALLS));
             }
             if (hasPussy()) {
                 TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandomPussy());

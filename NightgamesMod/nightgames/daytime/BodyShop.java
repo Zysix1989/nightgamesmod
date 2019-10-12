@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
@@ -293,7 +294,7 @@ public class BodyShop extends Activity {
             @Override
             void buy(Character buyer) {
                 buyer.body.removeAll(CockPart.TYPE);
-                buyer.body.removeAll("balls");
+                buyer.body.removeAll(Body.BALLS);
             }
 
             @Override
@@ -327,7 +328,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Grow Balls", 1000) {
             @Override
             void buy(Character buyer) {
-                buyer.body.addReplace(new GenericBodyPart("balls", 0, 1.0, 1.5, "balls", ""), 1);
+                buyer.body.addReplace(new GenericBodyPart("balls", 0, 1.0, 1.5, Body.BALLS, ""), 1);
             }
 
             @Override
@@ -344,7 +345,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Remove Balls", 1000) {
             @Override
             void buy(Character buyer) {
-                buyer.body.removeAll("balls");
+                buyer.body.removeAll(Body.BALLS);
             }
 
             @Override

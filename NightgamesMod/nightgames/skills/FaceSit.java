@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
+import nightgames.characters.body.Body;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.FeralMod;
@@ -65,7 +66,8 @@ public class FaceSit extends Skill {
             m = m * 3 / 2;
         }
         if (getSelf().hasBalls()) {
-            getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandom("balls"), m, c, this);
+            getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandom(
+                Body.BALLS), m, c, this);
         } else {
             getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandomPussy(), m, c, this);
             

@@ -61,11 +61,12 @@ public class Body implements Cloneable {
     }
 
     public static final String SKIN = "skin";
+    public static final String BALLS = "balls";
 
     // yeah i know :(
     public static BodyPart nonePart = new GenericBodyPart("none", 0, 1, 1, "none", "");
     private static Set<String> pluralParts = new HashSet<>(Arrays.asList(HandsPart.TYPE,
-        FeetPart.TYPE, WingsPart.TYPE, BreastsPart.TYPE, "balls"));
+        FeetPart.TYPE, WingsPart.TYPE, BreastsPart.TYPE, Body.BALLS));
     private final static BodyPart[] requiredParts = {
         new HandsPart(),
         new FeetPart(),
@@ -947,8 +948,8 @@ public class Body implements Cloneable {
     }
 
     private void addBallsIfNeeded() {
-        if (getRandom("balls") == null) {
-            add(new GenericBodyPart("balls", 0, 1.0, 1.5, "balls", ""));
+        if (getRandom(Body.BALLS) == null) {
+            add(new GenericBodyPart("balls", 0, 1.0, 1.5, Body.BALLS, ""));
         }
     }
 
@@ -1040,7 +1041,7 @@ public class Body implements Cloneable {
         if (newSex.hasBalls()) {
             addBallsIfNeeded();
         } else {
-            removeAll("balls");
+            removeAll(Body.BALLS);
         }
         addReplace(new FacePart(face.hotness, femininity), 1);
     }
@@ -1057,8 +1058,8 @@ public class Body implements Cloneable {
             }
         }
         if (sex.hasBalls()) {
-            if (!has("balls")) {
-                add(new GenericBodyPart("balls", 0, 1.0, 1.5, "balls", ""));
+            if (!has(Body.BALLS)) {
+                add(new GenericBodyPart("balls", 0, 1.0, 1.5, Body.BALLS, ""));
             }
         }
     }
