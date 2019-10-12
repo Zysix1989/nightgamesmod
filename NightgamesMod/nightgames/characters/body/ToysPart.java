@@ -31,7 +31,6 @@ public enum ToysPart implements BodyPart,BodyPartMod {
 
     @Override
     public void describeLong(StringBuilder b, Character c) {
-        b.append("");
     }
 
     @Override
