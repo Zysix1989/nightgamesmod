@@ -1101,7 +1101,12 @@ public class Body implements Cloneable {
     public void loadParts(JsonArray partsArr) {
         for (JsonElement element : partsArr) {
             JsonObject partJson = element.getAsJsonObject();
-            this.add(JsonUtils.getGson().fromJson(partJson, BodyPart.class));
+            try {
+                this.add(JsonUtils.getGson().fromJson(partJson, BodyPart.class));
+            } catch (Exception e) {
+                System.out.println(partJson);
+                throw e;
+            }
         }
     }
 
