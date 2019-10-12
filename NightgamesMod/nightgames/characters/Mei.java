@@ -6,6 +6,7 @@ import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
+import nightgames.characters.body.FallenAngelicWingsMod;
 import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
@@ -78,7 +79,9 @@ public class Mei extends BasePersonality {
         var tail = new TailPart();
         tail.addMod(new DemonicTailMod());
         character.getGrowth().addBodyPart(30, tail);
-        character.getGrowth().addBodyPart(30, WingsPart.fallenangel);
+        var wings = new WingsPart();
+        wings.addMod(new FallenAngelicWingsMod());
+        character.getGrowth().addBodyPart(30, wings);
         character.getGrowth().addTrait(30, Trait.fallenAngel);
         character.getGrowth().addTrait(35, Trait.energydrain);
         character.getGrowth().addTrait(40, Trait.soulsucker);

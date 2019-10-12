@@ -3,8 +3,11 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AngelicWingsMod;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
+import nightgames.characters.body.SlimeWingsMod;
+import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.PussyPart;
@@ -70,7 +73,13 @@ public class MimicAngel extends Skill {
                 getSelf().addTemporaryTrait(Trait.revered, 10);
             }
         }
-        getSelf().body.temporaryAddOrReplacePartWithType(WingsPart.angelicslime, 10);
+        var wings = (WingsPart) getSelf().body.getRandom(WingsPart.TYPE);
+        if (wings == null) {
+            wings = new WingsPart();
+        }
+        wings.addMod(new AngelicWingsMod());
+        wings.addMod(new SlimeWingsMod());
+        getSelf().body.temporaryAddOrReplacePartWithType(wings, 10);
         BreastsPart part = getSelf().body.getBreastsBelow(Size.max());
         if (part != null) {
             part.temporarilyChangeSize(2, 10);

@@ -3,6 +3,7 @@ package nightgames.characters;
 import java.util.Arrays;
 import java.util.Optional;
 
+import nightgames.characters.body.AngelicWingsMod;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.FacePart;
@@ -753,7 +754,9 @@ public class Angel extends BasePersonality {
         if (character.hasDick()) {
             character.body.getRandomCock().addMod(new BlessedCockMod());
         }
-        character.body.addReplace(WingsPart.angelic, 5);
+        var wings = new WingsPart();
+        wings.addMod(new AngelicWingsMod());
+        character.body.addReplace(wings, 1);
         character.unequipAllClothing();
         character.outfitPlan.add(Clothing.getByID("translucentshawl"));
         character.outfitPlan.add(Clothing.getByID("bikinitop"));

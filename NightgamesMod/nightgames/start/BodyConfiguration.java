@@ -8,11 +8,13 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import nightgames.characters.body.AngelicWingsMod;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.DemonicWingsMod;
 import nightgames.characters.body.mods.CatTailMod;
 import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.mods.CatEarsMod;
@@ -96,9 +98,7 @@ class BodyConfiguration {
         if (obj.has(EarsPart.TYPE))
             config.ears = Optional.of(EarsPart.load(obj.get(EarsPart.TYPE).getAsJsonObject()));
         // TODO: come back and handle tails at some point
-        if (obj.has("wings") && !obj.get("wings").getAsString().equals("none"))
-            config.wings = Optional.of(WingsPart.valueOf(obj.get("wings").getAsString()
-                                                               .toLowerCase()));
+        // TODO: come back and handle wings at some point
 
         if (obj.has("genitals"))
             config.genitals = Optional.of(GenitalConfiguration.parse(obj.getAsJsonObject("genitals")));
@@ -314,7 +314,9 @@ class BodyConfiguration {
                 body.getRandomPussy().addMod(pussyMod);
             switch (this) {
                 case ANGEL:
-                    body.add(WingsPart.angelic);
+                    var wings = new WingsPart();
+                    wings.addMod(new AngelicWingsMod());
+                    body.add(wings);
                     break;
                 case CAT:
                     var tail = new TailPart();
@@ -324,7 +326,9 @@ class BodyConfiguration {
                     body.add(ears);
                     break;
                 case DEMON:
-                    body.add(WingsPart.demonic);
+                    wings = new WingsPart();
+                    wings.addMod(new DemonicWingsMod());
+                    body.add(wings);
                     tail = new TailPart();
                     tail.addMod(new CatTailMod());
                     ears = new EarsPart();

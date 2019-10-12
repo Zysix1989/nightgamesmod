@@ -7,6 +7,8 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
+import nightgames.characters.body.DemonicWingsMod;
+import nightgames.characters.body.SlimeWingsMod;
 import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.GenericBodyPart;
@@ -72,7 +74,13 @@ public class MimicSuccubus extends Skill {
         getSelf().addTemporaryTrait(Trait.soulsucker, 999);
         getSelf().addTemporaryTrait(Trait.energydrain, 999);
         getSelf().addTemporaryTrait(Trait.spiritphage, 999);
-        getSelf().body.temporaryAddOrReplacePartWithType(WingsPart.demonicslime, 999);
+        var wings = (WingsPart) getSelf().body.getRandom(WingsPart.TYPE);
+        if (wings == null) {
+            wings = new WingsPart();
+        }
+        wings.addMod(new DemonicWingsMod());
+        wings.addMod(new SlimeWingsMod());
+        getSelf().body.temporaryAddOrReplacePartWithType(wings, 999);
         if (getSelf().body.getRandom(TailPart.TYPE) == null) {
             getSelf().body.temporaryAddOrReplacePartWithType(new TailPart(), 999);
         }

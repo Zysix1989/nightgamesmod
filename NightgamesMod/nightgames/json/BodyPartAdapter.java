@@ -36,7 +36,7 @@ public class BodyPartAdapter implements JsonSerializer<BodyPart>, JsonDeserializ
         prototypes = new HashMap<>();
         prototypes.put(PussyPart.class.getCanonicalName(), PussyPart::new);
         prototypes.put(BreastsPart.class.getCanonicalName(), BreastsPart::new);
-        prototypes.put(WingsPart.class.getCanonicalName(), WingsPart.demonic::load);
+        prototypes.put(WingsPart.class.getCanonicalName(), WingsPart::new);
         prototypes.put(TailPart.class.getCanonicalName(), TailPart::new);
         prototypes.put(EarsPart.class.getCanonicalName(), EarsPart::load);
         prototypes.put(StraponPart.class.getCanonicalName(), StraponPart::new);

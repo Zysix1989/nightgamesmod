@@ -6,6 +6,7 @@ import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.characters.body.AngelicWingsMod;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.body.CockPart;
@@ -152,7 +153,9 @@ public class AngelTime extends BaseNPCTime {
                             + "<br/>Angel eventually orgasms and her roaming hands shine brightly from behind your back. Your back feels the beyond-orgasmic sensation that her powers usually cause before your back feels like it's "
                             + "swelling and bursting. As angel is squeezeing you in holy bliss, you feel some new weight on your body and back. You now have angelic wings! After some time, you depart from the sex session satisfied with the exchange.<br/><br/>";
             angelWings.effect = (c, self, other) -> {
-                self.body.addReplace(WingsPart.angelic, 1);
+                var wings = new WingsPart();
+                wings.addMod(new AngelicWingsMod());
+                self.body.addReplace(wings, 1);
                 return true;
             };
             transformationOptions.add(angelWings);

@@ -1,31 +1,18 @@
 package nightgames.characters.body;
 
-import java.util.Collection;
-import java.util.Collections;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.combat.Combat;
 
-public enum WingsPart implements BodyPart,BodyPartMod {
-    demonicslime("demonic slime ", .1, 1.3, 1.2),
-    angelicslime("angelic slime ", .1, 1.3, 1.2),
-    demonic("demonic ", .1, 1.3, 1.2),
-    angelic("angelic ", .15, 1.4, 1.3),
-    fallenangel("fallen angel  ", .15, 1.4, 1.3),
-    ethereal("ethereal ", .15, 1.4, 1.3);
-    public String desc;
-    public double hotness;
-    public double pleasure;
-    public double sensitivity;
+public class WingsPart extends GenericBodyPart {
+    public static final String TYPE = "wings";
 
-    WingsPart(String desc, double hotness, double pleasure, double sensitivity) {
-        this.desc = desc;
-        this.hotness = hotness;
-        this.sensitivity = sensitivity;
-        this.pleasure = pleasure;
+    public WingsPart() {
+        super("wings", 1, 1, 1, true, TYPE, "");
+    }
+
+    public WingsPart(JsonObject js) {
+        super(js);
     }
 
     @Override
@@ -35,139 +22,16 @@ public enum WingsPart implements BodyPart,BodyPartMod {
     }
 
     @Override
-    public String canonicalDescription() {
-        return desc + "wings";
-    }
-
-    @Override
-    public String describe(Character c) {
-        return desc + "wings";
-    }
-
-    @Override
-    public String fullDescribe(Character c) {
-        return desc + "wings";
-    }
-
-    @Override
-    public String toString() {
-        return desc + "wings";
-    }
-
-    @Override
-    public boolean isType(String type) {
-        return type.equalsIgnoreCase("wings");
-    }
-
-    @Override
-    public String getType() {
-        return "wings";
-    }
-
-    @Override
-    public double getHotness(Character self, Character opponent) {
-        return hotness;
-    }
-
-    @Override
-    public double priority(Character c) {
-        return getPleasure(c, null);
-    }
-
-    @Override
-    public double getPleasure(Character self, BodyPart target) {
-        return pleasure;
-    }
-
-    @Override
-    public double getSensitivity(Character self, BodyPart target) {
-        return sensitivity;
-    }
-
-    @Override
-    public boolean isReady(Character self) {
-        return true;
-    }
-
-     @Override public JsonObject save() {
-        JsonObject obj = new JsonObject();
-        obj.addProperty("enum", name());
-        return obj;
-    }
-
-    public BodyPart load(JsonObject obj) {
-        return WingsPart.valueOf(obj.get("enum").getAsString());
-    }
-
-    @Override
-    public double applyBonuses(Character self, Character opponent, BodyPart target, double damage, Combat c) {
-        return 0;
-    }
-
-    @Override
-    public String getFluids(Character c) {
-        return "";
-    }
-
-    @Override
-    public boolean isErogenous() {
+    public boolean getDefaultErogenous() {
         return false;
     }
 
     @Override
-    public boolean isNotable() {
-        return true;
-    }
-
-    @Override
-    public double applyReceiveBonuses(Character self, Character opponent, BodyPart target, double damage, Combat c) {
-        return 0;
-    }
-
-    @Override
-    public String prefix() {
-        return "";
-    }
-
-    @Override
-    public boolean isVisible(Character c) {
-        return true;
-    }
-
-    @Override
-    public double applySubBonuses(Character self, Character opponent, BodyPart with, BodyPart target, double damage,
-                    Combat c) {
-        return 0;
-    }
-
-    @Override
     public int attributeModifier(Attribute a) {
-        switch (a) {
-            case Speed:
-                return 2;
-            default:
-                return 0;
+        if (a == Attribute.Speed) {
+            return 2;
         }
-    }
-
-    @Override
-    public void tickHolding(Combat c, Character self, Character opponent, BodyPart otherOrgan) {
-
-    }
-
-    @Override
-    public int counterValue(BodyPart otherPart, Character self, Character other) {
         return 0;
-    }
-
-    @Override
-    public Collection<BodyPartMod> getMods() {
-        return Collections.singleton(this);
-    }
-
-    @Override
-    public String getModType() {
-        return name();
     }
 
     @Override

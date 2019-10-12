@@ -13,6 +13,7 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPartMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
+import nightgames.characters.body.DemonicWingsMod;
 import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.MouthPart;
@@ -136,7 +137,9 @@ public class ReykaTime extends BaseNPCTime {
                                         + "Engrossed with exploring your new wings, you don't even notice when Reyka approaches you and pushes you down. You realize that the ritual must have "
                                         + "taken a lot out of her, and she looks particularly famished now. You resign yourself to be the demoness' partner and dinner as payment for your new wings.<br/><br/>";
         demonWings.effect = (c, self, other) -> {
-            self.body.addReplace(WingsPart.demonic, 1);
+            var wings = new WingsPart();
+            wings.addMod(new DemonicWingsMod());
+            self.body.addReplace(wings, 1);
             return true;
         };
         transformationOptions.add(demonWings);

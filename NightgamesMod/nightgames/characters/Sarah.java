@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
+import nightgames.characters.body.AngelicWingsMod;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.FacePart;
@@ -70,7 +71,9 @@ public class Sarah extends BasePersonality {
         character.getGrowth().addTrait(20, Trait.disablingblows);
         character.getGrowth().addTrait(25, Trait.nimbletoes);
         character.getGrowth().addBodyPartMod(30, PussyPart.TYPE, new FieryMod());
-        character.getGrowth().addBodyPart(30, WingsPart.angelic);
+        var wings = new WingsPart();
+        wings.addMod(new AngelicWingsMod());
+        character.getGrowth().addBodyPart(30, wings);
         character.getGrowth().addTrait(30, Trait.valkyrie);
         character.getGrowth().addTrait(35, Trait.overwhelmingPresence);
         character.getGrowth().addTrait(40, Trait.bitingwords);
