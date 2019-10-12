@@ -1,7 +1,6 @@
-package nightgames.characters.body;
+package nightgames.characters.body.mods;
 
 import java.util.Optional;
-import nightgames.characters.body.mods.PartMod;
 
 public class DemonicTailMod extends PartMod {
     public static final String TYPE = "demonic tail";

@@ -1,6 +1,4 @@
-package nightgames.characters.body;
-
-import nightgames.characters.body.mods.PartMod;
+package nightgames.characters.body.mods;
 
 public class SlimeTailMod extends PartMod {
     public static final String TYPE = "slime tail";

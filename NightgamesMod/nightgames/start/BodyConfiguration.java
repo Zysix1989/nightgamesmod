@@ -13,7 +13,7 @@ import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.CatTailMod;
+import nightgames.characters.body.mods.CatTailMod;
 import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.mods.CatEarsMod;
 import nightgames.characters.body.CockPart;

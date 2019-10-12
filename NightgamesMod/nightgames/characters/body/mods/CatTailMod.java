@@ -1,6 +1,4 @@
-package nightgames.characters.body;
-
-import nightgames.characters.body.mods.PartMod;
+package nightgames.characters.body.mods;
 
 public class CatTailMod extends PartMod {
     public static final String TYPE = "cat tail";

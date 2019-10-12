@@ -9,7 +9,7 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.CatTailMod;
+import nightgames.characters.body.mods.CatTailMod;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.combat.Combat;

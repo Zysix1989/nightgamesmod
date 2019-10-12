@@ -13,7 +13,7 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPartMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
-import nightgames.characters.body.DemonicTailMod;
+import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.mods.PointedEarsMod;
