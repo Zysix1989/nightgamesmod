@@ -3,7 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.Body;
+import nightgames.characters.body.HandsPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -35,11 +35,11 @@ public class TemptressHandjob extends Handjob {
         if (target.roll(getSelf(), c, accuracy(c, target))) {
             if (!target.body.getRandomCock().isReady(target)) {
                 m -= 7;
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomCock(), m, c, this);
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomCock(), m, c, this);
                 if (target.body.getRandomCock().isReady(target)) {
                     // Was flaccid, got hard
                     c.write(getSelf(), deal(c, 0, Result.special, target));
-                    getSelf().add(c, new FiredUp(getSelf(), target, Body.HANDS));
+                    getSelf().add(c, new FiredUp(getSelf(), target, HandsPart.TYPE));
                 } else {
                     // Was flaccid, still is
                     c.write(getSelf(), deal(c, 0, Result.weak, target));
@@ -47,11 +47,11 @@ public class TemptressHandjob extends Handjob {
             } else {
                 FiredUp status = (FiredUp) getSelf().status.stream().filter(s -> s instanceof FiredUp).findAny()
                                 .orElse(null);
-                int stack = status == null || !status.getPart().equals(Body.HANDS) ? 0 : status.getStack();
+                int stack = status == null || !status.getPart().equals(HandsPart.TYPE) ? 0 : status.getStack();
                 c.write(getSelf(), deal(c, stack, Result.normal, target));
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomCock(),
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomCock(),
                                 m + m * stack / 2, c, this);
-                getSelf().add(c, new FiredUp(getSelf(), target, Body.HANDS));
+                getSelf().add(c, new FiredUp(getSelf(), target, HandsPart.TYPE));
             }
         } else {
             c.write(getSelf(), deal(c, 0, Result.miss, target));

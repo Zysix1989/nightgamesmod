@@ -2,9 +2,8 @@ package nightgames.skills;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.Body;
-import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
+import nightgames.characters.body.HandsPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -34,7 +33,7 @@ public class FondleBreasts extends Skill {
         if (target.roll(getSelf(), c, accuracy(c, target))) {
 
             if (getSelf().getType().equals("Cassie") && target.body.getLargestBreasts().getSensitivity(target, getSelf().body.getRandom(
-                Body.HANDS)) > 4) {
+                HandsPart.TYPE)) > 4) {
 
                 result=Result.critical;
                 //c.write(getSelf(), deal(c, m, Result.critical, target));
@@ -51,7 +50,7 @@ public class FondleBreasts extends Skill {
         }
 
         writeOutput(c, result, target);
-        target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomBreasts(), m,
+        target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomBreasts(), m,
                         c, this);
 
         return true;

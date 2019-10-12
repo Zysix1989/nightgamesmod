@@ -60,13 +60,12 @@ public class Body implements Cloneable {
         }
     }
 
-    public static final String HANDS = "hands";
-    public static final String FEET = "feet";
     public static final String SKIN = "skin";
 
     // yeah i know :(
     public static BodyPart nonePart = new GenericBodyPart("none", 0, 1, 1, "none", "");
-    private static Set<String> pluralParts = new HashSet<>(Arrays.asList(Body.HANDS, Body.FEET, "wings", BreastsPart.TYPE, "balls"));
+    private static Set<String> pluralParts = new HashSet<>(Arrays.asList(HandsPart.TYPE,
+        FeetPart.TYPE, "wings", BreastsPart.TYPE, "balls"));
     private final static BodyPart[] requiredParts = {
         new HandsPart(),
         new FeetPart(),
@@ -75,7 +74,7 @@ public class Body implements Cloneable {
         new MouthPart(),
         new BreastsPart(0),
         new EarsPart()};
-    private final static String[] fetishParts = {AssPart.TYPE, Body.FEET, CockPart.TYPE, "wings", TailPart.TYPE, TentaclePart.TYPE, BreastsPart.TYPE};
+    private final static String[] fetishParts = {AssPart.TYPE, FeetPart.TYPE, CockPart.TYPE, "wings", TailPart.TYPE, TentaclePart.TYPE, BreastsPart.TYPE};
 
     private LinkedHashSet<BodyPart> bodyParts;
     public double hotness;

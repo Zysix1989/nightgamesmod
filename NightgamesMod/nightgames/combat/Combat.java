@@ -18,7 +18,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.NPC;
-import nightgames.characters.Player;
 import nightgames.characters.State;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
@@ -26,6 +25,7 @@ import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.FeetPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.characters.body.mods.catcher.CyberneticMod;
@@ -63,7 +63,6 @@ import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
 import nightgames.skills.Thrust;
 import nightgames.skills.WildThrust;
-import nightgames.stance.Behind;
 import nightgames.stance.Kneeling;
 import nightgames.stance.Mount;
 import nightgames.stance.Neutral;
@@ -80,7 +79,6 @@ import nightgames.status.Compulsive;
 import nightgames.status.Compulsive.Situation;
 import nightgames.status.CounterStatus;
 import nightgames.status.DivineCharge;
-import nightgames.status.EnemyButtslutTrainingStatus;
 import nightgames.status.Enthralled;
 import nightgames.status.Falling;
 import nightgames.status.Flatfooted;
@@ -236,7 +234,7 @@ public class Combat {
         }
 
         if (self.has(Trait.footfetishist)) {
-            applyFetish(self, other, Body.FEET);
+            applyFetish(self, other, FeetPart.TYPE);
         } 
         if(self.has(Trait.breastobsessed) && other.hasBreasts()) {
             applyFetish(self, other, BreastsPart.TYPE);
@@ -496,7 +494,7 @@ public class Combat {
         String buttslutCompletedFlag = Trait.buttslut.name() + "Completed";
 
         if (character.has(Trait.footfetishist)) {
-            fetishDisadvantageAura(character, allies, opponents, Body.FEET, ClothingSlot.feet);
+            fetishDisadvantageAura(character, allies, opponents, FeetPart.TYPE, ClothingSlot.feet);
         }
         if (character.has(Trait.breastobsessed)) {
             fetishDisadvantageAura(character, allies, opponents, BreastsPart.TYPE, ClothingSlot.top);
@@ -528,7 +526,7 @@ public class Combat {
             ifPartNotNull = 1;
         } else if(fetishType == AssPart.TYPE ){
             ifPartNotNull = 1;
-        } else if(fetishType == Body.FEET ){
+        } else if(fetishType == FeetPart.TYPE){
             ifPartNotNull = 1;
         } else{
             ifPartNotNull = 0;

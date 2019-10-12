@@ -3,9 +3,9 @@ package nightgames.requirements;
 import nightgames.actions.Movement;
 import nightgames.areas.Area;
 import nightgames.characters.*;
-import nightgames.characters.body.Body;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
+import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.FieryMod;
 import nightgames.combat.Combat;
@@ -16,7 +16,6 @@ import nightgames.items.clothing.Clothing;
 import nightgames.modifier.standard.NoModifier;
 import nightgames.stance.*;
 import nightgames.status.Alert;
-import nightgames.status.FiredUp;
 import nightgames.status.Stsflag;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -189,7 +188,7 @@ public class RequirementTest {
     @Test public void orgasmTest() throws Exception {
         assertThat(orgasms(1).meets(combat, self, other), is(false));
         assertThat(orgasms(1).meets(combat, other, self), is(false));
-        self.doOrgasm(combat, other, self.body.getRandomPussy(), other.body.get(Body.HANDS).get(0));
+        self.doOrgasm(combat, other, self.body.getRandomPussy(), other.body.get(HandsPart.TYPE).get(0));
         assertThat(orgasms(1).meets(combat, self, other), is(true));
         assertThat(orgasms(1).meets(combat, other, self), is(false));
     }

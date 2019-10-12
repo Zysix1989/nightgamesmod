@@ -7,9 +7,9 @@ import java.util.List;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.Body;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.FeetPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -19,7 +19,8 @@ import nightgames.status.BodyFetish;
 public class ImbueFetish extends Skill {
 
     private static final List<String> POSSIBLE_FETISHES =
-                    Collections.unmodifiableList(Arrays.asList(PussyPart.TYPE, BreastsPart.TYPE, Body.FEET, AssPart.TYPE, CockPart.TYPE));
+                    Collections.unmodifiableList(Arrays.asList(PussyPart.TYPE, BreastsPart.TYPE,
+                        FeetPart.TYPE, AssPart.TYPE, CockPart.TYPE));
 
     private String chosenFetish;
 

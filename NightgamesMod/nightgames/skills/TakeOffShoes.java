@@ -3,7 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.Body;
+import nightgames.characters.body.FeetPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -17,7 +17,8 @@ public class TakeOffShoes extends Skill {
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
-        return (user.get(Attribute.Cunning) >= 5 && !user.human()) || target.body.getFetish(Body.FEET).isPresent() && getSelf().has(Trait.direct);
+        return (user.get(Attribute.Cunning) >= 5 && !user.human()) || target.body.getFetish(
+            FeetPart.TYPE).isPresent() && getSelf().has(Trait.direct);
     }
 
     @Override
@@ -32,15 +33,16 @@ public class TakeOffShoes extends Skill {
 
     @Override
     public float priorityMod(Combat c) {
-        return c.getOpponent(getSelf()).body.getFetish(Body.FEET).isPresent() && c.getOpponent(getSelf()).body.getFetish(Body.FEET).get().magnitude > .25 && !c.getOpponent(getSelf()).stunned() ? 1.0f : -5.0f;
+        return c.getOpponent(getSelf()).body.getFetish(FeetPart.TYPE).isPresent() && c.getOpponent(getSelf()).body.getFetish(
+            FeetPart.TYPE).get().magnitude > .25 && !c.getOpponent(getSelf()).stunned() ? 1.0f : -5.0f;
     }
 
     @Override
     public boolean resolve(Combat c, Character target) {
         getSelf().strip(ClothingSlot.feet, c);
-        if (target.body.getFetish(Body.FEET).isPresent() && target.body.getFetish(Body.FEET).get().magnitude > .25) {
+        if (target.body.getFetish(FeetPart.TYPE).isPresent() && target.body.getFetish(FeetPart.TYPE).get().magnitude > .25) {
             writeOutput(c, Result.special, target);
-            target.temptWithSkill(c, getSelf(), getSelf().body.getRandom(Body.FEET), Global.random(17, 26), this);
+            target.temptWithSkill(c, getSelf(), getSelf().body.getRandom(FeetPart.TYPE), Global.random(17, 26), this);
         } else {
             writeOutput(c, Result.normal, target);
         }
@@ -55,7 +57,8 @@ public class TakeOffShoes extends Skill {
     @Override
     public Tactics type(Combat c) {
         Character target = c.getOpponent(getSelf());
-        return target.body.getFetish(Body.FEET).isPresent() && target.body.getFetish(Body.FEET).get().magnitude > .25 ? Tactics.pleasure : Tactics.misc;
+        return target.body.getFetish(FeetPart.TYPE).isPresent() && target.body.getFetish(
+            FeetPart.TYPE).get().magnitude > .25 ? Tactics.pleasure : Tactics.misc;
     }
 
     @Override

@@ -9,6 +9,8 @@ import nightgames.characters.Character;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.FeetPart;
+import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TentaclePart;
@@ -44,7 +46,7 @@ public class LeechEnergy extends Skill {
             BodyPart part = null;
             BodyPart selfPart = getSelf().body.getRandom(TentaclePart.TYPE);
             List<String> targets = new ArrayList<String>(
-                            Arrays.asList(Body.HANDS, Body.FEET, Body.SKIN, MouthPart.TYPE, CockPart.TYPE, PussyPart.TYPE, "balls"));
+                            Arrays.asList(HandsPart.TYPE, FeetPart.TYPE, Body.SKIN, MouthPart.TYPE, CockPart.TYPE, PussyPart.TYPE, "balls"));
             while (!targets.isEmpty()) {
                 String type = targets.remove(Global.random(targets.size()));
                 part = target.body.getRandom(type);
@@ -59,7 +61,7 @@ public class LeechEnergy extends Skill {
             }
             String partString = selfPart.describe(getSelf());
             String partStringSingular = partString.substring(0, partString.length() - 1);
-            if (part.isType(Body.HANDS)) {
+            if (part.isType(HandsPart.TYPE)) {
                 c.write(getSelf(),
                                 Global.format("{self:name-possessive} numerous " + selfPart.describe(getSelf())
                                                 + " latch onto {other:name-possessive} hands and swallow up {other:possessive} fingers. While the "
@@ -67,7 +69,7 @@ public class LeechEnergy extends Skill {
                                                 + " are lasciviously licking {other:possessive} digits, "
                                                 + "{other:subject-action:start|starts} feeling weak as {other:possessive} energy is being drained.",
                                 getSelf(), target));
-            } else if (part.isType(Body.FEET)) {
+            } else if (part.isType(FeetPart.TYPE)) {
                 c.write(getSelf(),
                                 Global.format("{self:name-possessive} numerous " + selfPart.describe(getSelf())
                                                 + " latch onto {other:name-possessive} legs and swallow up {other:possessive} feet. While the numerous bumps and ridges inside the "

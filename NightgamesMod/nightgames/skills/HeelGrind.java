@@ -2,10 +2,9 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.FeetPart;
+import nightgames.characters.body.HandsPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -36,7 +35,7 @@ public class HeelGrind extends Skill {
 
     @Override
     public float priorityMod(Combat c) {
-        BodyPart feet = getSelf().body.getRandom(Body.FEET);
+        BodyPart feet = getSelf().body.getRandom(FeetPart.TYPE);
         Character other = c.p1 == getSelf() ? c.p2 : c.p1;
         BodyPart otherpart = other.hasDick() ? other.body.getRandomCock() : other.body.getRandomPussy();
         if (feet != null) {
@@ -55,15 +54,15 @@ public class HeelGrind extends Skill {
         int m = 12 + Global.random(6);
         int m2 = m / 2;
         writeOutput(c, Result.normal, target);
-        target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.FEET), target.body.getRandomPussy(), m, c, this);
-        target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomBreasts(), m2, c, this);
+        target.body.pleasure(getSelf(), getSelf().body.getRandom(FeetPart.TYPE), target.body.getRandomPussy(), m, c, this);
+        target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomBreasts(), m2, c, this);
         if (c.getStance().en != Stance.behindfootjob) {
 
             c.setStance(new BehindFootjob(getSelf(), target, c.getStance().anallyPenetrated(c,target)), getSelf(), true);
 
         }
         if (Global.random(100) < 15 + 2 * getSelf().get(Attribute.Fetish)) {
-            target.add(c, new BodyFetish(target, getSelf(), Body.FEET, .25));
+            target.add(c, new BodyFetish(target, getSelf(), FeetPart.TYPE, .25));
         }
         return true;
     }

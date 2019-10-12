@@ -3,8 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.Body;
-import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.HandsPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -39,7 +38,7 @@ public class Finger extends Skill {
                 } else {
                     c.write(getSelf(), receive(c, 0, Result.normal, target));
                 }
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomPussy(), m,
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomPussy(), m,
                                 c, this);
             } else {
                 if (getSelf().human()) {
@@ -47,7 +46,7 @@ public class Finger extends Skill {
                 } else {
                     c.write(getSelf(), receive(c, 0, Result.weak, target));
                 }
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomPussy(), m,
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomPussy(), m,
                                 c, this);
             }
         } else {

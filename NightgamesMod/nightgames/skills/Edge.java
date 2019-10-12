@@ -3,7 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
-import nightgames.characters.body.Body;
+import nightgames.characters.body.HandsPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -79,7 +79,7 @@ public class Edge extends Skill {
                             + " {other:possessive} energy quite rapidly.", getSelf(), target));
             target.weaken(c, Math.min(30, Global.random((target.getArousal().percent() - 100) / 10)));
         }
-        target.temptWithSkill(c, getSelf(), getSelf().body.getRandom(Body.HANDS), 20 + Global.random(8), this);
+        target.temptWithSkill(c, getSelf(), getSelf().body.getRandom(HandsPart.TYPE), 20 + Global.random(8), this);
         target.emote(Emotion.horny, 30);
         getSelf().emote(Emotion.confident, 15);
         getSelf().emote(Emotion.dominant, 15);

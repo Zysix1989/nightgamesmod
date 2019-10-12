@@ -9,6 +9,7 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -41,7 +42,7 @@ public class Masturbate extends Skill {
     }
 
     public BodyPart getSelfOrgan() {
-        return getSelf().body.getRandom(Body.HANDS);
+        return getSelf().body.getRandom(HandsPart.TYPE);
     }
 
     public BodyPart getTargetOrgan(Combat c, Character target) {

@@ -3,8 +3,7 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.Body;
-import nightgames.characters.body.CockPart;
+import nightgames.characters.body.HandsPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -51,10 +50,10 @@ public class Handjob extends Skill {
             if (getSelf().get(Attribute.Seduction) >= 8) {
                 m += 6;
                 writeOutput(c, Result.normal, target);
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomCock(), m, c, this);
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomCock(), m, c, this);
             } else {
                 writeOutput(c, Result.weak, target);
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomCock(), m, c, this);
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomCock(), m, c, this);
             }
         } else {
             writeOutput(c, Result.miss, target);

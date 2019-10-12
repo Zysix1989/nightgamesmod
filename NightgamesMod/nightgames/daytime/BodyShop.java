@@ -7,13 +7,14 @@ import java.util.stream.Collectors;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarsPart;
+import nightgames.characters.body.FeetPart;
 import nightgames.characters.body.GenericBodyPart;
+import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.AnalPussyMod;
@@ -524,14 +525,14 @@ public class BodyShop extends Activity {
         addBodyPart("Fused Boots",
                         new GenericBodyPart("Fused Boots",
                                         "{self:name-possessive} legs are wrapped in a shiny black material that look fused on.",
-                                        .3, 1.5, .7, true, Body.FEET, ""),
-                        new GenericBodyPart("feet", 0, 1, 1, Body.FEET, ""), 1000, 1000);
+                                        .3, 1.5, .7, true, FeetPart.TYPE, ""),
+                        new GenericBodyPart("feet", 0, 1, 1, FeetPart.TYPE, ""), 1000, 1000);
         addBodyPartMod("Anal Pussy", new AnalPussyMod(), AssPart.TYPE, 2000, 2000, 0);
         addBodyPart("Fused Gloves",
                         new GenericBodyPart("Fused Gloves",
                                         "{self:name-possessive} arms and hands are wrapped in a shiny black material that look fused on.",
-                                        .2, 1.5, .7, true, Body.HANDS, ""),
-                        new GenericBodyPart("hands", 0, 1, 1, Body.HANDS, ""), 1000, 1000);
+                                        .2, 1.5, .7, true, HandsPart.TYPE, ""),
+                        new GenericBodyPart("hands", 0, 1, 1, HandsPart.TYPE, ""), 1000, 1000);
     }
 
     @Override

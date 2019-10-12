@@ -6,9 +6,9 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart.Size;
+import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.mods.CatTailMod;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
@@ -239,7 +239,7 @@ public class TailPeg extends Skill {
                                 target.pronoun(), target.action("lose"), target.possessiveAdjective());
             case intercourse:
                 List<BodyPart> parts = c.getStance().getPartsFor(c, getSelf(), target);
-                String part = Body.HANDS;
+                String part = HandsPart.TYPE;
                 if (!parts.isEmpty()) {
                     part = Global.pickRandom(parts).get().describe(getSelf());
                 }

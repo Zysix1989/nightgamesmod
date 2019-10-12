@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.Body;
+import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
@@ -52,12 +52,12 @@ public class PussyWorship extends Skill {
         }
         target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandomPussy(), m, c, this);
         if (getSelf().hasDick() && (!getSelf().hasPussy() || Global.random(2) == 0)) {
-            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), getSelf().body.getRandomCock(), m, c, this);
+            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), getSelf().body.getRandomCock(), m, c, this);
         } else if (getSelf().hasPussy()) {
-            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), getSelf().body.getRandomPussy(), m,
+            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), getSelf().body.getRandomPussy(), m,
                             c, this);
         } else {
-            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), getSelf().body.getRandomHole(), m, c, this);
+            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), getSelf().body.getRandomHole(), m, c, this);
         }
 
         target.buildMojo(c, 20);

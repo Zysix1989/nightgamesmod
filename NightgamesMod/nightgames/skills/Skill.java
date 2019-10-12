@@ -8,7 +8,7 @@ import java.util.Set;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.Body;
+import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
@@ -229,7 +229,7 @@ public abstract class Skill {
             FiredUp status = (FiredUp) skill.user().status.stream().filter(s -> s instanceof FiredUp).findAny()
                             .orElse(null);
             if (status != null) {
-                if (status.getPart().equals(Body.HANDS) && skill.getClass() != TemptressHandjob.class
+                if (status.getPart().equals(HandsPart.TYPE) && skill.getClass() != TemptressHandjob.class
                                 || status.getPart().equals(MouthPart.TYPE) && skill.getClass() != TemptressBlowjob.class
                                 || status.getPart().equals(PussyPart.TYPE) && skill.getClass() != TemptressRide.class) {
                     skill.user().removeStatus(Stsflag.firedup);

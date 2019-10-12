@@ -21,7 +21,9 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.EarsPart;
+import nightgames.characters.body.FeetPart;
 import nightgames.characters.body.GenericBodyPart;
+import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.TentaclePart;
@@ -833,7 +835,7 @@ public class Player extends Character {
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                 } else {
                     c.write(this, "You pull " + target.getName() + " to you and rub your thigh against her girl parts.");
-                    target.body.pleasure(this, body.getRandom(Body.FEET), target.body.getRandomPussy(),
+                    target.body.pleasure(this, body.getRandom(FeetPart.TYPE), target.body.getRandomPussy(),
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                 }
                 break;
@@ -851,7 +853,7 @@ public class Player extends Character {
                         c.setStance(new Neutral(this, c.getOpponent(this)), this, true);
                     }
                 } else {
-                    target.body.pleasure(this, body.getRandom(Body.HANDS), target.body.getRandomBreasts(),
+                    target.body.pleasure(this, body.getRandom(HandsPart.TYPE), target.body.getRandomBreasts(),
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                     c.write(this, Global.format(
                                     "{self:SUBJECT-ACTION:pinch|pinches} {other:possessive} nipples with {self:possessive} hands as {other:subject-action:try|tries} to fuck {self:direct-object}. "

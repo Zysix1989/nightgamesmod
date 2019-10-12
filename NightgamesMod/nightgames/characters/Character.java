@@ -40,6 +40,7 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
@@ -2725,7 +2726,7 @@ public abstract class Character extends Observable implements Cloneable {
                 } else {
                     c.write(Global.format("{self:SUBJECT-ACTION:focus|focuses} {self:possessive} attentions on {other:name-do}, "
                                     + "harassing and toying with {other:possessive} body as much as {self:pronoun} can.<br/>", this, pet));
-                    pet.body.pleasure(this, body.getRandom(Body.HANDS), pet.body.getRandomGenital(), Global.random(10, 20), c);
+                    pet.body.pleasure(this, body.getRandom(HandsPart.TYPE), pet.body.getRandomGenital(), Global.random(10, 20), c);
                 }
             }
         }
@@ -4105,7 +4106,7 @@ public abstract class Character extends Observable implements Cloneable {
     }
 
     public boolean isPartProtected(BodyPart target) {
-        return target.isType(Body.HANDS) && has(ClothingTrait.nursegloves);
+        return target.isType(HandsPart.TYPE) && has(ClothingTrait.nursegloves);
     }
 
     /**Removes temporary traits from this character. 

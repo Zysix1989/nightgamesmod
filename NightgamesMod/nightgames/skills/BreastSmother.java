@@ -4,7 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
-import nightgames.characters.body.Body;
+import nightgames.characters.body.HandsPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -111,7 +111,7 @@ public class BreastSmother extends Skill {
                                 getSelf(), target));
                 target.body.pleasure(getSelf(), getSelf().body.getRandomPussy(), target.body.getRandomCock(),
                                 targetDmg / 2, c, this);
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomPussy(),
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomPussy(),
                                 targetDmg / 2, c, this);
                 getSelf().body.pleasure(target, target.body.getRandomCock(), getSelf().body.getRandomPussy(), selfDmg,
                                 c, this);
@@ -144,7 +144,7 @@ public class BreastSmother extends Skill {
                                                 + " ass.", getSelf(), target));
                 target.body.pleasure(getSelf(), getSelf().body.getRandomCock(), target.body.getRandomPussy(),
                                 targetDmg / 2, c, this);
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomAss(),
+                target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomAss(),
                                 targetDmg / 2, c, this);
                 getSelf().body.pleasure(target, target.body.getRandomPussy(), getSelf().body.getRandomCock(), selfDmg,
                                 c, this);
@@ -201,7 +201,7 @@ public class BreastSmother extends Skill {
                 }
                 c.write(getSelf(), Global.format(msg, getSelf(), target));
                 if (pair == Pairing.MALE_HERM) {
-                    target.body.pleasure(getSelf(), getSelf().body.getRandom(Body.HANDS), target.body.getRandomCock(),
+                    target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomCock(),
                                     targetDmg / 2, c, this);
                     realTargetDmg /= 2;
                 }
