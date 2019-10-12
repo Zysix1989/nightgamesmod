@@ -14,6 +14,7 @@ import nightgames.characters.body.FacePart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TentaclePart;
+import nightgames.characters.body.mods.GooeySkinMod;
 import nightgames.characters.body.mods.catcher.GooeyMod;
 import nightgames.characters.body.mods.pitcher.SlimyCockMod;
 import nightgames.characters.custom.CharacterLine;
@@ -459,7 +460,7 @@ public class Airi extends BasePersonality {
             if (asspart != null) {
                 asspart.temporarilyChangeSize(2, 10);
             }
-            self.body.temporaryAddOrReplacePartWithType(new GenericBodyPart("gooey skin", .5, 1.5, .8, Body.SKIN, ""), 999);
+            ((GenericBodyPart) self.body.getRandom(Body.SKIN)).addTemporaryMod(new GooeySkinMod(), 999);
             self.body.temporaryAddOrReplacePartWithType(new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);
             if (self.level >= 25) {
                 self.addTemporaryTrait(Trait.shameless, 999);

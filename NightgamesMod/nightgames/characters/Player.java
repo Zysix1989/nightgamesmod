@@ -27,6 +27,7 @@ import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.TentaclePart;
+import nightgames.characters.body.mods.GooeySkinMod;
 import nightgames.characters.body.mods.catcher.GooeyMod;
 import nightgames.characters.body.mods.pitcher.SlimyCockMod;
 import nightgames.combat.Combat;
@@ -1026,8 +1027,7 @@ public class Player extends Character {
                 && body.getRandomBreasts().getSize() != Size.min()) {
                 part.temporarilyChangeSize(1, 999);
             }
-            body.temporaryAddOrReplacePartWithType(
-                new GenericBodyPart("gooey skin", .6, 1.5, .8, Body.SKIN, ""), 999);
+            ((GenericBodyPart) body.getRandom(Body.SKIN)).addTemporaryMod(new GooeySkinMod(), 999);
             body.temporaryAddOrReplacePartWithType(
                 new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);
             addTemporaryTrait(Trait.Sneaky, 999);
