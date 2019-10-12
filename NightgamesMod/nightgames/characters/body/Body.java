@@ -949,7 +949,7 @@ public class Body implements Cloneable {
 
     private void addBallsIfNeeded() {
         if (getRandom(Body.BALLS) == null) {
-            add(new GenericBodyPart("balls", 0, 1.0, 1.5, Body.BALLS, ""));
+            add(new BallsPart());
         }
     }
 
@@ -1059,7 +1059,7 @@ public class Body implements Cloneable {
         }
         if (sex.hasBalls()) {
             if (!has(Body.BALLS)) {
-                add(new GenericBodyPart("balls", 0, 1.0, 1.5, Body.BALLS, ""));
+                add(new BallsPart());
             }
         }
     }
