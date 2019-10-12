@@ -502,8 +502,7 @@ public class Body implements Cloneable {
     }
 
     public int pleasure(Character opponent, BodyPart with, BodyPart target, double magnitude,
-        int bonus, Combat c,
-        Skill skill) {
+        int bonus, Combat c, Skill skill) {
         if (target == null) {
             target = nonePart;
         }
