@@ -70,7 +70,7 @@ public class Body implements Cloneable {
     private final static BodyPart[] requiredParts = {
         new HandsPart(),
         new FeetPart(),
-        new GenericBodyPart("skin", 0, 1, 1, SKIN, ""),
+        new SkinPart(),
         new AssPart(AssPart.Size.Normal),
         new MouthPart(),
         new BreastsPart(0),
