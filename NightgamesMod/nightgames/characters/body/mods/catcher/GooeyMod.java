@@ -1,7 +1,6 @@
 package nightgames.characters.body.mods.catcher;
 
 import java.util.Optional;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;

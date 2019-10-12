@@ -3,7 +3,7 @@ package nightgames.characters;
 import java.util.Arrays;
 import java.util.Optional;
 
-import nightgames.characters.body.AngelicWingsMod;
+import nightgames.characters.body.mods.AngelicWingsMod;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.FacePart;

@@ -1,10 +1,8 @@
 package nightgames.characters.body;
 
+import com.google.gson.JsonObject;
 import java.util.Collection;
 import java.util.Collections;
-
-import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;

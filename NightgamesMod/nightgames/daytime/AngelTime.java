@@ -6,7 +6,7 @@ import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.AngelicWingsMod;
+import nightgames.characters.body.mods.AngelicWingsMod;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.body.CockPart;

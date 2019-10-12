@@ -1,4 +1,4 @@
-package nightgames.characters.body;
+package nightgames.characters.body.mods;
 
 public class FallenAngelicWingsMod extends AngelicWingsMod {
     public static final String TYPE = "fallen angel wings";

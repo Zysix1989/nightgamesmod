@@ -1,9 +1,6 @@
 package nightgames.characters.body.mods;
 
 import java.util.Optional;
-
-import com.google.gson.JsonElement;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;

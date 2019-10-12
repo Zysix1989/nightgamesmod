@@ -1,13 +1,8 @@
 package nightgames.characters.body.mods;
 
 import java.util.Optional;
-import nightgames.characters.Character;
-import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
-import nightgames.characters.body.MouthPart;
-import org.jtwig.JtwigModel;
-import org.jtwig.JtwigTemplate;
 
 public abstract class AdditionalPussyMod extends PartMod {
     public static final String TYPE = "secondpussy";
