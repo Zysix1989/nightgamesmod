@@ -69,7 +69,7 @@ public class Body implements Cloneable {
     private static Set<String> pluralParts = new HashSet<>(Arrays.asList(Body.HANDS, Body.FEET, "wings", BreastsPart.TYPE, "balls"));
     private final static BodyPart[] requiredParts = {
         new HandsPart(),
-        new GenericBodyPart("feet", 0, 1, 1, FEET, ""),
+        new FeetPart(),
         new GenericBodyPart("skin", 0, 1, 1, SKIN, ""),
         new AssPart(AssPart.Size.Normal),
         new MouthPart(),
