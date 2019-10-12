@@ -52,7 +52,7 @@ public class TestAngel extends BasePersonality {
         baseChar.body.add(new FacePart(.1, 4.2));
         baseChar.body.add(new PussyPart());
         baseChar.body.add(new MouthPart());
-        baseChar.body.add(new GenericBodyPart("hands", 0, 1, 1, Body.HANDS, ""));
+        baseChar.body.add(new HandsPart());
         baseChar.body.add(new GenericBodyPart("feet", 0, 1, 1, Body.FEET, ""));
         baseChar.body.add(new GenericBodyPart("skin", 0, 1, 1, Body.SKIN, ""));
         baseChar.body.add(new AssPart(Size.Small));
@@ -424,7 +424,6 @@ public class TestAngel extends BasePersonality {
         var pussy = new PussyPart();
         pussy.addMod(new DivineMod());
         character.body.addReplace(pussy, 1);
-        character.body.addReplace(WingsPart.angelic, 5);
         character.unequipAllClothing();
         character.outfitPlan.add(Clothing.getByID("translucentshawl"));
         character.outfitPlan.add(Clothing.getByID("bikinitop"));
