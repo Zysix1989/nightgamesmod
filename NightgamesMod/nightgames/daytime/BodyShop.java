@@ -19,6 +19,7 @@ import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.AnalPussyMod;
+import nightgames.characters.body.mods.LatexSkinMod;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -523,17 +524,19 @@ public class BodyShop extends Activity {
                         noRequirement);
         addTraitMod("Pheromones", "Remove Pheromones", Trait.augmentedPheromones, 1500, 1500,
                         noRequirement);
-        addBodyPart("Fused Boots",
-                        new GenericBodyPart("Fused Boots",
-                                        "{self:name-possessive} legs are wrapped in a shiny black material that look fused on.",
-                                        .3, 1.5, .7, true, FeetPart.TYPE, ""),
-                        new GenericBodyPart("feet", 0, 1, 1, FeetPart.TYPE, ""), 1000, 1000);
+        addBodyPartMod("Fused Boots",
+                        new LatexSkinMod(),
+                        FeetPart.TYPE,
+                        1000,
+                        1000,
+                        0);
         addBodyPartMod("Anal Pussy", new AnalPussyMod(), AssPart.TYPE, 2000, 2000, 0);
-        addBodyPart("Fused Gloves",
-                        new GenericBodyPart("Fused Gloves",
-                                        "{self:name-possessive} arms and hands are wrapped in a shiny black material that look fused on.",
-                                        .2, 1.5, .7, true, HandsPart.TYPE, ""),
-                        new GenericBodyPart("hands", 0, 1, 1, HandsPart.TYPE, ""), 1000, 1000);
+        addBodyPartMod("Fused Gloves",
+            new LatexSkinMod(),
+            HandsPart.TYPE,
+            1000,
+            1000,
+            0);
     }
 
     @Override
