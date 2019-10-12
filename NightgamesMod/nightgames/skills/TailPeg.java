@@ -2,7 +2,6 @@ package nightgames.skills;
 
 import java.util.Collection;
 import java.util.List;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
@@ -10,6 +9,7 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart.Size;
+import nightgames.characters.body.CatTailMod;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.combat.Combat;
@@ -31,7 +31,10 @@ public class TailPeg extends Skill {
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
         Collection<BodyPart> tails = user.body.get(TailPart.TYPE);
-        boolean hasFuckableTail = tails.stream().anyMatch(p -> p.isType(TailPart.TYPE) && p != TailPart.cat && p != TailPart.slimeycat);
+        boolean hasFuckableTail = tails.stream().anyMatch(
+            p -> p.isType(TailPart.TYPE) &&
+                ((TailPart) p).getMods().stream()
+                .anyMatch(m -> m.getModType().equals(CatTailMod.TYPE)));
         return hasFuckableTail && (user.get(Attribute.Dark) >= 1 || user.get(Attribute.Seduction) >= 20);
     }
 

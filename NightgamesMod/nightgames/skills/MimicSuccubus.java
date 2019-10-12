@@ -7,9 +7,11 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
+import nightgames.characters.body.DemonicTailMod;
 import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.SlimeTailMod;
 import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
@@ -71,7 +73,11 @@ public class MimicSuccubus extends Skill {
         getSelf().addTemporaryTrait(Trait.energydrain, 999);
         getSelf().addTemporaryTrait(Trait.spiritphage, 999);
         getSelf().body.temporaryAddOrReplacePartWithType(WingsPart.demonicslime, 999);
-        getSelf().body.temporaryAddOrReplacePartWithType(TailPart.demonicslime, 999);
+        if (getSelf().body.getRandom(TailPart.TYPE) == null) {
+            getSelf().body.temporaryAddOrReplacePartWithType(new TailPart(), 999);
+        }
+        ((GenericBodyPart) getSelf().body.getRandom(TailPart.TYPE)).addTemporaryMod(new DemonicTailMod(), 999);
+        ((GenericBodyPart) getSelf().body.getRandom(TailPart.TYPE)).addTemporaryMod(new SlimeTailMod(), 999);
         ((GenericBodyPart) getSelf().body.get(EarsPart.TYPE)).addTemporaryMod(new PointedEarsMod(), 999);
         BreastsPart part = getSelf().body.getBreastsBelow(Size.max());
         if (part != null) {

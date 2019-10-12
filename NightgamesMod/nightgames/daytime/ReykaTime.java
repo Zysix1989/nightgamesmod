@@ -13,6 +13,7 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPartMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
+import nightgames.characters.body.DemonicTailMod;
 import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.mods.PointedEarsMod;
@@ -153,7 +154,9 @@ public class ReykaTime extends BaseNPCTime {
                         + "<i>\"There you go! Do you want me to show you how to use it?\"</i><br/><br/>"
                         + "you shake your head no and decide to leave, noticing that your new tail needs to stay hidden before your mind starts using it for all sorts of lewd purposes.<br/>";
         demonTail.effect = (c, self, other) -> {
-            self.body.addReplace(TailPart.demonic, 1);
+            var tail = new TailPart();
+            tail.addMod(new DemonicTailMod());
+            self.body.addReplace(tail, 1);
             return true;
         };
         transformationOptions.add(demonTail);

@@ -14,8 +14,10 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.BodyPartMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
+import nightgames.characters.body.DemonicTailMod;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
@@ -59,7 +61,9 @@ public class Corruption extends Addiction {
             if (!atLeast(Severity.MED)) {
                 if (affected.human())
                 Global.writeIfCombat(c, affected, Global.format("The corruption is churning within {self:name-do}, but it seems that it's done all it can for now.", affected, cause));
-            } else if (!affected.body.has(TailPart.TYPE) || affected.body.getRandom(TailPart.TYPE) != TailPart.demonic) {
+            } else if (!affected.body.has(TailPart.TYPE) ||
+                affected.body.getRandom(TailPart.TYPE).getMods()
+                    .stream().anyMatch(m -> m.getModType().equals(DemonicTailMod.TYPE))) {
                 if (affected.human()) {
                     Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes {self:name-do} even further - {self:possessive} your back and butt feeling both pleasure and pain "
                                     + "as something pushes out! A spade-tipped tail bursts out of {self:possessive} lower back!</b>", affected, cause));
@@ -67,7 +71,7 @@ public class Corruption extends Addiction {
                      Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes {self:name-do} even further, and a spade-tipped tail bursts out of {self:possessive}"
                                 + " lower back!</b>", affected, cause));
                 }
-                affected.body.temporaryAddOrReplacePartWithType(TailPart.demonic, Global.random(15, 40));
+                ((GenericBodyPart) affected.body.getRandom(TailPart.TYPE)).addTemporaryMod(new DemonicTailMod(), Global.random(15, 40));
             } else if (!affected.body.has("wings") || affected.body.getRandom("wings") != WingsPart.demonic) {
                 if (affected.human()) {
                     Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes you even further: your back swells painfully - bones aching until it feels like your back splits open!"

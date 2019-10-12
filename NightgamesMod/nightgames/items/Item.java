@@ -12,6 +12,7 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
+import nightgames.characters.body.DemonicTailMod;
 import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.PussyPart;
@@ -186,7 +187,8 @@ public enum Item implements Loot {
             new PartModEffect("drink", "throw", CockPart.TYPE, new IncubusCockMod(), 15),
             new PartModEffect("drink", "throw", EarsPart.TYPE, new PointedEarsMod(), 15),
             new BodyReplaceEffect("drink", "throw", WingsPart.demonic),
-            new BodyReplaceEffect("drink", "throw", TailPart.demonic),
+            new BodyReplaceEffect("drink", "throw", new TailPart()),
+            new PartModEffect("drink", "throw", TailPart.TYPE, new DemonicTailMod(), 15),
             new BodyGrowthPlusEffect("drink", "throw",
                 new BreastsPart(BreastsPart.Size.DDCup))),
         RequirementShortcuts.rev(RequirementShortcuts.noTrait(Trait.succubus)),
@@ -202,7 +204,8 @@ public enum Item implements Loot {
             //TODO: Grow a cock if you don't already have one.
             new PartModEffect("drink", "throw", EarsPart.TYPE, new PointedEarsMod(), 15),
             new BodyReplaceEffect("drink", "throw", WingsPart.demonic),
-            new BodyReplaceEffect("drink", "throw", TailPart.demonic)
+            new BodyReplaceEffect("drink", "throw", new TailPart()),
+            new PartModEffect("drink", "throw", TailPart.TYPE, new DemonicTailMod(), 15)
             //new BodyModEffect("drink", "throw", BreastsPart.dd, BodyModEffect.Effect.growplus)
         ),
         RequirementShortcuts.rev(RequirementShortcuts.noTrait(Trait.succubus)),
@@ -218,7 +221,8 @@ public enum Item implements Loot {
             //TODO: Grow a cock if you don't already have one.
             new PartModEffect("drink", "throw", EarsPart.TYPE, new PointedEarsMod(), 15),
             new BodyReplaceEffect("drink", "throw", WingsPart.demonic),
-            new BodyReplaceEffect("drink", "throw", TailPart.demonic),
+            new BodyReplaceEffect("drink", "throw", new TailPart()),
+            new PartModEffect("drink", "throw", TailPart.TYPE, new DemonicTailMod(), 15),
             new BodyGrowthPlusEffect("drink", "throw",
                 new BreastsPart(BreastsPart.Size.DDCup))),
         RequirementShortcuts.rev(RequirementShortcuts.noTrait(Trait.succubus)),

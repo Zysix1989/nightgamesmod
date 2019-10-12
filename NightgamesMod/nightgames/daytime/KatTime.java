@@ -9,6 +9,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPartMod;
+import nightgames.characters.body.CatTailMod;
 import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.mods.CatEarsMod;
 import nightgames.characters.body.CockPart;
@@ -130,8 +131,9 @@ public class KatTime extends BaseNPCTime {
         catTail.addRequirement(not(bodypart(TailPart.TYPE)), "Has no tail");
         catTail.option = "Cat Tail";
         catTail.scene = "[Placeholder]<br/>Kat uses her totemic magic to grow you a cat tail.";
-        catTail.effect = (c, self, other) -> {
-            self.body.addReplace(TailPart.cat, 1);
+        catTail.effect = (c, self, other) -> {        var tail = new TailPart();
+            tail.addMod(new CatTailMod());
+            self.body.addReplace(tail, 1);
             return true;
         };
         transformationOptions.add(catTail);
