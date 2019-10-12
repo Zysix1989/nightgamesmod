@@ -7,7 +7,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 
-public enum ToysPart implements BodyPart,BodyPartMod {
+public enum ToysPart implements BodyPart {
     dildo("a", "dildo", "dildo", 0, 1.0, 0),
     vibrator("a", "vibrator", "dildo", 0, 1.5, 0),
     onahole("an", "onahole", "onahole", 0, 1.0, 0),
@@ -156,13 +156,9 @@ public enum ToysPart implements BodyPart,BodyPartMod {
 
     @Override
     public Collection<BodyPartMod> getMods() {
-        return Collections.singleton(this);
+        return Collections.emptyList();
     }
 
-    @Override
-    public String getModType() {
-        return name();
-    }
 
     @Override
     public String adjective() {
