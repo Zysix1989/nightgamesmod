@@ -136,8 +136,8 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
     }
 
     @Override
-    public double getPleasure(Character self, BodyPart target) {
-        return (.25 + getSize().value * .35) * super.getPleasure(self, target);
+    public double getPleasure(Character self) {
+        return (.25 + getSize().value * .35) * super.getPleasure(self);
     }
 
     @Override
@@ -280,7 +280,7 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
 
     @Override
     public double priority(Character c) {
-        double priority = getPleasure(c, null);
+        double priority = getPleasure(c);
         if (c.has(Trait.temptingtits)) {
             priority += .5;
         }

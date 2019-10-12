@@ -536,7 +536,7 @@ public class Body implements Cloneable {
         }
         double pleasure = 1;
         if (!with.isType("none")) {
-            pleasure = with.getPleasure(opponent, target);
+            pleasure = with.getPleasure(opponent);
         }
         double perceptionBonus = 1.0;
         if (opponent != null) {

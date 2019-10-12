@@ -122,8 +122,8 @@ public class AssPart extends GenericBodyPart implements Sizable<AssPart.Size> {
     }
 
     @Override
-    public double getPleasure(Character self, BodyPart target) {
-        double pleasureMod = super.getPleasure(self, target);
+    public double getPleasure(Character self) {
+        double pleasureMod = super.getPleasure(self);
         pleasureMod += self.has(Trait.analTraining1) ? .5 : 0;
         pleasureMod += self.has(Trait.analTraining2) ? .7 : 0;
         pleasureMod += self.has(Trait.analTraining3) ? .7 : 0;

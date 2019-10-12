@@ -24,7 +24,7 @@ public interface BodyPart {
 
     public double getHotness(Character self, Character opponent);
 
-    public double getPleasure(Character self, BodyPart target);
+    public double getPleasure(Character self);
 
     public double getSensitivity(Character self, BodyPart target);
 

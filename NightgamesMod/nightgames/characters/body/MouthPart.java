@@ -127,8 +127,8 @@ public class MouthPart extends GenericBodyPart {
     }
 
     @Override
-    public double getPleasure(Character self, BodyPart target) {
-        double pleasureMod = super.getPleasure(self, target);
+    public double getPleasure(Character self) {
+        double pleasureMod = super.getPleasure(self);
         pleasureMod += self.has(Trait.tongueTraining1) ? .5 : 0;
         pleasureMod += self.has(Trait.tongueTraining2) ? .7 : 0;
         pleasureMod += self.has(Trait.tongueTraining3) ? .9 : 0;

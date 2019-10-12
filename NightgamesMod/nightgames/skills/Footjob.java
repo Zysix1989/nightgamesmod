@@ -37,7 +37,7 @@ public class Footjob extends Skill {
         Character other = c.p1 == getSelf() ? c.p2 : c.p1;
         BodyPart otherpart = other.hasDick() ? other.body.getRandomCock() : other.body.getRandomPussy();
         if (feet != null) {
-            return (float) Math.max(0, feet.getPleasure(getSelf(), otherpart) - 1);
+            return (float) Math.max(0, feet.getPleasure(getSelf()) - 1);
         }
         return 0;
     }

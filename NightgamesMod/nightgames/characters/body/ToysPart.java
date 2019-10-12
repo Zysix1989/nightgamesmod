@@ -45,7 +45,7 @@ public enum ToysPart implements BodyPart {
 
     @Override
     public double priority(Character c) {
-        return getPleasure(c, null);
+        return getPleasure(c);
     }
 
     @Override
@@ -74,7 +74,7 @@ public enum ToysPart implements BodyPart {
     }
 
     @Override
-    public double getPleasure(Character self, BodyPart target) {
+    public double getPleasure(Character self) {
         return pleasure;
     }
 

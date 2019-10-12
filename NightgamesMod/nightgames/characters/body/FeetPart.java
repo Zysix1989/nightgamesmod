@@ -12,8 +12,8 @@ public class FeetPart extends GenericBodyPart {
     }
 
     @Override
-    public double getPleasure(Character self, BodyPart target) {
-        var mod = super.getPleasure(self, target);
+    public double getPleasure(Character self) {
+        var mod = super.getPleasure(self);
         mod += self.has(Trait.limbTraining1) ? .5 : 0;
         mod += self.has(Trait.limbTraining2) ? .7 : 0;
         mod += self.has(Trait.limbTraining3) ? .7 : 0;

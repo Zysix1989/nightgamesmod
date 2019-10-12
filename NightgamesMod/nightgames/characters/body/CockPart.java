@@ -123,8 +123,8 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
     }
 
     @Override
-    public double getPleasure(Character self, BodyPart target) {
-        double pleasureMod = super.getPleasure(self, target);
+    public double getPleasure(Character self) {
+        double pleasureMod = super.getPleasure(self);
         pleasureMod += self.has(Trait.sexTraining1) ? .5 : 0;
         pleasureMod += self.has(Trait.sexTraining2) ? .7 : 0;
         pleasureMod += self.has(Trait.sexTraining3) ? .7 : 0;

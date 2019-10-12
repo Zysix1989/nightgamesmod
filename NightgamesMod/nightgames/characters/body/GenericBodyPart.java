@@ -154,7 +154,7 @@ public class GenericBodyPart implements BodyPart {
 
     @Override
     public double priority(Character c) {
-        return (getPleasure(c, null) - 1) * 3;
+        return (getPleasure(c) - 1) * 3;
     }
 
     @Override
@@ -181,7 +181,7 @@ public class GenericBodyPart implements BodyPart {
     }
 
     @Override
-    public double getPleasure(Character self, BodyPart target) {
+    public double getPleasure(Character self) {
         double pleasureMod = pleasure;
         double pleasureBonus = 1.0;
         for (PartMod mod : getMods()) {

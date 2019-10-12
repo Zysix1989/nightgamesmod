@@ -38,7 +38,7 @@ public class EarsPart extends GenericBodyPart {
 
     @Override
     public double priority(Character c) {
-        return getPleasure(c, null);
+        return getPleasure(c);
     }
 
     @Override
