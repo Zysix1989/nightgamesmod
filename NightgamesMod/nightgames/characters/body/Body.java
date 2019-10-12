@@ -494,15 +494,16 @@ public class Body implements Cloneable {
     }
 
     public int pleasure(Character opponent, BodyPart with, BodyPart target, double magnitude, Combat c) {
-        return pleasure(opponent, with, target, magnitude, 0, c, false, null);
+        return pleasure(opponent, with, target, magnitude, 0, c, null);
     }
 
     public int pleasure(Character opponent, BodyPart with, BodyPart target, double magnitude, Combat c, Skill skill) {
-        return pleasure(opponent, with, target, magnitude, 0, c, false, skill);
+        return pleasure(opponent, with, target, magnitude, 0, c, skill);
     }
 
-    public int pleasure(Character opponent, BodyPart with, BodyPart target, double magnitude, int bonus, Combat c,
-                    boolean sub, Skill skill) {
+    public int pleasure(Character opponent, BodyPart with, BodyPart target, double magnitude,
+        int bonus, Combat c,
+        Skill skill) {
         if (target == null) {
             target = nonePart;
         }
@@ -547,10 +548,8 @@ public class Body implements Cloneable {
         if (opponent != null) {
             baseBonusDamage += with.applyBonuses(opponent, character, target, magnitude, c);
             baseBonusDamage += target.applyReceiveBonuses(character, opponent, with, magnitude, c);
-            if (!sub) {
-                for (BodyPart p : opponent.body.getCurrentParts()) {
-                    baseBonusDamage += p.applySubBonuses(opponent, character, with, target, magnitude, c);
-                }
+            for (BodyPart p : opponent.body.getCurrentParts()) {
+                baseBonusDamage += p.applySubBonuses(opponent, character, with, target, magnitude, c);
             }
             // double the base damage if the opponent is submissive and in a
             // submissive stance

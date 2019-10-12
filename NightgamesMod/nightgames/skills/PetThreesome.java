@@ -110,16 +110,20 @@ public class PetThreesome extends Skill {
                                 + "hard cock into {self:reflective}, ending up in a erotic daisy-chain.", fucker, 
                                 target));
                 c.setStance(new ReverseXHFDaisyChainThreesome(fucker, master, target), getSelf(), true);
-                target.body.pleasure(master, master.body.getRandomCock(), target.body.getRandomPussy(), otherm, 0, c, false, this);
-                master.body.pleasure(target, target.body.getRandomPussy(), master.body.getRandomCock(), m, 0, c, false, this);
+                target.body.pleasure(master, master.body.getRandomCock(), target.body.getRandomPussy(), otherm, 0, c,
+                    this);
+                master.body.pleasure(target, target.body.getRandomPussy(), master.body.getRandomCock(), m, 0, c,
+                    this);
             } else if (selfO.isType(PussyPart.TYPE) && targetO.isType(PussyPart.TYPE)) {
                 c.write(getSelf(), Global.format("While {master:subject:are|is} holding {other:name-do} down, "
                                 + "{self:subject-action:mount|mounts} {other:direct-object} and {self:action:press|presses} "
                                 + "{self:possessive} own pussy against {other:possessive}s.", fucker, 
                                 target));
                 c.setStance(new FFXTribThreesome(fucker, master, target), getSelf(), true);
-                target.body.pleasure(master, master.body.getRandomCock(), target.body.getRandomPussy(), otherm, 0, c, false, this);
-                master.body.pleasure(target, target.body.getRandomPussy(), master.body.getRandomCock(), m, 0, c, false, this);
+                target.body.pleasure(master, master.body.getRandomCock(), target.body.getRandomPussy(), otherm, 0, c,
+                    this);
+                master.body.pleasure(target, target.body.getRandomPussy(), master.body.getRandomCock(), m, 0, c,
+                    this);
             } else if (selfO.isType(PussyPart.TYPE)) {
                 if ((result == Result.critical || (master.hasInsertable() && target.hasPussy())) && master.useFemalePronouns()) {
                     c.write(getSelf(), Global.format("While %s holding {other:name-do} down with %s ass, "
@@ -145,8 +149,10 @@ public class PetThreesome extends Skill {
                                 target, master.subjectAction("are", "is"), master.subjectAction("slip"),
                                 master.reflexivePronoun()));
                 c.setStance(new XHFDaisyChainThreesome(fucker, master, target), getSelf(), true);
-                target.body.pleasure(master, master.body.getRandomPussy(), target.body.getRandomCock(), otherm, 0, c, false, this);
-                master.body.pleasure(target, target.body.getRandomCock(), master.body.getRandomPussy(), m, 0, c, false, this);
+                target.body.pleasure(master, master.body.getRandomPussy(), target.body.getRandomCock(), otherm, 0, c,
+                    this);
+                master.body.pleasure(target, target.body.getRandomCock(), master.body.getRandomPussy(), m, 0, c,
+                    this);
             } else if (selfO.isType(CockPart.TYPE) && !master.hasInsertable()) {
                 c.write(getSelf(), Global.format("While %s holding {other:name-do} down, "
                                 + "{self:subject} mounts {other:direct-object} and pierces "
@@ -164,8 +170,10 @@ public class PetThreesome extends Skill {
                                     + "leaving {other:direct-object} completely stuffed front and back.", fucker, 
                                     target, master.subjectAction("are", "is"), master.pronoun() + master.action(" grin and take", " grins and takes")));
                     c.setStance(new MFMDoublePenThreesome(fucker, master, target), getSelf(), true);
-                    target.body.pleasure(master, master.body.getRandomCock(), target.body.getRandomAss(), otherm, 0, c, false, this);
-                    master.body.pleasure(target, target.body.getRandomAss(), master.body.getRandomCock(), m, 0, c, false, this);
+                    target.body.pleasure(master, master.body.getRandomCock(), target.body.getRandomAss(), otherm, 0, c,
+                        this);
+                    master.body.pleasure(target, target.body.getRandomAss(), master.body.getRandomCock(), m, 0, c,
+                        this);
                 } else {
                     c.write(getSelf(), Global.format("While %s holding {other:name-possessive} head, "
                                     + "{self:subject} gets behind {other:direct-object} and pierces "

@@ -48,7 +48,7 @@ public class ViceGrip extends Tighten {
         if (m[0] != 0)
             target.body.pleasure(getSelf(), selfO, targetO, m[0], c, this);
         if (m[1] != 0)
-            getSelf().body.pleasure(target, targetO, selfO, m[1], -10000, c, false, this);
+            getSelf().body.pleasure(target, targetO, selfO, m[1], -10000, c, this);
         return true;
     }
 

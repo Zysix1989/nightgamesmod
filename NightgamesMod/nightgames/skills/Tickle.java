@@ -79,7 +79,8 @@ public class Tickle extends Skill {
                                     getSelf(), target));
                 }
                 target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandom(Body.SKIN),
-                                (int) getSelf().modifyDamage(type, target, 2 + Global.random(4)), bonus, c, false, this);
+                                (int) getSelf().modifyDamage(type, target, 2 + Global.random(4)), bonus, c,
+                    this);
                 target.weaken(c, (int) getSelf().modifyDamage(type, target, weak + Global.random(10, 15)));
             } else if (hastickler() && Global.random(2) == 1) {
                 type = DamageType.gadgets;
@@ -93,7 +94,7 @@ public class Tickle extends Skill {
                                         getSelf(), target));
                     }
                     target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandom(Body.SKIN),
-                                    4 + Global.random(4), bonus, c, false, this);
+                                    4 + Global.random(4), bonus, c, this);
                 } else {
                     writeOutput(c, Result.weak, target);
                     if (target.has(Trait.ticklish)) {
@@ -103,7 +104,7 @@ public class Tickle extends Skill {
                                         getSelf(), target));
                     }
                     target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandom(Body.SKIN),
-                                    4 + Global.random(2), bonus, c, false, this);
+                                    4 + Global.random(2), bonus, c, this);
                 }
                 target.weaken(c, (int) getSelf().modifyDamage(type, target, bonus + Global.random(5, 10)));
             } else {
@@ -118,7 +119,7 @@ public class Tickle extends Skill {
                 int m = (int) Math.round((2 + Global.random(3)) * (.25 + target.getExposure()));
                 int weak = (int) Math.round(bonus / 2 * (.25 + target.getExposure()));
                 target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandom(Body.SKIN), (int) getSelf().modifyDamage(type, target, m),
-                                bonus, c, false, this);
+                                bonus, c, this);
                 target.weaken(c, (int) getSelf().modifyDamage(type, target, weak + Global.random(4, 7)));
             }
         } else {
