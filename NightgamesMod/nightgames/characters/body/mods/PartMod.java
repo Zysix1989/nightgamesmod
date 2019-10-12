@@ -21,13 +21,6 @@ public abstract class PartMod implements BodyPartMod {
         this.sensitivity = sensitivity;
     }
 
-    /**
-     * This should be overridden if there needs to be more than only one variant of the attributeModifier active at the same time.
-     */
-    public String getVariant() {
-        return modType;
-    }
-
     @Override
     public String getModType() {
         return modType;
