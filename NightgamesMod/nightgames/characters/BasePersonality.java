@@ -1,5 +1,6 @@
 package nightgames.characters;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import nightgames.characters.custom.CharacterLine;
 import nightgames.characters.custom.CommentSituation;
 import nightgames.characters.custom.RecruitmentData;
 import nightgames.combat.Combat;
+import nightgames.combat.Result;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -25,7 +27,7 @@ import nightgames.start.NpcConfiguration;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.Addiction.Severity;
 
-public abstract class BasePersonality implements Personality {
+public abstract class BasePersonality implements Serializable {
     /**
      *
      */
@@ -81,7 +83,6 @@ public abstract class BasePersonality implements Personality {
 
     abstract public void setGrowth();
 
-    @Override
     public void rest(int time) {
         if (preferredCockMod.isPresent() && character.rank > 0) {
             Optional<BodyPart> optDick = character.body.get(CockPart.TYPE)
@@ -117,12 +118,10 @@ public abstract class BasePersonality implements Personality {
         }
     }
 
-    @Override
     public String getType() {
         return type;
     }
 
-    @Override
     public Skill act(HashSet<Skill> available, Combat c) {
         HashSet<Skill> tactic;
         Skill chosen;
@@ -141,13 +140,11 @@ public abstract class BasePersonality implements Personality {
         }
     }
 
-    @Override
     public Action move(Collection<Action> available, Collection<IMovement> radar) {
         Action proposed = Decider.parseMoves(available, radar, character);
         return proposed;
     }
 
-    @Override
     public void pickFeat() {
         ArrayList<Trait> available = new ArrayList<Trait>();
         for (Trait feat : Global.getFeats(character)) {
@@ -161,7 +158,6 @@ public abstract class BasePersonality implements Personality {
         character.add((Trait) available.toArray()[Global.random(available.size())]);
     }
 
-    @Override
     public String image(Combat c) {
         String fname = character.getTrueName().toLowerCase()
                         + "/portraits/" + character.mood.name() + ".jpg";
@@ -173,14 +169,12 @@ public abstract class BasePersonality implements Personality {
                         .toLowerCase() + "_confident.jpg";
     }
 
-    @Override
     public void ding(Character self) {
         self.getGrowth().levelUp(self);
         onLevelUp(self);
         self.distributePoints(preferredAttributes);
     }
 
-    @Override
     public List<PreferredAttribute> getPreferredAttributes() {
         return preferredAttributes;
     }
@@ -189,7 +183,6 @@ public abstract class BasePersonality implements Personality {
         // NOP
     }
 
-    @Override
     public String describeAll(Combat c, Character self) {
         StringBuilder b = new StringBuilder();
         b.append(self.getRandomLineFor(CharacterLine.DESCRIBE_LINER, c, c.getOpponent(self)));
@@ -204,39 +197,32 @@ public abstract class BasePersonality implements Personality {
         return b.toString();
     }
 
-    @Override
     public NPC getCharacter() {
         return character;
     }
 
-    @Override
     public RecruitmentData getRecruitmentData() {
         return null;
     }
 
-    @Override
     public AiModifiers getAiModifiers() {
         if (mods == null)
             resetAiModifiers();
         return mods;
     }
     
-    @Override
     public void setAiModifiers(AiModifiers mods) {
         this.mods = mods;
     }
     
-    @Override
     public void resetAiModifiers() {
         mods = AiModifiers.getDefaultModifiers(getType());
     }
     
-    @Override
     public String resist3p(Combat c, Character target, Character assist) {
         return null;
     }
 
-    @Override
     public Map<CommentSituation, String> getComments(Combat c) {
         Map<CommentSituation, String> all = CommentSituation.getDefaultComments(getType());
         Map<CommentSituation, String> applicable = new HashMap<>();
@@ -250,4 +236,36 @@ public abstract class BasePersonality implements Personality {
     
     public void handleQuests(Combat c) {
     }
+
+    public abstract String victory(Combat c, Result flag);
+
+    public abstract String defeat(Combat c, Result flag);
+
+    public abstract String victory3p(Combat c, Character target, Character assist);
+
+    public abstract String intervene3p(Combat c, Character target, Character assist);
+
+    public abstract String draw(Combat c, Result flag);
+
+    public abstract boolean fightFlight(Character opponent);
+
+    public abstract boolean attack(Character opponent);
+
+    public abstract boolean fit();
+
+    public abstract boolean checkMood(Combat c, Emotion mood, int value);
+
+    public void resolveOrgasm(Combat c, NPC self, Character opponent, BodyPart selfPart,
+        BodyPart opponentPart, int times,
+        int totalTimes) {
+        // no op
+    }
+
+    public void eot(Combat c, Character opponent) {
+        // noop
+    }
+
+    public abstract void applyBasicStats(Character self);
+
+    public abstract void applyStrategy(NPC self);
 }

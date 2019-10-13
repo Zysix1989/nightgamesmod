@@ -57,7 +57,7 @@ import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
 public class NPC extends Character {
-    public Personality ai;
+    public BasePersonality ai;
     public HashMap<Emotion, Integer> emotes;
     public Emotion mood;
     public Plan plan;
@@ -66,7 +66,7 @@ public class NPC extends Character {
     private List<CombatScene> postCombatScenes;
     private Map<String, List<CharacterLine>> lines;
 
-    public NPC(String name, int level, Personality ai) {
+    public NPC(String name, int level, BasePersonality ai) {
         super(name, level);
         this.ai = ai;
         this.lines = new HashMap<>();

@@ -1,63 +1,15 @@
 package nightgames.tests;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import nightgames.characters.BasePersonality;
 
-import com.google.gson.JsonParseException;
-
-import nightgames.actions.Movement;
 import nightgames.areas.Area;
-import nightgames.characters.Character;
-import nightgames.characters.CharacterSex;
-import nightgames.characters.NPC;
-import nightgames.characters.Personality;
-import nightgames.characters.custom.CustomNPC;
-import nightgames.characters.custom.JsonSourceNPCDataLoader;
-import nightgames.combat.Combat;
-import nightgames.global.Global;
-import nightgames.skills.Skill;
-import nightgames.stance.Anal;
-import nightgames.stance.AnalCowgirl;
-import nightgames.stance.AnalProne;
-import nightgames.stance.Behind;
-import nightgames.stance.BehindFootjob;
-import nightgames.stance.CoiledSex;
-import nightgames.stance.Cowgirl;
-import nightgames.stance.Doggy;
-import nightgames.stance.Engulfed;
-import nightgames.stance.FaceSitting;
-import nightgames.stance.FlowerSex;
-import nightgames.stance.FlyingCarry;
-import nightgames.stance.FlyingCowgirl;
-import nightgames.stance.HeldOral;
-import nightgames.stance.HeldPaizuri;
-import nightgames.stance.Jumped;
-import nightgames.stance.Missionary;
-import nightgames.stance.Mount;
-import nightgames.stance.Neutral;
-import nightgames.stance.NursingHold;
-import nightgames.stance.Pin;
 import nightgames.stance.Position;
-import nightgames.stance.ReverseCowgirl;
-import nightgames.stance.ReverseMount;
-import nightgames.stance.SixNine;
-import nightgames.stance.Standing;
-import nightgames.stance.StandingOver;
-import nightgames.stance.TribadismStance;
-import nightgames.stance.UpsideDownFemdom;
-import nightgames.stance.UpsideDownMaledom;
 
 public class SkillsTest {
-	List<Personality> npcs1;
-	List<Personality> npcs2;
+	List<BasePersonality> npcs1;
+	List<BasePersonality> npcs2;
 	List<Position> stances;
 	Area area;
 	/*

@@ -12,7 +12,6 @@ import nightgames.characters.*;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.daytime.Daytime;
-import nightgames.global.DebugFlags;
 import nightgames.global.Global;
 import nightgames.gui.TestGUI;
 import nightgames.modifier.standard.NoModifier;
@@ -168,9 +167,9 @@ public class CombatStats {
     public static class Setup {
 
         private int level;
-        private List<Personality> extraChars;
+        private List<BasePersonality> extraChars;
 
-        public Setup(int level, Personality... extraChars) {
+        public Setup(int level, BasePersonality... extraChars) {
             this.level = level;
             this.extraChars = Arrays.asList(extraChars);
         }

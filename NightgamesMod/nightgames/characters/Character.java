@@ -2732,7 +2732,7 @@ public abstract class Character extends Observable implements Cloneable {
         }
 
         if (canRespond() && has(Trait.apostles) && c.getCombatantData(this).getIntegerFlag(APOSTLES_COUNT) >= 4) {
-            List<Personality> possibleApostles = Arrays.asList(new Mei(), new Caroline(), new Sarah())
+            List<BasePersonality> possibleApostles = Arrays.asList(new Mei(), new Caroline(), new Sarah())
                             .stream()
                             .filter(possible -> !c.getOtherCombatants().contains(possible))
                             .collect(Collectors.toList());

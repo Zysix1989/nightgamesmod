@@ -69,6 +69,7 @@ import nightgames.areas.MapDrawHint;
 import nightgames.characters.Airi;
 import nightgames.characters.Angel;
 import nightgames.characters.Attribute;
+import nightgames.characters.BasePersonality;
 import nightgames.characters.Cassie;
 import nightgames.characters.Character;
 import nightgames.characters.CharacterSex;
@@ -78,7 +79,6 @@ import nightgames.characters.Kat;
 import nightgames.characters.Mara;
 import nightgames.characters.Maya;
 import nightgames.characters.NPC;
-import nightgames.characters.Personality;
 import nightgames.characters.Player;
 import nightgames.characters.Reyka;
 import nightgames.characters.Trait;
@@ -1509,7 +1509,7 @@ public class Global {
                     NPCData data = JsonSourceNPCDataLoader
                                     .load(ResourceLoader.getFileResourceAsStream("characters/" + name));
                     Optional<NpcConfiguration> npcConfig = findNpcConfig(CustomNPC.TYPE_PREFIX + data.getName(), startConfig);
-                    Personality npc = new CustomNPC(data, npcConfig, commonConfig);
+                    BasePersonality npc = new CustomNPC(data, npcConfig, commonConfig);
                     characterPool.put(npc.getCharacter().getType(), npc.getCharacter());
                     System.out.println("Loaded " + name);
                 } catch (JsonParseException e1) {
@@ -1523,16 +1523,16 @@ public class Global {
         }
 
         // TODO: Refactor into function and unify with CustomNPC handling.
-        Personality cassie = new Cassie(findNpcConfig("Cassie", startConfig), commonConfig);
-        Personality angel = new Angel(findNpcConfig("Angel", startConfig), commonConfig);
-        Personality reyka = new Reyka(findNpcConfig("Reyka", startConfig), commonConfig);
-        Personality kat = new Kat(findNpcConfig("Kat", startConfig), commonConfig);
-        Personality mara = new Mara(findNpcConfig("Mara", startConfig), commonConfig);
-        Personality jewel = new Jewel(findNpcConfig("Jewel", startConfig), commonConfig);
-        Personality airi = new Airi(findNpcConfig("Airi", startConfig), commonConfig);
-        Personality eve = new Eve(findNpcConfig("Eve", startConfig), commonConfig);
-        Personality maya = new Maya(1, findNpcConfig("Maya", startConfig), commonConfig);
-        Personality yui = new Yui(findNpcConfig("Yui", startConfig), commonConfig);
+        BasePersonality cassie = new Cassie(findNpcConfig("Cassie", startConfig), commonConfig);
+        BasePersonality angel = new Angel(findNpcConfig("Angel", startConfig), commonConfig);
+        BasePersonality reyka = new Reyka(findNpcConfig("Reyka", startConfig), commonConfig);
+        BasePersonality kat = new Kat(findNpcConfig("Kat", startConfig), commonConfig);
+        BasePersonality mara = new Mara(findNpcConfig("Mara", startConfig), commonConfig);
+        BasePersonality jewel = new Jewel(findNpcConfig("Jewel", startConfig), commonConfig);
+        BasePersonality airi = new Airi(findNpcConfig("Airi", startConfig), commonConfig);
+        BasePersonality eve = new Eve(findNpcConfig("Eve", startConfig), commonConfig);
+        BasePersonality maya = new Maya(1, findNpcConfig("Maya", startConfig), commonConfig);
+        BasePersonality yui = new Yui(findNpcConfig("Yui", startConfig), commonConfig);
         characterPool.put(cassie.getCharacter().getType(), cassie.getCharacter());
         characterPool.put(angel.getCharacter().getType(), angel.getCharacter());
         characterPool.put(reyka.getCharacter().getType(), reyka.getCharacter());
@@ -1622,7 +1622,7 @@ public class Global {
         return players;
     }
 
-    public static boolean newChallenger(Personality challenger) {
+    public static boolean newChallenger(BasePersonality challenger) {
         if (!players.contains(challenger.getCharacter())) {
             int targetLevel = human.getLevel();
             if (challenger.getCharacter().has(Trait.leveldrainer)) {
