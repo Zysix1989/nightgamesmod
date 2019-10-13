@@ -275,35 +275,7 @@ public class MaraTime extends BaseNPCTime {
                                       + "muscles feel a little sluggish, and it's only going to get worse with time and distance, but maybe"
                                       + " it's worth it?");
 
-            } /*else {
-
-                //another option to leave- it might not be the best idea to give carte blance to do "SCIENCE!!!" to you to a mad scientist with mind control tech, but you trust that 
-                //whatever Mara will do will be, if not in your best interest, then certainly not too much a bad thing
-                
-                //I'm testing building reflexes- and the one I've decided to test is seeing if I can program your ass to relax whenever something phallic touches it.
-                //If that works, then I can move on to seeing if I can program you to have increased sensitivity for some nerves, and see if I can turn touching sensations
-                //into pleasure for of things on the inside of your ass, but only after the anal wink reflex is triggered from the outside. 
-                
-                //calm down -> all of a sudden you can't seem to feel anything about this
-                //she keeps saying "don't worry- this is for science"
-                
-                //at the end- you come back to yourself, and she says "unfortunately, I had to skip over phase 2 animal testing, so I'm going to make sure my phase 3 human testing is very rigorous"
-                //SHe starts with automated testing- a dildo pumps in and out of your ass, and she makes sensitivity and force required measurements
-                //then she moves on to human-on-human testing- which means just what you'd expect
-                
-                //this affects the EnemyButtslutTrainingStatus by adding anal sensitivity (actually base damage) (up to the 10 standard for buttslut).
-                
-                //Cassie: the entrancing cock part
-                //she's testing resettable traps, which are partially completed spells that activate when a trigger condition is met. She's testing putting the trap somewhere nonobvious with an entrancing
-                //trap. She casts it on you, and you can't feel anything. Then she holds up a dildo and you get entranced by it. When you ask her about that, she blushes and says it was the first thing to
-                //hand. You start to protest and she keeps using it on you, adding more features like making you suck it.
-                
-                //Jewel: ???
-                Global.gui().message("\"Hey, "+player.getName()+", would you mind helping me with some <b>science</b>? I think I've figured out some new applications of the mind control technology that "
-                                + "will not only be able to make you feel amazing, they'll have impressive therapeutic applications too.\"");
-
-            }*/
-
+            }
             choices.add("Leave");
             Global.getPlayer().addict(null, AddictionType.MIND_CONTROL, npc, Addiction.MED_INCREASE);
             Global.getPlayer().getAddiction(AddictionType.MIND_CONTROL).ifPresent(Addiction::flagDaytime);

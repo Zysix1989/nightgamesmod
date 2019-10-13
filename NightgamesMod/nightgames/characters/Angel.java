@@ -2,14 +2,13 @@ package nightgames.characters;
 
 import java.util.Arrays;
 import java.util.Optional;
-
-import nightgames.characters.body.mods.AngelicWingsMod;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.WingsPart;
-import nightgames.characters.body.mods.pitcher.BlessedCockMod;
+import nightgames.characters.body.mods.AngelicWingsMod;
 import nightgames.characters.body.mods.catcher.DivineMod;
+import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
@@ -19,8 +18,6 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
-import nightgames.status.EnemyButtslutTrainingStatus;
-import nightgames.status.Stsflag;
 
 public class Angel extends BasePersonality {
     private static final long serialVersionUID = -8169646189131720872L;
@@ -408,7 +405,6 @@ public class Angel extends BasePersonality {
         String message = "";
 
         if (c.getStance().anallyPenetrated(c, opponent)
-            && !opponent.hasStatus(Stsflag.buttsluttraining)
             && !opponent.has(Trait.buttslut)) {
             dominance += 1;
 
@@ -428,72 +424,6 @@ public class Angel extends BasePersonality {
                             + "she could have been disappointed with that performance.  You can only gape as you look up to see Angel is gone along with your clothes. You sigh as you "
                             + "stand and ready yourself to move on. You wouldn't put past Angel to tell her girlfriends regardless of how well you performed, you just hope that's as "
                             + "far as that information goes.";
-
-        } else if (c.getStance().anallyPenetrated(c, opponent)
-            && opponent.hasStatus(Stsflag.buttsluttraining)
-            && !opponent.has(Trait.buttslut)) {
-            // This is supposed to be a mini-quest where the girls try to train you into a buttslut and you try to resist them. Every time you gain a level of the buttslut training status, you get
-            // 1 point in submissive, and every time you win by fucking one of them who is training you in the pussy from a dominant position, you gain a point of power (Jewel), cunning (Mara),
-            // seduction(angel) or willpower (Cassie). Losing to them by them fucking your ass gets you one step (of five) closer to irreversibly becoming a full buttslut, and causes you to present
-            // your ass the next time you see a cock. Being fucked in the ass by anyone also slowly increases you progress, and it slowly decreases over time.
-            // If you are trained to max sluttiness in any attribute (more are planned) then you get the trained slut trait, which causes any of your trainings being activated to convert some of your
-            // stats into submissive.
-           
-            //TODO: Move this into its own method to save space? - DSM
-            
-            dominance += 1;
-            String cockdesc = (character.hasDick() ? character.body.getRandomCock()
-                                                                   .describe(character)
-                            : "strapon");
-            EnemyButtslutTrainingStatus.getThisTypeForPlayer()
-                                       .reactivate();
-            if (!opponent.has(Trait.buttslut)) {
-                message = "Angel's " + cockdesc
-                                + " in your ass feels so good, and you're <i>so</i> close to orgasm- you fail to "
-                                + "fully contain a moan, and Angel seems to take that as recognition that you no longer even have a chance to win, and have stopped trying. She takes that as her cue to "
-                                + "pause so she can edge you- likely trying to erotically torture some concession out of you.<br/><br/>Angel puts her hands on either side of your waist and slides them "
-                                + "slightly up and down. It's a subtly dominant gesture- if she applied a little more force she'd be pumping you up and down her "
-                                + cockdesc + ". You start moving obediently "
-                                + "with her hands, until you catch yourself and stop. Angel clearly noticed your aborted motion, and she chuckles softly. It's not a heartening sound- it seems to carry "
-                                + "the promise of something sexual coming up- something that Angel is looking forward to a lot more than you are.<br/><br/>\"You know, "
-                                + opponent.getName() + ", at first I "
-
-                                + "didn't think I'd enjoy this so much- but seeing you cum from your ass like a good little buttslut gives me such an amazing feeling that I'm not sure a great job of "
-                                + "fucking my cunt is going to be enough to get me to stay silent about this.\"<br/><br/>You roll your eyes and point out that last time she didn't stay silent about it "
-                                + "either- Mei and Caroline have been teasing you nonstop since last time- and you thought she seemed satisfied with your performance then.<br/><br/>\"Of course I told Mei "
-                                + "and Caroline- I trust them to keep quiet anything I ask them to, and watching them tease you is hilarious. The point is I didn't tell anyone <i>else</i>, and that's "
-                                + "what I think you care about, and what you're going to have to find some way to... entice me... to avoid. I just said that what you did last time won't cut it- do you "
-                                + "have any idea how you might make it up to me?\"<br/><br/>You suspect Angel has something specific in mind- she doesn't seem like the kind of person to blackmail you "
-
-                                + "for money, or to try to cheat in the games- as you continue to think, Angel wiggles her "
-                                + cockdesc + " in your ass a bit, and resumes "
-
-                                + "the motion of her hands.<br/><br/>You quickly notice the unsublte hint and sigh. She evidently wants to fuck your butt, but she could have just done that earlier- "
-                                + "you suspect that she wants to hear you say it: to \"willingly\" offer up your anus for her use as a bribe for not telling other people about it- she probably wants "
-                                + "that feeling of power or something. You explain your idea to Angel, trying to keep your voice as unamused-sounding as possible. Angel seems to only be encouraged by "
-                                + "your resistance- you can hearly hear the smug grin in her voice as she responds.<br/><br/>\"Hmmm... that's a good idea, but I don't think it's enough. As I just proved, "
-                                + "if all I want is to fuck your ass, I can do that any time I run into you in a game. There would have to be something special about what you're offering me now.\"<br/><br/>"
-                                + "Angel coaxes you through coming up with more ideas- all involving you acting like a complete buttslut- and insists that you do them until you can do them to her satisfaction. "
-
-                                + "By the time she's satisfied and lets you go, you've had to memorize how best to present your ass to her "
-                                + cockdesc + " and how to rub your prostate against it for maximum "
-
-                                + "stimulation- and you've done it so many times that by now it almost feels like second nature.";
-            } else {
-                message = "You're not sure when the training the girls were giving you in acting like a buttslut turned into you being the real thing- but at this point you're self-aware enough to admit "
-                                + "that that's what's happened. As Angel rails your ass, you find yourself eagerly grinding backwards against her, and when she pinned you down and pushed into you "
-                                + "earlier you only offered perfunctory resistance. You suspect that the you of before the games would be horrified to know how you've turned out- but as you cum for "
-                                + "the third time in five minutes you can't bring yourself to care.<br/><br/>Angel pulls out of you, panting heavily, and you glance up at her with pleading eyes. "
-                                + "<br/><br/>Angel shudders in pleasure. \"I don't think I'll ever get tired of seeing that look on your face- and knowing that I was part of making you into this.\"<br/><br/>"
-                                + "You aren't that happy with the way she is referring to you, but you know you'd lose any argument you made about it, so you elect to keep quiet. \"Well, I'm a bit tired, but "
-                                + "it's clear that what you're out of at this point is will to resist, not desire to have your ass taken- and ability to cum from that.\" Angel easily slips two fingers "
-
-                                + "into your hungry ass, and lightly prods your sensitive prostate, making you"
-                                + (opponent.hasDick() ? "r cock" : "")
-                                + " twitch. <br/><br/>\"Happily for you, I'm a generous "
-                                + "person who likes giving my friends what they want- and what you want is someone to fill that cute ass, and Mei and Caroline have decided they'd like to break you in- so "
-                                + "you're coming home with me tonight, kay? Caroline and Mei will take good care of you <i>all</i> night.\"";
-            }
         } else if (c.getStance().inserted(character)
             && character.getWillpower().percent() < 0.5) {
             dominance += 1;
