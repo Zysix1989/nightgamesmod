@@ -198,7 +198,6 @@ public class NPC extends Character {
         gainTrophy(c, target);
 
         target.defeated(this);
-        ai.handleQuests(c);
         c.write(ai.victory(c, flag));
         gainAttraction(target, 1);
         target.gainAttraction(this, 2);

@@ -145,28 +145,10 @@ public abstract class BasePersonality implements Serializable {
         return proposed;
     }
 
-    public void pickFeat() {
-        ArrayList<Trait> available = new ArrayList<Trait>();
-        for (Trait feat : Global.getFeats(character)) {
-            if (!character.has(feat)) {
-                available.add(feat);
-            }
-        }
-        if (available.size() == 0) {
-            return;
-        }
-        character.add((Trait) available.toArray()[Global.random(available.size())]);
-    }
-
     public String image(Combat c) {
         String fname = character.getTrueName().toLowerCase()
                         + "/portraits/" + character.mood.name() + ".jpg";
         return fname;
-    }
-
-    public String defaultImage(Combat c) {
-        return character.getTrueName()
-                        .toLowerCase() + "_confident.jpg";
     }
 
     public void ding(Character self) {
@@ -210,11 +192,7 @@ public abstract class BasePersonality implements Serializable {
             resetAiModifiers();
         return mods;
     }
-    
-    public void setAiModifiers(AiModifiers mods) {
-        this.mods = mods;
-    }
-    
+
     public void resetAiModifiers() {
         mods = AiModifiers.getDefaultModifiers(getType());
     }
@@ -232,9 +210,6 @@ public abstract class BasePersonality implements Serializable {
                          .isApplicable(c, character, c.getOpponent(character)))
            .forEach(e -> applicable.put(e.getKey(), e.getValue()));
         return applicable;
-    }
-    
-    public void handleQuests(Combat c) {
     }
 
     public abstract String victory(Combat c, Result flag);
