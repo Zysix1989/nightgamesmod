@@ -14,6 +14,8 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.AddictionType;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class DivineCharge extends Status {
     public double magnitude;
@@ -26,10 +28,8 @@ public class DivineCharge extends Status {
     }
 
     private String getPart(Combat c) {
-        boolean penetrated = c.getStance()
-                              .vaginallyPenetrated(c, affected);
-        boolean inserted = c.getStance()
-                            .inserted(affected);
+        boolean penetrated = c.getStance().vaginallyPenetrated(c, affected);
+        boolean inserted = c.getStance().inserted(affected);
         String part = "body";
         if (penetrated && !inserted) {
             part = PussyPart.TYPE;
@@ -71,10 +71,17 @@ public class DivineCharge extends Status {
         affected.usedAttribute(Attribute.Divinity, c, .25);
     };
 
+    private static final JtwigTemplate DESCRIBE_TEMPLATE = JtwigTemplate.inlineTemplate(
+        "A faint white glow emanates from {{ self.nameOrDirectObject() }} as divine energy courses "
+            + "through {{ self.possessivePronoun() }} body. ({{ magnitude }})"
+    );
+
     @Override
     public String describe(Combat c) {
-        return "Concentrated divine energy surges through " + affected.nameOrPossessivePronoun() + " " + getPart(c)
-                        + " (" + Global.formatDecimal(magnitude) + ").";
+        var model = new JtwigModel()
+            .with("self", affected)
+            .with("magnitude", magnitude);
+        return DESCRIBE_TEMPLATE.render(model);
     }
 
     @Override
