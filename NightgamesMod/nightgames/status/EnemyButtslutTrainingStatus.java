@@ -20,9 +20,7 @@ public class EnemyButtslutTrainingStatus extends Status {
         sensitivityLevel = 0;
     }
 
-    private Trait trainingTrait = Trait.buttslut;
     private double trainingLevel;
-    private boolean pendingActivation;
     private double sensitivityLevel;
     
     public void tick(Combat c) {
@@ -31,7 +29,6 @@ public class EnemyButtslutTrainingStatus extends Status {
     }
     
     public void reactivate() {
-        pendingActivation = true;
         flag(Stsflag.buttslutificationReady);
     }
 
