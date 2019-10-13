@@ -18,7 +18,7 @@ public class InducedEuphoria extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "Your entire body is flushed with chemically induced pleasure. Every sensation turns you on.";
         } else {

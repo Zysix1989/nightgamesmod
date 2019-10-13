@@ -45,7 +45,7 @@ public class Parasited extends Status {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return String.format("%s a part of %s inside of %s head.", affected.subjectAction("have", "has"),
                         other.nameOrPossessivePronoun(), affected.possessiveAdjective());
     }

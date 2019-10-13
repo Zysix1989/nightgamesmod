@@ -117,7 +117,7 @@ public class MagicMilkAddiction extends Addiction {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         switch (getCombatSeverity()) {
             case HIGH:
                 return "You are desperate for more milk and can't even think of resisting " + cause.objectPronoun() + ".";

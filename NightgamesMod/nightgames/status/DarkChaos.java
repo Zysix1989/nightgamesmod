@@ -28,7 +28,7 @@ public class DarkChaos extends Status {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "The blackness coursing through your soul is looking for ways to hinder you.";
         } else {

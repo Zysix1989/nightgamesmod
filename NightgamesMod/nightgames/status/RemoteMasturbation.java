@@ -44,7 +44,7 @@ public class RemoteMasturbation extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return controller.subject() + " is remotely directing " + affected.nameOrPossessivePronoun()
                         + " hands to masturbate fiercely.";
     }

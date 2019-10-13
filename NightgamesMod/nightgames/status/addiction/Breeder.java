@@ -143,7 +143,7 @@ public class Breeder extends Addiction {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         switch (getCombatSeverity()) {
             case HIGH:
                 return "The animal part of your brain cultivated by " + cause.getName() + " is screaming for"

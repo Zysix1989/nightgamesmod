@@ -17,12 +17,12 @@ public class Oiled extends Status {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "Your skin is slick with oil and kinda feels weird.";
         } else {
             return String.format("%s is shiny with lubricant, making %s more tempted to touch and rub %s skin.",
-                            affected.subject(), c.getOpponent(affected).subject(), affected.possessiveAdjective());
+                            affected.subject(), opponent.subject(), affected.possessiveAdjective());
         }
     }
 

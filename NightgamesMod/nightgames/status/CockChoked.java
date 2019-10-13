@@ -28,7 +28,7 @@ public class CockChoked extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return String.format("%s preventing %s from cumming.\n", other.subjectAction("are", "is"), affected.subject());
     }
 

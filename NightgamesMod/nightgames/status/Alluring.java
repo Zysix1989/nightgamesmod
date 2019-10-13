@@ -35,9 +35,9 @@ public class Alluring extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (!affected.human()) {
-            return Global.format("{self:SUBJECT-ACTION:look|looks} impossibly beautiful to {other:name-possessive} eyes, {other:pronoun} can't bear to hurt {self:direct-object}.", affected, c.getOpponent(affected));
+            return Global.format("{self:SUBJECT-ACTION:look|looks} impossibly beautiful to {other:name-possessive} eyes, {other:pronoun} can't bear to hurt {self:direct-object}.", affected, opponent);
         }
         return "";
     }

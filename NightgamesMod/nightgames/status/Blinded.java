@@ -35,7 +35,7 @@ public class Blinded extends Status {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return Global.capitalizeFirstLetter(String.format("%s eyesight is blocked by %s.", affected.nameOrPossessivePronoun(), cause));
     }
 

@@ -24,7 +24,7 @@ public class IgnoreOrgasm extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.getArousal().isFull()) {
             return affected.subjectAction("are", "is") + " overpowering the urge to cum";
         }

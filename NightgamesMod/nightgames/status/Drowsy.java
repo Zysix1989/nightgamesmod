@@ -36,7 +36,7 @@ public class Drowsy extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "You feel lethargic and sluggish. You're struggling to remain standing";
         }

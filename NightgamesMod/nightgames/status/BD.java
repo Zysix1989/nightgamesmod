@@ -18,7 +18,7 @@ public class BD extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "Fantasies of being tied up continue to dance through your head.";
         } else {

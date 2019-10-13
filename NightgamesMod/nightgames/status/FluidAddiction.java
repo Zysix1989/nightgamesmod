@@ -42,19 +42,19 @@ public class FluidAddiction extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (isActive()) {
             if (affected.human()) {
                 return "You feel a desperate need to taste more of " + target.nameOrPossessivePronoun() + " fluids.";
             } else {
-                return affected.getName() + " is eyeing "+c.getOpponent(affected).nameDirectObject()+" like a junkie.";
+                return affected.getName() + " is eyeing "+opponent.nameDirectObject()+" like a junkie.";
             }
         } else {
             if (affected.human()) {
                 return "You're not sure why " + target.nameOrPossessivePronoun()
                                 + " fluids are so tantalizing, but you know you want some more";
             } else {
-                return affected.getName() + " seems to want more of "+c.getOpponent(affected).nameOrPossessivePronoun()+" fluids.";
+                return affected.getName() + " seems to want more of "+opponent.nameOrPossessivePronoun()+" fluids.";
             }
         }
     }

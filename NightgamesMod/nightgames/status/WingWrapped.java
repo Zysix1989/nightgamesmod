@@ -49,7 +49,7 @@ public class WingWrapped extends Status {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         String msg = "{self:SUBJECT-ACTION:are|is} held tightly by {other:name-possessive} {other:body-part:wings}";
         if (wrapper.has(Trait.VampireWings) && affected.outfit.slotEmpty(ClothingSlot.top)) {
             if (wrapper.human()) {

@@ -30,7 +30,7 @@ public class Braced extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return "";
     }
 

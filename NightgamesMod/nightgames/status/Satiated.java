@@ -23,12 +23,12 @@ public class Satiated extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "You feel immensely powerful after feeding on your opponent's essence\n";
         } else {
             return affected.getName() + " feels immensely satisfied after feeding on "+
-                            c.getOpponent(affected).nameOrPossessivePronoun()+" essence\n";
+                            opponent.nameOrPossessivePronoun()+" essence\n";
         }
     }
 

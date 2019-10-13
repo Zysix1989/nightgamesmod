@@ -29,7 +29,7 @@ public class CrisisOfFaith extends Status {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return "You are deeply disturbed by the doubt in your heart, limiting mojo gain.";
     }
 

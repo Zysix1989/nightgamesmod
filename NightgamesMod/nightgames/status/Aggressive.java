@@ -42,7 +42,7 @@ public class Aggressive extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "Affected by " + cause + ", you are incapable of anything but an all-out assault.";
         }

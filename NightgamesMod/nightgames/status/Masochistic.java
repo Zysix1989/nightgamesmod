@@ -19,7 +19,7 @@ public class Masochistic extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "Arousing fantasies of being hurt continue to tempt you.";
         } else {

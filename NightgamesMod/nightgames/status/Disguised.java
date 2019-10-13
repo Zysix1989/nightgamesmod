@@ -36,7 +36,7 @@ public class Disguised extends Status {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
     	return "";
     }
 

@@ -26,12 +26,12 @@ public class LegLocked extends Status {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "Her legs are locked around your waist, preventing you from pulling out.";
         } else {
             return String.format("%s legs are wrapped around %s waist, preventing %s from pulling out.",
-                            c.getOpponent(affected).nameOrPossessivePronoun(), affected.nameOrPossessivePronoun(),
+                            opponent.nameOrPossessivePronoun(), affected.nameOrPossessivePronoun(),
                             affected.objectPronoun());
         }
     }

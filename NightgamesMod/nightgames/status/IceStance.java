@@ -17,7 +17,7 @@ public class IceStance extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "You're as frigid as a glacier";
         } else {

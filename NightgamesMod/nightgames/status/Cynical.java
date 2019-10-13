@@ -20,7 +20,7 @@ public class Cynical extends DurationStatus {
         flag(Stsflag.cynical);
     }
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "You're feeling more cynical than usual and won't fall for any mind games.";
         } else {

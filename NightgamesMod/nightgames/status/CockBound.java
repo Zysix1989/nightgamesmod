@@ -23,7 +23,7 @@ public class CockBound extends Status {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return String.format("%s %s is bound by %s.", affected.nameOrPossessivePronoun(),
                         affected.body.getRandomCock().describe(affected), binding);
     }

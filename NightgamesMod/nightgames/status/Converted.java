@@ -48,7 +48,7 @@ public class Converted extends Abuff {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         String message = "";
         List<String> synonyms = Arrays.asList("converted", "transformed", "changed", "altered", "transmuted");
         if (value <= affected.getPure(converted) / 5) {

@@ -41,7 +41,7 @@ public class TailFucked extends Status implements InsertedStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         BodyPart hole = affected.body.getRandom(target);
         BodyPart tail = other.body.getRandom(TailPart.TYPE);
         if (hole == null || tail == null) {

@@ -29,7 +29,7 @@ public class BastionOfFaith extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return String.format("%s protected by a divine aura.\n", affected.subjectAction("are", "is"));
     }
 

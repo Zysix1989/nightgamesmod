@@ -183,7 +183,7 @@ public class ZealAddiction extends Addiction {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         switch (getCombatSeverity()) {
             case HIGH:
                 return "Your knees tremble with your desire to offer yourself to your goddess.";

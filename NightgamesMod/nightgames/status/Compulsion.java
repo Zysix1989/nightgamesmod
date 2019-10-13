@@ -32,7 +32,7 @@ public class Compulsion extends DurationStatus implements Compulsive {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return Global.format("{other:NAME-POSSESSIVE} compulsion still lies on"
                         + " {self:name-possessive} mind, enforcing {self:possessive} loyalty.",
                         affected, compeller);

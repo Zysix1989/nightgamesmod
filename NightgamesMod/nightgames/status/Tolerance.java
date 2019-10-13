@@ -17,12 +17,12 @@ public class Tolerance extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "You've built up a tolerance to addictive fluids.";
         } else {
             return affected.getName() + " has built up a tolerance to "
-                           +c.getOpponent(affected).nameOrPossessivePronoun()+" addictive fluids.";
+                           +opponent.nameOrPossessivePronoun()+" addictive fluids.";
         }
     }
 

@@ -46,13 +46,13 @@ public class Enthralled extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "You feel a constant pull on your mind, forcing you to obey " + master.possessiveAdjective()
                             + " every command.";
         } else {
             return affected.subject() + " looks dazed and compliant, ready to follow "
-                                +c.getOpponent(affected).nameOrPossessivePronoun()+" orders.";
+                                +opponent.nameOrPossessivePronoun()+" orders.";
         }
     }
 

@@ -38,7 +38,7 @@ public class Atrophy extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "You feel sluggish from " + source + ".";
         } else {

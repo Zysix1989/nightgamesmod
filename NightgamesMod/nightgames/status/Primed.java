@@ -39,7 +39,7 @@ public class Primed extends Status {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if(affected.human()){
             return "You have "+charges+" time charges primed.";
         }else{

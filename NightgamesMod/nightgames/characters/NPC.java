@@ -105,7 +105,7 @@ public class NPC extends Character {
         }
         b.append("<br/>");
         for (Status s : status) {
-            String statusDesc = s.describe(c);
+            String statusDesc = s.describe(c.getOpponent(this));
             if (!statusDesc.isEmpty()) {
                 b.append(statusDesc)
                     .append("<br/>");

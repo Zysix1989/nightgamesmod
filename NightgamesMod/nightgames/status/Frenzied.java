@@ -86,7 +86,7 @@ public class Frenzied extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         String msg;
         if (affected.human()) {
             msg = "You cannot think about anything other than fucking all that moves.";
@@ -95,7 +95,7 @@ public class Frenzied extends DurationStatus {
                             affected.getName(), affected.possessiveAdjective());
         }
         if (affected.has(Trait.PrimalHeat)) {
-            msg += Global.format(" Somehow {self:possessive} crazed animal desperation makes {self:direct-object} seem more attractive than ever.", affected, c.getOpponent(affected));
+            msg += Global.format(" Somehow {self:possessive} crazed animal desperation makes {self:direct-object} seem more attractive than ever.", affected, opponent);
         }
         return msg;
     }

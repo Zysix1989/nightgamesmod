@@ -25,23 +25,23 @@ public class PheromoneBombed extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         switch (getDuration()) {
             case 3:
                 return Global.format("{other:NAME-POSSESSIVE} spherical device is sticking to {self:subject}, "
-                                + "producing slow but insistent beeps.", affected, c.getOpponent(affected));
+                                + "producing slow but insistent beeps.", affected, opponent);
             case 2:
                 return Global.format("The sphere's beeping is accelerating, and some lights are beginning to flash."
-                                + " %s...", affected, c.getOpponent(affected),
-                                c.getOpponent(affected).human() ? "Excellent" : "This might be bad");
+                                + " %s...", affected, opponent,
+                                opponent.human() ? "Excellent" : "This might be bad");
             case 1:
                 return Global.format("A high-pitched whirring sound joins the cacophony of beeps coming"
                                 + " from the sphere on {self:name-possessive} chest.", affected, 
-                                c.getOpponent(affected));
+                                opponent);
             case 0:
                 return Global.format("<b>A tube-like protrusion extends from the sphere sticking to"
-                                + " {self:name-possessive} chest. %s!</b>", affected, c.getOpponent(affected),
-                                c.getOpponent(affected).human() ? "Just a few more seconds" :
+                                + " {self:name-possessive} chest. %s!</b>", affected, opponent,
+                                opponent.human() ? "Just a few more seconds" :
                                     "If {self:pronoun-action:are|is} planning to remove it, it had best be now");
             default:
                 return "<b><<ERROR>> Invalid state for PheromoneBombed!</b>";

@@ -62,7 +62,7 @@ public abstract class Status implements Cloneable {
 
     public abstract String initialMessage(Combat c, Optional<Status> replacement);
 
-    public abstract String describe(Combat c);
+    public abstract String describe(Character opponent);
 
     public abstract int mod(Attribute a);
 

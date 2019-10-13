@@ -42,7 +42,7 @@ public class Slimed extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
     	if (stacks < 2) {
     		return Global.format("A few chunks of {other:name-possessive} slimey body is stuck on {self:direct-object}.", affected, origin);
     	} else if (stacks < 5) {

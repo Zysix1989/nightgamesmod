@@ -20,7 +20,7 @@ public class RoboWebbed extends Bound {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return Global.format("{self:SUBJECT-ACTION:are|is} hopelessly tangled up in"
                         + " synthetic webbing, which is sending pleasurable sensations"
                         + " through {self:possessive} entire body.", affected, Global.noneCharacter());

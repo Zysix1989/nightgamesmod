@@ -64,7 +64,7 @@ public class BodyFetish extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         String desc = "";
         if (magnitude < .26) {
             desc = "slight ";
@@ -77,7 +77,7 @@ public class BodyFetish extends DurationStatus {
         }
         String magString = Global.formatDecimal(magnitude);
         if (affected.human()) {
-            if (origin != null && c != null && c.getOpponent(affected) == origin) {
+            if (origin != null && opponent == origin) {
                 return Global.capitalizeFirstLetter(
                                 desc + "fantasies of worshipping " + origin.nameOrPossessivePronoun() + " " + part
                                                 + " run through your mind (" + magString + ").");

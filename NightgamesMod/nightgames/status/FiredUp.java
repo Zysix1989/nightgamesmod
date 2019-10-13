@@ -40,7 +40,7 @@ public class FiredUp extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             if (stack == 1) {
                 return "You are getting a good sense of how to best use your " + part + ".";
@@ -56,13 +56,13 @@ public class FiredUp extends DurationStatus {
             if (stack == 1) {
                 return Global.capitalizeFirstLetter(String.format(
                                 "%s has a big grin on %s face at the prospect of further pleasuring %s with %s %s.",
-                                affected.pronoun(), affected.possessiveAdjective(), c.getOpponent(affected).nameDirectObject(),
+                                affected.pronoun(), affected.possessiveAdjective(), opponent.nameDirectObject(),
                                 affected.possessiveAdjective(), part));
             } else if (stack == 2) {
                 return Global.capitalizeFirstLetter(String.format(
                                 "%s looks as if %s is enjoying working %s %s almost as much as %s.",
                                 affected.pronoun(), affected.possessiveAdjective(), affected.pronoun(), part,
-                                c.getOpponent(affected).subjectAction("are", "is")));
+                                opponent.subjectAction("are", "is")));
             } else {
                 return Global.capitalizeFirstLetter(
                                 String.format("%s is focused almost exclusively on using %s %s to the greatest possible effect, and it's working.",

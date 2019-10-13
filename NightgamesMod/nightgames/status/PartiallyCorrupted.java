@@ -49,7 +49,7 @@ public class PartiallyCorrupted extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (counter > 0) {
             return Global.format("The barriers protecting {self:name-possessive} soul are temporarily weakened by {other:name-possessive} lips.", affected, cause);
         } else {

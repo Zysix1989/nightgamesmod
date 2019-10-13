@@ -27,7 +27,7 @@ public class Lethargic extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "Your mojo gain is stopped.";
         } else if (affected.has(Trait.lethargic)) {

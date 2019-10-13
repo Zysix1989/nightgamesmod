@@ -36,11 +36,11 @@ public class Knotted extends Status {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
-            return opponent.nameOrPossessivePronoun() + " knotted dick is lodged inside of you, preventing escape.";
+            return this.opponent.nameOrPossessivePronoun() + " knotted dick is lodged inside of you, preventing escape.";
         } else {
-            return "The knot in "+opponent.nameOrPossessivePronoun()+
+            return "The knot in "+ this.opponent.nameOrPossessivePronoun()+
                             " dick is keeping it fully entrenched within " + affected.getName() + ".";
         }
     }

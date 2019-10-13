@@ -42,7 +42,7 @@ public class Seeded extends Status implements InsertedStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         BodyPart hole = affected.body.getRandom(target);
         if (affected.human()) {
             if (stage > 4) {

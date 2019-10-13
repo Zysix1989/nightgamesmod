@@ -92,7 +92,7 @@ public class Drained extends Abuff {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         String person, adjective, modification;
 
         if (affected.human()) {

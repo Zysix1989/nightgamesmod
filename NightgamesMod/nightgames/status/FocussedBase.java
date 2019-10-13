@@ -27,9 +27,9 @@ public abstract class FocussedBase extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return Global.format("{self:NAME-POSSESSIVE} focus on %s has not yet waned.", 
-                        affected, c.getOpponent(affected), pro);
+                        affected, opponent, pro);
     }
     
     @Override

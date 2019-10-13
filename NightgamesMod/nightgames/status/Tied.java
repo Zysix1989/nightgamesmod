@@ -23,13 +23,13 @@ public class Tied extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "The rope wrapped around you digs into your body, but only slows you down a bit.";
         }
 
         return String.format("%s squirms against the rope, but %s %s tied it well.", affected.subject(),
-                        c.getOpponent(affected).subjectAction("know"), c.getOpponent(affected).pronoun());
+                        opponent.subjectAction("know"), opponent.pronoun());
     }
 
     @Override

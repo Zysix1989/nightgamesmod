@@ -32,7 +32,7 @@ public class HypnoVisor extends Status {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return "The Hypno Visor continues to bombard you with its insidious sights, while"
                         + " preventing you from seeing the real world around you.";
     }

@@ -43,7 +43,7 @@ public class PartSucked extends Status implements InsertedStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         BodyPart stick = affected.body.getRandom(target);
         if (stick == null || penetrated == null) {
             return "";

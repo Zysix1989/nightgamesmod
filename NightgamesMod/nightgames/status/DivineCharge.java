@@ -11,7 +11,6 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
-import nightgames.global.Global;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.AddictionType;
 import org.jtwig.JtwigModel;
@@ -77,7 +76,7 @@ public class DivineCharge extends Status {
     );
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         var model = new JtwigModel()
             .with("self", affected)
             .with("magnitude", magnitude);

@@ -6,8 +6,6 @@ import com.google.gson.JsonObject;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.Player;
-import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -143,7 +141,7 @@ public class MindControl extends Addiction {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         switch (getCombatSeverity()) {
             case HIGH:
                 return "Every word " + cause.getName() + " speaks rings of truth to you, even though " + cause.pronoun() + "'s"
@@ -403,7 +401,7 @@ public class MindControl extends Addiction {
         }
 
         @Override
-        public String describe(Combat c) {
+        public String describe(Character opponent) {
             return "";
         }
 

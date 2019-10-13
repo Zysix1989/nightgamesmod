@@ -31,7 +31,7 @@ public class Plasticized extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "You completely immobilized in a skin of hard plastic.";
         } else {

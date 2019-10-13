@@ -18,7 +18,7 @@ public class Nimble extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "You're as quick and nimble as a cat.";
         } else {

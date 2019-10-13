@@ -27,7 +27,7 @@ public class Flatfooted extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "You are caught off-guard.";
         } else {

@@ -37,7 +37,7 @@ public class TailSucked extends Status implements InsertedStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (!affected.hasDick()) {
             affected.removelist.add(this);
             return "";

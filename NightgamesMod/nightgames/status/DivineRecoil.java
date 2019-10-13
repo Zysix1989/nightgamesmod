@@ -32,7 +32,7 @@ public class DivineRecoil extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return String.format("Divine energy rampages through %s body, leaving %s incredibly sensitive.\n",
                         affected.nameOrPossessivePronoun(), affected.objectPronoun());
 

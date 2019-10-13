@@ -23,7 +23,7 @@ public class PlayerSlimeDummy extends Status {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return "You have switched into your slime form due to the intense situation.";
     }
 

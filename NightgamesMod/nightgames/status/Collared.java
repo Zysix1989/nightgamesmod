@@ -47,9 +47,9 @@ public class Collared extends Status implements Compulsive {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return Global.format("{self:SUBJECT-ACTION:are|is} wearing a training collar, which"
-                        + " is hampering {self:possessive} ability to fight.", affected, c.getOpponent(affected));
+                        + " is hampering {self:possessive} ability to fight.", affected, opponent);
     }
 
     @Override

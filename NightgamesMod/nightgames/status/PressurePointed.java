@@ -33,8 +33,8 @@ public class PressurePointed extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
-        return Global.format("{self:SUBJECT-ACTION:are} clenching {self:possessive} lower muscles to prevent {self:reflective} from cumming instantly.", affected, c.getOpponent(affected));
+    public String describe(Character opponent) {
+        return Global.format("{self:SUBJECT-ACTION:are} clenching {self:possessive} lower muscles to prevent {self:reflective} from cumming instantly.", affected, opponent);
     }
 
     @Override

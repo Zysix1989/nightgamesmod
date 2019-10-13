@@ -148,7 +148,7 @@ public class Dominance extends Addiction {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         return "";
     }
 

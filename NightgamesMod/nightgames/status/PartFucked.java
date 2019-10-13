@@ -43,7 +43,7 @@ public class PartFucked extends Status implements InsertedStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         BodyPart hole = affected.body.getRandom(target);
         if (hole == null || penetrator == null) {
             return "";

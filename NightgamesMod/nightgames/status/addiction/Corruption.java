@@ -321,7 +321,7 @@ public class Corruption extends Addiction {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "";
         } else {

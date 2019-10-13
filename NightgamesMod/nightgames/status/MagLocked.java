@@ -43,23 +43,23 @@ public class MagLocked extends Status {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (count == 1) {
             return Global.format(
                             "A single inactive MagLock hangs around one of {self:name-possessive}"
                                             + " wrists. It's harmless for now, but any more would be dangerous.",
-                            affected, c.getOpponent(affected));
+                            affected, opponent);
         } else if (count == 2) {
             return Global.format(
                             "{other:NAME-POSSESSIVE} two MagLocks, placed around {self:name-possessive}"
                                             + " wrists, have locked together behind {self:possessive} back and"
                                             + " are restraining {self:possessive} movement.",
-                            affected, c.getOpponent(affected));
+                            affected, opponent);
         } else {
             return Global.format(
                             "Hogtied by {other:name-possessive} MagLocks,"
                                             + "{self:subject-action:are|is} completely immobilized.",
-                            affected, c.getOpponent(affected));
+                            affected, opponent);
         }
     }
 

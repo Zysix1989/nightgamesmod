@@ -37,7 +37,7 @@ public class Trance extends DurationStatus {
     }
 
     @Override
-    public String describe(Combat c) {
+    public String describe(Character opponent) {
         if (affected.human()) {
             return "You know that you should be fighting back, but it's so much easier to just surrender.";
         } else {
