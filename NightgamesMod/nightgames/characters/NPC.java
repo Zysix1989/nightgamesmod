@@ -95,8 +95,7 @@ public class NPC extends Character {
     @Override
     public String describe(int per, Combat c) {
         StringBuilder b = new StringBuilder();
-        b.append(
-            ((Character) this).getRandomLineFor(CharacterLine.DESCRIBE_LINER, c, c.getOpponent(this)));
+        b.append(getRandomLineFor(CharacterLine.DESCRIBE_LINER, c, c.getOpponent(this)));
         b.append("<br/><br/>");
         body.describe(b, c.getOpponent(this), " ");
         b.append("<br/>");
@@ -105,22 +104,17 @@ public class NPC extends Character {
             b.append(' ');
         }
         b.append("<br/>");
-        String description = b.toString();
-        boolean wroteStatus = false;
         for (Status s : status) {
             String statusDesc = s.describe(c);
             if (!statusDesc.isEmpty()) {
-                description = description + statusDesc + "<br/>";
-                wroteStatus = true;
+                b.append(statusDesc)
+                    .append("<br/>");
             }
         }
-        if (wroteStatus) {
-            description += "<br/>";
-        }
-        description = description + outfit.describe(this);
-        description = description + observe(per);
-        description = description + c.getCombatantData(this).getManager().describe(this);
-        return description;
+        b.append(outfit.describe(this));
+        b.append(observe(per));
+        b.append(c.getCombatantData(this).getManager().describe(this));
+        return b.toString();
     }
 
     private String observe(int per) {
