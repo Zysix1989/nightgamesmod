@@ -165,20 +165,6 @@ public abstract class BasePersonality implements Serializable {
         // NOP
     }
 
-    public String describeAll(Combat c, Character self) {
-        StringBuilder b = new StringBuilder();
-        b.append(self.getRandomLineFor(CharacterLine.DESCRIBE_LINER, c, c.getOpponent(self)));
-        b.append("<br/><br/>");
-        self.body.describe(b, c.getOpponent(self), " ");
-        b.append("<br/>");
-        for (Trait t : self.getTraits()) {
-            t.describe(self, b);
-            b.append(' ');
-        }
-        b.append("<br/>");
-        return b.toString();
-    }
-
     public NPC getCharacter() {
         return character;
     }

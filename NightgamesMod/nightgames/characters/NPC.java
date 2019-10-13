@@ -94,7 +94,18 @@ public class NPC extends Character {
 
     @Override
     public String describe(int per, Combat c) {
-        String description = ai.describeAll(c, this);
+        StringBuilder b = new StringBuilder();
+        b.append(
+            ((Character) this).getRandomLineFor(CharacterLine.DESCRIBE_LINER, c, c.getOpponent(this)));
+        b.append("<br/><br/>");
+        body.describe(b, c.getOpponent(this), " ");
+        b.append("<br/>");
+        for (Trait t : getTraits()) {
+            t.describe(this, b);
+            b.append(' ');
+        }
+        b.append("<br/>");
+        String description = b.toString();
         boolean wroteStatus = false;
         for (Status s : status) {
             String statusDesc = s.describe(c);
