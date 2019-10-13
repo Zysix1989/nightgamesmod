@@ -35,7 +35,7 @@ import nightgames.skills.Thrust;
 import nightgames.skills.WildThrust;
 
 public class BodyFetish extends DurationStatus {
-    Character origin;
+    private Character origin;
     public String part;
     public double magnitude;
 
