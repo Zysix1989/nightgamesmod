@@ -64,12 +64,10 @@ public class NPC extends Character {
     public boolean isStartCharacter = false;
     private List<CombatStrategy> personalStrategies;
     private List<CombatScene> postCombatScenes;
-    private Map<String, List<CharacterLine>> lines;
 
     public NPC(String name, int level, BasePersonality ai) {
         super(name, level);
         this.ai = ai;
-        this.lines = new HashMap<>();
         emotes = new HashMap<>();
         for (Emotion e : Emotion.values()) {
             emotes.put(e, 0);
@@ -404,12 +402,7 @@ public class NPC extends Character {
     }
 
     public String getRandomLineFor(String lineType, Combat c, Character other) {
-        Map<String, List<CharacterLine>> lines = this.lines;
-        Disguised disguised = (Disguised) getStatus(Stsflag.disguised);
-        if (disguised != null) {
-            lines = disguised.getTarget().getLines();
-        }
-        return Global.format(Global.pickRandom(lines.get(lineType)).orElse((cb, sf, ot) -> "").getLine(c, this, other), this, other);
+        return ai.getRandomLineFor(lineType, c, other);
     }
 
     @Override
@@ -608,8 +601,7 @@ public class NPC extends Character {
     }
 
     public void addLine(String lineType, CharacterLine line) {
-        lines.computeIfAbsent(lineType, type -> new ArrayList<>());
-        lines.get(lineType).add(line);
+        ai.addLine(lineType, line);
     }
 
     @Override
@@ -900,6 +892,6 @@ public class NPC extends Character {
     }
 
     public Map<String, List<CharacterLine>> getLines() {
-        return lines;
+        return ai.lines;
     }
 }

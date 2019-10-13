@@ -24,6 +24,8 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.skills.Skill;
 import nightgames.start.NpcConfiguration;
+import nightgames.status.Disguised;
+import nightgames.status.Stsflag;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.Addiction.Severity;
 
@@ -37,6 +39,7 @@ public abstract class BasePersonality implements Serializable {
     protected List<PreferredAttribute> preferredAttributes;
     protected Optional<CockMod> preferredCockMod;
     protected AiModifiers mods;
+    protected Map<String, List<CharacterLine>> lines;
     
     protected int dominance=0;
     protected int minDominance=0;
@@ -48,6 +51,7 @@ public abstract class BasePersonality implements Serializable {
         character.isStartCharacter = isStartCharacter;
         preferredCockMod = Optional.empty();
         preferredAttributes = new ArrayList<PreferredAttribute>();
+        lines = new HashMap<>();
     }
 
     public BasePersonality(String name, Optional<NpcConfiguration> charConfig,
@@ -229,4 +233,18 @@ public abstract class BasePersonality implements Serializable {
     public abstract void applyBasicStats(Character self);
 
     public abstract void applyStrategy(NPC self);
+
+    public void addLine(String lineType, CharacterLine line) {
+        lines.computeIfAbsent(lineType, type -> new ArrayList<>());
+        lines.get(lineType).add(line);
+    }
+
+    public String getRandomLineFor(String lineType, Combat c, Character other) {
+        Map<String, List<CharacterLine>> lines = this.lines;
+        Disguised disguised = (Disguised) character.getStatus(Stsflag.disguised);
+        if (disguised != null) {
+            lines = disguised.getTarget().getLines();
+        }
+        return Global.format(Global.pickRandom(lines.get(lineType)).orElse((cb, sf, ot) -> "").getLine(c, character, other), character, other);
+    }
 }
