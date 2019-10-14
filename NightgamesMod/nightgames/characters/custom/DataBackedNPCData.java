@@ -17,6 +17,7 @@ import nightgames.combat.Combat;
 import nightgames.items.Item;
 import nightgames.items.ItemAmount;
 import nightgames.items.clothing.Clothing;
+import org.jtwig.JtwigTemplate;
 
 public class DataBackedNPCData {
     List<PreferredAttribute> preferredAttributes;
@@ -39,6 +40,7 @@ public class DataBackedNPCData {
     Body body;
     AiModifiers aiModifiers;
     Map<CommentSituation, String> comments;
+    Map<String, JtwigTemplate> templates;
     boolean isStartCharacter;
 
     public DataBackedNPCData() {
@@ -60,6 +62,7 @@ public class DataBackedNPCData {
         recruitment = new RecruitmentData();
         aiModifiers = new AiModifiers();
         comments = new HashMap<>();
+        templates = new HashMap<>();
         isStartCharacter = false;
     }
 
@@ -93,6 +96,10 @@ public class DataBackedNPCData {
 
     public List<ItemAmount> getPurchasedItems() {
         return purchasedItems;
+    }
+
+    public JtwigTemplate describe() {
+        return templates.get("describe");
     }
 
     public String getLine(String type, Combat c, Character self, Character other) {

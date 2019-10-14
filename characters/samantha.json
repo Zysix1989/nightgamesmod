@@ -212,6 +212,9 @@
 			}
 		]
 	},
+	"templates": {
+		"describe": "samantha/describe.twig"
+	},
 	"lines":{
 		"hurt":[{
 				"text":"<i>\"Oh, a bit of a masochist, are we? That's alright, I cater to all tastes!\"</i>"
@@ -281,10 +284,6 @@
 			},
 			{
 				"text":"<i>\"Good! Now we can really begin! Try to last a bit longer this time, huh? More fun for both of us!\"</i>"
-			}
-		],
-		"describe":[{
-				"text":"Looking at {self:name}, it's immediately obvious why she's so popular among the filthy rich. Her every curve is perfectly proportioned, her skin completely unblemished, her long hair a red so dark it's almost purple and with a satin shine. Her every action oozes sensuality, and the mischievous glint in her eyes tells you that she has no doubt she'll have you begging for her to finish you off in record time. "
 			}
 		],
 		"startBattle":[{

@@ -30,6 +30,7 @@ import nightgames.skills.Skill;
 import nightgames.stance.Stance;
 import nightgames.status.Stsflag;
 import nightgames.utilities.DebugHelper;
+import org.jtwig.JtwigTemplate;
 
 public class JsonSourceNPCDataLoader {
     private static JsonRequirementLoader requirementLoader = new JsonRequirementLoader();
@@ -79,6 +80,7 @@ public class JsonSourceNPCDataLoader {
         loadPreferredAttributes(stats.getAsJsonObject("growth").getAsJsonArray("preferredAttributes"),
                         data.preferredAttributes);
         loadItems(object.getAsJsonObject("items"), data);
+        loadTemplates(object.getAsJsonObject("templates"), data.templates);
         loadAllLines(object.getAsJsonObject("lines"), data.characterLines);
         data.portraits = loadLines(object.getAsJsonArray("portraits"));
         loadRecruitment(object.getAsJsonObject("recruitment"), data.recruitment);
@@ -235,5 +237,11 @@ public class JsonSourceNPCDataLoader {
 
      private static void loadComments(JsonArray arr, DataBackedNPCData data) {
         arr.forEach(e -> CommentSituation.parseComment(e.getAsJsonObject(), data.comments));
+    }
+
+    private static void loadTemplates(JsonObject obj, Map<String, JtwigTemplate> templates) {
+        for (var e : obj.entrySet()) {
+            templates.put(e.getKey(), JtwigTemplate.classpathTemplate(e.getValue().getAsString()));
+        }
     }
 }
