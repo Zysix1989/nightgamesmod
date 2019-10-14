@@ -40,6 +40,7 @@ public abstract class BasePersonality implements Serializable {
     protected Optional<CockMod> preferredCockMod;
     protected AiModifiers mods;
     protected Map<String, List<CharacterLine>> lines;
+    protected CharacterLine description;
     
     protected int dominance=0;
     protected int minDominance=0;
@@ -235,6 +236,10 @@ public abstract class BasePersonality implements Serializable {
     public abstract void applyStrategy(NPC self);
 
     public void addLine(String lineType, CharacterLine line) {
+        if (lineType.equals(CharacterLine.DESCRIBE_LINER)) {
+            description = line;
+            return;
+        }
         lines.computeIfAbsent(lineType, type -> new ArrayList<>());
         lines.get(lineType).add(line);
     }
@@ -244,6 +249,13 @@ public abstract class BasePersonality implements Serializable {
         Disguised disguised = (Disguised) character.getStatus(Stsflag.disguised);
         if (disguised != null) {
             lines = disguised.getTarget().getLines();
+        }
+        if (lineType.equals(CharacterLine.DESCRIBE_LINER)) {
+            if (disguised != null) {
+                return Global.format(disguised.getTarget()
+                    .ai.description.getLine(c, character, other), character, other);
+            }
+            return Global.format(description.getLine(c, character, other), character, other);
         }
         return Global.format(Global.pickRandom(lines.get(lineType)).orElse((cb, sf, ot) -> "").getLine(c, character, other), character, other);
     }
