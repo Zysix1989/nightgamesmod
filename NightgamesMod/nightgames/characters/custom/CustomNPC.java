@@ -16,16 +16,16 @@ import nightgames.items.ItemAmount;
 import nightgames.start.NpcConfiguration;
 
 public class CustomNPC extends BasePersonality {
-    private final NPCData data;
+    private final DataBackedNPCData data;
     private static final long serialVersionUID = -8169646189131720872L;
 
     public static final String TYPE_PREFIX = "CUSTOM_";
 
-    public CustomNPC(NPCData data){
+    public CustomNPC(DataBackedNPCData data){
         this(data, Optional.empty(), Optional.empty());
     }
 
-    public CustomNPC(NPCData data, Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    public CustomNPC(DataBackedNPCData data, Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super(data.getName(), data.isStartCharacter());
         this.data = data;
         setupCharacter(charConfig, commonConfig);
@@ -180,7 +180,7 @@ public class CustomNPC extends BasePersonality {
         return applicable;
     }
     
-    public NPCData getData() {
+    public DataBackedNPCData getData() {
         return data;
     }
 }

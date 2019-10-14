@@ -88,8 +88,8 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.custom.CustomNPC;
+import nightgames.characters.custom.DataBackedNPCData;
 import nightgames.characters.custom.JsonSourceNPCDataLoader;
-import nightgames.characters.custom.NPCData;
 import nightgames.combat.Combat;
 import nightgames.daytime.Daytime;
 import nightgames.gui.GUI;
@@ -1506,7 +1506,7 @@ public class Global {
             for (JsonElement element : characterSet) {
                 String name = element.getAsString();
                 try {
-                    NPCData data = JsonSourceNPCDataLoader
+                    DataBackedNPCData data = JsonSourceNPCDataLoader
                                     .load(ResourceLoader.getFileResourceAsStream("characters/" + name));
                     Optional<NpcConfiguration> npcConfig = findNpcConfig(CustomNPC.TYPE_PREFIX + data.getName(), startConfig);
                     BasePersonality npc = new CustomNPC(data, npcConfig, commonConfig);

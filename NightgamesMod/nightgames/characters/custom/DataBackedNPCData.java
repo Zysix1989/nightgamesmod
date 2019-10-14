@@ -18,7 +18,7 @@ import nightgames.items.Item;
 import nightgames.items.ItemAmount;
 import nightgames.items.clothing.Clothing;
 
-public class DataBackedNPCData implements NPCData {
+public class DataBackedNPCData {
     List<PreferredAttribute> preferredAttributes;
     List<ItemAmount> purchasedItems;
     List<ItemAmount> startingItems;
@@ -63,47 +63,38 @@ public class DataBackedNPCData implements NPCData {
         isStartCharacter = false;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public Stats getStats() {
         return stats;
     }
 
-    @Override
     public Stack<Clothing> getTopOutfit() {
         return top;
     }
 
-    @Override
     public Stack<Clothing> getBottomOutfit() {
         return bottom;
     }
 
-    @Override
     public Growth getGrowth() {
         return growth;
     }
 
-    @Override
     public List<PreferredAttribute> getPreferredAttributes() {
         return preferredAttributes;
     }
 
-    @Override
     public List<ItemAmount> getStartingItems() {
         return startingItems;
     }
 
-    @Override
     public List<ItemAmount> getPurchasedItems() {
         return purchasedItems;
     }
 
-    @Override
     public String getLine(String type, Combat c, Character self, Character other) {
         if (!characterLines.containsKey(type)) {
             return "";
@@ -117,12 +108,10 @@ public class DataBackedNPCData implements NPCData {
         return "";
     }
 
-    @Override
     public Item getTrophy() {
         return trophy;
     }
 
-    @Override
     public boolean checkMood(Character self, Emotion mood, int value) {
         if (moodThresholds.containsKey(mood)) {
             return value >= moodThresholds.get(mood);
@@ -130,17 +119,14 @@ public class DataBackedNPCData implements NPCData {
         return value >= 100;
     }
 
-    @Override
     public Body getBody() {
         return body;
     }
 
-    @Override
     public CharacterSex getSex() {
         return sex;
     }
 
-    @Override
     public String getPortraitName(Combat c, Character self, Character other) {
         for (CustomStringEntry line : portraits) {
             if (line.meetsRequirements(c, self, other)) {
@@ -150,32 +136,26 @@ public class DataBackedNPCData implements NPCData {
         return "";
     }
 
-    @Override
     public String getDefaultPortraitName() {
         return defaultPortraitName;
     }
 
-    @Override
     public Plan getPlan() {
         return plan;
     }
 
-    @Override
     public String getType() {
         return type;
     }
 
-    @Override
     public RecruitmentData getRecruitment() {
         return recruitment;
     }
 
-    @Override
     public AiModifiers getAiModifiers() {
         return aiModifiers;
     }
 
-    @Override
     public Map<CommentSituation, String> getComments() {
         return comments;
     }

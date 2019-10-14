@@ -51,7 +51,7 @@ public class JsonSourceNPCDataLoaderTest {
     }
 
     @Test public void testLoadBasicNPCData() throws Exception {
-        NPCData data = load(npcJSON);
+        DataBackedNPCData data = load(npcJSON);
         assertEquals("NPCTestSamantha", data.getType());
         assertEquals("TestSamantha", data.getName());
         assertEquals("SamanthaTrophy", data.getTrophy().getID());

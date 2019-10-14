@@ -41,12 +41,12 @@ public class JsonSourceNPCDataLoader {
         stats.willpower = resources.get("willpower").getAsFloat();
     }
 
-    public static NPCData load(InputStream in) throws JsonParseException {
+    public static DataBackedNPCData load(InputStream in) throws JsonParseException {
         JsonObject object = JsonUtils.rootJson(new InputStreamReader(in)).getAsJsonObject();
         return load(object);
     }
 
-    public static NPCData load(JsonObject object) {
+    public static DataBackedNPCData load(JsonObject object) {
         DataBackedNPCData data = new DataBackedNPCData();
         data.name = object.get("name").getAsString();
         data.type = object.get("type").getAsString();
