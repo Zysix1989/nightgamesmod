@@ -15,6 +15,8 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class Yui extends BasePersonality {
     /**
@@ -249,9 +251,10 @@ public class Yui extends BasePersonality {
         });
 
         description = (c, self, other) -> {
-            return character.subject()
-                            + " is a cute girl with her short blonde hair in a what's almost a pixie cut. However, her long bangs hangs over her blue eyes, and makes it hard for you to tell what's in her mind."
-                            + "She looks a bit strange dressed in what's obviously traditional eastern clothing while being very clearly white. Looking your way, she gives you a polite bow before taking her stance.";
+            var model = JtwigModel.newModel()
+                .with("self", self);
+            var template = JtwigTemplate.classpathTemplate("yui/describe.twig");
+            return template.render(model).replace(System.lineSeparator(), "");
         };
     }
 
