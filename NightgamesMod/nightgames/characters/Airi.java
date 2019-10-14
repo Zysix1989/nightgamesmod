@@ -32,6 +32,8 @@ import nightgames.start.NpcConfiguration;
 import nightgames.status.Flatfooted;
 import nightgames.status.SlimeMimicry;
 import nightgames.status.Stsflag;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class Airi extends BasePersonality {
     private static final long serialVersionUID = -8169646189131720872L;
@@ -147,12 +149,10 @@ public class Airi extends BasePersonality {
         });
 
         description = (c, self, other) -> {
-            return character.has(Trait.slime) ? "A crystal blue figure stands before you. Well, \"stands\" might be slightly incorrect. "
-            + "Airi sports a cute face and a tight body, but her thighs end in a giant ball of slime. "
-            + "Indeed, while her body might look human at a distance, she seems to be composed of a soft, translucent gel."
-            : "Airi looks at you cautiously. The lithe Japanese girl sports a cute face and a tight body with shoulder length black hair "
-                            + "almost covering her bright intelligent black eyes. You're not too sure what she's thinking "
-                            + "so you approach her cautiously.";
+            var model = JtwigModel.newModel()
+                .with("self", self);
+            var template = JtwigTemplate.classpathTemplate("airi/describe.twig");
+            return template.render(model).replace(System.lineSeparator(), "");
         };
         
         //To be said when this character wins the entire night.
