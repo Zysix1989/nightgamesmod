@@ -148,12 +148,7 @@ public class Airi extends BasePersonality {
             }
         });
 
-        description = (c, self, other) -> {
-            var model = JtwigModel.newModel()
-                .with("self", self);
-            var template = JtwigTemplate.classpathTemplate("airi/describe.twig");
-            return template.render(model).replace(System.lineSeparator(), "");
-        };
+        description = JtwigTemplate.classpathTemplate("airi/describe.twig");
         
         //To be said when this character wins the entire night.
         character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {

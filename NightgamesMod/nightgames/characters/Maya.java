@@ -193,12 +193,7 @@ public class Maya extends BasePersonality {
         character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
             return "<i>\"Aaaand there we are. Think you can go again?\"</i>";
         });
-        description = (c, self, other) -> {
-            var model = JtwigModel.newModel()
-                .with("self", self);
-            var template = JtwigTemplate.classpathTemplate("maya/describe.twig");
-            return template.render(model).replace(System.lineSeparator(), "");
-        };
+        description = JtwigTemplate.classpathTemplate("maya/describe.twig");
         
         
         character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {

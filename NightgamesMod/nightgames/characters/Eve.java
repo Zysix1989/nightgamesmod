@@ -244,12 +244,7 @@ public class Eve extends BasePersonality {
         });
         
 
-        description = (c, self, other) -> {
-            var model = JtwigModel.newModel()
-                .with("self", self);
-            var template = JtwigTemplate.classpathTemplate("eve/describe.twig");
-            return template.render(model).replace(System.lineSeparator(), "");
-        };
+        description = JtwigTemplate.classpathTemplate("eve/describe.twig");
         
         
         character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {

@@ -387,12 +387,7 @@ public class Kat extends BasePersonality {
             return "<i>\"Nyahaha! I gotcha! Hey hey, do you think you can cum again-nyaa? Let's try it out!\"</i>";
         });
 
-        description = (c, self, other) -> {
-            var model = JtwigModel.newModel()
-                .with("self", self);
-            var template = JtwigTemplate.classpathTemplate("kat/describe.twig");
-            return template.render(model).replace(System.lineSeparator(), "");
-        };
+        description = JtwigTemplate.classpathTemplate("kat/describe.twig");
 
         character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
             if (other.getLevel() < self.getLevel() - 5) {

@@ -55,6 +55,7 @@ import nightgames.status.Pheromones;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
+import org.jtwig.JtwigModel;
 
 public class NPC extends Character {
     public BasePersonality ai;
@@ -93,7 +94,9 @@ public class NPC extends Character {
     @Override
     public String describe(int per, Combat c) {
         StringBuilder b = new StringBuilder();
-        b.append(ai.description.getLine(c, this, c.getOpponent(this)));
+        var model = JtwigModel.newModel()
+                .with("self", this);
+        b.append(ai.description.render(model).replace(System.lineSeparator(), ""));
         b.append("<br/><br/>");
         body.describe(b, c.getOpponent(this), " ");
         b.append("<br/>");

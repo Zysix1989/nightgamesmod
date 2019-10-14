@@ -358,14 +358,7 @@ public class Angel extends BasePersonality {
             }
         });
 
-        description = (c, self, other) -> {
-            var model = JtwigModel.newModel()
-                .with("self", self)
-                .with("personalTrait", self.has(Trait.demigoddess));
-            var template = JtwigTemplate.classpathTemplate("angel/describe.twig");
-            return template.render(model).replace(System.lineSeparator(), "");
-        };
-        
+        description = JtwigTemplate.classpathTemplate("angel/describe.twig");
             
         //This is an example of a new kind of Line - a Line to be said if this character wins the entire night. 
         character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {

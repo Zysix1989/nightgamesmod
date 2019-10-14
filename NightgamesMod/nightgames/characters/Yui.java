@@ -250,12 +250,7 @@ public class Yui extends BasePersonality {
             return "{self:SUBJECT} bows respectifully towards {other:name-do} before sliding into an easy stance";
         });
 
-        description = (c, self, other) -> {
-            var model = JtwigModel.newModel()
-                .with("self", self);
-            var template = JtwigTemplate.classpathTemplate("yui/describe.twig");
-            return template.render(model).replace(System.lineSeparator(), "");
-        };
+        description = JtwigTemplate.classpathTemplate("yui/describe.twig");
     }
 
     @Override

@@ -95,12 +95,7 @@ public class Cassie extends BasePersonality {
                             + "sounds quite nice. <i>\"I love you.\"</i> The whisper was so soft you're not sure you heard it. When you look at Cassie's face, she's fast asleep.";
         });
 
-        description = (c, self, other) -> {
-            var model = JtwigModel.newModel()
-                .with("self", self);
-            var template = JtwigTemplate.classpathTemplate("cassie/describe.twig");
-            return template.render(model).replace(System.lineSeparator(), "");
-        };
+        description = JtwigTemplate.classpathTemplate("cassie/describe.twig");
 
         character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             final String finalLines[] = {

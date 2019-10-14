@@ -32,11 +32,7 @@ public class CustomNPC extends BasePersonality {
         setupCharacter(charConfig, commonConfig);
         for (String lineType : CharacterLine.ALL_LINES) {
             if (lineType.equals(CharacterLine.DESCRIBE_LINER)) {
-                this.description = (c, self, other) -> {
-                    var model = JtwigModel.newModel()
-                        .with("self", self);
-                    return data.describe().render(model).replace(System.lineSeparator(), "");
-                };
+                this.description = data.describe();
                 continue;
             }
             character.addLine(lineType, (c, self, other) -> data.getLine(lineType, c, self, other));

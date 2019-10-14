@@ -140,13 +140,8 @@ public class Mara extends BasePersonality {
             }
         });
 
-        description = (c, self, other) -> {
-            var model = JtwigModel.newModel()
-                .with("self", self);
-            var template = JtwigTemplate.classpathTemplate("mara/describe.twig");
-            return template.render(model).replace(System.lineSeparator(), "");
-        };
-        
+        description = JtwigTemplate.classpathTemplate("mara/describe.twig");
+
         character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "{self:SUBJECT} shouts in triumph, <i>\"Ha-haaa! Science wins AGAIN!!\"</i>";
         });

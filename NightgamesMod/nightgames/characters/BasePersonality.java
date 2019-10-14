@@ -28,6 +28,7 @@ import nightgames.status.Disguised;
 import nightgames.status.Stsflag;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.Addiction.Severity;
+import org.jtwig.JtwigTemplate;
 
 public abstract class BasePersonality implements Serializable {
     /**
@@ -40,7 +41,7 @@ public abstract class BasePersonality implements Serializable {
     protected Optional<CockMod> preferredCockMod;
     protected AiModifiers mods;
     protected Map<String, List<CharacterLine>> lines;
-    protected CharacterLine description;
+    protected JtwigTemplate description;
     
     protected int dominance=0;
     protected int minDominance=0;
