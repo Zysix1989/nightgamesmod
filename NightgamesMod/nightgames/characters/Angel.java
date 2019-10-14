@@ -360,7 +360,8 @@ public class Angel extends BasePersonality {
 
         description = (c, self, other) -> {
             var model = JtwigModel.newModel()
-                .with("self", self);
+                .with("self", self)
+                .with("personalTrait", self.has(Trait.demigoddess));
             var template = JtwigTemplate.classpathTemplate("angel/describe.twig");
             return template.render(model).replace(System.lineSeparator(), "");
         };

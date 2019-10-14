@@ -1,9 +1,9 @@
-{% if self.has(Trait.demigoddess) && self.isDemonic() %}
+{% if ((self.has(Trait.demigoddess)) and (self.isDemonic())) %}
 Angel seems to have transformed by some corruptive influences. Her previously pure white wings have
 been dyed with a muddy darkness. You also see a spade tail poke out behind her shapely rear. Still,
 she didn't seem to have lost any of her divine atmosphere. Instead she now carries herself like a
 whimsical dark goddess, ready to subject you to her will.
-{% else if self.has(Trait.demigoddess) %}
+{% elseif (self.has(Trait.demigoddess)) %}
 Angel's transformation seems to have taken inspiration from her own name. She has large angelic
 wings behind her, which combined with her long blonde hair and perfect unblemished skin gives her a
 positively divine appearance. Her appearance should be emanating holy purity, but instead her eyes
@@ -14,4 +14,4 @@ you struggle to ignore an overwhelming urge to prostrate yourself and beg to wor
 Angel has long, straight blonde hair that almost reaches her waist. Beautiful, refined features
 complete the set, making her utterly irresistible. Her personality is prideful and overbearing,
 as though you belong to her, but you don't know it yet.
-{% end if %}
+{% endif %}

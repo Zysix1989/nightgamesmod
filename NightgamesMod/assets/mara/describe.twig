@@ -1,11 +1,11 @@
-{% if self.has(Trait.madscientist) && !self.isDemonic() %}
+{% if ((self.has(Trait.madscientist)) and (not self.isDemonic())) %}
 {{ self.subject() }} has gone high tech. {{ self.pronoun() }} has a rig of equipment on harnesses
 that seem carefully placed so as not to interfere with clothing removal. The glasses
 {{self.pronoun()}}'s wearing appear to be computerized rather than prescription.
 {{ self.pronoun() }} also has a device of unknown purpose strapped to
 {{ self.possessiveAdjective() }}arm. Underneath all of that, {{ self.pronoun() }} has the same
 cute, mischievous expression as always.
-{{ else if self.has(Trait.madscientist) && self.isDemonic() %}
+{{ elseif ((self.has(Trait.madscientist)) and (self.isDemonic())) %}
 {{ self.subject() }} seems to have gotten too much of the demonic juju. Despite going high tech,
 {{ self.pronoun()'s rig of equipment {{ self.possessiveAdjective() }} fancy rig of various gadgets
 and computerized glasses seem to have something newer and more sinister behind them.
@@ -19,5 +19,5 @@ make {{ self.possessiveAdjective() }} look a few years younger than {{ self.pron
 is, and {{ self.pronoun() }} wears a near constant playful smile. {{ self.pronoun() }}'s far from
 physically intimidating, but {{ self.possessiveAdjective() }} sharp eyes reveal
 {{ self.possessiveAdjective() }} exceptional intellect.
-{% end if %}
+{% endif %}
             }

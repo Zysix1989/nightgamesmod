@@ -408,7 +408,8 @@ public class Jewel extends BasePersonality {
 
         description = (c, self, other) -> {
             var model = JtwigModel.newModel()
-                .with("self", self);
+                .with("self", self)
+                .with("personalTrait", self.has(Trait.fighter));
             var template = JtwigTemplate.classpathTemplate("jewel/describe.twig");
             return template.render(model).replace(System.lineSeparator(), "");
         };
