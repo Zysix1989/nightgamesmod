@@ -1,0 +1,16 @@
+{% if self.has(Trait.witch) %}
+{{ self.subject() }} has changed a lot since you started the Game. Maybe {{ self.pronoun() }} isn't
+that different physically. {{ self.pronoun() }} has the same bright blue eyes and the same sweet
+smile. The magic spell book and cloak are both new. {{ self.pronoun() }}'s been dabbling in the
+arcane, and it may be your imagination, but you feel like you can perceive the power radiating
+from {{ self.objectPronoun() }}. {{ self.possessiveAdjective() }} magic seems to have given
+{{ self.objectPronoun() }} more confidence and {{ self.pronoun() }} seems even more eager
+than usual.
+{% else %}
+{{ self.subject() }} is a cute {{ self.guyOrGirl }} with shoulder-length auburn hair, clear blue
+eyes, and glasses. {{ self.pronoun() }} doesn't look at all like the typical sex-fighter.
+{{ self.pronoun() }}'s short but not chubby: you would describe {{ self.possessiveAdjective() }}
+body as soft rather than athletic. {{ self.possessiveAdjective() }} gentle tone and occasional
+flickers of shyness give the impression of sexual innocence, but {{ self.pronoun() }} seems
+determined to win.
+{% end if %}

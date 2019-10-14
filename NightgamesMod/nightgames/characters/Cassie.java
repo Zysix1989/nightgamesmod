@@ -30,6 +30,8 @@ import nightgames.skills.strategy.OralStrategy;
 import nightgames.start.NpcConfiguration;
 import nightgames.status.Energized;
 import nightgames.status.Stsflag;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class Cassie extends BasePersonality {
     /**
@@ -94,16 +96,10 @@ public class Cassie extends BasePersonality {
         });
 
         description = (c, self, other) -> {
-            if (character.has(Trait.witch)) {
-                return " {self:SUBJECT} has changed a lot since you started the Game. Maybe {self:pronoun} isn't that different physically. {self:PRONOUN} has the same bright blue eyes and the same sweet smile. "
-                                + "The magic spellbook and cloak are both new. {self:PRONOUN}'s been dabbling in the arcane, and it may be your imagination, but you feel like you can perceive the power "
-                                + "radiating from {self:direct-object}. {self:POSSESSIVE} magic seems to have given {self:direct-object} more confidence and {self:pronoun} seems even more eager than usual.";
-            } else {
-                return character.subject()
-                                + " is a cute {self:guy} with shoulder-length auburn hair, clear blue eyes, and glasses. {self:PRONOUN} doesn't look at all like the typical sex-fighter. "
-                                + "{self:PRONOUN}'s short but not chubby: you would describe {self:possessive} body as soft rather than athletic. {self:POSSESSIVE} gentle tone and occasional "
-                                + "flickers of shyness give the impression of sexual innocence, but {self:pronoun} seems determined to win.";
-            }
+            var model = JtwigModel.newModel()
+                .with("self", self);
+            var template = JtwigTemplate.classpathTemplate("cassie/describe.twig");
+            return template.render(model).replace(System.lineSeparator(), "");
         };
 
         character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
