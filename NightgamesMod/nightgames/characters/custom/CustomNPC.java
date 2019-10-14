@@ -30,6 +30,10 @@ public class CustomNPC extends BasePersonality {
         this.data = data;
         setupCharacter(charConfig, commonConfig);
         for (String lineType : CharacterLine.ALL_LINES) {
+            if (lineType.equals(CharacterLine.DESCRIBE_LINER)) {
+                this.description = (c, self, other) -> data.getLine(lineType, c, self, other);
+                continue;
+            }
             character.addLine(lineType, (c, self, other) -> data.getLine(lineType, c, self, other));
         }
         for (int i = 1; i < data.getStats().level; i++) {

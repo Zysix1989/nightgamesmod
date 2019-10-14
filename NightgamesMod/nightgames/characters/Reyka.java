@@ -278,7 +278,7 @@ public class Reyka extends BasePersonality {
                             + " who she intends that morsel to be.";
         });
 
-        character.addLine(CharacterLine.DESCRIBE_LINER, (c, self, other) -> {
+        description = (c, self, other) -> {
             
             if (self.get(Attribute.Divinity) > 15) { 
                return "Reyka is no longer just a regular succubus - as if her being a succubus wasn't already scary enough: Standing before you is a dark goddess radiating a terrifying aura of unholy power. "
@@ -299,7 +299,7 @@ public class Reyka extends BasePersonality {
                                 + " and she will suck out your very soul.";
             }
 
-        });
+        };
 
         character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
             String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.describe(self)).orElse("pussy");

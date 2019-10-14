@@ -93,7 +93,7 @@ public class Cassie extends BasePersonality {
                             + "sounds quite nice. <i>\"I love you.\"</i> The whisper was so soft you're not sure you heard it. When you look at Cassie's face, she's fast asleep.";
         });
 
-        character.addLine(CharacterLine.DESCRIBE_LINER, (c, self, other) -> {
+        description = (c, self, other) -> {
             if (character.has(Trait.witch)) {
                 return " {self:SUBJECT} has changed a lot since you started the Game. Maybe {self:pronoun} isn't that different physically. {self:PRONOUN} has the same bright blue eyes and the same sweet smile. "
                                 + "The magic spellbook and cloak are both new. {self:PRONOUN}'s been dabbling in the arcane, and it may be your imagination, but you feel like you can perceive the power "
@@ -104,7 +104,7 @@ public class Cassie extends BasePersonality {
                                 + "{self:PRONOUN}'s short but not chubby: you would describe {self:possessive} body as soft rather than athletic. {self:POSSESSIVE} gentle tone and occasional "
                                 + "flickers of shyness give the impression of sexual innocence, but {self:pronoun} seems determined to win.";
             }
-        });
+        };
 
         character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             final String finalLines[] = {

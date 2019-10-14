@@ -191,7 +191,7 @@ public class Maya extends BasePersonality {
         character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
             return "<i>\"Aaaand there we are. Think you can go again?\"</i>";
         });
-        character.addLine(CharacterLine.DESCRIBE_LINER, (c, self, other) -> {
+        description = (c, self, other) -> {
             return "Maya is a beautiful young woman in her early twenties, though she carries"
                             + " herself with the grace of a more mature lady. She has soft, shapely "
                             + "breasts, larger than her slim frame would imply. Her waist length, raven "
@@ -200,7 +200,7 @@ public class Maya extends BasePersonality {
                             + "beautiful dark blue, behind her red-framed glasses, but every so often the "
                             + "light catches them in a way that makes you think there might "
                             + "be something dangerous inside.";
-        });
+        };
         
         
         character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {

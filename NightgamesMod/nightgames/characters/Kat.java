@@ -385,11 +385,11 @@ public class Kat extends BasePersonality {
             return "<i>\"Nyahaha! I gotcha! Hey hey, do you think you can cum again-nyaa? Let's try it out!\"</i>";
         });
 
-        character.addLine(CharacterLine.DESCRIBE_LINER, (c, self, other) -> {
+        description = (c, self, other) -> {
             return "It's easy to forget that Kat's older than you when she looks like she's about to start high school. She's a very short and slim, though you know she's "
                             + "stronger than she looks. Adorable cat ears poke through her short, strawberry blonde hair. She "
                             + "looks a bit timid, but there's a gleam of desire in her eyes.";
-        });
+        };
 
         character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
             if (other.getLevel() < self.getLevel() - 5) {

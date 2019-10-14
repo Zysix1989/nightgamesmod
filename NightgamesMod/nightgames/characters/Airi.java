@@ -146,14 +146,14 @@ public class Airi extends BasePersonality {
             }
         });
 
-        character.addLine(CharacterLine.DESCRIBE_LINER, (c, self, other) -> {
+        description = (c, self, other) -> {
             return character.has(Trait.slime) ? "A crystal blue figure stands before you. Well, \"stands\" might be slightly incorrect. "
             + "Airi sports a cute face and a tight body, but her thighs end in a giant ball of slime. "
             + "Indeed, while her body might look human at a distance, she seems to be composed of a soft, translucent gel."
             : "Airi looks at you cautiously. The lithe Japanese girl sports a cute face and a tight body with shoulder length black hair "
                             + "almost covering her bright intelligent black eyes. You're not too sure what she's thinking "
                             + "so you approach her cautiously.";
-        });
+        };
         
         //To be said when this character wins the entire night.
         character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {

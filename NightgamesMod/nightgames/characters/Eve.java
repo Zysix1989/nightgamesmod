@@ -242,11 +242,11 @@ public class Eve extends BasePersonality {
         });
         
 
-        character.addLine(CharacterLine.DESCRIBE_LINER, (c, self, other) -> {
+        description = (c, self, other) -> {
             return "If there's one word to describe Eve's appearance, it would have to be 'wild'. Her face is quite pretty, though her eyes are an unnerving silver color. "
                             + "She has bright purple hair gathered in a messy ponytail, a variety of tattoos decorating her extremely shapely body, and of course it's "
                             + "impossible to miss the larger than average cock and balls hanging between between her legs.";
-        });
+        };
         
         
         character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {

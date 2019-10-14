@@ -248,11 +248,11 @@ public class Yui extends BasePersonality {
             return "{self:SUBJECT} bows respectifully towards {other:name-do} before sliding into an easy stance";
         });
 
-        character.addLine(CharacterLine.DESCRIBE_LINER, (c, self, other) -> {
+        description = (c, self, other) -> {
             return character.subject()
                             + " is a cute girl with her short blonde hair in a what's almost a pixie cut. However, her long bangs hangs over her blue eyes, and makes it hard for you to tell what's in her mind."
                             + "She looks a bit strange dressed in what's obviously traditional eastern clothing while being very clearly white. Looking your way, she gives you a polite bow before taking her stance.";
-        });
+        };
     }
 
     @Override

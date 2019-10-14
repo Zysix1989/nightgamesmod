@@ -138,7 +138,7 @@ public class Mara extends BasePersonality {
             }
         });
 
-        character.addLine(CharacterLine.DESCRIBE_LINER, (c, self, other) -> {
+        description = (c, self, other) -> {
             if (character.has(Trait.madscientist) && !self.isDemonic()) {
                 return "{self:SUBJECT} has gone high tech. {self:PRONOUN} has a rig of equipment on harnesses that seem carefully placed so as not to interfere with clothing removal. The glasses {self:pronoun}'s wearing appear to be "
                                 + "computerized rather than prescription. {self:PRONOUN} also has a device of unknown purpose strapped to {self:possessive} arm. Underneath all of that, {self:pronoun} has the same cute, mischievous expression {self:pronoun} "
@@ -151,7 +151,7 @@ public class Mara extends BasePersonality {
                 return "{self:SUBJECT} is short and slender, with a small heart shaped face. {self:PRONOUN} has dark skin, and short, curly black hair. {self:POSSESSIVE} size and cute features make {self:possessive} look a few years "
                                 + "younger than {self:pronoun} actually is, and {self:pronoun} wears a near constant playful smile. {self:PRONOUN}'s far from physically intimidating, but {self:possessive} sharp eyes reveal {self:possessive} exceptional intellect.";
             }
-        });
+        };
         
         character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "{self:SUBJECT} shouts in triumph, <i>\"Ha-haaa! Science wins AGAIN!!\"</i>";

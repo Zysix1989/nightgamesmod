@@ -356,7 +356,7 @@ public class Angel extends BasePersonality {
             }
         });
 
-        character.addLine(CharacterLine.DESCRIBE_LINER, (c, self, other) -> {
+        description = (c, self, other) -> {
             if (character.has(Trait.demigoddess) && character.isDemonic()) {
                 return "Angel seems to have transformed by some corruptive influences. Her previously pure white wings have been dyed with a muddy darkness. You also see "
                                 + "a spade tail poke out behind her shapely rear. "
@@ -371,7 +371,7 @@ public class Angel extends BasePersonality {
                                 + "Beautiful, refined features complete the set, making her utterly irresistable. Her personality is prideful and overbearing, as though you belong to "
                                 + "her, but you don't know it yet.";
             }
-        });
+        };
         
             
         //This is an example of a new kind of Line - a Line to be said if this character wins the entire night. 
