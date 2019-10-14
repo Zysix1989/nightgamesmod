@@ -93,7 +93,7 @@ public class NPC extends Character {
     @Override
     public String describe(int per, Combat c) {
         StringBuilder b = new StringBuilder();
-        b.append(getRandomLineFor(CharacterLine.DESCRIBE_LINER, c, c.getOpponent(this)));
+        b.append(ai.description.getLine(c, this, c.getOpponent(this)));
         b.append("<br/><br/>");
         body.describe(b, c.getOpponent(this), " ");
         b.append("<br/>");
