@@ -30,6 +30,8 @@ import nightgames.skills.strategy.FootjobStrategy;
 import nightgames.skills.strategy.KnockdownStrategy;
 import nightgames.skills.strategy.OralStrategy;
 import nightgames.start.NpcConfiguration;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class Reyka extends BasePersonality {
     private static final long serialVersionUID = 8553663088141308399L;
@@ -279,26 +281,10 @@ public class Reyka extends BasePersonality {
         });
 
         description = (c, self, other) -> {
-            
-            if (self.get(Attribute.Divinity) > 15) { 
-               return "Reyka is no longer just a regular succubus - as if her being a succubus wasn't already scary enough: Standing before you is a dark goddess radiating a terrifying aura of unholy power. "
-                                + "Reyka remains tall in stature, but her alluring face and beautiful body now call to you to prostrate yourself before her and submit to her will. Her hands with their "
-                                + "red-polished nails now look as horribly cruel as they do enticing, gentle, and soft. Underneath, her long and perfectly formed legs and delicate feet stand in an "
-                                + "imposing posture. Behind her, you see a pair of magnificent looking bat-like wings, commanding you to submit to her embrace and worship her.<br/><br/>"
-                                + "Her gaze both captivates you and terrifies you - it's a gaze of indescribable pleasure and unknown power. She'll do worse than suck out your soul...far worse.";
-            } else {
-                 return "Reyka the succubus stands before you, six feet tall with"
-                                + " the most stunningly beautiful body you have ever seen."
-                                + " Her long black hair enshrines her perfect face like a priceless"
-                                + " painting. Her arms are slim and end in long-fingered,"
-                                + " soft hands, nails polished shining red. Underneath, her long and"
-                                + " perfectly formed legs and delicate feet stand in an imposing posture."
-                                + " Behind her, you see a pair of relatively small but powerful-looking bat wings.<br/>"
-                                + " Her gaze speaks of indescribable pleasure, but your mind reminds you"
-                                + " of the cost of indulging in a succubus' body: Give her half a chance"
-                                + " and she will suck out your very soul.";
-            }
-
+            var model = JtwigModel.newModel()
+                .with("self", self);
+            var template = JtwigTemplate.classpathTemplate("reyka/describe.twig");
+            return template.render(model).replace(System.lineSeparator(), "");
         };
 
         character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
