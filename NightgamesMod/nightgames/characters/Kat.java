@@ -28,6 +28,8 @@ import nightgames.status.Feral;
 import nightgames.status.Pheromones;
 import nightgames.status.Stsflag;
 import nightgames.status.addiction.AddictionType;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class Kat extends BasePersonality {
     /**
@@ -386,9 +388,10 @@ public class Kat extends BasePersonality {
         });
 
         description = (c, self, other) -> {
-            return "It's easy to forget that Kat's older than you when she looks like she's about to start high school. She's a very short and slim, though you know she's "
-                            + "stronger than she looks. Adorable cat ears poke through her short, strawberry blonde hair. She "
-                            + "looks a bit timid, but there's a gleam of desire in her eyes.";
+            var model = JtwigModel.newModel()
+                .with("self", self);
+            var template = JtwigTemplate.classpathTemplate("kat/describe.twig");
+            return template.render(model).replace(System.lineSeparator(), "");
         };
 
         character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
