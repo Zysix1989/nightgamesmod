@@ -5,14 +5,14 @@ that seem carefully placed so as not to interfere with clothing removal. The gla
 {{ self.pronoun() }} also has a device of unknown purpose strapped to
 {{ self.possessiveAdjective() }}arm. Underneath all of that, {{ self.pronoun() }} has the same
 cute, mischievous expression as always.
-{{ elseif ((self.has(Trait.madscientist)) and (self.isDemonic())) %}
+{% elseif ((self.has(Trait.madscientist)) and (self.isDemonic())) %}
 {{ self.subject() }} seems to have gotten too much of the demonic juju. Despite going high tech,
 {{ self.pronoun()'s rig of equipment {{ self.possessiveAdjective() }} fancy rig of various gadgets
 and computerized glasses seem to have something newer and more sinister behind them.
 {{ self.possessiveAdjective() }} eyes seem cruel and evil, bent on serving darker, more demonic
 powers. {{ self.possessiveAdjective() }} body seems a little different, too. Underneath all of the
 equipment, the cyber-demon has the same cute, mischievous expression that as always
-{{ else }}
+{% else %}
 {{ self.subject() }} is short and slender, with a small heart shaped face. {{ self.pronoun() }} has
 dark skin, and short, curly black hair. {{ self.possessiveAdjective() }} size and cute features
 make {{ self.possessiveAdjective() }} look a few years younger than {{ self.pronoun() }} actually
