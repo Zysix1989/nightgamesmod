@@ -28,6 +28,8 @@ import nightgames.skills.strategy.KnockdownStrategy;
 import nightgames.skills.strategy.ReceiveAnalStrategy;
 import nightgames.skills.strategy.StraponStrategy;
 import nightgames.start.NpcConfiguration;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class Jewel extends BasePersonality {
     /**
@@ -404,21 +406,11 @@ public class Jewel extends BasePersonality {
             }
         });
 
-        //TODO: Jewel pronoun and posessive pass.
         description = (c, self, other) -> {
-            if (character.has(Trait.fighter) && !self.isDemonic()) {
-                return "Something has changed about Jewel's demeanor, though it's hard to put your finger on it. Her body has always been toned, but now she seems like a weapon "
-                                + "in human shape. She carries a calm composure subtly different from her normal arrogance. Her movements are deliberate and fluid, like you imagine a "
-                                + "martial arts master would look.";
-            } else if (character.has(Trait.fighter) && self.isDemonic()) {
-                return "Something has changed about Jewel's demeanor, and you're very sure it's not good. It's hard to put your finger on it, but despite her toned, human-weapon like body, "
-                                + "she seems to have a dark composure to her. Behind what looks like a calm composure is a violent and cruel arrogance. Her movements are deliberate and fluid, "
-                                + "like a martial arts master, but with the cruelty and brutality of a demon. You might have made fun of her before, but whatever's gotten into her doesn't care for games or love.";
-            } else {
-                return "Jewel has one of the most appropriate names you've ever. Her eyes are as bright green as emeralds and her long ponytailed hair is ruby red. The combination "
-                                + "makes her strikingly beautiful despite not bothering with any make-up. Her body is fit and toned, with almost no fat. "
-                                + "She practically radiates confidence. By her expression alone, it's like her victory is already assured.";
-            }
+            var model = JtwigModel.newModel()
+                .with("self", self);
+            var template = JtwigTemplate.classpathTemplate("jewel/describe.twig");
+            return template.render(model).replace(System.lineSeparator(), "");
         };
         
         
