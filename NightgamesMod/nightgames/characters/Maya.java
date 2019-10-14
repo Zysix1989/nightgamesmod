@@ -16,6 +16,8 @@ import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
 import nightgames.status.Drowsy;
 import nightgames.status.Energized;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 public class Maya extends BasePersonality {
 
@@ -192,14 +194,10 @@ public class Maya extends BasePersonality {
             return "<i>\"Aaaand there we are. Think you can go again?\"</i>";
         });
         description = (c, self, other) -> {
-            return "Maya is a beautiful young woman in her early twenties, though she carries"
-                            + " herself with the grace of a more mature lady. She has soft, shapely "
-                            + "breasts, larger than her slim frame would imply. Her waist length, raven "
-                            + "black hair is tied in a single braid down her back. She wears elbow-length"
-                            + " silk gloves, giving the appearance of sensual elegance. Her eyes are a "
-                            + "beautiful dark blue, behind her red-framed glasses, but every so often the "
-                            + "light catches them in a way that makes you think there might "
-                            + "be something dangerous inside.";
+            var model = JtwigModel.newModel()
+                .with("self", self);
+            var template = JtwigTemplate.classpathTemplate("maya/describe.twig");
+            return template.render(model).replace(System.lineSeparator(), "");
         };
         
         
