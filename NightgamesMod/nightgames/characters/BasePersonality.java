@@ -237,8 +237,7 @@ public abstract class BasePersonality implements Serializable {
 
     public void addLine(String lineType, CharacterLine line) {
         if (lineType.equals(CharacterLine.DESCRIBE_LINER)) {
-            description = line;
-            return;
+            throw new IllegalArgumentException();
         }
         lines.computeIfAbsent(lineType, type -> new ArrayList<>());
         lines.get(lineType).add(line);
@@ -251,11 +250,7 @@ public abstract class BasePersonality implements Serializable {
             lines = disguised.getTarget().getLines();
         }
         if (lineType.equals(CharacterLine.DESCRIBE_LINER)) {
-            if (disguised != null) {
-                return Global.format(disguised.getTarget()
-                    .ai.description.getLine(c, character, other), character, other);
-            }
-            return Global.format(description.getLine(c, character, other), character, other);
+            throw new IllegalArgumentException();
         }
         return Global.format(Global.pickRandom(lines.get(lineType)).orElse((cb, sf, ot) -> "").getLine(c, character, other), character, other);
     }
