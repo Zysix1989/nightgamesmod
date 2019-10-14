@@ -96,7 +96,7 @@ public class NPC extends Character {
         StringBuilder b = new StringBuilder();
         var model = JtwigModel.newModel()
                 .with("self", this);
-        b.append(ai.description.render(model).replace(System.lineSeparator(), ""));
+        b.append(ai.description.render(model).replace(System.lineSeparator(), " "));
         b.append("<br/><br/>");
         body.describe(b, c.getOpponent(this), " ");
         b.append("<br/>");
