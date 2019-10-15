@@ -125,10 +125,6 @@ public class ArmManager {
         arms.add(arm);
     }
 
-    public int armCount() {
-        return arms.size();
-    }
-
     public List<Arm> getActiveArms() {
         return new ArrayList<>(arms);
     }
