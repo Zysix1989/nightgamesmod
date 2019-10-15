@@ -248,11 +248,6 @@ public class Combat {
         if (self.has(Trait.cockcraver)&& other.hasDick()) {
             applyFetish(self, other, CockPart.TYPE);
         }
-        if (self.has(Trait.Pseudopod) && self.has(Trait.slime)) {
-            ArmManager manager = new ArmManager();
-            manager.selectArms(self);
-            getCombatantData(self).setManager(manager);
-        }
     }
 
     public void applyFetish(Character self, Character other, String FetishType) {
