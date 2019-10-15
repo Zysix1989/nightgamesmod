@@ -38,7 +38,10 @@ import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.match.Encounter;
+import nightgames.match.Match;
 import nightgames.match.ftc.FTCMatch;
+import nightgames.pet.arms.ArmManager;
+import nightgames.pet.arms.ArmType;
 import nightgames.skills.Nothing;
 import nightgames.skills.Skill;
 import nightgames.skills.Stage;
@@ -894,5 +897,17 @@ public class NPC extends Character {
 
     public Map<String, List<CharacterLine>> getLines() {
         return ai.lines;
+    }
+
+    @Override
+    public void matchPrep(Match m) {
+        super.matchPrep(m);
+        ArmManager manager = m.getMatchData().getDataFor(this).getArmManager();
+        manager.selectArms(this);
+        if (manager.getActiveArms().stream().anyMatch(a -> a.getType() == ArmType.STABILIZER)) {
+            add(Trait.stabilized);
+        } else {
+            remove(Trait.stabilized);
+        }
     }
 }

@@ -4197,13 +4197,6 @@ public abstract class Character extends Observable implements Cloneable {
             Global.gainSkills(this);
             placeNinjaStash(m);
         }
-        ArmManager manager = m.getMatchData().getDataFor(this).getArmManager();
-        manager.selectArms(this);
-        if (manager.getActiveArms().stream().anyMatch(a -> a.getType() == ArmType.STABILIZER)) {
-            add(Trait.stabilized);
-        } else {
-            remove(Trait.stabilized);
-        }
         if (has(Trait.RemoteControl)) {
             int currentCount = inventory.getOrDefault(Item.RemoteControl, 0);
             gain(Item.RemoteControl, 2 - currentCount + get(Attribute.Science) / 10);
