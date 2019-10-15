@@ -10,7 +10,7 @@ import nightgames.pet.arms.skills.Grab;
 
 public class Grabber extends RoboArm {
 
-    Grabber(ArmManager manager) {
+    public Grabber(ArmManager manager) {
         super(manager, ArmType.GRABBER);
     }
 

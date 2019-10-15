@@ -9,7 +9,7 @@ import nightgames.pet.arms.skills.ArmSkill;
 import nightgames.pet.arms.skills.StabilizerIdle;
 
 public class Stabilizer extends RoboArm {
-    Stabilizer(ArmManager manager) {
+    public Stabilizer(ArmManager manager) {
         super(manager, ArmType.STABILIZER);
     }
 

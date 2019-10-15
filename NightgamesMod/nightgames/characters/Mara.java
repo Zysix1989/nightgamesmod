@@ -2,13 +2,12 @@ package nightgames.characters;
 
 import java.util.Arrays;
 import java.util.Optional;
-
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.mods.pitcher.BionicCockMod;
 import nightgames.characters.body.mods.catcher.CyberneticMod;
+import nightgames.characters.body.mods.pitcher.BionicCockMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
@@ -17,6 +16,14 @@ import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
+import nightgames.pet.arms.ArmManager;
+import nightgames.pet.arms.DefabCannon;
+import nightgames.pet.arms.Grabber;
+import nightgames.pet.arms.HealCannon;
+import nightgames.pet.arms.HeatCannon;
+import nightgames.pet.arms.Stabilizer;
+import nightgames.pet.arms.Stripper;
+import nightgames.pet.arms.ToyArm;
 import nightgames.skills.strategy.FootjobStrategy;
 import nightgames.skills.strategy.StraponStrategy;
 import nightgames.skills.strategy.TechStrategy;
@@ -27,7 +34,6 @@ import nightgames.status.Hypersensitive;
 import nightgames.status.Oiled;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.AddictionType;
-import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class Mara extends BasePersonality {
@@ -822,5 +828,48 @@ public class Mara extends BasePersonality {
                                             return true;
                                         }))));
     }
-    
+
+    @Override
+    void initializeArms(ArmManager manager) {
+        if (character.has(Trait.octo)) {
+            if (character.level < 30) {
+                if (Global.randomdouble() < .5) {
+                    manager.addArm(new Grabber(manager));
+                    manager.addArm(new Grabber(manager));
+                    manager.addArm(new ToyArm(manager));
+                } else {
+                    manager.addArm(new Stripper(manager));
+                    manager.addArm(new Stripper(manager));
+                    manager.addArm(new ToyArm(manager));
+                }
+            } else {
+                double r = Global.randomdouble();
+                if (r > .75) {
+                    manager.addArm(new Grabber(manager));
+                    manager.addArm(new Grabber(manager));
+                    manager.addArm(new HeatCannon(manager));
+                    manager.addArm(new Stripper(manager));
+                    manager.addArm(new ToyArm(manager));
+                } else if (r > .5) {
+                    manager.addArm(new Grabber(manager));
+                    manager.addArm(new Grabber(manager));
+                    manager.addArm(new Stabilizer(manager));
+                    manager.addArm(new Stabilizer(manager));
+                    manager.addArm(new ToyArm(manager));
+                } else if (r > .25) {
+                    manager.addArm(new HealCannon(manager));
+                    manager.addArm(new Stripper(manager));
+                    manager.addArm(new DefabCannon(manager));
+                    manager.addArm(new HeatCannon(manager));
+                    manager.addArm(new ToyArm(manager));
+                } else {
+                    manager.addArm(new Stabilizer(manager));
+                    manager.addArm(new Stabilizer(manager));
+                    manager.addArm(new HeatCannon(manager));
+                    manager.addArm(new DefabCannon(manager));
+                    manager.addArm(new ToyArm(manager));
+                }
+            }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package nightgames.characters;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,13 +10,27 @@ import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.CockPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.GooeySkinMod;
+import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.body.mods.TentacledMod;
+import nightgames.characters.body.mods.catcher.ArcaneMod;
+import nightgames.characters.body.mods.catcher.CyberneticMod;
+import nightgames.characters.body.mods.catcher.DemonicMod;
+import nightgames.characters.body.mods.catcher.DivineMod;
+import nightgames.characters.body.mods.catcher.FeralMod;
+import nightgames.characters.body.mods.catcher.FieryMod;
 import nightgames.characters.body.mods.catcher.GooeyMod;
+import nightgames.characters.body.mods.catcher.PlantMod;
+import nightgames.characters.body.mods.pitcher.BionicCockMod;
+import nightgames.characters.body.mods.pitcher.BlessedCockMod;
+import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
+import nightgames.characters.body.mods.pitcher.IncubusCockMod;
+import nightgames.characters.body.mods.pitcher.PrimalCockMod;
+import nightgames.characters.body.mods.pitcher.RunicCockMod;
 import nightgames.characters.body.mods.pitcher.SlimyCockMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
@@ -27,12 +42,16 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.pet.arms.ArmManager;
+import nightgames.pet.arms.TentacleClinger;
+import nightgames.pet.arms.TentacleImpaler;
+import nightgames.pet.arms.TentacleInjector;
+import nightgames.pet.arms.TentacleSquirter;
+import nightgames.pet.arms.TentacleSucker;
 import nightgames.stance.Engulfed;
 import nightgames.start.NpcConfiguration;
 import nightgames.status.Flatfooted;
 import nightgames.status.SlimeMimicry;
 import nightgames.status.Stsflag;
-import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class Airi extends BasePersonality {
@@ -469,7 +488,7 @@ public class Airi extends BasePersonality {
             CombatantData data = c.getCombatantData(self);
             if (self.has(Trait.Pseudopod) && data.getManager().getActiveArms().isEmpty()) {
                 ArmManager manager = new ArmManager();
-                manager.selectArms(self);
+                initializeArms(manager);
                 c.write(self, "<b>"+manager.getActiveArms().size() + " tentacle arms erupt out of " + self.possessiveAdjective() + " back!</b>");
                 data.setManager(manager);
             }
@@ -701,6 +720,37 @@ public class Airi extends BasePersonality {
             return "airi/portraits/mostly_human.jpg";
         } else {
             return "airi/portraits/mostly_slime.jpg";
+        }
+    }
+
+    private static final List<? extends PartMod> IMPALER_MODS = Collections.unmodifiableList(
+        Arrays.asList(new SlimyCockMod(), new RunicCockMod(), new BlessedCockMod(),
+            new IncubusCockMod(), new PrimalCockMod(), new BionicCockMod(),
+            new EnlightenedCockMod()));
+    private static final List<? extends PartMod> SUCKER_MODS = Arrays.asList(
+        new ArcaneMod(), new CyberneticMod(),
+        new DivineMod(), new FeralMod(),
+        new FieryMod(), new GooeyMod(),
+        new PlantMod(), new DemonicMod(),
+        new TentacledMod());
+
+    @Override
+    void initializeArms(ArmManager manager) {
+        if (character.has(Trait.Pseudopod) && character.has(Trait.slime)) {
+            manager.addArm(new TentacleClinger(manager));
+            if (character.level >= 58 && character.has(Trait.Imposter)) {
+                manager.addArm(new TentacleImpaler(manager, Global.pickRandom(IMPALER_MODS)));
+                manager.addArm(new TentacleSucker(manager, Global.pickRandom(SUCKER_MODS)));
+            } else if (character.level >= 28) {
+                manager.addArm(new TentacleImpaler(manager, Optional.empty()));
+                manager.addArm(new TentacleSucker(manager, Optional.empty()));
+            }
+            if (character.level >= 48) {
+                manager.addArm(new TentacleInjector(manager));
+            }
+            if (character.level >= 58 && character.has(Trait.VolatileSubstrate)) {
+                manager.addArm(new TentacleSquirter(manager));
+            }
         }
     }
 }

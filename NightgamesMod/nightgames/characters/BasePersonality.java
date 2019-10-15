@@ -11,8 +11,8 @@ import java.util.Optional;
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.mods.pitcher.CockMod;
 import nightgames.characters.custom.AiModifiers;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.characters.custom.CommentSituation;
@@ -22,6 +22,7 @@ import nightgames.combat.Result;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.pet.arms.ArmManager;
 import nightgames.skills.Skill;
 import nightgames.start.NpcConfiguration;
 import nightgames.status.Disguised;
@@ -263,4 +264,5 @@ public abstract class BasePersonality implements Serializable {
         return description.render(model).replace(System.lineSeparator(), " ");
     }
 
+    void initializeArms(ArmManager m) { }
 }

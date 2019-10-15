@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.actions.Move;
@@ -58,7 +57,6 @@ import nightgames.status.Pheromones;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
-import org.jtwig.JtwigModel;
 
 public class NPC extends Character {
     public BasePersonality ai;
@@ -903,7 +901,7 @@ public class NPC extends Character {
     public void matchPrep(Match m) {
         super.matchPrep(m);
         ArmManager manager = m.getMatchData().getDataFor(this).getArmManager();
-        manager.selectArms(this);
+        ai.initializeArms(manager);
         if (manager.getActiveArms().stream().anyMatch(a -> a.getType() == ArmType.STABILIZER)) {
             add(Trait.stabilized);
         } else {
