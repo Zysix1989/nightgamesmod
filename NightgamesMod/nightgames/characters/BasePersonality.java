@@ -28,6 +28,7 @@ import nightgames.status.Disguised;
 import nightgames.status.Stsflag;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.Addiction.Severity;
+import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public abstract class BasePersonality implements Serializable {
@@ -255,4 +256,11 @@ public abstract class BasePersonality implements Serializable {
         }
         return Global.format(Global.pickRandom(lines.get(lineType)).orElse((cb, sf, ot) -> "").getLine(c, character, other), character, other);
     }
+
+    String describe(Character self) {
+        var model = JtwigModel.newModel()
+            .with("self", this);
+        return description.render(model).replace(System.lineSeparator(), " ");
+    }
+
 }
