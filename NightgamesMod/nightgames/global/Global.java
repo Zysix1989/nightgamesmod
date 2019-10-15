@@ -960,7 +960,7 @@ public class Global {
 
     public static List<Trait> getFeats(Character c) {
         List<Trait> a = getTraitRequirements().availTraits(c);
-        a.sort((first, second) -> first.toString().compareTo(second.toString()));
+        a.sort(Comparator.comparing(Trait::toString));
         return a;
     }
 
