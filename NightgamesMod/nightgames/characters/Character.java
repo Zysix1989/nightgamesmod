@@ -2084,9 +2084,6 @@ public abstract class Character extends Observable implements Cloneable {
         }
     }
 
-    private static final OrgasmicTighten TIGHTEN_SKILL = new OrgasmicTighten(null);         //FIXME: HIDDEN SKILLS! Why are they final and static? - DSM
-    private static final OrgasmicThrust THRUST_SKILL = new OrgasmicThrust(null);            //FIXME: HIDDEN SKILLS! Why are they Final and static? - DSM
-
     /**Resolves the orgasm. Accounts for various traits and outputs dynamic text to the GUI.
      * 
      * @param c
@@ -2166,14 +2163,14 @@ public abstract class Character extends Observable implements Cloneable {
             add(c, new Abuff(this, Attribute.Seduction, 5, 10));
         }
         if (has(Trait.lastStand)) {
-            OrgasmicTighten tightenCopy = (OrgasmicTighten) TIGHTEN_SKILL.copy(this);
-            OrgasmicThrust thrustCopy = (OrgasmicThrust) THRUST_SKILL.copy(this);
-            System.out.println("lastStand triggered for "+this.getTrueName()+", tighten: "+tightenCopy.usable(c, opponent)+", thrust: "+thrustCopy.usable(c, opponent));
-            if (tightenCopy.usable(c, opponent)) {
-                tightenCopy.resolve(c, opponent);
+            var tighten = new OrgasmicTighten(this);
+            var thrust = new OrgasmicThrust(this);
+            System.out.println("lastStand triggered for "+this.getTrueName()+", tighten: "+tighten.usable(c, opponent)+", thrust: "+thrust.usable(c, opponent));
+            if (tighten.usable(c, opponent)) {
+                tighten.resolve(c, opponent);
             }
-            if (thrustCopy.usable(c, opponent)) {
-                thrustCopy.resolve(c, opponent);
+            if (thrust.usable(c, opponent)) {
+                thrust.resolve(c, opponent);
             }
         }
         if (this != opponent && times == totalTimes && canRespond()) {          //FIXME: Explicitly Parentesize for clear order of operations. - DSM
