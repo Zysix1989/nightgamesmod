@@ -41,13 +41,12 @@ public class ArmManager {
 
     private String describeArms(List<? extends Arm> arms) {
         Map<ArmType, List<Arm>> grouped = arms.stream()
-                                                  .collect(Collectors.groupingBy(Arm::getType));
+            .collect(Collectors.groupingBy(Arm::getType));
         int counter = 0;
         StringBuilder sb = new StringBuilder();
 
         for (Map.Entry<ArmType, List<Arm>> e : grouped.entrySet()) {
-            int amt = e.getValue()
-                       .size();
+            int amt = e.getValue().size();
             sb.append(amt == 1 ? "a" : amt);
             sb.append(" ").append(e.getKey().getName());
             if (amt > 1) sb.append('s');
