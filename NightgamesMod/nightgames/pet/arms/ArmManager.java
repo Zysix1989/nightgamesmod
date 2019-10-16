@@ -8,24 +8,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import nightgames.characters.Character;
-import nightgames.characters.Trait;
-import nightgames.characters.body.mods.PartMod;
-import nightgames.characters.body.mods.TentacledMod;
-import nightgames.characters.body.mods.catcher.ArcaneMod;
-import nightgames.characters.body.mods.catcher.CyberneticMod;
-import nightgames.characters.body.mods.catcher.DemonicMod;
-import nightgames.characters.body.mods.catcher.DivineMod;
-import nightgames.characters.body.mods.catcher.FeralMod;
-import nightgames.characters.body.mods.catcher.FieryMod;
-import nightgames.characters.body.mods.catcher.GooeyMod;
-import nightgames.characters.body.mods.catcher.PlantMod;
-import nightgames.characters.body.mods.pitcher.BionicCockMod;
-import nightgames.characters.body.mods.pitcher.BlessedCockMod;
-import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
-import nightgames.characters.body.mods.pitcher.IncubusCockMod;
-import nightgames.characters.body.mods.pitcher.PrimalCockMod;
-import nightgames.characters.body.mods.pitcher.RunicCockMod;
-import nightgames.characters.body.mods.pitcher.SlimyCockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.pet.PetCharacter;
@@ -48,77 +30,6 @@ public class ArmManager {
         arms.forEach(arm -> newManager.arms.add(arm.instance()));
         return newManager;
     }
-
-    public void selectArms(Character owner) {
-        arms.clear();
-        if (owner.has(Trait.octo)) {
-            if (owner.level < 30) {
-                if (Global.randomdouble() < .5) {
-                    arms.add(new Grabber(this));
-                    arms.add(new Grabber(this));
-                    arms.add(new ToyArm(this));
-                } else {
-                    arms.add(new Stripper(this));
-                    arms.add(new Stripper(this));
-                    arms.add(new ToyArm(this));
-                }
-            } else {
-                double r = Global.randomdouble();
-                if (r > .75) {
-                    arms.add(new Grabber(this));
-                    arms.add(new Grabber(this));
-                    arms.add(new HeatCannon(this));
-                    arms.add(new Stripper(this));
-                    arms.add(new ToyArm(this));
-                } else if (r > .5) {
-                    arms.add(new Grabber(this));
-                    arms.add(new Grabber(this));
-                    arms.add(new Stabilizer(this));
-                    arms.add(new Stabilizer(this));
-                    arms.add(new ToyArm(this));
-                } else if (r > .25) {
-                    arms.add(new HealCannon(this));
-                    arms.add(new Stripper(this));
-                    arms.add(new DefabCannon(this));
-                    arms.add(new HeatCannon(this));
-                    arms.add(new ToyArm(this));
-                } else {
-                    arms.add(new Stabilizer(this));
-                    arms.add(new Stabilizer(this));
-                    arms.add(new HeatCannon(this));
-                    arms.add(new DefabCannon(this));
-                    arms.add(new ToyArm(this));
-                }
-            }
-        }
-        if (owner.has(Trait.Pseudopod) && owner.has(Trait.slime)) {
-            addArm(new TentacleClinger(this));
-            if (owner.level >= 58 && owner.has(Trait.Imposter)) {
-                addArm(new TentacleImpaler(this, Global.pickRandom(IMPALER_MODS)));
-                addArm(new TentacleSucker(this, Global.pickRandom(SUCKER_MODS)));
-            } else if (owner.level >= 28) {
-                addArm(new TentacleImpaler(this, Optional.empty()));
-                addArm(new TentacleSucker(this, Optional.empty()));
-            }
-            if (owner.level >= 48) {
-                addArm(new TentacleInjector(this));
-            }
-            if (owner.level >= 58 && owner.has(Trait.VolatileSubstrate)) {
-                addArm(new TentacleSquirter(this));
-            }
-        }
-    }
-    
-    private static final List<? extends PartMod> IMPALER_MODS = Collections.unmodifiableList(
-        Arrays.asList(new SlimyCockMod(), new RunicCockMod(), new BlessedCockMod(),
-            new IncubusCockMod(), new PrimalCockMod(), new BionicCockMod(),
-            new EnlightenedCockMod()));
-    private static final List<? extends PartMod> SUCKER_MODS = Arrays.asList(
-                    new ArcaneMod(), new CyberneticMod(),
-                    new DivineMod(), new FeralMod(),
-                    new FieryMod(), new GooeyMod(),
-                    new PlantMod(), new DemonicMod(),
-                    new TentacledMod());
 
     public void addArm(Arm arm) {
         arms.add(arm);
