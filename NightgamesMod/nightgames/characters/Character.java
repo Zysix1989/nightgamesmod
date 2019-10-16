@@ -104,6 +104,7 @@ import nightgames.status.addiction.Addiction.Severity;
 import nightgames.status.addiction.AddictionType;
 import nightgames.status.addiction.Dominance;
 import nightgames.status.addiction.MindControl;
+import nightgames.traits.Wrassler;
 import nightgames.trap.Trap;
 import nightgames.utilities.DebugHelper;
 import nightgames.utilities.ProseUtils;
@@ -745,23 +746,18 @@ public abstract class Character extends Observable implements Cloneable {
 
         // threshold at which pain calms you down
         int painAllowance = Math.max(10, getStamina().max() / 6);
-        if (other != null && other.has(Trait.wrassler)) {
-            painAllowance *= 1.5;
-        }
         int difference = pain - painAllowance;
-        // if the pain exceeds the threshold and you aren't a masochist
-        // calm down by the overflow
-
-        if (c != null) {
-            c.writeSystemMessage(String.format("%s hurt for <font color='rgb(250,10,10)'>%d<font color='white'>",
-                            subjectWas(), pain), true);
+        if (other != null && other.has(Trait.wrassler)) {
+            difference = Wrassler.inflictedPainArousalLossModifier(pain, painAllowance);
         }
         if (difference > 0 && !is(Stsflag.masochism)) {
-            if (other != null && other.has(Trait.wrassler)) {
-                calm(c, difference / 2);
-            } else {
-                calm(c, difference);
-            }
+            calm(c, difference);
+        }
+        // if the pain exceeds the threshold and you aren't a masochist
+        // calm down by the overflow
+        if (c != null) {
+            c.writeSystemMessage(String.format("%s hurt for <font color='rgb(250,10,10)'>%d<font color='white'>",
+                subjectWas(), pain), true);
         }
         if (other != null && other.has(Trait.sadist) && !is(Stsflag.masochism)) {
             c.write("<br/>"+Global.capitalizeFirstLetter(
