@@ -76,8 +76,6 @@ import nightgames.match.Match;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.pet.CharacterPet;
 import nightgames.pet.PetCharacter;
-import nightgames.pet.arms.ArmManager;
-import nightgames.pet.arms.ArmType;
 import nightgames.skills.AssFuck;
 import nightgames.skills.OrgasmicThrust;
 import nightgames.skills.OrgasmicTighten;
