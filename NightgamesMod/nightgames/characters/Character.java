@@ -746,12 +746,12 @@ public abstract class Character extends Observable implements Cloneable {
 
         // threshold at which pain calms you down
         int painAllowance = Math.max(10, getStamina().max() / 6);
-        int difference = pain - painAllowance;
+        int arousalLoss = pain - painAllowance;
         if (other != null && other.has(Trait.wrassler)) {
-            difference = Wrassler.inflictedPainArousalLossModifier(pain, painAllowance);
+            arousalLoss = Wrassler.inflictedPainArousalLossModifier(pain, painAllowance);
         }
-        if (difference > 0 && !is(Stsflag.masochism)) {
-            calm(c, difference);
+        if (arousalLoss > 0 && !is(Stsflag.masochism)) {
+            calm(c, arousalLoss);
         }
         // if the pain exceeds the threshold and you aren't a masochist
         // calm down by the overflow
