@@ -2070,7 +2070,7 @@ public class Global {
 
     public static MatchType decideMatchType() {
         if (getPlayer().getLevel() >= 15 && random(10) < 2) {
-            return MatchType.TEAM;
+            return MatchType.FTC;
         }
         return MatchType.NORMAL;
     }
