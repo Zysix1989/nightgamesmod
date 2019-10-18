@@ -42,11 +42,9 @@ public class Match {
     protected int dropOffTime;
     protected Map<String, Area> map;
     protected Set<Participant> participants;
-    protected Map<Character, Integer> score;
     private boolean pause;
     protected Modifier condition;
     protected MatchData matchData;
-    Map<Character, List<Character>> mercy;
 
     private Iterator<Participant> roundIterator;
     
@@ -55,14 +53,11 @@ public class Match {
             .map(Participant::new)
             .collect(Collectors.toCollection(HashSet::new));
         matchData = new MatchData();
-        score = new HashMap<Character, Integer>();
         this.condition = condition;
         time = 0;
         dropOffTime = 0;
         pause = false;
         map = buildMap();
-        mercy = new HashMap<>();
-        combatants.forEach(c -> mercy.put(c, new ArrayList<>()));
         roundIterator = participants.iterator();
     }
     
@@ -74,7 +69,6 @@ public class Match {
         preStart();
         participants.forEach(participant -> {
             var combatant = participant.getCharacter();
-            score.put(combatant, 0);
             Global.gainSkills(combatant);
             Global.learnSkills(combatant);
             combatant.matchPrep(this);
@@ -170,16 +164,17 @@ public class Match {
 
     }
 
-    protected void afterTurn(Character combatant) {
-        if (combatant.state == State.resupplying) {
-            mercy.values().forEach(l -> l.remove(combatant));
+    protected void afterTurn(Participant participant) {
+        if (participant.getCharacter().state == State.resupplying) {
+            participants.forEach(p -> p.allowTarget(participant));
         }
     }
 
     public void score(Character combatant, int amt) {
-        score.put(combatant, score.get(combatant) + amt);
+        var participant = findParticipant(combatant);
+        participant.incrementScore(amt);
         if ((combatant.human() || combatant.location().humanPresent())) {
-            Global.gui().message(scoreString(combatant, score.get(combatant)));
+            Global.gui().message(scoreString(combatant, participant.getScore()));
         }
     }
 
@@ -193,8 +188,9 @@ public class Match {
     }
 
     public void haveMercy(Character victor, Character loser) {
-        mercy.get(victor).add(loser);
-        score.put(victor, score.get(victor) + 1);
+        var victorp = findParticipant(victor);
+        var loserp = findParticipant(loser);
+        victorp.defeated(loserp);
     }
 
     public final void round() {
@@ -214,7 +210,7 @@ public class Match {
                     self.upkeep();
                     manageConditions(self);
                     self.move();
-                    afterTurn(self);
+                    afterTurn(participant);
                 }
                 if (pause) {
                     return;
@@ -239,10 +235,9 @@ public class Match {
     }
 
     protected Optional<Character> decideWinner() {
-        return score.entrySet()
-                    .stream()
-                    .max(Comparator.comparing(Entry::getValue))
-                    .map(Entry::getKey);
+        return participants.stream()
+            .max(Comparator.comparing(Participant::getScore))
+            .map(Participant::getCharacter);
     }
 
     protected void giveWinnerPrize(Character winner, StringBuilder output) {
@@ -301,29 +296,32 @@ public class Match {
         Optional<Character> winner = decideWinner();
         Player player = Global.getPlayer();
 
-        for (Character combatant : score.keySet()) {
-            sb.append(scoreString(combatant, score.get(combatant)));
-            sb.append("<br/>");
-            combatant.modMoney(score.get(combatant) * combatant.prize());
-            combatant.modMoney(calculateReward(combatant, sb));
+        participants.stream().forEachOrdered(p -> {
+                var combatant = p.getCharacter();
+                sb.append(scoreString(combatant, p.getScore()));
+                sb.append("<br/>");
+                combatant.modMoney(p.getScore() * combatant.prize());
+                combatant.modMoney(calculateReward(combatant, sb));
 
-            //TODO: If they got 0 points, play their loser liner
-            if (score.get(combatant) == 0 && combatant.human() == false) {
-                sb.append(combatant.loserLiner(null, null) + "<br/>");
-            }
-            
-            combatant.challenges.clear();
-            combatant.state = State.ready;
-            condition.undoItems(combatant);
-            combatant.change();
-            finalizeCombatant(combatant);
-        }
+                //TODO: If they got 0 points, play their loser liner
+                if (p.getScore() == 0 && combatant.human() == false) {
+                    sb.append(combatant.loserLiner(null, null) + "<br/>");
+                }
+
+                combatant.challenges.clear();
+                combatant.state = State.ready;
+                condition.undoItems(combatant);
+                combatant.change();
+                finalizeCombatant(combatant);
+        });
+
+        var playerParticipant = findParticipant(player);
         sb.append("<br/>You earned $")
-          .append(score.get(player) * player.prize())
+          .append(playerParticipant.getScore() * player.prize())
           .append(" for scoring ")
-          .append(score.get(player))
+          .append(playerParticipant.getScore())
           .append(" points.<br/>");
-        int bonus = score.get(player) * condition.bonus();
+        int bonus = playerParticipant.getScore() * condition.bonus();
         player.modMoney(bonus);
         if (bonus > 0) {
             sb.append("You earned an additional $")
@@ -478,4 +476,10 @@ public class Match {
         resume();
     }
 
+    // Temporary nastiness
+    private Participant findParticipant(Character c) {
+        var candidates = participants.stream().filter(p -> p.getCharacter().equals(c));
+        assert candidates.count() == 1;
+        return candidates.findFirst().orElseThrow();
+    }
 }
