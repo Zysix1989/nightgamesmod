@@ -353,10 +353,7 @@ public class Match {
                 .afterParty();
         }
 
-        /*
-         * if (maxaffection >= 15 && closest != null) { closest.afterParty(); } else { Global.gui().message("You walk back to your dorm and get yourself cleaned up."); }
-         */
-        for (Character character : combatants) {
+        combatants.forEach(character -> {
             if (character.getFlag("heelsTraining") >= 50 && !character.hasPure(Trait.proheels)) {
                 if (character.human()) {
                     sb.append("<br/>You've gotten comfortable at fighting in heels.<br/><b>Gained Trait: Heels Pro</b>\n");
@@ -369,7 +366,7 @@ public class Match {
                 }
                 character.add(Trait.masterheels);
             }
-        }
+        });
         Global.getPlayer()
               .getAddictions()
               .forEach(Addiction::endNight);
