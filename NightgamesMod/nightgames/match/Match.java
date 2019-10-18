@@ -299,9 +299,7 @@ public class Match {
 
     private void end() {
         beforeEnd();
-        for (Character next : combatants) {
-            next.finishMatch();
-        }
+        combatants.forEach(Character::finishMatch);
         Global.gui()
               .clearText();
         StringBuilder sb = new StringBuilder("Tonight's match is over.<br/><br/>");
