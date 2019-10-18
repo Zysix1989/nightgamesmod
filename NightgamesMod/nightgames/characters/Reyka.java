@@ -316,7 +316,7 @@ public class Reyka extends BasePersonality {
 
     @Override
     public String victory(Combat c, Result flag) {
-        Character opponent = character.equals(c.p1) ? c.p2 : c.p1;
+        Character opponent = c.getOpponent(character);
 
         if (c.getStance().anallyPenetrated(c, opponent)) {
             return "Reyka alternates between long hard thrusts and sensual grinding to keep you from getting used to the stimulation, and the pleasure it is "

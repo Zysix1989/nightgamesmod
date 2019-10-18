@@ -177,11 +177,7 @@ public class Player extends Character {
         if (has(Trait.slime)) {
             purge(c);
         }
-        if (c.p1.human()) {
-            c.p2.defeat(c, flag);
-        } else {
-            c.p1.defeat(c, flag);
-        }
+        c.getOpponent(this).defeat(c, flag);
     }
 
     @Override
@@ -194,12 +190,7 @@ public class Player extends Character {
 
     @Override
     public boolean act(Combat c) {
-        Character target;
-        if (c.p1 == this) {
-            target = c.p2;
-        } else {
-            target = c.p1;
-        }
+        Character target = c.getOpponent(this);
         pickSkills(c, target);
         return true;
     }
@@ -248,11 +239,7 @@ public class Player extends Character {
         if (has(Trait.slime)) {
             purge(c);
         }
-        if (c.p1.human()) {
-            c.p2.draw(c, flag);
-        } else {
-            c.p1.draw(c, flag);
-        }
+        c.getOpponent(this).draw(c, flag);
     }
 
     @Override

@@ -550,12 +550,7 @@ public class Mara extends BasePersonality {
 
     @Override
     public String draw(Combat c, Result flag) {
-        Character target;
-        if (c.p1 == character) {
-            target = c.p2;
-        } else {
-            target = c.p1;
-        }
+        Character target = c.getOpponent(character);
         if (flag == Result.intercourse) {
             return "You thrust your dick into Mara's tight pussy while she writhes under you. You tease and pinch her nipples to increase her pleasure, but it's not really necessary. "
                             + "She's obviously already on the brink of climax. Thanks to the pleasurable tightness of her entrance, you're not far behind her, but you should be able to endure "

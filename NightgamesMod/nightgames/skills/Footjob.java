@@ -34,7 +34,7 @@ public class Footjob extends Skill {
     @Override
     public float priorityMod(Combat c) {
         BodyPart feet = getSelf().body.getRandom(FeetPart.TYPE);
-        Character other = c.p1 == getSelf() ? c.p2 : c.p1;
+        Character other = c.getOpponent(getSelf());
         BodyPart otherpart = other.hasDick() ? other.body.getRandomCock() : other.body.getRandomPussy();
         if (feet != null) {
             return (float) Math.max(0, feet.getPleasure(getSelf()) - 1);

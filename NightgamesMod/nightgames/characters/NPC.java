@@ -186,12 +186,7 @@ public class NPC extends Character {
 
     @Override
     public void victory(Combat c, Result flag) {
-        Character target;
-        if (c.p1 == this) {
-            target = c.p2;
-        } else {
-            target = c.p1;
-        }
+        Character target = c.getOpponent(this);
         gainXP(getVictoryXP(target));
         target.gainXP(target.getDefeatXP(this));
         target.arousal.empty();
@@ -210,12 +205,7 @@ public class NPC extends Character {
 
     @Override
     public void defeat(Combat c, Result flag) {
-        Character target;
-        if (c.p1 == this) {
-            target = c.p2;
-        } else {
-            target = c.p1;
-        }
+        Character target = c.getOpponent(this);
         gainXP(getDefeatXP(target));
         target.gainXP(target.getVictoryXP(this));
         arousal.empty();
@@ -352,12 +342,7 @@ public class NPC extends Character {
 
     @Override
     public void draw(Combat c, Result flag) {
-        Character target;
-        if (c.p1 == this) {
-            target = c.p2;
-        } else {
-            target = c.p1;
-        }
+        Character target = c.getOpponent(this);
         gainXP(getVictoryXP(target));
         target.gainXP(getVictoryXP(this));
         arousal.empty();

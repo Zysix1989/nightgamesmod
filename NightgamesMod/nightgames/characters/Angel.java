@@ -386,7 +386,7 @@ public class Angel extends BasePersonality {
     @Override
     public String victory(Combat c, Result flag) {
         character.arousal.empty();
-        Character opponent = character.equals(c.p1) ? c.p2 : c.p1;
+        Character opponent = c.getOpponent(character);
 
         String message = "";
 
