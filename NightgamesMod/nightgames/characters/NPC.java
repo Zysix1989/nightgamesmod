@@ -345,26 +345,6 @@ public class NPC extends Character {
         return defaultStrat;
     }
 
-    public Skill actFast(Combat c) {
-        HashSet<Skill> available = new HashSet<>();
-        Character target;
-        if (c.p1 == this) {
-            target = c.p2;
-        } else {
-            target = c.p1;
-        }
-        for (Skill act : getSkills()) {
-            if (Skill.isUsable(c, act) && cooldownAvailable(act)) {
-                available.add(act);
-            }
-        }
-        Skill.filterAllowedSkills(c, available, this, target);
-        if (available.size() == 0) {
-            available.add(new Nothing(this));
-        }
-        return ai.act(available, c);
-    }
-
     @Override
     public boolean human() {
         return false;
