@@ -485,9 +485,6 @@ public class Combat {
             getCombatantData(character).setBooleanFlag(beguilingbreastCompletedFlag, true);
         }
 
-        Character mainOpponent = getOpponent(character);
-        String buttslutCompletedFlag = Trait.buttslut.name() + "Completed";
-
         if (character.has(Trait.footfetishist)) {
             fetishDisadvantageAura(character, allies, opponents, FeetPart.TYPE, ClothingSlot.feet);
         }
