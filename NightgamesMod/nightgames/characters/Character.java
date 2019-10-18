@@ -2843,19 +2843,6 @@ public abstract class Character extends Observable implements Cloneable {
         }
         update();
     }
-    
-    /**Outputs a debug message.*/
-    public String debugMessage(Combat c, Position p) {
-        String mood;
-        if (this instanceof NPC) { // useOfInstanceOfWithThis
-            mood = "mood: " + ((NPC) this).mood.toString();
-        } else {
-            mood = "";
-        }
-        return String.format("[%s] %s s: %d/%d a: %d/%d m: %d/%d w: %d/%d c:%d f:%f", name, mood, stamina.getReal(),
-                        stamina.max(), arousal.getReal(), arousal.max(), mojo.getReal(), mojo.max(),
-                        willpower.getReal(), willpower.max(), outfit.getEquipped().size(), getFitness(c));
-    }
 
     public void gain(Item item) {
         gain(item, 1);
