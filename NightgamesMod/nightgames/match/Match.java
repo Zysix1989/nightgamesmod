@@ -341,11 +341,16 @@ public class Match {
             Global.flag(Flag.victory);
         }
 
-        int maxaffection = 0;
-        for (Character rival : combatants) {
-            if (rival.getAffection(player) > maxaffection) {
-                maxaffection = rival.getAffection(player);
-            }
+        Set<Character> potentialDates = combatants.stream()
+            .filter(c -> c.getAffection(player) >= 15)
+            .collect(Collectors.toSet());
+        if (potentialDates.isEmpty()) {
+            Global.gui().message("You walk back to your dorm and get yourself cleaned up.");
+        } else {
+            potentialDates.stream()
+                .max(Comparator.comparing(c -> c.getAffection(player)))
+                .orElseThrow()
+                .afterParty();
         }
 
         /*
