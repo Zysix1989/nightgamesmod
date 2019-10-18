@@ -18,8 +18,6 @@ import nightgames.areas.Area;
 import nightgames.areas.AreaAttribute;
 import nightgames.areas.MapDrawHint;
 import nightgames.characters.Character;
-import nightgames.combat.Combat;
-import nightgames.combat.CombatListener;
 import nightgames.global.Global;
 import nightgames.match.Encounter;
 import nightgames.match.Match;
@@ -37,11 +35,6 @@ public class TeamMatch extends Match {
         super(combatants, condition);
         teams = new HashMap<>();
         teamOf = new HashMap<>();
-    }
-
-    @Override
-    public List<CombatListener> getListeners(Combat c) {
-        return Collections.singletonList(new TeamCombatListener(c));
     }
 
     @Override

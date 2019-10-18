@@ -70,11 +70,7 @@ public class Match {
     protected void preStart() {
         
     }
-    
-    public List<CombatListener> getListeners(Combat c) {
-        return Collections.singletonList(new DefaultMatchEndListener(c));
-    }
-    
+
     public final void start() {
         preStart();
         combatants.forEach(combatant -> {
