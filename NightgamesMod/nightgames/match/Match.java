@@ -214,8 +214,7 @@ public class Match {
             }
             beforeAllTurns();
             while (index < combatants.size()) {
-                Global.gui()
-                      .refresh();
+                Global.gui().refresh();
                 if (combatants.get(index).state != State.quit) {
                     Character self = combatants.get(index);
                     beforeTurn(self);
