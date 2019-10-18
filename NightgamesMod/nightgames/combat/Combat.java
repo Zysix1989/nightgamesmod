@@ -473,9 +473,11 @@ public class Combat {
         }
         String beguilingbreastCompletedFlag = Trait.beguilingbreasts.name() + "Completed";
         //Fix for Beguiling Breasts being seen when it shouldn't.
-        if (character.has(Trait.beguilingbreasts) && !getCombatantData(character).getBooleanFlag(beguilingbreastCompletedFlag) && 
-                        character.outfit.slotOpen(ClothingSlot.top) && getStance().facing(character, getOpponent(character)) && 
-                        !getOpponent(character).is(Stsflag.blinded)) {
+        if (character.has(Trait.beguilingbreasts)
+            && !getCombatantData(character).getBooleanFlag(beguilingbreastCompletedFlag)
+            && character.outfit.slotOpen(ClothingSlot.top)
+            && getStance().facing(character, getOpponent(character))
+            && !getOpponent(character).is(Stsflag.blinded)) {
             Character mainOpponent = getOpponent(character);
             write(character, Global.format("The instant {self:subject-action:lay|lays} {self:possessive} eyes on {other:name-possessive} bare breasts, {self:possessive} consciousness flies out of {self:possessive} mind. " +
                             (character.canAct() ? "{other:SUBJECT-ACTION:giggle|giggles} a bit and {other:action:cup} {other:possessive} {other:body-part:breasts}"
