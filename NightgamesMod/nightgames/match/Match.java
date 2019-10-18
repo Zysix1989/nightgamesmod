@@ -77,25 +77,21 @@ public class Match {
     
     public final void start() {
         preStart();
-        for (Character combatant : combatants) {
+        combatants.forEach(combatant -> {
             score.put(combatant, 0);
             Global.gainSkills(combatant);
             Global.learnSkills(combatant);
             combatant.matchPrep(this);
-            combatant.getStamina()
-                     .fill();
-            combatant.getArousal()
-                     .empty();
-            combatant.getMojo()
-                     .empty();
-            combatant.getWillpower()
-                     .fill();
+            combatant.getStamina().fill();
+            combatant.getArousal().empty();
+            combatant.getMojo().empty();
+            combatant.getWillpower().fill();
             if (combatant.getPure(Attribute.Science) > 0) {
                 combatant.chargeBattery();
             }
             manageConditions(combatant);
             extraMatchPrep(combatant);
-        }
+        });
 
         placeCharacters();
         round();
