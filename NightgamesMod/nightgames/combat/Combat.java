@@ -140,8 +140,6 @@ public class Combat {
     private boolean cloned;
     private List<CombatListener> listeners;
     
-    private CombatData m_Data;
-    
     String imagePath = "";
     
     private static HashMap<String, HashMap<String, List<Integer>>> resultTracker=new HashMap<String, HashMap<String, List<Integer>>>();
