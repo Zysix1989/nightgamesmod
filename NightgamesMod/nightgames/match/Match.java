@@ -177,27 +177,20 @@ public class Match {
     }
 
     public void score(Character combatant, int amt) {
-        score(combatant, amt, Optional.empty());
-    }
-
-    public void score(Character combatant, int amt, Optional<String> message) {
         System.out.println(String.format("called score for %s", combatant.getTrueName()));
         score.put(combatant, score.get(combatant) + amt);
-        if (message.isPresent() && (combatant.human() || combatant.location()
-                                                                  .humanPresent())) {
-            Global.gui().message(scoreString(combatant, score.get(combatant), message));
+        if ((combatant.human() || combatant.location().humanPresent())) {
+            Global.gui().message(scoreString(combatant, score.get(combatant)));
         }
     }
 
-    private String scoreString(Character combatant, int amt, Optional<String> message) {
+    private String scoreString(Character combatant, int amt) {
         System.out.println(String.format("called score for %s", combatant.getTrueName()));
         JtwigModel model = new JtwigModel()
             .with("self", combatant)
-            .with("score", amt)
-            .with("message", message);
+            .with("score", amt);
         JtwigTemplate template = JtwigTemplate.inlineTemplate(
-            "{{- self.subject() }} scored {{ score }} point {{- (score != 1) ? 's' : '' }}" +
-                "{{ (message.isPresent()) ? message : '' }}.");
+            "{{- self.subject() }} scored {{ score }} point {{- (score != 1) ? 's' : '' }}.");
         return template.render(model);
     }
 
@@ -311,7 +304,7 @@ public class Match {
         Player player = Global.getPlayer();
 
         for (Character combatant : score.keySet()) {
-            sb.append(scoreString(combatant, score.get(combatant), Optional.empty()));
+            sb.append(scoreString(combatant, score.get(combatant)));
             sb.append("<br/>");
             combatant.modMoney(score.get(combatant) * combatant.prize());
             combatant.modMoney(calculateReward(combatant, sb));
