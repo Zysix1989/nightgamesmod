@@ -8,12 +8,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 
+import java.util.stream.Collectors;
 import nightgames.actions.Action;
 import nightgames.actions.Movement;
 import nightgames.areas.Area;
@@ -41,6 +43,7 @@ public class Match {
     protected int dropOffTime;
     protected Map<String, Area> map;
     protected List<Character> combatants;
+    protected Set<Participant> participants;
     protected Map<Character, Integer> score;
     private int index;
     private boolean pause;
@@ -50,6 +53,9 @@ public class Match {
     
     public Match(Collection<Character> combatants, Modifier condition) {
         this.combatants = new ArrayList<Character>(combatants);
+        this.participants = combatants.stream()
+            .map(Participant::new)
+            .collect(Collectors.toCollection(HashSet::new));
         matchData = new MatchData();
         score = new HashMap<Character, Integer>();
         this.condition = condition;
