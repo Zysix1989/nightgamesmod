@@ -177,7 +177,6 @@ public class Match {
     }
 
     public void score(Character combatant, int amt) {
-        System.out.println(String.format("called score for %s", combatant.getTrueName()));
         score.put(combatant, score.get(combatant) + amt);
         if ((combatant.human() || combatant.location().humanPresent())) {
             Global.gui().message(scoreString(combatant, score.get(combatant)));
@@ -185,7 +184,6 @@ public class Match {
     }
 
     private String scoreString(Character combatant, int amt) {
-        System.out.println(String.format("called score for %s", combatant.getTrueName()));
         JtwigModel model = new JtwigModel()
             .with("self", combatant)
             .with("score", amt);
