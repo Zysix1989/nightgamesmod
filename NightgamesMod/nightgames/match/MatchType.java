@@ -16,8 +16,7 @@ import nightgames.modifier.standard.NoModifier;
 
 public enum MatchType {
     NORMAL,
-    FTC,
-    TEAM;
+    FTC;
 
     public Match buildMatch(Collection<Character> combatants, Modifier condition) {
         switch (this) {
@@ -29,8 +28,6 @@ public enum MatchType {
                 return new FTCMatch(combatants, ((FTCModifier) condition).getPrey());
             case NORMAL:
                 return new Match(combatants, condition);
-            case TEAM:
-                return new TeamMatch(combatants, condition);
             default:
                 throw new Error();
         }
@@ -42,8 +39,6 @@ public enum MatchType {
                 return new FTCPrematch();
             case NORMAL:
                 return new DefaultPrematch();
-            case TEAM:
-                return new TeamPrematch();
             default:
                 throw new Error();
         }

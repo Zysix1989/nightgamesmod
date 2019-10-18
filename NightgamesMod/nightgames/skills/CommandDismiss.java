@@ -15,8 +15,7 @@ public class CommandDismiss extends PlayerCommand {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return super.usable(c, target) && !c.getPetsFor(target).isEmpty()
-                        && Global.getMatch().getType() != MatchType.TEAM;
+        return super.usable(c, target) && !c.getPetsFor(target).isEmpty();
     }
 
     @Override
