@@ -266,22 +266,22 @@ public class Match {
     }
 
     protected int calculateReward(Character combatant, StringBuilder output) {
-        int reward = 0;
-        for (Character other : combatants) {
+        AtomicInteger reward = new AtomicInteger();
+        combatants.forEach(other -> {
             while (combatant.has(other.getTrophy())) {
                 combatant.consume(other.getTrophy(), 1, false);
-                reward += other.prize();
+                reward.addAndGet(other.prize());
             }
-        }
+        });
         if (combatant.human()) {
             output.append("You received $")
-                  .append(reward)
+                  .append(reward.get())
                   .append(" for turning in your collected trophies.<br/>");
         }
         for (Challenge c : combatant.challenges) {
             if (c.done) {
                 int r = c.reward() + (c.reward() * 3 * combatant.getRank());
-                reward += r;
+                reward.addAndGet(r);
                 if (combatant.human()) {
                     output.append("You received $")
                           .append(r)
@@ -290,7 +290,7 @@ public class Match {
                 }
             }
         }
-        return reward;
+        return reward.get();
     }
 
     protected void finalizeCombatant(Character combatant) {
