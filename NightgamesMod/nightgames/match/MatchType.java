@@ -1,15 +1,12 @@
 package nightgames.match;
 
 import java.util.Collection;
-
 import nightgames.characters.Character;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.match.defaults.DefaultPrematch;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.match.ftc.FTCPrematch;
-import nightgames.match.team.TeamMatch;
-import nightgames.match.team.TeamPrematch;
 import nightgames.modifier.Modifier;
 import nightgames.modifier.standard.FTCModifier;
 import nightgames.modifier.standard.NoModifier;
