@@ -2,19 +2,20 @@ package nightgames.match;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import nightgames.actions.Action;
 import nightgames.actions.Movement;
@@ -25,8 +26,6 @@ import nightgames.characters.Character;
 import nightgames.characters.Player;
 import nightgames.characters.State;
 import nightgames.characters.Trait;
-import nightgames.combat.Combat;
-import nightgames.combat.CombatListener;
 import nightgames.global.Challenge;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -42,17 +41,16 @@ public class Match {
     protected int time;
     protected int dropOffTime;
     protected Map<String, Area> map;
-    protected List<Character> combatants;
     protected Set<Participant> participants;
     protected Map<Character, Integer> score;
-    private int index;
     private boolean pause;
     protected Modifier condition;
     protected MatchData matchData;
     Map<Character, List<Character>> mercy;
+
+    private Iterator<Participant> roundIterator;
     
     public Match(Collection<Character> combatants, Modifier condition) {
-        this.combatants = new ArrayList<Character>(combatants);
         this.participants = combatants.stream()
             .map(Participant::new)
             .collect(Collectors.toCollection(HashSet::new));
@@ -65,6 +63,7 @@ public class Match {
         map = buildMap();
         mercy = new HashMap<>();
         combatants.forEach(c -> mercy.put(c, new ArrayList<>()));
+        roundIterator = participants.iterator();
     }
     
     protected void preStart() {
@@ -73,7 +72,8 @@ public class Match {
 
     public final void start() {
         preStart();
-        combatants.forEach(combatant -> {
+        participants.forEach(participant -> {
+            var combatant = participant.getCharacter();
             score.put(combatant, 0);
             Global.gainSkills(combatant);
             Global.learnSkills(combatant);
@@ -137,7 +137,7 @@ public class Match {
         areaList.add(map.get("Tunnel"));
         areaList.add(map.get("Workshop"));
         areaList.add(map.get("Pool"));
-        combatants.forEach(character -> {
+        participants.stream().map(Participant::getCharacter).forEach(character -> {
             if (character.has(Trait.immobile)) {
                 character.place(map.get("Courtyard"));
             } else {
@@ -208,22 +208,23 @@ public class Match {
 
     public final void round() {
         while (!shouldEndMatch()) {
-            if (index >= combatants.size()) {
-                index = 0;
+            if (!roundIterator.hasNext()) {
+                // prepare next round
+                roundIterator = participants.iterator();
                 handleFullTurn();
             }
             beforeAllTurns();
-            while (index < combatants.size()) {
+            while (roundIterator.hasNext()) {
+                var participant = roundIterator.next();
+                var self = participant.getCharacter();
                 Global.gui().refresh();
-                if (combatants.get(index).state != State.quit) {
-                    Character self = combatants.get(index);
+                if (self.state != State.quit) {
                     beforeTurn(self);
                     self.upkeep();
                     manageConditions(self);
                     self.move();
                     afterTurn(self);
                 }
-                index++;
                 if (pause) {
                     return;
                 }
@@ -241,7 +242,9 @@ public class Match {
     }
 
     protected Postmatch buildPostmatch() {
-        return new DefaultPostmatch(combatants);
+        return new DefaultPostmatch(participants.stream()
+            .map(Participant::getCharacter)
+            .collect(Collectors.toList()));
     }
 
     protected Optional<Character> decideWinner() {
@@ -267,7 +270,8 @@ public class Match {
 
     protected int calculateReward(Character combatant, StringBuilder output) {
         AtomicInteger reward = new AtomicInteger();
-        combatants.forEach(other -> {
+        participants.forEach(participant -> {
+            var other = participant.getCharacter();
             while (combatant.has(other.getTrophy())) {
                 combatant.consume(other.getTrophy(), 1, false);
                 reward.addAndGet(other.prize());
@@ -299,7 +303,7 @@ public class Match {
 
     private void end() {
         beforeEnd();
-        combatants.forEach(Character::finishMatch);
+        participants.stream().map(Participant::getCharacter).forEach(Character::finishMatch);
         Global.gui()
               .clearText();
         StringBuilder sb = new StringBuilder("Tonight's match is over.<br/><br/>");
@@ -341,7 +345,8 @@ public class Match {
             Global.flag(Flag.victory);
         }
 
-        Set<Character> potentialDates = combatants.stream()
+        Set<Character> potentialDates = participants.stream()
+            .map(Participant::getCharacter)
             .filter(c -> c.getAffection(player) >= 15)
             .collect(Collectors.toSet());
         if (potentialDates.isEmpty()) {
@@ -353,7 +358,9 @@ public class Match {
                 .afterParty();
         }
 
-        combatants.forEach(character -> {
+        participants.stream()
+            .map(Participant::getCharacter)
+            .forEach(character -> {
             if (character.getFlag("heelsTraining") >= 50 && !character.hasPure(Trait.proheels)) {
                 if (character.human()) {
                     sb.append("<br/>You've gotten comfortable at fighting in heels.<br/><b>Gained Trait: Heels Pro</b>\n");
@@ -367,6 +374,7 @@ public class Match {
                 character.add(Trait.masterheels);
             }
         });
+
         Global.getPlayer()
               .getAddictions()
               .forEach(Addiction::endNight);
@@ -379,7 +387,11 @@ public class Match {
     }
 
     public final int meanLvl() {
-        return (int) combatants.stream().mapToInt(Character::getLevel).average().orElseThrow();
+        return (int) participants.stream()
+            .map(Participant::getCharacter)
+            .mapToInt(Character::getLevel)
+            .average()
+            .orElseThrow();
     }
 
     public void dropPackage() {
@@ -447,7 +459,9 @@ public class Match {
     }
 
     public final List<Character> getCombatants() {
-        return Collections.unmodifiableList(combatants);
+        return participants.stream()
+            .map(Participant::getCharacter)
+            .collect(Collectors.toUnmodifiableList());
     }
 
     public final Modifier getCondition() {

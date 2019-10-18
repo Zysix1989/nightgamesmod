@@ -2,7 +2,7 @@ package nightgames.match;
 
 import nightgames.characters.Character;
 
-class Participant {
+public class Participant {
     private Character character;
 
     Participant(Character c) {

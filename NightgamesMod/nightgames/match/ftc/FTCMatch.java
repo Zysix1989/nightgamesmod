@@ -19,6 +19,7 @@ import nightgames.items.Item;
 import nightgames.match.Encounter;
 import nightgames.match.Match;
 import nightgames.match.MatchType;
+import nightgames.match.Participant;
 import nightgames.modifier.standard.FTCModifier;
 
 public class FTCMatch extends Match {
@@ -67,7 +68,9 @@ public class FTCMatch extends Match {
     }
 
     public Character getFlagHolder() {
-        return combatants.stream().filter(c -> c.has(Item.Flag)).findAny().orElse(null);
+        return participants.stream()
+            .map(Participant::getCharacter)
+            .filter(c -> c.has(Item.Flag)).findAny().orElse(null);
     }
 
     public boolean isBase(Character ch, Area loc) {
@@ -81,7 +84,7 @@ public class FTCMatch extends Match {
     @Override
     protected void afterEnd() {
         Global.unflag(Flag.FTC);
-        combatants.forEach(c -> c.remove(Item.Flag));
+        participants.forEach(c -> c.getCharacter().remove(Item.Flag));
         super.afterEnd();
     }
 
