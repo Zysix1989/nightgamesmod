@@ -377,11 +377,7 @@ public class Match {
     }
 
     public final int meanLvl() {
-        int mean = 0;
-        for (Character player : combatants) {
-            mean += player.getLevel();
-        }
-        return mean / combatants.size();
+        return (int) combatants.stream().mapToInt(Character::getLevel).average().orElseThrow();
     }
 
     public void dropPackage() {
