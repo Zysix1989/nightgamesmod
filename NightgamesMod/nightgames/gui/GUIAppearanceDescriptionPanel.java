@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.html.HTMLDocument;
+import nightgames.characters.Attribute;
 import nightgames.characters.NPC;
 import nightgames.global.Global;
 
@@ -78,9 +79,8 @@ class GUIAppearanceDescriptionPanel extends JPanel {
 
     void setCharacter(NPC character) {
         text.setPreferredSize(new Dimension(getParent().getWidth(), getParent().getHeight()));
-        StringBuilder buf = new StringBuilder();
-        character.body.describe(buf, Global.getPlayer(), " ");
-        text.setText("<font face='Georgia' color='white' size='4'>" + buf.toString()
+        text.setText("<font face='Georgia' color='white' size='4'>" +
+            character.describe(Global.getPlayer().get(Attribute.Perception), Global.getPlayer())
             + "</font>");
         System.out.println(document.getLength());
     }
