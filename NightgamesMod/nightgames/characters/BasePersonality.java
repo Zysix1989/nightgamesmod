@@ -260,7 +260,7 @@ public abstract class BasePersonality implements Serializable {
 
     String describe(Character self) {
         var model = JtwigModel.newModel()
-            .with("self", this);
+            .with("self", self);
         return description.render(model).replace(System.lineSeparator(), " ");
     }
 
