@@ -21,21 +21,21 @@ public class Participant {
         return character;
     }
 
-    public int getScore() {
+    int getScore() {
         return score;
     }
 
-    public void incrementScore(int i) {
+    void incrementScore(int i) {
         score += i;
     }
 
-    public void defeated(Participant p) {
+    void defeated(Participant p) {
         assert !invalidTargets.contains(p);
         invalidTargets.add(p);
         incrementScore(1);
     }
 
-    public void allowTarget(Participant p) {
+    void allowTarget(Participant p) {
         invalidTargets.remove(p);
     }
 }
