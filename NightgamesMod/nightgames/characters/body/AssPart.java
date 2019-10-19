@@ -266,4 +266,11 @@ public class AssPart extends GenericBodyPart implements Sizable<AssPart.Size> {
     public AssPart copy() {
         return new AssPart(this);
     }
+
+    @Override
+    public String fullDescribe(Character c) {
+        return sizeTrait.getSize().description
+            + " "
+            + super.fullDescribe(c);
+    }
 }

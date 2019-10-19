@@ -211,6 +211,13 @@ public class CockPart extends GenericBodyPart implements Sizable<CockPart.Size> 
     }
 
     @Override
+    public String fullDescribe(Character c) {
+        return sizeTrait.getSize().description
+            + " "
+            + super.fullDescribe(c);
+    }
+
+    @Override
     public void describeLong(StringBuilder b, Character c) {
         b.append("There is a ");
         if (c.crotchAvailable()) {

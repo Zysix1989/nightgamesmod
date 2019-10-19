@@ -3,7 +3,9 @@ package nightgames.characters.body;
 import com.google.gson.JsonObject;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -167,6 +169,16 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
             b.append(Global.capitalizeFirstLetter(fullDescribe(c)));
             b.append(" adorn " + c.nameOrPossessivePronoun() + " chest.");
         }
+    }
+
+    @Override
+    public String fullDescribe(Character c) {
+        return Global.pickRandom(
+            List.of(sizeTrait.getSize().description,
+                sizeTrait.getSize().cupSize + "-cup"))
+            .orElseThrow()
+            + " "
+            + super.fullDescribe(c);
     }
 
     protected String modlessDescription(Character c) {
