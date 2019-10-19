@@ -1,6 +1,7 @@
 package nightgames.characters.body;
 
 import com.google.gson.JsonObject;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -173,10 +174,11 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
 
     @Override
     public String fullDescribe(Character c) {
-        return Global.pickRandom(
-            List.of(sizeTrait.getSize().description,
-                sizeTrait.getSize().cupSize + "-cup"))
-            .orElseThrow()
+        var validDescriptions = new ArrayList<>(List.of(sizeTrait.getSize().description));
+        if (!sizeTrait.getSize().cupSize.equals("")) {
+            validDescriptions.add(sizeTrait.getSize().cupSize + "-cup");
+        }
+        return Global.pickRandom(validDescriptions).orElseThrow()
             + " "
             + super.fullDescribe(c);
     }
