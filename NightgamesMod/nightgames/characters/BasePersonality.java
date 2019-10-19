@@ -149,14 +149,12 @@ public abstract class BasePersonality implements Serializable {
     }
 
     public Action move(Collection<Action> available, Collection<IMovement> radar) {
-        Action proposed = Decider.parseMoves(available, radar, character);
-        return proposed;
+        return Decider.parseMoves(available, radar, character);
     }
 
     public String image(Combat c) {
-        String fname = character.getTrueName().toLowerCase()
+        return character.getTrueName().toLowerCase()
                         + "/portraits/" + character.mood.name() + ".jpg";
-        return fname;
     }
 
     public void ding(Character self) {
