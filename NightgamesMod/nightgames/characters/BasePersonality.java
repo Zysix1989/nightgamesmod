@@ -265,4 +265,8 @@ public abstract class BasePersonality implements Serializable {
     }
 
     void initializeArms(ArmManager m) { }
+
+    Optional<ArmManager> getArmManager() {
+        return Optional.empty();
+    }
 }

@@ -61,6 +61,8 @@ public class Airi extends BasePersonality {
     private static final String AIRI_REPLICATION_FOCUS = "AiriReplicationFocus";
     private static final String AIRI_TENTACLES_FOCUS = "AiriTentaclesFocus";
 
+    private Optional<ArmManager> armManager;
+
     public Airi() {
         this(Optional.empty(), Optional.empty());
     }
@@ -486,11 +488,11 @@ public class Airi extends BasePersonality {
                 self.addTemporaryTrait(Trait.strongwilled, 999);
             }
             CombatantData data = c.getCombatantData(self);
-            if (self.has(Trait.Pseudopod) && data.getManager().getActiveArms().isEmpty()) {
-                ArmManager manager = new ArmManager();
-                initializeArms(manager);
-                c.write(self, "<b>"+manager.getActiveArms().size() + " tentacle arms erupt out of " + self.possessiveAdjective() + " back!</b>");
-                data.setManager(manager);
+            if (self.has(Trait.Pseudopod) && armManager.isEmpty()) {
+                var m = new ArmManager();
+                initializeArms(m);
+                c.write(self, "<b>"+m.getActiveArms().size() + " tentacle arms erupt out of " + self.possessiveAdjective() + " back!</b>");
+                armManager = Optional.of(m);
             }
             if (unmasked && self.has(Trait.ThePrestige) && c.getStance().distance() < 2) {
                 c.write(self, Global.format("<b>Taking advantage of {other:name-possessive} bewilderment, {self:subject-action:swoop} {self:possessive} slime onto {other:possessive} hapless form, swiftly engulfing it in {self:possessive} amorphous body.</b><br/>", self, opponent));
@@ -518,6 +520,7 @@ public class Airi extends BasePersonality {
 
     @Override
     public String victory(Combat c, Result flag) {
+        armManager = Optional.empty();
         Character opponent = c.getOpponent(character);
         character.arousal.empty();
         opponent.arousal.empty();
@@ -605,6 +608,7 @@ public class Airi extends BasePersonality {
 
     @Override
     public String defeat(Combat c, Result flag) {
+        armManager = Optional.empty();
         return "Fighting Airi is not easy. Her stickiness makes it"
                         + " quite difficult for you to accomplish much of anything. Still, "
                         + "considering her incoherent babbling she's probably not got much fight left in her. "
@@ -636,6 +640,7 @@ public class Airi extends BasePersonality {
 
     @Override
     public String draw(Combat c, Result flag) {
+        armManager = Optional.empty();
         return "[Placeholder] You make each other cum at the same time. Sorry.";
 
     }
@@ -652,6 +657,7 @@ public class Airi extends BasePersonality {
 
     @Override
     public String victory3p(Combat c, Character target, Character assist) {
+        armManager = Optional.empty();
         if (target.human()) {
             return "Airi crawls over to you at an agonizing pace. Her slime rapidly flows on top of your penis and covers it in a sticky bulb. <i>\"Time… for you to cum…\"</i><br/><br/>"
                             + "Her previously still slime suddenly starts to frantically squeeze and knead your cock, pulsating in waves of sticky goo on top of you. Startled by the sudden stimulation, you cum in seconds, spilling the proof of your defeat inside her tendril.<br/><br/>";
@@ -665,6 +671,7 @@ public class Airi extends BasePersonality {
 
     @Override
     public String intervene3p(Combat c, Character target, Character assist) {
+        armManager = Optional.empty();
         if (target.human()) {
             return Global.format(
                             "Your fight with {other:name} seemed to have ran into a stalemate. Neither of you is willing to get close enough to each other for anything substantial to happen. You just continue to trade taunts whilst waiting for an opportunity.<br/><br/>"
@@ -747,5 +754,10 @@ public class Airi extends BasePersonality {
                 manager.addArm(new TentacleSquirter(manager));
             }
         }
+    }
+
+    @Override
+    Optional<ArmManager> getArmManager() {
+        return armManager;
     }
 }

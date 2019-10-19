@@ -4682,6 +4682,6 @@ public abstract class Character extends Observable implements Cloneable {
     }
 
     public Optional<ArmManager> getArmManager(Combat c) {
-        return Optional.of(c.getCombatantData(this).getManager());
+        return Optional.empty();
     }
 }

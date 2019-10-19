@@ -183,8 +183,6 @@ public class Combat {
         this.p2 = p2;
         p1.startBattle(this);
         p2.startBattle(this);
-        getCombatantData(p1).setManager(Global.getMatch().getMatchData().getDataFor(p1).getArmManager());
-        getCombatantData(p2).setManager(Global.getMatch().getMatchData().getDataFor(p2).getArmManager());
         location = loc;
         stance = new Neutral(p1, p2);
         message = "";
@@ -1394,12 +1392,6 @@ public class Combat {
         ding = (p2.levelUpIfPossible(this) && p2.human()) || ding;
         if (doExtendedLog()) {
             log.logEnd(winner);
-        }
-        if (!p1.has(Trait.Pseudopod)) {
-            Global.getMatch().getMatchData().getDataFor(p1).setArmManager(getCombatantData(p1).getManager());
-        }
-        if (!p2.has(Trait.Pseudopod)) {
-            Global.getMatch().getMatchData().getDataFor(p2).setArmManager(getCombatantData(p2).getManager());
         }
         listen(l -> l.postEnd(winner));
         if (!ding && beingObserved) {

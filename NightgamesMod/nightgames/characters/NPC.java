@@ -865,12 +865,19 @@ public class NPC extends Character {
     @Override
     public void matchPrep(Match m) {
         super.matchPrep(m);
-        ArmManager manager = m.getMatchData().getDataFor(this).getArmManager();
-        ai.initializeArms(manager);
-        if (manager.getActiveArms().stream().anyMatch(a -> a.getType() == ArmType.STABILIZER)) {
-            add(Trait.stabilized);
-        } else {
-            remove(Trait.stabilized);
-        }
+        var optManager = ai.getArmManager();
+        optManager.ifPresent(manager -> {
+            ai.initializeArms(manager);
+            if (manager.getActiveArms().stream().anyMatch(a -> a.getType() == ArmType.STABILIZER)) {
+                add(Trait.stabilized);
+            } else {
+                remove(Trait.stabilized);
+            }
+        });
+    }
+
+    @Override
+    public Optional<ArmManager> getArmManager(Combat c) {
+        return ai.getArmManager();
     }
 }

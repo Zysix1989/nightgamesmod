@@ -47,6 +47,8 @@ public class Mara extends BasePersonality {
     private static final String MARA_OCTO_FOCUS = "MaraOctoFocus";
     private static final String MARA_MIND_CONTROL_FOCUS = "MaraMindControlFocus";
 
+    private ArmManager armManager;
+
     public Mara() {
         this(Optional.empty(), Optional.empty());
     }
@@ -54,6 +56,7 @@ public class Mara extends BasePersonality {
     public Mara(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Mara", charConfig, commonConfig, true);
         constructLines();
+        armManager = new ArmManager();
     }
 
     private void constructLines () {
@@ -866,5 +869,10 @@ public class Mara extends BasePersonality {
                 }
             }
         }
+    }
+
+    @Override
+    Optional<ArmManager> getArmManager() {
+        return Optional.of(armManager);
     }
 }
