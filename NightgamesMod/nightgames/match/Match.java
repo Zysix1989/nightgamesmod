@@ -80,7 +80,6 @@ public class Match {
                 combatant.chargeBattery();
             }
             manageConditions(combatant);
-            extraMatchPrep(combatant);
         });
 
         placeCharacters();
@@ -109,10 +108,6 @@ public class Match {
                   .getAddictions()
                   .forEach(Addiction::refreshWithdrawal);
         }
-    }
-
-    protected void extraMatchPrep(Character combatant) {
-
     }
 
     protected Map<String, Area> buildMap() {
