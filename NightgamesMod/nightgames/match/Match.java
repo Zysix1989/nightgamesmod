@@ -283,10 +283,6 @@ public class Match {
         return reward.get();
     }
 
-    protected void finalizeCombatant(Character combatant) {
-
-    }
-
     private void end() {
         beforeEnd();
         participants.stream().map(Participant::getCharacter).forEach(Character::finishMatch);
@@ -307,7 +303,6 @@ public class Match {
                 combatant.state = State.ready;
                 condition.undoItems(combatant);
                 combatant.change();
-                finalizeCombatant(combatant);
         });
 
         var playerParticipant = findParticipant(player);
