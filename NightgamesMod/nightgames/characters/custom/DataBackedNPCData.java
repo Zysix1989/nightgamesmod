@@ -171,14 +171,6 @@ public class DataBackedNPCData {
         return isStartCharacter;
     }
 
-    public List<CustomStringEntry> getPortraits() {
-        return portraits;
-    }
-
-    public void setPortraits(List<CustomStringEntry> portraits) {
-        this.portraits = portraits;
-    }
-
     public Map<Emotion, Integer> getMoodThresholds() {
         return moodThresholds;
     }
@@ -241,10 +233,6 @@ public class DataBackedNPCData {
 
     public void setSex(CharacterSex sex) {
         this.sex = sex;
-    }
-
-    public void setDefaultPortraitName(String defaultPortraitName) {
-        this.defaultPortraitName = defaultPortraitName;
     }
 
     public void setPlan(Plan plan) {
