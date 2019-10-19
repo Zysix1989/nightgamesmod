@@ -1,13 +1,9 @@
 package nightgames.actions;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.stream.Collectors;
-
 import nightgames.characters.Character;
 import nightgames.characters.NPC;
 import nightgames.characters.Trait;
-import nightgames.characters.body.BodyPart;
 import nightgames.global.Global;
 import nightgames.status.Disguised;
 import nightgames.status.Stsflag;
@@ -25,13 +21,12 @@ public class Disguise extends Action {
     }
 
     private NPC getRandomNPC(Character user) {
-        NPC target = (NPC) Global.pickRandom(Global.getParticipants()
-                        .stream().filter(other -> !other.human() 
-                                        && user != other 
+        return (NPC) Global.pickRandom(Global.getParticipants()
+                        .stream().filter(other -> !other.human()
+                                        && user != other
                                         && !other.has(Trait.cursed)
                                         && !Global.checkCharacterDisabledFlag(other))
                         .collect(Collectors.toList())).orElse(null);
-        return target;
     }
 
     @Override
