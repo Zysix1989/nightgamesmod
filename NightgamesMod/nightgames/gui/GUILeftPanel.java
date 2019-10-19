@@ -11,7 +11,7 @@ import nightgames.combat.Combat;
 class GUILeftPanel {
 
     private JPanel leftPanel;
-    private GUIAppearancePanel appearancePanel;
+    private GUICharacterPanel characterPanel;
     private CardLayout layout;
     private JComponent map;
 
@@ -25,8 +25,8 @@ class GUILeftPanel {
         leftPanel.setLayout(layout);
         leftPanel.setBackground(GUIColors.bgDark);
 
-        appearancePanel = new GUIAppearancePanel();
-        leftPanel.add(appearancePanel, USE_PORTRAIT);
+        characterPanel = new GUICharacterPanel();
+        leftPanel.add(characterPanel, USE_PORTRAIT);
 
         map = new MapComponent();
         leftPanel.add(map, USE_MAP);
@@ -34,11 +34,11 @@ class GUILeftPanel {
     }
 
     void clearPortrait() {
-        appearancePanel.clearPortrait();
+        characterPanel.clearPortrait();
     }
 
     void loadPortrait(Combat c, NPC enemy) {
-        appearancePanel.loadPortrait(c, enemy);
+        characterPanel.loadPortrait(c, enemy);
     }
 
     void showPortrait() {
