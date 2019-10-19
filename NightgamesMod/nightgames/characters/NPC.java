@@ -783,9 +783,9 @@ public class NPC extends Character {
     public String getPortrait(Combat c) {
         Disguised disguised = (Disguised) getStatus(Stsflag.disguised);
         if (disguised != null && !c.isEnded()) {
-            return disguised.getTarget().ai.image(c);
+            return disguised.getTarget().ai.image();
         }
-        return ai.image(c);
+        return ai.image();
     }
 
     @Override

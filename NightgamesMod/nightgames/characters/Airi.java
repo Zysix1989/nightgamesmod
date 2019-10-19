@@ -708,13 +708,13 @@ public class Airi extends BasePersonality {
     }
 
     @Override
-    public String image(Combat c) {
+    public String image() {
         if (character.has(Trait.slime)) {
             SlimeMimicry mimicry = (SlimeMimicry) character.getStatus(Stsflag.mimicry);
             if (mimicry != null) {
                 return "airi/portraits/" + mimicry.getMimickedName() + "_slime.jpg";
             } else {
-                return super.image(c);
+                return super.image();
             }
         } else if (character.getWillpower().percent() > 90) {
             return "airi/portraits/human.jpg";

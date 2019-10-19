@@ -133,7 +133,7 @@ public class DataBackedNPCData {
         return sex;
     }
 
-    public String getPortraitName(Combat c, Character self, Character other) {
+    public String getPortraitName(Character self) {
         return portraitMap.getOrDefault(self.getMood(), "");
     }
 

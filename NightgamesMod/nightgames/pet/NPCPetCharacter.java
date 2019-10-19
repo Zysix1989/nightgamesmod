@@ -3,7 +3,6 @@ package nightgames.pet;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
 import nightgames.characters.Character;
 import nightgames.characters.NPC;
 import nightgames.characters.custom.CharacterLine;
@@ -94,6 +93,6 @@ public class NPCPetCharacter extends PetCharacter {
 
     @Override
     public String getPortrait(Combat c) {
-        return prototype.ai.image(c);
+        return prototype.ai.image();
     }
 }

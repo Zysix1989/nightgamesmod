@@ -152,7 +152,7 @@ public abstract class BasePersonality implements Serializable {
         return Decider.parseMoves(available, radar, character);
     }
 
-    public String image(Combat c) {
+    public String image() {
         return character.getTrueName().toLowerCase()
                         + "/portraits/" + character.mood.name() + ".jpg";
     }

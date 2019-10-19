@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
 import nightgames.characters.BasePersonality;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
@@ -14,7 +13,6 @@ import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.items.ItemAmount;
 import nightgames.start.NpcConfiguration;
-import org.jtwig.JtwigModel;
 
 public class CustomNPC extends BasePersonality {
     private final DataBackedNPCData data;
@@ -153,9 +151,8 @@ public class CustomNPC extends BasePersonality {
     }
 
     @Override
-    public String image(Combat c) {
-        Character other = c.getOpponent(character);
-        return data.getPortraitName(c, character, other);
+    public String image() {
+        return data.getPortraitName(character);
     }
 
     public String defaultImage() {
