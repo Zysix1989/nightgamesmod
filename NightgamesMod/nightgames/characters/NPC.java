@@ -93,11 +93,11 @@ public class NPC extends Character {
     }
 
     @Override
-    public String describe(int per, Combat c) {
+    public String describe(int per, Character observer) {
         StringBuilder b = new StringBuilder();
         b.append(ai.describe(this));
         b.append("<br/><br/>");
-        body.describe(b, c.getOpponent(this), " ");
+        body.describe(b, observer, " ");
         b.append("<br/>");
         for (Trait t : getTraits()) {
             t.describe(this, b);
@@ -105,7 +105,7 @@ public class NPC extends Character {
         }
         b.append("<br/>");
         for (Status s : status) {
-            String statusDesc = s.describe(c.getOpponent(this));
+            String statusDesc = s.describe(observer);
             if (!statusDesc.isEmpty()) {
                 b.append(statusDesc)
                     .append("<br/>");

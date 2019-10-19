@@ -155,10 +155,10 @@ public class Player extends Character {
     }
 
     @Override
-    public String describe(int per, Combat c) {
+    public String describe(int per, Character observer) {
         String description = "<i>";
         for (Status s : status) {
-            description = description + s.describe(c.getOpponent(this)) + "<br/>";
+            description = description + s.describe(observer) + "<br/>";
         }
         description = description + "</i>";
         description = description + outfit.describe(this);

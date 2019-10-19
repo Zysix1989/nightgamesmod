@@ -1872,7 +1872,7 @@ public abstract class Character extends Observable implements Cloneable {
 
     public abstract void spy(Character opponent, Encounter enc);
 
-    public abstract String describe(int per, Combat c);
+    public abstract String describe(int per, Character observer);
 
     public abstract void victory(Combat c, Result flag);
 

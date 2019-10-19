@@ -805,19 +805,19 @@ public class Combat {
     private String describe(Character player, Character other) {
         if (beingObserved) {
             return "<font color='rgb(255,220,220)'>"
-                            + other.describe(Global.getPlayer().get(Attribute.Perception), this)
+                            + other.describe(Global.getPlayer().get(Attribute.Perception), Global.getPlayer())
                             + "</font><br/><br/><font color='rgb(220,220,255)'>"
-                            + player.describe(Global.getPlayer().get(Attribute.Perception), this)
+                            + player.describe(Global.getPlayer().get(Attribute.Perception), Global.getPlayer())
                             + "</font><br/><br/><font color='rgb(134,196,49)'><b>"
                             + Global.capitalizeFirstLetter(getStance().describe(this)) + "</b></font>";
         } else if (!player.is(Stsflag.blinded)) {
-            return other.describe(player.get(Attribute.Perception), this) + "<br/><br/>"
+            return other.describe(player.get(Attribute.Perception), Global.getPlayer()) + "<br/><br/>"
                             + Global.capitalizeFirstLetter(getStance().describe(this)) + "<br/><br/>"
-                            + player.describe(other.get(Attribute.Perception), this) + "<br/><br/>";
+                            + player.describe(other.get(Attribute.Perception), other) + "<br/><br/>";
         } else {
             return "<b>You are blinded, and cannot see what " + other.getTrueName() + " is doing!</b><br/><br/>"
                             + Global.capitalizeFirstLetter(getStance().describe(this)) + "<br/><br/>"
-                            + player.describe(other.get(Attribute.Perception), this) + "<br/><br/>";
+                            + player.describe(other.get(Attribute.Perception), other) + "<br/><br/>";
         }
     }
 

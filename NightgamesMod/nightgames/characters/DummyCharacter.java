@@ -32,7 +32,7 @@ public class DummyCharacter extends Character {
     public void spy(Character opponent, Encounter enc) {}
 
     @Override
-    public String describe(int per, Combat c) {
+    public String describe(int per, Character observer) {
         return "";
     }
 

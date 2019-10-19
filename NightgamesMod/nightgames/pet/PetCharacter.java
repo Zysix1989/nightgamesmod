@@ -152,7 +152,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public String describe(int per, Combat c) {
+    public String describe(int per, Character observer) {
         return "";
     }
 
