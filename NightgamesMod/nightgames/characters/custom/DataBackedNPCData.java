@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
-
 import nightgames.characters.Character;
 import nightgames.characters.CharacterSex;
 import nightgames.characters.Emotion;
@@ -23,7 +22,7 @@ public class DataBackedNPCData {
     List<PreferredAttribute> preferredAttributes;
     List<ItemAmount> purchasedItems;
     List<ItemAmount> startingItems;
-    List<CustomStringEntry> portraits;
+    Map<Emotion, String> portraitMap;
     Map<Emotion, Integer> moodThresholds;
     Map<String, List<CustomStringEntry>> characterLines;
     Stack<Clothing> top;
@@ -47,7 +46,7 @@ public class DataBackedNPCData {
         preferredAttributes = new ArrayList<>();
         purchasedItems = new ArrayList<>();
         startingItems = new ArrayList<>();
-        portraits = new ArrayList<>();
+        portraitMap = new HashMap<>();
         body = new Body();
         moodThresholds = new HashMap<>();
         characterLines = new HashMap<>();
@@ -135,12 +134,7 @@ public class DataBackedNPCData {
     }
 
     public String getPortraitName(Combat c, Character self, Character other) {
-        for (CustomStringEntry line : portraits) {
-            if (line.meetsRequirements(c, self, other)) {
-                return line.getLine(self, other);
-            }
-        }
-        return "";
+        return portraitMap.getOrDefault(self.getMood(), "");
     }
 
     public String getDefaultPortraitName() {

@@ -1,18 +1,17 @@
 package nightgames.characters.custom;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.CharacterSex;
+import nightgames.characters.Emotion;
 import nightgames.characters.Growth;
 import nightgames.characters.MaxAttribute;
 import nightgames.characters.Plan;
@@ -82,7 +81,7 @@ public class JsonSourceNPCDataLoader {
         loadItems(object.getAsJsonObject("items"), data);
         loadTemplates(object.getAsJsonObject("templates"), data.templates);
         loadAllLines(object.getAsJsonObject("lines"), data.characterLines);
-        data.portraits = loadLines(object.getAsJsonArray("portraits"));
+        loadPortraits(object.getAsJsonObject("portraits"), data.portraitMap);
         loadRecruitment(object.getAsJsonObject("recruitment"), data.recruitment);
         data.body = Body.load(object.getAsJsonObject("body"), null);
         data.sex = CharacterSex.valueOf(object.get("sex").getAsString());
@@ -243,5 +242,11 @@ public class JsonSourceNPCDataLoader {
         for (var e : obj.entrySet()) {
             templates.put(e.getKey(), JtwigTemplate.classpathTemplate(e.getValue().getAsString()));
         }
+    }
+
+    private static void loadPortraits(JsonObject obj, Map<Emotion, String> portraits) {
+        obj.entrySet().forEach(e -> {
+                portraits.put(Emotion.valueOf(e.getKey()), e.getValue().getAsString());
+            });
     }
 }
