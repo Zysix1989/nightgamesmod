@@ -44,7 +44,6 @@ public class Match {
     protected Set<Participant> participants;
     private boolean pause;
     protected Modifier condition;
-    protected MatchData matchData;
 
     private Iterator<Participant> roundIterator;
     
@@ -52,7 +51,6 @@ public class Match {
         this.participants = combatants.stream()
             .map(Participant::new)
             .collect(Collectors.toCollection(HashSet::new));
-        matchData = new MatchData();
         this.condition = condition;
         time = 0;
         dropOffTime = 0;
@@ -417,10 +415,6 @@ public class Match {
 
     public String genericRoomDescription() {
         return "room";
-    }
-
-    public final MatchData getMatchData() {
-        return matchData;
     }
 
     public final void pause() {
