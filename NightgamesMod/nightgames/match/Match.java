@@ -150,10 +150,6 @@ public class Match {
         getAreas().forEach(area -> area.setPinged(false));
     }
 
-    protected void beforeTurn(Character combatant) {
-
-    }
-
     protected void afterTurn(Participant participant) {
         if (participant.getCharacter().state == State.resupplying) {
             participants.forEach(p -> p.allowTarget(participant));
@@ -196,7 +192,6 @@ public class Match {
                 var self = participant.getCharacter();
                 Global.gui().refresh();
                 if (self.state != State.quit) {
-                    beforeTurn(self);
                     self.upkeep();
                     manageConditions(self);
                     self.move();
@@ -208,10 +203,6 @@ public class Match {
             }
         }
         end();
-    }
-
-    protected void beforeEnd() {
-
     }
 
     protected void afterEnd() {
@@ -274,7 +265,6 @@ public class Match {
     }
 
     private void end() {
-        beforeEnd();
         participants.stream().map(Participant::getCharacter).forEach(Character::finishMatch);
         Global.gui()
               .clearText();
