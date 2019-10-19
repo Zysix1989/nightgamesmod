@@ -579,11 +579,9 @@ public class DefaultEncounter implements Encounter {
         }
         target.nudify();
         target.defeated(attacker);
-        target.getArousal()
-              .empty();
+        target.getArousal().empty();
         attacker.tempt(20);
-        Global.getMatch()
-              .score(attacker,  1);
+        Global.getMatch().score(attacker,  1);
         attacker.state = State.ready;
         target.state = State.ready;
         location.endEncounter();
