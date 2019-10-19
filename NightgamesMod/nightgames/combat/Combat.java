@@ -622,7 +622,7 @@ public class Combat {
             }
         }
 
-        getCombatantData(self).getManager().act(this, self, other);
+        self.getArmManager(this).ifPresent(m -> m.act(this, self, other));
 
         if (self.has(Trait.mindcontroller)) {
             Collection<Clothing> infra = self.outfit.getArticlesWithTrait(ClothingTrait.infrasound);

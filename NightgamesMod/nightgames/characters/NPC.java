@@ -113,7 +113,7 @@ public class NPC extends Character {
         }
         b.append(outfit.describe(this));
         b.append(observe(per));
-        b.append(c.getCombatantData(this).getManager().describe(this));
+        b.append(getArmManager(c).map(m -> m.describe(this)).orElse(""));
         return b.toString();
     }
 

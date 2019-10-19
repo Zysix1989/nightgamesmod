@@ -76,6 +76,7 @@ import nightgames.match.Match;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.pet.CharacterPet;
 import nightgames.pet.PetCharacter;
+import nightgames.pet.arms.ArmManager;
 import nightgames.skills.AssFuck;
 import nightgames.skills.OrgasmicThrust;
 import nightgames.skills.OrgasmicTighten;
@@ -4678,5 +4679,9 @@ public abstract class Character extends Observable implements Cloneable {
 
     public String masterOrMistress() {
         return useFemalePronouns() ? "mistress" : "master";
+    }
+
+    public Optional<ArmManager> getArmManager(Combat c) {
+        return Optional.of(c.getCombatantData(this).getManager());
     }
 }
