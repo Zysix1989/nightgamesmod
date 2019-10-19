@@ -13,19 +13,10 @@ import nightgames.pet.arms.ArmManager;
  */
 public class MatchData {
     public class PlayerData {
-        private Map<String, String> flags;
+
         private ArmManager manager;
         public PlayerData() {
-            flags = new HashMap<>();
             manager = new ArmManager();
-        }
-
-        public void setFlag(String flag, String val) {
-            flags.put(flag, val);
-        }
-
-        public String getFlag(String flag) {
-            return flags.get(flag);
         }
 
         public ArmManager getArmManager() {
