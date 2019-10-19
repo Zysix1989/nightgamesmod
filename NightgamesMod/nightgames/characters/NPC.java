@@ -484,9 +484,7 @@ public class NPC extends Character {
         if (available.isEmpty()) {
             available.addAll(getItemActions());
             available.addAll(Global.getMatch().getAvailableActions());
-            if (Global.getMatch().canMoveOutOfCombat()) {
-                available.addAll(moves);
-            }
+            available.addAll(moves);
         }
         available.removeIf(a -> a == null || !a.usable(this));
         if (available.isEmpty()) {

@@ -88,10 +88,6 @@ public class Match {
     public Set<Action> getAvailableActions() {
         return Global.getActions();
     }
-    
-    public boolean canMoveOutOfCombat() {
-        return true;
-    }
 
     protected void manageConditions(Character player) {
         condition.handleOutfit(player);
