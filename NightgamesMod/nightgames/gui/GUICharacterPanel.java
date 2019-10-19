@@ -2,7 +2,6 @@ package nightgames.gui;
 
 import javax.swing.JPanel;
 import nightgames.characters.NPC;
-import nightgames.combat.Combat;
 
 class GUICharacterPanel extends JPanel {
 
@@ -19,7 +18,7 @@ class GUICharacterPanel extends JPanel {
         appearancePanel.clearPortrait();
     }
 
-    void loadPortrait(Combat c, NPC enemy) {
+    void loadPortrait(NPC enemy) {
         appearancePanel.loadPortrait(enemy);
     }
 }

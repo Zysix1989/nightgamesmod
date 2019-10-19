@@ -12,7 +12,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-
 import nightgames.areas.Area;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
@@ -721,9 +720,9 @@ public class Combat {
 
     private boolean turn() {
         if (p1.human() && p2 instanceof NPC) {
-            Global.gui().loadPortrait(this, (NPC) p2);
+            Global.gui().loadPortrait((NPC) p2);
         } else if (p2.human() && p1 instanceof NPC) {
-            Global.gui().loadPortrait(this, (NPC) p1);
+            Global.gui().loadPortrait((NPC) p1);
         }
         if (phase != CombatPhase.FINISHED_SCENE && phase != CombatPhase.RESULTS_SCENE && checkLosses(false)) {
             phase = determinePostCombatPhase();

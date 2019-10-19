@@ -6,7 +6,6 @@ import javax.swing.Box;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import nightgames.characters.NPC;
-import nightgames.combat.Combat;
 
 class GUILeftPanel {
 
@@ -37,8 +36,8 @@ class GUILeftPanel {
         characterPanel.clearPortrait();
     }
 
-    void loadPortrait(Combat c, NPC enemy) {
-        characterPanel.loadPortrait(c, enemy);
+    void loadPortrait(NPC enemy) {
+        characterPanel.loadPortrait(enemy);
     }
 
     void showPortrait() {
