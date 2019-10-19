@@ -303,11 +303,6 @@ public class Match {
                 combatant.modMoney(p.getScore() * combatant.prize());
                 combatant.modMoney(calculateReward(combatant, sb));
 
-                //TODO: If they got 0 points, play their loser liner
-                if (p.getScore() == 0 && combatant.human() == false) {
-                    sb.append(combatant.loserLiner(null, null) + "<br/>");
-                }
-
                 combatant.challenges.clear();
                 combatant.state = State.ready;
                 condition.undoItems(combatant);
