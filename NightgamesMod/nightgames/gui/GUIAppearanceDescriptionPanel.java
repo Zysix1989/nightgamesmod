@@ -78,10 +78,16 @@ class GUIAppearanceDescriptionPanel extends JPanel {
     }
 
     void setCharacter(NPC character) {
-        text.setPreferredSize(new Dimension(getParent().getWidth(), getParent().getHeight()));
         text.setText("<font face='Georgia' color='white' size='4'>" +
             character.describe(Global.getPlayer().get(Attribute.Perception), Global.getPlayer())
             + "</font>");
         System.out.println(document.getLength());
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        var d = super.getPreferredSize();
+        d.width = getParent().getWidth();
+        return d;
     }
 }
