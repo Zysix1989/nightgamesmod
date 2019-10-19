@@ -3,15 +3,12 @@ package nightgames.match;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 
@@ -39,7 +36,7 @@ import org.jtwig.JtwigTemplate;
 public class Match {
     
     protected int time;
-    protected int dropOffTime;
+    protected int timeSinceLastDrop;
     protected Map<String, Area> map;
     protected Set<Participant> participants;
     private boolean pause;
@@ -53,7 +50,7 @@ public class Match {
             .collect(Collectors.toCollection(HashSet::new));
         this.condition = condition;
         time = 0;
-        dropOffTime = 0;
+        timeSinceLastDrop = 0;
         pause = false;
         map = buildMap();
         roundIterator = participants.iterator();
@@ -138,15 +135,15 @@ public class Match {
     }
 
     protected void handleFullTurn() {
-        if (meanLvl() > 3 && Global.random(10) + dropOffTime >= 12) {
+        if (meanLvl() > 3 && Global.random(10) + timeSinceLastDrop >= 12) {
             dropPackage();
-            dropOffTime = 0;
+            timeSinceLastDrop = 0;
         }
         if (Global.checkFlag(Flag.challengeAccepted) && (time == 6 || time == 12 || time == 18 || time == 24)) {
             dropChallenge();
         }
         time++;
-        dropOffTime++;
+        timeSinceLastDrop++;
     }
 
     protected void beforeAllTurns() {
