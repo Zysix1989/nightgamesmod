@@ -169,7 +169,7 @@ public class Match {
         return template.render(model);
     }
 
-    void haveMercy(Character victor, Character loser) {
+    void invalidateTarget(Character victor, Character loser) {
         var victorp = findParticipant(victor);
         var loserp = findParticipant(loser);
         victorp.defeated(loserp);
