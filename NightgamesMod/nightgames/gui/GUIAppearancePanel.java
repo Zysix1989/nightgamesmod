@@ -38,7 +38,7 @@ class GUIAppearancePanel extends JPanel {
     GUIAppearancePanel() {
         portraitPanel = new GUIPortraitPanel();
         appearanceDescriptionPanel = new GUIAppearanceDescriptionPanel();
-        setBackground(null);
+        setOpaque(false);
         add(portraitPanel);
         add(appearanceDescriptionPanel);
         appearanceDescriptionPanel.setVisible(false);

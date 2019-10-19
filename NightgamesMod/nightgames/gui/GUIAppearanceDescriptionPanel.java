@@ -68,12 +68,13 @@ class GUIAppearanceDescriptionPanel extends JPanel {
         ((DefaultCaret) text.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         text.setForeground(GUIColors.textColorLight);
         text.setEditable(false);
-        text.setBackground(null);
+        text.setOpaque(false);
 
         // Pass MouseEvents to the parent
         text.setHighlighter(null);
         text.addMouseListener(new AppearanceDescriptionMouseListener());
 
+        setOpaque(false);
         add(text);
     }
 
