@@ -81,7 +81,6 @@ public enum Flag {
     SuperTraitMode,
     AutoNext,
     Buttslutification,
-    CanResupplyAnywhere,
     NoFTC,
     smallfonts, 
     basicSystemMessages,
