@@ -483,8 +483,8 @@ public class NPC extends Character {
     private void pickAndDoAction(Collection<Action> available, Collection<Action> moves, Collection<IMovement> radar) {
         if (available.isEmpty()) {
             available.addAll(getItemActions());
-            available.addAll(Global.getMatch().getAvailableActions(this));
-            if (Global.getMatch().canMoveOutOfCombat(this)) {
+            available.addAll(Global.getMatch().getAvailableActions());
+            if (Global.getMatch().canMoveOutOfCombat()) {
                 available.addAll(moves);
             }
         }

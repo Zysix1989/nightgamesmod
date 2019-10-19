@@ -85,11 +85,11 @@ public class Match {
         return MatchType.NORMAL;
     }
     
-    public Set<Action> getAvailableActions(Character ch) {
+    public Set<Action> getAvailableActions() {
         return Global.getActions();
     }
     
-    public boolean canMoveOutOfCombat(Character ch) {
+    public boolean canMoveOutOfCombat() {
         return true;
     }
 

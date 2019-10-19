@@ -414,11 +414,11 @@ public class Player extends Character {
                     actionChoices.addAll(allowedActions());
                 } else {
                     List<Action> possibleActions = new ArrayList<>();
-                    if (Global.getMatch().canMoveOutOfCombat(this)) {
+                    if (Global.getMatch().canMoveOutOfCombat()) {
                         possibleActions.addAll(location.possibleActions());
                     }
                     possibleActions.addAll(getItemActions());
-                    possibleActions.addAll(Global.getMatch().getAvailableActions(this));
+                    possibleActions.addAll(Global.getMatch().getAvailableActions());
                     for (Action act : possibleActions) {
                         if (act.usable(this) 
                             && Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
