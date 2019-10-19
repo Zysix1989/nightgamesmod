@@ -36,7 +36,7 @@ import org.jtwig.JtwigTemplate;
 public class Match {
     
     protected int time;
-    protected int timeSinceLastDrop;
+    private int timeSinceLastDrop;
     protected Map<String, Area> map;
     protected Set<Participant> participants;
     private boolean pause;
@@ -105,11 +105,11 @@ public class Match {
         }
     }
 
-    protected Map<String, Area> buildMap() {
+    private Map<String, Area> buildMap() {
         return Global.buildMap();
     }
 
-    protected void placeCharacters() {
+    private void placeCharacters() {
         Deque<Area> areaList = new ArrayDeque<>();
         areaList.add(map.get("Dorm"));
         areaList.add(map.get("Engineering"));
@@ -130,11 +130,11 @@ public class Match {
         });
     }
 
-    protected boolean shouldEndMatch() {
+    private boolean shouldEndMatch() {
         return time >= 36;
     }
 
-    protected void handleFullTurn() {
+    private void handleFullTurn() {
         if (meanLvl() > 3 && Global.random(10) + timeSinceLastDrop >= 12) {
             dropPackage();
             timeSinceLastDrop = 0;
@@ -146,11 +146,11 @@ public class Match {
         timeSinceLastDrop++;
     }
 
-    protected void beforeAllTurns() {
+    private void beforeAllTurns() {
         getAreas().forEach(area -> area.setPinged(false));
     }
 
-    protected void afterTurn(Participant participant) {
+    private void afterTurn(Participant participant) {
         if (participant.getCharacter().state == State.resupplying) {
             participants.forEach(p -> p.allowTarget(participant));
         }
@@ -173,7 +173,7 @@ public class Match {
         return template.render(model);
     }
 
-    public void haveMercy(Character victor, Character loser) {
+    void haveMercy(Character victor, Character loser) {
         var victorp = findParticipant(victor);
         var loserp = findParticipant(loser);
         victorp.defeated(loserp);
@@ -209,33 +209,31 @@ public class Match {
 
     }
 
-    protected Postmatch buildPostmatch() {
+    private Postmatch buildPostmatch() {
         return new DefaultPostmatch(participants.stream()
             .map(Participant::getCharacter)
             .collect(Collectors.toList()));
     }
 
-    protected Optional<Character> decideWinner() {
+    private Optional<Character> decideWinner() {
         return participants.stream()
             .max(Comparator.comparing(Participant::getScore))
             .map(Participant::getCharacter);
     }
 
-    protected void giveWinnerPrize(Character winner, StringBuilder output) {
+    private void giveWinnerPrize(Character winner, StringBuilder output) {
         winner.modMoney(winner.prize() * 5);
         output.append(Global.capitalizeFirstLetter(winner.subject()))
               .append(" won the match, earning an additional $")
               .append(winner.prize() * 5)
               .append("<br/>");
-              if (winner.human() == false) {
-                  output.append(winner.victoryLiner(null, null)+"<br/>");
-              } else {
-                  
+              if (!winner.human()) {
+                  output.append(winner.victoryLiner(null, null))
+                      .append("<br/>");
               }
-        
     }
 
-    protected int calculateReward(Character combatant, StringBuilder output) {
+    private int calculateReward(Character combatant, StringBuilder output) {
         AtomicInteger reward = new AtomicInteger();
         participants.forEach(participant -> {
             var other = participant.getCharacter();
@@ -345,7 +343,7 @@ public class Match {
         post.run();
     }
 
-    public final int meanLvl() {
+    private int meanLvl() {
         return (int) participants.stream()
             .map(Participant::getCharacter)
             .mapToInt(Character::getLevel)
@@ -353,9 +351,8 @@ public class Match {
             .orElseThrow();
     }
 
-    public void dropPackage() {
-        ArrayList<Area> areas = new ArrayList<Area>();
-        areas.addAll(map.values());
+    private void dropPackage() {
+        ArrayList<Area> areas = new ArrayList<>(map.values());
         for (int i = 0; i < 10; i++) {
             Area target = areas.get(Global.random(areas.size()));
             if (!target.corridor() && !target.open() && target.env.size() < 5) {
@@ -367,9 +364,8 @@ public class Match {
         }
     }
 
-    public void dropChallenge() {
-        ArrayList<Area> areas = new ArrayList<Area>();
-        areas.addAll(map.values());
+    private void dropChallenge() {
+        ArrayList<Area> areas = new ArrayList<>(map.values());
         Area target = areas.get(Global.random(areas.size()));
         if (!target.open() && target.env.size() < 5) {
             target.place(new Challenge());
