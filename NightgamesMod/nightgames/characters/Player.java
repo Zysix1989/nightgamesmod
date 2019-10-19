@@ -42,8 +42,8 @@ import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.global.Scene;
-import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.gui.GUI;
+import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
@@ -958,7 +958,7 @@ public class Player extends Character {
     }
 
     @Override
-    public String getPortrait(Combat c) {
+    public String getPortrait() {
         return null;
     }
 

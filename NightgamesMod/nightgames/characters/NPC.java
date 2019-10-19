@@ -780,9 +780,9 @@ public class NPC extends Character {
         ai.resolveOrgasm(c, this, opponent, selfPart, opponentPart, times, totalTimes);
     }
     @Override
-    public String getPortrait(Combat c) {
+    public String getPortrait() {
         Disguised disguised = (Disguised) getStatus(Stsflag.disguised);
-        if (disguised != null && !c.isEnded()) {
+        if (disguised != null) {
             return disguised.getTarget().ai.image();
         }
         return ai.image();

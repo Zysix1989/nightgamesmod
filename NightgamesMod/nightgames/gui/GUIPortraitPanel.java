@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import nightgames.characters.NPC;
-import nightgames.combat.Combat;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 
@@ -26,13 +25,13 @@ class GUIPortraitPanel extends JPanel {
         add(image);
     }
 
-    void loadPortrait(Combat c, NPC source) {
+    void loadPortrait(NPC source) {
         clearPortrait();
 
         if (Global.checkFlag(Flag.noportraits)) {
             return;
         }
-        String imagePath = source.getPortrait(c);
+        String imagePath = source.getPortrait();
         if (imagePath == null) {
             return;
         }

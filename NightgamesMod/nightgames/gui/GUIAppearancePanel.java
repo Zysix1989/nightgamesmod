@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 import nightgames.characters.NPC;
-import nightgames.combat.Combat;
 
 class GUIAppearancePanel extends JPanel {
 
@@ -49,8 +48,8 @@ class GUIAppearancePanel extends JPanel {
         portraitPanel.clearPortrait();
     }
 
-    void loadPortrait(Combat c, NPC enemy) {
-        portraitPanel.loadPortrait(c, enemy);
+    void loadPortrait(NPC enemy) {
+        portraitPanel.loadPortrait(enemy);
         appearanceDescriptionPanel.setCharacter(enemy);
     }
 

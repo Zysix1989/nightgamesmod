@@ -20,6 +20,6 @@ class GUICharacterPanel extends JPanel {
     }
 
     void loadPortrait(Combat c, NPC enemy) {
-        appearancePanel.loadPortrait(c, enemy);
+        appearancePanel.loadPortrait(enemy);
     }
 }

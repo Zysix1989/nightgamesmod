@@ -92,7 +92,7 @@ public class NPCPetCharacter extends PetCharacter {
     }
 
     @Override
-    public String getPortrait(Combat c) {
+    public String getPortrait() {
         return prototype.ai.image();
     }
 }

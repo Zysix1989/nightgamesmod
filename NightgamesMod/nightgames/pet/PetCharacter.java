@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import nightgames.characters.Character;
 import nightgames.characters.Decider;
 import nightgames.characters.Emotion;
@@ -258,7 +257,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public String getPortrait(Combat c) {
+    public String getPortrait() {
         return "";
     }
 

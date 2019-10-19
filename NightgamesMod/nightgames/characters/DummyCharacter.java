@@ -2,7 +2,6 @@ package nightgames.characters;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import java.util.List;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
@@ -121,7 +120,7 @@ public class DummyCharacter extends Character {
     public void counterattack(Character target, Tactics type, Combat c) {}
 
     @Override
-    public String getPortrait(Combat c) {
+    public String getPortrait() {
         return "";
     }
 

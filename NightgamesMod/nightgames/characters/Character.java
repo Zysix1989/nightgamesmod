@@ -3734,7 +3734,7 @@ public abstract class Character extends Observable implements Cloneable {
         return outfit.getExposure();
     }
 
-    public abstract String getPortrait(Combat c);
+    public abstract String getPortrait();
 
     public void modMoney(int i) {
         setMoney((int) (money + Math.round(i * Global.moneyRate)));

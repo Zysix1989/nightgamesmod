@@ -1,7 +1,6 @@
 package nightgames.pet;
 
 import java.util.HashMap;
-
 import nightgames.characters.Character;
 import nightgames.characters.Player;
 import nightgames.combat.Combat;
@@ -63,7 +62,7 @@ public class PlayerPetCharacter extends PetCharacter {
     }
 
     @Override
-    public String getPortrait(Combat c) {
+    public String getPortrait() {
         return "";
     }
 }
