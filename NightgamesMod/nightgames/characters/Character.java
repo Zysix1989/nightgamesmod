@@ -84,7 +84,6 @@ import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
 import nightgames.skills.damage.DamageType;
 import nightgames.stance.Neutral;
-import nightgames.stance.Position;
 import nightgames.stance.Stance;
 import nightgames.status.Abuff;
 import nightgames.status.Alluring;
@@ -4681,7 +4680,7 @@ public abstract class Character extends Observable implements Cloneable {
         return useFemalePronouns() ? "mistress" : "master";
     }
 
-    public Optional<ArmManager> getArmManager(Combat c) {
+    public Optional<ArmManager> getArmManager() {
         return Optional.empty();
     }
 }

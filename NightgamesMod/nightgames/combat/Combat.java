@@ -45,7 +45,6 @@ import nightgames.match.DefaultMatchEndListener;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.pet.Pet;
 import nightgames.pet.PetCharacter;
-import nightgames.pet.arms.ArmManager;
 import nightgames.skills.Anilingus;
 import nightgames.skills.AssFuck;
 import nightgames.skills.BreastWorship;
@@ -620,7 +619,7 @@ public class Combat {
             }
         }
 
-        self.getArmManager(this).ifPresent(m -> m.act(this, self, other));
+        self.getArmManager().ifPresent(m -> m.act(this, self, other));
 
         if (self.has(Trait.mindcontroller)) {
             Collection<Clothing> infra = self.outfit.getArticlesWithTrait(ClothingTrait.infrasound);

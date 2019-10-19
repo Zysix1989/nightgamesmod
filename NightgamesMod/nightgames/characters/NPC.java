@@ -113,7 +113,7 @@ public class NPC extends Character {
         }
         b.append(outfit.describe(this));
         b.append(observe(per));
-        b.append(getArmManager(c).map(m -> m.describe(this)).orElse(""));
+        b.append(getArmManager().map(m -> m.describe(this)).orElse(""));
         return b.toString();
     }
 
@@ -875,7 +875,7 @@ public class NPC extends Character {
     }
 
     @Override
-    public Optional<ArmManager> getArmManager(Combat c) {
+    public Optional<ArmManager> getArmManager() {
         return ai.getArmManager();
     }
 }
