@@ -33,9 +33,15 @@ class GUICharacterPanel extends JPanel {
 
     void clearPortrait() {
         appearancePanel.clearPortrait();
+        metersPanel.clear();
     }
 
     void loadPortrait(NPC enemy) {
         appearancePanel.loadPortrait(enemy);
+        metersPanel.setTarget(enemy);
+    }
+
+    void refresh() {
+        metersPanel.refresh();
     }
 }

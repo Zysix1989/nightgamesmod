@@ -61,5 +61,6 @@ class GUILeftPanel {
         if (map != null) {
             map.repaint();
         }
+        characterPanel.refresh();
     }
 }
