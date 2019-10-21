@@ -1,7 +1,6 @@
 package nightgames.characters;
 
 import java.io.Serializable;
-
 import nightgames.global.Global;
 
 public class Meter implements Serializable, Cloneable {
@@ -36,11 +35,7 @@ public class Meter implements Serializable, Cloneable {
     }
 
     public int max() {
-        return (int) maxFull();
-    }
-
-    public float maxFull() {
-        return Math.min(max, temporaryMax);
+        return (int) Math.min(max, temporaryMax);
     }
 
     public float trueMax() {
