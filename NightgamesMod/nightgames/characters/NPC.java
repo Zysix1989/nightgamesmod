@@ -117,61 +117,81 @@ public class NPC extends Character {
         return b.toString();
     }
 
+    private String observeStamina(int perception) {
+        if (perception >= 8) {
+            return "Her stamina is at " + stamina.percent() + "%<br/>";
+        }
+        if (perception >= 6) {
+            if (stamina.percent() <= 33) {
+                return "She looks a bit unsteady on her feet<br/>";
+            } else if (stamina.percent() <= 66) {
+                return "She's starting to look tired<br/>";
+            }
+        }
+        if (perception >= 4) {
+            if (stamina.percent() <= 50) {
+                return "She looks pretty tired<br/>";
+            }
+        }
+        return "";
+    }
+
+    private String observeArousal(int per) {
+        if (per >= 9) {
+            return "Her arousal is at " + arousal.percent() + "%<br/>";
+        }
+        if (per >= 7) {
+            if (arousal.percent() >= 75) {
+                return "She's dripping with arousal and breathing heavily. She's at least 3/4 of the way to orgasm<br/>";
+            } else if (arousal.percent() >= 50) {
+                return "She's showing signs of arousal. She's at least halfway to orgasm<br/>";
+            } else if (arousal.percent() >= 25) {
+                return "She's starting to look noticeably arousal, maybe a quarter of her limit<br/>";
+            }
+        }
+        if (per >= 3) {
+            if (arousal.percent() >= 50) {
+                return "She's showing clear sign of arousal. You're definitely getting to her.<br/>";
+            }
+        }
+        return "";
+    }
+
+    private String observeWillpower(int per) {
+        if (per >= 9) {
+            return "Her willpower is at " + willpower.percent() + "%<br/>";
+        }
+        if (per >= 7) {
+            if (willpower.percent() <= 75) {
+                return "She still seems ready to fight.<br/>";
+            } else if (willpower.percent() <= 50) {
+                return "She seems a bit unsettled, but she still has some spirit left in her.<br/>";
+            } else if (willpower.percent() <= 25) {
+                return "Her eyes seem glazed over and ready to give in.<br/>";
+            }
+        }
+        if (per >= 3) {
+            if (arousal.percent() >= 50) {
+                return "She's showing clear sign of arousal. You're definitely getting to her.<br/>";
+            }
+            if (willpower.percent() <= 50) {
+                return "She seems a bit distracted and unable to look you in the eye.<br/>";
+            }
+        }
+        return "";
+    }
+
     private String observe(int per) {
         String visible = "";
         if (is(Stsflag.unreadable)) {
             return visible;
         }
-        if (per >= 9) {
-            visible = visible + "Her arousal is at " + arousal.percent() + "%<br/>";
-        }
-        if (per >= 8) {
-            visible = visible + "Her stamina is at " + stamina.percent() + "%<br/>";
-        }
-        if (per >= 9) {
-            visible = visible + "Her willpower is at " + willpower.percent() + "%<br/>";
-        }
+        visible += observeArousal(per);
+        visible += observeStamina(per);
+        visible += observeWillpower(per);
         if (per >= 7) {
             visible = visible + "She looks " + mood.name() + "<br/>";
         }
-        if (per >= 7 && per < 9) {
-            if (arousal.percent() >= 75) {
-                visible = visible
-                                + "She's dripping with arousal and breathing heavily. She's at least 3/4 of the way to orgasm<br/>";
-            } else if (arousal.percent() >= 50) {
-                visible = visible + "She's showing signs of arousal. She's at least halfway to orgasm<br/>";
-            } else if (arousal.percent() >= 25) {
-                visible = visible + "She's starting to look noticeably arousal, maybe a quarter of her limit<br/>";
-            }
-            if (willpower.percent() <= 75) {
-                visible = visible + "She still seems ready to fight.<br/>";
-            } else if (willpower.percent() <= 50) {
-                visible = visible + "She seems a bit unsettled, but she still has some spirit left in her.<br/>";
-            } else if (willpower.percent() <= 25) {
-                visible = visible + "Her eyes seem glazed over and ready to give in.<br/>";
-            }
-        }
-        if (per >= 6 && per < 8) {
-            if (stamina.percent() <= 33) {
-                visible = visible + "She looks a bit unsteady on her feet<br/>";
-            } else if (stamina.percent() <= 66) {
-                visible = visible + "She's starting to look tired<br/>";
-            }
-        }
-        if (per >= 3 && per < 7) {
-            if (arousal.percent() >= 50) {
-                visible = visible + "She's showing clear sign of arousal. You're definitely getting to her.<br/>";
-            }
-            if (willpower.percent() <= 50) {
-                visible = visible + "She seems a bit distracted and unable to look you in the eye.<br/>";
-            }
-        }
-        if (per >= 4 && per < 6) {
-            if (stamina.percent() <= 50) {
-                visible = visible + "She looks pretty tired<br/>";
-            }
-        }
-
         if (per >= 5) {
             visible += Stage.describe(this);
         }
@@ -180,7 +200,6 @@ public class NPC extends Character {
             visible += status.stream().filter(s -> !s.flags().contains(Stsflag.disguised) || per >= 9).map(Status::toString).collect(Collectors.joining(", "));
             visible += "</i><br/>";
         }
-        
         return visible;
     }
 
