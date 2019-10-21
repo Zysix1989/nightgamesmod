@@ -1,9 +1,7 @@
 package nightgames.status.addiction;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
+import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
@@ -11,14 +9,12 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.Masochistic;
 import nightgames.status.Status;
-import nightgames.status.Stsflag;
 
 public class Dominance extends Addiction {
     private int originalWill;
 
     public Dominance(Character affected, Character cause, float magnitude) {
         super(affected, "Dominance", cause, magnitude);
-        flags.add(Stsflag.victimComplex);
         originalWill = -1;
     }
 
