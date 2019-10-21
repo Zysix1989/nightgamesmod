@@ -25,11 +25,7 @@ public class Meter implements Serializable {
     }
 
     public int get() {
-        if (current > max()) {
-            return max();
-        } else {
-            return current;
-        }
+        return Math.min(current, max());
     }
 
     public int getReal() {
