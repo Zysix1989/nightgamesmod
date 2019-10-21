@@ -227,14 +227,14 @@ public abstract class Character extends Observable implements Cloneable {
      * Is thrown when this object does not support the Cloneable interface.
      * */
     @Override
-    public Character clone() throws CloneNotSupportedException {
+public Character clone() throws CloneNotSupportedException {
         Character c = (Character) super.clone();
         c.att = new HashMap<>(att);
-        c.stamina = stamina.clone();
+        c.stamina = stamina.copy();
         c.cloned = cloned + 1;
-        c.arousal = arousal.clone();
-        c.mojo = mojo.clone();
-        c.willpower = willpower.clone();
+        c.arousal = arousal.copy();
+        c.mojo = mojo.copy();
+        c.willpower = willpower.copy();
         c.outfitPlan = new ArrayList<>(outfitPlan);
         c.outfit = new Outfit(outfit);
         c.flags = new HashMap<>(flags);

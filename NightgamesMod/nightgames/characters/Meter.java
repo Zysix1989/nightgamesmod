@@ -3,7 +3,7 @@ package nightgames.characters;
 import java.io.Serializable;
 import nightgames.global.Global;
 
-public class Meter implements Serializable, Cloneable {
+public class Meter implements Serializable {
     /**
      *
      */
@@ -16,6 +16,12 @@ public class Meter implements Serializable, Cloneable {
         this.max = max;
         this.temporaryMax = Integer.MAX_VALUE;
         current = 0;
+    }
+
+    private Meter(Meter original) {
+        current = original.current;
+        max = original.max;
+        temporaryMax = original.temporaryMax;
     }
 
     public int get() {
@@ -109,16 +115,15 @@ public class Meter implements Serializable, Cloneable {
     }
 
     @Override
-    public Meter clone() throws CloneNotSupportedException {
-        return (Meter) super.clone();
-    }
-
-    @Override
     public String toString() {
         return String.format("current: %s / max: %s", Global.formatDecimal(current), Global.formatDecimal(max()));
     }
 
     public double remaining() {
         return max() - getReal();
+    }
+
+    public Meter copy() {
+        return new Meter(this);
     }
 }
