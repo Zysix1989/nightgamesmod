@@ -59,10 +59,6 @@ public class Meter implements Serializable {
         }
     }
 
-    public void restoreNoLimit(int i) {
-        current += i;
-    }
-
     public boolean isEmpty() {
         return current <= 0;
     }

@@ -13,4 +13,8 @@ public class ArousalStat extends Meter {
     public ArousalStat copy() {
         return new ArousalStat(this);
     }
+
+    public void restoreNoLimit(int i) {
+        current += i;
+    }
 }
