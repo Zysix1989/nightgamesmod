@@ -1167,19 +1167,19 @@ public Character clone() throws CloneNotSupportedException {
         }
     }
 
-    public Meter getStamina() {
+    public StaminaStat getStamina() {
         return stamina;
     }
 
-    public Meter getArousal() {
+    public ArousalStat getArousal() {
         return arousal;
     }
 
-    public Meter getMojo() {
+    public MojoStat getMojo() {
         return mojo;
     }
 
-    public Meter getWillpower() {
+    public WillpowerStat getWillpower() {
         return willpower;
     }
 
