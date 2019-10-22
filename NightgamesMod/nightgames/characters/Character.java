@@ -806,7 +806,7 @@ public Character clone() throws CloneNotSupportedException {
                                                 subjectWas(), drained, drainer.subject()), true);
             }
             stamina.reduce(drained);
-            drainer.stamina.restore(drained);
+            drainer.stamina.recover(drained);
         }
     }
     
@@ -908,7 +908,7 @@ public Character clone() throws CloneNotSupportedException {
             c.writeSystemMessage(String.format("%s healed for <font color='rgb(100,240,30)'>%d<font color='white'>%s",
                             subjectWas(), i, reason), true);
         }
-        stamina.restore(i);
+        stamina.recover(i);
     }
 
     public String subject() {
@@ -1210,7 +1210,7 @@ public Character clone() throws CloneNotSupportedException {
         }
         x += bonus;
         if (x > 0) {
-            mojo.restore(x);
+            mojo.build(x);
             if (c != null) {
                 c.writeSystemMessage(Global.capitalizeFirstLetter(
                                 String.format("%s <font color='rgb(100,200,255)'>%d<font color='white'> mojo%s.",
@@ -2141,10 +2141,10 @@ public Character clone() throws CloneNotSupportedException {
         }
         getArousal().renew();
         if (has(Trait.insatiable)) {
-            arousal.restore((int) (arousal.max() * .2));
+            arousal.pleasure((int) (arousal.max() * .2));
         }
         if (is(Stsflag.feral)) {
-            arousal.restore(arousal.max() / 2);
+            arousal.pleasure(arousal.max() / 2);
         }
         float extra = 25.0f * overflow / (arousal.max());
 
@@ -2521,7 +2521,7 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public void restoreWillpower(Combat c, int i) {
-        willpower.restore(i);
+        willpower.recover(i);
         c.writeSystemMessage(String.format("%s regained <font color='rgb(181,230,30)'>%d<font color='white'> willpower.", subject(), i), true);
     }
     
@@ -2827,14 +2827,14 @@ public Character clone() throws CloneNotSupportedException {
         regen();
         tick(null);                     //FIXME: This is the culprit of the Addiction NPE outside of combat. Nulls are not handled by methods used within tick and Addiction.tick()
         if (has(Trait.Confident)) {
-            willpower.restore(10);
+            willpower.recover(10);
             mojo.reduce(5);
         } else {
-            willpower.restore(5);
+            willpower.recover(5);
             mojo.reduce(10);
         }
         if (has(Trait.exhibitionist) && mostlyNude()) {
-            mojo.restore(2);
+            mojo.build(2);
         }
         dropStatus(null, null);
         if (has(Trait.QuickRecovery)) {
@@ -3942,7 +3942,7 @@ public Character clone() throws CloneNotSupportedException {
                                             subjectWas(), drained, drainer.subject()), true);
         }
         willpower.reduce(drained);
-        drainer.willpower.restore(restored);
+        drainer.willpower.recover(restored);
     }
 
     public void drainWillpowerAsMojo(Combat c, Character drainer, int i, float efficiency) {
@@ -3964,7 +3964,7 @@ public Character clone() throws CloneNotSupportedException {
                                             subjectWas(), drained, restored, drainer.subject()), true);
         }
         willpower.reduce(drained);
-        drainer.mojo.restore(restored);
+        drainer.mojo.build(restored);
     }
 
     public void drainStaminaAsMojo(Combat c, Character drainer, int i, float efficiency) {
@@ -3986,7 +3986,7 @@ public Character clone() throws CloneNotSupportedException {
                                             subjectWas(), drained, restored, drainer.subject()), true);
         }
         stamina.reduce(drained);
-        drainer.mojo.restore(restored);
+        drainer.mojo.build(restored);
     }
 
     public void drainMojo(Combat c, Character drainer, int i) {
@@ -4007,7 +4007,7 @@ public Character clone() throws CloneNotSupportedException {
                                             subjectWas(), drained, drainer.subject()), true);
         }
         mojo.reduce(drained);
-        drainer.mojo.restore(drained);
+        drainer.mojo.build(drained);
     }
 
     // TODO: Rename this method; it has the same name as Observer's update(), which is a little

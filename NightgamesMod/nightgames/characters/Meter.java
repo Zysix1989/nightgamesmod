@@ -53,12 +53,6 @@ public class Meter implements Serializable {
         }
     }
 
-    public void restore(int i) {
-        if (current < max()) {
-            current = Math.min(max(), current + i);
-        }
-    }
-
     public boolean isEmpty() {
         return current <= 0;
     }

@@ -17,4 +17,8 @@ public class MojoStat extends Meter {
     public void renew() {
         current = 0;
     }
+
+    public void build(int i) {
+        current = Math.min(current + i, max());
+    }
 }

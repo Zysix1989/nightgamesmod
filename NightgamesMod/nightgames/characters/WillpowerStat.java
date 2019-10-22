@@ -18,4 +18,8 @@ public class WillpowerStat extends Meter {
     public void renew() {
         current = (int) max;
     }
+
+    public void recover(int i) {
+        current = Math.min(current + i, max());
+    }
 }

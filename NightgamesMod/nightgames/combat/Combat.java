@@ -1318,8 +1318,7 @@ public class Combat {
             intruder.gainXP(10 + intruder.lvlBonus(target));
             intruder.getArousal().renew();
             if (intruder.has(Trait.insatiable)) {
-                intruder.getArousal().restore(
-                    (int) (intruder.getArousal().max() * 0.2D));
+                intruder.getArousal().pleasure((int) (intruder.getArousal().max() * 0.2D));
             }
             target.undress(this);
             intruder.defeated(target);

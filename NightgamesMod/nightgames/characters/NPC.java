@@ -210,7 +210,7 @@ public class NPC extends Character {
         target.gainXP(target.getDefeatXP(this));
         target.arousal.renew();
         if (target.has(Trait.insatiable)) {
-            target.arousal.restore((int) (arousal.max() * .2));
+            target.arousal.pleasure((int) (arousal.max() * .2));
         }
         dress(c);
         target.undress(c);
@@ -232,10 +232,10 @@ public class NPC extends Character {
             target.arousal.renew();
         }
         if (this.has(Trait.insatiable)) {
-            arousal.restore((int) (arousal.max() * .2));
+            arousal.pleasure((int) (arousal.max() * .2));
         }
         if (target.has(Trait.insatiable)) {
-            target.arousal.restore((int) (arousal.max() * .2));
+            target.arousal.pleasure((int) (arousal.max() * .2));
         }
         target.dress(c);
         undress(c);
@@ -260,7 +260,7 @@ public class NPC extends Character {
         target.gainXP(target.getDefeatXP(this));
         target.arousal.renew();
         if (target.has(Trait.insatiable)) {
-            target.arousal.restore((int) (arousal.max() * .2));
+            target.arousal.pleasure((int) (arousal.max() * .2));
         }
         dress(c);
         target.undress(c);
@@ -367,10 +367,10 @@ public class NPC extends Character {
         arousal.renew();
         target.arousal.renew();
         if (this.has(Trait.insatiable)) {
-            arousal.restore((int) (arousal.max() * .2));
+            arousal.pleasure((int) (arousal.max() * .2));
         }
         if (target.has(Trait.insatiable)) {
-            target.arousal.restore((int) (arousal.max() * .2));
+            target.arousal.pleasure((int) (arousal.max() * .2));
         }
         target.undress(c);
         undress(c);

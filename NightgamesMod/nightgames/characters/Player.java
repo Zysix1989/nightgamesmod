@@ -737,7 +737,7 @@ public class Player extends Character {
         target.gainXP(target.getDefeatXP(this));
         target.arousal.renew();
         if (target.has(Trait.insatiable)) {
-            target.arousal.restore((int) (arousal.max() * .2));
+            target.arousal.pleasure((int) (arousal.max() * .2));
         }
         dress(c);
         target.undress(c);

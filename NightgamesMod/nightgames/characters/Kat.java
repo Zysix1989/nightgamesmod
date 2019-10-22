@@ -2,16 +2,15 @@ package nightgames.characters;
 
 import java.util.Arrays;
 import java.util.Optional;
-
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.mods.CatTailMod;
 import nightgames.characters.body.EarsPart;
-import nightgames.characters.body.mods.CatEarsMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
+import nightgames.characters.body.mods.CatEarsMod;
+import nightgames.characters.body.mods.CatTailMod;
 import nightgames.characters.body.mods.catcher.FeralMod;
 import nightgames.characters.body.mods.pitcher.PrimalCockMod;
 import nightgames.characters.custom.CharacterLine;
@@ -28,7 +27,6 @@ import nightgames.status.Feral;
 import nightgames.status.Pheromones;
 import nightgames.status.Stsflag;
 import nightgames.status.addiction.AddictionType;
-import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class Kat extends BasePersonality {
@@ -461,7 +459,7 @@ public class Kat extends BasePersonality {
         } else {
             opponent.add(c, Pheromones.getWith(character, opponent, 5, 10));
             opponent.add(c, Pheromones.getWith(character, opponent, 20, 5, " feral musk"));
-            opponent.arousal.restore(opponent.arousal.max() / 3);
+            opponent.arousal.pleasure(opponent.arousal.max() / 3);
             return "As Kat pleasures you, you're quickly reaching the limit of your control. You try to put some distance between you and her to catch your breath. The familiar "
                             + "tightness in your groin warns you that any stimulation will probably set you off right now. Eager to finish you off, Kat pounces on you and grabs your "
                             + "dick with both hands. <i>\"Nyaha! I got you!\"</i> The last of your endurance is blown away as she jerks you off excitedly. You shoot your load into the air, "
