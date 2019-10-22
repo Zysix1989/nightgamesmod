@@ -10,18 +10,15 @@ public class Meter implements Serializable {
     private static final long serialVersionUID = 2L;
     protected int current;
     protected float max;
-    protected int temporaryMax;
 
     public Meter(int max) {
         this.max = max;
-        this.temporaryMax = Integer.MAX_VALUE;
         current = 0;
     }
 
     protected Meter(Meter original) {
         current = original.current;
         max = original.max;
-        temporaryMax = original.temporaryMax;
     }
 
     public int get() {
@@ -37,7 +34,7 @@ public class Meter implements Serializable {
     }
 
     public int max() {
-        return (int) Math.min(max, temporaryMax);
+        return (int) max;
     }
 
     public float trueMax() {

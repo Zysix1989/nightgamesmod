@@ -1,6 +1,8 @@
 package nightgames.characters;
 
 public class WillpowerStat extends Meter {
+    private int temporaryMax;
+
     public WillpowerStat(int max) {
         super(max);
         renew();
@@ -8,6 +10,7 @@ public class WillpowerStat extends Meter {
 
     private WillpowerStat(WillpowerStat original) {
         super(original);
+        temporaryMax = original.temporaryMax;
     }
 
     @Override
@@ -37,5 +40,9 @@ public class WillpowerStat extends Meter {
 
     public void resetCapacity() {
         temporaryMax = Integer.MAX_VALUE;
+    }
+
+    public int max() {
+        return (int) Math.min(max, temporaryMax);
     }
 }
