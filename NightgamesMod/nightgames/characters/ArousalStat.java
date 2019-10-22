@@ -14,7 +14,7 @@ public class ArousalStat extends Meter {
         return new ArousalStat(this);
     }
 
-    public void restoreNoLimit(int i) {
+    public void pleasure(int i) {
         current += i;
     }
 }

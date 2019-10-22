@@ -929,7 +929,7 @@ public Character clone() throws CloneNotSupportedException {
         }
         pleasured = true;
         // pleasure = 0;
-        arousal.restoreNoLimit(pleasure);
+        arousal.pleasure(pleasure);
         if (checkOrgasm()) {
             doOrgasm(c, source, selfPart, opponentPart);
         }
@@ -1145,7 +1145,7 @@ public Character clone() throws CloneNotSupportedException {
         int bonus = 0;
 
         emote(Emotion.horny, i / 4);
-        arousal.restoreNoLimit(temptation);
+        arousal.pleasure(temptation);
     }
     
     /**Calms this character. 
