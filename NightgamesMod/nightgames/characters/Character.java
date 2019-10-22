@@ -122,7 +122,7 @@ public abstract class Character extends Observable implements Cloneable {
     public Map<Attribute, Integer> att;             //Attributes are good opportunity to move to OOP Implementation - They are very similar to meters with base and modified values - DSM
     protected StaminaStat stamina;
     protected ArousalStat arousal;
-    protected Meter mojo;
+    protected MojoStat mojo;
     protected Meter willpower;
     public Outfit outfit;
     public List<Clothing> outfitPlan;               //List is good but ArrayList is more powerful because it's serializable. - DSM 
@@ -183,7 +183,7 @@ public abstract class Character extends Observable implements Cloneable {
         stamina = new StaminaStat(22 + 3 * level);
         stamina.fill();
         arousal = new ArousalStat(90 + 10 * level);
-        mojo = new Meter(100);
+        mojo = new MojoStat(100);
         willpower = new Meter(40);
         orgasmed = false;
         pleasured = false;
