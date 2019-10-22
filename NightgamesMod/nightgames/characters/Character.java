@@ -123,7 +123,7 @@ public abstract class Character extends Observable implements Cloneable {
     protected StaminaStat stamina;
     protected ArousalStat arousal;
     protected MojoStat mojo;
-    protected Meter willpower;
+    protected WillpowerStat willpower;
     public Outfit outfit;
     public List<Clothing> outfitPlan;               //List is good but ArrayList is more powerful because it's serializable. - DSM 
     protected Area location;                        //What does this do? Is it the characters Current Location? This should be stored as a String or implemented as a token on a larger GameMap - DSM
@@ -184,7 +184,7 @@ public abstract class Character extends Observable implements Cloneable {
         stamina.fill();
         arousal = new ArousalStat(90 + 10 * level);
         mojo = new MojoStat(100);
-        willpower = new Meter(40);
+        willpower = new WillpowerStat(40);
         orgasmed = false;
         pleasured = false;
 
