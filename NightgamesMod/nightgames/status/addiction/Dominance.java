@@ -11,11 +11,9 @@ import nightgames.status.Masochistic;
 import nightgames.status.Status;
 
 public class Dominance extends Addiction {
-    private int originalWill;
 
     public Dominance(Character affected, Character cause, float magnitude) {
         super(affected, "Dominance", cause, magnitude);
-        originalWill = -1;
     }
 
     public Dominance(Character affected, Character cause) {
@@ -38,11 +36,8 @@ public class Dominance extends Addiction {
 
     @Override
     protected Optional<Status> withdrawalEffects() {
-        if (originalWill < 0) {
             double mod = Math.min(1.0, 1.0 / (double) getSeverity().ordinal() + .4);
-            originalWill = affected.getWillpower().max();
-            affected.getWillpower().setTemporaryMax((int) (originalWill * mod));
-        }
+            affected.getWillpower().reduceCapacity(mod);
         return Optional.of(new Masochistic(affected));
     }
 
@@ -55,8 +50,7 @@ public class Dominance extends Addiction {
     public void endNight() {
         super.endNight();
 
-        affected.getWillpower().setTemporaryMax(originalWill);
-        originalWill = -1;
+        affected.getWillpower().resetCapacity();
     }
 
     @Override

@@ -1,9 +1,7 @@
 package nightgames.status.addiction;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
+import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
@@ -13,7 +11,6 @@ import nightgames.status.Status;
 import nightgames.status.Stsflag;
 
 public class MagicMilkAddiction extends Addiction {
-    private int originalMaxWill;
 
     public MagicMilkAddiction(Character affected, Character cause, float magnitude) {
         super(affected, "Magic Milk Addiction", cause, magnitude);
@@ -28,15 +25,14 @@ public class MagicMilkAddiction extends Addiction {
     @Override
     protected Optional<Status> withdrawalEffects() {
         double mod = 1.0 / (double) getSeverity().ordinal();
-        originalMaxWill = affected.getWillpower().max();
-        affected.getWillpower().setTemporaryMax((int) (originalMaxWill * mod));
+        affected.getWillpower().reduceCapacity(mod);
         return Optional.empty();
     }
 
     @Override
     public void endNight() {
         super.endNight();
-        affected.getWillpower().setTemporaryMax(originalMaxWill);
+        affected.getWillpower().resetCapacity();
     }
 
     @Override

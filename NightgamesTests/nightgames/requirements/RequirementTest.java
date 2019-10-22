@@ -1,8 +1,45 @@
 package nightgames.requirements;
 
+import static nightgames.requirements.RequirementShortcuts.anal;
+import static nightgames.requirements.RequirementShortcuts.and;
+import static nightgames.requirements.RequirementShortcuts.attribute;
+import static nightgames.requirements.RequirementShortcuts.bodypart;
+import static nightgames.requirements.RequirementShortcuts.dom;
+import static nightgames.requirements.RequirementShortcuts.duration;
+import static nightgames.requirements.RequirementShortcuts.eitherinserted;
+import static nightgames.requirements.RequirementShortcuts.inserted;
+import static nightgames.requirements.RequirementShortcuts.item;
+import static nightgames.requirements.RequirementShortcuts.level;
+import static nightgames.requirements.RequirementShortcuts.mood;
+import static nightgames.requirements.RequirementShortcuts.none;
+import static nightgames.requirements.RequirementShortcuts.not;
+import static nightgames.requirements.RequirementShortcuts.or;
+import static nightgames.requirements.RequirementShortcuts.orgasms;
+import static nightgames.requirements.RequirementShortcuts.position;
+import static nightgames.requirements.RequirementShortcuts.prone;
+import static nightgames.requirements.RequirementShortcuts.random;
+import static nightgames.requirements.RequirementShortcuts.result;
+import static nightgames.requirements.RequirementShortcuts.rev;
+import static nightgames.requirements.RequirementShortcuts.specificpart;
+import static nightgames.requirements.RequirementShortcuts.status;
+import static nightgames.requirements.RequirementShortcuts.sub;
+import static nightgames.requirements.RequirementShortcuts.trait;
+import static nightgames.requirements.RequirementShortcuts.winning;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Optional;
 import nightgames.actions.Movement;
 import nightgames.areas.Area;
-import nightgames.characters.*;
+import nightgames.characters.Attribute;
+import nightgames.characters.BlankPersonality;
+import nightgames.characters.CharacterSex;
+import nightgames.characters.Emotion;
+import nightgames.characters.NPC;
+import nightgames.characters.Trait;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.HandsPart;
@@ -14,21 +51,16 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.modifier.standard.NoModifier;
-import nightgames.stance.*;
+import nightgames.stance.Anal;
+import nightgames.stance.FaceSitting;
+import nightgames.stance.FlyingCarry;
+import nightgames.stance.HeldOral;
+import nightgames.stance.Neutral;
 import nightgames.status.Alert;
 import nightgames.status.Stsflag;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Optional;
-
-import static nightgames.requirements.RequirementShortcuts.*;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Tests for Requirement functionality.
@@ -289,12 +321,12 @@ public class RequirementTest {
         assertThat(winning().meets(combat, self, other), is(true));
         assertThat(winning().meets(combat, other, self), is(true));
 
-        self.getWillpower().setTemporaryMax(50);
+        self.getWillpower().gain(50);
         self.getWillpower().set(25);
         assertThat(winning().meets(combat, self, other), is(false));
         assertThat(winning().meets(combat, other, self), is(true));
 
-        other.getWillpower().setTemporaryMax(1000);
+        other.getWillpower().gain(1000);
         other.getWillpower().set(100);
         assertThat(winning().meets(combat, self, other), is(true));
         assertThat(winning().meets(combat, other, self), is(false));

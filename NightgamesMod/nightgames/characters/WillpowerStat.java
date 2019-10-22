@@ -31,11 +31,11 @@ public class WillpowerStat extends Meter {
         return current <= 0;
     }
 
-    public void setTemporaryMax(int i) {
-        if (i <= 0) {
-            i = Integer.MAX_VALUE;
-        }
-        temporaryMax = i;
-        current = Math.min(current, max());
+    public void reduceCapacity(double percentage) {
+        temporaryMax = (int) ((float) max() * percentage);
+    }
+
+    public void resetCapacity() {
+        temporaryMax = Integer.MAX_VALUE;
     }
 }
