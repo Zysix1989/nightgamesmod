@@ -1233,9 +1233,6 @@ public Character clone() throws CloneNotSupportedException {
         }
         cost += bonus;
         mojo.deplete(cost);
-        if (mojo.get() < 0) {
-            mojo.set(0);
-        }
         if (c != null && i != 0) {
             c.writeSystemMessage(Global.capitalizeFirstLetter(
                             String.format("%s <font color='rgb(150,150,250)'>%d<font color='white'> mojo%s.",
@@ -1250,9 +1247,6 @@ public Character clone() throws CloneNotSupportedException {
     public int loseMojo(Combat c, int i, String source) {
         int amt = Math.min(mojo.get(), i);
         mojo.deplete(amt);
-        if (mojo.get() < 0) {
-            mojo.set(0);
-        }
         if (c != null) {
             c.writeSystemMessage(Global.capitalizeFirstLetter(
                             String.format("%s <font color='rgb(150,150,250)'>%d<font color='white'> mojo%s.",
