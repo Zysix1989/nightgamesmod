@@ -1,9 +1,7 @@
 package nightgames.status;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
+import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
@@ -44,7 +42,7 @@ public class Rewired extends DurationStatus {
 
     @Override
     public double pleasure(Combat c, BodyPart withPart, BodyPart targetPart, double x) {
-        affected.getStamina().reduce((int) Math.round(x));
+        affected.getStamina().exhaust((int) Math.round(x));
         return 0;
     }
 

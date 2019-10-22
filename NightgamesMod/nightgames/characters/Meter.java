@@ -43,15 +43,6 @@ public class Meter implements Serializable {
     public float trueMax() {
         return max;
     }
-    
-    public void reduce(int i) {
-        if (i > 0) {
-            current -= i;
-        }
-        if (current < 0) {
-            current = 0;
-        }
-    }
 
     public boolean isEmpty() {
         return current <= 0;

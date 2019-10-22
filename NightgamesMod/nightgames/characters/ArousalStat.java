@@ -18,6 +18,8 @@ public class ArousalStat extends Meter {
         current += i;
     }
 
+    public void calm(int i) { current = Math.max(current - i, 0); }
+
     public void renew() {
         current = 0;
     }

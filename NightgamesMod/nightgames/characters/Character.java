@@ -774,7 +774,7 @@ public Character clone() throws CloneNotSupportedException {
                             + " {self:name-do} seems to strip away {self:possessive} strength.", this, other));
             add(c, new Abuff(this, Attribute.Power, -mag, 10));
         }
-        stamina.reduce(pain);
+        stamina.exhaust(pain);
     }
 
     /**Drains this character's stamina by value i.
@@ -805,7 +805,7 @@ public Character clone() throws CloneNotSupportedException {
                                 String.format("%s drained of <font color='rgb(200,200,200)'>%d<font color='white'> stamina by %s",
                                                 subjectWas(), drained, drainer.subject()), true);
             }
-            stamina.reduce(drained);
+            stamina.exhaust(drained);
             drainer.stamina.recover(drained);
         }
     }
@@ -895,7 +895,7 @@ public Character clone() throws CloneNotSupportedException {
                 c.writeSystemMessage(String.format("%s weakened by <font color='rgb(200,200,200)'>%d<font color='white'>",
                                 subjectWas(), weak), true);
             }
-            stamina.reduce(weak);
+            stamina.exhaust(weak);
         }
     }
 
@@ -1162,7 +1162,7 @@ public Character clone() throws CloneNotSupportedException {
                                 Global.capitalizeFirstLetter(subjectAction("have", "has")), i);
                 c.writeSystemMessage(message, true);
             }
-            arousal.reduce(i);
+            arousal.calm(i);
         }
     }
 
@@ -1232,7 +1232,7 @@ public Character clone() throws CloneNotSupportedException {
             bonus += s.spendmojo(i);
         }
         cost += bonus;
-        mojo.reduce(cost);
+        mojo.deplete(cost);
         if (mojo.get() < 0) {
             mojo.set(0);
         }
@@ -1249,7 +1249,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public int loseMojo(Combat c, int i, String source) {
         int amt = Math.min(mojo.get(), i);
-        mojo.reduce(amt);
+        mojo.deplete(amt);
         if (mojo.get() < 0) {
             mojo.set(0);
         }
@@ -2107,7 +2107,7 @@ public Character clone() throws CloneNotSupportedException {
                             , this, c.getOpponent(this)));
             while (!c.getPetsFor(this).isEmpty() && checkOrgasm()) {
                 int amount = Math.min(getArousal().get(), getArousal().max());
-                getArousal().reduce(amount);
+                getArousal().calm(amount);
                 Character pet = c.getPetsFor(this).iterator().next();
                 pet.arouse(amount, c, Global.format("({self:master}'s orgasm)", this, opponent));
                 pet.doOrgasm(c, pet, null, null);
@@ -2507,7 +2507,7 @@ public Character clone() throws CloneNotSupportedException {
             reduced += " (Feral)";
         }
         int old = willpower.get();
-        willpower.reduce(amt);
+        willpower.exhaust(amt);
         if (c != null) {
             c.writeSystemMessage(String.format(
                             "%s lost <font color='rgb(220,130,40)'>%s<font color='white'> willpower" + reduced + "%s.",
@@ -2828,10 +2828,10 @@ public Character clone() throws CloneNotSupportedException {
         tick(null);                     //FIXME: This is the culprit of the Addiction NPE outside of combat. Nulls are not handled by methods used within tick and Addiction.tick()
         if (has(Trait.Confident)) {
             willpower.recover(10);
-            mojo.reduce(5);
+            mojo.deplete(5);
         } else {
             willpower.recover(5);
-            mojo.reduce(10);
+            mojo.deplete(10);
         }
         if (has(Trait.exhibitionist) && mostlyNude()) {
             mojo.build(2);
@@ -3941,7 +3941,7 @@ public Character clone() throws CloneNotSupportedException {
                             String.format("%s drained of <font color='rgb(220,130,40)'>%d<font color='white'> willpower<font color='white'> by %s",
                                             subjectWas(), drained, drainer.subject()), true);
         }
-        willpower.reduce(drained);
+        willpower.exhaust(drained);
         drainer.willpower.recover(restored);
     }
 
@@ -3963,7 +3963,7 @@ public Character clone() throws CloneNotSupportedException {
                             String.format("%s drained of <font color='rgb(220,130,40)'>%d<font color='white'> willpower as <font color='rgb(100,162,240)'>%d<font color='white'> mojo by %s",
                                             subjectWas(), drained, restored, drainer.subject()), true);
         }
-        willpower.reduce(drained);
+        willpower.exhaust(drained);
         drainer.mojo.build(restored);
     }
 
@@ -3985,7 +3985,7 @@ public Character clone() throws CloneNotSupportedException {
                             String.format("%s drained of <font color='rgb(240,162,100)'>%d<font color='white'> stamina as <font color='rgb(100,162,240)'>%d<font color='white'> mojo by %s",
                                             subjectWas(), drained, restored, drainer.subject()), true);
         }
-        stamina.reduce(drained);
+        stamina.exhaust(drained);
         drainer.mojo.build(restored);
     }
 
@@ -4006,7 +4006,7 @@ public Character clone() throws CloneNotSupportedException {
                             String.format("%s drained of <font color='rgb(0,162,240)'>%d<font color='white'> mojo by %s",
                                             subjectWas(), drained, drainer.subject()), true);
         }
-        mojo.reduce(drained);
+        mojo.deplete(drained);
         drainer.mojo.build(drained);
     }
 

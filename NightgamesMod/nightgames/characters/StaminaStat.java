@@ -23,4 +23,8 @@ public class StaminaStat extends Meter {
     public void recover(int i) {
         current = Math.min(current + i, max());
     }
+
+    public void exhaust(int i) {
+        current = Math.max(current - 1, 0);
+    }
 }
