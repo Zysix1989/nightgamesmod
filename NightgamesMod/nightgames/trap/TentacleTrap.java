@@ -37,8 +37,6 @@ public class TentacleTrap extends Trap {
                                 + "back into the floor. She'll left shivering, sticky, and unsatisfied. In effect, she's already defeated.");
             }
             target.tempt(target.getArousal().max());
-            target.getWillpower().set(target.getWillpower().max() / 3);;
-            target.calm(null, 1);
             target.addNonCombat(new Oiled(target));
             target.addNonCombat(new Hypersensitive(target));
             target.location().opportunity(target, this);
