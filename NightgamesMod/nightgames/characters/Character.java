@@ -1155,7 +1155,6 @@ public Character clone() throws CloneNotSupportedException {
      * 
      * */
     public void calm(Combat c, int i) {
-        i = Math.min(arousal.get(), i);
         if (i > 0) {
             if (c != null) {
                 String message = String.format("%s calmed down by <font color='rgb(80,145,200)'>%d<font color='white'>\n",
@@ -1245,14 +1244,13 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public int loseMojo(Combat c, int i, String source) {
-        int amt = Math.min(mojo.get(), i);
-        mojo.deplete(amt);
+        mojo.deplete(i);
         if (c != null) {
             c.writeSystemMessage(Global.capitalizeFirstLetter(
                             String.format("%s <font color='rgb(150,150,250)'>%d<font color='white'> mojo%s.",
-                                            subjectAction("lost", "lost"), amt, source)), true);
+                                            subjectAction("lost", "lost"), i, source)), true);
         }
-        return amt;
+        return i;
     }
 
     public Area location() {
