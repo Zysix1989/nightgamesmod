@@ -45,9 +45,6 @@ public class Meter implements Serializable {
         current = 0;
     }
 
-    public void fill() {
-        current = Math.max(max(), current);
-    }
 
     public void set(int i) {
         current = i;
