@@ -1976,10 +1976,10 @@ public Character clone() throws CloneNotSupportedException {
         money = object.get("money").getAsInt();
         {
             JsonObject resources = object.getAsJsonObject("resources");
-            stamina.setMax(resources.get("stamina").getAsFloat());
-            arousal.setMax(resources.get("arousal").getAsFloat());
-            mojo.setMax(resources.get("mojo").getAsFloat());
-            willpower.setMax(resources.get("willpower").getAsFloat());
+            stamina.setMax(resources.get("stamina").getAsInt());
+            arousal.setMax(resources.get("arousal").getAsInt());
+            mojo.setMax(resources.get("mojo").getAsInt());
+            willpower.setMax(resources.get("willpower").getAsInt());
         }
 
         affections = JsonUtils.mapFromJson(object.getAsJsonObject("affections"), String.class, Integer.class);

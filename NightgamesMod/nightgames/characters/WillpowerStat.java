@@ -43,6 +43,6 @@ public class WillpowerStat extends Meter {
     }
 
     public int max() {
-        return (int) Math.min(max, temporaryMax);
+        return Math.min(max, temporaryMax);
     }
 }

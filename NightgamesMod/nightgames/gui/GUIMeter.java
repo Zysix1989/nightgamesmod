@@ -3,13 +3,11 @@ package nightgames.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.SoftBevelBorder;
-
 import nightgames.characters.Meter;
 
 class GUIMeter {
@@ -58,7 +56,7 @@ class GUIMeter {
         text += overflow ? "(" : "";
         text += Integer.toString(meter.get() + meter.getOverflow());
         text += overflow ? ")" : "";
-        text += "/" + Integer.toString(meter.max());
+        text += "/" + meter.max();
         return text;
     }
 }

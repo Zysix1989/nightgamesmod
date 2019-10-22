@@ -35,10 +35,10 @@ public class JsonSourceNPCDataLoader {
     private static JsonRequirementLoader requirementLoader = new JsonRequirementLoader();
 
     protected static void loadResources(JsonObject resources, Stats stats) {
-        stats.stamina = resources.get("stamina").getAsFloat();
-        stats.arousal = resources.get("arousal").getAsFloat();
-        stats.mojo = resources.get("mojo").getAsFloat();
-        stats.willpower = resources.get("willpower").getAsFloat();
+        stats.stamina = resources.get("stamina").getAsInt();
+        stats.arousal = resources.get("arousal").getAsInt();
+        stats.mojo = resources.get("mojo").getAsInt();
+        stats.willpower = resources.get("willpower").getAsInt();
     }
 
     public static DataBackedNPCData load(InputStream in) throws JsonParseException {

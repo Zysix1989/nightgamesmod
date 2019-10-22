@@ -9,7 +9,7 @@ public class Meter implements Serializable {
      */
     private static final long serialVersionUID = 2L;
     protected int current;
-    protected float max;
+    protected int max;
 
     public Meter(int max) {
         this.max = max;
@@ -34,7 +34,7 @@ public class Meter implements Serializable {
     }
 
     public int max() {
-        return (int) max;
+        return max;
     }
 
     public float trueMax() {
@@ -63,7 +63,7 @@ public class Meter implements Serializable {
         }
     }
 
-    public void setMax(float i) {
+    public void setMax(int i) {
         max = i;
         current = max();
     }

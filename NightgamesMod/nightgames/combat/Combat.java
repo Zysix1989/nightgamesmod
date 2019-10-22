@@ -1715,8 +1715,8 @@ public class Combat {
         }
         if (master.has(Trait.tactician)) {
             self.getSelf().setAc(self.getSelf().getAc() + 3);
-            self.getArousal().setMax(self.getArousal().trueMax() * 1.5f);
-            self.getStamina().setMax(self.getStamina().trueMax() * 1.5f);
+            self.getArousal().setMax((int) (self.getArousal().trueMax() * 1.5f));
+            self.getStamina().setMax((int) (self.getStamina().trueMax() * 1.5f));
         }
         self.getStamina().renew();
         self.getArousal().renew();
