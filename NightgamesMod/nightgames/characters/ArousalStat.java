@@ -23,4 +23,8 @@ public class ArousalStat extends Meter {
     public void renew() {
         current = 0;
     }
+
+    public boolean isAtUnfavorableExtreme() {
+        return current >= max();
+    }
 }

@@ -26,4 +26,8 @@ public class WillpowerStat extends Meter {
     public void exhaust(int i) {
         current = Math.max(current - i, 0);
     }
+
+    public boolean isAtUnfavorableExtreme() {
+        return current <= 0;
+    }
 }

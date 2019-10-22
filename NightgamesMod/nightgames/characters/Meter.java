@@ -44,10 +44,6 @@ public class Meter implements Serializable {
         return max;
     }
 
-    public boolean isEmpty() {
-        return current <= 0;
-    }
-
     public boolean isFull() {
         return current >= max();
     }

@@ -1,9 +1,7 @@
 package nightgames.status;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
+import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
@@ -17,7 +15,7 @@ public class IgnoreOrgasm extends DurationStatus {
 
     @Override
     public String initialMessage(Combat c, Optional<Status> replacement) {
-        if (affected.getArousal().isFull()) {
+        if (affected.getArousal().isAtUnfavorableExtreme()) {
             return affected.subjectAction("are", "is") + " overpowering the urge to cum";
         }
         return "";
@@ -25,7 +23,7 @@ public class IgnoreOrgasm extends DurationStatus {
 
     @Override
     public String describe(Character opponent) {
-        if (affected.getArousal().isFull()) {
+        if (affected.getArousal().isAtUnfavorableExtreme()) {
             return affected.subjectAction("are", "is") + " overpowering the urge to cum";
         }
         return "";
@@ -48,7 +46,7 @@ public class IgnoreOrgasm extends DurationStatus {
 
     @Override
     public double pleasure(Combat c, BodyPart withPart, BodyPart targetPart, double x) {
-        if (affected.getArousal().isFull()) {
+        if (affected.getArousal().isAtUnfavorableExtreme()) {
             return -x * 9 / 10;
         }
         return 0;

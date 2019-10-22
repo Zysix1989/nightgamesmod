@@ -25,4 +25,6 @@ public class MojoStat extends Meter {
     public void deplete(int i) {
         current = Math.max(current - i, 0);
     }
+
+
 }

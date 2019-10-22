@@ -27,4 +27,8 @@ public class StaminaStat extends Meter {
     public void exhaust(int i) {
         current = Math.max(current - 1, 0);
     }
+
+    public boolean isAtUnfavorableExtreme() {
+        return current <= 0;
+    }
 }

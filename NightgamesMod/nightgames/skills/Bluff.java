@@ -35,7 +35,7 @@ public class Bluff extends Skill {
     public boolean resolve(Combat c, Character target) {
         int staminaToSelf = 20 + Global.random(25);
         writeOutput(c, Result.normal, target);
-        if (!getSelf().getArousal().isFull()) {
+        if (!getSelf().getArousal().isAtUnfavorableExtreme()) {
             getSelf().add(c, new IgnoreOrgasm(getSelf(), 2));
         }
         getSelf().heal(c, staminaToSelf);

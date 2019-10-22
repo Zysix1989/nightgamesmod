@@ -1202,8 +1202,7 @@ public class Combat {
     }
 
     public void checkStamina(Character p) {
-        if (p.getStamina()
-             .isEmpty() && !p.is(Stsflag.stunned)) {
+        if (p.getStamina().isAtUnfavorableExtreme() && !p.is(Stsflag.stunned)) {
             p.add(this, new Winded(p, 3));
             if (p.isPet()){
                 // pets don't get stance changes

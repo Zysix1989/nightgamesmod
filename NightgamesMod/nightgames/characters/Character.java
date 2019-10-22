@@ -2046,7 +2046,7 @@ public Character clone() throws CloneNotSupportedException {
     public abstract void afterParty();
 
     public boolean checkOrgasm() {
-        return getArousal().isFull() && !is(Stsflag.orgasmseal) && pleasured;
+        return getArousal().isAtUnfavorableExtreme() && !is(Stsflag.orgasmseal) && pleasured;
     }
 
     /**Makes the character orgasm. Currently accounts for various traits involved with orgasms.
@@ -2171,7 +2171,7 @@ public Character clone() throws CloneNotSupportedException {
             c.write(opponent, opponentOrgasmLiner);
         }
 
-        if (has(Trait.nymphomania) && (Global.random(100) < Math.sqrt(get(Attribute.Nymphomania) + get(Attribute.Animism)) * 10) && !getWillpower().isEmpty() && times == totalTimes) {
+        if (has(Trait.nymphomania) && (Global.random(100) < Math.sqrt(get(Attribute.Nymphomania) + get(Attribute.Animism)) * 10) && !getWillpower().isAtUnfavorableExtreme() && times == totalTimes) {
             if (human()) {
                 c.write("Cumming actually made you feel kind of refreshed, albeit with a burning desire for more.");
             } else {
@@ -3592,14 +3592,14 @@ public Character clone() throws CloneNotSupportedException {
         fit += other.outfit.getFitness(c, bottomFitness, topFitness);
         fit += other.body.getCharismaBonus(c, this);
         // Extreme situations
-        if (other.arousal.isFull()) {
+        if (other.arousal.isAtUnfavorableExtreme()) {
             fit -= 50;
         }
         // will power empty is a loss waiting to happen
-        if (other.willpower.isEmpty()) {
+        if (other.willpower.isAtUnfavorableExtreme()) {
             fit -= 100;
         }
-        if (other.stamina.isEmpty()) {
+        if (other.stamina.isAtUnfavorableExtreme()) {
             fit -= staminaMod * 3;
         }
         fit += other.getWillpower().getReal() * 5.33f;
@@ -3618,7 +3618,7 @@ public Character clone() throws CloneNotSupportedException {
         // hack to make the AI favor making the opponent cum
         fit -= 100 * other.orgasms;
         // special case where if you lost, you are super super unfit.
-        if (other.orgasmed && other.getWillpower().isEmpty()) {
+        if (other.orgasmed && other.getWillpower().isAtUnfavorableExtreme()) {
             fit -= 1000;
         }
         return fit;
@@ -3685,10 +3685,10 @@ public Character clone() throws CloneNotSupportedException {
             fit += (float) item.getPrice() / 10;
         }
         // Extreme situations
-        if (arousal.isFull()) {
+        if (arousal.isAtUnfavorableExtreme()) {
             fit -= 100;
         }
-        if (stamina.isEmpty()) {
+        if (stamina.isAtUnfavorableExtreme()) {
             fit -= staminaMod * 3;
         }
         fit += getWillpower().getReal() * 5.3f;
@@ -3715,7 +3715,7 @@ public Character clone() throws CloneNotSupportedException {
         // hack to make the AI favor making the opponent cum
         fit -= 100 * orgasms;
         // special case where if you lost, you are super super unfit.
-        if (orgasmed && getWillpower().isEmpty()) {
+        if (orgasmed && getWillpower().isAtUnfavorableExtreme()) {
             fit -= 1000;
         }
         return fit;
@@ -3888,7 +3888,7 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public boolean checkLoss(Combat c) {
-        return (orgasmed || c.getTimer() > 150) && willpower.isEmpty() && !this.human();
+        return (orgasmed || c.getTimer() > 150) && willpower.isAtUnfavorableExtreme() && !this.human();
     }
 
     public boolean isCustomNPC() {

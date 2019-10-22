@@ -1,9 +1,7 @@
 package nightgames.status;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
+import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
@@ -51,7 +49,7 @@ public class OrgasmSeal extends DurationStatus {
     @Override
     public int regen(Combat c) {
         super.regen(c);
-        if (affected.getArousal().isFull()) {
+        if (affected.getArousal().isAtUnfavorableExtreme()) {
             tick(4);
         }
         if (affected.getArousal().percent() > 80) {
