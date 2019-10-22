@@ -120,7 +120,7 @@ public abstract class Character extends Observable implements Cloneable {
     public int rank;
     public int money;
     public Map<Attribute, Integer> att;             //Attributes are good opportunity to move to OOP Implementation - They are very similar to meters with base and modified values - DSM
-    protected Meter stamina;
+    protected StaminaStat stamina;
     protected Meter arousal;
     protected Meter mojo;
     protected Meter willpower;
@@ -180,7 +180,7 @@ public abstract class Character extends Observable implements Cloneable {
         att.put(Attribute.Perception, 5);
         att.put(Attribute.Speed, 5);
         money = 0;
-        stamina = new Meter(22 + 3 * level);
+        stamina = new StaminaStat(22 + 3 * level);
         stamina.fill();
         arousal = new Meter(90 + 10 * level);
         mojo = new Meter(100);

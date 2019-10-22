@@ -18,7 +18,7 @@ public class Meter implements Serializable {
         current = 0;
     }
 
-    private Meter(Meter original) {
+    protected Meter(Meter original) {
         current = original.current;
         max = original.max;
         temporaryMax = original.temporaryMax;
