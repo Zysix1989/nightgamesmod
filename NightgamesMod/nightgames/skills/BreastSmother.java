@@ -4,34 +4,28 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
-import nightgames.characters.body.HandsPart;
+import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.BreastsPart.Size;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.nskills.tags.SkillTag;
-import nightgames.skills.EngulfedFuck.Pairing;
 import nightgames.skills.damage.DamageType;
 import nightgames.stance.BreastSmothering;
-import nightgames.stance.FlyingCarry;
 import nightgames.stance.Stance;
 import nightgames.status.BodyFetish;
 import nightgames.status.Charmed;
-import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.BreastsPart;
-import nightgames.status.WingWrapped;
 
 public class BreastSmother extends Skill {
     public BreastSmother(Character self) {
         super("BreastSmother", self);
         addTag(SkillTag.usesBreasts);
-        addTag(SkillTag.breastfeed);
-        addTag(SkillTag.perfectAccuracy);
         addTag(SkillTag.positioning);
     }
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
-        return user.human() && user.hasBreasts();
+        return user.getLevel() >= 15 || user.get(Attribute.Seduction) >= 30 && user.hasBreasts();
     }
 
     @Override
@@ -43,11 +37,17 @@ public class BreastSmother extends Skill {
         }
     }
 
-    static int MIN_REQUIRED_BREAST_SIZE = 4;
+    static BreastsPart.Size MIN_REQUIRED_BREAST_SIZE = Size.DCup;
     
     @Override
     public boolean usable(Combat c, Character target) {
-        return true;
+        return getSelf().breastsAvailable()
+            && c.getStance().reachTop(getSelf())
+            && c.getStance().front(getSelf())
+            && getSelf().body.getLargestBreasts().getSize().compareTo(MIN_REQUIRED_BREAST_SIZE) >= 0
+            && c.getStance().mobile(getSelf())
+            && (!c.getStance().mobile(target) || c.getStance().prone(target))
+            && getSelf().canAct();
     }
 
     @Override
@@ -85,145 +85,8 @@ public class BreastSmother extends Skill {
             getSelf().emote(Emotion.dominant, 10);
         }
         if (Global.random(100) < 15 + 2 * getSelf().get(Attribute.Fetish)) {
-            target.add(c, new BodyFetish(target, getSelf(), BreastsPart.TYPE, 10));
+            target.add(c, new BodyFetish(target, getSelf(), BreastsPart.TYPE, .25));
         }
-
-        Pairing pair = Pairing.findPairing(getSelf(), target);
-        double base = 10.0 + Math.min(20, Global.random(getSelf().get(Attribute.Slime) / 3 + getSelf().get(Attribute.Seduction) / 5));
-        int selfDmg = (int) ((base * pair.modPleasure(true)) / (getSelf().has(Trait.experienced) ? 2.0 : 3.0));
-        int targetDmg = (int) (base * pair.modPleasure(false));
-        switch (pair) {
-            case ASEX_MALE:
-                c.write(getSelf(),
-                                Global.format("{self:SUBJECT-ACTION:wrap|wraps} {other:name-possessive}"
-                                                + " {other:body-part:cock} in a clump of slime molded after {self:possessive} ass"
-                                                + " and {self:action:pump|pumps} it furiously.", getSelf(), target));
-                target.body.pleasure(getSelf(), getSelf().body.getRandomAss(), target.body.getRandomCock(), targetDmg,
-                                c, this);
-                getSelf().body.pleasure(target, target.body.getRandomCock(), getSelf().body.getRandomAss(), selfDmg, c, this);
-                break;
-            case FEMALE_HERM:
-                c.write(getSelf(),
-                                Global.format("{self:SUBJECT-ACTION:impale|impales} {self:reflective} on"
-                                                + " {other:name-possessive} {other:body-part:cock} and {self:action:bounce|bounces} wildly,"
-                                                + " filling {other:direct-object} with pleasure. At the same time, {self:pronoun} "
-                                                + "{self:action:twiddle|twiddles} {other:possessive} clit with {self:possessive} fingers.",
-                                getSelf(), target));
-                target.body.pleasure(getSelf(), getSelf().body.getRandomPussy(), target.body.getRandomCock(),
-                                targetDmg / 2, c, this);
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomPussy(),
-                                targetDmg / 2, c, this);
-                getSelf().body.pleasure(target, target.body.getRandomCock(), getSelf().body.getRandomPussy(), selfDmg,
-                                c, this);
-                break;
-            case FEMALE_MALE:
-                c.write(getSelf(),
-                                Global.format("{self:SUBJECT-ACTION:impale|impales} {self:reflective} on"
-                                                + " {other:name-possessive} {other:body-part:cock} and {self:action:bounce|bounces} wildly,"
-                                                + " filling {other:direct-object} with pleasure.", getSelf(), target));
-                target.body.pleasure(getSelf(), getSelf().body.getRandomPussy(), target.body.getRandomCock(), targetDmg,
-                                c, this);
-                getSelf().body.pleasure(target, target.body.getRandomCock(), getSelf().body.getRandomPussy(), selfDmg,
-                                c, this);
-                break;
-            case HERM_ASEX:
-            case MALE_ASEX:
-                c.write(getSelf(),
-                                Global.format("Despite not having much to work with, {self:subject} still"
-                                                + " {self:action:manage|manages} to make {other:subject} squeal by pounding {other:name-possessive}"
-                                                + " {other:body-part:ass} with {self:possessive} {self:body-part:cock}.",
-                                getSelf(), target));
-                target.body.pleasure(getSelf(), getSelf().body.getRandomCock(), target.body.getRandomAss(), targetDmg,
-                                c, this);
-                getSelf().body.pleasure(target, target.body.getRandomAss(), getSelf().body.getRandomCock(), selfDmg, c, this);
-                break;
-            case HERM_FEMALE:
-                c.write(getSelf(),
-                                Global.format("{self:SUBJECT-ACTION:pound|pounds} {other:name-possessive} "
-                                                + "{other:body-part:pussy} with vigor, at the same time fingering {other:possessive}"
-                                                + " ass.", getSelf(), target));
-                target.body.pleasure(getSelf(), getSelf().body.getRandomCock(), target.body.getRandomPussy(),
-                                targetDmg / 2, c, this);
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomAss(),
-                                targetDmg / 2, c, this);
-                getSelf().body.pleasure(target, target.body.getRandomPussy(), getSelf().body.getRandomCock(), selfDmg,
-                                c, this);
-                break;
-            case HERM_HERM:
-                c.write(getSelf(),
-                                Global.format("It takes some clever maneuvering, but {self:SUBJECT-ACTION:manage|manages}"
-                                                + " to line {other:name-do} and {self:reflective} up perfectly. When"
-                                                + " {self:pronoun} {self:action:strike|strikes}, {other:possessive} {other:body-part:cock} ends up"
-                                                + " in {self:possessive} {self:body-part:pussy}, and {self:body-part:cock} in {other:possessive}"
-                                                + " {other:body-part:pussy}. With every twitch, both of you are filled with unimaginable pleasure,"
-                                                + " so when {self:pronoun} {self:action:start|starts} fucking in earnest the sensations are"
-                                                + " almost enough to cause you both to pass out.", getSelf(), target));
-                target.body.pleasure(getSelf(), getSelf().body.getRandomCock(), target.body.getRandomPussy(),
-                                targetDmg / 2, c, this);
-                target.body.pleasure(getSelf(), getSelf().body.getRandomPussy(), target.body.getRandomCock(),
-                                targetDmg / 2, c, this);
-                getSelf().body.pleasure(target, target.body.getRandomPussy(), getSelf().body.getRandomCock(),
-                                selfDmg / 2, c, this);
-                getSelf().body.pleasure(target, target.body.getRandomCock(), getSelf().body.getRandomPussy(),
-                                selfDmg / 2, c, this);
-                break;
-            case HERM_MALE:
-                c.write(getSelf(),
-                                Global.format("{self:SUBJECT-ACTION:lower|lowers} {self:possessive}"
-                                                + " {self:body-part:pussy} down on {other:name-possessive} {other:body-part:cock}."
-                                                + " While slowly fucking {other:direct-object}, {self:pronoun} {self:action:move|moves}"
-                                                + " {self:possessive} {self:body-part:cock} to the entrance of {other:possessive} ass."
-                                                + " Before {other:pronoun} {other:action:have|has} a chance to react, {self:pronoun}"
-                                                + " {self:action:shove|shoves} it up there in one thrust, fucking {other:direct-object}"
-                                                + " from both sides.", getSelf(), target));
-                target.body.pleasure(getSelf(), getSelf().body.getRandomCock(), target.body.getRandomAss(),
-                                targetDmg / 2, c, this);
-                target.body.pleasure(getSelf(), getSelf().body.getRandomPussy(), target.body.getRandomCock(),
-                                targetDmg / 2, c, this);
-                getSelf().body.pleasure(target, target.body.getRandomPussy(), getSelf().body.getRandomCock(),
-                                selfDmg / 2, c, this);
-                getSelf().body.pleasure(target, target.body.getRandomCock(), getSelf().body.getRandomAss(), selfDmg / 2,
-                                c, this);
-                break;
-            case MALE_FEMALE:
-            case MALE_MALE:
-            case MALE_HERM:
-                BodyPart bpart = pair == Pairing.MALE_MALE ? target.body.getRandomAss() : target.body.getRandomPussy();
-                int realTargetDmg = targetDmg;
-                String msg = "{self:SUBJECT-ACTION:place|places} {self:possessive}"
-                                + " {self:body-part:cock} at {other:name-possessive} " + bpart.describe(target)
-                                + " and thrust in all the way"
-                                + " in a single movement of {self:possessive} hips. {self:PRONOUN} "
-                                + "{self:action:proceed|proceeds} to piston in and out at a furious pace.";
-                if (pair == Pairing.MALE_HERM) {
-                    msg += " At the same time, {self:pronoun} {self:action:use:uses} both of {self:possessive}"
-                                    + " hands to pump {other:possessive} {other:body-part:cock}.";
-                }
-                c.write(getSelf(), Global.format(msg, getSelf(), target));
-                if (pair == Pairing.MALE_HERM) {
-                    target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomCock(),
-                                    targetDmg / 2, c, this);
-                    realTargetDmg /= 2;
-                }
-                target.body.pleasure(getSelf(), getSelf().body.getRandomCock(), bpart, realTargetDmg, c, this);
-                getSelf().body.pleasure(target, bpart, getSelf().body.getRandomCock(), selfDmg, c, this);
-                break;
-        }
-
-
-
-        target.add(c, new WingWrapped(target, getSelf()));
-
-        getSelf().emote(Emotion.dominant, 50);
-        getSelf().emote(Emotion.horny, 30);
-        target.emote(Emotion.desperate, 50);
-        target.emote(Emotion.nervous, 75);
-        int m = 5 + Global.random(5);
-        int otherm = m;
-        if (getSelf().has(Trait.insertion)) {
-            otherm += Math.min(getSelf().get(Attribute.Seduction) / 4, 40);
-        }
-        c.setStance(new FlyingCarry(getSelf(), target), getSelf(), getSelf().canMakeOwnDecision());
 
         return true;
     }
