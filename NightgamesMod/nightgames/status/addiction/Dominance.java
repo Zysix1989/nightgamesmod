@@ -40,8 +40,7 @@ public class Dominance extends Addiction {
     protected Optional<Status> withdrawalEffects() {
         if (originalWill < 0) {
             double mod = Math.min(1.0, 1.0 / (double) getSeverity().ordinal() + .4);
-            originalWill = affected.getWillpower()
-                                    .max();
+            originalWill = affected.getWillpower().max();
             affected.getWillpower().setTemporaryMax((int) (originalWill * mod));
         }
         return Optional.of(new Masochistic(affected));
