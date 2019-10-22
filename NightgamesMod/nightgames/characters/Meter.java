@@ -8,9 +8,9 @@ public class Meter implements Serializable {
      *
      */
     private static final long serialVersionUID = 2L;
-    private int current;
-    private float max;
-    private int temporaryMax;
+    protected int current;
+    protected float max;
+    protected int temporaryMax;
 
     public Meter(int max) {
         this.max = max;
