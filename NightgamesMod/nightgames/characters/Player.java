@@ -968,11 +968,6 @@ public class Player extends Character {
     }
 
     @Override
-    public Meter getWillpower() {
-        return willpower;
-    }
-
-    @Override
     public String getType() {
         return getClass().getSimpleName();
     }
