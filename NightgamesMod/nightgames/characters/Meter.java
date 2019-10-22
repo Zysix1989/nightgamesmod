@@ -71,14 +71,6 @@ public class Meter implements Serializable {
         current = max();
     }
 
-    public void setTemporaryMax(int i) {
-        if (i <= 0) {
-            i = Integer.MAX_VALUE;
-        }
-        temporaryMax = i;
-        current = Math.min(current, max());
-    }
-
     public int percent() {
         return Math.min(100, 100 * current / max());
     }

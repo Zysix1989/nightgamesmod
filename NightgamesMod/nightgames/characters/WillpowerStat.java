@@ -30,4 +30,12 @@ public class WillpowerStat extends Meter {
     public boolean isAtUnfavorableExtreme() {
         return current <= 0;
     }
+
+    public void setTemporaryMax(int i) {
+        if (i <= 0) {
+            i = Integer.MAX_VALUE;
+        }
+        temporaryMax = i;
+        current = Math.min(current, max());
+    }
 }
