@@ -208,7 +208,7 @@ public class NPC extends Character {
         Character target = c.getOpponent(this);
         gainXP(getVictoryXP(target));
         target.gainXP(target.getDefeatXP(this));
-        target.arousal.empty();
+        target.arousal.renew();
         if (target.has(Trait.insatiable)) {
             target.arousal.restore((int) (arousal.max() * .2));
         }
@@ -227,9 +227,9 @@ public class NPC extends Character {
         Character target = c.getOpponent(this);
         gainXP(getDefeatXP(target));
         target.gainXP(target.getVictoryXP(this));
-        arousal.empty();
+        arousal.renew();
         if (!target.human() || !Global.getMatch().getCondition().name().equals("norecovery")) {
-            target.arousal.empty();
+            target.arousal.renew();
         }
         if (this.has(Trait.insatiable)) {
             arousal.restore((int) (arousal.max() * .2));
@@ -258,7 +258,7 @@ public class NPC extends Character {
     public void victory3p(Combat c, Character target, Character assist) {
         gainXP(getVictoryXP(target));
         target.gainXP(target.getDefeatXP(this));
-        target.arousal.empty();
+        target.arousal.renew();
         if (target.has(Trait.insatiable)) {
             target.arousal.restore((int) (arousal.max() * .2));
         }
@@ -364,8 +364,8 @@ public class NPC extends Character {
         Character target = c.getOpponent(this);
         gainXP(getVictoryXP(target));
         target.gainXP(getVictoryXP(this));
-        arousal.empty();
-        target.arousal.empty();
+        arousal.renew();
+        target.arousal.renew();
         if (this.has(Trait.insatiable)) {
             arousal.restore((int) (arousal.max() * .2));
         }

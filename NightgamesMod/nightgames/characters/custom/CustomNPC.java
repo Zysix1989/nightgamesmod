@@ -93,7 +93,7 @@ public class CustomNPC extends BasePersonality {
 
     @Override
     public String victory(Combat c, Result flag) {
-        character.getArousal().empty();
+        character.getArousal().renew();
         return data.getLine("victory", c, character, c.getOpponent(character));
     }
 

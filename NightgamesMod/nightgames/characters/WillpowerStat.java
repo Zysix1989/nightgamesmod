@@ -3,6 +3,7 @@ package nightgames.characters;
 public class WillpowerStat extends Meter {
     public WillpowerStat(int max) {
         super(max);
+        renew();
     }
 
     private WillpowerStat(WillpowerStat original) {
@@ -12,5 +13,9 @@ public class WillpowerStat extends Meter {
     @Override
     public WillpowerStat copy() {
         return new WillpowerStat(this);
+    }
+
+    public void renew() {
+        current = (int) max;
     }
 }

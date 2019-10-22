@@ -551,9 +551,8 @@ public class Jewel extends BasePersonality {
                                 + "For a moment, she just looks at you as you're panting from exertion as if considering asking for more. Then she looks away and sighs. "
                                 + "<i>\"That's disappointing. I was hoping you would be a real challenge. I suppose I'm just too strong for you.\"</i>";
             }
-            if (character.orgasms > 0 || character.getArousal()
-                                                  .percent() > 50) {
-                character.arousal.empty();
+            if (character.orgasms > 0 || character.getArousal().percent() > 50) {
+                character.arousal.renew();
                 if (other.hasDick()) {
                     message += "<i>\"Still, you were at least able to turn me on this much. Maybe you deserve a "
                                     + "reward.\"</i><br/><br/>She prods your rapidly softening dick with a frown. <i>\"If you'd held on just a little longer, you could have cum inside me. Oh well, I can at least give "

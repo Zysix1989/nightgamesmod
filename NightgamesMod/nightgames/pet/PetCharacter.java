@@ -124,9 +124,9 @@ public class PetCharacter extends Character {
         }
         this.getSkills().clear();
         this.mojo.setMax(100);
-        this.mojo.empty();
-        this.arousal.empty();
-        this.stamina.fill();
+        getStamina().renew();
+        getArousal().renew();
+        getMojo().renew();
     }
 
     private PetCharacter() {

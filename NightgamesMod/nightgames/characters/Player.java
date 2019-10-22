@@ -570,7 +570,7 @@ public class Player extends Character {
     @Override
     public void bathe() {
         status.removeIf(s -> s.flags().contains(Stsflag.purgable));
-        stamina.fill();
+        stamina.renew();
         if (location.name.equals("Showers")) {
             gui.message("You let the hot water wash away your exhaustion and soon you're back to peak condition.");
         }
@@ -665,7 +665,7 @@ public class Player extends Character {
     public void masturbate() {
         gui.message("You hurriedly stroke yourself off, eager to finish before someone catches you. After what seems like an eternity, you ejaculate into a tissue and "
                         + "throw it in the trash. Looks like you got away with it.");
-        arousal.empty();
+        arousal.renew();
         state = State.ready;
     }
 
@@ -735,7 +735,7 @@ public class Player extends Character {
     public void victory3p(Combat c, Character target, Character assist) {
         gainXP(getVictoryXP(target));
         target.gainXP(target.getDefeatXP(this));
-        target.arousal.empty();
+        target.arousal.renew();
         if (target.has(Trait.insatiable)) {
             target.arousal.restore((int) (arousal.max() * .2));
         }

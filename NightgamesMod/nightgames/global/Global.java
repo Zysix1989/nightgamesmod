@@ -1004,9 +1004,9 @@ public class Global {
         int maxLevelTracker = 0;
         
         for (Character player : players) {
-            player.getStamina().fill();
-            player.getArousal().empty();
-            player.getMojo().empty();
+            player.getStamina().renew();
+            player.getArousal().renew();
+            player.getMojo().renew();
             player.change();
             level += player.getLevel();
             if (!player.has(Trait.unnaturalgrowth) && !player.has(Trait.naturalgrowth)) {
@@ -1101,10 +1101,10 @@ public class Global {
         int maxaffection = 0;
         unflag(Flag.FTC);
         for (Character player : players) {
-            player.getStamina().fill();
-            player.getArousal().empty();
-            player.getMojo().empty();
-            player.getWillpower().fill();
+            player.getStamina().renew();
+            player.getArousal().renew();
+            player.getMojo().renew();
+            player.getWillpower().renew();
             if (player.getPure(Attribute.Science) > 0) {
                 player.chargeBattery();
             }

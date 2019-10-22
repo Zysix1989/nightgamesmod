@@ -13,4 +13,8 @@ public class MojoStat extends Meter {
     public MojoStat copy() {
         return new MojoStat(this);
     }
+
+    public void renew() {
+        current = 0;
+    }
 }

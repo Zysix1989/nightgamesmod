@@ -258,7 +258,7 @@ public class Eve extends BasePersonality {
 
     @Override
     public String victory(Combat c, Result flag) {
-        character.arousal.empty();
+        character.arousal.renew();
 
         if (c.getStance().anallyPenetratedBy(c, c.getOpponent(character), character)) {
             return "As Eve pounds you mercilessly in the ass, your body is overwhelmed"

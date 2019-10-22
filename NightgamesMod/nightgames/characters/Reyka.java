@@ -332,7 +332,7 @@ public class Reyka extends BasePersonality {
                             + "smiling. You shake your head; you don't think that sort of thing would really suit you. Her smile deflates some but she nods her head and "
                             + "turns to go. <i>\"Let me know if that ever changes, I'd definitely enjoy opening your mind,\"</i> she calls over her shoulder as she leaves.";
         }
-        character.arousal.empty();
+        character.arousal.renew();
         return "With a final cry of defeat (and pleasure) you erupt under Reyka's"
                         + " attentions. She immediatly pounces on you and draws your lips to hers."
                         + " As does so, she inhales deeply, drawing more than just air out of you."
@@ -363,7 +363,7 @@ public class Reyka extends BasePersonality {
 
     @Override
     public String defeat(Combat paramCombat, Result flag) {
-        character.arousal.empty();
+        character.arousal.renew();
         if (character.has(Trait.lacedjuices) && Global.random(3) == 0 ) {
             return "Reyka shivers as she approaches her climax and her legs fall open defenselessly. You can't resist taking advantage of this opening to deliver the "
                             + "coup de grace. You grab hold of her thighs and run your tongue across her wet pussy. Her love juice is surprisingly sweet and almost intoxicating, "

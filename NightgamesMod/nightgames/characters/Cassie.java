@@ -362,10 +362,10 @@ public class Cassie extends BasePersonality {
     @Override
     public String victory(Combat c, Result flag) {
         if (c.getStance().anallyPenetrated(c,c.getOpponent(character))) {
-            character.arousal.empty();
+            character.arousal.renew();
             dominance+=1;
 
-            character.arousal.empty();
+            character.arousal.renew();
             dominance+=1;
             return "Cassie bucks her hips against your ass wildly causing the strapon to rub hard against your prostate. Your arms and legs feel like jelly as she thrusts in again and again. "
                             + "You're almost shocked as you feel yourself on the edge of orgasm and you're certain you wouldn't be able to stop yourself if Cassie keeps this pace up. Above you Cassie moans "
@@ -376,7 +376,7 @@ public class Cassie extends BasePersonality {
                             + "I'd enjoy that so much.\"</i> Her grin widens in a way that makes you nervous. <i>\"I might need to try that again in the future.\"</i> Your decide to bid a hasty retreat leaving your "
                             + "clothes behind to the victor.";
         } else if (character.has(Trait.witch) && character.has(Trait.silvertongue) && Global.random(3) == 0 && c.getOpponent(character).hasDick() && !c.getOpponent(character).hasPussy()) {
-            character.arousal.empty();
+            character.arousal.renew();
             return "Cassie's efforts to pleasure you finally break your resistance and you find yourself completely unable to stop her. She slips between your legs and takes your straining "
                             + "dick into her mouth. She eagerly sucks on your cock, while glancing up to meet your eyes. Her talented oral technique blows away your endurance and you spill your seed "
                             + "into her mouth. She swallows your cum and smiles at you excitedly. <i>\"Gotcha. Did that feel good?\"</i> You nod and slump to the floor to catch your breath.\n\nCassie goes "
@@ -521,7 +521,7 @@ public class Cassie extends BasePersonality {
                             + "her breasts as she continues to grind against you. She stops your pillow talk by kissing you desperately just before you feel her body tense up in orgasm and splurt our her white soup on your stomach. "
                             + "She collapses on top of you and kisses your cheek contently. <i>\"I'll keep practicing and make you feel even better next time, \"</i> she tells you happily. <i>\"I promise.\"</i> ";
         } else if (character.arousal.percent() > 50) {
-            character.arousal.empty();
+            character.arousal.renew();
             return "Despite your best efforts, you realize you've lost to Cassie's diligant manipulation of your penis. It takes so much focus to hold back your ejaculation "
                             + "that you can't even attempt to retaliate. She pumps your twitching dick eagerly as the last of your endurance gives way. The pleasure building up in the base "
                             + "of your shaft finally overwhelms you and you almost pass out from the intensity of your climax. White jets of semen coat Cassie's hands in the proof of your defeat. <br/><br/>"

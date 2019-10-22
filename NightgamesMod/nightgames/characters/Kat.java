@@ -414,7 +414,7 @@ public class Kat extends BasePersonality {
     @Override
     public String victory(Combat c, Result flag) {
         Character opponent = c.getOpponent(character);
-        character.arousal.empty();
+        character.arousal.renew();
 
         if (c.getStance().vaginallyPenetrated(c,opponent) && opponent instanceof Player && ((Player) opponent).checkAddiction(AddictionType.BREEDER)) {
             opponent.add(c, Pheromones.getWith(character, opponent, 5, 10));

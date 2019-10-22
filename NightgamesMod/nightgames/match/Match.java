@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import nightgames.actions.Action;
@@ -67,10 +66,10 @@ public class Match {
             Global.gainSkills(combatant);
             Global.learnSkills(combatant);
             combatant.matchPrep(this);
-            combatant.getStamina().fill();
-            combatant.getArousal().empty();
-            combatant.getMojo().empty();
-            combatant.getWillpower().fill();
+            combatant.getStamina().renew();
+            combatant.getArousal().renew();
+            combatant.getMojo().renew();
+            combatant.getWillpower().renew();
             if (combatant.getPure(Attribute.Science) > 0) {
                 combatant.chargeBattery();
             }

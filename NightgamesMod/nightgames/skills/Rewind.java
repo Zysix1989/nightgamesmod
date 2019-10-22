@@ -35,10 +35,8 @@ public class Rewind extends Skill {
     @Override
     public boolean resolve(Combat c, Character target) {
         getSelf().add(c, new Primed(getSelf(), -8));
-        getSelf().getArousal()
-                 .empty();
-        getSelf().getStamina()
-                 .fill();
+        getSelf().getArousal().renew();
+        getSelf().getStamina().renew();
         getSelf().clearStatus();
         writeOutput(c, Result.normal, target);
         getSelf().emote(Emotion.confident, 25);

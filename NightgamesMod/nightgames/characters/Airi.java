@@ -522,8 +522,8 @@ public class Airi extends BasePersonality {
     public String victory(Combat c, Result flag) {
         armManager = Optional.empty();
         Character opponent = c.getOpponent(character);
-        character.arousal.empty();
-        opponent.arousal.empty();
+        character.arousal.renew();
+        opponent.arousal.renew();
 
         if (character.is(Stsflag.disguised)) {
             StringBuilder sb = new StringBuilder();

@@ -17,4 +17,8 @@ public class ArousalStat extends Meter {
     public void pleasure(int i) {
         current += i;
     }
+
+    public void renew() {
+        current = 0;
+    }
 }

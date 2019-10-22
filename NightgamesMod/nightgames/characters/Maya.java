@@ -237,7 +237,7 @@ public class Maya extends BasePersonality {
     public String victory(Combat c, Result flag) {
         Character target = c.getOpponent(character);
         target.add(c, new Drowsy(target));
-        character.arousal.empty();
+        character.arousal.renew();
         character.add(c, new Energized(character, 10));
         return "Maya completely outmatches you. How were you suppose to deal with"
                         + " someone this skilled? Your cock spurts a sticky white flag in her hands "

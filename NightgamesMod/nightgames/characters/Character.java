@@ -181,7 +181,6 @@ public abstract class Character extends Observable implements Cloneable {
         att.put(Attribute.Speed, 5);
         money = 0;
         stamina = new StaminaStat(22 + 3 * level);
-        stamina.fill();
         arousal = new ArousalStat(90 + 10 * level);
         mojo = new MojoStat(100);
         willpower = new WillpowerStat(40);
@@ -2140,7 +2139,7 @@ public Character clone() throws CloneNotSupportedException {
         if (this != opponent) {
             resolvePostOrgasmForOpponent(c, opponent, selfPart, opponentPart);
         }
-        getArousal().empty();
+        getArousal().renew();
         if (has(Trait.insatiable)) {
             arousal.restore((int) (arousal.max() * .2));
         }
@@ -2925,7 +2924,7 @@ public Character clone() throws CloneNotSupportedException {
         mercy.clear();
         change();
         state = State.ready;
-        getWillpower().fill();
+        getWillpower().renew();
         if (location().present.size() > 1) {
             if (location().id() == Movement.dorm) {
                 if (Global.getMatch().gps("Quad").get().present.isEmpty()) {
@@ -2975,9 +2974,9 @@ public Character clone() throws CloneNotSupportedException {
         temporaryAddedTraits.clear();
         temporaryRemovedTraits.clear();
         body.clearReplacements();
-        getStamina().fill();
-        getArousal().empty();
-        getMojo().empty();
+        getStamina().renew();
+        getArousal().renew();
+        getMojo().renew();
     }
 
     /**Places character directly at a location.
@@ -3034,13 +3033,13 @@ public Character clone() throws CloneNotSupportedException {
     /**Bathes the character, removing any purgable effects.*/
     public void bathe() {
         status.clear();
-        stamina.fill();
+        stamina.renew();
         state = State.ready;
         update();
     }
 
     public void masturbate() {
-        arousal.empty();
+        arousal.renew();
         state = State.ready;
         update();
     }

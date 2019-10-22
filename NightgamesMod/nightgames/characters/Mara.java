@@ -375,7 +375,7 @@ public class Mara extends BasePersonality {
     @Override
     public String victory(Combat c, Result flag) {
         Character target = c.getOpponent(character);
-        character.arousal.empty();
+        character.arousal.renew();
 
         if (c.getStance().anallyPenetrated(c, target)) {
             return "The sensations coming from your prostate are too much as your arms give out below you. Mara doesn't let up either, grinding the head of the strap on over your "

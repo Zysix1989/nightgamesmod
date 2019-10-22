@@ -4,6 +4,7 @@ public class StaminaStat extends Meter {
 
     public StaminaStat(int max) {
         super(max);
+        renew();
     }
 
     private StaminaStat(StaminaStat original) {
@@ -13,5 +14,9 @@ public class StaminaStat extends Meter {
     @Override
     public StaminaStat copy() {
         return new StaminaStat(this);
+    }
+
+    public void renew() {
+        current = (int) max;
     }
 }

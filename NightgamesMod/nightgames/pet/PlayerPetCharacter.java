@@ -25,9 +25,9 @@ public class PlayerPetCharacter extends PetCharacter {
         this.getSkills().clear();
         this.body = prototypeCharacter.body.clone(this);
         this.outfit = new Outfit(prototypeCharacter.outfit);
-        this.mojo.empty();
-        this.arousal.empty();
-        this.stamina.fill();
+        getStamina().renew();
+        getArousal().renew();
+        getMojo().renew();
         Global.learnSkills(this);
     }
 

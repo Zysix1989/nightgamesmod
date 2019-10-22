@@ -318,10 +318,8 @@ public class Combat {
             loser.getWillpower()
                  .gain(1);
         }
-        victor.getWillpower()
-              .fill();
-        loser.getWillpower()
-             .fill();
+        victor.getWillpower().renew();
+        loser.getWillpower().renew();
 
         if (Global.checkFlag(Flag.FTC) && loser.has(Item.Flag)) {
             write(victor, Global.format(
@@ -1318,13 +1316,10 @@ public class Combat {
         if (target.resist3p(this, intruder, assist)) {
             target.gainXP(20 + target.lvlBonus(intruder));
             intruder.gainXP(10 + intruder.lvlBonus(target));
-            intruder.getArousal()
-                    .empty();
+            intruder.getArousal().renew();
             if (intruder.has(Trait.insatiable)) {
-                intruder.getArousal()
-                        .restore((int) (intruder.getArousal()
-                                                .max()
-                                        * 0.2D));
+                intruder.getArousal().restore(
+                    (int) (intruder.getArousal().max() * 0.2D));
             }
             target.undress(this);
             intruder.defeated(target);
@@ -1687,10 +1682,10 @@ public class Combat {
             write(self, "Just as " + self.subject() + " was about to disappear, a dazzling light covers " 
             + self.possessiveAdjective() + " body. When the light fades, " + self.pronoun() + " looks completely refreshed!");
             getCombatantData(self).setBooleanFlag("resurrected", true);
-            self.getArousal().empty();
-            self.getMojo().empty();
-            self.getWillpower().fill();
-            self.getStamina().fill();
+            self.getStamina().renew();
+            self.getArousal().renew();
+            self.getMojo().renew();
+            self.getWillpower().renew();
             return;
         }
         getCombatantData(self).setBooleanFlag("resurrected", false);
@@ -1725,8 +1720,8 @@ public class Combat {
             self.getArousal().setMax(self.getArousal().trueMax() * 1.5f);
             self.getStamina().setMax(self.getStamina().trueMax() * 1.5f);
         }
-        self.getArousal().empty();
-        self.getStamina().fill();
+        self.getStamina().renew();
+        self.getArousal().renew();
         writeSystemMessage(self, Global.format("{self:SUBJECT-ACTION:have|has} summoned {other:name-do} (Level %s)",
                                         master, self, self.getLevel()));
         otherCombatants.add(self);

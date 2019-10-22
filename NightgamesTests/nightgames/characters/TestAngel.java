@@ -215,7 +215,7 @@ public class TestAngel extends BasePersonality {
     }
 
     @Override public String victory(Combat c, Result flag) {
-        character.arousal.empty();
+        character.arousal.renew();
         Character opponent = c.getOpponent(character);
         String message = "";
         if (c.getStance().anallyPenetrated(c, opponent)) {
