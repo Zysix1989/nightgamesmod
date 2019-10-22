@@ -45,14 +45,6 @@ public class Meter implements Serializable {
         current = 0;
     }
 
-
-    public void set(int i) {
-        current = i;
-        if (current < 0) {
-            current = 0;
-        }
-    }
-
     public void gain(float i) {
         max += i;
         if (current > max()) {

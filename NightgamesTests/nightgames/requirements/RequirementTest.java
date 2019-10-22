@@ -322,12 +322,12 @@ public class RequirementTest {
         assertThat(winning().meets(combat, other, self), is(true));
 
         self.getWillpower().gain(50);
-        self.getWillpower().set(25);
+        self.getWillpower().recover(25);
         assertThat(winning().meets(combat, self, other), is(false));
         assertThat(winning().meets(combat, other, self), is(true));
 
         other.getWillpower().gain(1000);
-        other.getWillpower().set(100);
+        other.getWillpower().recover(100);
         assertThat(winning().meets(combat, self, other), is(true));
         assertThat(winning().meets(combat, other, self), is(false));
     }

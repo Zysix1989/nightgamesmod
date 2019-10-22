@@ -430,8 +430,7 @@ public class Mara extends BasePersonality {
                             + "involuntarily, but she manages to maintain both the kiss and her grip on your cock. The intense stimulation blows away your endurance and your head goes blank as you "
                             + "cover her hands with your seed. Mara breaks the kiss and leaves you completely exhausted.";
         }
-        if (c.getStance()
-             .vaginallyPenetrated(c, character)) {
+        if (c.getStance().vaginallyPenetrated(c, character)) {
             if (character.has(Item.ShockGlove) && Global.random(2) == 0) {
                 return "You've got Mara just where you want her. Your arms are wrapped around her, holding her in place as you thrust your cock into her tight pussy over and over. Her moans are getting louder and louder, and you can feel her breath "
                                 + "quickening. You're getting close to cumming, but she's definitely closer. She returns your embrace, squeezing her body against yours, stroking your back with her hands. Her hands creep down to grasp your buttocks. "
@@ -462,7 +461,7 @@ public class Mara extends BasePersonality {
                                 + "her nipples. She moans against your mouth and shudders in your arms as she climaxes.";
             }
         } else {
-            target.arousal.set(target.arousal.max() * 2 / 3);
+            target.arousal.pleasure(target.arousal.max() / 3);
             return "You're completely at Mara's mercy, but she refuses to finish you off. She teases and caresses you, keeping you too on-edge to fight back, but avoids your "
                             + "painfully hard cock. She brings her face close to yours with a cat-like grin and whispers, <i>\"You look so desperate. Tell me you surrender and I'll "
                             + "let you cum.\"</i> You've already lost. There's no point resisting. You practically beg Mara to finish you, causing her amusement to increase tenfold. "
