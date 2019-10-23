@@ -12,10 +12,10 @@ class GUIMetersPanel extends JPanel {
     private GUIMeterPanel willpower;
 
     GUIMetersPanel() {
-        stamina = new GUIMeterPanel("stamina.png");
-        arousal = new GUIMeterPanel("arousal.png");
-        mojo = new GUIMeterPanel("mojo.png");
-        willpower = new GUIMeterPanel("willpower.png");
+        stamina = new GUIMeterPanel("stamina.png", GUIColors.staminaColor);
+        arousal = new GUIMeterPanel("arousal.png", GUIColors.arousalColor);
+        mojo = new GUIMeterPanel("mojo.png", GUIColors.mojoColor);
+        willpower = new GUIMeterPanel("willpower.png", GUIColors.willpowerColor);
 
         setOpaque(false);
 

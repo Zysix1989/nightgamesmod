@@ -1,5 +1,6 @@
 package nightgames.gui;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.MissingResourceException;
@@ -8,17 +9,19 @@ import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
+import javax.swing.border.SoftBevelBorder;
 import nightgames.characters.Meter;
 
 class GUIMeterPanel extends JPanel {
     private Meter target = null;
     private JLabel thumbnail;
-    private JLabel description;
+    private JProgressBar bar;
 
-    GUIMeterPanel(String imagePath) {
+    GUIMeterPanel(String imagePath, Color dominantColor) {
         thumbnail = new JLabel();
-        description = new JLabel();;
+        bar = new JProgressBar();
         var imageStream = this.getClass().getClassLoader().getResourceAsStream(imagePath);
         if (imageStream == null) {
             throw new MissingResourceException("", this.getClass().getName(), imagePath);
@@ -32,18 +35,23 @@ class GUIMeterPanel extends JPanel {
             throw new RuntimeException(e.getMessage());
         }
 
+        bar.setStringPainted(true);
+        bar.setBorder(new SoftBevelBorder(1, null, null, null, null));
+        bar.setForeground(dominantColor);
+        bar.setBackground(new Color(50, 50, 50));
+
         setOpaque(false);
 
         var layout = new GroupLayout(this);
         layout.setVerticalGroup(
             layout.createParallelGroup()
             .addComponent(thumbnail)
-            .addComponent(description)
+            .addComponent(bar)
         );
         layout.setHorizontalGroup(
             layout.createSequentialGroup()
             .addComponent(thumbnail)
-            .addComponent(description)
+            .addComponent(bar)
         );
         setLayout(layout);
     }
@@ -54,11 +62,13 @@ class GUIMeterPanel extends JPanel {
 
     void refresh() {
         if (target != null) {
-            description.setText(Integer.toString(target.percent()));
+            bar.setString(Integer.toString(target.percent()));
+            bar.setMaximum(target.max());
+            bar.setValue(target.get());
         }
     }
 
     void clear() {
-        description.setText("");
+        bar.setString("");
     }
 }
