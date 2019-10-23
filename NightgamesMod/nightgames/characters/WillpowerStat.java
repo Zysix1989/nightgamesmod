@@ -5,6 +5,7 @@ public class WillpowerStat extends Meter {
 
     public WillpowerStat(int max) {
         super(max);
+        resetCapacity();
         renew();
     }
 
