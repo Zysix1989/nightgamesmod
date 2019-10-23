@@ -17,7 +17,7 @@ public class StaminaStat extends Meter {
     }
 
     public void renew() {
-        current = (int) max;
+        current = max;
     }
 
     public void recover(int i) {
