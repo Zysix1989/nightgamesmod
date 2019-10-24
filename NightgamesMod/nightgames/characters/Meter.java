@@ -37,10 +37,6 @@ public class Meter implements Serializable {
         return max;
     }
 
-    public float trueMax() {
-        return max;
-    }
-
     public void gain(float i) {
         max += i;
         if (current > max()) {

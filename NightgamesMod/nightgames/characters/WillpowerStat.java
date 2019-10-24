@@ -46,4 +46,8 @@ public class WillpowerStat extends Meter {
     public int max() {
         return Math.min(max, temporaryMax);
     }
+
+    float trueMax() {
+        return max;
+    }
 }

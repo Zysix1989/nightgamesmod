@@ -1927,9 +1927,9 @@ public Character clone() throws CloneNotSupportedException {
         saveObj.addProperty("money", money);
         {
             JsonObject resources = new JsonObject();
-            resources.addProperty("stamina", stamina.trueMax());
-            resources.addProperty("arousal", arousal.trueMax());
-            resources.addProperty("mojo", mojo.trueMax());
+            resources.addProperty("stamina", stamina.max());
+            resources.addProperty("arousal", arousal.max());
+            resources.addProperty("mojo",  mojo.max());
             resources.addProperty("willpower", willpower.trueMax());
             saveObj.add("resources", resources);
         }
@@ -4597,7 +4597,7 @@ public Character clone() throws CloneNotSupportedException {
             gain = gain + Global.random(2);
         }
         gain = Math.max(0,
-            (int) (Math.min(maximumStaminaForLevel, stamina.trueMax() + gain) - stamina.trueMax()));
+            (Math.min(maximumStaminaForLevel, stamina.max() + gain) - stamina.max()));
         stamina.gain(gain);
         return gain;
     }
@@ -4608,8 +4608,7 @@ public Character clone() throws CloneNotSupportedException {
         if (has(Trait.expertGoogler)) {
             gain = gain + Global.random(2);
         }
-        gain = (int) Math.max(0,
-            (int) Math.min(maximumArousalForLevel, arousal.trueMax() + gain) - arousal.trueMax());
+        gain = Math.max(0, Math.min(maximumArousalForLevel, arousal.max() + gain) -  arousal.max());
         arousal.gain(gain);
         return gain;
     }
