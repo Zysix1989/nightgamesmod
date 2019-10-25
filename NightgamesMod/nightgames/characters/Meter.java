@@ -2,12 +2,14 @@ package nightgames.characters;
 
 import java.io.Serializable;
 import nightgames.global.Global;
+import org.apache.commons.lang3.Range;
 
-public class Meter implements Serializable {
+public abstract class Meter implements Serializable {
     /**
      *
      */
     private static final long serialVersionUID = 2L;
+
     protected int current;
     protected int max;
 
@@ -62,7 +64,7 @@ public class Meter implements Serializable {
         return max() - getReal();
     }
 
-    public Meter copy() {
-        return new Meter(this);
-    }
+    public abstract Meter copy();
+
+    public abstract Range<Integer> observe(int perception);
 }

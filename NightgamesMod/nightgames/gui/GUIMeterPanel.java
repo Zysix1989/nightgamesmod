@@ -9,7 +9,6 @@ import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.SoftBevelBorder;
 import nightgames.characters.Meter;
@@ -17,11 +16,11 @@ import nightgames.characters.Meter;
 class GUIMeterPanel extends JPanel {
     private Meter target = null;
     private JLabel thumbnail;
-    private JProgressBar bar;
+    private GUIMeterBar bar;
 
     GUIMeterPanel(String imagePath, Color dominantColor) {
         thumbnail = new JLabel();
-        bar = new JProgressBar();
+        bar = new GUIMeterBar();
         var imageStream = this.getClass().getClassLoader().getResourceAsStream(imagePath);
         if (imageStream == null) {
             throw new MissingResourceException("", this.getClass().getName(), imagePath);
@@ -39,6 +38,7 @@ class GUIMeterPanel extends JPanel {
         bar.setBorder(new SoftBevelBorder(1, null, null, null, null));
         bar.setForeground(dominantColor);
         bar.setBackground(new Color(50, 50, 50));
+        bar.setIndeterminate(true);
 
         setOpaque(false);
 
@@ -58,17 +58,20 @@ class GUIMeterPanel extends JPanel {
 
     void setTargetMeter(Meter target) {
         this.target = target;
+        refresh();
+        bar.setVisible(true);
     }
 
     void refresh() {
         if (target != null) {
             bar.setString(Integer.toString(target.percent()));
-            bar.setMaximum(target.max());
-            bar.setValue(target.get());
+            var range = target.observe(7);
+            bar.setValue(range.getMinimum());
+            bar.setExtent(range.getMaximum()-range.getMinimum());
         }
     }
 
     void clear() {
-        bar.setString("");
+        bar.setVisible(false);
     }
 }
