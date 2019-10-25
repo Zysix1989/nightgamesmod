@@ -222,7 +222,6 @@ import nightgames.skills.LaunchHarpoon;
 import nightgames.skills.LeechEnergy;
 import nightgames.skills.LeechSeed;
 import nightgames.skills.LegLock;
-import nightgames.skills.LevelDrain;
 import nightgames.skills.LewdSuggestion;
 import nightgames.skills.LickNipples;
 import nightgames.skills.LivingClothing;
@@ -694,7 +693,6 @@ public class Global {
         getSkillPool().add(new OrgasmSeal(ch));
         getSkillPool().add(new DenyOrgasm(ch));
         getSkillPool().add(new Drain(ch));
-        getSkillPool().add(new LevelDrain(ch));
         getSkillPool().add(new StoneForm(ch));
         getSkillPool().add(new FireForm(ch));
         getSkillPool().add(new Defabricator(ch));
