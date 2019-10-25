@@ -735,10 +735,7 @@ public class Player extends Character {
     public void victory3p(Combat c, Character target, Character assist) {
         gainXP(getVictoryXP(target));
         target.gainXP(target.getDefeatXP(this));
-        target.arousal.renew();
-        if (target.has(Trait.insatiable)) {
-            target.arousal.pleasure((int) (arousal.max() * .2));
-        }
+        target.orgasm();
         dress(c);
         target.undress(c);
         gainTrophy(c, target);

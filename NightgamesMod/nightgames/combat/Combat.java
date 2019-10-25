@@ -1315,10 +1315,7 @@ public class Combat {
         if (target.resist3p(this, intruder, assist)) {
             target.gainXP(20 + target.lvlBonus(intruder));
             intruder.gainXP(10 + intruder.lvlBonus(target));
-            intruder.getArousal().renew();
-            if (intruder.has(Trait.insatiable)) {
-                intruder.getArousal().pleasure((int) (intruder.getArousal().max() * 0.2D));
-            }
+            target.orgasm();
             target.undress(this);
             intruder.defeated(target);
             intruder.defeated(assist);

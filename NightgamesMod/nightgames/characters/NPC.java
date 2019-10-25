@@ -208,10 +208,7 @@ public class NPC extends Character {
         Character target = c.getOpponent(this);
         gainXP(getVictoryXP(target));
         target.gainXP(target.getDefeatXP(this));
-        target.arousal.renew();
-        if (target.has(Trait.insatiable)) {
-            target.arousal.pleasure((int) (arousal.max() * .2));
-        }
+        target.orgasm();
         dress(c);
         target.undress(c);
         gainTrophy(c, target);
@@ -227,15 +224,9 @@ public class NPC extends Character {
         Character target = c.getOpponent(this);
         gainXP(getDefeatXP(target));
         target.gainXP(target.getVictoryXP(this));
-        arousal.renew();
+        orgasm();
         if (!target.human() || !Global.getMatch().getCondition().name().equals("norecovery")) {
-            target.arousal.renew();
-        }
-        if (this.has(Trait.insatiable)) {
-            arousal.pleasure((int) (arousal.max() * .2));
-        }
-        if (target.has(Trait.insatiable)) {
-            target.arousal.pleasure((int) (arousal.max() * .2));
+            target.orgasm();
         }
         target.dress(c);
         undress(c);
@@ -258,10 +249,7 @@ public class NPC extends Character {
     public void victory3p(Combat c, Character target, Character assist) {
         gainXP(getVictoryXP(target));
         target.gainXP(target.getDefeatXP(this));
-        target.arousal.renew();
-        if (target.has(Trait.insatiable)) {
-            target.arousal.pleasure((int) (arousal.max() * .2));
-        }
+        target.orgasm();
         dress(c);
         target.undress(c);
         gainTrophy(c, target);
@@ -364,14 +352,8 @@ public class NPC extends Character {
         Character target = c.getOpponent(this);
         gainXP(getVictoryXP(target));
         target.gainXP(getVictoryXP(this));
-        arousal.renew();
-        target.arousal.renew();
-        if (this.has(Trait.insatiable)) {
-            arousal.pleasure((int) (arousal.max() * .2));
-        }
-        if (target.has(Trait.insatiable)) {
-            target.arousal.pleasure((int) (arousal.max() * .2));
-        }
+        orgasm();
+        target.orgasm();
         target.undress(c);
         undress(c);
         target.gainTrophy(c, this);

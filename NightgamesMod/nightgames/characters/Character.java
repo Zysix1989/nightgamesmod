@@ -104,6 +104,7 @@ import nightgames.status.addiction.Addiction.Severity;
 import nightgames.status.addiction.AddictionType;
 import nightgames.status.addiction.Dominance;
 import nightgames.status.addiction.MindControl;
+import nightgames.traits.Insatiable;
 import nightgames.traits.Wrassler;
 import nightgames.trap.Trap;
 import nightgames.utilities.DebugHelper;
@@ -2131,10 +2132,7 @@ public Character clone() throws CloneNotSupportedException {
         if (this != opponent) {
             resolvePostOrgasmForOpponent(c, opponent, selfPart, opponentPart);
         }
-        getArousal().renew();
-        if (has(Trait.insatiable)) {
-            arousal.pleasure((int) (arousal.max() * .2));
-        }
+        orgasm();
         if (is(Stsflag.feral)) {
             arousal.pleasure(arousal.max() / 2);
         }
@@ -4672,5 +4670,13 @@ public Character clone() throws CloneNotSupportedException {
 
     public Optional<ArmManager> getArmManager() {
         return Optional.empty();
+    }
+
+    public void orgasm() {
+        if (has(Trait.insatiable)) {
+            Insatiable.renewArousal(arousal);
+        } else {
+            arousal.renew();
+        }
     }
 }
