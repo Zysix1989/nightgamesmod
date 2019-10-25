@@ -33,7 +33,7 @@ public class ArousalStat extends Meter {
 
     @Override
     public int percent() {
-        return Math.max(super.percent(), 100);
+        return Math.min(super.percent(), 100);
     }
 
     @Override
