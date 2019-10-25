@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
 import nightgames.global.Global;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
@@ -14,8 +13,6 @@ import nightgames.status.Pheromones;
 import nightgames.status.Resistance;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
-import nightgames.status.addiction.Addiction;
-import nightgames.status.addiction.AddictionType;
 
 
 //TODO: Consider movine towards characters.CharTrait, which provides better handling and customization for traits. - DSM
@@ -276,7 +273,6 @@ public enum Trait {
     divinity("Divinity", "Has aspects of divinity."),
     leveldrainer("Level Drainer", "Natrually adept at draining levels."),
     ExpertLevelDrainer("Expert Level Drainer", "Can drain more than one level at a time."),
-    IndiscriminateThief("Indiscriminate Thief", "Drains levels from other level drainers."),
 
     // Strength
     dexterous("Dexterous", "Dexterous limbs and fingers. Underwear is not an obstacle."),

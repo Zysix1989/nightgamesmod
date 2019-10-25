@@ -2402,7 +2402,7 @@ public Character clone() throws CloneNotSupportedException {
                                             + opponent.possessiveAdjective() + " ego.</b>"));
             opponent.restoreWillpower(c, 10 + Global.random(10));
         }
-        if (opponent.has(Trait.leveldrainer) && (!has(Trait.leveldrainer) || opponent.has(Trait.IndiscriminateThief))
+        if (opponent.has(Trait.leveldrainer) && (!has(Trait.leveldrainer))
                         && (((c.getStance().penetratedBy(c, opponent, this) || c.getStance().penetratedBy(c, this, opponent))
                                         && !has(Trait.strapped)
                                         && !opponent.has(Trait.strapped))
