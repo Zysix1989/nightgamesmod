@@ -3,8 +3,8 @@ package nightgames.gui;
 import javax.swing.BoundedRangeModel;
 import javax.swing.JProgressBar;
 
-public class GUIMeterBar extends JProgressBar {
-    public GUIMeterBar() {
+class GUIMeterBar extends JProgressBar {
+    GUIMeterBar() {
         setUI(new MeterBarUI());
     }
 
@@ -31,13 +31,13 @@ public class GUIMeterBar extends JProgressBar {
         }
     }
 
-    public double getUncertainPercentComplete() {
+    double getUncertainPercentComplete() {
         long span = this.model.getMaximum() - this.model.getMinimum();
         double extentValue = this.model.getExtent();
         return (extentValue) / (double)span;
     }
 
-    public void setExtent(int extent) {
+    void setExtent(int extent) {
         this.model.setExtent(extent);
     }
 }
