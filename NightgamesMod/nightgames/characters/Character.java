@@ -2407,8 +2407,7 @@ public Character clone() throws CloneNotSupportedException {
                                         && !has(Trait.strapped)
                                         && !opponent.has(Trait.strapped))
                         || c.getStance().en == Stance.trib)) {
-            if (getLevel() > 1 && (!c.getCombatantData(opponent).getBooleanFlag("has_drained") 
-                            || opponent.has(Trait.ExpertLevelDrainer))) {
+            if (getLevel() > 1 && (!c.getCombatantData(opponent).getBooleanFlag("has_drained"))) {
                 c.getCombatantData(opponent).toggleFlagOn("has_drained", true);
                 if (c.getStance().penetratedBy(c, opponent, this)) {
                     c.write(opponent, Global.format("<b>{other:NAME-POSSESSIVE} %s contracts around {self:name-possessive} %s, reinforcing"

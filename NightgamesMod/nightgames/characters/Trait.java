@@ -272,7 +272,6 @@ public enum Trait {
     // Class subtrait
     divinity("Divinity", "Has aspects of divinity."),
     leveldrainer("Level Drainer", "Natrually adept at draining levels."),
-    ExpertLevelDrainer("Expert Level Drainer", "Can drain more than one level at a time."),
 
     // Strength
     dexterous("Dexterous", "Dexterous limbs and fingers. Underwear is not an obstacle."),
