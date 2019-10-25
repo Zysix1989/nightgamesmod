@@ -154,7 +154,6 @@ import nightgames.skills.CommandOral;
 import nightgames.skills.CommandStrip;
 import nightgames.skills.CommandStripPlayer;
 import nightgames.skills.CommandUse;
-import nightgames.skills.CounterDrain;
 import nightgames.skills.CounterFlower;
 import nightgames.skills.CounterPin;
 import nightgames.skills.CounterRide;
@@ -729,7 +728,6 @@ public class Global {
         getSkillPool().add(new ReverseFuck(ch));
         getSkillPool().add(new ReverseCarry(ch));
         getSkillPool().add(new ReverseFly(ch));
-        getSkillPool().add(new CounterDrain(ch));
         getSkillPool().add(new CounterRide(ch));
         getSkillPool().add(new CounterPin(ch));
         getSkillPool().add(new ReverseAssFuck(ch));
@@ -1621,9 +1619,6 @@ public class Global {
     public static boolean newChallenger(BasePersonality challenger) {
         if (!players.contains(challenger.getCharacter())) {
             int targetLevel = human.getLevel();
-            if (challenger.getCharacter().has(Trait.leveldrainer)) {
-                targetLevel -= 4;
-            }
             while (challenger.getCharacter().getLevel() <= targetLevel) {
                 challenger.getCharacter().ding(null);
             }

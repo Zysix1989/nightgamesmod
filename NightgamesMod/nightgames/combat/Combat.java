@@ -51,24 +51,18 @@ import nightgames.skills.CockWorship;
 import nightgames.skills.Command;
 import nightgames.skills.ConcedePosition;
 import nightgames.skills.FootWorship;
-import nightgames.skills.Grind;
 import nightgames.skills.PetInitiatedThreesome;
-import nightgames.skills.Piston;
-import nightgames.skills.PussyGrind;
 import nightgames.skills.PussyWorship;
 import nightgames.skills.Reversal;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
-import nightgames.skills.Thrust;
 import nightgames.skills.WildThrust;
 import nightgames.stance.Kneeling;
-import nightgames.stance.Mount;
 import nightgames.stance.Neutral;
 import nightgames.stance.Pin;
 import nightgames.stance.Position;
 import nightgames.stance.Stance;
 import nightgames.stance.StandingOver;
-import nightgames.stance.TribadismStance;
 import nightgames.status.Abuff;
 import nightgames.status.Alluring;
 import nightgames.status.BodyFetish;
@@ -667,53 +661,7 @@ public class Combat {
                     CombatPhase.DETERMINE_SKILL_ORDER);
 
     private CombatPhase determinePostCombatPhase() {
-        CombatPhase nextPhase = CombatPhase.RESULTS_SCENE;
-        if (p1.has(Trait.leveldrainer) ^ p2.has(Trait.leveldrainer) && !p1.has(Trait.strapped) && !p2.has(Trait.strapped)) {
-            Character drainer = p1.has(Trait.leveldrainer) ? p1 : p2;
-            Character drained = p1.has(Trait.leveldrainer) ? p2 : p1;
-            if (drainer.equals(winner.orElse(null)) && !getCombatantData(drainer).getBooleanFlag("has_drained")) {
-                if (!getStance().havingSex(this) || !getStance().dom(drainer)) {
-                    Position mountStance = new Mount(drainer, drained);
-                    if (mountStance.insert(this, drained, drainer) != mountStance) {
-                        write(drainer, Global.format("With {other:name-do} defeated and unable to fight back, {self:subject-action:climb|climbs} "
-                                        + "on top of {other:direct-object} and {self:action:insert} {other:possessive} cock into {self:reflective}.", drainer, drained));
-                        setStance(mountStance.insert(this, drained, drainer));
-                    } else if (mountStance.insert(this, drainer, drainer) != mountStance) {
-                        write(drainer, Global.format("With {other:name-do} defeated and unable to fight back, {self:subject-action:climb|climbs} "
-                                        + "on top of {other:direct-object} and {self:action:insert} {self:reflective} into {other:possessive} soaking vagina.", drainer, drained));
-                        setStance(mountStance.insert(this, drainer, drainer));
-                    } else if (drainer.hasPussy() && drained.hasPussy()) {
-                        write(drainer, Global.format("With {other:name-do} defeated and unable to fight back, {self:subject-action:climb|climbs} "
-                                        + "on top of {other:direct-object} and {self:action:press} {self:possessive} wet snatch on top of {other:poss-pronoun}.", drainer, drained));
-                        setStance(new TribadismStance(drainer, drained));
-                    } else {
-                        write(drainer, Global.format("With {other:name-do} defeated and unable to fight back, {self:subject-action:climb|climbs} "
-                                        + "on top of {other:direct-object}. However, {self:pronoun} could not figure a "
-                                        + "way to drain {other:possessive} levels.", drainer, drained));
-                        return CombatPhase.RESULTS_SCENE;
-                    }
-                } else if (phase == CombatPhase.LEVEL_DRAIN) {
-                    if (getCombatantData(drainer).getIntegerFlag("level_drain_thrusts") < 10) {
-                        Skill thrustSkill = getStance().en == Stance.trib ? new PussyGrind(drainer) : Global.pickRandom(new Thrust(drainer), new Grind(drainer), new Piston(drainer)).get();
-                        thrustSkill.resolve(this, drained);
-                        write("<br/>");
-                        getCombatantData(drainer).increaseIntegerFlag("level_drain_thrusts", 1);
-                    } else {
-                        drained.doOrgasm(this, drainer,
-                                        Global.pickRandom(getStance().getPartsFor(this, drained, drainer)).orElse(drained.body.getRandomGenital()),
-                                        Global.pickRandom(getStance().getPartsFor(this, drainer, drained)).orElse(drainer.body.getRandomGenital()));
-                        getCombatantData(drainer).setBooleanFlag("has_drained", true);
-                    }
-                } else {
-                    write(drainer, Global.format("With {other:name-do} defeated, {self:subject-action:don't stop|doesn't stop} {self:possessive} greedy hips, "
-                                        + "{self:pronoun-action:are|is} determined to extract all the power {self:pronoun} can get!", drainer, drained));
-                }
-                if (!getCombatantData(drainer).getBooleanFlag("has_drained")) {
-                    nextPhase = CombatPhase.LEVEL_DRAIN;
-                }
-            }
-        }
-        return nextPhase;
+        return CombatPhase.RESULTS_SCENE;
     }
 
     private boolean turn() {

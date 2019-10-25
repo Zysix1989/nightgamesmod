@@ -49,7 +49,6 @@ import nightgames.characters.body.ToysPart;
 import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.characters.custom.AiModifiers;
-import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatantData;
 import nightgames.combat.Result;
@@ -521,9 +520,7 @@ public Character clone() throws CloneNotSupportedException {
         rate *= Global.xpRate;
         i = (int) Math.round(i * rate);
 
-        if (!has(Trait.leveldrainer)) {
-            gainXPPure(i);
-        }
+        gainXPPure(i);
     }
 
     /**Mutator method for setting the experience of a character, then updating. 
@@ -2402,64 +2399,6 @@ public Character clone() throws CloneNotSupportedException {
                                             + opponent.possessiveAdjective() + " ego.</b>"));
             opponent.restoreWillpower(c, 10 + Global.random(10));
         }
-        if (opponent.has(Trait.leveldrainer) && (!has(Trait.leveldrainer))
-                        && (((c.getStance().penetratedBy(c, opponent, this) || c.getStance().penetratedBy(c, this, opponent))
-                                        && !has(Trait.strapped)
-                                        && !opponent.has(Trait.strapped))
-                        || c.getStance().en == Stance.trib)) {
-            if (getLevel() > 1 && (!c.getCombatantData(opponent).getBooleanFlag("has_drained"))) {
-                c.getCombatantData(opponent).toggleFlagOn("has_drained", true);
-                if (c.getStance().penetratedBy(c, opponent, this)) {
-                    c.write(opponent, Global.format("<b>{other:NAME-POSSESSIVE} %s contracts around {self:name-possessive} %s, reinforcing"
-                            + " {self:possessive} orgasm and drawing upon {self:possessive} very strength and experience. Once it's over, {other:pronoun-action:are}"
-                                                    + " left considerably more powerful at {self:possessive} expense.</b>",
-                                    this, opponent, c.getStance().insertablePartFor(c, opponent, this).describe(opponent),
-                                    c.getStance().insertedPartFor(c, this).describe(this)));
-                } else if (c.getStance().penetratedBy(c, this, opponent)) {
-                    c.write(opponent, Global.format("<b>{other:NAME-POSSESSIVE} cock pistons rapidly into {self:name-do} as {self:subject-action:cum|cums}, "
-                                    + "drawing out {self:possessive} very strength and experience on every return stroke. "
-                                    + "Once it's over, {other:pronoun-action:are} left considerably more powerful at {self:possessive} expense.</b>",
-                                    this, opponent));
-                } else {
-                    c.write(opponent, Global.format("<b>{other:NAME-POSSESSIVE} greedy {other:body-part:pussy} sucks itself tightly to {self:name-possessive} {self:body-part:pussy}, "
-                                    + "drawing in {self:possessive} very strength and experience along the pleasures of {self:possessive} orgasm. "
-                                    + "Once it's over, {other:pronoun-action:are|is} left considerably more powerful at {self:possessive} expense.</b>",
-                                    this, opponent));
-                }
-                String leveldrainLiner = opponent.getRandomLineFor(CharacterLine.LEVEL_DRAIN_LINER, c, this);
-                if (!leveldrainLiner.isEmpty()) {
-                    c.write(opponent, leveldrainLiner);
-                }
-                int gained;
-                if (Global.checkFlag(Flag.hardmode)) {
-                    drain(c, opponent, 30 + Global.random(50));
-                    gained = opponent.getXPReqToNextLevel();
-                } else {
-                    gained = opponent.getXPReqToNextLevel();
-                }
-                int xpStolen = getXP();
-                c.write(dong());
-                xp = Math.max(xp, Math.min(getXPReqToNextLevel() - 1, gained - xpStolen));
-                opponent.gainXPPure(gained);
-                opponent.levelUpIfPossible(c);
-            } else {
-                
-                if (opponent.has(Trait.succubus) || opponent.body.getRandomPussy() != null) {
-                     c.write(opponent, String.format("<b>%s %s pulses, but fails to"
-                                                + " draw in %s experience.</b>", Global.capitalizeFirstLetter(opponent.nameOrPossessivePronoun()),
-                                opponent.body.getRandomPussy().describe(opponent),      //FIXME: If the player has a penis and Succubus trait this creates a NPE since it's looking for a pussy that isn't there.
-                                nameOrPossessivePronoun()));
-                } else if (opponent.has(Trait.incubus) || opponent.body.getRandomPussy() == null) {
-                    
-                    c.write(opponent, String.format("<b>%s %s pulses, but fails to"
-                                    + " draw in %s experience.</b>", Global.capitalizeFirstLetter(opponent.nameOrPossessivePronoun()),
-                    opponent.body.getLargestCock().describe(opponent),     
-                    nameOrPossessivePronoun()));
-                }
-                
-               
-            }
-        }
     }
 
     public void loseWillpower(Combat c, int i) {
@@ -3131,9 +3070,6 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public int getDefeatXP(Character opponent) {
-        if (opponent.has(Trait.leveldrainer)) {
-            return 0;
-        }
         return 18 + lvlBonus(opponent);
     }
 
@@ -3560,7 +3496,7 @@ public Character clone() throws CloneNotSupportedException {
         double bottomFitness = 6.0;
         // If I'm horny, I want the other guy's clothing off, so I put more
         // fitness in them
-        if (getMood() == Emotion.horny || has(Trait.leveldrainer)) {
+        if (getMood() == Emotion.horny) {
             topFitness += 6;
             bottomFitness += 8;
             // If I'm horny, I want to make the opponent cum asap, put more
@@ -3643,7 +3579,7 @@ public Character clone() throws CloneNotSupportedException {
         double bottomFitness = 4.0;
         // If I'm horny, I don't care about my clothing, so I put more less
         // fitness in them
-        if (getMood() == Emotion.horny || is(Stsflag.feral) | has(Trait.leveldrainer)) {
+        if (getMood() == Emotion.horny || is(Stsflag.feral)) {
             topFitness = .5;
             bottomFitness = .5;
             // If I'm horny, I put less importance on my own arousal
