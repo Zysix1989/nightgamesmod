@@ -465,7 +465,6 @@ public enum Trait {
     private String name;
     public Trait parent;
     public Status status;
-    private boolean hidden;
 
     public String getDesc() {
         return desc;
@@ -477,33 +476,28 @@ public enum Trait {
     }
 
     private Trait(String name, String description) {
-        this(name, description, null, null, null, false);
-    }
-    
-    private Trait(String name, String description, boolean hidden) {
-        this(name, description, null, null, null, hidden);
+        this(name, description, null, null, null);
     }
 
     private Trait(String name, String description, TraitDescription longDesc) {
-        this(name, description, longDesc, null, null, false);
+        this(name, description, longDesc, null, null);
     }
 
     private Trait(String name, String description, TraitDescription longDesc, Trait parent) {
-        this(name, description, longDesc, parent, null, false);
+        this(name, description, longDesc, parent, null);
     }
 
     private Trait(String name, String description, Status status) {
-        this(name, description, null, null, status, false);
+        this(name, description, null, null, status);
     }
     
     private Trait(String name, String description, TraitDescription longDesc,
-                    Trait parent, Status status, boolean hidden) {
+        Trait parent, Status status) {
         this.name = name;
         desc = description;
         this.longDesc = longDesc;
         this.parent = parent;
         this.status = status;
-        this.hidden = hidden;
     }
 
     public boolean isFeat() {
