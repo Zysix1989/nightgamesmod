@@ -103,7 +103,6 @@ public class Combat {
         P1_ACT_SECOND,
         P2_ACT_SECOND,
         UPKEEP,
-        LEVEL_DRAIN,
         RESULTS_SCENE,
         FINISHED_SCENE,
         ENDED,
@@ -657,7 +656,6 @@ public class Combat {
                     CombatPhase.P2_ACT_FIRST,
                     CombatPhase.P2_ACT_SECOND,
                     CombatPhase.UPKEEP,
-                    CombatPhase.LEVEL_DRAIN,
                     CombatPhase.DETERMINE_SKILL_ORDER);
 
     private CombatPhase determinePostCombatPhase() {
@@ -1801,8 +1799,6 @@ public class Combat {
         } else if (p == CombatPhase.P2_ACT_SECOND) {
             
         } else if (p == CombatPhase.UPKEEP) {
-            
-        } else if (p == CombatPhase.LEVEL_DRAIN) {
             
         } else if (p == CombatPhase.RESULTS_SCENE) {
             
