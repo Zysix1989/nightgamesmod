@@ -189,7 +189,6 @@ import nightgames.skills.FireForm;
 import nightgames.skills.Flick;
 import nightgames.skills.Fly;
 import nightgames.skills.FlyCatcher;
-import nightgames.skills.Focus;
 import nightgames.skills.FondleBreasts;
 import nightgames.skills.FootPump;
 import nightgames.skills.FootSmother;
@@ -851,9 +850,6 @@ public class Global {
         getSkillPool().add(new KiShout(ch));
         getSkillPool().add(new PressurePoint(ch));
         getSkillPool().add(new Deepen(ch));
-        getSkillPool().add(new Focus.OnForeplay(ch));
-        getSkillPool().add(new Focus.OnSex(ch));
-        getSkillPool().add(new Focus.OnRecovery(ch));
 
         getSkillPool().add(new ManipulateFetish(ch));
         getSkillPool().add(new BreastGrowthSuper(ch));

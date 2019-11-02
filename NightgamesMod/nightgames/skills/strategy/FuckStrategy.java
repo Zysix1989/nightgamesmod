@@ -9,7 +9,6 @@ import nightgames.characters.Emotion;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.nskills.tags.SkillTag;
-import nightgames.skills.Focus;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
 
@@ -34,12 +33,7 @@ public class FuckStrategy extends AbstractStrategy {
             return allowedSkills.stream().filter(skill -> skill.getTags(c).contains(SkillTag.pleasureSelf)).collect(Collectors.toSet());
         }
         Set<Skill> fuckSkills = allowedSkills.stream().filter(skill -> Tactics.fucking.equals(skill.type(c))).collect(Collectors.toSet());
-        
-        Focus.OnSex focus = new Focus.OnSex(self);
-        if (focus.usable(c, other)) {
-            fuckSkills.add(focus);
-        }
-        
+
         if (!fuckSkills.isEmpty()) {
             return fuckSkills;
         }
@@ -57,9 +51,6 @@ public class FuckStrategy extends AbstractStrategy {
         }
         if (!self.body.getAllGenitals().stream().allMatch(other::clothingFuckable)) {
             return allowedSkills.stream().filter(skill -> skill.getTags(c).contains(SkillTag.undressing)).collect(Collectors.toSet());
-        }
-        if (focus.usable(c, other)) {
-            return Collections.singleton(focus);
         }
         return Collections.emptySet();
     }
