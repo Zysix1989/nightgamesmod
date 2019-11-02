@@ -523,16 +523,13 @@ public class Body implements Cloneable {
         if (target.isErogenous() && character.has(Trait.hairtrigger)) {
             sensitivity += 1;
         }
-        final BodyPart actualWith = with, actualTarget = target;
         final double moddedSensitivity = sensitivity;
         sensitivity += character.status.stream()
-            .mapToDouble(status ->
-                status.sensitivity(moddedSensitivity, actualWith, actualTarget, skill))
+            .mapToDouble(status -> status.sensitivity(moddedSensitivity, skill))
             .sum();
         if (opponent != null) {
             sensitivity += opponent.status.stream()
-                .mapToDouble(status ->
-                    status.opponentSensitivity(moddedSensitivity, actualWith, actualTarget, skill))
+                .mapToDouble(status -> status.opponentSensitivity(moddedSensitivity, skill))
                 .sum();
         }
         double pleasure = 1;

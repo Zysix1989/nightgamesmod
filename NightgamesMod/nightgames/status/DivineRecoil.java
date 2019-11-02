@@ -1,9 +1,7 @@
 package nightgames.status;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
+import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
@@ -72,7 +70,7 @@ public class DivineRecoil extends DurationStatus {
     }
 
     @Override
-    public double sensitivity(double x, BodyPart withPart, BodyPart targetPart, Skill skill) {
+    public double sensitivity(double x, Skill skill) {
         return magnitude;
     }
 

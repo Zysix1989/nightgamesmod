@@ -1,5 +1,6 @@
 package nightgames.status;
 
+import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -7,9 +8,6 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
-import com.google.gson.JsonObject;
-
 import nightgames.actions.Action;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
@@ -78,11 +76,11 @@ public abstract class Status implements Cloneable {
 
     public abstract int tempted(Combat c, int x);
 
-    public double sensitivity(double x, BodyPart withPart, BodyPart targetPart, Skill skill) {
+    public double sensitivity(double x, Skill skill) {
         return 0;
     }
     
-    public double opponentSensitivity(double x, BodyPart withPart, BodyPart targetPart, Skill skill) {
+    public double opponentSensitivity(double x, Skill skill) {
         return 0;
     }
 
