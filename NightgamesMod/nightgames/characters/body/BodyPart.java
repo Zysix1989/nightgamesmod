@@ -26,7 +26,7 @@ public interface BodyPart {
 
     public double getPleasure(Character self);
 
-    public double getSensitivity(Character self, BodyPart target);
+    public double getSensitivity(Character self);
 
     @Override
     public String toString();

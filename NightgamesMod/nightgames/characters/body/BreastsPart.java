@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -144,8 +143,8 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
     }
 
     @Override
-    public double getSensitivity(Character self, BodyPart target) {
-        return (.75 + getSize().value * .2)* super.getSensitivity(self, target);
+    public double getSensitivity(Character self) {
+        return (.75 + getSize().value * .2)* super.getSensitivity(self);
    }
 
     @Override

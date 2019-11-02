@@ -8,12 +8,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.Trait;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
-import nightgames.items.clothing.ClothingSlot;
-import nightgames.items.clothing.ClothingTrait;
 import nightgames.json.JsonUtils;
 
 public class GenericBodyPart implements BodyPart {
@@ -192,7 +189,7 @@ public class GenericBodyPart implements BodyPart {
     }
 
     @Override
-    public double getSensitivity(Character self, BodyPart target) {
+    public double getSensitivity(Character self) {
         double bonus = 1.0;
         for (PartMod mod : getMods()) {
             bonus += mod.getSensitivity();

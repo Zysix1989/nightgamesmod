@@ -79,7 +79,7 @@ public enum ToysPart implements BodyPart {
     }
 
     @Override
-    public double getSensitivity(Character self, BodyPart target) {
+    public double getSensitivity(Character self) {
         return sensitivity;
     }
 
