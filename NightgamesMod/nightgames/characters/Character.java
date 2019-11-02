@@ -4614,4 +4614,8 @@ public Character clone() throws CloneNotSupportedException {
             arousal.renew();
         }
     }
+
+    public Optional<Integer> getAttribute(Attribute a) {
+        return Optional.ofNullable(att.get(a));
+    }
 }
