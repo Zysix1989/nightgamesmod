@@ -49,7 +49,7 @@ public class GenericBodyPart implements BodyPart {
     private List<PartMod> mods;
     private ArrayList<TemporaryModApplication> temporaryMods = new ArrayList<>();
 
-    public GenericBodyPart(String desc, String descLong, double hotness, double pleasure, double sensitivity,
+    protected GenericBodyPart(String desc, String descLong, double hotness, double pleasure, double sensitivity,
                     boolean notable, String type, String prefix) {
         this.desc = desc;
         this.descLong = descLong;
@@ -67,7 +67,7 @@ public class GenericBodyPart implements BodyPart {
         this(desc, "", hotness, pleasure, sensitivity, false, type, prefix);
     }
 
-    public GenericBodyPart(String desc, double hotness, double pleasure, double sensitivity, boolean notable,
+    protected GenericBodyPart(String desc, double hotness, double pleasure, double sensitivity, boolean notable,
                     String type, String prefix) {
         this(desc, "", hotness, pleasure, sensitivity, notable, type, prefix);
     }
