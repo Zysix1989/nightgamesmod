@@ -2058,7 +2058,7 @@ public Character clone() throws CloneNotSupportedException {
                 total++;
             }
             if (opponent.has(Trait.intensesuction) && (outfit.has(ClothingTrait.harpoonDildo)
-                            || outfit.has(ClothingTrait.harpoonOnahole)) && Global.random(3) == 0) {
+                || outfit.has(ClothingTrait.harpoonOnahole)) && Global.random(3) == 0) {
                 total++;
             }
         }
@@ -2091,10 +2091,12 @@ public Character clone() throws CloneNotSupportedException {
     protected void resolveOrgasm(Combat c, Character opponent, BodyPart selfPart, BodyPart opponentPart, int times, int totalTimes) {
         if (has(Trait.HiveMind) && !c.getPetsFor(this).isEmpty()) {
             // don't use opponent, use opponent of the current combat
-            c.write(this, Global.format("Just as {self:subject-action:seem} about to orgasm, {self:possessive} expression shifts. "
-                            + "{self:POSSESSIVE} eyes dulls and {self:possessive} expressions slacken."
-                            + "{other:if-human: Shit you've seen this before, she somehow switched bodies with one of her clones!}"
-                            , this, c.getOpponent(this)));
+            c.write(this, Global.format("Just as {self:subject-action:seem} about to "
+                    + "orgasm, {self:possessive} expression shifts. {self:POSSESSIVE} eyes dulls "
+                    + "and {self:possessive} expressions slacken."
+                    + "{other:if-human: Shit you've seen this before, she somehow switched "
+                    + "bodies with one of her clones!}",
+                this, c.getOpponent(this)));
             while (!c.getPetsFor(this).isEmpty() && checkOrgasm()) {
                 int amount = Math.min(getArousal().get(), getArousal().max());
                 getArousal().calm(amount);
@@ -2106,13 +2108,16 @@ public Character clone() throws CloneNotSupportedException {
             if (!checkOrgasm()) {
                 return;
             } else {
-                c.write(this, Global.format("{other:if-human:Luckily }{self:pronoun} didn't seem to be able to shunt all {self:possessive} arousal "
-                                + "into {self:possessive} clones, and rapidly reaches the peak anyways."
-                                , this, c.getOpponent(this)));
+                c.write(this,
+                    Global.format("{other:if-human:Luckily }{self:pronoun} didn't seem to "
+                            + "be able to shunt all {self:possessive} arousal nto {self:possessive} "
+                            + "clones, and rapidly reaches the peak anyways.",
+                        this, c.getOpponent(this)));
             }
         }
 
-        String orgasmLiner = "<b>" + orgasmLiner(c, opponent == null ? c.getOpponent(this) : opponent) + "</b>";
+        String orgasmLiner = "<b>" + orgasmLiner(c,
+            opponent == null ? c.getOpponent(this) : opponent) + "</b>";
         String opponentOrgasmLiner = (opponent == null || opponent == this || opponent.isPet()) ? "" : 
             "<b>" + opponent.makeOrgasmLiner(c, this) + "</b>";
         orgasmed = true;
@@ -2125,7 +2130,9 @@ public Character clone() throws CloneNotSupportedException {
             resolvePreOrgasmForOpponent(c, opponent, selfPart, opponentPart, times, totalTimes);
         }
         int overflow = arousal.getOverflow();
-        c.write(this, String.format("<font color='rgb(255,50,200)'>%s<font color='white'> arousal overflow", overflow));
+        c.write(this,
+            String.format("<font color='rgb(255,50,200)'>%s<font color='white'> arousal overflow",
+                overflow));
         if (this != opponent) {
             resolvePostOrgasmForOpponent(c, opponent, selfPart, opponentPart);
         }
@@ -2138,14 +2145,15 @@ public Character clone() throws CloneNotSupportedException {
         int willloss = getOrgasmWillpowerLoss();
         loseWillpower(c, willloss, Math.round(extra), true, "");
         if (has(Trait.sexualDynamo)) {
-            c.write(this, Global.format("{self:NAME-POSSESSIVE} climax makes {self:direct-object} positively gleam with erotic splendor; "
-                            + "{self:possessive} every move seems more seductive than ever.", this, opponent));
+            c.write(this, Global.format("{self:NAME-POSSESSIVE} climax makes "
+                + "{self:direct-object} positively gleam with erotic splendor; "
+                + "{self:possessive} every move seems more seductive than ever.",
+                this, opponent));
             add(c, new Abuff(this, Attribute.Seduction, 5, 10));
         }
         if (has(Trait.lastStand)) {
             var tighten = new OrgasmicTighten(this);
             var thrust = new OrgasmicThrust(this);
-            System.out.println("lastStand triggered for "+this.getTrueName()+", tighten: "+tighten.usable(c, opponent)+", thrust: "+thrust.usable(c, opponent));
             if (tighten.usable(c, opponent)) {
                 tighten.resolve(c, opponent);
             }
@@ -2158,72 +2166,83 @@ public Character clone() throws CloneNotSupportedException {
             c.write(opponent, opponentOrgasmLiner);
         }
 
-        if (has(Trait.nymphomania) && (Global.random(100) < Math.sqrt(get(Attribute.Nymphomania) + get(Attribute.Animism)) * 10) && !getWillpower().isAtUnfavorableExtreme() && times == totalTimes) {
+        if (has(Trait.nymphomania)
+            && (Global.random(100) < Math.sqrt(get(Attribute.Nymphomania) + get(Attribute.Animism)) * 10)
+            && !getWillpower().isAtUnfavorableExtreme()
+            && times == totalTimes) {
             if (human()) {
-                c.write("Cumming actually made you feel kind of refreshed, albeit with a burning desire for more.");
+                c.write("Cumming actually made you feel kind of refreshed, albeit with a "
+                    + "burning desire for more.");
             } else {
                 c.write(Global.format(
-                                "After {self:subject} comes down from {self:possessive} orgasmic high, {self:pronoun} doesn't look satisfied at all. There's a mad glint in {self:possessive} eye that seems to be endlessly asking for more.",
-                                this, opponent));
-
+                    "After {self:subject} comes down from {self:possessive} orgasmic high, "
+                        + "{self:pronoun} doesn't look satisfied at all. There's a mad glint in "
+                        + "{self:possessive} eye that seems to be endlessly asking for more.",
+                    this, opponent));
             }
-            restoreWillpower(c, 5 + Math.min((get(Attribute.Animism) + get(Attribute.Nymphomania)) / 5, 15));
-        } 
-        /*
-        //Nymphomania buffed, but doesn't work for orgasms with a dick unless penetrated, and makes it harder to struggle out of penetration. 
-        if(get(Attribute.Nymphomania) > 0 && 
-                        2.5*get(Attribute.Nymphomania) > get(Attribute.Animism)) {
-            if(!(lastOrgasmPart instanceof CockPart 
-                        && !c.getStance().penetrated(c,this)) ) {
-                restoreWillpower(c,5+get(Attribute.Nymphomania)/2);
-            } else {
-                restoreWillpower(c, 5 + Math.min((get(Attribute.Animism) 
-                            + get(Attribute.Nymphomania)) / 5, (int)(0.7*(willloss+extra))));
-            }
-
+            restoreWillpower(c,
+                5 + Math.min((get(Attribute.Animism) + get(Attribute.Nymphomania)) / 5, 15));
         }
-        */
         if (times == totalTimes) {
             List<Status> purgedStatuses = getStatuses().stream()
-                            .filter(status -> (status.mindgames() && status.flags().contains(Stsflag.purgable)) || status.flags().contains(Stsflag.orgasmPurged))
-                            .collect(Collectors.toList());
+                .filter(status ->
+                    (status.mindgames() && status.flags().contains(Stsflag.purgable))
+                    || status.flags().contains(Stsflag.orgasmPurged))
+                .collect(Collectors.toList());
             if (!purgedStatuses.isEmpty()){
                 if (human()) {
                     c.write(this, "<b>Your mind clears up after your release.</b>");
                 } else {
-                    c.write(this, "<b>You see the light of reason return to " + nameDirectObject() + "  after " + possessiveAdjective() + " release.</b>");
+                    c.write(this, "<b>You see the light of reason return to "
+                        + nameDirectObject() + " after "
+                        + possessiveAdjective() + " release.</b>");
                 }
                 purgedStatuses.forEach(this::removeStatus);
             }
         }
 
-        if (checkAddiction(AddictionType.CORRUPTION, opponent) && selfPart != null && opponentPart != null) {
-            if (c.getStance().havingSex(c, this) && (c.getCombatantData(this).getIntegerFlag("ChoseToFuck") == 1)) {
-                c.write(this, Global.format("{self:NAME-POSSESSIVE} willing sacrifice to {other:name-do} greatly reinforces"
-                                + " the corruption inside of {self:direct-object}.", this, opponent));
+        if (checkAddiction(AddictionType.CORRUPTION, opponent)
+            && selfPart != null
+            && opponentPart != null) {
+            if (c.getStance().havingSex(c, this)
+                && (c.getCombatantData(this).getIntegerFlag("ChoseToFuck") == 1)) {
+                c.write(this,
+                    Global.format("{self:NAME-POSSESSIVE} willing sacrifice to "
+                        + "{other:name-do} greatly reinforces the corruption inside "
+                        + "of {self:direct-object}.", this, opponent));
                 addict(c, AddictionType.CORRUPTION, opponent, Addiction.HIGH_INCREASE);
             }
-            if (opponent.has(Trait.TotalSubjugation) && c.getStance().en == Stance.succubusembrace) {
-                c.write(this, Global.format("The succubus takes advantage of {self:name-possessive} moment of vulnerability and overwhelms {self:posssessive} mind with {other:possessive} soul-corroding lips.", this, opponent));
+            if (opponent.has(Trait.TotalSubjugation)
+                && c.getStance().en == Stance.succubusembrace) {
+                c.write(this,
+                    Global.format("The succubus takes advantage of {self:name-possessive} "
+                        + "moment of vulnerability and overwhelms {self:posssessive} mind with "
+                        + "{other:possessive} soul-corroding lips.", this, opponent));
                 addict(c, AddictionType.CORRUPTION, opponent, Addiction.HIGH_INCREASE);
             }
         }
-       if (checkAddiction(AddictionType.ZEAL, opponent) && selfPart != null 
-                        && opponentPart != null 
-                        && c.getStance().penetratedBy(c, opponent, this)
-
-                        && selfPart.isType(CockPart.TYPE)) {
-            c.write(this, Global.format("Experiencing so much pleasure inside of {other:name-do} reinforces {self:name-possessive} faith in the lovely goddess.", this, opponent));
+       if (checkAddiction(AddictionType.ZEAL, opponent)
+           && selfPart != null
+           && opponentPart != null
+           && c.getStance().penetratedBy(c, opponent, this)
+           && selfPart.isType(CockPart.TYPE)) {
+            c.write(this,
+                Global.format("Experiencing so much pleasure inside of {other:name-do} "
+                    + "reinforces {self:name-possessive} faith in the lovely goddess.",
+                    this, opponent));
             addict(c, AddictionType.ZEAL, opponent, Addiction.MED_INCREASE);
         }
 
-        if (checkAddiction(AddictionType.ZEAL, opponent) && selfPart != null 
-                        && opponentPart != null 
-                        && c.getStance().penetratedBy(c, this, opponent)
-
-                        && opponentPart.isType(CockPart.TYPE) && (selfPart
-                        .isType(PussyPart.TYPE) || selfPart.isType(AssPart.TYPE))) {
-            c.write(this, Global.format("Experiencing so much pleasure from {other:name-possessive} cock inside {self:direct-object} reinforces {self:name-possessive} faith.", this, opponent));
+        if (checkAddiction(AddictionType.ZEAL, opponent)
+            && selfPart != null
+            && opponentPart != null
+            && c.getStance().penetratedBy(c, this, opponent)
+            && opponentPart.isType(CockPart.TYPE)
+            && (selfPart.isType(PussyPart.TYPE) || selfPart.isType(AssPart.TYPE))) {
+            c.write(this,
+                Global.format("Experiencing so much pleasure from {other:name-possessive} "
+                    + "cock inside {self:direct-object} reinforces {self:name-possessive} faith.",
+                    this, opponent));
             addict(c, AddictionType.ZEAL, opponent, Addiction.MED_INCREASE);
         }
         if (checkAddiction(AddictionType.BREEDER, opponent)) {
@@ -2231,7 +2250,8 @@ public Character clone() throws CloneNotSupportedException {
             unaddictCombat(AddictionType.BREEDER, opponent, 1.f, c);
         }
         if (checkAddiction(AddictionType.DOMINANCE, opponent) && c.getStance().dom(opponent)) {
-            c.write(this, "Getting dominated by " + opponent.nameDirectObject() +" seems to excite " + nameDirectObject() + " even more.");
+            c.write(this, "Getting dominated by " + opponent.nameDirectObject()
+                + " seems to excite " + nameDirectObject() + " even more.");
             addict(c, AddictionType.DOMINANCE, opponent, Addiction.LOW_INCREASE);
         }
         orgasms += 1;
@@ -2253,22 +2273,28 @@ public Character clone() throws CloneNotSupportedException {
         if (selfPart != null && selfPart.isType(CockPart.TYPE)) {
             if (times == 1) {
                 c.write(this, Global.format(
-                                "<b>{self:NAME-POSSESSIVE} back arches as thick ropes of jizz fire from {self:possessive} dick and land on {self:reflective}.</b>",
-                                this, opponent));
+                    "<b>{self:NAME-POSSESSIVE} back arches as thick ropes of jizz fire from "
+                        + "{self:possessive} dick and land on {self:reflective}.</b>",
+                    this, opponent));
             } else {
                 c.write(this, Global.format(
-                                "<b>{other:SUBJECT-ACTION:expertly coax|expertly coaxes} yet another orgasm from {self:name-do}, leaving {self:direct-object} completely spent.</b>",
-                                this, opponent));
+                    "<b>{other:SUBJECT-ACTION:expertly coax|expertly coaxes} yet another "
+                        + "orgasm from {self:name-do}, leaving {self:direct-object} completely "
+                        + "spent.</b>",
+                    this, opponent));
             }
         } else {
             if (times == 1) {
                 c.write(this, Global.format(
-                                "<b>{self:SUBJECT-ACTION:shudder|shudders} as {self:pronoun} {self:action:bring|brings} {self:reflective} to a toe-curling climax.</b>",
-                                this, opponent));
+                    "<b>{self:SUBJECT-ACTION:shudder|shudders} as {self:pronoun} "
+                        + "{self:action:bring|brings} {self:reflective} to a toe-curling climax.</b>",
+                    this, opponent));
             } else {
                 c.write(this, Global.format(
-                                "<b>{other:SUBJECT-ACTION:expertly coax|expertly coaxes} yet another orgasm from {self:name-do}, leaving {self:direct-object} completely spent.</b>",
-                                this, opponent));
+                    "<b>{other:SUBJECT-ACTION:expertly coax|expertly coaxes} yet another "
+                        + "orgasm from {self:name-do}, leaving {self:direct-object} completely "
+                        + "spent.</b>",
+                    this, opponent));
             }
         }
     }
@@ -2285,7 +2311,7 @@ public Character clone() throws CloneNotSupportedException {
      * The opopnent's part that is orgasming.
      * */
     private void resolvePreOrgasmForOpponent(Combat c, Character opponent, BodyPart selfPart, BodyPart opponentPart,
-                    int times, int total) {
+        int times, int total) {
         if (c.getStance().inserted(this) && !has(Trait.strapped)) {
             Character partner = c.getStance().getPenetratedCharacter(c, this);
             BodyPart holePart = Global.pickRandom(c.getStance().getPartsFor(c, partner, this)).orElse(null);
@@ -2297,39 +2323,50 @@ public Character clone() throws CloneNotSupportedException {
                     hole = "hungry mouth";
                 }
                 c.write(this, Global.format(
-                                "<b>{self:SUBJECT-ACTION:tense|tenses} up as {self:possessive} hips wildly buck against {other:name-do}. In no time, {self:possessive} hot seed spills into {other:possessive} %s.</b>",
-                                this, partner, hole));
+                    "<b>{self:SUBJECT-ACTION:tense|tenses} up as {self:possessive} hips "
+                        + "wildly buck against {other:name-do}. In no time, {self:possessive} hot "
+                        + "seed spills into {other:possessive} %s.</b>",
+                    this, partner, hole));
             } else {
                 c.write(this, Global.format(
-                                "<b>{other:NAME-POSSESSIVE} devilish orfice does not let up, and {other:possessive} intense actions somehow force {self:name-do} to cum again instantly.</b>",
-                                this, partner));
+                    "<b>{other:NAME-POSSESSIVE} devilish orfice does not let up, and "
+                        + "{other:possessive} intense actions somehow force {self:name-do} to "
+                        + "cum again instantly.</b>",
+                    this, partner));
             }
             Optional<BodyPart> opponentHolePart = Global.pickRandom(c.getStance().getPartsFor(c, opponent, this));
-            if (opponentHolePart.isPresent()) {
-                partner.body.receiveCum(c, this, opponentHolePart.get());
-            }
-        } else if (selfPart != null && selfPart.isType(CockPart.TYPE) && opponentPart != null
-                        && !opponentPart.isType("none")) {
+            opponentHolePart.ifPresent(bodyPart -> partner.body.receiveCum(c, this, bodyPart));
+        } else if (selfPart != null
+            && selfPart.isType(CockPart.TYPE)
+            && opponentPart != null
+            && !opponentPart.isType("none")) {
             if (times == 1) {
                 c.write(this, Global.format(
-                                "<b>{self:NAME-POSSESSIVE} back arches as thick ropes of jizz fire from {self:possessive} dick and land on {other:name-possessive} "
-                                                + opponentPart.describe(opponent) + ".</b>",
-                                this, opponent));
+                    "<b>{self:NAME-POSSESSIVE} back arches as thick ropes of jizz fire "
+                        + "from {self:possessive} dick and land on {other:name-possessive} "
+                        + opponentPart.describe(opponent) + ".</b>",
+                    this, opponent));
             } else {
                 c.write(this, Global.format(
-                                "<b>{other:SUBJECT-ACTION:expertly coax|expertly coaxes} yet another orgasm from {self:name-do}, leaving {self:direct-object} completely spent.</b>",
-                                this, opponent));
+                    "<b>{other:SUBJECT-ACTION:expertly coax|expertly coaxes} yet another "
+                        + "orgasm from {self:name-do}, leaving {self:direct-object} completely "
+                        + "spent.</b>",
+                    this, opponent));
             }
             opponent.body.receiveCum(c, this, opponentPart);
         } else {
             if (times == 1) {
                 c.write(this, Global.format(
-                                "<b>{self:SUBJECT-ACTION:shudder|shudders} as {other:subject-action:bring|brings} {self:direct-object} to a toe-curling climax.</b>",
-                                this, opponent));
+                    "<b>{self:SUBJECT-ACTION:shudder|shudders} as "
+                        + "{other:subject-action:bring|brings} {self:direct-object} "
+                        + "to a toe-curling climax.</b>",
+                    this, opponent));
             } else {
                 c.write(this, Global.format(
-                                "<b>{other:SUBJECT-ACTION:expertly coax|expertly coaxes} yet another orgasm from {self:name-do}, leaving {self:direct-object} completely spent.</b>",
-                                this, opponent));
+                    "<b>{other:SUBJECT-ACTION:expertly coax|expertly coaxes} yet another "
+                        + "orgasm from {self:name-do}, leaving {self:direct-object} completely "
+                        + "spent.</b>",
+                    this, opponent));
             }
         }
         if (opponent.has(Trait.mindcontroller) && cloned == 0) {
@@ -2338,22 +2375,22 @@ public Character clone() throws CloneNotSupportedException {
             if (res.hasSucceeded()) {
                 if (opponent.has(Trait.EyeOpener) && outfit.has(ClothingTrait.harpoonDildo)) {
                     message += "Below, the vibrations of the dildo reach a powerful crescendo,"
-                                    + " and your eyes open wide in shock, a perfect target for "
-                                    + " what's coming next.";
+                        + " and your eyes open wide in shock, a perfect target for "
+                        + " what's coming next.";
                     addict(c, AddictionType.MIND_CONTROL, opponent, Addiction.LOW_INCREASE);
                 } else if (opponent.has(Trait.EyeOpener) && outfit.has(ClothingTrait.harpoonOnahole)) {
                     message += "The warm sheath around your dick suddenly tightens, pulling incredibly"
-                                    + ", almost painfully tight around the shaft. At the same time, it starts"
-                                    + " vibrating powerfully. The combined assault causes your eyes to open"
-                                    + " wide and defenseless."; 
+                        + ", almost painfully tight around the shaft. At the same time, it starts"
+                        + " vibrating powerfully. The combined assault causes your eyes to open"
+                        + " wide and defenseless.";
                     addict(c, AddictionType.MIND_CONTROL, opponent, Addiction.LOW_INCREASE);
                 }
                 message += "While your senses are overwhelmed by your violent orgasm, the deep pools of Mara's eyes"
-                                + " swirl and dance. You helplessly stare at the intricate movements and feel a strong"
-                                + " pressure on your mind as you do. When your orgasm dies down, so do the dancing patterns."
-                                + " With a satisfied smirk, Mara tells you to lift an arm. Before you have even processed"
-                                + " her words, you discover that your right arm is sticking straight up into the air. This"
-                                + " is probably really bad.";
+                    + " swirl and dance. You helplessly stare at the intricate movements and feel a strong"
+                    + " pressure on your mind as you do. When your orgasm dies down, so do the dancing patterns."
+                    + " With a satisfied smirk, Mara tells you to lift an arm. Before you have even processed"
+                    + " her words, you discover that your right arm is sticking straight up into the air. This"
+                    + " is probably really bad.";
                 addict(c, AddictionType.MIND_CONTROL, opponent, Addiction.MED_INCREASE);
             }
             c.write(this, message);
@@ -2383,9 +2420,10 @@ public Character clone() throws CloneNotSupportedException {
         body.onOrgasm(c, this, opponent);
 
         if (opponent.has(Trait.erophage)) {
-            c.write(Global.capitalizeFirstLetter("<b>" + opponent.subjectAction("flush", "flushes")
-                            + " as the feedback from " + nameOrPossessivePronoun() + " orgasm feeds "
-                            + opponent.possessiveAdjective() + " divine power.</b>"));
+            c.write(Global.capitalizeFirstLetter("<b>" +
+                opponent.subjectAction("flush", "flushes")
+                + " as the feedback from " + nameOrPossessivePronoun() + " orgasm feeds "
+                + opponent.possessiveAdjective() + " divine power.</b>"));
             opponent.add(c, new Alluring(opponent, 5));
             opponent.buildMojo(c, 100);
             if (c.getStance().inserted(this) && opponent.has(Trait.divinity)) {
@@ -2393,10 +2431,10 @@ public Character clone() throws CloneNotSupportedException {
             }
         }
         if (opponent.has(Trait.sexualmomentum)) {
-            c.write(Global.capitalizeFirstLetter(
-                            "<b>" + opponent.subjectAction("are more composed", "seems more composed") + " as "
-                                            + nameOrPossessivePronoun() + " forced orgasm goes straight to "
-                                            + opponent.possessiveAdjective() + " ego.</b>"));
+            c.write(Global.capitalizeFirstLetter("<b>"
+               + opponent.subjectAction("are more composed", "seems more composed")
+                + " as " + nameOrPossessivePronoun() + " forced orgasm goes straight to "
+                + opponent.possessiveAdjective() + " ego.</b>"));
             opponent.restoreWillpower(c, 10 + Global.random(10));
         }
     }
