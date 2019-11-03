@@ -24,9 +24,9 @@ import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.FeetPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.HandsPart;
-import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.TentaclePart;
+import nightgames.characters.body.mods.ExternalTentaclesMod;
 import nightgames.characters.body.mods.GooeySkinMod;
 import nightgames.characters.body.mods.catcher.GooeyMod;
 import nightgames.characters.body.mods.pitcher.SlimyCockMod;
@@ -993,8 +993,7 @@ public class Player extends Character {
             add(c, new PlayerSlimeDummy(this));
             if (hasPussy() && !body.getRandomPussy().moddedPartCountsAs(GooeyMod.TYPE)) {
                 body.getRandomPussy().addTemporaryMod(new GooeyMod(), 999);
-                body.temporaryAddOrReplacePartWithType(
-                    new TentaclePart("slime filaments", PussyPart.TYPE, "slime", 0.0, 1.0, 1.0), 999);
+                body.getRandomPussy().addTemporaryMod(new ExternalTentaclesMod(), 999);
             }
             if (hasDick() && !body.getRandomCock().moddedPartCountsAs(SlimyCockMod.TYPE)) {
                 body.getRandomCock().addTemporaryMod(new SlimyCockMod(), 999);
