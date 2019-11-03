@@ -600,8 +600,8 @@ public class Body implements Cloneable {
         perceptionBonus += dominance;
 
         double multiplier = Math.max(0, 1 + ((sensitivity - 1) + (pleasure - 1) + (perceptionBonus - 1)));
-        double stageMultiplier = pleasureResolveCalculateStageMultipler(skill);
-        double staleness = pleasureResolveCalculateStaleness(c, skill);
+        double stageMultiplier = pleasureResolveCalculateStageMultiplier(Optional.ofNullable(skill));
+        double staleness = pleasureResolveCalculateStaleness(c, Optional.ofNullable(skill));
         multiplier = Math.max(0, multiplier + stageMultiplier) * staleness;
 
         double damage = base * multiplier;
@@ -635,29 +635,22 @@ public class Body implements Cloneable {
 
         double percentPleasure = 100.0 * result / character.getArousal().max();
         pleasureResolveSexualDynamo(c, opponent, percentPleasure);
-        pleasureResolveShowmanship(c, opponent, percentPleasure, result, skill);
+        pleasureResolveShowmanship(c, opponent, percentPleasure, result, Optional.ofNullable(skill));
 
         character.resolvePleasure(result, c, opponent, target, with);
         pleasureResolveFetishTrainer(c, opponent, with);
         return result;
     }
 
-    private double pleasureResolveCalculateStageMultipler(Skill skill) {
-        double stageMultiplier = 0.0;
-        if (skill != null) {
-            stageMultiplier = skill.getStage().multiplierFor(character);
-        }
-        return stageMultiplier;
+    private double pleasureResolveCalculateStageMultiplier(Optional<Skill> skill) {
+        return skill.map(s -> s.getStage().multiplierFor(character)).orElse(0.0);
     }
 
-    private double pleasureResolveCalculateStaleness(Combat c, Skill skill) {
-        double staleness = 1.0;
-        if (skill != null) {
-            if (skill.getSelf() != null && c.getCombatantData(skill.getSelf()) != null) {
-                staleness = c.getCombatantData(skill.getSelf()).getMoveModifier(skill);
-            }
-        }
-        return staleness;
+    private double pleasureResolveCalculateStaleness(Combat c, Optional<Skill> skill) {
+        return skill
+            .filter(s -> s.getSelf() != null && c.getCombatantData(s.getSelf()) != null)
+            .map(s -> c.getCombatantData(s.getSelf()).getMoveModifier(s))
+            .orElse(1.0);
     }
 
     private void pleasureResolveWriteSynopsis(Combat c,
@@ -811,7 +804,7 @@ public class Body implements Cloneable {
         }
     }
 
-    private void pleasureResolveShowmanship(Combat c, Character opponent, double percentPleasureDealt, int pleasureDamage, Skill skill) {
+    private void pleasureResolveShowmanship(Combat c, Character opponent, double percentPleasureDealt, int pleasureDamage, Optional<Skill> skill) {
         if (character.has(Trait.showmanship)
             && percentPleasureDealt >= 5
             && opponent.isPet()
@@ -819,7 +812,7 @@ public class Body implements Cloneable {
             Character voyeur = c.getOpponent(character);
             c.write(character, Global.format("{self:NAME-POSSESSIVE} moans as {other:subject-action:make|makes} a show of pleasing {other:possessive} {self:master} "
                 + "turns %s on immensely.", character, opponent, voyeur.nameDirectObject()));
-            voyeur.temptWithSkill(c, character, null, Math.max(Global.random(14, 20), pleasureDamage / 3), skill);
+            voyeur.tempt(c, character, null, Math.max(Global.random(14, 20), pleasureDamage / 3), skill);
         }
     }
 

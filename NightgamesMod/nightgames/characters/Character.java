@@ -973,7 +973,7 @@ public Character clone() throws CloneNotSupportedException {
      *  An optional Skill.
      * 
      * */
-    private void tempt(Combat c, Character tempter, BodyPart with, int i, Optional<Skill> skillOptional) {
+    public void tempt(Combat c, Character tempter, BodyPart with, int i, Optional<Skill> skillOptional) {
         String extraMsg = "";
         double baseModifier = 1.0;
         if (has(Trait.oblivious)) {
