@@ -10,15 +10,6 @@ public class TentaclePart extends GenericBodyPart {
     public static final String TYPE = "tentacles";
     String attachpoint;
     private String fluids;
-    static final String[] allowedAttachTypes = {
-        AssPart.TYPE,
-        MouthPart.TYPE,
-        PussyPart.TYPE,
-        HandsPart.TYPE,
-        FeetPart.TYPE,
-        TailPart.TYPE,
-        CockPart.TYPE
-    };
 
     public static void pleasureWithTentacles(Combat c, Character target, int strength, BodyPart targetPart) {
         target.body.pleasure(c.getOpponent(target), new TentaclePart(), targetPart, strength, c);
@@ -71,12 +62,6 @@ public class TentaclePart extends GenericBodyPart {
     @Override
     public double applySubBonuses(Character self, Character opponent, BodyPart with, BodyPart target, double damage,
                     Combat c) {
-        if (with.isType(attachpoint) && Global.random(3) > -1) {
-            c.write(self, Global.format("Additionally, {self:name-possessive} " + fullDescribe(self)
-                            + " take the opportunity to squirm against {other:name-possessive} "
-                            + target.fullDescribe(opponent) + ".", self, opponent));
-            opponent.body.pleasure(self, this, target, 5, c);
-        }
         return 0;
     }
 
