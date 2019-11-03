@@ -2469,7 +2469,7 @@ public Character clone() throws CloneNotSupportedException {
             reduced += " (Strong-willed)";
         }
         if (is(Stsflag.feral) && primary) {
-            amt = amt * 1 / 2;
+            amt = amt / 2;
             reduced += " (Feral)";
         }
         int old = willpower.get();
