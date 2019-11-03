@@ -544,9 +544,6 @@ public class Body implements Cloneable {
         if (opponent != null) {
             baseBonusDamage += with.applyBonuses(opponent, character, target, magnitude, c);
             baseBonusDamage += target.applyReceiveBonuses(character, opponent, with, magnitude, c);
-            for (BodyPart p : opponent.body.getCurrentParts()) {
-                baseBonusDamage += p.applySubBonuses(opponent, character, with, target, magnitude, c);
-            }
             // double the base damage if the opponent is submissive and in a
             // submissive stance
             if (c.getStance().sub(opponent) && opponent.has(Trait.submissive) && target.isErogenous()) {

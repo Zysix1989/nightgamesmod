@@ -37,9 +37,6 @@ public interface BodyPart {
 
     public double applyBonuses(Character self, Character opponent, BodyPart target, double damage, Combat c);
 
-    public double applySubBonuses(Character self, Character opponent, BodyPart with, BodyPart target, double damage,
-                    Combat c);
-
     public String getFluids(Character c);
 
     public default double getFluidAddictiveness(Character c) {

@@ -310,12 +310,6 @@ public class GenericBodyPart implements BodyPart {
     }
 
     @Override
-    public double applySubBonuses(Character self, Character opponent, BodyPart with, BodyPart target, double damage,
-                    Combat c) {
-        return 0;
-    }
-
-    @Override
     public int attributeModifier(Attribute a) {
         return mods.stream()
             .mapToInt(m -> m.attributeModifier(a).orElse(0))
