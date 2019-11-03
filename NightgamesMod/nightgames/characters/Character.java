@@ -155,8 +155,7 @@ public abstract class Character extends Observable implements Cloneable {
     public int cloned;                              //Merge into tracker object for combat session. - DSM 
     private Map<Integer, LevelUpData> levelPlan;    //This has bloated save files quite a bit, making an XML save file attributeModifier very desireable for editing and reading. - DSM
     private Growth growth;                          //FIXME: Growth, as well as a host of many variables in many classes, have many public variables. Move to protected or private and implement mutators. The compliler is your friend. - DSM
-    private BodyPart lastOrgasmPart;                //Merge into tracker object for combat session. - DSM
-    
+
     /**Constructor for a character - creates a character off of a name and level. Base Attributes start at 5 and other stats are derived from that. 
      * @param name
      * The name of the character. 
@@ -4543,14 +4542,6 @@ public Character clone() throws CloneNotSupportedException {
     
     public boolean checkAddiction(AddictionType type, Character cause) {
         return getAddiction(type).map(addiction -> addiction.isActive() && addiction.wasCausedBy(cause)).orElse(false);
-    }
-
-    public void setLastOrgasmPart(BodyPart part) {
-        lastOrgasmPart=part;
-    }
-    
-    public BodyPart getLastOrgasmPart() {
-        return lastOrgasmPart;
     }
 
     public String loserLiner(Combat c, Character target) {
