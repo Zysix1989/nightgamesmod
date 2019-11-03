@@ -1304,30 +1304,41 @@ public class Body implements Cloneable {
         }
         if (opponent.has(Trait.hypnoticsemen)) {
             c.write(character, Global.format(
-                            "<br/><b>{other:NAME-POSSESSIVE} hypnotic semen takes its toll on {self:name-possessive} willpower, rendering {self:direct-object} doe-eyed and compliant.</b>",
+                "<br/><b>{other:NAME-POSSESSIVE} hypnotic semen takes its toll on "
+                    + "{self:name-possessive} willpower, rendering {self:direct-object} doe-eyed "
+                    + "and compliant.</b>",
                             character, opponent));
             character.loseWillpower(c, 10 + Global.random(10));
         }
         if (opponent.has(Trait.heatedsemen)) {
             c.write(Global.format(
-                            "<br><b>{other:NAME-POSSESSIVE} boiling semen takes its toll on {self:name-possessive} stamina, rendering {self:direct-object} limp and compliant.</b>",
-                            character, opponent));
+                "<br><b>{other:NAME-POSSESSIVE} boiling semen takes its toll on "
+                    + "{self:name-possessive} stamina, rendering {self:direct-object} limp "
+                    + "and compliant.</b>",
+                character, opponent));
             character.drain(c, opponent, character.getStamina().max()/3+20);
         }
         if (part.getType().equals(AssPart.TYPE) || part.getType().equals(PussyPart.TYPE)) {
             if (character.has(Trait.RapidMeiosis) && character.has(Trait.slime)) {
-                c.write(opponent, Global.format("{self:NAME-POSSESSIVE} hungry %s seems to vacuum {other:name-possessive} sperm into itself as {other:pronoun-action:cum|cums}. "
-                                + "As {other:pronoun-action:lay|lays} there heaving in exertion, {self:possessive} belly rapidly bloats up "
-                                + "as if going through 9 months of pregancy within seconds. With a groan, {self:pronoun-action:expel|expels} a massive quantity of slime onto the floor. "
-                                + "The slime seems to quiver for a second before reforming itself into an exact copy of {self:name-do}!", character, opponent, part.describe(character)));
+                c.write(opponent, Global.format("{self:NAME-POSSESSIVE} hungry %s seems to "
+                    + "vacuum {other:name-possessive} sperm into itself as "
+                    + "{other:pronoun-action:cum|cums}. As {other:pronoun-action:lay|lays} there "
+                    + "heaving in exertion, {self:possessive} belly rapidly bloats up as if going "
+                    + "through 9 months of pregancy within seconds. With a groan, "
+                    + "{self:pronoun-action:expel|expels} a massive quantity of slime onto the "
+                    + "floor. The slime seems to quiver for a second before reforming itself into "
+                    + "an exact copy of {self:name-do}!",
+                    character, opponent, part.describe(character)));
                 c.addPet(character, Divide.makeClone(c, character).getSelf());
             }
             if (opponent.has(Trait.RapidMeiosis) && opponent.has(Trait.slime)) {
-                c.write(opponent, Global.format("After {other:name-possessive} gooey cum fills {self:name-possessive} %s, "
-                                + "{self:pronoun-action:feel|feels} {self:possessive} belly suddenly churn and inflate. "
-                                + "The faux-semen seems to be multiplying inside {self:direct-object}! "
-                                + "Without warning, the sticky liquid makes a quick exit out of {self:possessive} orifice "
-                                + "and reforms itself into a copy of {other:name-do}!", character, opponent, part.describe(character)));
+                c.write(opponent, Global.format("After {other:name-possessive} gooey cum "
+                    + "fills {self:name-possessive} %s, {self:pronoun-action:feel|feels} "
+                    + "{self:possessive} belly suddenly churn and inflate. The faux-semen seems to "
+                    + "be multiplying inside {self:direct-object}! Without warning, the sticky "
+                    + "liquid makes a quick exit out of {self:possessive} orifice and reforms "
+                    + "itself into a copy of {other:name-do}!",
+                    character, opponent, part.describe(character)));
                 c.addPet(opponent, Divide.makeClone(c, opponent).getSelf());
             }
         }
