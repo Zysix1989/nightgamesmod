@@ -10,8 +10,15 @@ public class TentaclePart extends GenericBodyPart {
     public static final String TYPE = "tentacles";
     String attachpoint;
     private String fluids;
-    static final String[] allowedAttachTypes = {AssPart.TYPE, MouthPart.TYPE, PussyPart.TYPE,
-        HandsPart.TYPE, FeetPart.TYPE, TailPart.TYPE, CockPart.TYPE};
+    static final String[] allowedAttachTypes = {
+        AssPart.TYPE,
+        MouthPart.TYPE,
+        PussyPart.TYPE,
+        HandsPart.TYPE,
+        FeetPart.TYPE,
+        TailPart.TYPE,
+        CockPart.TYPE
+    };
 
     public static void pleasureWithTentacles(Combat c, Character target, int strength, BodyPart targetPart) {
         target.body.pleasure(c.getOpponent(target), new TentaclePart(), targetPart, strength, c);

@@ -12,7 +12,6 @@ import org.jtwig.JtwigTemplate;
 public class TentacledMod extends PartMod {
     public static final String TYPE = "tentacled";
 
-
     public TentacledMod() {
         super(TYPE, 0, 1, .2);
     }
