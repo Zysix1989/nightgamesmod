@@ -60,12 +60,6 @@ public class TentaclePart extends GenericBodyPart {
     }
 
     @Override
-    public double applySubBonuses(Character self, Character opponent, BodyPart with, BodyPart target, double damage,
-                    Combat c) {
-        return 0;
-    }
-
-    @Override
     public boolean isReady(Character c) {
         return true;
     }
