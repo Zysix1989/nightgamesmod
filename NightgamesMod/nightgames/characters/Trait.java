@@ -132,7 +132,6 @@ public enum Trait {
     polecontrol("Pole Control", "Always hit the right spots"), // Dick damage upgrade
     hypnoticsemen("Hypnotic Semen", "Cum drains willpower"), // Semen willpower damage trait
     sweetlips("Sweet lips", "Enticing lips makes kissing dangerous"), // more kickback damage from kiss
-    heatedsemen("Heated Semen", "Cum drains stamina"), // Jewel stamina draining semen trait
     testosterone("Testosterone", "More powerful muscles"), // Having a cock gives + to power
     pussyhandler("Pussy Handler", "Expert at pleasing the pussy"), // Bonus damage to pussies
     dickhandler("Dick Handler", "Expert at pleasing cocks"), // Bonus damage to cocks

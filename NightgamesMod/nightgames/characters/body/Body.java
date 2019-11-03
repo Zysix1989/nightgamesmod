@@ -1310,14 +1310,6 @@ public class Body implements Cloneable {
                             character, opponent));
             character.loseWillpower(c, 10 + Global.random(10));
         }
-        if (opponent.has(Trait.heatedsemen)) {
-            c.write(Global.format(
-                "<br><b>{other:NAME-POSSESSIVE} boiling semen takes its toll on "
-                    + "{self:name-possessive} stamina, rendering {self:direct-object} limp "
-                    + "and compliant.</b>",
-                character, opponent));
-            character.drain(c, opponent, character.getStamina().max()/3+20);
-        }
         if (part.getType().equals(AssPart.TYPE) || part.getType().equals(PussyPart.TYPE)) {
             if (character.has(Trait.RapidMeiosis) && character.has(Trait.slime)) {
                 c.write(opponent, Global.format("{self:NAME-POSSESSIVE} hungry %s seems to "
