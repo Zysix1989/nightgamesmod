@@ -3,13 +3,12 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.mods.AngelicWingsMod;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.mods.SlimeWingsMod;
-import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.body.WingsPart;
+import nightgames.characters.body.mods.AngelicWingsMod;
+import nightgames.characters.body.mods.SlimeWingsMod;
 import nightgames.characters.body.mods.catcher.DivineMod;
+import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -77,7 +76,7 @@ public class MimicAngel extends Skill {
         wings.addMod(new AngelicWingsMod());
         wings.addMod(new SlimeWingsMod());
         getSelf().body.temporaryAddOrReplacePartWithType(wings, 10);
-        BreastsPart part = getSelf().body.getBreastsBelow(Size.max());
+        BreastsPart part = getSelf().body.getRandomBreasts();
         if (part != null) {
             part.temporarilyChangeSize(2, 10);
         }

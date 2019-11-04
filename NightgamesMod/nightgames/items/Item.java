@@ -5,22 +5,21 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
-import nightgames.characters.body.mods.DemonicWingsMod;
-import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.EarsPart;
-import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
-import nightgames.characters.body.mods.catcher.DemonicMod;
+import nightgames.characters.body.mods.DemonicTailMod;
+import nightgames.characters.body.mods.DemonicWingsMod;
+import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.mods.TentacledMod;
+import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -154,18 +153,18 @@ public enum Item implements Loot {
     TinyDraft("Tiny Draft", 100, "Temporarily shrink a penis", "a ",
         Collections.singleton((ItemEffect) new BodyDowngradeEffect("drink", "throw",
             new CockPart(Size.Average))),
-        (c, self, target) -> self.body.getCockAbove(Size.min()) != null,
+        (c, self, target) -> self.body.getRandomCock().getSize().compareTo(Size.min()) > 0,
         15),
     PriapusDraft("Priapus Draft", 150, "Temporarily grow a penis", "a ",
         Collections.singleton((ItemEffect) new BodyGrowthPlusEffect("drink", "throw",
             new CockPart(Size.Average))),
         (c, self, target) -> !self.hasDick()
-            || self.body.getCockBelow(Size.max()) != null,
+            || self.body.getRandomCock().getSize().compareTo(Size.max()) < 0,
         15),
     BustDraft("Bust Draft", 80, "Temporarily grow breasts", "a ", Collections.singleton(
         (ItemEffect) new BodyGrowthPlusEffect("drink", "throw",
             new BreastsPart(BreastsPart.Size.CCup))),
-        (c, self, target) -> self.body.getBreastsBelow(BreastsPart.Size.max()) != null,
+        (c, self, target) -> self.body.getRandomBreasts().getSize().compareTo(BreastsPart.Size.ACup) < 0,
         15),
     FemDraft("Fem Draft", 150, "Temporarily grow a pussy", "a ", Arrays.asList(
         (ItemEffect) new BodyGrowthPlusEffect("drink", "throw",

@@ -5,19 +5,18 @@ import nightgames.characters.Character;
 import nightgames.characters.Reyka;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.FeetPart;
-import nightgames.characters.body.HandsPart;
-import nightgames.characters.body.mods.DemonicWingsMod;
-import nightgames.characters.body.mods.SlimeWingsMod;
-import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.EarsPart;
+import nightgames.characters.body.FeetPart;
 import nightgames.characters.body.GenericBodyPart;
+import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.MouthPart;
-import nightgames.characters.body.mods.SlimeTailMod;
-import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
+import nightgames.characters.body.mods.DemonicTailMod;
+import nightgames.characters.body.mods.DemonicWingsMod;
+import nightgames.characters.body.mods.PointedEarsMod;
+import nightgames.characters.body.mods.SlimeTailMod;
+import nightgames.characters.body.mods.SlimeWingsMod;
 import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.combat.Combat;
@@ -88,7 +87,7 @@ public class MimicSuccubus extends Skill {
         ((GenericBodyPart) getSelf().body.getRandom(TailPart.TYPE)).addTemporaryMod(new DemonicTailMod(), 999);
         ((GenericBodyPart) getSelf().body.getRandom(TailPart.TYPE)).addTemporaryMod(new SlimeTailMod(), 999);
         ((GenericBodyPart) getSelf().body.get(EarsPart.TYPE)).addTemporaryMod(new PointedEarsMod(), 999);
-        BreastsPart part = getSelf().body.getBreastsBelow(Size.max());
+        BreastsPart part = getSelf().body.getRandomBreasts();
         if (part != null) {
             part.temporarilyChangeSize(4, 999);
         }

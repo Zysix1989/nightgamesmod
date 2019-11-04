@@ -5,7 +5,6 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
-import nightgames.characters.body.CockPart.Size;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -60,28 +59,28 @@ public class ShrinkRay extends Skill {
         target.add(c, new Shamed(target));
         if (permanent) {
             if (target.hasDick()) {
-                CockPart part = target.body.getCockAbove(Size.min());
+                CockPart part = target.body.getRandomCock();
                 if (part != null) {
                     part.changeSize(-1);
                 } else {
                     target.body.remove(target.body.getRandomCock());
                 }
             } else {
-                BreastsPart part = target.body.getBreastsAbove(BreastsPart.Size.min());
+                BreastsPart part = target.body.getRandomBreasts();
                 if (part != null) {
                     part.changeSize(-1);
                 }
             }
         } else {
             if (target.hasDick()) {
-                CockPart part = target.body.getCockAbove(Size.min());
+                CockPart part = target.body.getRandomCock();
                 if (part != null) {
                     part.temporarilyChangeSize(-1, 10);
                 } else {
                     target.body.temporaryRemovePart(target.body.getRandomCock(), 10);
                 }
             } else {
-                BreastsPart part = target.body.getBreastsAbove(BreastsPart.Size.min());
+                BreastsPart part = target.body.getRandomBreasts();
                 if (part != null) {
                     part.temporarilyChangeSize(-1, 10);
                 }

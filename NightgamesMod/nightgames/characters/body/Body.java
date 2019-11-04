@@ -303,70 +303,6 @@ public class Body implements Cloneable {
         return largest;
     }
 
-    public CockPart getCockBelow(CockPart.Size size) {
-        List<BodyPart> parts = get(CockPart.TYPE);
-        List<CockPart> upgradable = new ArrayList<>();
-        for (BodyPart part : parts) {
-            CockPart cock = (CockPart) part;
-            if (cock.getSize().compareTo(size) < 0) {
-                upgradable.add(cock);
-            }
-        }
-        if (upgradable.size() == 0) {
-            return null;
-        }
-
-        return upgradable.get(Global.random(upgradable.size()));
-    }
-
-    public CockPart getCockAbove(CockPart.Size size) {
-        List<BodyPart> parts = get(CockPart.TYPE);
-        List<CockPart> upgradable = new ArrayList<>();
-        for (BodyPart part : parts) {
-            CockPart b = (CockPart) part;
-            if (b.getSize().compareTo(size) > 0) {
-                upgradable.add(b);
-            }
-        }
-        if (upgradable.size() == 0) {
-            return null;
-        }
-
-        return upgradable.get(Global.random(upgradable.size()));
-    }
-
-    public BreastsPart getBreastsBelow(BreastsPart.Size size) {
-        List<BodyPart> parts = get(BreastsPart.TYPE);
-        List<BreastsPart> upgradable = new ArrayList<>();
-        for (BodyPart part : parts) {
-            BreastsPart b = (BreastsPart) part;
-            if (b.getSize().compareTo(size) < 0) {
-                upgradable.add(b);
-            }
-        }
-        if (upgradable.size() == 0) {
-            return null;
-        }
-
-        return upgradable.get(Global.random(upgradable.size()));
-    }
-
-    public BreastsPart getBreastsAbove(BreastsPart.Size size) {
-        List<BodyPart> parts = get(BreastsPart.TYPE);
-        List<BreastsPart> upgradable = new ArrayList<>();
-        for (BodyPart part : parts) {
-            BreastsPart b = (BreastsPart) part;
-            if (b.getSize().compareTo(size) > 0) {
-                upgradable.add(b);
-            }
-        }
-        if (upgradable.size() == 0) {
-            return null;
-        }
-
-        return upgradable.get(Global.random(upgradable.size()));
-    }
-
     public Optional<BodyFetish> getFetish(String part) {
         Optional<Status> fs = character.status.stream().filter(status -> {
                                                   if (status.flags().contains(Stsflag.bodyfetish)) {
@@ -1447,36 +1383,6 @@ public class Body implements Cloneable {
 
     public FacePart getFace() {
         return (FacePart)getRandom(FacePart.TYPE);
-    }
-
-    public AssPart getAssBelow(Size size) {
-        List<BodyPart> parts = get(AssPart.TYPE);
-        List<AssPart> upgradable = new ArrayList<>();
-        for (BodyPart part : parts) {
-            AssPart b = (AssPart) part;
-            if (b.getSize().compareTo(size) < 0) {
-                upgradable.add(b);
-            }
-        }
-        if (upgradable.size() == 0) {
-            return null;
-        }
-        return Global.pickRandom(upgradable).get();
-    }
-
-    public AssPart getAssAbove(Size size) {
-        List<BodyPart> parts = get(AssPart.TYPE);
-        List<AssPart> downgradable = new ArrayList<>();
-        for (BodyPart part : parts) {
-            AssPart b = (AssPart) part;
-            if (b.getSize().compareTo(size) < 0) {
-                downgradable.add(b);
-            }
-        }
-        if (downgradable.size() == 0) {
-            return null;
-        }
-        return Global.pickRandom(downgradable).get();
     }
 
     // yeah i know it's not that simple, but best try right now

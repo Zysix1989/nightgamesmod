@@ -198,15 +198,15 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Ass Expansion", 1500) {
             @Override
             void buy(Character buyer) {
-                AssPart target = buyer.body.getAssBelow(AssPart.Size.max());
+                AssPart target = buyer.body.getRandomAss();
                 assert target != null;
                 target.changeSize(1);
             }
 
             @Override
             boolean available(Character buyer) {
-                AssPart target = buyer.body.getAssBelow(AssPart.Size.max());
-                return target != null;
+                AssPart target = buyer.body.getRandomAss();
+                return target.getSize().compareTo(AssPart.Size.max()) < 0;
             }
 
             @Override
@@ -218,15 +218,15 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Ass Reduction", 1500) {
             @Override
             void buy(Character buyer) {
-                AssPart target = buyer.body.getAssAbove(AssPart.Size.min());
+                AssPart target = buyer.body.getRandomAss();
                 assert target != null;
                 target.changeSize(-1);
             }
 
             @Override
             boolean available(Character buyer) {
-                AssPart target = buyer.body.getAssAbove(AssPart.Size.min());
-                return target != null;
+                AssPart target = buyer.body.getRandomAss();
+                return target.getSize().compareTo(AssPart.Size.min()) > 0;
             }
 
             @Override
@@ -238,15 +238,15 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Breast Expansion", 1500) {
             @Override
             void buy(Character buyer) {
-                BreastsPart target = buyer.body.getBreastsBelow(BreastsPart.Size.max());
+                BreastsPart target = buyer.body.getRandomBreasts();
                 assert target != null;
                 target.changeSize(1);
             }
 
             @Override
             boolean available(Character buyer) {
-                BreastsPart target = buyer.body.getBreastsBelow(BreastsPart.Size.max());
-                return target != null;
+                BreastsPart target = buyer.body.getRandomBreasts();
+                return target.getSize().compareTo(BreastsPart.Size.max()) < 0;
             }
 
             @Override
@@ -258,15 +258,15 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Breast Reduction", 1500) {
             @Override
             void buy(Character buyer) {
-                BreastsPart target = buyer.body.getBreastsAbove(BreastsPart.Size.min());
+                BreastsPart target = buyer.body.getRandomBreasts();
                 assert target != null;
                 target.changeSize(-1);
             }
 
             @Override
             boolean available(Character buyer) {
-                BreastsPart target = buyer.body.getBreastsAbove(BreastsPart.Size.min());
-                return target != null;
+                BreastsPart target = buyer.body.getRandomBreasts();
+                return target.getSize().compareTo(BreastsPart.Size.min()) > 0;
             }
 
             @Override
@@ -432,15 +432,15 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Cock Expansion", 1500) {
             @Override
             void buy(Character buyer) {
-                CockPart target = buyer.body.getCockBelow(Size.max());
+                CockPart target = buyer.body.getRandomCock();
                 assert target != null;
                 target.changeSize(1);
             }
 
             @Override
             boolean available(Character buyer) {
-                CockPart target = buyer.body.getCockBelow(Size.max());
-                return target != null;
+                CockPart target = buyer.body.getRandomCock();
+                return target.getSize().compareTo(Size.max()) < 0;
             }
 
             @Override
@@ -456,15 +456,15 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Cock Reduction", 1500) {
             @Override
             void buy(Character buyer) {
-                CockPart target = buyer.body.getCockAbove(Size.min());
+                CockPart target = buyer.body.getRandomCock();
                 assert target != null;
                 target.changeSize(-1);
             }
 
             @Override
             boolean available(Character buyer) {
-                CockPart target = buyer.body.getCockAbove(Size.min());
-                return target != null;
+                CockPart target = buyer.body.getRandomCock();
+                return target.getSize().compareTo(Size.min()) > 0;
             }
 
             @Override

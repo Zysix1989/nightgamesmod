@@ -133,7 +133,7 @@ public class FondleBreasts extends Skill {
 
     @Override
     public String getLabel(Combat c) {
-        return c.getOpponent(getSelf()).body.getBreastsAbove(Size.FlatChest) != null ? "Fondle Breasts"
+        return c.getOpponent(getSelf()).body.getRandomBreasts().getSize().compareTo(Size.FlatChest) > 0 ? "Fondle Breasts"
                         : "Tease Chest";
     }
 
