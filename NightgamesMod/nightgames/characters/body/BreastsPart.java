@@ -328,4 +328,9 @@ public class BreastsPart extends GenericBodyPart implements Sizable<BreastsPart.
     public BreastsPart copy() {
         return new BreastsPart(this);
     }
+
+    @Override
+    public boolean isMultipleObjects() {
+        return true;
+    }
 }

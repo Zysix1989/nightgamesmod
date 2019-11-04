@@ -393,4 +393,8 @@ public class GenericBodyPart implements BodyPart {
             throw new UnsupportedOperationException(String.format("no attributeModifier with type %s", modType));
         }
     }
+
+    public boolean isMultipleObjects() {
+        return false;
+    }
 }

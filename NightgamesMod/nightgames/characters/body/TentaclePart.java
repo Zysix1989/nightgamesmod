@@ -73,4 +73,9 @@ public class TentaclePart extends GenericBodyPart {
     public TentaclePart copy() {
         return new TentaclePart(this);
     }
+
+    @Override
+    public boolean isMultipleObjects() {
+        return true;
+    }
 }

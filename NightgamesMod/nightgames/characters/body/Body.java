@@ -1479,14 +1479,6 @@ public class Body implements Cloneable {
         return Global.pickRandom(downgradable).get();
     }
 
-    public static String partPronoun(String type) {
-        if (pluralParts.contains(type)) {
-            return "they";
-        } else {
-            return "it";
-        }
-    }
-
     // yeah i know it's not that simple, but best try right now
     public static String partArticle(String type) {
         if (pluralParts.contains(type)) {

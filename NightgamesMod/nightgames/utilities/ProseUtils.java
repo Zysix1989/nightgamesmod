@@ -36,4 +36,8 @@ public class ProseUtils {
         }
         return verb + "s";
     }
+
+    public static String neuterSubjectPronoun(boolean plural) {
+        return plural ? "they" : "it";
+    }
 }

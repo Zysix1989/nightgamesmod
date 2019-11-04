@@ -59,4 +59,9 @@ public class EarsPart extends GenericBodyPart {
         obj.addProperty("enum", getMods().stream().map(m -> m.getModType()).findAny().orElse(NORMAL_TYPE));
         return obj;
     }
+
+    @Override
+    public boolean isMultipleObjects() {
+        return true;
+    }
 }

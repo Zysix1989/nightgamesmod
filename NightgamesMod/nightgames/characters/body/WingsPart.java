@@ -38,4 +38,9 @@ public class WingsPart extends GenericBodyPart {
     public String adjective() {
         return "alar";
     }
+
+    @Override
+    public boolean isMultipleObjects() {
+        return true;
+    }
 }

@@ -20,11 +20,11 @@ import nightgames.characters.NPC;
 import nightgames.characters.State;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.FeetPart;
+import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.characters.body.mods.catcher.CyberneticMod;
@@ -86,6 +86,7 @@ import nightgames.status.Winded;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.Addiction.Severity;
 import nightgames.status.addiction.AddictionType;
+import nightgames.utilities.ProseUtils;
 
 public class Combat {
     private static final int NPC_TURN_LIMIT = 75;
@@ -240,10 +241,11 @@ public class Combat {
     public void applyFetish(Character self, Character other, String FetishType) {
         if ( !other.body.get(FetishType).isEmpty() && !self.body.getFetish(FetishType).isPresent()) {
             if (self.human()) {
+                var part = (GenericBodyPart) other.body.getRandom(FetishType);
                 write(self,
                     "As your first battle of the night begins, you can't help but think about "
                     + other.nameOrPossessivePronoun() + " " + FetishType
-                    + " and how " + Body.partPronoun(FetishType)
+                    + " and how " + ProseUtils.neuterSubjectPronoun(part.isMultipleObjects())
                     + " would feel on your skin.");
             } 
             self.add(this, new BodyFetish(self, null, FetishType, .25));

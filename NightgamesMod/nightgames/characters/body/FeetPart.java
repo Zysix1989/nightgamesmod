@@ -35,4 +35,9 @@ public class FeetPart extends GenericBodyPart {
         }
         return bonus;
     }
+
+    @Override
+    public boolean isMultipleObjects() {
+        return true;
+    }
 }

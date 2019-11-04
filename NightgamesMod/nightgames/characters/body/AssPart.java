@@ -273,4 +273,5 @@ public class AssPart extends GenericBodyPart implements Sizable<AssPart.Size> {
             + " "
             + super.fullDescribe(c);
     }
+
 }

@@ -47,4 +47,9 @@ public class HandsPart extends GenericBodyPart {
         }
         return bonus;
     }
+
+    @Override
+    public boolean isMultipleObjects() {
+        return true;
+    }
 }
