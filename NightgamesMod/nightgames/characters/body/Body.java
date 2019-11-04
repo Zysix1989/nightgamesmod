@@ -305,14 +305,14 @@ public class Body implements Cloneable {
 
     public Optional<BodyFetish> getFetish(String part) {
         Optional<Status> fs = character.status.stream().filter(status -> {
-                                                  if (status.flags().contains(Stsflag.bodyfetish)) {
-                                                      BodyFetish fetish = (BodyFetish) status;
-                                                      if (fetish.part.equalsIgnoreCase(part)) {
-                                                          return true;
-                                                      }
-                                                  }
-                                                  return false;
-                                              }).findFirst();
+            if (status.flags().contains(Stsflag.bodyfetish)) {
+                BodyFetish fetish = (BodyFetish) status;
+                if (fetish.part.equalsIgnoreCase(part)) {
+                    return true;
+                }
+            }
+            return false;
+        }).findFirst();
         return fs.map(status -> (BodyFetish) status);
     }
 
