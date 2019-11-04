@@ -168,14 +168,6 @@ public class PussyPart extends GenericBodyPart {
         return "anal";
     }
 
-    public BodyPart upgrade() {
-        return this;
-    }
-
-    public BodyPart downgrade() {
-        return this;
-    }
-
     public CockPart getEquivalentCock() {
         List<PartMod> newMods = getMods().stream()
             .filter(mod -> mod instanceof CatcherMod)
