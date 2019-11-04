@@ -36,10 +36,7 @@ public class PussyPart extends GenericBodyPart {
             return;
         }
         b.append("A ");
-        if (c.getArousal()
-             .percent() > 15
-                        && c.getArousal()
-                            .percent() < 60) {
+        if (c.getArousal().percent() > 15 && c.getArousal().percent() < 60) {
             b.append("moist ");
         } else if (c.getArousal()
                     .percent() >= 60) {
@@ -50,7 +47,9 @@ public class PussyPart extends GenericBodyPart {
         }
         b.append(describe(c));
         b.append(' ');
-        b.append("is nested between " + c.nameOrPossessivePronoun() + " legs.");
+        b.append("is nested between ")
+            .append(c.nameOrPossessivePronoun())
+            .append(" legs.");
     }
 
     @Override
