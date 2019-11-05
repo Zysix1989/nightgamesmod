@@ -77,7 +77,6 @@ public class Body implements Cloneable {
     private final static String[] fetishParts = {AssPart.TYPE, FeetPart.TYPE, CockPart.TYPE, "wings", TailPart.TYPE, TentaclePart.TYPE, BreastsPart.TYPE};
 
     private LinkedHashSet<BodyPart> bodyParts;
-    public double hotness;
     private transient Collection<PartReplacement> replacements;
     private transient Collection<BodyPart> currentParts;
     transient public Character character;
@@ -88,7 +87,6 @@ public class Body implements Cloneable {
         bodyParts = new LinkedHashSet<>();
         currentParts = new HashSet<>();
         replacements = new ArrayList<>();
-        hotness = 1.0;
         height = 170;
     }
 
@@ -99,7 +97,6 @@ public class Body implements Cloneable {
     public Body(Character character, double hotness) {
         this();
         this.character = character;
-        this.hotness = hotness;
     }
 
     private Collection<BodyPart> getCurrentParts() {
@@ -318,7 +315,7 @@ public class Body implements Cloneable {
 
     public double getHotness(Character opponent) {
         // represents tempt damage
-        double bodyHotness = hotness;
+        double bodyHotness = 1.0;
         for (BodyPart part : getCurrentParts()) {
             bodyHotness += part.getHotness(character, opponent) * (getFetish(part.getType()).isPresent() ? 2 : 1);
         }
@@ -1067,7 +1064,6 @@ public class Body implements Cloneable {
 
      public JsonObject save() {
         JsonObject bodyObj = new JsonObject();
-        bodyObj.addProperty("hotness", hotness);
         bodyObj.addProperty("femininity", baseFemininity);
         JsonArray partsArr = new JsonArray();
         for (BodyPart part : bodyParts) {
@@ -1355,8 +1351,6 @@ public class Body implements Cloneable {
 
         Body body = (Body) o;
 
-        if (!(Math.abs(body.hotness - hotness) < 1e-6))
-            return false;
         if (!(Math.abs(body.baseFemininity - baseFemininity) < 1e-6))
             return false;
         return bodyParts.equals(body.bodyParts);
@@ -1366,8 +1360,6 @@ public class Body implements Cloneable {
         int result;
         long temp;
         result = bodyParts.hashCode();
-        temp = Double.doubleToLongBits(hotness);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(baseFemininity);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;

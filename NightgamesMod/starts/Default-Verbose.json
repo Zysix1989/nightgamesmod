@@ -30,8 +30,7 @@
 			"ears":"normal",
 			"tail":"none",
 			"wings":"none",
-			"tentacles":[],
-			"hotness":1.0
+			"tentacles":[]
 		},
 		"clothing": [
 			"TShirt",

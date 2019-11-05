@@ -8,25 +8,25 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import nightgames.characters.body.mods.AngelicWingsMod;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.mods.DemonicWingsMod;
-import nightgames.characters.body.mods.CatTailMod;
-import nightgames.characters.body.EarsPart;
-import nightgames.characters.body.mods.CatEarsMod;
 import nightgames.characters.body.CockPart;
+import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.FacePart;
-import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.AnalPussyMod;
+import nightgames.characters.body.mods.AngelicWingsMod;
+import nightgames.characters.body.mods.CatEarsMod;
+import nightgames.characters.body.mods.CatTailMod;
+import nightgames.characters.body.mods.DemonicWingsMod;
 import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.characters.body.mods.catcher.CatcherMod;
 import nightgames.characters.body.mods.catcher.CyberneticMod;
@@ -53,7 +53,6 @@ class BodyConfiguration {
     protected Optional<TailPart> tail;
     protected Optional<WingsPart> wings;
     protected Optional<List<TentaclePart>> tentacles;
-    protected Optional<Double> hotness;
     protected Optional<Double> faceFemininity;
 
     BodyConfiguration() {
@@ -66,7 +65,6 @@ class BodyConfiguration {
         tail = Optional.empty();
         wings = Optional.empty();
         tentacles = Optional.empty();
-        hotness = Optional.empty();
     }
     
     BodyConfiguration(BodyConfiguration primaryConfig, BodyConfiguration secondaryConfig) {
@@ -79,7 +77,6 @@ class BodyConfiguration {
         tail = mergeOptionals(primaryConfig.tail, secondaryConfig.tail);
         wings = mergeOptionals(primaryConfig.wings, secondaryConfig.wings);
         tentacles = mergeOptionals(primaryConfig.tentacles, secondaryConfig.tentacles);
-        hotness = mergeOptionals(primaryConfig.hotness, secondaryConfig.hotness);
     }
 
     static BodyConfiguration parse(JsonObject obj) {
@@ -112,10 +109,6 @@ class BodyConfiguration {
         }
         config.tentacles = Optional.of(list);
 
-        if (obj.has("hotness")) {
-            config.hotness = Optional.of((double) obj.get("hotness").getAsFloat());
-        }
-
         if (obj.has("faceFemininity")) {
             config.faceFemininity = Optional.of((double) obj.get("faceFemininity").getAsFloat());
         }
@@ -142,7 +135,6 @@ class BodyConfiguration {
         replaceIfPresent(body, wings);
         replaceIfPresent(body, faceFemininity.map(fem -> new FacePart(Optional.ofNullable(body.getFace()).map(face -> face.hotness).orElse(0.0), fem)));
         applyTentacles(body);
-        hotness.ifPresent(h -> body.hotness = h);
     }
     
     private void replaceIfPresent(Body body, Optional<? extends BodyPart> part) {
@@ -167,7 +159,6 @@ class BodyConfiguration {
         result = prime * result + ((breasts == null) ? 0 : breasts.hashCode());
         result = prime * result + ((ears == null) ? 0 : ears.hashCode());
         result = prime * result + ((genitals == null) ? 0 : genitals.hashCode());
-        result = prime * result + ((hotness == null) ? 0 : hotness.hashCode());
         result = prime * result + ((tail == null) ? 0 : tail.hashCode());
         result = prime * result + ((tentacles == null) ? 0 : tentacles.hashCode());
         result = prime * result + ((type == null) ? 0 : type.hashCode());
@@ -204,12 +195,6 @@ class BodyConfiguration {
             if (other.genitals != null)
                 return false;
         } else if (!genitals.equals(other.genitals))
-            return false;
-        if (hotness == null) {
-            if (other.hotness != null) {
-                return false;
-            }
-        } else if (!hotness.equals(other.hotness))
             return false;
         if (tail == null) {
             if (other.tail != null)
