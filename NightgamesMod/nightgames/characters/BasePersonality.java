@@ -93,10 +93,7 @@ public abstract class BasePersonality implements Serializable {
 
     public void rest(int time) {
         if (preferredCockMod.isPresent() && character.rank > 0) {
-            Optional<BodyPart> optDick = character.body.get(CockPart.TYPE)
-                .stream()
-                .filter(part -> part.moddedPartCountsAs(preferredCockMod.get().getModType()))
-                .findAny();
+            Optional<BodyPart> optDick = Optional.ofNullable(character.body.getRandomCock());
             if (optDick.isPresent()) {
                 CockPart part = (CockPart) optDick.get();
                 part.addMod(preferredCockMod.get());

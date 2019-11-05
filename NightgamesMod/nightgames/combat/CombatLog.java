@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
@@ -95,7 +94,7 @@ class CombatLog {
         describeChanges(p2, last2, sb);
         describePositionChange(cbt.getStance(), lastP, sb, linebreak);
         sb.append(linebreak).append("____________________________").append(linebreak).append(linebreak);
-        
+
         try {
             last1 = p1.clone();
             last2 = p2.clone();
@@ -107,7 +106,7 @@ class CombatLog {
         lastP = cbt.getStance();
         return sb.toString();
     }
-    
+
     void logEnd(Optional<Character> winner) {
         StringBuilder sb = new StringBuilder("\nMATCH OVER: ");
         if (winner.isPresent()) {
@@ -222,11 +221,9 @@ class CombatLog {
 
     private static boolean describeBodyPartChange(Character c, Character clone, boolean otherChanges, String part,
                     StringBuilder sb) {
-        if (!c.body.get(part)
-                   .equals(clone.body.get(part))) {
+        if (!c.body.get(part).equals(clone.body.get(part))) {
             sb.append(otherChanges ? ',' : '[');
-            sb.append(clone.body.has(part) ? clone.body.getRandom(part)
-                                                       .describe(clone)
+            sb.append(clone.body.has(part) ? clone.body.getRandom(part).describe(clone)
                             : "none");
             sb.append("->");
             sb.append(c.body.has(part) ? c.body.getRandom(part)

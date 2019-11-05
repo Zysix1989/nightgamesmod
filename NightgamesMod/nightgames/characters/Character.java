@@ -1547,19 +1547,19 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public boolean hasDick() {
-        return body.get(CockPart.TYPE).size() > 0;
+        return body.getRandomCock() != null;
     }
 
     public boolean hasBalls() {
-        return body.get(Body.BALLS).size() > 0;
+        return body.getRandom(Body.BALLS) != null;
     }
 
     public boolean hasPussy() {
-        return body.get(PussyPart.TYPE).size() > 0;
+        return body.getRandomPussy() != null;
     }
 
     public boolean hasBreasts() {
-        return body.get(BreastsPart.TYPE).size() > 0;
+        return body.getRandomBreasts() != null;
     }
 
     public int countFeats() {
@@ -4015,11 +4015,8 @@ public Character clone() throws CloneNotSupportedException {
      * @return
      * Returns true if They have a demonic attributeModifier on their pussy or cock, or has the succubus trait.*/
     public boolean isDemonic() {
-        return has(Trait.succubus) ||
-            body.get(PussyPart.TYPE).stream()
-                .anyMatch(part -> part.moddedPartCountsAs(DemonicMod.TYPE))
-            || body.get(CockPart.TYPE).stream()
-            .anyMatch(part -> part.moddedPartCountsAs(IncubusCockMod.TYPE));
+        return has(Trait.succubus) || body.getRandomPussy().moddedPartCountsAs(DemonicMod.TYPE)
+            || body.getRandomCock().moddedPartCountsAs(IncubusCockMod.TYPE);
     }
 
     public int baseDisarm() {

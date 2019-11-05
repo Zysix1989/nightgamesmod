@@ -239,7 +239,7 @@ public class Combat {
     }
 
     public void applyFetish(Character self, Character other, String FetishType) {
-        if ( !other.body.get(FetishType).isEmpty() && !self.body.getFetish(FetishType).isPresent()) {
+        if ( other.body.getRandom(FetishType) != null && !self.body.getFetish(FetishType).isPresent()) {
             if (self.human()) {
                 var part = (GenericBodyPart) other.body.getRandom(FetishType);
                 write(self,
@@ -294,10 +294,8 @@ public class Combat {
     }
 
     private boolean checkBottleCollection(Character victor, Character loser, String modType) {
-        return victor.has(Item.EmptyBottle, 1) && loser.body.get(PussyPart.TYPE)
-                                                            .stream()
-                                                            .anyMatch(part -> part.moddedPartCountsAs(
-                                                                modType));
+        return victor.has(Item.EmptyBottle, 1)
+            && loser.body.getRandomPussy().moddedPartCountsAs(modType);
     }
 
     public void doVictory(Character victor, Character loser) {
@@ -515,7 +513,7 @@ public class Combat {
         
         if(ifPartNotNull == 1)
         {
-            Optional<Character> otherWithAura = opponents.stream().filter(other -> !other.body.get(fetishType).isEmpty()).findFirst();
+            Optional<Character> otherWithAura = opponents.stream().filter(other -> other.body.getRandom(fetishType) != null).findFirst();
             Clothing clothes = otherWithAura.get().getOutfit().getTopOfSlot(clothingType);
             boolean seeFetish = clothes == null || clothes.getLayer() <= 1 || otherWithAura.get().getOutfit().getExposure() >= .5;
             String partDescrip;
