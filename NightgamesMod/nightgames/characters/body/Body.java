@@ -57,6 +57,14 @@ public class Body implements Cloneable {
             removed = new LinkedHashSet<>(original.removed);
             duration = original.duration;
         }
+
+        private void timePasses() {
+            duration -= 1;
+        }
+
+        private boolean isExpired() {
+            return duration <= 0;
+        }
     }
 
     public static final String SKIN = "skin";
@@ -1115,8 +1123,8 @@ public class Body implements Cloneable {
 
         ArrayList<PartReplacement> expired = new ArrayList<>();
         for (PartReplacement r : replacements) {
-            r.duration -= 1;
-            if (r.duration <= 0) {
+            r.timePasses();
+            if (r.isExpired()) {
                 expired.add(r);
             }
         }
