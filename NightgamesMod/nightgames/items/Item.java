@@ -382,7 +382,7 @@ public enum Item implements Loot {
      * @param prefix
      * describes the item in a singular fashion; Ex: "A Bottle of"
      * */
-    private Item(String name, int price, String desc, String prefix) {
+    Item(String name, int price, String desc, String prefix) {
         this(name, price, desc, prefix, Collections.singleton(new ItemEffect()), RequirementShortcuts.none(), 0);
     }
 
@@ -402,12 +402,13 @@ public enum Item implements Loot {
      * @param duration
      * The duration of the item's effects.
      * */
-    private Item(String name, int price, String desc, String prefix, Collection<ItemEffect> effect, Requirement req, int duration) {
+    Item(String name, int price, String desc, String prefix, Collection<ItemEffect> effect,
+        Requirement req, int duration) {
         this.name = name;
         this.price = price;
         this.desc = desc;
         this.prefix = prefix;
-        this.effect = new ArrayList<ItemEffect>(effect);
+        this.effect = new ArrayList<>(effect);
         this.duration = duration;
         this.req = req;
     }
@@ -427,72 +428,28 @@ public enum Item implements Loot {
     public boolean usable(Combat c, Character self, Character target) {
         return req.meets(c, self, target);
     }
-    
-    // I'll take 'Things I Never Expected to Code' for 200, Alex. 
-    private static Collection<ItemEffect> getSemenEffects() {
-        return Arrays.asList((ItemEffect) new ConditionalEffect(
-                        new GroupEffect(Arrays.asList(
-                                        (ItemEffect) new BuffEffect("drink", "throw",
-                                                        new Abuff(Global.noneCharacter(), Attribute.Dark, 2,
-                                                                        15)),
-                                        new BuffEffect("drink", "throw",
-                                                        new Abuff(Global.noneCharacter(),
-                                                                        Attribute.Seduction, 2, 15)),
-                        new BuffEffect("drink", "throw", new Alluring(Global.noneCharacter(), 5)),
-                        new ResourceEffect("heal", 30), new ResourceEffect("build", 30),
-                        new ResourceEffect("arouse", 10))), new ConditionalEffect.EffectCondition() {
-                            @Override
-                            public boolean operation(Combat c, Character user, Character opponent,
-                                            Item item) {
-                                return user.has(Trait.succubus);
-                            }
-                        }),
-                        new ConditionalEffect(
-                                        new GroupEffect(Arrays.asList(
-                                                        (ItemEffect) new BuffEffect("drink", "throw",
-                                                                        new Shamed(Global.noneCharacter())),
-                                                        new ResourceEffect("arouse", 10))),
-                                        new ConditionalEffect.EffectCondition() {
-                                            @Override
-                                            public boolean operation(Combat c, Character user,
-                                                            Character opponent, Item item) {
-                                                return !user.has(Trait.succubus);
-                                            }
-                                        }));
-    }
-    
+
     private static Collection<ItemEffect> getHolyWaterEffects() {
-        return Arrays.asList((ItemEffect) new ConditionalEffect(
+        return Arrays.asList(new ConditionalEffect(
                         new GroupEffect(Arrays.asList(
-                                        (ItemEffect) new BuffEffect("drink", "throw",
-                                                        new Abuff(Global.noneCharacter(),
-                                                                        Attribute.Divinity, 2, 15)),
+                            new BuffEffect("drink", "throw",
+                                            new Abuff(Global.noneCharacter(),
+                                                            Attribute.Divinity, 2, 15)),
                                         new BuffEffect("drink", "throw",
                                                         new Alluring(Global.noneCharacter(), 5)),
                         new ResourceEffect("heal", 100), new ResourceEffect("build", 30),
-                        new ResourceEffect("arouse", 10))), new ConditionalEffect.EffectCondition() {
-                            @Override
-                            public boolean operation(Combat c, Character user, Character opponent,
-                                            Item item) {
-                                return !user.isDemonic();
-                            }
-                        }),
+                        new ResourceEffect("arouse", 10))),
+                (c, user, opponent, item) -> !user.isDemonic()),
                         new ConditionalEffect(
                                         new GroupEffect(Arrays.asList(
-                                                        (ItemEffect) new TextEffect("drink", "throw",
-                                                                        "The \"holy water\" splashes onto {self:name-possessive} demonic body, eliciting a shriek from the demon."),
+                                            new TextEffect("drink", "throw",
+                                                            "The \"holy water\" splashes onto {self:name-possessive} demonic body, eliciting a shriek from the demon."),
                                                         new BuffEffect("drink", "throw",
                                                                         new Abuff(Global.noneCharacter(),
                                                                                         Attribute.Dark, -10,
                                                                                         15)),
                                                         new ResourceEffect("pain", 100))),
-                                        new ConditionalEffect.EffectCondition() {
-                                            @Override
-                                            public boolean operation(Combat c, Character user,
-                                                            Character opponent, Item item) {
-                                                return user.isDemonic();
-                                            }
-                                        }));
+                            (c, user, opponent, item) -> user.isDemonic()));
         
     }
 }

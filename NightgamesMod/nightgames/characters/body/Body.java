@@ -166,7 +166,7 @@ public class Body implements Cloneable {
         PartReplacement replacement = null;
         if (removed != null)
             for (PartReplacement r : replacements) {
-                BodyPart other = null;
+                BodyPart other;
                 if (r.added.contains(removed)) {
                     other = removed;
                 } else {
@@ -1137,7 +1137,8 @@ public class Body implements Cloneable {
             LinkedList<BodyPart> added = new LinkedList<>(r.added);
             LinkedList<BodyPart> removed = new LinkedList<>(r.removed);
             if (added.size() > 0 && removed.size() == 0) {
-                sb.append(character.nameOrPossessivePronoun() + " ");
+                sb.append(character.nameOrPossessivePronoun())
+                    .append(" ");
                 for (BodyPart p : added.subList(0, added.size() - 1)) {
                     sb.append(p.fullDescribe(character))
                       .append(", ");
@@ -1149,7 +1150,8 @@ public class Body implements Cloneable {
                                .fullDescribe(character));
                 sb.append(" disappeared.");
             } else if (removed.size() > 0 && added.size() == 0) {
-                sb.append(character.nameOrPossessivePronoun() + " ");
+                sb.append(character.nameOrPossessivePronoun())
+                    .append(" ");
                 for (BodyPart p : removed.subList(0, removed.size() - 1)) {
                     sb.append(p.fullDescribe(character))
                       .append(", ");
