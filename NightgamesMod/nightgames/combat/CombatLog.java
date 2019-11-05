@@ -10,26 +10,22 @@ import nightgames.stance.Position;
 
 class CombatLog {
 
-    private final Combat cbt;
     private final Character p1, p2;
     private Writer writer;
-    private Character last1, last2;
-    private Position lastP;
 
 
     CombatLog(Combat cbt) {
-        this.cbt = cbt;
         this.p1 = cbt.p1;
         this.p2 = cbt.p2;
         try {
-            last1 = p1.clone();
-            last2 = p2.clone();
+            Character last1 = p1.clone();
+            Character last2 = p2.clone();
             last1.finishClone(p1);
             last2.finishClone(p2);
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-        lastP = cbt.getStance();
+        Position lastP = cbt.getStance();
         try {
             File dir = new File("combatlogs");
             if (!dir.isDirectory())
@@ -43,15 +39,15 @@ class CombatLog {
         }
     }
 
-    void logHeader(String linebreak) {
+    void logHeader() {
         StringBuilder sb = new StringBuilder("Combat Log - ");
         sb.append(p1.getTrueName())
           .append(" versus ")
           .append(p2.getTrueName())
-          .append(linebreak);
-        describeForHeader(p1, p2, sb, linebreak);
-        describeForHeader(p2, p1, sb, linebreak);
-        sb.append("____________________________").append(linebreak).append(linebreak);
+          .append("\n");
+        describeForHeader(p1, p2, sb);
+        describeForHeader(p2, p1, sb);
+        sb.append("____________________________").append("\n").append("\n");
         try {
             writer.write(sb.toString());
         } catch (IOException e) {
@@ -76,9 +72,9 @@ class CombatLog {
         }
     }
 
-    private static void describeForHeader(Character c, Character other, StringBuilder sb, String linebreak) {
+    private static void describeForHeader(Character c, Character other, StringBuilder sb) {
         sb.append(c.getTrueName())
-          .append(" at start:").append(linebreak);
+          .append(" at start:").append("\n");
         sb.append(c.att.toString());
         sb.append(c.getTraits().toString());
         sb.append(c.status.toString());
@@ -86,7 +82,7 @@ class CombatLog {
         c.body.describe(sb, other, " ", false);
         sb.append(" -- ");
         sb.append(c.outfit.describe(c));
-        sb.append(linebreak);
+        sb.append("\n");
     }
 
 }

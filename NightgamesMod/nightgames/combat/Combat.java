@@ -264,7 +264,7 @@ public class Combat {
 
         updateMessage();
         if (doExtendedLog()) {
-            log.logHeader("\n");
+            log.logHeader();
         }
         if (shouldAutoresolve()) {
             autoresolve();
