@@ -23,7 +23,7 @@ public class Fly extends Fuck {
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
-        return user.body.get("wings").size() > 0 && user.get(Attribute.Power) >= 15;
+        return user.body.getRandom("wings") != null && user.get(Attribute.Power) >= 15;
     }
 
     @Override

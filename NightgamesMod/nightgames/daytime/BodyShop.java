@@ -126,13 +126,12 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection(name, growPrice) {
             @Override
             void buy(Character buyer) {
-                ((GenericBodyPart) buyer.body.get(partType)).addMod(mod);
+                ((GenericBodyPart) buyer.body.getRandom(partType)).addMod(mod);
             }
 
             @Override
             boolean available(Character buyer) {
-                return buyer.body.get(partType).stream().anyMatch(part -> !part.moddedPartCountsAs(
-                    mod.getModType()));
+                return !buyer.body.getRandom(partType).moddedPartCountsAs(mod.getModType());
             }
 
             @Override
@@ -144,13 +143,12 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Remove " + name, removePrice) {
             @Override
             void buy(Character buyer) {
-                ((GenericBodyPart) buyer.body.get(partType)).purge(mod.getModType());
+                ((GenericBodyPart) buyer.body.getRandom(partType)).purge(mod.getModType());
             }
 
             @Override
             boolean available(Character buyer) {
-                return buyer.body.get(partType).stream().anyMatch(part -> part.moddedPartCountsAs(
-                    mod.getModType()));
+                return buyer.body.getRandom(partType).moddedPartCountsAs(mod.getModType());
             }
 
             @Override
@@ -487,9 +485,8 @@ public class BodyShop extends Activity {
 
             @Override
             boolean available(Character buyer) {
-                Optional<BodyPart> optTarget =
-                                buyer.body.get(CockPart.TYPE).stream().filter(c -> !c.isGeneric(buyer)).findAny();
-                return optTarget.isPresent();
+                Optional<BodyPart> optTarget = Optional.ofNullable(buyer.body.getRandom(CockPart.TYPE));
+                return optTarget.map(p -> !p.isGeneric(buyer)).orElse(false);
             }
 
             @Override
@@ -508,9 +505,8 @@ public class BodyShop extends Activity {
 
             @Override
             boolean available(Character buyer) {
-                Optional<BodyPart> optTarget =
-                                buyer.body.get(PussyPart.TYPE).stream().filter(c -> !c.isGeneric(buyer)).findAny();
-                return optTarget.isPresent();
+                Optional<BodyPart> optTarget = Optional.ofNullable(buyer.body.getRandomPussy());
+                return optTarget.map(c -> !c.isGeneric(buyer)).orElse(false);
             }
 
             @Override

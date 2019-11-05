@@ -5,22 +5,20 @@ import static nightgames.requirements.RequirementShortcuts.not;
 
 import java.util.ArrayList;
 import java.util.Optional;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.BodyPartMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
-import nightgames.characters.body.mods.DemonicWingsMod;
-import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.MouthPart;
-import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
+import nightgames.characters.body.mods.DemonicTailMod;
+import nightgames.characters.body.mods.DemonicWingsMod;
+import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.global.Global;
@@ -166,13 +164,9 @@ public class ReykaTime extends BaseNPCTime {
         TransformationOption pointedEars = new TransformationOption();
         pointedEars.ingredients.put(Item.SuccubusDraft, 10);
         pointedEars.ingredients.put(Item.semen, 5);
-        pointedEars.addRequirement((c, self, other) -> {
-            return self.body.get(EarsPart.TYPE)
-                            .stream()
-                            .anyMatch(part -> part instanceof BodyPartMod &&
-                                ((BodyPartMod) part).getModType().equals(PointedEarsMod.TYPE)) || !self.body.has(
-                EarsPart.TYPE);
-        }, "No pointed ears");
+        pointedEars.addRequirement((c, self, other) -> self.body.getRandom(EarsPart.TYPE).isGeneric(self)
+            || !self.body.has(EarsPart.TYPE),
+            "No pointed ears");
         pointedEars.option = "Pointed Ears";
         pointedEars.scene =
                         "Reyka fetches the ingredients from your pockets with her tail and mixes them together with her palm. She mutters something unintelligible under her breath and suddenly a "

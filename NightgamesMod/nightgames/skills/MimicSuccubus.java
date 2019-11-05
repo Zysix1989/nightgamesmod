@@ -86,7 +86,7 @@ public class MimicSuccubus extends Skill {
         }
         ((GenericBodyPart) getSelf().body.getRandom(TailPart.TYPE)).addTemporaryMod(new DemonicTailMod(), 999);
         ((GenericBodyPart) getSelf().body.getRandom(TailPart.TYPE)).addTemporaryMod(new SlimeTailMod(), 999);
-        ((GenericBodyPart) getSelf().body.get(EarsPart.TYPE)).addTemporaryMod(new PointedEarsMod(), 999);
+        ((GenericBodyPart) getSelf().body.getRandom(EarsPart.TYPE)).addTemporaryMod(new PointedEarsMod(), 999);
         BreastsPart part = getSelf().body.getRandomBreasts();
         if (part != null) {
             part.temporarilyChangeSize(4, 999);

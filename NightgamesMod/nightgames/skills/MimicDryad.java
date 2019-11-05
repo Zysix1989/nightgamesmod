@@ -72,7 +72,7 @@ public class MimicDryad extends Skill {
         getSelf().addTemporaryTrait(Trait.frenzyingjuices, 10);
         getSelf().addTemporaryTrait(Trait.RawSexuality, 10);
         getSelf().addTemporaryTrait(Trait.temptingtits, 10);
-        ((GenericBodyPart) getSelf().body.get(EarsPart.TYPE)).addTemporaryMod(new PointedEarsMod(), 10);
+        ((GenericBodyPart) getSelf().body.getRandom(EarsPart.TYPE)).addTemporaryMod(new PointedEarsMod(), 10);
         BreastsPart part = getSelf().body.getRandomBreasts();
         if (part != null) {
             part.temporarilyChangeSize(1, 10);

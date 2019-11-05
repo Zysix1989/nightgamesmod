@@ -19,7 +19,7 @@ public class TailJob extends Skill {
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
         boolean enough = getSelf().get(Attribute.Seduction) >= 20 || getSelf().get(Attribute.Animism) >= 1;
-        return enough && user.body.get(TailPart.TYPE).size() > 0;
+        return enough && user.body.getRandom(TailPart.TYPE) != null;
     }
 
     @Override

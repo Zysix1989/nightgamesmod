@@ -2,18 +2,17 @@ package nightgames.daytime;
 
 import java.util.ArrayList;
 import java.util.Optional;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.mods.AngelicWingsMod;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.WingsPart;
+import nightgames.characters.body.mods.AngelicWingsMod;
 import nightgames.characters.body.mods.catcher.DivineMod;
+import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.requirements.BodyPartRequirement;
@@ -139,8 +138,7 @@ public class AngelTime extends BaseNPCTime {
             TransformationOption angelWings = new TransformationOption();
             angelWings.ingredients.put(Item.HolyWater, 2);
             angelWings.addRequirement((c, self, other) -> {
-                return self.body.get("wings")
-                                .size() == 0;
+                return self.body.getRandom("wings") == null;
             }, "No wings");
             angelWings.addRequirement((c, self, other) -> {
                 return self.get(Attribute.Divinity) >= 10;

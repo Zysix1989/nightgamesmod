@@ -82,7 +82,7 @@ public class MimicCat extends Skill {
         }
         ((GenericBodyPart) getSelf().body.getRandom(TailPart.TYPE)).addTemporaryMod(new CatTailMod(), 10);
         ((GenericBodyPart) getSelf().body.getRandom(TailPart.TYPE)).addTemporaryMod(new SlimeTailMod(), 10);
-        ((GenericBodyPart) getSelf().body.get(EarsPart.TYPE)).addTemporaryMod(new CatEarsMod(), 10);
+        ((GenericBodyPart) getSelf().body.getRandom(EarsPart.TYPE)).addTemporaryMod(new CatEarsMod(), 10);
         BreastsPart part = getSelf().body.getRandomBreasts();
         if (part != null) {
             part.temporarilyChangeSize(-1, 10);
