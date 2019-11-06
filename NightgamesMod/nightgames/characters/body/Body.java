@@ -104,10 +104,6 @@ public class Body implements Cloneable {
     }
 
     public Body(Character character) {
-        this(character, 1);
-    }
-
-    public Body(Character character, double hotness) {
         this();
         this.character = character;
     }
@@ -1106,8 +1102,7 @@ public class Body implements Cloneable {
     }
 
     public static Body load(JsonObject bodyObj, Character character) {
-        double hotness = bodyObj.get("hotness").getAsDouble();
-        Body body = new Body(character, hotness);
+        Body body = new Body(character);
         body.loadParts(bodyObj.getAsJsonArray("parts"));
         double defaultFemininity = 0;
         if (body.has(PussyPart.TYPE)) {

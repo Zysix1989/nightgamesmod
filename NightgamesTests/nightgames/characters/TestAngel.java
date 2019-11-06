@@ -1,17 +1,25 @@
 package nightgames.characters;
 
-import nightgames.characters.body.*;
+import java.util.Optional;
+import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
-import nightgames.characters.body.mods.pitcher.BlessedCockMod;
+import nightgames.characters.body.Body;
+import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.EarsPart;
+import nightgames.characters.body.FacePart;
+import nightgames.characters.body.FeetPart;
+import nightgames.characters.body.HandsPart;
+import nightgames.characters.body.MouthPart;
+import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.SkinPart;
 import nightgames.characters.body.mods.catcher.DivineMod;
+import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
-
-import java.util.Optional;
 
 public class TestAngel extends BasePersonality {
     /**
@@ -47,7 +55,7 @@ public class TestAngel extends BasePersonality {
         baseChar.mood = Emotion.confident;
         baseChar.trophy = Item.AngelTrophy;
 
-        baseChar.body = new Body(baseChar, 1);
+        baseChar.body = new Body(baseChar);
         baseChar.body.add(new BreastsPart(BreastsPart.Size.DDCup));
         baseChar.body.add(new FacePart(.1, 4.2));
         baseChar.body.add(new PussyPart());
