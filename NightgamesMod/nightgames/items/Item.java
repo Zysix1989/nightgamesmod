@@ -169,7 +169,7 @@ public enum Item implements Loot {
     FemDraft("Fem Draft", 150, "Temporarily grow a pussy", "a ", Arrays.asList(
         (ItemEffect) new BodyGrowthPlusEffect("drink", "throw",
             new BreastsPart(BreastsPart.Size.CCup)),
-        (ItemEffect) new BodyReplaceEffect("drink", "throw", new PussyPart())),
+        (ItemEffect) new BodyGrowthEffect("drink", "throw", new PussyPart())),
         (c, self, target) -> !self.hasPussy(),
         15),
     Lactaid("Lactaid", 100, "Temporarily start lactating", "",
@@ -186,9 +186,9 @@ public enum Item implements Loot {
             new PartModEffect("drink", "throw", PussyPart.TYPE, new DemonicMod(), 15),
             new PartModEffect("drink", "throw", CockPart.TYPE, new IncubusCockMod(), 15),
             new PartModEffect("drink", "throw", EarsPart.TYPE, new PointedEarsMod(), 15),
-            new BodyReplaceEffect("drink", "throw", new WingsPart()),
+            new BodyGrowthEffect("drink", "throw", new WingsPart()),
             new PartModEffect("drink", "throw", WingsPart.TYPE, new DemonicWingsMod(), 15),
-            new BodyReplaceEffect("drink", "throw", new TailPart()),
+            new BodyGrowthEffect("drink", "throw", new TailPart()),
             new PartModEffect("drink", "throw", TailPart.TYPE, new DemonicTailMod(), 15),
             new BodyGrowthPlusEffect("drink", "throw",
                 new BreastsPart(BreastsPart.Size.DDCup))),
@@ -204,9 +204,9 @@ public enum Item implements Loot {
             new PartModEffect("drink", "throw", CockPart.TYPE, new DemonicMod(), 15),
             //TODO: Grow a cock if you don't already have one.
             new PartModEffect("drink", "throw", EarsPart.TYPE, new PointedEarsMod(), 15),
-            new BodyReplaceEffect("drink", "throw", new WingsPart()),
+            new BodyGrowthEffect("drink", "throw", new WingsPart()),
             new PartModEffect("drink", "throw", WingsPart.TYPE, new DemonicWingsMod(), 15),
-            new BodyReplaceEffect("drink", "throw", new TailPart()),
+            new BodyGrowthEffect("drink", "throw", new TailPart()),
             new PartModEffect("drink", "throw", TailPart.TYPE, new DemonicTailMod(), 15)
             //new BodyModEffect("drink", "throw", BreastsPart.dd, BodyModEffect.Effect.growplus)
         ),
@@ -222,9 +222,9 @@ public enum Item implements Loot {
             new PartModEffect("drink", "throw", CockPart.TYPE, new DemonicMod(), 15),
             //TODO: Grow a cock if you don't already have one.
             new PartModEffect("drink", "throw", EarsPart.TYPE, new PointedEarsMod(), 15),
-            new BodyReplaceEffect("drink", "throw", new WingsPart()),
+            new BodyGrowthEffect("drink", "throw", new WingsPart()),
             new PartModEffect("drink", "throw", WingsPart.TYPE, new DemonicWingsMod(), 15),
-            new BodyReplaceEffect("drink", "throw", new TailPart()),
+            new BodyGrowthEffect("drink", "throw", new TailPart()),
             new PartModEffect("drink", "throw", TailPart.TYPE, new DemonicTailMod(), 15),
             new BodyGrowthPlusEffect("drink", "throw",
                 new BreastsPart(BreastsPart.Size.DDCup))),
