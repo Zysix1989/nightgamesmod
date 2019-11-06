@@ -2,19 +2,10 @@ package nightgames.skills;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-
-import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
-
-import nightgames.characters.Trait;
-
-import nightgames.global.DebugFlags;
-
-import nightgames.stance.Stance;
-import nightgames.status.Hypersensitive;
 
 
 public class BreastGrowthSuper extends Skill {
@@ -60,28 +51,7 @@ public class BreastGrowthSuper extends Skill {
             }
         } else {
             res = Result.miss;
-        }/*
-        int additionalSizes = getSelf().get(Attribute.Arcane)/15;
-        boolean permanent = (getSelf().human() || c.shouldPrintReceive(target,c)) && !target.has(Trait.stableform) 
-                        && (Global.randomdouble()*20. - getSelf().get(Attribute.Arcane)/5. < 0 );
-        writeOutput(c, permanent ? 1 : 0, res, target);
-        if (res != Result.miss) {
-            target.add(c, new Hypersensitive(target));
-            BreastsPart part = target.body.getRandomBreasts();
-            if (permanent) {
-                if (part != null) {
-                    BreastsPart realPart = target.body.getRealBreasts();
-                    System.out.println("found real breasts; they are: " + realPart);
-                    //if (!target.body.getLargestBreasts().equals(realPart)) target.body.getLargestBreasts().bonusSensitivity +=1;
-                    target.body.addReplace((BreastsPart)(realPart.upgrade(1,.5)), 1);additionalSizes-=1;
-                    if(Global.isDebugOn(DebugFlags.DEBUG_SCENE)) System.out.println("New real breast sensitivity for "+target.getName()+" is "+target.body.getRealBreasts().getSensitivity(null,null)+".");
-                }
-            }
-           if (part != null) {
-                target.body.temporaryAddOrReplacePartWithType(part.upgrade(additionalSizes, getSelf().get(Attribute.Arcane)/20.), 10);
-                if(Global.isDebugOn(DebugFlags.DEBUG_SCENE)) System.out.println("New breast sensitivity for "+target.getName()+" is "+target.body.getLargestBreasts().getSensitivity(null,null)+".");
-            }
-        }*/
+        }
         return res != Result.miss;
     }
 
