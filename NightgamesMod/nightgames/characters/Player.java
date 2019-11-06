@@ -1004,7 +1004,7 @@ public class Player extends Character {
                 part.temporarilyChangeSize(1, 999);
             }
             ((GenericBodyPart) body.getRandom(Body.SKIN)).addTemporaryMod(new GooeySkinMod(), 999);
-            body.temporaryAddOrReplacePartWithType(
+            body.temporaryAddPart(
                 new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);
             addTemporaryTrait(Trait.Sneaky, 999);
             addTemporaryTrait(Trait.shameless, 999);

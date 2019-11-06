@@ -1,27 +1,25 @@
 package nightgames.status.addiction;
 
+import com.google.gson.JsonObject;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
-import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
-import nightgames.characters.body.mods.DemonicWingsMod;
-import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
+import nightgames.characters.body.mods.DemonicTailMod;
+import nightgames.characters.body.mods.DemonicWingsMod;
 import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.combat.Combat;
@@ -110,9 +108,10 @@ public class Corruption extends Addiction {
                      Global.writeIfCombat(c, affected, Global.format(
                                 "<b>The dark taint changes {self:name-do} even further, and a succubus's pussy forms between {self:possessive} legs!</b>", affected, cause));
                 }
+                var duration = Global.random(15, 40);
                 var pussy = new PussyPart();
-                pussy.addMod(new DemonicMod());
-                affected.body.temporaryAddOrReplacePartWithType(pussy, Global.random(15, 40));
+                affected.body.temporaryAddPart(pussy, duration);
+                pussy.addTemporaryMod(new DemonicMod(), duration);
             } else if (!affected.hasDick()) {
                 if (affected.human()) {
                     Global.writeIfCombat(c, affected, Global.format(
@@ -121,9 +120,10 @@ public class Corruption extends Addiction {
                     Global.writeIfCombat(c, affected, Global.format(
                                     "<b>The dark taint changes {self:name-do} even further, and an incubus's cock forms between {self:possessive} legs!</b>", affected, cause));
                 }
+                var duration = Global.random(15, 40);
                 var cock = new CockPart(Size.Big);
-                cock.addMod(new IncubusCockMod());
-                affected.body.temporaryAddOrReplacePartWithType(cock, Global.random(15, 40));
+                affected.body.temporaryAddPart(cock, duration);
+                cock.addTemporaryMod(new IncubusCockMod(), duration);
             } else if (!affected.body.getRandomAss().moddedPartCountsAs(DemonicMod.TYPE)) {
                 if (affected.human()) {
                     Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes {self:name-do} even further, and {self:possessive} asshole itches and burns with the corrupting power. It darkens with corruption!</b>", affected, cause));

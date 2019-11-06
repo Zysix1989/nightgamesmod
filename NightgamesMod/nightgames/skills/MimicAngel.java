@@ -73,9 +73,9 @@ public class MimicAngel extends Skill {
         if (wings == null) {
             wings = new WingsPart();
         }
-        wings.addMod(new AngelicWingsMod());
-        wings.addMod(new SlimeWingsMod());
-        getSelf().body.temporaryAddOrReplacePartWithType(wings, 10);
+        getSelf().body.temporaryAddPart(wings, 10);
+        wings.addTemporaryMod(new AngelicWingsMod(), 10);
+        wings.addTemporaryMod(new SlimeWingsMod(), 10);
         BreastsPart part = getSelf().body.getRandomBreasts();
         if (part != null) {
             part.temporarilyChangeSize(2, 10);

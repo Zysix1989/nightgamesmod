@@ -77,11 +77,13 @@ public class MimicCat extends Skill {
         getSelf().addTemporaryTrait(Trait.lacedjuices, 10);
         getSelf().addTemporaryTrait(Trait.catstongue, 10);
         getSelf().addTemporaryTrait(Trait.FrenzyScent, 10);
-        if (getSelf().body.getRandom(TailPart.TYPE) == null) {
-            getSelf().body.temporaryAddOrReplacePartWithType(new TailPart(), 10);
+        var tail = (TailPart) getSelf().body.getRandom(TailPart.TYPE);
+        if (tail == null) {
+            tail = new TailPart();
         }
-        ((GenericBodyPart) getSelf().body.getRandom(TailPart.TYPE)).addTemporaryMod(new CatTailMod(), 10);
-        ((GenericBodyPart) getSelf().body.getRandom(TailPart.TYPE)).addTemporaryMod(new SlimeTailMod(), 10);
+        getSelf().body.temporaryAddPart(tail, 10);
+        tail.addTemporaryMod(new CatTailMod(), 10);
+        tail.addTemporaryMod(new SlimeTailMod(), 10);
         ((GenericBodyPart) getSelf().body.getRandom(EarsPart.TYPE)).addTemporaryMod(new CatEarsMod(), 10);
         BreastsPart part = getSelf().body.getRandomBreasts();
         if (part != null) {

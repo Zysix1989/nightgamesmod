@@ -477,7 +477,7 @@ public class Airi extends BasePersonality {
                 asspart.temporarilyChangeSize(2, 10);
             }
             ((GenericBodyPart) self.body.getRandom(Body.SKIN)).addTemporaryMod(new GooeySkinMod(), 999);
-            self.body.temporaryAddOrReplacePartWithType(new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);
+            self.body.temporaryAddPart(new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);
             if (self.level >= 25) {
                 self.addTemporaryTrait(Trait.shameless, 999);
             }

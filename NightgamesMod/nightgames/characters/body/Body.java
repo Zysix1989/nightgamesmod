@@ -130,12 +130,16 @@ public class Body implements Cloneable {
     }
 
     public void temporaryAddPart(BodyPart part, int duration) {
-        PartReplacement replacement = new PartReplacement(duration);
-        replacement.added.add(part);
-        replacements.add(replacement);
-        updateCurrentParts();
-        if (character != null) {
-            updateCharacter();
+        if (getRandom(part.getType()) != null) {
+            setTemporaryPartDuration(part, duration);
+        } else {
+            PartReplacement replacement = new PartReplacement(duration);
+            replacement.added.add(part);
+            replacements.add(replacement);
+            updateCurrentParts();
+            if (character != null) {
+                updateCharacter();
+            }
         }
     }
 
@@ -147,10 +151,6 @@ public class Body implements Cloneable {
         if (character != null) {
             updateCharacter();
         }
-    }
-
-    public void temporaryAddOrReplacePartWithType(BodyPart part, int duration) {
-        temporaryAddOrReplacePartWithType(part, getRandom(part.getType()), duration);
     }
 
     private BodyPart getPartIn(String type, Collection<BodyPart> parts) {
