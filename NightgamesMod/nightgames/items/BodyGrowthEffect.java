@@ -17,7 +17,7 @@ class BodyGrowthEffect extends BodyModEffect {
         String message;
 
         if (original == affected) {
-            user.body.temporaryAddOrReplacePartWithType(affected, original, item.duration);
+            user.body.setTemporaryPartDuration(affected, item.duration);
             message =
                 Global.format(String.format("{self:NAME-POSSESSIVE} %s was reenforced",
                     original.fullDescribe(user)), user, opponent);

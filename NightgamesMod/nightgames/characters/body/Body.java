@@ -162,7 +162,7 @@ public class Body implements Cloneable {
         return null;
     }
 
-    public void temporaryAddOrReplacePartWithType(BodyPart part, BodyPart removed, int duration) {
+    private void temporaryAddOrReplacePartWithType(BodyPart part, BodyPart removed, int duration) {
         PartReplacement replacement = null;
         if (removed != null)
             for (PartReplacement r : replacements) {
@@ -190,6 +190,10 @@ public class Body implements Cloneable {
         if (character != null) {
             updateCharacter();
         }
+    }
+
+    public void setTemporaryPartDuration(BodyPart part, int newDuration) {
+        temporaryAddOrReplacePartWithType(part, part, newDuration);
     }
 
     public void describe(StringBuilder b, Character other, String delimiter) {
