@@ -32,6 +32,9 @@ import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.characters.body.mods.pitcher.PrimalCockMod;
 import nightgames.characters.body.mods.pitcher.RunicCockMod;
 import nightgames.characters.body.mods.pitcher.SlimyCockMod;
+import nightgames.characters.corestats.ArousalStat;
+import nightgames.characters.corestats.StaminaStat;
+import nightgames.characters.corestats.WillpowerStat;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
@@ -183,11 +186,10 @@ public class Airi extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var g = new Growth();
-        g.setStamina(1);
-        g.setArousal(5);
-        g.setWillpower(2.5f);
-        return g;
+        var stamina = new CoreStatGrowth<StaminaStat>(1);
+        var arousal = new CoreStatGrowth<ArousalStat>(5);
+        var willpower = new CoreStatGrowth<WillpowerStat>(2.5f);
+        return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override

@@ -9,6 +9,9 @@ import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.AngelicWingsMod;
 import nightgames.characters.body.mods.catcher.DivineMod;
 import nightgames.characters.body.mods.pitcher.BlessedCockMod;
+import nightgames.characters.corestats.ArousalStat;
+import nightgames.characters.corestats.StaminaStat;
+import nightgames.characters.corestats.WillpowerStat;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
@@ -74,10 +77,10 @@ public class Angel extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var g = new Growth();
-        g.setStamina(2);
-        g.setArousal(9);
-        return g;
+        var stamina = new CoreStatGrowth<StaminaStat>(2);
+        var arousal = new CoreStatGrowth<ArousalStat>(9);
+        var willpower = new CoreStatGrowth<WillpowerStat>(1.0f);
+        return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override

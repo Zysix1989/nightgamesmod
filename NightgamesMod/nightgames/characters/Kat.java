@@ -13,6 +13,9 @@ import nightgames.characters.body.mods.CatEarsMod;
 import nightgames.characters.body.mods.CatTailMod;
 import nightgames.characters.body.mods.catcher.FeralMod;
 import nightgames.characters.body.mods.pitcher.PrimalCockMod;
+import nightgames.characters.corestats.ArousalStat;
+import nightgames.characters.corestats.StaminaStat;
+import nightgames.characters.corestats.WillpowerStat;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
@@ -138,10 +141,10 @@ public class Kat extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var g = new Growth();
-        g.setStamina(2);
-        g.setArousal(7);
-        return g;
+        var stamina = new CoreStatGrowth<StaminaStat>(2);
+        var arousal = new CoreStatGrowth<ArousalStat>(7);
+        var willpower = new CoreStatGrowth<WillpowerStat>(1.0f);
+        return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override

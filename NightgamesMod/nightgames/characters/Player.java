@@ -30,6 +30,9 @@ import nightgames.characters.body.mods.ExternalTentaclesMod;
 import nightgames.characters.body.mods.GooeySkinMod;
 import nightgames.characters.body.mods.catcher.GooeyMod;
 import nightgames.characters.body.mods.pitcher.SlimyCockMod;
+import nightgames.characters.corestats.ArousalStat;
+import nightgames.characters.corestats.StaminaStat;
+import nightgames.characters.corestats.WillpowerStat;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatSceneChoice;
 import nightgames.combat.Result;
@@ -118,10 +121,15 @@ public class Player extends Character {
         body.finishBody(initialGender);
     }
 
+    private static Growth newGrowth() {
+        var stamina = new CoreStatGrowth<StaminaStat>(20);
+        var arousal = new CoreStatGrowth<ArousalStat>(40);
+        var willpower = new CoreStatGrowth<WillpowerStat>(10.4f);
+        return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
+    }
+
     public void setGrowth() {
-        getGrowth().setStamina(20);
-        getGrowth().setArousal(20);
-        getGrowth().setWillpower(10.4f);
+        setGrowth(newGrowth());
         getGrowth().bonusStamina = 10;
         getGrowth().bonusArousal = 20;
         getGrowth().attributes = new int[]{2, 3, 3, 3};

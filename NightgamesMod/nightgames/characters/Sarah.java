@@ -11,6 +11,9 @@ import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.AngelicWingsMod;
 import nightgames.characters.body.mods.catcher.FieryMod;
+import nightgames.characters.corestats.ArousalStat;
+import nightgames.characters.corestats.StaminaStat;
+import nightgames.characters.corestats.WillpowerStat;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -58,11 +61,10 @@ public class Sarah extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var g = new Growth();
-        g.setStamina(5);
-        g.setArousal(6);
-        g.setWillpower(.8f);
-        return g;
+        var stamina = new CoreStatGrowth<StaminaStat>(5);
+        var arousal = new CoreStatGrowth<ArousalStat>(6);
+        var willpower = new CoreStatGrowth<WillpowerStat>(0.8f);
+        return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override

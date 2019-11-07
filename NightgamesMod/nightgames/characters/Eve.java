@@ -7,6 +7,9 @@ import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
+import nightgames.characters.corestats.ArousalStat;
+import nightgames.characters.corestats.StaminaStat;
+import nightgames.characters.corestats.WillpowerStat;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
@@ -78,10 +81,10 @@ public class Eve extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var g = new Growth();
-        g.setStamina(2);
-        g.setArousal(6);
-        return g;
+        var stamina = new CoreStatGrowth<StaminaStat>(2);
+        var arousal = new CoreStatGrowth<ArousalStat>(6);
+        var willpower = new CoreStatGrowth<WillpowerStat>(1.0f);
+        return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override

@@ -15,6 +15,9 @@ import nightgames.characters.body.mods.ExtendedTonguedMod;
 import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
+import nightgames.characters.corestats.ArousalStat;
+import nightgames.characters.corestats.StaminaStat;
+import nightgames.characters.corestats.WillpowerStat;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
@@ -97,10 +100,10 @@ public class Reyka extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var g = new Growth();
-        g.setStamina(1);
-        g.setArousal(10);
-        return g;
+        var stamina = new CoreStatGrowth<StaminaStat>(1);
+        var arousal = new CoreStatGrowth<ArousalStat>(10);
+        var willpower = new CoreStatGrowth<WillpowerStat>(1.0f);
+        return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override

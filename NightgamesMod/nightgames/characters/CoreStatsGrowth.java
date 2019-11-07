@@ -9,7 +9,7 @@ public class CoreStatsGrowth {
     CoreStatGrowth<ArousalStat> arousal;
     CoreStatGrowth<WillpowerStat> willpower;
 
-    private CoreStatsGrowth(CoreStatGrowth<StaminaStat> stamina,
+    CoreStatsGrowth(CoreStatGrowth<StaminaStat> stamina,
         CoreStatGrowth<ArousalStat> arousal,
         CoreStatGrowth<WillpowerStat> willpower) {
         this.stamina = stamina;

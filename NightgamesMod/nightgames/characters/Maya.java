@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Optional;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
+import nightgames.characters.corestats.ArousalStat;
+import nightgames.characters.corestats.StaminaStat;
+import nightgames.characters.corestats.WillpowerStat;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
@@ -80,11 +83,10 @@ public class Maya extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var g = new Growth();
-        g.setStamina(2);
-        g.setArousal(10);
-        g.setWillpower(2.0f);
-        return g;
+        var stamina = new CoreStatGrowth<StaminaStat>(2);
+        var arousal = new CoreStatGrowth<ArousalStat>(10);
+        var willpower = new CoreStatGrowth<WillpowerStat>(2.0f);
+        return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override

@@ -14,6 +14,9 @@ import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.mods.ExtendedTonguedMod;
 import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.characters.body.mods.pitcher.RunicCockMod;
+import nightgames.characters.corestats.ArousalStat;
+import nightgames.characters.corestats.StaminaStat;
+import nightgames.characters.corestats.WillpowerStat;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
@@ -245,11 +248,10 @@ public class Cassie extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var g = new Growth();
-        g.setStamina(2);
-        g.setArousal(7);
-        g.setWillpower(.8f);
-        return g;
+        var stamina = new CoreStatGrowth<StaminaStat>(2);
+        var arousal = new CoreStatGrowth<ArousalStat>(7);
+        var willpower = new CoreStatGrowth<WillpowerStat>(0.8f);
+        return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override

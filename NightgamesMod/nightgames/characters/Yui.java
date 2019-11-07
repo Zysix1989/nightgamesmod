@@ -8,6 +8,9 @@ import nightgames.actions.Movement;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.FacePart;
+import nightgames.characters.corestats.ArousalStat;
+import nightgames.characters.corestats.StaminaStat;
+import nightgames.characters.corestats.WillpowerStat;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -68,11 +71,10 @@ public class Yui extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var g = new Growth();
-        g.setStamina(3);
-        g.setArousal(7);
-        g.setWillpower(1.4f);
-        return g;
+        var stamina = new CoreStatGrowth<StaminaStat>(3);
+        var arousal = new CoreStatGrowth<ArousalStat>(7);
+        var willpower = new CoreStatGrowth<WillpowerStat>(1.4f);
+        return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override

@@ -47,7 +47,11 @@ public class Growth implements Cloneable {
     private Map<Integer, Clothing> clothing;
 
     public Growth() {
-        coreStatsGrowth = CoreStatsGrowth.newDefault();
+        this(CoreStatsGrowth.newDefault());
+    }
+
+    public Growth(CoreStatsGrowth coreStatsGrowth) {
+        this.coreStatsGrowth = coreStatsGrowth;
         bonusStamina = 2;
         bonusArousal = 3;
         bonusAttributes = 1;
