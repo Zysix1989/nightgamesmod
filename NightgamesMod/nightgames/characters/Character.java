@@ -549,20 +549,7 @@ public Character clone() throws CloneNotSupportedException {
         rank++;
     }
 
-    
     public abstract void ding(Combat c);
-
-    /**Unapplies the level that was most recently gained on this character. Removes it from the levelplan. 
-     * 
-     *  NOTE: This also removes traits off the level plan, but may not be doing it elsewhere where traits or level data may exist. - DSM    
-     *  */
-    public String dong() {
-        getLevelUpFor(getLevel()).unapply(this);;
-        getGrowth().levelDown(this);
-        levelPlan.remove(getLevel());
-        level--;
-        return Global.capitalizeFirstLetter(subject()) + " lost a level! <br/>" + Global.gainSkills(this);
-    }
 
     public int getXP() {
         return xp;

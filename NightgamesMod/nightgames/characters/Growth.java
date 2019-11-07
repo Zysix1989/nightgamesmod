@@ -173,22 +173,6 @@ public class Growth implements Cloneable {
         addOrRemoveTraits(character);
     }
 
-    /**
-     * Note: only affects meters, not traits.
-     *
-     * @param character
-     */
-    public void levelDown(Character character) {
-        character.getStamina().gain(-stamina);
-        character.getArousal().gain(-arousal);
-        character.getWillpower().gain(-willpower);
-        if (Global.checkFlag(Flag.hardmode)) {
-            character.getStamina().gain(-bonusStamina);
-            character.getArousal().gain(-bonusArousal);
-            character.getWillpower().gain(-bonusWillpower);
-        }
-    }
-    
     public Object clone() throws CloneNotSupportedException {
         // TODO, growth should NEVER be modified as a cloned version. if this is true, we need to revisit this.
         Growth clone = (Growth) super.clone();
