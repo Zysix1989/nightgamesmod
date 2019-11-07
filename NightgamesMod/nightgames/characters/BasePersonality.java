@@ -48,7 +48,7 @@ public abstract class BasePersonality implements Serializable {
     protected int dominance=0;
     protected int minDominance=0;
 
-    protected BasePersonality(String name, boolean isStartCharacter) {
+    private BasePersonality(String name, boolean isStartCharacter) {
         // Make the built-in character
         type = getClass().getSimpleName();
         character = new NPC(name, 1, this);
@@ -64,7 +64,8 @@ public abstract class BasePersonality implements Serializable {
         setupCharacter(charConfig, commonConfig);
     }
 
-    protected void setupCharacter(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
+    private void setupCharacter(Optional<NpcConfiguration> charConfig,
+        Optional<NpcConfiguration> commonConfig) {
         setGrowth();
         applyBasicStats(character);
         applyStrategy(character);
