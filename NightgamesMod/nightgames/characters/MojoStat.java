@@ -2,7 +2,7 @@ package nightgames.characters;
 
 import org.apache.commons.lang3.Range;
 
-public class MojoStat extends Meter {
+public class MojoStat extends CoreStat {
     public MojoStat(int max) {
         super(max);
     }

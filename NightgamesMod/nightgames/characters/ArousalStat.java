@@ -3,7 +3,7 @@ package nightgames.characters;
 import java.util.List;
 import org.apache.commons.lang3.Range;
 
-public class ArousalStat extends Meter {
+public class ArousalStat extends CoreStat {
     public ArousalStat(int max) {
         super(max);
     }

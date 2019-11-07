@@ -3,7 +3,7 @@ package nightgames.characters;
 import java.util.List;
 import org.apache.commons.lang3.Range;
 
-public class WillpowerStat extends Meter {
+public class WillpowerStat extends CoreStat {
     private int temporaryMax;
 
     public WillpowerStat(int max) {

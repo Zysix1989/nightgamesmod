@@ -3,8 +3,8 @@ package nightgames.gui;
 import javax.swing.BoundedRangeModel;
 import javax.swing.JProgressBar;
 
-class GUIMeterBar extends JProgressBar {
-    GUIMeterBar() {
+class GUICoreStatBar extends JProgressBar {
+    GUICoreStatBar() {
         setUI(new MeterBarUI());
     }
 

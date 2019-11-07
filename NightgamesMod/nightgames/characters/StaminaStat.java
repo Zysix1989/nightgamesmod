@@ -3,7 +3,7 @@ package nightgames.characters;
 import java.util.List;
 import org.apache.commons.lang3.Range;
 
-public class StaminaStat extends Meter {
+public class StaminaStat extends CoreStat {
 
     public StaminaStat(int max) {
         super(max);

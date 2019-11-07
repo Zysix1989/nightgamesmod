@@ -5,17 +5,17 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 import nightgames.characters.NPC;
 
-class GUIMetersPanel extends JPanel {
-    private GUIMeterPanel stamina;
-    private GUIMeterPanel arousal;
-    private GUIMeterPanel mojo;
-    private GUIMeterPanel willpower;
+class GUICoreStatsBar extends JPanel {
+    private GUICoreStatPanel stamina;
+    private GUICoreStatPanel arousal;
+    private GUICoreStatPanel mojo;
+    private GUICoreStatPanel willpower;
 
-    GUIMetersPanel() {
-        stamina = new GUIMeterPanel("stamina.png", GUIColors.staminaColor);
-        arousal = new GUIMeterPanel("arousal.png", GUIColors.arousalColor);
-        mojo = new GUIMeterPanel("mojo.png", GUIColors.mojoColor);
-        willpower = new GUIMeterPanel("willpower.png", GUIColors.willpowerColor);
+    GUICoreStatsBar() {
+        stamina = new GUICoreStatPanel("stamina.png", GUIColors.staminaColor);
+        arousal = new GUICoreStatPanel("arousal.png", GUIColors.arousalColor);
+        mojo = new GUICoreStatPanel("mojo.png", GUIColors.mojoColor);
+        willpower = new GUICoreStatPanel("willpower.png", GUIColors.willpowerColor);
 
         setOpaque(false);
 

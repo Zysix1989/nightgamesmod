@@ -29,7 +29,7 @@ public class MeterBarUI extends MetalProgressBarUI {
                 int cellSpacing = this.getCellSpacing();
                 int amountFull = this.getAmountFull(b, barRectWidth, barRectHeight);
                 Graphics2D g2 = (Graphics2D) g;
-                if (this.progressBar instanceof GUIMeterBar) {
+                if (this.progressBar instanceof GUICoreStatBar) {
                     var fgColor = this.progressBar.getForeground();
                     var middleFrame = this.getFrameCount() / 2;
                     float alpha;
@@ -100,8 +100,8 @@ public class MeterBarUI extends MetalProgressBarUI {
     }
 
     private int getUncertainAmountFull(Insets b, int width, int height) {
-        assert this.progressBar instanceof GUIMeterBar;
-        var gmb = (GUIMeterBar) this.progressBar;
+        assert this.progressBar instanceof GUICoreStatBar;
+        var gmb = (GUICoreStatBar) this.progressBar;
         int amountFull = 0;
         BoundedRangeModel model = this.progressBar.getModel();
         if (model.getMaximum() - model.getMinimum() != 0) {
@@ -123,7 +123,7 @@ public class MeterBarUI extends MetalProgressBarUI {
         if (r == null) {
             r = new Rectangle();
         }
-        if (this.progressBar instanceof  GUIMeterBar) {
+        if (this.progressBar instanceof GUICoreStatBar) {
             Insets b = this.progressBar.getInsets();
             var amountFull = getAmountFull(b, this.progressBar.getWidth(),
                 this.progressBar.getHeight());

@@ -8,19 +8,19 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.SoftBevelBorder;
-import nightgames.characters.Meter;
+import nightgames.characters.CoreStat;
 
-class GUIMeter {
+class GUICoreStat {
 
     private String name;
-    private Meter meter;
+    private CoreStat coreStat;
     private JLabel label;
     private JProgressBar progressBar;
     private JPanel panel;
 
-    GUIMeter(String name, Meter meter, Color color, String toolTipText) {
+    GUICoreStat(String name, CoreStat coreStat, Color color, String toolTipText) {
         this.name = name;
-        this.meter = meter;
+        this.coreStat = coreStat;
 
         label = new JLabel("");
         label.setFont(new Font("Sylfaen", 1, 15));
@@ -46,17 +46,17 @@ class GUIMeter {
 
     final void refresh() {
         label.setText(getLabelString());
-        progressBar.setMaximum(meter.max());
-        progressBar.setValue(meter.get());
+        progressBar.setMaximum(coreStat.max());
+        progressBar.setValue(coreStat.get());
     }
 
     private String getLabelString() {
         String text = name + ": ";
-        boolean overflow = meter.getOverflow() > 0;
+        boolean overflow = coreStat.getOverflow() > 0;
         text += overflow ? "(" : "";
-        text += Integer.toString(meter.get() + meter.getOverflow());
+        text += Integer.toString(coreStat.get() + coreStat.getOverflow());
         text += overflow ? ")" : "";
-        text += "/" + meter.max();
+        text += "/" + coreStat.max();
         return text;
     }
 }

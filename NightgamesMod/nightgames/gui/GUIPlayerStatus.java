@@ -3,17 +3,15 @@ package nightgames.gui;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
-
 import javax.swing.JPanel;
-
 import nightgames.characters.Player;
 
 class GUIPlayerStatus {
-    private ArrayList<GUIMeter> meters = new ArrayList<GUIMeter>();
+    private ArrayList<GUICoreStat> meters = new ArrayList<GUICoreStat>();
     private JPanel panel;
 
-    private static GUIMeter newStaminaMeter(Player player) {
-        return new GUIMeter(
+    private static GUICoreStat newStaminaMeter(Player player) {
+        return new GUICoreStat(
             "Stamina",
             player.getStamina(),
             new Color(164, 8, 2),
@@ -21,8 +19,8 @@ class GUIPlayerStatus {
         );
     }
 
-    private static GUIMeter newArousalMeter(Player player) {
-        return new GUIMeter(
+    private static GUICoreStat newArousalMeter(Player player) {
+        return new GUICoreStat(
             "Arousal",
             player.getArousal(),
             new Color(254, 1, 107),
@@ -30,8 +28,8 @@ class GUIPlayerStatus {
         );
     }
 
-    private static GUIMeter newMojoMeter(Player player) {
-        return new GUIMeter(
+    private static GUICoreStat newMojoMeter(Player player) {
+        return new GUICoreStat(
             "Mojo",
             player.getMojo(),
             new Color(51, 153, 255),
@@ -39,8 +37,8 @@ class GUIPlayerStatus {
         );
     }
 
-    private static GUIMeter newWillpowerMeter(Player player) {
-        return new GUIMeter(
+    private static GUICoreStat newWillpowerMeter(Player player) {
+        return new GUICoreStat(
             "Willpower",
             player.getWillpower(),
             new Color(68, 170, 85),
@@ -49,10 +47,10 @@ class GUIPlayerStatus {
     }
 
     GUIPlayerStatus(Player player) {
-        GUIMeter stamina = newStaminaMeter(player);
-        GUIMeter arousal = newArousalMeter(player);
-        GUIMeter mojo = newMojoMeter(player);
-        GUIMeter willpower = newWillpowerMeter(player);
+        GUICoreStat stamina = newStaminaMeter(player);
+        GUICoreStat arousal = newArousalMeter(player);
+        GUICoreStat mojo = newMojoMeter(player);
+        GUICoreStat willpower = newWillpowerMeter(player);
 
         meters.add(stamina);
         meters.add(arousal);
@@ -74,7 +72,7 @@ class GUIPlayerStatus {
     }
 
     void refresh() {
-        for (GUIMeter meter : meters) {
+        for (GUICoreStat meter : meters) {
             meter.refresh();
         }
     }

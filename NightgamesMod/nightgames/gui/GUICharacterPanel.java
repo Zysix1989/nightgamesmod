@@ -8,11 +8,11 @@ import nightgames.characters.NPC;
 class GUICharacterPanel extends JPanel {
 
     private GUIAppearancePanel appearancePanel;
-    private GUIMetersPanel metersPanel;
+    private GUICoreStatsBar metersPanel;
 
     GUICharacterPanel() {
         appearancePanel = new GUIAppearancePanel();
-        metersPanel = new GUIMetersPanel();
+        metersPanel = new GUICoreStatsBar();
 
         setOpaque(false);
 

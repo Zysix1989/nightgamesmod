@@ -4,7 +4,7 @@ import java.io.Serializable;
 import nightgames.global.Global;
 import org.apache.commons.lang3.Range;
 
-public abstract class Meter implements Serializable {
+public abstract class CoreStat implements Serializable {
     /**
      *
      */
@@ -13,12 +13,12 @@ public abstract class Meter implements Serializable {
     protected int current;
     protected int max;
 
-    public Meter(int max) {
+    public CoreStat(int max) {
         this.max = max;
         current = 0;
     }
 
-    protected Meter(Meter original) {
+    protected CoreStat(CoreStat original) {
         current = original.current;
         max = original.max;
     }
@@ -64,7 +64,7 @@ public abstract class Meter implements Serializable {
         return max() - getReal();
     }
 
-    public abstract Meter copy();
+    public abstract CoreStat copy();
 
     public abstract Range<Integer> observe(int perception);
 }

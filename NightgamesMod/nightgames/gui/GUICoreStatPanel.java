@@ -11,16 +11,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.SoftBevelBorder;
-import nightgames.characters.Meter;
+import nightgames.characters.CoreStat;
 
-class GUIMeterPanel extends JPanel {
-    private Meter target = null;
+class GUICoreStatPanel extends JPanel {
+    private CoreStat target = null;
     private JLabel thumbnail;
-    private GUIMeterBar bar;
+    private GUICoreStatBar bar;
 
-    GUIMeterPanel(String imagePath, Color dominantColor) {
+    GUICoreStatPanel(String imagePath, Color dominantColor) {
         thumbnail = new JLabel();
-        bar = new GUIMeterBar();
+        bar = new GUICoreStatBar();
         var imageStream = this.getClass().getClassLoader().getResourceAsStream(imagePath);
         if (imageStream == null) {
             throw new MissingResourceException("", this.getClass().getName(), imagePath);
@@ -56,7 +56,7 @@ class GUIMeterPanel extends JPanel {
         setLayout(layout);
     }
 
-    void setTargetMeter(Meter target) {
+    void setTargetMeter(CoreStat target) {
         this.target = target;
         refresh();
         bar.setVisible(true);
