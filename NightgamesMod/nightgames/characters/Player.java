@@ -457,7 +457,7 @@ public class Player extends Character {
         }
     }
 
-    public void handleLevelUp() {
+    private void handleLevelUp() {
         if (availableAttributePoints > 0) {
             gui.message(this, availableAttributePoints + " Attribute Points remain.</br>");
 
