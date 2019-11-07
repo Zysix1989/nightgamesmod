@@ -3,8 +3,6 @@ package nightgames.characters;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 
-import java.util.Optional;
-
 /**
  * Test personality, or maybe for those with a flat affect.
  */
@@ -12,7 +10,7 @@ public class BlankPersonality extends BasePersonality {
     private static final long serialVersionUID = 1L;
 
     public BlankPersonality(String name) {
-        super(name, Optional.empty(), Optional.empty(), false);
+        super(name, false);
     }
 
     @Override public String victory(Combat c, Result flag) {

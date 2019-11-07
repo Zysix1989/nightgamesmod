@@ -30,7 +30,7 @@ public class Mei extends BasePersonality {
     }
 
     public Mei(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
-        super("Mei", charConfig, commonConfig, false);
+        super("Mei", false);
         setupCharacter(charConfig, commonConfig);
         constructLines();
     }
