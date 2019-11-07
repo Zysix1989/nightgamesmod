@@ -11,6 +11,7 @@ import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.corestats.ArousalStat;
 import nightgames.characters.corestats.StaminaStat;
+import nightgames.characters.corestats.WillpowerStat;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
@@ -157,9 +158,9 @@ public class Growth implements Cloneable {
     }
 
     public void levelUp(Character character) {
-        character.getStamina().gain(stamina);
-        character.getArousal().gain(arousal);
-        character.getWillpower().gain(willpower);
+        levelUpStamina(character.getStamina());
+        levelUpArousal(character.getArousal());
+        levelUpWillpower(character.getWillpower());
         if (traitPoints.containsKey(character.level) && character instanceof Player) ((Player)character).traitPoints+=traitPoints.get(character.level);
 
         character.availableAttributePoints += attributes[Math.min(character.rank, attributes.length-1)] + extraAttributes;
@@ -197,6 +198,8 @@ public class Growth implements Cloneable {
     public void levelUpStamina(StaminaStat s) {
         s.gain(stamina);
     }
+
+    public void levelUpWillpower(WillpowerStat s) { s.gain(willpower); }
 
     public float getArousal() {
         return arousal;
