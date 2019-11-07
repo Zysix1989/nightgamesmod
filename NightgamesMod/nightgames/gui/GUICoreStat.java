@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.SoftBevelBorder;
-import nightgames.characters.CoreStat;
+import nightgames.characters.corestats.CoreStat;
 
 class GUICoreStat {
 

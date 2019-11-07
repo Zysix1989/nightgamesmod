@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.SoftBevelBorder;
-import nightgames.characters.CoreStat;
+import nightgames.characters.corestats.CoreStat;
 
 class GUICoreStatPanel extends JPanel {
     private CoreStat target = null;

@@ -1,6 +1,6 @@
 package nightgames.traits;
 
-import nightgames.characters.ArousalStat;
+import nightgames.characters.corestats.ArousalStat;
 
 public class Insatiable {
 

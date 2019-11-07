@@ -1,4 +1,4 @@
-package nightgames.characters;
+package nightgames.characters.corestats;
 
 import com.google.gson.JsonObject;
 import org.apache.commons.lang3.Range;

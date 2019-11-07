@@ -1,25 +1,40 @@
-package nightgames.characters;
+package nightgames.characters.corestats;
 
 import com.google.gson.JsonObject;
 import java.util.List;
 import org.apache.commons.lang3.Range;
 
-public class StaminaStat extends CoreStat {
+public class WillpowerStat extends CoreStat {
+    private int temporaryMax;
 
-    public StaminaStat(int max) {
+    public WillpowerStat(int max) {
         super(max);
+        resetCapacity();
         renew();
     }
 
-    private StaminaStat(StaminaStat original) {
+    private WillpowerStat(WillpowerStat original) {
         super(original);
+        temporaryMax = original.temporaryMax;
     }
 
-    public StaminaStat(JsonObject js) { super(js); }
+    private static final String jsTemporaryMax = "temporaryMax";
+
+    public WillpowerStat(JsonObject js) {
+        super(js);
+        temporaryMax = js.get(jsTemporaryMax).getAsInt();
+    }
 
     @Override
-    public StaminaStat copy() {
-        return new StaminaStat(this);
+    public JsonObject save() {
+        var js = super.save();
+        js.addProperty(jsTemporaryMax, temporaryMax);
+        return js;
+    }
+
+    @Override
+    public WillpowerStat copy() {
+        return new WillpowerStat(this);
     }
 
     public void renew() {
@@ -38,24 +53,41 @@ public class StaminaStat extends CoreStat {
         return current <= 0;
     }
 
+    public void reduceCapacity(double percentage) {
+        temporaryMax = (int) ((float) max() * percentage);
+    }
+
+    public void resetCapacity() {
+        temporaryMax = Integer.MAX_VALUE;
+    }
+
+    public int max() {
+        return Math.min(max, temporaryMax);
+    }
+
+    float trueMax() {
+        return max;
+    }
+
     @Override
     public Range<Integer> observe(int perception) {
         var percentage = percent();
-        if (perception >= 8) {
+        if (perception >= 9) {
             return Range.is(percentage);
         }
-        if (perception >= 6) {
+        if (perception >= 7) {
             for (var i : List.of(
-                Range.between(0, 33),
-                Range.between(34, 66),
-                Range.between(67, 100))) {
+                Range.between(0, 24),
+                Range.between(25, 49),
+                Range.between(50, 74),
+                Range.between(75, 100))) {
                 if (i.contains(percentage)) {
                     return i;
                 }
             }
             throw new IllegalStateException(String.format("percentage %s not between 0 and 100", percentage));
         }
-        if (perception >= 5) {
+        if (perception >= 3) {
             for (var i : List.of(
                 Range.between(0, 49),
                 Range.between(50, 100))) {
