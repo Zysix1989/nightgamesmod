@@ -243,11 +243,17 @@ public class Cassie extends BasePersonality {
         preferredAttributes.add(character -> character.get(Attribute.Submissive) < 20 ? Optional.of(Attribute.Submissive) : Optional.empty());
     }
 
+    private static Growth newGrowth() {
+        var g = new Growth();
+        g.setStamina(2);
+        g.setArousal(7);
+        g.setWillpower(.8f);
+        return g;
+    }
+
     @Override
     public void setGrowth() {
-        character.getGrowth().setStamina(2);
-        character.getGrowth().setArousal(7);
-        character.getGrowth().setWillpower(.8f);
+        character.setGrowth(newGrowth());
         character.getGrowth().bonusStamina = 1;
         character.getGrowth().bonusArousal = 3;
 

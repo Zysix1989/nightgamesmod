@@ -61,11 +61,17 @@ public class Mei extends BasePersonality {
         character.initialGender = CharacterSex.female;
     }
 
+    private static Growth newGrowth() {
+        var g = new Growth();
+        g.setStamina(3);
+        g.setArousal(8);
+        g.setWillpower(.8f);
+        return g;
+    }
+
     @Override
     public void setGrowth() {
-        character.getGrowth().setStamina(3);
-        character.getGrowth().setArousal(8);
-        character.getGrowth().setWillpower(.8f);
+        character.setGrowth(newGrowth());
         character.getGrowth().bonusStamina = 2;
         character.getGrowth().bonusArousal = 2;
 

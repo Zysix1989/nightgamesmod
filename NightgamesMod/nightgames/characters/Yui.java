@@ -66,11 +66,17 @@ public class Yui extends BasePersonality {
         character.initialGender = CharacterSex.female;
     }
 
+    private static Growth newGrowth() {
+        var g = new Growth();
+        g.setStamina(3);
+        g.setArousal(7);
+        g.setWillpower(1.4f);
+        return g;
+    }
+
     @Override
     public void setGrowth() {
-        character.getGrowth().setStamina(3);
-        character.getGrowth().setArousal(7);
-        character.getGrowth().setWillpower(1.4f);
+        character.setGrowth(newGrowth());
         character.getGrowth().bonusStamina = 2;
         character.getGrowth().bonusArousal = 2;
         preferredAttributes.add(c -> c.get(Attribute.Ninjutsu) < 60 && c.getLevel() >= 10 ? Optional.of(Attribute.Ninjutsu)  : Optional.empty());

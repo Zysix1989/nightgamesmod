@@ -72,10 +72,16 @@ public class Angel extends BasePersonality {
         npcSelf.mood = Emotion.confident;
     }
 
+    private static Growth newGrowth() {
+        var g = new Growth();
+        g.setStamina(2);
+        g.setArousal(9);
+        return g;
+    }
+
     @Override
     public void setGrowth() {
-        character.getGrowth().setStamina(2);
-        character.getGrowth().setArousal(9);
+        character.setGrowth(newGrowth());
         character.getGrowth().bonusStamina = 1;
         character.getGrowth().bonusArousal = 4;
 

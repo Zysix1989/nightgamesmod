@@ -76,10 +76,16 @@ public class Eve extends BasePersonality {
         self.initialGender = CharacterSex.shemale;
     }
 
+    private static Growth newGrowth() {
+        var g = new Growth();
+        g.setStamina(2);
+        g.setArousal(6);
+        return g;
+    }
+
     @Override
     public void setGrowth() {
-        character.getGrowth().setStamina(2);
-        character.getGrowth().setArousal(6);
+        character.setGrowth(newGrowth());
         character.getGrowth().bonusStamina = 1;
         character.getGrowth().bonusArousal = 3;
         preferredAttributes.add(c -> c.get(Attribute.Fetish) < 80 ? Optional.of(Attribute.Fetish) : Optional.empty());

@@ -138,14 +138,20 @@ public class Jewel extends BasePersonality {
         growth.addTrait(55, Trait.overwhelmingPresence);
     }
 
+    private static Growth newGrowth() {
+        var g = new Growth();
+        g.setStamina(3);
+        g.setArousal(6);
+        g.setWillpower(1.7f);
+        return g;
+    }
+
     @Override
     public void setGrowth() {
+        character.setGrowth(newGrowth());
         Growth growth = character.getGrowth();
-        growth.setStamina(3);
-        growth.setArousal(6);
         growth.bonusStamina = 3;
         growth.bonusArousal = 1;
-        growth.setWillpower(1.7f);
 
         
         this.addFirstFocusScene();      //TODO: Add below addcombatscene block to this method.  NOTE: Growth in this scope breaks Jewel's first scene. 

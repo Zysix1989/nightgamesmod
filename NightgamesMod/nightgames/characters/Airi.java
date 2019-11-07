@@ -181,11 +181,17 @@ public class Airi extends BasePersonality {
         });
     }
 
+    private static Growth newGrowth() {
+        var g = new Growth();
+        g.setStamina(1);
+        g.setArousal(5);
+        g.setWillpower(2.5f);
+        return g;
+    }
+
     @Override
     public void setGrowth() {
-        character.getGrowth().setStamina(1);
-        character.getGrowth().setArousal(5);
-        character.getGrowth().setWillpower(2.5f);
+        character.setGrowth(newGrowth());
         character.getGrowth().bonusStamina = 1;
         character.getGrowth().bonusArousal = 1;
         character.addCombatScene(new CombatScene((c, self, other) -> {

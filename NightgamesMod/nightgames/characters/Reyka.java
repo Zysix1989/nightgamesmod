@@ -95,10 +95,16 @@ public class Reyka extends BasePersonality {
         self.initialGender = CharacterSex.female;
     }
 
+    private static Growth newGrowth() {
+        var g = new Growth();
+        g.setStamina(1);
+        g.setArousal(10);
+        return g;
+    }
+
     @Override
     public void setGrowth() {
-        character.getGrowth().setStamina(1);
-        character.getGrowth().setArousal(10);
+        character.setGrowth(newGrowth());
         character.getGrowth().bonusStamina = 1;
         character.getGrowth().bonusArousal = 3;
         preferredAttributes.add(c -> c.get(Attribute.Dark) < 50 && c.get(Attribute.Dark) <= c.get(Attribute.Fetish) + 10

@@ -136,10 +136,16 @@ public class Kat extends BasePersonality {
         character.getGrowth().addTrait(58, Trait.Unsatisfied);
     }
 
+    private static Growth newGrowth() {
+        var g = new Growth();
+        g.setStamina(2);
+        g.setArousal(7);
+        return g;
+    }
+
     @Override
     public void setGrowth() {
-        character.getGrowth().setStamina(2);
-        character.getGrowth().setArousal(7);
+        character.setGrowth(newGrowth());
         character.getGrowth().bonusStamina = 1;
         character.getGrowth().bonusArousal = 2;
         

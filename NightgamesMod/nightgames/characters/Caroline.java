@@ -57,11 +57,17 @@ public class Caroline extends BasePersonality {
         character.initialGender = CharacterSex.female;
     }
 
+    private static Growth newGrowth() {
+        var g = new Growth();
+        g.setStamina(4);
+        g.setArousal(7);
+        g.setWillpower(.4f);
+        return g;
+    }
+
     @Override
     public void setGrowth() {
-        character.getGrowth().setStamina(4);
-        character.getGrowth().setArousal(7);
-        character.getGrowth().setWillpower(.4f);
+        character.setGrowth(newGrowth());
         character.getGrowth().bonusStamina = 2;
         character.getGrowth().bonusArousal = 2;
 

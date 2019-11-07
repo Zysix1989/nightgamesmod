@@ -56,11 +56,17 @@ public class Sarah extends BasePersonality {
         character.initialGender = CharacterSex.female;
     }
 
+    private static Growth newGrowth() {
+        var g = new Growth();
+        g.setStamina(5);
+        g.setArousal(6);
+        g.setWillpower(.8f);
+        return g;
+    }
+
     @Override
     public void setGrowth() {
-        character.getGrowth().setStamina(5);
-        character.getGrowth().setArousal(6);
-        character.getGrowth().setWillpower(.8f);
+        character.setGrowth(newGrowth());
         character.getGrowth().bonusStamina = 2;
         character.getGrowth().bonusArousal = 2;
 

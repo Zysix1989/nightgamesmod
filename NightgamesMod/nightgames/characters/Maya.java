@@ -78,11 +78,17 @@ public class Maya extends BasePersonality {
         self.initialGender = CharacterSex.female;
     }
 
+    private static Growth newGrowth() {
+        var g = new Growth();
+        g.setStamina(2);
+        g.setArousal(10);
+        g.setWillpower(2.0f);
+        return g;
+    }
+
     @Override
     public void setGrowth() {
-        character.getGrowth().setStamina(2);
-        character.getGrowth().setArousal(10);
-        character.getGrowth().setWillpower(2.0f);
+        character.setGrowth(newGrowth());
         character.getGrowth().bonusStamina = 2;
         character.getGrowth().bonusArousal = 5;
 
