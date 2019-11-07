@@ -75,7 +75,7 @@ public class JsonSourceNPCDataLoader {
 
         loadResources(baseStats.getAsJsonObject("resources"), data.stats);
         loadTraits(baseStats.getAsJsonArray("traits"), data.stats.traits);
-        loadGrowth(stats.getAsJsonObject("growth"), data.growth);
+        data.setGrowth(new Growth(stats.getAsJsonObject("growth")));
         loadPreferredAttributes(stats.getAsJsonObject("growth").getAsJsonArray("preferredAttributes"),
                         data.preferredAttributes);
         loadItems(object.getAsJsonObject("items"), data);
@@ -171,7 +171,7 @@ public class JsonSourceNPCDataLoader {
         }
     }
 
-    private static void loadGrowth(JsonObject obj, Growth growth) {
+    public static void loadGrowth(JsonObject obj, Growth growth) {
         loadGrowthResources(obj.get("resources").getAsJsonObject(), growth);
         loadGrowthTraits(obj.get("traits").getAsJsonArray(), growth);
     }

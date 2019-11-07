@@ -1,5 +1,6 @@
 package nightgames.characters;
 
+import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,6 +13,7 @@ import nightgames.characters.body.mods.PartMod;
 import nightgames.characters.corestats.ArousalStat;
 import nightgames.characters.corestats.StaminaStat;
 import nightgames.characters.corestats.WillpowerStat;
+import nightgames.characters.custom.JsonSourceNPCDataLoader;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
@@ -65,6 +67,11 @@ public class Growth implements Cloneable {
         bodyPartMods = new HashMap<>();
         traitPoints = new HashMap<>();
         clothing = new HashMap<>();
+    }
+
+    public Growth(JsonObject js) {
+        this();
+        JsonSourceNPCDataLoader.loadGrowth(js, this);
     }
 
     public void addTrait(int level, Trait trait) {
