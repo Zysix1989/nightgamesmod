@@ -2,7 +2,6 @@ package nightgames.daytime;
 
 import java.util.ArrayList;
 import java.util.Optional;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -106,25 +105,6 @@ public class JewelTime extends BaseNPCTime {
             moltenAss.option = "Molten Ass";
             moltenAss.scene = "[Placeholder]<br/>Jewel trains you so you can concentrate your ki inside your ass.";
             transformationOptions.add(moltenAss);
-        }
-        {
-            TransformationOption retraining = new TransformationOption();
-            retraining.ingredients.put(Item.MoltenDrippings, 1);
-            retraining.addRequirement((c, s, o) -> Global.getDay().time <= 16, "Be before 4 pm");
-            retraining.option = "Retraining";
-            retraining.scene = "[Placeholder] Jewel spends the rest of the day breaking you down and building you back up again. By the end of your time together, you feel like a new person!";
-            retraining.effect = (c, self, other) -> {
-                Global.getDay().time = 21;
-                int level = self.getLevel();
-                for (int i = 1; i < level; i++) {
-                    Global.gui().message(self.dong());
-                }
-                for (int i = 1; i < level; i++) {
-                    self.ding(c);
-                }
-                return true;
-            };
-            transformationOptions.add(retraining);
         }
     }
 
