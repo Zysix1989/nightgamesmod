@@ -106,14 +106,14 @@ public class Airi extends BasePersonality {
     }
 
     private void constructLines() {
-        character.addLine(CharacterLine.BB_LINER, (c, self, other) -> self.has(Trait.slime) ? "Airi grimaces as you fall. <i>\"Apologies... but necessary.... Please understand...\"</i>" : "<i>\"Sorry... I hope it didn't hurt too badly...\"</i>");
-        character.addLine(CharacterLine.NAKED_LINER, (c, self, other) -> self.has(Trait.slime) ? "" : "<i>Nooo! Don't look at me!</i>");
-        character.addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> self.has(Trait.slime) ? "Airi glares at you from the puddle she formed on the floor. <i>\"Unforgivable...\"</i>" : "<i>\"Unforgivable...\"</i>");
-        character.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> self.has(Trait.slime) ? "Airi coos to you <i>\"About to cum..? ...even trying..?\"</i>" : "<i><b>Airi giggles, </b> \"Try a bit harder okay?\"</i>");
-        character.addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> self.has(Trait.slime) ? "<i>\"Fill me... now...\"</i>" : "<i>\"Uhm, it's okay, you can come inside...\"</i>");
-        character.addLine(CharacterLine.ENGULF_LINER, (c, self, other) -> "\n<i>\"It's done... over... stop struggling... cum.\"</i>");
+        addLine(CharacterLine.BB_LINER, (c, self, other) -> self.has(Trait.slime) ? "Airi grimaces as you fall. <i>\"Apologies... but necessary.... Please understand...\"</i>" : "<i>\"Sorry... I hope it didn't hurt too badly...\"</i>");
+        addLine(CharacterLine.NAKED_LINER, (c, self, other) -> self.has(Trait.slime) ? "" : "<i>Nooo! Don't look at me!</i>");
+        addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> self.has(Trait.slime) ? "Airi glares at you from the puddle she formed on the floor. <i>\"Unforgivable...\"</i>" : "<i>\"Unforgivable...\"</i>");
+        addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> self.has(Trait.slime) ? "Airi coos to you <i>\"About to cum..? ...even trying..?\"</i>" : "<i><b>Airi giggles, </b> \"Try a bit harder okay?\"</i>");
+        addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> self.has(Trait.slime) ? "<i>\"Fill me... now...\"</i>" : "<i>\"Uhm, it's okay, you can come inside...\"</i>");
+        addLine(CharacterLine.ENGULF_LINER, (c, self, other) -> "\n<i>\"It's done... over... stop struggling... cum.\"</i>");
 
-        character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             if (self.has(Trait.slime)) {
                 return "<i>\"Ahhnn... forgot how good... feels... Will return favor...\"</i>.";
             } else if (self.getWillpower().percent() > 90) {
@@ -124,9 +124,9 @@ public class Airi extends BasePersonality {
                 return "<i>\"I need more... Give me more...\"</i>";
             }
         });
-        character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> self.has(Trait.slime) ? "<i>\"...Feels good..? I'll suck more out... I'll milk you dry...\"</i>" : "<i>\"Hyaa! Oh please warn me next time...\"</i>");
+        addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> self.has(Trait.slime) ? "<i>\"...Feels good..? I'll suck more out... I'll milk you dry...\"</i>" : "<i>\"Hyaa! Oh please warn me next time...\"</i>");
         
-        character.addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> "You walk back to your dorm after the match, and decide to take a shower after all that exertion. Who knew sex fighting a bunch of girls "
+        addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> "You walk back to your dorm after the match, and decide to take a shower after all that exertion. Who knew sex fighting a bunch of girls "
                         + "would be so exhausting? You strip off your shirt and boxers and head straight into the bathroom. As you flip on the lights, you notice that the tub seems already filled with water. "
                         + "Just as you wonder if you forgot to drain the tub from last night, the liquid in the tub quivers and… stands up. "
                         + "<br/>"
@@ -138,7 +138,7 @@ public class Airi extends BasePersonality {
                         + "Wait what? Oh n-!<br/>"
                         + "Airi pulls you into the tub with her gooey appendages and submerges you inside her body. <i>Relax… I’ll clean you up… Inside and out…</i><br/>");
         
-        character.addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
+        addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
             if (other.human()) {
                 return character.has(Trait.slime)
                                 ? "Airi's main body rises up from her slime blob and forms the demure beauty you're used to seeing. <i>\"Delicious... Quickly... Give me your seed...\"</i>"
@@ -147,7 +147,7 @@ public class Airi extends BasePersonality {
                 return "<i>You... will do...</i>";
             }
         });
-        character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
             String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.describe(self)).orElse(
                 PussyPart.TYPE);
             if (character.has(Trait.slime)) {
@@ -172,11 +172,11 @@ public class Airi extends BasePersonality {
         description = JtwigTemplate.classpathTemplate("airi/describe.twig");
         
         //To be said when this character wins the entire night.
-        character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
+        addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "{self:SUBJECT} smiles and hides her face in her hands but says nothing; It's obvious that she's happy that she won.";
         });
         //To be said when they earn 0 points.
-        character.addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
             return "{self:SUBJECT} looks down at the ground and hides her face, obviously disappointed at her loss.\"</i>";
         });
     }

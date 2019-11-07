@@ -4,12 +4,12 @@ import java.util.Collection;
 import java.util.Optional;
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
-import nightgames.characters.body.mods.AngelicWingsMod;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.WingsPart;
+import nightgames.characters.body.mods.AngelicWingsMod;
 import nightgames.characters.body.mods.catcher.FieryMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
@@ -111,40 +111,40 @@ public class Sarah extends BasePersonality {
     }
     
     private void constructLines() {
-        character.addLine(CharacterLine.BB_LINER, (c, self, other) -> {
+        addLine(CharacterLine.BB_LINER, (c, self, other) -> {
             return "<i>\"...\"</i> Sarah silently looks at you, with no hint of remorse in her eyes.";
         });
 
-        character.addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
             return "Sarah looks unfazed at being undressed, but you can clearly see a flush creeping into her face.";
         });
 
-        character.addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
             return "<i>\"..!\"</i>";
         });
 
-        character.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
             return "Sarah simply eyes you with a disdainful look. If looks could kill... well this still probably wouldn't kill you. But it definitely hurts your pride.";
         });
 
-        character.addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
             return "Sarah cups her large breasts and gives you a show. The gap between her placid face and her lewd actions is surprisingly arousing.";
         });
 
-        character.addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
             return "";
         });
 
-        character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             return "Sarah's eyes slam shut in a blissful silent orgasm. "
                             + "You can clearly tell she's turned on like hell, but her face remains impassive as usual.";
         });
 
-        character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
             return "Sarah looks a bit flushed as {other:subject-action:cum|cums} hard. However she does changes neither her blank demeanor nor her stance.";
         });
         
-        character.addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
+        addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
             int sarahFought = other.getFlag(FOUGHT_SARAH_PET);
             if (other.human()) {
                 if (sarahFought == 0)  {

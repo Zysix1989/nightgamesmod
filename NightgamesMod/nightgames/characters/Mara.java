@@ -60,31 +60,31 @@ public class Mara extends BasePersonality {
     }
 
     private void constructLines () {
-        character.addLine(CharacterLine.BB_LINER, (c, self, other) -> { 
+        addLine(CharacterLine.BB_LINER, (c, self, other) -> {
             return "{self:SUBJECT} gives you a look of not quite genuine concern. <i>\"That must have really hurt. Sorry for scrambling your eggs. I feel really bad about that. Also for "
                             + "lying just now. I'm not actually that sorry.\"</i>";
         });
-        character.addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
+        addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
             return "{self:SUBJECT} smiles and faces {other:name-do}, practically daring {other:direct-object} to attack.";
         });
 
-        character.addLine(CharacterLine.NAKED_LINER, (c, self, other) -> { 
+        addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
             return "{self:SUBJECT} gives an exaggerated squeal and covers herself. <i>\"You brute! You rapist! What are you trying to do to a helpless, innocent girl?\"</i>";
          });
 
-        character.addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> { 
+        addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
             return "{self:SUBJECT} lets out a slightly pained whimper. <i>\"Go easy on me. I'm not really the masochistic type.\"</i>";
          });
 
-        character.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> { 
+        addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
             return "<i>\"If you want me to get you off so badly,\"</i> {self:SUBJECT} teases coyly. <i>\"You should have just said so from the start. You don't need to put up this token resistance.\"</i>";
          });
 
-        character.addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> { 
+        addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
             return "<i>\"If you want me to get you off so badly,\"</i> {self:SUBJECT} teases coyly. <i>\"You should have just said so from the start. You don't need to put up this token resistance.\"</i>";
          });
 
-        character.addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> { 
+        addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
             return "On your way back to your dorm after the match, you feel a sudden weight on your back that almost knocks you off your feet. It turns out to be {self:name-do}, who jumped "
                             + "on your back in {self:possessive} enthusiasm to spend the night together. You give {self:possessive} a piggyback ride back to the dorm, and per {self:possessive} request, head up to the roof. Unsurprisingly, "
                             + "there's no one here this late at night and there's a good view of the stars. {self:SUBJECT} strips off {self:possessive} clothes and dances naked onto the rooftop. <i>\"There's nothing like "
@@ -98,7 +98,7 @@ public class Mara extends BasePersonality {
                             + "before morning.";
          });
 
-        character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> { 
+        addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             final String finalLines[] =
                             {"<i>\"NNnnnn..! Oh man I can't take much more!\"</i>", "<i>\"Ngh! Slow down! please!\"</i>",
                                             "{self:SUBJECT} groans as {self:possessive} climax subsides, <i>\"Again! I deman a rematch!\"</i>",};
@@ -115,7 +115,7 @@ public class Mara extends BasePersonality {
              }
          });
 
-        character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> { 
+        addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
             final String finalLines[] = {"<i>\"Cumming again? You " + other.boyOrGirl() + "s are too easy.\"</i>",
                             "<i>\"You're simply inexhaustible aren't you? Let's test that theory... for science.\"</i>",
                             "{self:SUBJECT} laughs triumphantly, <i>\"Again! Again!\"</i>",};
@@ -132,7 +132,7 @@ public class Mara extends BasePersonality {
              }
          });
 
-        character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
             String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.describe(self)).orElse(
                 PussyPart.TYPE);
             if (other.getLevel() < self.getLevel() - 5) {
@@ -151,11 +151,11 @@ public class Mara extends BasePersonality {
 
         description = JtwigTemplate.classpathTemplate("mara/describe.twig");
 
-        character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
+        addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "{self:SUBJECT} shouts in triumph, <i>\"Ha-haaa! Science wins AGAIN!!\"</i>";
         });
         
-        character.addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
             return "{self:SUBJECT} mutters, <i>\"Crap...Need to make adjustments...\"</i>";
         });
         

@@ -4,16 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
-
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
-import nightgames.characters.body.mods.catcher.FieryMod;
 import nightgames.characters.body.mods.TrainedMod;
+import nightgames.characters.body.mods.catcher.FieryMod;
+import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
@@ -28,7 +27,6 @@ import nightgames.skills.strategy.KnockdownStrategy;
 import nightgames.skills.strategy.ReceiveAnalStrategy;
 import nightgames.skills.strategy.StraponStrategy;
 import nightgames.start.NpcConfiguration;
-import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class Jewel extends BasePersonality {
@@ -296,24 +294,24 @@ public class Jewel extends BasePersonality {
     }
 
     private void constructLines() {
-        character.addLine(CharacterLine.BB_LINER, (c, self, other) -> {
+        addLine(CharacterLine.BB_LINER, (c, self, other) -> {
             return "Jewel gently pats your injured testicles. <br/><i>\"These things are the reason I'm glad I was born a girl. If I had a pair of big dangling targets between my legs, "
                             + "I could never concentrate on fighting.\"</i>";
         });
 
-        character.addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
+        addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
             return "Jewel approaches, looking confident and ready to fight.";
         });
 
-        character.addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
             return "Jewel smiles and makes no effort to hide her nakedness. <i>\"Feel free to enjoy the view. I love fighting naked, it gives me so much freedom of movement.\"</i>";
         });
 
-        character.addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
             return "Jewel takes several heaving breaths, looking beaten and exhausted. She suddenly grins ear to ear. <i>\"OK, I'm impressed.\"</i>";
         });
 
-        character.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
             if (self.has(Trait.bitingwords) && c.getStance().dom(self)) {
                 ArrayList<String> possible = new ArrayList<>(); 
                 possible.add("Jewel looks down at you with a sadistic smirk, <i>\"That's a nice look on you there "
@@ -332,11 +330,11 @@ public class Jewel extends BasePersonality {
             }
         });
 
-        character.addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
             return "Jewel licks her lips, <i>\"Soon, I'll have you wailing like a whore.\"</i>";
         });
 
-        character.addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
             return "You head back to your dorm after saying a quick goodnight to each of your opponents. The only expection is Jewel, who unfortunately appears to have left before "
                             + "you. When you get near the dorm, you discover why she left in such a hurry. You spot Jewel waiting in front of your dorm before she sees you. She's fidgetting "
                             + "and looking around constantly, showing none of the confidence and composure you've always seen from her. When you greet her, she keeps her eyes averted and "
@@ -348,7 +346,7 @@ public class Jewel extends BasePersonality {
                             + "wake up in the morning wishing I had someone to hold me. Can I wake up in your arms tomorrow?\"</i> You kiss her again and lead her to your room.";
         });
 
-        character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             final String finalLines[] = {
                             "Jewels lets out an uncharacterically cute groan when she cums and glares fiercely at you when you chuckle, <i>\"I didn't cum! You didn't hear anything!\"</i>",
                             "<i>\"Ahhn feels sho good... No I wont lose!\"</i>",
@@ -365,7 +363,7 @@ public class Jewel extends BasePersonality {
             }
         });
 
-        character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
             final String finalLines[] = {
                             "<i>\"Wow, still going! You're the best you know? You can't expect everyone to last this long\"</i>",
                             "<i>\"Keep it coming partner! I'll take all that you've got.\"</i>",
@@ -386,7 +384,7 @@ public class Jewel extends BasePersonality {
             }
         });
 
-        character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
             String part = Global.pickRandom(c.getStance()
                                              .getPartsFor(c, self, other))
                                 .map(bp -> bp.getType())
@@ -408,11 +406,11 @@ public class Jewel extends BasePersonality {
 
         description = JtwigTemplate.classpathTemplate("jewel/describe.twig");
         
-        character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
+        addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "{self:SUBJECT} shouts in triumph, <i>\"YEAH! That'll show you. I'm the strongest.\"</i>";
         });
         
-        character.addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
             return "{self:SUBJECT} mutters, <i>\"Son of a bitch...\"</i>";
         });
     }

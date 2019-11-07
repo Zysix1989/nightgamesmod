@@ -336,15 +336,15 @@ public class Kat extends BasePersonality {
     }
 
     private void constructLines() {
-        character.addLine(CharacterLine.BB_LINER, (c, self, other) -> {
+        addLine(CharacterLine.BB_LINER, (c, self, other) -> {
             return "Kat gives you a look of concern and sympathy. <i>\"Nya... Are you ok? I didn't mean to hit you that hard.\"</i>";
         });
 
-        character.addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
+        addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
             return "Kat looks a bit nervous, but her tail wags slowly in anticipation. <i>\"Let's have some funNya.\"</i>";
         });
 
-        character.addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
             if (self.getArousal()
                     .percent() >= 50) {
                 return "Kat makes no effort to hide the moisture streaming down her thighs. <i>\"You want my pussy? I'm nyot going to myake it easy for you.\"</i>";
@@ -353,19 +353,19 @@ public class Kat extends BasePersonality {
             }
         });
 
-        character.addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
             return "Kat mews pitifully on the floor. <i>\"Don't be so meaNya.\"</i>";
         });
 
-        character.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
             return "Kat smiles excitedly and bats at your cock. <i>\"Are you already close to cumming? Nya! I want to play with you more!\"</i>";
         });
 
-        character.addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
             return "Kat winks at you and looks at your crotch, <i>\"MmM! That looks tasty nya!\"</i>";
         });
 
-        character.addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
             return "You walk back to your dorm after the match, but something is bothering you the whole way. You feel like you're being watched, but there's no menace to the sensation. "
                             + "You hear a rustling behind you and look back just in time to see someone duck behind a bush. 'Someone'.... The cat ears on that hat make your stalker's identity "
                             + "pretty obvious. You pretend you didn't see anything and continue toward your dorm. So, a stray Kat is following you home tonight. It would make more sense for her "
@@ -377,17 +377,17 @@ public class Kat extends BasePersonality {
                             + "delighted as you lead her to your room.";
         });
 
-        character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             return "<i>\"NYAAAH! uuu...\"</i> Kat glares at you reproachfully as she comes down from her high.";
         });
 
-        character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
             return "<i>\"Nyahaha! I gotcha! Hey hey, do you think you can cum again-nyaa? Let's try it out!\"</i>";
         });
 
         description = JtwigTemplate.classpathTemplate("kat/describe.twig");
 
-        character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
             if (other.getLevel() < self.getLevel() - 5) {
                 return "You don't even think Kat notices your meager strength draining into her much larger pool as she passionately fucks you in her bestial lust. <i>\"Nyahaha! Can't stop... WONT stop!\"</i>";
             } else if (other.getLevel() >= self.getLevel()) {
@@ -399,11 +399,11 @@ public class Kat extends BasePersonality {
             }
         });
         
-        character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
+        addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "{self:SUBJECT} shouts in triumph, <i>\"NYAAA! I'm the strongest!\"</i>";
         });
         
-        character.addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
             return "{self:SUBJECT} mutters, <i>\"Nyaaaaa...I lost? :3\"</i>";
         });
         

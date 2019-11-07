@@ -566,10 +566,6 @@ public class NPC extends Character {
         }
     }
 
-    public void addLine(String lineType, CharacterLine line) {
-        ai.addLine(lineType, line);
-    }
-
     @Override
     public void afterParty() {
         Global.gui().message(getRandomLineFor(CharacterLine.NIGHT_LINER, null, Global.getPlayer()));

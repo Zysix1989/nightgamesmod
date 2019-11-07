@@ -16,7 +16,6 @@ import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
 import nightgames.status.Drowsy;
 import nightgames.status.Energized;
-import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class Maya extends BasePersonality {
@@ -116,11 +115,11 @@ public class Maya extends BasePersonality {
     }
 
     private void constructLines() {
-        character.addLine(CharacterLine.BB_LINER, (c, self, other) -> {
+        addLine(CharacterLine.BB_LINER, (c, self, other) -> {
             return "Maya looks at you sympathetically. <i>\"Was that painful? Don't worry, you aren't seriously injured. Our Benefactor protects us.\"</i>";
         });
 
-        character.addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
+        addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
             if (other.human()) {
                 return "Maya smiles softly as she confidently steps toward you. <i>\"Are you simply unfortunate or were you actually hoping to challenge me? What a brave "
                                 + other.boyOrGirl() + ". I'll try not to disappoint you.\"</i>";
@@ -129,18 +128,18 @@ public class Maya extends BasePersonality {
             }
         });
 
-        character.addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
             return "Maya smiles, unashamed of her nudity. <i>\"Well done. Not many participants are able to get my clothes off anymore. You'll at least be able to look at a naked woman while you orgasm.\"</i>";
         });
 
-        character.addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
             return "You think you see something dangerous flicker in Maya's eyes. <i>\"Well done. I may need to get a little serious.\"</i>";
         });
 
-        character.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
             return "Maya gives you a look of gentle disapproval. <i>\"You aren't putting up much of a fight, are you? Aren't you a little overeager to cum?\"</i>";
         });
-        character.addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {  
+        addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
             //TODO: Maya might someday be able to play regularly, so this line will need multiple versions once that happens. For now, she plays monthly and is out of the player's league as an alumni. - DSM
             int x = 1;
             //IF Maya is actually a regular character now.
@@ -164,17 +163,17 @@ public class Maya extends BasePersonality {
       
         });
 
-        character.addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
             return "Maya lowers her voice to a smokey tone as she speaks. <i>\"Shall"
                             + " I show you what experience can do for a sexfighter?\"</i>";
         });
 
-        character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             return "<i>\"Oh.. SHIT! Did I just actually... Fuck! Come here and let me return the favor, stud!\"</i>";
         });
 
         
-        character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
             String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.describe(self)).orElse("pussy");
             if (other.getLevel() < self.getLevel() - 5) {
                 return "\"<i>Oh yeah! I can feel it! Go ahead and cum, stud! Cuuummmmmm!</i>\" "
@@ -190,13 +189,13 @@ public class Maya extends BasePersonality {
         });
 
         
-        character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
             return "<i>\"Aaaand there we are. Think you can go again?\"</i>";
         });
         description = JtwigTemplate.classpathTemplate("maya/describe.twig");
         
         
-        character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
             String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.describe(self)).orElse("pussy");
             if (other.getLevel() < self.getLevel() - 5) {
                 if (c.getStance().vaginallyPenetratedBy(c, other, self)) {
@@ -223,11 +222,11 @@ public class Maya extends BasePersonality {
             }
         });
         
-        character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
+        addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "Maya straightens herself out after hearing she's won and quietly says, <i>\"That was great. I should do this more.\"</i>";
         });
         
-        character.addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
             return "Maya takes the news that she lost calmly and quietly says, <i>\"Well...next time.\"</i>";
         });
         

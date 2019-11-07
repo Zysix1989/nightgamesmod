@@ -16,7 +16,6 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
-import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class Eve extends BasePersonality {
@@ -157,31 +156,31 @@ public class Eve extends BasePersonality {
     }
 
     private void constructLines() {
-        character.addLine(CharacterLine.BB_LINER, (c, self, other) -> {
+        addLine(CharacterLine.BB_LINER, (c, self, other) -> {
             return "Eve grins at you and pats her own groin. <i>\"Better you than me, " + other.boyOrGirl() + ".\"</i>";
         });
 
-        character.addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
+        addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
             return "{self:SUBJECT} gives {other:name-do} a dominant grin and cracks {self:possessive} knuckles. <i>\"Come on {other:name}, let's play.\"</i>";
         });
 
-        character.addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
             return "Eve seems more comfortable with her cock and balls hanging out than she was with her clothes on. <i>\"Like what you see? We're just getting started.\"</i>";
         });
 
-        character.addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
             return "Eve lets out a soft growl as she lays flat on the floor. <i>\"Enjoy it while you can, " + other.boyOrGirl() + ". As soon as I catch my breath, your ass is mine.\"</i>";
         });
 
-        character.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
             return "Eve grins sadistically. <i>\"If you're intimidated by my cock, don't worry. Size isn't everything.\"</i>";
         });
 
-        character.addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
             return "Eve grins sadistically. <i>\"I'm an expert at making people like you squeal.\"</i>";
         });
 
-        character.addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
             //If the player is functionally male
             if (other.hasDick() == true && other.hasPussy() == false) {
                 return "[PLACEHOLDER] Eve grabs your ass as you are leaving the match before pressing herself into you from behind. <br/><br/>"
@@ -206,7 +205,7 @@ public class Eve extends BasePersonality {
    
         });
 
-        character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             if (c.getStance().anallyPenetrated(c, other)) {
                 return "<i>\"Oh fuck! You are one tight little cum-bucket! Let's go again!\"</i>"
                                 + " Eve immediately resumes her thrusting.";
@@ -214,7 +213,7 @@ public class Eve extends BasePersonality {
             return "<i>\"Ahhh shit! Wouldn't it have been sooo much better to have " + "taken that load up your ass?\"</i>";
         });
 
-        character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
             if (c.getStance().anallyPenetrated(c, self)) {
                 return "Eve laughs maniacally as you cum. <i>\"I knew you'd like it"
                                 + ", you little ass-slut! But you're not done yet!\"</i>";
@@ -223,7 +222,7 @@ public class Eve extends BasePersonality {
         });
         
         
-        character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
             String part = Global.pickRandom(c.getStance()
                                              .getPartsFor(c, self, other))
                                 .map(bp -> bp.getType())
@@ -247,11 +246,11 @@ public class Eve extends BasePersonality {
         description = JtwigTemplate.classpathTemplate("eve/describe.twig");
         
         
-        character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
+        addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "Realzing she's won the night, Eve shouts in victory, <i>\"Hah! See? Your asses are ALL mine!\"</i>";
         });
         
-        character.addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
             return "Eve doesn't bother seeing her lousy results and says, <i>\"Whatever, later.\"</i>";
         });
     }

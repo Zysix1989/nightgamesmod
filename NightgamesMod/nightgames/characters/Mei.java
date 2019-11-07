@@ -6,14 +6,14 @@ import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.mods.FallenAngelicWingsMod;
-import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
-import nightgames.characters.body.mods.catcher.DemonicMod;
+import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.mods.ExtendedTonguedMod;
+import nightgames.characters.body.mods.FallenAngelicWingsMod;
+import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -120,35 +120,35 @@ public class Mei extends BasePersonality {
     }
     
     private void constructLines() {
-        character.addLine(CharacterLine.BB_LINER, (c, self, other) -> {
+        addLine(CharacterLine.BB_LINER, (c, self, other) -> {
             return "<i>They taught that one in self-defense class!</i>";
        });
 
-        character.addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
             return "While covering herself with her arms, Mei fake-screams <i>What do you think you're doing!?</i> Her lewd smile however speaks volumes about her true thoughts.";
        });
 
-        character.addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
             return "<i>Angel... Sorry...</i>";
        });
 
-        character.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
             return "<i>\"That's right, you're just a little " + other.boyOrGirl() + "toy for us. So why don't you just stay still?\"</i>";
        });
 
-        character.addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
             return "Mei runs her hands all over her body while teasing you, <i>\"Mmmm you want some of this? Just ask and we'll do as you please.\"</i>";
        });
 
-        character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             return "Mei yelps as she cums <i>\"Oh fuuuuckk!\"</i>";
        });
 
-        character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
             return "<i>Try a little harder wont you? At this rate there's no way you'll be suitable for her!</i>";
        });
         
-       character.addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
+       addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
            int meiFought = other.getFlag(FOUGHT_MEI_PET);
            if (other.human()) {
                if (meiFought == 0)  {

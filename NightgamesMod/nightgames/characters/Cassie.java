@@ -3,7 +3,6 @@ package nightgames.characters;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
-
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.actions.Movement;
@@ -12,8 +11,8 @@ import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.MouthPart;
-import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.characters.body.mods.ExtendedTonguedMod;
+import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.characters.body.mods.pitcher.RunicCockMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
@@ -30,7 +29,6 @@ import nightgames.skills.strategy.OralStrategy;
 import nightgames.start.NpcConfiguration;
 import nightgames.status.Energized;
 import nightgames.status.Stsflag;
-import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class Cassie extends BasePersonality {
@@ -56,22 +54,22 @@ public class Cassie extends BasePersonality {
     }
 
     private void constructLines() {
-        character.addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
+        addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
             return "{self:SUBJECT} looks hesitant for just a moment, but can't contain a curious little smile as {self:pronoun} prepares to face {other:name-do}.";
         });
-        character.addLine(CharacterLine.BB_LINER, (c, self, other) -> {
+        addLine(CharacterLine.BB_LINER, (c, self, other) -> {
             return "{self:SUBJECT} winces apologetically. <i>\"That looks really painful. Sorry, but I can't afford to go easy on you.\"</i>";
         });
 
-        character.addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
             return "{self:SUBJECT} blushes noticeably and covers {self:reflective}. <i>\"No matter how much time I spend naked, it doesn't get any less embarrassing.\"</i>";
         });
 
-        character.addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
             return "{self:SUBJECT} groans softly as {self:pronoun} tends {self:possessive} bruises, <i>\"Come on, you don't have to be so rough.\"</i> {self:pronoun} complains.";
         });
 
-        character.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
             if (other.hasDick()) {
                 return "{self:SUBJECT} giggles and taps the head of your dick. <i>\"Your penis is so eager and cooperative,\"</i> {self:pronoun} jokes. <i>\"Are you sure you're not just letting me win?\"</i>";
             } else {
@@ -79,11 +77,11 @@ public class Cassie extends BasePersonality {
             }
         });
 
-        character.addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
             return "{self:SUBJECT} catches you glancing at {self:possessive} body, and blows you a kiss. <i>\"Why don't you just stop resisting and let me make you cum?\"</i>";
         });
 
-        character.addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
             return "After the match, you stick around for a few minutes chatting with your fellow competitors. You haven't seen Cassie yet, but you at least want to say goodnight to her. "
                             + "You feel a warm hand grasp yours and find Cassie standing next to you, smiling shyly. She doesn't say anything, but that smile communicates her intentions quite well. "
                             + "You bid the other girls goodnight and lead Cassie back to your room. The two of you quickly undress each other while sharing brief kisses. You lay down on the bed and "
@@ -97,7 +95,7 @@ public class Cassie extends BasePersonality {
 
         description = JtwigTemplate.classpathTemplate("cassie/describe.twig");
 
-        character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             final String finalLines[] = {
                             "<i>\"Ooo... my body is starting feel numb. But I won't give up!\"</i>",
                             "<i>\"My head feels fuzzy... More... I want more!\"</i>",
@@ -115,7 +113,7 @@ public class Cassie extends BasePersonality {
             }
         });
 
-        character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
             final String finalLines[] = {
                             "<i>\"You know, making a " + other.boyOrGirl() + " cum isn't so hard. It's so simple!\"</i>",
                             "<i>\"Oh wow that one was impressive. I hope it felt as awesome as it looked!\"</i>",
@@ -133,7 +131,7 @@ public class Cassie extends BasePersonality {
             }
         });
 
-        character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
             String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.getType()).orElse("pussy");
             if (other.getLevel() < self.getLevel() - 5) {
                 return "{self:SUBJECT} grins at you as your strength is once again sucked into {self:possessive} devilish " + part 
@@ -153,11 +151,11 @@ public class Cassie extends BasePersonality {
         });
         
         
-        character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
+        addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "{self:SUBJECT} shouts in triumph, <i>\"I did it! I won!\"</i>";
         });
         
-        character.addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
             return "{self:SUBJECT} looks a bit heartbroken as she says, <i>\"Not even one point...?\"</i>";
         });
         

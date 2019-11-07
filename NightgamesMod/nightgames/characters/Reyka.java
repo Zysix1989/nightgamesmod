@@ -2,19 +2,18 @@ package nightgames.characters;
 
 import java.util.Arrays;
 import java.util.Optional;
-
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.mods.DemonicWingsMod;
-import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.FacePart;
-import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.WingsPart;
-import nightgames.characters.body.mods.catcher.DemonicMod;
+import nightgames.characters.body.mods.DemonicTailMod;
+import nightgames.characters.body.mods.DemonicWingsMod;
 import nightgames.characters.body.mods.ExtendedTonguedMod;
+import nightgames.characters.body.mods.PointedEarsMod;
+import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
@@ -30,7 +29,6 @@ import nightgames.skills.strategy.FootjobStrategy;
 import nightgames.skills.strategy.KnockdownStrategy;
 import nightgames.skills.strategy.OralStrategy;
 import nightgames.start.NpcConfiguration;
-import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class Reyka extends BasePersonality {
@@ -218,31 +216,31 @@ public class Reyka extends BasePersonality {
     }
     
     private void constructLines() {
-        character.addLine(CharacterLine.BB_LINER, (c, self, other) -> {
+        addLine(CharacterLine.BB_LINER, (c, self, other) -> {
             return "Reyka looks at you with a pang of regret: <i>\"In hindsight, damaging"
                             + " the source of my meal might not have been the best idea...\"</i>";
         });
 
-        character.addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
             return "<i>\"You could have just asked, you know.\"</i> As you gaze upon her naked form,"
                             + " noticing the radiant ruby ardorning her bellybutton, you feel"
                             + " sorely tempted to just give in to your desires. The hungry look"
                             + " on her face as she licks her lips, though, quickly dissuades you" + " from doing so";
         });
 
-        character.addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
             return "Reyka is laying on the floor, her wings spread out behind her, panting for breath";
         });
 
-        character.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
             return "\"You look like you will taste nice. Maybe if you let me have a taste, I will be nice to you too.\"";
         });
 
-        character.addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
             return "\"Why keep fighting? Wouldn't it just feel SO much better just to let me do what I do best?\"";
         });
 
-        character.addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
             return "You feel exhausted after yet another night of sexfighting. You're not complaining, of course; "
                             + "what " + other.guyOrGirl()
                             + " would when having this much sex with several different girls? Still, a weekend would "
@@ -265,15 +263,15 @@ public class Reyka extends BasePersonality {
                             + "each other, and enjoy a peaceful sleep together with your arms around her and her head on your shoulder.";
         });
 
-        character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             return "Reyka shudders, <i>\"Mmm it's been a while since I've felt that. Here, I'll return the favor\"</i>";
         });
 
-        character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
             return "With a devilish smile, Reyka brings her face close to yours <i>\"Mmmmm that smells great! Too bad I'm still pretty hungry.\"</i>";
         });
 
-        character.addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
+        addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
             return "<i>\"Yum, I was just looking for a tasty little morsel.\"</i><br/><br/>"
                             + "Reyka strikes a seductive pose and the devilish smile"
                             + " on her face reveals just what, or more specifically,"
@@ -282,7 +280,7 @@ public class Reyka extends BasePersonality {
 
         description = JtwigTemplate.classpathTemplate("reyka/describe.twig");
 
-        character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
             String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.describe(self)).orElse("pussy");
             if (other.getLevel() < self.getLevel() - 5) {
                 if (c.getStance().vaginallyPenetratedBy(c, other, self)) {
@@ -304,11 +302,11 @@ public class Reyka extends BasePersonality {
         });
         
         //To be said when this character wins the entire night.
-        character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
+        addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "{self:SUBJECT} smiles in satisfaction and says nothing, folding her arms while her tail swishes around. She seems pleased with the outcome.";
         });
         //To be said when they earn 0 points.
-        character.addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
             return "{self:SUBJECT} mutters, <i>\"Well, that's a little boring...\"</i>";
         });
         

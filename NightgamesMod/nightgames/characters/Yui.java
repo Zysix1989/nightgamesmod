@@ -15,7 +15,6 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
-import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class Yui extends BasePersonality {
@@ -206,7 +205,7 @@ public class Yui extends BasePersonality {
     }
 
     private void constructLines() {
-        character.addLine(CharacterLine.BB_LINER, (c, self, other) -> {
+        addLine(CharacterLine.BB_LINER, (c, self, other) -> {
             if (other.human()) {
                 return "Yui seems apologetic. <i>\"I'm sorry Master, but you did order a fair fight.\"</i>";
             } else {
@@ -214,15 +213,15 @@ public class Yui extends BasePersonality {
             }
         });
 
-        character.addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.NAKED_LINER, (c, self, other) -> {
             return "Yui doesn't seem too fazed. <i>\"If Master wanted to see my body, you need just to ask.\"</i>";
         });
 
-        character.addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
+        addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> {
             return "Yui groans as she falls, <i>\"Master, you are pretty good at this!\"</i>.";
         });
 
-        character.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
             if (other.human()) {
                 return "Yui blows you a kiss. <i>\"Master, your servant will comfort you soon!\"</i>";
             } else {
@@ -230,7 +229,7 @@ public class Yui extends BasePersonality {
             }
         });
 
-        character.addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {
             if (other.human()) {
                 return "Yui cups her breasts and looks at you slyly, <i>\"Master, keep your eyes on me.\"</i>";
             } else {
@@ -238,15 +237,15 @@ public class Yui extends BasePersonality {
             }
         });
 
-        character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             return "<i>\"Aaahhhh! Masteeerrr!\"</i>";
         });
 
-        character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
             return "Yui smiles, <i>\"Don't worry Master, you just need to everything to your humble servant.\"</i>";
         });
 
-        character.addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
+        addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
             return "{self:SUBJECT} bows respectifully towards {other:name-do} before sliding into an easy stance";
         });
 

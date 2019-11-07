@@ -6,10 +6,10 @@ import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.mods.EtherealWingsMod;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.WingsPart;
+import nightgames.characters.body.mods.EtherealWingsMod;
 import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
@@ -115,14 +115,14 @@ public class Caroline extends BasePersonality {
 
     private static String FOUGHT_CAROLINE_PET = "FOUGHT_CAROLINE_PET";
     private void constructLines() {
-        character.addLine(CharacterLine.BB_LINER, (c, self, other) -> "Caroline seems all business even after brutalizing {other:name-possessive} genitals <i>\"Don't worry, I don't think the damage is permanent... I hope.\"</i>");
-        character.addLine(CharacterLine.NAKED_LINER, (c, self, other) -> "Caroline doesn't even flinch after being stripped. <i>\"You know, you get used to these things after being friends with Angel this long.\"</i>");
-        character.addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> "Caroline staggers as she falls <i>\"You don't go easy do you...\"</i>");
-        character.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> "<i>\"Come on, put in some more effort. You'll just be another notch on our bedpost at this rate.\"</i>");
-        character.addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> "Caroline turns around and spreads her lower lips with her fingers, <i>\"Mmm, I may not be as good as Angel, but I'm confident you wont last 10 seconds in me. Want to give it a go?\"</i>");
-        character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> "Caroline groans as she love juices drips endlessly between her legs <i>\"You're pretty good...\"</i>");
-        character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> "<i>\"Come on, come on! Let's go for another round!\"</i>");
-        character.addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
+        addLine(CharacterLine.BB_LINER, (c, self, other) -> "Caroline seems all business even after brutalizing {other:name-possessive} genitals <i>\"Don't worry, I don't think the damage is permanent... I hope.\"</i>");
+        addLine(CharacterLine.NAKED_LINER, (c, self, other) -> "Caroline doesn't even flinch after being stripped. <i>\"You know, you get used to these things after being friends with Angel this long.\"</i>");
+        addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> "Caroline staggers as she falls <i>\"You don't go easy do you...\"</i>");
+        addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> "<i>\"Come on, put in some more effort. You'll just be another notch on our bedpost at this rate.\"</i>");
+        addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> "Caroline turns around and spreads her lower lips with her fingers, <i>\"Mmm, I may not be as good as Angel, but I'm confident you wont last 10 seconds in me. Want to give it a go?\"</i>");
+        addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> "Caroline groans as she love juices drips endlessly between her legs <i>\"You're pretty good...\"</i>");
+        addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> "<i>\"Come on, come on! Let's go for another round!\"</i>");
+        addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
             int carolineFought = other.getFlag(FOUGHT_CAROLINE_PET);
             if (other.human()) {
                 if (carolineFought == 0)  {

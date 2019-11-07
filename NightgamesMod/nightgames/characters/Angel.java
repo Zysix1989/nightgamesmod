@@ -18,7 +18,6 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
-import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class Angel extends BasePersonality {
@@ -274,24 +273,24 @@ public class Angel extends BasePersonality {
     }
 
     private void constructLines() {
-        character.addLine(CharacterLine.BB_LINER, (c, self,
+        addLine(CharacterLine.BB_LINER, (c, self,
                         other) -> "Angel seems to enjoy your anguish in a way that makes you more than a little nervous. <i>\"That's a great look for you, I'd like to see it more often.\"</i>");
-        character.addLine(CharacterLine.NAKED_LINER, (c, self,
+        addLine(CharacterLine.NAKED_LINER, (c, self,
                         other) -> "Angel gives you a haughty look, practically showing off her body. <i>\"I can't blame you for wanting to see me naked, everyone does.\"</i>");
-        character.addLine(CharacterLine.STUNNED_LINER, (c, self,
+        addLine(CharacterLine.STUNNED_LINER, (c, self,
                         other) -> "Angel groans on the floor. <i>\"You really are a beast. It takes a gentle touch to please a lady.\"</i>");
-        character.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
+        addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
             if (other.hasDick()) {
                 return "Angel pushes the head of your dick with her finger and watches it spring back into place. <i>\"You obviously can't help yourself. If only you were a little bigger, we could have a lot of fun.\"</i>";
             } else {
                 return "Angel spreads your cleft with her fingers, <i>\"So wet. Does my little slut want to come? Can't help yourself?\"</i>";
             }
         });
-        character.addLine(CharacterLine.CHALLENGE, (c, self,
+        addLine(CharacterLine.CHALLENGE, (c, self,
                         other) -> "{self:SUBJECT} licks {self:possessive} lips and stalks {other:name-do} like a predator.");
-        character.addLine(CharacterLine.TEMPT_LINER, (c, self,
+        addLine(CharacterLine.TEMPT_LINER, (c, self,
                         other) -> "Angel looks at you with a grin, <i>\"You're almost drooling. Is staring at my body that much fun? If you want me that much, why don't you just sit there and let me make you feel good.\"</i>");
-        character.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             final String finalLines[] = {"<i>\"Fill me! Fill me with everything you have!\"</i>",
                             "Angel pants with a flushed face and lidded eyes, <i>\"I'll pay you back... I wont let you escape!\"</i>",
                             "<i>\"Fuck me! fuck me! fuck me! fuck!\"</i>",};
@@ -307,7 +306,7 @@ public class Angel extends BasePersonality {
                                  .get();
             }
         });
-        character.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
+        addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
             final String finalLines[] = {"<i>\"You're making this too easy. Put your back into it!\"</i>",
                             "<i>\"I'm not satisfied. No, not at all. So keep going.\"</i>",
                             "<i>\"No resting. I won't allow it.\"</i>",};
@@ -336,7 +335,7 @@ public class Angel extends BasePersonality {
              }
          */
         
-        character.addLine(CharacterLine.NIGHT_LINER,
+        addLine(CharacterLine.NIGHT_LINER,
                         (c, self, other) -> "As you start to head back after the match, Angel grabs your hand and drags you in the other direction. <i>\"You're officially kidnapped, because I haven't had "
                                         + "enough sex yet tonight.\"</i> That makes sense... kinda? You did just finish three hours of intense sex-fighting. If she wants too much more than that, you're "
                                         + "both going to end up pretty sleep deprived. Angel looks like she's struggling to put her thoughts into words. <i>\"I had enough sex in general, but I want some "
@@ -345,7 +344,7 @@ public class Angel extends BasePersonality {
                                         + "a pretty good fit though. I don't know. It doesn't matter. I'm kidnapping you, so we're going to go back to my room, have sex, and you're going to stay the night "
                                         + "in case I want more sex in the morning.\"</i> You follow without protest. <br/>You lose a lot of sleep, but you don't regret it.");
 
-        character.addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
             if (other.getLevel() < self.getLevel() - 5) {
                 return "{self:SUBJECT} gives you an intense kiss as the familiar feeling of your strength flowing into her rips through your body, "
                                 + "\"<i>Mmmm... Honestly? I don't need any more of your power. I'm already quite a bit stronger than you now, you know? "
@@ -361,7 +360,7 @@ public class Angel extends BasePersonality {
         description = JtwigTemplate.classpathTemplate("angel/describe.twig");
             
         //This is an example of a new kind of Line - a Line to be said if this character wins the entire night. 
-        character.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
+        addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             if (character.has(Trait.demigoddess) && character.isDemonic()) {
                 return "[PLACEHOLDER] Angel (Corrupted Goddess) says, \"</i>That's right! Everyone on their knees!\"</i>";
             } else if (character.has(Trait.demigoddess)) {
@@ -372,7 +371,7 @@ public class Angel extends BasePersonality {
         });
         
           //This is an example of a new kind of Line - a Line to be said if this character gets 0 victories. 
-        character.addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
+        addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
             if (character.has(Trait.demigoddess) && character.isDemonic()) {
                 return "[PLACEHOLDER] Angel (Corrupted Goddess) says, \"</i>Wow...I didn't win ANYTHING?\"</i>";
             } else if (character.has(Trait.demigoddess)) {

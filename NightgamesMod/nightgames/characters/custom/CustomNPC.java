@@ -32,7 +32,7 @@ public class CustomNPC extends BasePersonality {
                 this.description = data.describe();
                 continue;
             }
-            character.addLine(lineType, (c, self, other) -> data.getLine(lineType, c, self, other));
+            addLine(lineType, (c, self, other) -> data.getLine(lineType, c, self, other));
         }
         for (int i = 1; i < data.getStats().level; i++) {
             character.ding(null);
