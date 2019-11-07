@@ -5,17 +5,22 @@ import nightgames.characters.corestats.StaminaStat;
 import nightgames.characters.corestats.WillpowerStat;
 
 public class CoreStatsGrowth {
-    CoreStatGrowth<StaminaStat> stamina = new CoreStatGrowth<>();
-    CoreStatGrowth<ArousalStat> arousal = new CoreStatGrowth<>();
-    CoreStatGrowth<WillpowerStat> willpower = new CoreStatGrowth<>();
+    CoreStatGrowth<StaminaStat> stamina;
+    CoreStatGrowth<ArousalStat> arousal;
+    CoreStatGrowth<WillpowerStat> willpower;
 
-    private CoreStatsGrowth() {};
+    private CoreStatsGrowth(CoreStatGrowth<StaminaStat> stamina,
+        CoreStatGrowth<ArousalStat> arousal,
+        CoreStatGrowth<WillpowerStat> willpower) {
+        this.stamina = stamina;
+        this.arousal = arousal;
+        this.willpower = willpower;
+    };
 
     static CoreStatsGrowth newDefault() {
-        var g = new CoreStatsGrowth();
-        g.stamina.baseIncrease = 2;
-        g.arousal.baseIncrease = 4;
-        g.willpower.baseIncrease = 1.0f;
-        return g;
+        var stamina = new CoreStatGrowth<StaminaStat>(2);
+        var arousal = new CoreStatGrowth<ArousalStat>(4);
+        var willpower = new CoreStatGrowth<WillpowerStat>(1.0f);
+        return new CoreStatsGrowth(stamina, arousal, willpower);
     }
 }
