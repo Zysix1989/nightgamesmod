@@ -1,5 +1,6 @@
 package nightgames.characters;
 
+import com.google.gson.JsonObject;
 import java.util.List;
 import org.apache.commons.lang3.Range;
 
@@ -15,6 +16,20 @@ public class WillpowerStat extends CoreStat {
     private WillpowerStat(WillpowerStat original) {
         super(original);
         temporaryMax = original.temporaryMax;
+    }
+
+    private static final String jsTemporaryMax = "temporaryMax";
+
+    public WillpowerStat(JsonObject js) {
+        super(js);
+        temporaryMax = js.get(jsTemporaryMax).getAsInt();
+    }
+
+    @Override
+    public JsonObject save() {
+        var js = super.save();
+        js.addProperty(jsTemporaryMax, temporaryMax);
+        return js;
     }
 
     @Override

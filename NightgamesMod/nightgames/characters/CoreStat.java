@@ -1,5 +1,6 @@
 package nightgames.characters;
 
+import com.google.gson.JsonObject;
 import java.io.Serializable;
 import nightgames.global.Global;
 import org.apache.commons.lang3.Range;
@@ -21,6 +22,21 @@ public abstract class CoreStat implements Serializable {
     protected CoreStat(CoreStat original) {
         current = original.current;
         max = original.max;
+    }
+
+    private static final String jsCurrent = "current";
+    private static final String jsMax = "max";
+
+    protected CoreStat(JsonObject js) {
+        current = js.get(jsCurrent).getAsInt();
+        max = js.get(jsMax).getAsInt();
+    }
+
+    public JsonObject save() {
+        var js = new JsonObject();
+        js.addProperty(jsCurrent, current);
+        js.addProperty(jsMax, max);
+        return js;
     }
 
     public int get() {
@@ -67,4 +83,6 @@ public abstract class CoreStat implements Serializable {
     public abstract CoreStat copy();
 
     public abstract Range<Integer> observe(int perception);
+
+
 }

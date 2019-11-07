@@ -1,5 +1,6 @@
 package nightgames.characters;
 
+import com.google.gson.JsonObject;
 import org.apache.commons.lang3.Range;
 
 public class MojoStat extends CoreStat {
@@ -10,6 +11,8 @@ public class MojoStat extends CoreStat {
     private MojoStat(MojoStat original) {
         super(original);
     }
+
+    public MojoStat(JsonObject js) { super(js); }
 
     @Override
     public MojoStat copy() {

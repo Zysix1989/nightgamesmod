@@ -1909,6 +1909,13 @@ public Character clone() throws CloneNotSupportedException {
         return human();
     }
 
+    private static final String jsCoreStats = "coreStats";
+    private static final String jsStamina = "stamina";
+    private static final String jsArousal = "arousal";
+    private static final String jsMojo = "mojo";
+    private static final String jsWillpower = "willpower";
+
+
     /**Saves this character using a JsonObject.  
      * 
      * This currently creates a large amount of sprawl in the save file, but moving towards object-oriented packages of members or XML may help. - DSM
@@ -1923,12 +1930,12 @@ public Character clone() throws CloneNotSupportedException {
         saveObj.addProperty("xp", xp);
         saveObj.addProperty("money", money);
         {
-            JsonObject resources = new JsonObject();
-            resources.addProperty("stamina", stamina.max());
-            resources.addProperty("arousal", arousal.max());
-            resources.addProperty("mojo",  mojo.max());
-            resources.addProperty("willpower", willpower.trueMax());
-            saveObj.add("resources", resources);
+            JsonObject jsCoreStats = new JsonObject();
+            jsCoreStats.add(jsStamina, stamina.save());
+            jsCoreStats.add(jsArousal, arousal.save());
+            jsCoreStats.add(jsMojo,  mojo.save());
+            jsCoreStats.add(jsWillpower, willpower.save());
+            saveObj.add(Character.jsCoreStats, jsCoreStats);
         }
         saveObj.add("affections", JsonUtils.JsonFromMap(affections));
         saveObj.add("attractions", JsonUtils.JsonFromMap(attractions));
@@ -1970,11 +1977,11 @@ public Character clone() throws CloneNotSupportedException {
         }
         money = object.get("money").getAsInt();
         {
-            JsonObject resources = object.getAsJsonObject("resources");
-            stamina.setMax(resources.get("stamina").getAsInt());
-            arousal.setMax(resources.get("arousal").getAsInt());
-            mojo.setMax(resources.get("mojo").getAsInt());
-            willpower.setMax(resources.get("willpower").getAsInt());
+            JsonObject jsCoreStats = object.getAsJsonObject(Character.jsCoreStats);
+            stamina = new StaminaStat(jsCoreStats.get(jsStamina).getAsJsonObject());
+            arousal = new ArousalStat(jsCoreStats.get(jsArousal).getAsJsonObject());
+            mojo = new MojoStat(jsCoreStats.get(jsMojo).getAsJsonObject());
+            willpower = new WillpowerStat(jsCoreStats.get(jsWillpower).getAsJsonObject());
         }
 
         affections = JsonUtils.mapFromJson(object.getAsJsonObject("affections"), String.class, Integer.class);

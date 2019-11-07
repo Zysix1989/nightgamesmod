@@ -1,5 +1,6 @@
 package nightgames.characters;
 
+import com.google.gson.JsonObject;
 import java.util.List;
 import org.apache.commons.lang3.Range;
 
@@ -13,6 +14,8 @@ public class StaminaStat extends CoreStat {
     private StaminaStat(StaminaStat original) {
         super(original);
     }
+
+    public StaminaStat(JsonObject js) { super(js); }
 
     @Override
     public StaminaStat copy() {

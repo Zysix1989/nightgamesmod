@@ -1,5 +1,6 @@
 package nightgames.characters;
 
+import com.google.gson.JsonObject;
 import java.util.List;
 import org.apache.commons.lang3.Range;
 
@@ -12,6 +13,7 @@ public class ArousalStat extends CoreStat {
         super(original);
     }
 
+    public ArousalStat(JsonObject js) { super(js); }
     @Override
     public ArousalStat copy() {
         return new ArousalStat(this);
