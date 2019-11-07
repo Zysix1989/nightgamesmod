@@ -138,8 +138,8 @@ public class Kat extends BasePersonality {
 
     @Override
     public void setGrowth() {
-        character.getGrowth().stamina = 2;
-        character.getGrowth().arousal = 7;
+        character.getGrowth().setStamina(2);
+        character.getGrowth().setArousal(7);
         character.getGrowth().bonusStamina = 1;
         character.getGrowth().bonusArousal = 2;
         

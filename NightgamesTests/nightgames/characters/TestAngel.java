@@ -110,8 +110,8 @@ public class TestAngel extends BasePersonality {
     }
 
     @Override public void setGrowth() {
-        character.getGrowth().stamina = 1;
-        character.getGrowth().arousal = 5;
+        character.getGrowth().setStamina(1)
+        character.getGrowth().setArousal(5)
         character.getGrowth().bonusStamina = 1;
         character.getGrowth().bonusArousal = 4;
         character.getGrowth().addTrait(3, Trait.alwaysready);

@@ -58,9 +58,9 @@ public class Sarah extends BasePersonality {
 
     @Override
     public void setGrowth() {
-        character.getGrowth().stamina = 5;
-        character.getGrowth().arousal = 6;
-        character.getGrowth().willpower = .8f;
+        character.getGrowth().setStamina(5);
+        character.getGrowth().setArousal(6);
+        character.getGrowth().setWillpower(.8f);
         character.getGrowth().bonusStamina = 2;
         character.getGrowth().bonusArousal = 2;
 

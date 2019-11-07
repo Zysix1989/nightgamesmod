@@ -74,8 +74,8 @@ public class Angel extends BasePersonality {
 
     @Override
     public void setGrowth() {
-        character.getGrowth().stamina = 2;
-        character.getGrowth().arousal = 9;
+        character.getGrowth().setStamina(2);
+        character.getGrowth().setArousal(9);
         character.getGrowth().bonusStamina = 1;
         character.getGrowth().bonusArousal = 4;
 

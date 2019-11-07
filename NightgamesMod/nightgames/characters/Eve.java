@@ -78,8 +78,8 @@ public class Eve extends BasePersonality {
 
     @Override
     public void setGrowth() {
-        character.getGrowth().stamina = 2;
-        character.getGrowth().arousal = 6;
+        character.getGrowth().setStamina(2);
+        character.getGrowth().setArousal(6);
         character.getGrowth().bonusStamina = 1;
         character.getGrowth().bonusArousal = 3;
         preferredAttributes.add(c -> c.get(Attribute.Fetish) < 80 ? Optional.of(Attribute.Fetish) : Optional.empty());

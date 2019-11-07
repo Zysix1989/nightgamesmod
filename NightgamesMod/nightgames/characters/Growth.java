@@ -6,10 +6,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.mods.PartMod;
+import nightgames.characters.corestats.ArousalStat;
+import nightgames.characters.corestats.StaminaStat;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
@@ -31,14 +32,14 @@ public class Growth implements Cloneable {
             return bodyPartType;
         }
     }
-    public float arousal;
-    public float stamina;
+    private float arousal;
+    private float stamina;
     public float bonusArousal;
     public float bonusStamina;
     public int attributes[];
     public int bonusAttributes;
     public int extraAttributes;
-    public float willpower;
+    private float willpower;
     public float bonusWillpower;
     private Map<Integer, List<Trait>> traits;
     private Map<Integer, Integer> traitPoints;
@@ -203,5 +204,37 @@ public class Growth implements Cloneable {
     }
     public void removeNullTraits() {
         traits.forEach((i, l) -> l.removeIf(t -> t == null));
+    }
+
+    public void levelUpArousal(ArousalStat s) {
+        s.gain(arousal);
+    }
+
+    public void levelUpStamina(StaminaStat s) {
+        s.gain(stamina);
+    }
+
+    public float getArousal() {
+        return arousal;
+    }
+
+    public float getStamina() {
+        return stamina;
+    }
+
+    public float getWillpower() {
+        return willpower;
+    }
+
+    public void setArousal(float arousal) {
+        this.arousal = arousal;
+    }
+
+    public void setStamina(float stamina) {
+        this.stamina = stamina;
+    }
+
+    public void setWillpower(float willpower) {
+        this.willpower = willpower;
     }
 }

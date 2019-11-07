@@ -3,6 +3,8 @@ package nightgames.start;
 import static nightgames.start.ConfigurationUtils.mergeCollections;
 import static nightgames.start.ConfigurationUtils.mergeOptionals;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,10 +17,6 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.CharacterSex;
@@ -210,9 +208,9 @@ public abstract class CharacterConfiguration {
         Growth growth = character.getGrowth();
         boolean hard = Global.checkFlag(Flag.hardmode);
         for (int i = 0; i < levels; i++) {
-            character.getStamina().gain(growth.stamina);
-            character.getArousal().gain(growth.arousal);
-            character.getWillpower().gain(growth.willpower);
+            character.getStamina().gain(growth.getStamina());
+            character.getArousal().gain(growth.getArousal());
+            character.getWillpower().gain(growth.getWillpower());
             if (hard) {
                 character.getStamina().gain(growth.bonusStamina);
                 character.getArousal().gain(growth.bonusArousal);

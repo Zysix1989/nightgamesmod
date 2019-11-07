@@ -1,18 +1,37 @@
 package nightgames.characters.custom;
 
+import static nightgames.characters.custom.JsonSourceNPCDataLoader.load;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import java.io.File;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import nightgames.characters.Attribute;
 import nightgames.characters.Growth;
 import nightgames.characters.MaxAttribute;
 import nightgames.characters.PreferredAttribute;
+import nightgames.characters.body.Body;
+import nightgames.characters.body.CockPart;
+import nightgames.characters.body.PussyPart;
 import nightgames.characters.custom.effect.CustomEffect;
 import nightgames.characters.custom.effect.MoneyModEffect;
-import nightgames.json.JsonUtils;
 import nightgames.items.Item;
 import nightgames.items.ItemAmount;
 import nightgames.items.clothing.Clothing;
-import nightgames.requirements.*;
+import nightgames.json.JsonUtils;
+import nightgames.requirements.AndRequirement;
+import nightgames.requirements.BodyPartRequirement;
+import nightgames.requirements.LevelRequirement;
+import nightgames.requirements.NotRequirement;
+import nightgames.requirements.OrRequirement;
+import nightgames.requirements.Requirement;
 import nightgames.skills.Skill;
 import nightgames.skills.ThrowDraft;
 import nightgames.stance.Stance;
@@ -22,18 +41,6 @@ import org.hamcrest.core.IsCollectionContaining;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.io.File;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import static nightgames.characters.custom.JsonSourceNPCDataLoader.load;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 /**
  * Tests for loading NPC data from JSON files.
@@ -130,11 +137,11 @@ public class JsonSourceNPCDataLoaderTest {
         JsonSourceNPCDataLoader.loadGrowthResources(resourcesJSON, growth);
 
         Growth expectedGrowth = new Growth();
-        expectedGrowth.stamina = 1;
+        expectedGrowth.setStamina(1);
         expectedGrowth.bonusStamina = 2;
-        expectedGrowth.arousal = 3;
+        expectedGrowth.setArousal(3);
         expectedGrowth.bonusArousal = 4;
-        expectedGrowth.willpower = 7.5f;
+        expectedGrowth.setWillpower(7.5f);
         expectedGrowth.bonusWillpower = 8.5f;
         expectedGrowth.attributes = new int[] {9, 10, 11, 11};
         expectedGrowth.bonusAttributes = 12;

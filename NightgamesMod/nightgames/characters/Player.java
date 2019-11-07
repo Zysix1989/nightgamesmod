@@ -119,9 +119,9 @@ public class Player extends Character {
     }
 
     public void setGrowth() {
-        getGrowth().stamina = 20;
-        getGrowth().arousal = 20;
-        getGrowth().willpower = 10.4f;
+        getGrowth().setStamina(20);
+        getGrowth().setArousal(20);
+        getGrowth().setWillpower(10.4f);
         getGrowth().bonusStamina = 10;
         getGrowth().bonusArousal = 20;
         getGrowth().attributes = new int[]{2, 3, 3, 3};
@@ -544,8 +544,8 @@ public class Player extends Character {
 
     private void actuallyDing() {
         level += 1;
-        getStamina().gain(getGrowth().stamina);
-        getArousal().gain(getGrowth().arousal);
+        getGrowth().levelUpStamina(getStamina());
+        getGrowth().levelUpArousal(getArousal());
         availableAttributePoints += getGrowth().attributes[Math.min(rank, getGrowth().attributes.length-1)];
         gui.message(this, "You've gained a Level!<br/>Select which attributes to increase.");
         if (getLevel() % 3 == 0 && level < 10 || (getLevel() + 1) % 2 == 0 && level > 10) {

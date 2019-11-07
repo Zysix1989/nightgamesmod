@@ -80,9 +80,9 @@ public class Maya extends BasePersonality {
 
     @Override
     public void setGrowth() {
-        character.getGrowth().stamina = 2;
-        character.getGrowth().arousal = 10;
-        character.getGrowth().willpower = 2.0f;
+        character.getGrowth().setStamina(2);
+        character.getGrowth().setArousal(10);
+        character.getGrowth().setWillpower(2.0f);
         character.getGrowth().bonusStamina = 2;
         character.getGrowth().bonusArousal = 5;
 

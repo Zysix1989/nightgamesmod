@@ -97,8 +97,8 @@ public class Reyka extends BasePersonality {
 
     @Override
     public void setGrowth() {
-        character.getGrowth().stamina = 1;
-        character.getGrowth().arousal = 10;
+        character.getGrowth().setStamina(1);
+        character.getGrowth().setArousal(10);
         character.getGrowth().bonusStamina = 1;
         character.getGrowth().bonusArousal = 3;
         preferredAttributes.add(c -> c.get(Attribute.Dark) < 50 && c.get(Attribute.Dark) <= c.get(Attribute.Fetish) + 10

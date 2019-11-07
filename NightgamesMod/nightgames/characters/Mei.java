@@ -63,9 +63,9 @@ public class Mei extends BasePersonality {
 
     @Override
     public void setGrowth() {
-        character.getGrowth().stamina = 3;
-        character.getGrowth().arousal = 8;
-        character.getGrowth().willpower = .8f;
+        character.getGrowth().setStamina(3);
+        character.getGrowth().setArousal(8);
+        character.getGrowth().setWillpower(.8f);
         character.getGrowth().bonusStamina = 2;
         character.getGrowth().bonusArousal = 2;
 

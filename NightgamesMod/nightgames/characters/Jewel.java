@@ -141,11 +141,11 @@ public class Jewel extends BasePersonality {
     @Override
     public void setGrowth() {
         Growth growth = character.getGrowth();
-        growth.stamina = 3;
-        growth.arousal = 6;
+        growth.setStamina(3);
+        growth.setArousal(6);
         growth.bonusStamina = 3;
         growth.bonusArousal = 1;
-        growth.willpower = 1.7f;
+        growth.setWillpower(1.7f);
 
         
         this.addFirstFocusScene();      //TODO: Add below addcombatscene block to this method.  NOTE: Growth in this scope breaks Jewel's first scene. 

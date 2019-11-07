@@ -59,9 +59,9 @@ public class Caroline extends BasePersonality {
 
     @Override
     public void setGrowth() {
-        character.getGrowth().stamina = 4;
-        character.getGrowth().arousal = 7;
-        character.getGrowth().willpower = .4f;
+        character.getGrowth().setStamina(4);
+        character.getGrowth().setArousal(7);
+        character.getGrowth().setWillpower(.4f);
         character.getGrowth().bonusStamina = 2;
         character.getGrowth().bonusArousal = 2;
 
