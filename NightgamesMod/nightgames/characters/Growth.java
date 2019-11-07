@@ -33,14 +33,12 @@ public class Growth implements Cloneable {
             return bodyPartType;
         }
     }
-    private float arousal;
-    private float stamina;
+    private CoreStatsGrowth coreStatsGrowth;
     public float bonusArousal;
     public float bonusStamina;
     public int attributes[];
     public int bonusAttributes;
     public int extraAttributes;
-    private float willpower;
     public float bonusWillpower;
     private Map<Integer, List<Trait>> traits;
     private Map<Integer, Integer> traitPoints;
@@ -49,13 +47,14 @@ public class Growth implements Cloneable {
     private Map<Integer, Clothing> clothing;
 
     public Growth() {
-        stamina = 2;
-        arousal = 4;
+        coreStatsGrowth = new CoreStatsGrowth();
+        coreStatsGrowth.stamina.baseIncrease = 2;
+        coreStatsGrowth.arousal.baseIncrease = 4;
         bonusStamina = 2;
         bonusArousal = 3;
         bonusAttributes = 1;
         extraAttributes = 0;
-        willpower = 1.0f;
+        coreStatsGrowth.willpower.baseIncrease = 1.0f;
         bonusWillpower = .25f;
         attributes = new int[10];
         Arrays.fill(attributes, 4);
@@ -185,43 +184,45 @@ public class Growth implements Cloneable {
     }
    
     @Override public String toString() {
-        return "Growth with stamina "+stamina+" arousal "+arousal+" bonusStamina "+bonusStamina+" bonusArousal "+bonusArousal+" bonusAttributes "+bonusAttributes+" willpower "+willpower+" bonusWillpower "+bonusWillpower+" attributes "+attributes+" traits "+traits;
+        return "Growth bonusStamina "+bonusStamina+" bonusArousal "+bonusArousal+" bonusAttributes "+bonusAttributes+" bonusWillpower "+bonusWillpower+" attributes "+attributes+" traits "+traits;
     }
     public void removeNullTraits() {
         traits.forEach((i, l) -> l.removeIf(t -> t == null));
     }
 
     public void levelUpArousal(ArousalStat s) {
-        s.gain(arousal);
+        coreStatsGrowth.arousal.levelUp(s);
     }
 
     public void levelUpStamina(StaminaStat s) {
-        s.gain(stamina);
+        coreStatsGrowth.stamina.levelUp(s);
     }
 
-    public void levelUpWillpower(WillpowerStat s) { s.gain(willpower); }
+    public void levelUpWillpower(WillpowerStat s) {
+        coreStatsGrowth.willpower.levelUp(s);
+    }
 
     public float getArousal() {
-        return arousal;
+        return coreStatsGrowth.arousal.baseIncrease;
     }
 
     public float getStamina() {
-        return stamina;
+        return coreStatsGrowth.stamina.baseIncrease;
     }
 
     public float getWillpower() {
-        return willpower;
+        return coreStatsGrowth.willpower.baseIncrease;
     }
 
     public void setArousal(float arousal) {
-        this.arousal = arousal;
+        coreStatsGrowth.arousal.baseIncrease = arousal;
     }
 
     public void setStamina(float stamina) {
-        this.stamina = stamina;
+        coreStatsGrowth.stamina.baseIncrease = stamina;
     }
 
     public void setWillpower(float willpower) {
-        this.willpower = willpower;
+        coreStatsGrowth.willpower.baseIncrease = willpower;
     }
 }
