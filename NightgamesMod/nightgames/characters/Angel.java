@@ -36,6 +36,7 @@ public class Angel extends BasePersonality {
 
     public Angel(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Angel", charConfig, commonConfig, true);
+        setupCharacter(charConfig, commonConfig);
         constructLines();
     }
 

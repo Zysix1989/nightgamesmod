@@ -50,6 +50,7 @@ public class Cassie extends BasePersonality {
 
     public Cassie(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Cassie", charConfig, commonConfig, true);
+        setupCharacter(charConfig, commonConfig);
         constructLines();
     }
 

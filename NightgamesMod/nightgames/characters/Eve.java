@@ -39,6 +39,7 @@ public class Eve extends BasePersonality {
 
     public Eve(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Eve", charConfig, commonConfig, false);
+        setupCharacter(charConfig, commonConfig);
         constructLines();
     }
 

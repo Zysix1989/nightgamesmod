@@ -28,6 +28,7 @@ public class Caroline extends BasePersonality {
 
     public Caroline(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Caroline", charConfig, commonConfig, false);
+        setupCharacter(charConfig, commonConfig);
         constructLines();
     }
 

@@ -46,6 +46,7 @@ public class Jewel extends BasePersonality {
 
     public Jewel(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Jewel", charConfig, commonConfig, true);
+        setupCharacter(charConfig, commonConfig);
         constructLines();
     }
 

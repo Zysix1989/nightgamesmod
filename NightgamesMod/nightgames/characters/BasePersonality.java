@@ -61,10 +61,9 @@ public abstract class BasePersonality implements Serializable {
     public BasePersonality(String name, Optional<NpcConfiguration> charConfig,
                     Optional<NpcConfiguration> commonConfig, boolean isStartCharacter) {
         this(name, isStartCharacter);
-        setupCharacter(charConfig, commonConfig);
     }
 
-    private void setupCharacter(Optional<NpcConfiguration> charConfig,
+    protected void setupCharacter(Optional<NpcConfiguration> charConfig,
         Optional<NpcConfiguration> commonConfig) {
         setGrowth();
         applyBasicStats(character);

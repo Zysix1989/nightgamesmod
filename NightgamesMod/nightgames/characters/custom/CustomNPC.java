@@ -27,6 +27,7 @@ public class CustomNPC extends BasePersonality {
     public CustomNPC(DataBackedNPCData data, Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super(data.getName(), charConfig, commonConfig, data.isStartCharacter());
         this.data = data;
+        setupCharacter(charConfig, commonConfig);
         for (String lineType : CharacterLine.ALL_LINES) {
             if (lineType.equals(CharacterLine.DESCRIBE_LINER)) {
                 this.description = data.describe();

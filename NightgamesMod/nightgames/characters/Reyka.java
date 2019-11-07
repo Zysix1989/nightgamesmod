@@ -45,6 +45,7 @@ public class Reyka extends BasePersonality {
 
     public Reyka(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Reyka", charConfig, commonConfig, false);
+        setupCharacter(charConfig, commonConfig);
         constructLines();
     }
 

@@ -85,6 +85,7 @@ public class TestAngel extends BasePersonality {
 
     public TestAngel(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("TestAngel", charConfig, commonConfig, true);
+        setupCharacter(charConfig, commonConfig);
     }
 
     public void applyBasicStats(Character self) {

@@ -55,6 +55,7 @@ public class Mara extends BasePersonality {
 
     public Mara(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Mara", charConfig, commonConfig, true);
+        setupCharacter(charConfig, commonConfig);
         constructLines();
         armManager = new ArmManager();
     }
