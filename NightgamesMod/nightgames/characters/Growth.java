@@ -47,14 +47,11 @@ public class Growth implements Cloneable {
     private Map<Integer, Clothing> clothing;
 
     public Growth() {
-        coreStatsGrowth = new CoreStatsGrowth();
-        coreStatsGrowth.stamina.baseIncrease = 2;
-        coreStatsGrowth.arousal.baseIncrease = 4;
+        coreStatsGrowth = CoreStatsGrowth.newDefault();
         bonusStamina = 2;
         bonusArousal = 3;
         bonusAttributes = 1;
         extraAttributes = 0;
-        coreStatsGrowth.willpower.baseIncrease = 1.0f;
         bonusWillpower = .25f;
         attributes = new int[10];
         Arrays.fill(attributes, 4);
