@@ -5,9 +5,9 @@ import nightgames.characters.corestats.StaminaStat;
 import nightgames.characters.corestats.WillpowerStat;
 
 public class CoreStatsGrowth {
-    CoreStatGrowth<StaminaStat> stamina;
-    CoreStatGrowth<ArousalStat> arousal;
-    CoreStatGrowth<WillpowerStat> willpower;
+    final CoreStatGrowth<StaminaStat> stamina;
+    final CoreStatGrowth<ArousalStat> arousal;
+    final CoreStatGrowth<WillpowerStat> willpower;
 
     CoreStatsGrowth(CoreStatGrowth<StaminaStat> stamina,
         CoreStatGrowth<ArousalStat> arousal,
