@@ -158,28 +158,27 @@ public class Body implements Cloneable {
         return null;
     }
 
-    private void temporaryAddOrReplacePartWithType(BodyPart part, BodyPart removed, int duration) {
+    public void setTemporaryPartDuration(BodyPart part, int newDuration) {
         assert part != null;
-        assert removed != null;
         PartReplacement replacement = null;
         for (PartReplacement r : replacements) {
             BodyPart other;
-            if (r.added.contains(removed)) {
-                other = removed;
+            if (r.added.contains(part)) {
+                other = part;
             } else {
-                other = getPartIn(removed.getType(), r.added);
+                other = getPartIn(part.getType(), r.added);
             }
             if (other != null) {
                 replacement = r;
                 r.added.remove(other);
                 r.added.add(part);
-                replacement.duration = Math.max(duration, replacement.duration);
+                replacement.duration = Math.max(newDuration, replacement.duration);
                 break;
             }
         }
         if (replacement == null) {
-            replacement = new PartReplacement(duration);
-            replacement.removed.add(removed);
+            replacement = new PartReplacement(newDuration);
+            replacement.removed.add(part);
             replacement.added.add(part);
             replacements.add(replacement);
         }
@@ -187,11 +186,6 @@ public class Body implements Cloneable {
         if (character != null) {
             updateCharacter();
         }
-    }
-
-    public void setTemporaryPartDuration(BodyPart part, int newDuration) {
-        assert part != null;
-        temporaryAddOrReplacePartWithType(part, part, newDuration);
     }
 
     public void describe(StringBuilder b, Character other, String delimiter) {
