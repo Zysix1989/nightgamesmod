@@ -162,22 +162,21 @@ public class Body implements Cloneable {
         assert part != null;
         assert removed != null;
         PartReplacement replacement = null;
-        if (removed != null)
-            for (PartReplacement r : replacements) {
-                BodyPart other;
-                if (r.added.contains(removed)) {
-                    other = removed;
-                } else {
-                    other = getPartIn(removed.getType(), r.added);
-                }
-                if (other != null) {
-                    replacement = r;
-                    r.added.remove(other);
-                    r.added.add(part);
-                    replacement.duration = Math.max(duration, replacement.duration);
-                    break;
-                }
+        for (PartReplacement r : replacements) {
+            BodyPart other;
+            if (r.added.contains(removed)) {
+                other = removed;
+            } else {
+                other = getPartIn(removed.getType(), r.added);
             }
+            if (other != null) {
+                replacement = r;
+                r.added.remove(other);
+                r.added.add(part);
+                replacement.duration = Math.max(duration, replacement.duration);
+                break;
+            }
+        }
         if (replacement == null) {
             replacement = new PartReplacement(duration);
             replacement.removed.add(removed);
