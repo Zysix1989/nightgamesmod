@@ -359,6 +359,8 @@ public class GenericBodyPart implements BodyPart {
         mods.add(mod);
     }
 
+    public void removeMod(PartMod mod) { mods.remove(mod); }
+
     public void addTemporaryMod(PartMod mod, int duration) {
         temporaryMods.add(new TemporaryModApplication(mod, duration));
     }

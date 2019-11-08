@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.FacePart;
@@ -242,8 +241,9 @@ public class Jewel extends BasePersonality {
             if (!character.body.getRandomAss().getMods().stream().anyMatch(mod -> mod.countsAs(TrainedMod.TYPE))) {
                 character.body.getRandomAss().addMod(new TrainedMod());
             }
-        } else if (character.body.getRandomAss().getMods().stream().anyMatch(mod -> mod.countsAs(TrainedMod.TYPE))) {
-            character.body.addReplace(new AssPart(Size.Small), 1);
+        } else {
+            var mod = character.body.getRandomAss().getMods().stream().filter(m -> m.countsAs(TrainedMod.TYPE)).findAny();
+            mod.ifPresent(m -> character.body.getRandomAss().removeMod(m));
         }
         super.rest(time);
         if (!(character.has(Item.Crop) || character.has(Item.Crop2)) && character.money >= 200) {
