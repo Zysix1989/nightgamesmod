@@ -238,13 +238,14 @@ public class Jewel extends BasePersonality {
             }
         }
         if (character.getLevel() >= 40 && Global.checkFlag(JEWEL_ANAL_FOCUS)) {
-            if (!character.body.getRandomAss().getMods().stream().anyMatch(mod -> mod.countsAs(TrainedMod.TYPE))) {
+            if (character.body.getRandomAss().getMods().stream().noneMatch(mod -> mod.countsAs(TrainedMod.TYPE))) {
                 character.body.getRandomAss().addMod(new TrainedMod());
             }
         } else {
             var mod = character.body.getRandomAss().getMods().stream().filter(m -> m.countsAs(TrainedMod.TYPE)).findAny();
             mod.ifPresent(m -> character.body.getRandomAss().removeMod(m));
         }
+
         super.rest(time);
         if (!(character.has(Item.Crop) || character.has(Item.Crop2)) && character.money >= 200) {
             character.gain(Item.Crop);
