@@ -7,12 +7,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
-import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.SkinPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.GooeySkinMod;
 import nightgames.characters.body.mods.PartMod;
@@ -483,7 +483,7 @@ public class Airi extends BasePersonality {
             if (asspart != null) {
                 asspart.temporarilyChangeSize(2, 10);
             }
-            ((GenericBodyPart) self.body.getRandom(Body.SKIN)).addTemporaryMod(new GooeySkinMod(), 999);
+            ((GenericBodyPart) self.body.getRandom(SkinPart.TYPE)).addTemporaryMod(new GooeySkinMod(), 999);
             self.body.temporaryAddPart(new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);
             if (self.level >= 25) {
                 self.addTemporaryTrait(Trait.shameless, 999);

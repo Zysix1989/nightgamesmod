@@ -69,8 +69,6 @@ public class Body implements Cloneable {
         }
     }
 
-    public static final String SKIN = "skin";
-
     // yeah i know :(
     public static BodyPart nonePart = new GenericBodyPart("none", 0, 1, 1, "none", "");
     private static Set<String> pluralParts = Set.of(HandsPart.TYPE,
@@ -1222,7 +1220,7 @@ public class Body implements Cloneable {
 
     public void receiveCum(Combat c, Character opponent, BodyPart part) {
         if (part == null) {
-            part = character.body.getRandom(Body.SKIN);
+            part = character.body.getRandom(SkinPart.TYPE);
         }
         part.receiveCum(c, character, opponent, part);
         if (character.has(Trait.spiritphage)) {

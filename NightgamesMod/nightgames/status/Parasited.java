@@ -1,16 +1,14 @@
 package nightgames.status;
 
+import com.google.gson.JsonObject;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
-import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.SkinPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.skills.FootWorship;
@@ -88,7 +86,7 @@ public class Parasited extends Status {
                                     affected, other));
                     BodyPart part = Global.pickRandom(c.getStance().getPartsFor(c, affected, other)).orElse(affected.body.getRandomGenital());
                     BodyPart otherPart = Global.pickRandom(c.getStance().getPartsFor(c, other, other)).orElse(other.body.getRandom(
-                        Body.SKIN));
+                        SkinPart.TYPE));
                     affected.doOrgasm(c, other, part, otherPart);
                     break;
                 case 1:

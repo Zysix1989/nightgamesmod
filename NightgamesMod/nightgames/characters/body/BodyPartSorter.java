@@ -20,7 +20,7 @@ public class BodyPartSorter implements Comparator<BodyPart>{
         BODY_PART_ORDER.put(TentaclePart.TYPE, 9);
         BODY_PART_ORDER.put(HandsPart.TYPE, 10);
         BODY_PART_ORDER.put(FeetPart.TYPE, 11);
-        BODY_PART_ORDER.put(Body.SKIN, 12);
+        BODY_PART_ORDER.put(SkinPart.TYPE, 12);
     }
 
     @Override

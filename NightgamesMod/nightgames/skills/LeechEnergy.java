@@ -6,13 +6,13 @@ import java.util.List;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BallsPart;
-import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.FeetPart;
 import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
+import nightgames.characters.body.SkinPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -46,7 +46,7 @@ public class LeechEnergy extends Skill {
             BodyPart part = null;
             BodyPart selfPart = getSelf().body.getRandom(TentaclePart.TYPE);
             List<String> targets = new ArrayList<String>(
-                            Arrays.asList(HandsPart.TYPE, FeetPart.TYPE, Body.SKIN, MouthPart.TYPE, CockPart.TYPE, PussyPart.TYPE,
+                            Arrays.asList(HandsPart.TYPE, FeetPart.TYPE, SkinPart.TYPE, MouthPart.TYPE, CockPart.TYPE, PussyPart.TYPE,
                                 BallsPart.TYPE));
             while (!targets.isEmpty()) {
                 String type = targets.remove(Global.random(targets.size()));
@@ -78,7 +78,7 @@ public class LeechEnergy extends Skill {
                                                 + " are squeezing and pulling on {other:possessive} ankles, "
                                                 + "{other:subject-action:start|starts} feeling weak as {other:possessive} energy is being drained through your toes.",
                                 getSelf(), target));
-            } else if (part.isType(Body.SKIN)) {
+            } else if (part.isType(SkinPart.TYPE)) {
                 c.write(getSelf(),
                                 Global.format("{self:name-possessive} numerous " + selfPart.describe(getSelf())
                                                 + " latch onto {other:name-possessive} body and coils around {other:possessive} waist. The numerous tips on the "

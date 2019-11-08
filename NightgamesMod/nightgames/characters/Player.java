@@ -16,7 +16,6 @@ import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.areas.Area.EncounterResult;
 import nightgames.areas.Deployable;
-import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
@@ -24,6 +23,7 @@ import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.FeetPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.HandsPart;
+import nightgames.characters.body.SkinPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.ExternalTentaclesMod;
@@ -1008,7 +1008,7 @@ public class Player extends Character {
                 && body.getRandomBreasts().getSize() != Size.min()) {
                 part.temporarilyChangeSize(1, 999);
             }
-            ((GenericBodyPart) body.getRandom(Body.SKIN)).addTemporaryMod(new GooeySkinMod(), 999);
+            ((GenericBodyPart) body.getRandom(SkinPart.TYPE)).addTemporaryMod(new GooeySkinMod(), 999);
             body.temporaryAddPart(
                 new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);
             addTemporaryTrait(Trait.Sneaky, 999);

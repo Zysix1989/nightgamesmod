@@ -3,9 +3,8 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
-import nightgames.characters.body.Body;
-import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
+import nightgames.characters.body.SkinPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -61,10 +60,12 @@ public class TentaclePorn extends Skill {
                     TentaclePart.pleasureWithTentacles(c, target, m, target.body.getRandomAss());
                 } else if (getSelf().human()) {
                     c.write(getSelf(), deal(c, 0, Result.normal, target));
-                    TentaclePart.pleasureWithTentacles(c, target, m, target.body.getRandom(Body.SKIN));
+                    TentaclePart.pleasureWithTentacles(c, target, m, target.body.getRandom(
+                        SkinPart.TYPE));
                 } else if (c.shouldPrintReceive(target, c)) {
                     c.write(getSelf(), receive(c, 0, Result.normal, target));
-                    TentaclePart.pleasureWithTentacles(c, target, m, target.body.getRandom(Body.SKIN));
+                    TentaclePart.pleasureWithTentacles(c, target, m, target.body.getRandom(
+                        SkinPart.TYPE));
                 }
                 if (!target.is(Stsflag.oiled)) {
                     target.add(c, new Oiled(target));

@@ -1,7 +1,7 @@
 package nightgames.skills.petskills;
 
 import nightgames.characters.Character;
-import nightgames.characters.body.Body;
+import nightgames.characters.body.SkinPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.nskills.tags.SkillTag;
@@ -34,7 +34,7 @@ public class GoblinFaceFuck extends SimpleEnemySkill {
                         + "She pulls the vibrator out of her pussy, causing a rain of love juice to splash {other:possessive} face. "
                         + "{self:SUBJECT} then wipes her leaking cock on {other:name-possessive} forehead, smearing {other:direct-object} with precum. "
                         + "{other:NAME-POSSESSIVE} face flushes with shame as the goblin marks {other:direct-object} with her fluids.", getSelf(), target));
-        getSelf().body.pleasure(target, target.body.getRandom(Body.SKIN), getSelf().body.getRandomCock(), 10, c);
+        getSelf().body.pleasure(target, target.body.getRandom(SkinPart.TYPE), getSelf().body.getRandomCock(), 10, c);
         target.add(c, new Shamed(target));
         return true;
     }
