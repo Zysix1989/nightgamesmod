@@ -137,11 +137,8 @@ public class JsonSourceNPCDataLoaderTest {
         JsonSourceNPCDataLoader.loadGrowthResources(resourcesJSON, growth);
 
         Growth expectedGrowth = new Growth();
-        expectedGrowth.setStamina(1);
         expectedGrowth.bonusStamina = 2;
-        expectedGrowth.setArousal(3);
         expectedGrowth.bonusArousal = 4;
-        expectedGrowth.setWillpower(7.5f);
         expectedGrowth.bonusWillpower = 8.5f;
         expectedGrowth.attributes = new int[] {9, 10, 11, 11};
         expectedGrowth.bonusAttributes = 12;

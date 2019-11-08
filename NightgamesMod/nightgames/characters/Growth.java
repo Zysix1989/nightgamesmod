@@ -71,6 +71,9 @@ public class Growth implements Cloneable {
 
     public Growth(JsonObject js) {
         this();
+        setStamina(js.get("stamina").getAsFloat());
+        setArousal(js.get("arousal").getAsFloat());
+        setWillpower(js.get("willpower").getAsFloat());
         JsonSourceNPCDataLoader.loadGrowthResources(js.get("resources").getAsJsonObject(), this);
         JsonSourceNPCDataLoader.loadGrowthTraits(js.get("traits").getAsJsonArray(), this);
     }
