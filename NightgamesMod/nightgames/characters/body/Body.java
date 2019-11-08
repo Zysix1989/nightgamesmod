@@ -43,7 +43,7 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class Body implements Cloneable {
-    static class PartReplacement {
+    private static class PartReplacement {
         private Optional<BodyPart> added;
         private Optional<BodyPart> removed;
         private int duration;
