@@ -32,4 +32,8 @@ class SizeTrait<SizeType extends _Size<SizeType>> {
     SizeType getSize() {
         return size.withModifications(sizeModifications);
     }
+
+    void setSize(SizeType target) {
+        this.size = target;
+    }
 }

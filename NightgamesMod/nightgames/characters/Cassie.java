@@ -201,7 +201,7 @@ public class Cassie extends BasePersonality {
 
     private void useBreastsFocus() {
         Global.flag(CASSIE_BREAST_FOCUS);
-        character.body.addReplace(new BreastsPart(BreastsPart.Size.FCup), 1);
+        character.body.getRandomBreasts().setSize(BreastsPart.Size.FCup);
         character.getGrowth().addTrait(11, Trait.lactating);
         character.getGrowth().addTrait(25, Trait.magicmilk);
         character.getGrowth().addTrait(38, Trait.temptingtits);

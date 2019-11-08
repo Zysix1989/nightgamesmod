@@ -246,20 +246,29 @@ public class AssPart extends GenericBodyPart implements Sizable<AssPart.Size> {
         return "anal";
     }
 
+    @Override
     public void changeSize(int modifier) {
         sizeTrait.changeSize(modifier);
     }
 
+    @Override
     public void temporarilyChangeSize(int modifier, int duration) {
         sizeTrait.temporarilyChangeSize(modifier, duration);
     }
 
+    @Override
     public void timePasses() {
         sizeTrait.timePasses();
     }
 
+    @Override
     public Size getSize() {
         return sizeTrait.getSize();
+    }
+
+    @Override
+    public void setSize(Size target) {
+        sizeTrait.setSize(target);
     }
 
     @Override
