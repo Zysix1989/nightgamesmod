@@ -168,20 +168,14 @@ public class Body implements Cloneable {
             } else {
                 other = getPartIn(part.getType(), r.added);
             }
-            if (other != null) {
-                replacement = r;
-                r.added.remove(other);
-                r.added.add(part);
-                replacement.duration = Math.max(newDuration, replacement.duration);
-                break;
-            }
+            assert other != null;
+            replacement = r;
+            r.added.remove(other);
+            r.added.add(part);
+            replacement.duration = Math.max(newDuration, replacement.duration);
+            break;
         }
-        if (replacement == null) {
-            replacement = new PartReplacement(newDuration);
-            replacement.removed.add(part);
-            replacement.added.add(part);
-            replacements.add(replacement);
-        }
+        assert replacement != null;
         updateCurrentParts();
         if (character != null) {
             updateCharacter();
