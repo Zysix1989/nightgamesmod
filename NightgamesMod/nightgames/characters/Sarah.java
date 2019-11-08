@@ -61,17 +61,15 @@ public class Sarah extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var stamina = new CoreStatGrowth<StaminaStat>(5);
-        var arousal = new CoreStatGrowth<ArousalStat>(6);
-        var willpower = new CoreStatGrowth<WillpowerStat>(0.8f);
+        var stamina = new CoreStatGrowth<StaminaStat>(5, 2);
+        var arousal = new CoreStatGrowth<ArousalStat>(6, 2);
+        var willpower = new CoreStatGrowth<WillpowerStat>(0.8f, .25f);
         return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override
     public void setGrowth() {
         character.setGrowth(newGrowth());
-        character.getGrowth().bonusStamina = 2;
-        character.getGrowth().bonusArousal = 2;
 
         character.getGrowth().addTrait(0, Trait.imagination);
         character.getGrowth().addTrait(0, Trait.pimphand);

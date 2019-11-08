@@ -186,17 +186,15 @@ public class Airi extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var stamina = new CoreStatGrowth<StaminaStat>(1);
-        var arousal = new CoreStatGrowth<ArousalStat>(5);
-        var willpower = new CoreStatGrowth<WillpowerStat>(2.5f);
+        var stamina = new CoreStatGrowth<StaminaStat>(1, 1);
+        var arousal = new CoreStatGrowth<ArousalStat>(5, 1);
+        var willpower = new CoreStatGrowth<WillpowerStat>(2.5f, .25f);
         return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override
     public void setGrowth() {
         character.setGrowth(newGrowth());
-        character.getGrowth().bonusStamina = 1;
-        character.getGrowth().bonusArousal = 1;
         character.addCombatScene(new CombatScene((c, self, other) -> {
             return self.getLevel() >= 13 && self.has(Trait.slime) && !Global.checkFlag(AIRI_SLIME_FOCUS) && !Global.checkFlag(AIRI_MIMICRY_FOCUS);
         }, (c, self, player) -> {

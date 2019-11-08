@@ -100,17 +100,15 @@ public class Reyka extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var stamina = new CoreStatGrowth<StaminaStat>(1);
-        var arousal = new CoreStatGrowth<ArousalStat>(10);
-        var willpower = new CoreStatGrowth<WillpowerStat>(1.0f);
+        var stamina = new CoreStatGrowth<StaminaStat>(1, 1);
+        var arousal = new CoreStatGrowth<ArousalStat>(10, 3);
+        var willpower = new CoreStatGrowth<WillpowerStat>(1.0f, .25f);
         return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override
     public void setGrowth() {
         character.setGrowth(newGrowth());
-        character.getGrowth().bonusStamina = 1;
-        character.getGrowth().bonusArousal = 3;
         preferredAttributes.add(c -> c.get(Attribute.Dark) < 50 && c.get(Attribute.Dark) <= c.get(Attribute.Fetish) + 10
                         ? Optional.of(Attribute.Dark) : Optional.empty());
         preferredAttributes.add(c -> c.get(Attribute.Dark) > c.get(Attribute.Fetish) + 10 && c.get(Attribute.Fetish) < 50

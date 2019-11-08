@@ -62,17 +62,15 @@ public class Caroline extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var stamina = new CoreStatGrowth<StaminaStat>(4);
-        var arousal = new CoreStatGrowth<ArousalStat>(7);
-        var willpower = new CoreStatGrowth<WillpowerStat>(0.4f);
+        var stamina = new CoreStatGrowth<StaminaStat>(4, 2);
+        var arousal = new CoreStatGrowth<ArousalStat>(7, 2);
+        var willpower = new CoreStatGrowth<WillpowerStat>(0.4f, .25f);
         return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override
     public void setGrowth() {
         character.setGrowth(newGrowth());
-        character.getGrowth().bonusStamina = 2;
-        character.getGrowth().bonusArousal = 2;
 
         character.getGrowth().addTrait(0, Trait.ticklish);
         character.getGrowth().addTrait(0, Trait.dexterous);

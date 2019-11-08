@@ -206,16 +206,10 @@ public abstract class CharacterConfiguration {
 
     private static void modMeters(Character character, int levels) {
         Growth growth = character.getGrowth();
-        boolean hard = Global.checkFlag(Flag.hardmode);
         for (int i = 0; i < levels; i++) {
             growth.levelUpStamina(character.getStamina());
             growth.levelUpArousal(character.getArousal());
             growth.levelUpWillpower(character.getWillpower());
-            if (hard) {
-                character.getStamina().gain(growth.bonusStamina);
-                character.getArousal().gain(growth.bonusArousal);
-                character.getWillpower().gain(growth.bonusWillpower);
-            }
         }
     }
     

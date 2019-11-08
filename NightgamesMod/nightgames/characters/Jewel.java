@@ -143,9 +143,9 @@ public class Jewel extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var stamina = new CoreStatGrowth<StaminaStat>(3);
-        var arousal = new CoreStatGrowth<ArousalStat>(6);
-        var willpower = new CoreStatGrowth<WillpowerStat>(1.7f);
+        var stamina = new CoreStatGrowth<StaminaStat>(3, 3);
+        var arousal = new CoreStatGrowth<ArousalStat>(6, 1);
+        var willpower = new CoreStatGrowth<WillpowerStat>(1.7f, .25f);
         return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
@@ -153,9 +153,6 @@ public class Jewel extends BasePersonality {
     public void setGrowth() {
         character.setGrowth(newGrowth());
         Growth growth = character.getGrowth();
-        growth.bonusStamina = 3;
-        growth.bonusArousal = 1;
-
         
         this.addFirstFocusScene();      //TODO: Add below addcombatscene block to this method.  NOTE: Growth in this scope breaks Jewel's first scene. 
         

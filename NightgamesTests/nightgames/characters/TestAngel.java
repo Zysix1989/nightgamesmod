@@ -114,12 +114,10 @@ public class TestAngel extends BasePersonality {
     }
 
     @Override public void setGrowth() {
-        var stamina = new CoreStatGrowth<StaminaStat>(1);
-        var arousal = new CoreStatGrowth<ArousalStat>(5);
-        var willpower = new CoreStatGrowth<WillpowerStat>(1);
+        var stamina = new CoreStatGrowth<StaminaStat>(1, 1);
+        var arousal = new CoreStatGrowth<ArousalStat>(5, 4);
+        var willpower = new CoreStatGrowth<WillpowerStat>(1, .25f);
         character.setGrowth(new Growth(new CoreStatsGrowth(stamina, arousal, willpower)));
-        character.getGrowth().bonusStamina = 1;
-        character.getGrowth().bonusArousal = 4;
         character.getGrowth().addTrait(3, Trait.alwaysready);
         character.getGrowth().addTrait(9, Trait.sexTraining1);
         character.getGrowth().addTrait(12, Trait.expertGoogler);

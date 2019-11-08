@@ -77,18 +77,15 @@ public class Angel extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var stamina = new CoreStatGrowth<StaminaStat>(2);
-        var arousal = new CoreStatGrowth<ArousalStat>(9);
-        var willpower = new CoreStatGrowth<WillpowerStat>(1.0f);
+        var stamina = new CoreStatGrowth<StaminaStat>(2, 1);
+        var arousal = new CoreStatGrowth<ArousalStat>(9, 4);
+        var willpower = new CoreStatGrowth<WillpowerStat>(1.0f, .25f);
         return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override
     public void setGrowth() {
         character.setGrowth(newGrowth());
-        character.getGrowth().bonusStamina = 1;
-        character.getGrowth().bonusArousal = 4;
-
         
         this.addFirstFocusScene(); 
                

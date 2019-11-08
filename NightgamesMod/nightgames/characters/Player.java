@@ -122,16 +122,14 @@ public class Player extends Character {
     }
 
     private static Growth newGrowth() {
-        var stamina = new CoreStatGrowth<StaminaStat>(20);
-        var arousal = new CoreStatGrowth<ArousalStat>(40);
-        var willpower = new CoreStatGrowth<WillpowerStat>(10.4f);
+        var stamina = new CoreStatGrowth<StaminaStat>(20, 10);
+        var arousal = new CoreStatGrowth<ArousalStat>(40, 20);
+        var willpower = new CoreStatGrowth<WillpowerStat>(10.4f, .25f);
         return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     public void setGrowth() {
         setGrowth(newGrowth());
-        getGrowth().bonusStamina = 10;
-        getGrowth().bonusArousal = 20;
         getGrowth().attributes = new int[]{2, 3, 3, 3};
     }
 

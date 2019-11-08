@@ -152,9 +152,6 @@ public class JsonSourceNPCDataLoader {
     }
 
     public static void loadGrowthResources(JsonObject object, Growth growth) {
-        growth.bonusStamina = object.get("bonusStamina").getAsFloat();
-        growth.bonusArousal = object.get("bonusArousal").getAsFloat();
-        growth.bonusWillpower = object.get("bonusWillpower").getAsFloat();
         growth.bonusAttributes = object.get("bonusPoints").getAsInt();
         JsonArray points = object.getAsJsonArray("points");
         int defaultPoints = 3;

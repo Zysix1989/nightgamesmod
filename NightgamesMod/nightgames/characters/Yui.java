@@ -71,17 +71,15 @@ public class Yui extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var stamina = new CoreStatGrowth<StaminaStat>(3);
-        var arousal = new CoreStatGrowth<ArousalStat>(7);
-        var willpower = new CoreStatGrowth<WillpowerStat>(1.4f);
+        var stamina = new CoreStatGrowth<StaminaStat>(3, 2);
+        var arousal = new CoreStatGrowth<ArousalStat>(7, 2);
+        var willpower = new CoreStatGrowth<WillpowerStat>(1.4f, .25f);
         return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override
     public void setGrowth() {
         character.setGrowth(newGrowth());
-        character.getGrowth().bonusStamina = 2;
-        character.getGrowth().bonusArousal = 2;
         preferredAttributes.add(c -> c.get(Attribute.Ninjutsu) < 60 && c.getLevel() >= 10 ? Optional.of(Attribute.Ninjutsu)  : Optional.empty());
         preferredAttributes.add(c -> c.get(Attribute.Cunning) < 50 ? Optional.of(Attribute.Cunning) : Optional.empty());
 

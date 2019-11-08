@@ -83,17 +83,15 @@ public class Maya extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var stamina = new CoreStatGrowth<StaminaStat>(2);
-        var arousal = new CoreStatGrowth<ArousalStat>(10);
-        var willpower = new CoreStatGrowth<WillpowerStat>(2.0f);
+        var stamina = new CoreStatGrowth<StaminaStat>(2, 2);
+        var arousal = new CoreStatGrowth<ArousalStat>(10, 5);
+        var willpower = new CoreStatGrowth<WillpowerStat>(2.0f, .25f);
         return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override
     public void setGrowth() {
         character.setGrowth(newGrowth());
-        character.getGrowth().bonusStamina = 2;
-        character.getGrowth().bonusArousal = 5;
 
         this.addFirstFocusScene();     
         this.addSecondFocusScene();   

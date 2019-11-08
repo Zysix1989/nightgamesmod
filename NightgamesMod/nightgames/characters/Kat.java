@@ -141,18 +141,15 @@ public class Kat extends BasePersonality {
     }
 
     private static Growth newGrowth() {
-        var stamina = new CoreStatGrowth<StaminaStat>(2);
-        var arousal = new CoreStatGrowth<ArousalStat>(7);
-        var willpower = new CoreStatGrowth<WillpowerStat>(1.0f);
+        var stamina = new CoreStatGrowth<StaminaStat>(2, 1);
+        var arousal = new CoreStatGrowth<ArousalStat>(7, 2);
+        var willpower = new CoreStatGrowth<WillpowerStat>(1.0f, .25f);
         return new Growth(new CoreStatsGrowth(stamina, arousal, willpower));
     }
 
     @Override
     public void setGrowth() {
         character.setGrowth(newGrowth());
-        character.getGrowth().bonusStamina = 1;
-        character.getGrowth().bonusArousal = 2;
-        
         
         this.addFirstFocusScene();      //TODO: Add below combatscene block to this method.
         

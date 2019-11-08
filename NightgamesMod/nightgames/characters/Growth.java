@@ -36,12 +36,9 @@ public class Growth implements Cloneable {
         }
     }
     private CoreStatsGrowth coreStatsGrowth;
-    public float bonusArousal;
-    public float bonusStamina;
     public int attributes[];
     public int bonusAttributes;
     public int extraAttributes;
-    public float bonusWillpower;
     private Map<Integer, List<Trait>> traits;
     private Map<Integer, Integer> traitPoints;
     public Map<Integer, List<BodyPart>> bodyParts;
@@ -54,11 +51,8 @@ public class Growth implements Cloneable {
 
     public Growth(CoreStatsGrowth coreStatsGrowth) {
         this.coreStatsGrowth = coreStatsGrowth;
-        bonusStamina = 2;
-        bonusArousal = 3;
         bonusAttributes = 1;
         extraAttributes = 0;
-        bonusWillpower = .25f;
         attributes = new int[10];
         Arrays.fill(attributes, 4);
         attributes[0] = 3;
@@ -72,9 +66,13 @@ public class Growth implements Cloneable {
     public Growth(JsonObject js) {
         this();
         var resources = js.getAsJsonObject("resources");
-        var stamina = new CoreStatGrowth<StaminaStat>(resources.get("stamina").getAsFloat());
-        var arousal = new CoreStatGrowth<ArousalStat>(resources.get("arousal").getAsFloat());
-        var willpower = new CoreStatGrowth<WillpowerStat>(resources.get("willpower").getAsFloat());
+
+        var stamina = new CoreStatGrowth<StaminaStat>(resources.get("stamina").getAsFloat(),
+            resources.get("bonusStamina").getAsFloat());
+        var arousal = new CoreStatGrowth<ArousalStat>(resources.get("arousal").getAsFloat()
+            ,resources.get("bonusArousal").getAsFloat());
+        var willpower = new CoreStatGrowth<WillpowerStat>(resources.get("willpower").getAsFloat(),
+            resources.get("bonusWillpower").getAsFloat());
         this.coreStatsGrowth = new CoreStatsGrowth(stamina, arousal, willpower);
         JsonSourceNPCDataLoader.loadGrowthResources(resources.getAsJsonObject(), this);
         JsonSourceNPCDataLoader.loadGrowthTraits(js.get("traits").getAsJsonArray(), this);
@@ -179,9 +177,6 @@ public class Growth implements Cloneable {
         character.availableAttributePoints += attributes[Math.min(character.rank, attributes.length-1)] + extraAttributes;
 
         if (Global.checkFlag(Flag.hardmode)) {
-            character.getStamina().gain(bonusStamina);
-            character.getArousal().gain(bonusArousal);
-            character.getWillpower().gain(bonusWillpower);
             character.availableAttributePoints += bonusAttributes;
         }
         addOrRemoveTraits(character);
@@ -198,7 +193,7 @@ public class Growth implements Cloneable {
     }
    
     @Override public String toString() {
-        return "Growth bonusStamina "+bonusStamina+" bonusArousal "+bonusArousal+" bonusAttributes "+bonusAttributes+" bonusWillpower "+bonusWillpower+" attributes "+attributes+" traits "+traits;
+        return "Growth bonusAttributes "+bonusAttributes+" attributes "+attributes+" traits "+traits;
     }
     public void removeNullTraits() {
         traits.forEach((i, l) -> l.removeIf(t -> t == null));
