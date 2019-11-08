@@ -3,9 +3,9 @@ package nightgames.skills;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.body.BallsPart;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
@@ -46,7 +46,8 @@ public class LeechEnergy extends Skill {
             BodyPart part = null;
             BodyPart selfPart = getSelf().body.getRandom(TentaclePart.TYPE);
             List<String> targets = new ArrayList<String>(
-                            Arrays.asList(HandsPart.TYPE, FeetPart.TYPE, Body.SKIN, MouthPart.TYPE, CockPart.TYPE, PussyPart.TYPE, Body.BALLS));
+                            Arrays.asList(HandsPart.TYPE, FeetPart.TYPE, Body.SKIN, MouthPart.TYPE, CockPart.TYPE, PussyPart.TYPE,
+                                BallsPart.TYPE));
             while (!targets.isEmpty()) {
                 String type = targets.remove(Global.random(targets.size()));
                 part = target.body.getRandom(type);
@@ -98,7 +99,7 @@ public class LeechEnergy extends Skill {
                                                 + partStringSingular
                                                 + "-pussy churns against {other:possessive} cock relentlessly, sucking out both precum and {other:possessive} precious energy.",
                                 getSelf(), target));
-            } else if (part.isType(Body.BALLS)) {
+            } else if (part.isType(BallsPart.TYPE)) {
                 c.write(getSelf(),
                                 Global.format("A particularly thick " + partStringSingular
                                                 + " latches onto {other:name-possessive} balls and swallows it whole. {other:SUBJECT-ACTION:gasp|gasps} in pleasure as the "

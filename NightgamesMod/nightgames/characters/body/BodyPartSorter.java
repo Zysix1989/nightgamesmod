@@ -14,7 +14,7 @@ public class BodyPartSorter implements Comparator<BodyPart>{
         BODY_PART_ORDER.put(AssPart.TYPE, 4);
         BODY_PART_ORDER.put(PussyPart.TYPE, 5);
         BODY_PART_ORDER.put(CockPart.TYPE, 6);
-        BODY_PART_ORDER.put(Body.BALLS, 6);
+        BODY_PART_ORDER.put(BallsPart.TYPE, 6);
         BODY_PART_ORDER.put("wings", 7);
         BODY_PART_ORDER.put(TailPart.TYPE, 8);
         BODY_PART_ORDER.put(TentaclePart.TYPE, 9);

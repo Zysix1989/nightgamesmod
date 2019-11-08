@@ -70,7 +70,6 @@ public class Body implements Cloneable {
     }
 
     public static final String SKIN = "skin";
-    public static final String BALLS = "balls";
 
     // yeah i know :(
     public static BodyPart nonePart = new GenericBodyPart("none", 0, 1, 1, "none", "");
@@ -78,7 +77,7 @@ public class Body implements Cloneable {
         FeetPart.TYPE,
         WingsPart.TYPE,
         BreastsPart.TYPE,
-        Body.BALLS);
+        BallsPart.TYPE);
     private final static BodyPart[] requiredParts = {
         new HandsPart(),
         new FeetPart(),
@@ -926,7 +925,7 @@ public class Body implements Cloneable {
     }
 
     private void addBallsIfNeeded() {
-        if (getRandom(Body.BALLS) == null) {
+        if (getRandom(BallsPart.TYPE) == null) {
             add(new BallsPart());
         }
     }
@@ -1019,7 +1018,7 @@ public class Body implements Cloneable {
         if (newSex.hasBalls()) {
             addBallsIfNeeded();
         } else {
-            removeAll(Body.BALLS);
+            removeAll(BallsPart.TYPE);
         }
         addReplace(new FacePart(face.hotness, femininity), 1);
     }
@@ -1036,7 +1035,7 @@ public class Body implements Cloneable {
             }
         }
         if (sex.hasBalls()) {
-            if (!has(Body.BALLS)) {
+            if (!has(BallsPart.TYPE)) {
                 add(new BallsPart());
             }
         }

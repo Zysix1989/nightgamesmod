@@ -17,7 +17,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Growth;
 import nightgames.characters.MaxAttribute;
 import nightgames.characters.PreferredAttribute;
-import nightgames.characters.body.Body;
+import nightgames.characters.body.BallsPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.custom.effect.CustomEffect;
@@ -95,7 +95,7 @@ public class JsonSourceNPCDataLoaderTest {
         orList.add(new BodyPartRequirement(CockPart.TYPE));
         List<Requirement> andList = new ArrayList<>();
         andList.add(new BodyPartRequirement(PussyPart.TYPE));
-        andList.add(new NotRequirement(new BodyPartRequirement(Body.BALLS)));
+        andList.add(new NotRequirement(new BodyPartRequirement(BallsPart.TYPE)));
         orList.add(new AndRequirement(andList));
         expectedReqs.add(new OrRequirement(orList));
 

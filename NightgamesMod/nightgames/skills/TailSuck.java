@@ -4,7 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
-import nightgames.characters.body.Body;
+import nightgames.characters.body.BallsPart;
 import nightgames.characters.body.TailPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -60,7 +60,7 @@ public class TailSuck extends Skill {
         } else if (target.hasBalls()) {
             writeOutput(c, Result.weak, target);
             target.body.pleasure(getSelf(), getSelf().body.getRandom(TailPart.TYPE), target.body.getRandom(
-                Body.BALLS),
+                BallsPart.TYPE),
                             Global.random(5) + 5, c, this);
             return true;
         } else {
