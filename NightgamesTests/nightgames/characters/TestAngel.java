@@ -14,6 +14,9 @@ import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.SkinPart;
 import nightgames.characters.body.mods.catcher.DivineMod;
 import nightgames.characters.body.mods.pitcher.BlessedCockMod;
+import nightgames.characters.corestats.ArousalStat;
+import nightgames.characters.corestats.StaminaStat;
+import nightgames.characters.corestats.WillpowerStat;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -111,8 +114,10 @@ public class TestAngel extends BasePersonality {
     }
 
     @Override public void setGrowth() {
-        character.getGrowth().setStamina(1);
-        character.getGrowth().setArousal(5);
+        var stamina = new CoreStatGrowth<StaminaStat>(1);
+        var arousal = new CoreStatGrowth<ArousalStat>(5);
+        var willpower = new CoreStatGrowth<WillpowerStat>(1);
+        character.setGrowth(new Growth(new CoreStatsGrowth(stamina, arousal, willpower)));
         character.getGrowth().bonusStamina = 1;
         character.getGrowth().bonusArousal = 4;
         character.getGrowth().addTrait(3, Trait.alwaysready);
