@@ -550,8 +550,7 @@ public class Player extends Character {
 
     private void actuallyDing() {
         level += 1;
-        getGrowth().levelUpStamina(getStamina());
-        getGrowth().levelUpArousal(getArousal());
+        getGrowth().levelUpCoreStatsOnly(this);
         availableAttributePoints += getGrowth().attributes[Math.min(rank, getGrowth().attributes.length-1)];
         gui.message(this, "You've gained a Level!<br/>Select which attributes to increase.");
         if (getLevel() % 3 == 0 && level < 10 || (getLevel() + 1) % 2 == 0 && level > 10) {

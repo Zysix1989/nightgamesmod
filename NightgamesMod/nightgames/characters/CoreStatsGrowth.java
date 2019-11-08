@@ -12,9 +12,9 @@ public class CoreStatsGrowth {
         return new CoreStatsGrowth(stamina, arousal, willpower);
     }
 
-    final CoreStatGrowth<StaminaStat> stamina;
-    final CoreStatGrowth<ArousalStat> arousal;
-    final CoreStatGrowth<WillpowerStat> willpower;
+    private final CoreStatGrowth<StaminaStat> stamina;
+    private final CoreStatGrowth<ArousalStat> arousal;
+    private final CoreStatGrowth<WillpowerStat> willpower;
 
     CoreStatsGrowth(CoreStatGrowth<StaminaStat> stamina,
         CoreStatGrowth<ArousalStat> arousal,
@@ -23,4 +23,10 @@ public class CoreStatsGrowth {
         this.arousal = arousal;
         this.willpower = willpower;
     };
+
+    void levelUp(Character c) {
+        stamina.levelUp(c.getStamina());
+        arousal.levelUp(c.getArousal());
+        willpower.levelUp(c.getWillpower());
+    }
 }

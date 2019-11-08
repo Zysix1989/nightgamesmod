@@ -22,7 +22,6 @@ import nightgames.characters.Character;
 import nightgames.characters.CharacterSex;
 import nightgames.characters.Growth;
 import nightgames.characters.Trait;
-import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
 import nightgames.json.JsonUtils;
@@ -207,9 +206,7 @@ public abstract class CharacterConfiguration {
     private static void modMeters(Character character, int levels) {
         Growth growth = character.getGrowth();
         for (int i = 0; i < levels; i++) {
-            growth.levelUpStamina(character.getStamina());
-            growth.levelUpArousal(character.getArousal());
-            growth.levelUpWillpower(character.getWillpower());
+            growth.levelUpCoreStatsOnly(character);
         }
     }
     

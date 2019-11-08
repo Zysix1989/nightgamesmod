@@ -168,10 +168,12 @@ public class Growth implements Cloneable {
         });
     }
 
+    public void levelUpCoreStatsOnly(Character c) {
+        coreStatsGrowth.levelUp(c);
+    }
+
     public void levelUp(Character character) {
-        levelUpStamina(character.getStamina());
-        levelUpArousal(character.getArousal());
-        levelUpWillpower(character.getWillpower());
+        levelUpCoreStatsOnly(character);
         if (traitPoints.containsKey(character.level) && character instanceof Player) ((Player)character).traitPoints+=traitPoints.get(character.level);
 
         character.availableAttributePoints += attributes[Math.min(character.rank, attributes.length-1)] + extraAttributes;
@@ -199,15 +201,4 @@ public class Growth implements Cloneable {
         traits.forEach((i, l) -> l.removeIf(t -> t == null));
     }
 
-    public void levelUpArousal(ArousalStat s) {
-        coreStatsGrowth.arousal.levelUp(s);
-    }
-
-    public void levelUpStamina(StaminaStat s) {
-        coreStatsGrowth.stamina.levelUp(s);
-    }
-
-    public void levelUpWillpower(WillpowerStat s) {
-        coreStatsGrowth.willpower.levelUp(s);
-    }
 }
