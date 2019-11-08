@@ -44,19 +44,19 @@ import org.jtwig.JtwigTemplate;
 
 public class Body implements Cloneable {
     static class PartReplacement {
-        private Set<BodyPart> added;
-        private Set<BodyPart> removed;
+        private Optional<BodyPart> added;
+        private Optional<BodyPart> removed;
         private int duration;
 
         PartReplacement(int duration) {
-            added = new LinkedHashSet<>(2);
-            removed = new LinkedHashSet<>(2);
+            added = Optional.empty();
+            removed = Optional.empty();
             this.duration = duration;
         }
 
         PartReplacement(PartReplacement original) {
-            added = new LinkedHashSet<>(original.added);
-            removed = new LinkedHashSet<>(original.removed);
+            added = original.added;
+            removed = original.removed;
             duration = original.duration;
         }
 
@@ -120,8 +120,8 @@ public class Body implements Cloneable {
         currentParts.clear();
         currentParts.addAll(bodyParts);
         for (PartReplacement r : replacements) {
-            currentParts.removeAll(r.removed);
-            currentParts.addAll(r.added);
+            r.removed.ifPresent(p -> currentParts.remove(p));
+            r.added.ifPresent(p -> currentParts.add(p));
         }
     }
 
@@ -130,7 +130,7 @@ public class Body implements Cloneable {
             setTemporaryPartDuration(part, duration);
         } else {
             PartReplacement replacement = new PartReplacement(duration);
-            replacement.added.add(part);
+            replacement.added = Optional.of(part);
             replacements.add(replacement);
             updateCurrentParts();
             if (character != null) {
@@ -141,7 +141,7 @@ public class Body implements Cloneable {
 
     public void temporaryRemovePart(BodyPart part, int duration) {
         PartReplacement replacement = new PartReplacement(duration);
-        replacement.removed.add(part);
+        replacement.removed = Optional.of(part);
         replacements.add(replacement);
         updateCurrentParts();
         if (character != null) {
@@ -162,14 +162,13 @@ public class Body implements Cloneable {
         assert part != null;
         for (PartReplacement r : replacements) {
             BodyPart other;
-            if (r.added.contains(part)) {
+            if (r.added.isPresent() && r.added.get().equals(part)) {
                 other = part;
             } else {
-                other = getPartIn(part.getType(), r.added);
+                other = getPartIn(part.getType(), r.added.stream().collect(Collectors.toList()));
             }
             assert other != null;
-            r.added.remove(other);
-            r.added.add(part);
+            r.added = Optional.of(part);
             r.duration = Math.max(newDuration, r.duration);
             break;
         }
@@ -1120,8 +1119,10 @@ public class Body implements Cloneable {
             replacements.remove(r);
             updateCurrentParts();
             StringBuilder sb = new StringBuilder();
-            LinkedList<BodyPart> added = new LinkedList<>(r.added);
-            LinkedList<BodyPart> removed = new LinkedList<>(r.removed);
+            LinkedList<BodyPart> added = new LinkedList<>();
+            r.added.ifPresent(added::add);
+            LinkedList<BodyPart> removed = new LinkedList<>();
+            r.removed.ifPresent(removed::add);
             if (added.size() > 0 && removed.size() == 0) {
                 sb.append(character.nameOrPossessivePronoun())
                     .append(" ");
