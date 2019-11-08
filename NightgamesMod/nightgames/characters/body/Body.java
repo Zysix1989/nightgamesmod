@@ -160,7 +160,6 @@ public class Body implements Cloneable {
 
     public void setTemporaryPartDuration(BodyPart part, int newDuration) {
         assert part != null;
-        PartReplacement replacement = null;
         for (PartReplacement r : replacements) {
             BodyPart other;
             if (r.added.contains(part)) {
@@ -169,13 +168,11 @@ public class Body implements Cloneable {
                 other = getPartIn(part.getType(), r.added);
             }
             assert other != null;
-            replacement = r;
             r.added.remove(other);
             r.added.add(part);
-            replacement.duration = Math.max(newDuration, replacement.duration);
+            r.duration = Math.max(newDuration, r.duration);
             break;
         }
-        assert replacement != null;
         updateCurrentParts();
         if (character != null) {
             updateCharacter();
