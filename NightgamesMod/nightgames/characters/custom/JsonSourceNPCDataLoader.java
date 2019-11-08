@@ -151,7 +151,7 @@ public class JsonSourceNPCDataLoader {
         return JsonUtils.getGson().fromJson(obj, ItemAmount.class);
     }
 
-    protected static void loadGrowthResources(JsonObject object, Growth growth) {
+    public static void loadGrowthResources(JsonObject object, Growth growth) {
         growth.setStamina(object.get("stamina").getAsFloat());
         growth.bonusStamina = object.get("bonusStamina").getAsFloat();
         growth.setArousal(object.get("arousal").getAsFloat());
@@ -171,11 +171,6 @@ public class JsonSourceNPCDataLoader {
         }
     }
 
-    public static void loadGrowth(JsonObject obj, Growth growth) {
-        loadGrowthResources(obj.get("resources").getAsJsonObject(), growth);
-        loadGrowthTraits(obj.get("traits").getAsJsonArray(), growth);
-    }
-
     protected static void loadPreferredAttributes(JsonArray arr, List<PreferredAttribute> preferredAttributes) {
         for (JsonElement element : arr) {
             JsonObject obj = element.getAsJsonObject();
@@ -185,7 +180,7 @@ public class JsonSourceNPCDataLoader {
         }
     }
 
-    private static void loadGrowthTraits(JsonArray arr, Growth growth) {
+    public static void loadGrowthTraits(JsonArray arr, Growth growth) {
         for (JsonElement element : arr) {
             JsonObject obj = element.getAsJsonObject();
             Trait trait = JsonUtils.getGson().fromJson(obj.get("trait"), Trait.class);
