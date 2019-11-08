@@ -159,6 +159,8 @@ public class Body implements Cloneable {
     }
 
     private void temporaryAddOrReplacePartWithType(BodyPart part, BodyPart removed, int duration) {
+        assert part != null;
+        assert removed != null;
         PartReplacement replacement = null;
         if (removed != null)
             for (PartReplacement r : replacements) {
@@ -189,6 +191,7 @@ public class Body implements Cloneable {
     }
 
     public void setTemporaryPartDuration(BodyPart part, int newDuration) {
+        assert part != null;
         temporaryAddOrReplacePartWithType(part, part, newDuration);
     }
 
