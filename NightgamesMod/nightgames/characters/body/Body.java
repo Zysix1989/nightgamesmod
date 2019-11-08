@@ -928,12 +928,6 @@ public class Body implements Cloneable {
         }
     }
 
-    private void growBreastsUpTo(BreastsPart part) {
-        if (BreastsPart.Size.max().compareTo(part.getSize()) < 0) {
-            addReplace(part, 1);
-        }
-    }
-
     /**
      * Guesses the character sex based on the current attributes.
      * I'm sorry if I whatever you want to be considered, you're free to add it yourself.
@@ -983,28 +977,28 @@ public class Body implements Cloneable {
                 femininity = Math.min(0, femininity);
                 replacePussyWithCock(new CockPart(CockPart.Size.Average));
                 addBallsIfNeeded();
-                addReplace(new BreastsPart(BreastsPart.Size.FlatChest), 1);
+                getRandomBreasts().setSize(BreastsPart.Size.FlatChest);
                 break;
             case female:
                 femininity = Math.max(2, femininity);
                 replaceCockWithPussy();
-                growBreastsUpTo(new BreastsPart(BreastsPart.Size.CCup));
+                getRandomBreasts().setSize(BreastsPart.Size.CCup);
                 break;
             case herm:
                 femininity = Math.max(1, femininity);
                 addEquivalentCockAndPussy(new CockPart(CockPart.Size.Big));
-                growBreastsUpTo(new BreastsPart(BreastsPart.Size.BCup));
+                getRandomBreasts().setSize(BreastsPart.Size.BCup);
                 break;
             case shemale:
                 femininity = Math.max(1, femininity);
                 replacePussyWithCock(new CockPart(CockPart.Size.Big));
-                growBreastsUpTo(new BreastsPart(BreastsPart.Size.DCup));
+                getRandomBreasts().setSize(BreastsPart.Size.DCup);
                 addBallsIfNeeded();
                 break;
             case trap:
                 femininity = Math.max(2, femininity);
                 replacePussyWithCock(new CockPart(CockPart.Size.Small));
-                addReplace(new BreastsPart(BreastsPart.Size.FlatChest), 1);
+                getRandomBreasts().setSize(BreastsPart.Size.FlatChest);
                 addBallsIfNeeded();
                 break;
             case asexual:
