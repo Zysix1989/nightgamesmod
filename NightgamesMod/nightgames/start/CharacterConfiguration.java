@@ -208,9 +208,9 @@ public abstract class CharacterConfiguration {
         Growth growth = character.getGrowth();
         boolean hard = Global.checkFlag(Flag.hardmode);
         for (int i = 0; i < levels; i++) {
-            character.getStamina().gain(growth.getStamina());
-            character.getArousal().gain(growth.getArousal());
-            character.getWillpower().gain(growth.getWillpower());
+            growth.levelUpStamina(character.getStamina());
+            growth.levelUpArousal(character.getArousal());
+            growth.levelUpWillpower(character.getWillpower());
             if (hard) {
                 character.getStamina().gain(growth.bonusStamina);
                 character.getArousal().gain(growth.bonusArousal);

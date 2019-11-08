@@ -223,8 +223,4 @@ public class Growth implements Cloneable {
     public float getStamina() {
         return coreStatsGrowth.stamina.baseIncrease;
     }
-
-    public float getWillpower() {
-        return coreStatsGrowth.willpower.baseIncrease;
-    }
 }
