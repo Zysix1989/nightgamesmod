@@ -3,7 +3,7 @@ package nightgames.characters;
 import nightgames.characters.corestats.CoreStat;
 
 class CoreStatGrowth<T extends CoreStat> {
-    final float baseIncrease;
+    private final float baseIncrease;
 
     CoreStatGrowth(float baseIncrease) {
         this.baseIncrease = baseIncrease;
