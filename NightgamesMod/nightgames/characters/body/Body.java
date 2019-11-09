@@ -344,23 +344,6 @@ public class Body implements Cloneable {
         }
     }
 
-    public void removeOne(String type) {
-        BodyPart removed = null;
-        for (BodyPart part : bodyParts) {
-            if (part.isType(type)) {
-                removed = part;
-                break;
-            }
-        }
-        if (removed != null) {
-            bodyParts.remove(removed);
-            updateCurrentParts();
-            if (character != null) {
-                updateCharacter();
-            }
-        }
-    }
-
     // returns how many are removed
     public int removeAll(String type) {
         List<BodyPart> removed = new ArrayList<>();
@@ -818,13 +801,6 @@ public class Body implements Cloneable {
                 perceptionBonus /= 3;
             }
             return perceptionBonus;
-        }
-    }
-
-    public void addReplace(BodyPart part, int max) {
-        int n = Math.min(Math.max(1, removeAll(part.getType())), max);
-        for (int i = 0; i < n; i++) {
-            add(part);
         }
     }
 

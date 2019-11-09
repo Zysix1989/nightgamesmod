@@ -60,66 +60,6 @@ public class BodyShop extends Activity {
         boolean isSatisfied(Character character);
     }
 
-    private void addBodyPart(String name, final BodyPart part, final BodyPart normal, int growPrice,
-                    int removePrice) {
-        addBodyPart(name, part, normal, growPrice, removePrice, 5, false);
-    }
-
-    private void addBodyPart(String name, final BodyPart part, final BodyPart normal, int growPrice, int removePrice,
-                    final int priority, final boolean onlyReplace) {
-        selection.add(new ShopSelection(name, growPrice) {
-            @Override
-            void buy(Character buyer) {
-                buyer.body.addReplace(part, 1);
-            }
-
-            @Override
-            boolean available(Character buyer) {
-                boolean possible = true;
-                if (onlyReplace) {
-                    possible = buyer.body.has(part.getType());
-                }
-                if (normal == null) {
-                    return possible && !buyer.body.has(part.getType()); // never
-                                                                        // available
-                } else {
-                    return possible && !buyer.body.contains(part);
-                }
-            }
-
-            @Override
-            double priority(Character buyer) {
-                return priority;
-            }
-        });
-
-        selection.add(new ShopSelection("Remove " + name, removePrice) {
-            @Override
-            void buy(Character buyer) {
-                if (normal == null) {
-                    buyer.body.removeOne(part.getType());
-                } else {
-                    buyer.body.remove(part);
-                    buyer.body.addReplace(normal, 1);
-                }
-            }
-
-            @Override
-            boolean available(Character buyer) {
-                if (normal == null) {
-                    return buyer.body.has(part.getType());
-                } else {
-                    return buyer.body.contains(part);
-                }
-            }
-
-            @Override
-            double priority(Character buyer) {
-                return 1;
-            }
-        });
-    }
-
     private void addBodyPartMod(String name, final PartMod mod, final String partType, int growPrice, int removePrice,
                     final int priority) {
         selection.add(new ShopSelection(name, growPrice) {
