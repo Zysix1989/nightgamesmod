@@ -675,7 +675,7 @@ public class CreatorGui extends Application {
 		pussy.getSelectionModel().select(ch.hasPussy() ? ch.body.getRandomPussy() : null);
 		ears.getSelectionModel().select((EarPart) ch.body.getRandom(EarPart.TYPE));
 
-		BodyPart mouthPart = ch.body.getRandom(MouthPart.TYPE);
+		BodyPart mouthPart = ch.body.getRandomMouth();
 		MouthType type = mouthPart instanceof MouthPart ? MouthType.normal : MouthType.mouth_pussy;
 		mouth.getSelectionModel().select(type);
 

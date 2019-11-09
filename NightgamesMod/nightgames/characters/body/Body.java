@@ -1295,6 +1295,8 @@ public class Body implements Cloneable {
 
     public FeetPart getRandomFeet() { return (FeetPart) getRandom(FeetPart.TYPE); }
 
+    public MouthPart getRandomMouth() { return (MouthPart) getRandom(MouthPart.TYPE); }
+
     // yeah i know it's not that simple, but best try right now
     public static String partArticle(String type) {
         if (pluralParts.contains(type)) {

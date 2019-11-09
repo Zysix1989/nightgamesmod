@@ -5,7 +5,6 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
-import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -46,7 +45,7 @@ public class CockWorship extends Skill {
             m += 4;
         }
         writeOutput(c, Result.normal, target);
-        BodyPart mouth = getSelf().body.getRandom(MouthPart.TYPE);
+        BodyPart mouth = getSelf().body.getRandomMouth();
         BodyPart cock = target.body.getRandomCock();
         target.body.pleasure(getSelf(), mouth, cock, m, c, this);
         if (getSelf().hasDick() && (!getSelf().hasPussy() || Global.random(2) == 0)) {

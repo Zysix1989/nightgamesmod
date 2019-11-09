@@ -4,7 +4,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.MouthPart;
-import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -80,7 +79,7 @@ public class Cunnilingus extends Skill {
             if (ReverseMount.class.isInstance(c.getStance())) {
                 c.setStance(new SixNine(getSelf(), target), getSelf(), true);
             }
-            target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandomPussy(), m, c, this);
+            target.body.pleasure(getSelf(), getSelf().body.getRandomMouth(), target.body.getRandomPussy(), m, c, this);
         }
         return results != Result.miss;
     }

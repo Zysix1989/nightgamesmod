@@ -4,7 +4,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -112,13 +111,13 @@ public class Kiss extends Skill {
             c.write(getSelf(), Global.format("<b>The exquisite tenderness of {self:name-possessive} kisses"
                             + " reinforces the haze clouding {other:name-possessive} mind.</b>", getSelf(), target));
         }
-        BodyPart selfMouth = getSelf().body.getRandom(MouthPart.TYPE);
-        target.body.pleasure(getSelf(), selfMouth, target.body.getRandom(MouthPart.TYPE), m, c, this);
+        BodyPart selfMouth = getSelf().body.getRandomMouth();
+        target.body.pleasure(getSelf(), selfMouth, target.body.getRandomMouth(), m, c, this);
         int selfDamage = Math.max(1, m / 4);
         if (selfMouth.isErogenous()) {
             selfDamage = m / 2;
         }
-        getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), selfMouth, selfDamage, c, this);
+        getSelf().body.pleasure(target, target.body.getRandomMouth(), selfMouth, selfDamage, c, this);
         return true;
     }
 

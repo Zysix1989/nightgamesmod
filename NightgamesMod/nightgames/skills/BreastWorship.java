@@ -5,7 +5,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -37,7 +36,7 @@ public class BreastWorship extends Skill {
         if (getSelf().has(Trait.silvertongue)) {
             m += 4;
         }
-        target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandomBreasts(), m, c, this);
+        target.body.pleasure(getSelf(), getSelf().body.getRandomMouth(), target.body.getRandomBreasts(), m, c, this);
         if (getSelf().hasDick() && (!getSelf().hasPussy() || Global.random(2) == 0)) {
             getSelf().body.pleasure(getSelf(), getSelf().body.getRandomHands(), getSelf().body.getRandomCock(), m, c, this);
         } else if (getSelf().hasPussy()) {

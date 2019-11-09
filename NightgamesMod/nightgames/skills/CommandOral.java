@@ -2,8 +2,6 @@ package nightgames.skills;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.CockPart;
-import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -45,7 +43,7 @@ public class CommandOral extends PlayerCommand {
                 c.write(getSelf(), deal(c, 0, Result.normal, target));
             }
         }
-        getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandomCock(), m, c, this);
+        getSelf().body.pleasure(target, target.body.getRandomMouth(), getSelf().body.getRandomCock(), m, c, this);
         return true;
     }
 

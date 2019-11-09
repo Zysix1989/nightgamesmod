@@ -45,7 +45,7 @@ public class TemptressBlowjob extends Blowjob {
         if (target.roll(getSelf(), c, accuracy(c, target))) {
             if (!target.body.getRandomCock().isReady(target)) {
                 m -= 7;
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandomCock(), m, c, this);
+                target.body.pleasure(getSelf(), getSelf().body.getRandomMouth(), target.body.getRandomCock(), m, c, this);
                 if (target.body.getRandomCock().isReady(target)) {
                     // Was flaccid, got hard
                     c.write(getSelf(), deal(c, 0, Result.special, target));
@@ -59,7 +59,7 @@ public class TemptressBlowjob extends Blowjob {
                                 .orElse(null);
                 int stack = status == null || !status.getPart().equals(MouthPart.TYPE) ? 0 : status.getStack();
                 c.write(getSelf(), deal(c, stack, Result.normal, target));
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandomCock(),
+                target.body.pleasure(getSelf(), getSelf().body.getRandomMouth(), target.body.getRandomCock(),
                                 m + m * stack / 2, c, this);
                 getSelf().add(c, new FiredUp(getSelf(), target, MouthPart.TYPE));
             }

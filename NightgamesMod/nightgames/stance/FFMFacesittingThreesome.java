@@ -6,11 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.Trait;
-import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.skills.Skill;
@@ -41,7 +38,7 @@ public class FFMFacesittingThreesome extends FFMCowgirlThreesome {
                                 .collect(Collectors.toList());
         } else if (self == bottom) {
             if (other == top) {
-                return Arrays.asList(top.body.getRandom(MouthPart.TYPE)).stream().filter(part -> part != null && part.present())
+                return Arrays.asList(top.body.getRandomMouth()).stream().filter(part -> part != null && part.present())
                                 .collect(Collectors.toList());
             } else if (other == domSexCharacter) {
                 return Arrays.asList(top.body.getRandomInsertable()).stream().filter(part -> part != null && part.present())

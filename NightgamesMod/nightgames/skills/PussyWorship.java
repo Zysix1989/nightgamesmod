@@ -3,7 +3,6 @@ package nightgames.skills;
 import java.util.Optional;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -48,7 +47,7 @@ public class PussyWorship extends Skill {
         } else if (getSelf().human()) {
             c.write(getSelf(), deal(c, m, Result.normal, target));
         }
-        target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandomPussy(), m, c, this);
+        target.body.pleasure(getSelf(), getSelf().body.getRandomMouth(), target.body.getRandomPussy(), m, c, this);
         if (getSelf().hasDick() && (!getSelf().hasPussy() || Global.random(2) == 0)) {
             getSelf().body.pleasure(getSelf(), getSelf().body.getRandomHands(), getSelf().body.getRandomCock(), m, c, this);
         } else if (getSelf().hasPussy()) {

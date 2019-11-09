@@ -5,7 +5,6 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
-import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -42,7 +41,7 @@ public class FaceFuck extends Skill {
         Result res = Result.normal;
         int selfDamage = 4;
         int targetDamage = 0;
-        BodyPart targetMouth = target.body.getRandom(MouthPart.TYPE);
+        BodyPart targetMouth = target.body.getRandomMouth();
         if (target.has(Trait.silvertongue)) {
             res = Result.reverse;
             selfDamage *= 2;
@@ -104,7 +103,7 @@ public class FaceFuck extends Skill {
                 m += "<br/>Additionally, your upgraded vibrocock thoroughly stimulates her throat.";
             }
         } else {
-            if (target.body.getRandom(MouthPart.TYPE).isErogenous()) {
+            if (target.body.getRandomMouth().isErogenous()) {
                 m = "You grab hold of " + target.getName()
                                 + "'s head and push your cock into her mouth. What you find inside is unexpected, though. "
                                 + target.getName()
@@ -147,7 +146,7 @@ public class FaceFuck extends Skill {
                             target.possessiveAdjective(), target.subjectAction("try", "tries"), target.possessiveAdjective(),
                             getSelf().subject(), target.possessiveAdjective(), target.subjectAction("gasp"),
                             target.pronoun(), target.action("manage"), target.pronoun(), target.action("are", "is"));
-        } else if (target.body.getRandom(MouthPart.TYPE).isErogenous()) {
+        } else if (target.body.getRandomMouth().isErogenous()) {
             m = String.format("%s forces %s mouth open and shoves %s %s into it. %s "
                             + "momentarily overwhelmed by the strong, musky smell and the taste, but "
                             + "%s quickly starts moving %s hips, fucking %s mouth. However, %s "

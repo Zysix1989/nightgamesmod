@@ -5,7 +5,6 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.GenericBodyPart;
-import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.mods.catcher.ArcaneMod;
 import nightgames.characters.body.mods.pitcher.RunicCockMod;
 import nightgames.combat.Combat;
@@ -64,7 +63,7 @@ public class MimicWitch extends Skill {
                 getSelf().addTemporaryTrait(Trait.enchantingVoice, 10);
             }
             if (getSelf().getLevel() >= 60) {
-                ((GenericBodyPart) getSelf().body.getRandom(MouthPart.TYPE)).addTemporaryMod(new ArcaneMod(), 10);
+                ((GenericBodyPart) getSelf().body.getRandomMouth()).addTemporaryMod(new ArcaneMod(), 10);
             }
         }
         getSelf().addTemporaryTrait(Trait.witch, 10);

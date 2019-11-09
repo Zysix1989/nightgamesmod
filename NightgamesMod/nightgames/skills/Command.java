@@ -13,7 +13,6 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
-import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -261,7 +260,7 @@ public class Command extends Skill {
                                                 getSelf().possessiveAdjective(), target.nameDirectObject(),
                                                 target.pronoun(), target.action("dive"), target.action("lick")));
                 int m = target.has(Trait.silvertongue) ? 15 : 10;
-                getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandomAss(),
+                getSelf().body.pleasure(target, target.body.getRandomMouth(), getSelf().body.getRandomAss(),
                                 7 + Global.random(m), c, this);
                 if (Global.random(50) < getSelf().get(Attribute.Fetish) + 10) {
                     target.add(c, new BodyFetish(target, getSelf(), AssPart.TYPE, .1));
@@ -283,7 +282,7 @@ public class Command extends Skill {
                                                               target.possessiveAdjective(), target.action("lick"),
                                                               target.action("suck")));
                 m = target.has(Trait.silvertongue) ? 15 : 10;
-                getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandomCock(),
+                getSelf().body.pleasure(target, target.body.getRandomMouth(), getSelf().body.getRandomCock(),
                                 7 + Global.random(m), c, this);
                 if (Global.random(50) < getSelf().get(Attribute.Fetish) + 10) {
                     target.add(c, new BodyFetish(target, getSelf(), CockPart.TYPE, .1));
@@ -304,7 +303,7 @@ public class Command extends Skill {
                                 target.objectPronoun(), target.subjectAction("are", "is"),
                                 getSelf().possessiveAdjective()));
                 m = target.has(Trait.silvertongue) ? 15 : 10;
-                getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandomPussy(),
+                getSelf().body.pleasure(target, target.body.getRandomMouth(), getSelf().body.getRandomPussy(),
                                 7 + Global.random(m), c, this);
                 if (Global.random(50) < getSelf().get(Attribute.Fetish) + 10) {
                     target.add(c, new BodyFetish(target, getSelf(), PussyPart.TYPE, .1));
@@ -458,7 +457,7 @@ public class Command extends Skill {
                                                 getSelf().body.getRandomCock().describe(target),
                                                 target.pronoun(), target.possessiveAdjective(),
                                                 target.reflexivePronoun()));
-                getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandomCock(),
+                getSelf().body.pleasure(target, target.body.getRandomMouth(), getSelf().body.getRandomCock(),
                                 10 + Global.random(8), c, this);
                 if (target.hasDick())
                     target.body.pleasure(target, target.body.getRandomHands(), target.body.getRandomCock(),
@@ -485,7 +484,7 @@ public class Command extends Skill {
                                                 getSelf().body.getRandomPussy().describe(target),
                                                 target.pronoun(), target.possessiveAdjective(),
                                                 target.reflexivePronoun()));
-                getSelf().body.pleasure(target, target.body.getRandom(MouthPart.TYPE), getSelf().body.getRandomPussy(),
+                getSelf().body.pleasure(target, target.body.getRandomMouth(), getSelf().body.getRandomPussy(),
                                 10 + Global.random(8), c, this);
                 if (target.hasDick())
                     target.body.pleasure(target, target.body.getRandomHands(), target.body.getRandomCock(),
