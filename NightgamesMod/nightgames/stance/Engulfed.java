@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
@@ -153,10 +152,10 @@ public class Engulfed extends Position {
     public List<BodyPart> topParts(Combat c) {
         List<BodyPart> parts = new ArrayList<>();
         if (slimePitches) {
-            parts.addAll(top.body.get(CockPart.TYPE));
+            parts.add(top.body.getRandom(CockPart.TYPE));
         } else {
-            parts.addAll(top.body.get(PussyPart.TYPE));
-            parts.addAll(top.body.get(AssPart.TYPE));
+            parts.add(top.body.getRandom(PussyPart.TYPE));
+            parts.add(top.body.getRandom(AssPart.TYPE));
         }
         return parts.stream()
                     .filter(part -> part != null && part.present())
@@ -167,10 +166,10 @@ public class Engulfed extends Position {
     public List<BodyPart> bottomParts() {
         List<BodyPart> parts = new ArrayList<>();
         if (!slimePitches) {
-            parts.addAll(bottom.body.get(CockPart.TYPE));
+            parts.add(bottom.body.getRandom(CockPart.TYPE));
         } else {
-            parts.addAll(bottom.body.get(PussyPart.TYPE));
-            parts.addAll(bottom.body.get(AssPart.TYPE));
+            parts.add(bottom.body.getRandom(PussyPart.TYPE));
+            parts.add(bottom.body.getRandom(AssPart.TYPE));
         }
         return parts.stream()
                     .filter(part -> part != null && part.present())

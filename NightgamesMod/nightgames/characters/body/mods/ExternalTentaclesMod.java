@@ -34,8 +34,8 @@ public class ExternalTentaclesMod extends PartMod {
     );
 
     public static Optional<GenericBodyPart> newTemporaryModForValidPart(Body target, int duration) {
-        var targetPart = usableBodyPartTypes.stream().
-            flatMap(t -> target.get(t).stream())
+        var targetPart = usableBodyPartTypes.stream()
+            .map(target::getRandom)
             .filter(part -> part.getMods().stream().noneMatch(mod -> mod.getModType().equals(TYPE)))
             .filter(part -> part instanceof GenericBodyPart)
             .map(part -> (GenericBodyPart) part)

@@ -248,12 +248,6 @@ public class Body implements Cloneable {
         return getCurrentParts().contains(part);
     }
 
-    public List<BodyPart> get(String type) {
-        return getCurrentParts().stream()
-            .filter(p -> p.isType(type))
-            .collect(Collectors.toList());
-    }
-
     public PussyPart getRandomPussy() {
         return (PussyPart) getRandom("pussy");
 
@@ -357,11 +351,13 @@ public class Body implements Cloneable {
     }
 
     public boolean has(String type) {
-        return get(type).size() > 0;
+        return getRandom(type) != null;
     }
 
     public BodyPart getRandom(String type) {
-        List<BodyPart> parts = get(type);
+        List<BodyPart> parts = getCurrentParts().stream()
+            .filter(p -> p.isType(type))
+            .collect(Collectors.toList());
         BodyPart part = null;
         if (parts.size() > 0) {
             part = parts.get(Global.random(parts.size()));
@@ -780,10 +776,10 @@ public class Body implements Cloneable {
                 if (!has(FacePart.TYPE)) {
                     add(new FacePart(0, 2));
                 }
-                if (get(BreastsPart.TYPE).size() == 0) {
+                if (getRandom(BreastsPart.TYPE) == null) {
                     add(new BreastsPart(BreastsPart.Size.BCup));
                 }
-                if (get(AssPart.TYPE).size() == 0) {
+                if (getRandom(AssPart.TYPE) == null) {
                     add(new AssPart(Size.Flared));
                 }
                 break;
@@ -798,7 +794,7 @@ public class Body implements Cloneable {
                 if (!has(FacePart.TYPE)) {
                     add(new FacePart(0, 2));
                 }
-                if (get(AssPart.TYPE).size() == 0) {
+                if (getRandom(AssPart.TYPE) == null) {
                     add(new AssPart(Size.Normal));
                 }
                 break;
@@ -807,10 +803,10 @@ public class Body implements Cloneable {
                 if (!has(FacePart.TYPE)) {
                     add(new FacePart(0, 1));
                 }
-                if (get(BreastsPart.TYPE).size() == 0) {
+                if (getRandom(BreastsPart.TYPE) == null) {
                     add(new BreastsPart(BreastsPart.Size.BCup));
                 }
-                if (get(AssPart.TYPE).size() == 0) {
+                if (getRandom(AssPart.TYPE) == null) {
                     add(new AssPart(Size.Girlish));
                 }
                 break;
@@ -819,10 +815,10 @@ public class Body implements Cloneable {
                 if (!has(FacePart.TYPE)) {
                     add(new FacePart(0, 1));
                 }
-                if (get(BreastsPart.TYPE).size() == 0) {
+                if (getRandom(BreastsPart.TYPE) == null) {
                     add(new BreastsPart(BreastsPart.Size.DCup));
                 }
-                if (get(AssPart.TYPE).size() == 0) {
+                if (getRandom(AssPart.TYPE) == null) {
                     add(new AssPart(Size.Girlish));
                 }
                 break;
@@ -1205,31 +1201,19 @@ public class Body implements Cloneable {
 
         if (anal) {
             if (!pitcher) {
-                totalCounterValue += get(AssPart.TYPE).stream()
-                    .flatMapToInt(ass -> other.body.get(CockPart.TYPE)
-                        .stream()
-                        .mapToInt(cock -> ass.counterValue(cock, self, other)))
-                    .sum();
+                totalCounterValue += getRandom(AssPart.TYPE)
+                    .counterValue(other.body.getRandom(CockPart.TYPE), self, other);
             } else {
-                totalCounterValue += get(CockPart.TYPE).stream()
-                    .flatMapToInt(cock -> other.body.get(AssPart.TYPE)
-                        .stream()
-                        .mapToInt(ass -> cock.counterValue(ass, self, other)))
-                    .sum();
+                totalCounterValue += getRandom(CockPart.TYPE)
+                    .counterValue(other.body.getRandom(AssPart.TYPE), self, other);
             }
         } else {
             if (!pitcher) {
-                totalCounterValue += get(PussyPart.TYPE).stream()
-                    .flatMapToInt(pussy -> other.body.get(CockPart.TYPE)
-                        .stream()
-                        .mapToInt(cock -> pussy.counterValue(cock, self, other)))
-                    .sum();
+                totalCounterValue += getRandom(PussyPart.TYPE)
+                    .counterValue(other.body.getRandom(CockPart.TYPE), self, other);
             } else {
-                totalCounterValue += get(CockPart.TYPE).stream()
-                    .flatMapToInt(cock -> other.body.get(PussyPart.TYPE)
-                        .stream()
-                        .mapToInt(pussy -> cock.counterValue(pussy, self, other)))
-                    .sum();
+                totalCounterValue += getRandom(CockPart.TYPE)
+                    .counterValue(other.body.getRandom(PussyPart.TYPE), self, other);
             }
         }
         return 20 * totalCounterValue;

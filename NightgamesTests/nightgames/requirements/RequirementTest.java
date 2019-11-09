@@ -223,7 +223,7 @@ public class RequirementTest {
     @Test public void orgasmTest() throws Exception {
         assertThat(orgasms(1).meets(combat, self, other), is(false));
         assertThat(orgasms(1).meets(combat, other, self), is(false));
-        self.doOrgasm(combat, other, self.body.getRandomPussy(), other.body.get(HandsPart.TYPE).get(0));
+        self.doOrgasm(combat, other, self.body.getRandomPussy(), other.body.getRandom(HandsPart.TYPE));
         assertThat(orgasms(1).meets(combat, self, other), is(true));
         assertThat(orgasms(1).meets(combat, other, self), is(false));
     }

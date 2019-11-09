@@ -10,7 +10,7 @@ public class EarsPart extends GenericBodyPart {
     public static final String TYPE = "ears";
     private static final String NORMAL_TYPE = "normal";
 
-    public static BodyPart load(JsonObject obj) {
+    public static GenericBodyPart load(JsonObject obj) {
         if (obj.get("enum").getAsString().equals(PointedEarsMod.TYPE)) {
             var ears = new EarsPart();
             ears.addMod(new PointedEarsMod());
