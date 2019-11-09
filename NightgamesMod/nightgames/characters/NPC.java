@@ -18,7 +18,6 @@ import nightgames.actions.Resupply;
 import nightgames.actions.Wait;
 import nightgames.areas.Area;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.CockPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.characters.custom.CommentSituation;
@@ -589,7 +588,7 @@ public class NPC extends Character {
                 if (target.hasDick()) {
                     if (target.crotchAvailable()) {
                         c.write(this, getName() + " catches you by the penis and rubs your sensitive glans.");
-                        target.body.pleasure(this, body.getRandomHands(), target.body.getRandom(CockPart.TYPE),
+                        target.body.pleasure(this, body.getRandomHands(), target.body.getRandomCock(),
                                         4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                     } else {
                         c.write(this, getName() + " catches you as you approach and grinds her knee into the tent in your "
