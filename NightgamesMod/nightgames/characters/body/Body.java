@@ -364,12 +364,6 @@ public class Body implements Cloneable {
         return removed.size();
     }
 
-    public void removeTemporaryParts(String type) {
-        replacements.removeIf(rep -> rep.added.stream()
-            .anyMatch(part -> part.getType().equals(type)));
-        updateCurrentParts();
-    }
-
     public CockPart getRandomCock() {
         return (CockPart) getRandom(CockPart.TYPE);
     }

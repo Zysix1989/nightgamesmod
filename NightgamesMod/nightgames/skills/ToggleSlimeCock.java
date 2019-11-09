@@ -57,7 +57,7 @@ public class ToggleSlimeCock extends Skill {
                 msg += "the bulge in {self:possessive} " + getSelf().outfit.getTopOfSlot(ClothingSlot.bottom).getName()
                                 + " shrinks considerably.";
             }
-            getSelf().body.removeTemporaryParts(CockPart.TYPE);
+            getSelf().body.setTemporaryPartDuration(getSelf().body.getRandomCock(), -1);
         } else {
             if (getSelf().human() || getSelf().crotchAvailable()) {
                 msg += "a thick, slimy cock forms between {self:possessive} legs.";
