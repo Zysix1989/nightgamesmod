@@ -15,7 +15,7 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
-import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.items.clothing.Clothing;
 
@@ -76,7 +76,7 @@ public class JsonUtils {
         if (gson == null) {
             gson = new GsonBuilder().setPrettyPrinting()
                             .registerTypeAdapter(Clothing.class, new ClothingAdaptor())
-                            .registerTypeAdapter(BodyPart.class, new BodyPartAdapter())
+                            .registerTypeAdapter(GenericBodyPart.class, new BodyPartAdapter())
                             .registerTypeAdapter(PartMod.class, new PartModAdapter())
                             .create();
         }

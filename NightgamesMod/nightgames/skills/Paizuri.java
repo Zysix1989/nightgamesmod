@@ -33,7 +33,7 @@ public class Paizuri extends Skill {
     @Override
     public boolean usable(Combat c, Character target) {
         return getSelf().hasBreasts()
-                        && getSelf().body.getLargestBreasts().getSize().compareTo(MIN_REQUIRED_BREAST_SIZE) >= 0
+                        && getSelf().body.getRandomBreasts().getSize().compareTo(MIN_REQUIRED_BREAST_SIZE) >= 0
                         && target.hasDick() && getSelf().breastsAvailable() && target.crotchAvailable()
                         && c.getStance().paizuri(getSelf(), target)
                         && c.getStance().front(getSelf()) && getSelf().canAct()
@@ -47,7 +47,7 @@ public class Paizuri extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        BreastsPart breasts = getSelf().body.getLargestBreasts();
+        BreastsPart breasts = getSelf().body.getRandomBreasts();
         // try to find a set of breasts large enough, if none, default to
         // largest.
         for (int i = 0; i < 3; i++) {

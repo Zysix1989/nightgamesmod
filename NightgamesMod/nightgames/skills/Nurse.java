@@ -35,7 +35,7 @@ public class Nurse extends Skill {
         return getSelf().breastsAvailable()
             && c.getStance().reachTop(getSelf())
             && c.getStance().front(getSelf())
-            && getSelf().body.getLargestBreasts().getSize().compareTo(Size.CCup) >= 0
+            && getSelf().body.getRandomBreasts().getSize().compareTo(Size.CCup) >= 0
             && c.getStance().mobile(getSelf())
             && (!c.getStance().mobile(target) || c.getStance().prone(target)) && getSelf().canAct();
     }

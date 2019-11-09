@@ -44,7 +44,7 @@ public class BreastSmother extends Skill {
         return getSelf().breastsAvailable()
             && c.getStance().reachTop(getSelf())
             && c.getStance().front(getSelf())
-            && getSelf().body.getLargestBreasts().getSize().compareTo(MIN_REQUIRED_BREAST_SIZE) >= 0
+            && getSelf().body.getRandomBreasts().getSize().compareTo(MIN_REQUIRED_BREAST_SIZE) >= 0
             && c.getStance().mobile(getSelf())
             && (!c.getStance().mobile(target) || c.getStance().prone(target))
             && getSelf().canAct();
@@ -60,7 +60,7 @@ public class BreastSmother extends Skill {
         boolean special = c.getStance().en != Stance.breastsmothering && !c.getStance().havingSex(c);        
         writeOutput(c, special ? Result.special : Result.normal, target);
 
-        double n = getSelf().body.getLargestBreasts().attributeModifier(Attribute.Seduction);
+        double n = getSelf().body.getRandomBreasts().attributeModifier(Attribute.Seduction);
 
         if (target.has(Trait.temptingtits)) {
             n += Global.random(5, 10);

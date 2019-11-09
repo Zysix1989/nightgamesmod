@@ -32,7 +32,7 @@ public class FondleBreasts extends Skill {
         Result result = Result.normal;
         if (target.roll(getSelf(), c, accuracy(c, target))) {
 
-            if (getSelf().getType().equals("Cassie") && target.body.getLargestBreasts().getSensitivity(target) > 4) {
+            if (getSelf().getType().equals("Cassie") && target.body.getRandomBreasts().getSensitivity(target) > 4) {
 
                 result=Result.critical;
                 //c.write(getSelf(), deal(c, m, Result.critical, target));
@@ -103,7 +103,7 @@ public class FondleBreasts extends Skill {
                             getSelf().subject(), target.nameOrPossessivePronoun(),
                             target.body.getRandomBreasts().describe(target));
         } else if (modifier == Result.critical) {
-            return "Cassie grabs your "+target.body.getLargestBreasts().describe(target)+" and caresses them, pinching your exquisitely sensitive nipples. An incredibly"
+            return "Cassie grabs your "+ target.body.getRandomBreasts().describe(target)+" and caresses them, pinching your exquisitely sensitive nipples. An incredibly"
                             + " sensual moan is torn from your lips as you instinctively arch your back, pushing your breasts and rock-hard, massive nipples into Cassie's hands. \"Damn, you "
                             + "really are a total cow-slut now, this is great!\" Cassie exclaims. \"I'll have to see if I can train you to moo though, that would be even hotter"
                             + " than you just moaning. I can't wait to see what happens when I jack up your sensitivity some more.\" She leers at you, a look that seems out of place"

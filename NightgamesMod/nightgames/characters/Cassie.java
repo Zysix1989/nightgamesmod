@@ -410,7 +410,7 @@ public class Cassie extends BasePersonality {
                             + "and starts to grind her clit against your pelvis. <i>\"Come on, don't be mean. Tell me I made you feel good,\"</i> she whispers in a needy voice. <i>\"It'll help me finish faster.\"</i> Is she really "
                             + "getting off on praise, or on the knowledge that her technique gave you pleasure? Either way, there's no reason to lie, she definitely made you feel amazing. She shudders and starts to breathe "
                             + "harder as you whisper to her how good her pussy felt. She leans forward to present her "
-                            + character.body.getLargestBreasts().describe(character)
+                            + character.body.getRandomBreasts().describe(character)
                             + " to you. <i>\"Can you touch my nipples more? I really like that.\"</i> You reach up and play with "
                             + "her breasts as she continues to grind against you. She stops your pillow talk by kissing you desperately just before you feel her body tense up in orgasm. She collapses on top of you and kisses "
                             + "your cheek contently. <i>\"I'll keep practicing and make you feel even better next time, \"</i> she tells you happily. <i>\"I promise.\"</i> ";
@@ -419,7 +419,7 @@ public class Cassie extends BasePersonality {
             && c.getStance().vaginallyPenetrated(c,c.getOpponent(character))
             && character.has(Trait.hypnoticsemen)
             && character.has(Trait.enthrallingjuices)
-            && character.body.getLargestCock().getMods().contains(new RunicCockMod())) {
+            && character.body.getRandomCock().getMods().contains(new RunicCockMod())) {
             minDominance=10;
             return "Cassie pumps her dick into your vagina faster and faster as she nears climax, but at this point it's clear you've lost. Your back arches as you orgasm, your "
                             + "vagina clenching around her magical meat. As you collapse limply to the ground, Cassie thrusts into your cunt as deep as she can go, and then "
@@ -521,7 +521,7 @@ public class Cassie extends BasePersonality {
                             + "and starts to grind her cock against your pussy lips. <i>\"Come on, don't be mean. Tell me I made you feel good,\"</i> she whispers in a needy voice. <i>\"It'll help me finish faster.\"</i> Is she really "
                             + "getting off on praise, or on the knowledge that her technique gave you pleasure? Either way, there's no reason to lie, she definitely made you feel amazing. She shudders and starts to breathe "
                             + "harder as you whisper to her how good her cock felt. She leans forward to present her "
-                            + character.body.getLargestBreasts().describe(character)
+                            + character.body.getRandomBreasts().describe(character)
                             + " to you. <i>\"Can you touch my nipples more? I really like that.\"</i> You reach up and play with "
                             + "her breasts as she continues to grind against you. She stops your pillow talk by kissing you desperately just before you feel her body tense up in orgasm and splurt our her white soup on your stomach. "
                             + "She collapses on top of you and kisses your cheek contently. <i>\"I'll keep practicing and make you feel even better next time, \"</i> she tells you happily. <i>\"I promise.\"</i> ";

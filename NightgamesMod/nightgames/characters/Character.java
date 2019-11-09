@@ -3757,9 +3757,10 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public boolean useFemalePronouns() {
-        return hasPussy() 
+        return hasPussy()
                         || !hasDick() 
-                        || (body.getLargestBreasts().getSize().compareTo(Size.min()) > 0 && body.getFace().getFemininity(this) > 0)
+                        || (
+            body.getRandomBreasts().getSize().compareTo(Size.min()) > 0 && body.getFace().getFemininity(this) > 0)
                         || (body.getFace().getFemininity(this) >= 1.5) 
                         || (human() && Global.checkFlag(Flag.PCFemalePronounsOnly))
                         || (!human() && Global.checkFlag(Flag.NPCFemalePronounsOnly));

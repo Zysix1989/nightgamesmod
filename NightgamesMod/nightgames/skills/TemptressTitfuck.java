@@ -4,7 +4,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.CockPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -39,7 +38,7 @@ public class TemptressTitfuck extends Paizuri {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        BreastsPart breasts = getSelf().body.getLargestBreasts();
+        BreastsPart breasts = getSelf().body.getRandomBreasts();
         for (int i = 0; i < 3; i++) {
             BreastsPart otherbreasts = getSelf().body.getRandomBreasts();
             if (otherbreasts.getSize().compareTo(MIN_REQUIRED_BREAST_SIZE) > 0) {
@@ -117,14 +116,15 @@ public class TemptressTitfuck extends Paizuri {
                                 "%s up %s flaccid %s between %s %s, doing everything %s"
                                                 + " can to get it hard, but %s %s back before %s can manage it.",
                                 getSelf().subjectAction("wrap"), target.nameOrPossessivePronoun(), target.body.getRandomCock().describe(target), 
-                                getSelf().possessiveAdjective(), getSelf().body.getLargestBreasts().describe(getSelf()),  
+                                getSelf().possessiveAdjective(), getSelf().body.getRandomBreasts().describe(getSelf()),
                                 getSelf().pronoun(), target.pronoun(), target.action("pull"), getSelf().pronoun());
             case special:
                 return String.format(
                                 "%s %s %s between her %s and %s them with intense pressure. %s %s hardens"
                                                 + " instantly, throbbing happily in its new home.",
                                  getSelf().subjectAction("trap"), target.possessiveAdjective(),
-                                target.body.getRandomCock().describe(target), getSelf().body.getLargestBreasts().describe(getSelf()),
+                                target.body.getRandomCock().describe(target), getSelf().body
+                        .getRandomBreasts().describe(getSelf()),
                                 getSelf().action("squeeze"), Global.capitalizeFirstLetter(target.possessiveAdjective()), target.body.getRandomCock().describe(target));
             default: // should be Result.normal
                 switch (damage) {
@@ -133,18 +133,20 @@ public class TemptressTitfuck extends Paizuri {
                                         "%s strokes %s %s with her %s in slow circular motions while"
                                                         + " lightly licking the tip, causing %s to groan in pleasure.",
                                         getSelf().getName(), target.nameOrPossessivePronoun(),
-                                        target.body.getRandomCock().describe(target), getSelf().body.getLargestBreasts().fullDescribe(getSelf()), target.objectPronoun());
+                                        target.body.getRandomCock().describe(target), getSelf().body
+                                .getRandomBreasts().fullDescribe(getSelf()), target.objectPronoun());
                     case 1:
                         return String.format("%s tongue loops around the head of %s hard %s "
                                         + "and %s the shaft with her %s, constantly increasing in intensity.",
                                         getSelf().nameOrPossessivePronoun(),
                                         target.nameOrPossessivePronoun(), target.body.getRandomCock().describe(target),
-                                        getSelf().action("milk"), getSelf().body.getLargestBreasts().fullDescribe(getSelf()));
+                                        getSelf().action("milk"), getSelf().body.getRandomBreasts().fullDescribe(getSelf()));
                     default:
                         return String.format("As %s %s rapidly fuck %s %s, a pleasurable pressure constantly builds at the base. "
                                         + "All while %s %s the head sending bolts of electric pleasure back down %s shaft. "
                                         + "Overwhelmed from the pleasure, you grit %s teeth through a pleasure filled smile trying not to cum.",
-                                        getSelf().nameOrPossessivePronoun(), getSelf().body.getLargestBreasts().describe(getSelf()),
+                                        getSelf().nameOrPossessivePronoun(), getSelf().body
+                                .getRandomBreasts().describe(getSelf()),
                                         target.possessivePronoun(), target.body.getRandomCock().describe(target), getSelf().getName(),
                                         getSelf().action("suck"), target.possessiveAdjective(), target.possessiveAdjective());
                 }

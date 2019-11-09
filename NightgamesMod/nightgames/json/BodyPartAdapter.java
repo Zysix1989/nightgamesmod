@@ -1,9 +1,5 @@
 package nightgames.json;
 
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -11,9 +7,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.EarsPart;
@@ -26,9 +23,9 @@ import nightgames.characters.body.TailPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.WingsPart;
 
-public class BodyPartAdapter implements JsonSerializer<BodyPart>, JsonDeserializer<BodyPart> {
+public class BodyPartAdapter implements JsonSerializer<GenericBodyPart>, JsonDeserializer<GenericBodyPart> {
     private interface BodyPartLoader {
-        BodyPart newFromJSON(JsonObject js);
+        GenericBodyPart newFromJSON(JsonObject js);
     }
 
     static private Map<String, BodyPartLoader> prototypes;
@@ -49,7 +46,7 @@ public class BodyPartAdapter implements JsonSerializer<BodyPart>, JsonDeserializ
     }
 
     @Override
-    public BodyPart deserialize(
+    public GenericBodyPart deserialize(
         JsonElement jsonElement,
         Type type,
         JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
@@ -60,7 +57,7 @@ public class BodyPartAdapter implements JsonSerializer<BodyPart>, JsonDeserializ
 
     @Override
     public JsonElement serialize(
-        BodyPart part,
+        GenericBodyPart part,
         Type type,
         JsonSerializationContext jsonSerializationContext) {
         JsonObject obj = part.save();

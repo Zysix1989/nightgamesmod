@@ -31,7 +31,7 @@ public class SuccubusNurse extends Skill {
     @Override
     public boolean usable(Combat c, Character target) {
         return getSelf().canAct()
-            && getSelf().body.getLargestBreasts().getSize().compareTo(Size.FlatChest) > 0
+            && getSelf().body.getRandomBreasts().getSize().compareTo(Size.FlatChest) > 0
             && c.getStance().en == Stance.succubusembrace;
     }
 

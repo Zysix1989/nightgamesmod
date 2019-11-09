@@ -271,14 +271,6 @@ public class Body implements Cloneable {
         return (BreastsPart) getRandom(BreastsPart.TYPE);
     }
 
-    public BreastsPart getLargestBreasts() {
-        return getRandomBreasts();
-    }
-
-    public CockPart getLargestCock() {
-        return getRandomCock();
-    }
-
     public Optional<BodyFetish> getFetish(String part) {
         Optional<Status> fs = character.status.stream().filter(status -> {
             if (status.flags().contains(Stsflag.bodyfetish)) {
