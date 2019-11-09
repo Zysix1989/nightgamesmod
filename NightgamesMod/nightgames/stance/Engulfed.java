@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
-import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -153,7 +152,7 @@ public class Engulfed extends Position {
             parts.add(top.body.getRandomCock());
         } else {
             parts.add(top.body.getRandomPussy());
-            parts.add(top.body.getRandom(AssPart.TYPE));
+            parts.add(top.body.getRandomAss());
         }
         return parts.stream()
                     .filter(part -> part != null && part.present())
@@ -167,7 +166,7 @@ public class Engulfed extends Position {
             parts.add(bottom.body.getRandomCock());
         } else {
             parts.add(bottom.body.getRandomPussy());
-            parts.add(bottom.body.getRandom(AssPart.TYPE));
+            parts.add(bottom.body.getRandomAss());
         }
         return parts.stream()
                     .filter(part -> part != null && part.present())

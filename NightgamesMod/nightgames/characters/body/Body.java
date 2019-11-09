@@ -779,7 +779,7 @@ public class Body implements Cloneable {
                 if (getRandomBreasts() == null) {
                     add(new BreastsPart(BreastsPart.Size.BCup));
                 }
-                if (getRandom(AssPart.TYPE) == null) {
+                if (getRandomAss() == null) {
                     add(new AssPart(Size.Flared));
                 }
                 break;
@@ -794,7 +794,7 @@ public class Body implements Cloneable {
                 if (!has(FacePart.TYPE)) {
                     add(new FacePart(0, 2));
                 }
-                if (getRandom(AssPart.TYPE) == null) {
+                if (getRandomAss() == null) {
                     add(new AssPart(Size.Normal));
                 }
                 break;
@@ -806,7 +806,7 @@ public class Body implements Cloneable {
                 if (getRandomBreasts() == null) {
                     add(new BreastsPart(BreastsPart.Size.BCup));
                 }
-                if (getRandom(AssPart.TYPE) == null) {
+                if (getRandomAss() == null) {
                     add(new AssPart(Size.Girlish));
                 }
                 break;
@@ -818,7 +818,7 @@ public class Body implements Cloneable {
                 if (getRandomBreasts() == null) {
                     add(new BreastsPart(BreastsPart.Size.DCup));
                 }
-                if (getRandom(AssPart.TYPE) == null) {
+                if (getRandomAss() == null) {
                     add(new AssPart(Size.Girlish));
                 }
                 break;
@@ -1201,11 +1201,11 @@ public class Body implements Cloneable {
 
         if (anal) {
             if (!pitcher) {
-                totalCounterValue += getRandom(AssPart.TYPE)
+                totalCounterValue += getRandomAss()
                     .counterValue(other.body.getRandomCock(), self, other);
             } else {
                 totalCounterValue += getRandomCock()
-                    .counterValue(other.body.getRandom(AssPart.TYPE), self, other);
+                    .counterValue(other.body.getRandomAss(), self, other);
             }
         } else {
             if (!pitcher) {
