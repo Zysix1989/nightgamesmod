@@ -2938,7 +2938,7 @@ public Character clone() throws CloneNotSupportedException {
         clearStatus();
         temporaryAddedTraits.clear();
         temporaryRemovedTraits.clear();
-        body.clearReplacements();
+        body.purge(null);
         getStamina().renew();
         getArousal().renew();
         getMojo().renew();

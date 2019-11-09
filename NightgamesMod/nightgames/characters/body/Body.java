@@ -1163,17 +1163,6 @@ public class Body implements Cloneable {
         return part;
     }
 
-    public void clearReplacements() {
-        replacements.clear();
-        updateCurrentParts();
-        if (character != null) {
-            updateCharacter();
-        }
-        bodyParts.stream()
-            .filter(bp -> bp instanceof GenericBodyPart)
-            .forEach(bp -> ((GenericBodyPart) bp).purge());
-    }
-
     public int mod(Attribute a, int total) {
         int res = 0;
         for (BodyPart p : getCurrentParts()) {
@@ -1355,7 +1344,7 @@ public class Body implements Cloneable {
     }
 
     public void mimic(Body other) {
-        clearReplacements();
+        purge(null);
         Collection<BodyPart> currentParts = new ArrayList<>(getCurrentParts());
         currentParts.forEach(part -> temporaryRemovePart(part, 1000));
         other.getCurrentParts().forEach(part -> temporaryAddPart(part, 1000));
