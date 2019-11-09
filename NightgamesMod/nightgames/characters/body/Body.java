@@ -776,7 +776,7 @@ public class Body implements Cloneable {
                 if (!has(FacePart.TYPE)) {
                     add(new FacePart(0, 2));
                 }
-                if (getRandom(BreastsPart.TYPE) == null) {
+                if (getRandomBreasts() == null) {
                     add(new BreastsPart(BreastsPart.Size.BCup));
                 }
                 if (getRandom(AssPart.TYPE) == null) {
@@ -803,7 +803,7 @@ public class Body implements Cloneable {
                 if (!has(FacePart.TYPE)) {
                     add(new FacePart(0, 1));
                 }
-                if (getRandom(BreastsPart.TYPE) == null) {
+                if (getRandomBreasts() == null) {
                     add(new BreastsPart(BreastsPart.Size.BCup));
                 }
                 if (getRandom(AssPart.TYPE) == null) {
@@ -815,7 +815,7 @@ public class Body implements Cloneable {
                 if (!has(FacePart.TYPE)) {
                     add(new FacePart(0, 1));
                 }
-                if (getRandom(BreastsPart.TYPE) == null) {
+                if (getRandomBreasts() == null) {
                     add(new BreastsPart(BreastsPart.Size.DCup));
                 }
                 if (getRandom(AssPart.TYPE) == null) {
