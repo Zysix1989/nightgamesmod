@@ -2,12 +2,13 @@ package nightgames.items;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.Sizable;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
 public class BodyDowngradeEffect extends BodyModEffect {
-    BodyDowngradeEffect(String selfVerb, String otherVerb, BodyPart affected) {
+    BodyDowngradeEffect(String selfVerb, String otherVerb, GenericBodyPart affected) {
         super(selfVerb, otherVerb, affected);
     }
 

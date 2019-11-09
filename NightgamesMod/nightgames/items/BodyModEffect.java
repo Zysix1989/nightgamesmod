@@ -1,11 +1,11 @@
 package nightgames.items;
 
-import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.GenericBodyPart;
 
 abstract class BodyModEffect extends ItemEffect {
-    protected BodyPart affected;
+    protected GenericBodyPart affected;
 
-    BodyModEffect(String selfVerb, String otherVerb, BodyPart affected) {
+    BodyModEffect(String selfVerb, String otherVerb, GenericBodyPart affected) {
         super(selfVerb, otherVerb, true, true);
         this.affected = affected;
     }

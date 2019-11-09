@@ -41,7 +41,7 @@ public class Growth implements Cloneable {
     public int extraAttributes;
     private Map<Integer, List<Trait>> traits;
     private Map<Integer, Integer> traitPoints;
-    public Map<Integer, List<BodyPart>> bodyParts;
+    public Map<Integer, List<GenericBodyPart>> bodyParts;
     public Map<Integer, List<PartModApplication>> bodyPartMods;
     private Map<Integer, Clothing> clothing;
 
@@ -103,7 +103,7 @@ public class Growth implements Cloneable {
         }
     }
 
-    public void addBodyPart(int level, BodyPart part) {
+    public void addBodyPart(int level, GenericBodyPart part) {
         if (!bodyParts.containsKey(level)) {
             bodyParts.put(level, new ArrayList<>());
         }

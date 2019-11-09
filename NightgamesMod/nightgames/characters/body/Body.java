@@ -44,8 +44,8 @@ import org.jtwig.JtwigTemplate;
 
 public class Body implements Cloneable {
     private static class PartReplacement {
-        private Optional<BodyPart> added;
-        private Optional<BodyPart> removed;
+        private Optional<GenericBodyPart> added;
+        private Optional<GenericBodyPart> removed;
         private int duration;
 
         PartReplacement(int duration) {
@@ -70,13 +70,13 @@ public class Body implements Cloneable {
     }
 
     // yeah i know :(
-    public static BodyPart nonePart = new GenericBodyPart("none", 0, 1, 1, "none", "");
+    public static GenericBodyPart nonePart = new GenericBodyPart("none", 0, 1, 1, "none", "");
     private static Set<String> pluralParts = Set.of(HandsPart.TYPE,
         FeetPart.TYPE,
         WingsPart.TYPE,
         BreastsPart.TYPE,
         BallsPart.TYPE);
-    private final static BodyPart[] requiredParts = {
+    private final static GenericBodyPart[] requiredParts = {
         new HandsPart(),
         new FeetPart(),
         new SkinPart(),
@@ -86,9 +86,9 @@ public class Body implements Cloneable {
         new EarsPart()};
     private final static String[] fetishParts = {AssPart.TYPE, FeetPart.TYPE, CockPart.TYPE, "wings", TailPart.TYPE, TentaclePart.TYPE, BreastsPart.TYPE};
 
-    private LinkedHashSet<BodyPart> bodyParts;
+    private LinkedHashSet<GenericBodyPart> bodyParts;
     private transient Collection<PartReplacement> replacements;
-    private transient Collection<BodyPart> currentParts;
+    private transient Collection<GenericBodyPart> currentParts;
     transient public Character character;
     public double baseFemininity;
     private double height;
@@ -105,7 +105,7 @@ public class Body implements Cloneable {
         this.character = character;
     }
 
-    private Collection<BodyPart> getCurrentParts() {
+    private Collection<GenericBodyPart> getCurrentParts() {
         return currentParts;
     }
 
@@ -122,7 +122,7 @@ public class Body implements Cloneable {
         }
     }
 
-    public void temporaryAddPart(BodyPart part, int duration) {
+    public void temporaryAddPart(GenericBodyPart part, int duration) {
         if (getRandom(part.getType()) != null) {
             setTemporaryPartDuration(part, duration);
         } else {
@@ -136,7 +136,7 @@ public class Body implements Cloneable {
         }
     }
 
-    public void temporaryRemovePart(BodyPart part, int duration) {
+    public void temporaryRemovePart(GenericBodyPart part, int duration) {
         PartReplacement replacement = new PartReplacement(duration);
         replacement.removed = Optional.of(part);
         replacements.add(replacement);
@@ -146,7 +146,7 @@ public class Body implements Cloneable {
         }
     }
 
-    private BodyPart getPartIn(String type, Collection<BodyPart> parts) {
+    private BodyPart getPartIn(String type, Collection<GenericBodyPart> parts) {
         for (BodyPart p : parts) {
             if (p.isType(type)) {
                 return p;
@@ -155,7 +155,7 @@ public class Body implements Cloneable {
         return null;
     }
 
-    public void setTemporaryPartDuration(BodyPart part, int newDuration) {
+    public void setTemporaryPartDuration(GenericBodyPart part, int newDuration) {
         assert part != null;
         for (PartReplacement r : replacements) {
             BodyPart other;
@@ -231,7 +231,7 @@ public class Body implements Cloneable {
         b.append(formatHotnessText(other));
     }
 
-    public void add(BodyPart part) {
+    public void add(GenericBodyPart part) {
         assert part != null;
         bodyParts.add(part);
         updateCurrentParts();
@@ -244,7 +244,7 @@ public class Body implements Cloneable {
         }
     }
 
-    public boolean contains(BodyPart part) {
+    public boolean contains(GenericBodyPart part) {
         return getCurrentParts().contains(part);
     }
 
@@ -860,14 +860,14 @@ public class Body implements Cloneable {
             default:
                 break;
         }
-        for (BodyPart part : requiredParts) {
+        for (GenericBodyPart part : requiredParts) {
             if (!has(part.getType())) {
                 add(part);
             }
         }
     }
 
-    private void replacePussyWithCock(BodyPart basicCock) {
+    private void replacePussyWithCock(GenericBodyPart basicCock) {
         PussyPart pussy = getRandomPussy();
         removeAll(PussyPart.TYPE);
         add(pussy == null ? basicCock : pussy.getEquivalentCock());
@@ -879,7 +879,7 @@ public class Body implements Cloneable {
         add(cock == null ? new PussyPart() : cock.getEquivalentPussy());
     }
 
-    private void addEquivalentCockAndPussy(BodyPart basicCock) {
+    private void addEquivalentCockAndPussy(GenericBodyPart basicCock) {
         boolean hasPussy = getRandomPussy() != null;
         boolean hasCock = getRandomCock() != null;
         if (!hasPussy) {
@@ -1040,7 +1040,7 @@ public class Body implements Cloneable {
         for (JsonElement element : partsArr) {
             JsonObject partJson = element.getAsJsonObject();
             try {
-                this.add(JsonUtils.getGson().fromJson(partJson, BodyPart.class));
+                this.add(JsonUtils.getGson().fromJson(partJson, GenericBodyPart.class));
             } catch (Exception e) {
                 System.out.println(partJson);
                 throw e;
@@ -1345,7 +1345,7 @@ public class Body implements Cloneable {
 
     public void mimic(Body other) {
         purge(null);
-        Collection<BodyPart> currentParts = new ArrayList<>(getCurrentParts());
+        Collection<GenericBodyPart> currentParts = new ArrayList<>(getCurrentParts());
         currentParts.forEach(part -> temporaryRemovePart(part, 1000));
         other.getCurrentParts().forEach(part -> temporaryAddPart(part, 1000));
     }

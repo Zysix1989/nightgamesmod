@@ -2,6 +2,7 @@ package nightgames.requirements;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.GenericBodyPart;
 import nightgames.combat.Combat;
 
 /**
@@ -10,9 +11,9 @@ import nightgames.combat.Combat;
  * This is a more specific requirements than BodyPartRequirement.
  */
 public class SpecificBodyPartRequirement extends BaseRequirement {
-    private final BodyPart part;
+    private final GenericBodyPart part;
 
-    public SpecificBodyPartRequirement(BodyPart part) {
+    public SpecificBodyPartRequirement(GenericBodyPart part) {
         this.part = part;
     }
 

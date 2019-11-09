@@ -1,11 +1,10 @@
 package nightgames.requirements;
 
 import java.util.Arrays;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
-import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.mods.PartMod;
 import nightgames.combat.Result;
 import nightgames.items.Item;
@@ -112,7 +111,7 @@ public class RequirementShortcuts {
         return new ReverseRequirement(subReq);
     }
 
-    public static SpecificBodyPartRequirement specificpart(BodyPart part) {
+    public static SpecificBodyPartRequirement specificpart(GenericBodyPart part) {
         return new SpecificBodyPartRequirement(part);
     }
 

@@ -2,11 +2,12 @@ package nightgames.items;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
+import nightgames.characters.body.GenericBodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
 class BodyGrowthEffect extends BodyModEffect {
-    BodyGrowthEffect(String selfVerb, String otherVerb, BodyPart affected) {
+    BodyGrowthEffect(String selfVerb, String otherVerb, GenericBodyPart affected) {
         super(selfVerb, otherVerb, affected);
     }
 
