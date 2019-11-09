@@ -84,7 +84,7 @@ public class Body implements Cloneable {
         new MouthPart(),
         new BreastsPart(0),
         new EarsPart()};
-    private final static String[] fetishParts = {AssPart.TYPE, FeetPart.TYPE, CockPart.TYPE, "wings", TailPart.TYPE, TentaclePart.TYPE, BreastsPart.TYPE};
+    private final static String[] fetishParts = {AssPart.TYPE, FeetPart.TYPE, CockPart.TYPE, WingsPart.TYPE, TailPart.TYPE, TentaclePart.TYPE, BreastsPart.TYPE};
 
     private LinkedHashSet<GenericBodyPart> bodyParts;
     private transient Collection<PartReplacement> replacements;
