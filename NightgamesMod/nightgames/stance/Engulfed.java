@@ -9,7 +9,6 @@ import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.skills.damage.DamageType;
@@ -153,7 +152,7 @@ public class Engulfed extends Position {
         if (slimePitches) {
             parts.add(top.body.getRandomCock());
         } else {
-            parts.add(top.body.getRandom(PussyPart.TYPE));
+            parts.add(top.body.getRandomPussy());
             parts.add(top.body.getRandom(AssPart.TYPE));
         }
         return parts.stream()
@@ -167,7 +166,7 @@ public class Engulfed extends Position {
         if (!slimePitches) {
             parts.add(bottom.body.getRandomCock());
         } else {
-            parts.add(bottom.body.getRandom(PussyPart.TYPE));
+            parts.add(bottom.body.getRandomPussy());
             parts.add(bottom.body.getRandom(AssPart.TYPE));
         }
         return parts.stream()

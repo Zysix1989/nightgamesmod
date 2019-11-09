@@ -1209,11 +1209,11 @@ public class Body implements Cloneable {
             }
         } else {
             if (!pitcher) {
-                totalCounterValue += getRandom(PussyPart.TYPE)
+                totalCounterValue += getRandomPussy()
                     .counterValue(other.body.getRandomCock(), self, other);
             } else {
                 totalCounterValue += getRandomCock()
-                    .counterValue(other.body.getRandom(PussyPart.TYPE), self, other);
+                    .counterValue(other.body.getRandomPussy(), self, other);
             }
         }
         return 20 * totalCounterValue;
