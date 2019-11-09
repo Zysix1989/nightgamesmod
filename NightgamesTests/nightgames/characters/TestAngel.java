@@ -433,9 +433,7 @@ public class TestAngel extends BasePersonality {
         character.add(Trait.demigoddess);
         character.add(Trait.divinity);
         character.add(Trait.proheels);
-        var pussy = new PussyPart();
-        pussy.addMod(new DivineMod());
-        character.body.addReplace(pussy, 1);
+        character.body.getRandomPussy().addMod(new DivineMod());
         character.unequipAllClothing();
         character.outfitPlan.add(Clothing.getByID("translucentshawl"));
         character.outfitPlan.add(Clothing.getByID("bikinitop"));

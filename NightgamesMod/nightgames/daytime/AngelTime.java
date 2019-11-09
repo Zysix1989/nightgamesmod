@@ -153,7 +153,7 @@ public class AngelTime extends BaseNPCTime {
             angelWings.effect = (c, self, other) -> {
                 var wings = new WingsPart();
                 wings.addMod(new AngelicWingsMod());
-                self.body.addReplace(wings, 1);
+                self.body.add(wings);
                 return true;
             };
             transformationOptions.add(angelWings);

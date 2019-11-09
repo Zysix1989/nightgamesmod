@@ -128,10 +128,12 @@ public class RequirementTest {
     }
 
     @Test public void bodypartTest() throws Exception {
-        self.body.addReplace(new PussyPart(), 1);
+        self.body.removeAll(PussyPart.TYPE);
+        self.body.add(new PussyPart());
         var pussy = new PussyPart();
         pussy.addMod(new FieryMod());
-        other.body.addReplace(pussy, 1);
+        other.body.removeAll(PussyPart.TYPE);
+        other.body.add(pussy);
         assertThat(bodypart(PussyPart.TYPE).meets(combat, self, other), is(true));
         assertThat(bodypart(PussyPart.TYPE).meets(combat, other, self), is(true));
         other.body.removeAll(PussyPart.TYPE);
@@ -159,7 +161,8 @@ public class RequirementTest {
     }
 
     @Test public void insertedTest() throws Exception {
-        self.body.addReplace(new CockPart(Size.Huge), 1);
+        self.body.removeAll(CockPart.TYPE);
+        self.body.add(new CockPart(Size.Huge));
         combat.setStance(new FlyingCarry(self, other));
         assertThat(inserted().meets(combat, self, other), is(true));
         assertThat(inserted().meets(combat, other, self), is(false));
@@ -245,7 +248,8 @@ public class RequirementTest {
     }
 
     @Test public void positionTest() throws Exception {
-        self.body.addReplace(new CockPart(), 1);
+        self.body.removeAll(CockPart.TYPE);
+        self.body.add(new CockPart());
         PositionRequirement flyfuck = position("FlyingCarry");
         combat.setStance(new FlyingCarry(self, other));
         assertThat(flyfuck.meets(combat, self, other), is(true));
@@ -286,10 +290,12 @@ public class RequirementTest {
     }
 
     @Test public void specificBodyPartTest() throws Exception {
-        self.body.addReplace(new PussyPart(), 1);
+        self.body.removeAll(PussyPart.TYPE);
+        self.body.add(new PussyPart());
         var pussy = new PussyPart();
         pussy.addMod(new FieryMod());
-        other.body.addReplace(pussy, 1);
+        other.body.removeAll(PussyPart.TYPE);
+        other.body.add(pussy);
         SpecificBodyPartRequirement fierypussy = specificpart(pussy);
         assertThat(fierypussy.meets(combat, self, other), is(false));
         assertThat(fierypussy.meets(combat, other, self), is(true));

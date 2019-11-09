@@ -678,7 +678,7 @@ public class Angel extends BasePersonality {
         }
         var wings = new WingsPart();
         wings.addMod(new AngelicWingsMod());
-        character.body.addReplace(wings, 1);
+        character.body.add(wings);
         character.unequipAllClothing();
         character.outfitPlan.add(Clothing.getByID("translucentshawl"));
         character.outfitPlan.add(Clothing.getByID("bikinitop"));

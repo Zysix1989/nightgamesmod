@@ -275,7 +275,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Grow Cock", 2500) {
             @Override
             void buy(Character buyer) {
-                buyer.body.addReplace(new CockPart(Size.Tiny), 1);
+                buyer.body.add(new CockPart(Size.Tiny));
             }
 
             @Override
@@ -327,7 +327,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Grow Balls", 1000) {
             @Override
             void buy(Character buyer) {
-                buyer.body.addReplace(new BallsPart(), 1);
+                buyer.body.add(new BallsPart());
             }
 
             @Override
@@ -412,7 +412,7 @@ public class BodyShop extends Activity {
         selection.add(new ShopSelection("Grow Pussy", 2500) {
             @Override
             void buy(Character buyer) {
-                buyer.body.addReplace(new PussyPart(), 1);
+                buyer.body.add(new PussyPart());
             }
 
             @Override

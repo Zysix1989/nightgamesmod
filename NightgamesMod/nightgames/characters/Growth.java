@@ -140,7 +140,7 @@ public class Growth implements Cloneable {
                 // only add parts if the level matches
                 if (level <= character.getLevel()) {
                     if (existingPart == null || !existingPartDesc.equals(loadedPartDesc)) {
-                        character.body.addReplace(part, 1);
+                        character.body.add(part);
                     }
                 }
             });

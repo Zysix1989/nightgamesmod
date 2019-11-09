@@ -12,6 +12,7 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.EarsPart;
+import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
@@ -137,7 +138,7 @@ public class ReykaTime extends BaseNPCTime {
         demonWings.effect = (c, self, other) -> {
             var wings = new WingsPart();
             wings.addMod(new DemonicWingsMod());
-            self.body.addReplace(wings, 1);
+            self.body.add(wings);
             return true;
         };
         transformationOptions.add(demonWings);
@@ -157,7 +158,7 @@ public class ReykaTime extends BaseNPCTime {
         demonTail.effect = (c, self, other) -> {
             var tail = new TailPart();
             tail.addMod(new DemonicTailMod());
-            self.body.addReplace(tail, 1);
+            self.body.add(tail);
             return true;
         };
         transformationOptions.add(demonTail);
@@ -176,9 +177,9 @@ public class ReykaTime extends BaseNPCTime {
                                         + "good twenty minutes of pinching and pulling on them, Reyka lets you know that she's done and gives you a mirror. You confirm that yes, you are now a proud owner of a set of "
                                         + "pointed fey-looking ears!";
         pointedEars.effect = (c, self, other) -> {
-            var ears = new EarsPart();
-            ears.addMod(new PointedEarsMod());
-            self.body.addReplace(ears, 1);
+            var ears = self.body.getRandom(EarsPart.TYPE);
+            assert ears instanceof GenericBodyPart;
+            ((GenericBodyPart) ears).addMod(new PointedEarsMod());
             return true;
         };
         transformationOptions.add(pointedEars);
