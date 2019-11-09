@@ -272,28 +272,11 @@ public class Body implements Cloneable {
     }
 
     public BreastsPart getLargestBreasts() {
-        List<BodyPart> parts = get(BreastsPart.TYPE);
-        BreastsPart breasts = new BreastsPart(BreastsPart.Size.min());
-        for (BodyPart part : parts) {
-            BreastsPart b = (BreastsPart) part;
-            if (b.getSize().compareTo(breasts.getSize()) > 0) {
-                breasts = b;
-            }
-        }
-        return breasts;
+        return getRandomBreasts();
     }
 
     public CockPart getLargestCock() {
-        List<BodyPart> parts = get(CockPart.TYPE);
-        if (parts.size() == 0) {
-            return null;
-        }
-        CockPart largest = new CockPart(CockPart.Size.min());
-        for (BodyPart part : parts) {
-            CockPart cock = (CockPart) part;
-            largest = cock.getSize().compareTo(largest.getSize()) >= 0 ? cock : largest;
-        }
-        return largest;
+        return getRandomCock();
     }
 
     public Optional<BodyFetish> getFetish(String part) {
