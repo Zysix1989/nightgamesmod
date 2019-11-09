@@ -1,10 +1,8 @@
 package nightgames.skills;
 
 import java.util.Optional;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.body.HandsPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -42,7 +40,7 @@ public class Honeypot extends Skill {
         if (targetPet.isPresent()) {
             writeOutput(c, Result.normal, targetPet.get());
             double m = Global.random(10, 25);
-            targetPet.get().body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE),
+            targetPet.get().body.pleasure(getSelf(), getSelf().body.getRandomHands(),
                             targetPet.get().body.getRandomGenital(), m, c);
             getSelf().arouse(getSelf().getArousal().max() / 4, c);
         return true;

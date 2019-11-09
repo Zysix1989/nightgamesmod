@@ -3,7 +3,6 @@ package nightgames.skills;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.HandsPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -49,7 +48,7 @@ public class FondleBreasts extends Skill {
         }
 
         writeOutput(c, result, target);
-        target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomBreasts(), m,
+        target.body.pleasure(getSelf(), getSelf().body.getRandomHands(), target.body.getRandomBreasts(), m,
                         c, this);
 
         return true;

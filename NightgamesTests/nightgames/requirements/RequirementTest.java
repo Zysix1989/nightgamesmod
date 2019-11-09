@@ -42,7 +42,6 @@ import nightgames.characters.NPC;
 import nightgames.characters.Trait;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
-import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.FieryMod;
 import nightgames.combat.Combat;
@@ -223,7 +222,7 @@ public class RequirementTest {
     @Test public void orgasmTest() throws Exception {
         assertThat(orgasms(1).meets(combat, self, other), is(false));
         assertThat(orgasms(1).meets(combat, other, self), is(false));
-        self.doOrgasm(combat, other, self.body.getRandomPussy(), other.body.getRandom(HandsPart.TYPE));
+        self.doOrgasm(combat, other, self.body.getRandomPussy(), other.body.getRandomHands());
         assertThat(orgasms(1).meets(combat, self, other), is(true));
         assertThat(orgasms(1).meets(combat, other, self), is(false));
     }

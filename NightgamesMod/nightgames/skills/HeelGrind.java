@@ -4,7 +4,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.FeetPart;
-import nightgames.characters.body.HandsPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -55,7 +54,7 @@ public class HeelGrind extends Skill {
         int m2 = m / 2;
         writeOutput(c, Result.normal, target);
         target.body.pleasure(getSelf(), getSelf().body.getRandom(FeetPart.TYPE), target.body.getRandomPussy(), m, c, this);
-        target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), target.body.getRandomBreasts(), m2, c, this);
+        target.body.pleasure(getSelf(), getSelf().body.getRandomHands(), target.body.getRandomBreasts(), m2, c, this);
         if (c.getStance().en != Stance.behindfootjob) {
 
             c.setStance(new BehindFootjob(getSelf(), target, c.getStance().anallyPenetrated(c,target)), getSelf(), true);

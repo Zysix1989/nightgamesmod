@@ -4,7 +4,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
-import nightgames.characters.body.HandsPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -74,7 +73,7 @@ public class BunshinService extends Skill {
                         break;
                     case 1:
                         r = Result.normal;
-                        target.body.pleasure(getSelf(),  getSelf().body.getRandom(HandsPart.TYPE),target.body.getRandomBreasts(),
+                        target.body.pleasure(getSelf(),  getSelf().body.getRandomHands(),target.body.getRandomBreasts(),
                                         Global.random(3 + getSelf().get(Attribute.Seduction) / 2)
                                                         + target.get(Attribute.Perception) / 2,
                                         c, this);
@@ -84,7 +83,7 @@ public class BunshinService extends Skill {
                         BodyPart targetPart = target.body.has(CockPart.TYPE) ? target.body.getRandomCock()
                                         : target.hasPussy() ? target.body.getRandomPussy()
                                                         : target.body.getRandomAss();
-                        target.body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE),targetPart,
+                        target.body.pleasure(getSelf(), getSelf().body.getRandomHands(),targetPart,
                                         Global.random(4 + getSelf().get(Attribute.Seduction))
                                                         + target.get(Attribute.Perception) / 2,
                                         c, this);
@@ -94,7 +93,7 @@ public class BunshinService extends Skill {
                         targetPart = target.body.has(CockPart.TYPE) ? target.body.getRandomCock()
                                         : target.hasPussy() ? target.body.getRandomPussy()
                                                         : target.body.getRandomAss();
-                        target.body.pleasure(getSelf(),getSelf().body.getRandom(HandsPart.TYPE), targetPart, Global.random(6)
+                        target.body.pleasure(getSelf(),getSelf().body.getRandomHands(), targetPart, Global.random(6)
                                         + getSelf().get(Attribute.Seduction) / 2 + target.get(Attribute.Perception), c,
                                         this);
                         break;

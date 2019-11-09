@@ -1,12 +1,10 @@
 package nightgames.skills;
 
 import java.util.Optional;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -41,12 +39,12 @@ public class BreastWorship extends Skill {
         }
         target.body.pleasure(getSelf(), getSelf().body.getRandom(MouthPart.TYPE), target.body.getRandomBreasts(), m, c, this);
         if (getSelf().hasDick() && (!getSelf().hasPussy() || Global.random(2) == 0)) {
-            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), getSelf().body.getRandomCock(), m, c, this);
+            getSelf().body.pleasure(getSelf(), getSelf().body.getRandomHands(), getSelf().body.getRandomCock(), m, c, this);
         } else if (getSelf().hasPussy()) {
-            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), getSelf().body.getRandomPussy(), m,
+            getSelf().body.pleasure(getSelf(), getSelf().body.getRandomHands(), getSelf().body.getRandomPussy(), m,
                             c, this);
         } else {
-            getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), getSelf().body.getRandomHole(), m, c, this);
+            getSelf().body.pleasure(getSelf(), getSelf().body.getRandomHands(), getSelf().body.getRandomHole(), m, c, this);
         }
         if (results == Result.special) {
             getSelf().temptWithSkill(c, target, target.body.getRandomBreasts(), (target.body.getRandomBreasts().attributeModifier(

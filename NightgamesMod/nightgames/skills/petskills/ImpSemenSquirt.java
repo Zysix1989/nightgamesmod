@@ -1,7 +1,6 @@
 package nightgames.skills.petskills;
 
 import nightgames.characters.Character;
-import nightgames.characters.body.HandsPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.nskills.tags.SkillTag;
@@ -35,7 +34,7 @@ public class ImpSemenSquirt extends SimpleEnemySkill {
                         + "hitting {other:direct-object} in the face with a thick load of semen. "
                         + "{other:SUBJECT-ACTION:flush|flushes} bright red and {other:action:look|looks} stunned "
                         + "as the aphrodisiac laden fluid overwhelms {other:possessive} senses.", getSelf(), target));
-        getSelf().body.pleasure(getSelf(), getSelf().body.getRandom(HandsPart.TYPE), getSelf().body.getRandomCock(), 10, c);
+        getSelf().body.pleasure(getSelf(), getSelf().body.getRandomHands(), getSelf().body.getRandomCock(), 10, c);
         target.add(c, new Horny(target, m, 5, "imp cum"));
         return true;
     }

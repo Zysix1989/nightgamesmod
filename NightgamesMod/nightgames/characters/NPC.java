@@ -20,7 +20,6 @@ import nightgames.areas.Area;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.EarsPart;
-import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.custom.CharacterLine;
 import nightgames.characters.custom.CommentSituation;
@@ -591,7 +590,7 @@ public class NPC extends Character {
                 if (target.hasDick()) {
                     if (target.crotchAvailable()) {
                         c.write(this, getName() + " catches you by the penis and rubs your sensitive glans.");
-                        target.body.pleasure(this, body.getRandom(HandsPart.TYPE), target.body.getRandom(
+                        target.body.pleasure(this, body.getRandomHands(), target.body.getRandom(
                             CockPart.TYPE),
                                         4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                     } else {
@@ -620,7 +619,7 @@ public class NPC extends Character {
                         c.setStance(new Neutral(this, c.getOpponent(this)), this, true);
                     }
                 } else {
-                    target.body.pleasure(this, body.getRandom(HandsPart.TYPE), target.body.getRandomBreasts(),
+                    target.body.pleasure(this, body.getRandomHands(), target.body.getRandomBreasts(),
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                     c.write(this, Global.format(
                                     "{self:SUBJECT-ACTION:pinch|pinches} {other:possessive} nipples with {self:possessive} hands as {other:subject-action:try|tries} to fuck {self:direct-object}. "

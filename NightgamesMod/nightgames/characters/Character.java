@@ -2679,7 +2679,7 @@ public Character clone() throws CloneNotSupportedException {
                 } else {
                     c.write(Global.format("{self:SUBJECT-ACTION:focus|focuses} {self:possessive} attentions on {other:name-do}, "
                                     + "harassing and toying with {other:possessive} body as much as {self:pronoun} can.<br/>", this, pet));
-                    pet.body.pleasure(this, body.getRandom(HandsPart.TYPE), pet.body.getRandomGenital(), Global.random(10, 20), c);
+                    pet.body.pleasure(this, body.getRandomHands(), pet.body.getRandomGenital(), Global.random(10, 20), c);
                 }
             }
         }
