@@ -73,7 +73,7 @@ public class MimicSuccubus extends Skill {
         getSelf().addTemporaryTrait(Trait.soulsucker, 999);
         getSelf().addTemporaryTrait(Trait.energydrain, 999);
         getSelf().addTemporaryTrait(Trait.spiritphage, 999);
-        var wings = (WingsPart) getSelf().body.getRandom(WingsPart.TYPE);
+        var wings = (WingsPart) getSelf().body.getRandomWings();
         if (wings == null) {
             wings = new WingsPart();
         }

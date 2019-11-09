@@ -69,7 +69,7 @@ public class MimicAngel extends Skill {
                 getSelf().addTemporaryTrait(Trait.revered, 10);
             }
         }
-        var wings = (WingsPart) getSelf().body.getRandom(WingsPart.TYPE);
+        var wings = (WingsPart) getSelf().body.getRandomWings();
         if (wings == null) {
             wings = new WingsPart();
         }

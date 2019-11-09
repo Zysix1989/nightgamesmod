@@ -17,7 +17,6 @@ import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TailPart;
-import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.mods.DemonicWingsMod;
 import nightgames.characters.body.mods.catcher.DemonicMod;
@@ -69,7 +68,7 @@ public class Corruption extends Addiction {
                                 + " lower back!</b>", affected, cause));
                 }
                 ((GenericBodyPart) affected.body.getRandom(TailPart.TYPE)).addTemporaryMod(new DemonicTailMod(), Global.random(15, 40));
-            } else if (!affected.body.has("wings") || affected.body.getRandom(WingsPart.TYPE).getMods()
+            } else if (!affected.body.has("wings") || affected.body.getRandomWings().getMods()
                 .stream().anyMatch(m -> m.getModType().equals(DemonicWingsMod.TYPE))) {
                 if (affected.human()) {
                     Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes you even further: your back swells painfully - bones aching until it feels like your back splits open!"
@@ -77,7 +76,7 @@ public class Corruption extends Addiction {
                 } else {
                      Global.writeIfCombat(c, affected, Global.format("<b>The dark taint changes {self:name-do} even further, and a set of black bat wings grows from {self:possessive} back!</b>", affected, cause));
                 }
-                ((GenericBodyPart) affected.body.getRandom(WingsPart.TYPE)).addTemporaryMod(new DemonicWingsMod(), Global.random(15, 40));
+                ((GenericBodyPart) affected.body.getRandomWings()).addTemporaryMod(new DemonicWingsMod(), Global.random(15, 40));
             } else if (affected.hasPussy() && !affected.body.getRandomPussy().moddedPartCountsAs(
                 DemonicMod.TYPE)) {
                 if (affected.human()) {
