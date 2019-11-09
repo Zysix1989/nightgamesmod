@@ -134,26 +134,6 @@ public class Cassie extends BasePersonality {
                     return Global.pickRandom(Arrays.asList(finalLines)).get();
             }
         });
-
-        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
-            String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.getType()).orElse("pussy");
-            if (other.getLevel() < self.getLevel() - 5) {
-                return "{self:SUBJECT} grins at you as your strength is once again sucked into {self:possessive} devilish " + part 
-                                + ", <i>\"{other:NAME}, I truly love you, you know that? But this... this is no longer a competition. "
-                                + "Thanks to your previous efforts, I'm now stronger, smarter, and more seductive than you'll ever be. "
-                                + "I think that's okay though... I can take care of you for the rest of your life. "
-                                + "Don't worry, I wont be giving you a choice on this matter...\"</i>";
-            } else if (other.getLevel() >= self.getLevel()) {
-                return "{self:SUBJECT} gasps as a new-found strength enters {self:possessive} body through {self:possessive} " + part + ". {self:PRONOUN} turns to you shyly and asks, "
-                                + "<i>\"{other:NAME}, that felt REALLY good... can I have some more? Pretty please?\"</i>";
-            } else {
-                return "{self:SUBJECT} clings to your convulsing body as {self:pronoun} once again steals your experiences and training from your body as you helplessly cum. "
-                                + "<i>\"{other:NAME}, {other:name}, you've made me feel so good, you know that? "
-                                + "And you've been generously donating so much of yourself to me. "
-                                + "Don't worry, I'll be sure to pay you back now that I've become stronger than you. I'll make you feel <b>incredible</b>!\"</i>";
-            }
-        });
-        
         
         addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "{self:SUBJECT} shouts in triumph, <i>\"I did it! I won!\"</i>";

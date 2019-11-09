@@ -11,7 +11,6 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.FacePart;
 import nightgames.characters.body.GenericBodyPart;
-import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.GooeySkinMod;
 import nightgames.characters.body.mods.PartMod;
@@ -148,27 +147,6 @@ public class Airi extends BasePersonality {
                                 : "You're fighting Airi, a rather mysterious asian girl. She looks pretty normal for now, but you know she's holding a secret.";
             } else {
                 return "<i>You... will do...</i>";
-            }
-        });
-        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
-            String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.describe(self)).orElse(
-                PussyPart.TYPE);
-            if (character.has(Trait.slime)) {
-                if (other.getLevel() < self.getLevel() - 5) {
-                    return "{self:SUBJECT} tousles {other:possessive} hair fondly as {other:subject} cum, \"<i>How does it feel... reduced to mere prey...? You're just food... for me now...</i>\"";
-                } else if (other.getLevel() >= self.getLevel()) {
-                    return "{self:SUBJECT} looks euphoric as your strength is stolen by her demonic " + part + " \"<i>Ahh... your strength... feels good... You have more to spare... I need more!</i>\"";
-                } else {
-                    return "\"<i>{other:NAME}... Did you know...? Stronger than you now... But can't stop... Need all you have...</i>\"";
-                }
-            } else {
-                if (other.getLevel() < self.getLevel() - 5) {
-                    return "{self:SUBJECT} looks rather surprised as {other:subject} abruptly cum, \"<i>Kyaa! Sorry, I didn't notice you were so close. I guess this isn't much of a challenge any more...</i>\"";
-                } else if (other.getLevel() >= self.getLevel()) {
-                    return "{self:SUBJECT} looks euphoric as your strength is stolen by her demonic " + part + " \"<i>Ughhh {other:name}, that feels good... Please... more?</i>\"";
-                } else {
-                    return "\"<i>Ahh... <b>*giggle*</b> I think I've finally caught up... But keep going... I want more!</i>\"";
-                }
             }
         });
 

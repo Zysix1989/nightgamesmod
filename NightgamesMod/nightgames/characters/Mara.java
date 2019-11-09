@@ -5,7 +5,6 @@ import java.util.Optional;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.FacePart;
-import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.CyberneticMod;
 import nightgames.characters.body.mods.pitcher.BionicCockMod;
 import nightgames.characters.corestats.ArousalStat;
@@ -135,23 +134,6 @@ public class Mara extends BasePersonality {
                                  .get();
              }
          });
-
-        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
-            String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.describe(self)).orElse(
-                PussyPart.TYPE);
-            if (other.getLevel() < self.getLevel() - 5) {
-                return "\"<i>Annddd... here it comes!</i>\" {self:SUBJECT} happily squeals as the now familiar sensation of your strength entering {self:possessive} flows through the petite girl. "
-                                + "You try struggling out, but {self:subject} simply holds you down with a single hand. \"<i>Now now, don't get antsy! "
-                                + "You know you're already much weaker than me right? So don't struggle and just let me take everything!</i>\"";
-            } else if (other.getLevel() >= self.getLevel()) {
-                return "{self:SUBJECT} narrows {self:possessive} eyes in pleasure as your strength is absorbed by {self:possessive} " + part + " as you cum. <i>\"Oh {other:boy}, that is some GOOD stuff! "
-                                + "Don't be stingy, give me some more!\"</i>";
-            } else {
-                return "\"<i>You know {other:NAME}, I don't know why I bothered working so hard before. "
-                                + "Training, studying, preparing took so much time! It's so much <b>easier</b> to just take it from you! "
-                                + "And now that I'm stronger than you, you can't say no anymore, can you?</i>\"";
-            }
-        });
 
         description = JtwigTemplate.classpathTemplate("mara/describe.twig");
 

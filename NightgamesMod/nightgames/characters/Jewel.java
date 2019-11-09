@@ -8,7 +8,6 @@ import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.FacePart;
-import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.TrainedMod;
 import nightgames.characters.body.mods.catcher.FieryMod;
 import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
@@ -388,26 +387,6 @@ public class Jewel extends BasePersonality {
                 default:
                     return Global.pickRandom(Arrays.asList(finalLines))
                                  .get();
-            }
-        });
-
-        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
-            String part = Global.pickRandom(c.getStance()
-                                             .getPartsFor(c, self, other))
-                                .map(bp -> bp.getType())
-                                .orElse(PussyPart.TYPE);
-            if (other.getLevel() < self.getLevel() - 5) {
-                return "Jewel smirks at you with a sadistic grin on her face as her " + self.body.getRandom(part)
-                                                                                                 .describe(self)
-                                + " plunders your strength once again. <i>\"Poor {other:guy}, being dominated by someone who used to be so much weaker than you.\"</i> "
-                                + "The red-head leans close to your ear, <i>\"Don't worry... I wont be making the same mistake. You'll always be my bottom-bitch from now on.\"</i>";
-            } else if (other.getLevel() >= self.getLevel()) {
-                return "Jewel clings on to your struggling body as your strength streams out of you and into the lovely red-head. As the flow subsides, she smirks "
-                                + "<i>\"Finders keepers...\"</i>";
-            } else {
-                return "Jewel rocks her powerful hips on top of you as you cum your soul out into her " + part + ". "
-                                + "When you finally collapse exhausted, the toned girl declares <i>\"And now we're even. Or maybe I'm a bit stronger? Who knows. "
-                                + "Even though I'm no longer the underdog, I still won't be showing you any mercy.\"</i>";
             }
         });
 

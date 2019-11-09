@@ -288,27 +288,6 @@ public class Reyka extends BasePersonality {
 
         description = JtwigTemplate.classpathTemplate("reyka/describe.twig");
 
-        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
-            String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.describe(self)).orElse("pussy");
-            if (other.getLevel() < self.getLevel() - 5) {
-                if (c.getStance().vaginallyPenetratedBy(c, other, self)) {
-                    return "The succubus gives you a sad smile as you cum uncontrollably into her nightmarish cunt, with your experience and training leaving you yet again. <i>{other:name}... You know, you're not really enough for me now. I'm still hungry!</i>";
-                } else if (c.getStance().anallyPenetratedBy(c, other, self)) {
-                    return "The succubus gives you a sad smile as you cum uncontrollably into her nightmarish backdoor, with your experience and training leaving you yet again. <i>{other:name}... You know, you're not really enough for me now. I'm still hungry!</i>";
-                } else {
-                    return "The succubus gives you a sad smile as you cum uncontrollably around her nightmarish cock, with your experience and training leaving you yet again. <i>{other:name}... You know, you're not really enough for me now. I'm still hungry!</i>";
-                }
-            } else if (other.getLevel() >= self.getLevel()) {
-                if (c.getStance().inserted(other)) {
-                    return "Reyka gives you a saucy grin as your cum floods her diabolic fuckhole \"<i>Oh ho ho, thank you for the donation kind sir! But you know what they say about charity right? It pays to make it a habit!</i>\"";
-                } else {
-                    return "Reyka gives you a saucy grin as she draws out your power with your orgasm \"<i>Oh ho ho, thank you for the donation kind sir! But you know what they say about charity right? It pays to make it a habit!</i>\"";
-                }
-            } else {
-                return "Reyka gives off a rapturous air as bits and pieces of your soul is absorbed by her demonic " + part + "  <i>\"Mmmm that is <b>good</b>! This is usually the part where I turn on my summoner and do my demon thing, but I think I'll make an exception this time... for now.\"</i>";
-            }
-        });
-        
         //To be said when this character wins the entire night.
         addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "{self:SUBJECT} smiles in satisfaction and says nothing, folding her arms while her tail swishes around. She seems pleased with the outcome.";

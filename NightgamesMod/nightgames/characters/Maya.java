@@ -179,56 +179,13 @@ public class Maya extends BasePersonality {
             return "<i>\"Oh.. SHIT! Did I just actually... Fuck! Come here and let me return the favor, stud!\"</i>";
         });
 
-        
-        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
-            String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.describe(self)).orElse("pussy");
-            if (other.getLevel() < self.getLevel() - 5) {
-                return "\"<i>Oh yeah! I can feel it! Go ahead and cum, stud! Cuuummmmmm!</i>\" "
-                                + "{self:SUBJECT} closes her eyes while giving you a hard squeeze with {self:possessive} " + part + " - setting you off. You feel the desperate and alarming sensation of your strength entering {self:possessive} as you hopelessly climax beneath {self:possessive}. "
-                                + "You attempt to move away, but {self:subject} holds you down effortlessly while riding you - they are definitely more powerful than you, now. You can't escape even if you tried. "
-                                + "\"<i>Oh, no {other:NAME}, you're not going anywhere! Taking your power, strength, and even memories while you cum yourself into weakness <b>really</b> scratches my itch...I think I understand why succubi enjoy themselves so much! Want give me more?</i>\"";
-            } else if (other.getLevel() >= self.getLevel()) {
-                return "{self:SUBJECT}'s eyes narrow while savoring the feeling of robbing you of your hard-earned power into {self:possessive} " + part + " as you hopelessly cum. "
-                                + "<i>\"Ohhhh~ I'm not sure how you got stronger than me in the first place, {other:boy}, but feel free to try again - sucking it out of you feels <b>really</b> good.\"</i>";
-            } else {
-                return "\"<i>Ha ha ha! You know, what, {other:NAME}? I don't know why you thought you'd take on a graduate, but I can't help but enjoy keeping you in your place.</i>\"";
-            }
-        });
 
         
         addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
             return "<i>\"Aaaand there we are. Think you can go again?\"</i>";
         });
         description = JtwigTemplate.classpathTemplate("maya/describe.twig");
-        
-        
-        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
-            String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.describe(self)).orElse("pussy");
-            if (other.getLevel() < self.getLevel() - 5) {
-                if (c.getStance().vaginallyPenetratedBy(c, other, self)) {
-                    return "Maya works you with a wide smile on her face while you cum uncontrollably into her pussy; your experience and training leaving you yet again while she softly chuckles at you. "
-                                    + "\"<i>Oh, {other:name}...You're such a small fry at this point that it's just too easy, but taking your strength and experience really scratches my itch!</i>\"";
-                } else if (c.getStance().anallyPenetratedBy(c, other, self)) {
-                    return "Maya works you with a wide smile on her face while you cum uncontrollably into her nightmarish backdoor; you feel it drawing you experience and training right out of you while she softly chuckles at you. "
-                                    + "\"<i>Oh, {other:name}...You're such a small fry at this point that it's just too easy, but taking your strength and experience really scratches my itch!</i>\"";
-                } else {
-                    return "Maya presses her demonic cock deep into you while you cum uncontrollably around it. You feel it drawing more of your experience and training out of your very soul while she softly chuckles at you. "
-                                    + "\"<i>Oh, {other:name}...You're such a small fry at this point that it's just too easy, but taking your strength and experience really scratches my itch!</i>\"";
-                }
-            } else if (other.getLevel() >= self.getLevel()) {
-                if (c.getStance().inserted(other)) {
-                    return "Maya tenses up and yelps on top of you as your power and experience snap off and flow into her. She turns her face to your cumming visage and cracks a cruel and smug-looking smile before giving you three more good squeezes. "
-                                    + "\"<i>You like giving it up to us, don't you? I knew you'd be a good addition. You can keep thanking me Just. Like. This!</i>\"";
-                } else {
-                    return "Maya tenses up and yelps on top of you as your power and experience snap off and flow into her. She turns her face to your cumming visage and cracks a cruel and smug-looking smile before giving you three more good squeezes. "
-                                    + "\"<i>You like giving it up to us, don't you? I knew you'd be a good addition. You can keep thanking me Just. Like. This!</i>\"";
-                }
-            } else {
-                return "Maya stiffens up in rapture as bits and pieces of your soul break off from you and are absorbed by her demonic " + part + " "
-                                + "\"<i>Ohhh-yeah, {other:name}, that's good. Shakes the rust right off. Want to do that again, stud?</i>\"";
-            }
-        });
-        
+
         addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "Maya straightens herself out after hearing she's won and quietly says, <i>\"That was great. I should do this more.\"</i>";
         });

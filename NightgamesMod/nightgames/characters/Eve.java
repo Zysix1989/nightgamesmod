@@ -228,28 +228,6 @@ public class Eve extends BasePersonality {
             }
             return "<i>\"That's it! Now, how about you return the favor?\"</i>";
         });
-        
-        
-        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
-            String part = Global.pickRandom(c.getStance()
-                                             .getPartsFor(c, self, other))
-                                .map(bp -> bp.getType())
-                                .orElse("pussy");
-            if (other.getLevel() < self.getLevel() - 5) {       //FIXME: Is self.body.getRandom(part).describe(self) the same funcationally as just using "part"? Should this be standardized? -DSM 
-                return "{self:SUBJECT} laughs uncontrolably while you feel your orgasm cause your power and experience to be sucked right into {self:SUBJECT}'s " + self.body.getRandom(part).describe(self) + ". {self:SUBJECT}'s hands squeeze and grope you lewdly while they continue slamming away, "
-                                + "<i>\"UNGH! Oh hohoooYEAH! You poor {other:guy}, being raped and dominated so much that you're cumming your worthless soul out. Holy shit, this feels so good, I don't wanna stoooop!\"</i> "
-                                + "They push their whole body into yours and grope you while whispering in your ear, "
-                                + "<i>\"Don't worry...We're gonna have lots of fun. Fucking the shit out of you is really <b>FUN! UNGH!</b>\"</i>";
-            } else if (other.getLevel() >= self.getLevel()) {
-                return "{self:SUBJECT} holds you down and slams themselves into you repeatedly until you violently climax. You cum as is you were a bursting dam - your strength and experience streams out of you and into {self:possessive} " + self.body.getRandom(part).describe(self) + ". "
-                                + "By the time you finally regain yopur senses, you're being held down by {self:SUBJECT}, who's licking your face while taunting you. "
-                                + "<i>\"That was good, my little slut - now get ready do it again. Cum your fucking soul out and make me stronger...\"</i>";
-            } else {
-                return "{self:SUBJECT} keeps at you without relenting in the slightest - you are cumming out of control right into her " + part + ". After you finally collapse from the ordeal, the wild girl laughs; she shows no sign that she's done. "
-                                + "<i>\"Oh, yeeeeah, you fucking slut...that was <b>good</b> - devouring your power like that. Maybe if I just keep pounding your soul out with my cock I'll ruin you enough that you can just become my slave! HA HA HA! Prepare your asshole!\"</i>";
-            }
-        });
-        
 
         description = JtwigTemplate.classpathTemplate("eve/describe.twig");
         

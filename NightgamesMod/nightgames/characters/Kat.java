@@ -394,18 +394,6 @@ public class Kat extends BasePersonality {
 
         description = JtwigTemplate.classpathTemplate("kat/describe.twig");
 
-        addLine(CharacterLine.LEVEL_DRAIN_LINER, (c, self, other) -> {
-            if (other.getLevel() < self.getLevel() - 5) {
-                return "You don't even think Kat notices your meager strength draining into her much larger pool as she passionately fucks you in her bestial lust. <i>\"Nyahaha! Can't stop... WONT stop!\"</i>";
-            } else if (other.getLevel() >= self.getLevel()) {
-                return "Your eyes widen as you feel your experience and training leave you and enter Kat's hungry body alongside your climax. "
-                                + "Kat however doesn't seem to really know what is going on, <i>\"Meowrrrr... That feels <b>REALLY</b> gooooodd... mmm...\"</i>";
-            } else {
-                String part = Global.pickRandom(c.getStance().getPartsFor(c, self, other)).map(bp -> bp.describe(self)).orElse(PussyPart.TYPE);
-                return "The sexy kitty doesn't pause for even a second as you cum your life force into her gluttonous " + part + ". <i>Aahh ahh! You're delicious nyaa!</i>";
-            }
-        });
-        
         addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "{self:SUBJECT} shouts in triumph, <i>\"NYAAA! I'm the strongest!\"</i>";
         });
