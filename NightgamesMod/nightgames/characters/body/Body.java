@@ -981,10 +981,10 @@ public class Body implements Cloneable {
         replacements.forEach(rep -> newBody.replacements.add(new PartReplacement(rep)));
         newBody.bodyParts = bodyParts.stream()
             .map(bp -> {
-                if (bp instanceof GenericBodyPart) {
-                    return ((GenericBodyPart) bp).copy();
+                if (bp != null) {
+                    return bp.copy();
                 } else {
-                    return bp;
+                    return null;
                 }
             })
             .collect(Collectors.toCollection(LinkedHashSet::new));
