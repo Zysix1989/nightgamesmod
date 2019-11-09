@@ -44,7 +44,6 @@ import nightgames.characters.body.CockPart;
 import nightgames.characters.body.HandsPart;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.SkinPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.ToysPart;
@@ -2563,7 +2562,7 @@ public Character clone() throws CloneNotSupportedException {
             if (hasBreasts()) {
                 TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandomBreasts());
             }
-            TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandom(SkinPart.TYPE));
+            TentaclePart.pleasureWithTentacles(c, this, 5, body.getSkin());
         }
         if (outfit.has(ClothingTrait.tentacleUnderwear)) {
             String undieName = "underwear";

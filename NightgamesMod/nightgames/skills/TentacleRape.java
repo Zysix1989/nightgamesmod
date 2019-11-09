@@ -6,7 +6,6 @@ import nightgames.characters.Emotion;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.SkinPart;
 import nightgames.characters.body.TentaclePart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -77,7 +76,7 @@ public class TentacleRape extends Skill {
                     }
                 } else {
                     writeOutput(c, Result.normal, target);
-                    target.body.pleasure(getSelf(), tentacles, target.body.getRandom(SkinPart.TYPE), m, c, this);
+                    target.body.pleasure(getSelf(), tentacles, target.body.getSkin(), m, c, this);
                 }
                 if (!target.is(Stsflag.oiled)) {
                     target.add(c, new Oiled(target));

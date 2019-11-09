@@ -1144,7 +1144,7 @@ public class Body implements Cloneable {
 
     public void receiveCum(Combat c, Character opponent, BodyPart part) {
         if (part == null) {
-            part = character.body.getRandom(SkinPart.TYPE);
+            part = character.body.getSkin();
         }
         part.receiveCum(c, character, opponent, part);
         if (character.has(Trait.spiritphage)) {
@@ -1286,6 +1286,8 @@ public class Body implements Cloneable {
     public FacePart getFace() {
         return (FacePart)getRandom(FacePart.TYPE);
     }
+
+    public SkinPart getSkin() { return (SkinPart) getRandom(SkinPart.TYPE); }
 
     // yeah i know it's not that simple, but best try right now
     public static String partArticle(String type) {
