@@ -30,7 +30,7 @@ public class FootPump extends Skill {
     }
 
     @Override public float priorityMod(Combat c) {
-        BodyPart feet = getSelf().body.getRandom(FeetPart.TYPE);
+        BodyPart feet = getSelf().body.getRandomFeet();
         Character other = c.getOpponent(getSelf());
         BodyPart otherpart = other.hasDick() ? other.body.getRandomCock() : other.body.getRandomPussy();
         if (feet != null) {
@@ -47,7 +47,7 @@ public class FootPump extends Skill {
         int m = 12 + Global.random(6);
         int m2 = m / 2;
         writeOutput(c, Result.normal, target);
-        target.body.pleasure(getSelf(), getSelf().body.getRandom(FeetPart.TYPE), target.body.getRandomCock(), m, c, this);
+        target.body.pleasure(getSelf(), getSelf().body.getRandomFeet(), target.body.getRandomCock(), m, c, this);
         target.body.pleasure(getSelf(), getSelf().body.getRandomHands(), target.body.getRandomBreasts(), m2, c, this);
         if (c.getStance().en != Stance.behindfootjob) {
 

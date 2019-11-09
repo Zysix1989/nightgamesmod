@@ -1,7 +1,6 @@
 package nightgames.skills;
 
 import java.util.Optional;
-
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.FeetPart;
@@ -49,7 +48,7 @@ public class FootWorship extends Skill {
         m = 8 + Global.random(6);
         n = 20;
         BodyPart mouth = getSelf().body.getRandom(MouthPart.TYPE);
-        BodyPart feet = target.body.getRandom(FeetPart.TYPE);
+        BodyPart feet = target.body.getRandomFeet();
         if (getSelf().human()) {
             c.write(getSelf(), Global.format(deal(c, 0, Result.normal, target), getSelf(), target));
         } else {

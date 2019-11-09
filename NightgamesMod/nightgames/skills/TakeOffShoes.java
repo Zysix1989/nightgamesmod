@@ -42,7 +42,7 @@ public class TakeOffShoes extends Skill {
         getSelf().strip(ClothingSlot.feet, c);
         if (target.body.getFetish(FeetPart.TYPE).isPresent() && target.body.getFetish(FeetPart.TYPE).get().magnitude > .25) {
             writeOutput(c, Result.special, target);
-            target.temptWithSkill(c, getSelf(), getSelf().body.getRandom(FeetPart.TYPE), Global.random(17, 26), this);
+            target.temptWithSkill(c, getSelf(), getSelf().body.getRandomFeet(), Global.random(17, 26), this);
         } else {
             writeOutput(c, Result.normal, target);
         }

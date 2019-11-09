@@ -2,7 +2,6 @@ package nightgames.skills.petskills;
 
 import nightgames.characters.Character;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.FeetPart;
 import nightgames.characters.body.ToysPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -34,7 +33,7 @@ public class GoblinTease extends SimpleEnemySkill {
                 c.write(getSelf(), Global.format("{self:SUBJECT} steps over {other:name-possessive} dick and starts massaging it with "
                                 + "{self:possessive} latex-covered foot.",
                                     getSelf(), target));
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(FeetPart.TYPE), target.body.getRandomCock(), m, c);
+                target.body.pleasure(getSelf(), getSelf().body.getRandomFeet(), target.body.getRandomCock(), m, c);
             } else if (target.hasPussy() && target.clothingFuckable(target.body.getRandomPussy()) && !c.getStance().vaginallyPenetrated(c, target)) {
                 c.write(getSelf(), Global.format("{self:SUBJECT} pulls the humming vibrator our of {self:possessive} wet hole and "
                                 + "thrusts it between {other:name-possessive} legs.",

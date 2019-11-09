@@ -4,10 +4,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.FeetPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
@@ -154,12 +152,12 @@ public class BehindFootjob extends AbstractBehindStance {
             c.write(struggler, Global.format("{self:SUBJECT-ACTION:attempt} to twist out of {other:name-possessive} grip, but "
                             + " {other:pronoun-action:wrap} {other:possessive} legs around {self:possessive} waist and {other:pronoun-action:step} "
                             + "on {self:possessive} cock hard, making {self:direct-object} yelp.", struggler, top));
-            struggler.body.pleasure(top, top.body.getRandom(FeetPart.TYPE), struggler.body.getRandomCock(), Global.random(6, 11), c);
+            struggler.body.pleasure(top, top.body.getRandomFeet(), struggler.body.getRandomCock(), Global.random(6, 11), c);
         } else {
             c.write(struggler, Global.format("{self:SUBJECT-ACTION:attempt} to twist out of {other:name-possessive} grip, but "
                             + " {other:pronoun-action:wrap} {other:possessive} legs around {self:possessive} waist and digs {other:possessive} "
                             + "heels into {self:possessive} pussy, making {self:direct-object} yelp.", struggler, top));
-            struggler.body.pleasure(top, top.body.getRandom(FeetPart.TYPE), struggler.body.getRandomPussy(), Global.random(6, 11), c);
+            struggler.body.pleasure(top, top.body.getRandomFeet(), struggler.body.getRandomPussy(), Global.random(6, 11), c);
         }
         super.struggle(c, struggler);
     }

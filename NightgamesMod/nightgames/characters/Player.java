@@ -20,7 +20,6 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.EarsPart;
-import nightgames.characters.body.FeetPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.TentaclePart;
@@ -821,7 +820,7 @@ public class Player extends Character {
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                 } else {
                     c.write(this, "You pull " + target.getName() + " to you and rub your thigh against her girl parts.");
-                    target.body.pleasure(this, body.getRandom(FeetPart.TYPE), target.body.getRandomPussy(),
+                    target.body.pleasure(this, body.getRandomFeet(), target.body.getRandomPussy(),
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                 }
                 break;

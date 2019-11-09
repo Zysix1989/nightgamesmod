@@ -33,7 +33,7 @@ public class Footjob extends Skill {
 
     @Override
     public float priorityMod(Combat c) {
-        BodyPart feet = getSelf().body.getRandom(FeetPart.TYPE);
+        BodyPart feet = getSelf().body.getRandomFeet();
         Character other = c.getOpponent(getSelf());
         BodyPart otherpart = other.hasDick() ? other.body.getRandomCock() : other.body.getRandomPussy();
         if (feet != null) {
@@ -62,9 +62,9 @@ public class Footjob extends Skill {
                 c.write(getSelf(), Global.format(receive(c, m, Result.normal, target), getSelf(), target));
             }
             if (target.hasDick()) {
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(FeetPart.TYPE), target.body.getRandomCock(), m, c, this);
+                target.body.pleasure(getSelf(), getSelf().body.getRandomFeet(), target.body.getRandomCock(), m, c, this);
             } else {
-                target.body.pleasure(getSelf(), getSelf().body.getRandom(FeetPart.TYPE), target.body.getRandomPussy(), m, c, this);
+                target.body.pleasure(getSelf(), getSelf().body.getRandomFeet(), target.body.getRandomPussy(), m, c, this);
             }
             if (Global.random(100) < 15 + 2 * getSelf().get(Attribute.Fetish)) {
                 target.add(c, new BodyFetish(target, getSelf(), FeetPart.TYPE, .25));
