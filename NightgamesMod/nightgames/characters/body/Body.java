@@ -864,7 +864,7 @@ public class Body implements Cloneable {
     }
 
     private void addBallsIfNeeded() {
-        if (getRandom(BallsPart.TYPE) == null) {
+        if (getRandomBalls() == null) {
             add(new BallsPart());
         }
     }
@@ -1288,6 +1288,8 @@ public class Body implements Cloneable {
     }
 
     public SkinPart getSkin() { return (SkinPart) getRandom(SkinPart.TYPE); }
+
+    public BallsPart getRandomBalls() { return (BallsPart) getRandom(BallsPart.TYPE); }
 
     // yeah i know it's not that simple, but best try right now
     public static String partArticle(String type) {

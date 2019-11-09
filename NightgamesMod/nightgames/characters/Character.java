@@ -35,7 +35,6 @@ import nightgames.actions.UseLubricant;
 import nightgames.areas.Area;
 import nightgames.areas.NinjaStash;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.BallsPart;
 import nightgames.characters.body.Body;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
@@ -1543,7 +1542,7 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public boolean hasBalls() {
-        return body.getRandom(BallsPart.TYPE) != null;
+        return body.getRandomBalls() != null;
     }
 
     public boolean hasPussy() {
@@ -2576,7 +2575,7 @@ public Character clone() throws CloneNotSupportedException {
                 body.pleasure(null, null, body.getRandomCock(), 5, c);
             }
             if (hasBalls()) {
-                TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandom(BallsPart.TYPE));
+                TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandomBalls());
             }
             if (hasPussy()) {
                 TentaclePart.pleasureWithTentacles(c, this, 5, body.getRandomPussy());
