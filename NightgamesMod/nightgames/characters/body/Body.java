@@ -249,12 +249,12 @@ public class Body implements Cloneable {
     }
 
     public PussyPart getRandomPussy() {
-        return (PussyPart) getRandom("pussy");
+        return (PussyPart) getRandom(PussyPart.TYPE);
 
     }
 
     public WingsPart getRandomWings() {
-        return (WingsPart) getRandom("wings");
+        return (WingsPart) getRandom(WingsPart.TYPE);
     }
 
     public AssPart getRandomAss() {
