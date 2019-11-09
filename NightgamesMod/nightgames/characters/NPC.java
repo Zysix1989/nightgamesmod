@@ -597,7 +597,7 @@ public class NPC extends Character {
                     } else {
                         c.write(this, getName() + " catches you as you approach and grinds her knee into the tent in your "
                                         + target.getOutfit().getTopOfSlot(ClothingSlot.bottom) +".");
-                        target.body.pleasure(this, body.getRandom("legs"), target.body.getRandom(CockPart.TYPE),
+                        target.body.pleasure(this, body.getRandom("legs"), target.body.getRandomCock(),
                                         4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                     }
                 } else {

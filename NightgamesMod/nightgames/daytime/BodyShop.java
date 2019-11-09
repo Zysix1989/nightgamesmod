@@ -424,7 +424,7 @@ public class BodyShop extends Activity {
 
             @Override
             boolean available(Character buyer) {
-                Optional<BodyPart> optTarget = Optional.ofNullable(buyer.body.getRandom(CockPart.TYPE));
+                Optional<BodyPart> optTarget = Optional.ofNullable(buyer.body.getRandomCock());
                 return optTarget.map(p -> !p.isGeneric(buyer)).orElse(false);
             }
 

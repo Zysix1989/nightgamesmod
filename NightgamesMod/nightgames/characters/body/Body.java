@@ -1202,17 +1202,17 @@ public class Body implements Cloneable {
         if (anal) {
             if (!pitcher) {
                 totalCounterValue += getRandom(AssPart.TYPE)
-                    .counterValue(other.body.getRandom(CockPart.TYPE), self, other);
+                    .counterValue(other.body.getRandomCock(), self, other);
             } else {
-                totalCounterValue += getRandom(CockPart.TYPE)
+                totalCounterValue += getRandomCock()
                     .counterValue(other.body.getRandom(AssPart.TYPE), self, other);
             }
         } else {
             if (!pitcher) {
                 totalCounterValue += getRandom(PussyPart.TYPE)
-                    .counterValue(other.body.getRandom(CockPart.TYPE), self, other);
+                    .counterValue(other.body.getRandomCock(), self, other);
             } else {
-                totalCounterValue += getRandom(CockPart.TYPE)
+                totalCounterValue += getRandomCock()
                     .counterValue(other.body.getRandom(PussyPart.TYPE), self, other);
             }
         }
