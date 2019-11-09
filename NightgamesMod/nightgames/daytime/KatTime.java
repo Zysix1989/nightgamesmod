@@ -140,13 +140,13 @@ public class KatTime extends BaseNPCTime {
         catEars.ingredients.put(Item.Rope, 10);
         catEars.ingredients.put(Item.Aphrodisiac, 25);
         catEars.addRequirement((c, self, other) ->
-            self.body.getRandom(EarsPart.TYPE).isGeneric(self)
+            self.body.getRandomEars().isGeneric(self)
                 || !self.body.has(EarsPart.TYPE),
             "No cat ears");
         catEars.option = "Cat Ears";
         catEars.scene = "[Placeholder]<br/>Kat uses her totemic magic to grow you cat ears.";
         catEars.effect = (c, self, other) -> {
-            var ears = self.body.getRandom(EarsPart.TYPE);
+            var ears = self.body.getRandomEars();
             assert ears instanceof GenericBodyPart;
             ((GenericBodyPart) ears).addMod(new CatEarsMod());
             return true;

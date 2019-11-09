@@ -165,7 +165,7 @@ public class ReykaTime extends BaseNPCTime {
         TransformationOption pointedEars = new TransformationOption();
         pointedEars.ingredients.put(Item.SuccubusDraft, 10);
         pointedEars.ingredients.put(Item.semen, 5);
-        pointedEars.addRequirement((c, self, other) -> self.body.getRandom(EarsPart.TYPE).isGeneric(self)
+        pointedEars.addRequirement((c, self, other) -> self.body.getRandomEars().isGeneric(self)
             || !self.body.has(EarsPart.TYPE),
             "No pointed ears");
         pointedEars.option = "Pointed Ears";
@@ -177,7 +177,7 @@ public class ReykaTime extends BaseNPCTime {
                                         + "good twenty minutes of pinching and pulling on them, Reyka lets you know that she's done and gives you a mirror. You confirm that yes, you are now a proud owner of a set of "
                                         + "pointed fey-looking ears!";
         pointedEars.effect = (c, self, other) -> {
-            var ears = self.body.getRandom(EarsPart.TYPE);
+            var ears = self.body.getRandomEars();
             assert ears instanceof GenericBodyPart;
             ((GenericBodyPart) ears).addMod(new PointedEarsMod());
             return true;

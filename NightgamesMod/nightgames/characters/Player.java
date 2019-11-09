@@ -19,7 +19,6 @@ import nightgames.areas.Deployable;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.TentaclePart;
@@ -816,7 +815,7 @@ public class Player extends Character {
                     c.write(this, "You pull " + target.getName()
                                     + " off balance and lick her sensitive ear. She trembles as you nibble on her earlobe.");
                     target.body.pleasure(this, body.getRandom("tongue"),
-                        target.body.getRandom(EarsPart.TYPE),
+                        target.body.getRandomEars(),
                                     4 + Math.min(Global.random(get(Attribute.Seduction)), 20), c);
                 } else {
                     c.write(this, "You pull " + target.getName() + " to you and rub your thigh against her girl parts.");

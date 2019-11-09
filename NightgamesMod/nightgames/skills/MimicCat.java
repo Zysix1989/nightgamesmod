@@ -5,7 +5,6 @@ import nightgames.characters.Character;
 import nightgames.characters.Kat;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.EarsPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.CatEarsMod;
@@ -84,7 +83,7 @@ public class MimicCat extends Skill {
         getSelf().body.temporaryAddPart(tail, 10);
         tail.addTemporaryMod(new CatTailMod(), 10);
         tail.addTemporaryMod(new SlimeTailMod(), 10);
-        ((GenericBodyPart) getSelf().body.getRandom(EarsPart.TYPE)).addTemporaryMod(new CatEarsMod(), 10);
+        ((GenericBodyPart) getSelf().body.getRandomEars()).addTemporaryMod(new CatEarsMod(), 10);
         BreastsPart part = getSelf().body.getRandomBreasts();
         if (part != null) {
             part.temporarilyChangeSize(-1, 10);

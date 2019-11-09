@@ -341,7 +341,7 @@ public class BodyShop extends Activity {
 
             @Override
             boolean available(Character buyer) {
-                return !buyer.body.getRandom(EarsPart.TYPE).getMods().isEmpty();
+                return !buyer.body.getRandomEars().getMods().isEmpty();
             }
 
             @Override
