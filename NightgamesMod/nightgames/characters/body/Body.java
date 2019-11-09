@@ -304,7 +304,7 @@ public class Body implements Cloneable {
         return totalHotness;
     }
 
-    public void remove(BodyPart part) {
+    public void remove(GenericBodyPart part) {
         bodyParts.remove(part);
 
         updateCurrentParts();
@@ -1113,8 +1113,8 @@ public class Body implements Cloneable {
         }
 
         for (var bp : currentParts) {
-            if (bp instanceof GenericBodyPart) {
-                ((GenericBodyPart) bp).timePasses(c, character);
+            if (bp != null) {
+                bp.timePasses(c, character);
             }
         }
     }
