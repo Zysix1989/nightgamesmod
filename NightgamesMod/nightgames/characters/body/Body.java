@@ -1012,7 +1012,7 @@ public class Body implements Cloneable {
         } else {
             removeAll(BallsPart.TYPE);
         }
-        addReplace(new FacePart(face.hotness, femininity), 1);
+        face.setFemininity(femininity);
     }
 
     public void makeGenitalOrgans(CharacterSex sex) {

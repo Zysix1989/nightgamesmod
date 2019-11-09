@@ -87,4 +87,8 @@ public class FacePart extends GenericBodyPart {
     public FacePart copy() {
         return new FacePart(this);
     }
+
+    public void setFemininity(double femininity) {
+        this.femininity = femininity;
+    }
 }
