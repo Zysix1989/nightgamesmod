@@ -239,7 +239,7 @@ public class Combat {
     }
 
     public void applyFetish(Character self, Character other, String FetishType) {
-        if ( other.body.getRandom(FetishType) != null && !self.body.getFetish(FetishType).isPresent()) {
+        if ( other.body.getRandom(FetishType) != null && self.body.getFetish(FetishType).isEmpty()) {
             if (self.human()) {
                 var part = (GenericBodyPart) other.body.getRandom(FetishType);
                 write(self,
