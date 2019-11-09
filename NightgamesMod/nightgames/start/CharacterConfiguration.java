@@ -35,7 +35,6 @@ public abstract class CharacterConfiguration {
     protected Optional<Integer> level;
     protected Optional<Integer> xp;
     protected Optional<Collection<Trait>> traits;
-    protected Optional<BodyConfiguration> body;
     protected Optional<Collection<String>> clothing;
     protected Map<String, Float> growth;
 
@@ -47,7 +46,6 @@ public abstract class CharacterConfiguration {
         level = Optional.empty();
         xp = Optional.empty();
         traits = Optional.empty();
-        body = Optional.empty();
         clothing = Optional.empty();
         growth = new HashMap<>();
     }
@@ -71,15 +69,6 @@ public abstract class CharacterConfiguration {
         traits = mergeCollections(primaryConfig.traits, secondaryConfig.traits);
         growth.putAll(primaryConfig.growth);
         growth.putAll(secondaryConfig.growth);
-        if (primaryConfig.body.isPresent()) {
-            if (secondaryConfig.body.isPresent()) {
-                body = Optional.of(new BodyConfiguration(primaryConfig.body.get(), secondaryConfig.body.get()));
-            } else {
-                body = primaryConfig.body;
-            }
-        } else {
-            body = secondaryConfig.body;
-        }
     }
 
     private static final Field[] GROWTH_FIELDS = Growth.class.getFields();
@@ -177,7 +166,6 @@ public abstract class CharacterConfiguration {
             base.closet = new HashSet<>(clothes);
             base.change();
         }
-        body.ifPresent(b -> b.apply(base.body));
         base.levelUpIfPossible(null);
     }
 
@@ -192,7 +180,6 @@ public abstract class CharacterConfiguration {
                         .map(CharacterSex::valueOf);
         traits = JsonUtils.getOptionalArray(object, "traits")
                         .map(array -> JsonUtils.collectionFromJson(array, Trait.class));
-        body = JsonUtils.getOptionalObject(object, "body").map(BodyConfiguration::parse);
         clothing = JsonUtils.getOptionalArray(object, "clothing").map(JsonUtils::stringsFromJson);
         money = JsonUtils.getOptional(object, "money").map(JsonElement::getAsInt);
         level = JsonUtils.getOptional(object, "level").map(JsonElement::getAsInt);
@@ -212,7 +199,7 @@ public abstract class CharacterConfiguration {
     
 
     @Override public String toString() {
-        return "CharacterConfiguration with name "+name+" gender "+gender+" attributes "+attributes+" money "+money+" level "+level+" traits "+traits+" XP "+xp+" body "+body+" clothing "+clothing+" growth "+growth;
+        return "CharacterConfiguration with name "+name+" gender "+gender+" attributes "+attributes+" money "+money+" level "+level+" traits "+traits+" XP "+xp+" clothing "+clothing+" growth "+growth;
     }
     
     public boolean nameIsSet() {
