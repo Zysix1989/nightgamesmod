@@ -1,5 +1,6 @@
 package nightgames.characters;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -72,7 +73,18 @@ public class Growth implements Cloneable {
         var willpower = new CoreStatGrowth<WillpowerStat>(resources.get("willpower").getAsFloat(),
             resources.get("bonusWillpower").getAsFloat());
         this.coreStatsGrowth = new CoreStatsGrowth(stamina, arousal, willpower);
-        JsonSourceNPCDataLoader.loadGrowthResources(resources.getAsJsonObject(), this);
+        {
+            JsonArray points = resources.getAsJsonArray("points");
+            int defaultPoints = 3;
+            for (int i = 0; i < attributes.length; i++) {
+                if (i < points.size()) {
+                    attributes[i] = points.get(i).getAsInt();
+                    defaultPoints = attributes[i];
+                } else {
+                    attributes[i] = defaultPoints;
+                }
+            }
+        }
         JsonSourceNPCDataLoader.loadGrowthTraits(js.get("traits").getAsJsonArray(), this);
     }
 

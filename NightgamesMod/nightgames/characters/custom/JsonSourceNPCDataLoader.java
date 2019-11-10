@@ -151,19 +151,6 @@ public class JsonSourceNPCDataLoader {
         return JsonUtils.getGson().fromJson(obj, ItemAmount.class);
     }
 
-    public static void loadGrowthResources(JsonObject object, Growth growth) {
-        JsonArray points = object.getAsJsonArray("points");
-        int defaultPoints = 3;
-        for (int i = 0; i < growth.attributes.length; i++) {
-            if (i < points.size()) {
-                growth.attributes[i] = points.get(i).getAsInt();
-                defaultPoints = growth.attributes[i];
-            } else {
-                growth.attributes[i] = defaultPoints;
-            }
-        }
-    }
-
     protected static void loadPreferredAttributes(JsonArray arr, List<PreferredAttribute> preferredAttributes) {
         for (JsonElement element : arr) {
             JsonObject obj = element.getAsJsonObject();

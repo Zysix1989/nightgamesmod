@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import nightgames.characters.Attribute;
-import nightgames.characters.Growth;
 import nightgames.characters.MaxAttribute;
 import nightgames.characters.PreferredAttribute;
 import nightgames.characters.body.BallsPart;
@@ -127,19 +126,6 @@ public class JsonSourceNPCDataLoaderTest {
 
         assertThat(item, equalTo(new ItemAmount(Item.Strapon, 1)));
 
-    }
-
-    @Test public void testLoadGrowthResources() throws Exception {
-        JsonObject statsJSON = npcJSON.getAsJsonObject("stats");
-        JsonObject growthJSON = statsJSON.getAsJsonObject("growth");
-        JsonObject resourcesJSON = growthJSON.getAsJsonObject("resources");
-        Growth growth = new Growth();
-        JsonSourceNPCDataLoader.loadGrowthResources(resourcesJSON, growth);
-
-        Growth expectedGrowth = new Growth();
-        expectedGrowth.attributes = new int[] {9, 10, 11, 11};
-
-        assertThat(growth, SamePropertyValuesAs.samePropertyValuesAs(expectedGrowth));
     }
 
     @Test public void testLoadPreferredAttributes() throws Exception {
