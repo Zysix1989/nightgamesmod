@@ -37,7 +37,6 @@ public class Growth implements Cloneable {
     }
     private CoreStatsGrowth coreStatsGrowth;
     public int attributes[];
-    public int bonusAttributes;
     private int extraAttributes;
     private Map<Integer, List<Trait>> traits;
     private Map<Integer, Integer> traitPoints;
@@ -51,7 +50,6 @@ public class Growth implements Cloneable {
 
     public Growth(CoreStatsGrowth coreStatsGrowth) {
         this.coreStatsGrowth = coreStatsGrowth;
-        bonusAttributes = 1;
         extraAttributes = 0;
         attributes = new int[10];
         Arrays.fill(attributes, 4);
@@ -179,7 +177,7 @@ public class Growth implements Cloneable {
         character.availableAttributePoints += attributes[Math.min(character.rank, attributes.length-1)] + extraAttributes;
 
         if (Global.checkFlag(Flag.hardmode)) {
-            character.availableAttributePoints += bonusAttributes;
+            character.availableAttributePoints += 1;
         }
         addOrRemoveTraits(character);
     }
@@ -195,7 +193,7 @@ public class Growth implements Cloneable {
     }
    
     @Override public String toString() {
-        return "Growth bonusAttributes "+bonusAttributes+" attributes "+attributes+" traits "+traits;
+        return "Growth attributes "+attributes+" traits "+traits;
     }
     public void removeNullTraits() {
         traits.forEach((i, l) -> l.removeIf(t -> t == null));

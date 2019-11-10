@@ -138,7 +138,6 @@ public class JsonSourceNPCDataLoaderTest {
 
         Growth expectedGrowth = new Growth();
         expectedGrowth.attributes = new int[] {9, 10, 11, 11};
-        expectedGrowth.bonusAttributes = 12;
 
         assertThat(growth, SamePropertyValuesAs.samePropertyValuesAs(expectedGrowth));
     }
