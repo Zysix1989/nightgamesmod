@@ -743,7 +743,7 @@ public class Mara extends BasePersonality {
                                             self, other));
                             useGeneralTech();
                             useHarpoon();
-                            character.getGrowth().extraAttributes += 1;
+                            character.getGrowth().additionalExtraAttributePoint();
                             Global.getPlayer()
                                   .getGrowth().addTraitPoints(new int[] {12, 39}, Global.getPlayer());
                             return true;
@@ -809,7 +809,7 @@ public class Mara extends BasePersonality {
                                                             self, other, character.useFemalePronouns() ? "ess" : ""));
                                             useMindControl();
                                             useOcto();
-                                            character.getGrowth().extraAttributes += 1;
+                                            character.getGrowth().additionalExtraAttributePoint();
                                             Global.getPlayer()
                                                   .getGrowth().addTraitPoints(new int[] {21, 48}, Global.getPlayer());
                                             return true;

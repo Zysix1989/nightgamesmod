@@ -464,7 +464,7 @@ public class Maya extends BasePersonality {
                                             "[Placeholder] You tell {self:name} not to hold back on account of her experience. Her response suggest she's about to get much tougher.", self, other));
                             useFirstType2();
                             useFirstType1();
-                            character.getGrowth().extraAttributes += 1;
+                            character.getGrowth().additionalExtraAttributePoint();
                             Global.getPlayer()
                                   .getGrowth().addTraitPoints(new int[] {12, 39}, Global.getPlayer());
                             return true;
@@ -504,7 +504,7 @@ public class Maya extends BasePersonality {
                                                             self, other, character.useFemalePronouns() ? "ess" : ""));
                                             useSecondType1();
                                             useSecondType2();
-                                            character.getGrowth().extraAttributes += 1;
+                                            character.getGrowth().additionalExtraAttributePoint();
                                             Global.getPlayer().getGrowth().addTraitPoints(new int[] {21, 48}, Global.getPlayer());
                                             
                                             return true;

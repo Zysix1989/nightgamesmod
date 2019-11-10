@@ -183,7 +183,7 @@ public class Jewel extends BasePersonality {
                                             + "to be putting a lot more effort into the games. If you want to keep up, you'll probably have to step up your own efforts as well.");
                             useAnal();
                             useMartial();
-                            growth.extraAttributes += 1;
+                            growth.additionalExtraAttributePoint();
                             // some compensation for the added difficulty. She gets 4 traits and 3 attribute points/level, and you only get 2 traits, but you are fighting more people than just her.
                             Global.getPlayer().getGrowth().addTraitPoints(new int[] {25, 47}, Global.getPlayer());
                             return true;
@@ -810,7 +810,7 @@ public class Jewel extends BasePersonality {
                                                             + "to be putting a lot more effort into the games. If you want to keep up, you'll probably have to step up your own efforts as well.");
                                             useAnal();
                                             useMartial();
-                                           //growth.extraAttributes += 1;
+                                           //growth.additionalExtraAttributePoint();
                                             // some compensation for the added difficulty. She gets 4 traits and 3 attribute points/level, and you only get 2 traits, but you are fighting more people than just her.
                                             Global.getPlayer()
                                                   .getGrowth()
@@ -851,7 +851,7 @@ public class Jewel extends BasePersonality {
                                             + ", I think you just dug your own grave. We'll see if this <b>little girl</b> can change your mind the next time we meet.\"</i>");
                             useMental();
                             usePhysical();
-                            character.getGrowth().extraAttributes += 1;
+                            character.getGrowth().additionalExtraAttributePoint();
                             // some compensation for the added difficulty. She gets 4 traits and 3 attribute points/level, and you only get 2 traits, but you are fighting more people than just her.
                             Global.getPlayer()
                                   .getGrowth()

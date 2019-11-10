@@ -193,7 +193,7 @@ public class Kat extends BasePersonality {
                                             + "Her new resolve could be... <i>troubling</i>.");
                             useSpeed();
                             usePower();
-                            character.getGrowth().extraAttributes += 1;
+                            character.getGrowth().additionalExtraAttributePoint();
                             Global.getPlayer().getGrowth().addTraitPoints(new int[]{12,39},Global.getPlayer());
                             return true;
                         })
@@ -279,7 +279,7 @@ public class Kat extends BasePersonality {
                                             + "You show a trouble face when she leaves. Having sex with a hungry sex kitten while high on pheromones did feel great, but you're not sure if you can last the night again.", self, other));
                             usePheromones();
                             useFrenzy();
-                            character.getGrowth().extraAttributes += 1;
+                            character.getGrowth().additionalExtraAttributePoint();
                             // some compensation for the added difficulty. She gets 6 traits and 1 attribute point/level, and you only get 2 traits, but you are fighting more people than just her.
                             Global.getPlayer().getGrowth().addTraitPoints(new int[]{21,48},Global.getPlayer());
                             return true;

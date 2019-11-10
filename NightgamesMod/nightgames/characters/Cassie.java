@@ -782,7 +782,7 @@ public class Cassie extends BasePersonality {
                                             + "That's okay, I'll work hard on making both irresistible!\"");
                             useMouthFocus();
                             useBreastsFocus();
-                            character.getGrowth().extraAttributes += 1;
+                            character.getGrowth().additionalExtraAttributePoint();
                             // some compensation for the added difficulty. She gets 4 traits and 3 attribute points/level, and you only get 2 traits, but you are fighting more people than just her.
                             Global.getPlayer().getGrowth().addTraitPoints(new int[]{1,57},Global.getPlayer());
                             return true;
@@ -826,7 +826,7 @@ public class Cassie extends BasePersonality {
                             useSubmissiveBonus();
                             character.getGrowth().addTrait(21, Trait.flexibleRole);
                             useEnchantressBonus();
-                            character.getGrowth().extraAttributes += 1;
+                            character.getGrowth().additionalExtraAttributePoint();
                             return true;
                         })
                     )

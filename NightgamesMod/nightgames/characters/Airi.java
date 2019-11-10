@@ -268,7 +268,7 @@ public class Airi extends BasePersonality {
                                   + "Looming over you, the asian girl speaks <i>\"Share my secrets...? No. Have to... find out yourself...\"</i> Uh oh, seems like you pissed her off. This could be bad.");
                             useSlime();
                             useMimicry();
-                            character.getGrowth().extraAttributes += 1;
+                            character.getGrowth().additionalExtraAttributePoint();
                             // some compensation for the added difficulty. She gets 6 traits and 2 attribute points/level, and you only get 2 traits, but you are fighting more people than just her.
                             Global.getPlayer().getGrowth().addTraitPoints(new int[]{12,39},Global.getPlayer());
                             return true;
@@ -347,7 +347,7 @@ public class Airi extends BasePersonality {
                                             + "<i>Hah... hah... fat... I am...? I'll have you... eat your words... You will... pay...</i> Okay definitely not a good idea. NOT A GOOD IDEA.");
                             useReplication();
                             useTentacles();
-                            character.getGrowth().extraAttributes += 1;
+                            character.getGrowth().additionalExtraAttributePoint();
                             // some compensation for the added difficulty. She gets 5 traits and 1 attribute point/level, and you only get 2 traits, but you are fighting more people than just her.
                             Global.getPlayer().getGrowth().addTraitPoints(new int[]{21,48},Global.getPlayer());
                             return true;

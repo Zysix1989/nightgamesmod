@@ -494,7 +494,7 @@ public class Eve extends BasePersonality {
                                             "[Placeholder] You tell {self:name} not to hold back. She DID she she's here to have fun, after all. Her response suggest she's about to get much tougher.", self, other));
                             useFirstType2();
                             useFirstType1();
-                            character.getGrowth().extraAttributes += 1;
+                            character.getGrowth().additionalExtraAttributePoint();
                             Global.getPlayer()
                                   .getGrowth().addTraitPoints(new int[] {12, 39}, Global.getPlayer());
                             return true;
@@ -532,7 +532,7 @@ public class Eve extends BasePersonality {
                                                             self, other, character.useFemalePronouns() ? "ess" : ""));
                                             useSecondType1();
                                             useSecondType2();
-                                            character.getGrowth().extraAttributes += 1;
+                                            character.getGrowth().additionalExtraAttributePoint();
                                             Global.getPlayer().getGrowth().addTraitPoints(new int[] {21, 48}, Global.getPlayer());
                                             return true;
                                         }))));

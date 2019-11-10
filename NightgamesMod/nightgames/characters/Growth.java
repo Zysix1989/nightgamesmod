@@ -38,7 +38,7 @@ public class Growth implements Cloneable {
     private CoreStatsGrowth coreStatsGrowth;
     public int attributes[];
     public int bonusAttributes;
-    public int extraAttributes;
+    private int extraAttributes;
     private Map<Integer, List<Trait>> traits;
     private Map<Integer, Integer> traitPoints;
     public Map<Integer, List<GenericBodyPart>> bodyParts;
@@ -201,4 +201,7 @@ public class Growth implements Cloneable {
         traits.forEach((i, l) -> l.removeIf(t -> t == null));
     }
 
+    public void additionalExtraAttributePoint() {
+        this.extraAttributes += 1;
+    }
 }

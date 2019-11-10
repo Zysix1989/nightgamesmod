@@ -738,7 +738,7 @@ public class Angel extends BasePersonality {
                                             + "Angel looks like she's found a whole new level of resolve- you suddenly realize that you've made a terrible mistake. You resolve to step up training yourself, if that's possible.");
                             useNymphomania();
                             useSex();
-                            character.getGrowth().extraAttributes += 1;
+                            character.getGrowth().additionalExtraAttributePoint();
                             // some compensation for the added difficulty. She gets 6 traits and 2 attribute points/level, and you only get 2 traits, but you are fighting more people than just her.
                             Global.getPlayer()
                                   .getGrowth()
@@ -812,7 +812,7 @@ public class Angel extends BasePersonality {
                                             self, other));
                             useWorship();
                             useFollowers();
-                            character.getGrowth().extraAttributes += 1;
+                            character.getGrowth().additionalExtraAttributePoint();
                             // some compensation for the added difficulty. She gets 6 traits and 1 attribute point/level, and you only get 2 traits, but you are fighting more people than just her.
                             Global.getPlayer()
                                   .getGrowth()
