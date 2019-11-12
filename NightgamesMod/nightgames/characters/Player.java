@@ -126,7 +126,6 @@ public class Player extends Character {
 
     public void setGrowth() {
         setGrowth(newGrowth());
-        getGrowth().attributes = new int[]{2, 3, 3, 3};
     }
 
     public String describeStatus() {

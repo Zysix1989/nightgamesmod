@@ -1,13 +1,12 @@
 package nightgames.characters;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.mods.PartMod;
@@ -21,6 +20,8 @@ import nightgames.items.clothing.Clothing;
 import nightgames.utilities.DebugHelper;
 
 public class Growth implements Cloneable {
+    private static final Integer maxRank = 3;
+
     public class PartModApplication {
         private final PartMod mod;
         private final String bodyPartType;
@@ -37,7 +38,7 @@ public class Growth implements Cloneable {
         }
     }
     private CoreStatsGrowth coreStatsGrowth;
-    public int attributes[];
+    private Map<Integer, Integer> attributesForRank;
     private int extraAttributes;
     private Map<Integer, List<Trait>> traits;
     private Map<Integer, Integer> traitPoints;
@@ -52,9 +53,11 @@ public class Growth implements Cloneable {
     public Growth(CoreStatsGrowth coreStatsGrowth) {
         this.coreStatsGrowth = coreStatsGrowth;
         extraAttributes = 0;
-        attributes = new int[10];
-        Arrays.fill(attributes, 4);
-        attributes[0] = 3;
+        attributesForRank = new HashMap<>();
+        attributesForRank.put(0, 3);
+        for (int i = 1; i <= maxRank; i++) {
+            attributesForRank.put(i, 4);
+        }
         traits = new HashMap<>();
         bodyParts = new HashMap<>();
         bodyPartMods = new HashMap<>();
@@ -74,14 +77,13 @@ public class Growth implements Cloneable {
             resources.get("bonusWillpower").getAsFloat());
         this.coreStatsGrowth = new CoreStatsGrowth(stamina, arousal, willpower);
         {
-            JsonArray points = resources.getAsJsonArray("points");
-            int defaultPoints = 3;
-            for (int i = 0; i < attributes.length; i++) {
-                if (i < points.size()) {
-                    attributes[i] = points.get(i).getAsInt();
-                    defaultPoints = attributes[i];
-                } else {
-                    attributes[i] = defaultPoints;
+            var points = resources.getAsJsonObject("points");
+            if (points != null) {
+                for (int i = 0; i <= maxRank; i++) {
+                    var pointsForRank = points.get(Integer.toString(i));
+                    if (pointsForRank != null) {
+                        attributesForRank.put(i, pointsForRank.getAsInt());
+                    }
                 }
             }
         }
@@ -205,7 +207,7 @@ public class Growth implements Cloneable {
     }
    
     @Override public String toString() {
-        return "Growth attributes "+attributes+" traits "+traits;
+        return " traits "+traits;
     }
     public void removeNullTraits() {
         traits.forEach((i, l) -> l.removeIf(t -> t == null));
@@ -216,6 +218,7 @@ public class Growth implements Cloneable {
     }
 
     public int attributePointsForRank(int rank) {
-        return attributes[Math.min(rank, attributes.length-1)];
+        var res = Optional.ofNullable(attributesForRank.get(rank));
+        return res.orElseThrow(() -> new IllegalArgumentException(String.format("illegal rank %d", rank)));
     }
 }
