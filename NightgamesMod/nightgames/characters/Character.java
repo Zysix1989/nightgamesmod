@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -77,7 +76,6 @@ import nightgames.json.JsonUtils;
 import nightgames.match.Encounter;
 import nightgames.match.Match;
 import nightgames.match.ftc.FTCMatch;
-import nightgames.pet.CharacterPet;
 import nightgames.pet.PetCharacter;
 import nightgames.pet.arms.ArmManager;
 import nightgames.skills.AssFuck;
@@ -107,6 +105,7 @@ import nightgames.status.addiction.Addiction.Severity;
 import nightgames.status.addiction.AddictionType;
 import nightgames.status.addiction.Dominance;
 import nightgames.status.addiction.MindControl;
+import nightgames.traits.Apostles;
 import nightgames.traits.Insatiable;
 import nightgames.traits.Wrassler;
 import nightgames.trap.Trap;
@@ -115,7 +114,6 @@ import nightgames.utilities.ProseUtils;
 
 @SuppressWarnings("unused")
 public abstract class Character extends Observable implements Cloneable {
-    private static final String APOSTLES_COUNT = "APOSTLES_COUNT";              //TODO: Divinity and associated Trait mechanics should all be turned into classes from abstract Trait. - DSM
 
     private String name;
     public CharacterSex initialGender;
@@ -2487,22 +2485,8 @@ public Character clone() throws CloneNotSupportedException {
         willpower.recover(i);
         c.writeSystemMessage(String.format("%s regained <font color='rgb(181,230,30)'>%d<font color='white'> willpower.", subject(), i), true);
     }
-    
-    /**FIXME: What is this private and static list of strings doing here? Can we move Angels Apostles to an approriate skill or trait object? - DSM */
-    private static List<String> ANGEL_APOSTLES_QUOTES = Arrays.asList(
-                    "The space around {self:name-do} starts abruptly shimmering. "
-                    + "{other:SUBJECT-ACTION:look|looks} up in alarm, but {self:subject} just chuckles. "
-                    + "<i>\"{other:NAME}, a Goddess should have followers don't you agree? Let's see how you fare in a ménage-à-trois, yes?\"</i>",
-                    "A soft light starts growing around {self:name-do}, causing {other:subject} to pause. "
-                    + "{self:SUBJECT} holds up her arms as if to welcome someone. "
-                    + "<i>\"Sex with just two is just so <b>lonely</b> don't you think? Let's spice it up a bit!\"</i>",
-                    "Suddenly, several pillars of light descend from the sky and converge in front of {self:name-do} in the form of a humanoid figure. "
-                    + "Not knowing what's going on, {other:subject-action:cautiously approach|cautiously approaches}. "
-                    + "{self:SUBJECT} reaches into the light and holds the figure's hands. "
-                    + "<i>\"See {other:name}, I'm not a greedy {self:girl}. I can share with my friends.\"</i>"
-                    );
 
-    /**Helper method that Handles the inserted? 
+    /**Helper method that Handles the inserted?
      * 
      * @param c
      * The Combat that this method requires.
@@ -2684,20 +2668,8 @@ public Character clone() throws CloneNotSupportedException {
             }
         }
 
-        if (canRespond() && has(Trait.apostles) && c.getCombatantData(this).getIntegerFlag(APOSTLES_COUNT) >= 4) {
-            List<BasePersonality> possibleApostles = Arrays.asList(new Mei(), new Caroline(), new Sarah())
-                            .stream()
-                            .filter(possible -> !c.getOtherCombatants().contains(possible))
-                            .collect(Collectors.toList());
-            if (!possibleApostles.isEmpty()) {
-                CharacterPet pet = new CharacterPet(this, Global.pickRandom(possibleApostles).get().getCharacter(), getLevel() - 5, getLevel()/4);
-                c.write(this, Global.format(Global.pickRandom(ANGEL_APOSTLES_QUOTES).get(), this, opponent));
-                c.addPet(this, pet.getSelf());
-                c.getCombatantData(this).setIntegerFlag(APOSTLES_COUNT, 0);
-            }
-        }
-        if (c.getPetsFor(this).size() < getPetLimit()) {
-            c.getCombatantData(this).setIntegerFlag(APOSTLES_COUNT, c.getCombatantData(this).getIntegerFlag(APOSTLES_COUNT) + 1);
+        if (has(Trait.apostles)) {
+            Apostles.eachCombatRound(c, this, opponent);
         }
 
         if (has(Trait.Rut) && Global.random(100) < ((getArousal().percent() - 25) / 2) && !is(Stsflag.frenzied)) {
