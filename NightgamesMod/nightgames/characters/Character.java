@@ -2864,14 +2864,16 @@ public Character clone() throws CloneNotSupportedException {
             if (location().id() == Movement.dorm) {
                 if (Global.getMatch().gps("Quad").get().present.isEmpty()) {
                     if (human()) {
-                        Global.gui()
-                                        .message("You hear your opponents searching around the dorm, so once you finish changing, you hop out the window and head to the quad.");
+                        Global.gui().message("You hear your opponents searching around the "
+                            + "dorm, so once you finish changing, you hop out the window and "
+                            + "head to the quad.");
                     }
                     travel(Global.getMatch().gps("Quad").get());
                 } else {
                     if (human()) {
-                        Global.gui()
-                                        .message("You hear your opponents searching around the dorm, so once you finish changing, you quietly move downstairs to the laundry room.");
+                        Global.gui().message("You hear your opponents searching around "
+                            + "the dorm, so once you finish changing, you quietly move "
+                            + "downstairs to the laundry room.");
                     }
                     travel(Global.getMatch().gps("Laundry").get());
                 }
@@ -2879,14 +2881,16 @@ public Character clone() throws CloneNotSupportedException {
             if (location().id() == Movement.union) {
                 if (Global.getMatch().gps("Quad").get().present.isEmpty()) {
                     if (human()) {
-                        Global.gui()
-                                        .message("You don't want to be ambushed leaving the student union, so once you finish changing, you hop out the window and head to the quad.");
+                        Global.gui().message("You don't want to be ambushed leaving the "
+                            + "student union, so once you finish changing, you hop out the "
+                            + "window and head to the quad.");
                     }
                     travel(Global.getMatch().gps("Quad").get());
                 } else {
                     if (human()) {
-                        Global.gui()
-                                        .message("You don't want to be ambushed leaving the student union, so once you finish changing, you sneak out the back door and head to the pool.");
+                        Global.gui().message("You don't want to be ambushed leaving "
+                            + "the student union, so once you finish changing, you sneak out "
+                            + "the back door and head to the pool.");
                     }
                     travel(Global.getMatch().gps("Pool").get());
                 }
