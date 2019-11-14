@@ -2516,15 +2516,7 @@ public Character clone() throws CloneNotSupportedException {
         });
     }
 
-    /**Performs various functions surrounding insertion of a part into another.
-     * 
-     * @param c
-     * The combat that this method requires.
-     *  
-     * @param opponent
-     * The opponent.
-     * */
-    public void eot(Combat c, Character opponent) {
+    public void endOfCombatRound(Combat c, Character opponent) {
         dropStatus(c, opponent);
         tick(c);
         List<String> removed = new ArrayList<>();

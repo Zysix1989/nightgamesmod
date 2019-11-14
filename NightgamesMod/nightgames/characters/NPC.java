@@ -702,8 +702,8 @@ public class NPC extends Character {
     }
 
     @Override
-    public void eot(Combat c, Character opponent) {
-        super.eot(c, opponent);
+    public void endOfCombatRound(Combat c, Character opponent) {
+        super.endOfCombatRound(c, opponent);
         ai.eot(c, opponent);
         if (opponent.has(Trait.pheromones) && opponent.getArousal().percent() >= 20 && opponent.rollPheromones(c)) {
             c.write(opponent, Global.format("<br/>{other:SUBJECT-ACTION:see} {self:subject} swoon slightly "

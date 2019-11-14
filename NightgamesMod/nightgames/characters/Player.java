@@ -875,8 +875,8 @@ public class Player extends Character {
     }
 
     @Override
-    public void eot(Combat c, Character opponent) {
-        super.eot(c, opponent);
+    public void endOfCombatRound(Combat c, Character opponent) {
+        super.endOfCombatRound(c, opponent);
         if (has(Trait.RawSexuality)) {
             c.write(this, Global.format("{self:NAME-POSSESSIVE} raw sexuality turns both of you on.", this, opponent));
             temptNoSkillNoSource(c, opponent, arousal.max() / 25);

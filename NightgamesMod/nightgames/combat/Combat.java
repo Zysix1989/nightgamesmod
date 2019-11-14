@@ -417,13 +417,13 @@ public class Combat {
     }
 
     private void doEndOfTurnUpkeep() {
-        p1.eot(this, p2);
-        p2.eot(this, p1);
+        p1.endOfCombatRound(this, p2);
+        p2.endOfCombatRound(this, p1);
         // iterate through all the pets here so we don't get concurrent modification issues
         List<PetCharacter> pets = new ArrayList<>(otherCombatants);
         pets.forEach(other -> {
             if (otherCombatants.contains(other)) {
-                other.eot(this, getOpponent(other));
+                other.endOfCombatRound(this, getOpponent(other));
             }
         });  
         checkStamina(p1);
