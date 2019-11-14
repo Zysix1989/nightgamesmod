@@ -2747,10 +2747,8 @@ public Character clone() throws CloneNotSupportedException {
         travel(adjacent[Global.random(adjacent.length)]);
         location2.endEncounter();
     }
-    
-    /**Performs this character's upkeep for a combat round.
-     * */
-    public void upkeep() {
+
+    public void endOfMatchRound() {
         getTraits().forEach(trait -> {
             if (trait.status != null) {
                 Status newStatus = trait.status.instance(this, null);

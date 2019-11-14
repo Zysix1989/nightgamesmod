@@ -187,7 +187,7 @@ public class Match {
                 var self = participant.getCharacter();
                 Global.gui().refresh();
                 if (self.state != State.quit) {
-                    self.upkeep();
+                    self.endOfMatchRound();
                     manageConditions(self);
                     self.move();
                     afterTurn(participant);

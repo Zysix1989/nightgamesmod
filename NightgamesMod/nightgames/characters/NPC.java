@@ -842,8 +842,8 @@ public class NPC extends Character {
     }
     
     @Override
-    public void upkeep() {
-        super.upkeep();
+    public void endOfMatchRound() {
+        super.endOfMatchRound();
         moodSwing();
         decayMood();
         update();
