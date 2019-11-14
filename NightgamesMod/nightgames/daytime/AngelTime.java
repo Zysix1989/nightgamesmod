@@ -200,11 +200,11 @@ public class AngelTime extends BaseNPCTime {
             choices.add("Sparring");
             choices.add("Sex");
             if (Global.getPlayer()
-                      .checkAddiction(AddictionType.ZEAL)) {
+                      .checkAddiction(AddictionType.ZEAL, npc)) {
                 choices.add("Worship");
             }
         } else if (Global.getPlayer()
-                         .checkAddiction(AddictionType.ZEAL)) {
+                         .checkAddiction(AddictionType.ZEAL,npc)) {
             Global.gui()
                   .message("Angel low-affection zeal intro");
             if (npc.getAttraction(player) < 15) {
@@ -534,7 +534,7 @@ public class AngelTime extends BaseNPCTime {
     
     @Override
     public Optional<String> getAddictionOption() {
-        return Global.getPlayer().checkAddiction(AddictionType.ZEAL) ? Optional.of("Worship") : Optional.empty();
+        return Global.getPlayer().checkAddiction(AddictionType.ZEAL,npc) ? Optional.of("Worship") : Optional.empty();
     }
 
     @Override

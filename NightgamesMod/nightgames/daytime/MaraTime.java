@@ -2,17 +2,16 @@ package nightgames.daytime;
 
 import java.util.ArrayList;
 import java.util.Optional;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.AssPart;
-import nightgames.characters.body.mods.pitcher.BionicCockMod;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
 import nightgames.characters.body.MouthPart;
 import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.CyberneticMod;
+import nightgames.characters.body.mods.pitcher.BionicCockMod;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.requirements.BodyPartRequirement;
@@ -145,10 +144,10 @@ public class MaraTime extends BaseNPCTime {
             if(player.getPure(Attribute.Arcane)>=3){
                 choices.add("Faerie play");
             }
-            if (Global.getPlayer().checkAddiction(AddictionType.MIND_CONTROL)) {
+            if (Global.getPlayer().checkAddiction(AddictionType.MIND_CONTROL,npc)) {
                 choices.add("Confront about control");
             }
-        } else if (Global.getPlayer().checkAddiction(AddictionType.MIND_CONTROL)) {
+        } else if (Global.getPlayer().checkAddiction(AddictionType.MIND_CONTROL,npc)) {
             Global.gui()
             .message("Mara low-affection addiction intro");
             if (npc.getAttraction(player) < 15) {
@@ -523,7 +522,7 @@ public class MaraTime extends BaseNPCTime {
     
     @Override
     public Optional<String> getAddictionOption() {
-        return Global.getPlayer().checkAddiction(AddictionType.MIND_CONTROL) ? 
+        return Global.getPlayer().checkAddiction(AddictionType.MIND_CONTROL,npc) ?
                         Optional.of("Confront about control") : Optional.empty();
     }
 

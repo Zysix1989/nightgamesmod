@@ -174,10 +174,10 @@ public class KatTime extends BaseNPCTime {
                             && Global.getNPC("Kat").getAffection(player) >= 5) {
                 choices.add("Ask about Animal Spirit");
             }
-            if (Global.getPlayer().checkAddiction(AddictionType.BREEDER)) {
+            if (Global.getPlayer().checkAddiction(AddictionType.BREEDER,npc)) {
                 choices.add("Must... Fuck...");
             }
-        } else if (Global.getPlayer().checkAddiction(AddictionType.BREEDER)) {
+        } else if (Global.getPlayer().checkAddiction(AddictionType.BREEDER,npc)) {
             Global.gui()
             .message("Kat low-affection addiction intro");
             if (npc.getAttraction(player) < 15) {

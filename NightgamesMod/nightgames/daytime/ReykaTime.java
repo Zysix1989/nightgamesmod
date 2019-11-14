@@ -257,11 +257,11 @@ public class ReykaTime extends BaseNPCTime {
             choices.add("Games");
             choices.add("Sparring");
             choices.add("Sex");
-            if (Global.getPlayer().checkAddiction(AddictionType.CORRUPTION)) {
+            if (Global.getPlayer().checkAddiction(AddictionType.CORRUPTION,npc)) {
                 choices.add("Strengthen Corruption");
             }
         } else if (Global.getPlayer()
-                         .checkAddiction(AddictionType.CORRUPTION)) {
+                         .checkAddiction(AddictionType.CORRUPTION,npc)) {
             Global.gui().message("Reyka low-affection corruption intro");
             if (npc.getAttraction(player) < 15) {
                 npc.gainAttraction(player, 2);
@@ -791,7 +791,7 @@ public class ReykaTime extends BaseNPCTime {
     
     @Override
     public Optional<String> getAddictionOption() {
-        return Global.getPlayer().checkAddiction(AddictionType.CORRUPTION) ? Optional.of("Strengthen Corruption") : Optional.empty();
+        return Global.getPlayer().checkAddiction(AddictionType.CORRUPTION,npc) ? Optional.of("Strengthen Corruption") : Optional.empty();
     }
 
     @Override

@@ -409,7 +409,7 @@ public class Kat extends BasePersonality {
         Character opponent = c.getOpponent(character);
         character.arousal.renew();
 
-        if (c.getStance().vaginallyPenetrated(c,opponent) && opponent instanceof Player && ((Player) opponent).checkAddiction(AddictionType.BREEDER)) {
+        if (c.getStance().vaginallyPenetrated(c,opponent) && opponent instanceof Player && opponent.checkAddiction(AddictionType.BREEDER, character)) {
             opponent.add(c, Pheromones.getWith(character, opponent, 5, 10));
             opponent.add(c, Pheromones.getWith(character, opponent, 20, 5, " feral musk"));
             return "As Kat desperately pounds into you, you mindlessly grind back against her, trying to force her cock as deep into your vagina as it will go. You tried to fight "

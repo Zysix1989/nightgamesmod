@@ -380,7 +380,7 @@ public class JewelTime extends BaseNPCTime {
     @Override
     public Optional<String> getAddictionOption() {
         return Global.getPlayer()
-                     .checkAddiction(AddictionType.DOMINANCE) ? Optional.of("Ask about Dominance") : Optional.empty();
+                     .checkAddiction(AddictionType.DOMINANCE,npc) ? Optional.of("Ask about Dominance") : Optional.empty();
     }
 
     @Override

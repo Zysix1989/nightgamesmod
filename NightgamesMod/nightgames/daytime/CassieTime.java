@@ -169,10 +169,10 @@ public class CassieTime extends BaseNPCTime {
             choices.add("Games");
             choices.add("Sparring");
             choices.add("Sex");
-            if (npc.has(Trait.magicmilk) && Global.getPlayer().checkAddiction(AddictionType.MAGIC_MILK)) {
+            if (npc.has(Trait.magicmilk) && Global.getPlayer().checkAddiction(AddictionType.MAGIC_MILK, npc)) {
                 choices.add("Ask for milk");
             }
-        } else if (Global.getPlayer().checkAddiction(AddictionType.MAGIC_MILK)) {
+        } else if (Global.getPlayer().checkAddiction(AddictionType.MAGIC_MILK,npc)) {
             Global.gui().message(
                             "You find Cassie studying in the library, a ways out of earshot of the other students. She catches your eye and smiles knowingly. "
                             + "Putting down her book, she walks to you and whispers in your ear, <i>Give me five minutes, then meet me in the girls bathroom on the third floor. Don't worry, it's always empty.</i>"
@@ -620,7 +620,7 @@ public class CassieTime extends BaseNPCTime {
     
     @Override
     public Optional<String> getAddictionOption() {
-        return Global.getPlayer().checkAddiction(AddictionType.MAGIC_MILK) ? Optional.of("Ask for milk") : Optional.empty();
+        return Global.getPlayer().checkAddiction(AddictionType.MAGIC_MILK,npc) ? Optional.of("Ask for milk") : Optional.empty();
     }
 
     @Override

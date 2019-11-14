@@ -8,9 +8,6 @@ import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.stance.Behind;
 import nightgames.stance.StandingOver;
-
-import nightgames.status.Charmed;
-
 import nightgames.status.Stsflag;
 import nightgames.status.addiction.AddictionType;
 
@@ -28,7 +25,8 @@ public class Growl extends Skill {
     @Override
     public boolean usable(Combat c, Character target) {
         return !(target.is(Stsflag.wary) || target.is(Stsflag.charmed)) && getSelf().canAct() && getSelf().crotchAvailable() && target.crotchAvailable()
-                        && c.getStance().mobile(getSelf()) && getSelf().getArousal().percent() >= 20 && (target instanceof Player) && ((Player)target).checkAddiction(AddictionType.BREEDER);
+                        && c.getStance().mobile(getSelf()) && getSelf().getArousal().percent() >= 20 && (target instanceof Player) && target
+            .checkAddiction(AddictionType.BREEDER);
     }
     
     @Override
