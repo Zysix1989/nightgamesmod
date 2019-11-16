@@ -3327,36 +3327,6 @@ public Character clone() throws CloneNotSupportedException {
         return null;
     }
 
-    /**Returns true if this character knows the given skill.*/
-    public boolean knows(Skill skill) {
-        for (Skill s : getSkills()) {
-            if (s.equals(skill)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    /**Returns true if the character can afford the given value.
-     * @param val
-     * The value that is tested against the character's current money.
-     * */
-    public boolean canAfford(int val){
-        if (this.money >= val) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    /**Spends the amount of money given. Works best with canAfford().
-     * @param val
-     * The value of money to spend.
-     * */
-    public void spendMoney(int val){
-        this.money -= val;
-    }
-
     /**Processes teh end of the battle for this character. */
     public void endofbattle(Combat c) {
         for (Status s : status) {
@@ -3466,10 +3436,6 @@ public Character clone() throws CloneNotSupportedException {
 
     public String toString() {
         return getType();
-    }
-
-    public boolean taintedFluids() {
-        return Global.random(get(Attribute.Dark) / 4 + 5) >= 4;
     }
 
     /***/
