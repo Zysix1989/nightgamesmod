@@ -29,6 +29,9 @@ import nightgames.combat.Result;
 import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
+import nightgames.grammar.PersonalGrammar;
+import nightgames.grammar.SingularFeminineThirdPerson;
+import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
@@ -870,5 +873,14 @@ public class NPC extends Character {
     @Override
     public Optional<ArmManager> getArmManager() {
         return ai.getArmManager();
+    }
+
+    @Override
+    public PersonalGrammar getGrammar() {
+        if (useFemalePronouns()) {
+            return new SingularFeminineThirdPerson();
+        } else {
+            return new SingularMasculineThirdPerson();
+        }
     }
 }

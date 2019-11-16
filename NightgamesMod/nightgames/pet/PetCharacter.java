@@ -17,6 +17,9 @@ import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
+import nightgames.grammar.PersonalGrammar;
+import nightgames.grammar.SingularFeminineThirdPerson;
+import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Encounter;
 import nightgames.nskills.tags.SkillTag;
@@ -327,7 +330,15 @@ public class PetCharacter extends Character {
     @Override
     public void spy(Character opponent, Encounter enc) {
         // TODO Auto-generated method stub
-        
+    }
+
+    @Override
+    public PersonalGrammar getGrammar() {
+        if (useFemalePronouns()) {
+            return new SingularFeminineThirdPerson();
+        } else {
+            return new SingularMasculineThirdPerson();
+        }
     }
 
 }

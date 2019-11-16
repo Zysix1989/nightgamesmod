@@ -41,6 +41,8 @@ import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.global.Scene;
+import nightgames.grammar.PersonalGrammar;
+import nightgames.grammar.SingularSecondPerson;
 import nightgames.gui.GUI;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
@@ -920,16 +922,6 @@ public class Player extends Character {
     }
 
     @Override
-    public String possessiveAdjective() {
-        return "your";
-    }
-    
-    @Override
-    public String possessivePronoun() {
-        return "yours";
-    }
-
-    @Override
     public String subject() {
         return "you";
     }
@@ -937,16 +929,6 @@ public class Player extends Character {
     @Override
     public String subjectWas() {
         return subject() + " were";
-    }
-
-    @Override
-    public String pronoun() {
-        return "you";
-    }
-
-    @Override
-    public String objectPronoun() {
-        return "you";
     }
 
     @Override
@@ -1164,7 +1146,7 @@ public class Player extends Character {
     }
 
     @Override
-    public String reflexivePronoun() {
-        return "yourself";
+    public PersonalGrammar getGrammar() {
+        return new SingularSecondPerson();
     }
 }

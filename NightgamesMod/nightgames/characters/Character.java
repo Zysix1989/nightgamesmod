@@ -65,6 +65,7 @@ import nightgames.global.Configuration;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.global.Scene;
+import nightgames.grammar.PersonalGrammar;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.items.Loot;
@@ -3643,11 +3644,7 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public String pronoun() {
-        if (useFemalePronouns()) {
-            return "she";
-        } else {
-            return "he";
-        }
+        return getGrammar().subjectPronoun();
     }
 
     public Emotion getMood() {
@@ -3655,35 +3652,19 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public String possessiveAdjective() {
-        if (useFemalePronouns()) {
-            return "her";
-        } else {
-            return "his";
-        }
+        return getGrammar().possessiveAdjective();
     }
     
     public String possessivePronoun() {
-        if (useFemalePronouns()) {
-            return "hers";
-        } else {
-            return "his";
-        }
+        return getGrammar().possessivePronoun();
     }
 
     public String objectPronoun() {
-        if (useFemalePronouns()) {
-            return "her";
-        } else {
-            return "him";
-        }
+        return getGrammar().objectPronoun();
     }
     
     public String reflexivePronoun() {
-        if (useFemalePronouns()) {
-            return "herself";
-        } else {
-            return "himself";
-        }
+        return getGrammar().reflexivePronoun();
     }
 
     public boolean useFemalePronouns() {
@@ -4575,4 +4556,6 @@ public Character clone() throws CloneNotSupportedException {
     public Optional<Integer> getAttribute(Attribute a) {
         return Optional.ofNullable(att.get(a));
     }
+
+    public abstract PersonalGrammar getGrammar();
 }
