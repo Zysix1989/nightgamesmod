@@ -1713,14 +1713,6 @@ public class Global {
         return (float) rng.nextDouble();
     }
 
-    public static String maybeString(String string) {
-        if (Global.random(2) == 0) {
-            return string;
-        } else {
-            return "";
-        }
-    }
-
     @SafeVarargs
     public static <T> Optional<T> pickRandom(T ... arr) {
         if (arr == null || arr.length == 0) return Optional.empty();
