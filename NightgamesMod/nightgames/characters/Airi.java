@@ -53,6 +53,7 @@ import nightgames.start.NpcConfiguration;
 import nightgames.status.Flatfooted;
 import nightgames.status.SlimeMimicry;
 import nightgames.status.Stsflag;
+import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 public class Airi extends BasePersonality {
@@ -174,17 +175,16 @@ public class Airi extends BasePersonality {
         character.setGrowth(newGrowth());
         character.addCombatScene(new CombatScene((c, self, other) -> {
             return self.getLevel() >= 13 && self.has(Trait.slime) && !Global.checkFlag(AIRI_SLIME_FOCUS) && !Global.checkFlag(AIRI_MIMICRY_FOCUS);
-        }, (c, self, player) -> {
-                return Global.format("After the match, you spend a few minutes examining the slime girl, much to her disconcertment. "
-                                + "It's quite curious how she can easily transform between slime and human form. "
-                                + "Somehow, she can solidify her fluid composition into something indistinguishable from normal flesh and skin. "
-                                + "You suppose it must be pretty convenient that she can hide her exotic attribute and live a normal life even after "
-                                + "turning into such an oddity."
-                                + "<br/><br/>"
-                                + "Airi is a bit wary of your poking and prodding, but she seems to be content to let you do your experiment. "
-                                + "After throughly feeling her unusual body up (strictly for science of course), "
-                                + "you wonder if you could ask her to show you some of her abilities.", self, player);
-            },
+        }, (c, self, player) ->
+            "After the match, you spend a few minutes examining the slime girl. "
+                + "It's quite curious how she can easily transform between slime and human form. "
+                + "Somehow, she can solidify her fluid composition into something indistinguishable from normal flesh and skin. "
+                + "You suppose it must be pretty convenient that she can hide her exotic attribute and live a normal life even after "
+                + "turning into such an oddity."
+                + "<br/><br/>"
+                + "Airi is a bit wary of your poking and prodding, but she seems to be content to let you do your experiment. "
+                + "After thoroughly feeling her unusual body up (strictly for science of course), "
+                + "you wonder if you could ask her to show you some of her abilities.",
                 Arrays.asList(
                         new CombatSceneChoice("Slime?", (c, self, other) -> {
                             c.write("You can't hold back your curiosity on the composition of her slime, so you ask Airi if you could try playing around with it a bit. "
@@ -240,25 +240,47 @@ public class Airi extends BasePersonality {
                                 loverFormString = "familiar seductive form";
                                 loverTalkString = "tempts in {other:name-possessive} melodious voice,";
                             }
-                            c.write(Global.format("You ask Airi if she could transform into someone else, or if she's just limited to her human body and her slime form. "
-                                            + "Intrigued, Airi asks you in her weird breathy voice, <i>\"Interesting... who shall I become...?\"</i> Immediately, "
-                                            + "{other:name-possessive} %s comes to mind, so you ask Airi if she could try turning into {other:direct-object}. "
-                                            + "The asian girl seems to pout for a split second before her body collapses into itself. "
-                                            + "The surface of her body seems to churn and twist, warping itself into a new shape. "
-                                            + "Soon, a %s stands before you, a perfect copy of {other:name-do}."
-                                            + "<br/><br/>"
-                                            + "Marveling at her powers of transformation, you examine her new form. After spending a good minute, "
-                                            + "you realize there's actually no way you can tell the difference between them! "
-                                            + "Unfortunately, Airi seems to have had enough with your little science experiement, and %s <i>\"Had enough yet? Well it's my turn now.\"</i> "
-                                            + "Without giving you a chance to respond, the copycat slime jumps on you and forces you onto the ground for the nth time tonight. "
-                                            + "<i>\""+other.getName()+"\", don't you think you stared a bit long at <b>{other:direct-object}</b>? "
-                                            + "You should be a bit more considerate when alone with a woman.\"</i> Okay now that is plain unfair. "
-                                            + "Even if you were oogling {other:name-possessive} body, technically it <i>IS</i> still Airi inside. "
-                                            + "<i>\"Ah ah, I'll be sure to teach you not to cheat... Just remember, the next time you try sleeping with another {self:guy}, "
-                                            + "it might just be me... And I'll make sure to pay you back...\"</i>"
-                                            + "<br/><br/>"
-                                            + "Okay. Now that is just creepy.", self, lover, 
-                                            loverBodyString, loverFormString, loverTalkString));
+                            var model = JtwigModel.newModel()
+                                .with("lover", lover)
+                                .with("other", other)
+                                .with("loverBody", loverBodyString)
+                                .with("loverForm", loverFormString)
+                                .with("loverTalk", loverTalkString);
+                            var template = JtwigTemplate.inlineTemplate(
+                                "You ask Airi if she could transform into someone else, or if "
+                                    + "she's just limited to her human body and her slime form. "
+                                    +  "Intrigued, Airi asks you in her weird breathy voice, "
+                                    + "<i>\"Interesting... who shall I become...?\"</i> "
+                                    + "Immediately, {{ lover.nameOrPossessiveAdjective() }} "
+                                    + "{{ loverBody }} comes to mind, so you ask Airi if she "
+                                    + "could try turning into {{ lover.objectPronoun() }}. "
+                                    + "The asian girl seems to pout for a split second before "
+                                    + "her body collapses into itself. The surface of her body "
+                                    + "seems to churn and twist, warping itself into a new shape. "
+                                    + "Soon, a {{ loverForm }} stands before you, a perfect copy "
+                                    + "of {{ lover.nameDirectObject }}."
+                                    + "<br/><br/>"
+                                    + "Marveling at her powers of transformation, you examine her "
+                                    + "new form. After spending a good minute, you realize there's "
+                                    + "actually no way you can tell the difference between them! "
+                                    + "Unfortunately, Airi seems to have had enough with your "
+                                    + "little science experiment, and {{ loverTalk }} "
+                                    + "<i>\"Had enough yet? Well it's my turn now.\"</i> "
+                                    + "Without giving you a chance to respond, the copycat slime "
+                                    + "jumps on you and forces you onto the ground for "
+                                    + "the nth time tonight. <i>\" {{ other.getName() }} \", don't "
+                                    + "you think you stared a bit long at "
+                                    + "<b> {{ lover.objectPronoun() }}</b>? You should be a bit "
+                                    + "more considerate when alone with a woman.\"</i> Okay now "
+                                    + "that is plain unfair. Even if you were ogling "
+                                    + "{{ other.nameOrPossessivePronoun() }} body, technically it "
+                                    + "<i>IS</i> still Airi inside. <i>\"Ah ah, I'll be sure to "
+                                    + "teach you not to cheat... Just remember, the next time you "
+                                    + "try sleeping with another {{ self.guyOrGirl }}, it might "
+                                    + "just be me... And I'll make sure to pay you back...\"</i>"
+                                    + "<br/><br/>"
+                                    + "Okay. Now that is just creepy.");
+                            c.write(template.render(model));
                             useMimicry();
                             return true;
                         }),
@@ -409,17 +431,21 @@ public class Airi extends BasePersonality {
     @Override
     public void eot(Combat c, Character opponent) {
         if (character.has(Trait.slime)) {
+            var template = JtwigTemplate.inlineTemplate(
+                "{{ self.nameOrPossessiveAdjective() }} {{ part.describe(self) }} re-slime-ified.");
             if (character.hasPussy() && !character.body.getRandomPussy().moddedPartCountsAs(GooeyMod.TYPE)) {
                 character.body.getRandomPussy().addTemporaryMod(new GooeyMod(), 999);
-                c.write(character, 
-                                Global.format("{self:NAME-POSSESSIVE} %s re-slime-ified.",
-                                                character, opponent, character.body.getRandomPussy().describe(character)));
+                var model = JtwigModel.newModel()
+                    .with("self", character)
+                    .with("part", character.body.getRandomPussy());
+                c.write(character, template.render(model));
             }
             if (character.hasDick() && !character.body.getRandomCock().moddedPartCountsAs(SlimyCockMod.TYPE)) {
                 character.body.getRandomCock().addTemporaryMod(new SlimyCockMod(), 999);
-                c.write(character,
-                                Global.format("{self:NAME-POSSESSIVE} %s re-slime-ified.",
-                                                character, opponent, character.body.getRandomCock().describe(character)));
+                var model = JtwigModel.newModel()
+                    .with("self", character)
+                    .with("part", character.body.getRandomCock());
+                c.write(character, template.render(model));
             }
         }
     }
@@ -431,15 +457,31 @@ public class Airi extends BasePersonality {
         if (times == totalTimes && ((self.getWillpower().percent() < 60 && !self.has(Trait.slime)) || unmaskable)) {
             boolean unmasked = false;
             if (unmaskable) {
-                c.write(self, Global.format("<b>As {self:subject} orgasms, {self:possessive} whole body shimmers and seems to melt into a puddle of goo. "
-                                + "A human body rises from the slime and molds itself to a facsimile of an all-too-familiar Asian {self:boy} giving you a self satisfied little smirk. "
-                                + "Shit, {self:pronoun} tricked you, it was Airi all along!</b><br/>", self, opponent));
+                var model = JtwigModel.newModel()
+                    .with("self", self);
+                var template = JtwigTemplate.inlineTemplate(
+                    "<b>As {{ self.subject() }} orgasms, {{ self.possessiveAdjective() }} whole "
+                        + "body shimmers and seems to melt into a puddle of goo. "
+                        + "A human body rises from the slime and molds itself to a facsimile "
+                        + "of an all-too-familiar Asian {{ self.boyOrGirl }} giving you a "
+                        + "self satisfied little smirk. Shit, it was {{ self.getName() }} "
+                        + "all along!</b>"
+                );
+                c.write(self, template.render(model));
                 opponent.add(c, new Flatfooted(opponent, 2));
                 unmasked = true;
             } else {
-                c.write(self, Global.format("After {self:name-possessive} orgasm, her whole body shimmers and melts into a puddle of goo. A human body rises from the slime and molds itself to a facsimile of {self:reflective}. "
-                                + "Gone is the slim repressed girl you knew. The new Airi that appears before you is a sexually idealized version of herself, with bigger breasts, a dynamic body line and long legs that end in a ball of blue goo. "
-                                + "You're now fighting {self:name} in slime form!", self, opponent));
+                var model = JtwigModel.newModel()
+                    .with("self", self);
+                var template = JtwigTemplate.inlineTemplate(
+                    "After {{ self.nameOrPossessiveAdjective() }} orgasm, her whole body "
+                        + "shimmers and melts into a puddle of goo. A human body rises from the "
+                        + "slime and molds itself to a facsimile of {{ self.reflectivePronoun() }}. "
+                        + "Gone is the slim repressed girl you knew. The new Airi that appears "
+                        + "before you is a sexually idealized version of herself, with bigger "
+                        + "breasts, a dynamic body line and long legs that end in a ball of blue goo. "
+                        + "You're now fighting {{ self.getName() }} in slime form!");
+                c.write(self, template.render(model));
             }
             self.completelyNudify(c);
             self.purge(c);
@@ -479,7 +521,16 @@ public class Airi extends BasePersonality {
                 armManager = Optional.of(m);
             }
             if (unmasked && self.has(Trait.ThePrestige) && c.getStance().distance() < 2) {
-                c.write(self, Global.format("<b>Taking advantage of {other:name-possessive} bewilderment, {self:subject-action:swoop} {self:possessive} slime onto {other:possessive} hapless form, swiftly engulfing it in {self:possessive} amorphous body.</b><br/>", self, opponent));
+                var template = JtwigTemplate.inlineTemplate(
+                    "<b>Taking advantage of {{ other.nameOrPossessiveAdjective() }} bewilderment, "
+                        + "{{ self.subject() }} {{ self.action('swoop') }} "
+                        + "{{ self.possessiveAdjective() }} slime onto "
+                        + "{{ other.possessiveAdjective() }} hapless form, "
+                        + "swiftly engulfing it in {{ self.possessiveAdjective() }} amorphous body.");
+                var model = JtwigModel.newModel()
+                    .with("self", self)
+                    .with("other", opponent);
+                c.write(self, template.render(model));
                 c.setStance(new Engulfed(self, opponent));
             }
             self.moodSwing(c);
@@ -511,68 +562,159 @@ public class Airi extends BasePersonality {
 
         if (character.is(Stsflag.disguised)) {
             StringBuilder sb = new StringBuilder();
-            sb.append(Global.format("Just as {self:subject-action:are} about to bring you to mind bending orgasm, {self:possessive} face shifts and melts. "
-                            + "One moment was staring at you haughtily like {self:pronoun} usually does, and the next, {self:possessive} entire body melts into a familiar cerulean goo. "
-                            + "Fuck, it seems like Airi has managed to trick you! The semi-opaque slime girl just smiles at you rather sarcastically "
-                            + "and taunts <i>\"You thought... {self:name}? Too bad...\"</i> You try to escape {self:possessive} hold on you, but you're way too far gone, "
-                            + "and struggling against her gelatinous body is just bringing to closer to your inevitable defeat. "
-                            + "Airi frowns when she notices you struggling, <i>\"Unhappy... with me? ...rather be with {self:name}?\"</i> "
-                            + "You notice something dangerous in her wispy voice, and shake your head as fast as you can. Unfortunately it was a bit too late and you can definitely tell Airi's mood has gone sour.<br/><br/>"
-                            + "<i>\"{other:name}... If rather have {self:name}... I oblige... But only {self:possessive} body...\"</i> Wait what is she saying? "
-                            + "How can she only--Oh right. She can transform. Airi's crystalline body <i>shudders</i> and starts to regain a fleshy tone and texture "
-                            + "starting from her feet. Slowly the change creeps up her body and stops at her neckline. From the neck up, Airi retains her slime-girl look complete with her piercing ruby eyes. "
-                            + "However, below that, she reverted into a carbon-copy of {self:name}! The transformed girl leers at you and asserts <i>\"I'll show you... how much better I can be...\"</i>"
-                            + "<br/><br/>", character, opponent));
+            {
+                var template = JtwigTemplate.inlineTemplate(
+                    "Just as {{ self.subject() }} {{ self.action('is') }} about to bring you to "
+                        + "mind-bending orgasm, {{ self.possessiveAdjective() }} face shifts and "
+                        + "melts. One moment {{ self.pronoun() }} was staring at you "
+                        + "haughtily like {{ self.pronoun() }} usually does, and the next, "
+                        + "{{ self.possessiveAdjective() }} entire body melts into a familiar "
+                        + "cerulean goo. Fuck, it seems like Airi has managed to trick you! "
+                        + "The semi-opaque slime girl just smiles at you rather sarcastically "
+                        + "and taunts <i>\"You thought... {{ self.getName() }}? Too bad...\"</i> "
+                        + "You try to escape {{ self.possessiveAdjective() }} hold on you, but "
+                        + "you're way too far gone, and struggling against her gelatinous body "
+                        + "is just bringing to closer to your inevitable defeat. Airi frowns when "
+                        + "she notices you struggling, <i>\"Unhappy... with me? ...rather be with "
+                        + "{{ self.getName() }}?\"</i> You notice something dangerous in her "
+                        + "wispy voice, and shake your head as fast as you can. Unfortunately, it "
+                        + "was a bit too late and you can definitely tell Airi's mood has "
+                        + "gone sour.<br/><br/>"
+                        + "<i>\" {{ other.getName() }}... If you'd rather have "
+                        + "{{ self.getName() }}... I can oblige... But only "
+                        + "{{ self.possessiveAdjective() }} body...\"</i> Wait what is she saying? "
+                        + "How can she only--Oh right. She can transform. Airi's crystalline body "
+                        + "<i>shudders</i> and starts to regain a fleshy tone and texture starting "
+                        + "from her feet. Slowly the change creeps up her body and stops at her "
+                        + "neckline. From the neck up, Airi retains her slime-girl look complete "
+                        + "with her piercing ruby eyes. However, below that, she reverted into a "
+                        + "carbon-copy of {{ self.getName() }}! The transformed girl leers at you "
+                        + "and asserts <i>\"I'll show you... how much better I can be...\"</i>"
+                        + "<br/><br/>"
+                );
+                var model = JtwigModel.newModel()
+                    .with("self", character)
+                    .with("other", opponent);
+                sb.append(template.render(model));
+            }
             if (opponent.hasDick()) {
                 if (!character.hasPussy()) {
-                    sb.append("Airi furrows her faux-eyebrows in a look of intense concentration. A split second later, a newly form slit opens between her legs with an audiable pop. "
-                                    + "Seeing your shocked expression, the lithe Japanese girl climbs ontop of you with an almost malicious grin. ");
+                    sb.append("Airi furrows her faux-eyebrows in a look of intense concentration. "
+                        + "A split second later, a newly form slit opens between her legs "
+                        + "with an audiable pop. Seeing your shocked expression, "
+                        + "the lithe Japanese girl climbs on top of you with an almost malicious "
+                        + "grin. ");
                 }
-                sb.append(Global.format("You almost lose it right there as Airi lowers herself on top of you. Her mimicked {self:body-part:pussy} swallows your {other:body-part:cock} with ease, "
-                                + "and immediately <i>tightens</i> around your fleshy rod. You gasp as her transformed cunt becomes narrower and narrower around you, "
-                                + "completely wrapping around the neck of your penis in a chokehold. You beg her to stop, but the smug asian girl just shakes her head and replies <i>\"No... this is your... punishment.\"</i>"
-                                + "While sitting motionlessly on top of you, Airi flexes her counterfeit vaginal muscles and starts milking your cock in a wave like motion. "
-                                + "It feels less like you're having sex with her, and more like she's giving you the best handjob ever inside her wetness. "
-                                + "However, every time you are just about to reach your climax, her perfectly controlled canal chokes the root of your cock and stops you from cumming. "
-                                + "Soon you grow desperate at Airi's inhumane teasing and beg for her to let you cum. Luckily for you, that seems to be what she was waiting for. "
-                                + "<i>\"Say it {other:name}... Who is better... me or {self:name}..?\"</i> At this point, you're deliriously aroused and cannot not but help screaming Airi's name into the night, "
-                                + "hoping she'll take mercy on your poor abused dick. The gelatinous girl seems happy with your answer. She finally starts moving her hips and starts fucking you in earnest. "
-                                + "After a few good pumps, Airi releases her death grip on your cock, and your thick sperm floods her emulated {self:body-part:pussy}. "
-                                + "She nods happily and leans close to give you a peck on the lips, <i>\"Good... And don't forget it...\"</i>.", character, opponent));
+                {
+                    var template = JtwigTemplate.inlineTemplate(
+                        "You almost lose it right there as Airi lowers herself on top of you. "
+                            + "Her mimicked pussy swallows your cock with ease, and immediately "
+                            + "<i>tightens</i> around your fleshy rod. You gasp as her transformed "
+                            + "cunt becomes narrower and narrower around you, completely wrapping "
+                            + "around the neck of your penis in a choke-hold. You beg her to stop, "
+                            + "but the smug asian girl just shakes her head and replies "
+                            + "<i>\"No... this is your... punishment.\"</i> While sitting "
+                            + "motionlessly on top of you, Airi flexes her counterfeit vaginal "
+                            + "muscles and starts milking your cock in a wave like motion. It "
+                            + "feels less like you're having sex with her, and more like she's "
+                            + "giving you the best handjob ever inside her wetness. However, every "
+                            + "time you are just about to reach your climax, her perfectly "
+                            + "controlled canal chokes the root of your cock and stops you from "
+                            + "cumming. Soon you grow desperate at Airi's inhumane teasing "
+                            + "and beg for her to let you cum. Luckily for you, that seems to be "
+                            + "what she was waiting for. <i>\"Say it {{ other.getName() }}... "
+                            + "Who is better... me or {{ self.getName() }}..?\"</i> At this point, "
+                            + "you're deliriously aroused and cannot not but help screaming "
+                            + "Airi's name into the night, hoping she'll take mercy on your poor "
+                            + "abused dick. The gelatinous girl seems happy with your answer. "
+                            + "She finally starts moving her hips and starts fucking you "
+                            + "in earnest. After a few good pumps, Airi releases her death grip "
+                            + "on your cock, and your thick sperm floods her emulated pussy. She "
+                            + "nods happily and leans close to give you a peck on the lips, "
+                            + "<i>\"Good... And don't forget it...\"</i>.");
+                    var model = JtwigModel.newModel()
+                        .with("self", character)
+                        .with("other", opponent);
+                    sb.append(template.render(model));
+                }
             } else if (opponent.hasPussy()) {
                 if (character.hasDick()) {
-                    sb.append(Global.format("You almost lose it right there as Airi penetrates you. Her mimicked {self:body-part:cock} pierces your {other:body-part:pussy} with ease, ",
-                                    character, opponent));
+                    sb.append("You almost lose it right there as Airi penetrates you. "
+                            + "Her mimicked cock pierces your pussy with ease, ");
                 } else {
-                    sb.append(Global.format("Airi furrows her faux-eyebrows in a look of intense concentration. A split second later, an huge slime-dong erupts from her crotch. "
-                                    + "Grinning with a barely concealed malicious glee, Airi pulls your legs apart and penetrates your soaked depths with her turgid penis. "
-                                    + "Her new cock pierces your {other:body-part:pussy} with ease, ", character, opponent));
+                    sb.append("Airi furrows her eyebrows in a look of "
+                        + "intense concentration. A split second later, an huge slime-dong erupts "
+                        + "from her crotch. Grinning with a barely concealed malicious glee, Airi "
+                        + "pulls your legs apart and penetrates your soaked depths with her turgid "
+                        + "penis. Her new cock pierces your pussy with ease, ");
                 }
-                sb.append(Global.format("and immediately <i>expands</i> inside your drenched love canal. You gasp as her transformed cock completely fills your pussy, "
-                                + "grinding against every bit of you. You beg her to stop, but the smug asian girl just shakes her head and replies <i>\"No... this is your... punishment.\"</i>"
-                                + "Slowly at first, but with increasing tempo, Airi fucks you with her oversized penis. It's rather painful, but you can't deny that it's turning you on immensely. "
-                                + "However, every time you are just about to reach your climax, her cock seems to disappear inside you like a punctured balloon, leaving you with an acute sense of loss. "
-                                + "Soon you grow desperate at Airi's inhumane teasing and beg for her to let you cum. Luckily for you, that seems to be what she was waiting for. "
-                                + "<i>\"Say it {other:name}... Who is better... me or {self:name}..?\"</i> At this point, you're deliriously aroused and cannot not but help screaming Airi's name "
-                                + "into the night, hoping she'll take mercy on your poor tormented cunt. The gelatinous girl seems happy with your answer. "
-                                + "She starts moving her hips again and finally fucks you in earnest. The piston action makes you cum almost instantly and continuously, shuddering on almost every return stroke. "
-                                + "After a few dozen good pumps, Airi shudders as well and floods your {other:body-part:pussy} with her thick pseudo-sperm. "
-                                + "Her scalding cum triggers a final climax from you and your arms desperately try to find a good place to grip as you cum hard around her pole yet again. "
-                                + "After she confirms that you came, she nods happily and leans close to give you a peck on the lips, <i>\"Good... And don't forget it...\"</i>.", character, opponent));
+                var template = JtwigTemplate.inlineTemplate("and immediately <i>expands</i> inside your "
+                    + "drenched love canal. You gasp as her transformed cock completely "
+                    + "fills your pussy, grinding against every bit of you. You beg her to stop, "
+                    + "but the smug asian girl just shakes her head and replies "
+                    + "<i>\"No... this is your... punishment.\"</i> Slowly at first, but with "
+                    + "increasing tempo, Airi fucks you with her over-sized penis. It's rather "
+                    + "painful, but you can't deny that it's turning you on immensely. However, "
+                    + "every time you are just about to reach your climax, her cock seems to "
+                    + "disappear inside you like a punctured balloon, leaving you with an acute "
+                    + "sense of loss. Soon you grow desperate at Airi's inhumane teasing and beg "
+                    + "for her to let you cum. Luckily for you, that seems to be what she was "
+                    + "waiting for. <i>\"Say it {{ other.getName() }}... Who is better... me or "
+                    + "{{ self.getName() }}..?\"</i> At this point, you're deliriously aroused and "
+                    + "cannot not but help screaming Airi's name into the night, hoping she'll "
+                    + "take mercy on your poor tormented cunt. The gelatinous girl seems happy "
+                    + "with your answer. She starts moving her hips again and finally fucks you "
+                    + "in earnest. The piston action makes you cum almost instantly and "
+                    + "continuously, shuddering on almost every return stroke. After a few dozen "
+                    + "good pumps, Airi shudders as well and floods your pussy with her thick "
+                    + "pseudo-sperm. Her scalding cum triggers a final climax from you and your "
+                    + "arms desperately try to find a good place to grip as you cum hard around "
+                    + "her pole yet again. After she confirms that you came, she nods happily "
+                    + "and leans close to give you a peck on the lips, <i>\"Good... And don't you "
+                    + "forget it...\"</i>.");
+                var model = JtwigModel.newModel()
+                .with("self", character)
+                .with("other", opponent);
+                sb.append(template.render(model));
             }
             return sb.toString();
         }
         if (character.has(Trait.slime)) {
-            return "Airi crawls over to you at an agonizing pace. Her slime rapidly flows on top of your penis and covers it in a sticky bulb. <i>\"Time… for you to cum…\"</i><br/><br/>"
-                            + "Her previously still slime suddenly starts to frantically squeeze and knead your cock, pulsating in waves of sticky goo on top of you. Startled by the sudden stimulation, you barely manage to hold on. Unfortunately--or perhaps fortunately--for you, Airi is not finished. She also covers your chest with her own sticky breasts and engulfs your nipples inside hers. Although it’s just slime, you feel as if her lips are on your nipples, sucking them and rolling the tips around inside her mouth.<br/><br/>"
-                            + "As you’re being overloaded with sensations, Airi brings her face close to yours and whispers in your ear.<i>\"Cum… cum… cum…\"</i> With a groan of agonising pleasure, you come hard, firing ropes of your seed inside her translucent depths.<br/><br/>"
-                            + "Panting with exertion from the aftershocks of your orgasm, you see your cum floating around in her body quickly getting absorbed and disappearing into nothing. Sensing danger, you glance at Airi's face <i>\"...Not enough... I need more food...\"</i><br/><br/>"
-                            + "This time Airi engulfs your whole body, leaving only your face outside, facing the sky. Try as you might, you can't even move your neck to see what's happening below. Feeling frightened at what she might do, you tense up your body to attempt to resist. <i>\"Are you... ready..? I'll begin...\"</i> Whatever you expected, it was not this. Her whole body begins to churn around your own, both massaging and licking every square inch of you. You feel a tendril of slime enter your ass and press against your prostate. At the same time two tendrils of slime enter your ears and attach themselves to something deep inside your head. In seconds, you feel Airi literally inside your head.<br/><br/>"
-                            + "<i>\"Cum...\"</i> An orgasm like nothing you felt before tears through your body, searing your head until your vision turns white.<br/><br/>"
-                            + "<i>\"Cum...\"</i> Another climax wracks you, suspending all your thoughts.<br/><br/>"
-                            + "<i>\"Cum...\"</i> Your cum turns thin, flowing out like water.<br/><br/>"
-                            + "<i>\"Give me... everything...\"</i> One final orgasm leaves you out cold. When you come to, you see Airi has left, taking your boxers like that. "
-                            + "Wow, you're not sure how many more of these you can endure.<br/><br/>";
+            return "Airi crawls over to you at an agonizing pace. Her slime rapidly flows on "
+                + "top of your penis and covers it in a sticky bulb. "
+                + "<i>\"Time… for you to cum…\"</i><br/><br/>"
+                + "Her previously still slime suddenly starts to frantically squeeze "
+                + "and knead your cock, pulsating in waves of sticky goo on top of you. "
+                + "Startled by the sudden stimulation, you barely manage to hold on. "
+                + "Unfortunately--or perhaps fortunately--for you, Airi is not finished. She also "
+                + "covers your chest with her own sticky breasts and engulfs your nipples inside "
+                + "hers. Although it’s just slime, you feel as if her lips are on your nipples, "
+                + "sucking them and rolling the tips around inside her mouth.<br/><br/>"
+                + "As you’re being overloaded with sensations, Airi brings her face close to yours "
+                + "and whispers in your ear.<i>\"Cum… cum… cum…\"</i> With a groan of agonising "
+                + "pleasure, you come hard, firing ropes of your seed inside her translucent "
+                + "depths.<br/><br/>"
+                + "Panting with exertion from the aftershocks of your orgasm, you see your cum "
+                + "floating around in her body quickly getting absorbed and disappearing into "
+                + "nothing. Sensing danger, you glance at Airi's face <i>\"...Not enough... I need "
+                + "more food...\"</i><br/><br/>"
+                + "This time Airi engulfs your whole body, leaving only your face outside, facing "
+                + "the sky. Try as you might, you can't even move your neck to see what's "
+                + "happening below. Feeling frightened at what she might do, you tense up your "
+                + "body to attempt to resist. <i>\"Are you... ready..? I'll begin...\"</i> "
+                + "Whatever you expected, it was not this. Her whole body begins to churn around "
+                + "your own, both massaging and licking every square inch of you. You feel a "
+                + "tendril of slime enter your ass and press against your prostate. At the same "
+                + "time two tendrils of slime enter your ears and attach themselves to something "
+                + "deep inside your head. In seconds, you feel Airi literally inside your "
+                + "head.<br/><br/>"
+                + "<i>\"Cum...\"</i> An orgasm like nothing you felt before tears through "
+                + "your body, searing your head until your vision turns white.<br/><br/>"
+                + "<i>\"Cum...\"</i> Another climax wracks you, suspending all your thoughts.<br/><br/>"
+                + "<i>\"Cum...\"</i> Your cum turns thin, flowing out like water.<br/><br/>"
+                + "<i>\"Give me... everything...\"</i> One final orgasm leaves you out cold. "
+                + "When you come to, you see Airi has left, taking your boxers like that. "
+                + "Wow, you're not sure how many more of these you can endure.<br/><br/>";
         }
 
         String message = "";
@@ -581,13 +723,22 @@ public class Airi extends BasePersonality {
         } else {
             message = "Airi looks triumphant as your pussy convulses around her slim fingers. ";
         }
-        return message + Global.format("<i>\"You know, before college I haven't even held another {other:boy}'s hand. "
-                        + "My parents were really strict with me. Once I moved out and started school here, I jumped at joining the games when offered the chance. I lost a lot at first, "
-                        + "but look at me now!\"</i> She gives your shrinking dick a little squeeze making you yelp. Smiling with satisfaction, Airi pulls your wrist with both hands and places it between her legs. "
-                        + "<i>\"Now please... a little help here?\"</i>"
-                        + "<br/><br/>"
-                        + "You weren't about to refuse the winner's orders, so you dutifully play with her soaked cunt until she shudders quietly and cums as well. "
-                        + "You're a bit peeved that you didn't even make Airi transform this time, but you can only try to do better when you meet her again.", character, opponent);
+        var template = JtwigTemplate.inlineTemplate(
+            "<i>\"You know, before college I hadn't even held another "
+                + "{{other.boyOrGirl}}'s hand. My parents were really strict with me. Once I "
+                + "moved out and started school here, I jumped at joining the games when offered "
+                + "the chance. I lost a lot at first, but look at me now!\"</i> She gives your "
+                + "shrinking dick a little squeeze making you yelp. Smiling with satisfaction, "
+                + "Airi pulls your wrist with both hands and places it between her legs. <i>\"Now "
+                + "please... a little help here?\"</i>"
+                + "<br/><br/>"
+                + "You aren't about to refuse the winner's orders, so you dutifully play with her "
+                + "soaked cunt until she shudders quietly and cums as well. You're a bit peeved "
+                + "that you didn't even make Airi transform this time, but you can only try to do "
+                + "better when you meet her again.");
+        var model = JtwigModel.newModel()
+            .with("other", opponent);
+        return message + template.render(model);
     }
 
     @Override
@@ -656,16 +807,29 @@ public class Airi extends BasePersonality {
     @Override
     public String intervene3p(Combat c, Character target, Character assist) {
         armManager = Optional.empty();
+        var interveneIntro = JtwigTemplate.inlineTemplate("Your fight with "
+            + "{{ other.getName() }} seemed to have ran into a stalemate. Neither of you "
+            + "is willing to get close enough to each other for anything substantial "
+            + "to happen. You just continue to trade taunts whilst waiting for an "
+            + "opportunity.<br/><br/>");
+        var model = JtwigModel.newModel()
+            .with("other", assist);
         if (target.human()) {
-            return Global.format(
-                            "Your fight with {other:name} seemed to have ran into a stalemate. Neither of you is willing to get close enough to each other for anything substantial to happen. You just continue to trade taunts whilst waiting for an opportunity.<br/><br/>"
-                                            + "Suddenly, you feel something grasp your ankles and pull you off balance. You brace yourself for the fall, but after a second, you only feel softness on your back. It’s Airi. She somehow snuck up on you and tripped you into falling on top of her. She quickly engulfs your hands and legs in her slime and presents your helpless body to {other:name}’s ministrations.",
-                            character, assist);
+            var template = JtwigTemplate.inlineTemplate("Suddenly, you feel something grasp your ankles and pull you off balance. "
+                    + "You brace yourself for the fall, but after a second, you only feel softness "
+                    + "on your back. It’s Airi. Somehow, she snuck up on you and tripped you into "
+                    + "falling on top of her. She quickly engulfs your hands and legs in her slime "
+                    + "and presents your helpless body to {{ other.nameOrPossessivePronoun() }} "
+                    + "ministrations.");
+            return interveneIntro.render(model) + template.render(model);
         } else {
-            return Global.format(
-                            "Your fight with {other:name} seemed to have ran into a stalemate. Neither of you is willing to get close enough to each other for anything substantial to happen. You just continue to trade taunts whilst waiting for an opportunity.<br/><br/>"
-                                            + "Suddenly, a blue blob appears in your line of sight. It’s Airi! More swiftly than you would expect, Airi moves to {other:name}’s side and engulfs her body in her own. After dissolving her clothing with her slime, Airi surfaces only {other:name-possessive} torso and sex, presenting her to you. Well, presented with a gift on a silver platter, you’re not going to refuse!",
-                            character, target);
+            var template = JtwigTemplate.inlineTemplate("Suddenly, a blue blob appears "
+                    + "in your line of sight. It’s Airi! More swiftly than you would expect, "
+                    + "Airi moves to {other:name}’s side and engulfs her body in her own. "
+                    + "After dissolving her clothing with her slime, Airi surfaces only "
+                    + "{{ other.nameOrPossessivePronoun() }} torso and sex, presenting her to you. "
+                    + "Well, presented with a gift on a silver platter, you’re not going to refuse!");
+            return interveneIntro.render(model) + template.render(model);
         }
     }
 
