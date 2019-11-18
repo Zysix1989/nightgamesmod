@@ -15,6 +15,7 @@ public interface Person {
     }
     Object object();
 
+    String replaceWithNoun(Noun n);
     String possessivePronoun();
     String possessiveAdjective();
     String reflexivePronoun();

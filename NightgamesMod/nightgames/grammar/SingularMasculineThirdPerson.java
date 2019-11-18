@@ -54,6 +54,11 @@ public class SingularMasculineThirdPerson implements Person {
     }
 
     @Override
+    public String replaceWithNoun(Noun n) {
+        return n.masculine();
+    }
+
+    @Override
     public String possessivePronoun() {
         return "his";
     }

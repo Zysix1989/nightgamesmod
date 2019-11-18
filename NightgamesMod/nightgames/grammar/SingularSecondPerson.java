@@ -4,6 +4,7 @@ import nightgames.characters.Character;
 
 public class SingularSecondPerson implements Person {
     private String name;
+    private boolean isFeminine;
 
     private class Subject implements Person.Subject {
         @Override
@@ -41,6 +42,7 @@ public class SingularSecondPerson implements Person {
 
     public SingularSecondPerson(Character c) {
         name = c.getName();
+        isFeminine = c.useFemalePronouns();
     }
 
     @Override
@@ -51,6 +53,14 @@ public class SingularSecondPerson implements Person {
     @Override
     public Object object() {
         return new Object();
+    }
+
+    @Override
+    public String replaceWithNoun(Noun n) {
+        if (isFeminine) {
+            return n.feminine();
+        }
+        return n.masculine();
     }
 
     @Override

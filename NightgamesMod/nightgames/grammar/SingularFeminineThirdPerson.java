@@ -43,7 +43,6 @@ public class SingularFeminineThirdPerson implements Person {
         name = c.getName();
     }
 
-
     @Override
     public Subject subject() {
         return new Subject();
@@ -51,6 +50,11 @@ public class SingularFeminineThirdPerson implements Person {
 
     @Override
     public Object object() { return new Object(); }
+
+    @Override
+    public String replaceWithNoun(Noun n) {
+        return n.feminine();
+    }
 
     @Override
     public String possessivePronoun() {
