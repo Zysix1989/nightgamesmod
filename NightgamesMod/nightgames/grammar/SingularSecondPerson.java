@@ -1,10 +1,34 @@
 package nightgames.grammar;
 
+import nightgames.characters.Character;
+
 public class SingularSecondPerson implements Person {
+    private String name;
+
+    private class Subject implements Person.Subject{
+        @Override
+        public String properNoun() {
+            return name;
+        }
+
+        @Override
+        public String defaultNoun() {
+            return pronoun();
+        }
+
+        @Override
+        public String pronoun() {
+            return "you";
+        }
+    }
 
     @Override
-    public String subjectPronoun() {
-        return "you";
+    public Subject subject() {
+        return new Subject();
+    }
+
+    public SingularSecondPerson(Character c) {
+        name = c.getName();
     }
 
     @Override

@@ -1,6 +1,5 @@
 package nightgames.gui;
 
-import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.util.Hashtable;
 import javax.swing.ButtonGroup;
@@ -14,7 +13,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import nightgames.debug.DebugGUIPanel;
-import nightgames.global.*;
+import nightgames.global.Flag;
+import nightgames.global.Global;
 
 class GUIMenuBar {
 
@@ -214,7 +214,7 @@ class GUIMenuBar {
         optionsPanel.add(fontSizeLabel);
         optionsPanel.add(rdfntnorm);
 
-        JLabel pronounLabel = new JLabel("Human Pronoun Usage");
+        JLabel pronounLabel = new JLabel("Human pronoun Usage");
         ButtonGroup pronoun = new ButtonGroup();
         JRadioButton rdPronounBody = new JRadioButton("Based on Anatomy");
         JRadioButton rdPronounFemale = new JRadioButton("Always Female");
@@ -224,7 +224,7 @@ class GUIMenuBar {
         optionsPanel.add(rdPronounBody);
         optionsPanel.add(rdPronounFemale);
 
-        JLabel npcPronounLabel = new JLabel("NPC Pronoun Usage");
+        JLabel npcPronounLabel = new JLabel("NPC pronoun Usage");
         ButtonGroup npcPronoun = new ButtonGroup();
         JRadioButton rdNPCPronounBody = new JRadioButton("Based on Anatomy");
         JRadioButton rdNPCPronounFemale = new JRadioButton("Always Female");

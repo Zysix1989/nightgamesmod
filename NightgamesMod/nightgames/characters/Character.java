@@ -899,7 +899,7 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public String subject() {
-        return getName();
+        return getGrammar().subject().defaultNoun();
     }
 
     public int pleasure(int i, Combat c, Character source) {
@@ -3644,7 +3644,7 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public String pronoun() {
-        return getGrammar().subjectPronoun();
+        return getGrammar().subject().pronoun();
     }
 
     public Emotion getMood() {

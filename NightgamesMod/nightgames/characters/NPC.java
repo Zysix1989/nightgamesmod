@@ -878,9 +878,9 @@ public class NPC extends Character {
     @Override
     public Person getGrammar() {
         if (useFemalePronouns()) {
-            return new SingularFeminineThirdPerson();
+            return new SingularFeminineThirdPerson(this);
         } else {
-            return new SingularMasculineThirdPerson();
+            return new SingularMasculineThirdPerson(this);
         }
     }
 }

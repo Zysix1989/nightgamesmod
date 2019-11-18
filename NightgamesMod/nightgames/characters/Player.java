@@ -1147,6 +1147,6 @@ public class Player extends Character {
 
     @Override
     public Person getGrammar() {
-        return new SingularSecondPerson();
+        return new SingularSecondPerson(this);
     }
 }

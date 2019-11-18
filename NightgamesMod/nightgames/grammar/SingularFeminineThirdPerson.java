@@ -1,10 +1,35 @@
 package nightgames.grammar;
 
+import nightgames.characters.Character;
+
 public class SingularFeminineThirdPerson implements Person {
+    private String name;
+
+    private class Subject implements Person.Subject{
+        @Override
+        public String properNoun() {
+            return name;
+        }
+
+        @Override
+        public String defaultNoun() {
+            return properNoun();
+        }
+
+        @Override
+        public String pronoun() {
+            return "she";
+        }
+    }
+
+    public SingularFeminineThirdPerson(Character c) {
+        name = c.getName();
+    }
+
 
     @Override
-    public String subjectPronoun() {
-        return "she";
+    public Subject subject() {
+        return new Subject();
     }
 
     @Override
