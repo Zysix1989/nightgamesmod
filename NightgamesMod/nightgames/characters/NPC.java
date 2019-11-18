@@ -29,7 +29,7 @@ import nightgames.combat.Result;
 import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
-import nightgames.grammar.PersonalGrammar;
+import nightgames.grammar.Person;
 import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.gui.commandpanel.CommandPanelOption;
@@ -876,7 +876,7 @@ public class NPC extends Character {
     }
 
     @Override
-    public PersonalGrammar getGrammar() {
+    public Person getGrammar() {
         if (useFemalePronouns()) {
             return new SingularFeminineThirdPerson();
         } else {

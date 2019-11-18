@@ -1,6 +1,6 @@
 package nightgames.grammar;
 
-public class SingularMasculineThirdPerson implements PersonalGrammar {
+public class SingularMasculineThirdPerson implements Person {
 
     @Override
     public String subjectPronoun() {

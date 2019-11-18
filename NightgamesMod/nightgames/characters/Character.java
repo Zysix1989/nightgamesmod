@@ -65,7 +65,7 @@ import nightgames.global.Configuration;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.global.Scene;
-import nightgames.grammar.PersonalGrammar;
+import nightgames.grammar.Person;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.items.Loot;
@@ -4557,5 +4557,5 @@ public Character clone() throws CloneNotSupportedException {
         return Optional.ofNullable(att.get(a));
     }
 
-    public abstract PersonalGrammar getGrammar();
+    public abstract Person getGrammar();
 }

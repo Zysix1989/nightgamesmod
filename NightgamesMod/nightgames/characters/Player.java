@@ -41,7 +41,7 @@ import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.global.Scene;
-import nightgames.grammar.PersonalGrammar;
+import nightgames.grammar.Person;
 import nightgames.grammar.SingularSecondPerson;
 import nightgames.gui.GUI;
 import nightgames.gui.commandpanel.CommandPanelOption;
@@ -1146,7 +1146,7 @@ public class Player extends Character {
     }
 
     @Override
-    public PersonalGrammar getGrammar() {
+    public Person getGrammar() {
         return new SingularSecondPerson();
     }
 }

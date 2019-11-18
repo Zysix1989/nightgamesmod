@@ -17,7 +17,7 @@ import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
-import nightgames.grammar.PersonalGrammar;
+import nightgames.grammar.Person;
 import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.gui.commandpanel.CommandPanelOption;
@@ -333,7 +333,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public PersonalGrammar getGrammar() {
+    public Person getGrammar() {
         if (useFemalePronouns()) {
             return new SingularFeminineThirdPerson();
         } else {

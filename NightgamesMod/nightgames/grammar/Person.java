@@ -1,6 +1,6 @@
 package nightgames.grammar;
 
-public interface PersonalGrammar {
+public interface Person {
     String subjectPronoun();
     String objectPronoun();
     String possessivePronoun();
