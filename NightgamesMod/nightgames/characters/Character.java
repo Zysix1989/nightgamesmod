@@ -3660,7 +3660,7 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public String objectPronoun() {
-        return getGrammar().objectPronoun();
+        return getGrammar().object().pronoun();
     }
     
     public String reflexivePronoun() {
@@ -3678,7 +3678,7 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public String nameDirectObject() {
-        return getName();
+        return getGrammar().object().defaultNoun();
     }
 
     public boolean clothingFuckable(BodyPart part) {

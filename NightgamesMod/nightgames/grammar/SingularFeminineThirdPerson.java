@@ -5,7 +5,7 @@ import nightgames.characters.Character;
 public class SingularFeminineThirdPerson implements Person {
     private String name;
 
-    private class Subject implements Person.Subject{
+    private class Subject implements Person.Subject {
         @Override
         public String properNoun() {
             return name;
@@ -22,6 +22,23 @@ public class SingularFeminineThirdPerson implements Person {
         }
     }
 
+    private class Object implements Person.Object {
+        @Override
+        public String properNoun() {
+            return name;
+        }
+
+        @Override
+        public String defaultNoun() {
+            return properNoun();
+        }
+
+        @Override
+        public String pronoun() {
+            return "her";
+        }
+    }
+
     public SingularFeminineThirdPerson(Character c) {
         name = c.getName();
     }
@@ -33,9 +50,7 @@ public class SingularFeminineThirdPerson implements Person {
     }
 
     @Override
-    public String objectPronoun() {
-        return "her";
-    }
+    public Object object() { return new Object(); }
 
     @Override
     public String possessivePronoun() {

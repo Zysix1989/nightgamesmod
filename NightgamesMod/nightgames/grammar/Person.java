@@ -8,7 +8,13 @@ public interface Person {
     }
     Subject subject();
 
-    String objectPronoun();
+    interface Object {
+        String properNoun();
+        String defaultNoun();
+        String pronoun();
+    }
+    Object object();
+
     String possessivePronoun();
     String possessiveAdjective();
     String reflexivePronoun();
