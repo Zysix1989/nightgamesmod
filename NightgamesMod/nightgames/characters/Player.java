@@ -927,7 +927,7 @@ public class Player extends Character {
     }
 
     @Override
-    public String subjectWas() {
+    protected String subjectWas() {
         return subject() + " were";
     }
 

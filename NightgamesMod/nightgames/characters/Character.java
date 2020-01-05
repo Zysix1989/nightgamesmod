@@ -1119,7 +1119,7 @@ public Character clone() throws CloneNotSupportedException {
         return subjectAction(verb, ProseUtils.getThirdPersonFromFirstPerson(verb));
     }
 
-    public String subjectWas() {
+    protected String subjectWas() {
         return subject() + " was";
     }
     
