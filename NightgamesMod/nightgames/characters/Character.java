@@ -67,6 +67,7 @@ import nightgames.global.Global;
 import nightgames.global.Scene;
 import nightgames.grammar.Dictionary;
 import nightgames.grammar.Person;
+import nightgames.grammar.Shorthand;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.items.Loot;
@@ -3903,22 +3904,6 @@ public Character clone() throws CloneNotSupportedException {
 
     public boolean hasInsertable() {
         return hasDick() || has(Trait.strapped);
-    }
-
-    public String guyOrGirl() {
-        return getGrammar().replaceWithNoun(Dictionary.INFORMAL_GENDERED_NOUN);
-    }
-
-    public String boyOrGirl() {
-        return getGrammar().replaceWithNoun(Dictionary.YOUTHFUL_GENDERED_NOUN);
-    }
-    
-    public String gentlemanOrLady() {
-        return getGrammar().replaceWithNoun(Dictionary.FORMAL_GENDERED_NOUN);
-    }
-    
-    public String bitchOrBastard() {
-        return getGrammar().replaceWithNoun(Dictionary.DEROGATORY_GENDERED_NOUN);
     }
 
     /**Checks if this character has any mods that would consider them demonic.

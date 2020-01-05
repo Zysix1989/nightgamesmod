@@ -20,6 +20,7 @@ import nightgames.combat.CombatScene;
 import nightgames.combat.CombatSceneChoice;
 import nightgames.combat.Result;
 import nightgames.global.Global;
+import nightgames.grammar.Shorthand;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.skills.strategy.FacesitStrategy;
@@ -325,7 +326,7 @@ public class Jewel extends BasePersonality {
                                 + ".\"</i>");
                 possible.add("Shifting her weight a bit to glare into your eyes, Jewel says happily, <i>\"Aha, it looks like you're quite comfortable there. Maybe you're a natural bottom?\"</i>");
                 if (other.hasBalls()) {
-                    possible.add("Jewel cups your vulnerable balls and gives them a light squeeze. <i>\"Worthless " + other.boyOrGirl() + "s like you should just give up. Why even try when you end up as my seat every time?\"</i>");
+                    possible.add("Jewel cups your vulnerable balls and gives them a light squeeze. <i>\"Worthless " + Shorthand.boyOrGirl(other) + "s like you should just give up. Why even try when you end up as my seat every time?\"</i>");
                 }
                 return possible.get(Global.random(possible.size()));
             }
@@ -378,7 +379,7 @@ public class Jewel extends BasePersonality {
                             };
             switch (other.orgasms) {
                 case 0:
-                    return "<i>\"Heh, no matter what, you're just a horny little " + other.boyOrGirl()
+                    return "<i>\"Heh, no matter what, you're just a horny little " + Shorthand.boyOrGirl(other)
                                 + " aren'tcha? Come on, no time for rest, let's see how many times in a row you can cum\"</i>";
                 case 1:
                     return "<i>\"Oooh that's two now. Hope you can keep going!\"</i>";
@@ -424,7 +425,7 @@ public class Jewel extends BasePersonality {
                             + "you over and sits on your face. <i>\"Come on,\"</i> she chuckles in a gloating manner. <i>\"You seemed to enjoy that, so its only fair you return "
                             + "the favor.\"</i> You sigh mentally and resign yourself to licking her out. It's not long before she is moaning above you. After Jewel collects your clothes she "
                             + "looks at you over her shoulder as she leaves and confesses, <i>\"I've punished assholes before, but I always wanted to try pegging a "
-                            + other.guyOrGirl()
+                            + Shorthand.guyOrGirl(other)
                             + " I like. Thanks for being cool about it.\"</i> You smile back tell her she's welcome, but you'd appreciate it if she weren't so rough. "
                             + "The last thing you hear before she round the corner is her giggled response. <i>\"We'll see.\"</i>";
         }
@@ -694,7 +695,7 @@ public class Jewel extends BasePersonality {
                             + " She stands up and presses her bare foot against %s dick and balls. "
                             + "%s groans in pleasure and pain as Jewel roughly grinds her foot against "
                             + "the sensitive organs. <i>\"Do you like that? You can't help it, can "
-                            + "you?\"</i> She grins sadistically. <i>\"I've stomped many " + target.boyOrGirl()
+                            + "you?\"</i> She grins sadistically. <i>\"I've stomped many " + Shorthand.boyOrGirl(target)
                             + "s into " + "the ground, but no matter how much pride they have, they always end "
                             + "up moaning in pleasure. It's like penises exist just to be dominated.\""
                             + "</i> You feel a chill run down your back, watching Jewel's display of"

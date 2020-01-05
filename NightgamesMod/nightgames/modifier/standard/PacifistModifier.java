@@ -2,6 +2,7 @@ package nightgames.modifier.standard;
 
 import nightgames.characters.Player;
 import nightgames.global.Global;
+import nightgames.grammar.Shorthand;
 import nightgames.modifier.BaseModifier;
 import nightgames.modifier.skill.BanTacticsModifier;
 import nightgames.skills.Tactics;
@@ -25,7 +26,7 @@ public class PacifistModifier extends BaseModifier {
     @Override
     public String intro() {
         return "Lilly gives you a long, appraising look. <i>\"I'm trying to decide what sort of person you are. You strike me as reasonable, probably not the type "
-                        + "to assault someone outside a match. I propose you try being a perfect " + Global.getPlayer().gentlemanOrLady() + " by refusing to hit "
+                        + "to assault someone outside a match. I propose you try being a perfect " + Shorthand.gentlemanOrLady(Global.getPlayer()) + " by refusing to hit "
                         + "anyone during tonight's match too. So no slapping, kicking, anything intended to purely cause pain. If you agree, I'll add $" + bonus()
                         + " to each point. What do you say?\"</i>";
     }

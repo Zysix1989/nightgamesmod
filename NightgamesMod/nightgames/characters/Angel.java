@@ -18,6 +18,7 @@ import nightgames.combat.CombatScene;
 import nightgames.combat.CombatSceneChoice;
 import nightgames.combat.Result;
 import nightgames.global.Global;
+import nightgames.grammar.Shorthand;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
@@ -701,7 +702,7 @@ public class Angel extends BasePersonality {
                                         + "Angel shows a rare moment of vulnerability and slides into your arms. <i>\"Hey {other:name}, I've been thinking, do you think this is wrong?\"</i> "
                                         + "Puzzled, you ask her what she means. <i>\"Well... you know, fucking like rabbits every day. "
                                         + "I love feeling good and I know I'm good at making other people feel good. Sometimes though, I wonder if I'm being too overbearing. "
-                                        + "Most " + player.guyOrGirl()
+                                        + "Most " + Shorthand.guyOrGirl(player)
                                         + "s can't even keep up with me, but I feel like I always want more. I feel like sometimes I'm no longer in control you know?\"</i>"
                                         + "<br/><br/>" + "",
                         self, player),
@@ -723,7 +724,7 @@ public class Angel extends BasePersonality {
                             c.write("You tell Angel that her insatiable sex drive is one of the things you like best about her. "
                                             + "After all, there's nothing else quite like fucking someone as enthusiastic as her. "
                                             + "Angel looks up and makes eye contact with you. She seems rather... amused? "
-                                            + "<i>\"That's what all " + other.boyOrGirl()
+                                            + "<i>\"That's what all " + Shorthand.boyOrGirl(other)
                                             + "s say before they're squeezed dry. "
                                             + "You're not going to be the same are you?\"</i>" + "<br/><br/>"
                                             + "You swallow your saliva a bit worriedly. What have you gotten yourself into?");

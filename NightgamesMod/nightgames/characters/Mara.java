@@ -16,6 +16,7 @@ import nightgames.combat.CombatScene;
 import nightgames.combat.CombatSceneChoice;
 import nightgames.combat.Result;
 import nightgames.global.Global;
+import nightgames.grammar.Shorthand;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.pet.arms.ArmManager;
@@ -119,7 +120,7 @@ public class Mara extends BasePersonality {
          });
 
         addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> {
-            final String finalLines[] = {"<i>\"Cumming again? You " + other.boyOrGirl() + "s are too easy.\"</i>",
+            final String finalLines[] = {"<i>\"Cumming again? You " + Shorthand.boyOrGirl(other) + "s are too easy.\"</i>",
                             "<i>\"You're simply inexhaustible aren't you? Let's test that theory... for science.\"</i>",
                             "{self:SUBJECT} laughs triumphantly, <i>\"Again! Again!\"</i>",};
             switch (other.orgasms) {
@@ -406,8 +407,7 @@ public class Mara extends BasePersonality {
                             + "as she goes, stopping from time to time to place light kisses. Between her enticing behavior and her naked body pressed against you, your erection recovers in record "
                             + "time.<br/><br/>Mara makes herself comfortable sitting on your lap and slides your lubed up dick between her thighs. As she leans against your chest, you can feel her hot slit "
                             + "pressing against your member. Her finger teases the head of your penis, which is poking out of her lap. <i>\"It's a good thing you're such a horny "
-                            + c.getOpponent(character)
-                               .boyOrGirl()
+                            + Shorthand.boyOrGirl(c.getOpponent(character))
                             + ". If you couldn't get it "
                             + "up again, I would have to settle for grinding on your leg.\"</i> As she says this, she starts to rub her clit along the length of your penis. She keeps her legs clamped "
                             + "tightly together so that her movements stimulate your entire shaft. You contribute by licking and sucking the side of her neck to draw out soft moans of pleasure. You "
@@ -490,17 +490,13 @@ public class Mara extends BasePersonality {
                             + "The sensation is amazing, but you're not in danger of cumming with her. You gently stroke her head while spasms of pleasure continue to run through her small body. "
                             + "It occurs to you -not for the first time- that she's really cute, even when she's not trying to be.<br/><br/>As Mara catches her breath, you see realization slowly dawn "
                             + "on her. <i>\"You didn't cum? Why not?\"</i> She actually looks a little hurt. <i>\"Every "
-                            + c.getOpponent(character)
-                               .boyOrGirl()
+                            + Shorthand.boyOrGirl(c.getOpponent(character))
                             + " I've been with said it feels really good and tight inside me. They never outlast "
-                            + "me.\"</i> Every " + c.getOpponent(character)
-                                                    .boyOrGirl()
+                            + "me.\"</i> Every " + Shorthand.boyOrGirl(c.getOpponent(character))
                             + " she's been with? Mara struck you as a bit of an introvert. How many "
-                            + c.getOpponent(character)
-                               .guyOrGirl()
+                            + Shorthand.guyOrGirl(c.getOpponent(character))
                             + "s has she been with? <br/>She gives you a flick on the forehead. <i>\"Don't be mean. "
-                            + "I've only slept with a few " + c.getOpponent(character)
-                                                               .boyOrGirl()
+                            + "I've only slept with a few " + Shorthand.boyOrGirl(c.getOpponent(character))
                             + "s. It's not like you're a virgin either.\"</i> Fair enough, but if she's upset that you didn't cum inside her, you're eager to remedy that. "
                             + "\n\nYou pull most of the way out in preparation for a big thrust, but Mara yelps in alarm. <i>\"Wait!\"</i> She slides her butt backward, causing your dick to fall out completely, "
                             + "and curls up protectively. <i>\"I get really sensitive down there after I orgasm. Give me a minute or two to recover before we continue. In the meantime we can always chat, "

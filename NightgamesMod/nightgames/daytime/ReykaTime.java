@@ -23,6 +23,7 @@ import nightgames.characters.body.mods.PointedEarsMod;
 import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.global.Global;
+import nightgames.grammar.Shorthand;
 import nightgames.items.Item;
 import nightgames.requirements.BodyPartRequirement;
 import nightgames.requirements.NotRequirement;
@@ -606,7 +607,7 @@ public class ReykaTime extends BaseNPCTime {
                                           + "losing clothes left and right. At the six-minute mark, she starts sprinting circles around you "
                                           + "inhumanly fast before grabbing you from behind. She holds you in place with one arm across your chest, "
                                           + "while she uses her other hand to fondle your already rising dick. <i>\"Yum, playtime.\"</i> With that, she pulls "
-                                          + "down your boxers and lets you go. <i>\"Next time, " + Global.getPlayer().boyOrGirl() + ", you're mine!\"</i> As you start the final round, three "
+                                          + "down your boxers and lets you go. <i>\"Next time, " + Shorthand.boyOrGirl(Global.getPlayer()) + ", you're mine!\"</i> As you start the final round, three "
                                           + "minutes remain on the clock. You aren't trying anymore fancy moves, instead opting to stay as far away "
                                           + "as possible. She gets close a couple times though, slapping your ass a few times. Your escapes are "
                                           + "hindered somewhat by the protrusion in your groin, but you make it to eight and a half minutes, "
@@ -670,7 +671,7 @@ public class ReykaTime extends BaseNPCTime {
                                           + "faculties in good condition if you are to study later. <i>\"Hey, you came to me! But alright, I guess we can "
                                           + "swap roles this time. I'll even level the playing field for you.\"</i> Unbidden images of wings sprouting "
                                           + "from your back come to mind, and you waste no time making clear to her you don't want them. <i>\"That's, "
-                                          + "not what I meant, you silly " + Global.getPlayer().boyOrGirl() + ". That would require at least five souls and I'm not allowed to harvest "
+                                          + "not what I meant, you silly " + Shorthand.boyOrGirl(Global.getPlayer()) + ". That would require at least five souls and I'm not allowed to harvest "
                                           + "any here. No, I meant the hunting instincts, you know, so you can track my movements?\"</i> Come again? "
                                           + "That kind of defeats the point of the game, but it sure sounds interesting... You ask her to elaborate. "
                                           + "<i>\"Well, it's quite simple really: I weave a little spell, and you gain a seventh sense!\"</i> You are too "
@@ -686,7 +687,7 @@ public class ReykaTime extends BaseNPCTime {
                 }
                 Global.gui()
                       .message("Reyka pulls you out towards the dorms. A lot of people, men and women alike, look your way, "
-                                      + "jealous at the " + Global.getPlayer().guyOrGirl() + " who is getting tugged towards the dorms by a stunningly beautiful woman "
+                                      + "jealous at the " + Shorthand.guyOrGirl(Global.getPlayer()) + " who is getting tugged towards the dorms by a stunningly beautiful woman "
                                       + "with a devilish grin on her face. You are not so sure if you are all that lucky, but hey, it "
                                       + "could be worse. You just hope she won't drag you to a family dinner some time, that brother of "
                                       + "hers doesn't sound like the type of guy you would get along with. That, and the cuisine would "

@@ -92,6 +92,7 @@ import nightgames.characters.custom.DataBackedNPCData;
 import nightgames.characters.custom.JsonSourceNPCDataLoader;
 import nightgames.combat.Combat;
 import nightgames.daytime.Daytime;
+import nightgames.grammar.Shorthand;
 import nightgames.gui.GUI;
 import nightgames.gui.HeadlessGui;
 import nightgames.items.Item;
@@ -1937,16 +1938,16 @@ public class Global {
         });
 
         matchActions.put("girl", (self, first, second, third) -> {
-                return self.guyOrGirl();
+            return Shorthand.guyOrGirl(self);
         });
         matchActions.put("guy", (self, first, second, third) -> {
-            return self.guyOrGirl();
+            return Shorthand.guyOrGirl(self);
         });
         matchActions.put("man", (self, first, second, third) -> {
             return self.useFemalePronouns() ? "woman" : "man";
         });
         matchActions.put("boy", (self, first, second, third) -> {
-            return self.boyOrGirl();
+            return Shorthand.boyOrGirl(self);
         });
         matchActions.put("poss-pronoun", (self, first, second, third) -> {
             if (self != null) {

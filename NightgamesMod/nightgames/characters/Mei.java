@@ -21,6 +21,7 @@ import nightgames.characters.custom.CharacterLine;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
+import nightgames.grammar.Shorthand;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
@@ -140,7 +141,7 @@ public class Mei extends BasePersonality {
        });
 
         addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> {
-            return "<i>\"That's right, you're just a little " + other.boyOrGirl() + "toy for us. So why don't you just stay still?\"</i>";
+            return "<i>\"That's right, you're just a little " + Shorthand.boyOrGirl(other) + "toy for us. So why don't you just stay still?\"</i>";
        });
 
         addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> {

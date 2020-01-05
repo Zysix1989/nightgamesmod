@@ -1,7 +1,6 @@
 package nightgames.daytime;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +16,7 @@ import nightgames.characters.Reyka;
 import nightgames.characters.custom.RecruitmentData;
 import nightgames.global.Flag;
 import nightgames.global.Global;
+import nightgames.grammar.Shorthand;
 import nightgames.status.addiction.Addiction;
 
 public class Informant extends Activity {
@@ -306,7 +306,7 @@ public class Informant extends Activity {
                         + "in %s harem. Obviously a serious athlete such as yourself needs a wide range of competitors to hone %s skills. "
                         + "I happen to know some people who are currently taking a break from the Game for various reasons. For a nominal "
                         + "fee, I could probably convince them to return. Let me know if you're interested in hearing their stories.\"</i>",
-                        player.bitchOrBastard(), player.possessiveAdjective(), player.possessiveAdjective()));
+                Shorthand.bitchOrBastard(player), player.possessiveAdjective(), player.possessiveAdjective()));
         Global.flag(Flag.rank1);
     }
 
@@ -347,7 +347,7 @@ public class Informant extends Activity {
                         + "'coincidentally' run into them during the day. Even if they don't seem interested in you at first, you can try again "
                         + "after a few matches. In my experience after you have sex with someone a few times they start to remember your name. "
                         + "Who knows, you might even get a relationship out of this. It's not wholly unprecedented.\"</i>",
-                        player.bitchOrBastard()));
+                Shorthand.bitchOrBastard(player)));
         Global.flag(Flag.girlAdvice);
         List<String> choices = new ArrayList<>();
         choices.add("Leave");

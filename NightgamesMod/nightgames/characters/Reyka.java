@@ -24,6 +24,7 @@ import nightgames.combat.CombatScene;
 import nightgames.combat.CombatSceneChoice;
 import nightgames.combat.Result;
 import nightgames.global.Global;
+import nightgames.grammar.Shorthand;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.skills.strategy.DisablingStrategy;
@@ -250,12 +251,12 @@ public class Reyka extends BasePersonality {
 
         addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> {
             return "You feel exhausted after yet another night of sexfighting. You're not complaining, of course; "
-                            + "what " + other.guyOrGirl()
+                            + "what " + Shorthand.guyOrGirl(other)
                             + " would when having this much sex with several different girls? Still, a weekend would "
                             + "be nice sometime... About half way to your room, Reyka steps in front of you. Where did she come from? "
                             + "<i>\"Listen, " + other.getName()
                             + ", I've been doing some thinking lately. You know very well I've had sex with a lot "
-                            + "of " + other.guyOrGirl()
+                            + "of " + Shorthand.guyOrGirl(other)
                             + "s and a fair amount of girls, too, right?\"</i> You just nod, wondering where this is going. <i>\"Well, "
                             + "in all that time no one has ever made me feel the way you can. I don't know why, really, but I can't help "
                             + "feeling there's something special about you.\"</i> You stand there, paralyzed, with a look of amazement "
@@ -307,8 +308,8 @@ public class Reyka extends BasePersonality {
             return "Reyka alternates between long hard thrusts and sensual grinding to keep you from getting used to the stimulation, and the pleasure it is "
                             + "inflicting on you stops you from mustering the resolve to fight back. <i>\"I do love a good bit of pegging.\"</i> Reyka comments as she begins "
                             + "to gently rock the head of the strapon over your prostate, leaving you breathing hard as your mouth hangs open. <i>\"There's a special "
-                            + "pleasure in making a " + opponent.boyOrGirl() + " a little butt slave.\"</i> Her words shock you and cause your resistance to slip a little. <i>\"Hmmm?\"</i> She purrs <i>\"Would "
-                            + "you like that?\"</i> she asks, picking up the pace of her thrusting. <i>\"To be my little pet " + opponent.boyOrGirl() + " slut?\"</i> Your only response is to cum. Hard. Ropes "
+                            + "pleasure in making a " + Shorthand.boyOrGirl(opponent) + " a little butt slave.\"</i> Her words shock you and cause your resistance to slip a little. <i>\"Hmmm?\"</i> She purrs <i>\"Would "
+                            + "you like that?\"</i> she asks, picking up the pace of her thrusting. <i>\"To be my little pet " + Shorthand.boyOrGirl(opponent) + " slut?\"</i> Your only response is to cum. Hard. Ropes "
                             + "of cum fall to the ground below you.<br/><br/>Reyka pouts as she pulls out <i>\"Such a good waste of semen though.\"</i> she tuts. <i>\"Looks like you "
                             + "still owe me a meal.\"</i> She smirks in a way that makes your eyes flash quickly left to right, looking for an escape route. Reyka is too quick "
                             + "however and soon you find yourself pinned with your still hard cock buried deep in her pussy.<br/><br/>She rides you until you cum again and she "

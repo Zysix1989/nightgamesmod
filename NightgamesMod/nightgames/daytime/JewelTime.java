@@ -12,6 +12,7 @@ import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.mods.catcher.FieryMod;
 import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
 import nightgames.global.Global;
+import nightgames.grammar.Shorthand;
 import nightgames.items.Item;
 import nightgames.requirements.BodyPartRequirement;
 import nightgames.requirements.NotRequirement;
@@ -188,7 +189,7 @@ public class JewelTime extends BaseNPCTime {
                                   + "swept out from under you. You fall hard on your back, and Jewel less-than-gracefully"
                                   + " drops herself onto your chest, knocking the wind out of you. Before you can even"
                                   + " catch your breath, Jewel finishes pulling off your shirt and attaches two ropes to"
-                                  + " your wrists. <br/><br/>\"Right over here, " + Global.getPlayer().boyOrGirl() + ".\" She gets up and uses the ropes to"
+                                  + " your wrists. <br/><br/>\"Right over here, " + Shorthand.boyOrGirl(Global.getPlayer()) + ".\" She gets up and uses the ropes to"
                                   + " drag you to the couch, attaching the ropes to its legs. While you test how much "
                                   + "movement you still have, Jewel finishes her work by tying your ankles to other "
                                   + "furniture. Now spread-eagled on your back, the near future is looking rather bleak. "
