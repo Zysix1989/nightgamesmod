@@ -1,16 +1,5 @@
 package nightgames.gui.commandpanel;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -18,8 +7,14 @@ import nightgames.skills.Skill;
 import nightgames.skills.Stage;
 import nightgames.skills.Tactics;
 
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.stream.Collectors;
+
 class CommandPanelButton extends JPanel {
-    private static final long serialVersionUID = -2379908542190189603L;
     private final JButton button;
 
     private CommandPanelButton(String text) {
