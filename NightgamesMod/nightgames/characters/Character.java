@@ -44,10 +44,7 @@ import nightgames.status.addiction.Addiction.Severity;
 import nightgames.status.addiction.AddictionType;
 import nightgames.status.addiction.Dominance;
 import nightgames.status.addiction.MindControl;
-import nightgames.traits.Apostles;
-import nightgames.traits.Insatiable;
-import nightgames.traits.Slime;
-import nightgames.traits.Wrassler;
+import nightgames.traits.*;
 import nightgames.trap.Trap;
 import nightgames.utilities.DebugHelper;
 import nightgames.utilities.ProseUtils;
@@ -646,10 +643,8 @@ public Character clone() throws CloneNotSupportedException {
         }
         if (c != null) {
             if (has(Trait.cute) && other != null && other != this && primary && physical) {
-                bonus -= Math.min(get(Attribute.Seduction), 50) * pain / 100;
-                c.write(this, Global.format(
-                                "{self:NAME-POSSESSIVE} innocent appearance throws {other:direct-object} off and {other:subject-action:use|uses} much less strength than intended.",
-                                this, other));
+                bonus += Cute.painModifier(this, pain);
+                c.write(this, Cute.textOnPain(this.getGrammar(), other.getGrammar()));
             }
             if (other != null && other != this && other.has(Trait.dirtyfighter) && (c.getStance().prone(other)
                             || c.getStance()

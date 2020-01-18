@@ -11,6 +11,7 @@ dependencies {
     compile fileTree('NightgamesMod') { include '*.jar' }
     compile fileTree('NightgamesTests') { include '*.jar' }
     compile "org.jtwig:jtwig-core:5.87.0.RELEASE"
+    implementation 'uk.ac.abdn:SimpleNLG:4.4.8'
 
     testImplementation('junit:junit:4.12')
 }
