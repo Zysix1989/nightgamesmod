@@ -646,14 +646,11 @@ public Character clone() throws CloneNotSupportedException {
                 bonus += Cute.painModifier(this, pain);
                 c.write(this, Cute.textOnPain(this.getGrammar(), other.getGrammar()));
             }
-            if (other != null && other != this && other.has(Trait.dirtyfighter) && (c.getStance().prone(other)
-                            || c.getStance()
-                                .sub(other))
-                            && physical) {
-                bonus += 10;
-                c.write(this, Global.format(
-                                "{other:SUBJECT-ACTION:know|knows} how to fight dirty, and {other:action:manage|manages} to give {self:direct-object} a lot more trouble than {self:subject} expected despite being in a compromised position.",
-                                this, other));
+            if (other != null && other != this && other.has(Trait.dirtyfighter)
+                    && (c.getStance().prone(other) || c.getStance().sub(other))
+                    && physical) {
+                bonus += DirtyFighter.painModifier();
+                c.write(this, DirtyFighter.textOnPain(this.getGrammar(), other.getGrammar()));
             }
 
             if (has(Trait.sacrosanct) && physical && primary) {
@@ -736,31 +733,31 @@ public Character clone() throws CloneNotSupportedException {
             drainer.stamina.recover(drained);
         }
     }
-    
-    /**Drains this character's given stat permenantly. Used by abilities that need to 
+
+    /**Drains this character's given stat permenantly. Used by abilities that need to
      * bypass the Drained Status effect, because permenant drain doesn't require a debuff or a bufff.
-     * 
-     * TODO: Finish implementing this. 
-     * 
+     *
+     * TODO: Finish implementing this.
+     *
      * @param c
      * The combat that requires this method.
-     * 
+     *
      * @param drainer
      * the character that is performing the drain on this character.
      *
      * */
     public void superdrain(Combat c, Character drainer, Attribute att, int value, int duration, boolean write) {
-        
+
         Character drained = this;
-        
+
         if (drainer.has(Trait.WillingSacrifice) && drained.is(Stsflag.charmed)) {
             value *= 1.5;
         }
         if (drainer.has(Trait.Greedy)) {
             duration *= 1.5;
         }
-        
-       
+
+
         int realValue = Math.min(drained.getPure(att) - (Attribute.isBasic(drained, att) ? 3 : 0), value);
         int inverseVal = realValue - (realValue*2);
         if (realValue > 0) {
@@ -768,9 +765,9 @@ public Character clone() throws CloneNotSupportedException {
                             , drainer, drained, att.toString()));
             //Do the actual stat transfer
             drained.mod(att, inverseVal);
-            
+
             drainer.mod(att, realValue);
-            
+
             //drainer.add(c, new Drained(drainer, drained, att, realValue, duration));
             //drained.add(c, new Drained(drained, drainer, att, -realValue, duration));
 
@@ -784,9 +781,9 @@ public Character clone() throws CloneNotSupportedException {
                 if (drainer.has(Trait.RaptorMentis)) {
                     Global.writeIfCombat(c, drainer, Global.format("Additionally, the draining leaves a profound emptiness in its"
                                     + " wake, sapping {other:name-possessive} confidence.", drainer, drained));
-                }  
+                }
                 //Show results
-                
+
             }
             if (drainer.has(Trait.RaptorMentis)) {
                 drained.drainMojo(c, drainer, Math.max(5, realValue));
