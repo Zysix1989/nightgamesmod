@@ -3,22 +3,6 @@ package nightgames.characters.body;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Queue;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.CharacterSex;
@@ -34,13 +18,13 @@ import nightgames.nskills.tags.SkillTag;
 import nightgames.pet.PetCharacter;
 import nightgames.skills.Divide;
 import nightgames.skills.Skill;
-import nightgames.status.Abuff;
-import nightgames.status.BodyFetish;
-import nightgames.status.Charmed;
-import nightgames.status.Status;
-import nightgames.status.Stsflag;
+import nightgames.status.*;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
+
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Body implements Cloneable {
     private static class PartReplacement {
@@ -508,8 +492,9 @@ public class Body implements Cloneable {
             perceptionlessDamage);
 
         pleasureResolveUnsatisfied(c, opponent, unsatisfied);
-        pleasureResolveStaleness(c, opponent, skill, staleness);
-
+        if (skill != null) {
+            pleasureResolveStaleness(c, opponent, skill, staleness);
+        }
         double percentPleasure = 100.0 * result / character.getArousal().max();
         pleasureResolveSexualDynamo(c, opponent, percentPleasure);
         pleasureResolveShowmanship(c, opponent, percentPleasure, result, Optional.ofNullable(skill));
