@@ -11,14 +11,76 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.stream.Collectors;
 
 class CommandPanelButton extends JPanel {
-    private final JButton button;
+    private final JRadioButton button;
+    private final ActionListener listener;
 
-    private CommandPanelButton(String text) {
-        this.button = new JButton(text);
+    // Very annoying, but supplying a null icon results in the default from the L&F
+    private static final class NoIcon implements Icon {
+        @Override
+        public void paintIcon(Component component, Graphics graphics, int i, int i1) {
+
+        }
+        @Override
+        public int getIconWidth() {
+            return 0;
+        }
+
+        @Override
+        public int getIconHeight() {
+            return 0;
+        }
+    }
+
+    private CommandPanelButton(String text, ActionListener listener) {
+        this.listener = listener;
+        this.button = new JRadioButton(text, new NoIcon());
+        this.button.setActionCommand(text);
+        var self = this;
+        this.button.addItemListener(itemEvent -> {
+            switch (itemEvent.getStateChange()) {
+                case ItemEvent.SELECTED:
+                    self.setBorder(BorderFactory.createLineBorder(Color.GRAY, 5));
+                    break;
+                case ItemEvent.DESELECTED:
+                    self.setBorder(BorderFactory.createEmptyBorder());
+                    break;
+            }
+        });
+        this.button.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                if (mouseEvent.getClickCount() > 1) {
+                    self.listener.actionPerformed(null);
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+
+            }
+        });
         this.setLayout(new BorderLayout());
         this.add(button);
         this.setOpaque(false);
@@ -31,13 +93,12 @@ class CommandPanelButton extends JPanel {
 
     static CommandPanelButton BasicButton(String text, ActionListener action) {
         text = formatHTMLMultiline(text);
-        var button = new CommandPanelButton(text);
+        var button = new CommandPanelButton(text, action);
         var fontSize = 18;
         if (text.contains("<br/>")) {
             fontSize = 14;
         }
         button.button.setFont(new Font("Baskerville Old Face", Font.PLAIN, fontSize));
-        button.button.addActionListener(action);
         return button;
     }
 
@@ -140,7 +201,9 @@ class CommandPanelButton extends JPanel {
         return button;
     }
 
-    public JButton getButton() {
+    public JRadioButton getButton() {
         return button;
     }
+
+    ActionListener getListener() { return listener; }
 }
