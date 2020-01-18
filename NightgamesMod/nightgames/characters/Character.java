@@ -734,66 +734,6 @@ public Character clone() throws CloneNotSupportedException {
         }
     }
 
-    /**Drains this character's given stat permenantly. Used by abilities that need to
-     * bypass the Drained Status effect, because permenant drain doesn't require a debuff or a bufff.
-     *
-     * TODO: Finish implementing this.
-     *
-     * @param c
-     * The combat that requires this method.
-     *
-     * @param drainer
-     * the character that is performing the drain on this character.
-     *
-     * */
-    public void superdrain(Combat c, Character drainer, Attribute att, int value, int duration, boolean write) {
-
-        Character drained = this;
-
-        if (drainer.has(Trait.WillingSacrifice) && drained.is(Stsflag.charmed)) {
-            value *= 1.5;
-        }
-        if (drainer.has(Trait.Greedy)) {
-            duration *= 1.5;
-        }
-
-
-        int realValue = Math.min(drained.getPure(att) - (Attribute.isBasic(drained, att) ? 3 : 0), value);
-        int inverseVal = realValue - (realValue*2);
-        if (realValue > 0) {
-            Global.writeIfCombat(c, drainer, Global.format("{self:reflective}'s powerful drain permenantly takes a portion of {other:possessive}'s soul!"
-                            , drainer, drained, att.toString()));
-            //Do the actual stat transfer
-            drained.mod(att, inverseVal);
-
-            drainer.mod(att, realValue);
-
-            //drainer.add(c, new Drained(drainer, drained, att, realValue, duration));
-            //drained.add(c, new Drained(drained, drainer, att, -realValue, duration));
-
-            if (write) {
-                if (drainer.has(Trait.WillingSacrifice) && drained.is(Stsflag.charmed)) {
-                    Global.writeIfCombat(c, drainer, Global.format("With {other:name-possessive} mental defenses lowered as they are,"
-                                    + " {self:subject-action:are|is} able to draw in more of {other:possessive} %s than"
-                                    + " normal."
-                                    , drainer, drained, att.toString()));
-                }
-                if (drainer.has(Trait.RaptorMentis)) {
-                    Global.writeIfCombat(c, drainer, Global.format("Additionally, the draining leaves a profound emptiness in its"
-                                    + " wake, sapping {other:name-possessive} confidence.", drainer, drained));
-                }
-                //Show results
-
-            }
-            if (drainer.has(Trait.RaptorMentis)) {
-                drained.drainMojo(c, drainer, Math.max(5, realValue));
-            }
-        } else {
-            Global.writeIfCombat(c, drainer, Global.format("{self:subject-action:try} to drain {other:name-possessive} %s but {self:action:find} that there's nothing left to take.",
-                            drainer, drained, att.getDrainedDO()));
-        }
-    }
-
     /**Weaken's this character's Stamina by value i.
      * 
      * @param c
