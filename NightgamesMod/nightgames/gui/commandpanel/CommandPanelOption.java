@@ -1,5 +1,7 @@
 package nightgames.gui.commandpanel;
 
+import javafx.scene.control.Tooltip;
+
 import java.awt.event.ActionListener;
 
 public class CommandPanelOption {
@@ -23,7 +25,7 @@ public class CommandPanelOption {
     CommandPanelButton toButton() {
         var button = CommandPanelButton.BasicButton(displayText, action);
         if (toolTipText != null) {
-            button.getButton().setToolTipText(toolTipText);
+            button.tooltipProperty().setValue(new Tooltip(toolTipText));
         }
         return button;
     }

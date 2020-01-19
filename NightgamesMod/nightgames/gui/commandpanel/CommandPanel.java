@@ -1,5 +1,17 @@
 package nightgames.gui.commandpanel;
 
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -9,113 +21,136 @@ import nightgames.skills.SkillGroup;
 import nightgames.skills.Tactics;
 
 import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout.ParallelGroup;
-import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.border.CompoundBorder;
-import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class CommandPanel extends JPanel{
-    private JPanel commandPanel;
+public class CommandPanel extends JFXPanel {
+    private HBox commandPanel;
 
     private Map<Tactics, SkillGroup> skills;
     private Character target;
     private Combat combat;
     private Tactics selectedTactic;
     private Skill selectedSkill;
-    private JButton submitButton;
-    private ButtonGroup buttonGroup;
+    private Button submitButton;
+    private ToggleGroup buttonGroup;
     private HashMap<String, ActionListener> eventMap = new HashMap<>();
-    private JButton backButton;
+    private Button backButton;
+    private Node focusTarget;
 
     public CommandPanel() {
-        commandPanel = new JPanel();
-        commandPanel.setOpaque(false);
-        commandPanel.setLayout(new GroupLayout(commandPanel));
+        Platform.setImplicitExit(false);
+        Platform.runLater(() -> {
+            commandPanel = new HBox();
+            commandPanel.setAlignment(Pos.CENTER);
+            commandPanel.setBackground(new Background(new BackgroundFill(GUIColors.PAINT_BG_DARK, CornerRadii.EMPTY, Insets.EMPTY)));
+            commandPanel.setBorder(new Border(new BorderStroke(
+                    new Color(0, 0, 0, 0),
+                    BorderStrokeStyle.NONE,
+                    CornerRadii.EMPTY,
+                    BorderStroke.DEFAULT_WIDTHS)));
 
-        JScrollPane scrollPane = new JScrollPane(commandPanel);
-        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.getViewport().setLayout(ViewportLayout.SHARED_INSTANCE);
-        scrollPane.getViewport().setBackground(GUIColors.bgDark);
+            ScrollPane scrollPane = new ScrollPane(commandPanel);
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+            scrollPane.setFitToWidth(true);
+            scrollPane.setBackground(new Background(new BackgroundFill(GUIColors.PAINT_BG_DARK, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        CommandPanel self = this;
+            buttonGroup = new ToggleGroup();
+            buttonGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    submitButton.setVisible(true);
+                } else {
+                    submitButton.setVisible(false);
+                }
+            });
 
-        buttonGroup = new ButtonGroup();
+            submitButton = new Button();
+            submitButton.setText("Do it!");
+            submitButton.setTextFill(Color.WHITE);
+            submitButton.setBackground(new Background(new BackgroundFill(GUIColors.PAINT_BG_GREY, CornerRadii.EMPTY, Insets.EMPTY)));
+            submitButton.setFont(new Font("Baskerville Old Face", 18));
+            submitButton.setOnAction(event -> SwingUtilities.invokeLater(() -> eventMap.get((String) buttonGroup.getSelectedToggle().getUserData()).actionPerformed(null)));
+            submitButton.setVisible(false);
+            submitButton.setAlignment(Pos.CENTER);
 
+            var submitButtonPane = new StackPane(submitButton);
 
-        submitButton = new JButton();
-        submitButton.setText("Do it!");
-        submitButton.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
-                eventMap.get(buttonGroup.getSelection().getActionCommand()).actionPerformed(null);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent mouseEvent) {
-
-            }
-        });
-        submitButton.setVisible(false);
-
-        backButton = new JButton();
-        backButton.setText("back");
-        backButton.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
+            var self = this;
+            backButton = new Button();
+            backButton.setText("Something else...");
+            backButton.setTextFill(Color.WHITE);
+            backButton.setBackground(new Background(new BackgroundFill(GUIColors.PAINT_BG_GREY, CornerRadii.EMPTY, Insets.EMPTY)));
+            backButton.setFont(new Font("Baskerville Old Face", 18));
+            backButton.setOnAction(event -> {
                 self.upOneLevel();
-            }
+                backButton.setVisible(false);
+            });
+            backButton.setVisible(false);
+            backButton.setAlignment(Pos.CENTER);
 
-            @Override
-            public void mousePressed(MouseEvent mouseEvent) {
+            var backButtonPane = new StackPane(backButton);
 
-            }
+            var pane = new BorderPane();
+            pane.setTop(submitButtonPane);
+            pane.setCenter(scrollPane);
+            pane.setBottom(backButtonPane);
+            pane.setOnKeyPressed(event -> {
+                switch (event.getCode()) {
+                    case UP: {
+                        if (submitButton.isVisible()) {
+                            submitButton.fire();
+                        }
+                    }
+                    break;
+                    case RIGHT: {
+                        int selectedIndex;
+                        if (buttonGroup.getSelectedToggle() == null) {
+                            selectedIndex = buttonGroup.getToggles().size() / 2;
+                        } else {
+                            selectedIndex = buttonGroup.getToggles().indexOf(buttonGroup.getSelectedToggle());
+                        }
+                        var nextSelectedToggle = buttonGroup.getToggles().get((selectedIndex + 1) % buttonGroup.getToggles().size());
+                        buttonGroup.selectToggle(nextSelectedToggle);
+                    }
+                    break;
+                    case LEFT: {
+                        int selectedIndex;
+                        if (buttonGroup.getSelectedToggle() == null) {
+                            selectedIndex = buttonGroup.getToggles().size() / 2;
+                        } else {
+                            selectedIndex = buttonGroup.getToggles().indexOf(buttonGroup.getSelectedToggle());
+                        }
+                        var nextSelectedToggle = buttonGroup.getToggles().get((selectedIndex - 1 + buttonGroup.getToggles().size()) % buttonGroup.getToggles().size());
+                        buttonGroup.selectToggle(nextSelectedToggle);
+                    }
+                    break;
+                    case DOWN: {
+                        if (backButton.isVisible()) {
+                            backButton.fire();
+                        }
+                    }
+                }
+            });
+            pane.setFocusTraversable(false);
+            pane.setBackground(new Background(new BackgroundFill(new Color(0, 0, 0, 0), CornerRadii.EMPTY, Insets.EMPTY)));
+            pane.setBorder(new Border(new BorderStroke(
+                    new Color(0, 0, 0, 0),
+                    BorderStrokeStyle.NONE,
+                    CornerRadii.EMPTY,
+                    BorderStroke.DEFAULT_WIDTHS)));
+            focusTarget = pane;
 
-            @Override
-            public void mouseReleased(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent mouseEvent) {
-
-            }
+            var scene = new Scene(pane);
+            scene.setFill(GUIColors.PAINT_BG_DARK);
+            setScene(scene);
         });
-        backButton.setVisible(false);
 
-        setLayout(new BorderLayout());
-        add(submitButton, BorderLayout.PAGE_START);
-        add(scrollPane, BorderLayout.CENTER);
-        add(backButton, BorderLayout.PAGE_END);
         setOpaque(false);
         setBorder(new CompoundBorder());
 
@@ -124,44 +159,41 @@ public class CommandPanel extends JPanel{
 
     public void reset() {
         skills.clear();
-        submitButton.setVisible(false);
-        backButton.setVisible(false);
+        Platform.runLater(() -> {
+            submitButton.setVisible(false);
+            backButton.setVisible(false);
+        });
         clear();
         refresh();
     }
 
     private void clear() {
-        submitButton.setVisible(false);
-        commandPanel.removeAll();
-        refresh();
+        Platform.runLater(() -> {
+            submitButton.setVisible(false);
+            commandPanel.getChildren().clear();
+            eventMap.clear();
+            buttonGroup.getToggles().clear();
+            refresh();
+        });
     }
 
     private void refresh() {
-        repaint();
-        revalidate();
+            SwingUtilities.invokeLater(() -> {
+                repaint();
+                revalidate();
+            });
     }
 
     private void add(List<CommandPanelButton> buttons) {
-
-        GroupLayout layout = new GroupLayout(commandPanel);
-        layout.setAutoCreateGaps(true);
-        layout.setAutoCreateContainerGaps(true);
-
-        SequentialGroup horizontal = layout.createSequentialGroup();
-        ParallelGroup vertical = layout.createParallelGroup(Alignment.LEADING);
-
-        buttons.forEach(button -> {
-            horizontal.addComponent(button);
-            vertical.addComponent(button);
-            buttonGroup.add(button.getButton());
-            eventMap.put(button.getButton().getActionCommand(), button.getListener());
-
-            button.getButton().addActionListener(event -> submitButton.setVisible(true));
-
+        Platform.runLater(() -> {
+            commandPanel.getChildren().addAll(buttons);
+            buttons.forEach(b -> {
+                b.setToggleGroup(buttonGroup);
+                eventMap.put((String) b.getUserData(), b.getListener());
+            });
+            buttonGroup.selectToggle(buttons.get(buttons.size() / 2));
+            focusTarget.requestFocus();
         });
-        layout.setHorizontalGroup(horizontal);
-        layout.setVerticalGroup(vertical);
-        commandPanel.setLayout(layout);
     }
 
     public void present(List<CommandPanelOption> options) {
@@ -213,7 +245,6 @@ public class CommandPanel extends JPanel{
         skills.forEach(group -> this.skills.put(group.tactics, group));
         addTactics();
         Global.getMatch().pause();
-        backButton.setVisible(true);
         refresh();
     }
 
@@ -224,6 +255,7 @@ public class CommandPanel extends JPanel{
                 .map(skill -> CommandPanelButton.SkillButton(combat, skill, target, this))
                 .collect(Collectors.toList()));
             selectedTactic = tactics;
+            backButton.setVisible(true);
         } else {
             addTactics();
         }
