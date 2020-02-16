@@ -1,26 +1,6 @@
 package nightgames.gui;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Panel;
-import java.awt.Toolkit;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.WindowConstants;
+import javafx.application.Platform;
 import nightgames.characters.Character;
 import nightgames.characters.NPC;
 import nightgames.characters.Player;
@@ -31,6 +11,15 @@ import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanel;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.skills.SkillGroup;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.File;
+import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class GUI extends JFrame implements Observer {
@@ -71,7 +60,42 @@ public class GUI extends JFrame implements Observer {
         setBackground(GUIColors.bgDark);
         // closing operation
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent windowEvent) {
 
+            }
+
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                Platform.runLater(Platform::exit);
+                System.exit(0);
+            }
+
+            @Override
+            public void windowClosed(WindowEvent windowEvent) {
+            }
+
+            @Override
+            public void windowIconified(WindowEvent windowEvent) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent windowEvent) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent windowEvent) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent windowEvent) {
+
+            }
+        });
         // resolution resolver
 
         int height = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.85);
