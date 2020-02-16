@@ -1,10 +1,11 @@
 package nightgames.global.start;
 
-import java.util.Arrays;
 import nightgames.global.Global;
 import nightgames.global.Scene;
 import nightgames.gui.GUI;
 import nightgames.modifier.standard.NoModifier;
+
+import java.util.Arrays;
 
 public class TutorialStart implements GameStarter, Scene {
 
@@ -520,7 +521,7 @@ public class TutorialStart implements GameStarter, Scene {
 
     @Override
     public void startGame() {
-        respond("Start");
+        respond("Done"); // Switch to "Start" to enable tutorial
     }
 
 }
