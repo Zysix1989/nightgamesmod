@@ -47,7 +47,7 @@ class CommandPanelButton extends ToggleButton {
         return BasicButton(text, action, GUIColors.PAINT_BG_GREY);
     }
 
-    static CommandPanelButton BasicButton(String text, ActionListener action, Color backgroundColor) {
+    private static CommandPanelButton BasicButton(String text, ActionListener action, Color backgroundColor) {
         var button = new CommandPanelButton(text, action, backgroundColor);
         var fontSize = 18;
         if (text.contains("<br/>")) {
@@ -87,6 +87,7 @@ class CommandPanelButton extends ToggleButton {
         BorderStroke border;
         int actualAccuracy = target.getChanceToHit(action.getSelf(), combat, action.accuracy(combat, target));
         int clampedAccuracy = Math.min(100, Math.max(0, actualAccuracy));
+
         String text = "<p><b>" + action.getLabel(combat) + "</b><br/>" +
             action.describe(combat) +
             "<br/><br/>Accuracy: " +
