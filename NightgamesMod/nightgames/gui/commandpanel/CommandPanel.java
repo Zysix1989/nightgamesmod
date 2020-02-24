@@ -70,11 +70,13 @@ public class CommandPanel extends JFXPanel {
                 }
             });
 
+            var buttonBG = new Background(new BackgroundFill(GUIColors.PAINT_BG_GREY, CornerRadii.EMPTY, Insets.EMPTY));
+            var buttonFont = new Font("Baskerville Old Face", 18);
             submitButton = new Button();
             submitButton.setText("Do it!");
             submitButton.setTextFill(Color.WHITE);
-            submitButton.setBackground(new Background(new BackgroundFill(GUIColors.PAINT_BG_GREY, CornerRadii.EMPTY, Insets.EMPTY)));
-            submitButton.setFont(new Font("Baskerville Old Face", 18));
+            submitButton.setBackground(buttonBG);
+            submitButton.setFont(buttonFont);
             submitButton.setOnAction(event -> SwingUtilities.invokeLater(() -> eventMap.get((String) buttonGroup.getSelectedToggle().getUserData()).actionPerformed(null)));
             submitButton.setVisible(false);
             submitButton.setAlignment(Pos.CENTER);
@@ -85,8 +87,8 @@ public class CommandPanel extends JFXPanel {
             backButton = new Button();
             backButton.setText("Something else...");
             backButton.setTextFill(Color.WHITE);
-            backButton.setBackground(new Background(new BackgroundFill(GUIColors.PAINT_BG_GREY, CornerRadii.EMPTY, Insets.EMPTY)));
-            backButton.setFont(new Font("Baskerville Old Face", 18));
+            backButton.setBackground(buttonBG);
+            backButton.setFont(buttonFont);
             backButton.setOnAction(event -> {
                 self.upOneLevel();
                 backButton.setVisible(false);
@@ -96,9 +98,49 @@ public class CommandPanel extends JFXPanel {
 
             var backButtonPane = new StackPane(backButton);
 
+            var rightButton = new Button();
+            rightButton.setText("->");
+            rightButton.setTextFill(Color.WHITE);
+            rightButton.setBackground(buttonBG);
+            rightButton.setFont(buttonFont);
+            rightButton.setOnAction(event -> {
+                int selectedIndex;
+                if (buttonGroup.getSelectedToggle() == null) {
+                    selectedIndex = buttonGroup.getToggles().size() / 2;
+                } else {
+                    selectedIndex = buttonGroup.getToggles().indexOf(buttonGroup.getSelectedToggle());
+                }
+                var nextSelectedToggle = buttonGroup.getToggles().get((selectedIndex + 1) % buttonGroup.getToggles().size());
+                buttonGroup.selectToggle(nextSelectedToggle);
+            });
+            rightButton.setAlignment(Pos.CENTER);
+
+            var rightButtonPane = new StackPane(rightButton);
+
+            var leftButton = new Button();
+            leftButton.setText("<-");
+            leftButton.setTextFill(Color.WHITE);
+            leftButton.setBackground(buttonBG);
+            leftButton.setFont(buttonFont);
+            leftButton.setOnAction(event -> {
+                int selectedIndex;
+                if (buttonGroup.getSelectedToggle() == null) {
+                    selectedIndex = buttonGroup.getToggles().size() / 2;
+                } else {
+                    selectedIndex = buttonGroup.getToggles().indexOf(buttonGroup.getSelectedToggle());
+                }
+                var nextSelectedToggle = buttonGroup.getToggles().get((selectedIndex - 1 + buttonGroup.getToggles().size()) % buttonGroup.getToggles().size());
+                buttonGroup.selectToggle(nextSelectedToggle);
+            });
+            leftButton.setAlignment(Pos.CENTER);
+
+            var leftButtonPane = new StackPane(leftButton);
+
             var pane = new BorderPane();
             pane.setTop(submitButtonPane);
+            pane.setLeft(leftButtonPane);
             pane.setCenter(scrollPane);
+            pane.setRight(rightButtonPane);
             pane.setBottom(backButtonPane);
             pane.setOnKeyPressed(event -> {
                 switch (event.getCode()) {
@@ -109,25 +151,11 @@ public class CommandPanel extends JFXPanel {
                     }
                     break;
                     case RIGHT: {
-                        int selectedIndex;
-                        if (buttonGroup.getSelectedToggle() == null) {
-                            selectedIndex = buttonGroup.getToggles().size() / 2;
-                        } else {
-                            selectedIndex = buttonGroup.getToggles().indexOf(buttonGroup.getSelectedToggle());
-                        }
-                        var nextSelectedToggle = buttonGroup.getToggles().get((selectedIndex + 1) % buttonGroup.getToggles().size());
-                        buttonGroup.selectToggle(nextSelectedToggle);
+                        rightButton.fire();
                     }
                     break;
                     case LEFT: {
-                        int selectedIndex;
-                        if (buttonGroup.getSelectedToggle() == null) {
-                            selectedIndex = buttonGroup.getToggles().size() / 2;
-                        } else {
-                            selectedIndex = buttonGroup.getToggles().indexOf(buttonGroup.getSelectedToggle());
-                        }
-                        var nextSelectedToggle = buttonGroup.getToggles().get((selectedIndex - 1 + buttonGroup.getToggles().size()) % buttonGroup.getToggles().size());
-                        buttonGroup.selectToggle(nextSelectedToggle);
+                        leftButton.fire();
                     }
                     break;
                     case DOWN: {
