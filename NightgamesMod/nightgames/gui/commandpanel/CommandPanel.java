@@ -12,6 +12,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -41,6 +43,7 @@ public class CommandPanel extends JFXPanel {
     private ToggleGroup buttonGroup;
     private HashMap<String, ActionListener> eventMap = new HashMap<>();
     private Button backButton;
+    private WebEngine detailText;
     private Node focusTarget;
 
     public CommandPanel() {
@@ -65,6 +68,7 @@ public class CommandPanel extends JFXPanel {
             buttonGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     submitButton.setVisible(true);
+                    detailText.loadContent((String) buttonGroup.getSelectedToggle().getUserData());
                 } else {
                     submitButton.setVisible(false);
                 }
@@ -77,7 +81,10 @@ public class CommandPanel extends JFXPanel {
             submitButton.setTextFill(Color.WHITE);
             submitButton.setBackground(buttonBG);
             submitButton.setFont(buttonFont);
-            submitButton.setOnAction(event -> SwingUtilities.invokeLater(() -> eventMap.get((String) buttonGroup.getSelectedToggle().getUserData()).actionPerformed(null)));
+            submitButton.setOnAction(event -> {
+                String userData = (String) buttonGroup.getSelectedToggle().getUserData();
+                SwingUtilities.invokeLater(() -> eventMap.get(userData).actionPerformed(null));
+            });
             submitButton.setVisible(false);
             submitButton.setAlignment(Pos.CENTER);
 
@@ -136,13 +143,21 @@ public class CommandPanel extends JFXPanel {
 
             var leftButtonPane = new StackPane(leftButton);
 
-            var pane = new BorderPane();
-            pane.setTop(submitButtonPane);
-            pane.setLeft(leftButtonPane);
-            pane.setCenter(scrollPane);
-            pane.setRight(rightButtonPane);
-            pane.setBottom(backButtonPane);
-            pane.setOnKeyPressed(event -> {
+            var detailView = new WebView();
+            detailText = detailView.getEngine();
+            var detailPane = new StackPane(detailView);
+
+            var innerPane = new BorderPane();
+            innerPane.setCenter(detailPane);
+            innerPane.setBottom(scrollPane);
+
+            var outerPane = new BorderPane();
+            outerPane.setTop(submitButtonPane);
+            outerPane.setLeft(leftButtonPane);
+            outerPane.setCenter(innerPane);
+            outerPane.setRight(rightButtonPane);
+            outerPane.setBottom(backButtonPane);
+            outerPane.setOnKeyPressed(event -> {
                 switch (event.getCode()) {
                     case UP: {
                         if (submitButton.isVisible()) {
@@ -165,16 +180,16 @@ public class CommandPanel extends JFXPanel {
                     }
                 }
             });
-            pane.setFocusTraversable(false);
-            pane.setBackground(new Background(new BackgroundFill(new Color(0, 0, 0, 0), CornerRadii.EMPTY, Insets.EMPTY)));
-            pane.setBorder(new Border(new BorderStroke(
+            outerPane.setFocusTraversable(false);
+            outerPane.setBackground(new Background(new BackgroundFill(new Color(0, 0, 0, 0), CornerRadii.EMPTY, Insets.EMPTY)));
+            outerPane.setBorder(new Border(new BorderStroke(
                     new Color(0, 0, 0, 0),
                     BorderStrokeStyle.NONE,
                     CornerRadii.EMPTY,
                     BorderStroke.DEFAULT_WIDTHS)));
-            focusTarget = pane;
+            focusTarget = outerPane;
 
-            var scene = new Scene(pane);
+            var scene = new Scene(outerPane);
             scene.setFill(GUIColors.PAINT_BG_DARK);
             setScene(scene);
         });
