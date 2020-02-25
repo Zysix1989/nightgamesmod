@@ -19,12 +19,9 @@ import java.util.stream.Collectors;
 
 class CommandPanelButton extends ToggleButton {
 
-    private CommandPanelButton(String text, ActionListener listener, Color backgroundColor) {
-        var data = new CommandPanelData();
-        data.label = text;
-        data.action = listener;
+    private CommandPanelButton(CommandPanelData data, Color backgroundColor) {
         setUserData(data);
-        setText(text);
+        setText(data.label);
         setWrapText(true);
         setBackground(new Background(new BackgroundFill(backgroundColor, CornerRadii.EMPTY, Insets.EMPTY)));
         setTextFill(textColorForBackground(backgroundColor));
@@ -39,7 +36,7 @@ class CommandPanelButton extends ToggleButton {
         });
         addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (event.getClickCount() > 1) {
-                listener.actionPerformed(null);
+                data.action.actionPerformed(null);
             }
         });
     }
@@ -49,9 +46,16 @@ class CommandPanelButton extends ToggleButton {
     }
 
     private static CommandPanelButton BasicButton(String text, ActionListener action, Color backgroundColor) {
-        var button = new CommandPanelButton(text, action, backgroundColor);
+        var data = new CommandPanelData();
+        data.label = text;
+        data.action = action;
+        return BasicButton(data, backgroundColor);
+    }
+
+    private static CommandPanelButton BasicButton(CommandPanelData data, Color backgroundColor) {
+        var button = new CommandPanelButton(data, backgroundColor);
         var fontSize = 18;
-        if (text.contains("<br/>")) {
+        if (data.label.contains("<br/>")) {
             fontSize = 14;
         }
         button.setFont(new Font("Baskerville Old Face", fontSize));
