@@ -12,7 +12,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
@@ -41,7 +40,7 @@ public class CommandPanel extends JFXPanel {
     private Button submitButton;
     private ToggleGroup buttonGroup;
     private Button backButton;
-    private WebEngine detailText;
+    private WebView detailText;
     private Node focusTarget;
 
     public CommandPanel() {
@@ -66,7 +65,9 @@ public class CommandPanel extends JFXPanel {
             buttonGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     submitButton.setVisible(true);
-                    detailText.loadContent(((CommandPanelData) buttonGroup.getSelectedToggle().getUserData()).detail);
+                    var data = (CommandPanelData) buttonGroup.getSelectedToggle().getUserData();
+                    detailText.setVisible(data.detail.length() > 0);
+                    detailText.getEngine().loadContent(((CommandPanelData) buttonGroup.getSelectedToggle().getUserData()).detail);
                 } else {
                     submitButton.setVisible(false);
                 }
@@ -141,9 +142,8 @@ public class CommandPanel extends JFXPanel {
 
             var leftButtonPane = new StackPane(leftButton);
 
-            var detailView = new WebView();
-            detailText = detailView.getEngine();
-            var detailPane = new StackPane(detailView);
+            detailText = new WebView();
+            var detailPane = new StackPane(detailText);
 
             var innerPane = new BorderPane();
             innerPane.setCenter(detailPane);
