@@ -139,7 +139,11 @@ class CommandPanelButton extends ToggleButton {
         if (onCoolDown) {
             bgColor = action.type(combat).getColor().darker();
         }
-        var button = BasicButton(text, actionListener, bgColor);
+        var data = new CommandPanelData();
+        data.label = action.getLabel(combat);
+        data.detail = text;
+        data.action = actionListener;
+        var button = BasicButton(data, bgColor);
         if (onCoolDown) {
             button.setDisabled(true);
         }

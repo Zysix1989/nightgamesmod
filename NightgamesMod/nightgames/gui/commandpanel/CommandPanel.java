@@ -66,7 +66,7 @@ public class CommandPanel extends JFXPanel {
             buttonGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     submitButton.setVisible(true);
-                    detailText.loadContent(((CommandPanelData) buttonGroup.getSelectedToggle().getUserData()).label);
+                    detailText.loadContent(((CommandPanelData) buttonGroup.getSelectedToggle().getUserData()).detail);
                 } else {
                     submitButton.setVisible(false);
                 }
