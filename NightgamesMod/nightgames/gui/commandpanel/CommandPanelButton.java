@@ -12,6 +12,8 @@ import nightgames.global.Global;
 import nightgames.gui.GUIColors;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -93,25 +95,31 @@ class CommandPanelButton extends ToggleButton {
         int actualAccuracy = target.getChanceToHit(action.getSelf(), combat, action.accuracy(combat, target));
         int clampedAccuracy = Math.min(100, Math.max(0, actualAccuracy));
 
-        String text = "<p><b>" + action.getLabel(combat) + "</b><br/>" +
-            action.describe(combat) +
-            "<br/><br/>Accuracy: " +
-            (actualAccuracy >=150 ? "---" : clampedAccuracy + "%") + "</p>";
-        if (action.getMojoCost(combat) > 0) {
-            border = new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT);
-            text += "<br/>Mojo cost: " + action.getMojoCost(combat);
-        } else if (action.getMojoBuilt(combat) > 0) {
+        var model = JtwigModel.newModel()
+                .with("label", action.getLabel(combat))
+                .with("description", action.describe(combat))
+                .with("accuracy", (actualAccuracy >=150 ? "---" : clampedAccuracy + "%"));
+
+        border = new BorderStroke(action.type(combat).getColor(), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT);
+        if (action.getMojoBuilt(combat) > 0) {
             border = new BorderStroke(new Color(.2, .66, 1, 1),
                     BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT);
-            text += "<br/>Mojo generated: " + action.getMojoBuilt(combat) + "%";
+            model.with("mojoBuild", action.getMojoBuilt(combat));
         } else {
-            border = new BorderStroke(action.type(combat).getColor(), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT);
+            model.with("mojoBuild", 0);
+        }
+        if (action.getMojoCost(combat) > 0) {
+            border = new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT);
+            model.with("mojoCost", action.getMojoCost(combat));
+        } else {
+            model.with("mojoCost", 0);
         }
         boolean onCoolDown = false;
         if (!action.user().cooldownAvailable(action)) {
             onCoolDown = true;
-            text += String.format("<br/>Remaining Cooldown: %d turns",
-                action.user().getCooldown(action));
+            model.with("coolDownTurns", action.user().getCooldown(action));
+        } else {
+            model.with("coolDownTurns", 0);
         }
 
         ActionListener actionListener = arg0 -> {
@@ -141,7 +149,7 @@ class CommandPanelButton extends ToggleButton {
         }
         var data = new CommandPanelData();
         data.label = action.getLabel(combat);
-        data.detail = text;
+        data.detail = SKILL_DETAIL_TEMPLATE.render(model);
         data.action = actionListener;
         var button = BasicButton(data, bgColor);
         if (onCoolDown) {
@@ -150,4 +158,12 @@ class CommandPanelButton extends ToggleButton {
         button.setBorder(new Border(border));
         return button;
     }
+
+    private static final JtwigTemplate SKILL_DETAIL_TEMPLATE = JtwigTemplate.inlineTemplate(
+            "<p><b>{{ label }}</b><br/>" +
+                    "{{ description }}<br/>" +
+                    "Accuracy: {{ accuracy }}<br/>" +
+                    "{% if (mojoCost > 0) %}Mojo cost: {{ mojoCost }}<br/>{% endif %}" +
+                    "{% if (mojoBuild > 0) %}Mojo generated: {{ mojoBuild }}%<br/>{% endif %}" +
+                    "{% if (coolDownTurns > 0) %}Remaining cooldown: {{ coolDownTurns }} turns<br/>{% endif %}");
 }
