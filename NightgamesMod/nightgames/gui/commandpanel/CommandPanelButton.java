@@ -18,11 +18,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 class CommandPanelButton extends ToggleButton {
-    private final ActionListener listener;
 
     private CommandPanelButton(String text, ActionListener listener, Color backgroundColor) {
-        this.listener = listener;
-        setUserData(text);
+        var data = new CommandPanelData();
+        data.label = text;
+        data.action = listener;
+        setUserData(data);
         setText(text);
         setWrapText(true);
         setBackground(new Background(new BackgroundFill(backgroundColor, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -141,7 +142,4 @@ class CommandPanelButton extends ToggleButton {
         button.setBorder(new Border(border));
         return button;
     }
-
-    ActionListener getListener() { return listener; }
-
 }

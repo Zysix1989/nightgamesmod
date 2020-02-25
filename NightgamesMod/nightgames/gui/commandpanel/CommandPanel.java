@@ -24,7 +24,6 @@ import nightgames.skills.Tactics;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +40,6 @@ public class CommandPanel extends JFXPanel {
     private Skill selectedSkill;
     private Button submitButton;
     private ToggleGroup buttonGroup;
-    private HashMap<String, ActionListener> eventMap = new HashMap<>();
     private Button backButton;
     private WebEngine detailText;
     private Node focusTarget;
@@ -68,7 +66,7 @@ public class CommandPanel extends JFXPanel {
             buttonGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {
                     submitButton.setVisible(true);
-                    detailText.loadContent((String) buttonGroup.getSelectedToggle().getUserData());
+                    detailText.loadContent(((CommandPanelData) buttonGroup.getSelectedToggle().getUserData()).label);
                 } else {
                     submitButton.setVisible(false);
                 }
@@ -82,8 +80,8 @@ public class CommandPanel extends JFXPanel {
             submitButton.setBackground(buttonBG);
             submitButton.setFont(buttonFont);
             submitButton.setOnAction(event -> {
-                String userData = (String) buttonGroup.getSelectedToggle().getUserData();
-                SwingUtilities.invokeLater(() -> eventMap.get(userData).actionPerformed(null));
+                var userData = (CommandPanelData) buttonGroup.getSelectedToggle().getUserData();
+                SwingUtilities.invokeLater(() -> userData.action.actionPerformed(null));
             });
             submitButton.setVisible(false);
             submitButton.setAlignment(Pos.CENTER);
@@ -214,7 +212,6 @@ public class CommandPanel extends JFXPanel {
         Platform.runLater(() -> {
             submitButton.setVisible(false);
             commandPanel.getChildren().clear();
-            eventMap.clear();
             buttonGroup.getToggles().clear();
             refresh();
         });
@@ -230,10 +227,7 @@ public class CommandPanel extends JFXPanel {
     private void add(List<CommandPanelButton> buttons) {
         Platform.runLater(() -> {
             commandPanel.getChildren().addAll(buttons);
-            buttons.forEach(b -> {
-                b.setToggleGroup(buttonGroup);
-                eventMap.put((String) b.getUserData(), b.getListener());
-            });
+            buttons.forEach(b -> b.setToggleGroup(buttonGroup));
             buttonGroup.selectToggle(buttons.get(buttons.size() / 2));
             focusTarget.requestFocus();
         });
