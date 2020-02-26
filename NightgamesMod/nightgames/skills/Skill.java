@@ -1,11 +1,5 @@
 package nightgames.skills;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.HandsPart;
@@ -19,6 +13,8 @@ import nightgames.skills.damage.Staleness;
 import nightgames.status.FiredUp;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
+
+import java.util.*;
 
 public abstract class Skill {
     /**
@@ -306,5 +302,9 @@ public abstract class Skill {
 
     public Set<SkillTag> getTags(Combat c, Character target) {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public SkillInstance instantiate(Combat c, Character target) {
+        return new SkillInstance(this, c, target);
     }
 }

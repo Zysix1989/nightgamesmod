@@ -13,12 +13,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
-import nightgames.characters.Character;
-import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.gui.GUIColors;
-import nightgames.skills.Skill;
 import nightgames.skills.SkillGroup;
+import nightgames.skills.SkillInstance;
 import nightgames.skills.Tactics;
 
 import javax.swing.*;
@@ -33,10 +31,8 @@ public class CommandPanel extends JFXPanel {
     private HBox commandPanel;
 
     private Map<Tactics, SkillGroup> skills;
-    private Character target;
-    private Combat combat;
     private Tactics selectedTactic;
-    private Skill selectedSkill;
+    private SkillInstance selectedSkill;
     private Button submitButton;
     private ToggleGroup buttonGroup;
     private Button backButton;
@@ -261,7 +257,7 @@ public class CommandPanel extends JFXPanel {
         selectedTactic = null;
     }
 
-    void setSelectedSkill(Skill s) {
+    void setSelectedSkill(SkillInstance s) {
         selectedSkill = s;
     }
 
@@ -272,13 +268,11 @@ public class CommandPanel extends JFXPanel {
             .collect(Collectors.toList()));
     }
 
-    public void chooseSkills(Combat com, nightgames.characters.Character target, List<SkillGroup> skills) {
+    public void chooseSkills(List<SkillGroup> skills) {
         reset();
         if (skills.isEmpty()) {
             throw new IllegalArgumentException("skills cannot be empty");
         }
-        combat = com;
-        this.target = target;
         skills.forEach(group -> this.skills.put(group.tactics, group));
         addTactics();
         Global.getMatch().pause();
@@ -289,7 +283,7 @@ public class CommandPanel extends JFXPanel {
         clear();
         if (tactics != null) {
             add(this.skills.get(tactics).skills.stream()
-                .map(skill -> CommandPanelButton.SkillButton(combat, skill, target, this))
+                .map(skill -> CommandPanelButton.SkillButton(skill, this))
                 .collect(Collectors.toList()));
             selectedTactic = tactics;
             backButton.setVisible(true);

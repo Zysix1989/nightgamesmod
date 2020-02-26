@@ -6,11 +6,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import nightgames.characters.Character;
-import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.gui.GUIColors;
-import nightgames.skills.Skill;
+import nightgames.skills.SkillInstance;
 import nightgames.skills.Tactics;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
@@ -85,70 +83,65 @@ class CommandPanelButton extends ToggleButton {
         return button;
     }
 
-    static CommandPanelButton SkillButton (
-        Combat combat,
-        Skill action,
-        Character target,
-        CommandPanel commandPanel) {
+    static CommandPanelButton SkillButton(
+            SkillInstance actionInstance,
+            CommandPanel commandPanel) {
 
         BorderStroke border;
-        int actualAccuracy = target.getChanceToHit(action.getSelf(), combat, action.accuracy(combat, target));
+        int actualAccuracy = actionInstance.getAccuracy();
         int clampedAccuracy = Math.min(100, Math.max(0, actualAccuracy));
 
         var model = JtwigModel.newModel()
-                .with("label", action.getLabel(combat))
-                .with("description", action.describe(combat))
+                .with("label", actionInstance.getLabel())
+                .with("description", actionInstance.getDescription())
                 .with("accuracy", (actualAccuracy >=150 ? "---" : clampedAccuracy + "%"));
 
-        border = new BorderStroke(action.type(combat).getColor(), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT);
-        if (action.getMojoBuilt(combat) > 0) {
+        border = new BorderStroke(actionInstance.getType().getColor(), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT);
+        if (actionInstance.getMojoBuilt() > 0) {
             border = new BorderStroke(new Color(.2, .66, 1, 1),
                     BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT);
-            model.with("mojoBuild", action.getMojoBuilt(combat));
+            model.with("mojoBuild", actionInstance.getMojoBuilt());
         } else {
             model.with("mojoBuild", 0);
         }
-        if (action.getMojoCost(combat) > 0) {
+        if (actionInstance.getMojoCost() > 0) {
             border = new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT);
-            model.with("mojoCost", action.getMojoCost(combat));
+            model.with("mojoCost", actionInstance.getMojoCost());
         } else {
             model.with("mojoCost", 0);
         }
         boolean onCoolDown = false;
-        if (!action.user().cooldownAvailable(action)) {
+        if (actionInstance.getCooldownRemaining() > 0) {
             onCoolDown = true;
-            model.with("coolDownTurns", action.user().getCooldown(action));
+            model.with("coolDownTurns", actionInstance.getCooldownRemaining());
         } else {
             model.with("coolDownTurns", 0);
         }
 
         ActionListener actionListener = arg0 -> {
-            if (action.subChoices(combat).size() == 0) {
+            if (actionInstance.getChoices().size() == 0) {
                 commandPanel.reset();
-                combat.act(action.user(), action);
-                combat.resume();
+                actionInstance.fire();
             } else {
-                List<CommandPanelOption> options = action.subChoices(combat).stream()
+                List<CommandPanelOption> options = actionInstance.getChoices().stream()
                     .map(choice -> new CommandPanelOption(
                         choice,
                         event -> {
                             commandPanel.reset();
-                            action.setChoice(choice);
-                            combat.act(action.user(), action);
-                            combat.resume();
+                            actionInstance.fire(choice);
                         }
                     )).collect(Collectors.toList());
                 commandPanel.addNoReset(options);
-                commandPanel.setSelectedSkill(action);
+                commandPanel.setSelectedSkill(actionInstance);
             }
         };
 
-        Color bgColor = action.type(combat).getColor();
+        Color bgColor = actionInstance.getType().getColor();
         if (onCoolDown) {
-            bgColor = action.type(combat).getColor().darker();
+            bgColor = bgColor.darker();
         }
         var data = new CommandPanelData();
-        data.label = action.getLabel(combat);
+        data.label = actionInstance.getLabel();
         data.detail = SKILL_DETAIL_TEMPLATE.render(model);
         data.action = actionListener;
         var button = BasicButton(data, bgColor);

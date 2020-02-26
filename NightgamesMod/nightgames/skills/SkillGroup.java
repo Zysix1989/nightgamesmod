@@ -1,12 +1,12 @@
 package nightgames.skills;
 
-import java.util.HashSet;
+import java.util.Set;
 
 public class SkillGroup {
     public Tactics tactics;
-    public HashSet<Skill> skills;
+    public Set<SkillInstance> skills;
 
-    public SkillGroup(Tactics tactics, HashSet<Skill> skills) {
+    public SkillGroup(Tactics tactics, Set<SkillInstance> skills) {
         this.tactics = tactics;
         this.skills = skills;
     }

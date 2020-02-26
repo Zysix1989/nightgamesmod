@@ -1,27 +1,13 @@
 package nightgames.characters;
 
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import nightgames.actions.Action;
 import nightgames.actions.Locate;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.areas.Area.EncounterResult;
 import nightgames.areas.Deployable;
-import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.GenericBodyPart;
-import nightgames.characters.body.StraponPart;
-import nightgames.characters.body.TentaclePart;
 import nightgames.characters.body.mods.ExternalTentaclesMod;
 import nightgames.characters.body.mods.GooeySkinMod;
 import nightgames.characters.body.mods.catcher.GooeyMod;
@@ -32,11 +18,7 @@ import nightgames.characters.corestats.WillpowerStat;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatSceneChoice;
 import nightgames.combat.Result;
-import nightgames.daytime.Activity;
-import nightgames.daytime.BodyShop;
-import nightgames.daytime.Exercise;
-import nightgames.daytime.Porn;
-import nightgames.daytime.Store;
+import nightgames.daytime.*;
 import nightgames.global.Encs;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -51,11 +33,7 @@ import nightgames.items.clothing.Clothing;
 import nightgames.match.Encounter;
 import nightgames.match.MatchType;
 import nightgames.match.ftc.FTCMatch;
-import nightgames.skills.Nothing;
-import nightgames.skills.Skill;
-import nightgames.skills.SkillGroup;
-import nightgames.skills.Stage;
-import nightgames.skills.Tactics;
+import nightgames.skills.*;
 import nightgames.skills.damage.DamageType;
 import nightgames.stance.Behind;
 import nightgames.stance.Neutral;
@@ -66,6 +44,10 @@ import nightgames.status.PlayerSlimeDummy;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
+
+import java.awt.event.ActionListener;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Player extends Character {
 
@@ -224,7 +206,8 @@ public class Player extends Character {
             skillMap.get(skill.type(c)).add(skill);
         });
         ArrayList<SkillGroup> skillGroups = new ArrayList<>();
-        skillMap.forEach((tactic, skills) -> skillGroups.add(new SkillGroup(tactic, skills)));
+        skillMap.forEach((tactic, skills) -> skillGroups.add(new SkillGroup(tactic, skills.stream()
+                .map(skill -> skill.instantiate(c, target)).collect(Collectors.toSet()))));
 
         gui.chooseSkills(c, target, skillGroups);
     }
