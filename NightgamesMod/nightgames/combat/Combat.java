@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 public class Combat {
     private static final int NPC_TURN_LIMIT = 75;
     private static final double NPC_DRAW_ERROR_MARGIN = .15;
-    
+
     /**Combat phases.*/
     private enum CombatPhase {
         START,
@@ -76,9 +76,9 @@ public class Combat {
     String imagePath = "";
 
     public Combat(Character p1, Character p2, Area loc) {
-        this.p1 = new Combatant(p1);
+        this.p1 = new Combatant(Global.getMatch().findParticipant(p1));
         combatantData = new HashMap<>();
-        this.p2 = new Combatant(p2);
+        this.p2 = new Combatant(Global.getMatch().findParticipant(p2));
         p1.startBattle(this);
         p2.startBattle(this);
         location = loc;

@@ -1,24 +1,21 @@
 package nightgames.combat;
 
 import nightgames.characters.Character;
+import nightgames.match.Participant;
 
 class Combatant {
-    private Character character;
+    private Participant participant;
 
-    Combatant(Character c) {
-        character = c;
+    Combatant(Participant p) {
+        participant = p;
     }
 
     private Combatant(Combatant c) {
-        try {
-            character = c.character.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new UnsupportedOperationException(e);
-        }
+            participant = c.participant.copy();
     }
 
     Character getCharacter() {
-        return character;
+        return participant.getCharacter();
     }
 
     Combatant copy() {

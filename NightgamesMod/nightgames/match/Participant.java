@@ -1,9 +1,9 @@
 package nightgames.match;
 
-import java.util.Collection;
+import nightgames.characters.Character;
+
 import java.util.HashSet;
 import java.util.Set;
-import nightgames.characters.Character;
 
 public class Participant {
     private Character character;
@@ -15,6 +15,16 @@ public class Participant {
 
     Participant(Character c) {
         this.character = c;
+    }
+
+    Participant(Participant p) {
+        try {
+            this.character = this.getCharacter().clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+        this.score = p.score;
+        this.invalidTargets = p.invalidTargets;
     }
 
     public Character getCharacter() {
@@ -33,6 +43,10 @@ public class Participant {
         assert !invalidTargets.contains(p);
         invalidTargets.add(p);
         incrementScore(1);
+    }
+
+    public Participant copy() {
+        return new Participant(this);
     }
 
     void allowTarget(Participant p) {

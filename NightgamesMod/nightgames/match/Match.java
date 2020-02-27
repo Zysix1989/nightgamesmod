@@ -1,27 +1,11 @@
 package nightgames.match;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 import nightgames.actions.Action;
 import nightgames.actions.Movement;
 import nightgames.areas.Area;
 import nightgames.areas.Cache;
-import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.Player;
-import nightgames.characters.State;
-import nightgames.characters.Trait;
+import nightgames.characters.*;
 import nightgames.global.Challenge;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -31,6 +15,10 @@ import nightgames.modifier.Modifier;
 import nightgames.status.addiction.Addiction;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
+
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class Match {
     
@@ -433,8 +421,8 @@ public class Match {
         resume();
     }
 
-    // Temporary nastiness
-    private Participant findParticipant(Character c) {
+    @Deprecated
+    public Participant findParticipant(Character c) {
         var candidates = participants.stream().filter(p -> p.getCharacter().equals(c));
         assert candidates.count() == 1;
         return candidates.findFirst().orElseThrow();
