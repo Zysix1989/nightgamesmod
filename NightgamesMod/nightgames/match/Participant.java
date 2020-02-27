@@ -13,7 +13,7 @@ public class Participant {
     // resupply.
     private Set<Participant> invalidTargets = new HashSet<>();
 
-    Participant(Character c) {
+    public Participant(Character c) {
         this.character = c;
     }
 

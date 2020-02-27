@@ -1,13 +1,5 @@
 package nightgames.match.ftc;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import java.util.Set;
 import nightgames.actions.Movement;
 import nightgames.areas.Area;
 import nightgames.areas.AreaAttribute;
@@ -22,17 +14,19 @@ import nightgames.match.MatchType;
 import nightgames.match.Participant;
 import nightgames.modifier.standard.FTCModifier;
 
+import java.util.*;
+
 public class FTCMatch extends Match {
     private Map<Character, Area> bases;
-    private Character prey; 
+    private Participant prey;
     private int gracePeriod;
     private boolean flagInCenter;
     private int flagCounter;
     
     public FTCMatch(Collection<Character> combatants, Character prey) {
         super(combatants, new FTCModifier(prey));
-        assert combatants.size() == 5; // 4 hunters + prey = 5
-        this.prey = prey;
+        assert participants.size() == 5; // 4 hunters + prey = 5
+        this.prey = findParticipant(prey);
         this.gracePeriod = 3;
         this.flagCounter = 0;
         List<Character> hunters = new ArrayList<>(combatants);
@@ -55,7 +49,7 @@ public class FTCMatch extends Match {
     }
 
     public boolean isPrey(Character ch) {
-        return prey.equals(ch);
+        return prey.equals(findParticipant(ch));
     }
 
     public Area getBase(Character ch) {
@@ -87,7 +81,7 @@ public class FTCMatch extends Match {
     public void manageConditions(Character ch) {
         if (Global.getMatch() == this)
             super.manageConditions(ch);
-        if (ch.equals(prey)) {
+        if (findParticipant(ch).equals(prey)) {
             if (gracePeriod > 0)
                 gracePeriod--;
             if (ch.has(Item.Flag) && gracePeriod == 0 && (++flagCounter % 3) == 0) {
@@ -241,8 +235,8 @@ public class FTCMatch extends Match {
         flagCounter = 0;
         Global.gui().message(Global.format("{self:SUBJECT-ACTION:grab|grabs} a new flag from the stash. That means"
                         + " {self:pronoun} cannot be attacked for two turns, so {self:pronoun}"
-                        + " {self:action:have|has} a chance to hide.", prey, Global.noneCharacter()));
-        prey.gain(Item.Flag);
+                        + " {self:action:have|has} a chance to hide.", prey.getCharacter(), Global.noneCharacter()));
+        prey.getCharacter().gain(Item.Flag);
     }
 
     @Override
