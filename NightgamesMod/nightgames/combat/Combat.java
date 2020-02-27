@@ -91,20 +91,7 @@ public class Combat {
         p1p2Results.set(result, 1+p1p2Results.get(result));
         p2p1Results.set(reverseresult, 1+p2p1Results.get(reverseresult));
     }
-    
-    public static void printResultsTracker() {
-        Set<String> all = new HashSet<String>();
-        for(String row:resultTracker.keySet()) {all.addAll(resultTracker.get(row).keySet());}
-        System.out.println("\t"+String.join(",\t", all));
-        for (String key:resultTracker.keySet()) {
-            System.out.print(key);
-            for(String key2:all) {
-                if(resultTracker.get(key).keySet().contains(key2)) System.out.print("\t"+resultTracker.get(key).get(key2).get(1));
-                else System.out.print("\t0");
-            }
-            System.out.println();;
-        }
-    }
+
     public static HashMap<String, HashMap<String, List<Integer>>> getResultTracker() {
         return resultTracker;
     }
