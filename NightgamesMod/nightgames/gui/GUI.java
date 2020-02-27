@@ -182,13 +182,12 @@ public class GUI extends JFrame implements Observer {
 
     // combat GUI
 
-    public Combat beginCombat(Player player, NPC enemy) {
+    public void beginCombat(Combat c, NPC enemy) {
         showPortrait();
-        combat = new Combat(player, enemy, player.location());
+        combat = c;
         combat.setBeingObserved(true);
         loadPortrait(enemy);
         showPortrait();
-        return combat;
     }
 
     public void displayImage(String path, String artist) {

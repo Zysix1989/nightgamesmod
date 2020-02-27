@@ -217,9 +217,11 @@ public class DefaultEncounter implements Encounter {
     protected void startFight(Character p1, Character p2) {
         startFightTimer();
         if (p1 instanceof Player && p2 instanceof NPC) {
-            this.fight = Global.gui().beginCombat((Player) p1, (NPC) p2);
+            this.fight = new Combat(p1, p2, p1.location()); // Not sure if order matters
+            Global.gui().beginCombat(fight, (NPC) p2);
         } else if (p2 instanceof Player && p1 instanceof NPC) {
-            this.fight = Global.gui().beginCombat((Player) p2, (NPC) p1);
+            this.fight = new Combat(p2, p1, p2.location());
+            Global.gui().beginCombat(fight, (NPC) p1);
         } else {
             this.fight = new Combat(p1, p2, location);
         }
