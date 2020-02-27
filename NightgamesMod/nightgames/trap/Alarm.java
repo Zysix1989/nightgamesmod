@@ -30,11 +30,6 @@ public class Alarm extends Trap {
     }
 
     @Override
-    public boolean decoy() {
-        return true;
-    }
-
-    @Override
     public boolean recipe(Character user) {
         return user.has(Item.Tripwire) && user.has(Item.Phone);
     }

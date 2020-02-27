@@ -20,10 +20,6 @@ public abstract class Trap implements Deployable {
     
     protected abstract void trigger(Participant target);
 
-    public boolean decoy() {
-        return false;
-    }
-
     public abstract boolean recipe(Character owner);
 
     public abstract boolean requirements(Character owner);

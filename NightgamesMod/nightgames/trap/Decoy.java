@@ -30,11 +30,6 @@ public class Decoy extends Trap {
     }
 
     @Override
-    public boolean decoy() {
-        return true;
-    }
-
-    @Override
     public boolean recipe(Character owner) {
         return owner.has(Item.Phone);
     }
