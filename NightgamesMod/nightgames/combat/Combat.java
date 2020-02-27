@@ -1,39 +1,10 @@
 package nightgames.combat;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 import nightgames.areas.Area;
-import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.Emotion;
-import nightgames.characters.NPC;
-import nightgames.characters.State;
-import nightgames.characters.Trait;
-import nightgames.characters.body.AssPart;
-import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.CockPart;
-import nightgames.characters.body.FeetPart;
-import nightgames.characters.body.GenericBodyPart;
-import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.mods.catcher.ArcaneMod;
-import nightgames.characters.body.mods.catcher.CyberneticMod;
-import nightgames.characters.body.mods.catcher.DemonicMod;
-import nightgames.characters.body.mods.catcher.DivineMod;
-import nightgames.characters.body.mods.catcher.FeralMod;
-import nightgames.characters.body.mods.catcher.FieryMod;
-import nightgames.characters.body.mods.catcher.GooeyMod;
-import nightgames.characters.body.mods.catcher.PlantMod;
+import nightgames.characters.*;
+import nightgames.characters.body.*;
+import nightgames.characters.body.mods.catcher.*;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -44,49 +15,19 @@ import nightgames.match.DefaultMatchEndListener;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.pet.Pet;
 import nightgames.pet.PetCharacter;
-import nightgames.skills.Anilingus;
-import nightgames.skills.AssFuck;
-import nightgames.skills.BreastWorship;
-import nightgames.skills.CockWorship;
-import nightgames.skills.Command;
-import nightgames.skills.ConcedePosition;
-import nightgames.skills.FootWorship;
-import nightgames.skills.PetInitiatedThreesome;
-import nightgames.skills.PussyWorship;
-import nightgames.skills.Reversal;
-import nightgames.skills.Skill;
-import nightgames.skills.Tactics;
-import nightgames.skills.WildThrust;
-import nightgames.stance.Kneeling;
-import nightgames.stance.Neutral;
-import nightgames.stance.Pin;
-import nightgames.stance.Position;
-import nightgames.stance.Stance;
-import nightgames.stance.StandingOver;
-import nightgames.status.Abuff;
-import nightgames.status.Alluring;
-import nightgames.status.BodyFetish;
-import nightgames.status.Braced;
-import nightgames.status.Compulsive;
-import nightgames.status.Compulsive.Situation;
-import nightgames.status.CounterStatus;
-import nightgames.status.DivineCharge;
-import nightgames.status.Enthralled;
-import nightgames.status.Falling;
-import nightgames.status.Flatfooted;
-import nightgames.status.Frenzied;
-import nightgames.status.SapphicSeduction;
-import nightgames.status.Slimed;
-import nightgames.status.Status;
-import nightgames.status.Stsflag;
+import nightgames.skills.*;
+import nightgames.stance.*;
+import nightgames.status.*;
 import nightgames.status.Stunned;
-import nightgames.status.Trance;
-import nightgames.status.Wary;
-import nightgames.status.Winded;
+import nightgames.status.Compulsive.Situation;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.Addiction.Severity;
 import nightgames.status.addiction.AddictionType;
 import nightgames.utilities.ProseUtils;
+
+import java.util.*;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class Combat {
     private static final int NPC_TURN_LIMIT = 75;
@@ -110,8 +51,8 @@ public class Combat {
     }
     
     //TODO: Convert as much of this data as possible to CombatData - DSm
-    public Character p1;
-    public Character p2;
+    private Combatant p1;
+    private Combatant p2;
     public List<PetCharacter> otherCombatants;
     public Map<String, CombatantData> combatantData;
     public Optional<Character> winner;
@@ -170,9 +111,9 @@ public class Combat {
 
     
     public Combat(Character p1, Character p2, Area loc) {
-        this.p1 = p1;
+        this.p1 = new Combatant(p1);
         combatantData = new HashMap<>();
-        this.p2 = p2;
+        this.p2 = new Combatant(p2);
         p1.startBattle(this);
         p2.startBattle(this);
         location = loc;
@@ -253,14 +194,14 @@ public class Combat {
     }
 
     public void go() {
-        if (p1.mostlyNude() && !p2.mostlyNude()) {
-            p1.emote(Emotion.nervous, 20);
+        if (p1.getCharacter().mostlyNude() && !p2.getCharacter().mostlyNude()) {
+            p1.getCharacter().emote(Emotion.nervous, 20);
         }
-        if (p2.mostlyNude() && !p1.mostlyNude()) {
-            p2.emote(Emotion.nervous, 20);
+        if (p2.getCharacter().mostlyNude() && !p1.getCharacter().mostlyNude()) {
+            p2.getCharacter().emote(Emotion.nervous, 20);
         }
-        applyCombatStatuses(p1, p2);
-        applyCombatStatuses(p2, p1);
+        applyCombatStatuses(p1.getCharacter(), p2.getCharacter());
+        applyCombatStatuses(p2.getCharacter(), p1.getCharacter());
 
         updateMessage();
         if (doExtendedLog()) {
@@ -325,16 +266,16 @@ public class Combat {
 
     private void draw() {
         state = eval();
-        p1.evalChallenges(this, null);
-        p2.evalChallenges(this, null);
-        p2.draw(this, state);
+        p1.getCharacter().evalChallenges(this, null);
+        p2.getCharacter().evalChallenges(this, null);
+        p2.getCharacter().draw(this, state);
         winner = Optional.of(Global.noneCharacter());
     }
 
     private void victory(Character won) {
         state = eval();
-        p1.evalChallenges(this, won);
-        p2.evalChallenges(this, won);
+        p1.getCharacter().evalChallenges(this, won);
+        p2.getCharacter().evalChallenges(this, won);
         won.victory(this, state);
         doVictory(won, getOpponent(won));
         winner = Optional.of(won);
@@ -344,25 +285,25 @@ public class Combat {
         if (cloned) {
             return false;
         }
-        if (p1.checkLoss(this) && p2.checkLoss(this)) {
+        if (p1.getCharacter().checkLoss(this) && p2.getCharacter().checkLoss(this)) {
             if (doLosses) {
                 draw();
             }
             return true;
         }
-        if (p1.checkLoss(this)) {
+        if (p1.getCharacter().checkLoss(this)) {
             if (doLosses) {
-                victory(p2);
+                victory(p2.getCharacter());
             } else {
-                winner = Optional.of(p2);
+                winner = Optional.of(p2.getCharacter());
             }
             return true;
         }
-        if (p2.checkLoss(this)) {
+        if (p2.getCharacter().checkLoss(this)) {
             if (doLosses) {
-                victory(p1);
+                victory(p1.getCharacter());
             } else {
-                winner = Optional.of(p1);
+                winner = Optional.of(p1.getCharacter());
             }
             return true;
         }
@@ -371,12 +312,12 @@ public class Combat {
 
     private void checkForCombatComment() {
         Character other;
-        if (p1.human()) {
-            other = p2;
-        } else if (p2.human()) {
-            other = p1;
+        if (p1.getCharacter().human()) {
+            other = p2.getCharacter();
+        } else if (p2.getCharacter().human()) {
+            other = p1.getCharacter();
         } else {
-            other = (NPC) (Global.random(2) == 0 ? p1 : p2);
+            other = (NPC) (Global.random(2) == 0 ? p1.getCharacter() : p2.getCharacter());
         }
         if (other instanceof NPC) {
             NPC commenter = (NPC) other;
@@ -391,12 +332,12 @@ public class Combat {
         timer += 1;
         Character player;
         Character other;
-        if (p1.human()) {
-            player = p1;
-            other = p2;
+        if (p1.getCharacter().human()) {
+            player = p1.getCharacter();
+            other = p2.getCharacter();
         } else {
-            player = p2;
-            other = p1;
+            player = p2.getCharacter();
+            other = p1.getCharacter();
         }
         message = describe(player, other);
         if (!shouldAutoresolve() && !Global.checkFlag(Flag.noimage)) {
@@ -407,8 +348,8 @@ public class Combat {
                       .displayImage(imagePath, images.get(imagePath));
             }
         }
-        p1.preturnUpkeep();
-        p2.preturnUpkeep();
+        p1.getCharacter().preturnUpkeep();
+        p2.getCharacter().preturnUpkeep();
         p1act = null;
         p2act = null;
         if (Global.random(3) == 0 && !shouldAutoresolve()) {
@@ -417,8 +358,8 @@ public class Combat {
     }
 
     private void doEndOfTurnUpkeep() {
-        p1.endOfCombatRound(this, p2);
-        p2.endOfCombatRound(this, p1);
+        p1.getCharacter().endOfCombatRound(this, p2.getCharacter());
+        p2.getCharacter().endOfCombatRound(this, p1.getCharacter());
         // iterate through all the pets here so we don't get concurrent modification issues
         List<PetCharacter> pets = new ArrayList<>(otherCombatants);
         pets.forEach(other -> {
@@ -426,20 +367,20 @@ public class Combat {
                 other.endOfCombatRound(this, getOpponent(other));
             }
         });  
-        checkStamina(p1);
-        checkStamina(p2);
+        checkStamina(p1.getCharacter());
+        checkStamina(p2.getCharacter());
         pets.forEach(other -> {
             if (otherCombatants.contains(other)) {
                 checkStamina(other);
             }
         });
-        doStanceTick(p1);
-        doStanceTick(p2);
+        doStanceTick(p1.getCharacter());
+        doStanceTick(p2.getCharacter());
 
-        List<Character> team1 = new ArrayList<>(getPetsFor(p1));
-        team1.add(p1);
-        List<Character> team2 = new ArrayList<>(getPetsFor(p2));
-        team2.add(p2);
+        List<Character> team1 = new ArrayList<>(getPetsFor(p1.getCharacter()));
+        team1.add(p1.getCharacter());
+        List<Character> team2 = new ArrayList<>(getPetsFor(p2.getCharacter()));
+        team2.add(p2.getCharacter());
         team1.forEach(self -> doAuraTick(self, team1, team2));
         team2.forEach(self -> doAuraTick(self, team2, team1));
 
@@ -447,8 +388,8 @@ public class Combat {
 
         getStance().decay(this);
         getStance().checkOngoing(this);
-        p1.regen(this);
-        p2.regen(this);
+        p1.getCharacter().regen(this);
+        p2.getCharacter().regen(this);
     }
 
     private void doAuraTick(Character character, List<Character> allies, List<Character> opponents) {
@@ -663,16 +604,16 @@ public class Combat {
     }
 
     private boolean turn() {
-        if (p1.human() && p2 instanceof NPC) {
-            Global.gui().loadPortrait((NPC) p2);
-        } else if (p2.human() && p1 instanceof NPC) {
-            Global.gui().loadPortrait((NPC) p1);
+        if (p1.getCharacter().human() && p2.getCharacter() instanceof NPC) {
+            Global.gui().loadPortrait((NPC) p2.getCharacter());
+        } else if (p2.getCharacter().human() && p1.getCharacter() instanceof NPC) {
+            Global.gui().loadPortrait((NPC) p1.getCharacter());
         }
         if (phase != CombatPhase.FINISHED_SCENE && phase != CombatPhase.RESULTS_SCENE && checkLosses(false)) {
             phase = determinePostCombatPhase();
             return next();
         }
-        if ((p1.orgasmed || p2.orgasmed) && phase != CombatPhase.RESULTS_SCENE && SKIPPABLE_PHASES.contains(phase)) {
+        if ((p1.getCharacter().orgasmed || p2.getCharacter().orgasmed) && phase != CombatPhase.RESULTS_SCENE && SKIPPABLE_PHASES.contains(phase)) {
             phase = CombatPhase.UPKEEP;
         }
         switch (phase) {
@@ -693,25 +634,25 @@ public class Combat {
                 phase = determineSkillOrder();
                 return false;
             case P1_ACT_FIRST:
-                if (doAction(p1, p1act.getDefaultTarget(this), p1act)) {
+                if (doAction(p1.getCharacter(), p1act.getDefaultTarget(this), p1act)) {
                     phase = CombatPhase.UPKEEP;
                 } else {
                     phase = CombatPhase.P2_ACT_SECOND;
                 }
                 return next();
             case P1_ACT_SECOND:
-                doAction(p1, p1act.getDefaultTarget(this), p1act);
+                doAction(p1.getCharacter(), p1act.getDefaultTarget(this), p1act);
                 phase = CombatPhase.UPKEEP;
                 return next();
             case P2_ACT_FIRST:
-                if (doAction(p2, p2act.getDefaultTarget(this), p2act)) {
+                if (doAction(p2.getCharacter(), p2act.getDefaultTarget(this), p2act)) {
                     phase = CombatPhase.UPKEEP;
                 } else {
                     phase = CombatPhase.P1_ACT_SECOND;
                 }
                 return next();
             case P2_ACT_SECOND:
-                doAction(p2, p2act.getDefaultTarget(this), p2act);
+                doAction(p2.getCharacter(), p2act.getDefaultTarget(this), p2act);
                 phase = CombatPhase.UPKEEP;
                 return next();
             case UPKEEP:
@@ -736,9 +677,9 @@ public class Combat {
 
     private boolean pickSkills() {
         if (p1act == null) {
-            return p1.act(this);
+            return p1.getCharacter().act(this);
         } else if (p2act == null) {
-            return p2.act(this);
+            return p2.getCharacter().act(this);
         } else {
             phase = CombatPhase.PET_ACTIONS;
             return false;
@@ -876,10 +817,10 @@ public class Combat {
     }
 
     public void act(Character c, Skill action) {
-        if (c == p1) {
+        if (c == p1.getCharacter()) {
             p1act = action;
         }
-        if (c == p2) {
+        if (c == p2.getCharacter()) {
             p2act = action;
         }
     }
@@ -1112,7 +1053,7 @@ public class Combat {
     }
 
     protected CombatPhase determineSkillOrder() {
-        if (p1.init() + p1act.speed() >= p2.init() + p2act.speed()) {
+        if (p1.getCharacter().init() + p1act.speed() >= p2.getCharacter().init() + p2act.speed()) {
             return CombatPhase.P1_ACT_FIRST;
         } else {
             return CombatPhase.P2_ACT_FIRST;
@@ -1155,10 +1096,10 @@ public class Combat {
                 return;
             }
             Character other;
-            if (p == p1) {
-                other = p2;
+            if (p == p1.getCharacter()) {
+                other = p2.getCharacter();
             } else {
-                other = p1;
+                other = p1.getCharacter();
             }
             if (!getStance().prone(p)) {
                 if (!getStance().mobile(p) && getStance().dom(other)) {
@@ -1216,11 +1157,11 @@ public class Combat {
                 return false;
             } else {
                 if (!paused) {
-                    p1.nextCombat(this);
-                    p2.nextCombat(this);
+                    p1.getCharacter().nextCombat(this);
+                    p2.getCharacter().nextCombat(this);
                     // This is a horrible hack to catch the case where the player is watching or
                     // has intervened in the combat
-                    if (!(p1.human() || p2.human()) && beingObserved) {
+                    if (!(p1.getCharacter().human() || p2.getCharacter().human()) && beingObserved) {
                         Global.getPlayer().nextCombat(this);
                     }
                 }
@@ -1233,17 +1174,17 @@ public class Combat {
     }
 
     private void autoresolve() {
-        assert !p1.human() && !p2.human() && !beingObserved;
+        assert !p1.getCharacter().human() && !p2.getCharacter().human() && !beingObserved;
         assert timer == 0;
         while (timer < NPC_TURN_LIMIT && !winner.isPresent()) {
             turn();
         }
         if (timer < NPC_TURN_LIMIT) {
-            double fitness1 = p1.getFitness(this);
-            double fitness2 = p2.getFitness(this);
+            double fitness1 = p1.getCharacter().getFitness(this);
+            double fitness2 = p2.getCharacter().getFitness(this);
             double diff = Math.abs(fitness1 / fitness2 - 1.0);
             if (diff > NPC_DRAW_ERROR_MARGIN) {
-                winner = Optional.of(fitness1 > fitness2 ? p1 : p2);
+                winner = Optional.of(fitness1 > fitness2 ? p1.getCharacter() : p2.getCharacter());
             } else {
                 winner = Optional.of(Global.noneCharacter());
             }
@@ -1253,10 +1194,10 @@ public class Combat {
 
     public void intervene(Character intruder, Character assist) {
         Character target;
-        if (p1 == assist) {
-            target = p2;
+        if (p1.getCharacter() == assist) {
+            target = p2.getCharacter();
         } else {
-            target = p1;
+            target = p1.getCharacter();
         }
         if (target.resist3p(this, intruder, assist)) {
             target.gainXP(20 + target.lvlBonus(intruder));
@@ -1270,7 +1211,7 @@ public class Combat {
             assist.victory3p(this, target, intruder);
         }
         phase = CombatPhase.RESULTS_SCENE;
-        if (!(p1.human() || p2.human() || intruder.human())) {
+        if (!(p1.getCharacter().human() || p2.getCharacter().human() || intruder.human())) {
             end();
         } else {
             Global.gui().watchCombat(this);
@@ -1283,47 +1224,47 @@ public class Combat {
      * @return true if it should end the fight, false if there are still more scenes
      */
     public void end() {
-        p1.state = State.ready;
-        p2.state = State.ready;
+        p1.getCharacter().state = State.ready;
+        p2.getCharacter().state = State.ready;
         if (processedEnding) {
-            p1.state = State.ready;
-            p2.state = State.ready;
+            p1.getCharacter().state = State.ready;
+            p2.getCharacter().state = State.ready;
             if (beingObserved) {
                 Global.gui().endCombat();
             }
             return;
         }
         boolean hasScene = false;
-        if (p1.human() || p2.human()) {
+        if (p1.getCharacter().human() || p2.getCharacter().human()) {
             if (postCombatScenesSeen < 3) {
-                if (!p2.human() && p2 instanceof NPC) {
-                    hasScene = doPostCombatScenes((NPC)p2);
-                } else if (!p1.human() && p1 instanceof NPC) {
-                    hasScene = doPostCombatScenes((NPC)p1);
+                if (!p2.getCharacter().human() && p2.getCharacter() instanceof NPC) {
+                    hasScene = doPostCombatScenes((NPC)p2.getCharacter());
+                } else if (!p1.getCharacter().human() && p1.getCharacter() instanceof NPC) {
+                    hasScene = doPostCombatScenes((NPC)p1.getCharacter());
                 }
                 if (hasScene) {
                     postCombatScenesSeen += 1;
                     return;
                 }
             } else {
-                p1.nextCombat(this);
-                p2.nextCombat(this);
+                p1.getCharacter().nextCombat(this);
+                p2.getCharacter().nextCombat(this);
                 // This is a horrible hack to catch the case where the player is watching or
                 // has intervened in the combat
-                if (!(p1.human() || p2.human()) && beingObserved) {
+                if (!(p1.getCharacter().human() || p2.getCharacter().human()) && beingObserved) {
                     Global.getPlayer().nextCombat(this);
                 }
             }
         }
         processedEnding = true;
-        p1.endofbattle(this);
-        p2.endofbattle(this);
-        getCombatantData(p1).getRemovedItems().forEach(p1::gain);
-        getCombatantData(p2).getRemovedItems().forEach(p2::gain);
+        p1.getCharacter().endofbattle(this);
+        p2.getCharacter().endofbattle(this);
+        getCombatantData(p1.getCharacter()).getRemovedItems().forEach(p1.getCharacter()::gain);
+        getCombatantData(p2.getCharacter()).getRemovedItems().forEach(p2.getCharacter()::gain);
         location.endEncounter();
         // it's a little ugly, but we must be mindful of lazy evaluation
-        boolean ding = p1.levelUpIfPossible(this) && p1.human();
-        ding = (p2.levelUpIfPossible(this) && p2.human()) || ding;
+        boolean ding = p1.getCharacter().levelUpIfPossible(this) && p1.getCharacter().human();
+        ding = (p2.getCharacter().levelUpIfPossible(this) && p2.getCharacter().human()) || ding;
         if (doExtendedLog()) {
             log.logEnd(winner);
         }
@@ -1369,32 +1310,32 @@ public class Combat {
     @Override
     public Combat clone() throws CloneNotSupportedException {
         Combat c = (Combat) super.clone();
-        c.p1 = p1.clone();
-        c.p2 = p2.clone();
-        c.p1.finishClone(c.p2);
-        c.p2.finishClone(c.p1);
+        c.p1 = new Combatant(p1.getCharacter().clone());
+        c.p2 = new Combatant(p2.getCharacter().clone());
+        c.p1.getCharacter().finishClone(c.p2.getCharacter());
+        c.p2.getCharacter().finishClone(c.p1.getCharacter());
         c.combatantData = new HashMap<>();
         combatantData.forEach((name, data) -> c.combatantData.put(name, (CombatantData) data.clone()));
         c.stance = getStance().clone();
         c.state = state;
-        if (c.getStance().top == p1) {
-            c.getStance().top = c.p1;
+        if (c.getStance().top == p1.getCharacter()) {
+            c.getStance().top = c.p1.getCharacter();
         }
-        if (c.getStance().top == p2) {
-            c.getStance().top = c.p2;
+        if (c.getStance().top == p2.getCharacter()) {
+            c.getStance().top = c.p2.getCharacter();
         }
-        if (c.getStance().bottom == p1) {
-            c.getStance().bottom = c.p1;
+        if (c.getStance().bottom == p1.getCharacter()) {
+            c.getStance().bottom = c.p1.getCharacter();
         }
-        if (c.getStance().bottom == p2) {
-            c.getStance().bottom = c.p2;
+        if (c.getStance().bottom == p2.getCharacter()) {
+            c.getStance().bottom = c.p2.getCharacter();
         }
         c.otherCombatants = new ArrayList<>();
         for (PetCharacter pet : otherCombatants) {
-            if (pet.isPetOf(p1)) {
-                c.otherCombatants.add(pet.cloneWithOwner(c.p1));
-            } else if (pet.isPetOf(p2)) {
-                c.otherCombatants.add(pet.cloneWithOwner(c.p2));
+            if (pet.isPetOf(p1.getCharacter())) {
+                c.otherCombatants.add(pet.cloneWithOwner(c.p1.getCharacter()));
+            } else if (pet.isPetOf(p2.getCharacter())) {
+                c.otherCombatants.add(pet.cloneWithOwner(c.p2.getCharacter()));
             }
         }
         c.getStance().setOtherCombatants(c.otherCombatants);
@@ -1404,9 +1345,9 @@ public class Combat {
     }
 
     public Skill lastact(Character user) {
-        if (user == p1) {
+        if (user == p1.getCharacter()) {
             return p1act;
-        } else if (user == p2) {
+        } else if (user == p2.getCharacter()) {
             return p2act;
         } else {
             return null;
@@ -1492,26 +1433,26 @@ public class Combat {
                 newStance = new Kneeling(otherCharacter, initiator);
             }
         }
-        checkStanceStatus(p1, stance, newStance);
-        checkStanceStatus(p2, stance, newStance);
+        checkStanceStatus(p1.getCharacter(), stance, newStance);
+        checkStanceStatus(p2.getCharacter(), stance, newStance);
 
         if (stance.inserted() && !newStance.inserted()) {
-            doEndPenetration(p1, p2);
+            doEndPenetration(p1.getCharacter(), p2.getCharacter());
             Character threePCharacter = stance.domSexCharacter(this);
-            if (threePCharacter != p1 && threePCharacter != p2) {
-                doEndPenetration(p1, threePCharacter);
-                doEndPenetration(p2, threePCharacter);
+            if (threePCharacter != p1.getCharacter() && threePCharacter != p2.getCharacter()) {
+                doEndPenetration(p1.getCharacter(), threePCharacter);
+                doEndPenetration(p2.getCharacter(), threePCharacter);
                 getCombatantData(threePCharacter).setIntegerFlag("ChoseToFuck", 0);
             }
-            getCombatantData(p1).setIntegerFlag("ChoseToFuck", 0);
-            getCombatantData(p2).setIntegerFlag("ChoseToFuck", 0);
-        } else if (!stance.inserted() && newStance.inserted() && (newStance.penetrated(this, p1) || newStance.penetrated(this, p2)) ) {
-            doStartPenetration(newStance, p1, p2);
+            getCombatantData(p1.getCharacter()).setIntegerFlag("ChoseToFuck", 0);
+            getCombatantData(p2.getCharacter()).setIntegerFlag("ChoseToFuck", 0);
+        } else if (!stance.inserted() && newStance.inserted() && (newStance.penetrated(this, p1.getCharacter()) || newStance.penetrated(this, p2.getCharacter())) ) {
+            doStartPenetration(newStance, p1.getCharacter(), p2.getCharacter());
         } else if (!stance.havingSex(this) && newStance.havingSex(this)) {
             Character threePCharacter = stance.domSexCharacter(this);
-            if (threePCharacter != p1 && threePCharacter != p2) {
-                doStartPenetration(newStance, p1, threePCharacter);
-                doStartPenetration(newStance, p2, threePCharacter);
+            if (threePCharacter != p1.getCharacter() && threePCharacter != p2.getCharacter()) {
+                doStartPenetration(newStance, p1.getCharacter(), threePCharacter);
+                doStartPenetration(newStance, p2.getCharacter(), threePCharacter);
             }
 
             if (voluntary) {
@@ -1520,8 +1461,8 @@ public class Combat {
                     getCombatantData(getOpponent(initiator)).setIntegerFlag("ChoseToFuck", -1);
                 }
             }
-            checkBreeder(p1, voluntary);
-            checkBreeder(p2, voluntary);
+            checkBreeder(p1.getCharacter(), voluntary);
+            checkBreeder(p2.getCharacter(), voluntary);
         }
 
         if (stance != newStance && initiator != null && initiator.has(Trait.Catwalk)) {
@@ -1554,11 +1495,11 @@ public class Combat {
     }
 
     public Character getOpponent(Character self) {
-        if (self.equals(p1) || self.isPetOf(p1)) {
-            return p2;
+        if (self.equals(p1.getCharacter()) || self.isPetOf(p1.getCharacter())) {
+            return p2.getCharacter();
         }
-        if (self.equals(p2) || self.isPetOf(p2)) {
-            return p1;
+        if (self.equals(p2.getCharacter()) || self.isPetOf(p2.getCharacter())) {
+            return p1.getCharacter();
         }
         System.err.println("Tried to get an opponent for " + self.getTrueName() + " which does not exist in combat.");
         Thread.dumpStack();
@@ -1583,7 +1524,7 @@ public class Combat {
     }
 
     private boolean doExtendedLog() {
-        return (p1.human() || p2.human()) && Global.checkFlag(Flag.extendedLogs);
+        return (p1.getCharacter().human() || p2.getCharacter().human()) && Global.checkFlag(Flag.extendedLogs);
     }
 
     public boolean isBeingObserved() {
@@ -1595,11 +1536,11 @@ public class Combat {
     }
     
     public boolean shouldPrintReceive(Character ch, Combat c) {
-        return beingObserved || (c.p1.human() || c.p2.human());
+        return beingObserved || (c.p1.getCharacter().human() || c.p2.getCharacter().human());
     }
     
     public boolean shouldAutoresolve() {
-        return !(p1.human() || p2.human()) && !beingObserved;
+        return !(p1.getCharacter().human() || p2.getCharacter().human()) && !beingObserved;
     }
 
     public String bothDirectObject(Character target) {
@@ -1828,6 +1769,14 @@ public class Combat {
     /**WIP - ends this combat, resolving and cleaning it up.*/
     public void endCombat(){
         
+    }
+
+    public Character getP1Character() {
+        return p1.getCharacter();
+    }
+
+    public Character getP2Character() {
+        return p2.getCharacter();
     }
     
 }

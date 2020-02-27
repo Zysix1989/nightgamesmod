@@ -1,28 +1,19 @@
 package nightgames.match.defaults;
 
-import java.util.Optional;
-
 import nightgames.actions.Movement;
 import nightgames.areas.Area;
-import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.Emotion;
-import nightgames.characters.NPC;
-import nightgames.characters.Player;
-import nightgames.characters.State;
-import nightgames.characters.Trait;
+import nightgames.characters.*;
 import nightgames.combat.Combat;
 import nightgames.global.Encs;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Encounter;
-import nightgames.status.Enthralled;
-import nightgames.status.Flatfooted;
-import nightgames.status.Hypersensitive;
-import nightgames.status.Status;
-import nightgames.status.Stsflag;
+import nightgames.status.*;
 import nightgames.trap.Spiderweb;
 import nightgames.trap.Trap;
+
+import java.util.Optional;
 
 public class DefaultEncounter implements Encounter {
 
@@ -492,7 +483,7 @@ public class DefaultEncounter implements Encounter {
 
     public void engage(Combat fight) {
         this.fight = fight;
-        if (fight.p1.human() || fight.p2.human()) {
+        if (fight.getP1Character().human() || fight.getP2Character().human()) {
             Global.gui().watchCombat(fight);
         }
     }

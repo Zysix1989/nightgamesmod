@@ -1,11 +1,5 @@
 package nightgames.characters;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.actions.Move;
@@ -21,6 +15,12 @@ import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
 import nightgames.skills.Wait;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Decider {
     private static void addAllSkillsWithPriority(ArrayList<WeightedSkill> priority, HashSet<Skill> skills,
                     float weight) {
@@ -35,7 +35,7 @@ public class Decider {
      * 
      * @param available
      * 
-     * @param C
+     * @param c
      * 
      * @param character
      * 
@@ -392,10 +392,10 @@ public class Decider {
 
     //TODO: Document this method
     private static Character getCopyFromCombat(Combat c, Combat clonedCombat, Character self) {
-        if (c.p1 == self) {
-            return clonedCombat.p1;
-        } else if (c.p2 == self) {
-            return clonedCombat.p2;
+        if (c.getP1Character() == self) {
+            return clonedCombat.getP1Character();
+        } else if (c.getP2Character() == self) {
+            return clonedCombat.getP2Character();
         } else if (c.getOtherCombatants().contains(self)) {
             return clonedCombat.getOtherCombatants().stream().filter(other -> other.equals(self)).findAny().get();
         } else {

@@ -1,8 +1,5 @@
 package nightgames.global;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import nightgames.areas.Deployable;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
@@ -10,6 +7,9 @@ import nightgames.characters.State;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.items.Item;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Challenge implements Deployable {
     private Character owner;
@@ -98,7 +98,7 @@ public class Challenge implements Deployable {
     }
     
     public void check(Combat state, Character victor) {
-        if (!done && (state.p1 == target || state.p2 == target || target == null)) {
+        if (!done && (state.getP1Character() == target || state.getP2Character() == target || target == null)) {
             switch (goal) {
                 case kisswin:
                     if (victor == owner && state.lastact(owner).toString().equals("Kiss")) {

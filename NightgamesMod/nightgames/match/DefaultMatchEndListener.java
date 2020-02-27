@@ -1,11 +1,11 @@
 package nightgames.match;
 
-import java.util.Optional;
-
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatListener;
 import nightgames.global.Global;
+
+import java.util.Optional;
 
 public class DefaultMatchEndListener extends CombatListener {
 
@@ -22,8 +22,8 @@ public class DefaultMatchEndListener extends CombatListener {
             //match.score(winner.get(), 1, Optional.of(" for defeating " + c.getOpponent(winner.get()).getName()));
 
         } else {
-            Global.getMatch().invalidateTarget(c.p1, c.p2);
-            Global.getMatch().invalidateTarget(c.p2, c.p1);
+            Global.getMatch().invalidateTarget(c.getP1Character(), c.getP2Character());
+            Global.getMatch().invalidateTarget(c.getP2Character(), c.getP2Character());
         }
     }
 }

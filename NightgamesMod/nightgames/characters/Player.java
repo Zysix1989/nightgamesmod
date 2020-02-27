@@ -114,7 +114,7 @@ public class Player extends Character {
 
     public String describeStatus() {
         StringBuilder b = new StringBuilder();
-        if (gui.combat != null && (gui.combat.p1.human() || gui.combat.p2.human())) {
+        if (gui.combat != null && (gui.combat.getP1Character().human() || gui.combat.getP2Character().human())) {
             body.describeBodyText(b, gui.combat.getOpponent(this), false);
         } else {
             body.describeBodyText(b, Global.getCharacterByType("Angel"), false);

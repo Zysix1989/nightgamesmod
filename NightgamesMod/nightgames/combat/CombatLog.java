@@ -1,12 +1,13 @@
 package nightgames.combat;
 
+import nightgames.characters.Character;
+import nightgames.stance.Position;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.util.Optional;
-import nightgames.characters.Character;
-import nightgames.stance.Position;
 
 class CombatLog {
 
@@ -15,8 +16,8 @@ class CombatLog {
 
 
     CombatLog(Combat cbt) {
-        this.p1 = cbt.p1;
-        this.p2 = cbt.p2;
+        this.p1 = cbt.getP1Character();
+        this.p2 = cbt.getP2Character();
         try {
             Character last1 = p1.clone();
             Character last2 = p2.clone();

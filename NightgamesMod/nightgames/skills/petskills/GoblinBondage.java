@@ -30,8 +30,8 @@ public class GoblinBondage extends SimpleEnemySkill {
         c.write(getSelf(), Global.format("{self:SUBJECT} pulls the bondage straps tighter around herself. You can see the leather and latex digging into her skin as "
                         + "her bondage fascinatation begins to affect both of you.", getSelf(), target));
         getSelf().pain(c, getSelf(), 10);
-        c.p1.add(c, new BD(c.p1));
-        c.p2.add(c, new BD(c.p2));
+        c.getP1Character().add(c, new BD(c.getP1Character()));
+        c.getP2Character().add(c, new BD(c.getP2Character()));
         return true;
     }
 
