@@ -345,10 +345,6 @@ public class GUI extends JFrame implements Observer {
         portraitPanel.refresh();
     }
 
-    public void displayStatus() {
-        playerBio.displayStatus();
-    }
-
     @Override
     public void update(Observable arg0, Object arg1) {
         refresh();
