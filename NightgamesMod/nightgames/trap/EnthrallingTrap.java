@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.Enthralled;
 import nightgames.status.Flatfooted;
@@ -25,35 +26,35 @@ public class EnthrallingTrap extends Trap {
     }
 
     @Override
-    public void trigger(Character target) {
-        if (target.human()) {
-            if (target.check(Attribute.Perception, 25 + target.baseDisarm())
-                            || !target.eligible(owner) || !owner.eligible(target)) {
-                Global.gui().message("As you step across the " + target.location().name
+    public void trigger(Participant target) {
+        if (target.getCharacter().human()) {
+            if (target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm())
+                            || !target.getCharacter().eligible(owner) || !owner.eligible(target.getCharacter())) {
+                Global.gui().message("As you step across the " + target.getCharacter().location().name
                                 + ", you notice a pentagram drawn on the floor,"
                                 + " appearing to have been drawn in cum. Wisely," + " you avoid stepping into it.");
             } else {
-                target.location().opportunity(target, this);
-                Global.gui().message("As you step across the " + target.location().name
+                target.getCharacter().location().opportunity(target.getCharacter(), this);
+                Global.gui().message("As you step across the " + target.getCharacter().location().name
                                 + ", you are suddenly surrounded by purple flames. Your mind "
                                 + "goes blank for a moment, leaving you staring into the distance."
                                 + " When you come back to your senses, you shake your head a few"
                                 + " times and hope whatever that thing was, it failed at"
                                 + " whatever it was supposed to do. The lingering vision of two"
                                 + " large red irises staring at you suggest differently, though.");
-                target.addNonCombat(new Enthralled(target, owner, 5 + getStrength() / 20));
+                target.getCharacter().addNonCombat(new Enthralled(target.getCharacter(), owner, 5 + getStrength() / 20));
             }
-        } else if (target.check(Attribute.Perception, 25 + target.baseDisarm()) || !target.eligible(owner) || !owner.eligible(target)) {
-            if (target.location().humanPresent()) {
+        } else if (target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm()) || !target.getCharacter().eligible(owner) || !owner.eligible(target.getCharacter())) {
+            if (target.getCharacter().location().humanPresent()) {
                 Global.gui().message("You catch a bout of purple fire in your peripheral vision,"
                                 + "but once you have turned to look the flames are gone. All that is left"
-                                + " to see is " + target.getName() + ", standing still and staring blankly ahead."
+                                + " to see is " + target.getCharacter().getName() + ", standing still and staring blankly ahead."
                                 + " It would seem to be very easy to have your way with her now, but"
                                 + " who or whatever left that thing there will probably be thinking" + " the same.");
             }
             //TODO: Currently, being Enthralled and moving to a new location doesn't use a turn of the effect, meaning that you still lose all those turns once you are in combat. 
-            target.addNonCombat(new Enthralled(target, owner, 5 + getStrength() / 20));
-            target.location().opportunity(target, this);
+            target.getCharacter().addNonCombat(new Enthralled(target.getCharacter(), owner, 5 + getStrength() / 20));
+            target.getCharacter().location().opportunity(target.getCharacter(), this);
         }
     }
 

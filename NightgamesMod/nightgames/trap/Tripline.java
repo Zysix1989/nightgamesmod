@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.stance.StandingOver;
 import nightgames.status.Flatfooted;
@@ -21,28 +22,28 @@ public class Tripline extends Trap {
     }
 
     @Override
-    public void trigger(Character target) {
-        int m = 30 + target.getLevel() * 5;
-        if (target.human()) {
-            if (!target.check(Attribute.Perception, 20 + target.baseDisarm())) {
+    public void trigger(Participant target) {
+        int m = 30 + target.getCharacter().getLevel() * 5;
+        if (target.getCharacter().human()) {
+            if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
                 Global.gui().message("You trip over a line of cord and fall on your face.");
-                target.pain(null, null, m);
-                target.location().opportunity(target, this);
+                target.getCharacter().pain(null, null, m);
+                target.getCharacter().location().opportunity(target.getCharacter(), this);
             } else {
                 Global.gui().message("You spot a line strung across the corridor and carefully step over it.");
-                target.location().remove(this);
+                target.getCharacter().location().remove(this);
             }
         } else {
-            if (!target.check(Attribute.Perception, 20 + target.baseDisarm())) {
-                if (target.location().humanPresent()) {
-                    Global.gui().message(target.getName()
+            if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
+                if (target.getCharacter().location().humanPresent()) {
+                    Global.gui().message(target.getCharacter().getName()
                                     + " carelessly stumbles over the tripwire and lands with an audible thud.");
                 }
-                target.pain(null, null, m);
-                target.location().opportunity(target, this);
+                target.getCharacter().pain(null, null, m);
+                target.getCharacter().location().opportunity(target.getCharacter(), this);
             } else {
-                if (target.location().humanPresent()) {
-                    Global.gui().message("You see " + target.getName() + " carefully step over the carefully placed tripline." );
+                if (target.getCharacter().location().humanPresent()) {
+                    Global.gui().message("You see " + target.getCharacter().getName() + " carefully step over the carefully placed tripline." );
                 }
             }
         }

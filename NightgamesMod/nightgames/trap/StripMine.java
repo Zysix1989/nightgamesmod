@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.Flatfooted;
 
@@ -21,9 +22,9 @@ public class StripMine extends Trap {
     }
 
     @Override
-    public void trigger(Character target) {
-        if (target.human()) {
-            if (target.mostlyNude()) {
+    public void trigger(Participant target) {
+        if (target.getCharacter().human()) {
+            if (target.getCharacter().mostlyNude()) {
                 Global.gui().message(
                                 "You're momentarily blinded by a bright flash of light. A camera flash maybe? Is someone taking naked pictures of you?");
             } else {
@@ -31,12 +32,12 @@ public class StripMine extends Trap {
                                 "You're suddenly dazzled by a bright flash of light. As you recover from your disorientation, you notice that it feel a bit drafty. "
                                                 + "You find you're missing some clothes. You reflect that your clothing expenses have gone up significantly since you joined the Games.");
             }
-        } else if (target.location().humanPresent()) {
+        } else if (target.getCharacter().location().humanPresent()) {
             Global.gui().message("You're startled by a flash of light not far away. Standing there is a half-naked "
-                            + target.getName() + ", looking surprised.");
+                            + target.getCharacter().getName() + ", looking surprised.");
         }
-        IntStream.range(0, 2 + Global.random(4)).forEach(i -> target.shredRandom());
-        target.location().opportunity(target, this);
+        IntStream.range(0, 2 + Global.random(4)).forEach(i -> target.getCharacter().shredRandom());
+        target.getCharacter().location().opportunity(target.getCharacter(), this);
     }
 
     @Override

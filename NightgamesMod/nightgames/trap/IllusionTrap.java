@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
+import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.Flatfooted;
 
@@ -24,20 +25,20 @@ public class IllusionTrap extends Trap {
     }
 
     @Override
-    public void trigger(Character target) {
-        if (target.human()) {
+    public void trigger(Participant target) {
+        if (target.getCharacter().human()) {
             Global.gui().message(
                             "You run into a girl you don't recognize, but she's beautiful and completely naked. You don't have a chance to wonder where she came from, because "
                                             + "she immediately presses her warm, soft body against you and kisses you passionately. She slips down a hand to grope your crotch, and suddenly vanishes after a few strokes. "
                                             + "She was just an illusion, but your arousal is very real.");
-        } else if (target.location().humanPresent()) {
-            Global.gui().message("There's a flash of pink light and " + target.getName() + " flushes with arousal.");
+        } else if (target.getCharacter().location().humanPresent()) {
+            Global.gui().message("There's a flash of pink light and " + target.getCharacter().getName() + " flushes with arousal.");
         }
-        if (target.has(Trait.imagination)) {
-            target.tempt(25 + getStrength());
+        if (target.getCharacter().has(Trait.imagination)) {
+            target.getCharacter().tempt(25 + getStrength());
         }
-        target.tempt(25 + getStrength());
-        target.location().opportunity(target, this);
+        target.getCharacter().tempt(25 + getStrength());
+        target.getCharacter().location().opportunity(target.getCharacter(), this);
     }
 
     @Override

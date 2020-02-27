@@ -5,6 +5,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.Flatfooted;
 import nightgames.status.Horny;
@@ -26,26 +27,26 @@ public class AphrodisiacTrap extends Trap {
     }
 
     @Override
-    public void trigger(Character target) {
-        if (!target.check(Attribute.Perception, 20 + target.baseDisarm())) {
-            if (target.human()) {
+    public void trigger(Participant target) {
+        if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
+            if (target.getCharacter().human()) {
                 Global.gui().message(
                                 "You spot a liquid spray trap in time to avoid setting it off. You carefully manage to disarm the trap and pocket the potion.");
-                target.gain(Item.Aphrodisiac);
-                target.location().remove(this);
+                target.getCharacter().gain(Item.Aphrodisiac);
+                target.getCharacter().location().remove(this);
             }
         } else {
-            if (target.human()) {
+            if (target.getCharacter().human()) {
                 Global.gui().message(
                                 "There's a sudden spray of gas in your face and the room seems to get much hotter. Your dick goes rock-hard and you realize you've been "
                                                 + "hit with an aphrodisiac.");
-            } else if (target.location().humanPresent()) {
+            } else if (target.getCharacter().location().humanPresent()) {
                 Global.gui().message(
-                                target.getName() + " is caught in your trap and sprayed with aphrodisiac. She flushes bright red and presses a hand against her crotch. It seems like "
+                                target.getCharacter().getName() + " is caught in your trap and sprayed with aphrodisiac. She flushes bright red and presses a hand against her crotch. It seems like "
                                                 + "she'll start masturbating even if you don't do anything.");
             }
-            target.addNonCombat(new Horny(target, (30 + getStrength()) / 10, 10, "Aphrodisiac Trap"));
-            target.location().opportunity(target, this);
+            target.getCharacter().addNonCombat(new Horny(target.getCharacter(), (30 + getStrength()) / 10, 10, "Aphrodisiac Trap"));
+            target.getCharacter().location().opportunity(target.getCharacter(), this);
         }
     }
     

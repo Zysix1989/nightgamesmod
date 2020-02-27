@@ -6,6 +6,7 @@ import nightgames.characters.State;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 import nightgames.stance.Position;
 
 import java.util.Optional;
@@ -25,9 +26,9 @@ public class Spiderweb extends Trap {
     }
 
     @Override
-    public void trigger(Character target) {
-        if (target.human()) {
-            if (target.mostlyNude()) {
+    public void trigger(Participant target) {
+        if (target.getCharacter().human()) {
+            if (target.getCharacter().mostlyNude()) {
                 Global.gui().message(
                                 "You feel the tripwire underfoot too late to avoid it. A staggering amount of rope flies up to entangle your limbs and pull you off the ground. "
                                                 + "Oh hell. You're completely immobilized and suspended in midair. Surprisingly, it's not that uncomfortable, but if someone finds you before you can get free, "
@@ -39,13 +40,13 @@ public class Spiderweb extends Trap {
                                                 + "Oh hell. You're completely immobilized and suspended naked in midair. Surprisingly, it's not that uncomfortable, but if someone finds you before you can get free, "
                                                 + "you'll be completely defenseless.");
             }
-        } else if (target.location().humanPresent()) {
-            Global.gui().message("You hear a snap as " + target.getName()
+        } else if (target.getCharacter().location().humanPresent()) {
+            Global.gui().message("You hear a snap as " + target.getCharacter().getName()
                             + " triggers your spiderweb trap and ends up helplessly suspended in midair like a naked present.");
         }
-        target.state = State.webbed;
-        target.delay(1);
-        target.location().opportunity(target, this);
+        target.getCharacter().state = State.webbed;
+        target.getCharacter().delay(1);
+        target.getCharacter().location().opportunity(target.getCharacter(), this);
     }
 
     @Override

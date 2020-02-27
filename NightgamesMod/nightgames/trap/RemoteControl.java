@@ -5,6 +5,7 @@ import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.ClothingSlot;
+import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.RemoteMasturbation;
 
@@ -17,33 +18,33 @@ public class RemoteControl extends Trap {
     }
 
     @Override
-    protected void trigger(Character target) {
-        if (target.human()) {
+    protected void trigger(Participant target) {
+        if (target.getCharacter().human()) {
             String msg = "You see a small, oblong object laying on the floor,"
                             + " and bend over to pick it up. It's black and shiny, but has no"
                             + " real discernable features. Suddenly a ring of light appears around"
                             + " the thing, and you freeze in place and hear " + owner.nameOrPossessivePronoun()
                             + " voice in your mind." + " <i>\"Is someone there? Who did I catch? Ah, it's you, "
-                            + target.getName() + "! Wonderful!\"</i> Without warning, the hand not holding the weird device"
+                            + target.getCharacter().getName() + "! Wonderful!\"</i> Without warning, the hand not holding the weird device"
                             + " flies down towards your crotch and";
-            if (!target.outfit.slotOpen(ClothingSlot.bottom)) {
+            if (!target.getCharacter().outfit.slotOpen(ClothingSlot.bottom)) {
                 msg += ", first removing all the clothing covering your nethers,";
-                target.outfit.undressOnly(c -> c.getSlots()
+                target.getCharacter().outfit.undressOnly(c -> c.getSlots()
                                                 .contains(ClothingSlot.bottom));
             }
             String otherHand;
-            if (target.hasDick()) {
-                msg += " grabs hold of your " + target.body.getRandomCock()
-                                                           .describe(target)
+            if (target.getCharacter().hasDick()) {
+                msg += " grabs hold of your " + target.getCharacter().body.getRandomCock()
+                                                           .describe(target.getCharacter())
                                 + ". You try to stop, try to let go of the black thing, but"
                                 + " you don't seem to have any control at all. The hand on your"
                                 + " cock moves deftly, but not in the way you would when"
                                 + " masturbating. It's definitely effective, though. You"
                                 + " don't think you're going to last too long doing this.";
                 otherHand = "wrapped around your cock, pumping it intently.";
-            } else if (target.hasPussy()) {
-                msg += " strokes the outside of your " + target.body.getRandomPussy()
-                                                                    .describe(target)
+            } else if (target.getCharacter().hasPussy()) {
+                msg += " strokes the outside of your " + target.getCharacter().body.getRandomPussy()
+                                                                    .describe(target.getCharacter())
                                 + ". " + owner.nameOrPossessivePronoun() + " experienced, feather-light"
                                 + " touch soon gets you lubricated enough to allow your fingers passage"
                                 + " deeper into your folds and the hole in their center. You gasp as "
@@ -51,7 +52,7 @@ public class RemoteControl extends Trap {
                                 + " thumb while probing your pussy with delicate thrusts of 'your' fingers.";
                 otherHand = "between your thighs, working dilligently on your pussy.";
             } else {
-                msg += " finds nothing there. <i>\"Oh, right. I forgot. You're really missing out," + target.getName()
+                msg += " finds nothing there. <i>\"Oh, right. I forgot. You're really missing out," + target.getCharacter().getName()
                                 + ", you ought to do something about that. Still, this"
                                 + " doesn't mean there is </i>nothing<i> we can do...\"</i>"
                                 + " Your errant limb bends back up, and you involuntarily wet a finger."
@@ -68,9 +69,9 @@ public class RemoteControl extends Trap {
         } else {
 
         }
-        target.addNonCombat(new RemoteMasturbation(target, owner));
-        target.location().opportunity(target, this);
-        target.location().alarm = true;
+        target.getCharacter().addNonCombat(new RemoteMasturbation(target.getCharacter(), owner));
+        target.getCharacter().location().opportunity(target.getCharacter(), this);
+        target.getCharacter().location().alarm = true;
     }
 
     @Override

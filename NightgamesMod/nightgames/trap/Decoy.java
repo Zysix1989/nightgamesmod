@@ -5,6 +5,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 
 public class Decoy extends Trap {
 
@@ -17,15 +18,15 @@ public class Decoy extends Trap {
     }
     
     @Override
-    public void trigger(Character target) {
-        if (target.human()) {
+    public void trigger(Participant target) {
+        if (target.getCharacter().human()) {
             Global.gui().message(
                             "You follow the noise you've been hearing for a while, which turns out to be coming from a disposable cell phone. Seems like someone "
                                             + "is playing a trick and you fell for it. You shut off the phone and toss it aside.");
-        } else if (target.location().humanPresent()) {
-            Global.gui().message(target.getName() + " finds the decoy phone and deactivates it.");
+        } else if (target.getCharacter().location().humanPresent()) {
+            Global.gui().message(target.getCharacter().getName() + " finds the decoy phone and deactivates it.");
         }
-        target.location().remove(this);
+        target.getCharacter().location().remove(this);
     }
 
     @Override

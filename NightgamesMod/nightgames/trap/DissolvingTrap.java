@@ -5,6 +5,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.Flatfooted;
 
@@ -21,17 +22,17 @@ public class DissolvingTrap extends Trap {
     }
 
     @Override
-    public void trigger(Character target) {
-        if (!target.check(Attribute.Perception, 25 + target.baseDisarm())) {
-            if (target.human()) {
+    public void trigger(Participant target) {
+        if (!target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm())) {
+            if (target.getCharacter().human()) {
                 Global.gui().message(
                                 "You spot a liquid spray trap in time to avoid setting it off. You carefully manage to disarm the trap and pocket the potion.");
-                target.gain(Item.DisSol);
-                target.location().remove(this);
+                target.getCharacter().gain(Item.DisSol);
+                target.getCharacter().location().remove(this);
             }
         } else {
-            if (target.human()) {
-                if (target.reallyNude()) {
+            if (target.getCharacter().human()) {
+                if (target.getCharacter().reallyNude()) {
                     Global.gui().message(
                                     "Your bare foot hits a tripwire and you brace yourself as liquid rains down on you. You hastely do your best to brush the liquid off, "
                                                     + "but after about a minute you realize nothing has happened. Maybe the trap was a dud.");
@@ -40,18 +41,18 @@ public class DissolvingTrap extends Trap {
                                     "You are sprayed with a clear liquid. Everywhere it lands on clothing, it immediately dissolves it, but it does nothing to your skin. "
                                                     + "You try valiantly to save enough clothes to preserve your modesty, but you quickly end up naked.");
                 }
-            } else if (target.location().humanPresent()) {
-                if (target.reallyNude()) {
-                    Global.gui().message(target.getName()
+            } else if (target.getCharacter().location().humanPresent()) {
+                if (target.getCharacter().reallyNude()) {
+                    Global.gui().message(target.getCharacter().getName()
                                     + " is caught in your clothes dissolving trap, but she was already naked. Oh well.");
                 } else {
                     Global.gui().message(
-                                    target.getName() + " is caught in your trap and is showered in dissolving solution. In seconds, her clothes vanish off her body, leaving her "
+                                    target.getCharacter().getName() + " is caught in your trap and is showered in dissolving solution. In seconds, her clothes vanish off her body, leaving her "
                                                     + "completely nude.");
                 }
             }
-            target.nudify();
-            target.location().opportunity(target, this);
+            target.getCharacter().nudify();
+            target.getCharacter().location().opportunity(target.getCharacter(), this);
         }
     }
 

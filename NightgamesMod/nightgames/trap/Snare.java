@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.Bound;
 
@@ -23,22 +24,22 @@ public class Snare extends Trap {
     }
 
     @Override
-    public void trigger(Character target) {
-        if (target.check(Attribute.Perception, 25 + getStrength() + target.baseDisarm())) {
-            if (target.human()) {
+    public void trigger(Participant target) {
+        if (target.getCharacter().check(Attribute.Perception, 25 + getStrength() + target.getCharacter().baseDisarm())) {
+            if (target.getCharacter().human()) {
                 Global.gui().message("You notice a snare on the floor in front of you and manage to disarm it safely");
             }
-            target.location().remove(this);
+            target.getCharacter().location().remove(this);
         } else {
-            target.addNonCombat(new Bound(target, 30 + getStrength() / 2, "snare"));
-            if (target.human()) {
+            target.getCharacter().addNonCombat(new Bound(target.getCharacter(), 30 + getStrength() / 2, "snare"));
+            if (target.getCharacter().human()) {
                 Global.gui().message(
                                 "You hear a sudden snap and you're suddenly overwhelmed by a blur of ropes. The tangle of ropes trip you up and firmly bind your arms.");
-            } else if (target.location().humanPresent()) {
-                Global.gui().message(target.getName()
+            } else if (target.getCharacter().location().humanPresent()) {
+                Global.gui().message(target.getCharacter().getName()
                                 + " enters the room, sets off your snare, and ends up thoroughly tangled in rope.");
             }
-            target.location().opportunity(target, this);
+            target.getCharacter().location().opportunity(target.getCharacter(), this);
         }
     }
 

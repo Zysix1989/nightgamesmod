@@ -4,6 +4,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.RoboWebbed;
 
@@ -20,8 +21,8 @@ public class RoboWeb extends Trap {
     }
 
     @Override
-    public void trigger(Character target) {
-        if (target.human()) {
+    public void trigger(Participant target) {
+        if (target.getCharacter().human()) {
             String msg = "";
             msg += "The instant you feel your foot catch on a tripwire, you know something"
                             + " terrible is about to happen. Your instincts prove correct as ropes come flying"
@@ -29,7 +30,7 @@ public class RoboWeb extends Trap {
                             + " you above the ground, leaving all but your head hopelessly tied up."
                             + " You look around and see that it's not actually rope which has so"
                             + " thoroughly bound you; it looks more like webbing. ";
-            if (!target.mostlyNude()) {
+            if (!target.getCharacter().mostlyNude()) {
                 msg +="Whatever it is, your clothing is not reacting well to it. Wherever"
                                 + " it touches the strange material, it melts away, although your skin"
                                 + " is mercifully unaffected. What disjointed scraps of your clothes remain"
@@ -37,10 +38,10 @@ public class RoboWeb extends Trap {
             }
             msg += "The strands of the web start vibrating softly, caressing every bit of skin"
                             + " they touch. Which is pretty much all of it. The webbing around your ";
-            if (target.hasDick()) {
-                msg += target.body.getRandomCock().describe(target);
-            } else if (target.hasPussy()) {
-                msg += target.body.getRandomPussy().describe(target);
+            if (target.getCharacter().hasDick()) {
+                msg += target.getCharacter().body.getRandomCock().describe(target.getCharacter());
+            } else if (target.getCharacter().hasPussy()) {
+                msg += target.getCharacter().body.getRandomPussy().describe(target.getCharacter());
             } else {
                 msg += "sensitive nipples";
             }
@@ -54,14 +55,14 @@ public class RoboWeb extends Trap {
                             + " %s into the air and leaving %s completely immobile. The clothes %s"
                             + " was wearing disappear from beneath the web-like structure, and %s"
                             + " thrashes around wildly, moaning loudly. %s is not getting"
-                            + " out of there anytime soon. Oh, the possibilities...", target.getName(), target.objectPronoun(),
-                            target.objectPronoun(), target.pronoun(), target.pronoun(),
-                            Global.capitalizeFirstLetter(target.pronoun())));
+                            + " out of there anytime soon. Oh, the possibilities...", target.getCharacter().getName(), target.getCharacter().objectPronoun(),
+                            target.getCharacter().objectPronoun(), target.getCharacter().pronoun(), target.getCharacter().pronoun(),
+                            Global.capitalizeFirstLetter(target.getCharacter().pronoun())));
         }
-        target.outfit.undress();
-        target.addNonCombat(new RoboWebbed(target, 100 + getStrength(), this));
-        target.location().opportunity(target, this);
-        target.location().alarm = true;
+        target.getCharacter().outfit.undress();
+        target.getCharacter().addNonCombat(new RoboWebbed(target.getCharacter(), 100 + getStrength(), this));
+        target.getCharacter().location().opportunity(target.getCharacter(), this);
+        target.getCharacter().location().alarm = true;
     }
 
     @Override

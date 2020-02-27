@@ -18,7 +18,7 @@ public abstract class Trap implements Deployable {
         this.setStrength(0);
     }
     
-    protected abstract void trigger(Character target);
+    protected abstract void trigger(Participant target);
 
     public boolean decoy() {
         return false;
@@ -32,7 +32,7 @@ public abstract class Trap implements Deployable {
 
     public boolean resolve(Participant active) {
         if (active.getCharacter() != owner) {
-            trigger(active.getCharacter());
+            trigger(active);
             return true;
         }
         return false;
