@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Area implements Serializable {
     /**
@@ -261,8 +260,8 @@ public class Area implements Serializable {
         return res;
     }
 
-    public Set<Character> getOccupants() {
-        return present.stream().map(Participant::getCharacter).collect(Collectors.toUnmodifiableSet());
+    public Set<Participant> getOccupants() {
+        return Set.copyOf(present);
     }
 
     // Stealthily slips a character into a room without triggering anything. Use with caution.
