@@ -5,6 +5,7 @@ import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Encounter;
+import nightgames.match.Participant;
 import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Area implements Serializable {
     /**
@@ -23,7 +25,7 @@ public class Area implements Serializable {
     public HashSet<Area> adjacent;
     public HashSet<Area> shortcut;
     public HashSet<Area> jump;
-    private ArrayList<Character> present;
+    private ArrayList<Participant> present;
     public String description;
     public Encounter fight;
     public boolean alarm;
@@ -105,20 +107,21 @@ public class Area implements Serializable {
         if (fight != null) {
             return true;
         }
-        for (Character c : present) {
-            if (!c.stealthCheck(perception) || open()) {
+        for (Participant participant : present) {
+            if (!participant.getCharacter().stealthCheck(perception) || open()) {
                 return true;
             }
         }
         return alarm;
     }
 
-    public void enter(Character p) {
+    public void enter(Character c) {
+        var p = Global.getMatch().findParticipant(c);
         present.add(p);
-        System.out.printf("%s enters %s: %s\n", p.getTrueName(), name, env);
+        System.out.printf("%s enters %s: %s\n", p.getCharacter().getTrueName(), name, env);
         List<Deployable> deps = new ArrayList<>(env);
         for (Deployable dep : deps) {
-            if (dep != null && dep.resolve(p)) {
+            if (dep != null && dep.resolve(p.getCharacter())) {
                 return;
             }
         }
@@ -140,18 +143,19 @@ public class Area implements Serializable {
      * returning true if something has come up that prevents the Character from moving
      * being presented with the normal campus Actions.
      */
-    public EncounterResult encounter(Character p) {
+    public EncounterResult encounter(Character c) {
+        var p = Global.getMatch().findParticipant(c);
         List<CommandPanelOption> options = new ArrayList<>();
         // We can't run encounters if a fight is already occurring.
-        if (fight != null && fight.checkIntrude(p)) {
-            options = p.intervene(fight, fight.getPlayer(1), fight.getPlayer(2));
-        } else if (present.size() > 1 && canFight(p)) {
-            for (Character opponent : Global.getMatch().getCombatants()) {          //FIXME: Currently - encounters repeat - Does this check if they are busy? 
+        if (fight != null && fight.checkIntrude(p.getCharacter())) {
+            options = p.getCharacter().intervene(fight, fight.getPlayer(1), fight.getPlayer(2));
+        } else if (present.size() > 1 && canFight(p.getCharacter())) {
+            for (Participant opponent : Global.getMatch().getParticipants()) {          //FIXME: Currently - encounters repeat - Does this check if they are busy?
                 if (present.contains(opponent) && opponent != p                     
-                               && canFight(opponent)
+                               && canFight(opponent.getCharacter())
                               // && Global.getMatch().canEngage(p, opponent)        
                                ) {
-                    fight = Global.getMatch().buildEncounter(p, opponent, this);
+                    fight = Global.getMatch().buildEncounter(p.getCharacter(), opponent.getCharacter(), this);
                     return new EncounterResult(fight.spotCheck(), new ArrayList<>());
                 }
             }
@@ -165,12 +169,13 @@ public class Area implements Serializable {
     }
     
     public boolean opportunity(Character target, Trap trap) {
+        var targetParticipant = Global.getMatch().findParticipant(target);
         if (present.size() > 1) {
-            for (Character opponent : present) {
-                if (opponent != target) {
-                    if (target.eligible(opponent) && opponent.eligible(target) && fight == null) {
-                        fight = Global.getMatch().buildEncounter(opponent, target, this);
-                        opponent.promptTrap(fight, target, trap);
+            for (Participant opponent : present) {
+                if (opponent != targetParticipant) {
+                    if (targetParticipant.getCharacter().eligible(opponent.getCharacter()) && opponent.getCharacter().eligible(targetParticipant.getCharacter()) && fight == null) {
+                        fight = Global.getMatch().buildEncounter(opponent.getCharacter(), target, this);
+                        opponent.getCharacter().promptTrap(fight, target, trap);
                         return true;
                     }
                 }
@@ -181,8 +186,8 @@ public class Area implements Serializable {
     }
 
     public boolean humanPresent() {
-        for (Character player : present) {
-            if (player.human()) {
+        for (Participant player : present) {
+            if (player.getCharacter().human()) {
                 return true;
             }
         }
@@ -235,7 +240,7 @@ public class Area implements Serializable {
     }
 
     public boolean isDetected() {
-        return present.stream().anyMatch(c -> c.is(Stsflag.detected));
+        return present.stream().anyMatch(c -> c.getCharacter().is(Stsflag.detected));
     }
 
     public boolean isTrapped() {
@@ -257,11 +262,11 @@ public class Area implements Serializable {
     }
 
     public Set<Character> getOccupants() {
-        return Set.copyOf(present);
+        return present.stream().map(Participant::getCharacter).collect(Collectors.toUnmodifiableSet());
     }
 
     // Stealthily slips a character into a room without triggering anything. Use with caution.
     public void place(Character c) {
-        present.add(c);
+        present.add(Global.getMatch().findParticipant(c));
     }
 }

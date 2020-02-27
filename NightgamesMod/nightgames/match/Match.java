@@ -398,6 +398,10 @@ public class Match {
             .collect(Collectors.toUnmodifiableList());
     }
 
+    public final Set<Participant> getParticipants() {
+        return Set.copyOf(participants);
+    }
+
     public final Modifier getCondition() {
         return condition;
     }
