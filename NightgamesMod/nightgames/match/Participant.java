@@ -56,7 +56,7 @@ public class Participant {
 
     public void place(Area loc) {
         character.location = loc;
-        loc.place(this.getCharacter());
+        loc.place(this);
         if (loc.name.isEmpty()) {
             throw new RuntimeException("empty location");
         }

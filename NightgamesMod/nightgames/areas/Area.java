@@ -265,7 +265,7 @@ public class Area implements Serializable {
     }
 
     // Stealthily slips a character into a room without triggering anything. Use with caution.
-    public void place(Character c) {
-        present.add(Global.getMatch().findParticipant(c));
+    public void place(Participant p) {
+        present.add(p);
     }
 }
