@@ -104,11 +104,11 @@ public class Match {
         areaList.add(map.get("Tunnel"));
         areaList.add(map.get("Workshop"));
         areaList.add(map.get("Pool"));
-        participants.stream().map(Participant::getCharacter).forEach(character -> {
-            if (character.has(Trait.immobile)) {
-                character.place(map.get("Courtyard"));
+        participants.forEach(participant -> {
+            if (participant.getCharacter().has(Trait.immobile)) {
+                participant.place(map.get("Courtyard"));
             } else {
-                character.place(areaList.pop());
+                participant.place(areaList.pop());
             }
         });
     }

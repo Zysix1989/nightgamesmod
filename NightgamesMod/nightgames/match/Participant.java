@@ -1,5 +1,6 @@
 package nightgames.match;
 
+import nightgames.areas.Area;
 import nightgames.characters.Character;
 
 import java.util.HashSet;
@@ -52,4 +53,13 @@ public class Participant {
     void allowTarget(Participant p) {
         invalidTargets.remove(p);
     }
+
+    public void place(Area loc) {
+        character.location = loc;
+        loc.place(this.getCharacter());
+        if (loc.name.isEmpty()) {
+            throw new RuntimeException("empty location");
+        }
+    }
+
 }

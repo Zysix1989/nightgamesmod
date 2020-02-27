@@ -71,7 +71,7 @@ public abstract class Character extends Observable implements Cloneable {
     protected WillpowerStat willpower;
     public Outfit outfit;
     public List<Clothing> outfitPlan;               //List is good but ArrayList is more powerful because it's serializable. - DSM 
-    protected Area location;                        //What does this do? Is it the characters Current Location? This should be stored as a String or implemented as a token on a larger GameMap - DSM
+    public Area location;                        //What does this do? Is it the characters Current Location? This should be stored as a String or implemented as a token on a larger GameMap - DSM
     private CopyOnWriteArrayList<Skill> skills;     //Skills are unlikely objects to mutate tow warrant this - just opinion. - DSM
     public List<Status> status;                     //List is not Serializable.  Marge into StatusEffect- DSM
     private Set<Stsflag> statusFlags;                //Can be merged into a StatusEffect object and made serializable. - DSM

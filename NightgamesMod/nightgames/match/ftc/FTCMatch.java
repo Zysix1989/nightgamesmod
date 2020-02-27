@@ -17,7 +17,7 @@ import nightgames.modifier.standard.FTCModifier;
 import java.util.*;
 
 public class FTCMatch extends Match {
-    private Map<Character, Area> bases;
+    private Map<Participant, Area> bases;
     private Participant prey;
     private int gracePeriod;
     private boolean flagInCenter;
@@ -29,11 +29,11 @@ public class FTCMatch extends Match {
         this.prey = findParticipant(prey);
         this.gracePeriod = 3;
         this.flagCounter = 0;
-        List<Character> hunters = new ArrayList<>(combatants);
-        hunters.remove(prey);
+        List<Participant> hunters = new ArrayList<>(participants);
+        hunters.remove(this.prey);
         Collections.shuffle(hunters);
-        buildFTCMap(hunters.get(0), hunters.get(1), hunters.get(2), hunters.get(3), prey);
-        bases.forEach(Character::place);
+        buildFTCMap(hunters.get(0), hunters.get(1), hunters.get(2), hunters.get(3), this.prey);
+        bases.forEach(Participant::place);
         flagInCenter = false;
         prey.gain(Item.Flag);
     }
@@ -93,28 +93,28 @@ public class FTCMatch extends Match {
         }
     }
 
-    private void buildFTCMap(Character north, Character west, Character south, Character east, Character prey) {
+    private void buildFTCMap(Participant north, Participant west, Participant south, Participant east, Participant prey) {
         map.clear();
         Area nBase = new Area("North Base",
                         String.format("You are in a small camp on the northern edge of the forest. "
-                                        + "%s %s base here.", north.subjectAction("have", "has"),
-                        north.possessiveAdjective()), Movement.ftcNorthBase);
+                                        + "%s %s base here.", north.getCharacter().subjectAction("have", "has"),
+                        north.getCharacter().possessiveAdjective()), Movement.ftcNorthBase);
         Area wBase = new Area("West Base",
                         String.format("You are in a small camp on the western edge of the forest. "
-                                        + "%s %s base here.", west.subjectAction("have", "has"),
-                        west.possessiveAdjective()), Movement.ftcWestBase);
+                                        + "%s %s base here.", west.getCharacter().subjectAction("have", "has"),
+                        west.getCharacter().possessiveAdjective()), Movement.ftcWestBase);
         Area sBase = new Area("South Base",
                         String.format("You are in a small camp on the southern edge of the forest. "
-                                        + "%s %s base here.", south.subjectAction("have", "has"),
-                        south.possessiveAdjective()), Movement.ftcSouthBase);
+                                        + "%s %s base here.", south.getCharacter().subjectAction("have", "has"),
+                        south.getCharacter().possessiveAdjective()), Movement.ftcSouthBase);
         Area eBase = new Area("East Base",
                         String.format("You are in a small camp on the eastern edge of the forest. "
-                                        + "%s %s base here.", east.subjectAction("have", "has"),
-                        east.possessiveAdjective()), Movement.ftcEastBase);
+                                        + "%s %s base here.", east.getCharacter().subjectAction("have", "has"),
+                        east.getCharacter().possessiveAdjective()), Movement.ftcEastBase);
         Area pBase = new Area("Central Camp",
                         String.format("You are in a clearing in the middle of the forest. There are no"
                                         + " trees here, just a small camp where %s can "
-                                        + "get a new Flag if it gets captured.", prey.subject()),
+                                        + "get a new Flag if it gets captured.", prey.getCharacter().subject()),
                         Movement.ftcCenter, new MapDrawHint(), Set.of(AreaAttribute.Open));
         map.put("North Base", nBase);
         map.put("West Base", wBase);
