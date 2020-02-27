@@ -74,29 +74,7 @@ public class Combat {
     private List<CombatListener> listeners;
     
     String imagePath = "";
-    
-    private static HashMap<String, HashMap<String, List<Integer>>> resultTracker=new HashMap<String, HashMap<String, List<Integer>>>();
-    
-    // result: 0 = not actually a fight, 1=p1 win, 2=p2 win, 3=draw
-    private static void registerCombatResult(Character p1, Character p2, int result) {
-        if (!getResultTracker().containsKey(p1.getName())) {getResultTracker().put(p1.getName(), new HashMap<String,List<Integer>>());}
-        if (!getResultTracker().containsKey(p2.getName())) {getResultTracker().put(p2.getName(), new HashMap<String,List<Integer>>());}
-        HashMap<String, List<Integer>> p1Results = getResultTracker().get(p1.getName());
-        HashMap<String, List<Integer>> p2Results = getResultTracker().get(p2.getName());
-        if (!p1Results.containsKey(p2.getName())) {p1Results.put(p2.getName(), Arrays.asList(0,0,0,0));}
-        if (!p2Results.containsKey(p1.getName())) {p2Results.put(p1.getName(), Arrays.asList(0,0,0,0));}
-        List<Integer> p1p2Results = p1Results.get(p2.getName());
-        List<Integer> p2p1Results = p2Results.get(p1.getName());
-        int reverseresult = (result==3?3:(result==1?2:0));
-        p1p2Results.set(result, 1+p1p2Results.get(result));
-        p2p1Results.set(reverseresult, 1+p2p1Results.get(reverseresult));
-    }
 
-    public static HashMap<String, HashMap<String, List<Integer>>> getResultTracker() {
-        return resultTracker;
-    }
-
-    
     public Combat(Character p1, Character p2, Area loc) {
         this.p1 = new Combatant(p1);
         combatantData = new HashMap<>();
@@ -227,7 +205,6 @@ public class Combat {
     }
 
     public void doVictory(Character victor, Character loser) {
-        registerCombatResult(victor, loser, 1);
               
         //Collect Bottle-able substances. 
         this.doBottleCollection(victor, loser); 
