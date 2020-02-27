@@ -2,11 +2,12 @@ package nightgames.trap;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.Item;
-import nightgames.match.Encounter;
+import nightgames.stance.Position;
 import nightgames.status.RoboWebbed;
+
+import java.util.Optional;
 
 public class RoboWeb extends Trap {
 
@@ -83,9 +84,9 @@ public class RoboWeb extends Trap {
     }
     
     @Override
-    public void capitalize(Character attacker, Character victim, Encounter enc) {
-        enc.engage(new Combat(attacker, victim, attacker.location()));
+    public Optional<Position> capitalize(Character attacker, Character victim) {
         attacker.location().remove(this);
+        return super.capitalize(attacker, victim);
     }
 
 }

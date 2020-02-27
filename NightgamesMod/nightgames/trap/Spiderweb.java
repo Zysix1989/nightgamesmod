@@ -6,7 +6,9 @@ import nightgames.characters.State;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
-import nightgames.match.Encounter;
+import nightgames.stance.Position;
+
+import java.util.Optional;
 
 public class Spiderweb extends Trap {
 
@@ -67,8 +69,9 @@ public class Spiderweb extends Trap {
     }
 
     @Override
-    public void capitalize(Character attacker, Character victim, Encounter enc) {
+    public Optional<Position> capitalize(Character attacker, Character victim) {
         onSpiderwebDefeat(attacker, victim, this);
+        return super.capitalize(attacker, victim);
     }
     
     public static void onSpiderwebDefeat(Character attacker, Character victim, Spiderweb trap) {

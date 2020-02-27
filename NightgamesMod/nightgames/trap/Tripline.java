@@ -2,12 +2,13 @@ package nightgames.trap;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.Item;
-import nightgames.match.Encounter;
+import nightgames.stance.Position;
 import nightgames.stance.StandingOver;
 import nightgames.status.Flatfooted;
+
+import java.util.Optional;
 
 public class Tripline extends Trap {
     
@@ -65,10 +66,10 @@ public class Tripline extends Trap {
     }
 
     @Override
-    public void capitalize(Character attacker, Character victim, Encounter enc) {
+    public Optional<Position> capitalize(Character attacker, Character victim) {
         victim.addNonCombat(new Flatfooted(victim, 1));
-        enc.engage(new Combat(attacker, victim, attacker.location(), new StandingOver(attacker, victim)));
         victim.location().remove(this);
+        return Optional.of(new StandingOver(attacker, victim));
     }
 
 }

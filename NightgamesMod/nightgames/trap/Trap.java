@@ -2,7 +2,9 @@ package nightgames.trap;
 
 import nightgames.areas.Deployable;
 import nightgames.characters.Character;
-import nightgames.match.Encounter;
+import nightgames.stance.Position;
+
+import java.util.Optional;
 
 public abstract class Trap implements Deployable {
     
@@ -62,8 +64,8 @@ public abstract class Trap implements Deployable {
         return obj != null && getName().equals(obj.toString());
     }
     
-    public void capitalize(Character attacker, Character victim, Encounter enc) {
-        // NOP
+    public Optional<Position> capitalize(Character attacker, Character victim) {
+        return Optional.empty();
     }
 
     public String getName() {

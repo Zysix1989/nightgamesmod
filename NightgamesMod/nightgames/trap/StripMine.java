@@ -1,14 +1,14 @@
 package nightgames.trap;
 
-import java.util.stream.IntStream;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.Item;
-import nightgames.match.Encounter;
+import nightgames.stance.Position;
 import nightgames.status.Flatfooted;
+
+import java.util.Optional;
+import java.util.stream.IntStream;
 
 public class StripMine extends Trap {
     
@@ -58,10 +58,10 @@ public class StripMine extends Trap {
     }
 
     @Override
-    public void capitalize(Character attacker, Character victim, Encounter enc) {
+    public Optional<Position> capitalize(Character attacker, Character victim) {
         victim.addNonCombat(new Flatfooted(victim, 1));
-        enc.engage(new Combat(attacker, victim, attacker.location()));
         attacker.location().remove(this);
+        return super.capitalize(attacker, victim);
     }
 
 }

@@ -8,8 +8,6 @@ import nightgames.trap.Trap;
 public interface Encounter {
     boolean battle();
 
-    void engage(Combat c);
-
     Combat getCombat();
 
     boolean checkIntrude(Character c);

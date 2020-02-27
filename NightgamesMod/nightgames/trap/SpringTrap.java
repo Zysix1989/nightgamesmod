@@ -3,14 +3,15 @@ package nightgames.trap;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.ClothingTrait;
-import nightgames.match.Encounter;
+import nightgames.stance.Position;
 import nightgames.stance.StandingOver;
 import nightgames.status.Flatfooted;
 import nightgames.status.Winded;
+
+import java.util.Optional;
 
 public class SpringTrap extends Trap {
     
@@ -74,10 +75,10 @@ public class SpringTrap extends Trap {
     }
 
     @Override
-    public void capitalize(Character attacker, Character victim, Encounter enc) {
+    public Optional<Position> capitalize(Character attacker, Character victim) {
         victim.addNonCombat(new Flatfooted(victim, 1));
-        enc.engage(new Combat(attacker, victim, attacker.location(), new StandingOver(attacker, victim)));
         attacker.location().remove(this);
+        return Optional.of(new StandingOver(attacker, victim));
     }
 
 }
