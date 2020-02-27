@@ -2786,18 +2786,6 @@ public Character clone() throws CloneNotSupportedException {
         getMojo().renew();
     }
 
-    /**Places character directly at a location.
-     * @param loc
-     * The location to place this character.
-     * */
-    public void place(Area loc) {
-        location = loc;
-        loc.place(this);
-        if (loc.name.isEmpty()) {
-            throw new RuntimeException("empty location");
-        }
-    }
-
     /**Collects bounty on a target in a FTC match.
      * @param points
      * 
