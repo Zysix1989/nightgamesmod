@@ -2,6 +2,7 @@ package nightgames.trap;
 
 import nightgames.areas.Deployable;
 import nightgames.characters.Character;
+import nightgames.match.Participant;
 import nightgames.stance.Position;
 
 import java.util.Optional;
@@ -29,9 +30,9 @@ public abstract class Trap implements Deployable {
 
     public abstract String setup(Character owner);
 
-    public boolean resolve(Character active) {
-        if (active != owner) {
-            trigger(active);
+    public boolean resolve(Participant active) {
+        if (active.getCharacter() != owner) {
+            trigger(active.getCharacter());
             return true;
         }
         return false;

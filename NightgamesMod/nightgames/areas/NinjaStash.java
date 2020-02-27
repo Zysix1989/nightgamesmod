@@ -1,10 +1,11 @@
 package nightgames.areas;
 
-import java.util.ArrayList;
-
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
+
+import java.util.ArrayList;
 
 public class NinjaStash implements Deployable {
 
@@ -27,8 +28,8 @@ public class NinjaStash implements Deployable {
         }
     }
     @Override
-    public boolean resolve(Character active) {
-        if(owner==active&&active.human()){
+    public boolean resolve(Participant active) {
+        if(owner==active.getCharacter()&&active.getCharacter().human()){
             Global.gui().message("You have a carefully hidden stash of emergency supplies here. You can replace your clothes and collect the items if you need to.");
         }
         return false;

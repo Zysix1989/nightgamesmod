@@ -7,6 +7,7 @@ import nightgames.characters.State;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,25 +143,25 @@ public class Challenge implements Deployable {
     }
 
     @Override
-    public boolean resolve(Character active) {
-        if (active.state == State.ready) {
-            owner = active;
+    public boolean resolve(Participant active) {
+        if (active.getCharacter().state == State.ready) {
+            owner = active.getCharacter();
             List<Character> combatants = Global.getMatch().getCombatants();
             target = combatants.get(Global.random(combatants.size() - 1));
-            for (int i = 0; i < 10 && target == active; i++) {
+            for (int i = 0; i < 10 && target == active.getCharacter(); i++) {
                 target = combatants.get(Global.random(combatants.size() - 1));
             }
-            if (target == active) {
+            if (target == active.getCharacter()) {
                 return false;
             }
             goal = pick();
-            if (active.human()) {
+            if (active.getCharacter().human()) {
                 Global.gui().message("You find a gold envelope sitting conspicously in the middle of the "
                                 + Global.getMatch().genericRoomDescription()
                                 + ". You open it up and read the note inside.\n'" + message() + "'\n");
             }
-            active.location().remove(this);
-            active.accept(this);
+            active.getCharacter().location().remove(this);
+            active.getCharacter().accept(this);
             return true;
         }
         return false;

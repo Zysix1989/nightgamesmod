@@ -120,7 +120,7 @@ public class Area implements Serializable {
         System.out.printf("%s enters %s: %s\n", p.getCharacter().getTrueName(), name, env);
         List<Deployable> deps = new ArrayList<>(env);
         for (Deployable dep : deps) {
-            if (dep != null && dep.resolve(p.getCharacter())) {
+            if (dep != null && dep.resolve(p)) {
                 return;
             }
         }

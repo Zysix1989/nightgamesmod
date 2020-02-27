@@ -1,12 +1,5 @@
 package nightgames.areas;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.State;
@@ -15,6 +8,14 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
+import nightgames.match.Participant;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Cache implements Deployable {
     
@@ -139,13 +140,13 @@ public class Cache implements Deployable {
     }
 
     @Override
-    public boolean resolve(Character active) {
-        if (active.state == State.ready) {
-            if (active.has(Trait.treasureSeeker)) {
+    public boolean resolve(Participant active) {
+        if (active.getCharacter().state == State.ready) {
+            if (active.getCharacter().has(Trait.treasureSeeker)) {
                 dc -= 5;
             }
-            if (active.check(test, dc)) {
-                if (active.human()) {
+            if (active.getCharacter().check(test, dc)) {
+                if (active.getCharacter().human()) {
                     switch (test) {
                         case Cunning:
                             Global.gui().message(
@@ -175,11 +176,11 @@ public class Cache implements Deployable {
                     }
                 }
                 for (Loot i : reward) {
-                    i.pickup(active);
+                    i.pickup(active.getCharacter());
                 }
-                active.modMoney(Global.random(500) + 500);
-            } else if (active.check(secondary, dc - 5)) {
-                if (active.human()) {
+                active.getCharacter().modMoney(Global.random(500) + 500);
+            } else if (active.getCharacter().check(secondary, dc - 5)) {
+                if (active.getCharacter().human()) {
                     switch (test) {
                         case Cunning:
                             Global.gui().message(
@@ -210,9 +211,9 @@ public class Cache implements Deployable {
                     }
                 }
                 for (Loot i : reward) {
-                    i.pickup(active);
+                    i.pickup(active.getCharacter());
                 }
-                active.modMoney(Global.random(500) + 500);
+                active.getCharacter().modMoney(Global.random(500) + 500);
             } else {
                 switch (test) {
                     case Cunning:
@@ -241,7 +242,7 @@ public class Cache implements Deployable {
                         break;
                 }
             }
-            active.location().remove(this);
+            active.getCharacter().location().remove(this);
             return true;
         }
         return false;
