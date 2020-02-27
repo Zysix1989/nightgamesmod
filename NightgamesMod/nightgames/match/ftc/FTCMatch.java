@@ -28,11 +28,6 @@ public class FTCMatch extends Match {
     private int gracePeriod;
     private boolean flagInCenter;
     private int flagCounter;
-
-    { // To prevent uninitalized comparison in manageConditions
-        prey = Global.noneCharacter();
-        gracePeriod = -1;
-    }
     
     public FTCMatch(Collection<Character> combatants, Character prey) {
         super(combatants, new FTCModifier(prey));
