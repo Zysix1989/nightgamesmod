@@ -9,7 +9,19 @@ class Combatant {
         character = c;
     }
 
+    private Combatant(Combatant c) {
+        try {
+            character = c.character.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new UnsupportedOperationException(e);
+        }
+    }
+
     Character getCharacter() {
         return character;
+    }
+
+    Combatant copy() {
+        return new Combatant(this);
     }
 }

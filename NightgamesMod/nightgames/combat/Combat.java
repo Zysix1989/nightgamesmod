@@ -1297,8 +1297,8 @@ public class Combat {
     @Override
     public Combat clone() throws CloneNotSupportedException {
         Combat c = (Combat) super.clone();
-        c.p1 = new Combatant(p1.getCharacter().clone());
-        c.p2 = new Combatant(p2.getCharacter().clone());
+        c.p1 = p1.copy();
+        c.p2 = p2.copy();
         c.p1.getCharacter().finishClone(c.p2.getCharacter());
         c.p2.getCharacter().finishClone(c.p1.getCharacter());
         c.combatantData = new HashMap<>();
