@@ -1,21 +1,18 @@
 package nightgames.areas;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import nightgames.actions.Action;
-import nightgames.actions.Leap;
-import nightgames.actions.Move;
-import nightgames.actions.Movement;
-import nightgames.actions.Shortcut;
+import nightgames.actions.*;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Encounter;
 import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Area implements Serializable {
     /**
@@ -26,7 +23,7 @@ public class Area implements Serializable {
     public HashSet<Area> adjacent;
     public HashSet<Area> shortcut;
     public HashSet<Area> jump;
-    public ArrayList<Character> present;
+    private ArrayList<Character> present;
     public String description;
     public Encounter fight;
     public boolean alarm;
@@ -257,5 +254,14 @@ public class Area implements Serializable {
             res.add(new Leap(path));
         }
         return res;
+    }
+
+    public Set<Character> getOccupants() {
+        return Set.copyOf(present);
+    }
+
+    // Stealthily slips a character into a room without triggering anything. Use with caution.
+    public void place(Character c) {
+        present.add(c);
     }
 }

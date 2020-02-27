@@ -2728,9 +2728,9 @@ public Character clone() throws CloneNotSupportedException {
         change();
         state = State.ready;
         getWillpower().renew();
-        if (location().present.size() > 1) {
+        if (location().getOccupants().size() > 1) {
             if (location().id() == Movement.dorm) {
-                if (Global.getMatch().gps("Quad").get().present.isEmpty()) {
+                if (Global.getMatch().gps("Quad").get().getOccupants().isEmpty()) {
                     if (human()) {
                         Global.gui().message("You hear your opponents searching around the "
                             + "dorm, so once you finish changing, you hop out the window and "
@@ -2747,7 +2747,7 @@ public Character clone() throws CloneNotSupportedException {
                 }
             }
             if (location().id() == Movement.union) {
-                if (Global.getMatch().gps("Quad").get().present.isEmpty()) {
+                if (Global.getMatch().gps("Quad").get().getOccupants().isEmpty()) {
                     if (human()) {
                         Global.gui().message("You don't want to be ambushed leaving the "
                             + "student union, so once you finish changing, you hop out the "
@@ -2792,7 +2792,7 @@ public Character clone() throws CloneNotSupportedException {
      * */
     public void place(Area loc) {
         location = loc;
-        loc.present.add(this);
+        loc.place(this);
         if (loc.name.isEmpty()) {
             throw new RuntimeException("empty location");
         }
