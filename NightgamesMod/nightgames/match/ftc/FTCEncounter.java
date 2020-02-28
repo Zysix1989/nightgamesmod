@@ -8,6 +8,7 @@ import nightgames.combat.Combat;
 import nightgames.global.Encs;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 import nightgames.match.defaults.DefaultEncounter;
 import nightgames.stance.Mount;
 import nightgames.stance.Pin;
@@ -17,7 +18,7 @@ import nightgames.trap.Trap;
 
 public class FTCEncounter extends DefaultEncounter {
 
-    public FTCEncounter(Character first, Character second, Area location) {
+    public FTCEncounter(Participant first, Participant second, Area location) {
         super(first, second, location);
     }
 

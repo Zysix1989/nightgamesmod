@@ -407,7 +407,7 @@ public class Match {
     }
 
     public Encounter buildEncounter(Participant first, Participant second, Area location) {
-        return new DefaultEncounter(first.getCharacter(), second.getCharacter(), location);
+        return new DefaultEncounter(first, second, location);
     }
     
     public final void quit() {

@@ -9,6 +9,7 @@ import nightgames.global.Encs;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Encounter;
+import nightgames.match.Participant;
 import nightgames.status.*;
 import nightgames.trap.Spiderweb;
 import nightgames.trap.Trap;
@@ -30,10 +31,10 @@ public class DefaultEncounter implements Encounter {
     private int checkin;
     protected int fightTime;
 
-    public DefaultEncounter(Character first, Character second, Area location) {
+    public DefaultEncounter(Participant first, Participant second, Area location) {
         this.location = location;
-        p1 = first;
-        p2 = second;
+        p1 = first.getCharacter();
+        p2 = second.getCharacter();
         checkin = 0;
         fight = null;
         p1Guaranteed = Optional.empty();
