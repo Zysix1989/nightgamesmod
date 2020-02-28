@@ -35,10 +35,6 @@ public class Area implements Serializable {
     private Set<AreaAttribute> attributes;
 
     public Area(String name, String description, Movement enumerator) {
-        this(name, description, enumerator, new MapDrawHint());
-    }
-
-    public Area(String name, String description, Movement enumerator, MapDrawHint drawHint) {
         this.name = name;
         this.description = description;
         this.enumerator = enumerator;
@@ -49,12 +45,12 @@ public class Area implements Serializable {
         env = new ArrayList<>();
         alarm = false;
         fight = null;
-        this.drawHint = drawHint;
+        this.drawHint = new MapDrawHint();
         this.attributes = Set.of();
     }
 
-    public Area(String name, String description, Movement enumerator, MapDrawHint drawHint, Set<AreaAttribute> attributes) {
-        this(name, description, enumerator, drawHint);
+    public Area(String name, String description, Movement enumerator, Set<AreaAttribute> attributes) {
+        this(name, description, enumerator);
         this.attributes = attributes;
     }
 
@@ -267,5 +263,9 @@ public class Area implements Serializable {
     // Stealthily slips a character into a room without triggering anything. Use with caution.
     public void place(Participant p) {
         present.add(p);
+    }
+
+    public void setMapDrawHint(MapDrawHint hint) {
+        drawHint = hint;
     }
 }

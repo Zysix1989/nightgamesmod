@@ -1,89 +1,16 @@
 package nightgames.global;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.stream.JsonWriter;
-import java.awt.Rectangle;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.sql.Timestamp;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Properties;
-import java.util.Random;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import nightgames.Resources.ResourceLoader;
 import nightgames.actions.Action;
-import nightgames.actions.Bathe;
-import nightgames.actions.BushAmbush;
-import nightgames.actions.Craft;
-import nightgames.actions.Disguise;
-import nightgames.actions.Energize;
-import nightgames.actions.Hide;
-import nightgames.actions.Locate;
-import nightgames.actions.MasturbateAction;
-import nightgames.actions.Movement;
-import nightgames.actions.PassAmbush;
-import nightgames.actions.Recharge;
-import nightgames.actions.Resupply;
-import nightgames.actions.Scavenge;
-import nightgames.actions.SetTrap;
-import nightgames.actions.TreeAmbush;
 import nightgames.actions.Wait;
+import nightgames.actions.*;
 import nightgames.areas.Area;
 import nightgames.areas.AreaAttribute;
 import nightgames.areas.MapDrawHint;
-import nightgames.characters.Airi;
-import nightgames.characters.Angel;
-import nightgames.characters.Attribute;
-import nightgames.characters.BasePersonality;
-import nightgames.characters.Cassie;
 import nightgames.characters.Character;
-import nightgames.characters.CharacterSex;
-import nightgames.characters.Eve;
-import nightgames.characters.Jewel;
-import nightgames.characters.Kat;
-import nightgames.characters.Mara;
-import nightgames.characters.Maya;
-import nightgames.characters.NPC;
-import nightgames.characters.Player;
-import nightgames.characters.Reyka;
-import nightgames.characters.Trait;
-import nightgames.characters.TraitTree;
-import nightgames.characters.Yui;
+import nightgames.characters.*;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.StraponPart;
@@ -102,288 +29,33 @@ import nightgames.match.Match;
 import nightgames.match.MatchType;
 import nightgames.modifier.CustomModifierLoader;
 import nightgames.modifier.Modifier;
-import nightgames.modifier.standard.FTCModifier;
-import nightgames.modifier.standard.MayaModifier;
-import nightgames.modifier.standard.NoItemsModifier;
-import nightgames.modifier.standard.NoModifier;
-import nightgames.modifier.standard.NoRecoveryModifier;
-import nightgames.modifier.standard.NoToysModifier;
-import nightgames.modifier.standard.NudistModifier;
-import nightgames.modifier.standard.PacifistModifier;
-import nightgames.modifier.standard.UnderwearOnlyModifier;
-import nightgames.modifier.standard.VibrationModifier;
-import nightgames.modifier.standard.VulnerableModifier;
+import nightgames.modifier.standard.*;
 import nightgames.pet.PetCharacter;
 import nightgames.pet.Ptype;
-import nightgames.skills.Anilingus;
-import nightgames.skills.Aphrodisiac;
-import nightgames.skills.ArmBar;
-import nightgames.skills.AssFuck;
-import nightgames.skills.AssJob;
-import nightgames.skills.AttireShift;
-import nightgames.skills.Barrier;
-import nightgames.skills.Beg;
-import nightgames.skills.Binding;
-import nightgames.skills.Bite;
-import nightgames.skills.Blindside;
-import nightgames.skills.Blowjob;
-import nightgames.skills.Bluff;
-import nightgames.skills.Bondage;
-import nightgames.skills.Bravado;
-import nightgames.skills.BreastGrowth;
-import nightgames.skills.BreastGrowthSuper;
-import nightgames.skills.BreastRay;
-import nightgames.skills.BreastWorship;
-import nightgames.skills.BunshinAssault;
-import nightgames.skills.BunshinService;
-import nightgames.skills.Carry;
-import nightgames.skills.CatsGrace;
-import nightgames.skills.Charm;
-import nightgames.skills.CheapShot;
-import nightgames.skills.CockGrowth;
-import nightgames.skills.CockWorship;
-import nightgames.skills.Collar;
-import nightgames.skills.ComeHither;
-import nightgames.skills.Command;
-import nightgames.skills.CommandDismiss;
-import nightgames.skills.CommandDown;
-import nightgames.skills.CommandGive;
-import nightgames.skills.CommandHurt;
-import nightgames.skills.CommandInsult;
-import nightgames.skills.CommandMasturbate;
-import nightgames.skills.CommandOral;
-import nightgames.skills.CommandStrip;
-import nightgames.skills.CommandStripPlayer;
-import nightgames.skills.CommandUse;
-import nightgames.skills.CounterFlower;
-import nightgames.skills.CounterPin;
-import nightgames.skills.CounterRide;
-import nightgames.skills.Cowardice;
-import nightgames.skills.Cunnilingus;
-import nightgames.skills.DarkKiss;
-import nightgames.skills.DarkTalisman;
-import nightgames.skills.DarkTendrils;
-import nightgames.skills.Deepen;
-import nightgames.skills.Defabricator;
-import nightgames.skills.DemandArousal;
-import nightgames.skills.DenyOrgasm;
-import nightgames.skills.Dissolve;
-import nightgames.skills.Distracted;
-import nightgames.skills.Dive;
-import nightgames.skills.Diversion;
-import nightgames.skills.Divide;
-import nightgames.skills.Dominate;
-import nightgames.skills.Drain;
-import nightgames.skills.Edge;
-import nightgames.skills.Embrace;
-import nightgames.skills.EmergencyJump;
-import nightgames.skills.EnergyDrink;
-import nightgames.skills.Engulf;
-import nightgames.skills.EngulfedFuck;
-import nightgames.skills.Escape;
-import nightgames.skills.EyesOfTemptation;
-import nightgames.skills.FaceFuck;
-import nightgames.skills.FaceSit;
-import nightgames.skills.FaerieSwarm;
-import nightgames.skills.Finger;
-import nightgames.skills.FireForm;
-import nightgames.skills.Flick;
-import nightgames.skills.Fly;
-import nightgames.skills.FlyCatcher;
-import nightgames.skills.FondleBreasts;
-import nightgames.skills.FootPump;
-import nightgames.skills.FootSmother;
-import nightgames.skills.FootWorship;
-import nightgames.skills.Footjob;
-import nightgames.skills.Frottage;
-import nightgames.skills.Fuck;
-import nightgames.skills.Glamour;
-import nightgames.skills.GoodnightKiss;
-import nightgames.skills.Grind;
-import nightgames.skills.Handjob;
-import nightgames.skills.Haste;
-import nightgames.skills.HeelGrind;
-import nightgames.skills.HeightenSenses;
-import nightgames.skills.HipThrow;
-import nightgames.skills.Honeypot;
-import nightgames.skills.HypnoVisorPlace;
-import nightgames.skills.HypnoVisorRemove;
-import nightgames.skills.IceForm;
-import nightgames.skills.Illusions;
-import nightgames.skills.ImbueFetish;
-import nightgames.skills.Invitation;
-import nightgames.skills.KiShout;
-import nightgames.skills.Kick;
-import nightgames.skills.Kiss;
-import nightgames.skills.Knee;
-import nightgames.skills.Kneel;
-import nightgames.skills.LaunchHarpoon;
-import nightgames.skills.LeechEnergy;
-import nightgames.skills.LeechSeed;
-import nightgames.skills.LegLock;
-import nightgames.skills.LewdSuggestion;
-import nightgames.skills.LickNipples;
-import nightgames.skills.LivingClothing;
-import nightgames.skills.LivingClothingOther;
-import nightgames.skills.Lubricate;
-import nightgames.skills.LustAura;
-import nightgames.skills.MagLock;
-import nightgames.skills.MagicMissile;
-import nightgames.skills.Maneuver;
-import nightgames.skills.ManipulateFetish;
-import nightgames.skills.Masochism;
-import nightgames.skills.Masturbate;
-import nightgames.skills.MimicAngel;
-import nightgames.skills.MimicCat;
-import nightgames.skills.MimicDryad;
-import nightgames.skills.MimicSuccubus;
-import nightgames.skills.MimicWitch;
-import nightgames.skills.MutualUndress;
-import nightgames.skills.NakedBloom;
-import nightgames.skills.NeedleThrow;
-import nightgames.skills.Nurple;
-import nightgames.skills.Nurse;
-import nightgames.skills.Obey;
-import nightgames.skills.Offer;
-import nightgames.skills.OfferAss;
-import nightgames.skills.OrgasmSeal;
-import nightgames.skills.Paizuri;
-import nightgames.skills.Parasite;
-import nightgames.skills.PerfectTouch;
-import nightgames.skills.PetInitiatedReverseThreesome;
-import nightgames.skills.PetInitiatedThreesome;
-import nightgames.skills.PetThreesome;
-import nightgames.skills.PinAndBlow;
-import nightgames.skills.PinningPaizuri;
-import nightgames.skills.Piston;
-import nightgames.skills.PlaceBlindfold;
-import nightgames.skills.Pray;
-import nightgames.skills.PressurePoint;
-import nightgames.skills.Prostrate;
-import nightgames.skills.PullOut;
-import nightgames.skills.PussyGrind;
-import nightgames.skills.PussyWorship;
-import nightgames.skills.Recover;
-import nightgames.skills.RemoveBomb;
-import nightgames.skills.Restrain;
-import nightgames.skills.Reversal;
-import nightgames.skills.ReverseAssFuck;
-import nightgames.skills.ReverseCarry;
-import nightgames.skills.ReverseFly;
-import nightgames.skills.ReverseFuck;
-import nightgames.skills.ReversePetThreesome;
-import nightgames.skills.ReverseStraddle;
-import nightgames.skills.Rewind;
-import nightgames.skills.RipBlindfold;
-import nightgames.skills.Sacrifice;
-import nightgames.skills.Sedate;
-import nightgames.skills.Sensitize;
-import nightgames.skills.ShamefulDisplay;
-import nightgames.skills.ShortCircuit;
-import nightgames.skills.Shove;
-import nightgames.skills.ShrinkRay;
-import nightgames.skills.Simulacrum;
-import nightgames.skills.Skill;
-import nightgames.skills.Slap;
-import nightgames.skills.SlimeMimicry;
-import nightgames.skills.Smother;
-import nightgames.skills.Spank;
-import nightgames.skills.SpawnFGoblin;
-import nightgames.skills.SpawnFaerie;
-import nightgames.skills.SpawnImp;
-import nightgames.skills.SpawnSlime;
-import nightgames.skills.SpiralThrust;
-import nightgames.skills.Spores;
-import nightgames.skills.Squeeze;
-import nightgames.skills.StandUp;
-import nightgames.skills.StealClothes;
-import nightgames.skills.Stomp;
-import nightgames.skills.StoneForm;
-import nightgames.skills.Straddle;
-import nightgames.skills.Strapon;
-import nightgames.skills.StripBottom;
-import nightgames.skills.StripMinor;
-import nightgames.skills.StripSelf;
-import nightgames.skills.StripTease;
-import nightgames.skills.StripTop;
 import nightgames.skills.Struggle;
-import nightgames.skills.Stumble;
-import nightgames.skills.StunBlast;
-import nightgames.skills.Stunned;
-import nightgames.skills.SubmissiveHold;
-import nightgames.skills.Substitute;
-import nightgames.skills.SuccubusNurse;
-import nightgames.skills.SuccubusSurprise;
-import nightgames.skills.SuckNeck;
-import nightgames.skills.Suckle;
-import nightgames.skills.Suggestion;
-import nightgames.skills.SummonYui;
-import nightgames.skills.Surrender;
-import nightgames.skills.SweetScent;
-import nightgames.skills.Tackle;
-import nightgames.skills.TailJob;
-import nightgames.skills.TailPeg;
-import nightgames.skills.TailSuck;
-import nightgames.skills.TakeOffShoes;
-import nightgames.skills.Taunt;
-import nightgames.skills.Tear;
-import nightgames.skills.Tempt;
-import nightgames.skills.TemptressBlowjob;
-import nightgames.skills.TemptressHandjob;
-import nightgames.skills.TemptressRide;
-import nightgames.skills.TemptressStripTease;
-import nightgames.skills.TemptressTitfuck;
-import nightgames.skills.TentaclePorn;
-import nightgames.skills.TentacleRape;
-import nightgames.skills.ThrowBomb;
-import nightgames.skills.ThrowDraft;
-import nightgames.skills.ThrowSlime;
-import nightgames.skills.Thrust;
-import nightgames.skills.Tickle;
-import nightgames.skills.Tie;
-import nightgames.skills.Tighten;
-import nightgames.skills.ToggleBlindfold;
-import nightgames.skills.ToggleKnot;
-import nightgames.skills.ToggleSlimeCock;
-import nightgames.skills.ToggleSlimePussy;
-import nightgames.skills.TortoiseWrap;
-import nightgames.skills.Tribadism;
-import nightgames.skills.Trip;
-import nightgames.skills.Turnover;
-import nightgames.skills.Undress;
-import nightgames.skills.Unstrip;
-import nightgames.skills.UseCrop;
-import nightgames.skills.UseDildo;
-import nightgames.skills.UseDraft;
-import nightgames.skills.UseOnahole;
-import nightgames.skills.UseSemen;
-import nightgames.skills.VibroTease;
-import nightgames.skills.ViceGrip;
-import nightgames.skills.WaterForm;
-import nightgames.skills.Whisper;
-import nightgames.skills.WildThrust;
-import nightgames.skills.WindUp;
-import nightgames.skills.WingWrap;
+import nightgames.skills.*;
 import nightgames.start.NpcConfiguration;
 import nightgames.start.PlayerConfiguration;
 import nightgames.start.StartConfiguration;
 import nightgames.status.Status;
-import nightgames.trap.Alarm;
-import nightgames.trap.AphrodisiacTrap;
-import nightgames.trap.Decoy;
-import nightgames.trap.DissolvingTrap;
-import nightgames.trap.EnthrallingTrap;
-import nightgames.trap.IllusionTrap;
-import nightgames.trap.RoboWeb;
-import nightgames.trap.Snare;
-import nightgames.trap.Spiderweb;
-import nightgames.trap.SpringTrap;
-import nightgames.trap.StripMine;
-import nightgames.trap.TentacleTrap;
-import nightgames.trap.Trap;
-import nightgames.trap.Tripline;
+import nightgames.trap.*;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextFactory;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Global {
     private static Random rng;                                      //Isn't the convention for static variables at this level is to put them in all caps? -DSM
@@ -1243,80 +915,96 @@ public class Global {
                         "You are in the <b>Quad</b> that sits in the center of the Dorm, the Dining Hall, the Engineering Building, and the Liberal Arts Building. There's "
                                         + "no one around at this time of night, but the Quad is well-lit and has no real cover. You can probably be spotted from any of the surrounding buildings, it may "
                                         + "not be a good idea to hang out here for long.",
-                        Movement.quad, new MapDrawHint(new Rectangle(10, 3, 7, 9), "Quad", false), Set.of(
-            AreaAttribute.Open));
+                        Movement.quad, Set.of(AreaAttribute.Open));
+        quad.setMapDrawHint(new MapDrawHint(new Rectangle(10, 3, 7, 9), "Quad", false));
         Area dorm = new Area("Dorm",
                         "You are in the <b>Dorm</b>. Everything is quieter than it would be in any other dorm this time of night. You've been told the entire first floor "
                                         + "is empty during match hours, but you wouldn't be surprised if a few of the residents are hiding in their rooms, peeking at the fights. You've stashed some clothes "
                                         + "in one of the rooms you're sure is empty, which is common practice for most of the competitors.",
-                        Movement.dorm, new MapDrawHint(new Rectangle(14, 12, 3, 5), "Dorm", false), Set.of(AreaAttribute.Resupply));
+                        Movement.dorm, Set.of(AreaAttribute.Resupply));
+        dorm.setMapDrawHint(new MapDrawHint(new Rectangle(14, 12, 3, 5), "Dorm", false));
         Area shower = new Area("Showers",
                         "You are in the first floor <b>Showers</b>. There are a half-dozen stalls shared by the residents on this floor. They aren't very big, but there's "
                                         + "room to hide if need be. A hot shower would help you recover after a tough fight, but you'd be vulnerable if someone finds you.",
-                        Movement.shower, new MapDrawHint(new Rectangle(13, 17, 4, 2), "Showers", false), Set.of(AreaAttribute.Bathe));
+                        Movement.shower, Set.of(AreaAttribute.Bathe));
+        shower.setMapDrawHint(new MapDrawHint(new Rectangle(13, 17, 4, 2), "Showers", false));
         Area laundry = new Area("Laundry Room",
                         "You are in the <b>Laundry Room</b> in the basement of the Dorm. Late night is prime laundry time in your dorm, but none of these machines "
                                         + "are running. You're a bit jealous when you notice that the machines here are free, while yours are coin-op. There's a tunnel here that connects to the basement of the "
                                         + "Dining Hall.",
-                        Movement.laundry, new MapDrawHint(new Rectangle(17, 15, 8, 2), "Laundry", false));
+                        Movement.laundry);
+        laundry.setMapDrawHint(new MapDrawHint(new Rectangle(17, 15, 8, 2), "Laundry", false));
         Area engineering = new Area("Engineering",
                         "You are in the Science and <b>Engineering Building</b>. Most of the lecture rooms are in other buildings; this one is mostly "
                                         + "for specialized rooms and labs. The first floor contains workshops mostly used by the Mechanical and Electrical Engineering classes. The second floor has "
                                         + "the Biology and Chemistry Labs. There's a third floor, but that's considered out of bounds.",
-                        Movement.engineering, new MapDrawHint(new Rectangle(10, 0, 7, 3), "Eng", false));
+                        Movement.engineering);
+        engineering.setMapDrawHint(new MapDrawHint(new Rectangle(10, 0, 7, 3), "Eng", false));
         Area lab = new Area("Chemistry Lab",
                         "You are in the <b>Chemistry Lab</b>. The shelves and cabinets are full of all manner of dangerous and/or interesting chemicals. A clever enough "
                                         + "person could combine some of the safer ones into something useful. Just outside the lab is a bridge connecting to the library.",
-                        Movement.lab, new MapDrawHint(new Rectangle(0, 0, 10, 3), "Lab", false), Set.of(AreaAttribute.Potions));
+                        Movement.lab, Set.of(AreaAttribute.Potions));
+        lab.setMapDrawHint(new MapDrawHint(new Rectangle(0, 0, 10, 3), "Lab", false));
         Area workshop = new Area("Workshop",
                         "You are in the Mechanical Engineering <b>Workshop</b>. There are shelves of various mechanical components and the back table is covered "
                                         + "with half-finished projects. A few dozen Mechanical Engineering students use this workshop each week, but it's well stocked enough that no one would miss "
                                         + "some materials that might be of use to you.",
-                        Movement.workshop, new MapDrawHint(new Rectangle(17, 0, 8, 3), "Workshop", false), Set.of(AreaAttribute.Materials, AreaAttribute.Recharge));
+                        Movement.workshop, Set.of(AreaAttribute.Materials, AreaAttribute.Recharge));
+        workshop.setMapDrawHint(new MapDrawHint(new Rectangle(17, 0, 8, 3), "Workshop", false));
         Area libarts = new Area("Liberal Arts",
                         "You are in the <b>Liberal Arts Building</b>. There are three floors of lecture halls and traditional classrooms, but only "
                                         + "the first floor is in bounds. The Library is located directly out back, and the side door is just a short walk from the pool.",
-                        Movement.la, new MapDrawHint(new Rectangle(5, 5, 5, 7), "L&A", false), Set.of(AreaAttribute.Mana));
+                        Movement.la, Set.of(AreaAttribute.Mana));
+        libarts.setMapDrawHint(new MapDrawHint(new Rectangle(5, 5, 5, 7), "L&A", false));
         Area pool = new Area("Pool",
                         "You are by the indoor <b>Pool</b>, which is connected to the Student Union for reasons that no one has ever really explained. The pool here is quite "
                                         + "large and there is even a jacuzzi. A quick soak would feel good, but the lack of privacy is a concern. The side doors are locked at this time of night, but the "
                                         + "door to the Student Union is open and there's a back door that exits near the Liberal Arts building. Across the water in the other direction is the Courtyard.",
-                        Movement.pool, new MapDrawHint(new Rectangle(6, 12, 4, 2), "Pool", false), Set.of(AreaAttribute.Bathe));
+                        Movement.pool, Set.of(AreaAttribute.Bathe));
+        pool.setMapDrawHint(new MapDrawHint(new Rectangle(6, 12, 4, 2), "Pool", false));
         Area library = new Area("Library",
                         "You are in the <b>Library</b>. It's a two floor building with an open staircase connecting the first and second floors. The front entrance leads to "
                                         + "the Liberal Arts building. The second floor has a Bridge connecting to the Chemistry Lab in the Science and Engineering building.",
-                        Movement.library, new MapDrawHint(new Rectangle(0, 8, 5, 12), "Library", false));
+                        Movement.library);
+        library.setMapDrawHint(new MapDrawHint(new Rectangle(0, 8, 5, 12), "Library", false));
         Area dining = new Area("Dining Hall",
                         "You are in the <b>Dining Hall</b>. Most students get their meals here, though some feel it's worth the extra money to eat out. The "
                                         + "dining hall is quite large and your steps echo on the linoleum, but you could probably find someplace to hide if you need to.",
-                        Movement.dining, new MapDrawHint(new Rectangle(17, 6, 4, 6), "Dining", false));
+                        Movement.dining);
+        dining.setMapDrawHint(new MapDrawHint(new Rectangle(17, 6, 4, 6), "Dining", false));
         Area kitchen = new Area("Kitchen",
                         "You are in the <b>Kitchen</b> where student meals are prepared each day. The industrial fridge and surrounding cabinets are full of the "
                                         + "ingredients for any sort of bland cafeteria food you can imagine. Fortunately, you aren't very hungry. There's a chance you might be able to cook up some "
                                         + "of the more obscure items into something useful.",
-                        Movement.kitchen, new MapDrawHint(new Rectangle(18, 12, 4, 2), "Kitchen", false), Set.of(AreaAttribute.Potions));
+                        Movement.kitchen, Set.of(AreaAttribute.Potions));
+        kitchen.setMapDrawHint(new MapDrawHint(new Rectangle(18, 12, 4, 2), "Kitchen", false));
         Area storage = new Area("Storage Room",
                         "You are in a <b>Storage Room</b> under the Dining Hall. It's always unlocked and receives a fair bit of foot traffic from students "
                                         + "using the tunnel to and from the Dorm, so no one keeps anything important in here. There's enough junk down here to provide some hiding places and there's a chance "
                                         + "you could find something useable in one of these boxes.",
-                        Movement.storage, new MapDrawHint(new Rectangle(21, 6, 4, 5), "Storage", false), Set.of(AreaAttribute.Materials));
+                        Movement.storage, Set.of(AreaAttribute.Materials));
+        storage.setMapDrawHint(new MapDrawHint(new Rectangle(21, 6, 4, 5), "Storage", false));
         Area tunnel = new Area("Tunnel",
                         "You are in the <b>Tunnel</b> connecting the dorm to the dining hall. It doesn't get a lot of use during the day and most of the freshmen "
                                         + "aren't even aware of its existence, but many upperclassmen have been thankful for it on cold winter days and it's proven to be a major tactical asset. The "
                                         + "tunnel is well-lit and doesn't offer any hiding places.",
-                        Movement.tunnel, new MapDrawHint(new Rectangle(23, 11, 2, 4), "Tunnel", true), Set.of(AreaAttribute.Corridor));
+                        Movement.tunnel, Set.of(AreaAttribute.Corridor));
+        tunnel.setMapDrawHint(new MapDrawHint(new Rectangle(23, 11, 2, 4), "Tunnel", true));
         Area bridge = new Area("Bridge",
                         "You are on the <b>Bridge</b> connecting the second floors of the Science and Engineering Building and the Library. It's essentially just a "
                                         + "corridor, so there's no place for anyone to hide.",
-                        Movement.bridge, new MapDrawHint(new Rectangle(0, 3, 2, 5), "Bridge", true), Set.of(AreaAttribute.Corridor));
+                        Movement.bridge, Set.of(AreaAttribute.Corridor));
+        bridge.setMapDrawHint(new MapDrawHint(new Rectangle(0, 3, 2, 5), "Bridge", true));
         Area sau = new Area("Student Union",
                         "You are in the <b>Student Union</b>, which doubles as base of operations during match hours. You and the other competitors can pick up "
                                         + "a change of clothing here.",
-                        Movement.union, new MapDrawHint(new Rectangle(10, 12, 3, 5), "S.Union", true), Set.of(AreaAttribute.Resupply));
+                        Movement.union, Set.of(AreaAttribute.Resupply));
+        sau.setMapDrawHint(new MapDrawHint(new Rectangle(10, 12, 3, 5), "S.Union", true));
         Area courtyard = new Area("Courtyard",
                         "You are in the <b>Courtyard</b>. "
                                         + "It's a small clearing behind the school pool. There's not much to see here except a tidy garden maintained by the botany department.",
-                        Movement.courtyard, new MapDrawHint(new Rectangle(6, 14, 3, 6), "Courtyard", true));
+                        Movement.courtyard);
+        courtyard.setMapDrawHint(new MapDrawHint(new Rectangle(6, 14, 3, 6), "Courtyard", true));
         quad.link(dorm);
         quad.link(engineering);
         quad.link(libarts);
