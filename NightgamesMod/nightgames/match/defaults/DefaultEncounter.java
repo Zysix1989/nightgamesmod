@@ -525,8 +525,6 @@ public class DefaultEncounter implements Encounter {
                 fightOrFlight(self, false, Optional.of(smokeMessage(self)));
                 self.consume(Item.SmokeBomb, 1);
                 break;
-            default:
-                return;
         }
     }
     
