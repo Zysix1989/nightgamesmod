@@ -264,19 +264,23 @@ public class Player extends Character {
         }
     }
 
-    @Override
-    public void faceOff(Character opponent, Encounter enc) {
-        gui.message("You run into <b>" + opponent.nameDirectObject()
-                        + "</b> and you both hesitate for a moment, deciding whether to attack or retreat.");
+    private void presentFightFlightChoice(Character opponent, ActionListener fightCallback, ActionListener flightCallback) {
         assessOpponent(opponent);
         gui.message("<br/>");
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Fight",
-            encounterOption(enc, opponent, Encs.fight)));
+                fightCallback));
         options.add(new CommandPanelOption("Flee",
-            encounterOption(enc, opponent, Encs.flee)));
+                flightCallback));
         gui.presentOptions(options);
         Global.getMatch().pause();
+    }
+
+    @Override
+    public void faceOff(Character opponent, Encounter enc) {
+        gui.message("You run into <b>" + opponent.nameDirectObject()
+                        + "</b> and you both hesitate for a moment, deciding whether to attack or retreat.");
+        presentFightFlightChoice(opponent, encounterOption(enc, opponent, Encs.fight),encounterOption(enc, opponent, Encs.flee));
     }
 
     private void assessOpponent(Character opponent) {
@@ -323,17 +327,7 @@ public class Player extends Character {
     public void spy(Character opponent, Encounter enc) {
         gui.message("You spot <b>" + opponent.nameDirectObject()
                         + "</b> but she hasn't seen you yet. You could probably catch her off guard, or you could remain hidden and hope she doesn't notice you.");
-        assessOpponent(opponent);
-        gui.message("<br/>");
-
-        ArrayList<CommandPanelOption> options = new ArrayList<>();
-        options.add(new CommandPanelOption("Fight",
-            encounterOption(enc, opponent, Encs.fight)));
-        options.add(new CommandPanelOption("Flee",
-            encounterOption(enc, opponent, Encs.flee)));
-        gui.presentOptions(options);
-
-        Global.getMatch().pause();
+        presentFightFlightChoice(opponent, encounterOption(enc, opponent, Encs.fight),encounterOption(enc, opponent, Encs.flee));
     }
 
     @Override

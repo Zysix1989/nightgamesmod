@@ -65,5 +65,4 @@ public class Participant {
     public boolean canStartCombat(Participant p2) {
         return character.eligible(p2.character);
     }
-
 }
