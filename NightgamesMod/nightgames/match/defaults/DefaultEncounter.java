@@ -43,7 +43,7 @@ public class DefaultEncounter implements Encounter {
         checkEnthrall(p2, p1);
     }
 
-    private void checkEnthrall(Character p1, Character p2) {
+    private static void checkEnthrall(Character p1, Character p2) {
         Status enthrall = p1.getStatus(Stsflag.enthralled);
         if (enthrall != null) {
             if (((Enthralled) enthrall).master != p2) {
