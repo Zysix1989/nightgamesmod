@@ -245,7 +245,7 @@ public class FTCMatch extends Match {
     }
     
     @Override
-    public Encounter buildEncounter(Character first, Character second, Area location) {
-        return new FTCEncounter(first, second, location);
+    public Encounter buildEncounter(Participant first, Participant second, Area location) {
+        return new FTCEncounter(first.getCharacter(), second.getCharacter(), location);
     }
 }
