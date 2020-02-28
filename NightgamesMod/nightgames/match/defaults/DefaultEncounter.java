@@ -116,7 +116,7 @@ public class DefaultEncounter implements Encounter {
         // We need to run both vision checks no matter what, and they have no
         // side effects besides.
         boolean p2_sees_p1 = p2.spotCheck(p1);
-        boolean p1_sees_p2 = p1.spotCheck(p1);
+        boolean p1_sees_p2 = p1.spotCheck(p2);
         
         if (p2_sees_p1 && p1_sees_p2) {
             p1.faceOff(p2, this);
