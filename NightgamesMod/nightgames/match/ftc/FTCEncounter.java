@@ -181,25 +181,18 @@ public class FTCEncounter extends DefaultEncounter {
     @Override
     public void parse(Encs choice, Character self, Character target, Trap trap) {
         assert trap != null || choice != Encs.capitalize;
-        if (!isFTCSpecific(choice)) {
-            super.parse(choice, self, target, trap);
-        } else {
-            switch (choice) {
-                case treeAmbush:
-                    treeAmbush(self, target);
-                    break;
-                case bushAmbush:
-                    bushAmbush(self, target);
-                    break;
-                case passAmbush:
-                    passAmbush(self, target);
-                    break;
-                default:
-            }
+        switch (choice) {
+            case treeAmbush:
+                treeAmbush(self, target);
+                break;
+            case bushAmbush:
+                bushAmbush(self, target);
+                break;
+            case passAmbush:
+                passAmbush(self, target);
+                break;
+            default:
+                super.parse(choice, self, target, trap);
         }
-    }
-
-    private static boolean isFTCSpecific(Encs enc) {
-        return enc == Encs.treeAmbush || enc == Encs.bushAmbush || enc == Encs.passAmbush;
     }
 }
