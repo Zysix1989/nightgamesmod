@@ -18,8 +18,8 @@ import java.util.Optional;
 
 public class DefaultEncounter implements Encounter {
 
-    protected Character p1;
-    protected Character p2;
+    protected Participant p1;
+    protected Participant p2;
     
     private boolean p1ff;
     private boolean p2ff;
@@ -33,14 +33,14 @@ public class DefaultEncounter implements Encounter {
 
     public DefaultEncounter(Participant first, Participant second, Area location) {
         this.location = location;
-        p1 = first.getCharacter();
-        p2 = second.getCharacter();
+        p1 = first;
+        p2 = second;
         checkin = 0;
         fight = null;
         p1Guaranteed = Optional.empty();
         p2Guaranteed = Optional.empty();
-        checkEnthrall(p1, p2);
-        checkEnthrall(p2, p1);
+        checkEnthrall(p1.getCharacter(), p2.getCharacter());
+        checkEnthrall(p2.getCharacter(), p1.getCharacter());
     }
 
     private static void checkEnthrall(Character p1, Character p2) {
@@ -77,7 +77,7 @@ public class DefaultEncounter implements Encounter {
      * campus Actions.
      */
     public boolean spotCheck() {
-        if (p1.eligible(p2) && p2.eligible(p1)) {
+        if (p1.getCharacter().eligible(p2.getCharacter()) && p2.getCharacter().eligible(p1.getCharacter())) {
             eligibleSpotCheck();
             return true;
         } else {
@@ -87,44 +87,44 @@ public class DefaultEncounter implements Encounter {
     }
     
     private void eligibleSpotCheck() {
-        if (p1.state == State.shower) {
-            p2.showerScene(p1, this);
+        if (p1.getCharacter().state == State.shower) {
+            p2.getCharacter().showerScene(p1.getCharacter(), this);
             return;
-        } else if (p2.state == State.shower) {
-            p1.showerScene(p2, this);
+        } else if (p2.getCharacter().state == State.shower) {
+            p1.getCharacter().showerScene(p2.getCharacter(), this);
             return;
-        } else if (p1.state == State.webbed) {
-            spider(p2, p1);
+        } else if (p1.getCharacter().state == State.webbed) {
+            spider(p2.getCharacter(), p1.getCharacter());
             return;
-        } else if (p2.state == State.webbed) {
-            spider(p1, p2);
+        } else if (p2.getCharacter().state == State.webbed) {
+            spider(p1.getCharacter(), p2.getCharacter());
             return;
-        } else if (p1.state == State.crafting || p1.state == State.searching) {
-            p2.spy(p1, this);
+        } else if (p1.getCharacter().state == State.crafting || p1.getCharacter().state == State.searching) {
+            p2.getCharacter().spy(p1.getCharacter(), this);
             return;
-        } else if (p2.state == State.crafting || p2.state == State.searching) {
-            p1.spy(p2, this);
+        } else if (p2.getCharacter().state == State.crafting || p2.getCharacter().state == State.searching) {
+            p1.getCharacter().spy(p2.getCharacter(), this);
             return;
-        } else if (p1.state == State.masturbating) {
-            caught(p2, p1);
+        } else if (p1.getCharacter().state == State.masturbating) {
+            caught(p2.getCharacter(), p1.getCharacter());
             return;
-        } else if (p2.state == State.masturbating) {
-            caught(p1, p2);
+        } else if (p2.getCharacter().state == State.masturbating) {
+            caught(p1.getCharacter(), p2.getCharacter());
             return;
         }
         
         // We need to run both vision checks no matter what, and they have no
         // side effects besides.
-        boolean p2_sees_p1 = p2.spotCheck(p1);
-        boolean p1_sees_p2 = p1.spotCheck(p2);
+        boolean p2_sees_p1 = p2.getCharacter().spotCheck(p1.getCharacter());
+        boolean p1_sees_p2 = p1.getCharacter().spotCheck(p2.getCharacter());
         
         if (p2_sees_p1 && p1_sees_p2) {
-            p1.faceOff(p2, this);
-            p2.faceOff(p1, this);
+            p1.getCharacter().faceOff(p2.getCharacter(), this);
+            p2.getCharacter().faceOff(p1.getCharacter(), this);
         } else if (p2_sees_p1) {
-            p2.spy(p1, this);
+            p2.getCharacter().spy(p1.getCharacter(), this);
         } else if (p1_sees_p2) {
-            p1.spy(p2,  this);
+            p1.getCharacter().spy(p2.getCharacter(),  this);
         } else {
             // Ships passing in the night :(
             location.endEncounter();
@@ -133,12 +133,12 @@ public class DefaultEncounter implements Encounter {
     
     private void ineligibleSpotCheck() {
         // We can skip a lot of flavor lines if there aren't any humans around
-        if (p1.human() || p2.human()) {
-            Character human = p1.human() ? p1 : p2;
-            Character npc = p1 != human ? p1 : p2;
+        if (p1.getCharacter().human() || p2.getCharacter().human()) {
+            Character human = p1.getCharacter().human() ? p1.getCharacter() : p2.getCharacter();
+            Character npc = p1.getCharacter() != human ? p1.getCharacter() : p2.getCharacter();
             Character masturbating =
-                            p1.state == State.masturbating ? p1 :
-                                (p2.state == State.masturbating ? p2 : null);
+                            p1.getCharacter().state == State.masturbating ? p1.getCharacter() :
+                                (p2.getCharacter().state == State.masturbating ? p2.getCharacter() : null);
             
             if (masturbating != null) {
                 if (human == masturbating) {
@@ -147,20 +147,20 @@ public class DefaultEncounter implements Encounter {
                     ineligibleNpcCaughtMasturbating(npc);
                 }
 
-            } else if (p1 == human && p1.eligible(p2)) {
+            } else if (p1.getCharacter() == human && p1.getCharacter().eligible(p2.getCharacter())) {
 
-                Global.gui().message("You encounter " + p2.getName() + ", but you still haven't recovered from your last fight.");
-            } else if (p1 == human) {
+                Global.gui().message("You encounter " + p2.getCharacter().getName() + ", but you still haven't recovered from your last fight.");
+            } else if (p1.getCharacter() == human) {
                 Global.gui().message(String.format(
                                 "You find %s still naked from your last encounter, but %s's not fair game again until %s replaces %s clothes.",
-                                p2.getName(), p2.pronoun(), p2.pronoun(), p2.possessiveAdjective()));
+                                p2.getCharacter().getName(), p2.getCharacter().pronoun(), p2.getCharacter().pronoun(), p2.getCharacter().possessiveAdjective()));
 
-            } else if (!p1.eligible(p2)) {
-                Global.gui().message("You encounter " + p1.getName() + ", but you still haven't recovered from your last fight.");
+            } else if (!p1.getCharacter().eligible(p2.getCharacter())) {
+                Global.gui().message("You encounter " + p1.getCharacter().getName() + ", but you still haven't recovered from your last fight.");
             } else {
                 Global.gui().message(String.format(
                                 "You find %s still naked from your last encounter, but %s's not fair game again until %s replaces %s clothes.",
-                                p1.getName(), p1.pronoun(), p1.pronoun(), p1.possessiveAdjective()));
+                                p1.getCharacter().getName(), p1.getCharacter().pronoun(), p1.getCharacter().pronoun(), p1.getCharacter().possessiveAdjective()));
 
             }
         }
@@ -189,7 +189,7 @@ public class DefaultEncounter implements Encounter {
      * String is messaged to the Character.
      */
     protected void fightOrFlight(Character p, boolean fight, Optional<String> guaranteed) {
-        if (p == p1) {
+        if (p == p1.getCharacter()) {
             p1ff = fight;
             p1Guaranteed = guaranteed;
             checkin++;
@@ -205,11 +205,11 @@ public class DefaultEncounter implements Encounter {
     
     private void doFightOrFlight() {
         if (p1ff && p2ff) {
-            startFight(p1, p2);
+            startFight(p1.getCharacter(), p2.getCharacter());
         } else if (p1ff) {
-            fightOrFlee(p1, p2);
+            fightOrFlee(p1.getCharacter(), p2.getCharacter());
         } else if (p2ff) {
-            fightOrFlee(p2, p1);
+            fightOrFlee(p2.getCharacter(), p1.getCharacter());
         } else {
             bothFlee();
         }
@@ -230,8 +230,8 @@ public class DefaultEncounter implements Encounter {
     
     // One Character wishes to Fight while the other attempts to flee.
     private void fightOrFlee(Character fighter, Character fleer) {
-        Optional<String> fighterGuaranteed = (fighter == p1) ? p1Guaranteed : p2Guaranteed;
-        Optional<String> fleerGuaranteed = (fleer == p1) ? p1Guaranteed : p2Guaranteed;
+        Optional<String> fighterGuaranteed = (fighter == p1.getCharacter()) ? p1Guaranteed : p2Guaranteed;
+        Optional<String> fleerGuaranteed = (fleer == p1.getCharacter()) ? p1Guaranteed : p2Guaranteed;
         
         // Fighter wins automatically
         if (fighterGuaranteed.isPresent() && !fleerGuaranteed.isPresent()) {
@@ -247,7 +247,7 @@ public class DefaultEncounter implements Encounter {
             if (fighter.human() || fleer.human()) {
                 Global.gui().message(fleerGuaranteed.get());
             }
-            p2.flee(location);
+            p2.getCharacter().flee(location);
             return;
         }
 
@@ -286,36 +286,36 @@ public class DefaultEncounter implements Encounter {
     }
     
     private void bothFlee() {
-        boolean humanPresent = p1.human() || p2.human();
+        boolean humanPresent = p1.getCharacter().human() || p2.getCharacter().human();
         if (p1Guaranteed.isPresent()) {
             if (humanPresent) {
                 Global.gui().message(p1Guaranteed.get());
             }
-            p1.flee(location);
+            p1.getCharacter().flee(location);
         } else if (p2Guaranteed.isPresent()) {
             if (humanPresent) {
                 Global.gui().message(p2Guaranteed.get());
             }
-            p2.flee(location);
-        } else if (p1.get(Attribute.Speed) + Global.random(10) >= p2.get(Attribute.Speed) + Global.random(10)) {
-            if (p2.human()) {
+            p2.getCharacter().flee(location);
+        } else if (p1.getCharacter().get(Attribute.Speed) + Global.random(10) >= p2.getCharacter().get(Attribute.Speed) + Global.random(10)) {
+            if (p2.getCharacter().human()) {
                 Global.gui()
-                      .message(p1.getName() + " dashes away before you can move.");
+                      .message(p1.getCharacter().getName() + " dashes away before you can move.");
             }
-            p1.flee(location);
+            p1.getCharacter().flee(location);
         } else {
-            if (p1.human()) {
+            if (p1.getCharacter().human()) {
                 Global.gui()
-                      .message(p2.getName() + " dashes away before you can move.");
+                      .message(p2.getCharacter().getName() + " dashes away before you can move.");
             }
-            p2.flee(location);
+            p2.getCharacter().flee(location);
         }
     }
 
     protected void ambush(Character attacker, Character target) {
         startFightTimer();
         target.addNonCombat(new Flatfooted(target, 3));
-        if (p1.human() || p2.human()) {
+        if (p1.getCharacter().human() || p2.getCharacter().human()) {
             startFight(attacker, target);
             Global.gui().message(Global.format("{self:SUBJECT-ACTION:catch|catches} {other:name-do} by surprise and {self:action:attack|attacks}!", attacker, target));
         } else {
@@ -332,13 +332,13 @@ public class DefaultEncounter implements Encounter {
             poolAmbush(attacker, target);
         }
         
-        if (p1.human() || p2.human()) {
-            startFight(p1, p2);
-            p2.undress(fight);
-            p1.emote(Emotion.dominant, 50);
-            p2.emote(Emotion.nervous, 50);
+        if (p1.getCharacter().human() || p2.getCharacter().human()) {
+            startFight(p1.getCharacter(), p2.getCharacter());
+            p2.getCharacter().undress(fight);
+            p1.getCharacter().emote(Emotion.dominant, 50);
+            p2.getCharacter().emote(Emotion.nervous, 50);
         } else {
-            fight = new Combat(p1, p2, location);
+            fight = new Combat(p1.getCharacter(), p2.getCharacter(), location);
         }
         
         target.add(fight, new Flatfooted(target, 4));
@@ -455,9 +455,9 @@ public class DefaultEncounter implements Encounter {
 
     public Character getPlayer(int i) {
         if (i == 1) {
-            return p1;
+            return p1.getCharacter();
         } else {
-            return p2;
+            return p2.getCharacter();
         }
     }
 
@@ -542,7 +542,7 @@ public class DefaultEncounter implements Encounter {
 
     @Override
     public boolean checkIntrude(Character c) {
-        return fight != null && !c.equals(p1) && !c.equals(p2);
+        return fight != null && !c.equals(p1.getCharacter()) && !c.equals(p2.getCharacter());
     }
 
     @Override

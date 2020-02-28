@@ -24,20 +24,20 @@ public class FTCEncounter extends DefaultEncounter {
 
     @Override
     public boolean spotCheck() {
-        if (!(p1.eligible(p2) && p2.eligible(p1)))
+        if (!(p1.getCharacter().eligible(p2.getCharacter()) && p2.getCharacter().eligible(p1.getCharacter())))
             return super.spotCheck();
-        if (p1.state == State.inTree) {
-            treeAmbush(p1, p2);
-        } else if (p2.state == State.inTree) {
-            treeAmbush(p2, p1);
-        } else if (p1.state == State.inBushes) {
-            bushAmbush(p1, p2);
-        } else if (p2.state == State.inBushes) {
-            bushAmbush(p2, p1);
-        } else if (p1.state == State.inPass) {
-            passAmbush(p1, p2);
-        } else if (p2.state == State.inPass) {
-            passAmbush(p2, p1);
+        if (p1.getCharacter().state == State.inTree) {
+            treeAmbush(p1.getCharacter(), p2.getCharacter());
+        } else if (p2.getCharacter().state == State.inTree) {
+            treeAmbush(p2.getCharacter(), p1.getCharacter());
+        } else if (p1.getCharacter().state == State.inBushes) {
+            bushAmbush(p1.getCharacter(), p2.getCharacter());
+        } else if (p2.getCharacter().state == State.inBushes) {
+            bushAmbush(p2.getCharacter(), p1.getCharacter());
+        } else if (p1.getCharacter().state == State.inPass) {
+            passAmbush(p1.getCharacter(), p2.getCharacter());
+        } else if (p2.getCharacter().state == State.inPass) {
+            passAmbush(p2.getCharacter(), p1.getCharacter());
         } else {
             return super.spotCheck();
         }
@@ -51,7 +51,7 @@ public class FTCEncounter extends DefaultEncounter {
             victim.addNonCombat(new Bound(victim, 75, "handcuffs"));
         else
             victim.addNonCombat(new Bound(victim, 50, "zip-tie"));
-        if (p1.human() || p2.human()) {
+        if (p1.getCharacter().human() || p2.getCharacter().human()) {
             startFight(attacker, victim);
             fight.setStance(new Pin(attacker, victim));
             String message = "";
@@ -95,7 +95,7 @@ public class FTCEncounter extends DefaultEncounter {
             victim.addNonCombat(new Bound(victim, 75, "handcuffs"));
         else
             victim.addNonCombat(new Bound(victim, 50, "zip-tie"));
-        if (p1.human() || p2.human()) {
+        if (p1.getCharacter().human() || p2.getCharacter().human()) {
             startFight(attacker, victim);
             fight.setStance(new Mount(attacker, victim));
             String message = "";
