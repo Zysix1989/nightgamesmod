@@ -77,7 +77,7 @@ public class DefaultEncounter implements Encounter {
      * campus Actions.
      */
     public boolean spotCheck() {
-        if (p1.getCharacter().eligible(p2.getCharacter()) && p2.getCharacter().eligible(p1.getCharacter())) {
+        if (p1.canStartCombat(p2) && p2.canStartCombat(p1)) {
             eligibleSpotCheck();
             return true;
         } else {
@@ -147,7 +147,7 @@ public class DefaultEncounter implements Encounter {
                     ineligibleNpcCaughtMasturbating(npc);
                 }
 
-            } else if (p1.getCharacter() == human && p1.getCharacter().eligible(p2.getCharacter())) {
+            } else if (p1.getCharacter() == human && p1.canStartCombat(p2)) {
 
                 Global.gui().message("You encounter " + p2.getCharacter().getName() + ", but you still haven't recovered from your last fight.");
             } else if (p1.getCharacter() == human) {
@@ -155,7 +155,7 @@ public class DefaultEncounter implements Encounter {
                                 "You find %s still naked from your last encounter, but %s's not fair game again until %s replaces %s clothes.",
                                 p2.getCharacter().getName(), p2.getCharacter().pronoun(), p2.getCharacter().pronoun(), p2.getCharacter().possessiveAdjective()));
 
-            } else if (!p1.getCharacter().eligible(p2.getCharacter())) {
+            } else if (!p1.canStartCombat(p2)) {
                 Global.gui().message("You encounter " + p1.getCharacter().getName() + ", but you still haven't recovered from your last fight.");
             } else {
                 Global.gui().message(String.format(

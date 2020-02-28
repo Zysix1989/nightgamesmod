@@ -81,7 +81,7 @@ public abstract class Character extends Observable implements Cloneable {
     public Set<Status> removelist;                  //Rename for clarity? - DSM 
     public Set<Status> addlist;                     //Rename for clarity?   -DSM
     private Map<String, Integer> cooldowns;          //May not require this if we add new Skills to characters and they may track their own requirements and cooldowns. - DSM
-    private CopyOnWriteArrayList<String> mercy;     //Can be changed into a flag that is stored in flags. -DSM
+    public CopyOnWriteArrayList<String> mercy;     //Can be changed into a flag that is stored in flags. -DSM
     private Map<Item, Integer> inventory;
     private Map<String, Integer> flags;             //Needs to be more strongly leveraged in mechanics.  -DSM
     protected Item trophy;                          

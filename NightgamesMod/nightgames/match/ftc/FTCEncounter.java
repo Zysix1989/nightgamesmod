@@ -24,7 +24,7 @@ public class FTCEncounter extends DefaultEncounter {
 
     @Override
     public boolean spotCheck() {
-        if (!(p1.getCharacter().eligible(p2.getCharacter()) && p2.getCharacter().eligible(p1.getCharacter())))
+        if (!(p1.canStartCombat(p2) && p2.canStartCombat(p1)))
             return super.spotCheck();
         if (p1.getCharacter().state == State.inTree) {
             treeAmbush(p1.getCharacter(), p2.getCharacter());
