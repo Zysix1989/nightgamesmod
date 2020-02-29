@@ -2613,8 +2613,13 @@ public Character clone() throws CloneNotSupportedException {
 
     /**Flees the encounter.*/
     public void flee(Area location2) {
-        Area[] adjacent = location2.adjacent.toArray(new Area[location2.adjacent.size()]);
-        travel(adjacent[Global.random(adjacent.length)]);
+        var options = location.possibleActions(this);
+        var destinations = options.stream()
+                .filter(action -> action instanceof Move)
+                .map(action -> (Move) action)
+                .map(Move::getDestination)
+                .collect(Collectors.toList());
+        travel(destinations.get(Global.random(destinations.size())));
         location2.endEncounter();
     }
 
