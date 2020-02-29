@@ -2924,7 +2924,7 @@ public Character clone() throws CloneNotSupportedException {
         busy += i;
     }
 
-    public abstract void promptTrap(Encounter fight, Character target, Trap trap);
+    public abstract void promptTrap(Encounter fight, Character target, Trap.Instance trap);
 
     public int lvlBonus(Character opponent) {
         if (opponent.getLevel() > getLevel()) {

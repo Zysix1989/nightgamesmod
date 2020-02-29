@@ -1,18 +1,7 @@
 package nightgames.pet;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import nightgames.characters.Character;
-import nightgames.characters.Decider;
-import nightgames.characters.Emotion;
-import nightgames.characters.Growth;
-import nightgames.characters.Trait;
-import nightgames.characters.WeightedSkill;
+import nightgames.characters.*;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
@@ -28,6 +17,9 @@ import nightgames.skills.Tactics;
 import nightgames.status.Slimed;
 import nightgames.status.Status;
 import nightgames.trap.Trap;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class PetCharacter extends Character {
     
@@ -295,7 +287,7 @@ public class PetCharacter extends Character {
     public void emote(Emotion emo, int amt) {}
 
     @Override
-    public void promptTrap(Encounter fight, Character target, Trap trap) {}
+    public void promptTrap(Encounter fight, Character target, Trap.Instance trap) {}
 
     @Override
     public void counterattack(Character target, Tactics type, Combat c) {}

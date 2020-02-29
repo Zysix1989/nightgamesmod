@@ -14,7 +14,7 @@ public interface Encounter {
 
     void intrude(Character intruder, Character assist);
 
-    void trap(Character opportunist, Character target, Trap trap);
+    void trap(Character opportunist, Character target, Trap.Instance trap);
 
     boolean spotCheck();
 
@@ -22,7 +22,7 @@ public interface Encounter {
 
     void parse(Encs choice, Character primary, Character opponent);
 
-    void parse(Encs choice, Character primary, Character opponent, Trap trap);
+    void parse(Encs choice, Character primary, Character opponent, Trap.Instance trap);
 
     void watch();
 }

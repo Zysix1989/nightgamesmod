@@ -134,7 +134,7 @@ public class Area implements Serializable {
         return true;
     }
     
-    public boolean opportunity(Character target, Trap trap) {
+    public boolean opportunity(Character target, Trap.Instance trap) {
         var targetParticipant = Global.getMatch().findParticipant(target);
         if (present.size() > 1) {
             for (Participant opponent : present) {

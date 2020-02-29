@@ -28,13 +28,13 @@ public class AphrodisiacTrap extends Trap {
     }
 
     @Override
-    public void trigger(Participant target) {
+    public void trigger(Participant target, Instance instance) {
         if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
             if (target.getCharacter().human()) {
                 Global.gui().message(
                                 "You spot a liquid spray trap in time to avoid setting it off. You carefully manage to disarm the trap and pocket the potion.");
                 target.getCharacter().gain(Item.Aphrodisiac);
-                target.getCharacter().location().remove(this);
+                target.getCharacter().location().remove(instance);
             }
         } else {
             if (target.getCharacter().human()) {
@@ -47,7 +47,7 @@ public class AphrodisiacTrap extends Trap {
                                                 + "she'll start masturbating even if you don't do anything.");
             }
             target.getCharacter().addNonCombat(new Horny(target.getCharacter(), (30 + getStrength()) / 10, 10, "Aphrodisiac Trap"));
-            target.getCharacter().location().opportunity(target.getCharacter(), this);
+            target.getCharacter().location().opportunity(target.getCharacter(), instance);
         }
     }
 
@@ -76,9 +76,9 @@ public class AphrodisiacTrap extends Trap {
     }
 
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim) {
+    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
         victim.addNonCombat(new Flatfooted(victim, 1));
-        attacker.location().remove(this);
-        return super.capitalize(attacker, victim);
+        attacker.location().remove(instance);
+        return super.capitalize(attacker, victim, instance);
     }
 }

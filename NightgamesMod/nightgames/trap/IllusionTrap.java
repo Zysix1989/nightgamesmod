@@ -27,7 +27,7 @@ public class IllusionTrap extends Trap {
     }
 
     @Override
-    public void trigger(Participant target) {
+    public void trigger(Participant target, Instance instance) {
         if (target.getCharacter().human()) {
             Global.gui().message(
                             "You run into a girl you don't recognize, but she's beautiful and completely naked. You don't have a chance to wonder where she came from, because "
@@ -40,7 +40,7 @@ public class IllusionTrap extends Trap {
             target.getCharacter().tempt(25 + getStrength());
         }
         target.getCharacter().tempt(25 + getStrength());
-        target.getCharacter().location().opportunity(target.getCharacter(), this);
+        target.getCharacter().location().opportunity(target.getCharacter(), instance);
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of();
@@ -67,10 +67,10 @@ public class IllusionTrap extends Trap {
     }
 
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim) {
+    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
         victim.addNonCombat(new Flatfooted(victim, 1));
-        victim.location().remove(this);
-        return super.capitalize(attacker, victim);
+        victim.location().remove(instance);
+        return super.capitalize(attacker, victim, instance);
     }
 
 }

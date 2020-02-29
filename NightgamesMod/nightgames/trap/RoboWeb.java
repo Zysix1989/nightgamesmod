@@ -22,7 +22,7 @@ public class RoboWeb extends Trap {
     }
 
     @Override
-    public void trigger(Participant target) {
+    public void trigger(Participant target, Instance instance) {
         if (target.getCharacter().human()) {
             String msg = "";
             msg += "The instant you feel your foot catch on a tripwire, you know something"
@@ -61,8 +61,8 @@ public class RoboWeb extends Trap {
                             Global.capitalizeFirstLetter(target.getCharacter().pronoun())));
         }
         target.getCharacter().outfit.undress();
-        target.getCharacter().addNonCombat(new RoboWebbed(target.getCharacter(), 100 + getStrength(), this));
-        target.getCharacter().location().opportunity(target.getCharacter(), this);
+        target.getCharacter().addNonCombat(new RoboWebbed(target.getCharacter(), 100 + getStrength(), instance));
+        target.getCharacter().location().opportunity(target.getCharacter(), instance);
         target.getCharacter().location().alarm = true;
     }
 
@@ -86,9 +86,9 @@ public class RoboWeb extends Trap {
     }
     
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim) {
-        attacker.location().remove(this);
-        return super.capitalize(attacker, victim);
+    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
+        attacker.location().remove(instance);
+        return super.capitalize(attacker, victim, instance);
     }
 
 }

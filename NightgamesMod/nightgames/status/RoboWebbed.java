@@ -1,16 +1,15 @@
 package nightgames.status;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.trap.Trap;
 
+import java.util.Optional;
+
 public class RoboWebbed extends Bound {
-    public RoboWebbed(Character affected, double dc, Trap roboWeb) {
+    public RoboWebbed(Character affected, double dc, Trap.Instance roboWeb) {
         super("RoboWebbed", affected, dc, "robo-web", roboWeb);
     }
 

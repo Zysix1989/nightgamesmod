@@ -25,12 +25,12 @@ public class Snare extends Trap {
     }
 
     @Override
-    public void trigger(Participant target) {
+    public void trigger(Participant target, Instance instance) {
         if (target.getCharacter().check(Attribute.Perception, 25 + getStrength() + target.getCharacter().baseDisarm())) {
             if (target.getCharacter().human()) {
                 Global.gui().message("You notice a snare on the floor in front of you and manage to disarm it safely");
             }
-            target.getCharacter().location().remove(this);
+            target.getCharacter().location().remove(instance);
         } else {
             target.getCharacter().addNonCombat(new Bound(target.getCharacter(), 30 + getStrength() / 2, "snare"));
             if (target.getCharacter().human()) {
@@ -40,7 +40,7 @@ public class Snare extends Trap {
                 Global.gui().message(target.getCharacter().getName()
                                 + " enters the room, sets off your snare, and ends up thoroughly tangled in rope.");
             }
-            target.getCharacter().location().opportunity(target.getCharacter(), this);
+            target.getCharacter().location().opportunity(target.getCharacter(), instance);
         }
     }
 
@@ -62,8 +62,8 @@ public class Snare extends Trap {
     }
 
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim) {
-        attacker.location().remove(this);
-        return super.capitalize(attacker, victim);
+    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
+        attacker.location().remove(instance);
+        return super.capitalize(attacker, victim, instance);
     }
 }

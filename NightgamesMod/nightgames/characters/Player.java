@@ -763,7 +763,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void promptTrap(Encounter enc, Character target, Trap trap) {
+    public void promptTrap(Encounter enc, Character target, Trap.Instance trap) {
         gui.message("Do you want to take the opportunity to ambush <b>" + target.getName() + "</b>?");
         assessOpponent(target);
         gui.message("<br/>");

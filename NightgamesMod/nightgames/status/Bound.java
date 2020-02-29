@@ -1,9 +1,6 @@
 package nightgames.status;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
@@ -12,19 +9,21 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.trap.Trap;
 
+import java.util.Optional;
+
 public class Bound extends Status {
     protected double toughness;
     protected String binding;
-    protected Optional<Trap> trap;
+    protected Optional<Trap.Instance> trap;
 
     public Bound(Character affected, double dc, String binding) {
         this(affected, dc, binding, null);
     }
-    public Bound(Character affected, double dc, String binding, Trap trap) {
+    public Bound(Character affected, double dc, String binding, Trap.Instance trap) {
         this("Bound", affected, dc, binding, trap);
     }
 
-    public Bound(String type, Character affected, double dc, String binding, Trap trap) {
+    public Bound(String type, Character affected, double dc, String binding, Trap.Instance trap) {
         super(type, affected);
         toughness = dc;
         this.binding = binding;
@@ -138,7 +137,7 @@ public class Bound extends Status {
     public void tick(Combat c) {
         if (c == null && trap.isPresent()) {
             if (affected.human()) {
-                Global.gui().message(Global.format("{self:SUBJECT-ACTION:are|is} still trapped by the %s.", affected, Global.noneCharacter(), trap.get().getName().toLowerCase()));
+                Global.gui().message(Global.format("{self:SUBJECT-ACTION:are|is} still trapped by the %s.", affected, Global.noneCharacter(), trap.get().getTrap().getName().toLowerCase()));
             }
             affected.location().opportunity(affected, trap.get());
         }

@@ -27,7 +27,7 @@ public class EnthrallingTrap extends Trap {
     }
 
     @Override
-    public void trigger(Participant target) {
+    public void trigger(Participant target, Instance instance) {
         if (target.getCharacter().human()) {
             if (target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm())
                             || !target.getCharacter().eligible(owner) || !owner.eligible(target.getCharacter())) {
@@ -35,7 +35,7 @@ public class EnthrallingTrap extends Trap {
                                 + ", you notice a pentagram drawn on the floor,"
                                 + " appearing to have been drawn in cum. Wisely," + " you avoid stepping into it.");
             } else {
-                target.getCharacter().location().opportunity(target.getCharacter(), this);
+                target.getCharacter().location().opportunity(target.getCharacter(), instance);
                 Global.gui().message("As you step across the " + target.getCharacter().location().name
                                 + ", you are suddenly surrounded by purple flames. Your mind "
                                 + "goes blank for a moment, leaving you staring into the distance."
@@ -55,7 +55,7 @@ public class EnthrallingTrap extends Trap {
             }
             //TODO: Currently, being Enthralled and moving to a new location doesn't use a turn of the effect, meaning that you still lose all those turns once you are in combat. 
             target.getCharacter().addNonCombat(new Enthralled(target.getCharacter(), owner, 5 + getStrength() / 20));
-            target.getCharacter().location().opportunity(target.getCharacter(), this);
+            target.getCharacter().location().opportunity(target.getCharacter(), instance);
         }
     }
 
@@ -80,10 +80,10 @@ public class EnthrallingTrap extends Trap {
     }
 
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim) {
+    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
         victim.addNonCombat(new Flatfooted(victim, 1));
-        attacker.location().remove(this);
-        return super.capitalize(attacker, victim);
+        attacker.location().remove(instance);
+        return super.capitalize(attacker, victim, instance);
     }
 
 }

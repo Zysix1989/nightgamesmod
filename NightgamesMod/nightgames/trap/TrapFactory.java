@@ -18,10 +18,10 @@ public interface TrapFactory {
             try {
                 Trap newTrap = trap.getClass().newInstance();
                 newTrap.setStrength(owner);
-                owner.location().place(newTrap);
-                String message = newTrap.setup(owner);
+                var result = newTrap.instantiate(owner);
+                owner.location().place(result.instance);
                 if (owner.human()) {
-                    Global.gui().message(message);
+                    Global.gui().message(result.message);
                 }
             } catch (InstantiationException | IllegalAccessException e) {
                 throw new RuntimeException(e);

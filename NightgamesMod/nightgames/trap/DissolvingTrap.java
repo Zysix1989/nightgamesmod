@@ -23,13 +23,13 @@ public class DissolvingTrap extends Trap {
     }
 
     @Override
-    public void trigger(Participant target) {
+    public void trigger(Participant target, Instance instance) {
         if (!target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm())) {
             if (target.getCharacter().human()) {
                 Global.gui().message(
                                 "You spot a liquid spray trap in time to avoid setting it off. You carefully manage to disarm the trap and pocket the potion.");
                 target.getCharacter().gain(Item.DisSol);
-                target.getCharacter().location().remove(this);
+                target.getCharacter().location().remove(instance);
             }
         } else {
             if (target.getCharacter().human()) {
@@ -53,7 +53,7 @@ public class DissolvingTrap extends Trap {
                 }
             }
             target.getCharacter().nudify();
-            target.getCharacter().location().opportunity(target.getCharacter(), this);
+            target.getCharacter().location().opportunity(target.getCharacter(), instance);
         }
     }
 
@@ -82,8 +82,8 @@ public class DissolvingTrap extends Trap {
     }
 
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim) {
+    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
         victim.addNonCombat(new Flatfooted(victim, 1));
-        return super.capitalize(attacker, victim);
+        return super.capitalize(attacker, victim, instance);
     }
 }

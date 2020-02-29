@@ -23,7 +23,7 @@ public class StripMine extends Trap {
     }
 
     @Override
-    public void trigger(Participant target) {
+    public void trigger(Participant target, Instance instance) {
         if (target.getCharacter().human()) {
             if (target.getCharacter().mostlyNude()) {
                 Global.gui().message(
@@ -38,7 +38,7 @@ public class StripMine extends Trap {
                             + target.getCharacter().getName() + ", looking surprised.");
         }
         IntStream.range(0, 2 + Global.random(4)).forEach(i -> target.getCharacter().shredRandom());
-        target.getCharacter().location().opportunity(target.getCharacter(), this);
+        target.getCharacter().location().opportunity(target.getCharacter(), instance);
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Tripwire, 1, Item.Battery, 3);
@@ -59,10 +59,10 @@ public class StripMine extends Trap {
     }
 
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim) {
+    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
         victim.addNonCombat(new Flatfooted(victim, 1));
-        attacker.location().remove(this);
-        return super.capitalize(attacker, victim);
+        attacker.location().remove(instance);
+        return super.capitalize(attacker, victim, instance);
     }
 
 }

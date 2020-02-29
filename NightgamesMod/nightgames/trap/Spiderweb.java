@@ -27,7 +27,7 @@ public class Spiderweb extends Trap {
     }
 
     @Override
-    public void trigger(Participant target) {
+    public void trigger(Participant target, Instance instance) {
         if (target.getCharacter().human()) {
             if (target.getCharacter().mostlyNude()) {
                 Global.gui().message(
@@ -47,7 +47,7 @@ public class Spiderweb extends Trap {
         }
         target.getCharacter().state = State.webbed;
         target.getCharacter().delay(1);
-        target.getCharacter().location().opportunity(target.getCharacter(), this);
+        target.getCharacter().location().opportunity(target.getCharacter(), instance);
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Rope, 4,
@@ -71,12 +71,12 @@ public class Spiderweb extends Trap {
     }
 
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim) {
-        onSpiderwebDefeat(attacker, victim, this);
-        return super.capitalize(attacker, victim);
+    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
+        onSpiderwebDefeat(attacker, victim, instance);
+        return super.capitalize(attacker, victim, instance);
     }
     
-    public static void onSpiderwebDefeat(Character attacker, Character victim, Spiderweb trap) {
+    public static void onSpiderwebDefeat(Character attacker, Character victim, Trap.Instance trap) {
         printSpiderwebLines(attacker, victim);
 
         // This code is identical to the encounter defeat code. If there are more use

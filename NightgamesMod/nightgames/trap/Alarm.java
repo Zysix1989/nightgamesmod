@@ -19,7 +19,7 @@ public class Alarm extends Trap {
     }
 
     @Override
-    public void trigger(Participant target) {
+    public void trigger(Participant target, Trap.Instance instance) {
         if (target.getCharacter().human()) {
             Global.gui().message(
                             "You're walking through the eerily quiet campus, when a loud beeping almost makes you jump out of your skin. You realize the beeping is "
@@ -28,7 +28,7 @@ public class Alarm extends Trap {
             Global.gui().message(target.getCharacter().getName() + " Sets off your alarm, giving away her presence.");
         }
         target.getCharacter().location().alarm = true;
-        target.getCharacter().location().remove(this);
+        target.getCharacter().location().remove(instance);
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Tripwire, 1,

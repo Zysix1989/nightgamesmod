@@ -27,7 +27,7 @@ public class SpringTrap extends Trap {
     }
 
     @Override
-    public void trigger(Participant target) {
+    public void trigger(Participant target, Instance instance) {
         if (!target.getCharacter().check(Attribute.Perception, 24 - target.getCharacter().get(Attribute.Perception) + target.getCharacter().baseDisarm())) {
             if (target.getCharacter().human()) {
                 Global.gui().message(
@@ -49,12 +49,12 @@ public class SpringTrap extends Trap {
                 target.getCharacter().pain(null, null, m);
                 target.getCharacter().addNonCombat(new Winded(target.getCharacter()));
             }
-            target.getCharacter().location().opportunity(target.getCharacter(), this);
+            target.getCharacter().location().opportunity(target.getCharacter(), instance);
         } else if (target.getCharacter().human()) {
             Global.gui().message(
                             "You spot a suspicious mechanism on the floor and prod it from a safe distance. A spring loaded line shoots up to groin height, which would have been "
                                             + "very unpleasant if you had kept walking.");
-            target.getCharacter().location().remove(this);
+            target.getCharacter().location().remove(instance);
         }
     }
 
@@ -79,9 +79,9 @@ public class SpringTrap extends Trap {
     }
 
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim) {
+    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
         victim.addNonCombat(new Flatfooted(victim, 1));
-        attacker.location().remove(this);
+        attacker.location().remove(instance);
         return Optional.of(new StandingOver(attacker, victim));
     }
 

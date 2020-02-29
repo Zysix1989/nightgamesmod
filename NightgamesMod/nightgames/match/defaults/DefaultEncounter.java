@@ -11,7 +11,6 @@ import nightgames.items.Item;
 import nightgames.match.Encounter;
 import nightgames.match.Participant;
 import nightgames.status.*;
-import nightgames.trap.Spiderweb;
 import nightgames.trap.Trap;
 
 import java.util.Optional;
@@ -432,7 +431,7 @@ public class DefaultEncounter implements Encounter {
     protected void spider(Character attacker, Character target) {
         attacker.gainXP(attacker.getVictoryXP(target));
         target.gainXP(target.getDefeatXP(attacker));
-        Spiderweb.onSpiderwebDefeat(attacker, target, (Spiderweb) location.get(Spiderweb.class));
+        // Spiderweb.onSpiderwebDefeat(attacker, target, (Spiderweb) location.get(Spiderweb.class));  TODO: Come back to this disaster
     }
 
     public void intrude(Character intruder, Character assist) {
@@ -473,7 +472,7 @@ public class DefaultEncounter implements Encounter {
         location.endEncounter();
     }
 
-    public void trap(Character opportunist, Character target, Trap trap) {
+    public void trap(Character opportunist, Character target, Trap.Instance trap) {
         if (opportunist.human()) {
             Global.gui()
                   .message("You leap out of cover and catch " + target.getName() + " by surprise.");
@@ -481,7 +480,7 @@ public class DefaultEncounter implements Encounter {
             Global.gui()
                   .message("Before you have a chance to recover, " + opportunist.getName() + " pounces on you.");
         }
-        var startingPosition = trap.capitalize(opportunist, target);
+        var startingPosition = trap.getTrap().capitalize(opportunist, target, trap);
         startingPosition.ifPresentOrElse(
                 sp -> fight = new Combat(opportunist, target, opportunist.location(), sp),
                 () -> fight = new Combat(opportunist, target, opportunist.location()));
@@ -494,7 +493,7 @@ public class DefaultEncounter implements Encounter {
         parse(choice, self, target, null);
     }
 
-    public void parse(Encs choice, Character self, Character target, Trap trap) {
+    public void parse(Encs choice, Character self, Character target, Trap.Instance trap) {
         switch (choice) {
             case ambush:
                 ambush(self, target);

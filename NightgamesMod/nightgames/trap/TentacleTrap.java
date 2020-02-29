@@ -23,7 +23,7 @@ public class TentacleTrap extends Trap {
     }
 
     @Override
-    public void trigger(Participant target) {
+    public void trigger(Participant target, Instance instance) {
         if (target.getCharacter().mostlyNude()) {
             if (target.getCharacter().human()) {
                 Global.gui().message(
@@ -42,7 +42,7 @@ public class TentacleTrap extends Trap {
             target.getCharacter().tempt(target.getCharacter().getArousal().max());
             target.getCharacter().addNonCombat(new Oiled(target.getCharacter()));
             target.getCharacter().addNonCombat(new Hypersensitive(target.getCharacter()));
-            target.getCharacter().location().opportunity(target.getCharacter(), this);
+            target.getCharacter().location().opportunity(target.getCharacter(), instance);
         } else {
             if (target.getCharacter().human()) {
                 Global.gui().message(
@@ -76,9 +76,9 @@ public class TentacleTrap extends Trap {
     }
 
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim) {
+    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
         victim.addNonCombat(new Flatfooted(victim, 1));
-        attacker.location().remove(this);
-        return super.capitalize(attacker, victim);
+        attacker.location().remove(instance);
+        return super.capitalize(attacker, victim, instance);
     }
 }
