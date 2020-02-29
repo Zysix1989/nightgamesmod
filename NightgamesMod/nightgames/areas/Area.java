@@ -1,6 +1,7 @@
 package nightgames.areas;
 
 import nightgames.actions.Action;
+import nightgames.actions.Move;
 import nightgames.actions.Movement;
 import nightgames.characters.Character;
 import nightgames.global.Global;
@@ -45,15 +46,15 @@ public class Area implements Serializable {
 
     public void link(Area adj) {
         adjacent.add(adj);
-        actionFactories.add(ActionFactory.ActionFactoryInstance.movement(adj));
+        actionFactories.add(new ActionFactory.ActionFactoryInstance(Move.normal(adj)));
     }
 
     public void shortcut(Area sc) {
-        actionFactories.add(ActionFactory.ActionFactoryInstance.shortcut(sc));
+        actionFactories.add(new ActionFactory.ActionFactoryInstance(Move.shortcut(sc)));
     }
 
     public void jump(Area adj){
-        actionFactories.add(ActionFactory.ActionFactoryInstance.ninjaLeap(adj));
+        actionFactories.add(new ActionFactory.ActionFactoryInstance(Move.ninjaLeap(adj)));
     }
 
     public boolean open() {

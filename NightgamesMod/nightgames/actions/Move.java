@@ -1,6 +1,7 @@
 package nightgames.actions;
 
 import nightgames.areas.Area;
+import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 
 public class Move extends Action {
@@ -13,10 +14,28 @@ public class Move extends Action {
     private Area destination;
     private SkillCheck skillCheck;
 
-    public Move(Area destination, String name, SkillCheck check) {
+    private Move(Area destination, String name, SkillCheck check) {
         super(name);
         this.destination = destination;
         this.skillCheck = check;
+    }
+
+    public static Move normal(Area adjacentRoom) {
+        return new Move(adjacentRoom,
+                "Move(" + adjacentRoom.name + ")",
+                ch -> !ch.bound());
+    }
+
+    public static Move shortcut(Area adjacentRoom) {
+        return new Move(adjacentRoom,
+                "Take shortcut to " + adjacentRoom.name,
+                ch -> ch.getPure(Attribute.Cunning) >= 28 && !ch.bound());
+    }
+
+    public static Move ninjaLeap(Area adjacentRoom) {
+        return new Move(adjacentRoom,
+                "Ninja Leap("+adjacentRoom.name+")",
+                ch -> ch.getPure(Attribute.Ninjutsu)>=5 && !ch.bound());
     }
 
     @Override
