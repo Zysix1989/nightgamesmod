@@ -16,7 +16,7 @@ public class Scavenge extends Action {
 
     @Override
     public boolean usable(Character user) {
-        return user.location().materials() && !user.bound();
+        return !user.bound();
     }
 
     @Override

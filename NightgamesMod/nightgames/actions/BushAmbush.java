@@ -16,8 +16,7 @@ public class BushAmbush extends Action {
 
     @Override
     public boolean usable(Character user) {
-        return user.location().id() == Movement.ftcPath
-            && (user.get(Attribute.Cunning) >= 20 || user.get(Attribute.Animism) >= 10)
+        return (user.get(Attribute.Cunning) >= 20 || user.get(Attribute.Animism) >= 10)
             && user.state != State.inBushes && !user.bound();
     }
 
