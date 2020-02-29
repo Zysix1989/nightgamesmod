@@ -14,14 +14,10 @@ public interface ActionFactory {
     Optional<Action> createActionFor(Character c);
 
     class Movement implements ActionFactory {
-        private final Area adjacentRoom;
-        private final String label;
-        private final Move.SkillCheck skillCheck;
+        private final Action action;
 
         private Movement(Area adjacentRoom, String label, Move.SkillCheck check) {
-            this.adjacentRoom = adjacentRoom;
-            this.label = label;
-            this.skillCheck = check;
+            this.action = new Move(adjacentRoom, label, check);
         }
 
         public static Movement movement(Area adjacentRoom) {
@@ -44,9 +40,6 @@ public interface ActionFactory {
                     ch -> ch.getPure(Attribute.Ninjutsu)>=5 && !ch.bound());
         }
         public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.Move(adjacentRoom,
-                    label,
-                    skillCheck);
             if (action.usable(c)) {
                 return Optional.of(action);
             }
