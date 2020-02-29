@@ -24,6 +24,10 @@ public abstract class Trap implements Deployable {
 
     public abstract boolean requirements(Character owner);
 
+    protected final void basicSetup(Character owner) {
+        this.owner = owner;
+    }
+
     public abstract String setup(Character owner);
 
     public boolean resolve(Participant active) {

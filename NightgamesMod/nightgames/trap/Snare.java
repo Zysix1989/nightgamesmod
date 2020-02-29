@@ -50,7 +50,7 @@ public class Snare extends Trap {
 
     @Override
     public String setup(Character owner) {
-        this.owner = owner;
+        basicSetup(owner);
         owner.consume(Item.Tripwire, 1);
         owner.consume(Item.Rope, 1);
         return "You carefully rig up a complex and delicate system of ropes on a tripwire. In theory, it should be able to bind whoever triggers it.";

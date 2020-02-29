@@ -52,7 +52,7 @@ public class StripMine extends Trap {
 
     @Override
     public String setup(Character owner) {
-        this.owner = owner;
+        basicSetup(owner);
         owner.consume(Item.Tripwire, 1);
         owner.consume(Item.Battery, 3);
         return "Using the techniques Jett showed you, you rig up a one-time-use clothing destruction device.";

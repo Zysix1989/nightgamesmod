@@ -7,11 +7,11 @@ import nightgames.items.Item;
 import nightgames.match.Participant;
 
 public class Alarm extends Trap {
-    
+
     public Alarm() {
         this(null);
     }
-    
+
     public Alarm(Character owner) {
         super("Alarm", owner);
     }
@@ -36,7 +36,7 @@ public class Alarm extends Trap {
 
     @Override
     public String setup(Character user) {
-        owner = user;
+        basicSetup(user);
         owner.consume(Item.Tripwire, 1);
         owner.consume(Item.Phone, 1);
         if (user.human()) {

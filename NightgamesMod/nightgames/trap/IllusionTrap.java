@@ -53,7 +53,7 @@ public class IllusionTrap extends Trap {
 
     @Override
     public String setup(Character owner) {
-        this.owner = owner;
+        basicSetup(owner);
         owner.spendMojo(null, 15);
         return "You cast a simple spell that will trigger when someone approaches; an illusion will seduce the trespasser.";
     }

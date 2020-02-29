@@ -70,7 +70,7 @@ public class EnthrallingTrap extends Trap {
 
     @Override
     public String setup(Character owner) {
-        this.owner = owner;
+        basicSetup(owner);
         owner.consume(Item.semen, 1);
         return "You pop open a bottle of cum and use its contents to draw"
                         + " a pentagram on the floor, all the while speaking"

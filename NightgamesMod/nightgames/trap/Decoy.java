@@ -41,7 +41,7 @@ public class Decoy extends Trap {
 
     @Override
     public String setup(Character owner) {
-        this.owner = owner;
+        basicSetup(owner);
         owner.consume(Item.Phone, 1);
         if (owner.human()) {
             return "Your program a phone to play a prerecorded audio track five minutes from now. It should be noticable from a reasonable distance until someone switches it "

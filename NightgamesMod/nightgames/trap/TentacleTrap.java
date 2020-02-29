@@ -68,7 +68,7 @@ public class TentacleTrap extends Trap {
 
     @Override
     public String setup(Character owner) {
-        this.owner = owner;
+        basicSetup(owner);
         owner.consume(Item.Totem, 1);
         return "You need to activate this phallic totem before it can be used as a trap. You stroke the small totem with your hand, which is... weird, but effective. You "
                         + "quickly place the totem someplace out of sight and hurriedly get out of range. You're not sure whether this will actually discriminate before attacking.";

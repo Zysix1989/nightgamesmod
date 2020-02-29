@@ -64,7 +64,7 @@ public class SpringTrap extends Trap {
 
     @Override
     public String setup(Character owner) {
-        this.owner = owner;
+        basicSetup(owner);
         owner.consume(Item.Rope, 1);
         owner.consume(Item.Spring, 1);
         return "You manage to rig up a makeshift booby trap, which should prove quite unpleasant to any who stumbles upon it.";

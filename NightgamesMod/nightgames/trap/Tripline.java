@@ -56,7 +56,7 @@ public class Tripline extends Trap {
 
     @Override
     public String setup(Character owner) {
-        this.owner = owner;
+        basicSetup(owner);
         owner.consume(Item.Rope, 1);
         return "You run a length of rope at ankle height. It should trip anyone who isn't paying much attention.";
     }

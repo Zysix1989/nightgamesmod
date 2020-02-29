@@ -58,7 +58,7 @@ public class AphrodisiacTrap extends Trap {
 
     @Override
     public String setup(Character owner) {
-        this.owner = owner;
+        basicSetup(owner);
         owner.consume(Item.Tripwire, 1);
         owner.consume(Item.Aphrodisiac, 1);
         owner.consume(Item.Sprayer, 1);

@@ -61,7 +61,7 @@ public class Spiderweb extends Trap {
 
     @Override
     public String setup(Character owner) {
-        this.owner = owner;
+        basicSetup(owner);
         owner.consume(Item.Tripwire, 1);
         owner.consume(Item.Rope, 4);
         owner.consume(Item.Spring, 2);
