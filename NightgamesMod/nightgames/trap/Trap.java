@@ -32,7 +32,7 @@ public abstract class Trap implements Deployable {
 
     protected final void basicSetup(Character owner) {
         this.owner = owner;
-        requiredItems().entrySet().forEach(entry -> owner.consume(entry.getKey(), entry.getValue()));
+        requiredItems().forEach(owner::consume);
     }
 
     public abstract String setup(Character owner);
