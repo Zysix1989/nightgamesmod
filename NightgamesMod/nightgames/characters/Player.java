@@ -256,12 +256,10 @@ public class Player extends Character {
     }
 
     private void detect() {
-        for (Area adjacent : location.adjacent) {
-            if (adjacent.ping(get(Attribute.Perception))) {
-                gui.message("You hear something in the <b>" + adjacent.name + "</b>.");
-                adjacent.setPinged(true);
-            }
-        }
+        location.detectNeighbors(get(Attribute.Perception)).forEach(room -> {
+            gui.message("You hear something in the <b>" + room.name + "</b>.");
+            room.setPinged(true);
+        });
     }
 
     private void presentFightFlightChoice(Character opponent, ActionListener fightCallback, ActionListener flightCallback) {

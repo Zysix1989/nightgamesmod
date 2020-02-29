@@ -20,7 +20,7 @@ public class Area implements Serializable {
      */
     private static final long serialVersionUID = -1372128249588089014L;
     public String name;
-    public HashSet<Area> adjacent = new HashSet<>();
+    private HashSet<Area> adjacent = new HashSet<>();
     private ArrayList<Participant> present = new ArrayList<>();
     public String description;
     public Encounter fight;
@@ -98,6 +98,11 @@ public class Area implements Serializable {
             }
         }
         return alarm;
+    }
+
+    // returns neighboring rooms that make noise
+    public Set<Area> detectNeighbors(int perception) {
+        return adjacent.stream().filter(area -> area.ping(perception)).collect(Collectors.toSet());
     }
 
     public void enter(Character c) {

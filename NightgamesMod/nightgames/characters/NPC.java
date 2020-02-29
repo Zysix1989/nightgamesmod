@@ -1,7 +1,6 @@
 package nightgames.characters;
 
 import nightgames.actions.*;
-import nightgames.areas.Area;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.custom.CharacterLine;
@@ -454,11 +453,7 @@ public class NPC extends Character {
                 }
             }
             if (!has(Trait.immobile) && moves.isEmpty()) {
-                for (Area path : location.adjacent) {
-                    if (path.ping(get(Attribute.Perception))) {
-                        radar.add(path.id());
-                    }
-                }
+                location.detectNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
                 moves.addAll(location.possibleActions(this));
             }
             pickAndDoAction(allowedActions(), moves, radar);
