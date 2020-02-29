@@ -58,4 +58,37 @@ public interface ActionFactory {
             return Optional.empty();
         }
     }
+
+    class BushAmbush implements ActionFactory {
+        @Override
+        public Optional<Action> createActionFor(Character c) {
+            var action = new nightgames.actions.BushAmbush();
+            if (action.usable(c)) {
+                return Optional.of(action);
+            }
+            return Optional.empty();
+        }
+    }
+
+    class PassAmbush implements ActionFactory {
+        @Override
+        public Optional<Action> createActionFor(Character c) {
+            var action = new nightgames.actions.PassAmbush();
+            if (action.usable(c)) {
+                return Optional.of(action);
+            }
+            return Optional.empty();
+        }
+    }
+
+    class TreeAmbush implements ActionFactory {
+        @Override
+        public Optional<Action> createActionFor(Character c) {
+            var action = new nightgames.actions.TreeAmbush();
+            if (action.usable(c)) {
+                return Optional.of(action);
+            }
+            return Optional.empty();
+        }
+    }
 }

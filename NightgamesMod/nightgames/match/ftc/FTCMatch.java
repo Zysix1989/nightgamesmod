@@ -1,6 +1,7 @@
 package nightgames.match.ftc;
 
 import nightgames.actions.Movement;
+import nightgames.areas.ActionFactory;
 import nightgames.areas.Area;
 import nightgames.areas.AreaAttribute;
 import nightgames.characters.Character;
@@ -207,6 +208,10 @@ public class FTCMatch extends Match {
         link(oak, monument);
         link(dump, waterfall);
         link(glade, lodge);
+
+        path.getActionFactories().add(new ActionFactory.BushAmbush());
+        pass.getActionFactories().add(new ActionFactory.PassAmbush());
+        trail.getActionFactories().add(new ActionFactory.TreeAmbush());
     }
 
     private void link(Area hub, Area... areas) {
