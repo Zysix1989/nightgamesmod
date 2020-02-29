@@ -45,12 +45,8 @@ public class Decoy extends Trap {
     @Override
     public String setup(Character owner) {
         basicSetup(owner);
-        if (owner.human()) {
-            return "Your program a phone to play a prerecorded audio track five minutes from now. It should be noticable from a reasonable distance until someone switches it "
-                            + "off.";
-        } else {
-            return null;
-        }
+        return "Your program a phone to play a prerecorded audio track five minutes from now. It should be noticable " +
+                "from a reasonable distance until someone switches it off.";
     }
 
 }

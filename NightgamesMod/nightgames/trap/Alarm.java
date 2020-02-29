@@ -41,11 +41,7 @@ public class Alarm extends Trap {
     @Override
     public String setup(Character user) {
         basicSetup(user);
-        if (user.human()) {
-            return "You rig up a disposable phone to a tripwire. When someone trips the wire, it should set of the phone's alarm.";
-        } else {
-            return "";
-        }
+        return "You rig up a disposable phone to a tripwire. When someone trips the wire, it should set of the phone's alarm.";
     }
 
     @Override
