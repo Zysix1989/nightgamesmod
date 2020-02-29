@@ -132,7 +132,7 @@ public class FTCMatch extends Match {
                         "You are at the edge of a small pond surrounded"
                                         + " by shrubbery. You could imagine taking a quick dip here, but it's a"
                                         + " little risky.",
-                        Movement.ftcPond, Set.of(AreaAttribute.Bathe));
+                        Movement.ftcPond);
         Area glade = new Area("Glade",
                         "You are in a glade under a canopy of tall trees. It's"
                                         + " quite pretty, really. Almost a shame to defile it with the debauchery"
@@ -142,7 +142,7 @@ public class FTCMatch extends Match {
                         "You are in a small cabin in the woods. There are lots"
                                         + " of tools here, and if you have the ingredients you could probably make"
                                         + " some decent traps with them.",
-                        Movement.ftcCabin, Set.of(AreaAttribute.Materials, AreaAttribute.Recharge));
+                        Movement.ftcCabin);
         Area trail = new Area("Trail",
                         "You are following a trail along some relatively"
                                         + " short trees. If you've got the upper body strength, you could"
@@ -152,7 +152,7 @@ public class FTCMatch extends Match {
                         "You are in a quaint wooden lodge. There are numerous"
                                         + " herbs and chemicals here, and you should be able to mix up some good"
                                         + " stuff.",
-                        Movement.ftcLodge, Set.of(AreaAttribute.Potions));
+                        Movement.ftcLodge);
         Area hill = new Area("Hill",
                         "You are on top of a hill overlooking a part of the forest."
                                         + " If you look closely, you might be able to spot other competitors from here.",
@@ -164,7 +164,7 @@ public class FTCMatch extends Match {
         Area oak = new Area("Oak",
                         "You are standing under a tall, broad oak. There's something about"
                                         + " it that somehow resonates inside you. It's quite a comfortable feeling, actually.",
-                        Movement.ftcOak, Set.of(AreaAttribute.Recharge));
+                        Movement.ftcOak);
         Area pass = new Area("Narrow Pass",
                         "You are walking through a narrow pass carved through a steep"
                                         + " hill. You could try ambushing someone here, but others could easily do the same"
@@ -174,7 +174,7 @@ public class FTCMatch extends Match {
                         "You are next to a pretty waterfall. The river it's in"
                                         + " bends sharply here, and only this bit is within the bounds for the Games. Still,"
                                         + " you could use it to take a shower in.",
-                        Movement.ftcWaterfall, Set.of(AreaAttribute.Bathe));
+                        Movement.ftcWaterfall);
         Area monument = new Area("Monument",
                         "You are in an area of the forest dominated by a tall stone"
                                         + " obelisk. It's probably a monument to something, but there's no plaque to tell you.",
@@ -182,7 +182,7 @@ public class FTCMatch extends Match {
         Area dump = new Area("Dump Site",
                         "You are at the edge of the forest, where people seem to go to dump"
                                         + " unwanted trash. The sight disgusts you, but there might be some useful stuff in there.",
-                        Movement.ftcDump, Set.of(AreaAttribute.Materials));
+                        Movement.ftcDump);
         map.put("Small Pond", pond);
         map.put("Glade", glade);
         map.put("Cabin", cabin);

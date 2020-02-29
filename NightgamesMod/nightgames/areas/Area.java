@@ -64,30 +64,6 @@ public class Area implements Serializable {
         return attributes.contains(AreaAttribute.Corridor);
     }
 
-    public boolean materials() {
-        return attributes.contains(AreaAttribute.Materials);
-    }
-
-    public boolean potions() {
-        return attributes.contains(AreaAttribute.Potions);
-    }
-
-    public boolean bath() {
-        return attributes.contains(AreaAttribute.Bathe);
-    }
-
-    public boolean resupply() {
-        return attributes.contains(AreaAttribute.Resupply);
-    }
-
-    public boolean recharge() {
-        return attributes.contains(AreaAttribute.Recharge);
-    }
-
-    public boolean mana() {
-        return attributes.contains(AreaAttribute.Mana);
-    }
-
     public boolean ping(int perception) {
         if (fight != null) {
             return true;
