@@ -535,20 +535,10 @@ public class Global {
      * */
     public static void buildActionPool() {
         actionPool = new HashSet<>();
-        actionPool.add(new Resupply());
         actionPool.add(new Wait());
-        actionPool.add(new Hide());
-        actionPool.add(new Bathe());
-        actionPool.add(new Scavenge());
-        actionPool.add(new Craft());
-        actionPool.add(new Recharge());
         actionPool.add(new Locate());
         actionPool.add(new MasturbateAction());
-        actionPool.add(new Energize());
         actionPool.add(new Disguise());
-        actionPool.add(new BushAmbush());
-        actionPool.add(new PassAmbush());
-        actionPool.add(new TreeAmbush());
         actionPool.add(new nightgames.actions.Struggle());
         buildTrapPool();
         for (Trap t : trapPool) {
