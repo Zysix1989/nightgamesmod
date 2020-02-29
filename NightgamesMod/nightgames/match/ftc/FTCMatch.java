@@ -208,35 +208,35 @@ public class FTCMatch extends Match {
         link(dump, waterfall);
         link(glade, lodge);
 
-        nBase.getActionFactories().add(new Hide());
-        nBase.getActionFactories().add(new Resupply(Set.of(north)));
-        wBase.getActionFactories().add(new Hide());
-        wBase.getActionFactories().add(new Resupply(Set.of(west)));
-        sBase.getActionFactories().add(new Hide());
-        sBase.getActionFactories().add(new Resupply(Set.of(south)));
-        eBase.getActionFactories().add(new Hide());
-        eBase.getActionFactories().add(new Resupply(Set.of(east)));
-        pBase.getActionFactories().add(new Resupply(Set.of(prey)));
+        nBase.getPossibleActions().add(new Hide());
+        nBase.getPossibleActions().add(new Resupply(Set.of(north)));
+        wBase.getPossibleActions().add(new Hide());
+        wBase.getPossibleActions().add(new Resupply(Set.of(west)));
+        sBase.getPossibleActions().add(new Hide());
+        sBase.getPossibleActions().add(new Resupply(Set.of(south)));
+        eBase.getPossibleActions().add(new Hide());
+        eBase.getPossibleActions().add(new Resupply(Set.of(east)));
+        pBase.getPossibleActions().add(new Resupply(Set.of(prey)));
 
-        pond.getActionFactories().add(new Bathe());
-        pond.getActionFactories().add(new Hide());
-        glade.getActionFactories().add(new Hide());
-        cabin.getActionFactories().add(new Hide());
-        cabin.getActionFactories().add(new Recharge());
-        cabin.getActionFactories().add(new Scavenge());
-        trail.getActionFactories().add(new TreeAmbush());
-        lodge.getActionFactories().add(new Craft());
-        lodge.getActionFactories().add(new Hide());
-        hill.getActionFactories().add(new Hide());
-        path.getActionFactories().add(new BushAmbush());
-        oak.getActionFactories().add(new Hide());
-        oak.getActionFactories().add(new Recharge());
-        pass.getActionFactories().add(new PassAmbush());
-        waterfall.getActionFactories().add(new Bathe());
-        waterfall.getActionFactories().add(new Hide());
-        monument.getActionFactories().add(new Hide());
-        dump.getActionFactories().add(new Hide());
-        dump.getActionFactories().add(new Scavenge());
+        pond.getPossibleActions().add(new Bathe());
+        pond.getPossibleActions().add(new Hide());
+        glade.getPossibleActions().add(new Hide());
+        cabin.getPossibleActions().add(new Hide());
+        cabin.getPossibleActions().add(new Recharge());
+        cabin.getPossibleActions().add(new Scavenge());
+        trail.getPossibleActions().add(new TreeAmbush());
+        lodge.getPossibleActions().add(new Craft());
+        lodge.getPossibleActions().add(new Hide());
+        hill.getPossibleActions().add(new Hide());
+        path.getPossibleActions().add(new BushAmbush());
+        oak.getPossibleActions().add(new Hide());
+        oak.getPossibleActions().add(new Recharge());
+        pass.getPossibleActions().add(new PassAmbush());
+        waterfall.getPossibleActions().add(new Bathe());
+        waterfall.getPossibleActions().add(new Hide());
+        monument.getPossibleActions().add(new Hide());
+        dump.getPossibleActions().add(new Hide());
+        dump.getPossibleActions().add(new Scavenge());
     }
 
     private void link(Area hub, Area... areas) {

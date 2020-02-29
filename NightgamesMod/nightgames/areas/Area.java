@@ -232,7 +232,7 @@ public class Area implements Serializable {
         drawHint = hint;
     }
 
-    public Set<Action> getActionFactories() {
+    public Set<Action> getPossibleActions() {
         return possibleActions;
     }
 }
