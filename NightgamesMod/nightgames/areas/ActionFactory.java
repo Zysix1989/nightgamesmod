@@ -48,91 +48,51 @@ public interface ActionFactory {
         }
     }
 
-    class BushAmbush implements ActionFactory {
-        @Override
-        public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.BushAmbush();
-            if (action.usable(c)) {
-                return Optional.of(action);
-            }
-            return Optional.empty();
+    class BushAmbush extends ActionFactoryInstance {
+        public BushAmbush() {
+            super(new nightgames.actions.BushAmbush());
         }
     }
 
-    class PassAmbush implements ActionFactory {
-        @Override
-        public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.PassAmbush();
-            if (action.usable(c)) {
-                return Optional.of(action);
-            }
-            return Optional.empty();
+    class PassAmbush extends ActionFactoryInstance {
+        public PassAmbush() {
+            super(new nightgames.actions.PassAmbush());
         }
     }
 
-    class TreeAmbush implements ActionFactory {
-        @Override
-        public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.TreeAmbush();
-            if (action.usable(c)) {
-                return Optional.of(action);
-            }
-            return Optional.empty();
+    class TreeAmbush extends ActionFactoryInstance {
+        public TreeAmbush() {
+            super(new nightgames.actions.TreeAmbush());
         }
     }
 
-    class Bathe implements ActionFactory {
-        @Override
-        public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.Bathe();
-            if (action.usable(c)) {
-                return Optional.of(action);
-            }
-            return Optional.empty();
+    class Bathe extends ActionFactoryInstance {
+        public Bathe() {
+            super(new nightgames.actions.Bathe());
         }
     }
 
-    class Craft implements ActionFactory {
-        @Override
-        public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.Craft();
-            if (action.usable(c)) {
-                return Optional.of(action);
-            }
-            return Optional.empty();
+    class Craft extends ActionFactoryInstance {
+        public Craft() {
+            super(new nightgames.actions.Craft());
         }
     }
 
-    class Energize implements ActionFactory {
-        @Override
-        public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.Energize();
-            if (action.usable(c)) {
-                return Optional.of(action);
-            }
-            return Optional.empty();
+    class Energize extends ActionFactoryInstance {
+        public Energize() {
+            super(new nightgames.actions.Energize());
         }
     }
 
-    class Hide implements ActionFactory {
-        @Override
-        public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.Hide();
-            if (action.usable(c)) {
-                return Optional.of(action);
-            }
-            return Optional.empty();
+    class Hide extends ActionFactoryInstance {
+        public Hide() {
+            super(new nightgames.actions.Hide());
         }
     }
 
-    class Recharge implements ActionFactory {
-        @Override
-        public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.Recharge();
-            if (action.usable(c)) {
-                return Optional.of(action);
-            }
-            return Optional.empty();
+    class Recharge extends ActionFactoryInstance {
+        public Recharge() {
+            super(new nightgames.actions.Recharge());
         }
     }
 
@@ -159,15 +119,9 @@ public interface ActionFactory {
         }
     }
 
-    class Scavenge implements ActionFactory {
-        @Override
-        public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.Scavenge();
-            if (action.usable(c)) {
-                return Optional.of(action);
-            }
-            return Optional.empty();
+    class Scavenge extends ActionFactoryInstance {
+        public Scavenge() {
+            super(new nightgames.actions.Scavenge());
         }
     }
-
 }
