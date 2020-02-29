@@ -1,9 +1,8 @@
 package nightgames.actions;
 
 import nightgames.characters.Character;
-import nightgames.global.Global;
-import nightgames.match.MatchType;
 import nightgames.trap.Trap;
+import nightgames.trap.TrapFactory;
 
 public class SetTrap extends Action {
     /**
@@ -26,17 +25,8 @@ public class SetTrap extends Action {
 
     @Override
     public IMovement execute(Character user) {
-        try {
-            Trap newTrap = trap.getClass().newInstance();
-            newTrap.setStrength(user);
-            user.location().place(newTrap);
-            String message = newTrap.setup(user);
-            if (user.human()) {
-                Global.gui().message(message);
-            }
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        var fact = new TrapFactory.Implementation(trap);
+        fact.setTrap(user);
         return Movement.trap;
     }
 
