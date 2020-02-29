@@ -41,4 +41,21 @@ public interface ActionFactory {
             return Optional.empty();
         }
     }
+
+    class LeapMovement implements ActionFactory {
+        private final Area adjacentRoom;
+
+        LeapMovement(Area adjacentRoom) {
+            this.adjacentRoom = adjacentRoom;
+        }
+
+        @Override
+        public Optional<Action> createActionFor(Character c) {
+            var action = new nightgames.actions.Leap(adjacentRoom);
+            if (action.usable(c)) {
+                return Optional.of(action);
+            }
+            return Optional.empty();
+        }
+    }
 }

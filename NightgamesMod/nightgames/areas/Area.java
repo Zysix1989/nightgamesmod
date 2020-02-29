@@ -1,7 +1,6 @@
 package nightgames.areas;
 
 import nightgames.actions.Action;
-import nightgames.actions.Leap;
 import nightgames.actions.Movement;
 import nightgames.characters.Character;
 import nightgames.global.Global;
@@ -22,7 +21,6 @@ public class Area implements Serializable {
     private static final long serialVersionUID = -1372128249588089014L;
     public String name;
     public HashSet<Area> adjacent = new HashSet<>();
-    public HashSet<Area> jump = new HashSet<>();
     private ArrayList<Participant> present = new ArrayList<>();
     public String description;
     public Encounter fight;
@@ -55,7 +53,7 @@ public class Area implements Serializable {
     }
     
     public void jump(Area adj){
-        jump.add(adj);
+        actionFactories.add(new ActionFactory.LeapMovement(adj));
     }
 
     public boolean open() {
@@ -235,15 +233,11 @@ public class Area implements Serializable {
     }
 
     public List<Action> possibleActions(Character c) {
-        var res = actionFactories.stream()
+        return actionFactories.stream()
                 .map(fact -> fact.createActionFor(c))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toCollection(ArrayList::new));
-        for (Area path : jump) {
-            res.add(new Leap(path));
-        }
-        return res;
     }
 
     public Set<Participant> getOccupants() {
