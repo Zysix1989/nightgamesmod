@@ -14,6 +14,35 @@ import java.util.Map;
 import java.util.Optional;
 
 public class AphrodisiacTrap extends Trap {
+    private static class Instance extends Trap.Instance {
+        public Instance(Trap self) {
+            super(self);
+        }
+
+        @Override
+        public void trigger(Participant target, Trap.Instance instance) {
+            if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
+                if (target.getCharacter().human()) {
+                    Global.gui().message(
+                            "You spot a liquid spray trap in time to avoid setting it off. You carefully manage to disarm the trap and pocket the potion.");
+                    target.getCharacter().gain(Item.Aphrodisiac);
+                    target.getCharacter().location().remove(instance);
+                }
+            } else {
+                if (target.getCharacter().human()) {
+                    Global.gui().message(
+                            "There's a sudden spray of gas in your face and the room seems to get much hotter. Your dick goes rock-hard and you realize you've been "
+                                    + "hit with an aphrodisiac.");
+                } else if (target.getCharacter().location().humanPresent()) {
+                    Global.gui().message(
+                            target.getCharacter().getName() + " is caught in your trap and sprayed with aphrodisiac. She flushes bright red and presses a hand against her crotch. It seems like "
+                                    + "she'll start masturbating even if you don't do anything.");
+                }
+                target.getCharacter().addNonCombat(new Horny(target.getCharacter(), (30 + self.getStrength()) / 10, 10, "Aphrodisiac Trap"));
+                target.getCharacter().location().opportunity(target.getCharacter(), instance);
+            }
+        }
+    }
 
     public AphrodisiacTrap() {
         this(null);
@@ -25,30 +54,6 @@ public class AphrodisiacTrap extends Trap {
 
     public void setStrength(Character user) {
         super.setStrength(user.get(Attribute.Cunning) + user.get(Attribute.Science) + user.getLevel() / 2);
-    }
-
-    @Override
-    public void trigger(Participant target, Instance instance) {
-        if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
-            if (target.getCharacter().human()) {
-                Global.gui().message(
-                                "You spot a liquid spray trap in time to avoid setting it off. You carefully manage to disarm the trap and pocket the potion.");
-                target.getCharacter().gain(Item.Aphrodisiac);
-                target.getCharacter().location().remove(instance);
-            }
-        } else {
-            if (target.getCharacter().human()) {
-                Global.gui().message(
-                                "There's a sudden spray of gas in your face and the room seems to get much hotter. Your dick goes rock-hard and you realize you've been "
-                                                + "hit with an aphrodisiac.");
-            } else if (target.getCharacter().location().humanPresent()) {
-                Global.gui().message(
-                                target.getCharacter().getName() + " is caught in your trap and sprayed with aphrodisiac. She flushes bright red and presses a hand against her crotch. It seems like "
-                                                + "she'll start masturbating even if you don't do anything.");
-            }
-            target.getCharacter().addNonCombat(new Horny(target.getCharacter(), (30 + getStrength()) / 10, 10, "Aphrodisiac Trap"));
-            target.getCharacter().location().opportunity(target.getCharacter(), instance);
-        }
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Aphrodisiac, 1,
@@ -71,12 +76,17 @@ public class AphrodisiacTrap extends Trap {
     }
 
     @Override
+    public InstantiateResult instantiate(Character owner) {
+        return new InstantiateResult(this.setup(owner), new Instance(this));
+    }
+
+    @Override
     public boolean requirements(Character owner) {
         return owner.get(Attribute.Cunning) >= 12 && !owner.has(Trait.direct);
     }
 
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
+    public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
         victim.addNonCombat(new Flatfooted(victim, 1));
         attacker.location().remove(instance);
         return super.capitalize(attacker, victim, instance);

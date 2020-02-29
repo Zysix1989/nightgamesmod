@@ -14,6 +14,29 @@ import java.util.Optional;
 
 public class IllusionTrap extends Trap {
 
+    private static class Instance extends Trap.Instance {
+        public Instance(Trap self) {
+            super(self);
+        }
+
+        @Override
+        public void trigger(Participant target, Trap.Instance instance) {
+            if (target.getCharacter().human()) {
+                Global.gui().message(
+                        "You run into a girl you don't recognize, but she's beautiful and completely naked. You don't have a chance to wonder where she came from, because "
+                                + "she immediately presses her warm, soft body against you and kisses you passionately. She slips down a hand to grope your crotch, and suddenly vanishes after a few strokes. "
+                                + "She was just an illusion, but your arousal is very real.");
+            } else if (target.getCharacter().location().humanPresent()) {
+                Global.gui().message("There's a flash of pink light and " + target.getCharacter().getName() + " flushes with arousal.");
+            }
+            if (target.getCharacter().has(Trait.imagination)) {
+                target.getCharacter().tempt(25 + self.getStrength());
+            }
+            target.getCharacter().tempt(25 + self.getStrength());
+            target.getCharacter().location().opportunity(target.getCharacter(), instance);
+        }
+    }
+
     public IllusionTrap() {
         this(null);
     }
@@ -24,23 +47,6 @@ public class IllusionTrap extends Trap {
 
     public void setStrength(Character user) {
         super.setStrength(user.get(Attribute.Arcane) + user.getLevel() / 2);
-    }
-
-    @Override
-    public void trigger(Participant target, Instance instance) {
-        if (target.getCharacter().human()) {
-            Global.gui().message(
-                            "You run into a girl you don't recognize, but she's beautiful and completely naked. You don't have a chance to wonder where she came from, because "
-                                            + "she immediately presses her warm, soft body against you and kisses you passionately. She slips down a hand to grope your crotch, and suddenly vanishes after a few strokes. "
-                                            + "She was just an illusion, but your arousal is very real.");
-        } else if (target.getCharacter().location().humanPresent()) {
-            Global.gui().message("There's a flash of pink light and " + target.getCharacter().getName() + " flushes with arousal.");
-        }
-        if (target.getCharacter().has(Trait.imagination)) {
-            target.getCharacter().tempt(25 + getStrength());
-        }
-        target.getCharacter().tempt(25 + getStrength());
-        target.getCharacter().location().opportunity(target.getCharacter(), instance);
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of();
@@ -67,7 +73,12 @@ public class IllusionTrap extends Trap {
     }
 
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
+    public InstantiateResult instantiate(Character owner) {
+        return new InstantiateResult(this.setup(owner), new Instance(this));
+    }
+
+    @Override
+    public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
         victim.addNonCombat(new Flatfooted(victim, 1));
         victim.location().remove(instance);
         return super.capitalize(attacker, victim, instance);

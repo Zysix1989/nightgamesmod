@@ -10,6 +10,23 @@ import nightgames.match.Participant;
 import java.util.Map;
 
 public class Decoy extends Trap {
+    private static class Instance extends Trap.Instance {
+        public Instance(Trap self) {
+            super(self);
+        }
+
+        @Override
+        public void trigger(Participant target, Trap.Instance instance) {
+            if (target.getCharacter().human()) {
+                Global.gui().message(
+                        "You follow the noise you've been hearing for a while, which turns out to be coming from a disposable cell phone. Seems like someone "
+                                + "is playing a trick and you fell for it. You shut off the phone and toss it aside.");
+            } else if (target.getCharacter().location().humanPresent()) {
+                Global.gui().message(target.getCharacter().getName() + " finds the decoy phone and deactivates it.");
+            }
+            target.getCharacter().location().remove(instance);
+        }
+    }
 
     public Decoy() {
         this(null);
@@ -17,18 +34,6 @@ public class Decoy extends Trap {
     
     public Decoy(Character owner) {
         super("Decoy", owner);
-    }
-    
-    @Override
-    public void trigger(Participant target, Instance instance) {
-        if (target.getCharacter().human()) {
-            Global.gui().message(
-                            "You follow the noise you've been hearing for a while, which turns out to be coming from a disposable cell phone. Seems like someone "
-                                            + "is playing a trick and you fell for it. You shut off the phone and toss it aside.");
-        } else if (target.getCharacter().location().humanPresent()) {
-            Global.gui().message(target.getCharacter().getName() + " finds the decoy phone and deactivates it.");
-        }
-        target.getCharacter().location().remove(instance);
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Phone, 1);
@@ -49,4 +54,8 @@ public class Decoy extends Trap {
                 "from a reasonable distance until someone switches it off.";
     }
 
+    @Override
+    public InstantiateResult instantiate(Character owner) {
+        return new InstantiateResult(this.setup(owner), new Instance(this));
+    }
 }

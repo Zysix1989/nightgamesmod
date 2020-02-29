@@ -13,32 +13,38 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 
 public class StripMine extends Trap {
-    
+    private static class Instance extends Trap.Instance {
+        public Instance(Trap self) {
+            super(self);
+        }
+
+        @Override
+        public void trigger(Participant target, Trap.Instance instance) {
+            if (target.getCharacter().human()) {
+                if (target.getCharacter().mostlyNude()) {
+                    Global.gui().message(
+                            "You're momentarily blinded by a bright flash of light. A camera flash maybe? Is someone taking naked pictures of you?");
+                } else {
+                    Global.gui().message(
+                            "You're suddenly dazzled by a bright flash of light. As you recover from your disorientation, you notice that it feel a bit drafty. "
+                                    + "You find you're missing some clothes. You reflect that your clothing expenses have gone up significantly since you joined the Games.");
+                }
+            } else if (target.getCharacter().location().humanPresent()) {
+                Global.gui().message("You're startled by a flash of light not far away. Standing there is a half-naked "
+                        + target.getCharacter().getName() + ", looking surprised.");
+            }
+            IntStream.range(0, 2 + Global.random(4)).forEach(i -> target.getCharacter().shredRandom());
+            target.getCharacter().location().opportunity(target.getCharacter(), instance);
+        }
+    }
+
+
     public StripMine() {
         this(null);
     }
     
     public StripMine(Character owner) {
         super("Strip Mine", owner);
-    }
-
-    @Override
-    public void trigger(Participant target, Instance instance) {
-        if (target.getCharacter().human()) {
-            if (target.getCharacter().mostlyNude()) {
-                Global.gui().message(
-                                "You're momentarily blinded by a bright flash of light. A camera flash maybe? Is someone taking naked pictures of you?");
-            } else {
-                Global.gui().message(
-                                "You're suddenly dazzled by a bright flash of light. As you recover from your disorientation, you notice that it feel a bit drafty. "
-                                                + "You find you're missing some clothes. You reflect that your clothing expenses have gone up significantly since you joined the Games.");
-            }
-        } else if (target.getCharacter().location().humanPresent()) {
-            Global.gui().message("You're startled by a flash of light not far away. Standing there is a half-naked "
-                            + target.getCharacter().getName() + ", looking surprised.");
-        }
-        IntStream.range(0, 2 + Global.random(4)).forEach(i -> target.getCharacter().shredRandom());
-        target.getCharacter().location().opportunity(target.getCharacter(), instance);
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Tripwire, 1, Item.Battery, 3);
@@ -59,7 +65,12 @@ public class StripMine extends Trap {
     }
 
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
+    public InstantiateResult instantiate(Character owner) {
+        return new InstantiateResult(this.setup(owner), new Instance(this));
+    }
+
+    @Override
+    public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
         victim.addNonCombat(new Flatfooted(victim, 1));
         attacker.location().remove(instance);
         return super.capitalize(attacker, victim, instance);

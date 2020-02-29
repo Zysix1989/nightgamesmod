@@ -12,17 +12,19 @@ import java.util.Optional;
 // TODO: Separate into TrapFactory and TrapInstance
 public abstract class Trap {
 
-    public static class Instance implements Deployable {
+    public abstract static class Instance implements Deployable {
         protected Trap self;
 
         public Instance(Trap self) {
             this.self = self;
         }
 
+        protected abstract void trigger(Participant target, Instance instance);
+
         @Override
         public boolean resolve(Participant active) {
             if (active.getCharacter() != self.owner) {
-                self.trigger(active, this);
+                trigger(active, this);
                 return true;
             }
             return false;
@@ -52,8 +54,6 @@ public abstract class Trap {
         this.owner = owner;
         this.setStrength(0);
     }
-    
-    protected abstract void trigger(Participant target, Instance instance);
 
     public boolean recipe(Character owner) {
         return requiredItems().entrySet().stream().allMatch(entry-> owner.has(entry.getKey(), entry.getValue()));
@@ -74,15 +74,13 @@ public abstract class Trap {
         public final String message;
         public final Instance instance;
 
-        private InstantiateResult(String msg, Instance instance) {
+        InstantiateResult(String msg, Instance instance) {
             this.message = msg;
             this.instance = instance;
         }
     }
 
-    public InstantiateResult instantiate(Character owner) {
-        return new InstantiateResult(this.setup(owner), new Instance(this));
-    }
+    public abstract InstantiateResult instantiate(Character owner);
 
     public void setStrength(Character user) {
         this.strength = user.getLevel();

@@ -13,6 +13,36 @@ import java.util.Map;
 import java.util.Optional;
 
 public class Spiderweb extends Trap {
+    private static class Instance extends Trap.Instance {
+
+        public Instance(Trap self) {
+            super(self);
+        }
+
+        @Override
+        public void trigger(Participant target, Trap.Instance instance) {
+            if (target.getCharacter().human()) {
+                if (target.getCharacter().mostlyNude()) {
+                    Global.gui().message(
+                            "You feel the tripwire underfoot too late to avoid it. A staggering amount of rope flies up to entangle your limbs and pull you off the ground. "
+                                    + "Oh hell. You're completely immobilized and suspended in midair. Surprisingly, it's not that uncomfortable, but if someone finds you before you can get free, "
+                                    + "you'll be completely defenseless.");
+                } else {
+                    Global.gui().message(
+                            "You feel the tripwire underfoot too late to avoid it. A staggering amount of rope flies up to entangle your limbs and pull you off the ground. "
+                                    + "Something snags your clothes and pulls them off of you with unbelievable precision."
+                                    + "Oh hell. You're completely immobilized and suspended naked in midair. Surprisingly, it's not that uncomfortable, but if someone finds you before you can get free, "
+                                    + "you'll be completely defenseless.");
+                }
+            } else if (target.getCharacter().location().humanPresent()) {
+                Global.gui().message("You hear a snap as " + target.getCharacter().getName()
+                        + " triggers your spiderweb trap and ends up helplessly suspended in midair like a naked present.");
+            }
+            target.getCharacter().state = State.webbed;
+            target.getCharacter().delay(1);
+            target.getCharacter().location().opportunity(target.getCharacter(), instance);
+        }
+    }
 
     public Spiderweb() {
         this(null);
@@ -24,30 +54,6 @@ public class Spiderweb extends Trap {
 
     public void setStrength(Character user) {
         super.setStrength(user.get(Attribute.Cunning) + user.get(Attribute.Science) + user.getLevel() / 2);
-    }
-
-    @Override
-    public void trigger(Participant target, Instance instance) {
-        if (target.getCharacter().human()) {
-            if (target.getCharacter().mostlyNude()) {
-                Global.gui().message(
-                                "You feel the tripwire underfoot too late to avoid it. A staggering amount of rope flies up to entangle your limbs and pull you off the ground. "
-                                                + "Oh hell. You're completely immobilized and suspended in midair. Surprisingly, it's not that uncomfortable, but if someone finds you before you can get free, "
-                                                + "you'll be completely defenseless.");
-            } else {
-                Global.gui().message(
-                                "You feel the tripwire underfoot too late to avoid it. A staggering amount of rope flies up to entangle your limbs and pull you off the ground. "
-                                                + "Something snags your clothes and pulls them off of you with unbelievable precision."
-                                                + "Oh hell. You're completely immobilized and suspended naked in midair. Surprisingly, it's not that uncomfortable, but if someone finds you before you can get free, "
-                                                + "you'll be completely defenseless.");
-            }
-        } else if (target.getCharacter().location().humanPresent()) {
-            Global.gui().message("You hear a snap as " + target.getCharacter().getName()
-                            + " triggers your spiderweb trap and ends up helplessly suspended in midair like a naked present.");
-        }
-        target.getCharacter().state = State.webbed;
-        target.getCharacter().delay(1);
-        target.getCharacter().location().opportunity(target.getCharacter(), instance);
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Rope, 4,
@@ -71,7 +77,12 @@ public class Spiderweb extends Trap {
     }
 
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
+    public InstantiateResult instantiate(Character owner) {
+        return new InstantiateResult(this.setup(owner), new Instance(this));
+    }
+
+    @Override
+    public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
         onSpiderwebDefeat(attacker, victim, instance);
         return super.capitalize(attacker, victim, instance);
     }

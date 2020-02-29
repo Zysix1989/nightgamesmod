@@ -9,6 +9,24 @@ import nightgames.match.Participant;
 import java.util.Map;
 
 public class Alarm extends Trap {
+    private static class Instance extends Trap.Instance {
+        public Instance(Trap self) {
+            super(self);
+        }
+
+        @Override
+        public void trigger(Participant target, Trap.Instance instance) {
+            if (target.getCharacter().human()) {
+                Global.gui().message(
+                        "You're walking through the eerily quiet campus, when a loud beeping almost makes you jump out of your skin. You realize the beeping is "
+                                + "coming from a cell phone on the floor. You shut it off as quickly as you can, but it's likely everyone nearby heard it already.");
+            } else if (target.getCharacter().location().humanPresent()) {
+                Global.gui().message(target.getCharacter().getName() + " Sets off your alarm, giving away her presence.");
+            }
+            target.getCharacter().location().alarm = true;
+            target.getCharacter().location().remove(instance);
+        }
+    }
 
     public Alarm() {
         this(null);
@@ -16,19 +34,6 @@ public class Alarm extends Trap {
 
     public Alarm(Character owner) {
         super("Alarm", owner);
-    }
-
-    @Override
-    public void trigger(Participant target, Trap.Instance instance) {
-        if (target.getCharacter().human()) {
-            Global.gui().message(
-                            "You're walking through the eerily quiet campus, when a loud beeping almost makes you jump out of your skin. You realize the beeping is "
-                                            + "coming from a cell phone on the floor. You shut it off as quickly as you can, but it's likely everyone nearby heard it already.");
-        } else if (target.getCharacter().location().humanPresent()) {
-            Global.gui().message(target.getCharacter().getName() + " Sets off your alarm, giving away her presence.");
-        }
-        target.getCharacter().location().alarm = true;
-        target.getCharacter().location().remove(instance);
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Tripwire, 1,
@@ -42,6 +47,11 @@ public class Alarm extends Trap {
     public String setup(Character user) {
         basicSetup(user);
         return "You rig up a disposable phone to a tripwire. When someone trips the wire, it should set of the phone's alarm.";
+    }
+
+    @Override
+    public InstantiateResult instantiate(Character owner) {
+        return new InstantiateResult(this.setup(owner), new Instance(this));
     }
 
     @Override

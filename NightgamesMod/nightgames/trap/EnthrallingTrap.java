@@ -13,6 +13,44 @@ import java.util.Map;
 import java.util.Optional;
 
 public class EnthrallingTrap extends Trap {
+    private static class Instance extends Trap.Instance {
+        public Instance(Trap self) {
+            super(self);
+        }
+
+        @Override
+        public void trigger(Participant target, Trap.Instance instance) {
+            if (target.getCharacter().human()) {
+                if (target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm())
+                        || !target.getCharacter().eligible(self.owner) || !self.owner.eligible(target.getCharacter())) {
+                    Global.gui().message("As you step across the " + target.getCharacter().location().name
+                            + ", you notice a pentagram drawn on the floor,"
+                            + " appearing to have been drawn in cum. Wisely," + " you avoid stepping into it.");
+                } else {
+                    target.getCharacter().location().opportunity(target.getCharacter(), instance);
+                    Global.gui().message("As you step across the " + target.getCharacter().location().name
+                            + ", you are suddenly surrounded by purple flames. Your mind "
+                            + "goes blank for a moment, leaving you staring into the distance."
+                            + " When you come back to your senses, you shake your head a few"
+                            + " times and hope whatever that thing was, it failed at"
+                            + " whatever it was supposed to do. The lingering vision of two"
+                            + " large red irises staring at you suggest differently, though.");
+                    target.getCharacter().addNonCombat(new Enthralled(target.getCharacter(), self.owner, 5 + self.getStrength() / 20));
+                }
+            } else if (target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm()) || !target.getCharacter().eligible(self.owner) || !self.owner.eligible(target.getCharacter())) {
+                if (target.getCharacter().location().humanPresent()) {
+                    Global.gui().message("You catch a bout of purple fire in your peripheral vision,"
+                            + "but once you have turned to look the flames are gone. All that is left"
+                            + " to see is " + target.getCharacter().getName() + ", standing still and staring blankly ahead."
+                            + " It would seem to be very easy to have your way with her now, but"
+                            + " who or whatever left that thing there will probably be thinking" + " the same.");
+                }
+                //TODO: Currently, being Enthralled and moving to a new location doesn't use a turn of the effect, meaning that you still lose all those turns once you are in combat.
+                target.getCharacter().addNonCombat(new Enthralled(target.getCharacter(), self.owner, 5 + self.getStrength() / 20));
+                target.getCharacter().location().opportunity(target.getCharacter(), instance);
+            }
+        }
+    }
 
     public EnthrallingTrap() {
         this(null);
@@ -24,39 +62,6 @@ public class EnthrallingTrap extends Trap {
 
     public EnthrallingTrap(Character owner) {
         super("Enthralling Trap", owner);
-    }
-
-    @Override
-    public void trigger(Participant target, Instance instance) {
-        if (target.getCharacter().human()) {
-            if (target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm())
-                            || !target.getCharacter().eligible(owner) || !owner.eligible(target.getCharacter())) {
-                Global.gui().message("As you step across the " + target.getCharacter().location().name
-                                + ", you notice a pentagram drawn on the floor,"
-                                + " appearing to have been drawn in cum. Wisely," + " you avoid stepping into it.");
-            } else {
-                target.getCharacter().location().opportunity(target.getCharacter(), instance);
-                Global.gui().message("As you step across the " + target.getCharacter().location().name
-                                + ", you are suddenly surrounded by purple flames. Your mind "
-                                + "goes blank for a moment, leaving you staring into the distance."
-                                + " When you come back to your senses, you shake your head a few"
-                                + " times and hope whatever that thing was, it failed at"
-                                + " whatever it was supposed to do. The lingering vision of two"
-                                + " large red irises staring at you suggest differently, though.");
-                target.getCharacter().addNonCombat(new Enthralled(target.getCharacter(), owner, 5 + getStrength() / 20));
-            }
-        } else if (target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm()) || !target.getCharacter().eligible(owner) || !owner.eligible(target.getCharacter())) {
-            if (target.getCharacter().location().humanPresent()) {
-                Global.gui().message("You catch a bout of purple fire in your peripheral vision,"
-                                + "but once you have turned to look the flames are gone. All that is left"
-                                + " to see is " + target.getCharacter().getName() + ", standing still and staring blankly ahead."
-                                + " It would seem to be very easy to have your way with her now, but"
-                                + " who or whatever left that thing there will probably be thinking" + " the same.");
-            }
-            //TODO: Currently, being Enthralled and moving to a new location doesn't use a turn of the effect, meaning that you still lose all those turns once you are in combat. 
-            target.getCharacter().addNonCombat(new Enthralled(target.getCharacter(), owner, 5 + getStrength() / 20));
-            target.getCharacter().location().opportunity(target.getCharacter(), instance);
-        }
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.semen, 1);
@@ -80,7 +85,12 @@ public class EnthrallingTrap extends Trap {
     }
 
     @Override
-    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
+    public InstantiateResult instantiate(Character owner) {
+        return new InstantiateResult(this.setup(owner), new Instance(this));
+    }
+
+    @Override
+    public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
         victim.addNonCombat(new Flatfooted(victim, 1));
         attacker.location().remove(instance);
         return super.capitalize(attacker, victim, instance);
