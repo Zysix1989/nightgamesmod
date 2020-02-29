@@ -18,7 +18,6 @@ public interface TrapFactory {
             try {
                 Trap newTrap = trap.getClass().newInstance();
                 var result = newTrap.instantiate(owner);
-                result.instance.setStrength(owner);
                 owner.location().place(result.instance);
                 if (owner.human()) {
                     Global.gui().message(result.message);

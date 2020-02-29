@@ -20,6 +20,7 @@ public abstract class Trap {
         public Instance(Trap self, Character owner) {
             this.self = self;
             this.owner = owner;
+            setStrength(owner);
         }
 
         protected abstract void trigger(Participant target);
