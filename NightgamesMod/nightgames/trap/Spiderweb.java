@@ -48,16 +48,17 @@ public class Spiderweb extends Trap {
             onSpiderwebDefeat(attacker, victim, this);
             return super.capitalize(attacker, victim);
         }
+
+        @Override
+        public void setStrength(Character user) {
+            self.setStrength(user.get(Attribute.Cunning) + user.get(Attribute.Science) + user.getLevel() / 2);
+        }
+
     }
     
     public Spiderweb() {
         super("Spiderweb");
     }
-
-    public void setStrength(Character user) {
-        super.setStrength(user.get(Attribute.Cunning) + user.get(Attribute.Science) + user.getLevel() / 2);
-    }
-
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Rope, 4,
             Item.Spring, 2,
             Item.Tripwire, 1);

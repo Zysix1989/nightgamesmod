@@ -43,14 +43,13 @@ public class IllusionTrap extends Trap {
             return super.capitalize(attacker, victim);
         }
 
+        public void setStrength(Character user) {
+            self.setStrength(user.get(Attribute.Arcane) + user.getLevel() / 2);
+        }
     }
     
     public IllusionTrap() {
         super("Illusion Trap");
-    }
-
-    public void setStrength(Character user) {
-        super.setStrength(user.get(Attribute.Arcane) + user.getLevel() / 2);
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of();

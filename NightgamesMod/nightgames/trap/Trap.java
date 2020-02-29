@@ -50,6 +50,10 @@ public abstract class Trap {
             return Optional.empty();
         }
 
+        public void setStrength(Character user) {
+            self.strength = user.getLevel();
+        }
+
         public int getStrength() {
             return self.strength;
         }
@@ -88,10 +92,6 @@ public abstract class Trap {
     }
 
     public abstract InstantiateResult instantiate(Character owner);
-
-    public void setStrength(Character user) {
-        this.strength = user.getLevel();
-    }
 
     public void setStrength(int strength) {
         this.strength = strength;

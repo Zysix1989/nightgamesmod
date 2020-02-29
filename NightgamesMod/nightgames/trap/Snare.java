@@ -42,14 +42,16 @@ public class Snare extends Trap {
             attacker.location().remove(this);
             return super.capitalize(attacker, victim);
         }
+
+        @Override
+        public void setStrength(Character user) {
+            self.setStrength(user.get(Attribute.Cunning) + user.getLevel() / 2);
+        }
+
     }
 
     public Snare() {
         super("Snare");
-    }
-
-    public void setStrength(Character user) {
-        super.setStrength(user.get(Attribute.Cunning) + user.getLevel() / 2);
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Tripwire, 1, Item.Rope, 1);

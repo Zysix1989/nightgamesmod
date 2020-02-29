@@ -49,14 +49,15 @@ public class AphrodisiacTrap extends Trap {
             attacker.location().remove(this);
             return super.capitalize(attacker, victim);
         }
+
+        @Override
+        public void setStrength(Character user) {
+            self.setStrength(user.get(Attribute.Cunning) + user.get(Attribute.Science) + user.getLevel() / 2);
+        }
     }
     
     public AphrodisiacTrap() {
         super("Aphrodisiac Trap");
-    }
-
-    public void setStrength(Character user) {
-        super.setStrength(user.get(Attribute.Cunning) + user.get(Attribute.Science) + user.getLevel() / 2);
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Aphrodisiac, 1,

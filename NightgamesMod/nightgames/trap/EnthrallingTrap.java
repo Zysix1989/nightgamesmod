@@ -57,10 +57,10 @@ public class EnthrallingTrap extends Trap {
             attacker.location().remove(this);
             return super.capitalize(attacker, victim);
         }
-    }
 
-    public void setStrength(Character user) {
-        super.setStrength(user.get(Attribute.Dark) + user.get(Attribute.Arcane) + user.getLevel() / 2);
+        public void setStrength(Character user) {
+            self.setStrength(user.get(Attribute.Dark) + user.get(Attribute.Arcane) + user.getLevel() / 2);
+        }
     }
 
     public EnthrallingTrap() {
