@@ -9,6 +9,7 @@ import nightgames.stance.Position;
 import nightgames.status.Enthralled;
 import nightgames.status.Flatfooted;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class EnthrallingTrap extends Trap {
@@ -58,9 +59,10 @@ public class EnthrallingTrap extends Trap {
         }
     }
 
-    @Override
-    public boolean recipe(Character owner) {
-        return owner.has(Item.semen);
+    private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.semen, 1);
+
+    protected Map<Item, Integer> requiredItems() {
+        return REQUIRED_ITEMS;
     }
 
     @Override
@@ -71,7 +73,6 @@ public class EnthrallingTrap extends Trap {
     @Override
     public String setup(Character owner) {
         basicSetup(owner);
-        owner.consume(Item.semen, 1);
         return "You pop open a bottle of cum and use its contents to draw"
                         + " a pentagram on the floor, all the while speaking"
                         + " incantations to cause the first person to step into"

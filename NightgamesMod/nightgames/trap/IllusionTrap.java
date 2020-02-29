@@ -4,10 +4,12 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
+import nightgames.items.Item;
 import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.Flatfooted;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class IllusionTrap extends Trap {
@@ -41,9 +43,15 @@ public class IllusionTrap extends Trap {
         target.getCharacter().location().opportunity(target.getCharacter(), this);
     }
 
+    private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of();
+
+    protected Map<Item, Integer> requiredItems() {
+        return REQUIRED_ITEMS;
+    }
+
     @Override
     public boolean recipe(Character owner) {
-        return owner.canSpend(15);
+        return super.recipe(owner) && owner.canSpend(15);
     }
 
     @Override

@@ -7,6 +7,8 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
 
+import java.util.Map;
+
 public class Decoy extends Trap {
 
     public Decoy() {
@@ -29,9 +31,10 @@ public class Decoy extends Trap {
         target.getCharacter().location().remove(this);
     }
 
-    @Override
-    public boolean recipe(Character owner) {
-        return owner.has(Item.Phone);
+    private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Phone, 1);
+
+    protected Map<Item, Integer> requiredItems() {
+        return REQUIRED_ITEMS;
     }
 
     @Override
@@ -42,7 +45,6 @@ public class Decoy extends Trap {
     @Override
     public String setup(Character owner) {
         basicSetup(owner);
-        owner.consume(Item.Phone, 1);
         if (owner.human()) {
             return "Your program a phone to play a prerecorded audio track five minutes from now. It should be noticable from a reasonable distance until someone switches it "
                             + "off.";

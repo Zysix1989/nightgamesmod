@@ -8,6 +8,7 @@ import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.RoboWebbed;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class RoboWeb extends Trap {
@@ -65,9 +66,12 @@ public class RoboWeb extends Trap {
         target.getCharacter().location().alarm = true;
     }
 
-    @Override
-    public boolean recipe(Character owner) {
-        return owner.has(Item.Rope, 4) && owner.has(Item.Spring, 2) && owner.has(Item.Tripwire);
+    private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Rope, 4,
+            Item.Spring, 2,
+            Item.Tripwire, 1);
+
+    protected Map<Item, Integer> requiredItems() {
+        return REQUIRED_ITEMS;
     }
 
     @Override
@@ -78,9 +82,6 @@ public class RoboWeb extends Trap {
     @Override
     public String setup(Character owner) {
         basicSetup(owner);
-        owner.consume(Item.Tripwire, 1);
-        owner.consume(Item.Rope, 4);
-        owner.consume(Item.Spring, 2);
         return "<invisible>";
     }
     

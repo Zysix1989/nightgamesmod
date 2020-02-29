@@ -9,6 +9,7 @@ import nightgames.status.Flatfooted;
 import nightgames.status.Hypersensitive;
 import nightgames.status.Oiled;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class TentacleTrap extends Trap {
@@ -56,9 +57,10 @@ public class TentacleTrap extends Trap {
         }
     }
 
-    @Override
-    public boolean recipe(Character owner) {
-        return owner.has(Item.Totem);
+    private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Totem, 1);
+
+    protected Map<Item, Integer> requiredItems() {
+        return REQUIRED_ITEMS;
     }
 
     @Override
@@ -69,7 +71,6 @@ public class TentacleTrap extends Trap {
     @Override
     public String setup(Character owner) {
         basicSetup(owner);
-        owner.consume(Item.Totem, 1);
         return "You need to activate this phallic totem before it can be used as a trap. You stroke the small totem with your hand, which is... weird, but effective. You "
                         + "quickly place the totem someplace out of sight and hurriedly get out of range. You're not sure whether this will actually discriminate before attacking.";
     }

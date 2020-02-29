@@ -6,6 +6,8 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
 
+import java.util.Map;
+
 public class Alarm extends Trap {
 
     public Alarm() {
@@ -29,16 +31,16 @@ public class Alarm extends Trap {
         target.getCharacter().location().remove(this);
     }
 
-    @Override
-    public boolean recipe(Character user) {
-        return user.has(Item.Tripwire) && user.has(Item.Phone);
+    private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Tripwire, 1,
+            Item.Phone, 1);
+
+    protected Map<Item, Integer> requiredItems() {
+        return REQUIRED_ITEMS;
     }
 
     @Override
     public String setup(Character user) {
         basicSetup(user);
-        owner.consume(Item.Tripwire, 1);
-        owner.consume(Item.Phone, 1);
         if (user.human()) {
             return "You rig up a disposable phone to a tripwire. When someone trips the wire, it should set of the phone's alarm.";
         } else {

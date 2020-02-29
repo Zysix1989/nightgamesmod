@@ -9,6 +9,7 @@ import nightgames.stance.Position;
 import nightgames.stance.StandingOver;
 import nightgames.status.Flatfooted;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class Tripline extends Trap {
@@ -49,15 +50,15 @@ public class Tripline extends Trap {
         }
     }
 
-    @Override
-    public boolean recipe(Character owner) {
-        return owner.has(Item.Rope);
+    private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Rope, 1);
+
+    protected Map<Item, Integer> requiredItems() {
+        return REQUIRED_ITEMS;
     }
 
     @Override
     public String setup(Character owner) {
         basicSetup(owner);
-        owner.consume(Item.Rope, 1);
         return "You run a length of rope at ankle height. It should trip anyone who isn't paying much attention.";
     }
 

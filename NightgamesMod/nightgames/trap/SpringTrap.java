@@ -12,6 +12,7 @@ import nightgames.stance.StandingOver;
 import nightgames.status.Flatfooted;
 import nightgames.status.Winded;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class SpringTrap extends Trap {
@@ -57,9 +58,10 @@ public class SpringTrap extends Trap {
         }
     }
 
-    @Override
-    public boolean recipe(Character owner) {
-        return owner.has(Item.Spring) && owner.has(Item.Rope);
+    private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Spring, 1, Item.Rope, 1);
+
+    protected Map<Item, Integer> requiredItems() {
+        return REQUIRED_ITEMS;
     }
 
     @Override

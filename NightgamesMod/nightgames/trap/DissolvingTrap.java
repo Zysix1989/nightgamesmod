@@ -9,6 +9,7 @@ import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.Flatfooted;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class DissolvingTrap extends Trap {
@@ -56,18 +57,22 @@ public class DissolvingTrap extends Trap {
         }
     }
 
+    private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Tripwire, 1,
+            Item.DisSol, 1,
+            Item.Sprayer, 1);
+
+    protected Map<Item, Integer> requiredItems() {
+        return REQUIRED_ITEMS;
+    }
+
     @Override
     public boolean recipe(Character owner) {
-        return owner.has(Item.Tripwire) && owner.has(Item.DisSol) && owner.has(Item.Sprayer)
-                        && !owner.has(Trait.direct);
+        return super.recipe(owner) && !owner.has(Trait.direct);
     }
 
     @Override
     public String setup(Character owner) {
         basicSetup(owner);
-        owner.consume(Item.Tripwire, 1);
-        owner.consume(Item.DisSol, 1);
-        owner.consume(Item.Sprayer, 1);
         return "You rig up a trap to dissolve the clothes of whoever triggers it.";
     }
 

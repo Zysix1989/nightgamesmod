@@ -8,6 +8,7 @@ import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.Flatfooted;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -40,9 +41,10 @@ public class StripMine extends Trap {
         target.getCharacter().location().opportunity(target.getCharacter(), this);
     }
 
-    @Override
-    public boolean recipe(Character owner) {
-        return owner.has(Item.Tripwire) && owner.has(Item.Battery, 3);
+    private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Tripwire, 1, Item.Battery, 3);
+
+    protected Map<Item, Integer> requiredItems() {
+        return REQUIRED_ITEMS;
     }
 
     @Override
@@ -53,8 +55,7 @@ public class StripMine extends Trap {
     @Override
     public String setup(Character owner) {
         basicSetup(owner);
-        owner.consume(Item.Tripwire, 1);
-        owner.consume(Item.Battery, 3);
+        requiredItems().entrySet().forEach(entry -> owner.consume(entry.getKey(), entry.getValue()));
         return "Using the techniques Jett showed you, you rig up a one-time-use clothing destruction device.";
     }
 

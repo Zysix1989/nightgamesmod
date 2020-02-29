@@ -2,9 +2,11 @@ package nightgames.trap;
 
 import nightgames.areas.Deployable;
 import nightgames.characters.Character;
+import nightgames.items.Item;
 import nightgames.match.Participant;
 import nightgames.stance.Position;
 
+import java.util.Map;
 import java.util.Optional;
 
 public abstract class Trap implements Deployable {
@@ -20,12 +22,17 @@ public abstract class Trap implements Deployable {
     
     protected abstract void trigger(Participant target);
 
-    public abstract boolean recipe(Character owner);
+    public boolean recipe(Character owner) {
+        return requiredItems().entrySet().stream().allMatch(entry-> owner.has(entry.getKey(), entry.getValue()));
+    }
 
     public abstract boolean requirements(Character owner);
 
+    protected abstract Map<Item, Integer> requiredItems();
+
     protected final void basicSetup(Character owner) {
         this.owner = owner;
+        requiredItems().entrySet().forEach(entry -> owner.consume(entry.getKey(), entry.getValue()));
     }
 
     public abstract String setup(Character owner);
