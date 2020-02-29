@@ -52,6 +52,7 @@ import nightgames.utilities.ProseUtils;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -3181,18 +3182,23 @@ public Character clone() throws CloneNotSupportedException {
         while (!queue.isEmpty()) {
             Area t = queue.pop();
             parents.put(t, last);
+            var adjacent = t.possibleActions(this).stream()
+                    .filter(action -> action instanceof Move)
+                    .map(action -> (Move) action)
+                    .map(Move::getDestination)
+                    .collect(Collectors.toSet());
             if (t.name.equals(target.name)) {
-                while (!location.adjacent.contains(t)) {
+                while (!adjacent.contains(t)) {
                     t = parents.get(t);
                 }
                 return new Move(t);
             }
-            for (Area area : t.adjacent) {
-                if (!vector.contains(area)) {
-                    vector.add(area);
-                    queue.push(area);
-                }
-            }
+            adjacent.stream()
+                    .filter(Predicate.not(vector::contains))
+                    .forEach(area -> {
+                        vector.add(area);
+                        queue.push(area);
+                    });
             last = t;
         }
         return null;
