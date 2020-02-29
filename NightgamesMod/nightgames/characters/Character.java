@@ -3182,16 +3182,22 @@ public Character clone() throws CloneNotSupportedException {
         while (!queue.isEmpty()) {
             Area t = queue.pop();
             parents.put(t, last);
-            var adjacent = t.possibleActions(this).stream()
+            var possibleMoves = t.possibleActions(this).stream()
                     .filter(action -> action instanceof Move)
                     .map(action -> (Move) action)
+                    .collect(Collectors.toUnmodifiableSet());
+            var adjacent = possibleMoves.stream()
                     .map(Move::getDestination)
                     .collect(Collectors.toSet());
             if (t.name.equals(target.name)) {
                 while (!adjacent.contains(t)) {
                     t = parents.get(t);
                 }
-                return new Move(t);
+                final var nextDest = t;
+                return possibleMoves.stream()
+                        .filter(move -> move.getDestination().equals(nextDest))
+                        .findAny()
+                        .orElseThrow();
             }
             adjacent.stream()
                     .filter(Predicate.not(vector::contains))
