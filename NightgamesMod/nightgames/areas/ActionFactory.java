@@ -4,10 +4,8 @@ import nightgames.actions.Action;
 import nightgames.actions.Move;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.match.Participant;
 
 import java.util.Optional;
-import java.util.Set;
 
 public interface ActionFactory {
     Optional<Action> createActionFor(Character c);
@@ -15,7 +13,7 @@ public interface ActionFactory {
     class ActionFactoryInstance implements ActionFactory {
         private final Action action;
 
-        private ActionFactoryInstance(Action action) {
+        public ActionFactoryInstance(Action action) {
             this.action = action;
         }
 
@@ -47,67 +45,4 @@ public interface ActionFactory {
         }
     }
 
-    class BushAmbush extends ActionFactoryInstance {
-        public BushAmbush() {
-            super(new nightgames.actions.BushAmbush());
-        }
-    }
-
-    class PassAmbush extends ActionFactoryInstance {
-        public PassAmbush() {
-            super(new nightgames.actions.PassAmbush());
-        }
-    }
-
-    class TreeAmbush extends ActionFactoryInstance {
-        public TreeAmbush() {
-            super(new nightgames.actions.TreeAmbush());
-        }
-    }
-
-    class Bathe extends ActionFactoryInstance {
-        public Bathe() {
-            super(new nightgames.actions.Bathe());
-        }
-    }
-
-    class Craft extends ActionFactoryInstance {
-        public Craft() {
-            super(new nightgames.actions.Craft());
-        }
-    }
-
-    class Energize extends ActionFactoryInstance {
-        public Energize() {
-            super(new nightgames.actions.Energize());
-        }
-    }
-
-    class Hide extends ActionFactoryInstance {
-        public Hide() {
-            super(new nightgames.actions.Hide());
-        }
-    }
-
-    class Recharge extends ActionFactoryInstance {
-        public Recharge() {
-            super(new nightgames.actions.Recharge());
-        }
-    }
-
-    class Resupply extends ActionFactoryInstance {
-        public Resupply() {
-            super(new nightgames.actions.Resupply());
-        }
-
-        public Resupply(Set<Participant> participants) {
-            super(new nightgames.actions.Resupply(participants));
-        }
-    }
-
-    class Scavenge extends ActionFactoryInstance {
-        public Scavenge() {
-            super(new nightgames.actions.Scavenge());
-        }
-    }
 }

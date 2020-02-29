@@ -1,7 +1,6 @@
 package nightgames.match;
 
-import nightgames.actions.Action;
-import nightgames.actions.Movement;
+import nightgames.actions.*;
 import nightgames.areas.*;
 import nightgames.characters.Character;
 import nightgames.characters.*;
@@ -231,30 +230,30 @@ public class Match {
         library.shortcut(tunnel);
         tunnel.shortcut(library);
 
-        dorm.getActionFactories().add(new ActionFactory.Hide());
-        dorm.getActionFactories().add(new ActionFactory.Resupply());
-        shower.getActionFactories().add(new ActionFactory.Bathe());
-        shower.getActionFactories().add(new ActionFactory.Hide());
-        laundry.getActionFactories().add(new ActionFactory.Hide());
-        engineering.getActionFactories().add(new ActionFactory.Hide());
-        lab.getActionFactories().add(new ActionFactory.Craft());
-        lab.getActionFactories().add(new ActionFactory.Hide());
-        workshop.getActionFactories().add(new ActionFactory.Hide());
-        workshop.getActionFactories().add(new ActionFactory.Recharge());
-        workshop.getActionFactories().add(new ActionFactory.Scavenge());
-        libarts.getActionFactories().add(new ActionFactory.Hide());
-        libarts.getActionFactories().add(new ActionFactory.Energize());
-        pool.getActionFactories().add(new ActionFactory.Bathe());
-        pool.getActionFactories().add(new ActionFactory.Hide());
-        library.getActionFactories().add(new ActionFactory.Hide());
-        dining.getActionFactories().add(new ActionFactory.Hide());
-        kitchen.getActionFactories().add(new ActionFactory.Craft());
-        kitchen.getActionFactories().add(new ActionFactory.Hide());
-        storage.getActionFactories().add(new ActionFactory.Hide());
-        storage.getActionFactories().add(new ActionFactory.Scavenge());
-        sau.getActionFactories().add(new ActionFactory.Hide());
-        sau.getActionFactories().add(new ActionFactory.Resupply());
-        courtyard.getActionFactories().add(new ActionFactory.Hide());
+        dorm.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        dorm.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Resupply()));
+        shower.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Bathe()));
+        shower.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        laundry.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        engineering.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        lab.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Craft()));
+        lab.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        workshop.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        workshop.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Recharge()));
+        workshop.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Scavenge()));
+        libarts.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        libarts.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Energize()));
+        pool.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Bathe()));
+        pool.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        library.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        dining.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        kitchen.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Craft()));
+        kitchen.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        storage.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        storage.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Scavenge()));
+        sau.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        sau.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Resupply()));
+        courtyard.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
 
         cacheLocations = Set.of(dorm, shower, laundry, engineering, lab, workshop, libarts, pool, library, dining,
                 kitchen, storage, sau, courtyard);

@@ -1,6 +1,6 @@
 package nightgames.match.ftc;
 
-import nightgames.actions.Movement;
+import nightgames.actions.*;
 import nightgames.areas.ActionFactory;
 import nightgames.areas.Area;
 import nightgames.areas.AreaAttribute;
@@ -209,35 +209,35 @@ public class FTCMatch extends Match {
         link(dump, waterfall);
         link(glade, lodge);
 
-        nBase.getActionFactories().add(new ActionFactory.Hide());
-        nBase.getActionFactories().add(new ActionFactory.Resupply(Set.of(north)));
-        wBase.getActionFactories().add(new ActionFactory.Hide());
-        wBase.getActionFactories().add(new ActionFactory.Resupply(Set.of(west)));
-        sBase.getActionFactories().add(new ActionFactory.Hide());
-        sBase.getActionFactories().add(new ActionFactory.Resupply(Set.of(south)));
-        eBase.getActionFactories().add(new ActionFactory.Hide());
-        eBase.getActionFactories().add(new ActionFactory.Resupply(Set.of(east)));
-        pBase.getActionFactories().add(new ActionFactory.Resupply(Set.of(prey)));
+        nBase.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        nBase.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Resupply(Set.of(north))));
+        wBase.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        wBase.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Resupply(Set.of(west))));
+        sBase.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        sBase.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Resupply(Set.of(south))));
+        eBase.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        eBase.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Resupply(Set.of(east))));
+        pBase.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Resupply(Set.of(prey))));
 
-        pond.getActionFactories().add(new ActionFactory.Bathe());
-        pond.getActionFactories().add(new ActionFactory.Hide());
-        glade.getActionFactories().add(new ActionFactory.Hide());
-        cabin.getActionFactories().add(new ActionFactory.Hide());
-        cabin.getActionFactories().add(new ActionFactory.Recharge());
-        cabin.getActionFactories().add(new ActionFactory.Scavenge());
-        trail.getActionFactories().add(new ActionFactory.TreeAmbush());
-        lodge.getActionFactories().add(new ActionFactory.Craft());
-        lodge.getActionFactories().add(new ActionFactory.Hide());
-        hill.getActionFactories().add(new ActionFactory.Hide());
-        path.getActionFactories().add(new ActionFactory.BushAmbush());
-        oak.getActionFactories().add(new ActionFactory.Hide());
-        oak.getActionFactories().add(new ActionFactory.Recharge());
-        pass.getActionFactories().add(new ActionFactory.PassAmbush());
-        waterfall.getActionFactories().add(new ActionFactory.Bathe());
-        waterfall.getActionFactories().add(new ActionFactory.Hide());
-        monument.getActionFactories().add(new ActionFactory.Hide());
-        dump.getActionFactories().add(new ActionFactory.Hide());
-        dump.getActionFactories().add(new ActionFactory.Scavenge());
+        pond.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Bathe()));
+        pond.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        glade.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        cabin.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        cabin.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Recharge()));
+        cabin.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Scavenge()));
+        trail.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new TreeAmbush()));
+        lodge.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Craft()));
+        lodge.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        hill.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        path.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new BushAmbush()));
+        oak.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        oak.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Recharge()));
+        pass.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new PassAmbush()));
+        waterfall.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Bathe()));
+        waterfall.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        monument.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        dump.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Hide()));
+        dump.getActionFactories().add(new ActionFactory.ActionFactoryInstance(new Scavenge()));
     }
 
     private void link(Area hub, Area... areas) {
