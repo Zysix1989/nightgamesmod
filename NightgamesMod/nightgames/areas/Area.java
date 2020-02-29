@@ -113,10 +113,11 @@ public class Area implements Serializable {
             options = p.getCharacter().intervene(fight, fight.getPlayer(1), fight.getPlayer(2));
         } else if (present.size() > 1 && canFight(p.getCharacter())) {
             for (Participant opponent : Global.getMatch().getParticipants()) {          //FIXME: Currently - encounters repeat - Does this check if they are busy?
-                if (present.contains(opponent) && opponent != p                     
-                               && canFight(opponent.getCharacter())
-                              // && Global.getMatch().canEngage(p, opponent)        
-                               ) {
+                if (present.contains(opponent)
+                        && opponent != p
+                        && canFight(opponent.getCharacter())
+                        // && Global.getMatch().canEngage(p, opponent)
+                ) {
                     fight = Global.getMatch().buildEncounter(p, opponent, this);
                     return new EncounterResult(fight.spotCheck(), new ArrayList<>());
                 }
