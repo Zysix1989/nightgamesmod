@@ -16,6 +16,7 @@ public class EnthrallingTrap extends Trap {
     private static class Instance extends Trap.Instance {
         public Instance(Trap self, Character owner) {
             super(self, owner);
+            strength = owner.get(Attribute.Dark) + owner.get(Attribute.Arcane) + owner.getLevel() / 2;
         }
 
         @Override
@@ -56,10 +57,6 @@ public class EnthrallingTrap extends Trap {
             victim.addNonCombat(new Flatfooted(victim, 1));
             attacker.location().remove(this);
             return super.capitalize(attacker, victim);
-        }
-
-        public void setStrength(Character user) {
-            strength = user.get(Attribute.Dark) + user.get(Attribute.Arcane) + user.getLevel() / 2;
         }
     }
 

@@ -20,7 +20,7 @@ public abstract class Trap {
         public Instance(Trap self, Character owner) {
             this.self = self;
             this.owner = owner;
-            setStrength(owner);
+            strength = owner.getLevel();
         }
 
         protected abstract void trigger(Participant target);
@@ -50,10 +50,6 @@ public abstract class Trap {
 
         public Optional<Position> capitalize(Character attacker, Character victim) {
             return Optional.empty();
-        }
-
-        public void setStrength(Character user) {
-            strength = user.getLevel();
         }
 
         public int getStrength() {

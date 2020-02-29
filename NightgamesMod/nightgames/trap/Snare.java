@@ -15,6 +15,7 @@ public class Snare extends Trap {
     private static class Instance extends Trap.Instance {
         public Instance(Trap self, Character owner) {
             super(self, owner);
+            strength = owner.get(Attribute.Cunning) + owner.getLevel() / 2;
         }
 
         @Override
@@ -42,12 +43,6 @@ public class Snare extends Trap {
             attacker.location().remove(this);
             return super.capitalize(attacker, victim);
         }
-
-        @Override
-        public void setStrength(Character user) {
-            strength = user.get(Attribute.Cunning) + user.getLevel() / 2;
-        }
-
     }
 
     public Snare() {

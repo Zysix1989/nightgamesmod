@@ -17,6 +17,7 @@ public class AphrodisiacTrap extends Trap {
     private static class Instance extends Trap.Instance {
         public Instance(Trap self, Character owner) {
             super(self, owner);
+            strength = owner.get(Attribute.Cunning) + owner.get(Attribute.Science) + owner.getLevel() / 2;
         }
 
         @Override
@@ -48,11 +49,6 @@ public class AphrodisiacTrap extends Trap {
             victim.addNonCombat(new Flatfooted(victim, 1));
             attacker.location().remove(this);
             return super.capitalize(attacker, victim);
-        }
-
-        @Override
-        public void setStrength(Character user) {
-            strength = user.get(Attribute.Cunning) + user.get(Attribute.Science) + user.getLevel() / 2;
         }
     }
     

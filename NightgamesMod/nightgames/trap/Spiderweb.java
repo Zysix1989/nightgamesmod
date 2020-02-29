@@ -17,6 +17,7 @@ public class Spiderweb extends Trap {
 
         public Instance(Trap self, Character owner) {
             super(self, owner);
+            strength = owner.get(Attribute.Cunning) + owner.get(Attribute.Science) + owner.getLevel() / 2;
         }
 
         @Override
@@ -48,12 +49,6 @@ public class Spiderweb extends Trap {
             onSpiderwebDefeat(attacker, victim, this);
             return super.capitalize(attacker, victim);
         }
-
-        @Override
-        public void setStrength(Character user) {
-            strength = user.get(Attribute.Cunning) + user.get(Attribute.Science) + user.getLevel() / 2;
-        }
-
     }
     
     public Spiderweb() {
