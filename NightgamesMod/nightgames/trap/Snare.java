@@ -45,7 +45,7 @@ public class Snare extends Trap {
 
         @Override
         public void setStrength(Character user) {
-            self.setStrength(user.get(Attribute.Cunning) + user.getLevel() / 2);
+            self.strength = user.get(Attribute.Cunning) + user.getLevel() / 2;
         }
 
     }

@@ -60,11 +60,11 @@ public abstract class Trap {
     }
 
     private final String name;
-    private int strength;
+    protected int strength;
 
     protected Trap(String name) {
         this.name = name;
-        this.setStrength(0);
+        this.strength = 0;
     }
 
     public boolean recipe(Character owner) {
@@ -92,10 +92,6 @@ public abstract class Trap {
     }
 
     public abstract InstantiateResult instantiate(Character owner);
-
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
 
     @Override
     public final String toString() {
