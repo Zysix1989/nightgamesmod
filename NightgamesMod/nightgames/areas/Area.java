@@ -12,7 +12,10 @@ import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Area implements Serializable {
@@ -31,7 +34,7 @@ public class Area implements Serializable {
     private Movement enumerator;
     private boolean pinged;
     private Set<AreaAttribute> attributes = Set.of();
-    private Set<ActionFactory> actionFactories = new HashSet<>();
+    private Set<Action> possibleActions = new HashSet<>();
 
     public Area(String name, String description, Movement enumerator) {
         this.name = name;
@@ -46,15 +49,15 @@ public class Area implements Serializable {
 
     public void link(Area adj) {
         adjacent.add(adj);
-        actionFactories.add(new ActionFactory.ActionFactoryInstance(Move.normal(adj)));
+        possibleActions.add(Move.normal(adj));
     }
 
     public void shortcut(Area sc) {
-        actionFactories.add(new ActionFactory.ActionFactoryInstance(Move.shortcut(sc)));
+        possibleActions.add(Move.shortcut(sc));
     }
 
     public void jump(Area adj){
-        actionFactories.add(new ActionFactory.ActionFactoryInstance(Move.ninjaLeap(adj)));
+        possibleActions.add(Move.ninjaLeap(adj));
     }
 
     public boolean open() {
@@ -211,11 +214,9 @@ public class Area implements Serializable {
     }
 
     public List<Action> possibleActions(Character c) {
-        return actionFactories.stream()
-                .map(fact -> fact.createActionFor(c))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toCollection(ArrayList::new));
+        return possibleActions.stream()
+                .filter(action -> action.usable(c))
+                .collect(Collectors.toList());
     }
 
     public Set<Participant> getOccupants() {
@@ -231,7 +232,7 @@ public class Area implements Serializable {
         drawHint = hint;
     }
 
-    public Set<ActionFactory> getActionFactories() {
-        return actionFactories;
+    public Set<Action> getActionFactories() {
+        return possibleActions;
     }
 }
