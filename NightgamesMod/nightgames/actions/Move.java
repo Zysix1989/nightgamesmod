@@ -5,7 +5,7 @@ import nightgames.characters.Character;
 
 public class Move extends Action {
 
-    interface SkillCheck {
+    public interface SkillCheck {
         boolean check(Character c);
     }
 
@@ -13,10 +13,10 @@ public class Move extends Action {
     private Area destination;
     private SkillCheck skillCheck;
 
-    public Move(Area destination) {
-        super("Move(" + destination.name + ")");
+    public Move(Area destination, String name, SkillCheck check) {
+        super(name);
         this.destination = destination;
-        this.skillCheck = c -> !c.bound();
+        this.skillCheck = check;
     }
 
     @Override

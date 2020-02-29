@@ -1,6 +1,7 @@
 package nightgames.areas;
 
 import nightgames.actions.Action;
+import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.match.Participant;
 
@@ -20,7 +21,9 @@ public interface ActionFactory {
 
         @Override
         public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.Move(adjacentRoom);
+            var action = new nightgames.actions.Move(adjacentRoom,
+                    "Move(" + adjacentRoom.name + ")",
+                    ch -> !ch.bound());
             if (action.usable(c)) {
                 return Optional.of(action);
             }
@@ -37,7 +40,9 @@ public interface ActionFactory {
 
         @Override
         public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.Shortcut(adjacentRoom);
+            var action = new nightgames.actions.Move(adjacentRoom,
+                    "Take shortcut to " + adjacentRoom.name,
+                    ch -> ch.getPure(Attribute.Cunning) >= 28 && !ch.bound());
             if (action.usable(c)) {
                 return Optional.of(action);
             }
@@ -54,7 +59,9 @@ public interface ActionFactory {
 
         @Override
         public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.Leap(adjacentRoom);
+            var action = new nightgames.actions.Move(adjacentRoom,
+                    "Ninja Leap("+adjacentRoom.name+")",
+                    ch -> ch.getPure(Attribute.Ninjutsu)>=5 && !ch.bound());
             if (action.usable(c)) {
                 return Optional.of(action);
             }
