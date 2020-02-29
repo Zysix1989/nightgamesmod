@@ -9,7 +9,6 @@ import nightgames.stance.Position;
 import java.util.Map;
 import java.util.Optional;
 
-// TODO: Separate into TrapFactory and TrapInstance
 public abstract class Trap {
 
     public abstract static class Instance implements Deployable {
