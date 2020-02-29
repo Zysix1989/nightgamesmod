@@ -51,7 +51,7 @@ public class Spiderweb extends Trap {
 
         @Override
         public void setStrength(Character user) {
-            self.strength = user.get(Attribute.Cunning) + user.get(Attribute.Science) + user.getLevel() / 2;
+            strength = user.get(Attribute.Cunning) + user.get(Attribute.Science) + user.getLevel() / 2;
         }
 
     }

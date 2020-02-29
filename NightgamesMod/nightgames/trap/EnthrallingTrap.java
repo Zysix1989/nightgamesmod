@@ -59,7 +59,7 @@ public class EnthrallingTrap extends Trap {
         }
 
         public void setStrength(Character user) {
-            self.strength = user.get(Attribute.Dark) + user.get(Attribute.Arcane) + user.getLevel() / 2;
+            strength = user.get(Attribute.Dark) + user.get(Attribute.Arcane) + user.getLevel() / 2;
         }
     }
 

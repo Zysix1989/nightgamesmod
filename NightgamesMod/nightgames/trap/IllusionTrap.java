@@ -44,7 +44,7 @@ public class IllusionTrap extends Trap {
         }
 
         public void setStrength(Character user) {
-            self.strength = user.get(Attribute.Arcane) + user.getLevel() / 2;
+            strength = user.get(Attribute.Arcane) + user.getLevel() / 2;
         }
     }
     

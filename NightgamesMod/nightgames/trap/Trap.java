@@ -15,6 +15,7 @@ public abstract class Trap {
     public abstract static class Instance implements Deployable {
         protected Trap self;
         protected Character owner;
+        protected int strength;
 
         public Instance(Trap self, Character owner) {
             this.self = self;
@@ -51,20 +52,18 @@ public abstract class Trap {
         }
 
         public void setStrength(Character user) {
-            self.strength = user.getLevel();
+            strength = user.getLevel();
         }
 
         public int getStrength() {
-            return self.strength;
+            return strength;
         }
     }
 
     private final String name;
-    protected int strength;
 
     protected Trap(String name) {
         this.name = name;
-        this.strength = 0;
     }
 
     public boolean recipe(Character owner) {
