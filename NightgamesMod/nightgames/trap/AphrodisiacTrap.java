@@ -38,7 +38,7 @@ public class AphrodisiacTrap extends Trap {
                             target.getCharacter().getName() + " is caught in your trap and sprayed with aphrodisiac. She flushes bright red and presses a hand against her crotch. It seems like "
                                     + "she'll start masturbating even if you don't do anything.");
                 }
-                target.getCharacter().addNonCombat(new Horny(target.getCharacter(), (30 + self.getStrength()) / 10, 10, "Aphrodisiac Trap"));
+                target.getCharacter().addNonCombat(new Horny(target.getCharacter(), (30 + getStrength()) / 10, 10, "Aphrodisiac Trap"));
                 target.getCharacter().location().opportunity(target.getCharacter(), this);
             }
         }

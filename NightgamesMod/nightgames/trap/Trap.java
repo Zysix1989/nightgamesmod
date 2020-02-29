@@ -49,6 +49,10 @@ public abstract class Trap {
         public Optional<Position> capitalize(Character attacker, Character victim) {
             return Optional.empty();
         }
+
+        public int getStrength() {
+            return self.strength;
+        }
     }
 
     private final String name;
@@ -91,10 +95,6 @@ public abstract class Trap {
 
     public void setStrength(int strength) {
         this.strength = strength;
-    }
-
-    public int getStrength() {
-        return strength;
     }
 
     @Override

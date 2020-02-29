@@ -35,7 +35,7 @@ public class EnthrallingTrap extends Trap {
                             + " times and hope whatever that thing was, it failed at"
                             + " whatever it was supposed to do. The lingering vision of two"
                             + " large red irises staring at you suggest differently, though.");
-                    target.getCharacter().addNonCombat(new Enthralled(target.getCharacter(), owner, 5 + self.getStrength() / 20));
+                    target.getCharacter().addNonCombat(new Enthralled(target.getCharacter(), owner, 5 + getStrength() / 20));
                 }
             } else if (target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm()) || !target.getCharacter().eligible(owner) || !owner.eligible(target.getCharacter())) {
                 if (target.getCharacter().location().humanPresent()) {
@@ -46,7 +46,7 @@ public class EnthrallingTrap extends Trap {
                             + " who or whatever left that thing there will probably be thinking" + " the same.");
                 }
                 //TODO: Currently, being Enthralled and moving to a new location doesn't use a turn of the effect, meaning that you still lose all those turns once you are in combat.
-                target.getCharacter().addNonCombat(new Enthralled(target.getCharacter(), owner, 5 + self.getStrength() / 20));
+                target.getCharacter().addNonCombat(new Enthralled(target.getCharacter(), owner, 5 + getStrength() / 20));
                 target.getCharacter().location().opportunity(target.getCharacter(), this);
             }
         }
