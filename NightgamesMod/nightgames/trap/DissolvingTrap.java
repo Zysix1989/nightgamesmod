@@ -61,13 +61,9 @@ public class DissolvingTrap extends Trap {
             return super.capitalize(attacker, victim);
         }
     }
-
-    public DissolvingTrap() {
-        this(null);
-    }
     
-    public DissolvingTrap(Character owner) {
-        super("Dissolving Trap", owner);
+    public DissolvingTrap() {
+        super("Dissolving Trap");
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Tripwire, 1,

@@ -27,13 +27,9 @@ public class Decoy extends Trap {
             target.getCharacter().location().remove(this);
         }
     }
-
-    public Decoy() {
-        this(null);
-    }
     
-    public Decoy(Character owner) {
-        super("Decoy", owner);
+    public Decoy() {
+        super("Decoy");
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Phone, 1);

@@ -44,13 +44,9 @@ public class IllusionTrap extends Trap {
         }
 
     }
-
-    public IllusionTrap() {
-        this(null);
-    }
     
-    public IllusionTrap(Character owner) {
-        super("Illusion Trap", owner);
+    public IllusionTrap() {
+        super("Illusion Trap");
     }
 
     public void setStrength(Character user) {

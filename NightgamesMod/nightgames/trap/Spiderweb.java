@@ -49,13 +49,9 @@ public class Spiderweb extends Trap {
             return super.capitalize(attacker, victim);
         }
     }
-
-    public Spiderweb() {
-        this(null);
-    }
     
-    public Spiderweb(Character owner) {
-        super("Spiderweb", owner);
+    public Spiderweb() {
+        super("Spiderweb");
     }
 
     public void setStrength(Character user) {

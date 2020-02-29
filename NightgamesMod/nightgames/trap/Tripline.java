@@ -53,13 +53,9 @@ public class Tripline extends Trap {
             return Optional.of(new StandingOver(attacker, victim));
         }
     }
-
-    public Tripline() {
-        this(null);
-    }
     
-    public Tripline(Character owner) {
-        super("Tripline", owner);
+    public Tripline() {
+        super("Tripline");
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Rope, 1);

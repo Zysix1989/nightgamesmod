@@ -60,13 +60,9 @@ public class SpringTrap extends Trap {
             return Optional.of(new StandingOver(attacker, victim));
         }
     }
-
-    public SpringTrap() {
-        this(null);
-    }
     
-    public SpringTrap(Character owner) {
-        super("Spring Trap", owner);
+    public SpringTrap() {
+        super("Spring Trap");
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Spring, 1, Item.Rope, 1);

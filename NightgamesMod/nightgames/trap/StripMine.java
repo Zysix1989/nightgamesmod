@@ -44,14 +44,9 @@ public class StripMine extends Trap {
             return super.capitalize(attacker, victim);
         }
     }
-
-
-    public StripMine() {
-        this(null);
-    }
     
-    public StripMine(Character owner) {
-        super("Strip Mine", owner);
+    public StripMine() {
+        super("Strip Mine");
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Tripwire, 1, Item.Battery, 3);

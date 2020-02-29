@@ -63,11 +63,7 @@ public class TentacleTrap extends Trap {
     }
 
     public TentacleTrap() {
-        this(null);
-    }
-    
-    public TentacleTrap(Character owner) {
-        super("Tentacle Trap", owner);
+        super("Tentacle Trap");
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Totem, 1);

@@ -29,11 +29,7 @@ public class Alarm extends Trap {
     }
 
     public Alarm() {
-        this(null);
-    }
-
-    public Alarm(Character owner) {
-        super("Alarm", owner);
+        super("Alarm");
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Tripwire, 1,

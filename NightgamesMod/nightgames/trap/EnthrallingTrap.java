@@ -59,16 +59,12 @@ public class EnthrallingTrap extends Trap {
         }
     }
 
-    public EnthrallingTrap() {
-        this(null);
-    }
-
     public void setStrength(Character user) {
         super.setStrength(user.get(Attribute.Dark) + user.get(Attribute.Arcane) + user.getLevel() / 2);
     }
 
-    public EnthrallingTrap(Character owner) {
-        super("Enthralling Trap", owner);
+    public EnthrallingTrap() {
+        super("Enthralling Trap");
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.semen, 1);

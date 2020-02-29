@@ -54,7 +54,7 @@ public abstract class Trap {
     private final String name;
     private int strength;
 
-    protected Trap(String name, Character owner) {
+    protected Trap(String name) {
         this.name = name;
         this.setStrength(0);
     }

@@ -69,13 +69,9 @@ public class RoboWeb extends Trap {
         }
 
     }
-
-    public RoboWeb() {
-        this(null);
-    }
     
-    public RoboWeb(Character owner) {
-        super("RoboWeb", owner);
+    public RoboWeb() {
+        super("RoboWeb");
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Rope, 4,

@@ -45,11 +45,7 @@ public class Snare extends Trap {
     }
 
     public Snare() {
-        this(null);
-    }
-
-    public Snare(Character owner) {
-        super("Snare", owner);
+        super("Snare");
     }
 
     public void setStrength(Character user) {

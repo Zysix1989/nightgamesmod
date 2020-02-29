@@ -50,13 +50,9 @@ public class AphrodisiacTrap extends Trap {
             return super.capitalize(attacker, victim);
         }
     }
-
-    public AphrodisiacTrap() {
-        this(null);
-    }
     
-    public AphrodisiacTrap(Character owner) {
-        super("Aphrodisiac Trap", owner);
+    public AphrodisiacTrap() {
+        super("Aphrodisiac Trap");
     }
 
     public void setStrength(Character user) {
