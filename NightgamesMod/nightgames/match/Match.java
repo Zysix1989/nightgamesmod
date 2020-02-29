@@ -29,7 +29,7 @@ public class Match {
     protected Set<Participant> participants;
     private boolean pause;
     protected Modifier condition;
-
+    protected Set<Area> cacheLocations;
     private Iterator<Participant> roundIterator;
     
     public Match(Collection<Character> combatants, Modifier condition) {
@@ -255,6 +255,9 @@ public class Match {
         sau.getActionFactories().add(new ActionFactory.Hide());
         sau.getActionFactories().add(new ActionFactory.Resupply());
         courtyard.getActionFactories().add(new ActionFactory.Hide());
+
+        cacheLocations = Set.of(dorm, shower, laundry, engineering, lab, workshop, libarts, pool, library, dining,
+                kitchen, storage, sau, courtyard);
 
         map = new HashMap<>();
         map.put("Quad", quad);
@@ -519,16 +522,16 @@ public class Match {
     }
 
     private void dropPackage() {
-        ArrayList<Area> areas = new ArrayList<>(map.values());
-        for (int i = 0; i < 10; i++) {
-            Area target = areas.get(Global.random(areas.size()));
-            if (!target.corridor() && !target.open() && target.env.size() < 5) {
-                target.place(new Cache(meanLvl() + Global.random(11) - 4));
-                Global.gui()
-                      .message("<br/><b>A new cache has been dropped off at " + target.name + "!</b>");
-                break;
-            }
-        }
+        List<Area> areas = new ArrayList<>(cacheLocations);
+        Collections.shuffle(areas);
+        areas.stream()
+                .filter(area -> area.env.size() < 5)
+                .findAny()
+                .ifPresent(area -> {
+                    area.place(new Cache(meanLvl() + Global.random(11) - 4));
+                    Global.gui()
+                            .message("<br/><b>A new cache has been dropped off at " + area.name + "!</b>");
+                });
     }
 
     private void dropChallenge() {
