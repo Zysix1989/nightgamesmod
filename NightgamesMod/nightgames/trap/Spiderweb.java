@@ -44,9 +44,9 @@ public class Spiderweb extends Trap {
         }
 
         @Override
-        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
-            onSpiderwebDefeat(attacker, victim, instance);
-            return super.capitalize(attacker, victim, instance);
+        public Optional<Position> capitalize(Character attacker, Character victim) {
+            onSpiderwebDefeat(attacker, victim, this);
+            return super.capitalize(attacker, victim);
         }
     }
 

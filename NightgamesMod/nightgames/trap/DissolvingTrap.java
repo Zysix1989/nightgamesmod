@@ -56,9 +56,9 @@ public class DissolvingTrap extends Trap {
 
 
         @Override
-        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
+        public Optional<Position> capitalize(Character attacker, Character victim) {
             victim.addNonCombat(new Flatfooted(victim, 1));
-            return super.capitalize(attacker, victim, instance);
+            return super.capitalize(attacker, victim);
         }
     }
 

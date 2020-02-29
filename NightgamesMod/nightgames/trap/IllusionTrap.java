@@ -37,10 +37,10 @@ public class IllusionTrap extends Trap {
         }
 
         @Override
-        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
+        public Optional<Position> capitalize(Character attacker, Character victim) {
             victim.addNonCombat(new Flatfooted(victim, 1));
-            victim.location().remove(instance);
-            return super.capitalize(attacker, victim, instance);
+            victim.location().remove(this);
+            return super.capitalize(attacker, victim);
         }
 
     }

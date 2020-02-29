@@ -480,7 +480,7 @@ public class DefaultEncounter implements Encounter {
             Global.gui()
                   .message("Before you have a chance to recover, " + opportunist.getName() + " pounces on you.");
         }
-        var startingPosition = trap.capitalize(opportunist, target, trap);
+        var startingPosition = trap.capitalize(opportunist, target);
         startingPosition.ifPresentOrElse(
                 sp -> fight = new Combat(opportunist, target, opportunist.location(), sp),
                 () -> fight = new Combat(opportunist, target, opportunist.location()));

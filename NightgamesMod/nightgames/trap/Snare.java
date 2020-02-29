@@ -38,9 +38,9 @@ public class Snare extends Trap {
         }
 
         @Override
-        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
-            attacker.location().remove(instance);
-            return super.capitalize(attacker, victim, instance);
+        public Optional<Position> capitalize(Character attacker, Character victim) {
+            attacker.location().remove(this);
+            return super.capitalize(attacker, victim);
         }
     }
 

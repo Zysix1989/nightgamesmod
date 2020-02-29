@@ -54,9 +54,9 @@ public class SpringTrap extends Trap {
         }
 
         @Override
-        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
+        public Optional<Position> capitalize(Character attacker, Character victim) {
             victim.addNonCombat(new Flatfooted(victim, 1));
-            attacker.location().remove(instance);
+            attacker.location().remove(this);
             return Optional.of(new StandingOver(attacker, victim));
         }
     }

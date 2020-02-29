@@ -44,10 +44,10 @@ public class AphrodisiacTrap extends Trap {
         }
 
         @Override
-        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
+        public Optional<Position> capitalize(Character attacker, Character victim) {
             victim.addNonCombat(new Flatfooted(victim, 1));
-            attacker.location().remove(instance);
-            return super.capitalize(attacker, victim, instance);
+            attacker.location().remove(this);
+            return super.capitalize(attacker, victim);
         }
     }
 

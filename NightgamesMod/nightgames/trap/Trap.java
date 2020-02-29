@@ -44,7 +44,7 @@ public abstract class Trap {
             return self;
         }
 
-        public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
+        public Optional<Position> capitalize(Character attacker, Character victim) {
             return Optional.empty();
         }
     }
