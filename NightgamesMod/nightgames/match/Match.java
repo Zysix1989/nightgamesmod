@@ -235,7 +235,7 @@ public class Match {
 
         dorm.getPossibleActions().add(new Hide());
         dorm.getPossibleActions().add(new Resupply());
-        shower.getPossibleActions().add(new Bathe());
+        shower.getPossibleActions().add(new Bathe(Bathe.SHOWER_MESSAGE));
         shower.getPossibleActions().add(new Hide());
         laundry.getPossibleActions().add(new Hide());
         engineering.getPossibleActions().add(new Hide());
@@ -246,7 +246,7 @@ public class Match {
         workshop.getPossibleActions().add(new Scavenge());
         libarts.getPossibleActions().add(new Hide());
         libarts.getPossibleActions().add(new Energize());
-        pool.getPossibleActions().add(new Bathe());
+        pool.getPossibleActions().add(new Bathe(Bathe.POOL_MESSAGE));
         pool.getPossibleActions().add(new Hide());
         library.getPossibleActions().add(new Hide());
         dining.getPossibleActions().add(new Hide());
