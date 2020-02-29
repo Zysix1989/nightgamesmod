@@ -19,16 +19,16 @@ public class Tripline extends Trap {
         }
 
         @Override
-        public void trigger(Participant target, Trap.Instance instance) {
+        public void trigger(Participant target) {
             int m = 30 + target.getCharacter().getLevel() * 5;
             if (target.getCharacter().human()) {
                 if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
                     Global.gui().message("You trip over a line of cord and fall on your face.");
                     target.getCharacter().pain(null, null, m);
-                    target.getCharacter().location().opportunity(target.getCharacter(), instance);
+                    target.getCharacter().location().opportunity(target.getCharacter(), this);
                 } else {
                     Global.gui().message("You spot a line strung across the corridor and carefully step over it.");
-                    target.getCharacter().location().remove(    instance);
+                    target.getCharacter().location().remove(    this);
                 }
             } else {
                 if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
@@ -37,7 +37,7 @@ public class Tripline extends Trap {
                                 + " carelessly stumbles over the tripwire and lands with an audible thud.");
                     }
                     target.getCharacter().pain(null, null, m);
-                    target.getCharacter().location().opportunity(target.getCharacter(), instance);
+                    target.getCharacter().location().opportunity(target.getCharacter(), this);
                 } else {
                     if (target.getCharacter().location().humanPresent()) {
                         Global.gui().message("You see " + target.getCharacter().getName() + " carefully step over the carefully placed tripline." );

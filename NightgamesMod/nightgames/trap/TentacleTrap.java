@@ -20,7 +20,7 @@ public class TentacleTrap extends Trap {
         }
 
         @Override
-        public void trigger(Participant target, Trap.Instance instance) {
+        public void trigger(Participant target) {
             if (target.getCharacter().mostlyNude()) {
                 if (target.getCharacter().human()) {
                     Global.gui().message(
@@ -39,7 +39,7 @@ public class TentacleTrap extends Trap {
                 target.getCharacter().tempt(target.getCharacter().getArousal().max());
                 target.getCharacter().addNonCombat(new Oiled(target.getCharacter()));
                 target.getCharacter().addNonCombat(new Hypersensitive(target.getCharacter()));
-                target.getCharacter().location().opportunity(target.getCharacter(), instance);
+                target.getCharacter().location().opportunity(target.getCharacter(), this);
             } else {
                 if (target.getCharacter().human()) {
                     Global.gui().message(

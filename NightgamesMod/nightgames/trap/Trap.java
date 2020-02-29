@@ -19,12 +19,12 @@ public abstract class Trap {
             this.self = self;
         }
 
-        protected abstract void trigger(Participant target, Instance instance);
+        protected abstract void trigger(Participant target);
 
         @Override
         public boolean resolve(Participant active) {
             if (active.getCharacter() != self.owner) {
-                trigger(active, this);
+                trigger(active);
                 return true;
             }
             return false;

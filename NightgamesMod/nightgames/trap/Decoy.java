@@ -16,7 +16,7 @@ public class Decoy extends Trap {
         }
 
         @Override
-        public void trigger(Participant target, Trap.Instance instance) {
+        public void trigger(Participant target) {
             if (target.getCharacter().human()) {
                 Global.gui().message(
                         "You follow the noise you've been hearing for a while, which turns out to be coming from a disposable cell phone. Seems like someone "
@@ -24,7 +24,7 @@ public class Decoy extends Trap {
             } else if (target.getCharacter().location().humanPresent()) {
                 Global.gui().message(target.getCharacter().getName() + " finds the decoy phone and deactivates it.");
             }
-            target.getCharacter().location().remove(instance);
+            target.getCharacter().location().remove(this);
         }
     }
 

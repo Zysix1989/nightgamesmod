@@ -19,7 +19,7 @@ public class StripMine extends Trap {
         }
 
         @Override
-        public void trigger(Participant target, Trap.Instance instance) {
+        public void trigger(Participant target) {
             if (target.getCharacter().human()) {
                 if (target.getCharacter().mostlyNude()) {
                     Global.gui().message(
@@ -34,7 +34,7 @@ public class StripMine extends Trap {
                         + target.getCharacter().getName() + ", looking surprised.");
             }
             IntStream.range(0, 2 + Global.random(4)).forEach(i -> target.getCharacter().shredRandom());
-            target.getCharacter().location().opportunity(target.getCharacter(), instance);
+            target.getCharacter().location().opportunity(target.getCharacter(), this);
         }
     }
 

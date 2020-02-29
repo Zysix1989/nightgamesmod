@@ -20,7 +20,7 @@ public class Spiderweb extends Trap {
         }
 
         @Override
-        public void trigger(Participant target, Trap.Instance instance) {
+        public void trigger(Participant target) {
             if (target.getCharacter().human()) {
                 if (target.getCharacter().mostlyNude()) {
                     Global.gui().message(
@@ -40,7 +40,7 @@ public class Spiderweb extends Trap {
             }
             target.getCharacter().state = State.webbed;
             target.getCharacter().delay(1);
-            target.getCharacter().location().opportunity(target.getCharacter(), instance);
+            target.getCharacter().location().opportunity(target.getCharacter(), this);
         }
     }
 

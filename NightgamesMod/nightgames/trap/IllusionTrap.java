@@ -20,7 +20,7 @@ public class IllusionTrap extends Trap {
         }
 
         @Override
-        public void trigger(Participant target, Trap.Instance instance) {
+        public void trigger(Participant target) {
             if (target.getCharacter().human()) {
                 Global.gui().message(
                         "You run into a girl you don't recognize, but she's beautiful and completely naked. You don't have a chance to wonder where she came from, because "
@@ -33,7 +33,7 @@ public class IllusionTrap extends Trap {
                 target.getCharacter().tempt(25 + self.getStrength());
             }
             target.getCharacter().tempt(25 + self.getStrength());
-            target.getCharacter().location().opportunity(target.getCharacter(), instance);
+            target.getCharacter().location().opportunity(target.getCharacter(), this);
         }
     }
 
