@@ -55,7 +55,6 @@ public class StripMine extends Trap {
     @Override
     public String setup(Character owner) {
         basicSetup(owner);
-        requiredItems().entrySet().forEach(entry -> owner.consume(entry.getKey(), entry.getValue()));
         return "Using the techniques Jett showed you, you rig up a one-time-use clothing destruction device.";
     }
 
