@@ -24,4 +24,21 @@ public interface ActionFactory {
             return Optional.empty();
         }
     }
+
+    class ShortcutMovement implements ActionFactory {
+        private final Area adjacentRoom;
+
+        ShortcutMovement(Area adjacentRoom) {
+            this.adjacentRoom = adjacentRoom;
+        }
+
+        @Override
+        public Optional<Action> createActionFor(Character c) {
+            var action = new nightgames.actions.Shortcut(adjacentRoom);
+            if (action.usable(c)) {
+                return Optional.of(action);
+            }
+            return Optional.empty();
+        }
+    }
 }

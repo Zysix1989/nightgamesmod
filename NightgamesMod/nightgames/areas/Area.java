@@ -3,7 +3,6 @@ package nightgames.areas;
 import nightgames.actions.Action;
 import nightgames.actions.Leap;
 import nightgames.actions.Movement;
-import nightgames.actions.Shortcut;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
@@ -22,34 +21,23 @@ public class Area implements Serializable {
      */
     private static final long serialVersionUID = -1372128249588089014L;
     public String name;
-    public HashSet<Area> adjacent;
-    public HashSet<Area> shortcut;
-    public HashSet<Area> jump;
-    private ArrayList<Participant> present;
+    public HashSet<Area> adjacent = new HashSet<>();
+    public HashSet<Area> jump = new HashSet<>();
+    private ArrayList<Participant> present = new ArrayList<>();
     public String description;
     public Encounter fight;
-    public boolean alarm;
-    public ArrayList<Deployable> env;
-    public transient MapDrawHint drawHint;
+    public boolean alarm = false;
+    public ArrayList<Deployable> env = new ArrayList<>();
+    public transient MapDrawHint drawHint = new MapDrawHint();
     private Movement enumerator;
     private boolean pinged;
-    private Set<AreaAttribute> attributes;
-    private Set<ActionFactory> actionFactories;
+    private Set<AreaAttribute> attributes = Set.of();
+    private Set<ActionFactory> actionFactories = new HashSet<>();
 
     public Area(String name, String description, Movement enumerator) {
         this.name = name;
         this.description = description;
         this.enumerator = enumerator;
-        adjacent = new HashSet<>();
-        shortcut = new HashSet<>();
-        jump = new HashSet<>();
-        present = new ArrayList<>();
-        env = new ArrayList<>();
-        alarm = false;
-        fight = null;
-        this.drawHint = new MapDrawHint();
-        this.attributes = Set.of();
-        this.actionFactories = new HashSet<>();
     }
 
     public Area(String name, String description, Movement enumerator, Set<AreaAttribute> attributes) {
@@ -63,7 +51,7 @@ public class Area implements Serializable {
     }
 
     public void shortcut(Area sc) {
-        shortcut.add(sc);
+        actionFactories.add(new ActionFactory.ShortcutMovement(sc));
     }
     
     public void jump(Area adj){
@@ -252,9 +240,6 @@ public class Area implements Serializable {
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toCollection(ArrayList::new));
-        for (Area path : shortcut) {
-            res.add(new Shortcut(path));
-        }
         for (Area path : jump) {
             res.add(new Leap(path));
         }
