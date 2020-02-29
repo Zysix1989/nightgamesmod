@@ -45,15 +45,15 @@ public class Area implements Serializable {
 
     public void link(Area adj) {
         adjacent.add(adj);
-        actionFactories.add(new ActionFactory.Movement(adj));
+        actionFactories.add(ActionFactory.Movement.movement(adj));
     }
 
     public void shortcut(Area sc) {
-        actionFactories.add(new ActionFactory.ShortcutMovement(sc));
+        actionFactories.add(ActionFactory.Movement.shortcut(sc));
     }
-    
+
     public void jump(Area adj){
-        actionFactories.add(new ActionFactory.LeapMovement(adj));
+        actionFactories.add(ActionFactory.Movement.ninjaLeap(adj));
     }
 
     public boolean open() {

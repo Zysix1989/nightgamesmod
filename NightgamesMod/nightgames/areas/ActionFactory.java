@@ -1,6 +1,7 @@
 package nightgames.areas;
 
 import nightgames.actions.Action;
+import nightgames.actions.Move;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.match.Participant;
@@ -14,54 +15,38 @@ public interface ActionFactory {
 
     class Movement implements ActionFactory {
         private final Area adjacentRoom;
+        private final String label;
+        private final Move.SkillCheck skillCheck;
 
-        Movement(Area adjacentRoom) {
+        private Movement(Area adjacentRoom, String label, Move.SkillCheck check) {
             this.adjacentRoom = adjacentRoom;
+            this.label = label;
+            this.skillCheck = check;
         }
 
-        @Override
-        public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.Move(adjacentRoom,
+        public static Movement movement(Area adjacentRoom) {
+            return new Movement(adjacentRoom,
                     "Move(" + adjacentRoom.name + ")",
                     ch -> !ch.bound());
-            if (action.usable(c)) {
-                return Optional.of(action);
-            }
-            return Optional.empty();
-        }
-    }
-
-    class ShortcutMovement implements ActionFactory {
-        private final Area adjacentRoom;
-
-        ShortcutMovement(Area adjacentRoom) {
-            this.adjacentRoom = adjacentRoom;
         }
 
-        @Override
-        public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.Move(adjacentRoom,
+        public static Movement shortcut(Area adjacentRoom) {
+            return new Movement(
+                adjacentRoom,
                     "Take shortcut to " + adjacentRoom.name,
                     ch -> ch.getPure(Attribute.Cunning) >= 28 && !ch.bound());
-            if (action.usable(c)) {
-                return Optional.of(action);
-            }
-            return Optional.empty();
-        }
-    }
-
-    class LeapMovement implements ActionFactory {
-        private final Area adjacentRoom;
-
-        LeapMovement(Area adjacentRoom) {
-            this.adjacentRoom = adjacentRoom;
         }
 
-        @Override
-        public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.Move(adjacentRoom,
+        public static Movement ninjaLeap(Area adjacentRoom) {
+            return new Movement(
+                    adjacentRoom,
                     "Ninja Leap("+adjacentRoom.name+")",
                     ch -> ch.getPure(Attribute.Ninjutsu)>=5 && !ch.bound());
+        }
+        public Optional<Action> createActionFor(Character c) {
+            var action = new nightgames.actions.Move(adjacentRoom,
+                    label,
+                    skillCheck);
             if (action.usable(c)) {
                 return Optional.of(action);
             }
