@@ -40,7 +40,7 @@ public class Match {
         time = 0;
         timeSinceLastDrop = 0;
         pause = false;
-        map = buildMap();
+        buildMap();
         roundIterator = participants.iterator();
     }
     
@@ -89,7 +89,7 @@ public class Match {
         }
     }
 
-    private static Map<String, Area> buildMap() {
+    private void buildMap() {
         Area quad = new Area("Quad",
                         "You are in the <b>Quad</b> that sits in the center of the Dorm, the Dining Hall, the Engineering Building, and the Liberal Arts Building. There's "
                                         + "no one around at this time of night, but the Quad is well-lit and has no real cover. You can probably be spotted from any of the surrounding buildings, it may "
@@ -256,7 +256,7 @@ public class Match {
         sau.getActionFactories().add(new ActionFactory.Resupply());
         courtyard.getActionFactories().add(new ActionFactory.Hide());
 
-        HashMap<String, Area> map = new HashMap<>();
+        map = new HashMap<>();
         map.put("Quad", quad);
         map.put("Dorm", dorm);
         map.put("Shower", shower);
@@ -274,7 +274,6 @@ public class Match {
         map.put("Bridge", bridge);
         map.put("Union", sau);
         map.put("Courtyard", courtyard);
-        return map;
     }
 
     private void placeCharacters() {
