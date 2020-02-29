@@ -5,22 +5,33 @@ import nightgames.characters.State;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 import nightgames.match.ftc.FTCMatch;
 
-public class Resupply extends Action {
+import java.util.Set;
+import java.util.stream.Collectors;
 
-    /**
-     *
-     */
+public class Resupply extends Action {
     private static final long serialVersionUID = -3349606637987124335L;
+
+    private final boolean permissioned;
+    private final Set<Character> validCharacters;
 
     public Resupply() {
         super("Resupply");
+        permissioned = false;
+        validCharacters = Set.of();
+    }
+
+    public Resupply(Set<Participant> validParticipants) {
+        super("Resupply");
+        permissioned = true;
+        validCharacters = validParticipants.stream().map(Participant::getCharacter).collect(Collectors.toSet());
     }
 
     @Override
     public boolean usable(Character user) {
-        return !user.bound();
+        return !user.bound() && (!permissioned || validCharacters.contains(user));
     }
 
     @Override

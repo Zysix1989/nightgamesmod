@@ -8,7 +8,6 @@ import nightgames.match.Participant;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public interface ActionFactory {
     Optional<Action> createActionFor(Character c);
@@ -96,26 +95,13 @@ public interface ActionFactory {
         }
     }
 
-    class Resupply implements ActionFactory {
-        boolean permissioned;
-        Set<Character> allowedCharacters;
-
+    class Resupply extends ActionFactoryInstance {
         public Resupply() {
-            permissioned = false;
+            super(new nightgames.actions.Resupply());
         }
 
         public Resupply(Set<Participant> participants) {
-            permissioned = true;
-            allowedCharacters = participants.stream().map(Participant::getCharacter).collect(Collectors.toSet());
-        }
-
-        @Override
-        public Optional<Action> createActionFor(Character c) {
-            var action = new nightgames.actions.Resupply();
-            if (action.usable(c) && (!permissioned || allowedCharacters.contains(c))) {
-                return Optional.of(action);
-            }
-            return Optional.empty();
+            super(new nightgames.actions.Resupply(participants));
         }
     }
 
