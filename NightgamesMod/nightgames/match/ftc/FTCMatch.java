@@ -147,7 +147,7 @@ public class FTCMatch extends Match {
                         "You are following a trail along some relatively"
                                         + " short trees. If you've got the upper body strength, you could"
                                         + " probably climb up one.",
-                        Movement.ftcTrail, Set.of(AreaAttribute.Corridor));
+                        Movement.ftcTrail);
         Area lodge = new Area("Lodge",
                         "You are in a quaint wooden lodge. There are numerous"
                                         + " herbs and chemicals here, and you should be able to mix up some good"
@@ -160,7 +160,7 @@ public class FTCMatch extends Match {
         Area path = new Area("Path",
                         "You are on a path leading through some bushes. If you can pick"
                                         + " a good bush to hide in, you might be able to get the drop on passers-by.",
-                        Movement.ftcPath, Set.of(AreaAttribute.Corridor));
+                        Movement.ftcPath);
         Area oak = new Area("Oak",
                         "You are standing under a tall, broad oak. There's something about"
                                         + " it that somehow resonates inside you. It's quite a comfortable feeling, actually.",
@@ -169,7 +169,7 @@ public class FTCMatch extends Match {
                         "You are walking through a narrow pass carved through a steep"
                                         + " hill. You could try ambushing someone here, but others could easily do the same"
                                         + " to you.",
-                        Movement.ftcPass, Set.of(AreaAttribute.Corridor));
+                        Movement.ftcPass);
         Area waterfall = new Area("Waterfall",
                         "You are next to a pretty waterfall. The river it's in"
                                         + " bends sharply here, and only this bit is within the bounds for the Games. Still,"

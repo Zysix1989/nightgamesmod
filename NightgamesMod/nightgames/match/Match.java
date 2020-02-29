@@ -154,11 +154,11 @@ public class Match {
                         "You are in the <b>Tunnel</b> connecting the dorm to the dining hall. It doesn't get a lot of use during the day and most of the freshmen "
                                         + "aren't even aware of its existence, but many upperclassmen have been thankful for it on cold winter days and it's proven to be a major tactical asset. The "
                                         + "tunnel is well-lit and doesn't offer any hiding places.",
-                        Movement.tunnel, Set.of(AreaAttribute.Corridor));
+                        Movement.tunnel);
         Area bridge = new Area("Bridge",
                         "You are on the <b>Bridge</b> connecting the second floors of the Science and Engineering Building and the Library. It's essentially just a "
                                         + "corridor, so there's no place for anyone to hide.",
-                        Movement.bridge, Set.of(AreaAttribute.Corridor));
+                        Movement.bridge);
         Area sau = new Area("Student Union",
                         "You are in the <b>Student Union</b>, which doubles as base of operations during match hours. You and the other competitors can pick up "
                                         + "a change of clothing here.",

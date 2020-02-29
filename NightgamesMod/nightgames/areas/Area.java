@@ -60,10 +60,6 @@ public class Area implements Serializable {
         return attributes.contains(AreaAttribute.Open);
     }
 
-    public boolean corridor() {
-        return attributes.contains(AreaAttribute.Corridor);
-    }
-
     public boolean ping(int perception) {
         if (fight != null) {
             return true;
