@@ -1,6 +1,9 @@
 package nightgames.areas;
 
-import nightgames.actions.*;
+import nightgames.actions.Action;
+import nightgames.actions.Leap;
+import nightgames.actions.Movement;
+import nightgames.actions.Shortcut;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
@@ -10,10 +13,8 @@ import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Area implements Serializable {
     /**
@@ -33,6 +34,7 @@ public class Area implements Serializable {
     private Movement enumerator;
     private boolean pinged;
     private Set<AreaAttribute> attributes;
+    private Set<ActionFactory> actionFactories;
 
     public Area(String name, String description, Movement enumerator) {
         this.name = name;
@@ -47,6 +49,7 @@ public class Area implements Serializable {
         fight = null;
         this.drawHint = new MapDrawHint();
         this.attributes = Set.of();
+        this.actionFactories = new HashSet<>();
     }
 
     public Area(String name, String description, Movement enumerator, Set<AreaAttribute> attributes) {
@@ -56,6 +59,7 @@ public class Area implements Serializable {
 
     public void link(Area adj) {
         adjacent.add(adj);
+        actionFactories.add(new ActionFactory.Movement(adj));
     }
 
     public void shortcut(Area sc) {
@@ -242,11 +246,12 @@ public class Area implements Serializable {
         return env.stream().anyMatch(d -> d instanceof Trap);
     }
 
-    public List<Action> possibleActions() {
-        var res = new ArrayList<Action>();
-        for (Area path : adjacent) {
-            res.add(new Move(path));
-        }
+    public List<Action> possibleActions(Character c) {
+        var res = actionFactories.stream()
+                .map(fact -> fact.createActionFor(c))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toCollection(ArrayList::new));
         for (Area path : shortcut) {
             res.add(new Shortcut(path));
         }
@@ -267,5 +272,9 @@ public class Area implements Serializable {
 
     public void setMapDrawHint(MapDrawHint hint) {
         drawHint = hint;
+    }
+
+    public Set<ActionFactory> getActionFactories() {
+        return actionFactories;
     }
 }

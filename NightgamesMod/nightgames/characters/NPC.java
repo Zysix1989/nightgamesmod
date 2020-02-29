@@ -1,21 +1,6 @@
 package nightgames.characters;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-import nightgames.actions.Action;
-import nightgames.actions.IMovement;
-import nightgames.actions.Move;
-import nightgames.actions.Resupply;
-import nightgames.actions.Wait;
+import nightgames.actions.*;
 import nightgames.areas.Area;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.StraponPart;
@@ -51,12 +36,11 @@ import nightgames.skills.strategy.DefaultStrategy;
 import nightgames.stance.Behind;
 import nightgames.stance.Neutral;
 import nightgames.stance.Position;
-import nightgames.status.Disguised;
-import nightgames.status.Enthralled;
-import nightgames.status.Pheromones;
-import nightgames.status.Status;
-import nightgames.status.Stsflag;
+import nightgames.status.*;
 import nightgames.trap.Trap;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class NPC extends Character {
     public BasePersonality ai;
@@ -475,7 +459,7 @@ public class NPC extends Character {
                         radar.add(path.id());
                     }
                 }
-                moves.addAll(location.possibleActions());
+                moves.addAll(location.possibleActions(this));
             }
             pickAndDoAction(allowedActions(), moves, radar);
         }
