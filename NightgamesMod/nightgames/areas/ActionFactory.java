@@ -13,32 +13,33 @@ import java.util.stream.Collectors;
 public interface ActionFactory {
     Optional<Action> createActionFor(Character c);
 
-    class Movement implements ActionFactory {
+    class ActionFactoryInstance implements ActionFactory {
         private final Action action;
 
-        private Movement(Area adjacentRoom, String label, Move.SkillCheck check) {
-            this.action = new Move(adjacentRoom, label, check);
+        private ActionFactoryInstance(Action action) {
+            this.action = action;
         }
 
-        public static Movement movement(Area adjacentRoom) {
-            return new Movement(adjacentRoom,
+        public static ActionFactoryInstance movement(Area adjacentRoom) {
+            return new ActionFactoryInstance(new Move(adjacentRoom,
                     "Move(" + adjacentRoom.name + ")",
-                    ch -> !ch.bound());
+                    ch -> !ch.bound()));
         }
 
-        public static Movement shortcut(Area adjacentRoom) {
-            return new Movement(
+        public static ActionFactoryInstance shortcut(Area adjacentRoom) {
+            return new ActionFactoryInstance(new Move(
                 adjacentRoom,
                     "Take shortcut to " + adjacentRoom.name,
-                    ch -> ch.getPure(Attribute.Cunning) >= 28 && !ch.bound());
+                    ch -> ch.getPure(Attribute.Cunning) >= 28 && !ch.bound()));
         }
 
-        public static Movement ninjaLeap(Area adjacentRoom) {
-            return new Movement(
+        public static ActionFactoryInstance ninjaLeap(Area adjacentRoom) {
+            return new ActionFactoryInstance(new Move(
                     adjacentRoom,
                     "Ninja Leap("+adjacentRoom.name+")",
-                    ch -> ch.getPure(Attribute.Ninjutsu)>=5 && !ch.bound());
+                    ch -> ch.getPure(Attribute.Ninjutsu)>=5 && !ch.bound()));
         }
+
         public Optional<Action> createActionFor(Character c) {
             if (action.usable(c)) {
                 return Optional.of(action);
