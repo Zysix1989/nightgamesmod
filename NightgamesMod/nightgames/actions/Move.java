@@ -4,20 +4,24 @@ import nightgames.areas.Area;
 import nightgames.characters.Character;
 
 public class Move extends Action {
-    /**
-     * 
-     */
+
+    interface SkillCheck {
+        boolean check(Character c);
+    }
+
     private static final long serialVersionUID = -6111866290941387475L;
     private Area destination;
+    private SkillCheck skillCheck;
 
     public Move(Area destination) {
         super("Move(" + destination.name + ")");
         this.destination = destination;
+        this.skillCheck = c -> !c.bound();
     }
 
     @Override
     public boolean usable(Character user) {
-        return !user.bound();
+        return skillCheck.check(user);
     }
 
     @Override
