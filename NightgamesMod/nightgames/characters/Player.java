@@ -539,8 +539,13 @@ public class Player extends Character {
 
     @Override
     public void flee(Area location2) {
-        Area[] adjacent = location2.adjacent.toArray(new Area[location2.adjacent.size()]);
-        Area destination = adjacent[Global.random(adjacent.length)];
+        var options = location.possibleActions(this);
+        var destinations = options.stream()
+                .filter(action -> action instanceof Move)
+                .map(action -> (Move) action)
+                .map(Move::getDestination)
+                .collect(Collectors.toList());
+        var destination = destinations.get(Global.random(destinations.size()));
         gui.message("You dash away and escape into the <b>" + destination.name + ".</b>");
         travel(destination);
         location2.endEncounter();
