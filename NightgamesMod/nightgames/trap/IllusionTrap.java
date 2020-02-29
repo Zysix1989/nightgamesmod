@@ -31,9 +31,9 @@ public class IllusionTrap extends Trap {
                 Global.gui().message("There's a flash of pink light and " + target.getCharacter().getName() + " flushes with arousal.");
             }
             if (target.getCharacter().has(Trait.imagination)) {
-                target.getCharacter().tempt(25 + getStrength());
+                target.getCharacter().tempt(25 + strength);
             }
-            target.getCharacter().tempt(25 + getStrength());
+            target.getCharacter().tempt(25 + strength);
             target.getCharacter().location().opportunity(target.getCharacter(), this);
         }
 

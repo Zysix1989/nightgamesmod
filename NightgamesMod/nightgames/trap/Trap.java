@@ -51,10 +51,6 @@ public abstract class Trap {
         public Optional<Position> capitalize(Character attacker, Character victim) {
             return Optional.empty();
         }
-
-        public int getStrength() {
-            return strength;
-        }
     }
 
     private final String name;

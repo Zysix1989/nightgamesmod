@@ -20,13 +20,13 @@ public class Snare extends Trap {
 
         @Override
         public void trigger(Participant target) {
-            if (target.getCharacter().check(Attribute.Perception, 25 + getStrength() + target.getCharacter().baseDisarm())) {
+            if (target.getCharacter().check(Attribute.Perception, 25 + strength + target.getCharacter().baseDisarm())) {
                 if (target.getCharacter().human()) {
                     Global.gui().message("You notice a snare on the floor in front of you and manage to disarm it safely");
                 }
                 target.getCharacter().location().remove(this);
             } else {
-                target.getCharacter().addNonCombat(new Bound(target.getCharacter(), 30 + getStrength() / 2, "snare"));
+                target.getCharacter().addNonCombat(new Bound(target.getCharacter(), 30 + strength / 2, "snare"));
                 if (target.getCharacter().human()) {
                     Global.gui().message(
                             "You hear a sudden snap and you're suddenly overwhelmed by a blur of ropes. The tangle of ropes trip you up and firmly bind your arms.");

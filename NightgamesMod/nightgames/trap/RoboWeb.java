@@ -57,7 +57,7 @@ public class RoboWeb extends Trap {
                         Global.capitalizeFirstLetter(target.getCharacter().pronoun())));
             }
             target.getCharacter().outfit.undress();
-            target.getCharacter().addNonCombat(new RoboWebbed(target.getCharacter(), 100 + getStrength(), this));
+            target.getCharacter().addNonCombat(new RoboWebbed(target.getCharacter(), 100 + strength, this));
             target.getCharacter().location().opportunity(target.getCharacter(), this);
             target.getCharacter().location().alarm = true;
         }
