@@ -53,6 +53,13 @@ public class TentacleTrap extends Trap {
                 }
             }
         }
+
+        @Override
+        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
+            victim.addNonCombat(new Flatfooted(victim, 1));
+            attacker.location().remove(instance);
+            return super.capitalize(attacker, victim, instance);
+        }
     }
 
     public TentacleTrap() {
@@ -84,12 +91,5 @@ public class TentacleTrap extends Trap {
     @Override
     public InstantiateResult instantiate(Character owner) {
         return new InstantiateResult(this.setup(owner), new Instance(this));
-    }
-
-    @Override
-    public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
-        victim.addNonCombat(new Flatfooted(victim, 1));
-        attacker.location().remove(instance);
-        return super.capitalize(attacker, victim, instance);
     }
 }

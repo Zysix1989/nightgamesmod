@@ -43,6 +43,10 @@ public abstract class Trap {
         public Trap getTrap() {
             return self;
         }
+
+        public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
+            return Optional.empty();
+        }
     }
 
     protected Character owner;
@@ -102,10 +106,6 @@ public abstract class Trap {
     @Override
     public final boolean equals(Object obj) {
         return obj != null && getName().equals(obj.toString());
-    }
-    
-    public Optional<Position> capitalize(Character attacker, Character victim, Instance instance) {
-        return Optional.empty();
     }
 
     public String getName() {

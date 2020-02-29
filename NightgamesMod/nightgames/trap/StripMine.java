@@ -36,6 +36,13 @@ public class StripMine extends Trap {
             IntStream.range(0, 2 + Global.random(4)).forEach(i -> target.getCharacter().shredRandom());
             target.getCharacter().location().opportunity(target.getCharacter(), this);
         }
+
+        @Override
+        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
+            victim.addNonCombat(new Flatfooted(victim, 1));
+            attacker.location().remove(instance);
+            return super.capitalize(attacker, victim, instance);
+        }
     }
 
 
@@ -67,13 +74,6 @@ public class StripMine extends Trap {
     @Override
     public InstantiateResult instantiate(Character owner) {
         return new InstantiateResult(this.setup(owner), new Instance(this));
-    }
-
-    @Override
-    public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
-        victim.addNonCombat(new Flatfooted(victim, 1));
-        attacker.location().remove(instance);
-        return super.capitalize(attacker, victim, instance);
     }
 
 }

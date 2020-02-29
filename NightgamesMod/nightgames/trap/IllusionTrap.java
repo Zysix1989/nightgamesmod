@@ -35,6 +35,14 @@ public class IllusionTrap extends Trap {
             target.getCharacter().tempt(25 + self.getStrength());
             target.getCharacter().location().opportunity(target.getCharacter(), this);
         }
+
+        @Override
+        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
+            victim.addNonCombat(new Flatfooted(victim, 1));
+            victim.location().remove(instance);
+            return super.capitalize(attacker, victim, instance);
+        }
+
     }
 
     public IllusionTrap() {
@@ -76,12 +84,4 @@ public class IllusionTrap extends Trap {
     public InstantiateResult instantiate(Character owner) {
         return new InstantiateResult(this.setup(owner), new Instance(this));
     }
-
-    @Override
-    public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
-        victim.addNonCombat(new Flatfooted(victim, 1));
-        victim.location().remove(instance);
-        return super.capitalize(attacker, victim, instance);
-    }
-
 }

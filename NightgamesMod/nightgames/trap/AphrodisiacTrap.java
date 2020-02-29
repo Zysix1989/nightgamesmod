@@ -42,6 +42,13 @@ public class AphrodisiacTrap extends Trap {
                 target.getCharacter().location().opportunity(target.getCharacter(), this);
             }
         }
+
+        @Override
+        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
+            victim.addNonCombat(new Flatfooted(victim, 1));
+            attacker.location().remove(instance);
+            return super.capitalize(attacker, victim, instance);
+        }
     }
 
     public AphrodisiacTrap() {
@@ -83,12 +90,5 @@ public class AphrodisiacTrap extends Trap {
     @Override
     public boolean requirements(Character owner) {
         return owner.get(Attribute.Cunning) >= 12 && !owner.has(Trait.direct);
-    }
-
-    @Override
-    public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
-        victim.addNonCombat(new Flatfooted(victim, 1));
-        attacker.location().remove(instance);
-        return super.capitalize(attacker, victim, instance);
     }
 }

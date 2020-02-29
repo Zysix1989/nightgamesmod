@@ -45,6 +45,13 @@ public class Tripline extends Trap {
                 }
             }
         }
+
+        @Override
+        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
+            victim.addNonCombat(new Flatfooted(victim, 1));
+            victim.location().remove(instance);
+            return Optional.of(new StandingOver(attacker, victim));
+        }
     }
 
     public Tripline() {
@@ -75,13 +82,6 @@ public class Tripline extends Trap {
     @Override
     public boolean requirements(Character owner) {
         return true;
-    }
-
-    @Override
-    public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
-        victim.addNonCombat(new Flatfooted(victim, 1));
-        victim.location().remove(instance);
-        return Optional.of(new StandingOver(attacker, victim));
     }
 
 }

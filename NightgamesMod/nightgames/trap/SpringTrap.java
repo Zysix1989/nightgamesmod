@@ -52,6 +52,13 @@ public class SpringTrap extends Trap {
                 target.getCharacter().location().remove(this);
             }
         }
+
+        @Override
+        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
+            victim.addNonCombat(new Flatfooted(victim, 1));
+            attacker.location().remove(instance);
+            return Optional.of(new StandingOver(attacker, victim));
+        }
     }
 
     public SpringTrap() {
@@ -85,13 +92,6 @@ public class SpringTrap extends Trap {
     @Override
     public boolean requirements(Character owner) {
         return owner.get(Attribute.Cunning) >= 10;
-    }
-
-    @Override
-    public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
-        victim.addNonCombat(new Flatfooted(victim, 1));
-        attacker.location().remove(instance);
-        return Optional.of(new StandingOver(attacker, victim));
     }
 
 }

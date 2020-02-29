@@ -61,6 +61,13 @@ public class RoboWeb extends Trap {
             target.getCharacter().location().opportunity(target.getCharacter(), this);
             target.getCharacter().location().alarm = true;
         }
+
+        @Override
+        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
+            attacker.location().remove(instance);
+            return super.capitalize(attacker, victim, instance);
+        }
+
     }
 
     public RoboWeb() {
@@ -94,11 +101,4 @@ public class RoboWeb extends Trap {
     public InstantiateResult instantiate(Character owner) {
         return new InstantiateResult(this.setup(owner), new Instance(this));
     }
-    
-    @Override
-    public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
-        attacker.location().remove(instance);
-        return super.capitalize(attacker, victim, instance);
-    }
-
 }

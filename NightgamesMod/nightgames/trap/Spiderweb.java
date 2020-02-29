@@ -42,6 +42,12 @@ public class Spiderweb extends Trap {
             target.getCharacter().delay(1);
             target.getCharacter().location().opportunity(target.getCharacter(), this);
         }
+
+        @Override
+        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
+            onSpiderwebDefeat(attacker, victim, instance);
+            return super.capitalize(attacker, victim, instance);
+        }
     }
 
     public Spiderweb() {
@@ -79,12 +85,6 @@ public class Spiderweb extends Trap {
     @Override
     public InstantiateResult instantiate(Character owner) {
         return new InstantiateResult(this.setup(owner), new Instance(this));
-    }
-
-    @Override
-    public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
-        onSpiderwebDefeat(attacker, victim, instance);
-        return super.capitalize(attacker, victim, instance);
     }
     
     public static void onSpiderwebDefeat(Character attacker, Character victim, Trap.Instance trap) {

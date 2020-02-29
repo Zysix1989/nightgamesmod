@@ -36,6 +36,12 @@ public class Snare extends Trap {
                 target.getCharacter().location().opportunity(target.getCharacter(), this);
             }
         }
+
+        @Override
+        public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
+            attacker.location().remove(instance);
+            return super.capitalize(attacker, victim, instance);
+        }
     }
 
     public Snare() {
@@ -70,11 +76,5 @@ public class Snare extends Trap {
     @Override
     public boolean requirements(Character owner) {
         return owner.get(Attribute.Cunning) >= 9;
-    }
-
-    @Override
-    public Optional<Position> capitalize(Character attacker, Character victim, Trap.Instance instance) {
-        attacker.location().remove(instance);
-        return super.capitalize(attacker, victim, instance);
     }
 }
