@@ -17,8 +17,8 @@ import java.util.Optional;
 
 public class SpringTrap extends Trap {
     private static class Instance extends Trap.Instance {
-        public Instance(Trap self) {
-            super(self);
+        public Instance(Trap self, Character owner) {
+            super(self, owner);
         }
 
         @Override
@@ -86,7 +86,7 @@ public class SpringTrap extends Trap {
 
     @Override
     public InstantiateResult instantiate(Character owner) {
-        return new InstantiateResult(this.setup(owner), new Instance(this));
+        return new InstantiateResult(this.setup(owner), new Instance(this, owner));
     }
 
     @Override

@@ -14,16 +14,18 @@ public abstract class Trap {
 
     public abstract static class Instance implements Deployable {
         protected Trap self;
+        protected Character owner;
 
-        public Instance(Trap self) {
+        public Instance(Trap self, Character owner) {
             this.self = self;
+            this.owner = owner;
         }
 
         protected abstract void trigger(Participant target);
 
         @Override
         public boolean resolve(Participant active) {
-            if (active.getCharacter() != self.owner) {
+            if (active.getCharacter() != owner) {
                 trigger(active);
                 return true;
             }
@@ -32,7 +34,7 @@ public abstract class Trap {
 
         @Override
         public Character owner() {
-            return self.owner;
+            return owner;
         }
 
         @Override
@@ -49,13 +51,11 @@ public abstract class Trap {
         }
     }
 
-    protected Character owner;
     private final String name;
     private int strength;
 
     protected Trap(String name, Character owner) {
         this.name = name;
-        this.owner = owner;
         this.setStrength(0);
     }
 
@@ -68,7 +68,6 @@ public abstract class Trap {
     protected abstract Map<Item, Integer> requiredItems();
 
     protected final void basicSetup(Character owner) {
-        this.owner = owner;
         requiredItems().forEach(owner::consume);
     }
 
