@@ -537,7 +537,7 @@ public class Match {
     private void dropChallenge() {
         ArrayList<Area> areas = new ArrayList<>(map.values());
         Area target = areas.get(Global.random(areas.size()));
-        if (!target.open() && target.env.size() < 5) {
+        if (target.env.size() < 5) {
             target.place(new Challenge());
         }
     }
