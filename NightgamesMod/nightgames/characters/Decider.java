@@ -4,7 +4,6 @@ import nightgames.actions.*;
 import nightgames.characters.custom.effect.CustomEffect;
 import nightgames.combat.Combat;
 import nightgames.daytime.Daytime;
-import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.pet.PetCharacter;
@@ -191,15 +190,17 @@ public class Decider {
             }
         }
         if (character.get(Attribute.Science) >= 1 && !character.has(Item.Battery, 10)) {
-            for (Action act : available) {
-                if (act.consider() == Movement.recharge) {
-                    return act;
-                }
+            Predicate<Action> rechargePredicate = act -> act instanceof Recharge;
+            var rechargeAction = available.stream().filter(rechargePredicate).findAny();
+            if (rechargeAction.isPresent()) {
+                return rechargeAction.get();
             }
-            String workshop = Global.checkFlag(Flag.FTC) ? "Cabin" : "Workshop";
-            Move path = character.findPath(Global.getMatch().gps(workshop).get());
-            if (path != null) {
-                return path;
+            var bestMove = Character.bestMove(character, character.location(), rechargePredicate);
+            if (bestMove.isPresent()) {
+                rechargeAction = available.stream().filter(action -> action.equals(bestMove.get())).findAny();
+            }
+            if (rechargeAction.isPresent()) {
+                return rechargeAction.get();
             }
         }
         for (Action act : available) {
