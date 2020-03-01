@@ -1,9 +1,6 @@
 package nightgames.characters;
 
-import nightgames.actions.Action;
-import nightgames.actions.IMovement;
-import nightgames.actions.Move;
-import nightgames.actions.Movement;
+import nightgames.actions.*;
 import nightgames.characters.custom.effect.CustomEffect;
 import nightgames.combat.Combat;
 import nightgames.daytime.Daytime;
@@ -19,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Decider {
@@ -159,16 +157,17 @@ public class Decider {
         HashSet<Action> utility = new HashSet<Action>();
         HashSet<Action> tactic = new HashSet<Action>();
         if (character.mostlyNude()) {
-            for (Action act : available) {
-                if (act.consider() == Movement.resupply) {
-                    return act;
-                } else if (act.getClass() == Move.class) {
-                    Move movement = (Move) act;
-                    if (movement.consider() == Movement.union && !radar.contains(Movement.union)
-                                    || movement.consider() == Movement.dorm && !radar.contains(Movement.dorm)) {
-                        return act;
-                    }
-                }
+            Predicate<Action> resupplyPredicate = act -> act instanceof Resupply;
+            var resupplyAction = available.stream().filter(resupplyPredicate).findAny();
+            if (resupplyAction.isPresent()) {
+                return resupplyAction.get();
+            }
+            var bestMove = Character.bestMove(character, character.location(), resupplyPredicate);
+            if (bestMove.isPresent()) {
+                resupplyAction = available.stream().filter(action -> action.equals(bestMove.get())).findAny();
+            }
+            if (resupplyAction.isPresent()) {
+                return resupplyAction.get();
             }
         }
         if (character.getArousal().percent() >= 40 && !character.location().humanPresent() && radar.isEmpty()) {
