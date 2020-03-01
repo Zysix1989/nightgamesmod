@@ -410,9 +410,9 @@ public class NPC extends Character {
      * 
      * FIXME: Currently, characters may repeat encaounters. THis method, as well as Area.encounter() and NPC.Move and player.Move() might be mixing or looping.
      *
-     * @param locationActions*/
+     * @param possibleActions*/
     @Override
-    public void move(Collection<Action> locationActions) {
+    public void move(Collection<Action> possibleActions) {
         if (state == State.combat) {
             if (location != null && location.fight != null) {
                 location.fight.battle();
@@ -444,9 +444,6 @@ public class NPC extends Character {
             if (!has(Trait.immobile)) {
                 location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
             }
-            available.addAll(locationActions);
-            available.addAll(getItemActions());
-            available.addAll(Global.getMatch().getAvailableActions());
             assert !available.isEmpty();
             pickAndDoAction(available, radar);
         }

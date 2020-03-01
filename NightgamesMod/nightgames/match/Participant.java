@@ -1,11 +1,14 @@
 package nightgames.match;
 
+import nightgames.actions.Action;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -70,7 +73,11 @@ public class Participant {
     }
 
     public void move() {
-        character.move(character.location.possibleActions(this));
+        List<Action> possibleActions = new ArrayList<>();
+        possibleActions.addAll(character.location.possibleActions(this));
+        possibleActions.addAll(character.getItemActions());
+        possibleActions.addAll(Global.getMatch().getAvailableActions());
+        character.move(possibleActions);
     }
 
     public void flee(Area area) {

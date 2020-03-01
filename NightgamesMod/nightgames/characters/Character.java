@@ -1750,7 +1750,7 @@ public Character clone() throws CloneNotSupportedException {
      */
     public abstract boolean act(Combat c);
 
-    public abstract void move(Collection<Action> locationActions);
+    public abstract void move(Collection<Action> possibleActions);
 
     public abstract void draw(Combat c, Result flag);
 
@@ -4383,7 +4383,7 @@ public Character clone() throws CloneNotSupportedException {
         // Can't be sure this isn't used at the moment
     }
 
-    protected Set<Action> getItemActions() {
+    public Set<Action> getItemActions() {
         var res = new HashSet<Action>();
         var inv = getInventory();
         for (Item i: inv.keySet()) {

@@ -328,7 +328,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void move(Collection<Action> locationActions) {
+    public void move(Collection<Action> possibleActions) {
         System.out.println("move called");
         List<Action> actionChoices = new ArrayList<>();
         List<CommandPanelOption> optionChoices = new ArrayList<>();
@@ -385,10 +385,6 @@ public class Player extends Character {
             EncounterResult result = location.encounter(this);
             optionChoices.addAll(result.options);
             if (!result.exclusive) {
-                List<Action> possibleActions = new ArrayList<>();
-                possibleActions.addAll(locationActions);
-                possibleActions.addAll(getItemActions());
-                possibleActions.addAll(Global.getMatch().getAvailableActions());
                 for (Action act : possibleActions) {
                     if (act.usable(this)
                         && Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
