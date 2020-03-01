@@ -1,20 +1,14 @@
 package nightgames.status;
 
 import com.google.gson.JsonObject;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import nightgames.actions.Action;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.requirements.Requirement;
 import nightgames.skills.Skill;
+
+import java.util.*;
 
 public abstract class Status implements Cloneable {
     public String name;
@@ -47,10 +41,6 @@ public abstract class Status implements Cloneable {
      * unioned.
      */
     public Set<Skill> skillBlacklist(Combat c) {
-        return Collections.emptySet();
-    }
-    
-    public Collection<Action> allowedActions() {
         return Collections.emptySet();
     }
 

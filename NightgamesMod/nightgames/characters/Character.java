@@ -4118,7 +4118,7 @@ public Character clone() throws CloneNotSupportedException {
     }
     
     public Collection<Action> allowedActions() {
-        return status.stream().flatMap(s -> s.allowedActions().stream()).collect(Collectors.toSet());
+        return Set.of();
     }
 
     public boolean isHypnotized() {
