@@ -8,6 +8,8 @@ import nightgames.items.Item;
 import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.Flatfooted;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 import java.util.Map;
 import java.util.Optional;
@@ -22,15 +24,23 @@ public class IllusionTrap extends Trap {
             strength = owner.get(Attribute.Arcane) + owner.getLevel() / 2;
         }
 
+        private static final String VICTIM_TRIGGER_MESSAGE = "You run into a girl you don't recognize, but she's " +
+                "beautiful and completely naked. You don't have a chance to wonder where she came from, because she " +
+                "immediately presses her warm, soft body against you and kisses you passionately. She slips down a " +
+                "hand to grope your crotch, and suddenly vanishes after a few strokes. She was just an illusion, but " +
+                "your arousal is very real.";
+
+        private static final JtwigTemplate OWNER_TRIGGER_TEMPLATE = JtwigTemplate.inlineTemplate(
+                "There's a flash of pink light and {{ victim.subject().defaultNoun() }} flushes with arousal.");
+
         @Override
         public void trigger(Participant target) {
             if (target.getCharacter().human()) {
-                Global.gui().message(
-                        "You run into a girl you don't recognize, but she's beautiful and completely naked. You don't have a chance to wonder where she came from, because "
-                                + "she immediately presses her warm, soft body against you and kisses you passionately. She slips down a hand to grope your crotch, and suddenly vanishes after a few strokes. "
-                                + "She was just an illusion, but your arousal is very real.");
+                Global.gui().message(VICTIM_TRIGGER_MESSAGE);
             } else if (target.getCharacter().location().humanPresent()) {
-                Global.gui().message("There's a flash of pink light and " + target.getCharacter().getName() + " flushes with arousal.");
+                var model = JtwigModel.newModel()
+                        .with("victim", target.getCharacter().getGrammar());
+                Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
             }
             if (target.getCharacter().has(Trait.imagination)) {
                 target.getCharacter().tempt(25 + strength);

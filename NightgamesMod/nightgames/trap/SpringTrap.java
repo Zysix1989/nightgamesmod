@@ -11,6 +11,8 @@ import nightgames.stance.Position;
 import nightgames.stance.StandingOver;
 import nightgames.status.Flatfooted;
 import nightgames.status.Winded;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 import java.util.Map;
 import java.util.Optional;
@@ -21,17 +23,27 @@ public class SpringTrap extends Trap {
             super(self, owner);
         }
 
+        private static final String VICTIM_DISARM_MESSAGE = "You spot a suspicious mechanism on the floor and prod it " +
+                "from a safe distance. A spring loaded line shoots up to groin height, which would have been very " +
+                "unpleasant if you had kept walking.";
+        private static final String VICTIM_TRIGGER_MESSAGE = "As you're walking, your foot hits something and " +
+                "there's a sudden debilitating pain in your groin. Someone has set up a spring-loaded rope designed " +
+                "to shoot up into your nuts, which is what just happened. You collapse into the fetal position and " +
+                "pray that there's no one nearby.";
+        private static final JtwigTemplate OWNER_TRIGGER_TEMPLATE = JtwigTemplate.inlineTemplate(
+                "You hear a sudden yelp as your trap catches {{ victim.object().defaultNoun() }} right in the cooch. " +
+                        "She eventually manages to extract the rope from between her legs and collapses to the floor " +
+                        "in pain.");
+
         @Override
         public void trigger(Participant target) {
             if (!target.getCharacter().check(Attribute.Perception, 24 - target.getCharacter().get(Attribute.Perception) + target.getCharacter().baseDisarm())) {
                 if (target.getCharacter().human()) {
-                    Global.gui().message(
-                            "As you're walking, your foot hits something and there's a sudden debilitating pain in your groin. Someone has set up a spring-loaded rope designed "
-                                    + "to shoot up into your nuts, which is what just happened. You collapse into the fetal position and pray that there's no one nearby.");
+                    Global.gui().message(VICTIM_TRIGGER_MESSAGE);
                 } else if (target.getCharacter().location().humanPresent()) {
-                    Global.gui().message("You hear a sudden yelp as your trap catches " + target.getCharacter().getName()
-                            + " right in the cooch. She eventually manages to extract the rope from between her legs "
-                            + "and collapses to the floor in pain.");
+                    var model = JtwigModel.newModel()
+                            .with("victim", target.getCharacter().getGrammar());
+                    Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
                 }
                 int m = 50 + target.getCharacter().getLevel() * 5;
                 if (target.getCharacter().has(ClothingTrait.armored)) {
@@ -46,9 +58,7 @@ public class SpringTrap extends Trap {
                 }
                 target.getCharacter().location().opportunity(target.getCharacter(), this);
             } else if (target.getCharacter().human()) {
-                Global.gui().message(
-                        "You spot a suspicious mechanism on the floor and prod it from a safe distance. A spring loaded line shoots up to groin height, which would have been "
-                                + "very unpleasant if you had kept walking.");
+                Global.gui().message(VICTIM_DISARM_MESSAGE);
                 target.getCharacter().location().remove(this);
             }
         }

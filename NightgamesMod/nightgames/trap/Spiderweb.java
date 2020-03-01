@@ -7,6 +7,8 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
 import nightgames.stance.Position;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 import java.util.Map;
 import java.util.Optional;
@@ -18,24 +20,30 @@ public class Spiderweb extends Trap {
             super(self, owner);
         }
 
+        private static String victimTriggerMessage(Participant victim) {
+            var msg = new StringBuilder();
+            msg.append("You feel the tripwire underfoot too late to avoid it. A staggering amount of rope flies up " +
+                    "to entangle your limbs and pull you off the ground. " );
+            if (!victim.getCharacter().mostlyNude()) {
+                msg.append("Something snags your clothes and pulls them off of you with unbelievable precision.");
+            }
+            msg.append("Oh hell. You're completely immobilized and suspended naked in midair. Surprisingly, it's not " +
+                    "that uncomfortable, but if someone finds you before you can get free, you'll be completely " +
+                    "defenseless.");
+            return msg.toString();
+        }
+
+        private static final JtwigTemplate OWNER_TRIGGER_TEMPLATE = JtwigTemplate.inlineTemplate(
+                "You hear a snap as {{ victim.subject().defaultNoun() }} triggers your spiderweb trap and ends up " +
+                        "helplessly suspended in midair like a naked present.");
         @Override
         public void trigger(Participant target) {
             if (target.getCharacter().human()) {
-                if (target.getCharacter().mostlyNude()) {
-                    Global.gui().message(
-                            "You feel the tripwire underfoot too late to avoid it. A staggering amount of rope flies up to entangle your limbs and pull you off the ground. "
-                                    + "Oh hell. You're completely immobilized and suspended in midair. Surprisingly, it's not that uncomfortable, but if someone finds you before you can get free, "
-                                    + "you'll be completely defenseless.");
-                } else {
-                    Global.gui().message(
-                            "You feel the tripwire underfoot too late to avoid it. A staggering amount of rope flies up to entangle your limbs and pull you off the ground. "
-                                    + "Something snags your clothes and pulls them off of you with unbelievable precision."
-                                    + "Oh hell. You're completely immobilized and suspended naked in midair. Surprisingly, it's not that uncomfortable, but if someone finds you before you can get free, "
-                                    + "you'll be completely defenseless.");
-                }
+                Global.gui().message(victimTriggerMessage(target));
             } else if (target.getCharacter().location().humanPresent()) {
-                Global.gui().message("You hear a snap as " + target.getCharacter().getName()
-                        + " triggers your spiderweb trap and ends up helplessly suspended in midair like a naked present.");
+                var model = JtwigModel.newModel()
+                        .with("victim", target.getCharacter().getGrammar());
+                Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
             }
             target.getCharacter().state = State.webbed;
             target.getCharacter().delay(1);

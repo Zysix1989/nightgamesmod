@@ -8,6 +8,8 @@ import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.stance.StandingOver;
 import nightgames.status.Flatfooted;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 import java.util.Map;
 import java.util.Optional;
@@ -18,29 +20,40 @@ public class Tripwire extends Trap {
             super(self, owner);
         }
 
+        private static final String VICTIM_TRIGGER_MESSAGE = "You trip over a line of cord and fall on your face.";
+        private static final String VICTIM_DISARM_MESSAGE = "You spot a line strung across the corridor " +
+                "and carefully step over it.";
+        private static final JtwigTemplate OWNER_TRIGGER_TEMPLATE = JtwigTemplate.inlineTemplate(
+                "{{ victim.subject().defaultNoun() }} carelessly stumbles over the tripwire and lands with an " +
+                        "audible thud.");
+        private static final JtwigTemplate OWNER_DISARM_TEMPLATE = JtwigTemplate.inlineTemplate(
+                "You see {{ victim.object().defaultNoun() }} carefully step over the carefully placed tripwire.");
         @Override
         public void trigger(Participant target) {
             int m = 30 + target.getCharacter().getLevel() * 5;
             if (target.getCharacter().human()) {
                 if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
-                    Global.gui().message("You trip over a line of cord and fall on your face.");
+                    Global.gui().message(VICTIM_TRIGGER_MESSAGE);
                     target.getCharacter().pain(null, null, m);
                     target.getCharacter().location().opportunity(target.getCharacter(), this);
                 } else {
-                    Global.gui().message("You spot a line strung across the corridor and carefully step over it.");
+                    Global.gui().message(VICTIM_DISARM_MESSAGE);
                     target.getCharacter().location().remove(    this);
                 }
             } else {
                 if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
                     if (target.getCharacter().location().humanPresent()) {
-                        Global.gui().message(target.getCharacter().getName()
-                                + " carelessly stumbles over the tripwire and lands with an audible thud.");
+                        var model = JtwigModel.newModel()
+                                .with("victim", target.getCharacter().getGrammar());
+                        Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
                     }
                     target.getCharacter().pain(null, null, m);
                     target.getCharacter().location().opportunity(target.getCharacter(), this);
                 } else {
                     if (target.getCharacter().location().humanPresent()) {
-                        Global.gui().message("You see " + target.getCharacter().getName() + " carefully step over the carefully placed tripline." );
+                        var model = JtwigModel.newModel()
+                                .with("victim", target.getCharacter().getGrammar());
+                        Global.gui().message(OWNER_DISARM_TEMPLATE.render(model));
                     }
                 }
             }

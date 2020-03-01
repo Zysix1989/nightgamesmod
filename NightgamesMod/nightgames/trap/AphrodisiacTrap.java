@@ -9,6 +9,8 @@ import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.Flatfooted;
 import nightgames.status.Horny;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 import java.util.Map;
 import java.util.Optional;
@@ -22,24 +24,32 @@ public class AphrodisiacTrap extends Trap {
             strength = owner.get(Attribute.Cunning) + owner.get(Attribute.Science) + owner.getLevel() / 2;
         }
 
+        private static final String VICTIM_DISARM_MESSAGE = "You spot a liquid spray trap in time to avoid setting " +
+                "it off. You carefully manage to disarm the trap and pocket the potion.";
+        private static final String VICTIM_TRIGGER_MESSAGE = "There's a sudden spray of gas in your face and the room " +
+                "seems to get much hotter. Your dick goes rock-hard and you realize you've been hit with an " +
+                "aphrodisiac.";
+        private static final JtwigTemplate OWNER_TRIGGER_TEMPLATE = JtwigTemplate.inlineTemplate(
+                "You watch {{ victim.subject() }} get blasted with aphrodisiac from your trap. " +
+                        "{{ victim.subject().pronoun() }} flushes bright red and presses a hand against " +
+                        "{{ victim.possessiveAdjective() }} crotch. It seems like {{ victim.subject().pronoun() }}'ll " +
+                        "start masturbating even if you don't do anything.");
+
         @Override
         public void trigger(Participant target) {
             if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
                 if (target.getCharacter().human()) {
-                    Global.gui().message(
-                            "You spot a liquid spray trap in time to avoid setting it off. You carefully manage to disarm the trap and pocket the potion.");
+                    Global.gui().message(VICTIM_DISARM_MESSAGE);
                     target.getCharacter().gain(Item.Aphrodisiac);
                     target.getCharacter().location().remove(this);
                 }
             } else {
                 if (target.getCharacter().human()) {
-                    Global.gui().message(
-                            "There's a sudden spray of gas in your face and the room seems to get much hotter. Your dick goes rock-hard and you realize you've been "
-                                    + "hit with an aphrodisiac.");
+                    Global.gui().message(VICTIM_TRIGGER_MESSAGE);
                 } else if (target.getCharacter().location().humanPresent()) {
-                    Global.gui().message(
-                            target.getCharacter().getName() + " is caught in your trap and sprayed with aphrodisiac. She flushes bright red and presses a hand against her crotch. It seems like "
-                                    + "she'll start masturbating even if you don't do anything.");
+                    var model = JtwigModel.newModel()
+                            .with("victim", target.getCharacter().getGrammar());
+                    Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
                 }
                 target.getCharacter().addNonCombat(new Horny(target.getCharacter(), (30 + strength) / 10.0f, 10, "Aphrodisiac Trap"));
                 target.getCharacter().location().opportunity(target.getCharacter(), this);

@@ -6,6 +6,8 @@ import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 import java.util.Map;
 
@@ -15,14 +17,19 @@ public class Decoy extends Trap {
             super(self, owner);
         }
 
+        private static final String VICTIM_TRIGGER_MESSAGE = "You follow the noise you've been hearing for a while, " +
+                "which turns out to be coming from a disposable cell phone. Seems like someone is playing a trick " +
+                "and you fell for it. You shut off the phone and toss it aside.";
+        private static final JtwigTemplate OWNER_TRIGGER_TEMPLATE = JtwigTemplate.inlineTemplate(
+                "{{ victim.subject().defaultNoun() }} finds the decoy phone and deactivates it.");
         @Override
         public void trigger(Participant target) {
             if (target.getCharacter().human()) {
-                Global.gui().message(
-                        "You follow the noise you've been hearing for a while, which turns out to be coming from a disposable cell phone. Seems like someone "
-                                + "is playing a trick and you fell for it. You shut off the phone and toss it aside.");
+                Global.gui().message(VICTIM_TRIGGER_MESSAGE);
             } else if (target.getCharacter().location().humanPresent()) {
-                Global.gui().message(target.getCharacter().getName() + " finds the decoy phone and deactivates it.");
+                var model = JtwigModel.newModel()
+                        .with("victim", target.getCharacter().getGrammar());
+                Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
             }
             target.getCharacter().location().remove(this);
         }

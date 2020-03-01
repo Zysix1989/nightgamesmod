@@ -7,6 +7,8 @@ import nightgames.items.Item;
 import nightgames.match.Participant;
 import nightgames.stance.Position;
 import nightgames.status.Bound;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 import java.util.Map;
 import java.util.Optional;
@@ -20,21 +22,28 @@ public class Snare extends Trap {
             strength = owner.get(Attribute.Cunning) + owner.getLevel() / 2;
         }
 
+        private static final String VICTIM_DISARM_MESSAGE = "You notice a snare on the floor in front of you and " +
+                "manage to disarm it safely";
+        private static final String VICTIM_TRIGGER_MESSAGE = "You hear a sudden snap and you're suddenly overwhelmed " +
+                "by a blur of ropes. The tangle of ropes trip you up and firmly bind your arms.";
+        private static final JtwigTemplate OWNER_TRIGGER_TEMPLATE = JtwigTemplate.inlineTemplate(
+                "{{ victim.subject().defaultNoun() }} enters the room, sets off your snare, and ends up thoroughly " +
+                        "tangled in rope.");
         @Override
         public void trigger(Participant target) {
             if (target.getCharacter().check(Attribute.Perception, 25 + strength + target.getCharacter().baseDisarm())) {
                 if (target.getCharacter().human()) {
-                    Global.gui().message("You notice a snare on the floor in front of you and manage to disarm it safely");
+                    Global.gui().message(VICTIM_DISARM_MESSAGE);
                 }
                 target.getCharacter().location().remove(this);
             } else {
                 target.getCharacter().addNonCombat(new Bound(target.getCharacter(), 30 + strength / 2.0f, "snare"));
                 if (target.getCharacter().human()) {
-                    Global.gui().message(
-                            "You hear a sudden snap and you're suddenly overwhelmed by a blur of ropes. The tangle of ropes trip you up and firmly bind your arms.");
+                    Global.gui().message(VICTIM_TRIGGER_MESSAGE);
                 } else if (target.getCharacter().location().humanPresent()) {
-                    Global.gui().message(target.getCharacter().getName()
-                            + " enters the room, sets off your snare, and ends up thoroughly tangled in rope.");
+                    var model = JtwigModel.newModel()
+                            .with("victim", target.getCharacter().getGrammar());
+                    Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
                 }
                 target.getCharacter().location().opportunity(target.getCharacter(), this);
             }

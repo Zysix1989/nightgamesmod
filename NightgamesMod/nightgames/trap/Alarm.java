@@ -5,6 +5,8 @@ import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 import java.util.Map;
 
@@ -14,14 +16,23 @@ public class Alarm extends Trap {
             super(self, owner);
         }
 
+        private static final String VICTIM_TRIGGER_MESSAGE = "You're walking through the eerily quiet campus, when a loud " +
+                "beeping almost makes you jump out of your skin. You realize the beeping is coming from a cell " +
+                "phone on the floor. You shut it off as quickly as you can, but it's likely everyone nearby heard " +
+                "it already.";
+
+        private static final JtwigTemplate OWNER_TRIGGER_TEMPLATE = JtwigTemplate.inlineTemplate(
+                "{{ victim.subject().defaultNoun() }} sets off your alarm, giving away {{ victim.possessiveAdjective() }} presence."
+        );
+
         @Override
         public void trigger(Participant target) {
             if (target.getCharacter().human()) {
-                Global.gui().message(
-                        "You're walking through the eerily quiet campus, when a loud beeping almost makes you jump out of your skin. You realize the beeping is "
-                                + "coming from a cell phone on the floor. You shut it off as quickly as you can, but it's likely everyone nearby heard it already.");
+                Global.gui().message(VICTIM_TRIGGER_MESSAGE);
             } else if (target.getCharacter().location().humanPresent()) {
-                Global.gui().message(target.getCharacter().getName() + " Sets off your alarm, giving away her presence.");
+                var model = JtwigModel.newModel()
+                        .with("victim", target.getCharacter().getGrammar());
+                Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
             }
             target.getCharacter().location().alarm = true;
             target.getCharacter().location().remove(this);
