@@ -1,16 +1,15 @@
 package nightgames.gui;
 
-import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import javax.swing.JTextPane;
-import javax.swing.text.DefaultCaret;
-import javax.swing.text.html.HTMLDocument;
 import nightgames.characters.Attribute;
 import nightgames.characters.NPC;
 import nightgames.global.Global;
+
+import javax.swing.*;
+import javax.swing.text.DefaultCaret;
+import javax.swing.text.html.HTMLDocument;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 class GUIAppearanceDescriptionPanel extends JPanel {
 
@@ -82,7 +81,6 @@ class GUIAppearanceDescriptionPanel extends JPanel {
         text.setText("<font face='Georgia' color='white' size='4'>" +
             character.describe(Global.getPlayer().get(Attribute.Perception), Global.getPlayer())
             + "</font>");
-        System.out.println(document.getLength());
     }
 
     @Override
