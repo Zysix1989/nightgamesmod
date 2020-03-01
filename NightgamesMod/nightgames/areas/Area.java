@@ -177,8 +177,8 @@ public class Area implements Serializable {
     }
 
     public void place(Deployable thing) {
-        if (thing instanceof Trap) {
-            env.add(0, thing);
+        if (thing instanceof Trap.Instance) {
+            trap = (Trap.Instance) thing;
         } else {
             env.add(thing);
         }
