@@ -5,6 +5,7 @@ import nightgames.characters.Character;
 import nightgames.characters.NPC;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
+import nightgames.match.Participant;
 import nightgames.status.Disguised;
 import nightgames.status.Stsflag;
 
@@ -16,8 +17,11 @@ public class Disguise extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
-        return !user.bound() && user.has(Trait.Imposter) && !user.is(Stsflag.disguised) && getRandomNPC(user) != null;
+    public boolean usable(Participant user) {
+        return !user.getCharacter().bound()
+                && user.getCharacter().has(Trait.Imposter)
+                && !user.getCharacter().is(Stsflag.disguised)
+                && getRandomNPC(user.getCharacter()) != null;
     }
 
     private NPC getRandomNPC(Character user) {

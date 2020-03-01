@@ -5,6 +5,7 @@ import nightgames.characters.State;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 
 public class MasturbateAction extends Action {
     /**
@@ -17,8 +18,8 @@ public class MasturbateAction extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
-        return user.getArousal().get() >= 15 && !user.bound();
+    public boolean usable(Participant user) {
+        return user.getCharacter().getArousal().get() >= 15 && !user.getCharacter().bound();
     }
 
     @Override

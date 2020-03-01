@@ -3,6 +3,7 @@ package nightgames.actions;
 import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
+import nightgames.match.Participant;
 
 public class Hide extends Action {
 
@@ -17,8 +18,8 @@ public class Hide extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
-        return !(user.state == State.hidden) && !user.bound();
+    public boolean usable(Participant user) {
+        return !(user.getCharacter().state == State.hidden) && !user.getCharacter().bound();
     }
 
     @Override

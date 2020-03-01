@@ -3,6 +3,7 @@ package nightgames.actions;
 import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
+import nightgames.match.Participant;
 
 public class Bathe extends Action {
 
@@ -18,8 +19,8 @@ public class Bathe extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
-        return !user.bound();
+    public boolean usable(Participant user) {
+        return !user.getCharacter().bound();
     }
 
     @Override

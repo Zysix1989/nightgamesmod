@@ -4,6 +4,7 @@ import nightgames.areas.Area;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.match.Participant;
 
 public class Move extends Action {
 
@@ -40,8 +41,8 @@ public class Move extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
-        return skillCheck.check(user);
+    public boolean usable(Participant user) {
+        return skillCheck.check(user.getCharacter());
     }
 
     @Override

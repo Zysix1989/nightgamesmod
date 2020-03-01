@@ -1,6 +1,7 @@
 package nightgames.actions;
 
 import nightgames.characters.Character;
+import nightgames.match.Participant;
 
 public class Wait extends Action {
 
@@ -14,7 +15,7 @@ public class Wait extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
+    public boolean usable(Participant user) {
         return true;
     }
 

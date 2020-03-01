@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 
 public class Recharge extends Action {
 
@@ -17,8 +18,10 @@ public class Recharge extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
-        return user.get(Attribute.Science) > 0 && user.count(Item.Battery) < 20 && !user.bound();
+    public boolean usable(Participant user) {
+        return user.getCharacter().get(Attribute.Science) > 0
+                && user.getCharacter().count(Item.Battery) < 20
+                && !user.getCharacter().bound();
     }
 
     @Override

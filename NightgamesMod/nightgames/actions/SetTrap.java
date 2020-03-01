@@ -2,6 +2,7 @@ package nightgames.actions;
 
 import nightgames.characters.Character;
 import nightgames.global.Global;
+import nightgames.match.Participant;
 import nightgames.trap.Trap;
 
 public class SetTrap extends Action {
@@ -17,11 +18,11 @@ public class SetTrap extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
-        return trap.recipe(user) && !user.location().open()
-                && trap.requirements(user)
-                && !user.bound()
-                && user.location().getTrap().isEmpty();
+    public boolean usable(Participant user) {
+        return trap.recipe(user.getCharacter()) && !user.getCharacter().location().open()
+                && trap.requirements(user.getCharacter())
+                && !user.getCharacter().bound()
+                && user.getCharacter().location().getTrap().isEmpty();
     }
 
     @Override

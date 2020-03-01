@@ -3,6 +3,7 @@ package nightgames.actions;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 import nightgames.status.Buzzed;
 
 public class UseBeer extends Action {
@@ -12,8 +13,8 @@ public class UseBeer extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
-        return !user.bound();
+    public boolean usable(Participant user) {
+        return !user.getCharacter().bound();
     }
 
     @Override

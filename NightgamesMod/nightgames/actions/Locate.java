@@ -9,6 +9,7 @@ import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.gui.GUI;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 import nightgames.status.Detected;
 import nightgames.status.Horny;
 
@@ -21,15 +22,15 @@ public class Locate extends Action {
     }
 
     @Override
-    public boolean usable(Character self) {
+    public boolean usable(Participant self) {
         boolean hasUnderwear = false;
-        for (Item i : self.getInventory().keySet()) {
+        for (Item i : self.getCharacter().getInventory().keySet()) {
             // i hate myself for having to add this null check... why is inventory even public...
             if (i != null && i.toString().contains("Trophy")) {
                 hasUnderwear = true;
             }
         }
-        return self.has(Trait.locator) && hasUnderwear && !self.bound();
+        return self.getCharacter().has(Trait.locator) && hasUnderwear && !self.getCharacter().bound();
     }
 
     @Override

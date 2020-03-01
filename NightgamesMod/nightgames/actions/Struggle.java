@@ -3,6 +3,7 @@ package nightgames.actions;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;
+import nightgames.match.Participant;
 import nightgames.status.Bound;
 import nightgames.status.Stsflag;
 
@@ -13,8 +14,8 @@ public class Struggle extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
-        return user.bound();
+    public boolean usable(Participant user) {
+        return user.getCharacter().bound();
     }
 
     @Override

@@ -3,6 +3,7 @@ package nightgames.actions;
 import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
+import nightgames.match.Participant;
 
 public class PassAmbush extends Action {
 
@@ -13,8 +14,9 @@ public class PassAmbush extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
-        return user.state != State.inPass && !user.bound();
+    public boolean usable(Participant user) {
+        return user.getCharacter().state != State.inPass
+                && !user.getCharacter().bound();
     }
 
     @Override

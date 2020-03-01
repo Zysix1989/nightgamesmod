@@ -214,7 +214,7 @@ public class Area implements Serializable {
 
     public List<Action> possibleActions(Participant p) {
         return possibleActions.stream()
-                .filter(action -> action.usable(p.getCharacter()))
+                .filter(action -> action.usable(p))
                 .collect(Collectors.toList());
     }
 

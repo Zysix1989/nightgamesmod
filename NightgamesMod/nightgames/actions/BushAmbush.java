@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
+import nightgames.match.Participant;
 
 public class BushAmbush extends Action {
 
@@ -15,9 +16,10 @@ public class BushAmbush extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
-        return (user.get(Attribute.Cunning) >= 20 || user.get(Attribute.Animism) >= 10)
-            && user.state != State.inBushes && !user.bound();
+    public boolean usable(Participant user) {
+        return (user.getCharacter().get(Attribute.Cunning) >= 20 || user.getCharacter().get(Attribute.Animism) >= 10)
+                && user.getCharacter().state != State.inBushes
+                && !user.getCharacter().bound();
     }
 
     @Override

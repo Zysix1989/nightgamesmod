@@ -3,6 +3,7 @@ package nightgames.actions;
 import java.io.Serializable;
 
 import nightgames.characters.Character;
+import nightgames.match.Participant;
 
 public abstract class Action implements Serializable {
     /**
@@ -15,7 +16,7 @@ public abstract class Action implements Serializable {
         this.name = name;
     }
 
-    public abstract boolean usable(Character user);
+    public abstract boolean usable(Participant user);
 
     public abstract IMovement execute(Character user);
 

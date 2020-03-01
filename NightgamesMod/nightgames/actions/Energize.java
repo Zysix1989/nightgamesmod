@@ -3,6 +3,7 @@ package nightgames.actions;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;
+import nightgames.match.Participant;
 import nightgames.status.Energized;
 import nightgames.status.Stsflag;
 
@@ -18,8 +19,10 @@ public class Energize extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
-        return user.get(Attribute.Arcane) >= 1 && !user.is(Stsflag.energized) && !user.bound();
+    public boolean usable(Participant user) {
+        return user.getCharacter().get(Attribute.Arcane) >= 1
+                && !user.getCharacter().is(Stsflag.energized)
+                && !user.getCharacter().bound();
     }
 
     @Override

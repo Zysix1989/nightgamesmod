@@ -77,7 +77,7 @@ public class Participant {
         possibleActions.addAll(character.location.possibleActions(this));
         possibleActions.addAll(character.getItemActions());
         possibleActions.addAll(Global.getMatch().getAvailableActions());
-        possibleActions.removeIf(a -> !a.usable(character));
+        possibleActions.removeIf(a -> !a.usable(this));
         character.move(possibleActions);
     }
 

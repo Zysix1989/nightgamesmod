@@ -30,8 +30,8 @@ public class Resupply extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
-        return !user.bound() && (!permissioned || validCharacters.contains(user));
+    public boolean usable(Participant user) {
+        return !user.getCharacter().bound() && (!permissioned || validCharacters.contains(user));
     }
 
     @Override

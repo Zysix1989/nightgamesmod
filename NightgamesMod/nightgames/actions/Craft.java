@@ -3,6 +3,7 @@ package nightgames.actions;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.State;
+import nightgames.match.Participant;
 
 public class Craft extends Action {
 
@@ -16,8 +17,8 @@ public class Craft extends Action {
     }
 
     @Override
-    public boolean usable(Character user) {
-        return user.get(Attribute.Cunning) > 15 && !user.bound();
+    public boolean usable(Participant user) {
+        return user.getCharacter().get(Attribute.Cunning) > 15 && !user.getCharacter().bound();
     }
 
     @Override
