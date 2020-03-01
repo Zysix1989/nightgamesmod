@@ -59,14 +59,14 @@ public class SpringTrap extends Trap {
                 target.getCharacter().location().opportunity(target.getCharacter(), this);
             } else if (target.getCharacter().human()) {
                 Global.gui().message(VICTIM_DISARM_MESSAGE);
-                target.getCharacter().location().remove(this);
+                target.getCharacter().location().clearTrap();
             }
         }
 
         @Override
         public Optional<Position> capitalize(Character attacker, Character victim) {
             victim.addNonCombat(new Flatfooted(victim, 1));
-            attacker.location().remove(this);
+            attacker.location().clearTrap();
             return Optional.of(new StandingOver(attacker, victim));
         }
     }

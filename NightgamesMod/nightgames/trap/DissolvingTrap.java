@@ -44,7 +44,7 @@ public class DissolvingTrap extends Trap {
                 if (target.getCharacter().human()) {
                     Global.gui().message(VICTIM_DISARM_MESSAGE);
                     target.getCharacter().gain(Item.DisSol);
-                    target.getCharacter().location().remove(this);
+                    target.getCharacter().location().clearTrap();
                 }
             } else {
                 if (target.getCharacter().human()) {

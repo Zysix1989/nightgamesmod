@@ -95,7 +95,7 @@ public class Spiderweb extends Trap {
         attacker.state = State.ready;
         victim.state = State.ready;
         victim.location().endEncounter();
-        victim.location().remove(trap);
+        victim.location().clearTrap();
     }
     
     private static void printSpiderwebLines(Character attacker, Character victim) {

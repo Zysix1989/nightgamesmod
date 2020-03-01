@@ -49,7 +49,7 @@ public class StripMine extends Trap {
         @Override
         public Optional<Position> capitalize(Character attacker, Character victim) {
             victim.addNonCombat(new Flatfooted(victim, 1));
-            attacker.location().remove(this);
+            attacker.location().clearTrap();
             return super.capitalize(attacker, victim);
         }
     }

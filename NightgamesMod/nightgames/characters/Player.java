@@ -5,7 +5,6 @@ import nightgames.actions.Locate;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.areas.Area.EncounterResult;
-import nightgames.areas.Deployable;
 import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.mods.ExternalTentaclesMod;
@@ -370,11 +369,9 @@ public class Player extends Character {
                 }
             }
             gui.message(location.description + "<br/><br/>");
-            for (Deployable trap : location.env) {
-                if (trap.owner() == this) {
-                    gui.message("You've set a " + trap.toString() + " here.");
-                }
-            }
+            location.getTrap()
+                    .filter(trap -> trap.owner() == this)
+                    .ifPresent(trap -> gui.message("You've set a " + trap.toString() + " here."));
             if (state == State.inTree) {
                 gui.message("You are hiding in a tree, waiting to drop down on an unwitting foe.");
             } else if (state == State.inBushes) {

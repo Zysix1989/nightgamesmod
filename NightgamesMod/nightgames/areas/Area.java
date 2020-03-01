@@ -12,10 +12,7 @@ import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Area implements Serializable {
@@ -35,6 +32,7 @@ public class Area implements Serializable {
     private boolean pinged;
     private Set<AreaAttribute> attributes = Set.of();
     private Set<Action> possibleActions = new HashSet<>();
+    private Trap.Instance trap = null;
 
     public Area(String name, String description, Movement enumerator) {
         this.name = name;
@@ -85,6 +83,9 @@ public class Area implements Serializable {
         present.add(p);
         System.out.printf("%s enters %s: %s\n", p.getCharacter().getTrueName(), name, env);
         List<Deployable> deps = new ArrayList<>(env);
+        if (trap != null && trap.resolve(p)) {
+            return;
+        }
         for (Deployable dep : deps) {
             if (dep != null && dep.resolve(p)) {
                 return;
@@ -146,7 +147,7 @@ public class Area implements Serializable {
                 }
             }
         }
-        remove(trap);
+        clearTrap();
         return false;
     }
 
@@ -183,17 +184,20 @@ public class Area implements Serializable {
         }
     }
 
+    public void setTrap(Trap.Instance t) {
+        this.trap = t;
+    }
+
+    public void clearTrap() {
+        this.trap = null;
+    }
+
     public void remove(Deployable triggered) {
         env.remove(triggered);
     }
 
-    public Deployable get(Class<? extends Deployable> type) {
-        for (Deployable thing : env) {
-            if (thing.getClass() == type) {
-                return thing;
-            }
-        }
-        return null;
+    public Optional<Trap.Instance> getTrap() {
+        return Optional.ofNullable(trap);
     }
 
     public void setPinged(boolean b) {
@@ -209,7 +213,7 @@ public class Area implements Serializable {
     }
 
     public boolean isTrapped() {
-        return env.stream().anyMatch(d -> d instanceof Trap);
+        return trap != null;
     }
 
     public List<Action> possibleActions(Character c) {

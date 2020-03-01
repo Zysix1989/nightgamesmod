@@ -35,7 +35,7 @@ public class Alarm extends Trap {
                 Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
             }
             target.getCharacter().location().alarm = true;
-            target.getCharacter().location().remove(this);
+            target.getCharacter().location().clearTrap();
         }
     }
 

@@ -31,7 +31,7 @@ public class Decoy extends Trap {
                         .with("victim", target.getCharacter().getGrammar());
                 Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
             }
-            target.getCharacter().location().remove(this);
+            target.getCharacter().location().clearTrap();
         }
     }
     

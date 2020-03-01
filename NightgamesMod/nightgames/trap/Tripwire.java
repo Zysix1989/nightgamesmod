@@ -38,7 +38,7 @@ public class Tripwire extends Trap {
                     target.getCharacter().location().opportunity(target.getCharacter(), this);
                 } else {
                     Global.gui().message(VICTIM_DISARM_MESSAGE);
-                    target.getCharacter().location().remove(    this);
+                    target.getCharacter().location().clearTrap();
                 }
             } else {
                 if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
@@ -62,7 +62,7 @@ public class Tripwire extends Trap {
         @Override
         public Optional<Position> capitalize(Character attacker, Character victim) {
             victim.addNonCombat(new Flatfooted(victim, 1));
-            victim.location().remove(this);
+            victim.location().clearTrap();
             return Optional.of(new StandingOver(attacker, victim));
         }
     }

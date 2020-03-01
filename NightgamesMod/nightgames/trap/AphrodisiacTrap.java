@@ -41,7 +41,7 @@ public class AphrodisiacTrap extends Trap {
                 if (target.getCharacter().human()) {
                     Global.gui().message(VICTIM_DISARM_MESSAGE);
                     target.getCharacter().gain(Item.Aphrodisiac);
-                    target.getCharacter().location().remove(this);
+                    target.getCharacter().location().clearTrap();
                 }
             } else {
                 if (target.getCharacter().human()) {
@@ -59,7 +59,7 @@ public class AphrodisiacTrap extends Trap {
         @Override
         public Optional<Position> capitalize(Character attacker, Character victim) {
             victim.addNonCombat(new Flatfooted(victim, 1));
-            attacker.location().remove(this);
+            attacker.location().clearTrap();
             return super.capitalize(attacker, victim);
         }
     }

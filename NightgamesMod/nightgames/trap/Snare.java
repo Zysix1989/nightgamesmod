@@ -35,7 +35,7 @@ public class Snare extends Trap {
                 if (target.getCharacter().human()) {
                     Global.gui().message(VICTIM_DISARM_MESSAGE);
                 }
-                target.getCharacter().location().remove(this);
+                target.getCharacter().location().clearTrap();
             } else {
                 target.getCharacter().addNonCombat(new Bound(target.getCharacter(), 30 + strength / 2.0f, "snare"));
                 if (target.getCharacter().human()) {
@@ -51,7 +51,7 @@ public class Snare extends Trap {
 
         @Override
         public Optional<Position> capitalize(Character attacker, Character victim) {
-            attacker.location().remove(this);
+            attacker.location().clearTrap();
             return super.capitalize(attacker, victim);
         }
     }

@@ -11,6 +11,7 @@ import nightgames.items.Item;
 import nightgames.match.Encounter;
 import nightgames.match.Participant;
 import nightgames.status.*;
+import nightgames.trap.Spiderweb;
 import nightgames.trap.Trap;
 
 import java.util.Optional;
@@ -431,7 +432,7 @@ public class DefaultEncounter implements Encounter {
     protected void spider(Character attacker, Character target) {
         attacker.gainXP(attacker.getVictoryXP(target));
         target.gainXP(target.getDefeatXP(attacker));
-        // Spiderweb.onSpiderwebDefeat(attacker, target, (Spiderweb) location.get(Spiderweb.class));  TODO: Come back to this disaster
+        Spiderweb.onSpiderwebDefeat(attacker, target, location.getTrap().orElseThrow());
     }
 
     public void intrude(Character intruder, Character assist) {

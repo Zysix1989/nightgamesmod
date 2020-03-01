@@ -26,7 +26,7 @@ public class SetTrap extends Action {
     @Override
     public IMovement execute(Character user) {
         var result = trap.instantiate(user);
-        user.location().place(result.instance);
+        user.location().setTrap(result.instance);
         if (user.human()) {
             Global.gui().message(result.message);
         }

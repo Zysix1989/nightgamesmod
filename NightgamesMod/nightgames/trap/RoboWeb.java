@@ -77,7 +77,7 @@ public class RoboWeb extends Trap {
 
         @Override
         public Optional<Position> capitalize(Character attacker, Character victim) {
-            attacker.location().remove(this);
+            attacker.location().clearTrap();
             return super.capitalize(attacker, victim);
         }
 
