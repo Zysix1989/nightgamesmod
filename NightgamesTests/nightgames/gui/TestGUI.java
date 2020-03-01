@@ -1,15 +1,15 @@
 package nightgames.gui;
 
+import nightgames.characters.Character;
+import nightgames.characters.NPC;
+import nightgames.combat.Combat;
+import nightgames.gui.commandpanel.CommandPanelOption;
+import nightgames.skills.SkillGroup;
+
 import java.io.File;
 import java.util.List;
 import java.util.Observable;
 import java.util.Optional;
-import nightgames.characters.Character;
-import nightgames.characters.NPC;
-import nightgames.characters.Player;
-import nightgames.combat.Combat;
-import nightgames.gui.commandpanel.CommandPanelOption;
-import nightgames.skills.SkillGroup;
 
 public class TestGUI extends GUI {
     /**
@@ -31,10 +31,9 @@ public class TestGUI extends GUI {
     }
 
     @Override
-    public Combat beginCombat(Player p1, NPC p2) {
-        combat = new Combat(p1, p2, p1.location());
+    public void beginCombat(Combat c, NPC p2) {
+        combat = c;
         combat.setBeingObserved(true);
-        return combat;
     }
 
     @Override
