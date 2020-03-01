@@ -15,15 +15,10 @@ public interface TrapFactory {
 
         @Override
         public void setTrap(Character owner) {
-            try {
-                Trap newTrap = trap.getClass().newInstance();
-                var result = newTrap.instantiate(owner);
-                owner.location().place(result.instance);
-                if (owner.human()) {
-                    Global.gui().message(result.message);
-                }
-            } catch (InstantiationException | IllegalAccessException e) {
-                throw new RuntimeException(e);
+            var result = trap.instantiate(owner);
+            owner.location().place(result.instance);
+            if (owner.human()) {
+                Global.gui().message(result.message);
             }
         }
     }
