@@ -25,7 +25,7 @@ public class TentacleTrap extends Trap {
                 if (target.getCharacter().human()) {
                     Global.gui().message(
                             "An unearthly glow appears from the floor surrounding you and at least a dozen tentacles burst from the floor. Before you can react, you're lifted helpless "
-                                    + "into the air. The tentacles assault you front and back, wriggling around you nipples and cock, while one persistant tentacle forces its way into your ass. The overwhelming "
+                                    + "into the air. The tentacles assault you front and back, wriggling around you nipples and cock, while one persistent tentacle forces its way into your ass. The overwhelming "
                                     + "sensations and violation keep you from thinking clearly and you can't even begin to mount a reasonable resistance. Just as suddenly as they attacked you, the tentacles "
                                     + "are gone, dumping you unceremoniously to the floor. You're left coated in a slimy liquid that, based on your rock-hard erection, seems to be a powerful aphrodisiac. Holy "
                                     + "fucking hell....");

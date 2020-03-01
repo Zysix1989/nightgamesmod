@@ -32,7 +32,7 @@ public class DissolvingTrap extends Trap {
                 if (target.getCharacter().human()) {
                     if (target.getCharacter().reallyNude()) {
                         Global.gui().message(
-                                "Your bare foot hits a tripwire and you brace yourself as liquid rains down on you. You hastely do your best to brush the liquid off, "
+                                "Your bare foot hits a tripwire and you brace yourself as liquid rains down on you. You hastily do your best to brush the liquid off, "
                                         + "but after about a minute you realize nothing has happened. Maybe the trap was a dud.");
                     } else {
                         Global.gui().message(
