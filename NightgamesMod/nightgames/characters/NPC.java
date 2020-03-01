@@ -453,7 +453,7 @@ public class NPC extends Character {
                 }
             }
             if (!has(Trait.immobile) && moves.isEmpty()) {
-                location.detectNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
+                location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
                 moves.addAll(location.possibleActions(this));
             }
             pickAndDoAction(allowedActions(), moves, radar);

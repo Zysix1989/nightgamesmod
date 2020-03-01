@@ -256,7 +256,7 @@ public class Player extends Character {
     }
 
     private void detect() {
-        location.detectNeighbors(get(Attribute.Perception)).forEach(room -> {
+        location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
             gui.message("You hear something in the <b>" + room.name + "</b>.");
             room.setPinged(true);
         });

@@ -76,8 +76,7 @@ public class Area implements Serializable {
         return alarm;
     }
 
-    // returns neighboring rooms that make noise
-    public Set<Area> detectNeighbors(int perception) {
+    public Set<Area> noisyNeighbors(int perception) {
         return adjacent.stream().filter(area -> area.ping(perception)).collect(Collectors.toSet());
     }
 
