@@ -212,10 +212,6 @@ public class Area implements Serializable {
         return present.stream().anyMatch(c -> c.getCharacter().is(Stsflag.detected));
     }
 
-    public boolean isTrapped() {
-        return trap != null;
-    }
-
     public List<Action> possibleActions(Character c) {
         return possibleActions.stream()
                 .filter(action -> action.usable(c))
