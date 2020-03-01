@@ -11,10 +11,7 @@ import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
 import nightgames.skills.Wait;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -148,6 +145,16 @@ public class Decider {
          */ return priority;
     }
 
+    private static Optional<Action> searchForAction(Collection<Action> available, NPC character, Predicate<Action> predicate) {
+        var action = available.stream().filter(predicate).findAny();
+        if (action.isEmpty()) {
+            var bestMove = Character.bestMove(character, character.location(), predicate);
+            if (bestMove.isPresent()) {
+                action = available.stream().filter(act -> act.equals(bestMove.get())).findAny();
+            }
+        }
+        return action;
+    }
     
     /**This method parses the actions available to the character and returns an action.*/
     public static Action parseMoves(Collection<Action> available, Collection<IMovement> radar, NPC character) {
@@ -156,15 +163,7 @@ public class Decider {
         HashSet<Action> utility = new HashSet<Action>();
         HashSet<Action> tactic = new HashSet<Action>();
         if (character.mostlyNude()) {
-            Predicate<Action> resupplyPredicate = act -> act instanceof Resupply;
-            var resupplyAction = available.stream().filter(resupplyPredicate).findAny();
-            if (resupplyAction.isPresent()) {
-                return resupplyAction.get();
-            }
-            var bestMove = Character.bestMove(character, character.location(), resupplyPredicate);
-            if (bestMove.isPresent()) {
-                resupplyAction = available.stream().filter(action -> action.equals(bestMove.get())).findAny();
-            }
+            var resupplyAction = searchForAction(available, character, act -> act instanceof Resupply);
             if (resupplyAction.isPresent()) {
                 return resupplyAction.get();
             }
@@ -176,29 +175,13 @@ public class Decider {
             }
         }
         if (character.getStamina().percent() <= 60 || character.getArousal().percent() >= 30) {
-            Predicate<Action> bathePredicate = act -> act instanceof Bathe;
-            var batheAction = available.stream().filter(bathePredicate).findAny();
-            if (batheAction.isPresent()) {
-                return batheAction.get();
-            }
-            var bestMove = Character.bestMove(character, character.location(), bathePredicate);
-            if (bestMove.isPresent()) {
-                batheAction = available.stream().filter(action -> action.equals(bestMove.get())).findAny();
-            }
+            var batheAction = searchForAction(available, character, act -> act instanceof Bathe);
             if (batheAction.isPresent()) {
                 return batheAction.get();
             }
         }
         if (character.get(Attribute.Science) >= 1 && !character.has(Item.Battery, 10)) {
-            Predicate<Action> rechargePredicate = act -> act instanceof Recharge;
-            var rechargeAction = available.stream().filter(rechargePredicate).findAny();
-            if (rechargeAction.isPresent()) {
-                return rechargeAction.get();
-            }
-            var bestMove = Character.bestMove(character, character.location(), rechargePredicate);
-            if (bestMove.isPresent()) {
-                rechargeAction = available.stream().filter(action -> action.equals(bestMove.get())).findAny();
-            }
+            var rechargeAction = searchForAction(available, character, act -> act instanceof Recharge);
             if (rechargeAction.isPresent()) {
                 return rechargeAction.get();
             }
