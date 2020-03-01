@@ -171,10 +171,9 @@ public class Decider {
             }
         }
         if (character.getArousal().percent() >= 40 && !character.location().humanPresent() && radar.isEmpty()) {
-            for (Action act : available) {
-                if (act.consider() == Movement.masturbate) {
-                    return act;
-                }
+            var masturbateAction = available.stream().filter(act -> act instanceof MasturbateAction).findAny();
+            if (masturbateAction.isPresent()) {
+                return masturbateAction.get();
             }
         }
         if (character.getStamina().percent() <= 60 || character.getArousal().percent() >= 30) {
