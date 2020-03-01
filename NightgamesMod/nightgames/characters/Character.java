@@ -3166,27 +3166,20 @@ public Character clone() throws CloneNotSupportedException {
         }
     }
 
-    /**This method determines the path to a destination for this character. 
-     * 
-     * @return null
-     * Returns null of the desitnation is the same as thej starting location.
-     * @return 
-     * Returns by performing a move().  
-     * */
-    public Move findPath(Area target) {
-        if (location.name.equals(target.name)) {
-            return null;
+    public static Optional<Move> bestMove(Character c, Area initial, Area target) {
+        if (initial.name.equals(target.name)) {
+            throw new RuntimeException("initial area same as target");
         }
         ArrayDeque<Area> queue = new ArrayDeque<>();
-        Vector<Area> vector = new Vector<>();                  
+        Vector<Area> vector = new Vector<>();
         HashMap<Area, Area> parents = new HashMap<>();
-        queue.push(location);
-        vector.add(location);
+        queue.push(initial);
+        vector.add(initial);
         Area last = null;
         while (!queue.isEmpty()) {
             Area t = queue.pop();
             parents.put(t, last);
-            var possibleMoves = t.possibleActions(this).stream()
+            var possibleMoves = t.possibleActions(c).stream()
                     .filter(action -> action instanceof Move)
                     .map(action -> (Move) action)
                     .collect(Collectors.toUnmodifiableSet());
@@ -3200,8 +3193,7 @@ public Character clone() throws CloneNotSupportedException {
                 final var nextDest = t;
                 return possibleMoves.stream()
                         .filter(move -> move.getDestination().equals(nextDest))
-                        .findAny()
-                        .orElseThrow();
+                        .findAny();
             }
             adjacent.stream()
                     .filter(Predicate.not(vector::contains))
@@ -3211,7 +3203,19 @@ public Character clone() throws CloneNotSupportedException {
                     });
             last = t;
         }
-        return null;
+        return Optional.empty();
+    }
+
+
+    /**This method determines the path to a destination for this character. 
+     * 
+     * @return null
+     * Returns null of the desitnation is the same as thej starting location.
+     * @return 
+     * Returns by performing a move().  
+     * */
+    public Move findPath(Area target) {
+        return bestMove(this, this.location, target).orElse(null);
     }
 
     /**Processes teh end of the battle for this character. */
