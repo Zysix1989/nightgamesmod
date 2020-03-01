@@ -116,7 +116,7 @@ public class Spiderweb extends Trap {
                             + "and sucking it until it's completely hard. Then the teasing starts. She strokes you, rubs you, and licks the head of your dick. She uses every technique to "
                             + "pleasure you, but stops just short of letting you ejaculate. It's maddening. Finally you have to swallow your pride and beg to cum. She pumps you dick in earnest "
                             + "now and fondles your balls. When you cum, you shoot your load onto her face and chest. You hang in the rope web, literally and figuratively drained. "
-                            + attacker.getName() + " " + "gratiously unties you and helps you down.");
+                            + attacker.getName() + " " + "graciously unties you and helps you down.");
         }
     }
 
