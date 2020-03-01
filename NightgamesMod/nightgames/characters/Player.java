@@ -371,7 +371,7 @@ public class Player extends Character {
             gui.message(location.description + "<br/><br/>");
             location.getTrap()
                     .filter(trap -> trap.owner() == this)
-                    .ifPresent(trap -> gui.message("You've set a " + trap.toString() + " here."));
+                    .ifPresent(trap -> gui.message("You've set a " + trap.getName() + " here."));
             if (state == State.inTree) {
                 gui.message("You are hiding in a tree, waiting to drop down on an unwitting foe.");
             } else if (state == State.inBushes) {
