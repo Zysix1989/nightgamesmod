@@ -35,6 +35,7 @@ import nightgames.start.NpcConfiguration;
 import nightgames.start.PlayerConfiguration;
 import nightgames.start.StartConfiguration;
 import nightgames.status.Status;
+import nightgames.trap.Tripwire;
 import nightgames.trap.*;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextFactory;
@@ -543,7 +544,7 @@ public class Global {
     public static void buildTrapPool() {
         trapPool = new HashSet<>();
         trapPool.add(new Alarm());
-        trapPool.add(new Tripline());
+        trapPool.add(new Tripwire());
         trapPool.add(new Snare());
         trapPool.add(new SpringTrap());
         trapPool.add(new AphrodisiacTrap());

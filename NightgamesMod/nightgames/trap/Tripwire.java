@@ -12,7 +12,7 @@ import nightgames.status.Flatfooted;
 import java.util.Map;
 import java.util.Optional;
 
-public class Tripline extends Trap {
+public class Tripwire extends Trap {
     private static class Instance extends Trap.Instance {
         public Instance(Trap self, Character owner) {
             super(self, owner);
@@ -54,8 +54,8 @@ public class Tripline extends Trap {
         }
     }
     
-    public Tripline() {
-        super("Tripline");
+    public Tripwire() {
+        super("Tripwire");
     }
 
     private static final Map<Item, Integer> REQUIRED_ITEMS = Map.of(Item.Rope, 1);
