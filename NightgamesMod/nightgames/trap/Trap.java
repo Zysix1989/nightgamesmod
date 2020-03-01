@@ -85,11 +85,6 @@ public abstract class Trap {
         return getName();
     }
 
-    @Override
-    public final boolean equals(Object obj) {
-        return obj != null && getName().equals(obj.toString());
-    }
-
     public String getName() {
         return name;
     }
