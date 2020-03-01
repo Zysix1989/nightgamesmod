@@ -68,7 +68,7 @@ public class AphrodisiacTrap extends Trap {
 
     @Override
     public boolean recipe(Character owner) {
-        return super.recipe(owner) && !owner.has(Trait.direct);
+        return super.recipe(owner);
     }
 
     @Override
