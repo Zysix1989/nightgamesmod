@@ -386,8 +386,7 @@ public class Player extends Character {
             optionChoices.addAll(result.options);
             if (!result.exclusive) {
                 for (Action act : possibleActions) {
-                    if (act.usable(this)
-                        && Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
+                    if (Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
                         actionChoices.add(act);
                     }
                 }

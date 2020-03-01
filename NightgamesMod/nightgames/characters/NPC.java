@@ -450,7 +450,6 @@ public class NPC extends Character {
     }
 
     private void pickAndDoAction(Collection<Action> available, Collection<IMovement> radar) {
-        available.removeIf(a -> a == null || !a.usable(this));
         if (location.humanPresent()) {
             Global.gui().message("You notice " + getName() + ai.move(available, radar).execute(this).describe(this));
         } else {
