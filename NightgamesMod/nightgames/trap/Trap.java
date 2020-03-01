@@ -64,11 +64,11 @@ public abstract class Trap {
 
     protected abstract Map<Item, Integer> requiredItems();
 
-    protected final void basicSetup(Character owner) {
-        requiredItems().forEach(owner::consume);
+    protected void deductCostsFrom(Character c) {
+        requiredItems().forEach(c::consume);
     }
 
-    public abstract String setup(Character owner);
+    public abstract String instanceCreationMessage(Character owner);
 
     public static class InstantiateResult {
         public final String message;

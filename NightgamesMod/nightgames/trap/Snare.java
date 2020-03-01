@@ -58,14 +58,14 @@ public class Snare extends Trap {
     }
 
     @Override
-    public String setup(Character owner) {
-        basicSetup(owner);
+    public String instanceCreationMessage(Character owner) {
         return "You carefully rig up a complex and delicate system of ropes on a tripwire. In theory, it should be able to bind whoever triggers it.";
     }
 
     @Override
     public InstantiateResult instantiate(Character owner) {
-        return new InstantiateResult(this.setup(owner), new Instance(this, owner));
+        deductCostsFrom(owner);
+        return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
     }
     
     @Override

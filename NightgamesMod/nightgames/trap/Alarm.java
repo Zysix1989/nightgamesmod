@@ -40,14 +40,14 @@ public class Alarm extends Trap {
     }
 
     @Override
-    public String setup(Character user) {
-        basicSetup(user);
+    public String instanceCreationMessage(Character user) {
         return "You rig up a disposable phone to a tripwire. When someone trips the wire, it should set of the phone's alarm.";
     }
 
     @Override
     public InstantiateResult instantiate(Character owner) {
-        return new InstantiateResult(this.setup(owner), new Instance(this, owner));
+        deductCostsFrom(owner);
+        return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
     }
 
     @Override

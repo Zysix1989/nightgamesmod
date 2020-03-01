@@ -68,14 +68,19 @@ public class IllusionTrap extends Trap {
     }
 
     @Override
-    public String setup(Character owner) {
-        basicSetup(owner);
-        owner.spendMojo(null, 15);
+    protected void deductCostsFrom(Character c) {
+        super.deductCostsFrom(c);
+        c.spendMojo(null, 15);
+    }
+
+    @Override
+    public String instanceCreationMessage(Character owner) {
         return "You cast a simple spell that will trigger when someone approaches; an illusion will seduce the trespasser.";
     }
 
     @Override
     public InstantiateResult instantiate(Character owner) {
-        return new InstantiateResult(this.setup(owner), new Instance(this, owner));
+        deductCostsFrom(owner);
+        return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
     }
 }

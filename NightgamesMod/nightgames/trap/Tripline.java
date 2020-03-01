@@ -65,14 +65,14 @@ public class Tripline extends Trap {
     }
 
     @Override
-    public String setup(Character owner) {
-        basicSetup(owner);
+    public String instanceCreationMessage(Character owner) {
         return "You run a length of rope at ankle height. It should trip anyone who isn't paying much attention.";
     }
 
     @Override
     public InstantiateResult instantiate(Character owner) {
-        return new InstantiateResult(this.setup(owner), new Instance(this, owner));
+        deductCostsFrom(owner);
+        return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
     }
 
     @Override

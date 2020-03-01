@@ -69,15 +69,15 @@ public class Spiderweb extends Trap {
     }
 
     @Override
-    public String setup(Character owner) {
-        basicSetup(owner);
+    public String instanceCreationMessage(Character owner) {
         return "With quite a bit of time and effort, you carefully setup a complex series of spring loaded snares. " +
                 "Anyone who gets caught in this will be rendered as helpless as a fly in a web.";
     }
 
     @Override
     public InstantiateResult instantiate(Character owner) {
-        return new InstantiateResult(this.setup(owner), new Instance(this, owner));
+        deductCostsFrom(owner);
+        return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
     }
     
     public static void onSpiderwebDefeat(Character attacker, Character victim, Trap.Instance trap) {

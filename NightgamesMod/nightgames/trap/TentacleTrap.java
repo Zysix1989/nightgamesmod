@@ -78,14 +78,14 @@ public class TentacleTrap extends Trap {
     }
 
     @Override
-    public String setup(Character owner) {
-        basicSetup(owner);
+    public String instanceCreationMessage(Character owner) {
         return "You need to activate this phallic totem before it can be used as a trap. You stroke the small totem with your hand, which is... weird, but effective. You "
                         + "quickly place the totem someplace out of sight and hurriedly get out of range. You're not sure whether this will actually discriminate before attacking.";
     }
 
     @Override
     public InstantiateResult instantiate(Character owner) {
-        return new InstantiateResult(this.setup(owner), new Instance(this, owner));
+        deductCostsFrom(owner);
+        return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
     }
 }

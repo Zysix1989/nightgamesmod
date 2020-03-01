@@ -44,14 +44,14 @@ public class Decoy extends Trap {
     }
 
     @Override
-    public String setup(Character owner) {
-        basicSetup(owner);
+    public String instanceCreationMessage(Character owner) {
         return "Your program a phone to play a prerecorded audio track five minutes from now. It should be noticable " +
                 "from a reasonable distance until someone switches it off.";
     }
 
     @Override
     public InstantiateResult instantiate(Character owner) {
-        return new InstantiateResult(this.setup(owner), new Instance(this, owner));
+        deductCostsFrom(owner);
+        return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
     }
 }

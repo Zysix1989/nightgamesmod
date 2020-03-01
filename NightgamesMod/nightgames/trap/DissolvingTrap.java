@@ -80,8 +80,7 @@ public class DissolvingTrap extends Trap {
     }
 
     @Override
-    public String setup(Character owner) {
-        basicSetup(owner);
+    public String instanceCreationMessage(Character owner) {
         return "You rig up a trap to dissolve the clothes of whoever triggers it.";
     }
 
@@ -92,6 +91,7 @@ public class DissolvingTrap extends Trap {
 
     @Override
     public InstantiateResult instantiate(Character owner) {
-        return new InstantiateResult(this.setup(owner), new Instance(this, owner));
+        deductCostsFrom(owner);
+        return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
     }
 }

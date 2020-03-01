@@ -61,14 +61,14 @@ public class StripMine extends Trap {
     }
 
     @Override
-    public String setup(Character owner) {
-        basicSetup(owner);
+    public String instanceCreationMessage(Character owner) {
+        deductCostsFrom(owner);
         return "Using the techniques Jett showed you, you rig up a one-time-use clothing destruction device.";
     }
 
     @Override
     public InstantiateResult instantiate(Character owner) {
-        return new InstantiateResult(this.setup(owner), new Instance(this, owner));
+        return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
     }
 
 }
