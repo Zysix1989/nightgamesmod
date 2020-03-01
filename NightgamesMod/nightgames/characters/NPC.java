@@ -456,16 +456,15 @@ public class NPC extends Character {
                 location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
                 moves.addAll(location.possibleActions(this));
             }
-            pickAndDoAction(Set.of(), moves, radar);
+            pickAndDoAction(moves, radar);
         }
     }
 
-    private void pickAndDoAction(Collection<Action> available, Collection<Action> moves, Collection<IMovement> radar) {
-        if (available.isEmpty()) {
-            available.addAll(getItemActions());
-            available.addAll(Global.getMatch().getAvailableActions());
-            available.addAll(moves);
-        }
+    private void pickAndDoAction(Collection<Action> moves, Collection<IMovement> radar) {
+        var available = new HashSet<Action>();
+        available.addAll(getItemActions());
+        available.addAll(Global.getMatch().getAvailableActions());
+        available.addAll(moves);
         available.removeIf(a -> a == null || !a.usable(this));
         if (available.isEmpty()) {
             available.add(new Wait());
