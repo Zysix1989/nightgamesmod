@@ -1,8 +1,8 @@
 package nightgames.actions;
 
 import nightgames.characters.Character;
+import nightgames.global.Global;
 import nightgames.trap.Trap;
-import nightgames.trap.TrapFactory;
 
 public class SetTrap extends Action {
     /**
@@ -25,8 +25,11 @@ public class SetTrap extends Action {
 
     @Override
     public IMovement execute(Character user) {
-        var fact = new TrapFactory.Implementation(trap);
-        fact.setTrap(user);
+        var result = trap.instantiate(user);
+        user.location().place(result.instance);
+        if (user.human()) {
+            Global.gui().message(result.message);
+        }
         return Movement.trap;
     }
 
