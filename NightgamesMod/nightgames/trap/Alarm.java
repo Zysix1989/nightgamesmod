@@ -40,14 +40,9 @@ public class Alarm extends Trap {
     }
 
     @Override
-    public String instanceCreationMessage(Character user) {
-        return CREATION_MESSAGE;
-    }
-
-    @Override
     public InstantiateResult instantiate(Character owner) {
         deductCostsFrom(owner);
-        return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
+        return new InstantiateResult(CREATION_MESSAGE, new Instance(this, owner));
     }
 
     @Override

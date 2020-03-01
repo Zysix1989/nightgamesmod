@@ -61,14 +61,9 @@ public class StripMine extends Trap {
     }
 
     @Override
-    public String instanceCreationMessage(Character owner) {
-        return CREATION_MESSAGE;
-    }
-
-    @Override
     public InstantiateResult instantiate(Character owner) {
         deductCostsFrom(owner);
-        return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
+        return new InstantiateResult(CREATION_MESSAGE, new Instance(this, owner));
     }
 
     private static final String CREATION_MESSAGE = "Using the techniques Jett showed you, you rig up a one-time-use " +

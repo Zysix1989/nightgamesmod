@@ -68,8 +68,6 @@ public abstract class Trap {
         requiredItems().forEach(c::consume);
     }
 
-    public abstract String instanceCreationMessage(Character owner);
-
     public static class InstantiateResult {
         public final String message;
         public final Instance instance;

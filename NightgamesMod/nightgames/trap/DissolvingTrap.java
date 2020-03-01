@@ -80,11 +80,6 @@ public class DissolvingTrap extends Trap {
     }
 
     @Override
-    public String instanceCreationMessage(Character owner) {
-        return CREATION_MESSAGE;
-    }
-
-    @Override
     public boolean requirements(Character owner) {
         return owner.get(Attribute.Cunning) >= 11 && !owner.has(Trait.direct);
     }
@@ -92,7 +87,7 @@ public class DissolvingTrap extends Trap {
     @Override
     public InstantiateResult instantiate(Character owner) {
         deductCostsFrom(owner);
-        return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
+        return new InstantiateResult(CREATION_MESSAGE, new Instance(this, owner));
     }
 
     private static final String CREATION_MESSAGE = "You rig up a trap to dissolve the clothes of whoever triggers it.";
