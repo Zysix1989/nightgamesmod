@@ -177,15 +177,17 @@ public class Decider {
             }
         }
         if (character.getStamina().percent() <= 60 || character.getArousal().percent() >= 30) {
-            for (Action act : available) {
-                if (act.consider() == Movement.bathe) {
-                    return act;
-                } else if (act.getClass() == Move.class) {
-                    Move movement = (Move) act;
-                    if (movement.consider() == Movement.pool || movement.consider() == Movement.shower) {
-                        return act;
-                    }
-                }
+            Predicate<Action> bathePredicate = act -> act instanceof Bathe;
+            var batheAction = available.stream().filter(bathePredicate).findAny();
+            if (batheAction.isPresent()) {
+                return batheAction.get();
+            }
+            var bestMove = Character.bestMove(character, character.location(), bathePredicate);
+            if (bestMove.isPresent()) {
+                batheAction = available.stream().filter(action -> action.equals(bestMove.get())).findAny();
+            }
+            if (batheAction.isPresent()) {
+                return batheAction.get();
             }
         }
         if (character.get(Attribute.Science) >= 1 && !character.has(Item.Battery, 10)) {
