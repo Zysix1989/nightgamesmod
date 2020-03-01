@@ -438,37 +438,35 @@ public class NPC extends Character {
         } else if (state == State.masturbating) {
             masturbate();
         } else if (!location.encounter(this).exclusive) {
-            HashSet<Action> moves = new HashSet<>();
+            HashSet<Action> available = new HashSet<>();
             HashSet<IMovement> radar = new HashSet<>();
             FTCMatch match;
             if (Global.checkFlag(Flag.FTC)) {
                 match = (FTCMatch) Global.getMatch();
                 if (match.isPrey(this) && match.getFlagHolder() == null) {
-                    moves.add(findPath(match.gps("Central Camp").get()));
+                    available.add(findPath(match.gps("Central Camp").get()));
                 } else if (!match.isPrey(this) && has(Item.Flag) && !match.isBase(this, location)) {
-                    moves.add(findPath(match.getBase(this)));
+                    available.add(findPath(match.getBase(this)));
                 } else if (!match.isPrey(this) && has(Item.Flag) && match.isBase(this, location)) {
                     new Resupply().execute(this);
                     return;
                 }
             }
-            if (!has(Trait.immobile) && moves.isEmpty()) {
+            if (!has(Trait.immobile) && available.isEmpty()) {
                 location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
-                moves.addAll(location.possibleActions(this));
+                available.addAll(location.possibleActions(this));
             }
-            pickAndDoAction(moves, radar);
+            available.addAll(getItemActions());
+            available.addAll(Global.getMatch().getAvailableActions());
+            if (available.isEmpty()) {
+                available.add(new Wait());
+            }
+            pickAndDoAction(available, radar);
         }
     }
 
-    private void pickAndDoAction(Collection<Action> moves, Collection<IMovement> radar) {
-        var available = new HashSet<Action>();
-        available.addAll(getItemActions());
-        available.addAll(Global.getMatch().getAvailableActions());
-        available.addAll(moves);
+    private void pickAndDoAction(Collection<Action> available, Collection<IMovement> radar) {
         available.removeIf(a -> a == null || !a.usable(this));
-        if (available.isEmpty()) {
-            available.add(new Wait());
-        }
         if (location.humanPresent()) {
             Global.gui().message("You notice " + getName() + ai.move(available, radar).execute(this).describe(this));
         } else {
