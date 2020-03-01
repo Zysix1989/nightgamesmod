@@ -443,8 +443,8 @@ public class NPC extends Character {
             HashSet<IMovement> radar = new HashSet<>();
             if (!has(Trait.immobile)) {
                 location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
-                available.addAll(locationActions);
             }
+            available.addAll(locationActions);
             available.addAll(getItemActions());
             available.addAll(Global.getMatch().getAvailableActions());
             assert !available.isEmpty();
