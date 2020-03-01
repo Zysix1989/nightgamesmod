@@ -3166,9 +3166,10 @@ public Character clone() throws CloneNotSupportedException {
         }
     }
 
-    public static Optional<Move> bestMove(Character c, Area initial, Area target) {
-        if (initial.name.equals(target.name)) {
-            throw new RuntimeException("initial area same as target");
+    // finds the best Move to get to an Area with an Action that satisfies the predicate
+    public static Optional<Move> bestMove(Character c, Area initial, Predicate<Action> predicate) {
+        if (initial.possibleActions(c).stream().anyMatch(predicate)) {
+            throw new RuntimeException("current room already satisfies predicate");
         }
         ArrayDeque<Area> queue = new ArrayDeque<>();
         Vector<Area> vector = new Vector<>();
@@ -3186,7 +3187,7 @@ public Character clone() throws CloneNotSupportedException {
             var adjacent = possibleMoves.stream()
                     .map(Move::getDestination)
                     .collect(Collectors.toSet());
-            if (t.name.equals(target.name)) {
+            if (t.possibleActions(c).stream().anyMatch(predicate)) {
                 while (!adjacent.contains(t)) {
                     t = parents.get(t);
                 }
@@ -3215,7 +3216,9 @@ public Character clone() throws CloneNotSupportedException {
      * Returns by performing a move().  
      * */
     public Move findPath(Area target) {
-        return bestMove(this, this.location, target).orElse(null);
+        return bestMove(this, this.location,
+                action -> action instanceof Move && ((Move) action).getDestination().name.equals(target.name)
+        ).orElse(null);
     }
 
     /**Processes teh end of the battle for this character. */
