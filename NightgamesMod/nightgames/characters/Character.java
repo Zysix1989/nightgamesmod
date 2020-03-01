@@ -4116,10 +4116,6 @@ public Character clone() throws CloneNotSupportedException {
     public int getPetLimit() {
         return has(Trait.congregation) ? 2 : 1;
     }
-    
-    public Collection<Action> allowedActions() {
-        return Set.of();
-    }
 
     public boolean isHypnotized() {
         return is(Stsflag.drowsy) || is(Stsflag.enthralled) || is(Stsflag.charmed) || is(Stsflag.trance) || is(Stsflag.lovestruck);

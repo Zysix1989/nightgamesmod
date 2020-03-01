@@ -441,7 +441,7 @@ public class NPC extends Character {
             HashSet<Action> moves = new HashSet<>();
             HashSet<IMovement> radar = new HashSet<>();
             FTCMatch match;
-            if (Global.checkFlag(Flag.FTC) && allowedActions().isEmpty()) {
+            if (Global.checkFlag(Flag.FTC)) {
                 match = (FTCMatch) Global.getMatch();
                 if (match.isPrey(this) && match.getFlagHolder() == null) {
                     moves.add(findPath(match.gps("Central Camp").get()));
@@ -456,7 +456,7 @@ public class NPC extends Character {
                 location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
                 moves.addAll(location.possibleActions(this));
             }
-            pickAndDoAction(allowedActions(), moves, radar);
+            pickAndDoAction(Set.of(), moves, radar);
         }
     }
 
