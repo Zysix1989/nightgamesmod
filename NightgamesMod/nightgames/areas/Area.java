@@ -93,7 +93,7 @@ public class Area implements Serializable {
         }
     }
 
-    public class EncounterResult {
+    public static class EncounterResult {
         public boolean exclusive;
         public List<CommandPanelOption> options;
 
