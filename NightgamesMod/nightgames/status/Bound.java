@@ -137,7 +137,7 @@ public class Bound extends Status {
     public void tick(Combat c) {
         if (c == null && trap.isPresent()) {
             if (affected.human()) {
-                Global.gui().message(Global.format("{self:SUBJECT-ACTION:are|is} still trapped by the %s.", affected, Global.noneCharacter(), trap.get().getTrap().getName().toLowerCase()));
+                Global.gui().message(Global.format("{self:SUBJECT-ACTION:are|is} still trapped by the %s.", affected, Global.noneCharacter(), trap.get().getName().toLowerCase()));
             }
             affected.location().opportunity(affected, trap.get());
         }

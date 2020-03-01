@@ -41,8 +41,8 @@ public abstract class Trap {
             return 0;
         }
 
-        public Trap getTrap() {
-            return self;
+        public String getName() {
+            return self.name;
         }
 
         public Optional<Position> capitalize(Character attacker, Character victim) {
