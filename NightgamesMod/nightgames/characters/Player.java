@@ -254,13 +254,6 @@ public class Player extends Character {
         };
     }
 
-    private void detect() {
-        location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
-            gui.message("You hear something in the <b>" + room.name + "</b>.");
-            room.setPinged(true);
-        });
-    }
-
     private void presentFightFlightChoice(Character opponent, ActionListener fightCallback, ActionListener flightCallback) {
         assessOpponent(opponent);
         gui.message("<br/>");
@@ -407,7 +400,10 @@ public class Player extends Character {
             } else if (state == State.hidden) {
                 gui.message("You have found a hiding spot and are waiting for someone to pounce upon.");
             }
-            detect();
+            location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
+                gui.message("You hear something in the <b>" + room.name + "</b>.");
+                room.setPinged(true);
+            });
             EncounterResult result = location.encounter(this);
             optionChoices.addAll(result.options);
             if (!result.exclusive) {
