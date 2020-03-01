@@ -79,10 +79,7 @@ public class EnthrallingTrap extends Trap {
 
     @Override
     public String instanceCreationMessage(Character owner) {
-        return "You pop open a bottle of cum and use its contents to draw"
-                        + " a pentagram on the floor, all the while speaking"
-                        + " incantations to cause the first person to step into"
-                        + " it to be immediatly enthralled by you.";
+        return CREATION_MESSAGE;
     }
 
     @Override
@@ -91,4 +88,7 @@ public class EnthrallingTrap extends Trap {
         return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
     }
 
+    private static final String CREATION_MESSAGE = "You pop open a bottle of cum and use its contents to draw"
+            + " a pentagram on the floor, all the while speaking incantations to cause the first person to step into"
+            + " it to be immediatly enthralled by you.";
 }

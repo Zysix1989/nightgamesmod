@@ -73,8 +73,7 @@ public class SpringTrap extends Trap {
 
     @Override
     public String instanceCreationMessage(Character owner) {
-        return "You manage to rig up a makeshift booby trap, which should prove quite unpleasant to any who " +
-                "stumbles upon it.";
+        return CREATION_MESSAGE;
     }
 
     @Override
@@ -88,4 +87,6 @@ public class SpringTrap extends Trap {
         return owner.get(Attribute.Cunning) >= 10;
     }
 
+    private static final String CREATION_MESSAGE = "You manage to rig up a makeshift booby trap, which should prove " +
+            "quite unpleasant to any who stumbles upon it.";
 }

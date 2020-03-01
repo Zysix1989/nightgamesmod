@@ -73,7 +73,7 @@ public class AphrodisiacTrap extends Trap {
 
     @Override
     public String instanceCreationMessage(Character owner) {
-        return "You set up a spray trap to coat an unwary opponent in powerful aphrodisiac.";
+        return CREATION_MESSAGE;
     }
 
     @Override
@@ -86,4 +86,7 @@ public class AphrodisiacTrap extends Trap {
     public boolean requirements(Character owner) {
         return owner.get(Attribute.Cunning) >= 12 && !owner.has(Trait.direct);
     }
+
+    private static final String CREATION_MESSAGE = "You set up a spray trap to coat an unwary opponent in powerful " +
+            "aphrodisiac.";
 }

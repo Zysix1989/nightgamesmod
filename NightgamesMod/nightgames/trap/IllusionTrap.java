@@ -75,7 +75,7 @@ public class IllusionTrap extends Trap {
 
     @Override
     public String instanceCreationMessage(Character owner) {
-        return "You cast a simple spell that will trigger when someone approaches; an illusion will seduce the trespasser.";
+        return CREATION_MESSAGE;
     }
 
     @Override
@@ -83,4 +83,7 @@ public class IllusionTrap extends Trap {
         deductCostsFrom(owner);
         return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
     }
+
+    private static final String CREATION_MESSAGE = "You cast a simple spell that will trigger when someone " +
+            "approaches; an illusion will seduce the trespasser.";
 }

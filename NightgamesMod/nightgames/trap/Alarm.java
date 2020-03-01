@@ -41,7 +41,7 @@ public class Alarm extends Trap {
 
     @Override
     public String instanceCreationMessage(Character user) {
-        return "You rig up a disposable phone to a tripwire. When someone trips the wire, it should set of the phone's alarm.";
+        return CREATION_MESSAGE;
     }
 
     @Override
@@ -55,4 +55,6 @@ public class Alarm extends Trap {
         return owner.get(Attribute.Cunning) >= 6;
     }
 
+    private static final String CREATION_MESSAGE = "You rig up a disposable phone to a tripwire. When someone trips " +
+            "the wire, it should set of the phone's alarm.";
 }

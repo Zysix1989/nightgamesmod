@@ -59,7 +59,7 @@ public class Snare extends Trap {
 
     @Override
     public String instanceCreationMessage(Character owner) {
-        return "You carefully rig up a complex and delicate system of ropes on a tripwire. In theory, it should be able to bind whoever triggers it.";
+        return CREATION_MESSAGE;
     }
 
     @Override
@@ -72,4 +72,7 @@ public class Snare extends Trap {
     public boolean requirements(Character owner) {
         return owner.get(Attribute.Cunning) >= 9;
     }
+
+    private static final String CREATION_MESSAGE = "You carefully rig up a complex and delicate system of ropes on a " +
+            "tripwire. In theory, it should be able to bind whoever triggers it.";
 }

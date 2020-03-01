@@ -45,8 +45,7 @@ public class Decoy extends Trap {
 
     @Override
     public String instanceCreationMessage(Character owner) {
-        return "Your program a phone to play a prerecorded audio track five minutes from now. It should be noticable " +
-                "from a reasonable distance until someone switches it off.";
+        return CREATION_MESSAGE;
     }
 
     @Override
@@ -54,4 +53,7 @@ public class Decoy extends Trap {
         deductCostsFrom(owner);
         return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
     }
+
+    private static final String CREATION_MESSAGE = "Your program a phone to play a prerecorded audio track five " +
+            "minutes from now. It should be noticeable from a reasonable distance until someone switches it off.";
 }

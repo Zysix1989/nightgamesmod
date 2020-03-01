@@ -81,7 +81,7 @@ public class DissolvingTrap extends Trap {
 
     @Override
     public String instanceCreationMessage(Character owner) {
-        return "You rig up a trap to dissolve the clothes of whoever triggers it.";
+        return CREATION_MESSAGE;
     }
 
     @Override
@@ -94,4 +94,6 @@ public class DissolvingTrap extends Trap {
         deductCostsFrom(owner);
         return new InstantiateResult(this.instanceCreationMessage(owner), new Instance(this, owner));
     }
+
+    private static final String CREATION_MESSAGE = "You rig up a trap to dissolve the clothes of whoever triggers it.";
 }

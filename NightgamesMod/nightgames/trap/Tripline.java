@@ -66,7 +66,7 @@ public class Tripline extends Trap {
 
     @Override
     public String instanceCreationMessage(Character owner) {
-        return "You run a length of rope at ankle height. It should trip anyone who isn't paying much attention.";
+        return CREATION_MESSAGE;
     }
 
     @Override
@@ -80,4 +80,6 @@ public class Tripline extends Trap {
         return true;
     }
 
+    private static final String CREATION_MESSAGE = "You run a length of rope at ankle height. It should trip anyone " +
+            "who isn't paying much attention.";
 }

@@ -70,8 +70,7 @@ public class Spiderweb extends Trap {
 
     @Override
     public String instanceCreationMessage(Character owner) {
-        return "With quite a bit of time and effort, you carefully setup a complex series of spring loaded snares. " +
-                "Anyone who gets caught in this will be rendered as helpless as a fly in a web.";
+        return CREATION_MESSAGE;
     }
 
     @Override
@@ -121,4 +120,7 @@ public class Spiderweb extends Trap {
         }
     }
 
+    private static final String CREATION_MESSAGE = "With quite a bit of time and effort, you carefully setup a " +
+            "complex series of spring loaded snares. Anyone who gets caught in this will be rendered as helpless " +
+            "as a fly in a web.";
 }
