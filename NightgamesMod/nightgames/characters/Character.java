@@ -1750,7 +1750,7 @@ public Character clone() throws CloneNotSupportedException {
      */
     public abstract boolean act(Combat c);
 
-    public abstract void move();
+    public abstract void move(Collection<Action> locationActions);
 
     public abstract void draw(Combat c, Result flag);
 

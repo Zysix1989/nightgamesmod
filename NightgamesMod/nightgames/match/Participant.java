@@ -67,7 +67,7 @@ public class Participant {
     }
 
     public void move() {
-        character.move();
+        character.move(character.location.possibleActions(character));
     }
 
 }

@@ -1,5 +1,6 @@
 package nightgames.pet;
 
+import nightgames.actions.Action;
 import nightgames.characters.Character;
 import nightgames.characters.*;
 import nightgames.characters.body.BodyPart;
@@ -216,7 +217,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void move() {}
+    public void move(Collection<Action> locationActions) {}
 
     @Override
     public void draw(Combat c, Result flag) {}
