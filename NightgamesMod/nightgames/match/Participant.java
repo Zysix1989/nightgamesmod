@@ -1,10 +1,13 @@
 package nightgames.match;
 
+import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.characters.Character;
+import nightgames.global.Global;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Participant {
     private Character character;
@@ -71,6 +74,15 @@ public class Participant {
     }
 
     public void flee(Area area) {
-        character.flee(area);
+        var options = character.location.possibleActions(character);
+        var destinations = options.stream()
+                .filter(action -> action instanceof Move)
+                .map(action -> (Move) action)
+                .map(Move::getDestination)
+                .collect(Collectors.toList());
+        var destination = destinations.get(Global.random(destinations.size()));
+        character.notifyFlight(destination);
+        character.travel(destination);
+        area.endEncounter();
     }
 }

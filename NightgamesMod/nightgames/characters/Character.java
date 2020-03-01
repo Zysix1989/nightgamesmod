@@ -2616,17 +2616,7 @@ public Character clone() throws CloneNotSupportedException {
         }
     }
 
-    /**Flees the encounter.*/
-    public void flee(Area location2) {
-        var options = location.possibleActions(this);
-        var destinations = options.stream()
-                .filter(action -> action instanceof Move)
-                .map(action -> (Move) action)
-                .map(Move::getDestination)
-                .collect(Collectors.toList());
-        travel(destinations.get(Global.random(destinations.size())));
-        location2.endEncounter();
-    }
+    public void notifyFlight(Area destination) {}
 
     public void endOfMatchRound() {
         getTraits().forEach(trait -> {
