@@ -1,15 +1,9 @@
 package nightgames.characters;
 
-import java.util.Collection;
-import java.util.Optional;
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
-import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.FacePart;
-import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.TailPart;
-import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.mods.ExtendedTonguedMod;
 import nightgames.characters.body.mods.FallenAngelicWingsMod;
@@ -25,6 +19,9 @@ import nightgames.grammar.Shorthand;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
+
+import java.util.Collection;
+import java.util.Optional;
 
 public class Mei extends BasePersonality {
     private static final long serialVersionUID = 8601852023164119671L;
@@ -105,8 +102,7 @@ public class Mei extends BasePersonality {
 
     @Override
     public Action move(Collection<Action> available, Collection<IMovement> radar) {
-        Action proposed = Decider.parseMoves(available, radar, character);
-        return proposed;
+        return Decider.parseMoves(available, radar, character);
     }
 
     @Override

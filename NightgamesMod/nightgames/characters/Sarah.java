@@ -1,7 +1,5 @@
 package nightgames.characters;
 
-import java.util.Collection;
-import java.util.Optional;
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.characters.body.BreastsPart;
@@ -21,6 +19,9 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
+
+import java.util.Collection;
+import java.util.Optional;
 
 public class Sarah extends BasePersonality {
     private static final long serialVersionUID = 8601852023164119671L;
@@ -95,8 +96,7 @@ public class Sarah extends BasePersonality {
 
     @Override
     public Action move(Collection<Action> available, Collection<IMovement> radar) {
-        Action proposed = Decider.parseMoves(available, radar, character);
-        return proposed;
+        return Decider.parseMoves(available, radar, character);
     }
 
     @Override

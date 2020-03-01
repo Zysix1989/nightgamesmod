@@ -1,8 +1,5 @@
 package nightgames.characters;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Optional;
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.actions.Movement;
@@ -34,6 +31,10 @@ import nightgames.start.NpcConfiguration;
 import nightgames.status.Energized;
 import nightgames.status.Stsflag;
 import org.jtwig.JtwigTemplate;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Optional;
 
 public class Cassie extends BasePersonality {
     /**
@@ -278,8 +279,7 @@ public class Cassie extends BasePersonality {
                 return act;
             }
         }
-        Action proposed = Decider.parseMoves(available, radar, character);
-        return proposed;
+        return Decider.parseMoves(available, radar, character);
     }
 
     @Override

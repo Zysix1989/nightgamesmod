@@ -1,7 +1,5 @@
 package nightgames.characters;
 
-import java.util.Collection;
-import java.util.Optional;
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.actions.Movement;
@@ -19,6 +17,9 @@ import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
 import org.jtwig.JtwigTemplate;
+
+import java.util.Collection;
+import java.util.Optional;
 
 public class Yui extends BasePersonality {
     /**
@@ -119,8 +120,7 @@ public class Yui extends BasePersonality {
                 return act;
             }
         }
-        Action proposed = Decider.parseMoves(available, radar, character);
-        return proposed;
+        return Decider.parseMoves(available, radar, character);
     }
 
     @Override
