@@ -15,6 +15,8 @@ import java.util.Optional;
 
 public class AphrodisiacTrap extends Trap {
     private static class Instance extends Trap.Instance {
+        private int strength;
+
         public Instance(Trap self, Character owner) {
             super(self, owner);
             strength = owner.get(Attribute.Cunning) + owner.get(Attribute.Science) + owner.getLevel() / 2;

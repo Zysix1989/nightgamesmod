@@ -15,6 +15,8 @@ import java.util.Optional;
 public class IllusionTrap extends Trap {
 
     private static class Instance extends Trap.Instance {
+        private int strength;
+
         public Instance(Trap self, Character owner) {
             super(self, owner);
             strength = owner.get(Attribute.Arcane) + owner.getLevel() / 2;

@@ -14,12 +14,10 @@ public abstract class Trap {
     public abstract static class Instance implements Deployable {
         protected Trap self;
         protected Character owner;
-        protected int strength;
 
         public Instance(Trap self, Character owner) {
             this.self = self;
             this.owner = owner;
-            strength = owner.getLevel();
         }
 
         protected abstract void trigger(Participant target);
