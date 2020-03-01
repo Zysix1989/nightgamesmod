@@ -3,7 +3,6 @@ package nightgames.characters;
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.actions.Move;
-import nightgames.actions.Wait;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.custom.CharacterLine;
@@ -448,9 +447,7 @@ public class NPC extends Character {
             }
             available.addAll(getItemActions());
             available.addAll(Global.getMatch().getAvailableActions());
-            if (available.isEmpty()) {
-                available.add(new Wait());
-            }
+            assert !available.isEmpty();
             pickAndDoAction(available, radar);
         }
     }
