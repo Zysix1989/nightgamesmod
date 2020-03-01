@@ -1,11 +1,11 @@
-package nightgames.global;
+package nightgames.areas;
 
-import nightgames.areas.Deployable;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
+import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
 

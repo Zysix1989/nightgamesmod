@@ -1,13 +1,9 @@
 package nightgames.match;
 
 import nightgames.actions.*;
-import nightgames.areas.Area;
-import nightgames.areas.AreaAttribute;
-import nightgames.areas.Cache;
-import nightgames.areas.MapDrawHint;
+import nightgames.areas.*;
 import nightgames.characters.Character;
 import nightgames.characters.*;
-import nightgames.global.Challenge;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.match.defaults.DefaultEncounter;

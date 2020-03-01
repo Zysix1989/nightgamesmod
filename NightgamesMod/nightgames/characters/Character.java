@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import nightgames.actions.*;
 import nightgames.areas.Area;
+import nightgames.areas.Challenge;
 import nightgames.areas.NinjaStash;
 import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;
@@ -19,7 +20,10 @@ import nightgames.combat.Combat;
 import nightgames.combat.CombatantData;
 import nightgames.combat.Result;
 import nightgames.daytime.*;
-import nightgames.global.*;
+import nightgames.global.Configuration;
+import nightgames.global.Flag;
+import nightgames.global.Global;
+import nightgames.global.Scene;
 import nightgames.grammar.Person;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
@@ -91,7 +95,7 @@ public abstract class Character extends Observable implements Cloneable {
     protected Map<String, Integer> attractions;
     private Map<String, Integer> affections;
     public HashSet<Clothing> closet;                //If clothing can be destroyed, it should stand to reason that characters should purchase replace. Consider reworking - DSM            
-    public List<Challenge> challenges;      
+    public List<Challenge> challenges;
     public Body body;                               //While current implementation allows for many kinds of parts - it means controlling and finding them gets difficult. - DSM 
     public int availableAttributePoints;            
     public boolean orgasmed;                        //Merge into tracker object for combat session. -DSM
