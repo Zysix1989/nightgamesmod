@@ -1,6 +1,9 @@
 package nightgames.characters;
 
-import nightgames.actions.*;
+import nightgames.actions.Action;
+import nightgames.actions.IMovement;
+import nightgames.actions.Move;
+import nightgames.actions.Wait;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.custom.CharacterLine;
@@ -11,7 +14,6 @@ import nightgames.combat.CombatScene;
 import nightgames.combat.CombatantData;
 import nightgames.combat.Result;
 import nightgames.global.Encs;
-import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.grammar.Person;
 import nightgames.grammar.SingularFeminineThirdPerson;
@@ -22,7 +24,6 @@ import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.match.Encounter;
 import nightgames.match.Match;
-import nightgames.match.ftc.FTCMatch;
 import nightgames.pet.arms.ArmManager;
 import nightgames.pet.arms.ArmType;
 import nightgames.skills.Nothing;
@@ -441,19 +442,7 @@ public class NPC extends Character {
         } else if (!location.encounter(this).exclusive) {
             HashSet<Action> available = new HashSet<>();
             HashSet<IMovement> radar = new HashSet<>();
-            FTCMatch match;
-            if (Global.checkFlag(Flag.FTC)) {
-                match = (FTCMatch) Global.getMatch();
-                if (match.isPrey(this) && match.getFlagHolder() == null) {
-                    available.add(findPath(match.gps("Central Camp").get()));
-                } else if (!match.isPrey(this) && has(Item.Flag) && !match.isBase(this, location)) {
-                    available.add(findPath(match.getBase(this)));
-                } else if (!match.isPrey(this) && has(Item.Flag) && match.isBase(this, location)) {
-                    new Resupply().execute(this);
-                    return;
-                }
-            }
-            if (!has(Trait.immobile) && available.isEmpty()) {
+            if (!has(Trait.immobile)) {
                 location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
                 available.addAll(locationActions);
             }

@@ -4,8 +4,10 @@ import nightgames.actions.*;
 import nightgames.characters.custom.effect.CustomEffect;
 import nightgames.combat.Combat;
 import nightgames.daytime.Daytime;
+import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.ftc.FTCMatch;
 import nightgames.pet.PetCharacter;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
@@ -184,6 +186,28 @@ public class Decider {
             var rechargeAction = searchForAction(available, character, act -> act instanceof Recharge);
             if (rechargeAction.isPresent()) {
                 return rechargeAction.get();
+            }
+        }
+        FTCMatch match;
+        if (Global.checkFlag(Flag.FTC)) {
+            match = (FTCMatch) Global.getMatch();
+            if (match.isPrey(character) && match.getFlagHolder() == null) {
+                var action = searchForAction(available, character,
+                        act -> act instanceof Move && ((Move) act).getDestination().name.equals("Central Camp"));
+                if (action.isPresent()) {
+                    return action.get();
+                }
+            } else if (!match.isPrey(character)
+                    && character.has(Item.Flag)
+                    && !match.isBase(character, character.location)) {
+                var action = searchForAction(available, character,
+                        act -> act instanceof Move && ((Move) act).getDestination().name.equals(match.getBase(character).name));
+                if (action.isPresent()) {
+                    return action.get();
+                }
+            } else if (!match.isPrey(character) && character.has(Item.Flag) && match.isBase(character, character.location)) {
+                return searchForAction(available, character, act -> act instanceof Resupply)
+                        .orElseThrow(() -> new RuntimeException("This is your base. There ought to be a resupply."));
             }
         }
         for (Action act : available) {
