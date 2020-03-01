@@ -362,7 +362,7 @@ public class Match {
                 if (self.state != State.quit) {
                     self.endOfMatchRound();
                     manageConditions(self);
-                    self.move();
+                    participant.move();
                     afterTurn(participant);
                 }
                 if (pause) {

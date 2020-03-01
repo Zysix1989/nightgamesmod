@@ -66,5 +66,8 @@ public class Participant {
         return character.eligible(p2.character);
     }
 
+    public void move() {
+        character.move();
+    }
 
 }
