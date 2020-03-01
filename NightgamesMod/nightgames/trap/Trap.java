@@ -12,8 +12,8 @@ import java.util.Optional;
 public abstract class Trap {
 
     public abstract static class Instance implements Deployable {
-        protected Trap self;
-        protected Character owner;
+        private final Trap self;
+        protected final Character owner;
 
         public Instance(Trap self, Character owner) {
             this.self = self;
