@@ -212,9 +212,9 @@ public class Area implements Serializable {
         return present.stream().anyMatch(c -> c.getCharacter().is(Stsflag.detected));
     }
 
-    public List<Action> possibleActions(Character c) {
+    public List<Action> possibleActions(Participant p) {
         return possibleActions.stream()
-                .filter(action -> action.usable(c))
+                .filter(action -> action.usable(p.getCharacter()))
                 .collect(Collectors.toList());
     }
 

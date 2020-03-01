@@ -70,11 +70,11 @@ public class Participant {
     }
 
     public void move() {
-        character.move(character.location.possibleActions(character));
+        character.move(character.location.possibleActions(this));
     }
 
     public void flee(Area area) {
-        var options = character.location.possibleActions(character);
+        var options = character.location.possibleActions(this);
         var destinations = options.stream()
                 .filter(action -> action instanceof Move)
                 .map(action -> (Move) action)
