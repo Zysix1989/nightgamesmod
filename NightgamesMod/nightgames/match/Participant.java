@@ -70,4 +70,7 @@ public class Participant {
         character.move(character.location.possibleActions(character));
     }
 
+    public void flee(Area area) {
+        character.flee(area);
+    }
 }

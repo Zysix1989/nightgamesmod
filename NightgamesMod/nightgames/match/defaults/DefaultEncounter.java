@@ -232,7 +232,9 @@ public class DefaultEncounter implements Encounter {
     private void fightOrFlee(Character fighter, Character fleer) {
         Optional<String> fighterGuaranteed = (fighter == p1.getCharacter()) ? p1Guaranteed : p2Guaranteed;
         Optional<String> fleerGuaranteed = (fleer == p1.getCharacter()) ? p1Guaranteed : p2Guaranteed;
-        
+
+        var fleerParticipant = (fleer == p1.getCharacter()) ? p1 : p2;
+
         // Fighter wins automatically
         if (fighterGuaranteed.isPresent() && !fleerGuaranteed.isPresent()) {
             if (fighter.human() || fleer.human()) {
@@ -247,7 +249,7 @@ public class DefaultEncounter implements Encounter {
             if (fighter.human() || fleer.human()) {
                 Global.gui().message(fleerGuaranteed.get());
             }
-            p2.getCharacter().flee(location);
+            p2.flee(location);
             return;
         }
 
@@ -256,7 +258,7 @@ public class DefaultEncounter implements Encounter {
             if (fighter.human()) {
                 Global.gui().message(fleer.getName() + " dashes away before you can move.");
             }
-            fleer.flee(location);
+            fleerParticipant.flee(location);
         } else {
             if (fighter.human() || fleer.human()) {
                 if (fighter.human()) {
@@ -291,24 +293,24 @@ public class DefaultEncounter implements Encounter {
             if (humanPresent) {
                 Global.gui().message(p1Guaranteed.get());
             }
-            p1.getCharacter().flee(location);
+            p1.flee(location);
         } else if (p2Guaranteed.isPresent()) {
             if (humanPresent) {
                 Global.gui().message(p2Guaranteed.get());
             }
-            p2.getCharacter().flee(location);
+            p2.flee(location);
         } else if (p1.getCharacter().get(Attribute.Speed) + Global.random(10) >= p2.getCharacter().get(Attribute.Speed) + Global.random(10)) {
             if (p2.getCharacter().human()) {
                 Global.gui()
                       .message(p1.getCharacter().getName() + " dashes away before you can move.");
             }
-            p1.getCharacter().flee(location);
+            p1.flee(location);
         } else {
             if (p1.getCharacter().human()) {
                 Global.gui()
                       .message(p2.getCharacter().getName() + " dashes away before you can move.");
             }
-            p2.getCharacter().flee(location);
+            p2.flee(location);
         }
     }
 
