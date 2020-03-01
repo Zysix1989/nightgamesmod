@@ -405,7 +405,16 @@ public class NPC extends Character {
     public String loserLiner(Combat c, Character target) {
         return getRandomLineFor(CharacterLine.LOSER_LINER, c, target);
     }
-    
+
+    public void handleEnthrall() {
+        Character master;
+        master = ((Enthralled) getStatus(Stsflag.enthralled)).master;
+        Move compelled = findPath(master.location);
+        if (compelled != null) {
+            compelled.execute(this);
+        }
+    }
+
     /**This method determines what happens when a character moves.
      * 
      * FIXME: Currently, characters may repeat encaounters. THis method, as well as Area.encounter() and NPC.Move and player.Move() might be mixing or looping.
@@ -420,12 +429,7 @@ public class NPC extends Character {
         } else if (busy > 0) {
             busy--;
         } else if (this.is(Stsflag.enthralled) && !has(Trait.immobile)) {
-            Character master;
-            master = ((Enthralled) getStatus(Stsflag.enthralled)).master;
-            Move compelled = findPath(master.location);
-            if (compelled != null) {
-                compelled.execute(this);
-            }
+            handleEnthrall();
         } else if (state == State.shower || state == State.lostclothes) {
             bathe();
         } else if (state == State.crafting) {
@@ -439,13 +443,11 @@ public class NPC extends Character {
         } else if (state == State.masturbating) {
             masturbate();
         } else if (!location.encounter(this).exclusive) {
-            HashSet<Action> available = new HashSet<>();
             HashSet<IMovement> radar = new HashSet<>();
             if (!has(Trait.immobile)) {
                 location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
             }
-            assert !available.isEmpty();
-            pickAndDoAction(available, radar);
+            pickAndDoAction(possibleActions, radar);
         }
     }
 

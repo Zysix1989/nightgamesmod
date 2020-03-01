@@ -327,6 +327,39 @@ public class Player extends Character {
         presentFightFlightChoice(opponent, encounterOption(enc, opponent, Encs.fight),encounterOption(enc, opponent, Encs.flee));
     }
 
+    private void presentMoveOptions(List<CommandPanelOption> optionChoices, Collection<Action> actionChoices) {
+        optionChoices.addAll(actionChoices.stream()
+                .map(action -> new CommandPanelOption(
+                        action.toString(),
+                        event -> {
+                            action.execute(this);
+                            if (!action.freeAction()) {
+                                Global.getMatch().resume();
+                            }
+                        })).collect(Collectors.toList()));
+
+        if (!optionChoices.isEmpty()) {
+            // Otherwise someone else is going to provide choices
+            gui.presentOptions(optionChoices);
+            Global.getMatch().pause();
+        }
+    }
+
+
+    public void handleEnthrall() {
+        List<Action> actionChoices = new ArrayList<>();
+        Character master;
+        master = ((Enthralled) getStatus(Stsflag.enthralled)).master;
+        if (master != null) {
+            Move compelled = findPath(master.location());
+            gui.message("You feel an irresistible compulsion to head to the <b>" + master.location().name + "</b>");
+            if (compelled != null) {
+                actionChoices.add(compelled);
+            }
+        }
+        presentMoveOptions(List.of(), actionChoices);
+    }
+
     @Override
     public void move(Collection<Action> possibleActions) {
         System.out.println("move called");
@@ -339,15 +372,8 @@ public class Player extends Character {
         } else if (busy > 0) {
             busy--;
         } else if (this.is(Stsflag.enthralled)) {
-            Character master;
-            master = ((Enthralled) getStatus(Stsflag.enthralled)).master;
-            if (master != null) {
-                Move compelled = findPath(master.location());
-                gui.message("You feel an irresistible compulsion to head to the <b>" + master.location().name + "</b>");
-                if (compelled != null) {
-                    actionChoices.add(compelled);
-                }
-            }
+            handleEnthrall();
+            return;
         } else if (state == State.shower || state == State.lostclothes) {
             bathe();
         } else if (state == State.crafting) {
@@ -392,21 +418,7 @@ public class Player extends Character {
                 }
             }
         }
-        optionChoices.addAll(actionChoices.stream()
-            .map(action -> new CommandPanelOption(
-                action.toString(),
-                event -> {
-                    action.execute(this);
-                    if (!action.freeAction()) {
-                        Global.getMatch().resume();
-                    }
-                })).collect(Collectors.toList()));
-
-        if (!optionChoices.isEmpty()) {
-            // Otherwise someone else is going to provide choices
-            gui.presentOptions(optionChoices);
-            Global.getMatch().pause();
-        }
+        presentMoveOptions(optionChoices, actionChoices);
     }
 
     @Override

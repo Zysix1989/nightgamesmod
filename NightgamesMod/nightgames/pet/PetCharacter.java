@@ -220,6 +220,11 @@ public class PetCharacter extends Character {
     public void move(Collection<Action> locationActions) {}
 
     @Override
+    public void handleEnthrall() {
+
+    }
+
+    @Override
     public void draw(Combat c, Result flag) {}
 
     @Override

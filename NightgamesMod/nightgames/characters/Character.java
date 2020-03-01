@@ -1752,6 +1752,8 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract void move(Collection<Action> possibleActions);
 
+    public abstract void handleEnthrall();
+
     public abstract void draw(Combat c, Result flag);
 
     /**abstract method for determining if this character is human - meaning the player. 
