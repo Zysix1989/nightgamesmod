@@ -1,6 +1,5 @@
 package nightgames.actions;
 
-import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
 import nightgames.match.Participant;
@@ -24,14 +23,14 @@ public class Bathe extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
-        if (user.human()) {
+    public IMovement execute(Participant user) {
+        if (user.getCharacter().human()) {
             if (message != null) {
                 Global.gui().message(message);
             }
         }
-        user.state = State.shower;
-        user.delay(1);
+        user.getCharacter().state = State.shower;
+        user.getCharacter().delay(1);
         return Movement.bathe;
     }
 

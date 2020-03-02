@@ -1,6 +1,5 @@
 package nightgames.actions;
 
-import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.match.Participant;
 
@@ -21,8 +20,8 @@ public class Scavenge extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
-        user.state = State.searching;
+    public IMovement execute(Participant user) {
+        user.getCharacter().state = State.searching;
         return Movement.scavenge;
     }
 

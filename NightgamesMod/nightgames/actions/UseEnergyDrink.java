@@ -1,6 +1,5 @@
 package nightgames.actions;
 
-import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
@@ -17,13 +16,13 @@ public class UseEnergyDrink extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
-        if (user.human()) {
+    public IMovement execute(Participant user) {
+        if (user.getCharacter().human()) {
             Global.gui().message(
                 "You chug down the unpleasant drink. Your tiredness immediately starts to recede.");
         }
-        user.heal(null, 10 + Global.random(10));
-        user.consume(Item.EnergyDrink, 1);
+        user.getCharacter().heal(null, 10 + Global.random(10));
+        user.getCharacter().consume(Item.EnergyDrink, 1);
         return Movement.enerydrink;
     }
 

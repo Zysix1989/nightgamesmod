@@ -35,19 +35,19 @@ public class Resupply extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
+    public IMovement execute(Participant user) {
         if (Global.checkFlag(Flag.FTC)) {
             FTCMatch match = (FTCMatch) Global.getMatch();
-            if (user.human()) {
+            if (user.getCharacter().human()) {
                 Global.gui().message("You get a change of clothes from the chest placed here.");
             }
-            if (user.has(Item.Flag) && !match.isPrey(user)) {
-                match.turnInFlag(user);
-            } else if (match.canCollectFlag(user)) {
+            if (user.getCharacter().has(Item.Flag) && !match.isPrey(user.getCharacter())) {
+                match.turnInFlag(user.getCharacter());
+            } else if (match.canCollectFlag(user.getCharacter())) {
                 match.grabFlag();
             }
         } else {
-            if (user.human()) {
+            if (user.getCharacter().human()) {
                 if (Global.getMatch().getCondition().name().equals("nudist")) {
                     Global.gui().message(
                                     "You check in so that you're eligible to fight again, but you still don't get any clothes.");
@@ -56,7 +56,7 @@ public class Resupply extends Action {
                 }
             }
         }
-        user.state = State.resupplying;
+        user.getCharacter().state = State.resupplying;
         return Movement.resupply;
     }
 

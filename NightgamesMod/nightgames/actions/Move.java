@@ -46,8 +46,8 @@ public class Move extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
-        user.travel(destination);
+    public IMovement execute(Participant user) {
+        user.getCharacter().travel(destination);
         return destination.id();
     }
 

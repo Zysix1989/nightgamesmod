@@ -1,7 +1,6 @@
 package nightgames.actions;
 
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.match.Participant;
 import nightgames.status.Bound;
@@ -19,27 +18,27 @@ public class Struggle extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
-        Bound status = (Bound) user.getStatus(Stsflag.bound);
-        int difficulty = 20 - user.getEscape(null, null);
-        if (user.check(Attribute.Power, difficulty)) {
-            if (user.human()) {
+    public IMovement execute(Participant user) {
+        Bound status = (Bound) user.getCharacter().getStatus(Stsflag.bound);
+        int difficulty = 20 - user.getCharacter().getEscape(null, null);
+        if (user.getCharacter().check(Attribute.Power, difficulty)) {
+            if (user.getCharacter().human()) {
                 if (status != null) {
                     Global.gui().message("You manage to break free from the " + status.getVariant() + ".");
                 } else {
                     Global.gui().message("You manage to snap the restraints that are binding your hands.");
                 }
             }
-            user.free();
+            user.getCharacter().free();
         } else {
-            if (user.human()) {
+            if (user.getCharacter().human()) {
                 if (status != null) {
                     Global.gui().message("You struggle against the " + status.getVariant() + ", but can't get free.");
                 } else {
                     Global.gui().message("You struggle against your restraints, but can't get free.");
                 }
             }
-            user.struggle();
+            user.getCharacter().struggle();
         }
         return Movement.struggle;
     }

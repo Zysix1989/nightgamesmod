@@ -1,7 +1,6 @@
 package nightgames.actions;
 
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
@@ -25,11 +24,11 @@ public class Recharge extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
-        if (user.human()) {
+    public IMovement execute(Participant user) {
+        if (user.getCharacter().human()) {
             Global.gui().message("You find a power supply and restore your batteries to full.");
         }
-        user.chargeBattery();
+        user.getCharacter().chargeBattery();
         return Movement.recharge;
     }
 

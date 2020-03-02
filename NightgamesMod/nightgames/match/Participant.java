@@ -94,7 +94,7 @@ public class Participant {
             character.busy--;
             return;
         } else if (this.character.is(Stsflag.enthralled)) {
-            character.handleEnthrall(act -> act.execute(character));
+            character.handleEnthrall(act -> act.execute(this));
             return;
         } else if (character.state == State.shower || character.state == State.lostclothes) {
             character.bathe();
@@ -115,7 +115,7 @@ public class Participant {
             character.masturbate();
             return;
         }
-        character.move(possibleActions, character.location.encounter(this), act -> act.execute(character));
+        character.move(possibleActions, character.location.encounter(this), act -> act.execute(this));
     }
 
     public void flee(Area area) {

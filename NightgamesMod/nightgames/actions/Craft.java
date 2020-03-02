@@ -1,7 +1,6 @@
 package nightgames.actions;
 
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.match.Participant;
 
@@ -22,8 +21,8 @@ public class Craft extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
-        user.state = State.crafting;
+    public IMovement execute(Participant user) {
+        user.getCharacter().state = State.crafting;
         return Movement.craft;
     }
 

@@ -1,6 +1,5 @@
 package nightgames.actions;
 
-import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.match.Participant;
 import nightgames.trap.Trap;
@@ -26,10 +25,10 @@ public class SetTrap extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
-        var result = trap.instantiate(user);
-        user.location().setTrap(result.instance);
-        if (user.human()) {
+    public IMovement execute(Participant user) {
+        var result = trap.instantiate(user.getCharacter());
+        user.getCharacter().location().setTrap(result.instance);
+        if (user.getCharacter().human()) {
             Global.gui().message(result.message);
         }
         return Movement.trap;

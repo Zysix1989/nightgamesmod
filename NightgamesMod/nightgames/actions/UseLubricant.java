@@ -1,6 +1,5 @@
 package nightgames.actions;
 
-import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
@@ -18,13 +17,13 @@ public class UseLubricant extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
-        if (user.human()) {
+    public IMovement execute(Participant user) {
+        if (user.getCharacter().human()) {
             Global.gui().message(
                 "You cover yourself in slick oil. It's a weird feeling, but it should make it easier to escape from a hold.");
         }
-        user.addNonCombat(new Oiled(user));
-        user.consume(Item.Lubricant, 1);
+        user.getCharacter().addNonCombat(new Oiled(user.getCharacter()));
+        user.getCharacter().consume(Item.Lubricant, 1);
         return Movement.oil;
     }
 

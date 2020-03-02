@@ -1,7 +1,6 @@
 package nightgames.actions;
 
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
 import nightgames.match.Participant;
@@ -23,9 +22,9 @@ public class BushAmbush extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
-        if (user.human()) {
-            if (user.get(Attribute.Animism) >= 10) {
+    public IMovement execute(Participant user) {
+        if (user.getCharacter().human()) {
+            if (user.getCharacter().get(Attribute.Animism) >= 10) {
                 Global.gui().message("You crouch down in some dense bushes, ready" + " to pounce on passing prey.");
             } else {
                 Global.gui().message("You spot some particularly dense bushes, and figure"
@@ -33,7 +32,7 @@ public class BushAmbush extends Action {
                                 + " and wait for someone to walk past.");
             }
         }
-        user.state = State.inBushes;
+        user.getCharacter().state = State.inBushes;
         return Movement.ftcBushAmbush;
     }
 

@@ -1,7 +1,6 @@
 package nightgames.actions;
 
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
 import nightgames.match.Participant;
@@ -22,9 +21,9 @@ public class TreeAmbush extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
-        if (user.human()) {
-            if (user.get(Attribute.Animism) >= 10) {
+    public IMovement execute(Participant user) {
+        if (user.getCharacter().human()) {
+            if (user.getCharacter().get(Attribute.Animism) >= 10) {
                 Global.gui().message(
                                 "Following your instincts, you clamber up a tree" + " to await an unwitting passerby.");
             } else {
@@ -33,7 +32,7 @@ public class TreeAmbush extends Action {
                                 + " able to surprise someone passing underneath.");
             }
         }
-        user.state = State.inTree;
+        user.getCharacter().state = State.inTree;
         return Movement.ftcTreeAmbush;
     }
 

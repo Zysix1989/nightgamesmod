@@ -1,8 +1,5 @@
 package nightgames.actions;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.stream.Collectors;
 import nightgames.areas.Area;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -12,6 +9,10 @@ import nightgames.items.Item;
 import nightgames.match.Participant;
 import nightgames.status.Detected;
 import nightgames.status.Horny;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.stream.Collectors;
 
 public class Locate extends Action {
     private static final long serialVersionUID = 1L;
@@ -34,14 +35,14 @@ public class Locate extends Action {
     }
 
     @Override
-    public IMovement execute(Character self) {
+    public IMovement execute(Participant self) {
         GUI gui = Global.gui();
         gui.clearText();
         gui.validate();
-        if (self.human()) {
+        if (self.getCharacter().human()) {
             gui.message("Thinking back to your 'games' with Reyka, you take out a totem to begin a scrying ritual: ");
         }
-        handleEvent(self, "Start");
+        handleEvent(self.getCharacter(), "Start");
         return Movement.locating;
     }
 

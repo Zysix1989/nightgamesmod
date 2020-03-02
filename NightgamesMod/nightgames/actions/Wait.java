@@ -1,6 +1,5 @@
 package nightgames.actions;
 
-import nightgames.characters.Character;
 import nightgames.match.Participant;
 
 public class Wait extends Action {
@@ -20,7 +19,7 @@ public class Wait extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
+    public IMovement execute(Participant user) {
         return Movement.wait;
     }
 

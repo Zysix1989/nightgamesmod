@@ -1,9 +1,8 @@
 package nightgames.actions;
 
-import java.io.Serializable;
-
-import nightgames.characters.Character;
 import nightgames.match.Participant;
+
+import java.io.Serializable;
 
 public abstract class Action implements Serializable {
     /**
@@ -18,7 +17,7 @@ public abstract class Action implements Serializable {
 
     public abstract boolean usable(Participant user);
 
-    public abstract IMovement execute(Character user);
+    public abstract IMovement execute(Participant user);
 
     @Override
     public String toString() {

@@ -1,6 +1,5 @@
 package nightgames.actions;
 
-import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
 import nightgames.match.Participant;
@@ -20,12 +19,12 @@ public class PassAmbush extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
-        if (user.human()) {
+    public IMovement execute(Participant user) {
+        if (user.getCharacter().human()) {
             Global.gui().message(
                             "You try to find a decent hiding place in the irregular" + " rock faces lining the pass.");
         }
-        user.state = State.inPass;
+        user.getCharacter().state = State.inPass;
         return Movement.ftcPassAmbush;
     }
 

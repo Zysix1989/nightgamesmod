@@ -1,6 +1,5 @@
 package nightgames.actions;
 
-import java.util.stream.Collectors;
 import nightgames.characters.Character;
 import nightgames.characters.NPC;
 import nightgames.characters.Trait;
@@ -8,6 +7,8 @@ import nightgames.global.Global;
 import nightgames.match.Participant;
 import nightgames.status.Disguised;
 import nightgames.status.Stsflag;
+
+import java.util.stream.Collectors;
 
 public class Disguise extends Action {
     private static final long serialVersionUID = 2089054062272510717L;
@@ -34,15 +35,15 @@ public class Disguise extends Action {
     }
 
     @Override
-    public IMovement execute(Character user) {
-        NPC target = getRandomNPC(user);
+    public IMovement execute(Participant user) {
+        NPC target = getRandomNPC(user.getCharacter());
         if (target != null) {
-            user.addNonCombat(new Disguised(user, target));
-            user.body.mimic(target.body);
-            user.getTraits().forEach(t -> user.removeTemporaryTrait(t, 1000));
-            target.getTraits().forEach(t -> user.addTemporaryTrait(t, 1000));
-            user.completelyNudify(null);
-            target.outfitPlan.forEach(user.outfit::equip);
+            user.getCharacter().addNonCombat(new Disguised(user.getCharacter(), target));
+            user.getCharacter().body.mimic(target.body);
+            user.getCharacter().getTraits().forEach(t -> user.getCharacter().removeTemporaryTrait(t, 1000));
+            target.getTraits().forEach(t -> user.getCharacter().addTemporaryTrait(t, 1000));
+            user.getCharacter().completelyNudify(null);
+            target.outfitPlan.forEach(user.getCharacter().outfit::equip);
         }
         return Movement.disguise;
     }
