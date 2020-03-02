@@ -1,6 +1,7 @@
 package nightgames.pet;
 
 import nightgames.actions.Action;
+import nightgames.areas.Area;
 import nightgames.characters.Character;
 import nightgames.characters.*;
 import nightgames.characters.body.BodyPart;
@@ -12,6 +13,7 @@ import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Encounter;
+import nightgames.match.Participant;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
@@ -174,6 +176,16 @@ public class PetCharacter extends Character {
         return false;
     }
 
+    @Override
+    public void move(Collection<Action> possibleActions, Area.EncounterResult encounterResult, Participant.ActionCallback callback) {
+
+    }
+
+    @Override
+    public void handleEnthrall(Participant.ActionCallback callback) {
+
+    }
+
     public void act(Combat c, Character target) {
         List<Skill> allowedEnemySkills = new ArrayList<>(getSkills()
                         .stream().filter(skill -> Skill.isUsableOn(c, skill, target) && Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
@@ -214,14 +226,6 @@ public class PetCharacter extends Character {
             c.write(this, Global.format("With {self:name-possessive} link to the fight weakened, {self:subject-action:disappears|disappears}..", this, this));
             c.removePet(this);
         }
-    }
-
-    @Override
-    public void move(Collection<Action> locationActions) {}
-
-    @Override
-    public void handleEnthrall() {
-
     }
 
     @Override
