@@ -1752,7 +1752,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public void displayStateMessage() {};
 
-    public abstract void move(Collection<Action> possibleActions);
+    public abstract void move(Collection<Action> possibleActions, Area.EncounterResult encounterResult);
 
     public abstract void handleEnthrall();
 

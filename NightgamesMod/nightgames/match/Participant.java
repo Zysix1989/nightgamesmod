@@ -111,7 +111,7 @@ public class Participant {
             character.masturbate();
             return;
         }
-        character.move(possibleActions);
+        character.move(possibleActions, character.location.encounter(character));
     }
 
     public void flee(Area area) {

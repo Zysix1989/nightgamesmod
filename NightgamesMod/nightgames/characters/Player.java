@@ -379,16 +379,15 @@ public class Player extends Character {
     }
 
     @Override
-    public void move(Collection<Action> possibleActions) {
+    public void move(Collection<Action> possibleActions, EncounterResult encounterResult) {
         List<Action> actionChoices = new ArrayList<>();
         List<CommandPanelOption> optionChoices = new ArrayList<>();
         location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
             gui.message("You hear something in the <b>" + room.name + "</b>.");
             room.setPinged(true);
         });
-        EncounterResult result = location.encounter(this);
-        optionChoices.addAll(result.options);
-        if (!result.exclusive) {
+        optionChoices.addAll(encounterResult.options);
+        if (!encounterResult.exclusive) {
             for (Action act : possibleActions) {
                 if (Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
                     actionChoices.add(act);

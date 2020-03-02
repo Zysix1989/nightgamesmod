@@ -3,6 +3,7 @@ package nightgames.characters;
 import nightgames.actions.Action;
 import nightgames.actions.IMovement;
 import nightgames.actions.Move;
+import nightgames.areas.Area;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.custom.CharacterLine;
@@ -421,8 +422,8 @@ public class NPC extends Character {
      *
      * @param possibleActions*/
     @Override
-    public void move(Collection<Action> possibleActions) {
-        if (!location.encounter(this).exclusive) {
+    public void move(Collection<Action> possibleActions, Area.EncounterResult encounterResult) {
+        if (!encounterResult.exclusive) {
             HashSet<IMovement> radar = new HashSet<>();
             if (!has(Trait.immobile)) {
                 location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
