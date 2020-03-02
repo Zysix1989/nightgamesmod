@@ -4,6 +4,7 @@ import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.stance.Position;
 import nightgames.status.Flatfooted;
 import nightgames.status.Hypersensitive;
@@ -64,8 +65,8 @@ public class TentacleTrap extends Trap {
                     Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
                 }
                 target.getCharacter().tempt(target.getCharacter().getArousal().max());
-                target.getCharacter().addNonCombat(new Oiled(target.getCharacter()));
-                target.getCharacter().addNonCombat(new Hypersensitive(target.getCharacter()));
+                target.getCharacter().addNonCombat(new Status(new Oiled(target.getCharacter())));
+                target.getCharacter().addNonCombat(new Status(new Hypersensitive(target.getCharacter())));
                 target.getCharacter().location().opportunity(target.getCharacter(), this);
             } else {
                 if (target.getCharacter().human()) {
@@ -80,7 +81,7 @@ public class TentacleTrap extends Trap {
 
         @Override
         public Optional<Position> capitalize(Character attacker, Character victim) {
-            victim.addNonCombat(new Flatfooted(victim, 1));
+            victim.addNonCombat(new Status(new Flatfooted(victim, 1)));
             attacker.location().clearTrap();
             return super.capitalize(attacker, victim);
         }

@@ -1,15 +1,14 @@
 package nightgames.status.addiction;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.Status;
 import nightgames.status.Stsflag;
+
+import java.util.Optional;
 
 public abstract class Addiction extends Status {
 
@@ -178,7 +177,7 @@ public abstract class Addiction extends Status {
         if (inWithdrawal) {
             Optional<Status> opt = withdrawalEffects();
             if (opt.isPresent() && !affected.has(opt.get()))
-                affected.addNonCombat(opt.get().instance(affected, cause));
+                affected.addNonCombat(new nightgames.match.Status(opt.get().instance(affected, cause)));
         }
     }
 

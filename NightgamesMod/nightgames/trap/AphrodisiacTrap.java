@@ -6,6 +6,7 @@ import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.stance.Position;
 import nightgames.status.Flatfooted;
 import nightgames.status.Horny;
@@ -51,14 +52,14 @@ public class AphrodisiacTrap extends Trap {
                             .with("victim", target.getCharacter().getGrammar());
                     Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
                 }
-                target.getCharacter().addNonCombat(new Horny(target.getCharacter(), (30 + strength) / 10.0f, 10, "Aphrodisiac Trap"));
+                target.getCharacter().addNonCombat(new Status(new Horny(target.getCharacter(), (30 + strength) / 10.0f, 10, "Aphrodisiac Trap")));
                 target.getCharacter().location().opportunity(target.getCharacter(), this);
             }
         }
 
         @Override
         public Optional<Position> capitalize(Character attacker, Character victim) {
-            victim.addNonCombat(new Flatfooted(victim, 1));
+            victim.addNonCombat(new Status(new Flatfooted(victim, 1)));
             attacker.location().clearTrap();
             return super.capitalize(attacker, victim);
         }

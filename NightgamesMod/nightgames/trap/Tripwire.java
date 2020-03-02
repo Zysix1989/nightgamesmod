@@ -5,6 +5,7 @@ import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.stance.Position;
 import nightgames.stance.StandingOver;
 import nightgames.status.Flatfooted;
@@ -61,7 +62,7 @@ public class Tripwire extends Trap {
 
         @Override
         public Optional<Position> capitalize(Character attacker, Character victim) {
-            victim.addNonCombat(new Flatfooted(victim, 1));
+            victim.addNonCombat(new Status(new Flatfooted(victim, 1)));
             victim.location().clearTrap();
             return Optional.of(new StandingOver(attacker, victim));
         }

@@ -824,7 +824,7 @@ public class Global {
     public static void startMatch() {
         Global.getPlayer().getAddictions().forEach(a -> {
             Optional<Status> withEffect = a.startNight();
-            withEffect.ifPresent(s -> Global.getPlayer().addNonCombat(s));
+            withEffect.ifPresent(s -> Global.getPlayer().addNonCombat(new nightgames.match.Status(s)));
         });
         Global.gui().startMatch();
         match.start();

@@ -5,6 +5,7 @@ import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.stance.Position;
 import nightgames.status.Bound;
 import org.jtwig.JtwigModel;
@@ -37,7 +38,7 @@ public class Snare extends Trap {
                 }
                 target.getCharacter().location().clearTrap();
             } else {
-                target.getCharacter().addNonCombat(new Bound(target.getCharacter(), 30 + strength / 2.0f, "snare"));
+                target.getCharacter().addNonCombat(new Status(new Bound(target.getCharacter(), 30 + strength / 2.0f, "snare")));
                 if (target.getCharacter().human()) {
                     Global.gui().message(VICTIM_TRIGGER_MESSAGE);
                 } else if (target.getCharacter().location().humanPresent()) {

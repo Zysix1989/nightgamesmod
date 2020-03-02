@@ -6,6 +6,7 @@ import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.stance.Position;
 import nightgames.status.Flatfooted;
 import org.jtwig.JtwigModel;
@@ -70,7 +71,7 @@ public class DissolvingTrap extends Trap {
 
         @Override
         public Optional<Position> capitalize(Character attacker, Character victim) {
-            victim.addNonCombat(new Flatfooted(victim, 1));
+            victim.addNonCombat(new Status(new Flatfooted(victim, 1)));
             return super.capitalize(attacker, victim);
         }
     }

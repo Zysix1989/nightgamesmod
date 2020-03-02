@@ -27,7 +27,7 @@ public class StatusModifier implements ModifierCategory<StatusModifier>, Modifie
 
     public void apply(Character c) {
         if ((!playerOnly || c.human()) && status != null) {
-            c.addNonCombat(status.instance(c, null));
+            c.addNonCombat(new nightgames.match.Status(status.instance(c, null)));
         }
     }
 

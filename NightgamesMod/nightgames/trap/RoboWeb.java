@@ -5,6 +5,7 @@ import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.stance.Position;
 import nightgames.status.RoboWebbed;
 import org.jtwig.JtwigModel;
@@ -70,7 +71,7 @@ public class RoboWeb extends Trap {
                 Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
             }
             target.getCharacter().outfit.undress();
-            target.getCharacter().addNonCombat(new RoboWebbed(target.getCharacter(), 100 + strength, this));
+            target.getCharacter().addNonCombat(new Status(new RoboWebbed(target.getCharacter(), 100 + strength, this)));
             target.getCharacter().location().opportunity(target.getCharacter(), this);
             target.getCharacter().location().alarm = true;
         }

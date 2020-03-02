@@ -5,6 +5,7 @@ import nightgames.characters.NPC;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.status.Disguised;
 import nightgames.status.Stsflag;
 
@@ -38,7 +39,7 @@ public class Disguise extends Action {
     public IMovement execute(Participant user) {
         NPC target = getRandomNPC(user.getCharacter());
         if (target != null) {
-            user.getCharacter().addNonCombat(new Disguised(user.getCharacter(), target));
+            user.getCharacter().addNonCombat(new Status(new Disguised(user.getCharacter(), target)));
             user.getCharacter().body.mimic(target.body);
             user.getCharacter().getTraits().forEach(t -> user.getCharacter().removeTemporaryTrait(t, 1000));
             target.getTraits().forEach(t -> user.getCharacter().addTemporaryTrait(t, 1000));

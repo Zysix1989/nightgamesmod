@@ -9,6 +9,7 @@ import nightgames.global.Encs;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.match.defaults.DefaultEncounter;
 import nightgames.stance.Mount;
 import nightgames.stance.Pin;
@@ -46,11 +47,11 @@ public class FTCEncounter extends DefaultEncounter {
 
     private void treeAmbush(Character attacker, Character victim) {
         fightTime = 2;
-        victim.addNonCombat(new Flatfooted(victim, 3));
+        victim.addNonCombat(new Status(new Flatfooted(victim, 3)));
         if (attacker.has(Item.Handcuffs))
-            victim.addNonCombat(new Bound(victim, 75, "handcuffs"));
+            victim.addNonCombat(new Status(new Bound(victim, 75, "handcuffs")));
         else
-            victim.addNonCombat(new Bound(victim, 50, "zip-tie"));
+            victim.addNonCombat(new Status(new Bound(victim, 50, "zip-tie")));
         if (p1.getCharacter().human() || p2.getCharacter().human()) {
             startFight(attacker, victim);
             fight.setStance(new Pin(attacker, victim));
@@ -90,11 +91,11 @@ public class FTCEncounter extends DefaultEncounter {
 
     private void bushAmbush(Character attacker, Character victim) {
         fightTime = 2;
-        victim.addNonCombat(new Flatfooted(victim, 3));
+        victim.addNonCombat(new Status(new Flatfooted(victim, 3)));
         if (attacker.has(Item.Handcuffs))
-            victim.addNonCombat(new Bound(victim, 75, "handcuffs"));
+            victim.addNonCombat(new Status(new Bound(victim, 75, "handcuffs")));
         else
-            victim.addNonCombat(new Bound(victim, 50, "zip-tie"));
+            victim.addNonCombat(new Status(new Bound(victim, 50, "zip-tie")));
         if (p1.getCharacter().human() || p2.getCharacter().human()) {
             startFight(attacker, victim);
             fight.setStance(new Mount(attacker, victim));
@@ -144,7 +145,7 @@ public class FTCEncounter extends DefaultEncounter {
                                 + " at a disadvantage.";
             }
             startFight(attacker, victim);
-            victim.addNonCombat(new Flatfooted(victim, 3));
+            victim.addNonCombat(new Status(new Flatfooted(victim, 3)));
         } else {
             if (attacker.human()) {
                 message += "While you are hiding behind a rock, waiting for someone to"
@@ -164,7 +165,7 @@ public class FTCEncounter extends DefaultEncounter {
                                 + " {self:direct-object} to fall to the ground.";
             }
             startFight(attacker, victim);
-            attacker.addNonCombat(new Flatfooted(attacker, 3));
+            attacker.addNonCombat(new Status(new Flatfooted(attacker, 3)));
         }
         if (attacker.human() || victim.human()) {
             Global.gui().message(Global.format(message, attacker, victim));

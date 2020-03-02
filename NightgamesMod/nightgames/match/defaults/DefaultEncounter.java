@@ -48,8 +48,8 @@ public class DefaultEncounter implements Encounter {
         if (enthrall != null) {
             if (((Enthralled) enthrall).master != p2) {
                 p1.removelist.add(enthrall);
-                p1.addNonCombat(new Flatfooted(p1, 2));
-                p1.addNonCombat(new Hypersensitive(p1));
+                p1.addNonCombat(new nightgames.match.Status(new Flatfooted(p1, 2)));
+                p1.addNonCombat(new nightgames.match.Status(new Hypersensitive(p1)));
                 if (p1.human()) {
                     Global.gui()
                           .message("At " + p2.getName() + "'s interruption, you break free from the"
@@ -316,7 +316,7 @@ public class DefaultEncounter implements Encounter {
 
     protected void ambush(Character attacker, Character target) {
         startFightTimer();
-        target.addNonCombat(new Flatfooted(target, 3));
+        target.addNonCombat(new nightgames.match.Status(new Flatfooted(target, 3)));
         if (p1.getCharacter().human() || p2.getCharacter().human()) {
             startFight(attacker, target);
             Global.gui().message(Global.format("{self:SUBJECT-ACTION:catch|catches} {other:name-do} by surprise and {self:action:attack|attacks}!", attacker, target));

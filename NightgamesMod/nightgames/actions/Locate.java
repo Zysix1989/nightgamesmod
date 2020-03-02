@@ -7,6 +7,7 @@ import nightgames.global.Global;
 import nightgames.gui.GUI;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.status.Detected;
 import nightgames.status.Horny;
 
@@ -68,14 +69,14 @@ public class Locate extends Action {
                                 + target.getTrueName()
                                 + " currently is. Your small talisman is already burning up in those creepy "
                                 + "purple flames, the smoke flowing from your nose straight to your crotch and setting another fire there.");
-                target.addNonCombat(new Detected(target, 10));
+                target.addNonCombat(new Status(new Detected(target, 10)));
             } else {
                 gui.message("Drawing on the dark energies inside the talisman, you attempt to scry for "
                                 + target.nameOrPossessivePronoun() + " location. "
                                 + "However, you draw a blank. Your small talisman is already burning up in those creepy "
                                 + "purple flames, the smoke flowing from your nose straight to your crotch and setting another fire there.");
             }
-            self.addNonCombat(new Horny(self, self.getArousal().max() / 10, 10, "Scrying Ritual"));
+            self.addNonCombat(new Status(new Horny(self, self.getArousal().max() / 10, 10, "Scrying Ritual")));
             self.leaveAction(this);
         } else {
             StringWriter writer = new StringWriter();

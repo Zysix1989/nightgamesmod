@@ -7,6 +7,7 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.ClothingTrait;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.stance.Position;
 import nightgames.stance.StandingOver;
 import nightgames.status.Flatfooted;
@@ -54,7 +55,7 @@ public class SpringTrap extends Trap {
                         m += 20;
                     }
                     target.getCharacter().pain(null, null, m);
-                    target.getCharacter().addNonCombat(new Winded(target.getCharacter()));
+                    target.getCharacter().addNonCombat(new Status(new Winded(target.getCharacter())));
                 }
                 target.getCharacter().location().opportunity(target.getCharacter(), this);
             } else if (target.getCharacter().human()) {
@@ -65,7 +66,7 @@ public class SpringTrap extends Trap {
 
         @Override
         public Optional<Position> capitalize(Character attacker, Character victim) {
-            victim.addNonCombat(new Flatfooted(victim, 1));
+            victim.addNonCombat(new Status(new Flatfooted(victim, 1)));
             attacker.location().clearTrap();
             return Optional.of(new StandingOver(attacker, victim));
         }

@@ -5,6 +5,7 @@ import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.stance.Position;
 import nightgames.status.Enthralled;
 import nightgames.status.Flatfooted;
@@ -48,7 +49,7 @@ public class EnthrallingTrap extends Trap {
                 } else {
                     target.getCharacter().location().opportunity(target.getCharacter(), this);
                     Global.gui().message(VICTIM_TRIGGER_MESSAGE);
-                    target.getCharacter().addNonCombat(new Enthralled(target.getCharacter(), owner, 5 + strength / 20));
+                    target.getCharacter().addNonCombat(new Status(new Enthralled(target.getCharacter(), owner, 5 + strength / 20)));
                 }
             } else if (target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm()) || !target.getCharacter().eligible(owner) || !owner.eligible(target.getCharacter())) {
                 if (target.getCharacter().location().humanPresent()) {
@@ -57,14 +58,14 @@ public class EnthrallingTrap extends Trap {
                     Global.gui().message(OWNER_TRIGGER_MESSAGE.render(model));
                 }
                 //TODO: Currently, being Enthralled and moving to a new location doesn't use a turn of the effect, meaning that you still lose all those turns once you are in combat.
-                target.getCharacter().addNonCombat(new Enthralled(target.getCharacter(), owner, 5 + strength / 20));
+                target.getCharacter().addNonCombat(new Status(new Enthralled(target.getCharacter(), owner, 5 + strength / 20)));
                 target.getCharacter().location().opportunity(target.getCharacter(), this);
             }
         }
 
         @Override
         public Optional<Position> capitalize(Character attacker, Character victim) {
-            victim.addNonCombat(new Flatfooted(victim, 1));
+            victim.addNonCombat(new Status(new Flatfooted(victim, 1)));
             attacker.location().clearTrap();
             return super.capitalize(attacker, victim);
         }

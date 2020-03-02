@@ -3,6 +3,7 @@ package nightgames.actions;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.status.Oiled;
 
 public class UseLubricant extends Action {
@@ -22,7 +23,7 @@ public class UseLubricant extends Action {
             Global.gui().message(
                 "You cover yourself in slick oil. It's a weird feeling, but it should make it easier to escape from a hold.");
         }
-        user.getCharacter().addNonCombat(new Oiled(user.getCharacter()));
+        user.getCharacter().addNonCombat(new Status(new Oiled(user.getCharacter())));
         user.getCharacter().consume(Item.Lubricant, 1);
         return Movement.oil;
     }

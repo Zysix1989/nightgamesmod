@@ -1488,8 +1488,8 @@ public Character clone() throws CloneNotSupportedException {
         orgasmed = false;
     }
 
-    public void addNonCombat(Status status) {
-        add(null, status);
+    public void addNonCombat(nightgames.match.Status status) {
+        add(null, status.inflictedStatus);
     }
 
     public boolean has(Status status) {
@@ -2629,7 +2629,7 @@ public Character clone() throws CloneNotSupportedException {
             if (trait.status != null) {
                 Status newStatus = trait.status.instance(this, null);
                 if (!has(newStatus)) {
-                    addNonCombat(newStatus);
+                    addNonCombat(new nightgames.match.Status(newStatus));
                 }
             }
         });
@@ -4196,7 +4196,7 @@ public Character clone() throws CloneNotSupportedException {
                 System.out.printf("Creating initial %s on player with %.3f\n", type.name(), mag);
             }
             Addiction addict = type.build(this, cause, mag);
-            addNonCombat(addict);
+            addNonCombat(new nightgames.match.Status(addict));
             addict.describeInitial();
         }
     }
