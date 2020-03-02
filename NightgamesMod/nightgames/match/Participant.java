@@ -20,8 +20,7 @@ public class Participant {
     private int score = 0;
     private int roundsToWait = 0;
 
-    // Participants this participant has defeated recently.  They are not valid targets until they
-    // resupply.
+    // Participants this participant has defeated recently.  They are not valid targets until they resupply.
     private Set<Participant> invalidTargets = new HashSet<>();
 
     public Participant(Character c) {
