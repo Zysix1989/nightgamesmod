@@ -135,4 +135,8 @@ public class Participant {
     public void waitRounds(int i) {
         roundsToWait += i;
     }
+
+    public void endOfMatchRound() {
+        character.endOfMatchRound();
+    }
 }

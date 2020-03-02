@@ -360,7 +360,7 @@ public class Match {
                 var self = participant.getCharacter();
                 Global.gui().refresh();
                 if (self.state != State.quit) {
-                    self.endOfMatchRound();
+                    participant.endOfMatchRound();
                     manageConditions(self);
                     participant.move();
                     afterTurn(participant);
