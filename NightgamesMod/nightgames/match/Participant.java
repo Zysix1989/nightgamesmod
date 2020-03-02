@@ -130,4 +130,8 @@ public class Participant {
         character.travel(destination);
         area.endEncounter();
     }
+
+    public void delay(int i) {
+        character.busy += i;
+    }
 }

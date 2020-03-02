@@ -2921,10 +2921,6 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract String challenge(Character other);
 
-    public void delay(int i) {
-        busy += i;
-    }
-
     public abstract void promptTrap(Encounter fight, Character target, Trap.Instance trap);
 
     public int lvlBonus(Character opponent) {

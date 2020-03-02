@@ -30,7 +30,7 @@ public class Bathe extends Action {
             }
         }
         user.getCharacter().state = State.shower;
-        user.getCharacter().delay(1);
+        user.delay(1);
         return Movement.bathe;
     }
 

@@ -46,7 +46,7 @@ public class Spiderweb extends Trap {
                 Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
             }
             target.getCharacter().state = State.webbed;
-            target.getCharacter().delay(1);
+            target.delay(1);
             target.getCharacter().location().opportunity(target.getCharacter(), this);
         }
 
