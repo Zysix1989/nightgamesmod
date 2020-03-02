@@ -199,13 +199,13 @@ public class Decider {
                 }
             } else if (!match.isPrey(character)
                     && character.has(Item.Flag)
-                    && !match.isBase(character, character.location)) {
+                    && !match.isBase(character, character.location.get())) {
                 var action = searchForAction(available, character,
                         act -> act instanceof Move && ((Move) act).getDestination().name.equals(match.getBase(character).name));
                 if (action.isPresent()) {
                     return action.get();
                 }
-            } else if (!match.isPrey(character) && character.has(Item.Flag) && match.isBase(character, character.location)) {
+            } else if (!match.isPrey(character) && character.has(Item.Flag) && match.isBase(character, character.location.get())) {
                 return searchForAction(available, character, act -> act instanceof Resupply)
                         .orElseThrow(() -> new RuntimeException("This is your base. There ought to be a resupply."));
             }

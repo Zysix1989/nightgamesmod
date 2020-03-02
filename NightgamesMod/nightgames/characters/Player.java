@@ -364,8 +364,8 @@ public class Player extends Character {
                 gui.message("<b>" + holder.subject() + " currently holds the Flag.</b></br>");
             }
         }
-        gui.message(location.description + "<br/><br/>");
-        location.getTrap()
+        gui.message(location.get().description + "<br/><br/>");
+        location.get().getTrap()
                 .filter(trap -> trap.owner() == this)
                 .ifPresent(trap -> gui.message("You've set a " + trap.getName() + " here."));
         if (state == State.webbed) {
@@ -386,7 +386,7 @@ public class Player extends Character {
                      EncounterResult encounterResult,
                      Participant.ActionCallback callback) {
         List<Action> actionChoices = new ArrayList<>();
-        location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
+        location.get().noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
             gui.message("You hear something in the <b>" + room.name + "</b>.");
             room.setPinged(true);
         });
@@ -523,10 +523,10 @@ public class Player extends Character {
     public void bathe() {
         status.removeIf(s -> s.flags().contains(Stsflag.purgable));
         stamina.renew();
-        if (location.name.equals("Showers")) {
+        if (location.get().name.equals("Showers")) {
             gui.message("You let the hot water wash away your exhaustion and soon you're back to peak condition.");
         }
-        if (location.name.equals("Pool")) {
+        if (location.get().name.equals("Pool")) {
             gui.message("The hot water soothes and relaxes your muscles. You feel a bit exposed, skinny-dipping in such an open area. You decide it's time to get moving.");
         }
         if (state == State.lostclothes) {

@@ -66,7 +66,7 @@ public class Participant {
     }
 
     public void place(Area loc) {
-        character.location = loc;
+        character.location.set(loc);
         loc.place(this);
         if (loc.name.isEmpty()) {
             throw new RuntimeException("empty location");
@@ -83,12 +83,12 @@ public class Participant {
     public void move() {
         character.displayStateMessage();
         List<Action> possibleActions = new ArrayList<>();
-        possibleActions.addAll(character.location.possibleActions(this));
+        possibleActions.addAll(character.location.get().possibleActions(this));
         possibleActions.addAll(character.getItemActions());
         possibleActions.addAll(Global.getMatch().getAvailableActions());
         possibleActions.removeIf(a -> !a.usable(this));
         if (character.state == State.combat) {
-            if (!character.location.fight.battle()) {
+            if (!character.location.get().fight.battle()) {
                 Global.getMatch().resume();
             }
             return;
@@ -117,11 +117,11 @@ public class Participant {
             character.masturbate();
             return;
         }
-        character.move(possibleActions, character.location.encounter(this), act -> act.execute(this));
+        character.move(possibleActions, character.location.get().encounter(this), act -> act.execute(this));
     }
 
     public void flee(Area area) {
-        var options = character.location.possibleActions(this);
+        var options = character.location.get().possibleActions(this);
         var destinations = options.stream()
                 .filter(action -> action instanceof Move)
                 .map(action -> (Move) action)

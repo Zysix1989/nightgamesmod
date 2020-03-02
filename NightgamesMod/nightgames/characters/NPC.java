@@ -412,7 +412,7 @@ public class NPC extends Character {
     public void handleEnthrall(Participant.ActionCallback callback) {
         Character master;
         master = ((Enthralled) getStatus(Stsflag.enthralled)).master;
-        Move compelled = findPath(master.location);
+        Move compelled = findPath(master.location.get());
         if (compelled != null) {
             callback.execute(compelled);
         }
@@ -430,7 +430,7 @@ public class NPC extends Character {
         if (!encounterResult.exclusive) {
             HashSet<IMovement> radar = new HashSet<>();
             if (!has(Trait.immobile)) {
-                location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
+                location.get().noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
             }
             pickAndDoAction(possibleActions, radar, callback);
         }
@@ -438,7 +438,7 @@ public class NPC extends Character {
 
     private void pickAndDoAction(Collection<Action> available, Collection<IMovement> radar, Participant.ActionCallback callback) {
         var chosenAction = ai.move(available, radar);
-        if (location.humanPresent()) {
+        if (location.get().humanPresent()) {
             Global.gui().message("You notice " + getName() + callback.execute(chosenAction).describe(this));
         } else {
             callback.execute(chosenAction);
@@ -464,7 +464,7 @@ public class NPC extends Character {
         if (ai.attack(opponent)) {
             enc.parse(Encs.ambush, this, opponent);
         } else {
-            location.endEncounter();
+            location.get().endEncounter();
         }
     }
 
@@ -509,7 +509,7 @@ public class NPC extends Character {
         if (ai.attack(target) && (!target.human() || !false)) {
             enc.trap(this, target, trap);
         } else {
-            location.endEncounter();
+            location.get().endEncounter();
         }
     }
 

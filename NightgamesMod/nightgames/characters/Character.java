@@ -7,6 +7,7 @@ import nightgames.actions.*;
 import nightgames.areas.Area;
 import nightgames.areas.Challenge;
 import nightgames.areas.NinjaStash;
+import nightgames.beans.Property;
 import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.mods.catcher.DemonicMod;
@@ -77,7 +78,7 @@ public abstract class Character extends Observable implements Cloneable {
     protected WillpowerStat willpower;
     public Outfit outfit;
     public List<Clothing> outfitPlan;               //List is good but ArrayList is more powerful because it's serializable. - DSM 
-    public Area location;                        //What does this do? Is it the characters Current Location? This should be stored as a String or implemented as a token on a larger GameMap - DSM
+    public Property<Area> location;                        //What does this do? Is it the characters Current Location? This should be stored as a String or implemented as a token on a larger GameMap - DSM
     private CopyOnWriteArrayList<Skill> skills;     //Skills are unlikely objects to mutate tow warrant this - just opinion. - DSM
     public List<Status> status;                     //List is not Serializable.  Marge into StatusEffect- DSM
     private Set<Stsflag> statusFlags;                //Can be merged into a StatusEffect object and made serializable. - DSM
@@ -153,7 +154,7 @@ public abstract class Character extends Observable implements Cloneable {
         attractions = new HashMap<>(2);
         affections = new HashMap<>(2);
         challenges = new ArrayList<>();
-        location = new Area("", "", null);
+        location = new Property<>(new Area("", "", null));
         state = State.ready;
         // this.combatStats = new CombatStats();       //TODO: Reading, writing, cloning?
         
@@ -1122,7 +1123,7 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public Area location() {
-        return location;
+        return location.get();
     }
 
     public int init() {
@@ -2613,8 +2614,8 @@ public Character clone() throws CloneNotSupportedException {
      * */
     public void travel(Area dest) {
         state = State.ready;
-        location.exit(this);
-        location = dest;
+        location.get().exit(this);
+        location.set(dest);
         dest.enter(this);
         if (dest.name.isEmpty()) {
             throw new RuntimeException("empty location");
@@ -3208,7 +3209,7 @@ public Character clone() throws CloneNotSupportedException {
      * Returns by performing a move().  
      * */
     public Move findPath(Area target) {
-        return bestMove(this, this.location,
+        return bestMove(this, this.location.get(),
                 action -> action instanceof Move && ((Move) action).getDestination().name.equals(target.name)
         ).orElse(null);
     }
