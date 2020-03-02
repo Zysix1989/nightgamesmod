@@ -387,39 +387,46 @@ public class Player extends Character {
             if (!location.fight.battle()) {
                 Global.getMatch().resume();
             }
+            return;
         } else if (busy > 0) {
             busy--;
+            return;
         } else if (this.is(Stsflag.enthralled)) {
             handleEnthrall();
             return;
         } else if (state == State.shower || state == State.lostclothes) {
             bathe();
+            return;
         } else if (state == State.crafting) {
             craft();
+            return;
         } else if (state == State.searching) {
             search();
+            return;
         } else if (state == State.resupplying) {
             resupply();
+            return;
         } else if (state == State.webbed) {
             state = State.ready;
+            return;
         } else if (state == State.masturbating) {
             masturbate();
-        } else {
-            location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
-                gui.message("You hear something in the <b>" + room.name + "</b>.");
-                room.setPinged(true);
-            });
-            EncounterResult result = location.encounter(this);
-            optionChoices.addAll(result.options);
-            if (!result.exclusive) {
-                for (Action act : possibleActions) {
-                    if (Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
-                        actionChoices.add(act);
-                    }
+            return;
+        }
+        location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
+            gui.message("You hear something in the <b>" + room.name + "</b>.");
+            room.setPinged(true);
+        });
+        EncounterResult result = location.encounter(this);
+        optionChoices.addAll(result.options);
+        if (!result.exclusive) {
+            for (Action act : possibleActions) {
+                if (Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
+                    actionChoices.add(act);
                 }
             }
-            presentMoveOptions(optionChoices, actionChoices);
         }
+        presentMoveOptions(optionChoices, actionChoices);
     }
 
     @Override
