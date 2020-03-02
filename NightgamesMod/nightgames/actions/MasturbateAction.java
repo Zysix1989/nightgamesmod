@@ -47,7 +47,7 @@ public class MasturbateAction extends Action {
             }
         }
         user.getCharacter().state = State.masturbating;
-        user.delay(1);
+        user.waitRounds(1);
         return Movement.masturbate;
     }
 

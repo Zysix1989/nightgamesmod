@@ -133,7 +133,7 @@ public class Participant {
         area.endEncounter();
     }
 
-    public void delay(int i) {
+    public void waitRounds(int i) {
         roundsToWait += i;
     }
 }
