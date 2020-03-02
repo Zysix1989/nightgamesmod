@@ -109,8 +109,7 @@ public class Area implements Serializable {
      * returning true if something has come up that prevents the Character from moving
      * being presented with the normal campus Actions.
      */
-    public EncounterResult encounter(Character c) {
-        var p = Global.getMatch().findParticipant(c);
+    public EncounterResult encounter(Participant p) {
         List<CommandPanelOption> options = new ArrayList<>();
         // We can't run encounters if a fight is already occurring.
         if (fight != null && fight.checkIntrude(p.getCharacter())) {
