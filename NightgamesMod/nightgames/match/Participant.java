@@ -73,6 +73,7 @@ public class Participant {
     }
 
     public void move() {
+        character.displayStateMessage();
         List<Action> possibleActions = new ArrayList<>();
         possibleActions.addAll(character.location.possibleActions(this));
         possibleActions.addAll(character.getItemActions());

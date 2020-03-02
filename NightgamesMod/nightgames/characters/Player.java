@@ -354,6 +354,31 @@ public class Player extends Character {
     }
 
     @Override
+    public void displayStateMessage() {
+        if (Global.checkFlag(Flag.FTC)) {
+            Character holder = ((FTCMatch) Global.getMatch()).getFlagHolder();
+            if (holder != null && !holder.human()) {
+                gui.message("<b>" + holder.subject() + " currently holds the Flag.</b></br>");
+            }
+        }
+        gui.message(location.description + "<br/><br/>");
+        location.getTrap()
+                .filter(trap -> trap.owner() == this)
+                .ifPresent(trap -> gui.message("You've set a " + trap.getName() + " here."));
+        if (state == State.webbed) {
+            gui.message("You eventually manage to get an arm free, which you then use to extract yourself from the trap.");
+        } else if (state == State.inTree) {
+            gui.message("You are hiding in a tree, waiting to drop down on an unwitting foe.");
+        } else if (state == State.inBushes) {
+            gui.message("You are hiding in dense bushes, waiting for someone to pass by.");
+        } else if (state == State.inPass) {
+            gui.message("You are hiding in an alcove in the pass.");
+        } else if (state == State.hidden) {
+            gui.message("You have found a hiding spot and are waiting for someone to pounce upon.");
+        }
+    }
+
+    @Override
     public void move(Collection<Action> possibleActions) {
         System.out.println("move called");
         List<Action> actionChoices = new ArrayList<>();
@@ -376,30 +401,10 @@ public class Player extends Character {
         } else if (state == State.resupplying) {
             resupply();
         } else if (state == State.webbed) {
-            gui.message("You eventually manage to get an arm free, which you then use to extract yourself from the trap.");
             state = State.ready;
         } else if (state == State.masturbating) {
             masturbate();
         } else {
-            if (Global.checkFlag(Flag.FTC)) {
-                Character holder = ((FTCMatch) Global.getMatch()).getFlagHolder();
-                if (holder != null && !holder.human()) {
-                    gui.message("<b>" + holder.subject() + " currently holds the Flag.</b></br>");
-                }
-            }
-            gui.message(location.description + "<br/><br/>");
-            location.getTrap()
-                    .filter(trap -> trap.owner() == this)
-                    .ifPresent(trap -> gui.message("You've set a " + trap.getName() + " here."));
-            if (state == State.inTree) {
-                gui.message("You are hiding in a tree, waiting to drop down on an unwitting foe.");
-            } else if (state == State.inBushes) {
-                gui.message("You are hiding in dense bushes, waiting for someone to pass by.");
-            } else if (state == State.inPass) {
-                gui.message("You are hiding in an alcove in the pass.");
-            } else if (state == State.hidden) {
-                gui.message("You have found a hiding spot and are waiting for someone to pounce upon.");
-            }
             location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
                 gui.message("You hear something in the <b>" + room.name + "</b>.");
                 room.setPinged(true);
@@ -413,8 +418,8 @@ public class Player extends Character {
                     }
                 }
             }
+            presentMoveOptions(optionChoices, actionChoices);
         }
-        presentMoveOptions(optionChoices, actionChoices);
     }
 
     @Override

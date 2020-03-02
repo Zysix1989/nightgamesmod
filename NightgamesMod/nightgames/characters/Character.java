@@ -1750,6 +1750,8 @@ public Character clone() throws CloneNotSupportedException {
      */
     public abstract boolean act(Combat c);
 
+    public void displayStateMessage() {};
+
     public abstract void move(Collection<Action> possibleActions);
 
     public abstract void handleEnthrall();
