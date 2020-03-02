@@ -35,6 +35,7 @@ import nightgames.items.clothing.Outfit;
 import nightgames.json.JsonUtils;
 import nightgames.match.Encounter;
 import nightgames.match.Match;
+import nightgames.match.Participant;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.pet.PetCharacter;
 import nightgames.pet.arms.ArmManager;
@@ -1752,9 +1753,11 @@ public Character clone() throws CloneNotSupportedException {
 
     public void displayStateMessage() {};
 
-    public abstract void move(Collection<Action> possibleActions, Area.EncounterResult encounterResult);
+    public abstract void move(Collection<Action> possibleActions,
+                              Area.EncounterResult encounterResult,
+                              Participant.ActionCallback callback);
 
-    public abstract void handleEnthrall();
+    public abstract void handleEnthrall(Participant.ActionCallback callback);
 
     public abstract void draw(Combat c, Result flag);
 

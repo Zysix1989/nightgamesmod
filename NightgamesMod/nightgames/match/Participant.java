@@ -1,6 +1,7 @@
 package nightgames.match;
 
 import nightgames.actions.Action;
+import nightgames.actions.IMovement;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.characters.Character;
@@ -74,6 +75,9 @@ public class Participant {
         return character.eligible(p2.character);
     }
 
+    public interface ActionCallback {
+        IMovement execute(Action a);
+    }
     public void move() {
         character.displayStateMessage();
         List<Action> possibleActions = new ArrayList<>();
@@ -90,7 +94,7 @@ public class Participant {
             character.busy--;
             return;
         } else if (this.character.is(Stsflag.enthralled)) {
-            character.handleEnthrall();
+            character.handleEnthrall(act -> act.execute(character));
             return;
         } else if (character.state == State.shower || character.state == State.lostclothes) {
             character.bathe();
@@ -111,7 +115,7 @@ public class Participant {
             character.masturbate();
             return;
         }
-        character.move(possibleActions, character.location.encounter(this));
+        character.move(possibleActions, character.location.encounter(this), act -> act.execute(character));
     }
 
     public void flee(Area area) {

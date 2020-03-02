@@ -31,6 +31,7 @@ import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
 import nightgames.match.Encounter;
 import nightgames.match.MatchType;
+import nightgames.match.Participant;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.skills.*;
 import nightgames.skills.damage.DamageType;
@@ -320,12 +321,14 @@ public class Player extends Character {
         presentFightFlightChoice(opponent, encounterOption(enc, opponent, Encs.fight),encounterOption(enc, opponent, Encs.flee));
     }
 
-    private void presentMoveOptions(List<CommandPanelOption> optionChoices, Collection<Action> actionChoices) {
+    private void presentMoveOptions(List<CommandPanelOption> optionChoices,
+                                    Collection<Action> actionChoices,
+                                    Participant.ActionCallback callback) {
         optionChoices.addAll(actionChoices.stream()
                 .map(action -> new CommandPanelOption(
                         action.toString(),
                         event -> {
-                            action.execute(this);
+                            callback.execute(action);
                             if (!action.freeAction()) {
                                 Global.getMatch().resume();
                             }
@@ -338,8 +341,8 @@ public class Player extends Character {
         }
     }
 
-
-    public void handleEnthrall() {
+    @Override
+    public void handleEnthrall(Participant.ActionCallback callback) {
         List<Action> actionChoices = new ArrayList<>();
         Character master;
         master = ((Enthralled) getStatus(Stsflag.enthralled)).master;
@@ -350,7 +353,7 @@ public class Player extends Character {
                 actionChoices.add(compelled);
             }
         }
-        presentMoveOptions(List.of(), actionChoices);
+        presentMoveOptions(List.of(), actionChoices, callback);
     }
 
     @Override
@@ -379,7 +382,9 @@ public class Player extends Character {
     }
 
     @Override
-    public void move(Collection<Action> possibleActions, EncounterResult encounterResult) {
+    public void move(Collection<Action> possibleActions,
+                     EncounterResult encounterResult,
+                     Participant.ActionCallback callback) {
         List<Action> actionChoices = new ArrayList<>();
         location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
             gui.message("You hear something in the <b>" + room.name + "</b>.");
@@ -392,7 +397,7 @@ public class Player extends Character {
                 }
             }
         }
-        presentMoveOptions(encounterResult.options, actionChoices);
+        presentMoveOptions(encounterResult.options, actionChoices, callback);
     }
 
     @Override

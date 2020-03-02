@@ -24,6 +24,7 @@ import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.match.Encounter;
 import nightgames.match.Match;
+import nightgames.match.Participant;
 import nightgames.pet.arms.ArmManager;
 import nightgames.pet.arms.ArmType;
 import nightgames.skills.Nothing;
@@ -407,12 +408,13 @@ public class NPC extends Character {
         return getRandomLineFor(CharacterLine.LOSER_LINER, c, target);
     }
 
-    public void handleEnthrall() {
+    @Override
+    public void handleEnthrall(Participant.ActionCallback callback) {
         Character master;
         master = ((Enthralled) getStatus(Stsflag.enthralled)).master;
         Move compelled = findPath(master.location);
         if (compelled != null) {
-            compelled.execute(this);
+            callback.execute(compelled);
         }
     }
 
@@ -422,21 +424,24 @@ public class NPC extends Character {
      *
      * @param possibleActions*/
     @Override
-    public void move(Collection<Action> possibleActions, Area.EncounterResult encounterResult) {
+    public void move(Collection<Action> possibleActions,
+                     Area.EncounterResult encounterResult,
+                     Participant.ActionCallback callback) {
         if (!encounterResult.exclusive) {
             HashSet<IMovement> radar = new HashSet<>();
             if (!has(Trait.immobile)) {
                 location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
             }
-            pickAndDoAction(possibleActions, radar);
+            pickAndDoAction(possibleActions, radar, callback);
         }
     }
 
-    private void pickAndDoAction(Collection<Action> available, Collection<IMovement> radar) {
+    private void pickAndDoAction(Collection<Action> available, Collection<IMovement> radar, Participant.ActionCallback callback) {
+        var chosenAction = ai.move(available, radar);
         if (location.humanPresent()) {
-            Global.gui().message("You notice " + getName() + ai.move(available, radar).execute(this).describe(this));
+            Global.gui().message("You notice " + getName() + callback.execute(chosenAction).describe(this));
         } else {
-            ai.move(available, radar).execute(this);
+            callback.execute(chosenAction);
         }
     }
 
