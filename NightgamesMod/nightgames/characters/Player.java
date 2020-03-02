@@ -380,39 +380,8 @@ public class Player extends Character {
 
     @Override
     public void move(Collection<Action> possibleActions) {
-        System.out.println("move called");
         List<Action> actionChoices = new ArrayList<>();
         List<CommandPanelOption> optionChoices = new ArrayList<>();
-        if (state == State.combat) {
-            if (!location.fight.battle()) {
-                Global.getMatch().resume();
-            }
-            return;
-        } else if (busy > 0) {
-            busy--;
-            return;
-        } else if (this.is(Stsflag.enthralled)) {
-            handleEnthrall();
-            return;
-        } else if (state == State.shower || state == State.lostclothes) {
-            bathe();
-            return;
-        } else if (state == State.crafting) {
-            craft();
-            return;
-        } else if (state == State.searching) {
-            search();
-            return;
-        } else if (state == State.resupplying) {
-            resupply();
-            return;
-        } else if (state == State.webbed) {
-            state = State.ready;
-            return;
-        } else if (state == State.masturbating) {
-            masturbate();
-            return;
-        }
         location.noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
             gui.message("You hear something in the <b>" + room.name + "</b>.");
             room.setPinged(true);

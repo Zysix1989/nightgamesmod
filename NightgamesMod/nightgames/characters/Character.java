@@ -91,7 +91,7 @@ public abstract class Character extends Observable implements Cloneable {
     private Map<String, Integer> flags;             //Needs to be more strongly leveraged in mechanics.  -DSM
     protected Item trophy;                          
     public State state;                             //State of character - tracked between in combat and out of combat. - DSM
-    protected int busy;                             //Merge into some object tracking the character on the logical game map. - DSM
+    public int busy;                             //Merge into some object tracking the character on the logical game map. - DSM
     protected Map<String, Integer> attractions;
     private Map<String, Integer> affections;
     public HashSet<Clothing> closet;                //If clothing can be destroyed, it should stand to reason that characters should purchase replace. Consider reworking - DSM            

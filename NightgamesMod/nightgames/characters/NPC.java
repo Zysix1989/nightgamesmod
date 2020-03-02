@@ -422,36 +422,6 @@ public class NPC extends Character {
      * @param possibleActions*/
     @Override
     public void move(Collection<Action> possibleActions) {
-        if (state == State.combat) {
-            if (location != null && location.fight != null) {
-                location.fight.battle();
-            }
-            return;
-        } else if (busy > 0) {
-            busy--;
-            return;
-        } else if (this.is(Stsflag.enthralled) && !has(Trait.immobile)) {
-            handleEnthrall();
-            return;
-        } else if (state == State.shower || state == State.lostclothes) {
-            bathe();
-            return;
-        } else if (state == State.crafting) {
-            craft();
-            return;
-        } else if (state == State.searching) {
-            search();
-            return;
-        } else if (state == State.resupplying) {
-            resupply();
-            return;
-        } else if (state == State.webbed) {
-            state = State.ready;
-            return;
-        } else if (state == State.masturbating) {
-            masturbate();
-            return;
-        }
         if (!location.encounter(this).exclusive) {
             HashSet<IMovement> radar = new HashSet<>();
             if (!has(Trait.immobile)) {

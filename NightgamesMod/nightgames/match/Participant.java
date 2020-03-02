@@ -4,7 +4,9 @@ import nightgames.actions.Action;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.characters.Character;
+import nightgames.characters.State;
 import nightgames.global.Global;
+import nightgames.status.Stsflag;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -79,6 +81,36 @@ public class Participant {
         possibleActions.addAll(character.getItemActions());
         possibleActions.addAll(Global.getMatch().getAvailableActions());
         possibleActions.removeIf(a -> !a.usable(this));
+        if (character.state == State.combat) {
+            if (!character.location.fight.battle()) {
+                Global.getMatch().resume();
+            }
+            return;
+        } else if (character.busy > 0) {
+            character.busy--;
+            return;
+        } else if (this.character.is(Stsflag.enthralled)) {
+            character.handleEnthrall();
+            return;
+        } else if (character.state == State.shower || character.state == State.lostclothes) {
+            character.bathe();
+            return;
+        } else if (character.state == State.crafting) {
+            character.craft();
+            return;
+        } else if (character.state == State.searching) {
+            character.search();
+            return;
+        } else if (character.state == State.resupplying) {
+            character.resupply();
+            return;
+        } else if (character.state == State.webbed) {
+            character.state = State.ready;
+            return;
+        } else if (character.state == State.masturbating) {
+            character.masturbate();
+            return;
+        }
         character.move(possibleActions);
     }
 
