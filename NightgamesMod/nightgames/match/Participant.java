@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class Participant {
     private Character character;
     private int score = 0;
+    private int roundsToWait = 0;
 
     // Participants this participant has defeated recently.  They are not valid targets until they
     // resupply.
@@ -35,6 +36,7 @@ public class Participant {
         }
         this.score = p.score;
         this.invalidTargets = p.invalidTargets;
+        this.roundsToWait = p.roundsToWait;
     }
 
     public Character getCharacter() {
@@ -90,8 +92,8 @@ public class Participant {
                 Global.getMatch().resume();
             }
             return;
-        } else if (character.busy > 0) {
-            character.busy--;
+        } else if (roundsToWait > 0) {
+            roundsToWait--;
             return;
         } else if (this.character.is(Stsflag.enthralled)) {
             character.handleEnthrall(act -> act.execute(this));
@@ -132,6 +134,6 @@ public class Participant {
     }
 
     public void delay(int i) {
-        character.busy += i;
+        roundsToWait += i;
     }
 }
