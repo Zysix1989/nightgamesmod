@@ -114,10 +114,9 @@ public class Area implements Serializable {
         // We can't run encounters if a fight is already occurring.
         if (fight != null && fight.checkIntrude(p.getCharacter())) {
             options = p.getCharacter().intervene(fight, fight.getPlayer(1), fight.getPlayer(2));
-        } else if (present.size() > 1 && canFight(p.getCharacter())) {
+        } else if (present.size() > 1) {
             for (Participant opponent : present) {          //FIXME: Currently - encounters repeat - Does this check if they are busy?
                 if (opponent != p
-                        && canFight(opponent.getCharacter())
                         // && Global.getMatch().canEngage(p, opponent)
                 ) {
                     fight = Global.getMatch().buildEncounter(p, opponent, this);
@@ -128,10 +127,6 @@ public class Area implements Serializable {
         return new EncounterResult(false, options);
     }
 
-    private boolean canFight(Character c) {         //FIXME: This method has same name as Match.canFight() and they are used in the same method. Change both - DSM
-        return true;
-    }
-    
     public boolean opportunity(Character target, Trap.Instance trap) {
         var targetParticipant = Global.getMatch().findParticipant(target);
         if (present.size() > 1) {
