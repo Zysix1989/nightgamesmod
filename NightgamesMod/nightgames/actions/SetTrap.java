@@ -19,7 +19,7 @@ public class SetTrap extends Action {
     @Override
     public boolean usable(Participant user) {
         return trap.recipe(user) && !user.getCharacter().location().open()
-                && trap.requirements(user.getCharacter())
+                && trap.requirements(user)
                 && !user.getCharacter().bound()
                 && user.getCharacter().location().getTrap().isEmpty();
     }

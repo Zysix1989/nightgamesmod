@@ -98,8 +98,8 @@ public class RoboWeb extends Trap {
     }
 
     @Override
-    public boolean requirements(Character owner) {
-        return owner.has(Trait.roboweb);
+    public boolean requirements(Participant user) {
+        return user.getCharacter().has(Trait.roboweb);
     }
 
     @Override

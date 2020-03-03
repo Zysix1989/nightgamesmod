@@ -90,8 +90,8 @@ public class AphrodisiacTrap extends Trap {
     }
 
     @Override
-    public boolean requirements(Character owner) {
-        return owner.get(Attribute.Cunning) >= 12 && !owner.has(Trait.direct);
+    public boolean requirements(Participant user) {
+        return user.getCharacter().get(Attribute.Cunning) >= 12 && !user.getCharacter().has(Trait.direct);
     }
 
     private static final String CREATION_MESSAGE = "You set up a spray trap to coat an unwary opponent in powerful " +

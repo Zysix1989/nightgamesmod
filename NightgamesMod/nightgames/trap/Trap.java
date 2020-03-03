@@ -60,7 +60,7 @@ public abstract class Trap {
         return requiredItems().entrySet().stream().allMatch(entry-> owner.getCharacter().has(entry.getKey(), entry.getValue()));
     }
 
-    public abstract boolean requirements(Character owner);
+    public abstract boolean requirements(Participant user);
 
     protected abstract Map<Item, Integer> requiredItems();
 

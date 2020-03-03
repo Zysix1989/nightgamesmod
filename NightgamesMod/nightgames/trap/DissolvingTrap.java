@@ -94,8 +94,8 @@ public class DissolvingTrap extends Trap {
     }
 
     @Override
-    public boolean requirements(Character owner) {
-        return owner.get(Attribute.Cunning) >= 11 && !owner.has(Trait.direct);
+    public boolean requirements(Participant user) {
+        return user.getCharacter().get(Attribute.Cunning) >= 11 && !user.getCharacter().has(Trait.direct);
     }
 
     @Override

@@ -89,8 +89,8 @@ public class SpringTrap extends Trap {
     }
 
     @Override
-    public boolean requirements(Character owner) {
-        return owner.get(Attribute.Cunning) >= 10;
+    public boolean requirements(Participant user) {
+        return user.getCharacter().get(Attribute.Cunning) >= 10;
     }
 
     private static final String CREATION_MESSAGE = "You manage to rig up a makeshift booby trap, which should prove " +

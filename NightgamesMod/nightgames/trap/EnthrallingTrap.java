@@ -83,8 +83,8 @@ public class EnthrallingTrap extends Trap {
     }
 
     @Override
-    public boolean requirements(Character owner) {
-        return owner.get(Attribute.Dark) > 5;
+    public boolean requirements(Participant user) {
+        return user.getCharacter().get(Attribute.Dark) > 5;
     }
 
     @Override

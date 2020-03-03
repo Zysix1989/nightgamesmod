@@ -85,7 +85,7 @@ public class Tripwire extends Trap {
     }
 
     @Override
-    public boolean requirements(Character owner) {
+    public boolean requirements(Participant user) {
         return true;
     }
 

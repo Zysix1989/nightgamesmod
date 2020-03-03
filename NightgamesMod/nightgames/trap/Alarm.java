@@ -1,7 +1,6 @@
 package nightgames.trap;
 
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
@@ -57,8 +56,8 @@ public class Alarm extends Trap {
     }
 
     @Override
-    public boolean requirements(Character owner) {
-        return owner.get(Attribute.Cunning) >= 6;
+    public boolean requirements(Participant user) {
+        return user.getCharacter().get(Attribute.Cunning) >= 6;
     }
 
     private static final String CREATION_MESSAGE = "You rig up a disposable phone to a tripwire. When someone trips " +

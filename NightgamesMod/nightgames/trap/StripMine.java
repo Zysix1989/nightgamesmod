@@ -66,8 +66,8 @@ public class StripMine extends Trap {
     }
 
     @Override
-    public boolean requirements(Character owner) {
-        return owner.get(Attribute.Science) >= 4;
+    public boolean requirements(Participant user) {
+        return user.getCharacter().get(Attribute.Science) >= 4;
     }
 
     @Override

@@ -76,8 +76,8 @@ public class Snare extends Trap {
     }
     
     @Override
-    public boolean requirements(Character owner) {
-        return owner.get(Attribute.Cunning) >= 9;
+    public boolean requirements(Participant user) {
+        return user.getCharacter().get(Attribute.Cunning) >= 9;
     }
 
     private static final String CREATION_MESSAGE = "You carefully rig up a complex and delicate system of ropes on a " +

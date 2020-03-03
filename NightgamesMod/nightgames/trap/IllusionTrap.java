@@ -75,8 +75,8 @@ public class IllusionTrap extends Trap {
     }
 
     @Override
-    public boolean requirements(Character owner) {
-        return owner.get(Attribute.Arcane) >= 5;
+    public boolean requirements(Participant user) {
+        return user.getCharacter().get(Attribute.Arcane) >= 5;
     }
 
     @Override

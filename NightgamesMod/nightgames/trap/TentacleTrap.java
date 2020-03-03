@@ -98,8 +98,8 @@ public class TentacleTrap extends Trap {
     }
 
     @Override
-    public boolean requirements(Character owner) {
-        return owner.getRank() > 0;
+    public boolean requirements(Participant user) {
+        return user.getCharacter().getRank() > 0;
     }
 
     @Override

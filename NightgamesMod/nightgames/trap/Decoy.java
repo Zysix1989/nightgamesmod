@@ -1,7 +1,6 @@
 package nightgames.trap;
 
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -47,8 +46,8 @@ public class Decoy extends Trap {
     }
 
     @Override
-    public boolean requirements(Character owner) {
-        return owner.get(Attribute.Cunning) >= 6 && !owner.has(Trait.direct);
+    public boolean requirements(Participant user) {
+        return user.getCharacter().get(Attribute.Cunning) >= 6 && !user.getCharacter().has(Trait.direct);
     }
 
     @Override
