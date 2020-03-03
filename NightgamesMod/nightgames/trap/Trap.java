@@ -1,6 +1,5 @@
 package nightgames.trap;
 
-import nightgames.areas.Deployable;
 import nightgames.characters.Character;
 import nightgames.items.Item;
 import nightgames.match.Participant;
@@ -11,7 +10,7 @@ import java.util.Optional;
 
 public abstract class Trap {
 
-    public abstract static class Instance implements Deployable {
+    public abstract static class Instance {
         private final Trap self;
         protected final Participant owner;
 
@@ -22,7 +21,6 @@ public abstract class Trap {
 
         protected abstract void trigger(Participant target);
 
-        @Override
         public boolean resolve(Participant active) {
             if (active != owner) {
                 trigger(active);
