@@ -53,13 +53,8 @@ public class Locate extends Action {
                         .collect(Collectors.toList()));
     }
 
-    public final void eventBody(Character self, String choice) {
+    public final void eventBody(Character self, Character target) {
         var gui = Global.gui();
-        Character target = Global.getMatch().getParticipants().stream()
-                .filter(p -> p.getCharacter().getTrueName().equals(choice))
-                .findAny()
-                .orElseThrow()
-                .getCharacter();
         Area area = target.location();
         gui.clearText();
         if (area != null) {
