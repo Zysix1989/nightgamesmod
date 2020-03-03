@@ -15,9 +15,9 @@ public abstract class Trap {
         private final Trap self;
         protected final Character owner;
 
-        public Instance(Trap self, Character owner) {
+        public Instance(Trap self, Participant owner) {
             this.self = self;
-            this.owner = owner;
+            this.owner = owner.getCharacter();
         }
 
         protected abstract void trigger(Participant target);
@@ -56,16 +56,16 @@ public abstract class Trap {
         this.name = name;
     }
 
-    public boolean recipe(Character owner) {
-        return requiredItems().entrySet().stream().allMatch(entry-> owner.has(entry.getKey(), entry.getValue()));
+    public boolean recipe(Participant owner) {
+        return requiredItems().entrySet().stream().allMatch(entry-> owner.getCharacter().has(entry.getKey(), entry.getValue()));
     }
 
     public abstract boolean requirements(Character owner);
 
     protected abstract Map<Item, Integer> requiredItems();
 
-    protected void deductCostsFrom(Character c) {
-        requiredItems().forEach(c::consume);
+    protected void deductCostsFrom(Participant c) {
+        requiredItems().forEach(c.getCharacter()::consume);
     }
 
     public static class InstantiateResult {
@@ -78,7 +78,7 @@ public abstract class Trap {
         }
     }
 
-    public abstract InstantiateResult instantiate(Character owner);
+    public abstract InstantiateResult instantiate(Participant owner);
 
     @Override
     public final String toString() {

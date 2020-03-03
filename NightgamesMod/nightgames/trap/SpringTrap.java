@@ -20,7 +20,7 @@ import java.util.Optional;
 
 public class SpringTrap extends Trap {
     private static class Instance extends Trap.Instance {
-        public Instance(Trap self, Character owner) {
+        public Instance(Trap self, Participant owner) {
             super(self, owner);
         }
 
@@ -83,7 +83,7 @@ public class SpringTrap extends Trap {
     }
 
     @Override
-    public InstantiateResult instantiate(Character owner) {
+    public InstantiateResult instantiate(Participant owner) {
         deductCostsFrom(owner);
         return new InstantiateResult(CREATION_MESSAGE, new Instance(this, owner));
     }

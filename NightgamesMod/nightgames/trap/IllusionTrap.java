@@ -20,9 +20,10 @@ public class IllusionTrap extends Trap {
     private static class Instance extends Trap.Instance {
         private int strength;
 
-        public Instance(Trap self, Character owner) {
+        public Instance(Trap self, Participant owner) {
             super(self, owner);
-            strength = owner.get(Attribute.Arcane) + owner.getLevel() / 2;
+            var ch = owner.getCharacter();
+            strength = ch.get(Attribute.Arcane) + ch.getLevel() / 2;
         }
 
         private static final String VICTIM_TRIGGER_MESSAGE = "You run into a girl you don't recognize, but she's " +
@@ -69,8 +70,8 @@ public class IllusionTrap extends Trap {
     }
 
     @Override
-    public boolean recipe(Character owner) {
-        return super.recipe(owner) && owner.canSpend(15);
+    public boolean recipe(Participant owner) {
+        return super.recipe(owner) && owner.getCharacter().canSpend(15);
     }
 
     @Override
@@ -79,13 +80,13 @@ public class IllusionTrap extends Trap {
     }
 
     @Override
-    protected void deductCostsFrom(Character c) {
+    protected void deductCostsFrom(Participant c) {
         super.deductCostsFrom(c);
-        c.spendMojo(null, 15);
+        c.getCharacter().spendMojo(null, 15);
     }
 
     @Override
-    public InstantiateResult instantiate(Character owner) {
+    public InstantiateResult instantiate(Participant owner) {
         deductCostsFrom(owner);
         return new InstantiateResult(CREATION_MESSAGE, new Instance(this, owner));
     }

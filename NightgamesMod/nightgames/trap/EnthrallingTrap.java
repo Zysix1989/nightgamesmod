@@ -20,9 +20,10 @@ public class EnthrallingTrap extends Trap {
     private static class Instance extends Trap.Instance {
         private int strength;
 
-        public Instance(Trap self, Character owner) {
+        public Instance(Trap self, Participant owner) {
             super(self, owner);
-            strength = owner.get(Attribute.Dark) + owner.get(Attribute.Arcane) + owner.getLevel() / 2;
+            var ch = owner.getCharacter();
+            strength = ch.get(Attribute.Dark) + ch.get(Attribute.Arcane) + ch.getLevel() / 2;
         }
 
         private static final String VICTIM_AVOID_MESSAGE = "As you walk through the area, you notice a pentagram " +
@@ -87,7 +88,7 @@ public class EnthrallingTrap extends Trap {
     }
 
     @Override
-    public InstantiateResult instantiate(Character owner) {
+    public InstantiateResult instantiate(Participant owner) {
         deductCostsFrom(owner);
         return new InstantiateResult(CREATION_MESSAGE, new Instance(this, owner));
     }

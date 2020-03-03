@@ -18,9 +18,10 @@ public class RoboWeb extends Trap {
     private static class Instance extends Trap.Instance {
         private int strength;
 
-        public Instance(Trap self, Character owner) {
+        public Instance(Trap self, Participant owner) {
             super(self, owner);
-            strength = owner.getLevel();
+            var ch = owner.getCharacter();
+            strength = ch.getLevel();
         }
 
         private static String victimTriggerMessage(Participant target) {
@@ -102,7 +103,7 @@ public class RoboWeb extends Trap {
     }
 
     @Override
-    public InstantiateResult instantiate(Character owner) {
+    public InstantiateResult instantiate(Participant owner) {
         deductCostsFrom(owner);
         return new InstantiateResult("<invisible>", new Instance(this, owner));
     }

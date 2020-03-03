@@ -18,9 +18,11 @@ public class Snare extends Trap {
     private static class Instance extends Trap.Instance {
         private int strength;
 
-        public Instance(Trap self, Character owner) {
+
+        public Instance(Trap self, Participant owner) {
             super(self, owner);
-            strength = owner.get(Attribute.Cunning) + owner.getLevel() / 2;
+            var ch = owner.getCharacter();
+            strength = ch.get(Attribute.Cunning) + ch.getLevel() / 2;
         }
 
         private static final String VICTIM_DISARM_MESSAGE = "You notice a snare on the floor in front of you and " +
@@ -68,7 +70,7 @@ public class Snare extends Trap {
     }
 
     @Override
-    public InstantiateResult instantiate(Character owner) {
+    public InstantiateResult instantiate(Participant owner) {
         deductCostsFrom(owner);
         return new InstantiateResult(CREATION_MESSAGE, new Instance(this, owner));
     }

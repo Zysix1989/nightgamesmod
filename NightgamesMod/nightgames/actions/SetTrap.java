@@ -18,7 +18,7 @@ public class SetTrap extends Action {
 
     @Override
     public boolean usable(Participant user) {
-        return trap.recipe(user.getCharacter()) && !user.getCharacter().location().open()
+        return trap.recipe(user) && !user.getCharacter().location().open()
                 && trap.requirements(user.getCharacter())
                 && !user.getCharacter().bound()
                 && user.getCharacter().location().getTrap().isEmpty();
@@ -26,7 +26,7 @@ public class SetTrap extends Action {
 
     @Override
     public IMovement execute(Participant user) {
-        var result = trap.instantiate(user.getCharacter());
+        var result = trap.instantiate(user);
         user.getCharacter().location().setTrap(result.instance);
         if (user.getCharacter().human()) {
             Global.gui().message(result.message);
