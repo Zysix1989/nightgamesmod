@@ -11,7 +11,6 @@ import nightgames.status.Stsflag;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -81,7 +80,7 @@ public class Participant {
     }
     public void move() {
         character.displayStateMessage(character.location.get().getTrap(this));
-        List<Action> possibleActions = new ArrayList<>();
+        var possibleActions = new ArrayList<Action>();
         possibleActions.addAll(character.location.get().possibleActions(this));
         possibleActions.addAll(character.getItemActions());
         possibleActions.addAll(Global.getMatch().getAvailableActions());
