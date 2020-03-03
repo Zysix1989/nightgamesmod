@@ -449,7 +449,7 @@ public class Body implements Cloneable {
             && (character.getArousal().percent() >= 50)
             && (skill == null || !skill.getTags(c).contains(SkillTag.fucking))
             && !(with.isGenitalOrToy() && target.isGenitalOrToy() && c.getStance().havingSex(c))) {
-            if (c != null && c.getOpponent(character).human()) {
+            if (c != null && c.getOpponentCharacter(character).human()) {
                 pleasure -= 4;
             } else {
                 pleasure -= .8;
@@ -671,7 +671,7 @@ public class Body implements Cloneable {
             && percentPleasureDealt >= 5
             && opponent.isPet()
             && ((PetCharacter)opponent).getSelf().owner().equals(character)) {
-            Character voyeur = c.getOpponent(character);
+            Character voyeur = c.getOpponentCharacter(character);
             c.write(character, Global.format("{self:NAME-POSSESSIVE} moans as {other:subject-action:make|makes} a show of pleasing {other:possessive} {self:master} "
                 + "turns %s on immensely.", character, opponent, voyeur.nameDirectObject()));
             voyeur.tempt(c, character, null, Math.max(Global.random(14, 20), pleasureDamage / 3), skill);

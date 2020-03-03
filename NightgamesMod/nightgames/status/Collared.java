@@ -43,7 +43,7 @@ public class Collared extends Status implements Compulsive {
     @Override
     public String initialMessage(Combat c, Optional<Status> replacement) {
         return Global.format("{self:SUBJECT} now {self:action:have|has} a metallic collar around"
-                        + " {self:possessive} neck!", affected, c.getOpponent(affected));
+                        + " {self:possessive} neck!", affected, c.getOpponentCharacter(affected));
     }
 
     @Override

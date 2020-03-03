@@ -24,7 +24,7 @@ public class FuckStrategy extends AbstractStrategy {
 
     @Override
     protected Set<Skill> filterSkills(Combat c, Character self, Set<Skill> allowedSkills) {
-        Character other = c.getOpponent(self);
+        Character other = c.getOpponentCharacter(self);
 
         if (other.getArousal().percent() < 15) {
             return allowedSkills.stream().filter(skill -> skill.type(c).equals(Tactics.pleasure)).collect(Collectors.toSet());

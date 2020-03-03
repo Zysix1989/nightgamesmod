@@ -3,7 +3,6 @@ package nightgames.skills;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.PussyPart;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -35,7 +34,7 @@ public class Offer extends Skill {
 
     @Override
     public String describe(Combat c) {
-        Character other = c.getOpponent(getSelf());
+        Character other = c.getOpponentCharacter(getSelf());
         return other.hasDick() || other.has(Trait.strapped)
                         ? "Offer your " + (getSelf().hasPussy() ? "pussy" : "ass") + " to " + other.possessiveAdjective()
                                         + "'s " + other.body.getRandomInsertable().describe(other)

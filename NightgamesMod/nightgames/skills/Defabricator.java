@@ -19,7 +19,7 @@ public class Defabricator extends Skill {
     public float priorityMod(Combat c) {
         // Maybe don't destroy clothing which is difficult for the opponent to remove;
         // it's probably harming them by being there.
-        return c.getOpponent(getSelf()).stripDifficulty(getSelf()) > 0 ? -10 : 0;
+        return c.getOpponentCharacter(getSelf()).stripDifficulty(getSelf()) > 0 ? -10 : 0;
     }
     
     @Override

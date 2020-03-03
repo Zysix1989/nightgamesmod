@@ -48,7 +48,7 @@ public class Oiled extends Status {
 
     @Override
     public double pleasure(Combat c, BodyPart withPart, BodyPart targetPart, double x) {
-        c.write(affected, Global.format("{self:NAME-POSSESSIVE} slippery oiled form makes {self:direct-object} all the more sensitive.", affected, c.getOpponent(affected)));
+        c.write(affected, Global.format("{self:NAME-POSSESSIVE} slippery oiled form makes {self:direct-object} all the more sensitive.", affected, c.getOpponentCharacter(affected)));
         return x / 4;
     }
 

@@ -42,7 +42,7 @@ public class DisablingStrategy extends KnockdownThenActionStrategy {
     
     @Override
     protected Set<Skill> filterSkills(Combat c, Character self, Set<Skill> allowedSkills) {
-        if (c.getOpponent(self).is(Stsflag.charmed) && c.getStance().en == Stance.succubusembrace) {
+        if (c.getOpponentCharacter(self).is(Stsflag.charmed) && c.getStance().en == Stance.succubusembrace) {
             return Collections.emptySet();
         }
         Set<Skill> skills = new HashSet<>();
@@ -57,7 +57,7 @@ public class DisablingStrategy extends KnockdownThenActionStrategy {
         if (self.has(Trait.DemonsEmbrace)) {
             skills.add(new WingWrap(self));
         }
-        if (skills.stream().anyMatch(skill -> skill.usable(c, c.getOpponent(self)))) {
+        if (skills.stream().anyMatch(skill -> skill.usable(c, c.getOpponentCharacter(self)))) {
             return skills;
         }
         return new FuckStrategy().filterSkills(c, self, allowedSkills);

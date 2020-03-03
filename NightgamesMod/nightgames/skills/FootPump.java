@@ -31,7 +31,7 @@ public class FootPump extends Skill {
 
     @Override public float priorityMod(Combat c) {
         BodyPart feet = getSelf().body.getRandomFeet();
-        Character other = c.getOpponent(getSelf());
+        Character other = c.getOpponentCharacter(getSelf());
         BodyPart otherpart = other.hasDick() ? other.body.getRandomCock() : other.body.getRandomPussy();
         if (feet != null) {
             return (float) Math.max(0, feet.getPleasure(getSelf()) - 1);

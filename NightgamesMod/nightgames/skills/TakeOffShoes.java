@@ -33,8 +33,8 @@ public class TakeOffShoes extends Skill {
 
     @Override
     public float priorityMod(Combat c) {
-        return c.getOpponent(getSelf()).body.getFetish(FeetPart.TYPE).isPresent() && c.getOpponent(getSelf()).body.getFetish(
-            FeetPart.TYPE).get().magnitude > .25 && !c.getOpponent(getSelf()).stunned() ? 1.0f : -5.0f;
+        return c.getOpponentCharacter(getSelf()).body.getFetish(FeetPart.TYPE).isPresent() && c.getOpponentCharacter(getSelf()).body.getFetish(
+            FeetPart.TYPE).get().magnitude > .25 && !c.getOpponentCharacter(getSelf()).stunned() ? 1.0f : -5.0f;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class TakeOffShoes extends Skill {
 
     @Override
     public Tactics type(Combat c) {
-        Character target = c.getOpponent(getSelf());
+        Character target = c.getOpponentCharacter(getSelf());
         return target.body.getFetish(FeetPart.TYPE).isPresent() && target.body.getFetish(
             FeetPart.TYPE).get().magnitude > .25 ? Tactics.pleasure : Tactics.misc;
     }

@@ -250,7 +250,7 @@ public abstract class Position implements Cloneable {
     }
 
     public BodyPart insertedPartFor(Combat combat, Character c) {
-        return partsForStanceOnly(combat, c, combat.getOpponent(c)).stream().filter(part -> part.isType(CockPart.TYPE) || part.isType(
+        return partsForStanceOnly(combat, c, combat.getOpponentCharacter(c)).stream().filter(part -> part.isType(CockPart.TYPE) || part.isType(
             StraponPart.TYPE)).findAny()
                         .orElse(Body.nonePart);
     }

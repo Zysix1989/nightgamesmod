@@ -29,7 +29,7 @@ public class PressurePointed extends DurationStatus {
                         + "While {self:pronoun-action:aren't|isn't} necessarily aroused, "
                         + "it's all {self:pronoun} can do to tighten up {self:possessive} "
                         + "body to avoid cumming instantly. {self:pronoun-action:know} that "
-                        + "if {self:pronoun} relaxed for even a second, it'll be all over.", affected, c.getOpponent(affected));
+                        + "if {self:pronoun} relaxed for even a second, it'll be all over.", affected, c.getOpponentCharacter(affected));
     }
 
     @Override
@@ -47,11 +47,11 @@ public class PressurePointed extends DurationStatus {
         if (getDuration() <= 0) {
             affected.removelist.add(this);
             c.write(Global.format("The feeling in {self:name-possessive} crotch finally passes and {self:pronoun} can finally relax; whatever {other:SUBJECT} did to {self:direct-object} seems to have subsided.", affected,
-                            c.getOpponent(affected)));
+                            c.getOpponentCharacter(affected)));
         } else if (!affected.canRespond()) {
-            c.write(Global.format("<b>Without {self:NAME-DO} actively holding it in, the artifically induced orgasm rips through {self:possessive} body.</b>", affected, c.getOpponent(affected)));
+            c.write(Global.format("<b>Without {self:NAME-DO} actively holding it in, the artifically induced orgasm rips through {self:possessive} body.</b>", affected, c.getOpponentCharacter(affected)));
             affected.removelist.add(this);
-            affected.doOrgasm(c, c.getOpponent(affected), null, null);
+            affected.doOrgasm(c, c.getOpponentCharacter(affected), null, null);
         }
     }
 

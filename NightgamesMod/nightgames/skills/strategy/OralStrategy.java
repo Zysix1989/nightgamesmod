@@ -18,7 +18,7 @@ public class OralStrategy extends KnockdownThenActionStrategy {
     @Override
     public double weight(Combat c, Character self) {
         double weight = .55;
-        if (!(new Cunnilingus(self)).requirements(c, self, c.getOpponent(self)) && !(new Blowjob(self).requirements(c, c.getOpponent(self)))) {
+        if (!(new Cunnilingus(self)).requirements(c, self, c.getOpponentCharacter(self)) && !(new Blowjob(self).requirements(c, c.getOpponentCharacter(self)))) {
             return 0;
         }
         if (self.has(Trait.silvertongue)) {

@@ -168,7 +168,7 @@ public class Anilingus extends Skill {
 
     private boolean isWorship(Combat c, Character target) {
         Optional<BodyFetish> fetish = getSelf().body.getFetish(AssPart.TYPE);
-        boolean worship = c.getOpponent(getSelf()).has(Trait.objectOfWorship);
+        boolean worship = c.getOpponentCharacter(getSelf()).has(Trait.objectOfWorship);
         boolean enthralled = getSelf().is(Stsflag.enthralled);
         boolean isPet = target == null ? getSelf().isPet() : getSelf().isPetOf(target);
         return fetish.isPresent() || worship || enthralled || isPet;

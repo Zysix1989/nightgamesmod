@@ -1,7 +1,5 @@
 package nightgames.skills.strategy;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,7 +26,7 @@ public class NurseStrategy extends KnockdownThenActionStrategy {
         if (self.getMood().equals(Emotion.angry) || self.getMood().equals(Emotion.nervous)) {
             weight *= .2;
         }
-        if (!(new Nurse(self)).requirements(c, self, c.getOpponent(self))) {
+        if (!(new Nurse(self)).requirements(c, self, c.getOpponentCharacter(self))) {
             weight = 0;
         }
         return weight;

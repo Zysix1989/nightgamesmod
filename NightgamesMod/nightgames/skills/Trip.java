@@ -83,7 +83,7 @@ public class Trip extends Skill {
 
     @Override
     public int accuracy(Combat c, Character target) {
-        double cunningDifference = getSelf().get(Attribute.Cunning) - c.getOpponent(getSelf())
+        double cunningDifference = getSelf().get(Attribute.Cunning) - c.getOpponentCharacter(getSelf())
                                                                        .get(Attribute.Cunning);
         double accuracy = 2.5f * cunningDifference + 75 - target.knockdownDC();
         if (isSlime()) {

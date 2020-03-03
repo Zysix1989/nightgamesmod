@@ -20,10 +20,10 @@ public class FootjobStrategy extends KnockdownThenActionStrategy {
     @Override
     public double weight(Combat c, Character self) {
         double weight = .25;
-        if (!(new Footjob(self)).requirements(c, self, c.getOpponent(self))) {
+        if (!(new Footjob(self)).requirements(c, self, c.getOpponentCharacter(self))) {
             return 0;
         }
-        if (c.getOpponent(self).has(Trait.footfetishist)) {
+        if (c.getOpponentCharacter(self).has(Trait.footfetishist)) {
             weight += 2;
         }
         if (self.has(Trait.nimbletoes)) {
@@ -45,7 +45,7 @@ public class FootjobStrategy extends KnockdownThenActionStrategy {
         if (!footjobSkills.isEmpty()) {
             return Optional.of(footjobSkills);
         }
-        if (!c.getOpponent(self).crotchAvailable()) {
+        if (!c.getOpponentCharacter(self).crotchAvailable()) {
             Set<Skill> strippingSkills = allowedSkills.stream()
                             .filter(skill -> (skill.getTags(c).contains(SkillTag.stripping))
                                             && !skill.getTags(c).contains(SkillTag.suicidal))

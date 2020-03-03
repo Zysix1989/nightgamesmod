@@ -246,7 +246,7 @@ public class Eve extends BasePersonality {
     public String victory(Combat c, Result flag) {
         character.arousal.renew();
 
-        if (c.getStance().anallyPenetratedBy(c, c.getOpponent(character), character)) {
+        if (c.getStance().anallyPenetratedBy(c, c.getOpponentCharacter(character), character)) {
             return "As Eve pounds you mercilessly in the ass, your body is overwhelmed"
                             + " by the strange sensations radiating from your insides. <i>\"How"
                             + " does your prostate feel? I could probably milk you like this, but"
@@ -268,7 +268,7 @@ public class Eve extends BasePersonality {
                             + "pain causes your ass to clench up involuntarily. Eve buries her "
                             + "cock deep in your ass and you feel her hot seed fill you. You slump "
                             + "to the floor as she releases you, defeated and spent. <i>\"You make"
-                            + " a pretty good cocksleeve, " + Shorthand.boyOrGirl(c.getOpponent(character)) + ". Let's do this again sometime.\"</i>";
+                            + " a pretty good cocksleeve, " + Shorthand.boyOrGirl(c.getOpponentCharacter(character)) + ". Let's do this again sometime.\"</i>";
         }
 
         return "You try valiantly to outlast Eve, but it's no good. She's got you right "
@@ -312,7 +312,7 @@ public class Eve extends BasePersonality {
                         + " Through the haze of pain, you're vaguely aware that Eve is jerking "
                         + "off while watching your reaction, and she soon adds her ejaculation "
                         + "to the pool of semen you shot out. <i>\"You sure put on a hell of a "
-                        + "show, " + Shorthand.boyOrGirl(c.getOpponent(character)) + ". Don't worry, I didn't hit you nearly as hard as it must have"
+                        + "show, " + Shorthand.boyOrGirl(c.getOpponentCharacter(character)) + ". Don't worry, I didn't hit you nearly as hard as it must have"
                         + " felt. You'll be ok in a couple minutes.\"</i>";
     }
 
@@ -321,7 +321,7 @@ public class Eve extends BasePersonality {
         return "As you pleasure Eve, she gradually stops fighting back, apparently more interested in enjoying her orgasm than in the outcome of the fight. You grab her throbbing "
                         + "cock and pump it rapidly. She lets out a scream of pleasure as she cums and fires powerful jets of semen into the air. She relaxes on the floor with a blissful "
                         + "expression, idly playing with her own fluids and occasionally licking them off her fingers. <br/><br/>You wave your unsatisfied erection in front of her face to remind her "
-                        + "that she still owes you an orgasm. Eve smiles up at you lewdly. <i>\"Don't worry, " + Shorthand.boyOrGirl(c.getOpponent(character)) + ". I'll get you off properly, but I don't want you just sitting back and enjoying "
+                        + "that she still owes you an orgasm. Eve smiles up at you lewdly. <i>\"Don't worry, " + Shorthand.boyOrGirl(c.getOpponentCharacter(character)) + ". I'll get you off properly, but I don't want you just sitting back and enjoying "
                         + "it. Sucking you dry is bound to get me all hot and bothered again, and I don't plan to walk away with a boner. Make sure you give as good as you get.\"</i> She's pretty "
                         + "demanding for a loser. Fortunately for her, you're in a generous mood. Eve seems eager to hold up her side of the deal. She takes most of your cock into her mouth "
                         + "without much difficulty and begins to explore your length with her tongue. You watch her dick harden again, sooner than you would have expected.";
@@ -360,7 +360,7 @@ public class Eve extends BasePersonality {
                         + " same as a win. Eve probably doesn't care about losing her clothes, "
                         + "but giving you a free point isn't the way to win a match. She lets out "
                         + "surprisingly girly giggle in response. <i>\"You're adorably naive if "
-                        + "you think winning is the point of all this. I like seeing dumb " + Shorthand.boyOrGirl(c.getOpponent(character)) + "s "
+                        + "you think winning is the point of all this. I like seeing dumb " + Shorthand.boyOrGirl(c.getOpponentCharacter(character)) + "s "
                         + "like you try your hardest.\"</i> She sits up and smiles at you in pure "
                         + "amusement. <i>\"Go on then Tiger. Let's see you win this match and "
                         + "prove you're the best sexfighter on campus. Keep imagining it makes a "

@@ -365,7 +365,7 @@ public class Mara extends BasePersonality {
 
     @Override
     public String victory(Combat c, Result flag) {
-        Character target = c.getOpponent(character);
+        Character target = c.getOpponentCharacter(character);
         character.arousal.renew();
 
         if (c.getStance().anallyPenetrated(c, target)) {
@@ -407,7 +407,7 @@ public class Mara extends BasePersonality {
                             + "as she goes, stopping from time to time to place light kisses. Between her enticing behavior and her naked body pressed against you, your erection recovers in record "
                             + "time.<br/><br/>Mara makes herself comfortable sitting on your lap and slides your lubed up dick between her thighs. As she leans against your chest, you can feel her hot slit "
                             + "pressing against your member. Her finger teases the head of your penis, which is poking out of her lap. <i>\"It's a good thing you're such a horny "
-                            + Shorthand.boyOrGirl(c.getOpponent(character))
+                            + Shorthand.boyOrGirl(c.getOpponentCharacter(character))
                             + ". If you couldn't get it "
                             + "up again, I would have to settle for grinding on your leg.\"</i> As she says this, she starts to rub her clit along the length of your penis. She keeps her legs clamped "
                             + "tightly together so that her movements stimulate your entire shaft. You contribute by licking and sucking the side of her neck to draw out soft moans of pleasure. You "
@@ -464,7 +464,7 @@ public class Mara extends BasePersonality {
 
     @Override
     public String defeat(Combat c, Result flag) {
-        Character other = c.getOpponent(character);
+        Character other = c.getOpponentCharacter(character);
         if (character.has(Trait.madscientist) && character.has(Item.SPotion)) {
             character.add(c, new Hypersensitive(character));
             return "Mara begins to panic as she realizes she's on the verge of defeat. She grabs a small bottle of liquid from pouch on her belt, but it slips from her fingers "
@@ -490,13 +490,13 @@ public class Mara extends BasePersonality {
                             + "The sensation is amazing, but you're not in danger of cumming with her. You gently stroke her head while spasms of pleasure continue to run through her small body. "
                             + "It occurs to you -not for the first time- that she's really cute, even when she's not trying to be.<br/><br/>As Mara catches her breath, you see realization slowly dawn "
                             + "on her. <i>\"You didn't cum? Why not?\"</i> She actually looks a little hurt. <i>\"Every "
-                            + Shorthand.boyOrGirl(c.getOpponent(character))
+                            + Shorthand.boyOrGirl(c.getOpponentCharacter(character))
                             + " I've been with said it feels really good and tight inside me. They never outlast "
-                            + "me.\"</i> Every " + Shorthand.boyOrGirl(c.getOpponent(character))
+                            + "me.\"</i> Every " + Shorthand.boyOrGirl(c.getOpponentCharacter(character))
                             + " she's been with? Mara struck you as a bit of an introvert. How many "
-                            + Shorthand.guyOrGirl(c.getOpponent(character))
+                            + Shorthand.guyOrGirl(c.getOpponentCharacter(character))
                             + "s has she been with? <br/>She gives you a flick on the forehead. <i>\"Don't be mean. "
-                            + "I've only slept with a few " + Shorthand.boyOrGirl(c.getOpponent(character))
+                            + "I've only slept with a few " + Shorthand.boyOrGirl(c.getOpponentCharacter(character))
                             + "s. It's not like you're a virgin either.\"</i> Fair enough, but if she's upset that you didn't cum inside her, you're eager to remedy that. "
                             + "\n\nYou pull most of the way out in preparation for a big thrust, but Mara yelps in alarm. <i>\"Wait!\"</i> She slides her butt backward, causing your dick to fall out completely, "
                             + "and curls up protectively. <i>\"I get really sensitive down there after I orgasm. Give me a minute or two to recover before we continue. In the meantime we can always chat, "
@@ -538,7 +538,7 @@ public class Mara extends BasePersonality {
 
     @Override
     public String draw(Combat c, Result flag) {
-        Character target = c.getOpponent(character);
+        Character target = c.getOpponentCharacter(character);
         if (flag == Result.intercourse) {
             return "You thrust your dick into Mara's tight pussy while she writhes under you. You tease and pinch her nipples to increase her pleasure, but it's not really necessary. "
                             + "She's obviously already on the brink of climax. Thanks to the pleasurable tightness of her entrance, you're not far behind her, but you should be able to endure "

@@ -38,13 +38,13 @@ public class ToggleKnot extends Skill {
     
     @Override
     public float priorityMod(Combat c) {
-        if(c.getOpponent(getSelf()).hasStatus(Stsflag.knotted)) return -5.0f;
+        if(c.getOpponentCharacter(getSelf()).hasStatus(Stsflag.knotted)) return -5.0f;
         return 0.0f;
     }
 
     @Override
     public String getLabel(Combat c) {
-        if (isActive(c.getOpponent(getSelf()))) {
+        if (isActive(c.getOpponentCharacter(getSelf()))) {
             return "Deflate Knot";
         }
         return "Inflate Knot";

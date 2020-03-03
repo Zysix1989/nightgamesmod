@@ -115,7 +115,7 @@ public class Player extends Character {
     public String describeStatus() {
         StringBuilder b = new StringBuilder();
         if (gui.combat != null && (gui.combat.getP1Character().human() || gui.combat.getP2Character().human())) {
-            body.describeBodyText(b, gui.combat.getOpponent(this), false);
+            body.describeBodyText(b, gui.combat.getOpponentCharacter(this), false);
         } else {
             body.describeBodyText(b, Global.getCharacterByType("Angel"), false);
         }
@@ -162,7 +162,7 @@ public class Player extends Character {
         if (has(Trait.slime)) {
             purge(c);
         }
-        c.getOpponent(this).defeat(c, flag);
+        c.getOpponentCharacter(this).defeat(c, flag);
     }
 
     @Override
@@ -175,7 +175,7 @@ public class Player extends Character {
 
     @Override
     public boolean act(Combat c) {
-        Character target = c.getOpponent(this);
+        Character target = c.getOpponentCharacter(this);
         pickSkills(c, target);
         return true;
     }
@@ -225,7 +225,7 @@ public class Player extends Character {
         if (has(Trait.slime)) {
             purge(c);
         }
-        c.getOpponent(this).draw(c, flag);
+        c.getOpponentCharacter(this).draw(c, flag);
     }
 
     @Override
@@ -785,7 +785,7 @@ public class Player extends Character {
                         c.write(this, Global.format(
                                         "{self:NAME-POSSESSIVE} quick wits find a gap in {other:name-possessive} hold and {self:action:slip|slips} away.",
                                         this, target));
-                        c.setStance(new Neutral(this, c.getOpponent(this)), this, true);
+                        c.setStance(new Neutral(this, c.getOpponentCharacter(this)), this, true);
                     }
                 } else {
                     target.body.pleasure(this, body.getRandomHands(), target.body.getRandomBreasts(),

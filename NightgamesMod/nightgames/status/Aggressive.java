@@ -53,7 +53,7 @@ public class Aggressive extends DurationStatus {
     @Override
     public Collection<Skill> skillWhitelist(Combat c) {
         return CONTACT_SKILLS.stream()
-                        .filter(s -> s.requirements(c, affected, c.getOpponent(affected))
+                        .filter(s -> s.requirements(c, affected, c.getOpponentCharacter(affected))
                                         && Skill.isUsable(c, s))
                         .map(s -> s.copy(affected)).collect(Collectors.toSet());
     }

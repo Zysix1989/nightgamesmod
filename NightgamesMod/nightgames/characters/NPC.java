@@ -190,7 +190,7 @@ public class NPC extends Character {
 
     @Override
     public void victory(Combat c, Result flag) {
-        Character target = c.getOpponent(this);
+        Character target = c.getOpponentCharacter(this);
         gainXP(getVictoryXP(target));
         target.gainXP(target.getDefeatXP(this));
         target.orgasm();
@@ -206,7 +206,7 @@ public class NPC extends Character {
 
     @Override
     public void defeat(Combat c, Result flag) {
-        Character target = c.getOpponent(this);
+        Character target = c.getOpponentCharacter(this);
         gainXP(getDefeatXP(target));
         target.gainXP(target.getVictoryXP(this));
         orgasm();
@@ -255,7 +255,7 @@ public class NPC extends Character {
 
     @Override
     public boolean act(Combat c) {
-        return act(c, c.getOpponent(this));
+        return act(c, c.getOpponentCharacter(this));
     }
 
     private boolean act(Combat c, Character target) {
@@ -334,7 +334,7 @@ public class NPC extends Character {
 
     @Override
     public void draw(Combat c, Result flag) {
-        Character target = c.getOpponent(this);
+        Character target = c.getOpponentCharacter(this);
         gainXP(getVictoryXP(target));
         target.gainXP(getVictoryXP(this));
         orgasm();
@@ -563,7 +563,7 @@ public class NPC extends Character {
                         c.write(this, Global.format(
                                         "{self:NAME-POSSESSIVE} quick wits find a gap in {other:name-possessive} hold and {self:action:slip|slips} away.",
                                         this, target));
-                        c.setStance(new Neutral(this, c.getOpponent(this)), this, true);
+                        c.setStance(new Neutral(this, c.getOpponentCharacter(this)), this, true);
                     }
                 } else {
                     target.body.pleasure(this, body.getRandomHands(), target.body.getRandomBreasts(),
@@ -751,7 +751,7 @@ public class NPC extends Character {
         if (!canRespond()) {
             return Optional.empty();
         }
-        Set<CommentSituation> applicable = CommentSituation.getApplicableComments(c, this, c.getOpponent(this));
+        Set<CommentSituation> applicable = CommentSituation.getApplicableComments(c, this, c.getOpponentCharacter(this));
         Set<CommentSituation> forbidden = EnumSet.allOf(CommentSituation.class);
         forbidden.removeAll(applicable);
         Map<CommentSituation, String> comments = ai.getComments(c);

@@ -61,7 +61,7 @@ public class StripMinor extends Skill {
     }
 
     private List<Clothing> getStrippableArticles(Combat c) {
-        return c.getOpponent(getSelf()).getOutfit()
+        return c.getOpponentCharacter(getSelf()).getOutfit()
                         .getAllStrippable()
                         .stream()
                         .filter(article -> canStripArticle(c, article))

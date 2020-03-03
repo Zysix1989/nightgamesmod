@@ -406,7 +406,7 @@ public class Kat extends BasePersonality {
 
     @Override
     public String victory(Combat c, Result flag) {
-        Character opponent = c.getOpponent(character);
+        Character opponent = c.getOpponentCharacter(character);
         character.arousal.renew();
 
         if (c.getStance().vaginallyPenetrated(c,opponent) && opponent instanceof Player && opponent.checkAddiction(AddictionType.BREEDER, character)) {
@@ -478,7 +478,7 @@ public class Kat extends BasePersonality {
 
     @Override
     public String defeat(Combat c, Result flag) {
-        Character opponent = c.getOpponent(character);
+        Character opponent = c.getOpponentCharacter(character);
         if (c.getStance().vaginallyPenetrated(c, character)) {
             opponent.add(c, Pheromones.getWith(character, opponent, 5, 10));
             return "Kat squeaks as you pump your cock inside her over and over, penetrating her deeper with each thrust. She seems to be particularly vulnerable to being fucked"
@@ -521,7 +521,7 @@ public class Kat extends BasePersonality {
 
     @Override
     public String draw(Combat c, Result flag) {
-        Character opponent = c.getOpponent(character);
+        Character opponent = c.getOpponentCharacter(character);
         if (flag == Result.intercourse) {
             opponent.add(c, Pheromones.getWith(character, opponent, 5, 10));
             return "Kat lets out a near-constant mewing of pleasure as you thrust repeatedly into her tight pussy. You feel yourself rapidly approaching orgasm and judging by "

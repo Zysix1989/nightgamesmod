@@ -39,7 +39,7 @@ public class Cunnilingus extends Skill {
 
     @Override
     public int getMojoBuilt(Combat c) {
-        if (c.getStance().isBeingFaceSatBy(c, getSelf(), c.getOpponent(getSelf()))) {
+        if (c.getStance().isBeingFaceSatBy(c, getSelf(), c.getOpponentCharacter(getSelf()))) {
             return 0;
         } else {
             return 5;

@@ -93,7 +93,7 @@ public class Tackle extends Skill {
             base = 120 + (getSelf().getArousal().getReal() / 10);
         }
         return Math.round(Math.max(Math.min(150,
-                        2.5f * (getSelf().get(Attribute.Power) - c.getOpponent(getSelf()).get(Attribute.Power)) + base),
+                        2.5f * (getSelf().get(Attribute.Power) - c.getOpponentCharacter(getSelf()).get(Attribute.Power)) + base),
                         40));
     }
 

@@ -50,7 +50,7 @@ public class TailPeg extends Skill {
 
     @Override
     public String describe(Combat c) {
-        if (c.getStance().anallyPenetrated(c, c.getOpponent(getSelf()))) {
+        if (c.getStance().anallyPenetrated(c, c.getOpponentCharacter(getSelf()))) {
             return "Fuck your opponent with your tail";
         }
         return "Shove your tail up your opponent's ass.";
@@ -58,7 +58,7 @@ public class TailPeg extends Skill {
 
     @Override
     public String getLabel(Combat c) {
-        if (c.getStance().anallyPenetrated(c, c.getOpponent(getSelf()))) {
+        if (c.getStance().anallyPenetrated(c, c.getOpponentCharacter(getSelf()))) {
             return "Tail Fuck";
         } else {
             return "Tail Peg";

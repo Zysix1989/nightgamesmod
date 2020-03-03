@@ -404,7 +404,7 @@ public class Jewel extends BasePersonality {
 
     @Override
     public String victory(Combat c, Result flag) {
-        Character other = c.getOpponent(character);
+        Character other = c.getOpponentCharacter(character);
 
         Collection<BodyPart> otherOrgans = c.getStance()
                                             .getPartsFor(c, other, other);
@@ -571,7 +571,7 @@ public class Jewel extends BasePersonality {
 
     @Override
     public String defeat(Combat c, Result flag) {
-        Character other = c.getOpponent(character);
+        Character other = c.getOpponentCharacter(character);
         
         if (character.has(Trait.fighter) && Global.randomBool()) {
 

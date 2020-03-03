@@ -172,7 +172,7 @@ public class Yui extends BasePersonality {
 
     @Override
     public String victory(Combat c, Result flag) {
-        if (c.getStance().anallyPenetrated(c, c.getOpponent(character))) {
+        if (c.getStance().anallyPenetrated(c, c.getOpponentCharacter(character))) {
             character.arousal.renew();
             return "Yui fucks you from behind.";
         } else if (c.getStance().vaginallyPenetrated(c, character)) {

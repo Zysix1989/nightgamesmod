@@ -228,7 +228,7 @@ public class TestAngel extends BasePersonality {
 
     @Override public String victory(Combat c, Result flag) {
         character.arousal.renew();
-        Character opponent = c.getOpponent(character);
+        Character opponent = c.getOpponentCharacter(character);
         String message = "";
         if (c.getStance().anallyPenetrated(c, opponent)) {
             message =
@@ -295,7 +295,7 @@ public class TestAngel extends BasePersonality {
     }
 
     @Override public String defeat(Combat c, Result flag) {
-        Character opponent = c.getOpponent(character);
+        Character opponent = c.getOpponentCharacter(character);
         if (c.getStance().vaginallyPenetrated(c, character)) {
             return "You thrust your cock continously into Angel's dripping pussy. Her hot insides feel amazing, but you're sure you have enough of an advantage to risk "
                             + "it. She lets out breathy moans in time to your thrusts and her arms are trembling too much to hold herself up. She's clearly about to cum, you just "

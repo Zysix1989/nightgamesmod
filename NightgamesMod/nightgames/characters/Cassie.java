@@ -347,7 +347,7 @@ public class Cassie extends BasePersonality {
 
     @Override
     public String victory(Combat c, Result flag) {
-        if (c.getStance().anallyPenetrated(c,c.getOpponent(character))) {
+        if (c.getStance().anallyPenetrated(c,c.getOpponentCharacter(character))) {
             character.arousal.renew();
             dominance+=1;
 
@@ -361,7 +361,7 @@ public class Cassie extends BasePersonality {
                             + "you actually came while she was pegging you. <i>\"You came?\"</i> she gasps. <i>\"I mean the shopkeeper said it would work but....\"</i> she trails off.  She smiles, and stands. <i>\"I never knew "
                             + "I'd enjoy that so much.\"</i> Her grin widens in a way that makes you nervous. <i>\"I might need to try that again in the future.\"</i> Your decide to bid a hasty retreat leaving your "
                             + "clothes behind to the victor.";
-        } else if (character.has(Trait.witch) && character.has(Trait.silvertongue) && Global.random(3) == 0 && c.getOpponent(character).hasDick() && !c.getOpponent(character).hasPussy()) {
+        } else if (character.has(Trait.witch) && character.has(Trait.silvertongue) && Global.random(3) == 0 && c.getOpponentCharacter(character).hasDick() && !c.getOpponentCharacter(character).hasPussy()) {
             character.arousal.renew();
             return "Cassie's efforts to pleasure you finally break your resistance and you find yourself completely unable to stop her. She slips between your legs and takes your straining "
                             + "dick into her mouth. She eagerly sucks on your cock, while glancing up to meet your eyes. Her talented oral technique blows away your endurance and you spill your seed "
@@ -397,7 +397,7 @@ public class Cassie extends BasePersonality {
                             + "your cheek contently. <i>\"I'll keep practicing and make you feel even better next time, \"</i> she tells you happily. <i>\"I promise.\"</i> ";
         } else if (dominance >= 10
             && minDominance==0
-            && c.getStance().vaginallyPenetrated(c,c.getOpponent(character))
+            && c.getStance().vaginallyPenetrated(c,c.getOpponentCharacter(character))
             && character.has(Trait.hypnoticsemen)
             && character.has(Trait.enthrallingjuices)
             && character.body.getRandomCock().getMods().contains(new RunicCockMod())) {
@@ -416,9 +416,9 @@ public class Cassie extends BasePersonality {
                             + "your skull with empty white.<p>Cassie leans forward, letting out a comfortable sigh. She rests herself on her crossed arms, pushing down on your "
                             + "sternum right below your breasts. Her breasts dangle down, almost touching yours, and her face hovers close above yours. Her eyes move back and "
                             + "forth, looking for something in your face. After a few seconds she seems satisfied and nods, beginning to rock her hips back and forth slowly once "
-                            + "more, pumping her dick in and out of your sensitive pussy. \"I like you, "+c.getOpponent(character).getName()+", and I like making you feel good,\" Cassie says, "
+                            + "more, pumping her dick in and out of your sensitive pussy. \"I like you, "+c.getOpponentCharacter(character).getName()+", and I like making you feel good,\" Cassie says, "
                             + "\"but as I've interacted with you I've come to suspect something, and I think you've just confirmed it.\" She nods decisively and proclaims \"You, "
-                            + c.getOpponent(character).getName()+", have a fetish for being mind controlled and used as a sex toy.\"<p>\"Now, I know this may be hard for you to admit, "
+                            + c.getOpponentCharacter(character).getName()+", have a fetish for being mind controlled and used as a sex toy.\"<p>\"Now, I know this may be hard for you to admit, "
                             + "even to yourself, but it's ok- I won't judge, so you don't have to hide it from me or pretend it's not true.\" She pauses for a minute, tapping a "
                             + "finger against her lips as she thinks. \"Actually, my research about submissives who like to be controlled indicated that one very common sentiment "
                             + "driving such submissive behavior was that you wanted weird and kinky things done to you but didn't want to feel like a pervert, so you wanted those "
@@ -426,7 +426,7 @@ public class Cassie extends BasePersonality {
                             + "things. It does seems like that would be kind of hard to distinguish from genuinely not liking those things, but happily I have a way around that!\" "
                             + "Cassie sits up and put her hands on her hips, puffing out her chest proudly. \"With you completely under my control, I can have you spill your "
                             + "darkest desires and kinks to me! It is kind of invasive, but I have probable cause to believe that you wouldn't tell me otherwise, and this is for "
-                            + "your own, good, so it's justifiable! So, "+c.getOpponent(character).getName()+", do you have a fetish for being mind controlled?\"<p><p>When Cassie started "
+                            + "your own, good, so it's justifiable! So, "+c.getOpponentCharacter(character).getName()+", do you have a fetish for being mind controlled?\"<p><p>When Cassie started "
                             + "talking, you were paying close attention to her, but as she continued to pump into your sensitized pussy you were brought to two more quiet orgasms, "
                             + "and the pulses of mind-controlling magic from her enchanted dick continued to ripple through your head. Each wave seemed to spread the white through "
                             + "your head a little more, until it seemed like every cranny of your brain was stuffed with magical white Cassie-fluid, and without any room to form "
@@ -484,7 +484,7 @@ public class Cassie extends BasePersonality {
                             + "the end of your tongue, and Cassie squeaks and topples over backwards, your tongue's grip pulling your head with her.<p>Cassie laughs, sitting back "
                             + "up. \"I guess we can wait until you're done with that blowjob if you want.\"<p>Less than a minute later, your inexpert but full-genital stimulation "
                             + "brings Cassie to orgasm, and more stupefying liquid inundates your body as the arcane emanations from her cock continue to reduce you to an obedient, "
-                            + "empty-headed vessel. The milky injection only reinvigorates you, and you attack her cock and pussy with renewed vigor.<p>\"Eek! No! Enough! Honestly, "+c.getOpponent(character).getName()+",\" Cassie "
+                            + "empty-headed vessel. The milky injection only reinvigorates you, and you attack her cock and pussy with renewed vigor.<p>\"Eek! No! Enough! Honestly, "+c.getOpponentCharacter(character).getName()+",\" Cassie "
                             + "yelps, futily trying to pry your head away from her crotch with her hands, before she remembers her magic and you suddenly freeze.<p>Cassie sighs, "
                             + "shaking her head and smiling fondly at you, before a look of careful concentration takes over her face. \"Alright, I think erasing your memory back "
                             + " to the second-to-last time I came in your pussy should be best.\" Cassie sets her hands over your temples and starts muttering, and then everything "
@@ -495,7 +495,7 @@ public class Cassie extends BasePersonality {
                             + "Like Cassie's mind control spells not interacting the way she expected, causing you to inadventantly consent to and admit to craving for her doing "
                             + "horribly deviant things to you? No, you can't remember anything like that.<p><p>You stand up, bracing yourself against a wall at a sudden spike of "
                             + "dizziness. Tonight hasn't been going too well, but there's still time to salvage it if you can beat a few more people.";
-        } else if (c.getStance().vaginallyPenetrated(c, c.getOpponent(character))) {
+        } else if (c.getStance().vaginallyPenetrated(c, c.getOpponentCharacter(character))) {
             return "You feel yourself rapidly nearing the point of no return as Cassie thrusts her hardon into your wet snatch. You fondle and tease her sensitive nipples to increase her pleasure, but it's a losing battle. You're "
                             + "going to cum first. She smiles gently and kisses you as your pussy spasms wrapped around her cock when you cum. She shivers slightly, but you know she hasn't climaxed yet. When she breaks the kiss, her flushed "
                             + "face lights up in a broad smile. <i>\"It feels like you came pretty hard. Did you feel good?\"</i> You groan and slump flat on the ground in defeat. She gives you a light kiss on the tip of your nose "
@@ -512,7 +512,7 @@ public class Cassie extends BasePersonality {
                             + "that you can't even attempt to retaliate. She pumps your twitching dick eagerly as the last of your endurance gives way. The pleasure building up in the base "
                             + "of your shaft finally overwhelms you and you almost pass out from the intensity of your climax. White jets of semen coat Cassie's hands in the proof of your defeat. <br/><br/>"
                             + "As you recover, you notice Cassie restlessly rubbing her legs together with unfulfilled arousal and offer to help get her off however she prefers. She looks down at "
-                            + "your spent, shrivelled dick and gently fondles it while pouting cutely. <i>\"I have a cute " + Shorthand.boyOrGirl(c.getOpponent(character)) + " all to myself, but he's already worn out.\"</i> She leans in close and whispers in "
+                            + "your spent, shrivelled dick and gently fondles it while pouting cutely. <i>\"I have a cute " + Shorthand.boyOrGirl(c.getOpponentCharacter(character)) + " all to myself, but he's already worn out.\"</i> She leans in close and whispers in "
                             + "your ear, <i>\"If you get hard again, we can have sex.\"</i><br/><br/>Your cock responds almost immediately to her words and her soft caress. In no time, you're back to full mast. Cassie "
                             + "straddles your hips and guides the head of your member to her entrance. She leans down to kiss you passionately as she lowers herself onto you. As you pierce her tight, wet pussy, "
                             + "she moans into your mouth. She rides you enthusiastically and you can feel your pleasure building again despite having just cum. Cassie is breathing heavily and clearly on the "
@@ -522,7 +522,7 @@ public class Cassie extends BasePersonality {
             return "Despite your best efforts, you realize you've lost to Cassie's diligent manipulation of your penis. It takes so much focus to hold back your ejaculation "
                             + "that you can't even attempt to retaliate. She pumps your twitching dick eagerly as the last of your endurance gives way. The pleasure building up in the base "
                             + "of your shaft finally overwhelms you and you almost pass out from the intensity of your climax. White jets of semen coat Cassie's hands in the proof of your defeat. "
-                            + "You recover your senses enough to offer to return the favor.<br/><i>\"No need,\"</i> she teases good-naturedly. <i>\"I have a bit more self-control than a horny " + Shorthand.boyOrGirl(c.getOpponent(character)) + ".\"</i><br/> Her victorious smile is "
+                            + "You recover your senses enough to offer to return the favor.<br/><i>\"No need,\"</i> she teases good-naturedly. <i>\"I have a bit more self-control than a horny " + Shorthand.boyOrGirl(c.getOpponentCharacter(character)) + ".\"</i><br/> Her victorious smile is "
                             + "bright enough to light up a small city as she gives you a chaste kiss on the cheek and walks away, taking your clothes as a trophy.";
         }
     }
@@ -530,11 +530,11 @@ public class Cassie extends BasePersonality {
     @Override
     public String defeat(Combat c, Result flag) {
 
-        if (c.getStance().vaginallyPenetrated(c, c.getOpponent(character))) {
+        if (c.getStance().vaginallyPenetrated(c, c.getOpponentCharacter(character))) {
             dominance=Math.max(dominance-1,minDominance);
         }
 
-        Character opponent = c.getOpponent(character);
+        Character opponent = c.getOpponentCharacter(character);
         if (character.has(Trait.witch) && Global.random(3) == 0) {
             opponent.add(c, new Energized(opponent, 10));
             return "You capture Cassie's lips and slip your hand between her legs to facilitate her imminent orgasm. You rub her soaked pussy lips and she moans against your lips. Her body "
@@ -566,7 +566,7 @@ public class Cassie extends BasePersonality {
                             + "her body to you, giving you the freedom to pleasure her. You work your way down her neck, kissing, licking and listening to her breathing grow heavier. <br/><br/>Her reactions are having a "
                             + "more of an effect on you than you expected. Soon you need to slow down to maintain control. <i>\"Keep going,\"</i> Cassie coos. <i>\"I want you to feel good. I want you to feel good because "
                             + "of me.\"</i> You don't think she's quite there yet, but you speed up like she asks. In moments, you hit your peak and shoot your load inside her. Cassie lets out a moan and you feel her "
-                            + "shudder. Did she just cum again? She giggles again. <i>\"I guess having a cute " + Shorthand.boyOrGirl(c.getOpponent(character)) + " climax inside me is a big turn-on. We should do this more often.\"</i> If she wants to lose to you more "
+                            + "shudder. Did she just cum again? She giggles again. <i>\"I guess having a cute " + Shorthand.boyOrGirl(c.getOpponentCharacter(character)) + " climax inside me is a big turn-on. We should do this more often.\"</i> If she wants to lose to you more "
                             + "often, you aren't going to complain. She sits up and kisses you softly on the cheek. <i>\"Maybe I'll win next time.\"</i>";
         } else if (c.getStance().vaginallyPenetratedBy(c, opponent, character)) {
             return "As you passionately ride Cassie's hard shaft, she trembles and moans uncontrollably. You lean down to kiss her soft lips and she responds by wrapping her arms around "
@@ -582,14 +582,14 @@ public class Cassie extends BasePersonality {
                             + "her body to you, giving you the freedom to pleasure her. You work your way down her neck, kissing, licking and listening to her breathing grow heavier. <br/><br/>Her reactions are having a "
                             + "more of an effect on you than you expected. Soon she has you gasping and clawing at her back begging for more. <i>\"Cum for me " + opponent.getName() + ",\"</i> Cassie coos. <i>\"I want you to feel good. "
                             + "I want you to feel good because of me.\"</i> She speeds up her hips, pistoning her hardness into you like her life depends on it. In moments, you hit your peak and cum while screaming her name. "
-                            + "Cassie lets out a moan and you feel her warmth flow into you for the second time tonight. Did she just cum again? She giggles again. <i>\"I guess having a cute " + Shorthand.boyOrGirl(c.getOpponent(character)) + " climax because of me is a big turn-on. "
+                            + "Cassie lets out a moan and you feel her warmth flow into you for the second time tonight. Did she just cum again? She giggles again. <i>\"I guess having a cute " + Shorthand.boyOrGirl(c.getOpponentCharacter(character)) + " climax because of me is a big turn-on. "
                             + "We should do this more often.\"</i> If she wants to lose to you more often, you aren't going to complain. She sits up and kisses you softly on the cheek. <i>\"Maybe I'll win next time.\"</i>";
         } else if (opponent.hasDick()){
             return "As Cassie moans and shivers, it's clear she's past the point of no return. <i>\"Please,\"</i> she begs. <i>\"Give me a kiss before I cum.\"</i> You kiss her firmly on the lips and "
                             + "rub her clit relentlessly. She shudders and holds you tight as she rides out an intense orgasm. You wait until she comes down before gently disentangling yourself "
                             + "from her embrace. <br/><br/><i>\"Thanks. Not that I'm happy about losing, but that felt amazing.\"</i> Cassie smiles "
                             + "sheepishly and takes hold of your still-hard cock. <i>\"I'm the one who got you this turned on, right? Then I'm going to take responsibility and finish you off.\"</i> "
-                            + "You're slightly skeptical of her reasoning, not that you're going to turn down her offer. <br/><br/><i>\"It would be a disgrace to get a " + Shorthand.boyOrGirl(c.getOpponent(character)) + " all hot and bothered, "
+                            + "You're slightly skeptical of her reasoning, not that you're going to turn down her offer. <br/><br/><i>\"It would be a disgrace to get a " + Shorthand.boyOrGirl(c.getOpponentCharacter(character)) + " all hot and bothered, "
                             + "only to have another girl make " + opponent.objectPronoun() + " cum.\"</i> She explains. She sets to licking and stroking your dick, showing no less enthusiasm than she did during the fight. "
                             + "The delightful sensations from her fingers and tongue soon bring you to a messy climax on her face. You thank her as you collect your clothes and hers, "
                             + "leaving her naked, but still in good spirits.";
@@ -608,7 +608,7 @@ public class Cassie extends BasePersonality {
 
     @Override
     public String draw(Combat c, Result flag) {
-        Character opponent=c.getOpponent(character);
+        Character opponent=c.getOpponentCharacter(character);
         if (flag == Result.intercourse) {
             if (character.has(Trait.witch) && opponent.getPure(Attribute.Arcane) >= 4 && character.getAffection(opponent) >= 12 && Global.random(2) == 0) {
                 return "You thrust your hips in time with Cassie's, pushing you both closer to orgasm. At this rate, it seems a draw is pretty much certain. If you pulled out, "
@@ -631,7 +631,7 @@ public class Cassie extends BasePersonality {
                                 + "You feel a strange giddy nervousness seize your heart as Cassie turns bright red. She smiles sheepishly as she pulls her hips away, breaking the bond. "
                                 + "<i>\"Sorry.\"</i> She whispers. <i>\"I'm really happy. Really really happy, but I don't think I can handle you knowing everything I feel for very long.\"</i> "
                                 + "She snuggles up to you again, her clear blue eyes staring into yours. <i>\"A girl's heart is suppose to be mysterious. I can't reveal all its secrets "
-                                + "to a " + Shorthand.boyOrGirl(c.getOpponent(character)) + ". You'll just need to figure out what I'm feeling the old fashioned way.\"</i>";
+                                + "to a " + Shorthand.boyOrGirl(c.getOpponentCharacter(character)) + ". You'll just need to figure out what I'm feeling the old fashioned way.\"</i>";
             }
             return "You and Cassie move your hips against each other, both rapidly approaching orgasm. As you thrust again and again into her tight folds, you feel yourself pass "
                             + "the point of no return. You need to make her cum, now! You kiss her passionately, forcing your tongue into her mouth. The deep kiss combined with your continous "
@@ -766,7 +766,7 @@ public class Cassie extends BasePersonality {
         }, (c, self, player) -> "Before leaving, " + character.getName() + " turns and asks you \"Hey " + player.getName() + ", what turns you on more? Just for the sakes of... science let's say. I noticed you spending a lot of time on my boobs... are you a tits " + Shorthand.guyOrGirl(player) + "? Or do you prefer something more romantic? Maybe a kiss would do?\"",
                 Arrays.asList(
                         new CombatSceneChoice("Stare at her breasts", (c, self, other) -> {
-                            c.write("Cassie catches your gaze with her eyes and lightly giggles. \"I knew it, " + Shorthand.boyOrGirl(c.getOpponent(character)) + "s are all about boobs right? Hmm I wonder if I can use this to my advantage...\"");
+                            c.write("Cassie catches your gaze with her eyes and lightly giggles. \"I knew it, " + Shorthand.boyOrGirl(c.getOpponentCharacter(character)) + "s are all about boobs right? Hmm I wonder if I can use this to my advantage...\"");
                             useBreastsFocus();
                             return true;
                         }),
@@ -800,7 +800,7 @@ public class Cassie extends BasePersonality {
             return self.getLevel() >= 20 && !Global.checkFlag(CASSIE_SUBMISSIVE_FOCUS) && !Global.checkFlag(CASSIE_ENCHANTRESS_FOCUS)
                             && (Global.checkFlag(CASSIE_BREAST_FOCUS) || Global.checkFlag(CASSIE_MOUTH_FOCUS));
         }, (c, self, player) -> "After you two recover from your afterglow, Cassie turns towards you. \"You know, we've been competing in the games for a while now. I can't believe how much I've changed! "
-                        + "When we just started, I've only gone all the way with a " + Shorthand.boyOrGirl(c.getOpponent(character)) + " once. I barely knew what to do even! Now though...\" Cassie gigles and starts tickling your spent "
+                        + "When we just started, I've only gone all the way with a " + Shorthand.boyOrGirl(c.getOpponentCharacter(character)) + " once. I barely knew what to do even! Now though...\" Cassie gigles and starts tickling your spent "
                         + "cock with an conjured arcane feather. \"Hey " + player.getName()+", what do you think? are you disappointed I turned out this way?\"",
                 Arrays.asList(
                         new CombatSceneChoice("Liked her old submissiveness more", (c, self, other) -> {

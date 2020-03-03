@@ -36,7 +36,7 @@ public class Sensitized extends DurationStatus {
         if (replacement.isPresent())
             return "";
         return Global.format(String.format("{self:NAME-POSSESSIVE} groans as {self:possessive} %s grows hot.",
-                        part.describe(affected)), affected, c.getOpponent(affected));
+                        part.describe(affected)), affected, c.getOpponentCharacter(affected));
     }
 
     @Override

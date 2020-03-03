@@ -380,7 +380,7 @@ public class Angel extends BasePersonality {
     @Override
     public String victory(Combat c, Result flag) {
         character.arousal.renew();
-        Character opponent = c.getOpponent(character);
+        Character opponent = c.getOpponentCharacter(character);
 
         String message = "";
 
@@ -507,7 +507,7 @@ public class Angel extends BasePersonality {
 
     @Override
     public String defeat(Combat c, Result flag) {
-        Character opponent = c.getOpponent(character);
+        Character opponent = c.getOpponentCharacter(character);
 
         if (c.getStance().vaginallyPenetrated(c, character)) {
             dominance=Math.max(dominance-1, minDominance);

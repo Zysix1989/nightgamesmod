@@ -45,7 +45,7 @@ public class DivineCharge extends Status {
     @Override
     public void tick(Combat c) {
         if (c != null) {
-            Character opponent = c.getOpponent(affected);
+            Character opponent = c.getOpponentCharacter(affected);
             if (!c.getStance().havingSex(c, affected) && !(affected.has(Trait.zealinspiring)
                             && !opponent.getAddiction(AddictionType.ZEAL).map(Addiction::isInWithdrawal).orElse(false))) {
                 magnitude = magnitude / 2;

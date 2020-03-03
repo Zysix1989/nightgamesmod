@@ -61,7 +61,7 @@ public abstract class Addiction extends Status {
         if (c == null) {                            //A patient comes into the doctor's office and says it hurts when I do this; the doctor says "Well, don't do that..." - DSM
             System.out.println("ERROR: Tried to process " + affected.getName() + "'s " + this.name + " from " + this.cause + " (Actually: " + this.cause.getTrueName() +  "), but Combat c is null in Addiction.tick()");        
         } else  {
-             if (c.getOpponent(affected).equals(cause)) {           
+             if (c.getOpponentCharacter(affected).equals(cause)) {
                  combatMagnitude += magnitude / 14.0;
              }
         }

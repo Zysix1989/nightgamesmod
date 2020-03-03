@@ -199,7 +199,7 @@ public class Maya extends BasePersonality {
 
     @Override
     public String victory(Combat c, Result flag) {
-        Character target = c.getOpponent(character);
+        Character target = c.getOpponentCharacter(character);
         target.add(c, new Drowsy(target));
         character.arousal.renew();
         character.add(c, new Energized(character, 10));
@@ -314,7 +314,7 @@ public class Maya extends BasePersonality {
 
     @Override
     public String draw(Combat c, Result flag) {
-        Character target = c.getOpponent(character);
+        Character target = c.getOpponentCharacter(character);
         if (target.human()) {
             Global.flag(Flag.Clue1);
         }

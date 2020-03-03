@@ -93,6 +93,6 @@ public class Sedate extends Skill {
 
     @Override
     public String describe(Combat c) {
-        return "Throw a sedative at your opponent, weakening " + c.getOpponent(getSelf()).objectPronoun();
+        return "Throw a sedative at your opponent, weakening " + c.getOpponentCharacter(getSelf()).objectPronoun();
     }
 }

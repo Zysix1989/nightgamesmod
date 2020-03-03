@@ -18,7 +18,7 @@ public class UseHandsStrategy extends KnockdownThenActionStrategy {
     @Override
     public double weight(Combat c, Character self) {
         double weight = .75;
-        if (!(new Handjob(self)).requirements(c, self, c.getOpponent(self)) && !(new Finger(self).requirements(c, c.getOpponent(self)))) {
+        if (!(new Handjob(self)).requirements(c, self, c.getOpponentCharacter(self)) && !(new Finger(self).requirements(c, c.getOpponentCharacter(self)))) {
             return 0;
         }
         if (self.has(Trait.defthands)) {

@@ -853,7 +853,7 @@ public Character clone() throws CloneNotSupportedException {
         }
         if (has(Trait.Unsatisfied) && (getArousal().percent() >= 50 || getWillpower().percent() < 25)) {
             extraMsg += " (Unsatisfied)";
-            if (c != null && c.getOpponent(this).human()) {
+            if (c != null && c.getOpponentCharacter(this).human()) {
                 baseModifier *= .2;
             } else {
                 baseModifier *= .66;
@@ -977,7 +977,7 @@ public Character clone() throws CloneNotSupportedException {
         if (has(Trait.Unsatisfied) && (getArousal().percent() >= 50 || getWillpower().percent() < 25)) {
             extraMsg += " (Unsatisfied)";
             // make it much less effective vs NPCs because they're bad at exploiting the weakness
-            if (c != null && c.getOpponent(this).human()) {
+            if (c != null && c.getOpponentCharacter(this).human()) {
                 i = Math.max(1, i / 5);
             } else {
                 i = Math.max(1, i * 2 / 3);
@@ -1065,9 +1065,9 @@ public Character clone() throws CloneNotSupportedException {
      * */
     public void buildMojo(Combat c, int percent, String source) {
         if (Dominance.mojoIsBlocked(this, c)) {
-            c.write(c.getOpponent(this), 
+            c.write(c.getOpponentCharacter(this),
                             String.format("Enraptured by %s display of dominance, %s no mojo.", 
-                                            c.getOpponent(this).nameOrPossessivePronoun(), subjectAction("build")));
+                                            c.getOpponentCharacter(this).nameOrPossessivePronoun(), subjectAction("build")));
             return;
         }
         
@@ -1546,10 +1546,10 @@ public Character clone() throws CloneNotSupportedException {
             if (!message.isEmpty()) {
                 message = Global.capitalizeFirstLetter(message);
                 if (c != null) {
-                    if (!c.getOpponent(this).human() || !c.getOpponent(this).is(Stsflag.blinded)) {
+                    if (!c.getOpponentCharacter(this).human() || !c.getOpponentCharacter(this).is(Stsflag.blinded)) {
                         c.write(this, "<b>" + message + "</b>");
                     }
-                    effectiveStatus.onApply(c, c.getOpponent(this));
+                    effectiveStatus.onApply(c, c.getOpponentCharacter(this));
                 } else if (human() || location() != null && location().humanPresent()) {
                     Global.gui().message("<b>" + message + "</b>");
                     effectiveStatus.onApply(null, null);
@@ -1697,7 +1697,7 @@ public Character clone() throws CloneNotSupportedException {
                 total -= 5;
             }
         }
-        if (c != null && checkAddiction(AddictionType.DOMINANCE, c.getOpponent(this))) {
+        if (c != null && checkAddiction(AddictionType.DOMINANCE, c.getOpponentCharacter(this))) {
             total -= getAddiction(AddictionType.DOMINANCE).get().getCombatSeverity().ordinal() * 8;
         }
         if (has(Trait.FeralStrength) && is(Stsflag.feral)) {
@@ -1980,7 +1980,7 @@ public Character clone() throws CloneNotSupportedException {
                     + "and {self:possessive} expressions slacken."
                     + "{other:if-human: Shit you've seen this before, she somehow switched "
                     + "bodies with one of her clones!}",
-                this, c.getOpponent(this)));
+                this, c.getOpponentCharacter(this)));
             while (!c.getPetsFor(this).isEmpty() && checkOrgasm()) {
                 int amount = Math.min(getArousal().get(), getArousal().max());
                 getArousal().calm(amount);
@@ -1988,7 +1988,7 @@ public Character clone() throws CloneNotSupportedException {
                 pet.arouse(amount, c, Global.format("({self:master}'s orgasm)", this, opponent));
                 pet.doOrgasm(c, pet, null, null);
             }
-            c.setStance(new Neutral(this, c.getOpponent(this)));
+            c.setStance(new Neutral(this, c.getOpponentCharacter(this)));
             if (!checkOrgasm()) {
                 return;
             } else {
@@ -1996,12 +1996,12 @@ public Character clone() throws CloneNotSupportedException {
                     Global.format("{other:if-human:Luckily }{self:pronoun} didn't seem to "
                             + "be able to shunt all {self:possessive} arousal nto {self:possessive} "
                             + "clones, and rapidly reaches the peak anyways.",
-                        this, c.getOpponent(this)));
+                        this, c.getOpponentCharacter(this)));
             }
         }
 
         String orgasmLiner = "<b>" + orgasmLiner(c,
-            opponent == null ? c.getOpponent(this) : opponent) + "</b>";
+            opponent == null ? c.getOpponentCharacter(this) : opponent) + "</b>";
         String opponentOrgasmLiner = (opponent == null || opponent == this || opponent.isPet()) ? "" : 
             "<b>" + opponent.makeOrgasmLiner(c, this) + "</b>";
         orgasmed = true;
@@ -3411,7 +3411,7 @@ public Character clone() throws CloneNotSupportedException {
         float staminaMod = 2.0f;
         float mojoMod = 1.0f;
         float usum = arousalMod + staminaMod + mojoMod;
-        Character other = c.getOpponent(this);
+        Character other = c.getOpponentCharacter(this);
 
         int totalAtts = 0;
         for (Attribute attribute : att.keySet()) {
@@ -3488,7 +3488,7 @@ public Character clone() throws CloneNotSupportedException {
             AiModifiers mods = me.ai.getAiModifiers();
             fit += mods.modPosition(c.getStance().enumerate()) * 6;
             fit += status.stream().flatMap(s -> s.flags().stream()).mapToDouble(mods::modSelfStatus).sum();
-            fit += c.getOpponent(this).status.stream().flatMap(s -> s.flags().stream())
+            fit += c.getOpponentCharacter(this).status.stream().flatMap(s -> s.flags().stream())
                             .mapToDouble(mods::modOpponentStatus).sum();
         }
         // hack to make the AI favor making the opponent cum

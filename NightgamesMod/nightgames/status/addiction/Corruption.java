@@ -170,7 +170,7 @@ public class Corruption extends Addiction {
             }
             buffs.forEach((att, b) -> affected.add(c, new Converted(affected, Attribute.Dark, att, b, 20)));
         }
-        if (c != null && cause.has(Trait.InfernalAllegiance) && !affected.is(Stsflag.compelled) && shouldCompel() && c.getOpponent(affected).equals(cause)) {
+        if (c != null && cause.has(Trait.InfernalAllegiance) && !affected.is(Stsflag.compelled) && shouldCompel() && c.getOpponentCharacter(affected).equals(cause)) {
             Global.writeIfCombat(c, affected, Global.format( "A wave of obedience radiates out from the dark essence within {self:name-do}, constraining"
                             + " {self:possessive} free will. It will make fighting " 
                             + cause.getName() + " much more difficult...", affected, cause));

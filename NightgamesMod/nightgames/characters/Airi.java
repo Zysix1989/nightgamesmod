@@ -532,7 +532,7 @@ public class Airi extends BasePersonality {
     @Override
     public String victory(Combat c, Result flag) {
         armManager = Optional.empty();
-        Character opponent = c.getOpponent(character);
+        Character opponent = c.getOpponentCharacter(character);
         character.arousal.renew();
         opponent.arousal.renew();
 

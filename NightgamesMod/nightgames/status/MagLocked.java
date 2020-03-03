@@ -75,14 +75,14 @@ public class MagLocked extends Status {
     public void tick(Combat c) {
         if (count > 1) {
             flag(Stsflag.bound);
-            c.getOpponent(affected).consume(Item.Battery, count - 1);
+            c.getOpponentCharacter(affected).consume(Item.Battery, count - 1);
             if (count == 3) flag(Stsflag.hogtied);
         }
-        if (!c.getOpponent(affected).has(Item.Battery)) {
+        if (!c.getOpponentCharacter(affected).has(Item.Battery)) {
             c.write(Global.format(
                             "<b>{other:NAME-POSSESSIVE} MagLocks have run out of power and "
                                             + "fall harmlessly off of {self:subject} and onto the ground.",
-                            affected, c.getOpponent(affected)));
+                            affected, c.getOpponentCharacter(affected)));
             affected.removelist.add(this);
         }
     }

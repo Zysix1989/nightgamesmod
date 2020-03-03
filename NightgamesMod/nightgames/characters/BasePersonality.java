@@ -191,7 +191,7 @@ public abstract class BasePersonality implements Serializable {
         all.entrySet()
            .stream()
            .filter(e -> e.getKey()
-                         .isApplicable(c, character, c.getOpponent(character)))
+                         .isApplicable(c, character, c.getOpponentCharacter(character)))
            .forEach(e -> applicable.put(e.getKey(), e.getValue()));
         return applicable;
     }

@@ -25,12 +25,12 @@ public class CombatScene {
 
     public void visit(Combat c, Character npc) {
         c.write("<br/>");
-        c.write(message.provide(c, npc, c.getOpponent(npc)));
+        c.write(message.provide(c, npc, c.getOpponentCharacter(npc)));
         c.updateAndClearMessage();
         Global.getPlayer().chooseCombatScene(c, npc, choices);
     }
 
     public boolean meetsRequirements(Combat c, NPC npc) {
-        return requirement.meets(c, npc, c.getOpponent(npc));
+        return requirement.meets(c, npc, c.getOpponentCharacter(npc));
     }
 }

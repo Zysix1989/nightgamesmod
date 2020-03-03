@@ -59,7 +59,7 @@ public class PerfectTouch extends Skill {
     @Override
     public int accuracy(Combat c, Character target) {
         return Math.round(Math.max(Math.min(150,
-                        2.5f * (getSelf().get(Attribute.Cunning) - c.getOpponent(getSelf()).get(Attribute.Cunning)) + 65),
+                        2.5f * (getSelf().get(Attribute.Cunning) - c.getOpponentCharacter(getSelf()).get(Attribute.Cunning)) + 65),
                         40));
     }
 

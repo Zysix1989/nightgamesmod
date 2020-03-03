@@ -46,7 +46,7 @@ public class Shove extends Skill {
             target.shred(ClothingSlot.top);
             target.pain(c, getSelf(), (int) getSelf().modifyDamage(DamageType.physical, target, Global.random(10, 25)));
             if (getSelf().check(Attribute.Power, target.knockdownDC() - getSelf().get(Attribute.Ki))) {
-                c.setStance(new Neutral(getSelf(), c.getOpponent(getSelf())), getSelf(), true);
+                c.setStance(new Neutral(getSelf(), c.getOpponentCharacter(getSelf())), getSelf(), true);
 
                 target.add(c, new Falling(target));
 
@@ -60,7 +60,7 @@ public class Shove extends Skill {
                     c.write(getSelf(), String.format("%s shoves %s hard enough to free %s and jump up.",
                                     getSelf().subject(), target.nameDirectObject(), getSelf().reflexivePronoun()));
                 }
-                c.setStance(new Neutral(getSelf(), c.getOpponent(getSelf())), getSelf(), true);
+                c.setStance(new Neutral(getSelf(), c.getOpponentCharacter(getSelf())), getSelf(), true);
             } else {
                 if (getSelf().human()) {
                     c.write(getSelf(), "You push " + target.getName() + ", but you're unable to dislodge her.");

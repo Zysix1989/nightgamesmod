@@ -44,18 +44,18 @@ public class Falling extends Status {
         if (c==null) return 0;
         affected.removelist.add(this);
         if (c.getStance().havingSex(c) && c.getStance().dom(affected) && c.getStance().reversable(c)) {
-            c.write(c.getOpponent(affected), Global.format("{other:SUBJECT-ACTION:take|takes} the chance to shift into a more dominant position.", affected, c.getOpponent(affected)));
+            c.write(c.getOpponentCharacter(affected), Global.format("{other:SUBJECT-ACTION:take|takes} the chance to shift into a more dominant position.", affected, c.getOpponentCharacter(affected)));
             c.setStance(c.getStance().reverse(c, true));
         } else if (c.getStance().havingSex(c)) {
-            c.write(Global.format("As {self:SUBJECT-ACTION:collapse|collapses}, {other:direct-object} {other:SUBJECT-ACTION:retain|retains} {other:possessive-adjective} dominant position.", affected, c.getOpponent(affected)));    
+            c.write(Global.format("As {self:SUBJECT-ACTION:collapse|collapses}, {other:direct-object} {other:SUBJECT-ACTION:retain|retains} {other:possessive-adjective} dominant position.", affected, c.getOpponentCharacter(affected)));
         } else if (!c.getStance().prone(affected)) {
-            c.setStance(new StandingOver(c.getOpponent(affected), affected));
+            c.setStance(new StandingOver(c.getOpponentCharacter(affected), affected));
         }
         if (affected.has(Trait.NimbleRecovery)) {
-            c.write(Global.format("{self:NAME-POSSESSIVE} nimble body expertly breaks the fall.", affected, c.getOpponent(affected)));
+            c.write(Global.format("{self:NAME-POSSESSIVE} nimble body expertly breaks the fall.", affected, c.getOpponentCharacter(affected)));
             affected.add(c, new Stunned(affected, 0, true));
         } else if (affected.has(Trait.Unwavering)) {
-            c.write(Global.format("{self:SUBJECT-ACTION:go|goes} down but the fall seems to hardly affect {self:direct-object}.", affected, c.getOpponent(affected)));
+            c.write(Global.format("{self:SUBJECT-ACTION:go|goes} down but the fall seems to hardly affect {self:direct-object}.", affected, c.getOpponentCharacter(affected)));
         } else {
             affected.add(c, new Stunned(affected));            
         }

@@ -95,7 +95,7 @@ public class ThrowDraft extends Skill {
         } else {
             ArrayList<Item> usables = new ArrayList<Item>();
             for (Item i : getSelf().getInventory().keySet()) {
-                if (i.getEffects().get(0).throwable() && i.usable(c, getSelf(), c.getOpponent(getSelf()))) {
+                if (i.getEffects().get(0).throwable() && i.usable(c, getSelf(), c.getOpponentCharacter(getSelf()))) {
                     usables.add(i);
                 }
             }

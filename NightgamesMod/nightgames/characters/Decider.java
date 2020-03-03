@@ -289,7 +289,7 @@ public class Decider {
 
         // Starting fitness
         Character master = self.getSelf().owner();
-        Character other = c.getOpponent(self);
+        Character other = c.getOpponentCharacter(self);
         double masterFit = master.getFitness(c);
         double otherFit = master.getOtherFitness(c, other);
 
@@ -337,7 +337,7 @@ public class Decider {
         final double RATING_FACTOR = 0.02f;
 
         // Starting fitness
-        Character other = c.getOpponent(self);
+        Character other = c.getOpponentCharacter(self);
         double selfFit = self.getFitness(c);
         double otherFit = self.getOtherFitness(c, other);
 
@@ -413,7 +413,7 @@ public class Decider {
 
     
     public static double rateAction(Character skillUser, Combat c, double selfFit, double otherFit, CustomEffect effect) {
-        return rateActionWithObserver(skillUser, skillUser, c.getOpponent(skillUser), c, selfFit, otherFit, effect);
+        return rateActionWithObserver(skillUser, skillUser, c.getOpponentCharacter(skillUser), c, selfFit, otherFit, effect);
     }
 
     /**Clones the combat and returns a rating.
@@ -432,7 +432,7 @@ public class Decider {
         Global.debugSimulation += 1;
         Character newSkillUser = getCopyFromCombat(c, c2, skillUser);
         Character newObserver = getCopyFromCombat(c, c2, fitnessObserver);
-        Character newOpponent = c2.getOpponent(newSkillUser);
+        Character newOpponent = c2.getOpponentCharacter(newSkillUser);
         Character newTarget = getCopyFromCombat(c, c2, target);
 
         effect.execute(c2, newSkillUser, newTarget);

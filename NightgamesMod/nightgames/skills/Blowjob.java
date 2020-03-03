@@ -36,7 +36,7 @@ public class Blowjob extends Skill {
     @Override
     public float priorityMod(Combat c) {
         float priority = 0;
-        if (c.getStance().penetratedBy(c, getSelf(), c.getOpponent(getSelf()))) {
+        if (c.getStance().penetratedBy(c, getSelf(), c.getOpponentCharacter(getSelf()))) {
             priority += 1.0f;
         }
         if (getSelf().has(Trait.silvertongue)) {
@@ -54,7 +54,7 @@ public class Blowjob extends Skill {
             target.body.getRandomCock(),
             getSelf(),
             getSelf().body.getRandomPussy())
-            && !c.getOpponent(getSelf()).has(Trait.strapped)
+            && !c.getOpponentCharacter(getSelf()).has(Trait.strapped)
             && getSelf().body.getRandomPussy().moddedPartCountsAs(ExtendedTonguedMod.TYPE);
     }
 
@@ -64,9 +64,9 @@ public class Blowjob extends Skill {
 
     @Override
     public int getMojoBuilt(Combat c) {
-        if (isVaginal(c, c.getOpponent(getSelf()))) {
+        if (isVaginal(c, c.getOpponentCharacter(getSelf()))) {
             return 10;
-        } else if (c.getStance().isBeingFaceSatBy(c, getSelf(), c.getOpponent(getSelf()))) {
+        } else if (c.getStance().isBeingFaceSatBy(c, getSelf(), c.getOpponentCharacter(getSelf()))) {
             return 0;
         } else {
             return 5;

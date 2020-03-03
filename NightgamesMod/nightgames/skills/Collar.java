@@ -29,17 +29,17 @@ public class Collar extends Skill {
 
     @Override
     public float priorityMod(Combat c) {
-        return !c.getOpponent(getSelf()).is(Stsflag.collared) ? 10 : 2;
+        return !c.getOpponentCharacter(getSelf()).is(Stsflag.collared) ? 10 : 2;
     }
     
     @Override
     public String getLabel(Combat c) {
-        return c.getOpponent(getSelf()).is(Stsflag.collared) ? "Recharge Collar" : "Place Collar";
+        return c.getOpponentCharacter(getSelf()).is(Stsflag.collared) ? "Recharge Collar" : "Place Collar";
     }
     
     @Override
     public String describe(Combat c) {
-        return c.getOpponent(getSelf()).is(Stsflag.collared) 
+        return c.getOpponentCharacter(getSelf()).is(Stsflag.collared)
                         ? "Spend 5 batteries to recharge the collar around your opponent's neck." 
                         : "Place a Training Collar around your opponent's neck";
     }

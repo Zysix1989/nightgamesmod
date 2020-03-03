@@ -79,7 +79,7 @@ public class Frenzied extends DurationStatus {
     public String initialMessage(Combat c, Optional<Status> replacement) {
         if (affected.has(Trait.Rut) && !affected.human()) {
             return Global.format("There's a frenzied look in {self:name-possessive} eyes as they zero in on {other:name-possessive} crotch. "
-                            + "This could be bad.", affected, c.getOpponent(affected));
+                            + "This could be bad.", affected, c.getOpponentCharacter(affected));
         }
         return String.format("%s mind blanks, leaving only the bestial need to breed.",
                         affected.nameOrPossessivePronoun());
@@ -196,7 +196,7 @@ public class Frenzied extends DurationStatus {
     public Collection<Skill> skillWhitelist(Combat c) {
         // Gather the preferred skills for which the character meets the
         // requirements
-        return FUCK_SKILLS.stream().filter(s -> s.requirements(c, affected, c.getOpponent(affected)))
+        return FUCK_SKILLS.stream().filter(s -> s.requirements(c, affected, c.getOpponentCharacter(affected)))
                         .map(s -> s.copy(affected)).collect(Collectors.toSet());
     }
 

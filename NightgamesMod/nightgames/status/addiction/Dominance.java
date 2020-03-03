@@ -24,7 +24,7 @@ public class Dominance extends Addiction {
         if (c == null)
             return false;
         Character player = affected;
-        Character opp = c.getOpponent(player);
+        Character opp = c.getOpponentCharacter(player);
         if (!affected.checkAddiction(AddictionType.DOMINANCE, opp))
             return false;
         int sev = player.getAddictionSeverity(AddictionType.DOMINANCE)

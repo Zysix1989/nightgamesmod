@@ -172,7 +172,7 @@ public class PetCharacter extends Character {
 
     @Override
     public boolean act(Combat c) {
-        act(c, c.getOpponent(this));
+        act(c, c.getOpponentCharacter(this));
         return false;
     }
 

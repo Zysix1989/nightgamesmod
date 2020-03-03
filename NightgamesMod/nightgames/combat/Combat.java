@@ -241,7 +241,7 @@ public class Combat {
         p1.getCharacter().evalChallenges(this, won);
         p2.getCharacter().evalChallenges(this, won);
         won.victory(this, state);
-        doVictory(won, getOpponent(won));
+        doVictory(won, getOpponentCharacter(won));
         winner = Optional.of(won);
     }
 
@@ -328,7 +328,7 @@ public class Combat {
         List<PetCharacter> pets = new ArrayList<>(otherCombatants);
         pets.forEach(other -> {
             if (otherCombatants.contains(other)) {
-                other.endOfCombatRound(this, getOpponent(other));
+                other.endOfCombatRound(this, getOpponentCharacter(other));
             }
         });  
         checkStamina(p1.getCharacter());
@@ -366,9 +366,9 @@ public class Combat {
         if (character.has(Trait.beguilingbreasts)
             && !getCombatantData(character).getBooleanFlag(beguilingbreastCompletedFlag)
             && character.outfit.slotOpen(ClothingSlot.top)
-            && getStance().facing(character, getOpponent(character))
-            && !getOpponent(character).is(Stsflag.blinded)) {
-            Character mainOpponent = getOpponent(character);
+            && getStance().facing(character, getOpponentCharacter(character))
+            && !getOpponentCharacter(character).is(Stsflag.blinded)) {
+            Character mainOpponent = getOpponentCharacter(character);
             write(character, Global.format("The instant {self:subject-action:lay|lays} {self:possessive} eyes on {other:name-possessive} bare breasts, {self:possessive} consciousness flies out of {self:possessive} mind. " +
                             (character.canAct() ? "{other:SUBJECT-ACTION:giggle|giggles} a bit and {other:action:cup} {other:possessive} {other:body-part:breasts}"
                                                 + "  and {other:action:give} them a little squeeze to which {self:subject} can only moan." : ""), 
@@ -484,7 +484,7 @@ public class Combat {
             write(self, Global.format("{self:SUBJECT-ACTION:can't avert|can't avert} {self:possessive} eyes from {other:name-possessive} perfectly shaped tits sitting in front of {self:possessive} eyes.",
                                             self, other));
             self.temptNoSkill(this, other, other.body.getRandomBreasts(), 10 + Math.max(0, other.get(Attribute.Seduction) / 3 - 7));
-        } else if (getOpponent(self).has(Trait.temptingtits) && getStance().behind(other)) {
+        } else if (getOpponentCharacter(self).has(Trait.temptingtits) && getStance().behind(other)) {
             write(self, Global.format("{self:SUBJECT-ACTION:feel|feels} a heat in {self:possessive} groin as {other:name-possessive} enticing tits press against {self:possessive} back.",
                             self, other));
             double selfTopExposure = self.outfit.getExposure(ClothingSlot.top);
@@ -824,7 +824,7 @@ public class Combat {
 
     private Character pickTarget(PetCharacter pet) {
         if (otherCombatants.size() == 1 || Global.random(2) == 0) {
-            return getOpponent(pet);
+            return getOpponentCharacter(pet);
         }
         Character tgt;
         do {
@@ -1076,7 +1076,7 @@ public class Combat {
                                         p.objectPronoun()));
                     }
                 } else if (getStance().havingSex(this, p) && getStance().dom(p) && getStance().reversable(this)) {
-                    write(getOpponent(p), Global.format("{other:SUBJECT-ACTION:take|takes} the chance to shift into a more dominant position.", p, getOpponent(p)));
+                    write(getOpponentCharacter(p), Global.format("{other:SUBJECT-ACTION:take|takes} the chance to shift into a more dominant position.", p, getOpponentCharacter(p)));
                     setStance(getStance().reverse(this, false));
                 } else {
                     if (stance.havingSex(this)) {
@@ -1386,7 +1386,7 @@ public class Combat {
             return;
         }
         if (initiator != null) {
-            Character otherCharacter = getOpponent(initiator);
+            Character otherCharacter = getOpponentCharacter(initiator);
             if (voluntary
                 && newStance.en == Stance.neutral
                 && getStance().en != Stance.kneeling
@@ -1422,7 +1422,7 @@ public class Combat {
             if (voluntary) {
                 if (initiator != null) {
                     getCombatantData(initiator).setIntegerFlag("ChoseToFuck", 1);
-                    getCombatantData(getOpponent(initiator)).setIntegerFlag("ChoseToFuck", -1);
+                    getCombatantData(getOpponentCharacter(initiator)).setIntegerFlag("ChoseToFuck", -1);
                 }
             }
             checkBreeder(p1.getCharacter(), voluntary);
@@ -1431,7 +1431,7 @@ public class Combat {
 
         if (stance != newStance && initiator != null && initiator.has(Trait.Catwalk)) {
             write(initiator, Global.format("The way {self:subject-action:move|moves} exudes such feline grace that it demands {other:name-possessive} attention.",
-                            initiator, getOpponent(initiator)));
+                            initiator, getOpponentCharacter(initiator)));
             initiator.add(this, new Alluring(initiator, 1));
         }
         stance = newStance;
@@ -1458,7 +1458,7 @@ public class Combat {
         }
     }
 
-    public Character getOpponent(Character self) {
+    public Character getOpponentCharacter(Character self) {
         if (self.equals(p1.getCharacter()) || self.isPetOf(p1.getCharacter())) {
             return p2.getCharacter();
         }
@@ -1571,7 +1571,7 @@ public class Combat {
         writeSystemMessage(self, Global.format("{self:SUBJECT-ACTION:have|has} summoned {other:name-do} (Level %s)",
                                         master, self, self.getLevel()));
         otherCombatants.add(self);
-        this.write(self, self.challenge(getOpponent(self)));
+        this.write(self, self.challenge(getOpponentCharacter(self)));
     }
 
     public List<PetCharacter> getOtherCombatants() {

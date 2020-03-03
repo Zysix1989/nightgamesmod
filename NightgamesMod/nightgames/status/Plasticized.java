@@ -72,7 +72,7 @@ public class Plasticized extends DurationStatus {
     public int regen(Combat c) {
         super.regen(c);
         if (c != null && c.getStance().mobile(affected)) {
-        	c.write(affected, Global.format("It's impossible for {self:name-do} to stay on {self:possessive} feet.", affected, c.getOpponent(affected)));
+        	c.write(affected, Global.format("It's impossible for {self:name-do} to stay on {self:possessive} feet.", affected, c.getOpponentCharacter(affected)));
         	affected.add(c, new Falling(affected));
         }
         affected.emote(Emotion.nervous, 5);

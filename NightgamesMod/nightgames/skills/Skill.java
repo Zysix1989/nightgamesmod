@@ -270,7 +270,7 @@ public abstract class Skill {
     }
 
     public Character getDefaultTarget(Combat c) {
-        return c.getOpponent(getSelf());
+        return c.getOpponentCharacter(getSelf());
     }
 
     public final double multiplierForStage(Character target) {
@@ -297,7 +297,7 @@ public abstract class Skill {
         tags.remove(tag);
     }
     public final Set<SkillTag> getTags(Combat c) {
-        return getTags(c, c.getOpponent(self));
+        return getTags(c, c.getOpponentCharacter(self));
     }
 
     public Set<SkillTag> getTags(Combat c, Character target) {

@@ -32,7 +32,7 @@ public class OfferAss extends Skill {
 
     @Override
     public String describe(Combat c) {
-        Character other = c.getOpponent(getSelf());
+        Character other = c.getOpponentCharacter(getSelf());
         return "Offer your ass to " + other.possessiveAdjective() + "'s " + other.body.getRandomInsertable().describe(other);
     }
 

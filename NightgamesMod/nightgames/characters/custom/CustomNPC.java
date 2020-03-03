@@ -94,17 +94,17 @@ public class CustomNPC extends BasePersonality {
     @Override
     public String victory(Combat c, Result flag) {
         character.getArousal().renew();
-        return data.getLine("victory", c, character, c.getOpponent(character));
+        return data.getLine("victory", c, character, c.getOpponentCharacter(character));
     }
 
     @Override
     public String defeat(Combat c, Result flag) {
-        return data.getLine("defeat", c, character, c.getOpponent(character));
+        return data.getLine("defeat", c, character, c.getOpponentCharacter(character));
     }
 
     @Override
     public String draw(Combat c, Result flag) {
-        return data.getLine("draw", c, character, c.getOpponent(character));
+        return data.getLine("draw", c, character, c.getOpponentCharacter(character));
     }
 
     @Override
@@ -173,7 +173,7 @@ public class CustomNPC extends BasePersonality {
     public Map<CommentSituation, String> getComments(Combat c) {
         Map<CommentSituation, String> all = data.getComments();
         Map<CommentSituation, String> applicable = new HashMap<>();
-        all.entrySet().stream().filter(e -> e.getKey().isApplicable(c, character, c.getOpponent(character)))
+        all.entrySet().stream().filter(e -> e.getKey().isApplicable(c, character, c.getOpponentCharacter(character)))
                         .forEach(e -> applicable.put(e.getKey(), e.getValue()));
         return applicable;
     }

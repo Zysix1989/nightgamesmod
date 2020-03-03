@@ -6,11 +6,8 @@ import java.util.Optional;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.Player;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.CockPart;
-import nightgames.characters.body.PussyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.body.mods.pitcher.EnlightenedCockMod;
 import nightgames.combat.Combat;
@@ -163,7 +160,7 @@ public class Struggle extends Skill {
                 } else {
                     c.write(getSelf(), "You manage to break away from " + target.getName() + ".");
                 }
-                c.setStance(new Neutral(getSelf(), c.getOpponent(getSelf())));
+                c.setStance(new Neutral(getSelf(), c.getOpponentCharacter(getSelf())));
             } else if (c.shouldPrintReceive(target, c)) {
                 if (knotted) {
                     c.write(getSelf(), String.format("%s roughly pulls away from %s, groaning loudly"
@@ -178,7 +175,7 @@ public class Struggle extends Skill {
                                     getSelf().subject(), target.nameDirectObject(),
                                     target.possessiveAdjective(), getSelf().possessiveAdjective()));
                 }
-                c.setStance(new Neutral(getSelf(), c.getOpponent(getSelf())));
+                c.setStance(new Neutral(getSelf(), c.getOpponentCharacter(getSelf())));
             }
             return true;
         } else {
@@ -254,7 +251,7 @@ public class Struggle extends Skill {
                 c.write(getSelf(),
                                 Global.format("{self:SUBJECT-ACTION:manage|manages} to shake {other:direct-object} off.",
                                                 getSelf(), target));
-                c.setStance(new Neutral(getSelf(), c.getOpponent(getSelf())));
+                c.setStance(new Neutral(getSelf(), c.getOpponentCharacter(getSelf())));
             }
             return true;
         } else {
@@ -279,7 +276,7 @@ public class Struggle extends Skill {
             } else if (c.shouldPrintReceive(target, c)) {
                 c.write(getSelf(), getSelf().getName() + " squirms out from under "+target.nameDirectObject()+".");
             }
-            c.setStance(new Neutral(getSelf(), c.getOpponent(getSelf())));
+            c.setStance(new Neutral(getSelf(), c.getOpponentCharacter(getSelf())));
             return true;
         } else {
             getSelf().struggle();

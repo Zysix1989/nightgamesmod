@@ -12,7 +12,7 @@ public class TentaclePart extends GenericBodyPart {
     private String fluids;
 
     public static void pleasureWithTentacles(Combat c, Character target, int strength, BodyPart targetPart) {
-        target.body.pleasure(c.getOpponent(target), new TentaclePart(), targetPart, strength, c);
+        target.body.pleasure(c.getOpponentCharacter(target), new TentaclePart(), targetPart, strength, c);
     }
 
     public TentaclePart(String desc, String attachpoint, String fluids, double hotness, double pleasure,

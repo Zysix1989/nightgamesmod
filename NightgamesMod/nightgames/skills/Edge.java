@@ -36,8 +36,8 @@ public class Edge extends Skill {
                         getSelf().has(Trait.limbTraining1)) {
             mod += .5f;
         }
-        if (c.getOpponent(getSelf()).getArousal().percent() >= 100 
-                        && c.getOpponent(getSelf()).getArousal().percent() < 300) {
+        if (c.getOpponentCharacter(getSelf()).getArousal().percent() >= 100
+                        && c.getOpponentCharacter(getSelf()).getArousal().percent() < 300) {
             mod *= 2;
         }
         if (getSelf().getArousal().percent() >= 80) {
