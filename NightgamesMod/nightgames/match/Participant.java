@@ -80,7 +80,7 @@ public class Participant {
         IMovement execute(Action a);
     }
     public void move() {
-        character.displayStateMessage();
+        character.displayStateMessage(character.location.get().getTrap(this));
         List<Action> possibleActions = new ArrayList<>();
         possibleActions.addAll(character.location.get().possibleActions(this));
         possibleActions.addAll(character.getItemActions());

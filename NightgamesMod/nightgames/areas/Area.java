@@ -193,6 +193,8 @@ public class Area implements Serializable {
         return Optional.ofNullable(trap);
     }
 
+    public Optional<Trap.Instance> getTrap(Participant p) { return getTrap().filter(trap -> trap.getOwner() == p); }
+
     public void setPinged(boolean b) {
         this.pinged = b;
     }

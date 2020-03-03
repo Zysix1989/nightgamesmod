@@ -357,7 +357,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void displayStateMessage() {
+    public void displayStateMessage(Optional<Trap.Instance> knownTrap) {
         if (Global.checkFlag(Flag.FTC)) {
             Character holder = ((FTCMatch) Global.getMatch()).getFlagHolder();
             if (holder != null && !holder.human()) {
@@ -365,9 +365,7 @@ public class Player extends Character {
             }
         }
         gui.message(location.get().description + "<br/><br/>");
-        location.get().getTrap()
-                .filter(trap -> trap.getOwner().getCharacter() == this)
-                .ifPresent(trap -> gui.message("You've set a " + trap.getName() + " here."));
+        knownTrap.ifPresent(trap -> gui.message("You've set a " + trap.getName() + " here."));
         if (state == State.webbed) {
             gui.message("You eventually manage to get an arm free, which you then use to extract yourself from the trap.");
         } else if (state == State.inTree) {
