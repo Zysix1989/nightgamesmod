@@ -613,15 +613,6 @@ public class Global {
         return a;
     }
 
-    public static Character lookup(String name) {
-        for (Character player : players) {
-            if (player.getTrueName().equalsIgnoreCase(name)) {
-                return player;
-            }
-        }
-        return null;
-    }
-
     public static Time getTime() {
         return time;
     }
