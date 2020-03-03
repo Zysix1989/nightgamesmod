@@ -13,18 +13,18 @@ public abstract class Trap {
 
     public abstract static class Instance implements Deployable {
         private final Trap self;
-        protected final Character owner;
+        protected final Participant owner;
 
         public Instance(Trap self, Participant owner) {
             this.self = self;
-            this.owner = owner.getCharacter();
+            this.owner = owner;
         }
 
         protected abstract void trigger(Participant target);
 
         @Override
         public boolean resolve(Participant active) {
-            if (active.getCharacter() != owner) {
+            if (active != owner) {
                 trigger(active);
                 return true;
             }
@@ -33,7 +33,7 @@ public abstract class Trap {
 
         @Override
         public Character owner() {
-            return owner;
+            return owner.getCharacter();
         }
 
         @Override
