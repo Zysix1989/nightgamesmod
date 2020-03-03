@@ -41,18 +41,8 @@ public class Locate extends Action {
         if (self.getCharacter().human()) {
             gui.message("Thinking back to your 'games' with Reyka, you take out a totem to begin a scrying ritual: ");
         }
-        handleEvent(self.getCharacter(), "Start");
+        startEvent(self.getCharacter());
         return Movement.locating;
-    }
-
-    public void handleEvent(Character self, String choice) {
-        if (choice.equals("Start")) {
-            startEvent(self);
-        } else if (choice.equals("Leave")) {
-            endEvent();
-        } else {
-            eventBody(self, choice);
-        }
     }
 
     public final void startEvent(Character self) {
