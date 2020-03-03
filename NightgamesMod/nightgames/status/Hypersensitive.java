@@ -1,13 +1,12 @@
 package nightgames.status;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
+
+import java.util.Optional;
 
 public class Hypersensitive extends DurationStatus {
     public Hypersensitive(Character affected) {
@@ -32,7 +31,7 @@ public class Hypersensitive extends DurationStatus {
 
     @Override
     public String initialMessage(Combat c, Optional<Status> replacement) {
-        if (!replacement.isPresent()) {
+        if (replacement.isEmpty()) {
             return String.format("%s now hypersensitive.\n", affected.subjectAction("are", "is"));
         } else {
             return "";
