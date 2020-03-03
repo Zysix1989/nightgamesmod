@@ -35,11 +35,6 @@ public abstract class Trap {
             return owner;
         }
 
-        @Override
-        public int priority() {
-            return 0;
-        }
-
         public String getName() {
             return self.name;
         }
