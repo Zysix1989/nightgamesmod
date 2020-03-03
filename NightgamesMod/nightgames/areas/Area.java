@@ -129,7 +129,6 @@ public class Area implements Serializable {
     }
 
     private boolean canFight(Character c) {         //FIXME: This method has same name as Match.canFight() and they are used in the same method. Change both - DSM
-        c.human();
         return true;
     }
     
