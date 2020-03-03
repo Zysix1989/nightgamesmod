@@ -1458,16 +1458,18 @@ public class Combat {
         }
     }
 
-    public Character getOpponentCharacter(Character self) {
+    public Combatant getOpponent(Character self) {
         if (self.equals(p1.getCharacter()) || self.isPetOf(p1.getCharacter())) {
-            return p2.getCharacter();
+            return p2;
         }
         if (self.equals(p2.getCharacter()) || self.isPetOf(p2.getCharacter())) {
-            return p1.getCharacter();
+            return p1;
         }
-        System.err.println("Tried to get an opponent for " + self.getTrueName() + " which does not exist in combat.");
-        Thread.dumpStack();
-        return Global.noneCharacter();
+        throw new RuntimeException(String.format("no opponent found for %s", self));
+    }
+
+    public Character getOpponentCharacter(Character self) {
+        return getOpponent(self).getCharacter();
     }
 
     public void writeSystemMessage(String battleString, boolean basic) {
