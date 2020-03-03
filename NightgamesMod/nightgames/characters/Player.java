@@ -997,7 +997,7 @@ public class Player extends Character {
     public void chooseLocateTarget(Locate action, Collection<Character> potentialTargets) {
         List<CommandPanelOption> options = potentialTargets.stream()
             .map(character -> new CommandPanelOption(character.getTrueName(),
-                event -> action.eventBody(this, getTrueName())))
+                event -> action.eventBody(this, character.getTrueName())))
             .collect(Collectors.toList());
         options.add(new CommandPanelOption("Leave", event -> action.endEvent()));
         gui.presentOptions(options);
