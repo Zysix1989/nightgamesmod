@@ -4,7 +4,6 @@ import nightgames.areas.Area;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
-import nightgames.gui.GUI;
 import nightgames.items.Item;
 import nightgames.match.Participant;
 import nightgames.match.Status;
@@ -35,22 +34,18 @@ public class Locate extends Action {
 
     @Override
     public IMovement execute(Participant self) {
-        GUI gui = Global.gui();
-        gui.clearText();
-        gui.validate();
-        if (self.getCharacter().human()) {
-            gui.message("Thinking back to your 'games' with Reyka, you take out a totem to begin a scrying ritual: ");
-        }
         startEvent(self.getCharacter());
         return Movement.locating;
     }
 
     public final void startEvent(Character self) {
+        var msg = "Thinking back to your 'games' with Reyka, you take out a totem to begin a scrying ritual: ";
         self.chooseLocateTarget(this,
                 Global.getMatch().getParticipants().stream()
                         .filter(p -> self.getAffection(p.getCharacter()) >= MINIMUM_SCRYING_REQUIREMENT)
                         .map(Participant::getCharacter)
-                        .collect(Collectors.toList()));
+                        .collect(Collectors.toList()),
+                msg);
     }
 
     public final void eventBody(Character self, Character target) {

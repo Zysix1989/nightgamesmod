@@ -994,7 +994,10 @@ public class Player extends Character {
     }
 
     @Override
-    public void chooseLocateTarget(Locate action, Collection<Character> potentialTargets) {
+    public void chooseLocateTarget(Locate action, Collection<Character> potentialTargets, String msg) {
+        gui.clearText();
+        gui.validate();
+        gui.message(msg);
         List<CommandPanelOption> options = potentialTargets.stream()
             .map(character -> new CommandPanelOption(character.getTrueName(),
                 event -> action.eventBody(this, character)))

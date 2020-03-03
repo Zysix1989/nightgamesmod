@@ -4350,7 +4350,7 @@ public Character clone() throws CloneNotSupportedException {
         return gain;
     }
 
-    public void chooseLocateTarget(Locate action, Collection<Character> potentialTargets) {
+    public void chooseLocateTarget(Locate action, Collection<Character> potentialTargets, String msg) {
         throw new UnsupportedOperationException(
             String.format("attempted to choose target for %s", action.toString()));
     }
