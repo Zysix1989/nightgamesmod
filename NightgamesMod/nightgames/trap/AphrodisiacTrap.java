@@ -43,18 +43,18 @@ public class AphrodisiacTrap extends Trap {
                 if (target.getCharacter().human()) {
                     Global.gui().message(VICTIM_DISARM_MESSAGE);
                     target.getCharacter().gain(Item.Aphrodisiac);
-                    target.getCharacter().location().clearTrap();
+                    target.getLocation().clearTrap();
                 }
             } else {
                 if (target.getCharacter().human()) {
                     Global.gui().message(VICTIM_TRIGGER_MESSAGE);
-                } else if (target.getCharacter().location().humanPresent()) {
+                } else if (target.getLocation().humanPresent()) {
                     var model = JtwigModel.newModel()
                             .with("victim", target.getCharacter().getGrammar());
                     Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
                 }
                 target.getCharacter().addNonCombat(new Status(new Horny(target.getCharacter(), (30 + strength) / 10.0f, 10, "Aphrodisiac Trap")));
-                target.getCharacter().location().opportunity(target.getCharacter(), this);
+                target.getLocation().opportunity(target.getCharacter(), this);
             }
         }
 

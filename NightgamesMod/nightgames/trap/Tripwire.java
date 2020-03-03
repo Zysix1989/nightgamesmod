@@ -36,22 +36,22 @@ public class Tripwire extends Trap {
                 if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
                     Global.gui().message(VICTIM_TRIGGER_MESSAGE);
                     target.getCharacter().pain(null, null, m);
-                    target.getCharacter().location().opportunity(target.getCharacter(), this);
+                    target.getLocation().opportunity(target.getCharacter(), this);
                 } else {
                     Global.gui().message(VICTIM_DISARM_MESSAGE);
-                    target.getCharacter().location().clearTrap();
+                    target.getLocation().clearTrap();
                 }
             } else {
                 if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
-                    if (target.getCharacter().location().humanPresent()) {
+                    if (target.getLocation().humanPresent()) {
                         var model = JtwigModel.newModel()
                                 .with("victim", target.getCharacter().getGrammar());
                         Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
                     }
                     target.getCharacter().pain(null, null, m);
-                    target.getCharacter().location().opportunity(target.getCharacter(), this);
+                    target.getLocation().opportunity(target.getCharacter(), this);
                 } else {
-                    if (target.getCharacter().location().humanPresent()) {
+                    if (target.getLocation().humanPresent()) {
                         var model = JtwigModel.newModel()
                                 .with("victim", target.getCharacter().getGrammar());
                         Global.gui().message(OWNER_DISARM_TEMPLATE.render(model));

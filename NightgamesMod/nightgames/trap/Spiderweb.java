@@ -40,14 +40,14 @@ public class Spiderweb extends Trap {
         public void trigger(Participant target) {
             if (target.getCharacter().human()) {
                 Global.gui().message(victimTriggerMessage(target));
-            } else if (target.getCharacter().location().humanPresent()) {
+            } else if (target.getLocation().humanPresent()) {
                 var model = JtwigModel.newModel()
                         .with("victim", target.getCharacter().getGrammar());
                 Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
             }
             target.getCharacter().state = State.webbed;
             target.waitRounds(1);
-            target.getCharacter().location().opportunity(target.getCharacter(), this);
+            target.getLocation().opportunity(target.getCharacter(), this);
         }
 
         @Override

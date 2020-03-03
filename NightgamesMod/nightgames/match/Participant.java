@@ -139,4 +139,6 @@ public class Participant {
     public void endOfMatchRound() {
         character.endOfMatchRound();
     }
+
+    public Area getLocation() { return character.location(); }
 }

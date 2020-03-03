@@ -26,12 +26,12 @@ public class Decoy extends Trap {
         public void trigger(Participant target) {
             if (target.getCharacter().human()) {
                 Global.gui().message(VICTIM_TRIGGER_MESSAGE);
-            } else if (target.getCharacter().location().humanPresent()) {
+            } else if (target.getLocation().humanPresent()) {
                 var model = JtwigModel.newModel()
                         .with("victim", target.getCharacter().getGrammar());
                 Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
             }
-            target.getCharacter().location().clearTrap();
+            target.getLocation().clearTrap();
         }
     }
     

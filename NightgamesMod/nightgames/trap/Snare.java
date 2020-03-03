@@ -38,17 +38,17 @@ public class Snare extends Trap {
                 if (target.getCharacter().human()) {
                     Global.gui().message(VICTIM_DISARM_MESSAGE);
                 }
-                target.getCharacter().location().clearTrap();
+                target.getLocation().clearTrap();
             } else {
                 target.getCharacter().addNonCombat(new Status(new Bound(target.getCharacter(), 30 + strength / 2.0f, "snare")));
                 if (target.getCharacter().human()) {
                     Global.gui().message(VICTIM_TRIGGER_MESSAGE);
-                } else if (target.getCharacter().location().humanPresent()) {
+                } else if (target.getLocation().humanPresent()) {
                     var model = JtwigModel.newModel()
                             .with("victim", target.getCharacter().getGrammar());
                     Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
                 }
-                target.getCharacter().location().opportunity(target.getCharacter(), this);
+                target.getLocation().opportunity(target.getCharacter(), this);
             }
         }
 

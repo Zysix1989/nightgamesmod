@@ -242,7 +242,7 @@ public class Cache implements Deployable {
                         break;
                 }
             }
-            active.getCharacter().location().remove(this);
+            active.getLocation().remove(this);
             return true;
         }
         return false;

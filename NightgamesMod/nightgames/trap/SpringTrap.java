@@ -41,7 +41,7 @@ public class SpringTrap extends Trap {
             if (!target.getCharacter().check(Attribute.Perception, 24 - target.getCharacter().get(Attribute.Perception) + target.getCharacter().baseDisarm())) {
                 if (target.getCharacter().human()) {
                     Global.gui().message(VICTIM_TRIGGER_MESSAGE);
-                } else if (target.getCharacter().location().humanPresent()) {
+                } else if (target.getLocation().humanPresent()) {
                     var model = JtwigModel.newModel()
                             .with("victim", target.getCharacter().getGrammar());
                     Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
@@ -57,10 +57,10 @@ public class SpringTrap extends Trap {
                     target.getCharacter().pain(null, null, m);
                     target.getCharacter().addNonCombat(new Status(new Winded(target.getCharacter())));
                 }
-                target.getCharacter().location().opportunity(target.getCharacter(), this);
+                target.getLocation().opportunity(target.getCharacter(), this);
             } else if (target.getCharacter().human()) {
                 Global.gui().message(VICTIM_DISARM_MESSAGE);
-                target.getCharacter().location().clearTrap();
+                target.getLocation().clearTrap();
             }
         }
 

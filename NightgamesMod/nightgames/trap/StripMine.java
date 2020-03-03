@@ -38,13 +38,13 @@ public class StripMine extends Trap {
                 } else {
                     Global.gui().message(VICTIM_TRIGGER_MESSAGE);
                 }
-            } else if (target.getCharacter().location().humanPresent()) {
+            } else if (target.getLocation().humanPresent()) {
                 var model = JtwigModel.newModel()
                         .with("victim", target.getCharacter().getGrammar());
                 Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
             }
             IntStream.range(0, 2 + Global.random(4)).forEach(i -> target.getCharacter().shredRandom());
-            target.getCharacter().location().opportunity(target.getCharacter(), this);
+            target.getLocation().opportunity(target.getCharacter(), this);
         }
 
         @Override

@@ -59,7 +59,7 @@ public class TentacleTrap extends Trap {
             if (target.getCharacter().mostlyNude()) {
                 if (target.getCharacter().human()) {
                     Global.gui().message(VICTIM_TRIGGER_MESSAGE);
-                } else if (target.getCharacter().location().humanPresent()) {
+                } else if (target.getLocation().humanPresent()) {
                     var model = JtwigModel.newModel()
                             .with("victim", target.getCharacter().getGrammar());
                     Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
@@ -67,11 +67,11 @@ public class TentacleTrap extends Trap {
                 target.getCharacter().tempt(target.getCharacter().getArousal().max());
                 target.getCharacter().addNonCombat(new Status(new Oiled(target.getCharacter())));
                 target.getCharacter().addNonCombat(new Status(new Hypersensitive(target.getCharacter())));
-                target.getCharacter().location().opportunity(target.getCharacter(), this);
+                target.getLocation().opportunity(target.getCharacter(), this);
             } else {
                 if (target.getCharacter().human()) {
                     Global.gui().message(VICTIM_TRIGGER_INEFFECTIVE_MESSAGE);
-                } else if (target.getCharacter().location().humanPresent()) {
+                } else if (target.getLocation().humanPresent()) {
                     var model = JtwigModel.newModel()
                             .with("victim", target.getCharacter().getGrammar());
                     Global.gui().message(OWNER_TRIGGER_INEFFECTIVE_TEMPLATE.render(model));

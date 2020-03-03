@@ -45,7 +45,7 @@ public class DissolvingTrap extends Trap {
                 if (target.getCharacter().human()) {
                     Global.gui().message(VICTIM_DISARM_MESSAGE);
                     target.getCharacter().gain(Item.DisSol);
-                    target.getCharacter().location().clearTrap();
+                    target.getLocation().clearTrap();
                 }
             } else {
                 if (target.getCharacter().human()) {
@@ -54,7 +54,7 @@ public class DissolvingTrap extends Trap {
                     } else {
                         Global.gui().message(VICTIM_TRIGGER_MESSAGE);
                     }
-                } else if (target.getCharacter().location().humanPresent()) {
+                } else if (target.getLocation().humanPresent()) {
                     var model = JtwigModel.newModel()
                             .with("victim", target.getCharacter().getGrammar());
                     if (target.getCharacter().reallyNude()) {
@@ -64,7 +64,7 @@ public class DissolvingTrap extends Trap {
                     }
                 }
                 target.getCharacter().nudify();
-                target.getCharacter().location().opportunity(target.getCharacter(), this);
+                target.getLocation().opportunity(target.getCharacter(), this);
             }
         }
 

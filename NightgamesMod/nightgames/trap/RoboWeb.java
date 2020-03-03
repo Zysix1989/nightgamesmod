@@ -73,8 +73,8 @@ public class RoboWeb extends Trap {
             }
             target.getCharacter().outfit.undress();
             target.getCharacter().addNonCombat(new Status(new RoboWebbed(target.getCharacter(), 100 + strength, this)));
-            target.getCharacter().location().opportunity(target.getCharacter(), this);
-            target.getCharacter().location().alarm = true;
+            target.getLocation().opportunity(target.getCharacter(), this);
+            target.getLocation().alarm = true;
         }
 
         @Override

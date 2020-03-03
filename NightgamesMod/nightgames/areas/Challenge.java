@@ -160,7 +160,7 @@ public class Challenge implements Deployable {
                                 + Global.getMatch().genericRoomDescription()
                                 + ". You open it up and read the note inside.\n'" + message() + "'\n");
             }
-            active.getCharacter().location().remove(this);
+            active.getLocation().remove(this);
             active.getCharacter().accept(this);
             return true;
         }

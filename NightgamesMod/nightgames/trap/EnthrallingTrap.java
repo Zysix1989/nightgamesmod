@@ -48,19 +48,19 @@ public class EnthrallingTrap extends Trap {
                         || !target.getCharacter().eligible(owner.getCharacter()) || !owner.getCharacter().eligible(target.getCharacter())) {
                     Global.gui().message(VICTIM_AVOID_MESSAGE);
                 } else {
-                    target.getCharacter().location().opportunity(target.getCharacter(), this);
+                    target.getLocation().opportunity(target.getCharacter(), this);
                     Global.gui().message(VICTIM_TRIGGER_MESSAGE);
                     target.getCharacter().addNonCombat(new Status(new Enthralled(target.getCharacter(), owner.getCharacter(), 5 + strength / 20)));
                 }
             } else if (target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm()) || !target.getCharacter().eligible(owner.getCharacter()) || !owner.getCharacter().eligible(target.getCharacter())) {
-                if (target.getCharacter().location().humanPresent()) {
+                if (target.getLocation().humanPresent()) {
                     var model = JtwigModel.newModel()
                             .with("victim", target.getCharacter().getGrammar());
                     Global.gui().message(OWNER_TRIGGER_MESSAGE.render(model));
                 }
                 //TODO: Currently, being Enthralled and moving to a new location doesn't use a turn of the effect, meaning that you still lose all those turns once you are in combat.
                 target.getCharacter().addNonCombat(new Status(new Enthralled(target.getCharacter(), owner.getCharacter(), 5 + strength / 20)));
-                target.getCharacter().location().opportunity(target.getCharacter(), this);
+                target.getLocation().opportunity(target.getCharacter(), this);
             }
         }
 
