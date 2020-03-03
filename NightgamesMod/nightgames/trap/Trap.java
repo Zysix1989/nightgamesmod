@@ -31,7 +31,6 @@ public abstract class Trap {
             return false;
         }
 
-        @Override
         public Character owner() {
             return owner.getCharacter();
         }

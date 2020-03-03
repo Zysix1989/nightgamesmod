@@ -167,11 +167,6 @@ public class Challenge implements Deployable {
         return false;
     }
 
-    @Override
-    public Character owner() {
-        return null;
-    }
-
     public int reward() {
         switch (goal) {
             case kisswin:

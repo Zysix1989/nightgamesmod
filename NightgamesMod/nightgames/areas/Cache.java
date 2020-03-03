@@ -1,7 +1,6 @@
 package nightgames.areas;
 
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
@@ -242,12 +241,6 @@ public class Cache implements Deployable {
         Map<RewardType, Double> weighted = REWARDS.stream().filter(r -> level >= r.minLevel)
                         .collect(Collectors.toMap(Function.identity(), r -> r.weight));
         reward.addAll(Global.pickWeighted(weighted).get().items);
-    }
-
-    @Override
-    public Character owner() {
-        // TODO Auto-generated method stub
-        return null;
     }
     
     private static class RewardType {
