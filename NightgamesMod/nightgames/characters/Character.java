@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import nightgames.actions.*;
 import nightgames.areas.Area;
 import nightgames.areas.Challenge;
-import nightgames.areas.NinjaStash;
 import nightgames.beans.Property;
 import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;
@@ -3913,40 +3912,10 @@ public Character clone() throws CloneNotSupportedException {
     public void matchPrep(Match m) {
         if(getPure(Attribute.Ninjutsu)>=9){
             Global.gainSkills(this);
-            placeNinjaStash(m);
         }
         if (has(Trait.RemoteControl)) {
             int currentCount = inventory.getOrDefault(Item.RemoteControl, 0);
             gain(Item.RemoteControl, 2 - currentCount + get(Attribute.Science) / 10);
-        }
-    }
-
-    /**Places a Ninja stash. */
-    private void placeNinjaStash(Match m) {
-        String location;
-        switch(Global.random(6)){
-        case 0:
-            location = "Library";
-            break;
-        case 1:
-            location = "Dining";
-            break;
-        case 2:
-            location = "Lab";
-            break;
-        case 3:
-            location = "Workshop";
-            break;
-        case 4:
-            location = "Storage";
-            break;
-        default:
-            location = "Liberal Arts";
-            break;
-        }
-        m.gps(location).get().place(new NinjaStash(this));
-        if(human()){
-            Global.gui().message("<b>You've arranged for a hidden stash to be placed in the "+m.gps(location).get().name+".</b>");
         }
     }
 
