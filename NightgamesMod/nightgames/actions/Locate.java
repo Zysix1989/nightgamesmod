@@ -11,8 +11,6 @@ import nightgames.match.Status;
 import nightgames.status.Detected;
 import nightgames.status.Horny;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.stream.Collectors;
 
 public class Locate extends Action {
@@ -52,13 +50,19 @@ public class Locate extends Action {
         GUI gui = Global.gui();
         if (choice.equals("Start")) {
             self.chooseLocateTarget(this,
-                Global.getMatch().getCombatants().stream()
-                    .filter(c -> self.getAffection(c) >= MINIMUM_SCRYING_REQUIREMENT)
-                    .collect(Collectors.toList()));
+                Global.getMatch().getParticipants().stream()
+                        .filter(p -> self.getAffection(p.getCharacter()) >= MINIMUM_SCRYING_REQUIREMENT)
+                        .map(Participant::getCharacter)
+                        .collect(Collectors.toList()));
         } else if (choice.equals("Leave")) {
             gui.clearText();
             Global.getMatch().resume();
-        } else if ((target = Global.getParticipantsByName(choice)) != null) {
+        } else {
+            target = Global.getMatch().getParticipants().stream()
+                    .filter(p -> p.getCharacter().getTrueName().equals(choice))
+                    .findAny()
+                    .orElseThrow()
+                    .getCharacter();
             Area area = target.location();
             gui.clearText();
             if (area != null) {
@@ -77,16 +81,6 @@ public class Locate extends Action {
                                 + "purple flames, the smoke flowing from your nose straight to your crotch and setting another fire there.");
             }
             self.addNonCombat(new Status(new Horny(self, self.getArousal().max() / 10, 10, "Scrying Ritual")));
-            self.leaveAction(this);
-        } else {
-            StringWriter writer = new StringWriter();
-            new UnsupportedOperationException().printStackTrace(new PrintWriter(writer));
-            gui.clearText();
-            gui.message("If you see this text in game, something went wrong with"
-                            + " the locator function. Please take the time to send the information"
-                            + " below to The Silver Bard at his wordpress blog or Fenoxo's Forum: " + "\n\nSelf: "
-                            + self.getTrueName() + "(" + self.human() + ")\n" + "Choice: " + choice + "\nStacktrace:\n"
-                            + writer.toString());
             self.leaveAction(this);
         }
     }

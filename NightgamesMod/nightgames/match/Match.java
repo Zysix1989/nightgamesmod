@@ -612,4 +612,8 @@ public class Match {
         assert candidates.count() == 1;
         return candidates.findFirst().orElseThrow();
     }
+
+    public Set<Participant> getParticipants() {
+        return Set.copyOf(participants);
+    }
 }
