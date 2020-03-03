@@ -131,14 +131,6 @@ public class Cache implements Deployable {
         calcReward(level);
     }
 
-    public void gainMoney(Character active) {
-        int reward = 500 + level * 50;
-        active.modMoney(reward);
-        if (active.human()) {
-            Global.gui().message("You have found " + reward + "$!");
-        }
-    }
-
     @Override
     public boolean resolve(Participant active) {
         if (active.getCharacter().state == State.ready) {
