@@ -35,13 +35,6 @@ public class NinjaStash implements Deployable {
         return false;
     }
 
-    public void collect(Character active){
-        for(Item i: contents){
-            active.gain(i);
-        }
-        contents.clear();
-    }
-    
     public String toString(){
         return "Ninja Stash";
     }
