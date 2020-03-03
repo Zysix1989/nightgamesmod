@@ -31,7 +31,7 @@ public abstract class Trap {
             return false;
         }
 
-        public Character owner() {
+        public Character getOwner() {
             return owner.getCharacter();
         }
 

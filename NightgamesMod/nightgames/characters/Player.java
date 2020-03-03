@@ -366,7 +366,7 @@ public class Player extends Character {
         }
         gui.message(location.get().description + "<br/><br/>");
         location.get().getTrap()
-                .filter(trap -> trap.owner() == this)
+                .filter(trap -> trap.getOwner() == this)
                 .ifPresent(trap -> gui.message("You've set a " + trap.getName() + " here."));
         if (state == State.webbed) {
             gui.message("You eventually manage to get an arm free, which you then use to extract yourself from the trap.");
