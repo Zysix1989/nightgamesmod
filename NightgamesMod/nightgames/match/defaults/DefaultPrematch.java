@@ -1,19 +1,19 @@
 package nightgames.match.defaults;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import nightgames.global.Flag;
 import nightgames.global.Global;
-import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.gui.GUI;
+import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Prematch;
 import nightgames.match.PrematchEvent;
 import nightgames.modifier.standard.MayaModifier;
 import nightgames.modifier.standard.NoModifier;
 import nightgames.modifier.standard.UnderwearOnlyModifier;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class DefaultPrematch extends Prematch {
 
@@ -53,8 +53,7 @@ public class DefaultPrematch extends Prematch {
 
         @Override
         protected boolean valid() {
-            return Global.getPlayer()
-                         .getLevel() < 5;
+            return Global.getPlayer().getLevel() < 5;
         }
 
     }
@@ -132,8 +131,7 @@ public class DefaultPrematch extends Prematch {
 
         @Override
         protected boolean valid() {
-            return Global.getPlayer()
-                         .getRank() > 0 && Global.getDate() % 30 == 0;
+            return Global.getPlayer().getRank() > 0 && Global.getDate() % 30 == 0;
         }
 
     }
@@ -150,8 +148,7 @@ public class DefaultPrematch extends Prematch {
                             + " a visible smirk. Your instincts tells you something is wrong, but"
                             + " you decide to ignore it for now.<br/><br/>"
                             + "<b>Airi has entered the games.</b><br/><br/>";
-            if (type.name()
-                    .equals("normal")) {
+            if (type.name().equals("normal")) {
                 options.add(GUI.sceneOption("Start The Match"));
             } else {
                 options.add(GUI.sceneOption("Do it"));
