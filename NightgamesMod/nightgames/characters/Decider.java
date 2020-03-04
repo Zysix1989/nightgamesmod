@@ -213,11 +213,18 @@ public class Decider {
         for (Action act : available) {
             if (radar.contains(act.consider())) {
                 enemy.add(act);
-            } else if (act.consider() == Movement.bathe || act.consider() == Movement.craft
-                            || act.consider() == Movement.scavenge || act.consider() == Movement.hide
-                            || act.consider() == Movement.trap || act.consider() == Movement.wait
-                            || act.consider() == Movement.engineering || act.consider() == Movement.dining
-                            || act.consider() == Movement.disguise) {
+            } else if (act instanceof Bathe
+                    || act instanceof Craft
+                    || act instanceof Scavenge
+                    || act instanceof Hide
+                    || act instanceof SetTrap
+                    || act instanceof nightgames.actions.Wait
+                    // TODO: The next two I do NOT understand
+                    // If two weeks go by an I haven't figured out why they're here, remove them.
+                    // Written 2020-03-03
+                    || (act instanceof Move && ((Move) act).getDestination().name.equals("Engineering"))
+                    || (act instanceof Move && ((Move) act).getDestination().name.equals("Dining"))
+                    || act instanceof Disguise) {
                 onlyWhenSafe.add(act);
             } else {
                 utility.add(act);
@@ -235,8 +242,8 @@ public class Decider {
             tactic.addAll(available);
         }
         // give disguise some priority when just picking something random
-        if (tactic.stream().anyMatch(a -> a.consider() == Movement.disguise) && Global.random(5) == 0) {
-            return tactic.stream().filter(a -> a.consider() == Movement.disguise).findFirst().get();
+        if (tactic.stream().anyMatch(a -> a instanceof Disguise) && Global.random(5) == 0) {
+            return tactic.stream().filter(a -> a instanceof Disguise).findFirst().get();
         }
         Action[] actions = tactic.toArray(new Action[tactic.size()]);
         return actions[Global.random(actions.length)];

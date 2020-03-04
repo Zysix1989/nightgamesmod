@@ -1,8 +1,8 @@
 package nightgames.characters;
 
 import nightgames.actions.Action;
+import nightgames.actions.Energize;
 import nightgames.actions.IMovement;
-import nightgames.actions.Movement;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.FacePart;
@@ -116,7 +116,7 @@ public class Yui extends BasePersonality {
     @Override
     public Action move(Collection<Action> available, Collection<IMovement> radar) {
         for (Action act : available) {
-            if (act.consider() == Movement.mana) {
+            if (act instanceof Energize) {
                 return act;
             }
         }

@@ -1,8 +1,8 @@
 package nightgames.characters;
 
 import nightgames.actions.Action;
+import nightgames.actions.Energize;
 import nightgames.actions.IMovement;
-import nightgames.actions.Movement;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
 import nightgames.characters.body.BreastsPart;
@@ -275,7 +275,7 @@ public class Cassie extends BasePersonality {
     @Override
     public Action move(Collection<Action> available, Collection<IMovement> radar) {
         for (Action act : available) {
-            if (!character.is(Stsflag.energized) && act.consider() == Movement.mana) {
+            if (!character.is(Stsflag.energized) && act instanceof Energize) {
                 return act;
             }
         }
