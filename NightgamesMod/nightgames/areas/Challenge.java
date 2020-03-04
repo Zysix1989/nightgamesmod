@@ -8,6 +8,8 @@ import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,32 +44,53 @@ public class Challenge implements Deployable {
         return available.get(Global.random(available.size()));
     }
 
-    public String message() {
+    private static final JtwigTemplate KISS_WIN_ANNOUNCE = JtwigTemplate.inlineTemplate(
+            "{{ target.subject().properNoun() }} seems pretty head over heels for you, at least to my eyes. " +
+                    "I bet you can bring {{ target.subject().pronoun() }} to a climax if you give " +
+                    "{{ target.object().pronoun() }} a good kiss. Give it a try.");
+    private static final JtwigTemplate CLOTHED_WIN_ANNOUNCE = JtwigTemplate.inlineTemplate(
+            "Not everyone relies on brute force to get their opponents off. The masters of seduction often don't " +
+                    "bother to even undress their opponents. See if you can make {{ target.object().properNoun() }} " +
+                    "cum while {{ target.subject().pronoun() }}'s still got {{ target.possessiveAdjective() }} " +
+                    "clothes on.");
+    private static final JtwigTemplate PEGGED_LOSS_ANNOUNCE = JtwigTemplate.inlineTemplate(
+            "Getting pegged in the ass is a hell of a thing, isn't it? I sympathize... especially since "
+            + "{{ target.subject().properNoun() }} seems to have it in for you tonight. If " +
+                    "you cum from it, I'll see that you're compensated.");
+    private static final JtwigTemplate ANAL_WIN_ANNOUNCE = JtwigTemplate.inlineTemplate(
+            "{{ target.subject().properNoun() }} has been acting pretty cocky lately. If you can make her cum " +
+                    "while fucking {{ target.object().pronoun() }} in the ass, {{ target.subject().pronoun() }} " +
+                    "should learn some humility.");
+    private static final JtwigTemplate PEN_DOM_WIN_ANNOUNCE = JtwigTemplate.inlineTemplate(
+            "How good are you exactly? If you want to show {{ target.object().properNoun() }} that you're the best, " +
+                    "make {{ target.object().pronoun() }} cum while giving {{ target.object().pronoun() }} a good " +
+                    "fucking.");
+    private static final JtwigTemplate PEN_DRAW_ANNOUNCE = JtwigTemplate.inlineTemplate(
+            "Some things are better than winning, like cumming together with your sweetheart. You and " +
+                    "{{ target.subject().properNoun() }} seem pretty sweet.");
+    private static final JtwigTemplate SUB_WIN_ANNOUNCE = JtwigTemplate.inlineTemplate(
+            "Everyone loves an underdog. If you can make {{ target.object().properNoun() }} cum when " +
+                    "{{ target.subject().properNoun() }} thinks you're at {{ target.possessiveAdjective() }} mercy, " +
+                    "you'll get a sizable bonus.");
+
+    public JtwigTemplate announceTemplate() {
         switch (goal) {
             case kisswin:
-                return target.getTrueName()
-                                + " seems pretty head over heels for you, at least to my eyes. I bet she'll climax if you give her a good kiss. Give it a try.";
+                return KISS_WIN_ANNOUNCE;
             case clothedwin:
-                return "Not everyone relies on brute force to get their opponents off. The masters of seduction often don't bother to even undress their opponents. See "
-                                + "if you can make " + target.getTrueName() + " cum while she's still got her clothes on.";
+                return CLOTHED_WIN_ANNOUNCE;
             case peggedloss:
-                return "Getting pegged in the ass is a hell of a thing, isn't it. I sympathize... especially since "
-                                + target.getTrueName() + " seems to have it in for you tonight. If it "
-                                + "happens, I'll see that you're compensated.";
+                return PEGGED_LOSS_ANNOUNCE;
             case analwin:
-                return target.getTrueName()
-                                + " has been acting pretty cocky lately. If you can make her cum while fucking her in the ass, she should learn some humility.";
+                return ANAL_WIN_ANNOUNCE;
             case pendomwin:
-                return "How good are you exactly? If you want to show " + target.getTrueName()
-                                + " that you're the best, make her cum while giving her a good fucking.";
+                return PEN_DOM_WIN_ANNOUNCE;
             case pendraw:
-                return "Some things are better than winning, like cumming together with your sweetheart. You and "
-                                + target.getTrueName() + " seem pretty sweet.";
+                return PEN_DRAW_ANNOUNCE;
             case subwin:
-                return "Everyone loves an underdog. If you can win a fight with " + target.getTrueName()
-                                + " when she thinks you're at her mercy, you'll get a sizeable bonus.";
+                return SUB_WIN_ANNOUNCE;
             default:
-                return "";
+                throw new RuntimeException(String.format("fell off end: %s", goal));
         }
     }
 
@@ -151,9 +174,11 @@ public class Challenge implements Deployable {
             }
             goal = pick();
             if (active.getCharacter().human()) {
+                var model = JtwigModel.newModel()
+                        .with("target", target.getGrammar());
                 Global.gui().message("You find a gold envelope sitting conspicously in the middle of the "
                                 + Global.getMatch().genericRoomDescription()
-                                + ". You open it up and read the note inside.\n'" + message() + "'\n");
+                                + ". You open it up and read the note inside.\n'" + announceTemplate().render(model) + "'\n");
             }
             active.getLocation().remove(this);
             active.getCharacter().accept(this);
