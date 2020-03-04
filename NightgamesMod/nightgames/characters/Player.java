@@ -390,7 +390,7 @@ public class Player extends Character {
     public void move(Collection<Action> possibleActions,
                      EncounterResult encounterResult,
                      Participant.ActionCallback callback) {
-        List<Action> actionChoices = new ArrayList<>();
+        var actionChoices = new ArrayList<Action>();
         location.get().noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
             gui.message("You hear something in the <b>" + room.name + "</b>.");
             room.setPinged(true);
