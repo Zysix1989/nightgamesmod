@@ -12,11 +12,11 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class Challenge implements Deployable {
-    private Character owner;
-    private Character target;
+    private Participant owner;
+    private Participant target;
     private GOAL goal;
     public boolean done;
 
@@ -26,17 +26,17 @@ public class Challenge implements Deployable {
 
     public GOAL pick() {
         ArrayList<GOAL> available = new ArrayList<>();
-        if (!target.breastsAvailable() && !target.crotchAvailable()) {
+        if (!target.getCharacter().breastsAvailable() && !target.getCharacter().crotchAvailable()) {
             available.add(GOAL.clothedwin);
         }
-        if (owner.getPure(Attribute.Seduction) >= 9) {
+        if (owner.getCharacter().getPure(Attribute.Seduction) >= 9) {
             available.add(GOAL.analwin);
         }
-        if (owner.getAffection(target) >= 10) {
+        if (owner.getCharacter().getAffection(target.getCharacter()) >= 10) {
             available.add(GOAL.kisswin);
             available.add(GOAL.pendraw);
         }
-        if (target.has(Item.Strapon) || target.has(Item.Strapon2) || target.hasDick()) {
+        if (target.getCharacter().has(Item.Strapon) || target.getCharacter().has(Item.Strapon2) || target.getCharacter().hasDick()) {
             available.add(GOAL.peggedloss);
         }
         available.add(GOAL.pendomwin);
@@ -96,9 +96,9 @@ public class Challenge implements Deployable {
 
     public String startMessage() {
         var model = JtwigModel.newModel()
-                .with("target", target.getGrammar());
+                .with("target", target.getCharacter().getGrammar());
         return "You find a gold envelope sitting conspicuously in the middle of the "
-                + owner.location().name
+                + owner.getLocation().name
                 + ". You open it up and read the note inside.\n'" + announceTemplate().render(model) + "'\n";
     }
 
@@ -123,34 +123,34 @@ public class Challenge implements Deployable {
     }
 
     public String describe() {
-        return goal.getName() + " Challenge vs. " + target.getTrueName();
+        return goal.getName() + " Challenge vs. " + target.getCharacter().getTrueName();
     }
     
     public void check(Combat state, Character victor) {
-        if (!done && (state.getP1Character() == target || state.getP2Character() == target || target == null)) {
+        if (!done && (state.getP1Character() == target.getCharacter() || state.getP2Character() == target.getCharacter() || target == null)) {
             switch (goal) {
                 case kisswin:
-                    if (victor == owner && state.lastact(owner).toString().equals("Kiss")) {
+                    if (victor == owner.getCharacter() && state.lastact(owner.getCharacter()).toString().equals("Kiss")) {
                         done = true;
                     }
                     break;
                 case clothedwin:
-                    if (victor == owner && !target.breastsAvailable() && !target.crotchAvailable()) {
+                    if (victor == owner.getCharacter() && !target.getCharacter().breastsAvailable() && !target.getCharacter().crotchAvailable()) {
                         done = true;
                     }
                     break;
                 case peggedloss:
-                    if (target == victor && state.state == Result.anal) {
+                    if (target.getCharacter() == victor && state.state == Result.anal) {
                         done = true;
                     }
                     break;
                 case analwin:
-                    if (owner == victor && state.state == Result.anal) {
+                    if (owner.getCharacter() == victor && state.state == Result.anal) {
                         done = true;
                     }
                     break;
                 case pendomwin:
-                    if (target == victor && state.state == Result.intercourse) {
+                    if (target.getCharacter() == victor && state.state == Result.intercourse) {
                         done = true;
                     }
                     break;
@@ -160,7 +160,7 @@ public class Challenge implements Deployable {
                     }
                     break;
                 case subwin:
-                    if (victor == owner && state.getStance().sub(owner)) {
+                    if (victor == owner.getCharacter() && state.getStance().sub(owner.getCharacter())) {
                         done = true;
                     }
                     break;
@@ -171,19 +171,15 @@ public class Challenge implements Deployable {
     @Override
     public boolean resolve(Participant active) {
         if (active.getCharacter().state == State.ready) {
-            owner = active.getCharacter();
-            List<Character> combatants = Global.getMatch().getCombatants();
-            target = combatants.get(Global.random(combatants.size() - 1));
-            for (int i = 0; i < 10 && target == active.getCharacter(); i++) {
-                target = combatants.get(Global.random(combatants.size() - 1));
+            var participants = Global.getMatch().getParticipants().stream().filter(p -> p != active).collect(Collectors.toUnmodifiableList());
+            if (participants.size() > 0) {
+                owner = active;
+                target = participants.get(Global.random(participants.size() - 1));
+                goal = pick();
+                active.getLocation().remove(this);
+                active.getCharacter().accept(this);
+                return true;
             }
-            if (target == active.getCharacter()) {
-                return false;
-            }
-            goal = pick();
-            active.getLocation().remove(this);
-            active.getCharacter().accept(this);
-            return true;
         }
         return false;
     }
