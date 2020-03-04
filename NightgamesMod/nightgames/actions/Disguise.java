@@ -14,6 +14,12 @@ import java.util.stream.Collectors;
 public class Disguise extends Action {
     private static final long serialVersionUID = 2089054062272510717L;
 
+    private static class Aftermath extends Action.Aftermath {
+        private Aftermath() {
+            super(Movement.disguise);
+        }
+    }
+
     public Disguise() {
         super("Disguise");
     }
@@ -36,7 +42,7 @@ public class Disguise extends Action {
     }
 
     @Override
-    public IMovement execute(Participant user) {
+    public Action.Aftermath execute(Participant user) {
         NPC target = getRandomNPC(user.getCharacter());
         if (target != null) {
             user.getCharacter().addNonCombat(new Status(new Disguised(user.getCharacter(), target)));
@@ -46,7 +52,7 @@ public class Disguise extends Action {
             user.getCharacter().completelyNudify(null);
             target.outfitPlan.forEach(user.getCharacter().outfit::equip);
         }
-        return Movement.disguise;
+        return new Aftermath();
     }
 
 }

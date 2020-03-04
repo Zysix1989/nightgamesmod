@@ -6,6 +6,12 @@ import nightgames.match.Participant;
 
 public class UseEnergyDrink extends Action {
 
+    private static class Aftermath extends Action.Aftermath {
+        private Aftermath() {
+            super(Movement.enerydrink);
+        }
+    }
+
     public UseEnergyDrink() {
         super("Energy Drink");
     }
@@ -16,14 +22,14 @@ public class UseEnergyDrink extends Action {
     }
 
     @Override
-    public IMovement execute(Participant user) {
+    public Action.Aftermath execute(Participant user) {
         if (user.getCharacter().human()) {
             Global.gui().message(
                 "You chug down the unpleasant drink. Your tiredness immediately starts to recede.");
         }
         user.getCharacter().heal(null, 10 + Global.random(10));
         user.getCharacter().consume(Item.EnergyDrink, 1);
-        return Movement.enerydrink;
+        return new Aftermath();
     }
 
 }

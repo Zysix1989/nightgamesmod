@@ -1,7 +1,6 @@
 package nightgames.match;
 
 import nightgames.actions.Action;
-import nightgames.actions.IMovement;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.characters.Character;
@@ -76,7 +75,7 @@ public class Participant {
     }
 
     public interface ActionCallback {
-        IMovement execute(Action a);
+        Action.Aftermath execute(Action a);
     }
     public void move() {
         character.displayStateMessage(character.location.get().getTrap(this));

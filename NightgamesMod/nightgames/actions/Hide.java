@@ -5,15 +5,16 @@ import nightgames.global.Global;
 import nightgames.match.Participant;
 
 public class Hide extends Action {
-
-    /**
-     * 
-     */
     private static final long serialVersionUID = 9222848242102511020L;
+
+    private static class Aftermath extends Action.Aftermath {
+        private Aftermath() {
+            super(Movement.hide);
+        }
+    }
 
     public Hide() {
         super("Hide");
-
     }
 
     @Override
@@ -22,12 +23,12 @@ public class Hide extends Action {
     }
 
     @Override
-    public IMovement execute(Participant user) {
+    public Action.Aftermath execute(Participant user) {
         if (user.getCharacter().human()) {
             Global.gui().message("You find a decent hiding place and wait for unwary opponents.");
         }
         user.getCharacter().state = State.hidden;
-        return Movement.hide;
+        return new Aftermath();
     }
 
 }

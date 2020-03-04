@@ -13,6 +13,13 @@ public class Move extends Action {
     }
 
     private static final long serialVersionUID = -6111866290941387475L;
+
+    private class Aftermath extends Action.Aftermath {
+        private Aftermath() {
+            super(destination.id());
+        }
+    }
+
     private Area destination;
     private SkillCheck skillCheck;
 
@@ -46,9 +53,9 @@ public class Move extends Action {
     }
 
     @Override
-    public IMovement execute(Participant user) {
+    public Action.Aftermath execute(Participant user) {
         user.getCharacter().travel(destination);
-        return destination.id();
+        return new Aftermath();
     }
 
     public Area getDestination() {

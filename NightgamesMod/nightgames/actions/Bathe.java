@@ -10,6 +10,11 @@ public class Bathe extends Action {
      * 
      */
     private static final long serialVersionUID = 4565550545479306251L;
+    private static class Aftermath extends Action.Aftermath {
+        private Aftermath() {
+            super(Movement.bathe);
+        }
+    }
     private final String message;
 
     public Bathe(String message) {
@@ -23,7 +28,7 @@ public class Bathe extends Action {
     }
 
     @Override
-    public IMovement execute(Participant user) {
+    public Action.Aftermath execute(Participant user) {
         if (user.getCharacter().human()) {
             if (message != null) {
                 Global.gui().message(message);
@@ -31,7 +36,7 @@ public class Bathe extends Action {
         }
         user.getCharacter().state = State.shower;
         user.waitRounds(1);
-        return Movement.bathe;
+        return new Aftermath();
     }
 
     public static final String SHOWER_MESSAGE = "It's a bit dangerous, but a shower sounds especially inviting right now.";

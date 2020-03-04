@@ -8,6 +8,13 @@ import nightgames.status.Stsflag;
 
 public class Struggle extends Action {
     private static final long serialVersionUID = -644996487174479671L;
+
+    private static class Aftermath extends Action.Aftermath {
+        private Aftermath() {
+            super(Movement.struggle);
+        }
+    }
+
     public Struggle() {
         super("Struggle");
     }
@@ -18,7 +25,7 @@ public class Struggle extends Action {
     }
 
     @Override
-    public IMovement execute(Participant user) {
+    public Action.Aftermath execute(Participant user) {
         Bound status = (Bound) user.getCharacter().getStatus(Stsflag.bound);
         int difficulty = 20 - user.getCharacter().getEscape(null, null);
         if (user.getCharacter().check(Attribute.Power, difficulty)) {
@@ -40,7 +47,7 @@ public class Struggle extends Action {
             }
             user.getCharacter().struggle();
         }
-        return Movement.struggle;
+        return new Aftermath();
     }
 
 }

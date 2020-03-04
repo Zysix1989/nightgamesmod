@@ -5,8 +5,13 @@ import nightgames.global.Global;
 import nightgames.match.Participant;
 
 public class PassAmbush extends Action {
-
     private static final long serialVersionUID = -1745311550506911281L;
+
+    private static class Aftermath extends Action.Aftermath {
+        private Aftermath() {
+            super(Movement.ftcPassAmbush);
+        }
+    }
 
     public PassAmbush() {
         super("Try Ambush");
@@ -19,13 +24,13 @@ public class PassAmbush extends Action {
     }
 
     @Override
-    public IMovement execute(Participant user) {
+    public Action.Aftermath execute(Participant user) {
         if (user.getCharacter().human()) {
             Global.gui().message(
                             "You try to find a decent hiding place in the irregular" + " rock faces lining the pass.");
         }
         user.getCharacter().state = State.inPass;
-        return Movement.ftcPassAmbush;
+        return new Aftermath();
     }
 
 }

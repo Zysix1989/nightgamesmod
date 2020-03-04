@@ -16,6 +16,12 @@ public class Locate extends Action {
     private static final long serialVersionUID = 1L;
     private static final int MINIMUM_SCRYING_REQUIREMENT = 5;
 
+    private static class Aftermath extends Action.Aftermath {
+        private Aftermath() {
+            super(Movement.locating);
+        }
+    }
+
     public Locate() {
         super("Locate");
     }
@@ -33,9 +39,9 @@ public class Locate extends Action {
     }
 
     @Override
-    public IMovement execute(Participant self) {
+    public Action.Aftermath execute(Participant self) {
         startEvent(self.getCharacter());
-        return Movement.locating;
+        return new Aftermath();
     }
 
     public final void startEvent(Character self) {

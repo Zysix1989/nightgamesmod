@@ -6,11 +6,13 @@ import nightgames.items.Item;
 import nightgames.match.Participant;
 
 public class Recharge extends Action {
-
-    /**
-     * 
-     */
     private static final long serialVersionUID = 2089054062272510717L;
+
+    private static class Aftermath extends Action.Aftermath {
+        private Aftermath() {
+            super(Movement.recharge);
+        }
+    }
 
     public Recharge() {
         super("Recharge");
@@ -24,12 +26,12 @@ public class Recharge extends Action {
     }
 
     @Override
-    public IMovement execute(Participant user) {
+    public Action.Aftermath execute(Participant user) {
         if (user.getCharacter().human()) {
             Global.gui().message("You find a power supply and restore your batteries to full.");
         }
         user.getCharacter().chargeBattery();
-        return Movement.recharge;
+        return new Aftermath();
     }
 
 }

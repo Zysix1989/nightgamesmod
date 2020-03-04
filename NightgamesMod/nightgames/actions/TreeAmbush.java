@@ -6,8 +6,13 @@ import nightgames.global.Global;
 import nightgames.match.Participant;
 
 public class TreeAmbush extends Action {
-
     private static final long serialVersionUID = -8503564080765172483L;
+
+    private static class Aftermath extends Action.Aftermath {
+        private Aftermath() {
+            super(Movement.ftcTreeAmbush);
+        }
+    }
 
     public TreeAmbush() {
         super("Climb a Tree");
@@ -21,7 +26,7 @@ public class TreeAmbush extends Action {
     }
 
     @Override
-    public IMovement execute(Participant user) {
+    public Action.Aftermath execute(Participant user) {
         if (user.getCharacter().human()) {
             if (user.getCharacter().get(Attribute.Animism) >= 10) {
                 Global.gui().message(
@@ -33,7 +38,7 @@ public class TreeAmbush extends Action {
             }
         }
         user.getCharacter().state = State.inTree;
-        return Movement.ftcTreeAmbush;
+        return new Aftermath();
     }
 
 }

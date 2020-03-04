@@ -5,11 +5,13 @@ import nightgames.characters.State;
 import nightgames.match.Participant;
 
 public class Craft extends Action {
-
-    /**
-     * 
-     */
     private static final long serialVersionUID = 3199968029862277675L;
+
+    private static class Aftermath extends Action.Aftermath {
+        private Aftermath() {
+            super(Movement.craft);
+        }
+    }
 
     public Craft() {
         super("Craft Potion");
@@ -21,9 +23,9 @@ public class Craft extends Action {
     }
 
     @Override
-    public IMovement execute(Participant user) {
+    public Action.Aftermath execute(Participant user) {
         user.getCharacter().state = State.crafting;
-        return Movement.craft;
+        return new Aftermath();
     }
 
 }

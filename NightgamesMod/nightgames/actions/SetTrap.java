@@ -5,10 +5,14 @@ import nightgames.match.Participant;
 import nightgames.trap.Trap;
 
 public class SetTrap extends Action {
-    /**
-     * 
-     */
     private static final long serialVersionUID = 9194305067966782124L;
+
+    private static class Aftermath extends Action.Aftermath {
+        private Aftermath() {
+            super(Movement.trap);
+        }
+    }
+
     private Trap trap;
 
     public SetTrap(Trap trap) {
@@ -25,13 +29,13 @@ public class SetTrap extends Action {
     }
 
     @Override
-    public IMovement execute(Participant user) {
+    public Action.Aftermath execute(Participant user) {
         var result = trap.instantiate(user);
         user.getLocation().setTrap(result.instance);
         if (user.getCharacter().human()) {
             Global.gui().message(result.message);
         }
-        return Movement.trap;
+        return new Aftermath();
     }
 
 }

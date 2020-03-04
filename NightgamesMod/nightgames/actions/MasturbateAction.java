@@ -7,10 +7,13 @@ import nightgames.items.Item;
 import nightgames.match.Participant;
 
 public class MasturbateAction extends Action {
-    /**
-     * 
-     */
     private static final long serialVersionUID = 3479886040422510833L;
+
+    private static class Aftermath extends Action.Aftermath {
+        private Aftermath() {
+            super(Movement.masturbate);
+        }
+    }
 
     public MasturbateAction() {
         super("Masturbate");
@@ -22,7 +25,7 @@ public class MasturbateAction extends Action {
     }
 
     @Override
-    public IMovement execute(Participant user) {
+    public Action.Aftermath execute(Participant user) {
         if (user.getCharacter().human()) {
             if (user.getCharacter().hasDick()) {
                 Global.gui().message(
@@ -48,7 +51,7 @@ public class MasturbateAction extends Action {
         }
         user.getCharacter().state = State.masturbating;
         user.waitRounds(1);
-        return Movement.masturbate;
+        return new Aftermath();
     }
 
 }

@@ -429,7 +429,7 @@ public class NPC extends Character {
         if (!encounterResult.exclusive) {
             HashSet<Area> radar = new HashSet<>();
             if (!has(Trait.immobile)) {
-                location.get().noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room));
+                radar.addAll(location.get().noisyNeighbors(get(Attribute.Perception)));
             }
             pickAndDoAction(possibleActions, radar, callback);
         }

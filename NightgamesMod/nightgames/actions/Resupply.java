@@ -14,6 +14,12 @@ import java.util.stream.Collectors;
 public class Resupply extends Action {
     private static final long serialVersionUID = -3349606637987124335L;
 
+    private static class Aftermath extends Action.Aftermath {
+        private Aftermath() {
+            super(Movement.resupply);
+        }
+    }
+
     private final boolean permissioned;
     private final Set<Character> validCharacters;
 
@@ -35,7 +41,7 @@ public class Resupply extends Action {
     }
 
     @Override
-    public IMovement execute(Participant user) {
+    public Action.Aftermath execute(Participant user) {
         if (Global.checkFlag(Flag.FTC)) {
             FTCMatch match = (FTCMatch) Global.getMatch();
             if (user.getCharacter().human()) {
@@ -57,7 +63,7 @@ public class Resupply extends Action {
             }
         }
         user.getCharacter().state = State.resupplying;
-        return Movement.resupply;
+        return new Aftermath();
     }
 
 }
