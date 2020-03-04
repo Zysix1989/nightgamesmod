@@ -1,6 +1,7 @@
 package nightgames.actions;
 
 import nightgames.characters.Attribute;
+import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.match.Participant;
 import nightgames.status.Bound;
@@ -10,8 +11,11 @@ public class Struggle extends Action {
     private static final long serialVersionUID = -644996487174479671L;
 
     private static class Aftermath extends Action.Aftermath {
-        private Aftermath() {
-            super(Movement.struggle);
+        private Aftermath() {}
+
+        @Override
+        public String describe(Character c) {
+            return Movement.struggle.describe(c);
         }
     }
 

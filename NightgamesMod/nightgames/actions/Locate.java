@@ -17,8 +17,11 @@ public class Locate extends Action {
     private static final int MINIMUM_SCRYING_REQUIREMENT = 5;
 
     private static class Aftermath extends Action.Aftermath {
-        private Aftermath() {
-            super(Movement.locating);
+        private Aftermath() {}
+
+        @Override
+        public String describe(Character c) {
+            return Movement.locating.describe(c);
         }
     }
 

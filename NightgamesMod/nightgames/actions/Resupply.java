@@ -15,8 +15,11 @@ public class Resupply extends Action {
     private static final long serialVersionUID = -3349606637987124335L;
 
     private static class Aftermath extends Action.Aftermath {
-        private Aftermath() {
-            super(Movement.resupply);
+        private Aftermath() {}
+
+        @Override
+        public String describe(Character c) {
+            return Movement.resupply.describe(c);
         }
     }
 

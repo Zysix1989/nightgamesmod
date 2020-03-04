@@ -15,8 +15,11 @@ public class Move extends Action {
     private static final long serialVersionUID = -6111866290941387475L;
 
     private class Aftermath extends Action.Aftermath {
-        private Aftermath() {
-            super(destination.id());
+        private Aftermath() {}
+
+        @Override
+        public String describe(Character c) {
+            return destination.id().describe(c);
         }
     }
 

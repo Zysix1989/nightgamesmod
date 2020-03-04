@@ -1,5 +1,6 @@
 package nightgames.actions;
 
+import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -10,8 +11,11 @@ public class MasturbateAction extends Action {
     private static final long serialVersionUID = 3479886040422510833L;
 
     private static class Aftermath extends Action.Aftermath {
-        private Aftermath() {
-            super(Movement.masturbate);
+        private Aftermath() {}
+
+        @Override
+        public String describe(Character c) {
+            return Movement.masturbate.describe(c);
         }
     }
 

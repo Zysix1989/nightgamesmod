@@ -1,5 +1,6 @@
 package nightgames.actions;
 
+import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
 import nightgames.match.Participant;
@@ -8,8 +9,11 @@ public class Hide extends Action {
     private static final long serialVersionUID = 9222848242102511020L;
 
     private static class Aftermath extends Action.Aftermath {
-        private Aftermath() {
-            super(Movement.hide);
+        private Aftermath() { }
+
+        @Override
+        public String describe(Character c) {
+            return Movement.hide.describe(c);
         }
     }
 

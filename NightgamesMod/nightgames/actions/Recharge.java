@@ -1,6 +1,7 @@
 package nightgames.actions;
 
 import nightgames.characters.Attribute;
+import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
@@ -9,8 +10,11 @@ public class Recharge extends Action {
     private static final long serialVersionUID = 2089054062272510717L;
 
     private static class Aftermath extends Action.Aftermath {
-        private Aftermath() {
-            super(Movement.recharge);
+        private Aftermath() {}
+
+        @Override
+        public String describe(Character c) {
+            return Movement.recharge.describe(c);
         }
     }
 

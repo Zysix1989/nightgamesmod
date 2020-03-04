@@ -1,5 +1,6 @@
 package nightgames.actions;
 
+import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.match.Participant;
 import nightgames.trap.Trap;
@@ -8,8 +9,11 @@ public class SetTrap extends Action {
     private static final long serialVersionUID = 9194305067966782124L;
 
     private static class Aftermath extends Action.Aftermath {
-        private Aftermath() {
-            super(Movement.trap);
+        private Aftermath() { }
+
+        @Override
+        public String describe(Character c) {
+            return Movement.trap.describe(c);
         }
     }
 

@@ -1,6 +1,7 @@
 package nightgames.actions;
 
 import nightgames.characters.Attribute;
+import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
 import nightgames.match.Participant;
@@ -9,8 +10,11 @@ public class TreeAmbush extends Action {
     private static final long serialVersionUID = -8503564080765172483L;
 
     private static class Aftermath extends Action.Aftermath {
-        private Aftermath() {
-            super(Movement.ftcTreeAmbush);
+        private Aftermath() {}
+
+        @Override
+        public String describe(Character c) {
+            return Movement.ftcTreeAmbush.describe(c);
         }
     }
 

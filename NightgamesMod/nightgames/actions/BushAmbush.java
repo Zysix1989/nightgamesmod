@@ -1,6 +1,7 @@
 package nightgames.actions;
 
 import nightgames.characters.Attribute;
+import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
 import nightgames.match.Participant;
@@ -10,7 +11,12 @@ public class BushAmbush extends Action {
 
     private static class Aftermath extends Action.Aftermath {
         private Aftermath() {
-            super(Movement.ftcBushAmbush);
+
+        }
+
+        @Override
+        public String describe(Character c) {
+            return Movement.ftcBushAmbush.describe(c);
         }
     }
 

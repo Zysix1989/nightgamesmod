@@ -1,6 +1,7 @@
 package nightgames.actions;
 
 import nightgames.characters.Attribute;
+import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.match.Participant;
 import nightgames.match.Status;
@@ -12,7 +13,12 @@ public class Energize extends Action {
 
     private static class Aftermath extends Action.Aftermath {
         private Aftermath() {
-            super(Movement.mana);
+            ))
+        }
+
+        @Override
+        public String describe(Character c) {
+            return Movement.mana.describe(c);
         }
     }
 

@@ -19,15 +19,10 @@ public abstract class Action implements Serializable {
     public abstract boolean usable(Participant user);
 
     public static abstract class Aftermath {
-        private IMovement movement;
 
-        protected Aftermath(IMovement movement) {
-            this.movement = movement;
-        }
+        protected Aftermath() {}
 
-        public String describe(Character c) {
-            return movement.describe(c);
-        }
+        public abstract String describe(Character c);
     }
 
     public abstract Aftermath execute(Participant user);

@@ -1,5 +1,6 @@
 package nightgames.actions;
 
+import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
@@ -9,8 +10,11 @@ import nightgames.status.Buzzed;
 public class UseBeer extends Action {
 
     private static class Aftermath extends Action.Aftermath {
-        private Aftermath() {
-            super(Movement.beer);
+        private Aftermath() {}
+
+        @Override
+        public String describe(Character c) {
+            return Movement.beer.describe(c);
         }
     }
 

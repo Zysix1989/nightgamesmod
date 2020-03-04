@@ -1,5 +1,6 @@
 package nightgames.actions;
 
+import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
@@ -7,8 +8,11 @@ import nightgames.match.Participant;
 public class UseEnergyDrink extends Action {
 
     private static class Aftermath extends Action.Aftermath {
-        private Aftermath() {
-            super(Movement.enerydrink);
+        private Aftermath() {}
+
+        @Override
+        public String describe(Character c) {
+            return Movement.enerydrink.describe(c);
         }
     }
 

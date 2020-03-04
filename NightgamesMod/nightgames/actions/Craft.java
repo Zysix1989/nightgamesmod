@@ -1,6 +1,7 @@
 package nightgames.actions;
 
 import nightgames.characters.Attribute;
+import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.match.Participant;
 
@@ -9,7 +10,11 @@ public class Craft extends Action {
 
     private static class Aftermath extends Action.Aftermath {
         private Aftermath() {
-            super(Movement.craft);
+        }
+
+        @Override
+        public String describe(Character c) {
+            return Movement.craft.describe(c);
         }
     }
 

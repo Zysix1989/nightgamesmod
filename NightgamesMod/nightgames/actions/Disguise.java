@@ -16,7 +16,11 @@ public class Disguise extends Action {
 
     private static class Aftermath extends Action.Aftermath {
         private Aftermath() {
-            super(Movement.disguise);
+        }
+
+        @Override
+        public String describe(Character c) {
+            return Movement.disguise.describe(c);
         }
     }
 
