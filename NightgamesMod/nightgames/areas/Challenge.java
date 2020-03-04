@@ -50,8 +50,6 @@ public class Challenge implements Deployable {
             case clothedwin:
                 return "Not everyone relies on brute force to get their opponents off. The masters of seduction often don't bother to even undress their opponents. See "
                                 + "if you can make " + target.getTrueName() + " cum while she's still got her clothes on.";
-            case bathambush:
-                return "";
             case peggedloss:
                 return "Getting pegged in the ass is a hell of a thing, isn't it. I sympathize... especially since "
                                 + target.getTrueName() + " seems to have it in for you tonight. If it "
@@ -76,7 +74,6 @@ public class Challenge implements Deployable {
     private enum GOAL {
         kisswin("'Win with a kiss'"),
         clothedwin("'Win while opponent is clothed'"),
-        bathambush("'Ambush opponent while bathing'"),
         peggedloss("'Lose by being pegged'"),
         analwin("'Win through anal sex'"),
         pendomwin("'Win through dominant sex'"),
@@ -110,8 +107,6 @@ public class Challenge implements Deployable {
                     if (victor == owner && !target.breastsAvailable() && !target.crotchAvailable()) {
                         done = true;
                     }
-                    break;
-                case bathambush:
                     break;
                 case peggedloss:
                     if (target == victor && state.state == Result.anal) {
