@@ -73,7 +73,7 @@ public class Challenge implements Deployable {
                     "{{ target.subject().properNoun() }} thinks you're at {{ target.possessiveAdjective() }} mercy, " +
                     "you'll get a sizable bonus.");
 
-    public JtwigTemplate announceTemplate() {
+    private JtwigTemplate announceTemplate() {
         switch (goal) {
             case kisswin:
                 return KISS_WIN_ANNOUNCE;
@@ -92,6 +92,14 @@ public class Challenge implements Deployable {
             default:
                 throw new RuntimeException(String.format("fell off end: %s", goal));
         }
+    }
+
+    public String startMessage() {
+        var model = JtwigModel.newModel()
+                .with("target", target.getGrammar());
+        return "You find a gold envelope sitting conspicuously in the middle of the "
+                + owner.location().name
+                + ". You open it up and read the note inside.\n'" + announceTemplate().render(model) + "'\n";
     }
 
     private enum GOAL {
@@ -173,13 +181,6 @@ public class Challenge implements Deployable {
                 return false;
             }
             goal = pick();
-            if (active.getCharacter().human()) {
-                var model = JtwigModel.newModel()
-                        .with("target", target.getGrammar());
-                Global.gui().message("You find a gold envelope sitting conspicously in the middle of the "
-                                + Global.getMatch().genericRoomDescription()
-                                + ". You open it up and read the note inside.\n'" + announceTemplate().render(model) + "'\n");
-            }
             active.getLocation().remove(this);
             active.getCharacter().accept(this);
             return true;

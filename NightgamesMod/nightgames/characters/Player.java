@@ -5,6 +5,7 @@ import nightgames.actions.Locate;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.areas.Area.EncounterResult;
+import nightgames.areas.Challenge;
 import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.mods.ExternalTentaclesMod;
@@ -377,6 +378,12 @@ public class Player extends Character {
         } else if (state == State.hidden) {
             gui.message("You have found a hiding spot and are waiting for someone to pounce upon.");
         }
+    }
+
+    @Override
+    public void accept(Challenge c) {
+        gui.message(c.startMessage());
+        super.accept(c);
     }
 
     @Override
