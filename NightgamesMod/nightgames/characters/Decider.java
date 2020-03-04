@@ -1,6 +1,7 @@
 package nightgames.characters;
 
 import nightgames.actions.*;
+import nightgames.areas.Area;
 import nightgames.characters.custom.effect.CustomEffect;
 import nightgames.combat.Combat;
 import nightgames.daytime.Daytime;
@@ -159,7 +160,7 @@ public class Decider {
     }
     
     /**This method parses the actions available to the character and returns an action.*/
-    public static Action parseMoves(Collection<Action> available, Collection<IMovement> radar, NPC character) {
+    public static Action parseMoves(Collection<Action> available, Collection<Area> radar, NPC character) {
         HashSet<Action> enemy = new HashSet<Action>();
         HashSet<Action> onlyWhenSafe = new HashSet<Action>();
         HashSet<Action> utility = new HashSet<Action>();
@@ -211,7 +212,7 @@ public class Decider {
             }
         }
         for (Action act : available) {
-            if (radar.contains(act.consider())) {
+            if (act instanceof Move && radar.contains(((Move) act).getDestination())) {
                 enemy.add(act);
             } else if (act instanceof Bathe
                     || act instanceof Craft

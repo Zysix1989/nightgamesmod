@@ -1,15 +1,7 @@
 package nightgames.characters;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import nightgames.actions.Action;
-import nightgames.actions.IMovement;
+import nightgames.areas.Area;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.mods.pitcher.CockMod;
@@ -31,6 +23,9 @@ import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.Addiction.Severity;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
+
+import java.io.Serializable;
+import java.util.*;
 
 public abstract class BasePersonality implements Serializable {
     /**
@@ -140,7 +135,7 @@ public abstract class BasePersonality implements Serializable {
         }
     }
 
-    public Action move(Collection<Action> available, Collection<IMovement> radar) {
+    public Action move(Collection<Action> available, Collection<Area> radar) {
         return Decider.parseMoves(available, radar, character);
     }
 

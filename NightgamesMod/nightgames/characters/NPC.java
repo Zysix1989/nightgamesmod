@@ -1,7 +1,6 @@
 package nightgames.characters;
 
 import nightgames.actions.Action;
-import nightgames.actions.IMovement;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.characters.body.BodyPart;
@@ -428,15 +427,15 @@ public class NPC extends Character {
                      Area.EncounterResult encounterResult,
                      Participant.ActionCallback callback) {
         if (!encounterResult.exclusive) {
-            HashSet<IMovement> radar = new HashSet<>();
+            HashSet<Area> radar = new HashSet<>();
             if (!has(Trait.immobile)) {
-                location.get().noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room.id()));
+                location.get().noisyNeighbors(get(Attribute.Perception)).forEach(room -> radar.add(room));
             }
             pickAndDoAction(possibleActions, radar, callback);
         }
     }
 
-    private void pickAndDoAction(Collection<Action> available, Collection<IMovement> radar, Participant.ActionCallback callback) {
+    private void pickAndDoAction(Collection<Action> available, Collection<Area> radar, Participant.ActionCallback callback) {
         var chosenAction = ai.move(available, radar);
         if (location.get().humanPresent()) {
             Global.gui().message("You notice " + getName() + callback.execute(chosenAction).describe(this));

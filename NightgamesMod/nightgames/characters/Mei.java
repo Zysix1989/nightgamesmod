@@ -1,7 +1,7 @@
 package nightgames.characters;
 
 import nightgames.actions.Action;
-import nightgames.actions.IMovement;
+import nightgames.areas.Area;
 import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.mods.DemonicTailMod;
@@ -101,7 +101,7 @@ public class Mei extends BasePersonality {
     }
 
     @Override
-    public Action move(Collection<Action> available, Collection<IMovement> radar) {
+    public Action move(Collection<Action> available, Collection<Area> radar) {
         return Decider.parseMoves(available, radar, character);
     }
 
