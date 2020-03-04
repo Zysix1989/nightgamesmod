@@ -27,9 +27,4 @@ public class UseBeer extends Action {
         return Movement.beer;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.beer;
-    }
-
 }

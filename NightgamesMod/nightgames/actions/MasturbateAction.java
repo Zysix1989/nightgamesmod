@@ -51,9 +51,4 @@ public class MasturbateAction extends Action {
         return Movement.masturbate;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.masturbate;
-    }
-
 }

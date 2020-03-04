@@ -36,9 +36,4 @@ public class TreeAmbush extends Action {
         return Movement.ftcTreeAmbush;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.ftcTreeAmbush;
-    }
-
 }

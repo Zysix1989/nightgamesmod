@@ -28,8 +28,4 @@ public class UseLubricant extends Action {
         return Movement.oil;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.oil;
-    }
 }

@@ -36,9 +36,4 @@ public class BushAmbush extends Action {
         return Movement.ftcBushAmbush;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.ftcBushAmbush;
-    }
-
 }

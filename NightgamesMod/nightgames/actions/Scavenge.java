@@ -25,9 +25,4 @@ public class Scavenge extends Action {
         return Movement.scavenge;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.scavenge;
-    }
-
 }

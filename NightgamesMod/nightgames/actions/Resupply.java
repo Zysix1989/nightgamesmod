@@ -60,9 +60,4 @@ public class Resupply extends Action {
         return Movement.resupply;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.resupply;
-    }
-
 }

@@ -37,9 +37,4 @@ public class Energize extends Action {
         return Movement.mana;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.mana;
-    }
-
 }

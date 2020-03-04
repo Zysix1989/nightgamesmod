@@ -34,9 +34,4 @@ public class SetTrap extends Action {
         return Movement.trap;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.trap;
-    }
-
 }

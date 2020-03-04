@@ -30,8 +30,4 @@ public class Hide extends Action {
         return Movement.hide;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.hide;
-    }
 }

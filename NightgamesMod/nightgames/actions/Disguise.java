@@ -49,9 +49,4 @@ public class Disguise extends Action {
         return Movement.disguise;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.disguise;
-    }
-
 }

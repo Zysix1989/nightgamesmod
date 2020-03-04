@@ -77,11 +77,6 @@ public class Locate extends Action {
     }
 
     @Override
-    public IMovement consider() {
-        return Movement.locating;
-    }
-
-    @Override
     public boolean freeAction() {
         return true;
     }

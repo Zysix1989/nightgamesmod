@@ -24,8 +24,6 @@ public abstract class Action implements Serializable {
         return name;
     }
 
-    public abstract IMovement consider();
-
     public boolean freeAction() {
         return false;
     }

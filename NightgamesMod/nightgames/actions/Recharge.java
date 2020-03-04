@@ -32,9 +32,4 @@ public class Recharge extends Action {
         return Movement.recharge;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.recharge;
-    }
-
 }

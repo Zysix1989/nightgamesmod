@@ -28,9 +28,4 @@ public class PassAmbush extends Action {
         return Movement.ftcPassAmbush;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.ftcPassAmbush;
-    }
-
 }

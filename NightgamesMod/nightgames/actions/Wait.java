@@ -23,9 +23,4 @@ public class Wait extends Action {
         return Movement.wait;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.wait;
-    }
-
 }

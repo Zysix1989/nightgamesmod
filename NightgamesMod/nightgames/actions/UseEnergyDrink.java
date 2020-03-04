@@ -26,9 +26,4 @@ public class UseEnergyDrink extends Action {
         return Movement.enerydrink;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.enerydrink;
-    }
-
 }

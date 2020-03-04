@@ -34,11 +34,6 @@ public class Bathe extends Action {
         return Movement.bathe;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.bathe;
-    }
-
     public static final String SHOWER_MESSAGE = "It's a bit dangerous, but a shower sounds especially inviting right now.";
     public static final String POOL_MESSAGE = "There's a jacuzzi in the pool area and you decide to risk a quick soak.";
 

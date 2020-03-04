@@ -26,9 +26,4 @@ public class Craft extends Action {
         return Movement.craft;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.craft;
-    }
-
 }

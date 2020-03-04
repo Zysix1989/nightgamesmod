@@ -43,9 +43,4 @@ public class Struggle extends Action {
         return Movement.struggle;
     }
 
-    @Override
-    public IMovement consider() {
-        return Movement.struggle;
-    }
-
 }

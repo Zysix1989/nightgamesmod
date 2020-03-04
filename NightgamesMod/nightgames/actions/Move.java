@@ -55,8 +55,4 @@ public class Move extends Action {
         return destination;
     }
 
-    @Override
-    public IMovement consider() {
-        return destination.id();
-    }
 }
