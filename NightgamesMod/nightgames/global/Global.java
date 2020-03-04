@@ -80,7 +80,6 @@ public class Global {
     private static Map<String, NPC> characterPool;
     private static Set<Skill> skillPool = new HashSet<>();          //These central peices of data are not going to change. so they should be gathered and separated for better management. - DSM 
     private static Set<Action> actionPool;
-    private static Set<Trap> trapPool;
     private static Set<Trait> featPool;
     private static Set<Modifier> modifierPool;
     private static Set<Character> players;
@@ -535,14 +534,11 @@ public class Global {
         actionPool.add(new MasturbateAction());
         actionPool.add(new Disguise());
         actionPool.add(new nightgames.actions.Struggle());
-        buildTrapPool();
-        for (Trap t : trapPool) {
-            actionPool.add(new SetTrap(t));
-        }
+        newTrapPool().forEach(t -> actionPool.add(new SetTrap(t)));
     }
 
-    public static void buildTrapPool() {
-        trapPool = new HashSet<>();
+    public static Set<Trap> newTrapPool() {
+        Set<Trap> trapPool = new HashSet<>();
         trapPool.add(new Alarm());
         trapPool.add(new Tripwire());
         trapPool.add(new Snare());
@@ -556,6 +552,7 @@ public class Global {
         trapPool.add(new StripMine());
         trapPool.add(new TentacleTrap());
         trapPool.add(new RoboWeb());
+        return trapPool;
     }
 
     public static void buildFeatPool() {
