@@ -1,6 +1,5 @@
 package nightgames.actions;
 
-import nightgames.areas.Area;
 import nightgames.characters.Character;
 
 public enum Movement implements IMovement {
@@ -72,7 +71,7 @@ public enum Movement implements IMovement {
     });
     
     private interface DescriptionProducer {
-        public String getDescriptionFor(Character doer);
+        String getDescriptionFor(Character doer);
     }
     private DescriptionProducer producer;
 
@@ -83,28 +82,11 @@ public enum Movement implements IMovement {
         return producer.getDescriptionFor(doer);
     }
 
-    private Movement(String desc) {
+    Movement(String desc) {
         this.producer = n -> desc;
     }
     
-    private Movement(DescriptionProducer producer) {
+    Movement(DescriptionProducer producer) {
         this.producer = producer;
-    }
-
-    public static Movement ftcBaseMovement(Area base) {
-        switch (base.name) {
-            case "North Base":
-                return ftcNorthBase;
-            case "East Base":
-                return ftcEastBase;
-            case "South Base":
-                return ftcSouthBase;
-            case "West Base":
-                return ftcWestBase;
-            case "Central Camp":
-                return ftcCenter;
-            default:
-                throw new IllegalArgumentException("Not an FTC base: " + base.name);
-        }
     }
 }
