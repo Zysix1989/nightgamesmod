@@ -70,8 +70,6 @@ public enum Movement implements IMovement {
         }
         return mast + "while trying not to make much noise. It's quite a show.";
     });
-
-    private String desc;
     
     private interface DescriptionProducer {
         public String getDescriptionFor(Character doer);
@@ -82,20 +80,14 @@ public enum Movement implements IMovement {
      * @return the Item name
      */
     public String describe(Character doer) {
-        if (desc != null) {
-            return desc;
-        } else {
-            return producer.getDescriptionFor(doer);
-        }
+        return producer.getDescriptionFor(doer);
     }
 
     private Movement(String desc) {
-        this.desc = desc;
-        this.producer = null;
+        this.producer = n -> desc;
     }
     
     private Movement(DescriptionProducer producer) {
-        this.desc = null;
         this.producer = producer;
     }
 
