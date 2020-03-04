@@ -242,8 +242,11 @@ public class Decider {
             tactic.addAll(available);
         }
         // give disguise some priority when just picking something random
-        if (tactic.stream().anyMatch(a -> a instanceof Disguise) && Global.random(5) == 0) {
-            return tactic.stream().filter(a -> a instanceof Disguise).findFirst().get();
+        if (Global.random(5) == 0) {
+            var maybeDisguise = tactic.stream().filter(a -> a instanceof Disguise).findAny();
+            if (maybeDisguise.isPresent()) {
+                return maybeDisguise.get();
+            }
         }
         Action[] actions = tactic.toArray(new Action[tactic.size()]);
         return actions[Global.random(actions.length)];
