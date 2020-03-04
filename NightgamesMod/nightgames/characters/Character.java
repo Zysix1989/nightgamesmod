@@ -1940,8 +1940,9 @@ public Character clone() throws CloneNotSupportedException {
             if (opponent.has(Trait.carnalvirtuoso)) {
                 total++;
             }
-            if (opponent.has(Trait.intensesuction) && (outfit.has(ClothingTrait.harpoonDildo)
-                || outfit.has(ClothingTrait.harpoonOnahole)) && Global.random(3) == 0) {
+            if (opponent.has(Trait.intensesuction)
+                    && (outfit.has(ClothingTrait.harpoonDildo) || outfit.has(ClothingTrait.harpoonOnahole))
+                    && Global.random(3) == 0) {
                 total++;
             }
         }
