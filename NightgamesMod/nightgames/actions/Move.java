@@ -19,7 +19,7 @@ public class Move extends Action {
 
         @Override
         public String describe(Character c) {
-            return destination.id().describe(c);
+            return destination.getMovementToAreaDescription(c);
         }
     }
 

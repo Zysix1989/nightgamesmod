@@ -169,6 +169,10 @@ public class Area implements Serializable {
         return enumerator;
     }
 
+    public String getMovementToAreaDescription(Character c) {
+        return enumerator.describe(c);
+    }
+
     public void place(Deployable thing) {
         if (thing instanceof Trap.Instance) {
             trap = (Trap.Instance) thing;
