@@ -25,7 +25,7 @@ public class Challenge implements Deployable {
     }
 
     public GOAL pick() {
-        ArrayList<GOAL> available = new ArrayList<GOAL>();
+        ArrayList<GOAL> available = new ArrayList<>();
         if (!target.breastsAvailable() && !target.crotchAvailable()) {
             available.add(GOAL.clothedwin);
         }
@@ -105,7 +105,7 @@ public class Challenge implements Deployable {
         
         private final String name;
         
-        private GOAL(String name) {
+        GOAL(String name) {
             this.name = name;
         }
         
