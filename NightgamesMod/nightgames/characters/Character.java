@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import nightgames.actions.*;
 import nightgames.areas.Area;
+import nightgames.areas.AreaIdentity;
 import nightgames.areas.Challenge;
 import nightgames.areas.DescriptionModule;
 import nightgames.beans.Property;
@@ -2736,7 +2737,7 @@ public Character clone() throws CloneNotSupportedException {
         state = State.ready;
         getWillpower().renew();
         if (location().getOccupants().size() > 1) {
-            if (location().id() == Movement.dorm) {
+            if (location().id() == AreaIdentity.dorm) {
                 if (Global.getMatch().gps("Quad").get().getOccupants().isEmpty()) {
                     if (human()) {
                         Global.gui().message("You hear your opponents searching around the "
@@ -2753,7 +2754,7 @@ public Character clone() throws CloneNotSupportedException {
                     travel(Global.getMatch().gps("Laundry").get());
                 }
             }
-            if (location().id() == Movement.union) {
+            if (location().id() == AreaIdentity.union) {
                 if (Global.getMatch().gps("Quad").get().getOccupants().isEmpty()) {
                     if (human()) {
                         Global.gui().message("You don't want to be ambushed leaving the "

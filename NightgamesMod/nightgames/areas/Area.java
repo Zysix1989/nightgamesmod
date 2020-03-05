@@ -2,7 +2,6 @@ package nightgames.areas;
 
 import nightgames.actions.Action;
 import nightgames.actions.Move;
-import nightgames.actions.Movement;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
@@ -28,19 +27,19 @@ public class Area implements Serializable {
     public boolean alarm = false;
     public ArrayList<Deployable> env = new ArrayList<>();
     public transient MapDrawHint drawHint = new MapDrawHint();
-    private Movement enumerator;
+    private AreaIdentity enumerator;
     private boolean pinged;
     private Set<AreaAttribute> attributes = Set.of();
     private Set<Action> possibleActions = new HashSet<>();
     private Trap.Instance trap = null;
 
-    public Area(String name, DescriptionModule descriptions, Movement enumerator) {
+    public Area(String name, DescriptionModule descriptions, AreaIdentity enumerator) {
         this.name = name;
         this.descriptions = descriptions;
         this.enumerator = enumerator;
     }
 
-    public Area(String name, DescriptionModule descriptions, Movement enumerator, Set<AreaAttribute> attributes) {
+    public Area(String name, DescriptionModule descriptions, AreaIdentity enumerator, Set<AreaAttribute> attributes) {
         this(name, descriptions, enumerator);
         this.attributes = attributes;
     }
@@ -165,7 +164,7 @@ public class Area implements Serializable {
         fight = null;
     }
 
-    public Movement id() {
+    public AreaIdentity id() {
         return enumerator;
     }
 

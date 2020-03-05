@@ -1,7 +1,7 @@
 package nightgames.match.defaults;
 
-import nightgames.actions.Movement;
 import nightgames.areas.Area;
+import nightgames.areas.AreaIdentity;
 import nightgames.characters.Character;
 import nightgames.characters.*;
 import nightgames.combat.Combat;
@@ -328,9 +328,9 @@ public class DefaultEncounter implements Encounter {
     protected void showerambush(Character attacker, Character target) {
         startFightTimer();
         
-        if (location.id() == Movement.shower) {
+        if (location.id() == AreaIdentity.shower) {
             showerAmbush(attacker, target);
-        } else if (location.id() == Movement.pool) {
+        } else if (location.id() == AreaIdentity.pool) {
             poolAmbush(attacker, target);
         }
         
@@ -586,9 +586,9 @@ public class DefaultEncounter implements Encounter {
     
     /** Returns null if no message is to be sent */
     private String getAphrodisiacTrickMessage(Character attacker, Character target) {
-        if (location.id() == Movement.shower) {
+        if (location.id() == AreaIdentity.shower) {
             return getAphrodisiacTrickShowerMessage(attacker, target);
-        } else if (location.id() == Movement.pool) {
+        } else if (location.id() == AreaIdentity.pool) {
             return getAphrodisiacTrickPoolMessage(attacker, target);
         }
         return null;

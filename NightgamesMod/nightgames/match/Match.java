@@ -132,23 +132,23 @@ public class Match {
     }
 
     private void buildMap() {
-        Area quad = new Area("Quad", DescriptionModule.quad(), Movement.quad, Set.of(AreaAttribute.Open));
-        Area dorm = new Area("Dorm", DescriptionModule.dorm(), Movement.dorm);
-        Area shower = new Area("Showers", DescriptionModule.shower(), Movement.shower);
-        Area laundry = new Area("Laundry Room", DescriptionModule.laundry(), Movement.laundry);
-        Area engineering = new Area("Engineering", DescriptionModule.engineering(), Movement.engineering);
-        Area lab = new Area("Chemistry Lab", DescriptionModule.lab(), Movement.lab);
-        Area workshop = new Area("Workshop", DescriptionModule.workshop(), Movement.workshop);
-        Area libarts = new Area("Liberal Arts", DescriptionModule.liberalArts(), Movement.la);
-        Area pool = new Area("Pool", DescriptionModule.pool(), Movement.pool);
-        Area library = new Area("Library", DescriptionModule.library(), Movement.library);
-        Area dining = new Area("Dining Hall", DescriptionModule.diningHall(), Movement.dining);
-        Area kitchen = new Area("Kitchen", DescriptionModule.kitchen(), Movement.kitchen);
-        Area storage = new Area("Storage Room", DescriptionModule.storage(), Movement.storage);
-        Area tunnel = new Area("Tunnel", DescriptionModule.tunnel(), Movement.tunnel);
-        Area bridge = new Area("Bridge", DescriptionModule.bridge(), Movement.bridge);
-        Area sau = new Area("Student Union", DescriptionModule.studentUnion(), Movement.union);
-        Area courtyard = new Area("Courtyard", DescriptionModule.courtyard(), Movement.courtyard);
+        Area quad = new Area("Quad", DescriptionModule.quad(), AreaIdentity.quad, Set.of(AreaAttribute.Open));
+        Area dorm = new Area("Dorm", DescriptionModule.dorm(), AreaIdentity.dorm);
+        Area shower = new Area("Showers", DescriptionModule.shower(), AreaIdentity.shower);
+        Area laundry = new Area("Laundry Room", DescriptionModule.laundry(), AreaIdentity.laundry);
+        Area engineering = new Area("Engineering", DescriptionModule.engineering(), AreaIdentity.engineering);
+        Area lab = new Area("Chemistry Lab", DescriptionModule.lab(), AreaIdentity.lab);
+        Area workshop = new Area("Workshop", DescriptionModule.workshop(), AreaIdentity.workshop);
+        Area libarts = new Area("Liberal Arts", DescriptionModule.liberalArts(), AreaIdentity.la);
+        Area pool = new Area("Pool", DescriptionModule.pool(), AreaIdentity.pool);
+        Area library = new Area("Library", DescriptionModule.library(), AreaIdentity.library);
+        Area dining = new Area("Dining Hall", DescriptionModule.diningHall(), AreaIdentity.dining);
+        Area kitchen = new Area("Kitchen", DescriptionModule.kitchen(), AreaIdentity.kitchen);
+        Area storage = new Area("Storage Room", DescriptionModule.storage(), AreaIdentity.storage);
+        Area tunnel = new Area("Tunnel", DescriptionModule.tunnel(), AreaIdentity.tunnel);
+        Area bridge = new Area("Bridge", DescriptionModule.bridge(), AreaIdentity.bridge);
+        Area sau = new Area("Student Union", DescriptionModule.studentUnion(), AreaIdentity.union);
+        Area courtyard = new Area("Courtyard", DescriptionModule.courtyard(), AreaIdentity.courtyard);
 
         quad.setMapDrawHint(new MapDrawHint(new Rectangle(10, 3, 7, 9), "Quad", false));
         dorm.setMapDrawHint(new MapDrawHint(new Rectangle(14, 12, 3, 5), "Dorm", false));
@@ -585,7 +585,7 @@ public class Match {
             human.location()
                  .endEncounter();
         }
-        human.travel(new Area("Retirement", new DescriptionModule.ErrorDescriptionModule(), Movement.retire));
+        human.travel(new Area("Retirement", new DescriptionModule.ErrorDescriptionModule(), AreaIdentity.retire));
         human.state = State.quit;
         resume();
     }
