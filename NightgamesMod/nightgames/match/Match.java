@@ -27,7 +27,6 @@ public class Match {
     private boolean pause;
     protected Modifier condition;
     protected Set<Area> cacheLocations;
-    private Iterator<Participant> roundIterator;
     
     public Match(Collection<Character> combatants, Modifier condition) {
         this.participants = combatants.stream()
@@ -38,7 +37,6 @@ public class Match {
         timeSinceLastDrop = 0;
         pause = false;
         buildMap();
-        roundIterator = participants.iterator();
     }
     
     protected void preStart() {
@@ -287,6 +285,7 @@ public class Match {
     }
 
     public final void round() {
+        var roundIterator = participants.iterator();
         while (!shouldEndMatch()) {
             if (!roundIterator.hasNext()) {
                 // prepare next round
