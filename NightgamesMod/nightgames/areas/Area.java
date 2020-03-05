@@ -170,7 +170,7 @@ public class Area implements Serializable {
     }
 
     public String getMovementToAreaDescription(Character c) {
-        return enumerator.describe(c);
+        return descriptions.movedToLocation();
     }
 
     public void place(Deployable thing) {
