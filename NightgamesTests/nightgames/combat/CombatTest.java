@@ -1,26 +1,18 @@
 package nightgames.combat;
 
-import nightgames.actions.Movement;
 import nightgames.areas.Area;
+import nightgames.areas.DescriptionModule;
 import nightgames.characters.BlankPersonality;
 import nightgames.characters.CharacterSex;
 import nightgames.characters.NPC;
-import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.modifier.standard.NoModifier;
-import nightgames.stance.Position;
-import nightgames.stance.Stance;
-import nightgames.stance.TestPosition;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
-
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.*;
 
 /**
  * TODO: Write class-level documentation.
@@ -39,7 +31,7 @@ public class CombatTest {
     @Before public void setUp() throws Exception {
         self = new BlankPersonality("SelfTestNPC").character;
         other = new BlankPersonality("OtherTestNPC").character;
-        Area area = new Area("TestArea", "TestArea description", Movement.beer);
+        Area area = new Area("TestArea", new DescriptionModule.ErrorDescriptionModule(), null);
         combat = new Combat(self, other, area);
     }
 /*
