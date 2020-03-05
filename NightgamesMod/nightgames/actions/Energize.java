@@ -12,9 +12,7 @@ public class Energize extends Action {
     private static final long serialVersionUID = 75530820306364893L;
 
     private static class Aftermath extends Action.Aftermath {
-        private Aftermath() {
-            ))
-        }
+        private Aftermath() {}
 
         @Override
         public String describe(Character c) {
