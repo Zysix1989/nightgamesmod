@@ -1,5 +1,15 @@
 package nightgames.tests;
 
+import nightgames.areas.Area;
+import nightgames.areas.DescriptionModule;
+import nightgames.characters.Character;
+import nightgames.characters.*;
+import nightgames.combat.Combat;
+import nightgames.daytime.Daytime;
+import nightgames.global.Global;
+import nightgames.gui.TestGUI;
+import nightgames.modifier.standard.NoModifier;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,17 +17,8 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import nightgames.areas.Area;
-import nightgames.characters.*;
-import nightgames.characters.Character;
-import nightgames.combat.Combat;
-import nightgames.daytime.Daytime;
-import nightgames.global.Global;
-import nightgames.gui.TestGUI;
-import nightgames.modifier.standard.NoModifier;
-
 public class CombatStats {
-    private static final Area NULL_AREA = new Area("", "", null);
+    private static final Area NULL_AREA = new Area("", new DescriptionModule.ErrorDescriptionModule(), null);
     private static final int MATCH_COUNT = 10;
 
     private List<Character> combatants;

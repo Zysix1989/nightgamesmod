@@ -14,6 +14,7 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import java.awt.*;
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.*;
@@ -24,7 +25,7 @@ public class Match {
 
     private static final LocalTime startTime = LocalTime.of(22, 0, 0);
     protected LocalTime time;
-    private int timeSinceLastDrop;
+    private Optional<LocalTime> lastCacheDropped;
     protected Map<String, Area> map;
     protected Set<Participant> participants;
     private boolean pause;
@@ -37,7 +38,6 @@ public class Match {
             .collect(Collectors.toCollection(HashSet::new));
         this.condition = condition;
         time = startTime;
-        timeSinceLastDrop = 0;
         pause = false;
         buildMap();
     }
@@ -243,9 +243,11 @@ public class Match {
     }
 
     private void handleFullTurn() {
-        if (meanLvl() > 3 && Global.random(10) + timeSinceLastDrop >= 12) {
+        if (meanLvl() > 3
+                && (lastCacheDropped.isEmpty() ||
+                time.compareTo(lastCacheDropped.get().plus(Duration.ofHours(1).minus(Duration.ofMinutes(Global.random(10) * 5)))) >= 0)) {
             dropPackage();
-            timeSinceLastDrop = 0;
+            lastCacheDropped = Optional.of(time);
         }
         if (Global.checkFlag(Flag.challengeAccepted)
                 && time.getMinute() != 0
@@ -253,7 +255,6 @@ public class Match {
             dropChallenge();
         }
         time = time.plusMinutes(5);
-        timeSinceLastDrop++;
     }
 
     private void beforeAllTurns() {
