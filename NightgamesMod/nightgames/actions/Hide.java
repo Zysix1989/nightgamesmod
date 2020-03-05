@@ -13,7 +13,7 @@ public class Hide extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.hide.describe(c);
+            return " disappear into a hiding place.";
         }
     }
 

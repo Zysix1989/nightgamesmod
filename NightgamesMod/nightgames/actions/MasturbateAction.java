@@ -15,7 +15,15 @@ public class MasturbateAction extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.masturbate.describe(c);
+            String mast;
+            if (c.hasDick()) {
+                mast = String.format(" starts to stroke %s cock ", c.possessiveAdjective());
+            } else if (c.hasPussy()) {
+                mast = String.format(" starts to stroke %s pussy ", c.possessiveAdjective());
+            } else {
+                mast = String.format(" starts to finger %s ass ", c.possessiveAdjective());
+            }
+            return mast + "while trying not to make much noise. It's quite a show.";
         }
     }
 

@@ -14,7 +14,7 @@ public class Recharge extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.recharge.describe(c);
+            return " plugging a battery pack into a nearby charging station.";
         }
     }
 

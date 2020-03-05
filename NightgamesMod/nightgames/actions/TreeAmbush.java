@@ -14,7 +14,7 @@ public class TreeAmbush extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.ftcTreeAmbush.describe(c);
+            return " climb up a tree.";
         }
     }
 

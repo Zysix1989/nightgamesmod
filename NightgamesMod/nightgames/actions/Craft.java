@@ -14,7 +14,7 @@ public class Craft extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.craft.describe(c);
+            return " start mixing various liquids. Whatever it is doesn't look healthy.";
         }
     }
 

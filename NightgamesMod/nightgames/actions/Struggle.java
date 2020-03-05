@@ -15,7 +15,7 @@ public class Struggle extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.struggle.describe(c);
+            return String.format(" is struggling against %s bondage.", c.possessiveAdjective());
         }
     }
 

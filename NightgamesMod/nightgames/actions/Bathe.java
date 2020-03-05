@@ -16,7 +16,7 @@ public class Bathe extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.bathe.describe(c);
+            return " start bathing in the nude, not bothered by your presence.";
         }
     }
     private final String message;

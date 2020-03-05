@@ -21,7 +21,7 @@ public class Locate extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.locating.describe(c);
+            return String.format(" is holding someone's underwear in %s hands and breathing deeply. Strange.", c.possessiveAdjective());
         }
     }
 

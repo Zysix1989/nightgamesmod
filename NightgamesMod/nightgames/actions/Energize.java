@@ -16,7 +16,7 @@ public class Energize extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.mana.describe(c);
+            return String.format(" doing something with a large book. When %s's finished, you can see a sort of aura coming from %s.", c.pronoun(), c.possessiveAdjective());
         }
     }
 

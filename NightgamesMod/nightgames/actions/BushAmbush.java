@@ -16,7 +16,7 @@ public class BushAmbush extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.ftcBushAmbush.describe(c);
+            return " dive into some bushes.";
         }
     }
 

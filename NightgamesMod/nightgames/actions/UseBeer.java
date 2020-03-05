@@ -14,7 +14,7 @@ public class UseBeer extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.beer.describe(c);
+            return " opening a beer and downing the whole thing.";
         }
     }
 

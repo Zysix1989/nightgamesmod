@@ -12,7 +12,7 @@ public class Scavenge extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.scavenge.describe(c);
+            return " begin scrounging through some boxes in the corner.";
         }
     }
 

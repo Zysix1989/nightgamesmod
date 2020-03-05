@@ -20,7 +20,7 @@ public class Disguise extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.disguise.describe(c);
+            return " shimmer and turn into someone else!";
         }
     }
 

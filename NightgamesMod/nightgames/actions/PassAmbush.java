@@ -13,7 +13,7 @@ public class PassAmbush extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.ftcPassAmbush.describe(c);
+            return " slip into an alcove.";
         }
     }
 

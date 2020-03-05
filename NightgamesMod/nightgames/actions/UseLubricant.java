@@ -14,7 +14,7 @@ public class UseLubricant extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.oil.describe(c);
+            return String.format(" rubbing body oil on every inch of %s skin. Wow, you wouldn't mind watching that again.", c.possessiveAdjective());
         }
     }
 

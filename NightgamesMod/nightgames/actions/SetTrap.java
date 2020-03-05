@@ -13,7 +13,7 @@ public class SetTrap extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.trap.describe(c);
+            return " start rigging up something weird, probably a trap.";
         }
     }
 

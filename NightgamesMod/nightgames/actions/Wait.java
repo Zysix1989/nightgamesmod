@@ -11,7 +11,7 @@ public class Wait extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.wait.describe(c);
+            return " loitering nearby";
         }
     }
 

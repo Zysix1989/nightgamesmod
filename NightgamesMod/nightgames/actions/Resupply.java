@@ -19,7 +19,7 @@ public class Resupply extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.resupply.describe(c);
+            return " heads for one of the safe rooms, probably to get a change of clothes.";
         }
     }
 

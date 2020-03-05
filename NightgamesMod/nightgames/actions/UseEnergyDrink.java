@@ -12,7 +12,7 @@ public class UseEnergyDrink extends Action {
 
         @Override
         public String describe(Character c) {
-            return Movement.enerydrink.describe(c);
+            return " opening an energy drink and downing the whole thing.";
         }
     }
 
