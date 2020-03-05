@@ -14,13 +14,16 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import java.awt.*;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class Match {
-    protected int time;
+
+    private static final LocalTime startTime = LocalTime.of(22, 0, 0);
+    protected LocalTime time;
     private int timeSinceLastDrop;
     protected Map<String, Area> map;
     protected Set<Participant> participants;
@@ -33,7 +36,7 @@ public class Match {
             .map(Participant::new)
             .collect(Collectors.toCollection(HashSet::new));
         this.condition = condition;
-        time = 0;
+        time = startTime;
         timeSinceLastDrop = 0;
         pause = false;
         buildMap();
@@ -236,7 +239,7 @@ public class Match {
     }
 
     private boolean shouldEndMatch() {
-        return time >= 36;
+        return time.isBefore(startTime.plusHours(3));
     }
 
     private void handleFullTurn() {
@@ -244,10 +247,12 @@ public class Match {
             dropPackage();
             timeSinceLastDrop = 0;
         }
-        if (Global.checkFlag(Flag.challengeAccepted) && (time == 6 || time == 12 || time == 18 || time == 24)) {
+        if (Global.checkFlag(Flag.challengeAccepted)
+                && time.getMinute() != 0
+                && time.getMinute() % 30 == 0) {
             dropChallenge();
         }
-        time++;
+        time = time.plusMinutes(5);
         timeSinceLastDrop++;
     }
 
@@ -483,19 +488,11 @@ public class Match {
     }
 
     public final int getHour() {
-        return 10 + time / 12;
+        return time.getHour();
     }
 
     public String getTime() {
-        int hour = getHour();
-        if (hour > 12) {
-            hour = hour % 12;
-        }
-        if (time % 12 < 2) {
-            return hour + ":0" + time % 12 * 5;
-        } else {
-            return hour + ":" + time % 12 * 5;
-        }
+        return String.format("%1d:%01d", time.getHour(), time.getMinute());
     }
 
     public final Collection<Area> getAreas() {
