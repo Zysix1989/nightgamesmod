@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import nightgames.actions.*;
 import nightgames.areas.Area;
 import nightgames.areas.Challenge;
+import nightgames.areas.DescriptionModule;
 import nightgames.beans.Property;
 import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;
@@ -153,7 +154,7 @@ public abstract class Character extends Observable implements Cloneable {
         attractions = new HashMap<>(2);
         affections = new HashMap<>(2);
         challenges = new ArrayList<>();
-        location = new Property<>(new Area("", "", null));
+        location = new Property<>(new Area("", new DescriptionModule.ErrorDescriptionModule(), null));
         state = State.ready;
         // this.combatStats = new CombatStats();       //TODO: Reading, writing, cloning?
         
