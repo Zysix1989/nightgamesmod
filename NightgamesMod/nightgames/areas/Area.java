@@ -23,7 +23,7 @@ public class Area implements Serializable {
     public String name;
     private HashSet<Area> adjacent = new HashSet<>();
     private ArrayList<Participant> present = new ArrayList<>();
-    public String description;
+    private final DescriptionModule descriptions;
     public Encounter fight;
     public boolean alarm = false;
     public ArrayList<Deployable> env = new ArrayList<>();
@@ -34,14 +34,14 @@ public class Area implements Serializable {
     private Set<Action> possibleActions = new HashSet<>();
     private Trap.Instance trap = null;
 
-    public Area(String name, String description, Movement enumerator) {
+    public Area(String name, DescriptionModule descriptions, Movement enumerator) {
         this.name = name;
-        this.description = description;
+        this.descriptions = descriptions;
         this.enumerator = enumerator;
     }
 
-    public Area(String name, String description, Movement enumerator, Set<AreaAttribute> attributes) {
-        this(name, description, enumerator);
+    public Area(String name, DescriptionModule descriptions, Movement enumerator, Set<AreaAttribute> attributes) {
+        this(name, descriptions, enumerator);
         this.attributes = attributes;
     }
 
@@ -232,5 +232,9 @@ public class Area implements Serializable {
 
     public Set<Action> getPossibleActions() {
         return possibleActions;
+    }
+
+    public DescriptionModule getDescriptions() {
+        return descriptions;
     }
 }

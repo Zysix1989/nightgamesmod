@@ -132,57 +132,23 @@ public class Match {
     }
 
     private void buildMap() {
-        Area quad = new Area("Quad",
-                QUAD_DESCRIPTION,
-                        Movement.quad, Set.of(AreaAttribute.Open));
-        Area dorm = new Area("Dorm",
-                DORM_DESCRIPTION,
-                        Movement.dorm);
-        Area shower = new Area("Showers",
-                SHOWER_DESCRIPTION,
-                        Movement.shower);
-        Area laundry = new Area("Laundry Room",
-                LAUNDRY_DESCRIPTION,
-                        Movement.laundry);
-        Area engineering = new Area("Engineering",
-                ENGINEERING_DESCRIPTION,
-                        Movement.engineering);
-        Area lab = new Area("Chemistry Lab",
-                LAB_DESCRIPTION,
-                        Movement.lab);
-        Area workshop = new Area("Workshop",
-                WORKSHOP_DESCRIPTION,
-                        Movement.workshop);
-        Area libarts = new Area("Liberal Arts",
-                LIBERAL_ARTS_DESCRIPTION,
-                        Movement.la);
-        Area pool = new Area("Pool",
-                POOL_DESCRIPTION,
-                        Movement.pool);
-        Area library = new Area("Library",
-                LIBRARY_DESCRIPTION,
-                        Movement.library);
-        Area dining = new Area("Dining Hall",
-                DINING_HALL_DESCRIPTION,
-                        Movement.dining);
-        Area kitchen = new Area("Kitchen",
-                KITCHEN_DESCRIPTION,
-                        Movement.kitchen);
-        Area storage = new Area("Storage Room",
-                STORAGE_DESCRIPTION,
-                        Movement.storage);
-        Area tunnel = new Area("Tunnel",
-                TUNNEL_DESCRIPTION,
-                        Movement.tunnel);
-        Area bridge = new Area("Bridge",
-                BRIDGE_DESCRIPTION,
-                        Movement.bridge);
-        Area sau = new Area("Student Union",
-                STUDENT_UNION_DESCRIPTION,
-                        Movement.union);
-        Area courtyard = new Area("Courtyard",
-                COURTYARD_DESCRIPTION,
-                        Movement.courtyard);
+        Area quad = new Area("Quad", DescriptionModule.quad(), Movement.quad, Set.of(AreaAttribute.Open));
+        Area dorm = new Area("Dorm", DescriptionModule.dorm(), Movement.dorm);
+        Area shower = new Area("Showers", DescriptionModule.shower(), Movement.shower);
+        Area laundry = new Area("Laundry Room", DescriptionModule.laundry(), Movement.laundry);
+        Area engineering = new Area("Engineering", DescriptionModule.engineering(), Movement.engineering);
+        Area lab = new Area("Chemistry Lab", DescriptionModule.lab(), Movement.lab);
+        Area workshop = new Area("Workshop", DescriptionModule.workshop(), Movement.workshop);
+        Area libarts = new Area("Liberal Arts", DescriptionModule.liberalArts(), Movement.la);
+        Area pool = new Area("Pool", DescriptionModule.pool(), Movement.pool);
+        Area library = new Area("Library", DescriptionModule.library(), Movement.library);
+        Area dining = new Area("Dining Hall", DescriptionModule.diningHall(), Movement.dining);
+        Area kitchen = new Area("Kitchen", DescriptionModule.kitchen(), Movement.kitchen);
+        Area storage = new Area("Storage Room", DescriptionModule.storage(), Movement.storage);
+        Area tunnel = new Area("Tunnel", DescriptionModule.tunnel(), Movement.tunnel);
+        Area bridge = new Area("Bridge", DescriptionModule.bridge(), Movement.bridge);
+        Area sau = new Area("Student Union", DescriptionModule.studentUnion(), Movement.union);
+        Area courtyard = new Area("Courtyard", DescriptionModule.courtyard(), Movement.courtyard);
 
         quad.setMapDrawHint(new MapDrawHint(new Rectangle(10, 3, 7, 9), "Quad", false));
         dorm.setMapDrawHint(new MapDrawHint(new Rectangle(14, 12, 3, 5), "Dorm", false));
@@ -619,7 +585,7 @@ public class Match {
             human.location()
                  .endEncounter();
         }
-        human.travel(new Area("Retirement", "", Movement.retire));
+        human.travel(new Area("Retirement", new DescriptionModule.ErrorDescriptionModule(), Movement.retire));
         human.state = State.quit;
         resume();
     }

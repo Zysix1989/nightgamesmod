@@ -3,6 +3,7 @@ package nightgames.match.ftc;
 import nightgames.actions.*;
 import nightgames.areas.Area;
 import nightgames.areas.AreaAttribute;
+import nightgames.areas.DescriptionModule;
 import nightgames.characters.Character;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -47,6 +48,7 @@ public class FTCMatch extends Match {
             + " obelisk. It's probably a monument to something, but there's no plaque to tell you.";
     public static final String DUMP_DESCRIPTION = "You are at the edge of the forest, where people seem to go to dump"
             + " unwanted trash. The sight disgusts you, but there might be some useful stuff in there.";
+
     private Map<Participant, Area> bases;
     private Participant prey;
     private int gracePeriod;
@@ -137,17 +139,11 @@ public class FTCMatch extends Match {
 
     private void buildFTCMap(Participant north, Participant west, Participant south, Participant east, Participant prey) {
         map.clear();
-        Area nBase = new Area("North Base",
-                        baseDescription(north, "north"), Movement.ftcNorthBase);
-        Area wBase = new Area("West Base",
-                        baseDescription(west, "west"), Movement.ftcWestBase);
-        Area sBase = new Area("South Base",
-                        baseDescription(south, "south"), Movement.ftcSouthBase);
-        Area eBase = new Area("East Base",
-                        baseDescription(east, "east"), Movement.ftcEastBase);
-        Area pBase = new Area("Central Camp",
-                        campDescription(prey),
-                        Movement.ftcCenter, Set.of(AreaAttribute.Open));
+        Area nBase = new Area("North Base", DescriptionModule.base(north, "north"), Movement.ftcNorthBase);
+        Area wBase = new Area("West Base", DescriptionModule.base(west, "west"), Movement.ftcWestBase);
+        Area sBase = new Area("South Base", DescriptionModule.base(south, "south"), Movement.ftcSouthBase);
+        Area eBase = new Area("East Base", DescriptionModule.base(east, "east"), Movement.ftcEastBase);
+        Area pBase = new Area("Central Camp", DescriptionModule.camp(prey), Movement.ftcCenter, Set.of(AreaAttribute.Open));
         map.put("North Base", nBase);
         map.put("West Base", wBase);
         map.put("South Base", sBase);
@@ -160,42 +156,18 @@ public class FTCMatch extends Match {
         bases.put(east, eBase);
         bases.put(prey, pBase);
 
-        Area pond = new Area("Small Pond",
-                POND_DESCRIPTION,
-                        Movement.ftcPond);
-        Area glade = new Area("Glade",
-                GLADE_DESCRIPTION,
-                        Movement.ftcGlade);
-        Area cabin = new Area("Cabin",
-                CABIN_DESCRIPTION,
-                        Movement.ftcCabin);
-        Area trail = new Area("Trail",
-                TRAIL_DESCRIPTION,
-                        Movement.ftcTrail);
-        Area lodge = new Area("Lodge",
-                LODGE_DESCRIPTION,
-                        Movement.ftcLodge);
-        Area hill = new Area("Hill",
-                HILL_DESCRIPTION,
-                        Movement.ftcHill);
-        Area path = new Area("Path",
-                PATH_DESCRIPTION,
-                        Movement.ftcPath);
-        Area oak = new Area("Oak",
-                OAK_DESCRIPTION,
-                        Movement.ftcOak);
-        Area pass = new Area("Narrow Pass",
-                PASS_DESCRIPTION,
-                        Movement.ftcPass);
-        Area waterfall = new Area("Waterfall",
-                WATERFALL_DESCRIPTION,
-                        Movement.ftcWaterfall);
-        Area monument = new Area("Monument",
-                MONUMENT_DESCRIPTION,
-                        Movement.ftcMonument);
-        Area dump = new Area("Dump Site",
-                DUMP_DESCRIPTION,
-                        Movement.ftcDump);
+        Area pond = new Area("Small Pond", DescriptionModule.pond(), Movement.ftcPond);
+        Area glade = new Area("Glade", DescriptionModule.glade(), Movement.ftcGlade);
+        Area cabin = new Area("Cabin", DescriptionModule.cabin(), Movement.ftcCabin);
+        Area trail = new Area("Trail", DescriptionModule.trail(), Movement.ftcTrail);
+        Area lodge = new Area("Lodge", DescriptionModule.lodge(), Movement.ftcLodge);
+        Area hill = new Area("Hill", DescriptionModule.hill(), Movement.ftcHill);
+        Area path = new Area("Path", DescriptionModule.path(), Movement.ftcPath);
+        Area oak = new Area("Oak", DescriptionModule.oak(), Movement.ftcOak);
+        Area pass = new Area("Narrow Pass", DescriptionModule.pass(), Movement.ftcPass);
+        Area waterfall = new Area("Waterfall", DescriptionModule.waterfall(), Movement.ftcWaterfall);
+        Area monument = new Area("Monument", DescriptionModule.monument(), Movement.ftcMonument);
+        Area dump = new Area("Dump Site", DescriptionModule.dump(), Movement.ftcDump);
         map.put("Small Pond", pond);
         map.put("Glade", glade);
         map.put("Cabin", cabin);
