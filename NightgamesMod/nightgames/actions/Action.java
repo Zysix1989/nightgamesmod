@@ -32,10 +32,6 @@ public abstract class Action implements Serializable {
         return name;
     }
 
-    public boolean freeAction() {
-        return false;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;

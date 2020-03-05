@@ -85,8 +85,4 @@ public class Locate extends Action {
         Global.getMatch().resume();
     }
 
-    @Override
-    public boolean freeAction() {
-        return true;
-    }
 }

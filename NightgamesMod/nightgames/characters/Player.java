@@ -330,9 +330,7 @@ public class Player extends Character {
                         action.toString(),
                         event -> {
                             callback.execute(action);
-                            if (!action.freeAction()) {
-                                Global.getMatch().resume();
-                            }
+                            Global.getMatch().resume();
                         })).collect(Collectors.toList()));
 
         if (!optionChoices.isEmpty()) {
