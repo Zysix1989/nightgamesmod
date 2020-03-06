@@ -3,7 +3,6 @@ package nightgames.characters.custom;
 import nightgames.characters.BasePersonality;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
-import nightgames.characters.NPC;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -28,7 +27,9 @@ public class CustomNPC extends BasePersonality {
     public CustomNPC(DataBackedNPCData data, Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super(data.getName(), data.isStartCharacter());
         this.data = data;
-        applyStrategy(character);
+        character.isStartCharacter = this.data.isStartCharacter();
+        character.plan = this.data.getPlan();
+        character.mood = Emotion.confident;
         setupCharacter(this,charConfig, commonConfig);
         for (String lineType : CharacterLine.ALL_LINES) {
             if (lineType.equals(CharacterLine.DESCRIBE_LINER)) {
@@ -40,13 +41,6 @@ public class CustomNPC extends BasePersonality {
         for (int i = 1; i < data.getStats().level; i++) {
             character.ding(null);
         }
-    }
-
-    @Override
-    public void applyStrategy(NPC self) {
-        self.isStartCharacter = data.isStartCharacter();
-        self.plan = data.getPlan();
-        self.mood = Emotion.confident;
     }
 
     @Override

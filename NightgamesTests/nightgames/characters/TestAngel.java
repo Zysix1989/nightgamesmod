@@ -80,7 +80,6 @@ public class TestAngel extends BasePersonality {
 
     public TestAngel(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("TestAngel", true);
-        applyStrategy(character);
         setupCharacter(this,charConfig, commonConfig);
     }
 
@@ -446,7 +445,4 @@ public class TestAngel extends BasePersonality {
         }
     }
 
-    @Override
-    public void applyStrategy(NPC self) {   
-    }
 }

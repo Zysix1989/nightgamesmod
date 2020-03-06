@@ -32,13 +32,9 @@ public class Caroline extends BasePersonality {
 
     public Caroline(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Caroline", false);
-        applyStrategy(character);
         setupCharacter(this,charConfig, commonConfig);
         constructLines();
     }
-
-    @Override
-    public void applyStrategy(NPC self) {}
 
     @Override
     public void applyBasicStats(Character self) {

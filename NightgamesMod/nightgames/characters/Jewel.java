@@ -45,21 +45,16 @@ public class Jewel extends BasePersonality {
 
     public Jewel(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Jewel", true);
-        applyStrategy(character);
+        character.plan = Plan.hunting;
+        character.mood = Emotion.confident;
+
+        character.addPersonalStrategy(new FootjobStrategy());
+        character.addPersonalStrategy(new FacesitStrategy());
+        character.addPersonalStrategy(new KnockdownStrategy());
+        character.addPersonalStrategy(new StraponStrategy());
+        getCharacter().addPersonalStrategy(new ReceiveAnalStrategy());
         setupCharacter(this,charConfig, commonConfig);
         constructLines();
-    }
-
-    @Override
-    public void applyStrategy(NPC self) {
-        self.plan = Plan.hunting;
-        self.mood = Emotion.confident;
-
-        self.addPersonalStrategy(new FootjobStrategy());
-        self.addPersonalStrategy(new FacesitStrategy());
-        self.addPersonalStrategy(new KnockdownStrategy());
-        self.addPersonalStrategy(new StraponStrategy());
-        getCharacter().addPersonalStrategy(new ReceiveAnalStrategy());
     }
 
     @Override

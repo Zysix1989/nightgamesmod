@@ -40,7 +40,8 @@ public class Angel extends BasePersonality {
 
     public Angel(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Angel", true);
-        applyStrategy(character);
+        character.plan = Plan.hunting;
+        character.mood = Emotion.confident;
         setupCharacter(this,charConfig, commonConfig);
         constructLines();
     }
@@ -65,12 +66,6 @@ public class Angel extends BasePersonality {
         // very feminine face
         self.body.add(new FacePart(0.3, 4.2));
         self.initialGender = CharacterSex.female;
-    }
-
-    @Override
-    public void applyStrategy(NPC self) {
-        self.plan = Plan.hunting;
-        self.mood = Emotion.confident;
     }
 
     private static Growth newGrowth() {

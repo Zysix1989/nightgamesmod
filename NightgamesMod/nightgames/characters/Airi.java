@@ -48,15 +48,10 @@ public class Airi extends BasePersonality {
 
     public Airi(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Airi", false);
-        applyStrategy(character);
+        character.plan = Plan.retreating;
+        character.mood = Emotion.nervous;
         setupCharacter(this, charConfig, commonConfig);
         constructLines(this);
-    }
-
-    @Override
-    public void applyStrategy(NPC self) {
-        self.plan = Plan.retreating;
-        self.mood = Emotion.nervous;
     }
 
     @Override

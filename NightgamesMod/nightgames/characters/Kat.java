@@ -40,16 +40,11 @@ public class Kat extends BasePersonality {
 
     public Kat(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Kat", false);
-        applyStrategy(character);
+        character.plan = Plan.retreating;
+        character.mood = Emotion.confident;
+        character.addPersonalStrategy(new FacesitStrategy());
         setupCharacter(this,charConfig, commonConfig);
         constructLines();
-    }
-
-    @Override
-    public void applyStrategy(NPC self) {
-        self.plan = Plan.retreating;
-        self.mood = Emotion.confident;
-        self.addPersonalStrategy(new FacesitStrategy());
     }
 
     @Override

@@ -35,15 +35,10 @@ public class Yui extends BasePersonality {
         // Yui is a start character so that you can gain affection with her straight off the bat.
         // She is disabled when the game starts
         super("Yui", true);
-        applyStrategy(character);
+        character.plan = Plan.hunting;
+        character.mood = Emotion.confident;
         setupCharacter(this,charConfig, commonConfig);
         constructLines();
-    }
-
-    @Override
-    public void applyStrategy(NPC self) {
-        self.plan = Plan.hunting;
-        self.mood = Emotion.confident;
     }
 
     @Override

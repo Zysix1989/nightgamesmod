@@ -58,8 +58,4 @@ public class BlankPersonality extends BasePersonality {
         
     }
 
-    @Override
-    public void applyStrategy(NPC self) {
-        
-    }
 }

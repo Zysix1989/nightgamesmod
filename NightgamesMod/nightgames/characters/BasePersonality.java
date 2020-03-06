@@ -220,8 +220,6 @@ public abstract class BasePersonality implements Serializable {
 
     public abstract void applyBasicStats(Character self);
 
-    public abstract void applyStrategy(NPC self);
-
     public void addLine(String lineType, CharacterLine line) {
         if (lineType.equals(CharacterLine.DESCRIBE_LINER)) {
             throw new IllegalArgumentException();

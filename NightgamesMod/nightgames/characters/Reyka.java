@@ -41,21 +41,16 @@ public class Reyka extends BasePersonality {
 
     public Reyka(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Reyka", false);
-        applyStrategy(character);
+        character.plan = Plan.hunting;
+        character.mood = Emotion.confident;
+
+        character.addPersonalStrategy(new OralStrategy());
+        character.addPersonalStrategy(new FootjobStrategy());
+        character.addPersonalStrategy(new FacesitStrategy());
+        character.addPersonalStrategy(new KnockdownStrategy());
+        character.addPersonalStrategy(new DisablingStrategy());
         setupCharacter(this,charConfig, commonConfig);
         constructLines();
-    }
-
-    @Override
-    public void applyStrategy(NPC self) {
-        self.plan = Plan.hunting;
-        self.mood = Emotion.confident;
-
-        self.addPersonalStrategy(new OralStrategy());
-        self.addPersonalStrategy(new FootjobStrategy());
-        self.addPersonalStrategy(new FacesitStrategy());
-        self.addPersonalStrategy(new KnockdownStrategy());
-        self.addPersonalStrategy(new DisablingStrategy());
     }
 
     @Override

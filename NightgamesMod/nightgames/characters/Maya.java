@@ -44,18 +44,13 @@ public class Maya extends BasePersonality {
 
     public Maya(int playerLevel, Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Maya", false);
-        applyStrategy(character);
+        character.plan = Plan.hunting;
+        character.mood = Emotion.confident;
         setupCharacter(this,charConfig, commonConfig);
         while (character.getLevel() < playerLevel + 20) {
             character.ding(null);
         }
         constructLines();
-    }
-
-    @Override
-    public void applyStrategy(NPC self) {
-        self.plan = Plan.hunting;
-        self.mood = Emotion.confident;
     }
 
     @Override

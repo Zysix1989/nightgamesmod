@@ -48,7 +48,14 @@ public class Mara extends BasePersonality {
 
     public Mara(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Mara", true);
-        applyStrategy(character);
+        character.plan = Plan.hunting;
+        character.mood = Emotion.confident;
+
+        character.addPersonalStrategy(new FootjobStrategy());
+        character.addPersonalStrategy(new UseToyStrategy());
+        character.addPersonalStrategy(new StraponStrategy());
+        character.addPersonalStrategy(new WindUpStrategy());
+        character.addPersonalStrategy(new TechStrategy());
         setupCharacter(this,charConfig, commonConfig);
         constructLines();
         armManager = new ArmManager();
@@ -137,18 +144,6 @@ public class Mara extends BasePersonality {
             return "{self:SUBJECT} mutters, <i>\"Crap...Need to make adjustments...\"</i>";
         });
         
-    }
-
-    @Override
-    public void applyStrategy(NPC self) {
-        self.plan = Plan.hunting;
-        self.mood = Emotion.confident;
-
-        self.addPersonalStrategy(new FootjobStrategy());
-        self.addPersonalStrategy(new UseToyStrategy());
-        self.addPersonalStrategy(new StraponStrategy());
-        self.addPersonalStrategy(new WindUpStrategy());
-        self.addPersonalStrategy(new TechStrategy());
     }
 
     @Override

@@ -55,7 +55,12 @@ public class Cassie extends BasePersonality {
 
     public Cassie(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Cassie", true);
-        applyStrategy(character);
+        character.plan = Plan.retreating;
+        character.mood = Emotion.confident;
+
+        character.addPersonalStrategy(new OralStrategy());
+        character.addPersonalStrategy(new BreastStrategy());
+        character.addPersonalStrategy(new NurseStrategy());
         setupCharacter(this,charConfig, commonConfig);
         constructLines();
     }
@@ -146,16 +151,6 @@ public class Cassie extends BasePersonality {
             return "{self:SUBJECT} looks a bit heartbroken as she says, <i>\"Not even one point...?\"</i>";
         });
         
-    }
-
-    @Override
-    public void applyStrategy(NPC self) {
-        self.plan = Plan.retreating;
-        self.mood = Emotion.confident;
-        
-        self.addPersonalStrategy(new OralStrategy());
-        self.addPersonalStrategy(new BreastStrategy());
-        self.addPersonalStrategy(new NurseStrategy());
     }
 
     @Override
