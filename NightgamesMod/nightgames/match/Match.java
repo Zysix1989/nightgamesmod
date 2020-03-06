@@ -312,12 +312,6 @@ public class Match {
 
     }
 
-    private Postmatch buildPostmatch() {
-        return new DefaultPostmatch(participants.stream()
-            .map(Participant::getCharacter)
-            .collect(Collectors.toList()));
-    }
-
     private Optional<Character> decideWinner() {
         return participants.stream()
             .max(Comparator.comparing(Participant::getScore))
@@ -442,7 +436,9 @@ public class Match {
               .message(sb.toString());
 
         afterEnd();
-        Postmatch post = buildPostmatch();
+        Postmatch post = new DefaultPostmatch(participants.stream()
+                .map(Participant::getCharacter)
+                .collect(Collectors.toList()));
         post.run();
     }
 
