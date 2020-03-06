@@ -36,7 +36,6 @@ public class FTCMatch extends Match {
         this.flagCounter = 0;
         this.bases = bases;
         flagInCenter = false;
-        prey.getCharacter().gain(Item.Flag);
     }
 
     @Override
@@ -197,7 +196,7 @@ public class FTCMatch extends Match {
                 map,
                 bases,
                 preyParticipant);
-        match.flagInCenter = false;
+
         prey.gain(Item.Flag);
         return match;
     }
