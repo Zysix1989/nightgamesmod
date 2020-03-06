@@ -95,7 +95,15 @@ public class FTCMatch extends Match {
     }
 
     public static FTCMatch newMatch(Collection<Character> combatants, Character prey) {
-        return new FTCMatch(combatants, prey);
+        var match = new FTCMatch(combatants, prey);
+        List<Participant> hunters = new ArrayList<>(match.participants);
+        hunters.remove(match.prey);
+        Collections.shuffle(hunters);
+        buildFTCMap(match, hunters.get(0), hunters.get(1), hunters.get(2), hunters.get(3), match.prey);
+        match.bases.forEach(Participant::place);
+        match.flagInCenter = false;
+        prey.gain(Item.Flag);
+        return match;
     }
 
     private static void buildFTCMap(FTCMatch m, Participant north, Participant west, Participant south, Participant east, Participant prey) {
