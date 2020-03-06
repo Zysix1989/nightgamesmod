@@ -25,10 +25,11 @@ public class FTCMatch extends Match {
     private boolean flagInCenter;
     private int flagCounter;
 
-    protected FTCMatch(Set<Participant> hunters, Map<String, Area> map, Map<Participant, Area> bases, Participant prey) {
+    protected FTCMatch(Set<Participant> hunters, Map<String, Area> map, Map<Participant, Area> bases, Participant prey,
+                       FTCModifier modifier) {
         super(Stream.concat(hunters.stream(), Set.of(prey).stream()).collect(Collectors.toSet()),
                 map,
-                new FTCModifier(prey.getCharacter()));
+                modifier);
         this.bases = bases;
         this.prey = prey;
         gracePeriod = 3;
@@ -85,13 +86,13 @@ public class FTCMatch extends Match {
         }
     }
 
-    public static FTCMatch newMatch(Collection<Character> combatants, Character prey) {
+    public static FTCMatch newMatch(Collection<Character> combatants, FTCModifier modifier) {
         var hunters = combatants.stream()
-                .filter(c -> c.equals(prey))
+                .filter(c -> c.equals(modifier.getPrey()))
                 .map(Participant::new)
                 .collect(Collectors.toList());
         Collections.shuffle(hunters);
-        var preyParticipant = new Participant(prey);
+        var preyParticipant = new Participant(modifier.getPrey());
         Participant north = hunters.get(0);
         Participant west = hunters.get(1);
         Participant south = hunters.get(2);
@@ -187,9 +188,10 @@ public class FTCMatch extends Match {
                 .collect(Collectors.toSet()),
                 map,
                 bases,
-                preyParticipant);
+                preyParticipant,
+                modifier);
 
-        prey.gain(Item.Flag);
+        preyParticipant.getCharacter().gain(Item.Flag);
         return match;
     }
 
