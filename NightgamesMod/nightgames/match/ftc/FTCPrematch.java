@@ -12,6 +12,7 @@ import nightgames.modifier.standard.FTCModifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class FTCPrematch extends Prematch {
 
@@ -52,9 +53,7 @@ public class FTCPrematch extends Prematch {
                                     + " the center. You take a Flag from the box and await the starting" + " signal.";
                 }
             } else {
-                do {
-                    prey = (Character) Global.pickRandom(Global.getParticipants().toArray()).get();
-                } while (prey.human());
+                prey = Global.getParticipants().stream().filter(Predicate.not(Character::human)).findAny().orElseThrow();
                 if (!Global.checkFlag(Flag.didFTC)) {
                     message += "\"No one? Really? Fine, then I'll pick someone. Let's see... " + prey.getTrueName()
                                     + "! You have the honors tonight. Oh and just so"
