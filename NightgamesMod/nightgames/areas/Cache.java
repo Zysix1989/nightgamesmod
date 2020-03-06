@@ -127,7 +127,10 @@ public class Cache implements Deployable {
                         .filter(area -> area.env.size() < 5)
                         .findAny()
                         .ifPresent(area -> {
-                            area.place(new Cache((int) meanParticipantLevel + Global.random(11) - 4));
+                            int level = (int) meanParticipantLevel + Global.random(11) - 4;
+                            Cache cache = new Cache(level);
+                            calcReward(cache, level);
+                            area.place(cache);
                             Global.gui().message(
                                     "<br/><b>A new cache has been dropped off at " + area.name + "!</b>");
                         });
@@ -163,7 +166,6 @@ public class Cache implements Deployable {
                 secondary = Attribute.Ki;
                 break;
         }
-        calcReward(level);
     }
 
     @Override
@@ -275,10 +277,10 @@ public class Cache implements Deployable {
         return false;
     }
 
-    public void calcReward(int level) {
+    public static void calcReward(Cache c, int level) {
         Map<RewardType, Double> weighted = REWARDS.stream().filter(r -> level >= r.minLevel)
                         .collect(Collectors.toMap(Function.identity(), r -> r.weight));
-        reward.addAll(Global.pickWeighted(weighted).get().items);
+        c.reward.addAll(Global.pickWeighted(weighted).get().items);
     }
     
     private static class RewardType {
