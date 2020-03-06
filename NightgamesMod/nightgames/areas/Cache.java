@@ -107,6 +107,19 @@ public class Cache implements Deployable {
             this.cacheLocations = cacheLocations;
         }
 
+        private void placeCache(Match m, Area area, int level) {
+            Cache cache = new Cache(level,
+                    Global.pickWeighted(REWARDS.stream()
+                            .filter(r -> level >= r.minLevel)
+                            .map(reward -> new Tuple2<>(reward, reward.weight))
+                            .collect(Collectors.toList()))
+                            .orElseThrow().items);
+            area.place(cache);
+            lastCacheDropped = Optional.of(m.getRawTime());
+            Global.gui().message(
+                    "<br/><b>A new cache has been dropped off at " + area.name + "!</b>");
+        }
+
         @Override
         public void fire(Match m) {
             var meanParticipantLevel = m.getParticipants().stream()
@@ -126,19 +139,7 @@ public class Cache implements Deployable {
                 areas.stream()
                         .filter(area -> area.env.size() < 5)
                         .findFirst()
-                        .ifPresent(area -> {
-                            int level = (int) meanParticipantLevel + Global.random(11) - 4;
-                            Cache cache = new Cache(level,
-                                    Global.pickWeighted(REWARDS.stream()
-                                            .filter(r -> level >= r.minLevel)
-                                            .map(reward -> new Tuple2<>(reward, reward.weight))
-                                            .collect(Collectors.toList()))
-                                            .orElseThrow().items);
-                            area.place(cache);
-                            lastCacheDropped = Optional.of(m.getRawTime());
-                            Global.gui().message(
-                                    "<br/><b>A new cache has been dropped off at " + area.name + "!</b>");
-                        });
+                        .ifPresent(area -> placeCache(m, area, (int) meanParticipantLevel + Global.random(11) - 4));
             }
         }
     }
