@@ -38,16 +38,15 @@ public class Match {
     protected Modifier condition;
     private List<Trigger> roundTriggers = List.of(new Challenge.SpawnTrigger());
 
-    protected Match(Set<Participant> participants, ConstructorInputs mi, Modifier condition) {
+    protected Match(Set<Participant> participants, Map<String, Area> map, Modifier condition) {
         this.participants = new HashSet<>(participants);
         this.condition = condition;
         time = startTime;
         pause = false;
-        this.map = mi.map;
+        this.map = map;
     }
 
     public static Match newMatch(Collection<Character> combatants, Modifier condition) {
-        var m1 = new ConstructorInputs();
         Area quad = new Area("Quad", DescriptionModule.quad(), AreaIdentity.quad, Set.of(AreaAttribute.Open));
         Area dorm = new Area("Dorm", DescriptionModule.dorm(), AreaIdentity.dorm);
         Area shower = new Area("Showers", DescriptionModule.shower(), AreaIdentity.shower);
@@ -156,29 +155,27 @@ public class Match {
 
         var cacheLocations = Set.of(dorm, shower, laundry, engineering, lab, workshop, libarts, pool, library, dining,
                 kitchen, storage, sau, courtyard);
-
-        m1.map = new HashMap<>();
-        m1.map.put("Quad", quad);
-        m1.map.put("Dorm", dorm);
-        m1.map.put("Shower", shower);
-        m1.map.put("Laundry", laundry);
-        m1.map.put("Engineering", engineering);
-        m1.map.put("Workshop", workshop);
-        m1.map.put("Lab", lab);
-        m1.map.put("Liberal Arts", libarts);
-        m1.map.put("Pool", pool);
-        m1.map.put("Library", library);
-        m1.map.put("Dining", dining);
-        m1.map.put("Kitchen", kitchen);
-        m1.map.put("Storage", storage);
-        m1.map.put("Tunnel", tunnel);
-        m1.map.put("Bridge", bridge);
-        m1.map.put("Union", sau);
-        m1.map.put("Courtyard", courtyard);
+        var map = new HashMap<>(Map.of("Quad", quad));
+        map.put("Dorm", dorm);
+        map.put("Shower", shower);
+        map.put("Laundry", laundry);
+        map.put("Engineering", engineering);
+        map.put("Workshop", workshop);
+        map.put("Lab", lab);
+        map.put("Liberal Arts", libarts);
+        map.put("Pool", pool);
+        map.put("Library", library);
+        map.put("Dining", dining);
+        map.put("Kitchen", kitchen);
+        map.put("Storage", storage);
+        map.put("Tunnel", tunnel);
+        map.put("Bridge", bridge);
+        map.put("Union", sau);
+        map.put("Courtyard", courtyard);
         var m = new Match(combatants.stream()
                 .map(Participant::new)
                 .collect(Collectors.toSet()),
-                m1,
+                map,
                 condition);
         m.roundTriggers.add(new Cache.SpawnTrigger(cacheLocations));
         return m;

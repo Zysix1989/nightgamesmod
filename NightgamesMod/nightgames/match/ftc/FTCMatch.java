@@ -26,9 +26,9 @@ public class FTCMatch extends Match {
     private boolean flagInCenter;
     private int flagCounter;
 
-    protected FTCMatch(Set<Participant> hunters, Match.ConstructorInputs inputs, Map<Participant, Area> bases, Participant prey) {
+    protected FTCMatch(Set<Participant> hunters, Map<String, Area> map, Map<Participant, Area> bases, Participant prey) {
         super(Stream.concat(hunters.stream(), Set.of(prey).stream()).collect(Collectors.toSet()),
-                inputs,
+                map,
                 new FTCModifier(prey.getCharacter()));
         assert participants.size() == 5; // 4 hunters + prey = 5
         this.prey = prey;
@@ -105,18 +105,18 @@ public class FTCMatch extends Match {
         Participant west = hunters.get(1);
         Participant south = hunters.get(2);
         Participant east = hunters.get(3);
-        var inputs = new Match.ConstructorInputs();
-        inputs.map.clear();
+
         Area nBase = new Area("North Base", DescriptionModule.base(north, "north"), AreaIdentity.ftcNorthBase);
         Area wBase = new Area("West Base", DescriptionModule.base(west, "west"), AreaIdentity.ftcWestBase);
         Area sBase = new Area("South Base", DescriptionModule.base(south, "south"), AreaIdentity.ftcSouthBase);
         Area eBase = new Area("East Base", DescriptionModule.base(east, "east"), AreaIdentity.ftcEastBase);
         Area pBase = new Area("Central Camp", DescriptionModule.camp(preyParticipant), AreaIdentity.ftcCenter, Set.of(AreaAttribute.Open));
-        inputs.map.put("North Base", nBase);
-        inputs.map.put("West Base", wBase);
-        inputs.map.put("South Base", sBase);
-        inputs.map.put("East Base", eBase);
-        inputs.map.put("Central Camp", pBase);
+
+        var map = new HashMap<>(Map.of("North Base", nBase));
+        map.put("West Base", wBase);
+        map.put("South Base", sBase);
+        map.put("East Base", eBase);
+        map.put("Central Camp", pBase);
         var bases = new HashMap<Participant, Area>();
         bases.put(north, nBase);
         bases.put(west, wBase);
@@ -137,18 +137,18 @@ public class FTCMatch extends Match {
         Area waterfall = new Area("Waterfall", DescriptionModule.waterfall(), AreaIdentity.ftcWaterfall);
         Area monument = new Area("Monument", DescriptionModule.monument(), AreaIdentity.ftcMonument);
         Area dump = new Area("Dump Site", DescriptionModule.dump(), AreaIdentity.ftcDump);
-        inputs.map.put("Small Pond", pond);
-        inputs.map.put("Glade", glade);
-        inputs.map.put("Cabin", cabin);
-        inputs.map.put("Trail", trail);
-        inputs.map.put("Lodge", lodge);
-        inputs.map.put("Hill", hill);
-        inputs.map.put("Path", path);
-        inputs.map.put("Oak", oak);
-        inputs.map.put("Pass", pass);
-        inputs.map.put("Waterfall", waterfall);
-        inputs.map.put("Monument", monument);
-        inputs.map.put("Dump", dump);
+        map.put("Small Pond", pond);
+        map.put("Glade", glade);
+        map.put("Cabin", cabin);
+        map.put("Trail", trail);
+        map.put("Lodge", lodge);
+        map.put("Hill", hill);
+        map.put("Path", path);
+        map.put("Oak", oak);
+        map.put("Pass", pass);
+        map.put("Waterfall", waterfall);
+        map.put("Monument", monument);
+        map.put("Dump", dump);
         link(nBase, pond, glade);
         link(wBase, oak, cabin);
         link(eBase, waterfall, lodge);
@@ -194,7 +194,7 @@ public class FTCMatch extends Match {
         dump.getPossibleActions().add(new Scavenge());
         var match = new FTCMatch(Stream.concat(hunters.stream(), Set.of(preyParticipant).stream())
                 .collect(Collectors.toSet()),
-                inputs,
+                map,
                 bases,
                 preyParticipant);
         match.flagInCenter = false;
