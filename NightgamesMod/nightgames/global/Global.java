@@ -34,7 +34,6 @@ import nightgames.skills.*;
 import nightgames.start.NpcConfiguration;
 import nightgames.start.PlayerConfiguration;
 import nightgames.start.StartConfiguration;
-import nightgames.status.Status;
 import nightgames.trap.Tripwire;
 import nightgames.trap.*;
 import org.mozilla.javascript.Context;
@@ -806,15 +805,6 @@ public class Global {
         } else {
             match = buildMatch(participants, matchmod);
         }
-        startMatch();
-    }
-
-    public static void startMatch() {
-        Global.getPlayer().getAddictions().forEach(a -> {
-            Optional<Status> withEffect = a.startNight();
-            withEffect.ifPresent(s -> Global.getPlayer().addNonCombat(new nightgames.match.Status(s)));
-        });
-        Global.gui().startMatch();
         match.start();
     }
 
