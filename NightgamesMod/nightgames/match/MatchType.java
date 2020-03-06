@@ -21,7 +21,7 @@ public enum MatchType {
                 if (combatants.size() != 5) {
                     return Match.newMatch(combatants, new NoModifier());
                 }
-                return FTCMatch.newMatch(combatants, condition);
+                return FTCMatch.newMatch(combatants, (FTCModifier) condition);
             case NORMAL:
                 return Match.newMatch(combatants, condition);
             default:
