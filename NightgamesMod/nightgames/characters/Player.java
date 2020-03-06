@@ -554,10 +554,9 @@ public class Player extends Character {
 
     @Override
     public void masturbate() {
+        super.masturbate();
         gui.message("You hurriedly stroke yourself off, eager to finish before someone catches you. After what seems like an eternity, you ejaculate into a tissue and "
                         + "throw it in the trash. Looks like you got away with it.");
-        arousal.renew();
-        state = State.ready;
     }
 
     @Override

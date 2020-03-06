@@ -2839,7 +2839,6 @@ public Character clone() throws CloneNotSupportedException {
 
     public void masturbate() {
         arousal.renew();
-        state = State.ready;
         update();
     }
 

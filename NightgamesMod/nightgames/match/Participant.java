@@ -178,6 +178,7 @@ public class Participant {
             return;
         } else if (character.state == State.masturbating) {
             character.masturbate();
+            character.state = State.ready;
             return;
         }
         character.move(possibleActions, character.location.get().encounter(this), act -> act.execute(this));
