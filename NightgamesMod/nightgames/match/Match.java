@@ -265,7 +265,7 @@ public class Match {
             .with("self", combatant)
             .with("score", amt);
         JtwigTemplate template = JtwigTemplate.inlineTemplate(
-            "{{- self.subject() }} scored {{ score }} point {{- (score != 1) ? 's' : '' }}.");
+            "{{- self.subject() }} scored {{ score }} point{{- (score != 1) ? 's' : '' }}.");
         return template.render(model);
     }
 
