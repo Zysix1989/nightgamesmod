@@ -2584,28 +2584,6 @@ public Character clone() throws CloneNotSupportedException {
         getSkills().remove(copy);
     }
 
-    // This shouldn't have any side effects
-    /**Performs a post check against the checked character. The Checked character provides a bonus to DC.
-     * @param checked
-     * The opponent to create teh DC for the check. 
-     * @return
-     * Returns true if the DC is passed via check().
-     * */
-    public boolean spotCheck(Character checked) {
-        if (bound()) {
-            return false;
-        }
-        int dc = checked.get(Attribute.Cunning) / 3;
-        if (checked.state == State.hidden) {
-            dc += (checked.get(Attribute.Cunning) * 2 / 3) + 20;
-        }
-        if (checked.has(Trait.Sneaky)) {
-            dc += 20;
-        }
-        dc -= dc * 5 / Math.max(1, get(Attribute.Perception));
-        return check(Attribute.Cunning, dc);
-    }
-
     /**Moves this character direct from one place to another.
      * 
      * @param dest
