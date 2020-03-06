@@ -4068,7 +4068,7 @@ public Character clone() throws CloneNotSupportedException {
                 System.out.printf("Creating initial %s on player with %.3f\n", type.name(), mag);
             }
             Addiction addict = type.build(this, cause, mag);
-            addNonCombat(new nightgames.match.Status(addict));
+            add(c, addict);
             addict.describeInitial();
         }
     }
