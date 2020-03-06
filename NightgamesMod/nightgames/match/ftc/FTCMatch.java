@@ -58,7 +58,7 @@ public class FTCMatch extends Match {
     }
 
     public Area getBase(Character ch) {
-        return bases.get(ch);
+        return bases.get(findParticipant(ch));
     }
 
     public Character getFlagHolder() {
