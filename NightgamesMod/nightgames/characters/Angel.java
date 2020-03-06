@@ -57,10 +57,8 @@ public class Angel extends BasePersonality {
         self.modAttributeDontSaveData(Attribute.Perception, 1);
         Global.gainSkills(self);
 
-        self.getStamina()
-            .setMax(60);
-        self.getArousal()
-            .setMax(110);
+        self.getStamina().setMax(60);
+        self.getArousal().setMax(110);
 
         self.setTrophy(Item.AngelTrophy);
         self.body.add(new BreastsPart(Size.DDCup));
