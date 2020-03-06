@@ -243,15 +243,6 @@ public class Match {
         });
     }
 
-    private void handleFullTurn() {
-        beforeRoundTriggers.forEach(trigger -> trigger.fire(this));
-        time = time.plusMinutes(5);
-    }
-
-    private void beforeAllTurns() {
-        getAreas().forEach(area -> area.setPinged(false));
-    }
-
     private void afterTurn(Participant participant) {
         if (participant.getCharacter().state == State.resupplying) {
             participants.forEach(p -> p.allowTarget(participant));
@@ -287,9 +278,10 @@ public class Match {
             if (!roundIterator.hasNext()) {
                 // prepare next round
                 roundIterator = participants.iterator();
-                handleFullTurn();
+                beforeRoundTriggers.forEach(trigger -> trigger.fire(this));
+                time = time.plusMinutes(5);
             }
-            beforeAllTurns();
+            getAreas().forEach(area -> area.setPinged(false));
             while (roundIterator.hasNext()) {
                 var participant = roundIterator.next();
                 var self = participant.getCharacter();
