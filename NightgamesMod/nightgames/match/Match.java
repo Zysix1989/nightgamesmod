@@ -29,7 +29,6 @@ public class Match {
 
     public static class ConstructorInputs {
         public Map<String, Area> map;
-        protected Set<Area> cacheLocations;
     }
 
     protected LocalTime time;
@@ -48,63 +47,7 @@ public class Match {
     }
 
     public static Match newMatch(Collection<Character> combatants, Modifier condition) {
-        var inputs = makeConstructorInputs();
-        var m = new Match(combatants.stream()
-                .map(Participant::new)
-                .collect(Collectors.toSet()),
-                inputs,
-                condition);
-        m.roundTriggers.add(new Cache.SpawnTrigger(inputs.cacheLocations));
-        return m;
-    }
-
-    protected void preStart() {
-        
-    }
-
-    public final void start() {
-        preStart();
-        participants.forEach(participant -> {
-            var combatant = participant.getCharacter();
-            Global.gainSkills(combatant);
-            Global.learnSkills(combatant);
-            combatant.matchPrep(this);
-            combatant.getStamina().renew();
-            combatant.getArousal().renew();
-            combatant.getMojo().renew();
-            combatant.getWillpower().renew();
-            if (combatant.getPure(Attribute.Science) > 0) {
-                combatant.chargeBattery();
-            }
-            manageConditions(combatant);
-        });
-
-        placeCharacters();
-        round();
-    }
-    
-    public MatchType getType() {
-        return MatchType.NORMAL;
-    }
-    
-    public Set<Action> getAvailableActions() {
-        return Global.getActions();
-    }
-
-    protected void manageConditions(Character player) {
-        condition.handleOutfit(player);
-        condition.handleItems(player);
-        condition.handleStatus(player);
-        condition.handleTurn(player, this);
-        if (player.human()) {
-            Global.getPlayer()
-                  .getAddictions()
-                  .forEach(Addiction::refreshWithdrawal);
-        }
-    }
-
-    protected static ConstructorInputs makeConstructorInputs() {
-        var m = new ConstructorInputs();
+        var m1 = new ConstructorInputs();
         Area quad = new Area("Quad", DescriptionModule.quad(), AreaIdentity.quad, Set.of(AreaAttribute.Open));
         Area dorm = new Area("Dorm", DescriptionModule.dorm(), AreaIdentity.dorm);
         Area shower = new Area("Showers", DescriptionModule.shower(), AreaIdentity.shower);
@@ -211,28 +154,79 @@ public class Match {
         sau.getPossibleActions().add(new Resupply());
         courtyard.getPossibleActions().add(new Hide());
 
-        m.cacheLocations = Set.of(dorm, shower, laundry, engineering, lab, workshop, libarts, pool, library, dining,
+        var cacheLocations = Set.of(dorm, shower, laundry, engineering, lab, workshop, libarts, pool, library, dining,
                 kitchen, storage, sau, courtyard);
 
-        m.map = new HashMap<>();
-        m.map.put("Quad", quad);
-        m.map.put("Dorm", dorm);
-        m.map.put("Shower", shower);
-        m.map.put("Laundry", laundry);
-        m.map.put("Engineering", engineering);
-        m.map.put("Workshop", workshop);
-        m.map.put("Lab", lab);
-        m.map.put("Liberal Arts", libarts);
-        m.map.put("Pool", pool);
-        m.map.put("Library", library);
-        m.map.put("Dining", dining);
-        m.map.put("Kitchen", kitchen);
-        m.map.put("Storage", storage);
-        m.map.put("Tunnel", tunnel);
-        m.map.put("Bridge", bridge);
-        m.map.put("Union", sau);
-        m.map.put("Courtyard", courtyard);
+        m1.map = new HashMap<>();
+        m1.map.put("Quad", quad);
+        m1.map.put("Dorm", dorm);
+        m1.map.put("Shower", shower);
+        m1.map.put("Laundry", laundry);
+        m1.map.put("Engineering", engineering);
+        m1.map.put("Workshop", workshop);
+        m1.map.put("Lab", lab);
+        m1.map.put("Liberal Arts", libarts);
+        m1.map.put("Pool", pool);
+        m1.map.put("Library", library);
+        m1.map.put("Dining", dining);
+        m1.map.put("Kitchen", kitchen);
+        m1.map.put("Storage", storage);
+        m1.map.put("Tunnel", tunnel);
+        m1.map.put("Bridge", bridge);
+        m1.map.put("Union", sau);
+        m1.map.put("Courtyard", courtyard);
+        var m = new Match(combatants.stream()
+                .map(Participant::new)
+                .collect(Collectors.toSet()),
+                m1,
+                condition);
+        m.roundTriggers.add(new Cache.SpawnTrigger(cacheLocations));
         return m;
+    }
+
+    protected void preStart() {
+        
+    }
+
+    public final void start() {
+        preStart();
+        participants.forEach(participant -> {
+            var combatant = participant.getCharacter();
+            Global.gainSkills(combatant);
+            Global.learnSkills(combatant);
+            combatant.matchPrep(this);
+            combatant.getStamina().renew();
+            combatant.getArousal().renew();
+            combatant.getMojo().renew();
+            combatant.getWillpower().renew();
+            if (combatant.getPure(Attribute.Science) > 0) {
+                combatant.chargeBattery();
+            }
+            manageConditions(combatant);
+        });
+
+        placeCharacters();
+        round();
+    }
+    
+    public MatchType getType() {
+        return MatchType.NORMAL;
+    }
+    
+    public Set<Action> getAvailableActions() {
+        return Global.getActions();
+    }
+
+    protected void manageConditions(Character player) {
+        condition.handleOutfit(player);
+        condition.handleItems(player);
+        condition.handleStatus(player);
+        condition.handleTurn(player, this);
+        if (player.human()) {
+            Global.getPlayer()
+                  .getAddictions()
+                  .forEach(Addiction::refreshWithdrawal);
+        }
     }
 
     private void placeCharacters() {
