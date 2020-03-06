@@ -495,7 +495,6 @@ public class CreationGUI extends JPanel {
 
 
     protected void makeGame(Optional<StartConfiguration> startConfig) {
-
         if (!namefield.getText().isEmpty() || (startConfig.isPresent() 
                         && startConfig.get().player.nameIsSet())) {
 

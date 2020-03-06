@@ -197,14 +197,14 @@ public class Global {
         // Add starting characters to players
         players.addAll(characterPool.values().stream().filter(npc -> npc.isStartCharacter).collect(Collectors.toList()));
         if (!cfgFlags.isEmpty()) {
-            flags = cfgFlags.stream().collect(Collectors.toSet());
+            flags = new HashSet<>(cfgFlags);
             System.out.println("flags: "+flags.toString());
         }      
         Map<String, Boolean> configurationFlags = JsonUtils.mapFromJson(JsonUtils.rootJson(new InputStreamReader(ResourceLoader.getFileResourceAsStream("data/globalflags.json"))).getAsJsonObject(), String.class, Boolean.class);
-        configurationFlags.forEach((flag, val) -> Global.setFlag(flag, val));
+        configurationFlags.forEach(Global::setFlag);
 
         if (!cfgDebugFlags.isEmpty()) {
-            for (DebugFlags db:cfgDebugFlags.stream().collect(Collectors.toSet())) {
+            for (DebugFlags db: new HashSet<>(cfgDebugFlags)) {
             }
         }
 
