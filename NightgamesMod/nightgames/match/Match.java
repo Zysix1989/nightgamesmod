@@ -27,6 +27,11 @@ public class Match {
         void fire(Match m);
     }
 
+    protected static class ConstructorInputs {
+        protected Map<String, Area> map;
+        protected Set<Area> cacheLocations;
+    }
+
     protected LocalTime time;
     protected Map<String, Area> map;
     protected Set<Participant> participants;
@@ -35,14 +40,19 @@ public class Match {
     protected Set<Area> cacheLocations;
     private List<Trigger> roundTriggers = List.of(new Cache.SpawnTrigger(), new Challenge.SpawnTrigger());
 
-    public Match(Collection<Character> combatants, Modifier condition) {
+    protected Match(ConstructorInputs mi, Collection<Character> combatants, Modifier condition) {
         this.participants = combatants.stream()
             .map(Participant::new)
             .collect(Collectors.toCollection(HashSet::new));
         this.condition = condition;
         time = startTime;
         pause = false;
-        buildMap(this);
+        this.map = mi.map;
+        this.cacheLocations = mi.cacheLocations;
+    }
+
+    public static Match newMatch(Collection<Character> combatants, Modifier condition) {
+        return new Match(buildMap(), combatants, condition);
     }
     
     protected void preStart() {
@@ -90,7 +100,8 @@ public class Match {
         }
     }
 
-    private static void buildMap(Match m) {
+    protected static ConstructorInputs buildMap() {
+        var m = new ConstructorInputs();
         Area quad = new Area("Quad", DescriptionModule.quad(), AreaIdentity.quad, Set.of(AreaAttribute.Open));
         Area dorm = new Area("Dorm", DescriptionModule.dorm(), AreaIdentity.dorm);
         Area shower = new Area("Showers", DescriptionModule.shower(), AreaIdentity.shower);
@@ -218,6 +229,7 @@ public class Match {
         m.map.put("Bridge", bridge);
         m.map.put("Union", sau);
         m.map.put("Courtyard", courtyard);
+        return m;
     }
 
     private void placeCharacters() {

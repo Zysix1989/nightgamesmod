@@ -25,7 +25,7 @@ public class FTCMatch extends Match {
     private int flagCounter;
     
     protected FTCMatch(Collection<Character> combatants, Character prey) {
-        super(combatants, new FTCModifier(prey));
+        super(Match.buildMap(), combatants, new FTCModifier(prey));
         assert participants.size() == 5; // 4 hunters + prey = 5
         this.prey = findParticipant(prey);
         this.gracePeriod = 3;

@@ -21,11 +21,11 @@ public enum MatchType {
             case FTC:
                 assert condition.name().equals("FTC");
                 if (combatants.size() != 5) {
-                    return new Match(combatants, new NoModifier());
+                    return Match.newMatch(combatants, new NoModifier());
                 }
                 return FTCMatch.newMatch(combatants, ((FTCModifier) condition).getPrey());
             case NORMAL:
-                return new Match(combatants, condition);
+                return Match.newMatch(combatants, condition);
             default:
                 throw new Error();
         }

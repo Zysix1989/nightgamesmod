@@ -788,7 +788,7 @@ public class Global {
             maya.gain(Item.Onahole2);
             maya.gain(Item.Dildo2);
             maya.gain(Item.Strapon2);
-            match = new Match(lineup, matchmod);
+            match = Match.newMatch(lineup, matchmod);
         } else if (matchmod.name().equals("ftc")) {
             Character prey = ((FTCModifier) matchmod).getPrey();
             if (!prey.human()) {
