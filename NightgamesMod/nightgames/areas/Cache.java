@@ -114,13 +114,13 @@ public class Cache implements Deployable {
                     .mapToInt(Character::getLevel)
                     .average()
                     .orElseThrow();
-            if (meanParticipantLevel > 3.0
-                    && (lastCacheDropped.isEmpty() ||
-                    m.getRawTime()
-                            .compareTo(lastCacheDropped.get()
-                                    .plus(Duration.ofHours(1)
-                                            .minus(Duration.ofMinutes(Global.random(10) * 5))))
-                            >= 0)) {
+            if (meanParticipantLevel > 3.0 &&
+                    (lastCacheDropped.isEmpty() ||
+                            m.getRawTime()
+                                    .compareTo(lastCacheDropped.get()
+                                            .plus(Duration.ofHours(1)
+                                                    .minus(Duration.ofMinutes(Global.random(10) * 5))))
+                                    >= 0)) {
                 List<Area> areas = new ArrayList<>(cacheLocations);
                 Collections.shuffle(areas);
                 areas.stream()
@@ -128,8 +128,8 @@ public class Cache implements Deployable {
                         .findAny()
                         .ifPresent(area -> {
                             area.place(new Cache((int) meanParticipantLevel + Global.random(11) - 4));
-                            Global.gui()
-                                    .message("<br/><b>A new cache has been dropped off at " + area.name + "!</b>");
+                            Global.gui().message(
+                                    "<br/><b>A new cache has been dropped off at " + area.name + "!</b>");
                         });
                 lastCacheDropped = Optional.of(m.getRawTime());
             }
