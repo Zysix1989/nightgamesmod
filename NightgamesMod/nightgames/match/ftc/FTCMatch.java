@@ -30,11 +30,11 @@ public class FTCMatch extends Match {
         super(Stream.concat(hunters.stream(), Set.of(prey).stream()).collect(Collectors.toSet()),
                 map,
                 new FTCModifier(prey.getCharacter()));
+        this.bases = bases;
         this.prey = prey;
         this.gracePeriod = 3;
-        this.flagCounter = 0;
-        this.bases = bases;
         flagInCenter = false;
+        this.flagCounter = 0;
     }
 
     @Override

@@ -39,11 +39,11 @@ public class Match {
     private List<Trigger> roundTriggers = List.of(new Challenge.SpawnTrigger());
 
     protected Match(Set<Participant> participants, Map<String, Area> map, Modifier condition) {
-        this.participants = new HashSet<>(participants);
-        this.condition = condition;
         time = startTime;
-        pause = false;
         this.map = map;
+        this.participants = new HashSet<>(participants);
+        pause = false;
+        this.condition = condition;
     }
 
     public static Match newMatch(Collection<Character> combatants, Modifier condition) {
