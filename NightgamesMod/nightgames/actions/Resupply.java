@@ -69,5 +69,4 @@ public class Resupply extends Action {
         user.getCharacter().state = State.resupplying;
         return new Aftermath();
     }
-
 }
