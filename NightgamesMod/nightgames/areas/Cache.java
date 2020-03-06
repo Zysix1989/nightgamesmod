@@ -149,49 +149,34 @@ public class Cache implements Deployable {
 
         private void placeCache(Match m, Area area, int level) {
             var difficulty = level + 10;
-            Attribute primaryAttribute;
-            Attribute secondaryAttribute;
-            String primarySuccessMessage;
-            String secondarySuccessMessage;
+            AttributeCheck primaryAttribute;
+            AttributeCheck secondaryAttribute;
             String failureMessage;
 
             switch (Global.random(4)) {
                 case 3:
-                    primaryAttribute = Attribute.Seduction;
-                    secondaryAttribute = Attribute.Dark;
-                    primarySuccessMessage = INTERNAL_CONTRAPTION_SEDUCTION_SUCCESS;
-                    secondarySuccessMessage = INTERNAL_CONTRAPTION_DARK_SUCCESS;
+                    primaryAttribute = new AttributeCheck(Attribute.Seduction, difficulty, INTERNAL_CONTRAPTION_SEDUCTION_SUCCESS);
+                    secondaryAttribute = new AttributeCheck(Attribute.Dark, difficulty - 5, INTERNAL_CONTRAPTION_DARK_SUCCESS);
                     failureMessage = INTERNAL_CONTRAPTION_FAILURE;
                     break;
                 case 2:
-                    primaryAttribute = Attribute.Cunning;
-                    secondaryAttribute = Attribute.Science;
-                    primarySuccessMessage = TOUCHSCREEN_LOCK_CUNNING_SUCCESS;
-                    secondarySuccessMessage = TOUCHSCREEN_LOCK_SCIENCE_SUCCESS;
+                    primaryAttribute = new AttributeCheck(Attribute.Cunning, difficulty, TOUCHSCREEN_LOCK_CUNNING_SUCCESS);
+                    secondaryAttribute = new AttributeCheck(Attribute.Science, difficulty - 5, TOUCHSCREEN_LOCK_SCIENCE_SUCCESS);
                     failureMessage = TOUCHSCREEN_LOCK_FAILURE;
                     break;
                 case 1:
-                    primaryAttribute = Attribute.Perception;
-                    secondaryAttribute = Attribute.Arcane;
-                    difficulty -= 8;
-                    primarySuccessMessage = HIDDEN_PERCEPTION_SUCCESS;
-                    secondarySuccessMessage = HIDDEN_ARCANE_SUCCESS;
+                    primaryAttribute = new AttributeCheck(Attribute.Perception, difficulty - 8, HIDDEN_PERCEPTION_SUCCESS); // Perception doesn't work like most Attributes
+                    secondaryAttribute = new AttributeCheck(Attribute.Arcane, difficulty - 5, HIDDEN_ARCANE_SUCCESS);
                     failureMessage = HIDDEN_FAILURE;
                     break;
                 default:
-                    primaryAttribute = Attribute.Power;
-                    secondaryAttribute = Attribute.Ki;
-                    primarySuccessMessage = HEAVY_LID_POWER_SUCCESS;
-                    secondarySuccessMessage = HEAVY_LID_KI_SUCCESS;
+                    primaryAttribute = new AttributeCheck(Attribute.Power, difficulty, HEAVY_LID_POWER_SUCCESS);
+                    secondaryAttribute = new AttributeCheck(Attribute.Ki, difficulty - 5, HEAVY_LID_KI_SUCCESS);
                     failureMessage = HEAVY_LID_FAILURE;
                     break;
             }
-            Cache cache = new Cache(primaryAttribute,
-                    secondaryAttribute,
-                    primarySuccessMessage,
-                    secondarySuccessMessage,
+            Cache cache = new Cache(Set.of(primaryAttribute, secondaryAttribute),
                     failureMessage,
-                    difficulty,
                     Global.pickWeighted(REWARDS.stream()
                             .filter(r -> level >= r.minLevel)
                             .map(reward -> new Tuple2<>(reward, reward.weight))
@@ -227,24 +212,37 @@ public class Cache implements Deployable {
         }
     }
 
-    private int dc;
-    private Attribute primaryAttribute;
-    private Attribute secondaryAttribute;
-    private String primarySuccessMessage;
-    private String secondarySuccessMessage;
+    private static final class AttributeCheck {
+        private Attribute attribute;
+        private int difficulty;
+        private String successMessage;
+
+        private AttributeCheck(Attribute attribute, int difficulty, String successMessage) {
+            this.attribute = attribute;
+            this.difficulty = difficulty;
+            this.successMessage = successMessage;
+        }
+
+        private Optional<String> check(Participant p) {
+            var dc = difficulty;
+            if (p.getCharacter().has(Trait.treasureSeeker)) {
+                dc -= 5;
+            }
+            if (p.getCharacter().check(attribute, dc)) {
+                return Optional.of(successMessage);
+            }
+            return Optional.empty();
+        }
+    }
+
+    private Set<AttributeCheck> attributeChecks;
     private String failureMessage;
     private ArrayList<Loot> reward;
 
-    public Cache(Attribute primaryAttribute, Attribute secondaryAttribute,
-                 String primarySuccessMessage, String secondarySuccessMessage, String failureMessage,
-                 int difficulty, List<Loot> reward) {
+    public Cache(Set<AttributeCheck> attributeChecks, String failureMessage, List<Loot> reward) {
+        this.attributeChecks = attributeChecks;
         this.reward = new ArrayList<>(reward);
-        this.primaryAttribute = primaryAttribute;
-        this.secondaryAttribute = secondaryAttribute;
-        this.primarySuccessMessage = primarySuccessMessage;
-        this.secondarySuccessMessage = secondarySuccessMessage;
         this.failureMessage = failureMessage;
-        this.dc = difficulty;
     }
 
     private void grantReward(Participant p) {
@@ -257,22 +255,19 @@ public class Cache implements Deployable {
     @Override
     public boolean resolve(Participant active) {
         if (active.getCharacter().state == State.ready) {
-            if (active.getCharacter().has(Trait.treasureSeeker)) {
-                dc -= 5;
-            }
-            if (active.getCharacter().check(primaryAttribute, dc)) {
-                if (active.getCharacter().human()) {
-                    Global.gui().message(primarySuccessMessage);
-                }
-                grantReward(active);
-            } else if (active.getCharacter().check(secondaryAttribute, dc - 5)) {
-                if (active.getCharacter().human()) {
-                    Global.gui().message(secondarySuccessMessage);
-                }
-                grantReward(active);
-            } else {
-                Global.gui().message(failureMessage);
-            }
+            attributeChecks.stream()
+                    .map(c -> c.check(active))
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .findAny()
+                    .ifPresentOrElse(
+                            msg -> {
+                                if (active.getCharacter().human()) {
+                                    Global.gui().message(msg);
+                                }
+                                grantReward(active);
+                            },
+                            () -> Global.gui().message(failureMessage));
             active.getLocation().remove(this);
             return true;
         }
