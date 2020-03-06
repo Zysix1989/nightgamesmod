@@ -128,13 +128,12 @@ public class Cache implements Deployable {
                         .findFirst()
                         .ifPresent(area -> {
                             int level = (int) meanParticipantLevel + Global.random(11) - 4;
-                            Cache cache = new Cache(level);
-                            cache.reward.addAll(
+                            Cache cache = new Cache(level,
                                     Global.pickWeighted(REWARDS.stream()
                                             .filter(r -> level >= r.minLevel)
                                             .map(reward -> new Tuple2<>(reward, reward.weight))
                                             .collect(Collectors.toList()))
-                                    .orElseThrow().items);
+                                            .orElseThrow().items);
                             area.place(cache);
                             Global.gui().message(
                                     "<br/><b>A new cache has been dropped off at " + area.name + "!</b>");
@@ -149,8 +148,8 @@ public class Cache implements Deployable {
     private Attribute secondary;
     private ArrayList<Loot> reward;
 
-    public Cache(int level) {
-        reward = new ArrayList<Loot>();
+    public Cache(int level, List<Loot> reward) {
+        this.reward = new ArrayList<>(reward);
         dc = 10 + level;
         switch (Global.random(4)) {
             case 3:
