@@ -27,7 +27,7 @@ public class FTCMatch extends Match {
     
     protected FTCMatch(Set<Participant> participants, Character prey) {
         super(participants,
-                Match.buildMap(),
+                Match.makeConstructorInputs(),
                 new FTCModifier(prey));
         assert participants.size() == 5; // 4 hunters + prey = 5
         this.prey = findParticipant(prey);

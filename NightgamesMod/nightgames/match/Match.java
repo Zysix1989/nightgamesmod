@@ -53,7 +53,7 @@ public class Match {
         return new Match(combatants.stream()
                 .map(Participant::new)
                 .collect(Collectors.toSet()),
-                buildMap(),
+                makeConstructorInputs(),
                 condition);
     }
 
@@ -102,7 +102,7 @@ public class Match {
         }
     }
 
-    protected static ConstructorInputs buildMap() {
+    protected static ConstructorInputs makeConstructorInputs() {
         var m = new ConstructorInputs();
         Area quad = new Area("Quad", DescriptionModule.quad(), AreaIdentity.quad, Set.of(AreaAttribute.Open));
         Area dorm = new Area("Dorm", DescriptionModule.dorm(), AreaIdentity.dorm);
