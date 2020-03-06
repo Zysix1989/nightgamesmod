@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 public class Match {
 
     private static final LocalTime startTime = LocalTime.of(22, 0, 0);
+
     public interface Trigger {
         void fire(Match m);
     }
@@ -33,6 +34,7 @@ public class Match {
     private boolean pause;
     protected Modifier condition;
     private List<Trigger> beforeRoundTriggers = List.of(new Challenge.SpawnTrigger());
+    private Iterator<Participant> roundIterator;
 
     protected Match(Set<Participant> participants, Map<String, Area> map, Modifier condition) {
         time = startTime;
@@ -40,6 +42,7 @@ public class Match {
         this.participants = new HashSet<>(participants);
         pause = false;
         this.condition = condition;
+        roundIterator = Collections.emptyIterator();
     }
 
     public static Match newMatch(Collection<Character> combatants, Modifier condition) {
@@ -273,7 +276,6 @@ public class Match {
     }
 
     public final void round() {
-        Iterator<Participant> roundIterator = Collections.emptyIterator();
         while (!time.isBefore(startTime.plusHours(3))) {
             if (!roundIterator.hasNext()) {
                 // prepare next round
