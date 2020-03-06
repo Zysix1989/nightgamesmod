@@ -90,7 +90,7 @@ public abstract class Character extends Observable implements Cloneable {
     public Set<Status> removelist;                  //Rename for clarity? - DSM 
     public Set<Status> addlist;                     //Rename for clarity?   -DSM
     private Map<String, Integer> cooldowns;          //May not require this if we add new Skills to characters and they may track their own requirements and cooldowns. - DSM
-    public CopyOnWriteArrayList<String> mercy;     //Can be changed into a flag that is stored in flags. -DSM
+    public CopyOnWriteArrayList<Character> mercy;     //Can be changed into a flag that is stored in flags. -DSM
     private Map<Item, Integer> inventory;
     private Map<String, Integer> flags;             //Needs to be more strongly leveraged in mechanics.  -DSM
     protected Item trophy;                          
@@ -2723,7 +2723,7 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public void defeated(Character victor) {
-        mercy.addIfAbsent(victor.getType());
+        mercy.addIfAbsent(victor);
     }
 
     /**Performs the resupply of this character. Performs the correct otucome to evade the problem of camping a clothing location.
@@ -2776,8 +2776,7 @@ public Character clone() throws CloneNotSupportedException {
      * 
      * */
     public void finishMatch() {
-        for (String victorType : mercy) {
-            Character victor = Global.getCharacterByType(victorType);
+        for (var victor : mercy) {
             victor.bounty( 1, victor);
         }
         Global.gui().clearImage();
@@ -2820,7 +2819,7 @@ public Character clone() throws CloneNotSupportedException {
             FTCMatch match = (FTCMatch) Global.getMatch();
             ftc = !match.inGracePeriod() || (!match.isPrey(this) && !match.isPrey(p2));
         }
-        return ftc && !mercy.contains(p2.getType()) && state != State.resupplying;
+        return ftc && !mercy.contains(p2) && state != State.resupplying;
     }
 
     public void setTrophy(Item trophy) {
