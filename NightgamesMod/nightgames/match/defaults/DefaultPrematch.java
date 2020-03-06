@@ -4,6 +4,7 @@ import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.gui.GUI;
 import nightgames.gui.commandpanel.CommandPanelOption;
+import nightgames.match.MatchType;
 import nightgames.match.Prematch;
 import nightgames.match.PrematchEvent;
 import nightgames.modifier.standard.MayaModifier;
@@ -26,10 +27,10 @@ public class DefaultPrematch extends Prematch {
         String message = "";
         List<CommandPanelOption> choice = new ArrayList<>();
         if (response.startsWith("Start")) {
-            Global.setUpMatch(Global.currentMatchType, type);
+            Global.setUpMatch(MatchType.NORMAL, type);
         } else if (response.startsWith("Not")) {
             type = new NoModifier();
-            Global.setUpMatch(Global.currentMatchType, type);
+            Global.setUpMatch(MatchType.NORMAL, type);
         } else if (response.startsWith("Do")) {
             message += type.acceptance();
             choice.add(GUI.sceneOption("Start The Match"));
