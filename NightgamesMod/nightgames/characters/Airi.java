@@ -49,7 +49,7 @@ public class Airi extends BasePersonality {
     public Airi(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Airi", false);
         setupCharacter(this, charConfig, commonConfig);
-        constructLines();
+        constructLines(this);
     }
 
     @Override
@@ -85,15 +85,15 @@ public class Airi extends BasePersonality {
         self.body.add(new AssPart(Size.Normal));
     }
 
-    private void constructLines() {
-        addLine(CharacterLine.BB_LINER, (c, self, other) -> self.has(Trait.slime) ? "Airi grimaces as you fall. <i>\"Apologies... but necessary.... Please understand...\"</i>" : "<i>\"Sorry... I hope it didn't hurt too badly...\"</i>");
-        addLine(CharacterLine.NAKED_LINER, (c, self, other) -> self.has(Trait.slime) ? "" : "<i>Nooo! Don't look at me!</i>");
-        addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> self.has(Trait.slime) ? "Airi glares at you from the puddle she formed on the floor. <i>\"Unforgivable...\"</i>" : "<i>\"Unforgivable...\"</i>");
-        addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> self.has(Trait.slime) ? "Airi coos to you <i>\"About to cum..? ...even trying..?\"</i>" : "<i><b>Airi giggles, </b> \"Try a bit harder okay?\"</i>");
-        addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> self.has(Trait.slime) ? "<i>\"Fill me... now...\"</i>" : "<i>\"Uhm, it's okay, you can come inside...\"</i>");
-        addLine(CharacterLine.ENGULF_LINER, (c, self, other) -> "\n<i>\"It's done... over... stop struggling... cum.\"</i>");
+    private static void constructLines(Airi ai) {
+        ai.addLine(CharacterLine.BB_LINER, (c, self, other) -> self.has(Trait.slime) ? "Airi grimaces as you fall. <i>\"Apologies... but necessary.... Please understand...\"</i>" : "<i>\"Sorry... I hope it didn't hurt too badly...\"</i>");
+        ai.addLine(CharacterLine.NAKED_LINER, (c, self, other) -> self.has(Trait.slime) ? "" : "<i>Nooo! Don't look at me!</i>");
+        ai.addLine(CharacterLine.STUNNED_LINER, (c, self, other) -> self.has(Trait.slime) ? "Airi glares at you from the puddle she formed on the floor. <i>\"Unforgivable...\"</i>" : "<i>\"Unforgivable...\"</i>");
+        ai.addLine(CharacterLine.TAUNT_LINER, (c, self, other) -> self.has(Trait.slime) ? "Airi coos to you <i>\"About to cum..? ...even trying..?\"</i>" : "<i><b>Airi giggles, </b> \"Try a bit harder okay?\"</i>");
+        ai.addLine(CharacterLine.TEMPT_LINER, (c, self, other) -> self.has(Trait.slime) ? "<i>\"Fill me... now...\"</i>" : "<i>\"Uhm, it's okay, you can come inside...\"</i>");
+        ai.addLine(CharacterLine.ENGULF_LINER, (c, self, other) -> "\n<i>\"It's done... over... stop struggling... cum.\"</i>");
 
-        addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
+        ai.addLine(CharacterLine.ORGASM_LINER, (c, self, other) -> {
             if (self.has(Trait.slime)) {
                 return "<i>\"Ahhnn... forgot how good... feels... Will return favor...\"</i>.";
             } else if (self.getWillpower().percent() > 90) {
@@ -104,9 +104,9 @@ public class Airi extends BasePersonality {
                 return "<i>\"I need more... Give me more...\"</i>";
             }
         });
-        addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> self.has(Trait.slime) ? "<i>\"...Feels good..? I'll suck more out... I'll milk you dry...\"</i>" : "<i>\"Hyaa! Oh please warn me next time...\"</i>");
-        
-        addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> "You walk back to your dorm after the match, and decide to take a shower after all that exertion. Who knew sex fighting a bunch of girls "
+        ai.addLine(CharacterLine.MAKE_ORGASM_LINER, (c, self, other) -> self.has(Trait.slime) ? "<i>\"...Feels good..? I'll suck more out... I'll milk you dry...\"</i>" : "<i>\"Hyaa! Oh please warn me next time...\"</i>");
+
+        ai.addLine(CharacterLine.NIGHT_LINER, (c, self, other) -> "You walk back to your dorm after the match, and decide to take a shower after all that exertion. Who knew sex fighting a bunch of girls "
                         + "would be so exhausting? You strip off your shirt and boxers and head straight into the bathroom. As you flip on the lights, you notice that the tub seems already filled with water. "
                         + "Just as you wonder if you forgot to drain the tub from last night, the liquid in the tub quivers and… stands up. "
                         + "<br/>"
@@ -117,10 +117,10 @@ public class Airi extends BasePersonality {
                         + "<i>Un… will help you clean…</i><br/><br/> "
                         + "Wait what? Oh n-!<br/>"
                         + "Airi pulls you into the tub with her gooey appendages and submerges you inside her body. <i>Relax… I’ll clean you up… Inside and out…</i><br/>");
-        
-        addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
+
+        ai.addLine(CharacterLine.CHALLENGE, (c, self, other) -> {
             if (other.human()) {
-                return character.has(Trait.slime)
+                return ai.character.has(Trait.slime)
                                 ? "Airi's main body rises up from her slime blob and forms the demure beauty you're used to seeing. <i>\"Delicious... Quickly... Give me your seed...\"</i>"
                                 : "You're fighting Airi, a rather mysterious asian girl. She looks pretty normal for now, but you know she's holding a secret.";
             } else {
@@ -128,14 +128,14 @@ public class Airi extends BasePersonality {
             }
         });
 
-        description = JtwigTemplate.classpathTemplate("airi/describe.twig");
+        ai.description = JtwigTemplate.classpathTemplate("airi/describe.twig");
         
         //To be said when this character wins the entire night.
-        addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
+        ai.addLine(CharacterLine.VICTORY_LINER, (c, self, other) -> {
             return "{self:SUBJECT} smiles and hides her face in her hands but says nothing; It's obvious that she's happy that she won.";
         });
         //To be said when they earn 0 points.
-        addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
+        ai.addLine(CharacterLine.LOSER_LINER, (c, self, other) -> {
             return "{self:SUBJECT} looks down at the ground and hides her face, obviously disappointed at her loss.\"</i>";
         });
     }
