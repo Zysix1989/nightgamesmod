@@ -32,7 +32,7 @@ public class Match {
     protected Set<Participant> participants;
     private boolean pause;
     protected Modifier condition;
-    private List<Trigger> roundTriggers = List.of(new Challenge.SpawnTrigger());
+    private List<Trigger> beforeRoundTriggers = List.of(new Challenge.SpawnTrigger());
 
     protected Match(Set<Participant> participants, Map<String, Area> map, Modifier condition) {
         time = startTime;
@@ -173,7 +173,7 @@ public class Match {
                 .collect(Collectors.toSet()),
                 map,
                 condition);
-        m.roundTriggers.add(new Cache.SpawnTrigger(cacheLocations));
+        m.beforeRoundTriggers.add(new Cache.SpawnTrigger(cacheLocations));
         return m;
     }
 
@@ -244,7 +244,7 @@ public class Match {
     }
 
     private void handleFullTurn() {
-        roundTriggers.forEach(trigger -> trigger.fire(this));
+        beforeRoundTriggers.forEach(trigger -> trigger.fire(this));
         time = time.plusMinutes(5);
     }
 
