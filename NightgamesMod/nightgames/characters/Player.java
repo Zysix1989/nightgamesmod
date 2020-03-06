@@ -545,31 +545,11 @@ public class Player extends Character {
     }
 
     @Override
-    public void search() {
-        int roll = Global.random(10);
-        switch (roll) {
-            case 9:
-                gain(Item.Tripwire);
-                gain(Item.Tripwire);
-                break;
-            case 8:
-                gain(Item.ZipTie);
-                gain(Item.ZipTie);
-                gain(Item.ZipTie);
-                break;
-            case 7:
-                gain(Item.Phone);
-                break;
-            case 6:
-                gain(Item.Rope);
-                break;
-            case 5:
-                gain(Item.Spring);
-                break;
-            default:
-                gui.message("You don't find anything useful.");
+    public void search(Collection<Item> foundItems) {
+        super.search(foundItems);
+        if (foundItems.isEmpty()) {
+            gui.message("You don't find anything useful.");
         }
-        state = State.ready;
     }
 
     @Override

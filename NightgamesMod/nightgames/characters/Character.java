@@ -2855,29 +2855,8 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     /**Searches the area for an item. Provides a random item of a hardcoded set. */
-    public void search() {
-        int roll = Global.random(15);
-        switch (roll) {
-            case 9:
-                gain(Item.Tripwire);
-                gain(Item.Tripwire);
-                break;
-            case 8:
-                gain(Item.ZipTie);
-                gain(Item.ZipTie);
-                gain(Item.ZipTie);
-                break;
-            case 7:
-                gain(Item.Phone);
-                break;
-            case 6:
-                gain(Item.Rope);
-                break;
-            case 5:
-                gain(Item.Spring);
-        }
-        state = State.ready;
-
+    public void search(Collection<Item> foundItems) {
+        foundItems.forEach(this::gain);
     }
 
     public abstract String challenge(Character other);

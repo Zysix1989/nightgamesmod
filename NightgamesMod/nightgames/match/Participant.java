@@ -121,6 +121,23 @@ public class Participant {
         return List.of();
     }
 
+    private Collection<Item> searchItems() {
+        int roll = Global.random(10);
+        switch (roll) {
+            case 9:
+                return List.of(Item.Tripwire, Item.Tripwire);
+            case 8:
+                return List.of(Item.ZipTie, Item.ZipTie, Item.ZipTie);
+            case 7:
+                return List.of(Item.Phone);
+            case 6:
+                return List.of(Item.Rope);
+            case 5:
+                return List.of(Item.Spring);
+            default:
+                return List.of();
+        }
+    }
 
 
     public void move() {
@@ -150,7 +167,8 @@ public class Participant {
             character.state = State.ready;
             return;
         } else if (character.state == State.searching) {
-            character.search();
+            character.search(searchItems());
+            character.state = State.ready;
             return;
         } else if (character.state == State.resupplying) {
             character.resupply();
