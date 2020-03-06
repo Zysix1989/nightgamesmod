@@ -270,11 +270,11 @@ public class Cache implements Deployable {
         return false;
     }
 
-    private static class RewardType {
+    private static final class RewardType {
         List<Loot> items;
         int minLevel;
         double weight;
-        public RewardType(int minLevel, double weight, Loot...items) {
+        private RewardType(int minLevel, double weight, Loot... items) {
             this.items = Arrays.asList(items);
             this.minLevel = minLevel;
             this.weight = weight;
