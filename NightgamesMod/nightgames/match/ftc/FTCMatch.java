@@ -24,7 +24,7 @@ public class FTCMatch extends Match {
     private boolean flagInCenter;
     private int flagCounter;
     
-    public FTCMatch(Collection<Character> combatants, Character prey) {
+    protected FTCMatch(Collection<Character> combatants, Character prey) {
         super(combatants, new FTCModifier(prey));
         assert participants.size() == 5; // 4 hunters + prey = 5
         this.prey = findParticipant(prey);
@@ -92,6 +92,10 @@ public class FTCMatch extends Match {
                 }
             }
         }
+    }
+
+    public static FTCMatch newMatch(Collection<Character> combatants, Character prey) {
+        return new FTCMatch(combatants, prey);
     }
 
     private static void buildFTCMap(FTCMatch m, Participant north, Participant west, Participant south, Participant east, Participant prey) {

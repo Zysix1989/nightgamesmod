@@ -1,6 +1,5 @@
 package nightgames.match;
 
-import java.util.Collection;
 import nightgames.characters.Character;
 import nightgames.global.Flag;
 import nightgames.global.Global;
@@ -10,6 +9,8 @@ import nightgames.match.ftc.FTCPrematch;
 import nightgames.modifier.Modifier;
 import nightgames.modifier.standard.FTCModifier;
 import nightgames.modifier.standard.NoModifier;
+
+import java.util.Collection;
 
 public enum MatchType {
     NORMAL,
@@ -22,7 +23,7 @@ public enum MatchType {
                 if (combatants.size() != 5) {
                     return new Match(combatants, new NoModifier());
                 }
-                return new FTCMatch(combatants, ((FTCModifier) condition).getPrey());
+                return FTCMatch.newMatch(combatants, ((FTCModifier) condition).getPrey());
             case NORMAL:
                 return new Match(combatants, condition);
             default:
