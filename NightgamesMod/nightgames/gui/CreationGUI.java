@@ -1,42 +1,19 @@
 package nightgames.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import javax.swing.Box;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.ScrollPaneConstants;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.CharacterSex;
 import nightgames.characters.Trait;
 import nightgames.global.Flag;
 import nightgames.global.Global;
+import nightgames.global.start.DefaultStart;
 import nightgames.global.start.GameStarter;
 import nightgames.global.start.TutorialStart;
 import nightgames.start.StartConfiguration;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.List;
+import java.util.*;
 
 public class CreationGUI extends JPanel {
     /**
@@ -44,7 +21,7 @@ public class CreationGUI extends JPanel {
      */
     private static final long serialVersionUID = -101675245609325067L;
 
-    private static final GameStarter STARTER = new TutorialStart();
+    private static final GameStarter STARTER = new DefaultStart();
     
     private JTextField powerfield;
     private JTextField seductionfield;
@@ -540,7 +517,7 @@ public class CreationGUI extends JPanel {
             selectedAttributes.put(Attribute.Cunning, cunning);
             Global.newGame(name, startConfig, traits, sex, selectedAttributes);
             if(startConfig.isPresent() && Global.getFlagStartingWith(startConfig.get().getFlags(), "SkipTutorial").isPresent() && STARTER instanceof TutorialStart) {
-                ((TutorialStart)STARTER).respond("No");return;
+                ((TutorialStart)STARTER).respond("Start");return;
             }
             STARTER.startGame();
         }
