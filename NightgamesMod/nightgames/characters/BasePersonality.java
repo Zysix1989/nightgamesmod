@@ -57,7 +57,6 @@ public abstract class BasePersonality implements Serializable {
         Optional<NpcConfiguration> commonConfig) {
         p.setGrowth();
         p.applyBasicStats(p.character);
-        p.applyStrategy(p.character);
 
         // Apply config changes
         Optional<NpcConfiguration> mergedConfig = NpcConfiguration.mergeOptionalNpcConfigs(charConfig, commonConfig);

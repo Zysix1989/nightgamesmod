@@ -44,6 +44,7 @@ public class Maya extends BasePersonality {
 
     public Maya(int playerLevel, Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Maya", false);
+        applyStrategy(character);
         setupCharacter(this,charConfig, commonConfig);
         while (character.getLevel() < playerLevel + 20) {
             character.ding(null);

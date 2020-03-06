@@ -40,6 +40,7 @@ public class Kat extends BasePersonality {
 
     public Kat(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Kat", false);
+        applyStrategy(character);
         setupCharacter(this,charConfig, commonConfig);
         constructLines();
     }
