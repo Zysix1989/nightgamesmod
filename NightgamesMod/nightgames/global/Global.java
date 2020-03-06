@@ -710,7 +710,10 @@ public class Global {
 
     
     public static void startNight() {
-        currentMatchType = decideMatchType();
+        currentMatchType = MatchType.NORMAL;
+        if (getPlayer().getLevel() >= 15 && random(10) < 2) {
+            currentMatchType = MatchType.FTC;
+        }
         currentMatchType.runPrematch();
     }
 
@@ -1530,13 +1533,6 @@ public class Global {
 
     public static Set<Modifier> getModifierPool() {
         return modifierPool;
-    }
-
-    public static MatchType decideMatchType() {
-        if (getPlayer().getLevel() >= 15 && random(10) < 2) {
-            return MatchType.FTC;
-        }
-        return MatchType.NORMAL;
     }
 
     public static HashSet<Character> getParticipants() {
