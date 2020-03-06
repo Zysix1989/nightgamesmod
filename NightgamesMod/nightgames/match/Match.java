@@ -454,19 +454,6 @@ public class Match {
             .orElseThrow();
     }
 
-    public void dropPackage(Collection<Area> cacheLocations) {
-        List<Area> areas = new ArrayList<>(cacheLocations);
-        Collections.shuffle(areas);
-        areas.stream()
-                .filter(area -> area.env.size() < 5)
-                .findAny()
-                .ifPresent(area -> {
-                    area.place(new Cache(meanLvl() + Global.random(11) - 4));
-                    Global.gui()
-                            .message("<br/><b>A new cache has been dropped off at " + area.name + "!</b>");
-                });
-    }
-
     public final Optional<Area> gps(String name) {
         return Optional.ofNullable(map.get(name));
     }

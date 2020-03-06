@@ -111,7 +111,16 @@ public class Cache implements Deployable {
             if (m.meanLvl() > 3
                     && (lastCacheDropped.isEmpty() ||
                     m.getRawTime().compareTo(lastCacheDropped.get().plus(Duration.ofHours(1).minus(Duration.ofMinutes(Global.random(10) * 5)))) >= 0)) {
-                m.dropPackage(cacheLocations);
+                List<Area> areas = new ArrayList<>(cacheLocations);
+                Collections.shuffle(areas);
+                areas.stream()
+                        .filter(area -> area.env.size() < 5)
+                        .findAny()
+                        .ifPresent(area -> {
+                            area.place(new Cache(m.meanLvl() + Global.random(11) - 4));
+                            Global.gui()
+                                    .message("<br/><b>A new cache has been dropped off at " + area.name + "!</b>");
+                        });
                 lastCacheDropped = Optional.of(m.getRawTime());
             }
         }
