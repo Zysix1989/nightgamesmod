@@ -108,7 +108,31 @@ public class Cache implements Deployable {
         }
 
         private void placeCache(Match m, Area area, int level) {
-            Cache cache = new Cache(level,
+            var difficulty = level + 10;
+            Attribute primaryAttribute;
+            Attribute secondaryAttribute;
+            switch (Global.random(4)) {
+                case 3:
+                    primaryAttribute = Attribute.Seduction;
+                    secondaryAttribute = Attribute.Dark;
+                    break;
+                case 2:
+                    primaryAttribute = Attribute.Cunning;
+                    secondaryAttribute = Attribute.Science;
+                    break;
+                case 1:
+                    primaryAttribute = Attribute.Perception;
+                    secondaryAttribute = Attribute.Arcane;
+                    difficulty -= 8;
+                    break;
+                default:
+                    primaryAttribute = Attribute.Power;
+                    secondaryAttribute = Attribute.Ki;
+                    break;
+            }
+            Cache cache = new Cache(primaryAttribute,
+                    secondaryAttribute,
+                    difficulty,
                     Global.pickWeighted(REWARDS.stream()
                             .filter(r -> level >= r.minLevel)
                             .map(reward -> new Tuple2<>(reward, reward.weight))
@@ -145,32 +169,15 @@ public class Cache implements Deployable {
     }
 
     private int dc;
-    private Attribute test;
-    private Attribute secondary;
+    private Attribute primaryAttribute;
+    private Attribute secondaryAttribute;
     private ArrayList<Loot> reward;
 
-    public Cache(int level, List<Loot> reward) {
+    public Cache(Attribute primaryAttribute, Attribute secondaryAttribute, int difficulty, List<Loot> reward) {
         this.reward = new ArrayList<>(reward);
-        dc = 10 + level;
-        switch (Global.random(4)) {
-            case 3:
-                test = Attribute.Seduction;
-                secondary = Attribute.Dark;
-                break;
-            case 2:
-                test = Attribute.Cunning;
-                secondary = Attribute.Science;
-                break;
-            case 1:
-                test = Attribute.Perception;
-                secondary = Attribute.Arcane;
-                dc -= 8;
-                break;
-            default:
-                test = Attribute.Power;
-                secondary = Attribute.Ki;
-                break;
-        }
+        this.primaryAttribute = primaryAttribute;
+        this.secondaryAttribute = secondaryAttribute;
+        this.dc = difficulty;
     }
 
     @Override
@@ -179,9 +186,9 @@ public class Cache implements Deployable {
             if (active.getCharacter().has(Trait.treasureSeeker)) {
                 dc -= 5;
             }
-            if (active.getCharacter().check(test, dc)) {
+            if (active.getCharacter().check(primaryAttribute, dc)) {
                 if (active.getCharacter().human()) {
-                    switch (test) {
+                    switch (primaryAttribute) {
                         case Cunning:
                             Global.gui().message(
                                             "<br/><br/>You notice a conspicuous box lying on the floor connected to a small digital touchscreen. The box is sealed tight, but it looks like "
@@ -213,9 +220,9 @@ public class Cache implements Deployable {
                     i.pickup(active.getCharacter());
                 }
                 active.getCharacter().modMoney(Global.random(500) + 500);
-            } else if (active.getCharacter().check(secondary, dc - 5)) {
+            } else if (active.getCharacter().check(secondaryAttribute, dc - 5)) {
                 if (active.getCharacter().human()) {
-                    switch (test) {
+                    switch (primaryAttribute) {
                         case Cunning:
                             Global.gui().message(
                                             "<br/><br/>You notice a conspicuous box lying on the floor connected to a small digital touchscreen. The box is sealed tight, but it looks like "
@@ -249,7 +256,7 @@ public class Cache implements Deployable {
                 }
                 active.getCharacter().modMoney(Global.random(500) + 500);
             } else {
-                switch (test) {
+                switch (primaryAttribute) {
                     case Cunning:
                         Global.gui().message(
                                         "<br/><br/>You notice a conspicuous box lying on the floor connected to a small digital touchscreen. The box is sealed tight, but it looks like "
