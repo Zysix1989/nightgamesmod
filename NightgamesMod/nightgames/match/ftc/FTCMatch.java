@@ -32,9 +32,9 @@ public class FTCMatch extends Match {
                 new FTCModifier(prey.getCharacter()));
         this.bases = bases;
         this.prey = prey;
-        this.gracePeriod = 3;
+        gracePeriod = 3;
         flagInCenter = false;
-        this.flagCounter = 0;
+        flagCounter = 0;
     }
 
     @Override
