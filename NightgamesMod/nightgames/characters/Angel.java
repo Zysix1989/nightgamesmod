@@ -1,7 +1,5 @@
 package nightgames.characters;
 
-import java.util.Arrays;
-import java.util.Optional;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.FacePart;
@@ -23,6 +21,9 @@ import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
 import org.jtwig.JtwigTemplate;
+
+import java.util.Arrays;
+import java.util.Optional;
 
 public class Angel extends BasePersonality {
     private static final long serialVersionUID = -8169646189131720872L;
@@ -62,8 +63,6 @@ public class Angel extends BasePersonality {
             .setMax(110);
 
         self.setTrophy(Item.AngelTrophy);
-        if (self instanceof NPC) {
-        }
         self.body.add(new BreastsPart(Size.DDCup));
         // very feminine face
         self.body.add(new FacePart(0.3, 4.2));
@@ -72,9 +71,8 @@ public class Angel extends BasePersonality {
 
     @Override
     public void applyStrategy(NPC self) {
-        NPC npcSelf = (NPC) self;
-        npcSelf.plan = Plan.hunting;
-        npcSelf.mood = Emotion.confident;
+        self.plan = Plan.hunting;
+        self.mood = Emotion.confident;
     }
 
     private static Growth newGrowth() {
