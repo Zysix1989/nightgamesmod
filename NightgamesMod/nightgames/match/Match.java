@@ -465,14 +465,6 @@ public class Match {
                 });
     }
 
-    public void dropChallenge() {
-        ArrayList<Area> areas = new ArrayList<>(map.values());
-        Area target = areas.get(Global.random(areas.size()));
-        if (target.env.size() < 5) {
-            target.place(new Challenge());
-        }
-    }
-
     public final Optional<Area> gps(String name) {
         return Optional.ofNullable(map.get(name));
     }
@@ -545,4 +537,5 @@ public class Match {
     public Set<Participant> getParticipants() {
         return Set.copyOf(participants);
     }
+
 }

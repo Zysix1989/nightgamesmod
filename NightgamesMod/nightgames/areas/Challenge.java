@@ -24,7 +24,11 @@ public class Challenge implements Deployable {
             if (Global.checkFlag(Flag.challengeAccepted)
                     && m.getRawTime().getMinute() != 0
                     && m.getRawTime().getMinute() % 30 == 0) {
-                m.dropChallenge();
+                ArrayList<Area> areas = new ArrayList<>(m.getAreas());
+                Area target = areas.get(Global.random(areas.size()));
+                if (target.env.size() < 5) {
+                    target.place(new Challenge());
+                }
             }
         }
     }
