@@ -109,10 +109,10 @@ public class DefaultEncounter implements Encounter {
             p1.getCharacter().showerScene(p2.getCharacter(), this);
             return;
         } else if (p1.getCharacter().state == State.webbed) {
-            spider(p2.getCharacter(), p1.getCharacter());
+            spider(p2, p1);
             return;
         } else if (p2.getCharacter().state == State.webbed) {
-            spider(p1.getCharacter(), p2.getCharacter());
+            spider(p1, p2);
             return;
         } else if (p1.getCharacter().state == State.crafting || p1.getCharacter().state == State.searching) {
             p2.getCharacter().spy(p1.getCharacter(), this);
@@ -446,10 +446,10 @@ public class DefaultEncounter implements Encounter {
         location.endEncounter();
     }
 
-    protected void spider(Character attacker, Character target) {
-        attacker.gainXP(attacker.getVictoryXP(target));
-        target.gainXP(target.getDefeatXP(attacker));
-        Spiderweb.onSpiderwebDefeat(attacker, target, location.getTrap().orElseThrow());
+    protected void spider(Participant attacker, Participant target) {
+        attacker.getCharacter().gainXP(attacker.getCharacter().getVictoryXP(target.getCharacter()));
+        target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
+        Spiderweb.onSpiderwebDefeat(attacker.getCharacter(), target.getCharacter(), location.getTrap().orElseThrow());
     }
 
     public void intrude(Character intruder, Character assist) {
