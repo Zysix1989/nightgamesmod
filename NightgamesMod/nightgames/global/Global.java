@@ -39,6 +39,7 @@ import nightgames.trap.Tripwire;
 import nightgames.trap.*;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextFactory;
+import org.parboiled.common.Tuple2;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
@@ -1228,31 +1229,28 @@ public class Global {
     
     
     public static <T> Optional<T> pickWeighted(Map<T, Double> map) {
-        if (map.isEmpty()) {
-            return Optional.empty();
-        }
-    
         // Normalize the weights so they sum to 1.0, sort them low->high,
         // then partition the range [0, 1) such that values with greater
         // weight get a larger 'section'. Finally, pick a random value in
         // [0, 1) and see what partition it's in. Return the corresponding value.
         
-        double totalWeight = map.values().stream().reduce(0.0, Double::sum);
-        Map<T, Double> normalized = new HashMap<>();
-        map.forEach((key, value) -> normalized.put(key, value / totalWeight));
-        List<Map.Entry<T, Double>> entries = new ArrayList<>(normalized.entrySet());
-        entries.sort(Map.Entry.comparingByValue());
-        
-        double threshold = rng.nextDouble();
-        double sumSoFar = 0.0;
-        for (Map.Entry<T, Double> ent : entries) {
-            if (ent.getValue() + sumSoFar >= threshold) {
-                return Optional.of(ent.getKey());
-            }
-            sumSoFar += ent.getValue();
-        }
-        
-        throw new RuntimeException("pickWeighted failed to pick a value");
+        final double totalWeight = map.values().stream().reduce(0.0, Double::sum);
+        final double threshold = rng.nextDouble();
+        final var wrapper = new Object() {
+            double sumSoFar = 0.0;
+        };
+
+        return map.entrySet().stream()
+                .map(entry -> new Tuple2<>(entry.getKey(), entry.getValue() / totalWeight))
+                .sorted(Comparator.comparing(t -> t.b))
+                .dropWhile(t -> {
+                    if (t.b + wrapper.sumSoFar >= threshold) {
+                        return false;
+                    }
+                    wrapper.sumSoFar += t.b;
+                    return true;
+                })
+                .findFirst().map(t -> t.a);
     }
 
     public static int getDate() {
