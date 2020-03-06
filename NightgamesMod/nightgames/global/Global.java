@@ -702,7 +702,7 @@ public class Global {
 
     
     public static void startNight() {
-        currentMatchType = MatchType.NORMAL;
+        var currentMatchType = MatchType.NORMAL;
         if (getPlayer().getLevel() >= 15 && random(10) < 2) {
             currentMatchType = MatchType.FTC;
         }
