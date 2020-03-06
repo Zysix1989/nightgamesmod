@@ -71,15 +71,15 @@ public class FTCMatch extends Match {
     }
 
     @Override
-    public void manageConditions(Character ch) {
+    public void manageConditions(Participant p) {
         if (Global.getMatch() == this)
-            super.manageConditions(ch);
-        if (isPrey(ch)) {
+            super.manageConditions(p);
+        if (isPrey(p.getCharacter())) {
             if (gracePeriod > 0)
                 gracePeriod--;
-            if (ch.has(Item.Flag) && gracePeriod == 0 && (++flagCounter % 3) == 0) {
-                score(ch, 1);
-                if (ch.human()) {
+            if (p.getCharacter().has(Item.Flag) && gracePeriod == 0 && (++flagCounter % 3) == 0) {
+                score(p.getCharacter(), 1);
+                if (p.getCharacter().human()) {
                     Global.gui().message("You scored one point for holding the flag.");
                 }
             }

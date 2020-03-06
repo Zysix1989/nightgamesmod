@@ -198,7 +198,7 @@ public class Match {
             if (combatant.getPure(Attribute.Science) > 0) {
                 combatant.chargeBattery();
             }
-            manageConditions(combatant);
+            manageConditions(participant);
         });
 
         placeCharacters();
@@ -213,12 +213,12 @@ public class Match {
         return Global.getActions();
     }
 
-    protected void manageConditions(Character player) {
-        condition.handleOutfit(player);
-        condition.handleItems(player);
-        condition.handleStatus(player);
-        condition.handleTurn(player, this);
-        if (player.human()) {
+    protected void manageConditions(Participant p) {
+        condition.handleOutfit(p.getCharacter());
+        condition.handleItems(p.getCharacter());
+        condition.handleStatus(p.getCharacter());
+        condition.handleTurn(p.getCharacter(), this);
+        if (p.getCharacter().human()) {
             Global.getPlayer()
                   .getAddictions()
                   .forEach(Addiction::refreshWithdrawal);
@@ -290,7 +290,7 @@ public class Match {
                 Global.gui().refresh();
                 if (self.state != State.quit) {
                     participant.endOfMatchRound();
-                    manageConditions(self);
+                    manageConditions(participant);
                     participant.move();
                     afterTurn(participant);
                 }
