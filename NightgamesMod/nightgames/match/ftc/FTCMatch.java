@@ -30,7 +30,6 @@ public class FTCMatch extends Match {
         super(Stream.concat(hunters.stream(), Set.of(prey).stream()).collect(Collectors.toSet()),
                 map,
                 new FTCModifier(prey.getCharacter()));
-        assert participants.size() == 5; // 4 hunters + prey = 5
         this.prey = prey;
         this.gracePeriod = 3;
         this.flagCounter = 0;
