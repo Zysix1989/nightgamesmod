@@ -86,19 +86,19 @@ public class DefaultEncounter implements Encounter {
         }
     }
 
-    public static boolean spotCheck(Character spotter, Character hidden) {
-        if (spotter.bound()) {
+    public static boolean spotCheck(Participant spotter, Participant hidden) {
+        if (spotter.getCharacter().bound()) {
             return false;
         }
-        int dc = hidden.get(Attribute.Cunning) / 3;
-        if (hidden.state == State.hidden) {
-            dc += (hidden.get(Attribute.Cunning) * 2 / 3) + 20;
+        int dc = hidden.getCharacter().get(Attribute.Cunning) / 3;
+        if (hidden.getCharacter().state == State.hidden) {
+            dc += (hidden.getCharacter().get(Attribute.Cunning) * 2 / 3) + 20;
         }
-        if (hidden.has(Trait.Sneaky)) {
+        if (hidden.getCharacter().has(Trait.Sneaky)) {
             dc += 20;
         }
-        dc -= dc * 5 / Math.max(1, spotter.get(Attribute.Perception));
-        return spotter.check(Attribute.Cunning, dc);
+        dc -= dc * 5 / Math.max(1, spotter.getCharacter().get(Attribute.Perception));
+        return spotter.getCharacter().check(Attribute.Cunning, dc);
     }
 
     private void eligibleSpotCheck() {
@@ -130,8 +130,8 @@ public class DefaultEncounter implements Encounter {
         
         // We need to run both vision checks no matter what, and they have no
         // side effects besides.
-        boolean p2_sees_p1 = spotCheck(p2.getCharacter(), p1.getCharacter());
-        boolean p1_sees_p2 = spotCheck(p1.getCharacter(), p2.getCharacter());
+        boolean p2_sees_p1 = spotCheck(p2, p1);
+        boolean p1_sees_p2 = spotCheck(p1, p2);
         
         if (p2_sees_p1 && p1_sees_p2) {
             p1.getCharacter().faceOff(p2.getCharacter(), this);
