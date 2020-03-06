@@ -108,7 +108,8 @@ public class Cache implements Deployable {
 
         @Override
         public void fire(Match m) {
-            if (m.meanLvl() > 3
+            var meanParticipantLevel = m.meanLvl();
+            if (meanParticipantLevel > 3
                     && (lastCacheDropped.isEmpty() ||
                     m.getRawTime()
                             .compareTo(lastCacheDropped.get()
@@ -121,7 +122,7 @@ public class Cache implements Deployable {
                         .filter(area -> area.env.size() < 5)
                         .findAny()
                         .ifPresent(area -> {
-                            area.place(new Cache(m.meanLvl() + Global.random(11) - 4));
+                            area.place(new Cache(meanParticipantLevel + Global.random(11) - 4));
                             Global.gui()
                                     .message("<br/><b>A new cache has been dropped off at " + area.name + "!</b>");
                         });
