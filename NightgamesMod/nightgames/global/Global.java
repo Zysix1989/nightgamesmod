@@ -1240,7 +1240,7 @@ public class Global {
         double totalWeight = map.values().stream().reduce(0.0, Double::sum);
         Map<T, Double> normalized = new HashMap<>();
         map.entrySet().forEach(e -> normalized.put(e.getKey(), e.getValue() / totalWeight));
-        List<Map.Entry<T, Double>> entries = new ArrayList<>(map.entrySet());
+        List<Map.Entry<T, Double>> entries = new ArrayList<>(normalized.entrySet());
         entries.sort(Comparator.comparing(Map.Entry::getValue));
         
         double threshold = rng.nextDouble();
