@@ -33,7 +33,6 @@ public class Angel extends BasePersonality {
     private static final String ANGEL_FOLLOWERS_FOCUS = "AngelFollowersFocus";
 
     private int dominance=0;
-    private int mindominance=0;
 
     public Angel() {
         this(Optional.empty(), Optional.empty());
