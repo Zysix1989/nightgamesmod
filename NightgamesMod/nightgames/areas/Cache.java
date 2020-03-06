@@ -18,7 +18,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Cache implements Deployable {
-
+    private static final class RewardType {
+        List<Loot> items;
+        int minLevel;
+        double weight;
+        private RewardType(int minLevel, double weight, Loot... items) {
+            this.items = Arrays.asList(items);
+            this.minLevel = minLevel;
+            this.weight = weight;
+        }
+    }
     private static final List<RewardType> REWARDS = Arrays.asList(
                     new RewardType(13, 1.0, Item.Sprayer, 
                                            Item.Sprayer, 
@@ -268,16 +277,5 @@ public class Cache implements Deployable {
             return true;
         }
         return false;
-    }
-
-    private static final class RewardType {
-        List<Loot> items;
-        int minLevel;
-        double weight;
-        private RewardType(int minLevel, double weight, Loot... items) {
-            this.items = Arrays.asList(items);
-            this.minLevel = minLevel;
-            this.weight = weight;
-        }
     }
 }
