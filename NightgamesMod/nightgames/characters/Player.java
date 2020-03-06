@@ -30,6 +30,7 @@ import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
 import nightgames.match.Encounter;
+import nightgames.match.Match;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
 import nightgames.match.ftc.FTCMatch;
@@ -488,6 +489,16 @@ public class Player extends Character {
         mod(attribute, 1);
         availableAttributePoints -= 1;
         handleLevelUp();
+    }
+
+    @Override
+    public void matchPrep(Match m) {
+        super.matchPrep(m);
+        getAddictions().forEach(a -> {
+            Optional<nightgames.status.Status> withEffect = a.startNight();
+            withEffect.ifPresent(s -> Global.getPlayer().addNonCombat(new nightgames.match.Status(s)));
+        });
+        gui.startMatch();
     }
 
     private void grantTrait(Trait trait) {
