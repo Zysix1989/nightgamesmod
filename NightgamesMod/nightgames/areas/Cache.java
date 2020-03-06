@@ -1,6 +1,7 @@
 package nightgames.areas;
 
 import nightgames.characters.Attribute;
+import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
@@ -108,8 +109,12 @@ public class Cache implements Deployable {
 
         @Override
         public void fire(Match m) {
-            var meanParticipantLevel = m.meanLvl();
-            if (meanParticipantLevel > 3
+            var meanParticipantLevel = m.getParticipants().stream()
+                    .map(Participant::getCharacter)
+                    .mapToInt(Character::getLevel)
+                    .average()
+                    .orElseThrow();
+            if (meanParticipantLevel > 3.0
                     && (lastCacheDropped.isEmpty() ||
                     m.getRawTime()
                             .compareTo(lastCacheDropped.get()
@@ -122,7 +127,7 @@ public class Cache implements Deployable {
                         .filter(area -> area.env.size() < 5)
                         .findAny()
                         .ifPresent(area -> {
-                            area.place(new Cache(meanParticipantLevel + Global.random(11) - 4));
+                            area.place(new Cache((int) meanParticipantLevel + Global.random(11) - 4));
                             Global.gui()
                                     .message("<br/><b>A new cache has been dropped off at " + area.name + "!</b>");
                         });

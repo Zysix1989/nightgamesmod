@@ -446,14 +446,6 @@ public class Match {
         post.run();
     }
 
-    public int meanLvl() {
-        return (int) participants.stream()
-            .map(Participant::getCharacter)
-            .mapToInt(Character::getLevel)
-            .average()
-            .orElseThrow();
-    }
-
     public final Optional<Area> gps(String name) {
         return Optional.ofNullable(map.get(name));
     }
