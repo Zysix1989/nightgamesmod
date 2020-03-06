@@ -796,14 +796,14 @@ public class Global {
             lineup = pickCharacters(participants, lineup, LINEUP_SIZE);
             resting = new HashSet<>(players);
             resting.removeAll(lineup);
-            match = buildMatch(lineup, matchmod);
+            match = currentMatchType.buildMatch(lineup, matchmod);
         } else if (participants.size() > LINEUP_SIZE) {
             lineup = pickCharacters(participants, lineup, LINEUP_SIZE);
             resting = new HashSet<>(players);
             resting.removeAll(lineup);
-            match = buildMatch(lineup, matchmod);
+            match = currentMatchType.buildMatch(lineup, matchmod);
         } else {
-            match = buildMatch(participants, matchmod);
+            match = currentMatchType.buildMatch(participants, matchmod);
         }
         match.start();
     }
@@ -1537,10 +1537,6 @@ public class Global {
             return MatchType.FTC;
         }
         return MatchType.NORMAL;
-    }
-
-    private static Match buildMatch(Collection<Character> combatants, Modifier mod) {
-        return currentMatchType.buildMatch(combatants, mod);
     }
 
     public static HashSet<Character> getParticipants() {
