@@ -25,6 +25,25 @@ public class Locate extends Action {
         }
     }
 
+    private static final class Dialog {
+        private Participant scryer;
+        private Locate action;
+        private Dialog(Participant scryer, Locate action) {
+            this.scryer = scryer;
+            this.action = action;
+        }
+
+        private void start() {
+            var msg = "Thinking back to your 'games' with Reyka, you take out a totem to begin a scrying ritual: ";
+            scryer.getCharacter().chooseLocateTarget(action,
+                    Global.getMatch().getParticipants().stream()
+                            .filter(p -> scryer.getCharacter().getAffection(p.getCharacter()) >= MINIMUM_SCRYING_REQUIREMENT)
+                            .map(Participant::getCharacter)
+                            .collect(Collectors.toList()),
+                    msg);
+        }
+    }
+
     public Locate() {
         super("Locate");
     }
@@ -43,18 +62,9 @@ public class Locate extends Action {
 
     @Override
     public Action.Aftermath execute(Participant self) {
-        startEvent(self.getCharacter());
+        var dialog = new Dialog(self, this);
+        dialog.start();
         return new Aftermath();
-    }
-
-    public final void startEvent(Character self) {
-        var msg = "Thinking back to your 'games' with Reyka, you take out a totem to begin a scrying ritual: ";
-        self.chooseLocateTarget(this,
-                Global.getMatch().getParticipants().stream()
-                        .filter(p -> self.getAffection(p.getCharacter()) >= MINIMUM_SCRYING_REQUIREMENT)
-                        .map(Participant::getCharacter)
-                        .collect(Collectors.toList()),
-                msg);
     }
 
     public final void eventBody(Character self, Character target) {
