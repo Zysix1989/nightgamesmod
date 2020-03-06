@@ -142,27 +142,46 @@ public class Cache implements Deployable {
             var difficulty = level + 10;
             Attribute primaryAttribute;
             Attribute secondaryAttribute;
+            String primarySuccessMessage;
+            String secondarySuccessMessage;
+            String failureMessage;
+
             switch (Global.random(4)) {
                 case 3:
                     primaryAttribute = Attribute.Seduction;
                     secondaryAttribute = Attribute.Dark;
+                    primarySuccessMessage = INTERNAL_CONTRAPTION_SEDUCTION_SUCCESS;
+                    secondarySuccessMessage = INTERNAL_CONTRAPTION_DARK_SUCCESS;
+                    failureMessage = INTERNAL_CONTRAPTION_FAILURE;
                     break;
                 case 2:
                     primaryAttribute = Attribute.Cunning;
                     secondaryAttribute = Attribute.Science;
+                    primarySuccessMessage = TOUCHSCREEN_LOCK_CUNNING_SUCCESS;
+                    secondarySuccessMessage = TOUCHSCREEN_LOCK_SCIENCE_SUCCESS;
+                    failureMessage = TOUCHSCREEN_LOCK_FAILURE;
                     break;
                 case 1:
                     primaryAttribute = Attribute.Perception;
                     secondaryAttribute = Attribute.Arcane;
                     difficulty -= 8;
+                    primarySuccessMessage = HIDDEN_PERCEPTION_SUCCESS;
+                    secondarySuccessMessage = HIDDEN_ARCANE_SUCCESS;
+                    failureMessage = HIDDEN_FAILURE;
                     break;
                 default:
                     primaryAttribute = Attribute.Power;
                     secondaryAttribute = Attribute.Ki;
+                    primarySuccessMessage = HEAVY_LID_POWER_SUCCESS;
+                    secondarySuccessMessage = HEAVY_LID_KI_SUCCESS;
+                    failureMessage = HEAVY_LID_FAILURE;
                     break;
             }
             Cache cache = new Cache(primaryAttribute,
                     secondaryAttribute,
+                    primarySuccessMessage,
+                    secondarySuccessMessage,
+                    failureMessage,
                     difficulty,
                     Global.pickWeighted(REWARDS.stream()
                             .filter(r -> level >= r.minLevel)
@@ -202,12 +221,20 @@ public class Cache implements Deployable {
     private int dc;
     private Attribute primaryAttribute;
     private Attribute secondaryAttribute;
+    private String primarySuccessMessage;
+    private String secondarySuccessMessage;
+    private String failureMessage;
     private ArrayList<Loot> reward;
 
-    public Cache(Attribute primaryAttribute, Attribute secondaryAttribute, int difficulty, List<Loot> reward) {
+    public Cache(Attribute primaryAttribute, Attribute secondaryAttribute,
+                 String primarySuccessMessage, String secondarySuccessMessage, String failureMessage,
+                 int difficulty, List<Loot> reward) {
         this.reward = new ArrayList<>(reward);
         this.primaryAttribute = primaryAttribute;
         this.secondaryAttribute = secondaryAttribute;
+        this.primarySuccessMessage = primarySuccessMessage;
+        this.secondarySuccessMessage = secondarySuccessMessage;
+        this.failureMessage = failureMessage;
         this.dc = difficulty;
     }
 
@@ -219,22 +246,7 @@ public class Cache implements Deployable {
             }
             if (active.getCharacter().check(primaryAttribute, dc)) {
                 if (active.getCharacter().human()) {
-                    switch (primaryAttribute) {
-                        case Cunning:
-                            Global.gui().message(TOUCHSCREEN_LOCK_CUNNING_SUCCESS);
-                            break;
-                        case Perception:
-                            Global.gui().message(HIDDEN_PERCEPTION_SUCCESS);
-                            break;
-                        case Power:
-                            Global.gui().message(HEAVY_LID_POWER_SUCCESS);
-                            break;
-                        case Seduction:
-                            Global.gui().message(INTERNAL_CONTRAPTION_SEDUCTION_SUCCESS);
-                            break;
-                        default:
-                            break;
-                    }
+                    Global.gui().message(primarySuccessMessage);
                 }
                 for (Loot i : reward) {
                     i.pickup(active.getCharacter());
@@ -242,44 +254,14 @@ public class Cache implements Deployable {
                 active.getCharacter().modMoney(Global.random(500) + 500);
             } else if (active.getCharacter().check(secondaryAttribute, dc - 5)) {
                 if (active.getCharacter().human()) {
-                    switch (primaryAttribute) {
-                        case Cunning:
-                            Global.gui().message(TOUCHSCREEN_LOCK_SCIENCE_SUCCESS);
-                            break;
-                        case Perception:
-                            Global.gui().message(HIDDEN_ARCANE_SUCCESS);
-                            break;
-                        case Power:
-                            Global.gui().message(HEAVY_LID_KI_SUCCESS);
-                            break;
-                        case Seduction:
-                            Global.gui().message(INTERNAL_CONTRAPTION_DARK_SUCCESS);
-                            break;
-                        default:
-                            break;
-                    }
+                    Global.gui().message(secondarySuccessMessage);
                 }
                 for (Loot i : reward) {
                     i.pickup(active.getCharacter());
                 }
                 active.getCharacter().modMoney(Global.random(500) + 500);
             } else {
-                switch (primaryAttribute) {
-                    case Cunning:
-                        Global.gui().message(TOUCHSCREEN_LOCK_FAILURE);
-                        break;
-                    case Perception:
-                        Global.gui().message(HIDDEN_FAILURE);
-                        break;
-                    case Power:
-                        Global.gui().message(HEAVY_LID_FAILURE);
-                        break;
-                    case Seduction:
-                        Global.gui().message(INTERNAL_CONTRAPTION_FAILURE);
-                        break;
-                    default:
-                        break;
-                }
+                Global.gui().message(failureMessage);
             }
             active.getLocation().remove(this);
             return true;
