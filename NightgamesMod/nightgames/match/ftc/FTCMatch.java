@@ -26,11 +26,7 @@ public class FTCMatch extends Match {
     private boolean flagInCenter;
     private int flagCounter;
 
-    protected static class ConstructorInputs extends Match.ConstructorInputs {
-        protected Map<Participant, Area> bases;
-    }
-
-    protected FTCMatch(Set<Participant> hunters, ConstructorInputs inputs, Map<Participant, Area> bases, Participant prey) {
+    protected FTCMatch(Set<Participant> hunters, Match.ConstructorInputs inputs, Map<Participant, Area> bases, Participant prey) {
         super(Stream.concat(hunters.stream(), Set.of(prey).stream()).collect(Collectors.toSet()),
                 inputs,
                 new FTCModifier(prey.getCharacter()));
@@ -109,7 +105,7 @@ public class FTCMatch extends Match {
         Participant west = hunters.get(1);
         Participant south = hunters.get(2);
         Participant east = hunters.get(3);
-        var inputs = new ConstructorInputs();
+        var inputs = new Match.ConstructorInputs();
         inputs.map.clear();
         Area nBase = new Area("North Base", DescriptionModule.base(north, "north"), AreaIdentity.ftcNorthBase);
         Area wBase = new Area("West Base", DescriptionModule.base(west, "west"), AreaIdentity.ftcWestBase);

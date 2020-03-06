@@ -27,7 +27,7 @@ public class Match {
         void fire(Match m);
     }
 
-    protected static class ConstructorInputs {
+    public static class ConstructorInputs {
         public Map<String, Area> map;
         protected Set<Area> cacheLocations;
     }
