@@ -241,10 +241,6 @@ public class Match {
         });
     }
 
-    private boolean shouldEndMatch() {
-        return time.isBefore(startTime.plusHours(3));
-    }
-
     private void handleFullTurn() {
         roundTriggers.forEach(trigger -> trigger.fire(this));
         time = time.plusMinutes(5);
@@ -285,7 +281,7 @@ public class Match {
 
     public final void round() {
         var roundIterator = participants.iterator();
-        while (!shouldEndMatch()) {
+        while (!time.isBefore(startTime.plusHours(3))) {
             if (!roundIterator.hasNext()) {
                 // prepare next round
                 roundIterator = participants.iterator();
