@@ -7,12 +7,12 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
+import nightgames.match.Match;
 import nightgames.match.Participant;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -97,7 +97,21 @@ public class Cache implements Deployable {
                                            Item.SPotion,
                                            Item.Handcuffs)
     );
-    
+
+    public static class SpawnTrigger implements Match.Trigger {
+        private Optional<LocalTime> lastCacheDropped;
+
+        @Override
+        public void fire(Match m) {
+            if (m.meanLvl() > 3
+                    && (lastCacheDropped.isEmpty() ||
+                    m.getRawTime().compareTo(lastCacheDropped.get().plus(Duration.ofHours(1).minus(Duration.ofMinutes(Global.random(10) * 5)))) >= 0)) {
+                m.dropPackage();
+                lastCacheDropped = Optional.of(m.getRawTime());
+            }
+        }
+    }
+
     private int dc;
     private Attribute test;
     private Attribute secondary;

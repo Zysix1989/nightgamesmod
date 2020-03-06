@@ -14,7 +14,6 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import java.awt.*;
-import java.time.Duration;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.*;
@@ -24,14 +23,18 @@ import java.util.stream.Collectors;
 public class Match {
 
     private static final LocalTime startTime = LocalTime.of(22, 0, 0);
+    public interface Trigger {
+        void fire(Match m);
+    }
+
     protected LocalTime time;
-    private Optional<LocalTime> lastCacheDropped;
     protected Map<String, Area> map;
     protected Set<Participant> participants;
     private boolean pause;
     protected Modifier condition;
     protected Set<Area> cacheLocations;
-    
+    private List<Trigger> roundTriggers = List.of(new Cache.SpawnTrigger(), new Challenge.SpawnTrigger());
+
     public Match(Collection<Character> combatants, Modifier condition) {
         this.participants = combatants.stream()
             .map(Participant::new)
@@ -243,17 +246,7 @@ public class Match {
     }
 
     private void handleFullTurn() {
-        if (meanLvl() > 3
-                && (lastCacheDropped.isEmpty() ||
-                time.compareTo(lastCacheDropped.get().plus(Duration.ofHours(1).minus(Duration.ofMinutes(Global.random(10) * 5)))) >= 0)) {
-            dropPackage();
-            lastCacheDropped = Optional.of(time);
-        }
-        if (Global.checkFlag(Flag.challengeAccepted)
-                && time.getMinute() != 0
-                && time.getMinute() % 30 == 0) {
-            dropChallenge();
-        }
+        roundTriggers.forEach(trigger -> trigger.fire(this));
         time = time.plusMinutes(5);
     }
 
@@ -455,7 +448,7 @@ public class Match {
         post.run();
     }
 
-    private int meanLvl() {
+    public int meanLvl() {
         return (int) participants.stream()
             .map(Participant::getCharacter)
             .mapToInt(Character::getLevel)
@@ -463,7 +456,7 @@ public class Match {
             .orElseThrow();
     }
 
-    private void dropPackage() {
+    public void dropPackage() {
         List<Area> areas = new ArrayList<>(cacheLocations);
         Collections.shuffle(areas);
         areas.stream()
@@ -476,7 +469,7 @@ public class Match {
                 });
     }
 
-    private void dropChallenge() {
+    public void dropChallenge() {
         ArrayList<Area> areas = new ArrayList<>(map.values());
         Area target = areas.get(Global.random(areas.size()));
         if (target.env.size() < 5) {
@@ -490,6 +483,10 @@ public class Match {
 
     public final int getHour() {
         return time.getHour();
+    }
+
+    public LocalTime getRawTime() {
+        return time;
     }
 
     public String getTime() {

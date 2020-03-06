@@ -5,8 +5,10 @@ import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
+import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Match;
 import nightgames.match.Participant;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
@@ -15,6 +17,18 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class Challenge implements Deployable {
+    public static class SpawnTrigger implements Match.Trigger {
+
+        @Override
+        public void fire(Match m) {
+            if (Global.checkFlag(Flag.challengeAccepted)
+                    && m.getRawTime().getMinute() != 0
+                    && m.getRawTime().getMinute() % 30 == 0) {
+                m.dropChallenge();
+            }
+        }
+    }
+
     private Participant owner;
     private Participant target;
     private GOAL goal;
