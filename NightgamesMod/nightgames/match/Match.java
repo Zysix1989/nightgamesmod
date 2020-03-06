@@ -190,6 +190,10 @@ public class Match {
             var combatant = participant.getCharacter();
             Global.gainSkills(combatant);
             Global.learnSkills(combatant);
+            combatant.getAddictions().forEach(a -> {
+                Optional<nightgames.status.Status> withEffect = a.startNight();
+                withEffect.ifPresent(s -> combatant.addNonCombat(new nightgames.match.Status(s)));
+            });
             combatant.matchPrep(this);
             combatant.getStamina().renew();
             combatant.getArousal().renew();
