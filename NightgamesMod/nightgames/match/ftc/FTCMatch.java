@@ -86,7 +86,7 @@ public class FTCMatch extends Match {
     public void manageConditions(Character ch) {
         if (Global.getMatch() == this)
             super.manageConditions(ch);
-        if (findParticipant(ch).equals(prey)) {
+        if (isPrey(ch)) {
             if (gracePeriod > 0)
                 gracePeriod--;
             if (ch.has(Item.Flag) && gracePeriod == 0 && (++flagCounter % 3) == 0) {
