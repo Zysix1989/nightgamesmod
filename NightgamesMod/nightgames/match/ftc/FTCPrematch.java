@@ -5,7 +5,6 @@ import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.gui.GUI;
 import nightgames.gui.commandpanel.CommandPanelOption;
-import nightgames.match.MatchType;
 import nightgames.match.Prematch;
 import nightgames.match.PrematchEvent;
 import nightgames.modifier.standard.FTCModifier;
@@ -29,7 +28,7 @@ public class FTCPrematch extends Prematch {
             FTCModifier mod = new FTCModifier(prey);
             type = mod;
             Global.flag(Flag.didFTC);
-            Global.setUpFTCMatch(MatchType.FTC, mod);
+            Global.setUpFTCMatch(mod);
         } else {
             String message = "";
             if (response.equals("Volunteer")) {

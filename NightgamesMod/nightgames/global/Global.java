@@ -761,7 +761,7 @@ public class Global {
         return result;
     }
 
-    public static void setUpFTCMatch(MatchType matchType, Modifier matchmod) {
+    public static void setUpFTCMatch(Modifier matchmod) {
         var data = setUpMatchCommon();
         Character prey = ((FTCModifier) matchmod).getPrey();
         if (!prey.human()) {
@@ -770,7 +770,7 @@ public class Global {
         data.lineup = pickCharacters(data.participants, data.lineup, LINEUP_SIZE);
         resting = new HashSet<>(players);
         resting.removeAll(data.lineup);
-        match = matchType.buildMatch(data.lineup, matchmod);
+        match = MatchType.FTC.buildMatch(data.lineup, matchmod);
     }
 
     /**Sets up a match by assigning the player lineup.
