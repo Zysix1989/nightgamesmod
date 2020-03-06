@@ -48,7 +48,7 @@ public class Airi extends BasePersonality {
 
     public Airi(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Airi", false);
-        setupCharacter(charConfig, commonConfig);
+        setupCharacter(this, charConfig, commonConfig);
         constructLines();
     }
 

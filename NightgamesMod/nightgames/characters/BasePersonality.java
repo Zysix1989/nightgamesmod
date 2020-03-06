@@ -53,26 +53,26 @@ public abstract class BasePersonality implements Serializable {
         lines = new HashMap<>();
     }
 
-    protected void setupCharacter(Optional<NpcConfiguration> charConfig,
+    protected static void setupCharacter(BasePersonality p, Optional<NpcConfiguration> charConfig,
         Optional<NpcConfiguration> commonConfig) {
-        setGrowth();
-        applyBasicStats(character);
-        applyStrategy(character);
+        p.setGrowth();
+        p.applyBasicStats(p.character);
+        p.applyStrategy(p.character);
 
         // Apply config changes
         Optional<NpcConfiguration> mergedConfig = NpcConfiguration.mergeOptionalNpcConfigs(charConfig, commonConfig);
-        mergedConfig.ifPresent(cfg -> cfg.apply(character));
+        mergedConfig.ifPresent(cfg -> cfg.apply(p.character));
 
-        if (Global.checkFlag("FutaTime") && character.initialGender == CharacterSex.female) {
-            character.initialGender = CharacterSex.herm;
+        if (Global.checkFlag("FutaTime") && p.character.initialGender == CharacterSex.female) {
+            p.character.initialGender = CharacterSex.herm;
         }
-        character.body.makeGenitalOrgans(character.initialGender);
-        character.body.finishBody(character.initialGender);
-        for (int i = 1; i < character.getLevel(); i++) {
-            character.getGrowth().levelUp(character);
+        p.character.body.makeGenitalOrgans(p.character.initialGender);
+        p.character.body.finishBody(p.character.initialGender);
+        for (int i = 1; i < p.character.getLevel(); i++) {
+            p.character.getGrowth().levelUp(p.character);
         }
-        character.distributePoints(preferredAttributes);
-        character.getGrowth().addOrRemoveTraits(character);
+        p.character.distributePoints(p.preferredAttributes);
+        p.character.getGrowth().addOrRemoveTraits(p.character);
     }
 
     public void setCharacter(NPC c) {

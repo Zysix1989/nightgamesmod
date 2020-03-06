@@ -1,14 +1,7 @@
 package nightgames.characters;
 
-import java.util.Arrays;
-import java.util.Optional;
-import nightgames.characters.body.AssPart;
+import nightgames.characters.body.*;
 import nightgames.characters.body.AssPart.Size;
-import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.EarsPart;
-import nightgames.characters.body.FacePart;
-import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.CatEarsMod;
 import nightgames.characters.body.mods.CatTailMod;
 import nightgames.characters.body.mods.catcher.FeralMod;
@@ -32,6 +25,9 @@ import nightgames.status.Stsflag;
 import nightgames.status.addiction.AddictionType;
 import org.jtwig.JtwigTemplate;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public class Kat extends BasePersonality {
     /**
      *
@@ -44,7 +40,7 @@ public class Kat extends BasePersonality {
 
     public Kat(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Kat", false);
-        setupCharacter(charConfig, commonConfig);
+        setupCharacter(this,charConfig, commonConfig);
         constructLines();
     }
 

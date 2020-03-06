@@ -1,14 +1,7 @@
 package nightgames.characters;
 
-import java.util.Arrays;
-import java.util.Optional;
-import nightgames.characters.body.BreastsPart;
+import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;
-import nightgames.characters.body.EarsPart;
-import nightgames.characters.body.FacePart;
-import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.TailPart;
-import nightgames.characters.body.WingsPart;
 import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.mods.DemonicWingsMod;
 import nightgames.characters.body.mods.ExtendedTonguedMod;
@@ -27,13 +20,12 @@ import nightgames.global.Global;
 import nightgames.grammar.Shorthand;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
-import nightgames.skills.strategy.DisablingStrategy;
-import nightgames.skills.strategy.FacesitStrategy;
-import nightgames.skills.strategy.FootjobStrategy;
-import nightgames.skills.strategy.KnockdownStrategy;
-import nightgames.skills.strategy.OralStrategy;
+import nightgames.skills.strategy.*;
 import nightgames.start.NpcConfiguration;
 import org.jtwig.JtwigTemplate;
+
+import java.util.Arrays;
+import java.util.Optional;
 
 public class Reyka extends BasePersonality {
     private static final long serialVersionUID = 8553663088141308399L;
@@ -49,7 +41,7 @@ public class Reyka extends BasePersonality {
 
     public Reyka(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Reyka", false);
-        setupCharacter(charConfig, commonConfig);
+        setupCharacter(this,charConfig, commonConfig);
         constructLines();
     }
 

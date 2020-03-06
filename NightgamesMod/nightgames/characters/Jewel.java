@@ -1,9 +1,5 @@
 package nightgames.characters;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Optional;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.BreastsPart;
@@ -23,13 +19,14 @@ import nightgames.global.Global;
 import nightgames.grammar.Shorthand;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
-import nightgames.skills.strategy.FacesitStrategy;
-import nightgames.skills.strategy.FootjobStrategy;
-import nightgames.skills.strategy.KnockdownStrategy;
-import nightgames.skills.strategy.ReceiveAnalStrategy;
-import nightgames.skills.strategy.StraponStrategy;
+import nightgames.skills.strategy.*;
 import nightgames.start.NpcConfiguration;
 import org.jtwig.JtwigTemplate;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Optional;
 
 public class Jewel extends BasePersonality {
     /**
@@ -48,7 +45,7 @@ public class Jewel extends BasePersonality {
 
     public Jewel(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Jewel", true);
-        setupCharacter(charConfig, commonConfig);
+        setupCharacter(this,charConfig, commonConfig);
         constructLines();
     }
 

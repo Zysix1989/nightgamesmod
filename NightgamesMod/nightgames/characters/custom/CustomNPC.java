@@ -1,9 +1,5 @@
 package nightgames.characters.custom;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 import nightgames.characters.BasePersonality;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
@@ -13,6 +9,11 @@ import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.items.ItemAmount;
 import nightgames.start.NpcConfiguration;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class CustomNPC extends BasePersonality {
     private final DataBackedNPCData data;
@@ -27,7 +28,7 @@ public class CustomNPC extends BasePersonality {
     public CustomNPC(DataBackedNPCData data, Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super(data.getName(), data.isStartCharacter());
         this.data = data;
-        setupCharacter(charConfig, commonConfig);
+        setupCharacter(this,charConfig, commonConfig);
         for (String lineType : CharacterLine.ALL_LINES) {
             if (lineType.equals(CharacterLine.DESCRIBE_LINER)) {
                 this.description = data.describe();

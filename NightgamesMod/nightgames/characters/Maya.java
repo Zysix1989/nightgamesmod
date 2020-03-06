@@ -1,7 +1,5 @@
 package nightgames.characters;
 
-import java.util.Arrays;
-import java.util.Optional;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.corestats.ArousalStat;
@@ -21,6 +19,9 @@ import nightgames.start.NpcConfiguration;
 import nightgames.status.Drowsy;
 import nightgames.status.Energized;
 import org.jtwig.JtwigTemplate;
+
+import java.util.Arrays;
+import java.util.Optional;
 
 public class Maya extends BasePersonality {
 
@@ -43,7 +44,7 @@ public class Maya extends BasePersonality {
 
     public Maya(int playerLevel, Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Maya", false);
-        setupCharacter(charConfig, commonConfig);
+        setupCharacter(this,charConfig, commonConfig);
         while (character.getLevel() < playerLevel + 20) {
             character.ding(null);
         }

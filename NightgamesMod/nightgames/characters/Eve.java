@@ -1,7 +1,5 @@
 package nightgames.characters;
 
-import java.util.Arrays;
-import java.util.Optional;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.CockPart.Size;
@@ -21,6 +19,9 @@ import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
 import org.jtwig.JtwigTemplate;
+
+import java.util.Arrays;
+import java.util.Optional;
 
 public class Eve extends BasePersonality {
     
@@ -43,7 +44,7 @@ public class Eve extends BasePersonality {
 
     public Eve(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("Eve", false);
-        setupCharacter(charConfig, commonConfig);
+        setupCharacter(this,charConfig, commonConfig);
         constructLines();
     }
 

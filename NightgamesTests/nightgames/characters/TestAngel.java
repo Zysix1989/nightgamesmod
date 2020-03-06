@@ -1,17 +1,7 @@
 package nightgames.characters;
 
-import java.util.Optional;
-import nightgames.characters.body.AssPart;
+import nightgames.characters.body.*;
 import nightgames.characters.body.AssPart.Size;
-import nightgames.characters.body.Body;
-import nightgames.characters.body.BreastsPart;
-import nightgames.characters.body.EarsPart;
-import nightgames.characters.body.FacePart;
-import nightgames.characters.body.FeetPart;
-import nightgames.characters.body.HandsPart;
-import nightgames.characters.body.MouthPart;
-import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.SkinPart;
 import nightgames.characters.body.mods.catcher.DivineMod;
 import nightgames.characters.body.mods.pitcher.BlessedCockMod;
 import nightgames.characters.corestats.ArousalStat;
@@ -23,6 +13,8 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.start.NpcConfiguration;
+
+import java.util.Optional;
 
 public class TestAngel extends BasePersonality {
     /**
@@ -88,7 +80,7 @@ public class TestAngel extends BasePersonality {
 
     public TestAngel(Optional<NpcConfiguration> charConfig, Optional<NpcConfiguration> commonConfig) {
         super("TestAngel", true);
-        setupCharacter(charConfig, commonConfig);
+        setupCharacter(this,charConfig, commonConfig);
     }
 
     public void applyBasicStats(Character self) {
