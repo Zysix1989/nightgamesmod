@@ -35,9 +35,6 @@ public class FTCMatch extends Match {
         flagInCenter = false;
         flagCounter = 0;
     }
-
-    @Override
-    protected void preStart() {}
     
     @Override
     public MatchType getType() {

@@ -180,12 +180,7 @@ public class Match {
         return m;
     }
 
-    protected void preStart() {
-        
-    }
-
     public final void start() {
-        preStart();
         participants.forEach(participant -> {
             var combatant = participant.getCharacter();
             Global.gainSkills(combatant);
