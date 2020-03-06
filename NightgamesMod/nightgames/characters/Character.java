@@ -2836,7 +2836,7 @@ public Character clone() throws CloneNotSupportedException {
     
     /**Bathes the character, removing any purgable effects.*/
     public void bathe() {
-        status.clear();
+        status.removeIf(s -> s.flags().contains(Stsflag.purgable));
         stamina.renew();
         state = State.ready;
         update();

@@ -523,8 +523,7 @@ public class Player extends Character {
 
     @Override
     public void bathe() {
-        status.removeIf(s -> s.flags().contains(Stsflag.purgable));
-        stamina.renew();
+        super.bathe();
         if (location.get().name.equals("Showers")) {
             gui.message("You let the hot water wash away your exhaustion and soon you're back to peak condition.");
         }
@@ -534,7 +533,6 @@ public class Player extends Character {
         if (state == State.lostclothes) {
             gui.message("Your clothes aren't where you left them. Someone must have come by and taken them.");
         }
-        state = State.ready;
     }
 
     @Override
