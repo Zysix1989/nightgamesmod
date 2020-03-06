@@ -40,10 +40,8 @@ public class Match {
     protected Set<Area> cacheLocations;
     private List<Trigger> roundTriggers = List.of(new Cache.SpawnTrigger(), new Challenge.SpawnTrigger());
 
-    protected Match(ConstructorInputs mi, Collection<Character> combatants, Modifier condition) {
-        this.participants = combatants.stream()
-            .map(Participant::new)
-            .collect(Collectors.toCollection(HashSet::new));
+    protected Match(Set<Participant> participants, ConstructorInputs mi, Modifier condition) {
+        this.participants = new HashSet<>(participants);
         this.condition = condition;
         time = startTime;
         pause = false;
@@ -52,9 +50,13 @@ public class Match {
     }
 
     public static Match newMatch(Collection<Character> combatants, Modifier condition) {
-        return new Match(buildMap(), combatants, condition);
+        return new Match(combatants.stream()
+                .map(Participant::new)
+                .collect(Collectors.toSet()),
+                buildMap(),
+                condition);
     }
-    
+
     protected void preStart() {
         
     }

@@ -16,6 +16,7 @@ import nightgames.match.Participant;
 import nightgames.modifier.standard.FTCModifier;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class FTCMatch extends Match {
     private Map<Participant, Area> bases;
@@ -24,8 +25,10 @@ public class FTCMatch extends Match {
     private boolean flagInCenter;
     private int flagCounter;
     
-    protected FTCMatch(Collection<Character> combatants, Character prey) {
-        super(Match.buildMap(), combatants, new FTCModifier(prey));
+    protected FTCMatch(Set<Participant> participants, Character prey) {
+        super(participants,
+                Match.buildMap(),
+                new FTCModifier(prey));
         assert participants.size() == 5; // 4 hunters + prey = 5
         this.prey = findParticipant(prey);
         this.gracePeriod = 3;
@@ -95,8 +98,11 @@ public class FTCMatch extends Match {
     }
 
     public static FTCMatch newMatch(Collection<Character> combatants, Character prey) {
-        var match = new FTCMatch(combatants, prey);
-        List<Participant> hunters = new ArrayList<>(match.participants);
+        var participants = combatants.stream()
+                .map(Participant::new)
+                .collect(Collectors.toSet());
+        var match = new FTCMatch(participants, prey);
+        List<Participant> hunters = new ArrayList<>(participants);
         hunters.remove(match.prey);
         Collections.shuffle(hunters);
         buildFTCMap(match, hunters.get(0), hunters.get(1), hunters.get(2), hunters.get(3), match.prey);
