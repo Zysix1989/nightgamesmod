@@ -3813,6 +3813,10 @@ public Character clone() throws CloneNotSupportedException {
      * 
      * */
     public void matchPrep(Match m) {
+        getAddictions().forEach(a -> {
+            Optional<nightgames.status.Status> withEffect = a.startNight();
+            withEffect.ifPresent(s -> addNonCombat(new nightgames.match.Status(s)));
+        });
         if(getPure(Attribute.Ninjutsu)>=9){
             Global.gainSkills(this);
         }

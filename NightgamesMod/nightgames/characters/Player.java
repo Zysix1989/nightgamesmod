@@ -494,10 +494,6 @@ public class Player extends Character {
     @Override
     public void matchPrep(Match m) {
         super.matchPrep(m);
-        getAddictions().forEach(a -> {
-            Optional<nightgames.status.Status> withEffect = a.startNight();
-            withEffect.ifPresent(s -> addNonCombat(new nightgames.match.Status(s)));
-        });
         gui.startMatch();
     }
 
