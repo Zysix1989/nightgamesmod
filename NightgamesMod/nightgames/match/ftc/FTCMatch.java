@@ -33,7 +33,7 @@ public class FTCMatch extends Match {
         List<Participant> hunters = new ArrayList<>(participants);
         hunters.remove(this.prey);
         Collections.shuffle(hunters);
-        buildFTCMap(hunters.get(0), hunters.get(1), hunters.get(2), hunters.get(3), this.prey);
+        buildFTCMap(this, hunters.get(0), hunters.get(1), hunters.get(2), hunters.get(3), this.prey);
         bases.forEach(Participant::place);
         flagInCenter = false;
         prey.gain(Item.Flag);
@@ -94,24 +94,24 @@ public class FTCMatch extends Match {
         }
     }
 
-    private void buildFTCMap(Participant north, Participant west, Participant south, Participant east, Participant prey) {
-        map.clear();
+    private static void buildFTCMap(FTCMatch m, Participant north, Participant west, Participant south, Participant east, Participant prey) {
+        m.map.clear();
         Area nBase = new Area("North Base", DescriptionModule.base(north, "north"), AreaIdentity.ftcNorthBase);
         Area wBase = new Area("West Base", DescriptionModule.base(west, "west"), AreaIdentity.ftcWestBase);
         Area sBase = new Area("South Base", DescriptionModule.base(south, "south"), AreaIdentity.ftcSouthBase);
         Area eBase = new Area("East Base", DescriptionModule.base(east, "east"), AreaIdentity.ftcEastBase);
         Area pBase = new Area("Central Camp", DescriptionModule.camp(prey), AreaIdentity.ftcCenter, Set.of(AreaAttribute.Open));
-        map.put("North Base", nBase);
-        map.put("West Base", wBase);
-        map.put("South Base", sBase);
-        map.put("East Base", eBase);
-        map.put("Central Camp", pBase);
-        bases = new HashMap<>();
-        bases.put(north, nBase);
-        bases.put(west, wBase);
-        bases.put(south, sBase);
-        bases.put(east, eBase);
-        bases.put(prey, pBase);
+        m.map.put("North Base", nBase);
+        m.map.put("West Base", wBase);
+        m.map.put("South Base", sBase);
+        m.map.put("East Base", eBase);
+        m.map.put("Central Camp", pBase);
+        m.bases = new HashMap<>();
+        m.bases.put(north, nBase);
+        m.bases.put(west, wBase);
+        m.bases.put(south, sBase);
+        m.bases.put(east, eBase);
+        m.bases.put(prey, pBase);
 
         Area pond = new Area("Small Pond", DescriptionModule.pond(), AreaIdentity.ftcPond);
         Area glade = new Area("Glade", DescriptionModule.glade(), AreaIdentity.ftcGlade);
@@ -125,18 +125,18 @@ public class FTCMatch extends Match {
         Area waterfall = new Area("Waterfall", DescriptionModule.waterfall(), AreaIdentity.ftcWaterfall);
         Area monument = new Area("Monument", DescriptionModule.monument(), AreaIdentity.ftcMonument);
         Area dump = new Area("Dump Site", DescriptionModule.dump(), AreaIdentity.ftcDump);
-        map.put("Small Pond", pond);
-        map.put("Glade", glade);
-        map.put("Cabin", cabin);
-        map.put("Trail", trail);
-        map.put("Lodge", lodge);
-        map.put("Hill", hill);
-        map.put("Path", path);
-        map.put("Oak", oak);
-        map.put("Pass", pass);
-        map.put("Waterfall", waterfall);
-        map.put("Monument", monument);
-        map.put("Dump", dump);
+        m.map.put("Small Pond", pond);
+        m.map.put("Glade", glade);
+        m.map.put("Cabin", cabin);
+        m.map.put("Trail", trail);
+        m.map.put("Lodge", lodge);
+        m.map.put("Hill", hill);
+        m.map.put("Path", path);
+        m.map.put("Oak", oak);
+        m.map.put("Pass", pass);
+        m.map.put("Waterfall", waterfall);
+        m.map.put("Monument", monument);
+        m.map.put("Dump", dump);
         link(nBase, pond, glade);
         link(wBase, oak, cabin);
         link(eBase, waterfall, lodge);
@@ -182,7 +182,7 @@ public class FTCMatch extends Match {
         dump.getPossibleActions().add(new Scavenge());
     }
 
-    private void link(Area hub, Area... areas) {
+    private static void link(Area hub, Area... areas) {
         for (Area area : areas) {
             hub.link(area);
             area.link(hub);

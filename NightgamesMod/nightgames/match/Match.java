@@ -42,7 +42,7 @@ public class Match {
         this.condition = condition;
         time = startTime;
         pause = false;
-        buildMap();
+        buildMap(this);
     }
     
     protected void preStart() {
@@ -90,7 +90,7 @@ public class Match {
         }
     }
 
-    private void buildMap() {
+    private static void buildMap(Match m) {
         Area quad = new Area("Quad", DescriptionModule.quad(), AreaIdentity.quad, Set.of(AreaAttribute.Open));
         Area dorm = new Area("Dorm", DescriptionModule.dorm(), AreaIdentity.dorm);
         Area shower = new Area("Showers", DescriptionModule.shower(), AreaIdentity.shower);
@@ -197,27 +197,27 @@ public class Match {
         sau.getPossibleActions().add(new Resupply());
         courtyard.getPossibleActions().add(new Hide());
 
-        cacheLocations = Set.of(dorm, shower, laundry, engineering, lab, workshop, libarts, pool, library, dining,
+        m.cacheLocations = Set.of(dorm, shower, laundry, engineering, lab, workshop, libarts, pool, library, dining,
                 kitchen, storage, sau, courtyard);
 
-        map = new HashMap<>();
-        map.put("Quad", quad);
-        map.put("Dorm", dorm);
-        map.put("Shower", shower);
-        map.put("Laundry", laundry);
-        map.put("Engineering", engineering);
-        map.put("Workshop", workshop);
-        map.put("Lab", lab);
-        map.put("Liberal Arts", libarts);
-        map.put("Pool", pool);
-        map.put("Library", library);
-        map.put("Dining", dining);
-        map.put("Kitchen", kitchen);
-        map.put("Storage", storage);
-        map.put("Tunnel", tunnel);
-        map.put("Bridge", bridge);
-        map.put("Union", sau);
-        map.put("Courtyard", courtyard);
+        m.map = new HashMap<>();
+        m.map.put("Quad", quad);
+        m.map.put("Dorm", dorm);
+        m.map.put("Shower", shower);
+        m.map.put("Laundry", laundry);
+        m.map.put("Engineering", engineering);
+        m.map.put("Workshop", workshop);
+        m.map.put("Lab", lab);
+        m.map.put("Liberal Arts", libarts);
+        m.map.put("Pool", pool);
+        m.map.put("Library", library);
+        m.map.put("Dining", dining);
+        m.map.put("Kitchen", kitchen);
+        m.map.put("Storage", storage);
+        m.map.put("Tunnel", tunnel);
+        m.map.put("Bridge", bridge);
+        m.map.put("Union", sau);
+        m.map.put("Courtyard", courtyard);
     }
 
     private void placeCharacters() {
