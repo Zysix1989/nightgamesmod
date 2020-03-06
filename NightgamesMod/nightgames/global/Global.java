@@ -178,8 +178,6 @@ public class Global {
     public static void newGame(String playerName, Optional<StartConfiguration> config, List<Trait> pickedTraits,
                     CharacterSex pickedGender, Map<Attribute, Integer> selectedAttributes) {
         Optional<PlayerConfiguration> playerConfig = config.map(c -> c.player);
-        Collection<DebugFlags> cfgDebugFlags = config.map
-                        (StartConfiguration::getDebugFlags).orElse(new ArrayList<>());
         Collection<String> cfgFlags = config.map(StartConfiguration::getFlags).orElse(new ArrayList<>());
         human = new Player(playerName, gui, pickedGender, playerConfig, pickedTraits,
             selectedAttributes);
@@ -202,11 +200,6 @@ public class Global {
         }      
         Map<String, Boolean> configurationFlags = JsonUtils.mapFromJson(JsonUtils.rootJson(new InputStreamReader(ResourceLoader.getFileResourceAsStream("data/globalflags.json"))).getAsJsonObject(), String.class, Boolean.class);
         configurationFlags.forEach(Global::setFlag);
-
-        if (!cfgDebugFlags.isEmpty()) {
-            for (DebugFlags db: new HashSet<>(cfgDebugFlags)) {
-            }
-        }
 
         time = Time.NIGHT;
         date = 1;
