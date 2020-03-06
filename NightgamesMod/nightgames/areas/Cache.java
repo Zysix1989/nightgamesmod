@@ -184,8 +184,7 @@ public class Cache implements Deployable {
                             .orElseThrow().items);
             area.place(cache);
             lastCacheDropped = Optional.of(m.getRawTime());
-            Global.gui().message(
-                    "<br/><b>A new cache has been dropped off at " + area.name + "!</b>");
+            Global.gui().message("<br/><b>A new cache has been dropped off at " + area.name + "!</b>");
         }
 
         @Override
