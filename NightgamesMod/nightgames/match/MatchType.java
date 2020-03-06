@@ -1,8 +1,6 @@
 package nightgames.match;
 
 import nightgames.characters.Character;
-import nightgames.global.Flag;
-import nightgames.global.Global;
 import nightgames.match.defaults.DefaultPrematch;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.match.ftc.FTCPrematch;
@@ -45,15 +43,4 @@ public enum MatchType {
     public void runPrematch() {
         buildPrematch().run();
     }
-    
-    //exists entirely to make debugging with MatchModifierPicker.java work. runs a default event
-    //with the given modifier while ignoring any requirements
-    public void runWith(Modifier m) {
-        Global.unflag(Flag.victory);
-        DefaultPrematch selection = new DefaultPrematch();
-        selection.type = m;
-        Global.current = selection;
-        selection.respond("Do");
-    }
-
 }
