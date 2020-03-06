@@ -179,8 +179,7 @@ public class Global {
                     CharacterSex pickedGender, Map<Attribute, Integer> selectedAttributes) {
         Optional<PlayerConfiguration> playerConfig = config.map(c -> c.player);
         Collection<String> cfgFlags = config.map(StartConfiguration::getFlags).orElse(new ArrayList<>());
-        human = new Player(playerName, gui, pickedGender, playerConfig, pickedTraits,
-            selectedAttributes);
+        human = new Player(playerName, gui, pickedGender, playerConfig, pickedTraits, selectedAttributes);
         if(human.has(Trait.largereserves)) {
             human.getWillpower().gain(20);
         }
