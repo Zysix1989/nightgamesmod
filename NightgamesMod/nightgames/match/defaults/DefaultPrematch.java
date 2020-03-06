@@ -26,10 +26,10 @@ public class DefaultPrematch extends Prematch {
         String message = "";
         List<CommandPanelOption> choice = new ArrayList<>();
         if (response.startsWith("Start")) {
-            Global.setUpMatch(type);
+            Global.setUpMatch(Global.currentMatchType, type);
         } else if (response.startsWith("Not")) {
             type = new NoModifier();
-            Global.setUpMatch(type);
+            Global.setUpMatch(Global.currentMatchType, type);
         } else if (response.startsWith("Do")) {
             message += type.acceptance();
             choice.add(GUI.sceneOption("Start The Match"));

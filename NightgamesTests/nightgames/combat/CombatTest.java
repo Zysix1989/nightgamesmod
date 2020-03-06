@@ -21,7 +21,7 @@ public class CombatTest {
     @BeforeClass public static void setUpClass() throws Exception {
         Global.initForTesting();
         Global.newGame("TestPlayer", Optional.empty(), new ArrayList<>(), CharacterSex.asexual, new HashMap<>());
-        Global.setUpMatch(new NoModifier());
+        Global.setUpMatch(Global.currentMatchType, new NoModifier());
     }
 
     private NPC self;

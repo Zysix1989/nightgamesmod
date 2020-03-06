@@ -506,12 +506,12 @@ public class TutorialStart implements GameStarter, Scene {
             case "No":
                 Global.gui()
                       .clearText();
-                Global.setUpMatch(new NoModifier());
+                Global.setUpMatch(Global.currentMatchType, new NoModifier());
                 break;
             default:
                 Global.gui()
                       .message("<b>Error: Invalid Tutorial Scene '" + response + "', starting game.</b>");
-                Global.setUpMatch(new NoModifier());
+                Global.setUpMatch(Global.currentMatchType, new NoModifier());
         }
     }
 

@@ -55,7 +55,7 @@ public class RequirementTest {
         self = new BlankPersonality("SelfTestNPC").character;
         other = new BlankPersonality("OtherTestNPC").character;
         Area area = new Area("TestArea", new DescriptionModule.ErrorDescriptionModule(), null);
-        Global.setUpMatch(new NoModifier());
+        Global.setUpMatch(Global.currentMatchType, new NoModifier());
         combat = new Combat(self, other, area);
     }
 

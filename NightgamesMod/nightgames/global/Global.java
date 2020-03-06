@@ -734,7 +734,7 @@ public class Global {
     /**Sets up a match by assigning the player lineup.
      * 
      * FIXME: Also includes code that checks for Maya and adds her. This should be extracted out into some kind of event. - DSM*/
-    public static void setUpMatch(Modifier matchmod) {
+    public static void setUpMatch(MatchType matchType, Modifier matchmod) {
         assert day == null;
         Set<Character> lineup = new HashSet<>(debugChars);
         Character lover = null;
@@ -799,14 +799,14 @@ public class Global {
             lineup = pickCharacters(participants, lineup, LINEUP_SIZE);
             resting = new HashSet<>(players);
             resting.removeAll(lineup);
-            match = currentMatchType.buildMatch(lineup, matchmod);
+            match = matchType.buildMatch(lineup, matchmod);
         } else if (participants.size() > LINEUP_SIZE) {
             lineup = pickCharacters(participants, lineup, LINEUP_SIZE);
             resting = new HashSet<>(players);
             resting.removeAll(lineup);
-            match = currentMatchType.buildMatch(lineup, matchmod);
+            match = matchType.buildMatch(lineup, matchmod);
         } else {
-            match = currentMatchType.buildMatch(participants, matchmod);
+            match = matchType.buildMatch(participants, matchmod);
         }
         match.start();
     }

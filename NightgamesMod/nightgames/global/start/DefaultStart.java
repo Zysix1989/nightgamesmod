@@ -7,7 +7,7 @@ public class DefaultStart implements GameStarter {
 
     @Override
     public void startGame() {
-        Global.setUpMatch(new NoModifier());
+        Global.setUpMatch(Global.currentMatchType, new NoModifier());
     }
 
 }

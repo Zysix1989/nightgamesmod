@@ -111,7 +111,7 @@ public class CombatStats {
     public static void main(String[] args) throws InterruptedException {
         Global.init();
         Global.newGame("TestPlayer", Optional.empty(), new ArrayList<>(), CharacterSex.asexual, new HashMap<>());
-        Global.setUpMatch(new NoModifier());
+        Global.setUpMatch(Global.currentMatchType, new NoModifier());
         Thread.sleep(10000);
         for (int i = 5; i < 75; i += 5) {
             Setup s3 = new Setup(i, new Reyka(), new Kat(), new Eve());

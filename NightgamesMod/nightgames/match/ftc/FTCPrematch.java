@@ -28,7 +28,7 @@ public class FTCPrematch extends Prematch {
             FTCModifier mod = new FTCModifier(prey);
             type = mod;
             Global.flag(Flag.didFTC);
-            Global.setUpMatch(mod);
+            Global.setUpMatch(Global.currentMatchType, mod);
         } else {
             String message = "";
             if (response.equals("Volunteer")) {
