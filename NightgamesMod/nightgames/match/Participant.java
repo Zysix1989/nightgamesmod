@@ -97,6 +97,7 @@ public class Participant {
             return;
         } else if (character.state == State.shower || character.state == State.lostclothes) {
             character.bathe();
+            character.state = State.ready;
             return;
         } else if (character.state == State.crafting) {
             character.craft();

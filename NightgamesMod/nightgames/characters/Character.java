@@ -2838,7 +2838,6 @@ public Character clone() throws CloneNotSupportedException {
     public void bathe() {
         status.removeIf(s -> s.flags().contains(Stsflag.purgable));
         stamina.renew();
-        state = State.ready;
         update();
     }
 
