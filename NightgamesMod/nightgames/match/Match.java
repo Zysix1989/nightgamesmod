@@ -28,7 +28,7 @@ public class Match {
     }
 
     protected static class ConstructorInputs {
-        protected Map<String, Area> map;
+        public Map<String, Area> map;
         protected Set<Area> cacheLocations;
     }
 

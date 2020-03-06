@@ -17,6 +17,7 @@ import nightgames.modifier.standard.FTCModifier;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FTCMatch extends Match {
     private Map<Participant, Area> bases;
@@ -24,22 +25,22 @@ public class FTCMatch extends Match {
     private int gracePeriod;
     private boolean flagInCenter;
     private int flagCounter;
-    
-    protected FTCMatch(Set<Participant> participants, Character prey) {
-        super(participants,
-                Match.makeConstructorInputs(),
-                new FTCModifier(prey));
+
+    protected static class ConstructorInputs extends Match.ConstructorInputs {
+        protected Map<Participant, Area> bases;
+    }
+
+    protected FTCMatch(Set<Participant> hunters, ConstructorInputs inputs, Participant prey) {
+        super(Stream.concat(hunters.stream(), Set.of(prey).stream()).collect(Collectors.toSet()),
+                inputs,
+                new FTCModifier(prey.getCharacter()));
         assert participants.size() == 5; // 4 hunters + prey = 5
-        this.prey = findParticipant(prey);
+        this.prey = prey;
         this.gracePeriod = 3;
         this.flagCounter = 0;
-        List<Participant> hunters = new ArrayList<>(participants);
-        hunters.remove(this.prey);
-        Collections.shuffle(hunters);
-        buildFTCMap(this, hunters.get(0), hunters.get(1), hunters.get(2), hunters.get(3), this.prey);
-        bases.forEach(Participant::place);
+        this.bases = inputs.bases;
         flagInCenter = false;
-        prey.gain(Item.Flag);
+        prey.getCharacter().gain(Item.Flag);
     }
 
     @Override
@@ -98,21 +99,23 @@ public class FTCMatch extends Match {
     }
 
     public static FTCMatch newMatch(Collection<Character> combatants, Character prey) {
-        var participants = combatants.stream()
+        var hunters = combatants.stream()
+                .filter(c -> c.equals(prey))
                 .map(Participant::new)
-                .collect(Collectors.toSet());
-        var match = new FTCMatch(participants, prey);
-        List<Participant> hunters = new ArrayList<>(participants);
-        hunters.remove(match.prey);
+                .collect(Collectors.toList());
         Collections.shuffle(hunters);
-        buildFTCMap(match, hunters.get(0), hunters.get(1), hunters.get(2), hunters.get(3), match.prey);
-        match.bases.forEach(Participant::place);
+        var preyParticipant = new Participant(prey);
+        var match = new FTCMatch(Stream.concat(hunters.stream(), Set.of(preyParticipant).stream())
+                .collect(Collectors.toSet()),
+                buildFTCMap(hunters.get(0), hunters.get(1), hunters.get(2), hunters.get(3), preyParticipant),
+                preyParticipant);
         match.flagInCenter = false;
         prey.gain(Item.Flag);
         return match;
     }
 
-    private static void buildFTCMap(FTCMatch m, Participant north, Participant west, Participant south, Participant east, Participant prey) {
+    private static ConstructorInputs buildFTCMap(Participant north, Participant west, Participant south, Participant east, Participant prey) {
+        var m = new ConstructorInputs();
         m.map.clear();
         Area nBase = new Area("North Base", DescriptionModule.base(north, "north"), AreaIdentity.ftcNorthBase);
         Area wBase = new Area("West Base", DescriptionModule.base(west, "west"), AreaIdentity.ftcWestBase);
@@ -130,6 +133,7 @@ public class FTCMatch extends Match {
         m.bases.put(south, sBase);
         m.bases.put(east, eBase);
         m.bases.put(prey, pBase);
+        m.bases.forEach(Participant::place);
 
         Area pond = new Area("Small Pond", DescriptionModule.pond(), AreaIdentity.ftcPond);
         Area glade = new Area("Glade", DescriptionModule.glade(), AreaIdentity.ftcGlade);
@@ -198,6 +202,7 @@ public class FTCMatch extends Match {
         monument.getPossibleActions().add(new Hide());
         dump.getPossibleActions().add(new Hide());
         dump.getPossibleActions().add(new Scavenge());
+        return m;
     }
 
     private static void link(Area hub, Area... areas) {
