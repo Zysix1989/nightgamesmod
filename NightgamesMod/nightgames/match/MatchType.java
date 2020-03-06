@@ -19,7 +19,7 @@ public enum MatchType {
     public Match buildMatch(Collection<Character> combatants, Modifier condition) {
         switch (this) {
             case FTC:
-                assert condition.name().equals("FTC");
+                assert condition.name().equals(FTCModifier.NAME);
                 if (combatants.size() != 5) {
                     return Match.newMatch(combatants, new NoModifier());
                 }

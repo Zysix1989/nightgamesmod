@@ -4,6 +4,7 @@ import nightgames.global.Global;
 import nightgames.modifier.BaseModifier;
 
 public class MayaModifier extends BaseModifier {
+    public static final String NAME = "maya";
 
     // Does nothing
 
@@ -14,7 +15,7 @@ public class MayaModifier extends BaseModifier {
 
     @Override
     public String name() {
-        return "maya";
+        return NAME;
     }
 
     @Override

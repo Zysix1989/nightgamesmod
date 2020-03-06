@@ -1,13 +1,15 @@
 package nightgames.modifier.standard;
 
-import java.util.Map;
-
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.modifier.BaseModifier;
 import nightgames.modifier.item.BanToysModifier;
 
+import java.util.Map;
+
 public class NoToysModifier extends BaseModifier {
+
+    public static final String NAME = "notoys";
 
     public NoToysModifier() {
         items = new BanToysModifier();
@@ -20,7 +22,7 @@ public class NoToysModifier extends BaseModifier {
 
     @Override
     public String name() {
-        return "notoys";
+        return NAME;
     }
 
     @Override

@@ -6,6 +6,8 @@ import nightgames.modifier.clothing.NudeModifier;
 
 public class NudistModifier extends BaseModifier {
 
+    public static final String NAME = "nudist";
+
     public NudistModifier() {
         clothing = new NudeModifier();
     }
@@ -17,7 +19,7 @@ public class NudistModifier extends BaseModifier {
 
     @Override
     public String name() {
-        return "nudist";
+        return NAME;
     }
 
     @Override

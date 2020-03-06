@@ -7,6 +7,7 @@ import nightgames.modifier.item.FlagOnlyModifier;
 
 public class FTCModifier extends BaseModifier {
 
+    public static final String NAME = "ftc";
     private final NudeModifier nudeMod;
     private final Character prey;
 
@@ -30,7 +31,7 @@ public class FTCModifier extends BaseModifier {
 
     @Override
     public String name() {
-        return "ftc";
+        return NAME;
     }
 
     public Character getPrey() {

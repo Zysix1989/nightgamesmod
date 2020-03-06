@@ -6,6 +6,8 @@ import nightgames.modifier.item.BanConsumablesModifier;
 
 public class NoItemsModifier extends BaseModifier {
 
+    public static final String NAME = "noitems";
+
     public NoItemsModifier() {
         items = new BanConsumablesModifier();
     }
@@ -17,7 +19,7 @@ public class NoItemsModifier extends BaseModifier {
 
     @Override
     public String name() {
-        return "noitems";
+        return NAME;
     }
 
     @Override

@@ -1,14 +1,16 @@
 package nightgames.match;
 
+import nightgames.global.Global;
+import nightgames.gui.GUI;
+import nightgames.gui.commandpanel.CommandPanelOption;
+import nightgames.modifier.Modifier;
+import nightgames.modifier.standard.MayaModifier;
+import nightgames.modifier.standard.NoModifier;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import nightgames.global.Global;
-import nightgames.gui.commandpanel.CommandPanelOption;
-import nightgames.gui.GUI;
-import nightgames.modifier.Modifier;
-import nightgames.modifier.standard.NoModifier;
 
 public abstract class PrematchEvent {
 
@@ -42,7 +44,7 @@ public abstract class PrematchEvent {
         }
         Set<Modifier> modifiers = new HashSet<>(Global.getModifierPool());
         modifiers.removeIf(mod -> !mod.isApplicable() || mod.name()
-                                                            .equals("normal"));
+                                                            .equals(MayaModifier.NAME));
         return Global.pickRandom(modifiers.toArray(new Modifier[] {}))
                      .get();
     }
@@ -55,7 +57,7 @@ public abstract class PrematchEvent {
                             + "them before you check in with Lilly to see if she has any custom rules for you.<br/><br/>"
                             + type.intro();
             if (type.name()
-                    .equals("normal")) {
+                    .equals(MayaModifier.NAME)) {
                 options.add(GUI.sceneOption("Start The Match"));
             } else {
                 options.add(GUI.sceneOption("Do it"));

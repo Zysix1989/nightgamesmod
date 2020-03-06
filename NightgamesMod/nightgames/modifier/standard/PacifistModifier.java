@@ -9,6 +9,8 @@ import nightgames.skills.Tactics;
 
 public class PacifistModifier extends BaseModifier {
 
+    public static final String NAME = "pacifist";
+
     public PacifistModifier() {
         skills = new BanTacticsModifier(Tactics.damage);
     }
@@ -20,7 +22,7 @@ public class PacifistModifier extends BaseModifier {
 
     @Override
     public String name() {
-        return "pacifist";
+        return NAME;
     }
 
     @Override

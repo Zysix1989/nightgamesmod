@@ -10,6 +10,8 @@ import nightgames.skills.Masturbate;
 
 public class NoRecoveryModifier extends BaseModifier {
 
+    public static final String NAME = "norecovery";
+
     public NoRecoveryModifier() {
         actions = new BanActionModifier(new MasturbateAction());
         skills = new BanSkillsModifier(new Masturbate(null));
@@ -22,7 +24,7 @@ public class NoRecoveryModifier extends BaseModifier {
 
     @Override
     public String name() {
-        return "norecovery";
+        return NAME;
     }
 
     @Override

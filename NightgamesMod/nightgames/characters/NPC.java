@@ -24,6 +24,7 @@ import nightgames.items.clothing.ClothingSlot;
 import nightgames.match.Encounter;
 import nightgames.match.Match;
 import nightgames.match.Participant;
+import nightgames.modifier.standard.NoRecoveryModifier;
 import nightgames.pet.arms.ArmManager;
 import nightgames.pet.arms.ArmType;
 import nightgames.skills.Nothing;
@@ -209,7 +210,7 @@ public class NPC extends Character {
         gainXP(getDefeatXP(target));
         target.gainXP(target.getVictoryXP(this));
         orgasm();
-        if (!target.human() || !Global.getMatch().getCondition().name().equals("norecovery")) {
+        if (!target.human() || !Global.getMatch().getCondition().name().equals(NoRecoveryModifier.NAME)) {
             target.orgasm();
         }
         target.dress(c);

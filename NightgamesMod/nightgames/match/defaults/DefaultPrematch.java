@@ -148,7 +148,7 @@ public class DefaultPrematch extends Prematch {
                             + " a visible smirk. Your instincts tells you something is wrong, but"
                             + " you decide to ignore it for now.<br/><br/>"
                             + "<b>Airi has entered the games.</b><br/><br/>";
-            if (type.name().equals("normal")) {
+            if (type.name().equals(MayaModifier.NAME)) {
                 options.add(GUI.sceneOption("Start The Match"));
             } else {
                 options.add(GUI.sceneOption("Do it"));

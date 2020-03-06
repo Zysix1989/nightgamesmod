@@ -8,6 +8,8 @@ import nightgames.status.Hypersensitive;
 
 public class VulnerableModifier extends BaseModifier {
 
+    public static final String NAME = "vulnerable";
+
     public VulnerableModifier() {
         status = new StatusModifier(new Hypersensitive(null), true);
     }
@@ -19,7 +21,7 @@ public class VulnerableModifier extends BaseModifier {
 
     @Override
     public String name() {
-        return "vulnerable";
+        return NAME;
     }
 
     @Override

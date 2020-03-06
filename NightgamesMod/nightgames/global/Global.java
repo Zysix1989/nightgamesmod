@@ -762,7 +762,7 @@ public class Global {
         }
         lineup.add(human);
         //TODO: This really should be taken out of this in favor of something that processes extra events of this kind. - DSM
-        if (matchmod.name().equals("maya")) {
+        if (matchmod.name().equals(MayaModifier.NAME)) {
             if (!checkFlag(Flag.Maya)) {
                 newChallenger(new Maya(human.getLevel()));
                 flag(Flag.Maya);
@@ -788,7 +788,7 @@ public class Global {
             maya.gain(Item.Dildo2);
             maya.gain(Item.Strapon2);
             match = Match.newMatch(lineup, matchmod);
-        } else if (matchmod.name().equals("ftc")) {
+        } else if (matchmod.name().equals(FTCModifier.NAME)) {
             Character prey = ((FTCModifier) matchmod).getPrey();
             if (!prey.human()) {
                 lineup.add(prey);

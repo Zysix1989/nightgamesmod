@@ -5,6 +5,8 @@ import nightgames.modifier.BaseModifier;
 
 public class VibrationModifier extends BaseModifier {
 
+    public static final String NAME = "vibration";
+
     public VibrationModifier() {
         custom = (c, m) -> {
                 c.tempt(5);
@@ -18,7 +20,7 @@ public class VibrationModifier extends BaseModifier {
 
     @Override
     public String name() {
-        return "vibration";
+        return NAME;
     }
 
     @Override

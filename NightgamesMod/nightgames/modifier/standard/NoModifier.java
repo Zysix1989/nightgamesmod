@@ -5,6 +5,8 @@ import nightgames.modifier.BaseModifier;
 
 public class NoModifier extends BaseModifier {
 
+    public static final String NAME = "normal";
+
     @Override
     public int bonus() {
         return 0;
@@ -12,7 +14,7 @@ public class NoModifier extends BaseModifier {
 
     @Override
     public String name() {
-        return "normal";
+        return NAME;
     }
 
     @Override

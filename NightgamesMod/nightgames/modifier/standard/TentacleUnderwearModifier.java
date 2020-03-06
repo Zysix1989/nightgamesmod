@@ -5,6 +5,8 @@ import nightgames.modifier.clothing.ForceClothingModifier;
 
 public class TentacleUnderwearModifier extends BaseModifier {
 
+    public static final String NAME = "tentacle-underwear";
+
     public TentacleUnderwearModifier() {
         this.clothing = new ForceClothingModifier("tentaclebottom");
     }
@@ -16,7 +18,7 @@ public class TentacleUnderwearModifier extends BaseModifier {
 
     @Override
     public String name() {
-        return "tentacle-underwear";
+        return NAME;
     }
 
     @Override

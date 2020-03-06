@@ -7,6 +7,7 @@ import nightgames.items.Item;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
 import nightgames.match.ftc.FTCMatch;
+import nightgames.modifier.standard.NudistModifier;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -57,7 +58,7 @@ public class Resupply extends Action {
             }
         } else {
             if (user.getCharacter().human()) {
-                if (Global.getMatch().getCondition().name().equals("nudist")) {
+                if (Global.getMatch().getCondition().name().equals(NudistModifier.NAME)) {
                     Global.gui().message(
                                     "You check in so that you're eligible to fight again, but you still don't get any clothes.");
                 } else {

@@ -6,6 +6,8 @@ import nightgames.modifier.BaseModifier;
 
 public class UnderwearOnlyModifier extends BaseModifier {
 
+    public static final String NAME = "underwearonly";
+
     public UnderwearOnlyModifier() {
         clothing = new nightgames.modifier.clothing.UnderwearOnlyModifier();
     }
@@ -17,7 +19,7 @@ public class UnderwearOnlyModifier extends BaseModifier {
 
     @Override
     public String name() {
-        return "underwearonly";
+        return NAME;
     }
 
     @Override
