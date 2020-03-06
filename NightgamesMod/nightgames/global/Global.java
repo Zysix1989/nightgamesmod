@@ -1227,21 +1227,20 @@ public class Global {
         }
     }
     
-    
-    public static <T> Optional<T> pickWeighted(Map<T, Double> map) {
+    public static <T> Optional<T> pickWeighted(Collection<Tuple2<T, Double>> weights) {
         // Normalize the weights so they sum to 1.0, sort them low->high,
         // then partition the range [0, 1) such that values with greater
         // weight get a larger 'section'. Finally, pick a random value in
         // [0, 1) and see what partition it's in. Return the corresponding value.
         
-        final double totalWeight = map.values().stream().reduce(0.0, Double::sum);
+        final double totalWeight = weights.stream().map(t -> t.b).reduce(0.0, Double::sum);
         final double threshold = rng.nextDouble();
         final var wrapper = new Object() {
             double sumSoFar = 0.0;
         };
 
-        return map.entrySet().stream()
-                .map(entry -> new Tuple2<>(entry.getKey(), entry.getValue() / totalWeight))
+        return weights.stream()
+                .map(t -> new Tuple2<>(t.a, t.b / totalWeight))
                 .sorted(Comparator.comparing(t -> t.b))
                 .dropWhile(t -> {
                     if (t.b + wrapper.sumSoFar >= threshold) {

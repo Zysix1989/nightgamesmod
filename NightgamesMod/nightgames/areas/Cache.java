@@ -10,11 +10,11 @@ import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
 import nightgames.match.Match;
 import nightgames.match.Participant;
+import org.parboiled.common.Tuple2;
 
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Cache implements Deployable {
@@ -129,9 +129,12 @@ public class Cache implements Deployable {
                         .ifPresent(area -> {
                             int level = (int) meanParticipantLevel + Global.random(11) - 4;
                             Cache cache = new Cache(level);
-                            var weighted = REWARDS.stream().filter(r -> level >= r.minLevel)
-                                            .collect(Collectors.toMap(Function.identity(), r -> r.weight));
-                            cache.reward.addAll(Global.pickWeighted(weighted).get().items);
+                            cache.reward.addAll(
+                                    Global.pickWeighted(REWARDS.stream()
+                                            .filter(r -> level >= r.minLevel)
+                                            .map(reward -> new Tuple2<>(reward, reward.weight))
+                                            .collect(Collectors.toList()))
+                                    .orElseThrow().items);
                             area.place(cache);
                             Global.gui().message(
                                     "<br/><b>A new cache has been dropped off at " + area.name + "!</b>");
