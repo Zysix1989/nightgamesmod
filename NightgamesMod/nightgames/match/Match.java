@@ -27,10 +27,6 @@ public class Match {
         void fire(Match m);
     }
 
-    public static class ConstructorInputs {
-        public Map<String, Area> map;
-    }
-
     protected LocalTime time;
     protected Map<String, Area> map;
     protected Set<Participant> participants;
