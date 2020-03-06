@@ -125,7 +125,7 @@ public class Cache implements Deployable {
                 Collections.shuffle(areas);
                 areas.stream()
                         .filter(area -> area.env.size() < 5)
-                        .findAny()
+                        .findFirst()
                         .ifPresent(area -> {
                             int level = (int) meanParticipantLevel + Global.random(11) - 4;
                             Cache cache = new Cache(level);
