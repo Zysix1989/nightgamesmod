@@ -466,10 +466,6 @@ public class Match {
         return map.values();
     }
 
-    public String genericRoomDescription() {
-        return "room";
-    }
-
     public final void pause() {
         pause = true;
     }

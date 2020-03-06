@@ -230,11 +230,6 @@ public class FTCMatch extends Match {
     }
 
     @Override
-    public String genericRoomDescription() {
-        return "area";
-    }
-    
-    @Override
     public Encounter buildEncounter(Participant first, Participant second, Area location) {
         return new FTCEncounter(first, second, location);
     }
