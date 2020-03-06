@@ -275,7 +275,6 @@ public class Cache implements Deployable {
         int minLevel;
         double weight;
         public RewardType(int minLevel, double weight, Loot...items) {
-            super();
             this.items = Arrays.asList(items);
             this.minLevel = minLevel;
             this.weight = weight;
