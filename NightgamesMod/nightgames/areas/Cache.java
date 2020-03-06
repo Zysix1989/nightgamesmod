@@ -110,7 +110,11 @@ public class Cache implements Deployable {
         public void fire(Match m) {
             if (m.meanLvl() > 3
                     && (lastCacheDropped.isEmpty() ||
-                    m.getRawTime().compareTo(lastCacheDropped.get().plus(Duration.ofHours(1).minus(Duration.ofMinutes(Global.random(10) * 5)))) >= 0)) {
+                    m.getRawTime()
+                            .compareTo(lastCacheDropped.get()
+                                    .plus(Duration.ofHours(1)
+                                            .minus(Duration.ofMinutes(Global.random(10) * 5))))
+                            >= 0)) {
                 List<Area> areas = new ArrayList<>(cacheLocations);
                 Collections.shuffle(areas);
                 areas.stream()
