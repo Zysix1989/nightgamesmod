@@ -361,8 +361,7 @@ public class Match {
 
     private void end() {
         participants.stream().map(Participant::getCharacter).forEach(Character::finishMatch);
-        Global.gui()
-              .clearText();
+        Global.gui().clearText();
         StringBuilder sb = new StringBuilder("Tonight's match is over.<br/><br/>");
         Optional<Character> winner = decideWinner();
         Player player = Global.getPlayer();
