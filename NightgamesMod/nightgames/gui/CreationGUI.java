@@ -518,7 +518,7 @@ public class CreationGUI extends JPanel {
             if(startConfig.isPresent() && Global.getFlagStartingWith(startConfig.get().getFlags(), "SkipTutorial").isPresent() && STARTER instanceof TutorialStart) {
                 ((TutorialStart)STARTER).respond("Start");return;
             }
-            STARTER.startGame();
+            STARTER.startGame(Global.currentMatchType);
         }
     }
 

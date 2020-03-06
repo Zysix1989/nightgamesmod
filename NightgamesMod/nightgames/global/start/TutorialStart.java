@@ -3,11 +3,13 @@ package nightgames.global.start;
 import nightgames.global.Global;
 import nightgames.global.Scene;
 import nightgames.gui.GUI;
+import nightgames.match.MatchType;
 import nightgames.modifier.standard.NoModifier;
 
 import java.util.Arrays;
 
 public class TutorialStart implements GameStarter, Scene {
+    private MatchType matchType;
 
     @Override
     public void respond(String response) {
@@ -504,14 +506,14 @@ public class TutorialStart implements GameStarter, Scene {
                 break;
             case "Done":
             case "No":
-                Global.gui()
-                      .clearText();
-                Global.setUpMatch(Global.currentMatchType, new NoModifier());
+                assert matchType != null;
+                Global.gui().clearText();
+                Global.setUpMatch(matchType, new NoModifier());
                 break;
             default:
-                Global.gui()
-                      .message("<b>Error: Invalid Tutorial Scene '" + response + "', starting game.</b>");
-                Global.setUpMatch(Global.currentMatchType, new NoModifier());
+                assert matchType != null;
+                Global.gui().message("<b>Error: Invalid Tutorial Scene '" + response + "', starting game.</b>");
+                Global.setUpMatch(matchType, new NoModifier());
         }
     }
 
@@ -520,8 +522,9 @@ public class TutorialStart implements GameStarter, Scene {
     }
 
     @Override
-    public void startGame() {
-        respond("Done"); // Switch to "Start" to enable tutorial
+    public void startGame(MatchType type) {
+        this.matchType = type;
+        respond("Start");
     }
 
 }
