@@ -238,6 +238,13 @@ public class Cache implements Deployable {
         this.dc = difficulty;
     }
 
+    private void grantReward(Participant p) {
+        for (Loot i : reward) {
+            i.pickup(p.getCharacter());
+        }
+        p.getCharacter().modMoney(Global.random(500) + 500);
+    }
+
     @Override
     public boolean resolve(Participant active) {
         if (active.getCharacter().state == State.ready) {
@@ -248,18 +255,12 @@ public class Cache implements Deployable {
                 if (active.getCharacter().human()) {
                     Global.gui().message(primarySuccessMessage);
                 }
-                for (Loot i : reward) {
-                    i.pickup(active.getCharacter());
-                }
-                active.getCharacter().modMoney(Global.random(500) + 500);
+                grantReward(active);
             } else if (active.getCharacter().check(secondaryAttribute, dc - 5)) {
                 if (active.getCharacter().human()) {
                     Global.gui().message(secondarySuccessMessage);
                 }
-                for (Loot i : reward) {
-                    i.pickup(active.getCharacter());
-                }
-                active.getCharacter().modMoney(Global.random(500) + 500);
+                grantReward(active);
             } else {
                 Global.gui().message(failureMessage);
             }
