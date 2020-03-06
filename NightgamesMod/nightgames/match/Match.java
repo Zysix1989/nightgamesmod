@@ -273,7 +273,7 @@ public class Match {
     }
 
     public final void round() {
-        var roundIterator = participants.iterator();
+        Iterator<Participant> roundIterator = Collections.emptyIterator();
         while (!time.isBefore(startTime.plusHours(3))) {
             if (!roundIterator.hasNext()) {
                 // prepare next round
