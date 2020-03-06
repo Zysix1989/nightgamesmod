@@ -2602,14 +2602,6 @@ public Character clone() throws CloneNotSupportedException {
     public void notifyFlight(Area destination) {}
 
     public void endOfMatchRound() {
-        getTraits().forEach(trait -> {
-            if (trait.status != null) {
-                Status newStatus = trait.status.instance(this, null);
-                if (!has(newStatus)) {
-                    addNonCombat(new nightgames.match.Status(newStatus));
-                }
-            }
-        });
         regen();
         tick(null);                     //FIXME: This is the culprit of the Addiction NPE outside of combat. Nulls are not handled by methods used within tick and Addiction.tick()
         if (has(Trait.Confident)) {

@@ -202,6 +202,14 @@ public class Participant {
     }
 
     public void endOfMatchRound() {
+        character.getTraits().forEach(trait -> {
+            if (trait.status != null) {
+                nightgames.status.Status newStatus = trait.status.instance(character, null);
+                if (!character.has(newStatus)) {
+                    character.addNonCombat(new nightgames.match.Status(newStatus));
+                }
+            }
+        });
         character.endOfMatchRound();
     }
 
