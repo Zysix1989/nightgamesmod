@@ -2730,9 +2730,6 @@ public Character clone() throws CloneNotSupportedException {
      * 
      * */
     public void resupply() {
-        for (String victorType : mercy) {
-            Character victor = Global.getCharacterByType(victorType);
-        }
         mercy.clear();
         change();
         state = State.ready;
