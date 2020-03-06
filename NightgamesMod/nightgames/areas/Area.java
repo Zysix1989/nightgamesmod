@@ -2,7 +2,9 @@ package nightgames.areas;
 
 import nightgames.actions.Action;
 import nightgames.actions.Move;
+import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.State;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Encounter;
@@ -66,7 +68,8 @@ public class Area implements Serializable {
             return true;
         }
         for (Participant participant : present) {
-            if (!participant.getCharacter().stealthCheck(perception) || open()) {
+            Character character = participant.getCharacter();
+            if (!(character.check(Attribute.Cunning, Global.random(20) + perception) || character.state == State.hidden) || open()) {
                 return true;
             }
         }

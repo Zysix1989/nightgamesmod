@@ -2584,10 +2584,6 @@ public Character clone() throws CloneNotSupportedException {
         getSkills().remove(copy);
     }
 
-    public boolean stealthCheck(int perception) {
-        return check(Attribute.Cunning, Global.random(20) + perception) || state == State.hidden;
-    }
-
     // This shouldn't have any side effects
     /**Performs a post check against the checked character. The Checked character provides a bonus to DC.
      * @param checked
