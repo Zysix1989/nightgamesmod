@@ -939,13 +939,13 @@ public class Player extends Character {
     }
 
     @Override
-    public void chooseLocateTarget(Locate action, Collection<Character> potentialTargets, String msg) {
+    public void chooseLocateTarget(Locate action, Map<Character, Runnable> potentialTargets, String msg) {
         gui.clearText();
         gui.validate();
         gui.message(msg);
-        List<CommandPanelOption> options = potentialTargets.stream()
-            .map(character -> new CommandPanelOption(character.getTrueName(),
-                event -> action.eventBody(this, character)))
+        List<CommandPanelOption> options = potentialTargets.entrySet().stream()
+            .map(entry -> new CommandPanelOption(entry.getKey().getTrueName(),
+                event -> entry.getValue().run()))
             .collect(Collectors.toList());
         options.add(new CommandPanelOption("Leave", event -> action.endEvent()));
         gui.presentOptions(options);
