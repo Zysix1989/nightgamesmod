@@ -18,38 +18,6 @@ import nightgames.modifier.standard.FTCModifier;
 import java.util.*;
 
 public class FTCMatch extends Match {
-    public static final String POND_DESCRIPTION = "You are at the edge of a small pond surrounded"
-            + " by shrubbery. You could imagine taking a quick dip here, but it's a"
-            + " little risky.";
-    public static final String GLADE_DESCRIPTION = "You are in a glade under a canopy of tall trees. It's"
-            + " quite pretty, really. Almost a shame to defile it with the debauchery"
-            + " that will inevitably take place here at some point.";
-    public static final String CABIN_DESCRIPTION = "You are in a small cabin in the woods. There are lots"
-            + " of tools here, and if you have the ingredients you could probably make"
-            + " some decent traps with them.";
-    public static final String TRAIL_DESCRIPTION = "You are following a trail along some relatively"
-            + " short trees. If you've got the upper body strength, you could"
-            + " probably climb up one.";
-    public static final String LODGE_DESCRIPTION = "You are in a quaint wooden lodge. There are numerous"
-            + " herbs and chemicals here, and you should be able to mix up some good"
-            + " stuff.";
-    public static final String HILL_DESCRIPTION = "You are on top of a hill overlooking a part of the forest."
-            + " If you look closely, you might be able to spot other competitors from here.";
-    public static final String PATH_DESCRIPTION = "You are on a path leading through some bushes. If you can pick"
-            + " a good bush to hide in, you might be able to get the drop on passers-by.";
-    public static final String OAK_DESCRIPTION = "You are standing under a tall, broad oak. There's something about"
-            + " it that somehow resonates inside you. It's quite a comfortable feeling, actually.";
-    public static final String PASS_DESCRIPTION = "You are walking through a narrow pass carved through a steep"
-            + " hill. You could try ambushing someone here, but others could easily do the same"
-            + " to you.";
-    public static final String WATERFALL_DESCRIPTION = "You are next to a pretty waterfall. The river it's in"
-            + " bends sharply here, and only this bit is within the bounds for the Games. Still,"
-            + " you could use it to take a shower in.";
-    public static final String MONUMENT_DESCRIPTION = "You are in an area of the forest dominated by a tall stone"
-            + " obelisk. It's probably a monument to something, but there's no plaque to tell you.";
-    public static final String DUMP_DESCRIPTION = "You are at the edge of the forest, where people seem to go to dump"
-            + " unwanted trash. The sight disgusts you, but there might be some useful stuff in there.";
-
     private Map<Participant, Area> bases;
     private Participant prey;
     private int gracePeriod;
@@ -124,18 +92,6 @@ public class FTCMatch extends Match {
                 }
             }
         }
-    }
-
-    private static String baseDescription(Participant p, String direction) {
-        return String.format("You are in a small camp on the " + direction + "ern edge of the forest. "
-                        + "%s %s base here.", p.getCharacter().subjectAction("have", "has"),
-                p.getCharacter().possessiveAdjective());
-    }
-
-    private static String campDescription(Participant prey) {
-        return String.format("You are in a clearing in the middle of the forest. There are no"
-                + " trees here, just a small camp where %s can "
-                + "get a new Flag if it gets captured.", prey.getCharacter().subject());
     }
 
     private void buildFTCMap(Participant north, Participant west, Participant south, Participant east, Participant prey) {
