@@ -214,8 +214,7 @@ public class Combat {
         if (loser.human() && loser.getWillpower().max() < loser.getMaxWillpowerPossible()) {
             write("<br/>Ashamed at your loss, you resolve to win next time.");
             write("<br/><b>Gained 1 Willpower</b>.");
-            loser.getWillpower()
-                 .gain(1);
+            loser.getWillpower().gain(1);
         }
         victor.getWillpower().renew();
         loser.getWillpower().renew();
