@@ -8,6 +8,7 @@ import nightgames.global.Global;
 import nightgames.global.start.DefaultStart;
 import nightgames.global.start.GameStarter;
 import nightgames.global.start.TutorialStart;
+import nightgames.match.MatchType;
 import nightgames.start.StartConfiguration;
 
 import javax.swing.*;
@@ -518,7 +519,7 @@ public class CreationGUI extends JPanel {
             if(startConfig.isPresent() && Global.getFlagStartingWith(startConfig.get().getFlags(), "SkipTutorial").isPresent() && STARTER instanceof TutorialStart) {
                 ((TutorialStart)STARTER).respond("Start");return;
             }
-            STARTER.startGame(Global.currentMatchType);
+            STARTER.startGame(MatchType.NORMAL);
         }
     }
 

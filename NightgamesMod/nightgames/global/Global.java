@@ -73,10 +73,9 @@ public class Global {
     private static Time time;
     private static Date jdate;
 
-   
-   
-    //THE FOLLOWING ITEMS ARE CANDIDATES FOR EXTRACTION TO A GAMEDATA CLASS - DSM 
-    public static MatchType currentMatchType = MatchType.NORMAL;
+
+
+    //THE FOLLOWING ITEMS ARE CANDIDATES FOR EXTRACTION TO A GAMEDATA CLASS - DSM
     private static Map<String, NPC> characterPool;
     private static Set<Skill> skillPool = new HashSet<>();          //These central peices of data are not going to change. so they should be gathered and separated for better management. - DSM 
     private static Set<Action> actionPool;

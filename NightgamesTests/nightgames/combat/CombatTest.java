@@ -6,6 +6,7 @@ import nightgames.characters.BlankPersonality;
 import nightgames.characters.CharacterSex;
 import nightgames.characters.NPC;
 import nightgames.global.Global;
+import nightgames.match.MatchType;
 import nightgames.modifier.standard.NoModifier;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -21,7 +22,7 @@ public class CombatTest {
     @BeforeClass public static void setUpClass() throws Exception {
         Global.initForTesting();
         Global.newGame("TestPlayer", Optional.empty(), new ArrayList<>(), CharacterSex.asexual, new HashMap<>());
-        Global.setUpMatch(Global.currentMatchType, new NoModifier());
+        Global.setUpMatch(MatchType.NORMAL, new NoModifier());
     }
 
     private NPC self;

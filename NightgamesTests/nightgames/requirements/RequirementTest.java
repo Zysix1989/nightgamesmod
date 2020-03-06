@@ -12,6 +12,7 @@ import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
+import nightgames.match.MatchType;
 import nightgames.modifier.standard.NoModifier;
 import nightgames.stance.*;
 import nightgames.status.Alert;
@@ -55,7 +56,7 @@ public class RequirementTest {
         self = new BlankPersonality("SelfTestNPC").character;
         other = new BlankPersonality("OtherTestNPC").character;
         Area area = new Area("TestArea", new DescriptionModule.ErrorDescriptionModule(), null);
-        Global.setUpMatch(Global.currentMatchType, new NoModifier());
+        Global.setUpMatch(MatchType.NORMAL, new NoModifier());
         combat = new Combat(self, other, area);
     }
 
