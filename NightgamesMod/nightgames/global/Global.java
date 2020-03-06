@@ -722,12 +722,15 @@ public class Global {
         return results;
     }
 
-    /**Sets up a match by assigning the player lineup.
-     * 
-     * FIXME: Also includes code that checks for Maya and adds her. This should be extracted out into some kind of event. - DSM*/
-    public static void setUpMatch(MatchType matchType, Modifier matchmod) {
+    private static class MatchCommonData {
+        Set<Character> lineup;
+        List<Character> participants;
+    }
+
+    private static MatchCommonData setUpMatchCommon() {
         assert day == null;
-        Set<Character> lineup = new HashSet<>(debugChars);
+        var result = new MatchCommonData();
+        result.lineup = new HashSet<>(debugChars);
         Character lover = null;
         int maxaffection = 0;
         for (Character player : players) {
@@ -743,18 +746,38 @@ public class Global {
                 lover = player;
             }
         }
-        List<Character> participants = new ArrayList<>();
+        result.participants = new ArrayList<>();
         // Disable characters flagged as disabled
         for (Character c : players) {
             // Disabling the player wouldn't make much sense, and there's no PlayerDisabled flag.
             if (c.getType().equals("Player") || !checkCharacterDisabledFlag(c)) {
-                participants.add(c);
+                result.participants.add(c);
             }
         }
         if (lover != null) {
-            lineup.add(lover);
+            result.lineup.add(lover);
         }
-        lineup.add(human);
+        result.lineup.add(human);
+        return result;
+    }
+
+    public static void setUpFTCMatch(MatchType matchType, Modifier matchmod) {
+        var data = setUpMatchCommon();
+        Character prey = ((FTCModifier) matchmod).getPrey();
+        if (!prey.human()) {
+            data.lineup.add(prey);
+        }
+        data.lineup = pickCharacters(data.participants, data.lineup, LINEUP_SIZE);
+        resting = new HashSet<>(players);
+        resting.removeAll(data.lineup);
+        match = matchType.buildMatch(data.lineup, matchmod);
+    }
+
+    /**Sets up a match by assigning the player lineup.
+     *
+     * FIXME: Also includes code that checks for Maya and adds her. This should be extracted out into some kind of event. - DSM*/
+    public static void setUpMatch(MatchType matchType, Modifier matchmod) {
+        var data = setUpMatchCommon();
         //TODO: This really should be taken out of this in favor of something that processes extra events of this kind. - DSM
         if (matchmod.name().equals(MayaModifier.NAME)) {
             if (!checkFlag(Flag.Maya)) {
@@ -763,10 +786,10 @@ public class Global {
             }
             NPC maya = Optional.ofNullable(getNPC("Maya")).orElseThrow(() -> new IllegalStateException(
                             "Maya data unavailable when attempting to add her to lineup."));
-            lineup.add(maya);
-            lineup = pickCharacters(participants, lineup, LINEUP_SIZE);
+            data.lineup.add(maya);
+            data.lineup = pickCharacters(data.participants, data.lineup, LINEUP_SIZE);
             resting = new HashSet<>(players);
-            resting.removeAll(lineup);
+            resting.removeAll(data.lineup);
             maya.gain(Item.Aphrodisiac, 10);
             maya.gain(Item.DisSol, 10);
             maya.gain(Item.Sedative, 10);
@@ -781,23 +804,14 @@ public class Global {
             maya.gain(Item.Onahole2);
             maya.gain(Item.Dildo2);
             maya.gain(Item.Strapon2);
-            match = Match.newMatch(lineup, matchmod);
-        } else if (matchmod.name().equals(FTCModifier.NAME)) {
-            Character prey = ((FTCModifier) matchmod).getPrey();
-            if (!prey.human()) {
-                lineup.add(prey);
-            }
-            lineup = pickCharacters(participants, lineup, LINEUP_SIZE);
+            match = Match.newMatch(data.lineup, matchmod);
+        } else if (data.participants.size() > LINEUP_SIZE) {
+            data.lineup = pickCharacters(data.participants, data.lineup, LINEUP_SIZE);
             resting = new HashSet<>(players);
-            resting.removeAll(lineup);
-            match = matchType.buildMatch(lineup, matchmod);
-        } else if (participants.size() > LINEUP_SIZE) {
-            lineup = pickCharacters(participants, lineup, LINEUP_SIZE);
-            resting = new HashSet<>(players);
-            resting.removeAll(lineup);
-            match = matchType.buildMatch(lineup, matchmod);
+            resting.removeAll(data.lineup);
+            match = matchType.buildMatch(data.lineup, matchmod);
         } else {
-            match = matchType.buildMatch(participants, matchmod);
+            match = matchType.buildMatch(data.participants, matchmod);
         }
         match.start();
     }
