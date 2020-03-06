@@ -3,14 +3,14 @@ package nightgames.match;
 import nightgames.actions.Action;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
+import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
+import nightgames.items.Item;
 import nightgames.status.Stsflag;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Participant {
@@ -77,6 +77,52 @@ public class Participant {
     public interface ActionCallback {
         Action.Aftermath execute(Action a);
     }
+
+
+    private Collection<Item> craftItems() {
+        int roll = Global.random(15);
+        if (character.check(Attribute.Cunning, 25)) {
+            if (roll == 9) {
+                return List.of(Item.Aphrodisiac, Item.DisSol);
+            } else if (roll >= 5) {
+                return List.of(Item.Aphrodisiac);
+            } else {
+                return List.of(Item.Lubricant, Item.Sedative);
+            }
+        } else if (character.check(Attribute.Cunning, 20)) {
+            if (roll == 9) {
+                return List.of(Item.Aphrodisiac);
+            } else if (roll >= 7) {
+                return List.of(Item.DisSol);
+            } else if (roll >= 5) {
+                return List.of(Item.Lubricant);
+            } else if (roll >= 3) {
+                return List.of(Item.Sedative);
+            } else {
+                return List.of(Item.EnergyDrink);
+            }
+        } else if (character.check(Attribute.Cunning, 15)) {
+            if (roll == 9) {
+                return List.of(Item.Aphrodisiac);
+            } else if (roll >= 8) {
+                return List.of(Item.DisSol);
+            } else if (roll >= 7) {
+                return List.of(Item.Lubricant);
+            } else if (roll >= 6) {
+                return List.of(Item.EnergyDrink);
+            }
+        } else {
+            if (roll >= 7) {
+                return List.of(Item.Lubricant);
+            } else if (roll >= 5) {
+                return List.of(Item.Sedative);
+            }
+        }
+        return List.of();
+    }
+
+
+
     public void move() {
         character.displayStateMessage(character.location.get().getTrap(this));
         var possibleActions = new ArrayList<Action>();
@@ -100,7 +146,8 @@ public class Participant {
             character.state = State.ready;
             return;
         } else if (character.state == State.crafting) {
-            character.craft();
+            character.craft(craftItems());
+            character.state = State.ready;
             return;
         } else if (character.state == State.searching) {
             character.search();

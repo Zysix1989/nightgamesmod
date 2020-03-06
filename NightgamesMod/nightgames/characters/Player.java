@@ -536,53 +536,12 @@ public class Player extends Character {
     }
 
     @Override
-    public void craft() {
-        int roll = Global.random(10);
+    public void craft(Collection<Item> itemsCrafted) {
         gui.message("You spend some time crafting some potions with the equipment.");
-        if (check(Attribute.Cunning, 25)) {
-            if (roll == 9) {
-                gain(Item.Aphrodisiac);
-                gain(Item.DisSol);
-            } else if (roll >= 5) {
-                gain(Item.Aphrodisiac);
-            } else {
-                gain(Item.Lubricant);
-                gain(Item.Sedative);
-            }
-        } else if (check(Attribute.Cunning, 20)) {
-            if (roll == 9) {
-                gain(Item.Aphrodisiac);
-            } else if (roll >= 7) {
-                gain(Item.DisSol);
-            } else if (roll >= 5) {
-                gain(Item.Lubricant);
-            } else if (roll >= 3) {
-                gain(Item.Sedative);
-            } else {
-                gain(Item.EnergyDrink);
-            }
-        } else if (check(Attribute.Cunning, 15)) {
-            if (roll == 9) {
-                gain(Item.Aphrodisiac);
-            } else if (roll >= 8) {
-                gain(Item.DisSol);
-            } else if (roll >= 7) {
-                gain(Item.Lubricant);
-            } else if (roll >= 6) {
-                gain(Item.EnergyDrink);
-            } else {
-                gui.message("Your concoction turns a sickly color and releases a foul smelling smoke. You trash it before you do any more damage.");
-            }
-        } else {
-            if (roll >= 7) {
-                gain(Item.Lubricant);
-            } else if (roll >= 5) {
-                gain(Item.Sedative);
-            } else {
-                gui.message("Your concoction turns a sickly color and releases a foul smelling smoke. You trash it before you do any more damage.");
-            }
+        super.craft(itemsCrafted);
+        if (itemsCrafted.isEmpty()) {
+            gui.message("Your concoction turns a sickly color and releases a foul smelling smoke. You trash it before you do any more damage.");
         }
-        state = State.ready;
     }
 
     @Override

@@ -2849,48 +2849,8 @@ public Character clone() throws CloneNotSupportedException {
 
     /**Performs the craft function on the map - the item this character gets is random.
      * */
-    public void craft() {
-        int roll = Global.random(15);
-        if (check(Attribute.Cunning, 25)) {
-            if (roll == 9) {
-                gain(Item.Aphrodisiac);
-                gain(Item.DisSol);
-            } else if (roll >= 5) {
-                gain(Item.Aphrodisiac);
-            } else {
-                gain(Item.Lubricant);
-                gain(Item.Sedative);
-            }
-        } else if (check(Attribute.Cunning, 20)) {
-            if (roll == 9) {
-                gain(Item.Aphrodisiac);
-            } else if (roll >= 7) {
-                gain(Item.DisSol);
-            } else if (roll >= 5) {
-                gain(Item.Lubricant);
-            } else if (roll >= 3) {
-                gain(Item.Sedative);
-            } else {
-                gain(Item.EnergyDrink);
-            }
-        } else if (check(Attribute.Cunning, 15)) {
-            if (roll == 9) {
-                gain(Item.Aphrodisiac);
-            } else if (roll >= 8) {
-                gain(Item.DisSol);
-            } else if (roll >= 7) {
-                gain(Item.Lubricant);
-            } else if (roll >= 6) {
-                gain(Item.EnergyDrink);
-            }
-        } else {
-            if (roll >= 7) {
-                gain(Item.Lubricant);
-            } else if (roll >= 5) {
-                gain(Item.Sedative);
-            }
-        }
-        state = State.ready;
+    public void craft(Collection<Item> itemsCrafted) {
+        itemsCrafted.forEach(this::gain);
         update();
     }
 
