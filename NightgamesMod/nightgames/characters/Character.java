@@ -37,6 +37,7 @@ import nightgames.items.clothing.Outfit;
 import nightgames.json.JsonUtils;
 import nightgames.match.Encounter;
 import nightgames.match.Match;
+import nightgames.match.MatchType;
 import nightgames.match.Participant;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.pet.PetCharacter;
@@ -2802,7 +2803,7 @@ public Character clone() throws CloneNotSupportedException {
      * */
     public void bounty(int points, Character victor) {
         int score = points;
-        if (Global.checkFlag(Flag.FTC) && points == 1) {
+        if (Global.getMatch().getType() == MatchType.FTC && points == 1) {
             FTCMatch match = (FTCMatch) Global.getMatch();
             if (match.isPrey(this)) {
                 score = 3;
@@ -2818,7 +2819,7 @@ public Character clone() throws CloneNotSupportedException {
     /**Checks if this character can resupply.*/
     public boolean eligible(Character p2) {
         boolean ftc = true;
-        if (Global.checkFlag(Flag.FTC)) {
+        if (Global.getMatch().getType() == MatchType.FTC) {
             FTCMatch match = (FTCMatch) Global.getMatch();
             ftc = !match.inGracePeriod() || (!match.isPrey(this) && !match.isPrey(p2));
         }

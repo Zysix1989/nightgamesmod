@@ -6,7 +6,6 @@ import nightgames.areas.AreaAttribute;
 import nightgames.areas.AreaIdentity;
 import nightgames.areas.DescriptionModule;
 import nightgames.characters.Character;
-import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Encounter;
@@ -38,9 +37,7 @@ public class FTCMatch extends Match {
     }
 
     @Override
-    protected void preStart() {
-        Global.flag(Flag.FTC);
-    }
+    protected void preStart() {}
     
     @Override
     public MatchType getType() {
@@ -71,7 +68,6 @@ public class FTCMatch extends Match {
 
     @Override
     protected void afterEnd() {
-        Global.unflag(Flag.FTC);
         participants.forEach(c -> c.getCharacter().remove(Item.Flag));
         super.afterEnd();
     }

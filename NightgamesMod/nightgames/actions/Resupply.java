@@ -2,9 +2,9 @@ package nightgames.actions;
 
 import nightgames.characters.Character;
 import nightgames.characters.State;
-import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.MatchType;
 import nightgames.match.Participant;
 import nightgames.match.ftc.FTCMatch;
 
@@ -45,7 +45,7 @@ public class Resupply extends Action {
 
     @Override
     public Action.Aftermath execute(Participant user) {
-        if (Global.checkFlag(Flag.FTC)) {
+        if (Global.getMatch().getType() == MatchType.FTC) {
             FTCMatch match = (FTCMatch) Global.getMatch();
             if (user.getCharacter().human()) {
                 Global.gui().message("You get a change of clothes from the chest placed here.");

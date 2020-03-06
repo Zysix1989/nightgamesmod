@@ -20,7 +20,6 @@ import nightgames.combat.CombatSceneChoice;
 import nightgames.combat.Result;
 import nightgames.daytime.*;
 import nightgames.global.Encs;
-import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.global.Scene;
 import nightgames.grammar.Person;
@@ -357,7 +356,7 @@ public class Player extends Character {
 
     @Override
     public void displayStateMessage(Optional<Trap.Instance> knownTrap) {
-        if (Global.checkFlag(Flag.FTC)) {
+        if (Global.getMatch().getType() == MatchType.FTC) {
             Character holder = ((FTCMatch) Global.getMatch()).getFlagHolder();
             if (holder != null && !holder.human()) {
                 gui.message("<b>" + holder.subject() + " currently holds the Flag.</b></br>");

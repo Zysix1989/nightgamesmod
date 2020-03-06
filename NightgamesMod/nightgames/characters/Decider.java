@@ -5,9 +5,9 @@ import nightgames.areas.Area;
 import nightgames.characters.custom.effect.CustomEffect;
 import nightgames.combat.Combat;
 import nightgames.daytime.Daytime;
-import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.MatchType;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.pet.PetCharacter;
 import nightgames.skills.Skill;
@@ -190,7 +190,7 @@ public class Decider {
             }
         }
         FTCMatch match;
-        if (Global.checkFlag(Flag.FTC)) {
+        if (Global.getMatch().getType() == MatchType.FTC) {
             match = (FTCMatch) Global.getMatch();
             if (match.isPrey(character) && match.getFlagHolder() == null) {
                 var action = searchForAction(available, character,

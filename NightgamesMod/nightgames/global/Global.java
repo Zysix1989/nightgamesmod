@@ -737,7 +737,6 @@ public class Global {
         Set<Character> lineup = new HashSet<>(debugChars);
         Character lover = null;
         int maxaffection = 0;
-        unflag(Flag.FTC);
         for (Character player : players) {
             player.getStamina().renew();
             player.getArousal().renew();

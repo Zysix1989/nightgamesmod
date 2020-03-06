@@ -12,6 +12,7 @@ import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
 import nightgames.match.DefaultMatchEndListener;
+import nightgames.match.MatchType;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.pet.Pet;
 import nightgames.pet.PetCharacter;
@@ -219,7 +220,7 @@ public class Combat {
         victor.getWillpower().renew();
         loser.getWillpower().renew();
 
-        if (Global.checkFlag(Flag.FTC) && loser.has(Item.Flag)) {
+        if (Global.getMatch().getType() == MatchType.FTC && loser.has(Item.Flag)) {
             write(victor, Global.format(
                             "<br/><b>{self:SUBJECT-ACTION:take|takes} the " + "Flag from {other:subject}!</b>", victor,
                             loser));
