@@ -37,8 +37,7 @@ public class Match {
     protected Set<Participant> participants;
     private boolean pause;
     protected Modifier condition;
-    protected Set<Area> cacheLocations;
-    private List<Trigger> roundTriggers = List.of(new Cache.SpawnTrigger(), new Challenge.SpawnTrigger());
+    private List<Trigger> roundTriggers = List.of(new Challenge.SpawnTrigger());
 
     protected Match(Set<Participant> participants, ConstructorInputs mi, Modifier condition) {
         this.participants = new HashSet<>(participants);
@@ -46,15 +45,17 @@ public class Match {
         time = startTime;
         pause = false;
         this.map = mi.map;
-        this.cacheLocations = mi.cacheLocations;
     }
 
     public static Match newMatch(Collection<Character> combatants, Modifier condition) {
-        return new Match(combatants.stream()
+        var inputs = makeConstructorInputs();
+        var m = new Match(combatants.stream()
                 .map(Participant::new)
                 .collect(Collectors.toSet()),
-                makeConstructorInputs(),
+                inputs,
                 condition);
+        m.roundTriggers.add(new Cache.SpawnTrigger(inputs.cacheLocations));
+        return m;
     }
 
     protected void preStart() {
@@ -466,7 +467,7 @@ public class Match {
             .orElseThrow();
     }
 
-    public void dropPackage() {
+    public void dropPackage(Collection<Area> cacheLocations) {
         List<Area> areas = new ArrayList<>(cacheLocations);
         Collections.shuffle(areas);
         areas.stream()

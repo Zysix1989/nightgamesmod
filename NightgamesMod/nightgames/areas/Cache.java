@@ -100,13 +100,18 @@ public class Cache implements Deployable {
 
     public static class SpawnTrigger implements Match.Trigger {
         private Optional<LocalTime> lastCacheDropped;
+        private Set<Area> cacheLocations;
+
+        public SpawnTrigger(Set<Area> cacheLocations) {
+            this.cacheLocations = cacheLocations;
+        }
 
         @Override
         public void fire(Match m) {
             if (m.meanLvl() > 3
                     && (lastCacheDropped.isEmpty() ||
                     m.getRawTime().compareTo(lastCacheDropped.get().plus(Duration.ofHours(1).minus(Duration.ofMinutes(Global.random(10) * 5)))) >= 0)) {
-                m.dropPackage();
+                m.dropPackage(cacheLocations);
                 lastCacheDropped = Optional.of(m.getRawTime());
             }
         }
