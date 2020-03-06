@@ -18,7 +18,7 @@ import java.util.List;
 public class DefaultPrematch extends Prematch {
 
     public DefaultPrematch() {
-        super(new EarlyGameEvent(), new FirstLillyEvent(), new MayaEvent(), new AiriEvent());
+        super(List.of(new EarlyGameEvent(), new FirstLillyEvent(), new MayaEvent(), new AiriEvent()));
     }
     
     @Override

@@ -1,23 +1,18 @@
 package nightgames.match;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.global.Scene;
 import nightgames.modifier.Modifier;
+
+import java.util.Collections;
+import java.util.List;
 
 public abstract class Prematch implements Scene {
     private final List<PrematchEvent> specialEvents;
     
     protected Modifier type;
     protected PrematchEvent chosenEvent;
-    
-    protected Prematch(PrematchEvent...events) {
-        this(Arrays.asList(events));
-    }
 
     protected Prematch(List<PrematchEvent> events) {
         specialEvents = Collections.unmodifiableList(events);

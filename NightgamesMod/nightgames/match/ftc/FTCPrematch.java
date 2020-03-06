@@ -1,23 +1,24 @@
 package nightgames.match.ftc;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import nightgames.characters.Character;
 import nightgames.global.Flag;
 import nightgames.global.Global;
-import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.gui.GUI;
+import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Prematch;
 import nightgames.match.PrematchEvent;
 import nightgames.modifier.standard.FTCModifier;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class FTCPrematch extends Prematch {
 
     private Character prey;
 
     public FTCPrematch() { 
-        super(new FTCFirstIntroEvent(), new FTCIntroEvent());
+        super(List.of(new FTCFirstIntroEvent(), new FTCIntroEvent()));
     }
 
     @Override
