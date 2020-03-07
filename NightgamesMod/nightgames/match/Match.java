@@ -183,7 +183,9 @@ public class Match {
     public final void start() {
         Global.getPlayer().getAddictions().forEach(a -> {
             Optional<nightgames.status.Status> withEffect = a.startNight();
-            withEffect.ifPresent(s -> Global.getPlayer().addNonCombat(new nightgames.match.Status(s)));
+            withEffect.ifPresent(s -> findParticipant(Global.getPlayer())
+                    .getCharacter()
+                    .addNonCombat(new nightgames.match.Status(s)));
         });
         Global.gui().startMatch();
         participants.forEach(participant -> {
