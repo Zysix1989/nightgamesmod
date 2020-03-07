@@ -66,7 +66,10 @@ public class Locate extends Action {
                     .with("target", target.getCharacter().getGrammar())
                     .with("area", area);
             gui.message(COMPLETION_TEMPLATE.render(model));
-            scryer.getCharacter().addNonCombat(new Status(new Horny(scryer.getCharacter(), scryer.getCharacter().getArousal().max() / 10.0f, 10, "Scrying Ritual")));
+            scryer.getCharacter().addNonCombat(new Status(new Horny(scryer.getCharacter(),
+                    scryer.getCharacter().getArousal().max() / 10.0f,
+                    10,
+                    "Scrying Ritual")));
             scryer.getCharacter().leaveAction(action);
         }
     }
