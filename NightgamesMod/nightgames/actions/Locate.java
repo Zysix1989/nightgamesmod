@@ -38,12 +38,12 @@ public class Locate extends Action {
             scryer.getCharacter().chooseLocateTarget(
                     Global.getMatch().getParticipants().stream()
                             .filter(p -> scryer.getCharacter().getAffection(p.getCharacter()) >= MINIMUM_SCRYING_REQUIREMENT)
-                            .collect(Collectors.toMap(Participant::getCharacter, p -> () -> this.chooseTarget(scryer.getCharacter(), p.getCharacter()))),
+                            .collect(Collectors.toMap(Participant::getCharacter, p -> () -> this.chooseTarget(p.getCharacter()))),
                     () -> action.endEvent(),
                     msg);
         }
 
-        private void chooseTarget(Character self, Character target) {
+        private void chooseTarget(Character target) {
             var gui = Global.gui();
             Area area = target.location();
             gui.clearText();
@@ -62,8 +62,8 @@ public class Locate extends Action {
                         + "However, you draw a blank. Your small talisman is already burning up in those creepy "
                         + "purple flames, the smoke flowing from your nose straight to your crotch and setting another fire there.");
             }
-            self.addNonCombat(new Status(new Horny(self, self.getArousal().max() / 10, 10, "Scrying Ritual")));
-            self.leaveAction(action);
+            scryer.getCharacter().addNonCombat(new Status(new Horny(scryer.getCharacter(), scryer.getCharacter().getArousal().max() / 10, 10, "Scrying Ritual")));
+            scryer.getCharacter().leaveAction(action);
         }
     }
 
