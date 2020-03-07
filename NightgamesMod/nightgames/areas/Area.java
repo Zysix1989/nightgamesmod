@@ -8,8 +8,8 @@ import nightgames.characters.State;
 import nightgames.global.Encs;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
-import nightgames.match.Encounter;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
 import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
@@ -26,7 +26,8 @@ public class Area implements Serializable {
     private HashSet<Area> adjacent = new HashSet<>();
     private ArrayList<Participant> present = new ArrayList<>();
     private final DescriptionModule descriptions;
-    public Encounter fight;
+
+    public DefaultEncounter fight;
     public boolean alarm = false;
     public ArrayList<Deployable> env = new ArrayList<>();
     public transient MapDrawHint drawHint = new MapDrawHint();

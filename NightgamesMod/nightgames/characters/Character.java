@@ -35,10 +35,10 @@ import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
 import nightgames.items.clothing.Outfit;
 import nightgames.json.JsonUtils;
-import nightgames.match.Encounter;
 import nightgames.match.Match;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.pet.PetCharacter;
 import nightgames.pet.arms.ArmManager;
@@ -1730,9 +1730,9 @@ public Character clone() throws CloneNotSupportedException {
         return !(stunned() || distracted() || is(Stsflag.enthralled));
     }
 
-    public abstract void faceOff(Character opponent, Encounter enc);
+    public abstract void faceOff(Character opponent, DefaultEncounter enc);
 
-    public abstract void spy(Character opponent, Encounter enc);
+    public abstract void spy(Character opponent, DefaultEncounter enc);
 
     public abstract String describe(int per, Character observer);
 
@@ -1774,9 +1774,9 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract String taunt(Combat c, Character target);
 
-    public abstract List<CommandPanelOption> intervene(Encounter fight, Character p1, Character p2);
+    public abstract List<CommandPanelOption> intervene(DefaultEncounter fight, Character p1, Character p2);
 
-    public abstract void showerScene(Character target, Encounter encounter);
+    public abstract void showerScene(Character target, DefaultEncounter encounter);
 
     /**Determines if this character is controlled by a human.
      * 

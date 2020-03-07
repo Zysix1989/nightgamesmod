@@ -12,8 +12,8 @@ import nightgames.grammar.Person;
 import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.gui.commandpanel.CommandPanelOption;
-import nightgames.match.Encounter;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
@@ -284,12 +284,12 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public List<CommandPanelOption> intervene(Encounter fight, Character p1, Character p2) {
+    public List<CommandPanelOption> intervene(DefaultEncounter fight, Character p1, Character p2) {
         return new ArrayList<>();
     }
 
     @Override
-    public void showerScene(Character target, Encounter encounter) {}
+    public void showerScene(Character target, DefaultEncounter encounter) {}
     @Override
     public void afterParty() {}
     
@@ -324,13 +324,13 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void faceOff(Character opponent, Encounter enc) {
+    public void faceOff(Character opponent, DefaultEncounter enc) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public void spy(Character opponent, Encounter enc) {
+    public void spy(Character opponent, DefaultEncounter enc) {
         // TODO Auto-generated method stub
     }
 

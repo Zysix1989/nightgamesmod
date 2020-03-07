@@ -480,7 +480,7 @@ public class Match {
         return condition;
     }
 
-    public Encounter buildEncounter(Participant first, Participant second, Area location) {
+    public DefaultEncounter buildEncounter(Participant first, Participant second, Area location) {
         return new DefaultEncounter(first, second, location);
     }
     

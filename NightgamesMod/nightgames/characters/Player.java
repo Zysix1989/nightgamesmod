@@ -28,10 +28,10 @@ import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
-import nightgames.match.Encounter;
 import nightgames.match.Match;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.skills.*;
 import nightgames.skills.damage.DamageType;
@@ -265,7 +265,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void faceOff(Character opponent, Encounter enc) {
+    public void faceOff(Character opponent, DefaultEncounter enc) {
         gui.message("You run into <b>" + opponent.nameDirectObject()
                         + "</b> and you both hesitate for a moment, deciding whether to attack or retreat.");
         presentFightFlightChoice(opponent, encounterOption(() -> {
@@ -318,7 +318,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void spy(Character opponent, Encounter enc) {
+    public void spy(Character opponent, DefaultEncounter enc) {
         gui.message("You spot <b>" + opponent.nameDirectObject()
                         + "</b> but she hasn't seen you yet. You could probably catch her off guard, or you could remain hidden and hope she doesn't notice you.");
         presentFightFlightChoice(opponent, encounterOption(() -> {
@@ -575,7 +575,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void showerScene(Character target, Encounter encounter) {
+    public void showerScene(Character target, DefaultEncounter encounter) {
         if (target.location().name.equals("Showers")) {
             gui.message("You hear running water coming from the first floor showers. There shouldn't be any residents on this floor right now, so it's likely one "
                             + "of your opponents. You peek inside and sure enough, <b>" + target.subject()
@@ -618,7 +618,7 @@ public class Player extends Character {
     }
 
     @Override
-    public List<CommandPanelOption> intervene(Encounter enc, Character p1, Character p2) {
+    public List<CommandPanelOption> intervene(DefaultEncounter enc, Character p1, Character p2) {
         gui.message("You find <b>" + p1.getName() + "</b> and <b>" + p2.getName()
                         + "</b> fighting too intensely to notice your arrival. If you intervene now, it'll essentially decide the winner.");
         gui.message("Then again, you could just wait and see which one of them comes out on top. It'd be entertaining,"

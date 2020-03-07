@@ -8,10 +8,10 @@ import nightgames.areas.DescriptionModule;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
-import nightgames.match.Encounter;
 import nightgames.match.Match;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
 import nightgames.modifier.standard.FTCModifier;
 
 import java.util.*;
@@ -225,7 +225,7 @@ public class FTCMatch extends Match {
     }
 
     @Override
-    public Encounter buildEncounter(Participant first, Participant second, Area location) {
+    public DefaultEncounter buildEncounter(Participant first, Participant second, Area location) {
         return new FTCEncounter(first, second, location);
     }
 }

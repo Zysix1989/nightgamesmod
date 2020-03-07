@@ -21,9 +21,9 @@ import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
-import nightgames.match.Encounter;
 import nightgames.match.Match;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
 import nightgames.modifier.standard.NoRecoveryModifier;
 import nightgames.pet.arms.ArmManager;
 import nightgames.pet.arms.ArmType;
@@ -446,7 +446,7 @@ public class NPC extends Character {
     }
 
     @Override
-    public void faceOff(Character opponent, Encounter enc) {
+    public void faceOff(Character opponent, DefaultEncounter enc) {
         Encs encType;
         if (ai.fightFlight(opponent)) {
             encType = Encs.fight;
@@ -460,7 +460,7 @@ public class NPC extends Character {
     }
 
     @Override
-    public void spy(Character opponent, Encounter enc) {
+    public void spy(Character opponent, DefaultEncounter enc) {
         if (ai.attack(opponent)) {
             enc.parse(Encs.ambush, this, opponent);
         } else {
@@ -478,7 +478,7 @@ public class NPC extends Character {
     }
 
     @Override
-    public void showerScene(Character target, Encounter encounter) {
+    public void showerScene(Character target, DefaultEncounter encounter) {
         Encs response;
         if (this.has(Item.Aphrodisiac)) {
             // encounter.aphrodisiactrick(this, target);
@@ -494,7 +494,7 @@ public class NPC extends Character {
     }
 
     @Override
-    public List<CommandPanelOption> intervene(Encounter enc, Character p1, Character p2) {
+    public List<CommandPanelOption> intervene(DefaultEncounter enc, Character p1, Character p2) {
         if (Global.random(20) + getAffection(p1) + (p1.has(Trait.sympathetic) ? 10 : 0) >= Global.random(20)
                         + getAffection(p2) + (p2.has(Trait.sympathetic) ? 10 : 0)) {
             enc.intrude(this, p1);
