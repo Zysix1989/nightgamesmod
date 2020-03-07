@@ -1159,25 +1159,38 @@ public class Combat {
         } else {
             target = p1;
         }
-        if (target.getCharacter().resist3p(this, intruder.getCharacter(), assist.getCharacter())) {
-            target.getCharacter().gainXP(20 + target.getCharacter().lvlBonus(intruder.getCharacter()));
-            intruder.getCharacter().gainXP(10 + intruder.getCharacter().lvlBonus(target.getCharacter()));
-            target.getCharacter().orgasm();
-            target.getCharacter().undress(this);
-            intruder.getCharacter().defeated(target.getCharacter());
-            intruder.getCharacter().defeated(assist.getCharacter());
+        var targetCharacter = target.getCharacter();
+        var assistCharacter = assist.getCharacter();
+        var intruderCharacter = intruder.getCharacter();
+        if (targetCharacter.resist3p(this, intruderCharacter, assistCharacter)) {
+            targetCharacter.gainXP(20 + targetCharacter.lvlBonus(intruderCharacter));
+            intruderCharacter.gainXP(10 + intruderCharacter.lvlBonus(targetCharacter));
+            targetCharacter.orgasm();
+            targetCharacter.undress(this);
+            intruderCharacter.defeated(targetCharacter);
+            intruderCharacter.defeated(assistCharacter);
         } else {
-            intruder.getCharacter().intervene3p(this, target.getCharacter(), assist.getCharacter());
-            assist.getCharacter().victory3p(this, target.getCharacter(), intruder.getCharacter());
+            intruderCharacter.gainXP(intruderCharacter.getAssistXP(targetCharacter));
+            targetCharacter.defeated(intruderCharacter);
+            assistCharacter.gainAttraction(intruderCharacter, 1);
+            intruderCharacter.intervene3p(this, targetCharacter, assistCharacter);
+            assistCharacter.gainXP(assistCharacter.getVictoryXP(targetCharacter));
+            targetCharacter.gainXP(targetCharacter.getDefeatXP(assistCharacter));
+            targetCharacter.orgasm();
+            assistCharacter.dress(this);
+            targetCharacter.undress(this);
+            assistCharacter.gainTrophy(this, targetCharacter);
+            targetCharacter.defeated(assistCharacter);
+            assistCharacter.victory3p(this, targetCharacter, intruderCharacter);
         }
         phase = CombatPhase.RESULTS_SCENE;
-        if (!(p1.getCharacter().human() || p2.getCharacter().human() || intruder.getCharacter().human())) {
+        if (!(p1.getCharacter().human() || p2.getCharacter().human() || intruderCharacter.human())) {
             end();
         } else {
             Global.gui().watchCombat(this);
             resumeNoClearFlag();
         }
-        listen(l -> l.postEnd(Optional.of(assist.getCharacter())));
+        listen(l -> l.postEnd(Optional.of(assistCharacter)));
     }
 
     /**

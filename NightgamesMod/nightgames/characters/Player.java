@@ -633,9 +633,6 @@ public class Player extends Character {
 
     @Override
     public void intervene3p(Combat c, Character target, Character assist) {
-        gainXP(getAssistXP(target));
-        target.defeated(this);
-        assist.gainAttraction(this, 1);
         c.write("You take your time, approaching " + target.getName() + " and " + assist.getName() + " stealthily. "
                         + assist.getName() + " notices you first and before her reaction "
                         + "gives you away, you quickly lunge and grab " + target.getName()
@@ -646,13 +643,6 @@ public class Player extends Character {
 
     @Override
     public void victory3p(Combat c, Character target, Character assist) {
-        gainXP(getVictoryXP(target));
-        target.gainXP(target.getDefeatXP(this));
-        target.orgasm();
-        dress(c);
-        target.undress(c);
-        gainTrophy(c, target);
-        target.defeated(this);
         if (target.hasDick()) {
             c.write(String.format(
                             "You position yourself between %s's legs, gently "

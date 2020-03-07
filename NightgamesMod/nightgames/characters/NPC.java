@@ -223,21 +223,11 @@ public class NPC extends Character {
 
     @Override
     public void intervene3p(Combat c, Character target, Character assist) {
-        gainXP(getAssistXP(target));
-        target.defeated(this);
         c.write(ai.intervene3p(c, target, assist));
-        assist.gainAttraction(this, 1);
     }
 
     @Override
     public void victory3p(Combat c, Character target, Character assist) {
-        gainXP(getVictoryXP(target));
-        target.gainXP(target.getDefeatXP(this));
-        target.orgasm();
-        dress(c);
-        target.undress(c);
-        gainTrophy(c, target);
-        target.defeated(this);
         c.updateAndClearMessage();
         c.write(ai.victory3p(c, target, assist));
         gainAttraction(target, 1);
