@@ -52,7 +52,7 @@ public class Spiderweb extends Trap {
 
         @Override
         public Optional<Position> capitalize(Participant attacker, Participant victim) {
-            onSpiderwebDefeat(attacker.getCharacter(), victim.getCharacter(), this);
+            onSpiderwebDefeat(attacker, victim, this);
             return super.capitalize(attacker, victim);
         }
     }
@@ -79,23 +79,23 @@ public class Spiderweb extends Trap {
         return new InstantiateResult(CREATION_MESSAGE, new Instance(this, owner));
     }
     
-    public static void onSpiderwebDefeat(Character attacker, Character victim, Trap.Instance trap) {
-        printSpiderwebLines(attacker, victim);
+    public static void onSpiderwebDefeat(Participant attacker, Participant victim, Trap.Instance trap) {
+        printSpiderwebLines(attacker.getCharacter(), victim.getCharacter());
 
         // This code is identical to the encounter defeat code. If there are more use
         // cases like this it needs to be encapsulated somewhere more general.
-        if (victim.mostlyNude()) {
-            attacker.gain(victim.getTrophy());
+        if (victim.getCharacter().mostlyNude()) {
+            attacker.getCharacter().gain(victim.getCharacter().getTrophy());
         }
-        victim.nudify();
-        victim.defeated(attacker);
-        victim.getArousal().renew();
-        attacker.tempt(20);
-        Global.getMatch().score(attacker,  1);
-        attacker.state = State.ready;
-        victim.state = State.ready;
-        victim.location().endEncounter();
-        victim.location().clearTrap();
+        victim.getCharacter().nudify();
+        victim.getCharacter().defeated(attacker.getCharacter());
+        victim.getCharacter().getArousal().renew();
+        attacker.getCharacter().tempt(20);
+        Global.getMatch().score(attacker.getCharacter(),  1);
+        attacker.getCharacter().state = State.ready;
+        victim.getCharacter().state = State.ready;
+        victim.getCharacter().location().endEncounter();
+        victim.getCharacter().location().clearTrap();
     }
     
     private static void printSpiderwebLines(Character attacker, Character victim) {

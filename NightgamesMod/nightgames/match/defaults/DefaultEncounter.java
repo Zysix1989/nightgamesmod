@@ -443,7 +443,7 @@ public class DefaultEncounter {
     protected void spider(Participant attacker, Participant target) {
         attacker.getCharacter().gainXP(attacker.getCharacter().getVictoryXP(target.getCharacter()));
         target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
-        Spiderweb.onSpiderwebDefeat(attacker.getCharacter(), target.getCharacter(), location.getTrap().orElseThrow());
+        Spiderweb.onSpiderwebDefeat(attacker, target, location.getTrap().orElseThrow());
     }
 
     public void intrude(Character intruder, Character assist) {
