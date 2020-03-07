@@ -22,7 +22,5 @@ public interface Encounter {
 
     void parse(Encs choice, Character primary, Character opponent);
 
-    void parse(Encs choice, Character primary, Character opponent, Trap.Instance trap);
-
     void watch();
 }

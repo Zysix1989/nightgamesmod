@@ -508,16 +508,10 @@ public class DefaultEncounter implements Encounter {
     }
 
     public void parse(Encs choice, Character self, Character target) {
-        parse(choice, self, target, null);
-    }
 
-    public void parse(Encs choice, Character self, Character target, Trap.Instance trap) {
         switch (choice) {
             case ambush:
                 ambush(self, target);
-                break;
-            case capitalize:
-                trap(self, target, trap);
                 break;
             case showerattack:
                 showerambush(self, target);
@@ -544,7 +538,7 @@ public class DefaultEncounter implements Encounter {
                 break;
         }
     }
-    
+
     private String smokeMessage(Character c) {
         return String.format("%s a smoke bomb and %s.", 
                         Global.capitalizeFirstLetter(c.subjectAction("drop", "drops"))

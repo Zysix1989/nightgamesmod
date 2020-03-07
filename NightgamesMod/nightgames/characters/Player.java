@@ -684,7 +684,7 @@ public class Player extends Character {
 
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Attack " + target.getName(), event -> {
-            enc.parse(Encs.capitalize, this, target, trap);
+            enc.trap(this, target, trap);
             Global.getMatch().resume();
         }));
         options.add(new CommandPanelOption("Wait",

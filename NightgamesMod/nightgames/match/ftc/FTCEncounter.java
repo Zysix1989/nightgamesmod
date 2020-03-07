@@ -15,7 +15,6 @@ import nightgames.stance.Mount;
 import nightgames.stance.Pin;
 import nightgames.status.Bound;
 import nightgames.status.Flatfooted;
-import nightgames.trap.Trap;
 
 public class FTCEncounter extends DefaultEncounter {
 
@@ -176,12 +175,7 @@ public class FTCEncounter extends DefaultEncounter {
 
     @Override
     public void parse(Encs choice, Character self, Character target) {
-        parse(choice, self, target, null);
-    }
-
-    @Override
-    public void parse(Encs choice, Character self, Character target, Trap.Instance trap) {
-        assert trap != null || choice != Encs.capitalize;
+        assert choice != Encs.capitalize;
         switch (choice) {
             case treeAmbush:
                 treeAmbush(self, target);
@@ -193,7 +187,8 @@ public class FTCEncounter extends DefaultEncounter {
                 passAmbush(self, target);
                 break;
             default:
-                super.parse(choice, self, target, trap);
+                super.parse(choice, self, target);
         }
     }
+
 }
