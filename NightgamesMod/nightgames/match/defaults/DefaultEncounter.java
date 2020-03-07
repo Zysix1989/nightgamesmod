@@ -379,14 +379,10 @@ public class DefaultEncounter {
             }
         }
         
-        if (p1.getCharacter().human() || p2.getCharacter().human()) {
-            startFight(p1.getCharacter(), p2.getCharacter());
-            p2.getCharacter().undress(fight);
-            p1.getCharacter().emote(Emotion.dominant, 50);
-            p2.getCharacter().emote(Emotion.nervous, 50);
-        } else {
-            fight = new Combat(p1.getCharacter(), p2.getCharacter(), location);
-        }
+        startFight(p1.getCharacter(), p2.getCharacter());
+        p2.getCharacter().undress(fight);
+        p1.getCharacter().emote(Emotion.dominant, 50);
+        p2.getCharacter().emote(Emotion.nervous, 50);
         
         target.add(fight, new Flatfooted(target, 4));
     }
