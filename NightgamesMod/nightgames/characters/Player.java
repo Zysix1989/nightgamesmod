@@ -252,13 +252,6 @@ public class Player extends Character {
         return event -> continuation.run();
     }
 
-    private ActionListener encounterOption(Encounter enc, Character target, Encs choice) {
-        return encounterOption( () -> {
-            enc.parse(choice, this, target);
-            Global.getMatch().resume();
-        });
-    }
-
     private void presentFightFlightChoice(Character opponent, ActionListener fightCallback, ActionListener flightCallback) {
         assessOpponent(opponent);
         gui.message("<br/>");
@@ -275,7 +268,13 @@ public class Player extends Character {
     public void faceOff(Character opponent, Encounter enc) {
         gui.message("You run into <b>" + opponent.nameDirectObject()
                         + "</b> and you both hesitate for a moment, deciding whether to attack or retreat.");
-        presentFightFlightChoice(opponent, encounterOption(enc, opponent, Encs.fight),encounterOption(enc, opponent, Encs.flee));
+        presentFightFlightChoice(opponent, encounterOption(() -> {
+            enc.parse(Encs.fight, this, opponent);
+            Global.getMatch().resume();
+        }), encounterOption(() -> {
+            enc.parse(Encs.flee, this, opponent);
+            Global.getMatch().resume();
+        }));
     }
 
     private void assessOpponent(Character opponent) {
@@ -322,7 +321,13 @@ public class Player extends Character {
     public void spy(Character opponent, Encounter enc) {
         gui.message("You spot <b>" + opponent.nameDirectObject()
                         + "</b> but she hasn't seen you yet. You could probably catch her off guard, or you could remain hidden and hope she doesn't notice you.");
-        presentFightFlightChoice(opponent, encounterOption(enc, opponent, Encs.fight),encounterOption(enc, opponent, Encs.flee));
+        presentFightFlightChoice(opponent, encounterOption(() -> {
+            enc.parse(Encs.fight, this, opponent);
+            Global.getMatch().resume();
+        }), encounterOption(() -> {
+            enc.parse(Encs.flee, this, opponent);
+            Global.getMatch().resume();
+        }));
     }
 
     private void presentMoveOptions(List<CommandPanelOption> optionChoices,
@@ -585,17 +590,29 @@ public class Player extends Character {
 
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Surprise Her",
-            encounterOption(encounter, target, Encs.showerattack)));
+                encounterOption(() -> {
+                    encounter.parse(Encs.showerattack, this, target);
+                    Global.getMatch().resume();
+                })));
         if (!target.mostlyNude()) {
             options.add(new CommandPanelOption("Steal Clothes",
-                encounterOption(encounter, target, Encs.stealclothes)));
+                    encounterOption(() -> {
+                        encounter.parse(Encs.stealclothes, this, target);
+                        Global.getMatch().resume();
+                    })));
         }
         if (has(Item.Aphrodisiac)) {
             options.add(new CommandPanelOption("Use Aphrodisiac",
-                encounterOption(encounter, target, Encs.aphrodisiactrick)));
+                    encounterOption(() -> {
+                        encounter.parse(Encs.aphrodisiactrick, this, target);
+                        Global.getMatch().resume();
+                    })));
         }
         options.add(new CommandPanelOption("Do Nothing",
-            encounterOption(encounter, target, Encs.wait)));
+                encounterOption(() -> {
+                    encounter.parse(Encs.wait, this, target);
+                    Global.getMatch().resume();
+                })));
         gui.presentOptions(options);
         Global.getMatch().pause();
     }
@@ -693,7 +710,10 @@ public class Player extends Character {
                     Global.getMatch().resume();
                 })));
         options.add(new CommandPanelOption("Wait",
-            encounterOption(enc, target, Encs.wait)));
+                encounterOption(() -> {
+                    enc.parse(Encs.wait, this, target);
+                    Global.getMatch().resume();
+                })));
         gui.presentOptions(options);
         Global.getMatch().pause();
     }
