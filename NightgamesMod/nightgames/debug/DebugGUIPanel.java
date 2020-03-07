@@ -1,6 +1,13 @@
 package nightgames.debug;
 
-import java.awt.GridLayout;
+import nightgames.characters.Attribute;
+import nightgames.characters.Character;
+import nightgames.characters.Trait;
+import nightgames.global.Global;
+import nightgames.items.Item;
+import nightgames.match.Participant;
+
+import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -9,20 +16,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import javax.swing.BoxLayout;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-
-import nightgames.characters.Attribute;
-import nightgames.characters.Character;
-import nightgames.characters.Trait;
-import nightgames.global.DebugFlags;
-import nightgames.global.Global;
-import nightgames.items.Item;
 
 public class DebugGUIPanel extends JPanel {
     /**
@@ -64,8 +57,8 @@ public class DebugGUIPanel extends JPanel {
         }));
         consoleCommands.add(new DebugCommand("(\\w+)\\.move (\\w+)", (output, list) -> {
             try {
-                Character target = Global.getCharacterByType(list.get(1));
-                target.travel(Global.getMatch().getAreas().stream().filter(area -> area.name.toLowerCase().contains(list.get(2).toLowerCase())).findAny().get());
+                Participant target = Global.getMatch().findParticipant(Global.getCharacterByType(list.get(1)));
+                target.getCharacter().travel(Global.getMatch().getAreas().stream().filter(area -> area.name.toLowerCase().contains(list.get(2).toLowerCase())).findAny().get());
             } catch (NullPointerException e) {
                 output.setText(list.get(1) + " is not a valid character");
             }
