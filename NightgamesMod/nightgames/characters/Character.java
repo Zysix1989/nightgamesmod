@@ -2585,8 +2585,6 @@ public Character clone() throws CloneNotSupportedException {
 
     public void notifyTravel(Area dest, String message) { }
 
-    public void notifyFlight(Area destination) {}
-
     public void endOfMatchRound() {
         regen();
         tick(null);                     //FIXME: This is the culprit of the Addiction NPE outside of combat. Nulls are not handled by methods used within tick and Addiction.tick()

@@ -193,8 +193,7 @@ public class Participant {
                 .map(Move::getDestination)
                 .collect(Collectors.toList());
         var destination = destinations.get(Global.random(destinations.size()));
-        character.notifyFlight(destination);
-        travel(destination);
+        travel(destination, "You dash away and escape into the <b>" + destination.name + ".</b>");
         area.endEncounter();
     }
 

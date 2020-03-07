@@ -531,11 +531,6 @@ public class Player extends Character {
     }
 
     @Override
-    public void notifyFlight(Area destination) {
-        gui.message("You dash away and escape into the <b>" + destination.name + ".</b>");
-    }
-
-    @Override
     public void notifyTravel(Area dest, String message) {
         super.notifyTravel(dest, message);
         gui.message(message);
