@@ -39,6 +39,7 @@ public class Locate extends Action {
                     Global.getMatch().getParticipants().stream()
                             .filter(p -> scryer.getCharacter().getAffection(p.getCharacter()) >= MINIMUM_SCRYING_REQUIREMENT)
                             .collect(Collectors.toMap(Participant::getCharacter, p -> () -> action.eventBody(scryer.getCharacter(), p.getCharacter()))),
+                    () -> action.endEvent(),
                     msg);
         }
     }
