@@ -398,11 +398,7 @@ public class Eve extends BasePersonality {
                             + "overstimulated dick becomes uncomfortably sensitive, but she doesn't "
                             + "let up until she ejaculates onto you.";
         }
-
-        if (assist.eligible(character)) {
-            assist.defeated(character);
-            assist.nudify();
-        }
+        assist.pleasure(20, c, character);
         return "Eve kneels between " + target.getName()
                         + "'s legs and plays with the helpless girl's slit. <i>\"Nice and wet. Good.\"</i> She flicks a finger across "
                         + target.getName() + "'s "
@@ -416,7 +412,7 @@ public class Eve extends BasePersonality {
                         + target.getName() + "'s soft butt is rubbing firmly and pleasurably against your erection. "
                         + "Shit. She's going to make you cum too, even when you're helping her. <i>\"Don't let go of her, or you won't get credit for her orgasm.\"</i> Unable to struggle "
                         + "free, the sensation of " + target.getName()
-                        + "'s ass grinding against your dick makes you cum right after she does.";
+                        + "'s ass grinding against your dick leaves you aroused and unsatisfied.";
 
     }
 
