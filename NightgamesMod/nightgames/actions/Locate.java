@@ -29,10 +29,9 @@ public class Locate extends Action {
 
     private static final class Dialog {
         private Participant scryer;
-        private Locate action;
-        private Dialog(Participant scryer, Locate action) {
+
+        private Dialog(Participant scryer) {
             this.scryer = scryer;
-            this.action = action;
         }
 
         private void start() {
@@ -41,7 +40,7 @@ public class Locate extends Action {
                     Global.getMatch().getParticipants().stream()
                             .filter(p -> scryer.getCharacter().getAffection(p.getCharacter()) >= MINIMUM_SCRYING_REQUIREMENT)
                             .collect(Collectors.toMap(Participant::getCharacter, p -> () -> this.chooseTarget(p))),
-                    () -> action.endEvent(),
+                    this::end,
                     msg);
         }
 
@@ -70,7 +69,12 @@ public class Locate extends Action {
                     scryer.getCharacter().getArousal().max() / 10.0f,
                     10,
                     "Scrying Ritual")));
-            scryer.getCharacter().leaveAction(() -> action.endEvent());
+            scryer.getCharacter().leaveAction(this::end);
+        }
+
+        private void end() {
+            Global.gui().clearText();
+            Global.getMatch().resume();
         }
     }
 
@@ -92,14 +96,8 @@ public class Locate extends Action {
 
     @Override
     public Action.Aftermath execute(Participant self) {
-        var dialog = new Dialog(self, this);
+        var dialog = new Dialog(self);
         dialog.start();
         return new Aftermath();
     }
-
-    public final void endEvent() {
-        Global.gui().clearText();
-        Global.getMatch().resume();
-    }
-
 }
