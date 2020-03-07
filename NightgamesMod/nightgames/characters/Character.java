@@ -4226,9 +4226,8 @@ public Character clone() throws CloneNotSupportedException {
         throw new UnsupportedOperationException("attempted to choose locate target");
     }
 
-    public void leaveAction(Locate action) {
-        throw new UnsupportedOperationException(
-            String.format("attempted to leave %s", action.toString()));
+    public void leaveAction(Runnable callback) {
+        throw new UnsupportedOperationException(String.format("attempted to leave locate action"));
     }
 
     public void chooseShopOption(Store shop, Collection<Loot> items,

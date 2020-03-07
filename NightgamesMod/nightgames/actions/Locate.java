@@ -70,7 +70,7 @@ public class Locate extends Action {
                     scryer.getCharacter().getArousal().max() / 10.0f,
                     10,
                     "Scrying Ritual")));
-            scryer.getCharacter().leaveAction(action);
+            scryer.getCharacter().leaveAction(() -> action.endEvent());
         }
     }
 

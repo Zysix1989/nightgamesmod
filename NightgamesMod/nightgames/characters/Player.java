@@ -1,7 +1,6 @@
 package nightgames.characters;
 
 import nightgames.actions.Action;
-import nightgames.actions.Locate;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.areas.Area.EncounterResult;
@@ -952,9 +951,9 @@ public class Player extends Character {
     }
 
     @Override
-    public void leaveAction(Locate action) {
+    public void leaveAction(Runnable callback) {
         ArrayList<CommandPanelOption> options = new ArrayList<>();
-        options.add(new CommandPanelOption("Leave", event -> action.endEvent()));
+        options.add(new CommandPanelOption("Leave", event -> callback.run()));
         gui.presentOptions(options);
     }
 
