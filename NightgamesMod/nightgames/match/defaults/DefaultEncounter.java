@@ -5,7 +5,6 @@ import nightgames.areas.AreaIdentity;
 import nightgames.characters.Character;
 import nightgames.characters.*;
 import nightgames.combat.Combat;
-import nightgames.global.Encs;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
@@ -106,7 +105,7 @@ public class DefaultEncounter {
                 () -> showerAmbush(attacker.getCharacter(), victim.getCharacter()),
                 () -> steal(attacker.getCharacter(), victim.getCharacter()),
                 () -> aphrodisiactrick(attacker.getCharacter(), victim.getCharacter()),
-                () -> parse(Encs.wait, attacker.getCharacter(), victim.getCharacter()));
+                () -> {});
     }
 
     private void eligibleSpotCheck() {
@@ -499,9 +498,6 @@ public class DefaultEncounter {
         if (fight.getP1Character().human() || fight.getP2Character().human()) {
             Global.gui().watchCombat(fight);
         }
-    }
-
-    public void parse(Encs choice, Character self, Character target) {
     }
 
     public String smokeMessage(Character c) {

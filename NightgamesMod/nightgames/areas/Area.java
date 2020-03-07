@@ -5,7 +5,6 @@ import nightgames.actions.Move;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.State;
-import nightgames.global.Encs;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Participant;
@@ -142,7 +141,7 @@ public class Area implements Serializable {
                                 target,
                                 trap,
                                 () -> fight.trap(opponent, targetParticipant, trap),
-                                () -> fight.parse(Encs.wait, opponent.getCharacter(), target));
+                                () -> {});
                         return true;
                     }
                 }
