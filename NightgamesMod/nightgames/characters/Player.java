@@ -248,6 +248,10 @@ public class Player extends Character {
         return null;
     }
 
+    private ActionListener encounterOption(Runnable continuation) {
+        return event -> continuation.run();
+    }
+
     private ActionListener encounterOption(Encounter enc, Character target, Encs choice) {
         return event -> {
             enc.parse(choice, Global.getPlayer(), target);
@@ -683,10 +687,11 @@ public class Player extends Character {
         gui.message("<br/>");
 
         ArrayList<CommandPanelOption> options = new ArrayList<>();
-        options.add(new CommandPanelOption("Attack " + target.getName(), event -> {
-            enc.trap(this, target, trap);
-            Global.getMatch().resume();
-        }));
+        options.add(new CommandPanelOption("Attack " + target.getName(),
+                encounterOption(() -> {
+                    enc.trap(this, target, trap);
+                    Global.getMatch().resume();
+                })));
         options.add(new CommandPanelOption("Wait",
             encounterOption(enc, target, Encs.wait)));
         gui.presentOptions(options);

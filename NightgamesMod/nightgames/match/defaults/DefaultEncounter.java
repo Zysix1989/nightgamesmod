@@ -492,11 +492,9 @@ public class DefaultEncounter implements Encounter {
 
     public void trap(Character opportunist, Character target, Trap.Instance trap) {
         if (opportunist.human()) {
-            Global.gui()
-                  .message("You leap out of cover and catch " + target.getName() + " by surprise.");
+            Global.gui().message("You leap out of cover and catch " + target.getName() + " by surprise.");
         } else if (target.human()) {
-            Global.gui()
-                  .message("Before you have a chance to recover, " + opportunist.getName() + " pounces on you.");
+            Global.gui().message("Before you have a chance to recover, " + opportunist.getName() + " pounces on you.");
         }
         var startingPosition = trap.capitalize(opportunist, target);
         startingPosition.ifPresentOrElse(
