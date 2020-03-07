@@ -2599,6 +2599,10 @@ public Character clone() throws CloneNotSupportedException {
         }
     }
 
+    public void travel(Area dest, String message) {
+        travel(dest);
+    }
+
     public void notifyFlight(Area destination) {}
 
     public void endOfMatchRound() {
@@ -2703,36 +2707,28 @@ public Character clone() throws CloneNotSupportedException {
         if (location().getOccupants().size() > 1) {
             if (location().id() == AreaIdentity.dorm) {
                 if (Global.getMatch().gps("Quad").get().getOccupants().isEmpty()) {
-                    if (human()) {
-                        Global.gui().message("You hear your opponents searching around the "
-                            + "dorm, so once you finish changing, you hop out the window and "
-                            + "head to the quad.");
-                    }
-                    travel(Global.getMatch().gps("Quad").get());
+                    travel(Global.getMatch().gps("Quad").get(),
+                            "You hear your opponents searching around the "
+                                    + "dorm, so once you finish changing, you hop out the window and "
+                                    + "head to the quad.");
                 } else {
-                    if (human()) {
-                        Global.gui().message("You hear your opponents searching around "
-                            + "the dorm, so once you finish changing, you quietly move "
-                            + "downstairs to the laundry room.");
-                    }
-                    travel(Global.getMatch().gps("Laundry").get());
+                    travel(Global.getMatch().gps("Laundry").get(),
+                            "You hear your opponents searching around "
+                                    + "the dorm, so once you finish changing, you quietly move "
+                                    + "downstairs to the laundry room.");
                 }
             }
             if (location().id() == AreaIdentity.union) {
                 if (Global.getMatch().gps("Quad").get().getOccupants().isEmpty()) {
-                    if (human()) {
-                        Global.gui().message("You don't want to be ambushed leaving the "
-                            + "student union, so once you finish changing, you hop out the "
-                            + "window and head to the quad.");
-                    }
-                    travel(Global.getMatch().gps("Quad").get());
+                    travel(Global.getMatch().gps("Quad").get(),
+                            "You don't want to be ambushed leaving the "
+                                    + "student union, so once you finish changing, you hop out the "
+                                    + "window and head to the quad.");
                 } else {
-                    if (human()) {
-                        Global.gui().message("You don't want to be ambushed leaving "
-                            + "the student union, so once you finish changing, you sneak out "
-                            + "the back door and head to the pool.");
-                    }
-                    travel(Global.getMatch().gps("Pool").get());
+                    travel(Global.getMatch().gps("Pool").get(),
+                            "You don't want to be ambushed leaving "
+                                    + "the student union, so once you finish changing, you sneak out "
+                                    + "the back door and head to the pool.");
                 }
             }
         }

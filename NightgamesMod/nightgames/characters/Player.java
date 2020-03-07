@@ -536,6 +536,12 @@ public class Player extends Character {
     }
 
     @Override
+    public void travel(Area dest, String message) {
+        super.travel(dest, message);
+        gui.message(message);
+    }
+
+    @Override
     public void bathe() {
         super.bathe();
         if (location.get().name.equals("Showers")) {
