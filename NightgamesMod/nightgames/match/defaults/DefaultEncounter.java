@@ -337,7 +337,7 @@ public class DefaultEncounter {
         }
     }
 
-    protected void ambush(Character attacker, Character target) {
+    public void ambush(Character attacker, Character target) {
         startFightTimer();
         target.addNonCombat(new nightgames.match.Status(new Flatfooted(target, 3)));
         if (p1.getCharacter().human() || p2.getCharacter().human()) {
@@ -504,9 +504,6 @@ public class DefaultEncounter {
     public void parse(Encs choice, Character self, Character target) {
 
         switch (choice) {
-            case ambush:
-                ambush(self, target);
-                break;
             case fight:
                 fightOrFlight(self, true, Optional.empty());
                 break;

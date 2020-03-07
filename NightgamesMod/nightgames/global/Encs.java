@@ -1,7 +1,6 @@
 package nightgames.global;
 
 public enum Encs {
-    ambush,
     fight,
     flee,
     fleehidden,

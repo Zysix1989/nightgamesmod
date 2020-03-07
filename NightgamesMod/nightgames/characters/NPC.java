@@ -462,7 +462,7 @@ public class NPC extends Character {
     @Override
     public void spy(Character opponent, DefaultEncounter enc) {
         if (ai.attack(opponent)) {
-            enc.parse(Encs.ambush, this, opponent);
+            enc.ambush(this, opponent);
         } else {
             location.get().endEncounter();
         }
