@@ -8,7 +8,6 @@ import nightgames.combat.Combat;
 import nightgames.global.Encs;
 import nightgames.global.Global;
 import nightgames.items.Item;
-import nightgames.match.Encounter;
 import nightgames.match.Participant;
 import nightgames.status.*;
 import nightgames.trap.Spiderweb;
@@ -16,7 +15,7 @@ import nightgames.trap.Trap;
 
 import java.util.Optional;
 
-public class DefaultEncounter implements Encounter {
+public class DefaultEncounter {
 
     protected Participant p1;
     protected Participant p2;
@@ -548,12 +547,10 @@ public class DefaultEncounter implements Encounter {
         return Global.format("{self:SUBJECT-ACTION:flee} before {other:subject-action:can} notice {self:direct-object}.", c, other);
     }
 
-    @Override
     public boolean checkIntrude(Character c) {
         return fight != null && !c.equals(p1.getCharacter()) && !c.equals(p2.getCharacter());
     }
 
-    @Override
     public void watch() {
         Global.gui().watchCombat(fight);
         fight.go();
