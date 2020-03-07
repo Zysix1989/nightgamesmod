@@ -485,17 +485,15 @@ public class Match {
     }
     
     public final void quit() {
-        Character human = Global.getPlayer();
-        if (human.state == State.combat) {
-            if (human.location().fight.getCombat() != null) {
-                human.location().fight.getCombat()
-                                      .forfeit(human);
+        var human = findParticipant(Global.getPlayer());
+        if (human.getCharacter().state == State.combat) {
+            if (human.getCharacter().location().fight.getCombat() != null) {
+                human.getCharacter().location().fight.getCombat().forfeit(human.getCharacter());
             }
-            human.location()
-                 .endEncounter();
+            human.getCharacter().location().endEncounter();
         }
-        human.travel(new Area("Retirement", new DescriptionModule.ErrorDescriptionModule(), AreaIdentity.retire));
-        human.state = State.quit;
+        human.getCharacter().travel(new Area("Retirement", new DescriptionModule.ErrorDescriptionModule(), AreaIdentity.retire));
+        human.getCharacter().state = State.quit;
         resume();
     }
 
