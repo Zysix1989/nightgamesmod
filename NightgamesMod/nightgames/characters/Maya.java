@@ -254,9 +254,7 @@ public class Maya extends BasePersonality {
                             + "her foot. You can't hold on any more. Your cock throbs and you shoot "
                             + "your seed onto her foot.";
         }
-        if (assist.eligible(character)) {
-            assist.defeated(character);
-        }
+        assist.pleasure(50, c, character);
         return "Maya looks a bit surprised as you restrain her opponent. <i>\"You're going to "
                         + "side with me? I appreciate the thought.\"</i> She kneels down in front of " + target.getName()
                         + " and kisses her softly while staring deeply into her eyes. "
@@ -271,7 +269,7 @@ public class Maya extends BasePersonality {
                         + target.getName() + "'s slit. You groan despite yourself as she" + " starts to stroke your shaft "
                         + "with both hands. Her mouth goes to work on the other girl's pussy. "
                         + "The two of you writhe in pleasure, completely at the mercy of the " + "veteran sexfighter. "
-                        + target.getName() + " kisses you passionately as you both cum simultaneously.";
+                        + target.getName() + " kisses you passionately as she cums.  You're left with a raging hard-on.";
 
     }
 
