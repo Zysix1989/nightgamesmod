@@ -479,18 +479,13 @@ public class NPC extends Character {
 
     @Override
     public void showerScene(Character target, DefaultEncounter encounter) {
-        Encs response;
         if (this.has(Item.Aphrodisiac)) {
-            // encounter.aphrodisiactrick(this, target);
-            response = Encs.aphrodisiactrick;
+            encounter.aphrodisiactrick(this, target);
         } else if (!target.mostlyNude() && Global.random(3) >= 2) {
-            // encounter.steal(this, target);
-            response = Encs.stealclothes;
+            encounter.steal(this, target);
         } else {
-            // encounter.showerambush(this, target);
-            response = Encs.showerattack;
+            encounter.showerambush(this, target);
         }
-        encounter.parse(response, this, target);
     }
 
     @Override

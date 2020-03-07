@@ -339,7 +339,7 @@ public class DefaultEncounter {
         }
     }
 
-    protected void showerambush(Character attacker, Character target) {
+    public void showerambush(Character attacker, Character target) {
         startFightTimer();
         
         if (location.id() == AreaIdentity.shower) {
@@ -477,7 +477,7 @@ public class DefaultEncounter {
         }
     }
 
-    protected void steal(Character thief, Character target) {
+    public void steal(Character thief, Character target) {
         if (thief.human()) {
             Global.gui()
                   .message("You quietly swipe " + target.getName()
@@ -510,15 +510,6 @@ public class DefaultEncounter {
         switch (choice) {
             case ambush:
                 ambush(self, target);
-                break;
-            case showerattack:
-                showerambush(self, target);
-                break;
-            case aphrodisiactrick:
-                aphrodisiactrick(self, target);
-                break;
-            case stealclothes:
-                steal(Global.getPlayer(), target);
                 break;
             case fight:
                 fightOrFlight(self, true, Optional.empty());
@@ -584,7 +575,7 @@ public class DefaultEncounter {
         location.endEncounter();
     }
 
-    protected void aphrodisiactrick(Character attacker, Character target) {
+    public void aphrodisiactrick(Character attacker, Character target) {
         attacker.consume(Item.Aphrodisiac, 1);
         encounterDefeat(attacker, target, getAphrodisiacTrickMessage(attacker, target));
     }

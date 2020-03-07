@@ -2,9 +2,6 @@ package nightgames.global;
 
 public enum Encs {
     ambush,
-    showerattack,
-    aphrodisiactrick,
-    stealclothes,
     fight,
     flee,
     fleehidden,

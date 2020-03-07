@@ -591,20 +591,20 @@ public class Player extends Character {
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Surprise Her",
                 encounterOption(() -> {
-                    encounter.parse(Encs.showerattack, this, target);
+                    encounter.showerambush(this, target);
                     Global.getMatch().resume();
                 })));
         if (!target.mostlyNude()) {
             options.add(new CommandPanelOption("Steal Clothes",
                     encounterOption(() -> {
-                        encounter.parse(Encs.stealclothes, this, target);
+                        encounter.steal(this, target);
                         Global.getMatch().resume();
                     })));
         }
         if (has(Item.Aphrodisiac)) {
             options.add(new CommandPanelOption("Use Aphrodisiac",
                     encounterOption(() -> {
-                        encounter.parse(Encs.aphrodisiactrick, this, target);
+                        encounter.aphrodisiactrick(this, target);
                         Global.getMatch().resume();
                     })));
         }
