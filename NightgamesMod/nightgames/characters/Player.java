@@ -18,7 +18,6 @@ import nightgames.combat.Combat;
 import nightgames.combat.CombatSceneChoice;
 import nightgames.combat.Result;
 import nightgames.daytime.*;
-import nightgames.global.Encs;
 import nightgames.global.Global;
 import nightgames.global.Scene;
 import nightgames.grammar.Person;
@@ -269,10 +268,10 @@ public class Player extends Character {
         gui.message("You run into <b>" + opponent.nameDirectObject()
                         + "</b> and you both hesitate for a moment, deciding whether to attack or retreat.");
         presentFightFlightChoice(opponent, encounterOption(() -> {
-            enc.parse(Encs.fight, this, opponent);
+            enc.fightOrFlight(this, true, Optional.empty());
             Global.getMatch().resume();
         }), encounterOption(() -> {
-            enc.parse(Encs.flee, this, opponent);
+            enc.fightOrFlight(this, false, Optional.empty());
             Global.getMatch().resume();
         }));
     }
@@ -322,10 +321,10 @@ public class Player extends Character {
         gui.message("You spot <b>" + opponent.nameDirectObject()
                         + "</b> but she hasn't seen you yet. You could probably catch her off guard, or you could remain hidden and hope she doesn't notice you.");
         presentFightFlightChoice(opponent, encounterOption(() -> {
-            enc.parse(Encs.fight, this, opponent);
+            enc.fightOrFlight(this, true, Optional.empty());
             Global.getMatch().resume();
         }), encounterOption(() -> {
-            enc.parse(Encs.flee, this, opponent);
+            enc.fightOrFlight(this, false, Optional.empty());
             Global.getMatch().resume();
         }));
     }

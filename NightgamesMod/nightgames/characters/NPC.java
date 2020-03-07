@@ -12,7 +12,6 @@ import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
 import nightgames.combat.CombatantData;
 import nightgames.combat.Result;
-import nightgames.global.Encs;
 import nightgames.global.Global;
 import nightgames.grammar.Person;
 import nightgames.grammar.SingularFeminineThirdPerson;
@@ -447,16 +446,14 @@ public class NPC extends Character {
 
     @Override
     public void faceOff(Character opponent, DefaultEncounter enc) {
-        Encs encType;
         if (ai.fightFlight(opponent)) {
-            encType = Encs.fight;
+            enc.fightOrFlight(this, true, Optional.empty());
         } else if (has(Item.SmokeBomb)) {
-            encType = Encs.smoke;
+            enc.fightOrFlight(this, false, Optional.of(enc.smokeMessage(this)));
             remove(Item.SmokeBomb);
         } else {
-            encType = Encs.flee;
+            enc.fightOrFlight(this, false, Optional.empty());
         }
-        enc.parse(encType, this, opponent);
     }
 
     @Override

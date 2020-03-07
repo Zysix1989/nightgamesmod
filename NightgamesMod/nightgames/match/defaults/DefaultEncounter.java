@@ -211,7 +211,7 @@ public class DefaultEncounter {
      * @param guaranteed Whether the Character's option is guaranteed to work. If so, the provided
      * String is messaged to the Character.
      */
-    protected void fightOrFlight(Character p, boolean fight, Optional<String> guaranteed) {
+    public void fightOrFlight(Character p, boolean fight, Optional<String> guaranteed) {
         if (p == p1.getCharacter()) {
             p1ff = fight;
             p1Guaranteed = guaranteed;
@@ -502,26 +502,9 @@ public class DefaultEncounter {
     }
 
     public void parse(Encs choice, Character self, Character target) {
-
-        switch (choice) {
-            case fight:
-                fightOrFlight(self, true, Optional.empty());
-                break;
-            case flee:
-                fightOrFlight(self, false, Optional.empty());
-                break;
-            case fleehidden:
-                checkin += 2;
-                fightOrFlight(self, false, Optional.of(fleeHiddenMessage(self, target)));
-                break;
-            case smoke:
-                fightOrFlight(self, false, Optional.of(smokeMessage(self)));
-                self.consume(Item.SmokeBomb, 1);
-                break;
-        }
     }
 
-    private String smokeMessage(Character c) {
+    public String smokeMessage(Character c) {
         return String.format("%s a smoke bomb and %s.", 
                         Global.capitalizeFirstLetter(c.subjectAction("drop", "drops"))
                         , c.action("disappear", "disappears"));
