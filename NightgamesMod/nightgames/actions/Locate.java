@@ -35,7 +35,7 @@ public class Locate extends Action {
 
         private void start() {
             var msg = "Thinking back to your 'games' with Reyka, you take out a totem to begin a scrying ritual: ";
-            scryer.getCharacter().chooseLocateTarget(action,
+            scryer.getCharacter().chooseLocateTarget(
                     Global.getMatch().getParticipants().stream()
                             .filter(p -> scryer.getCharacter().getAffection(p.getCharacter()) >= MINIMUM_SCRYING_REQUIREMENT)
                             .collect(Collectors.toMap(Participant::getCharacter, p -> () -> action.eventBody(scryer.getCharacter(), p.getCharacter()))),

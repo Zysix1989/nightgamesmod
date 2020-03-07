@@ -939,7 +939,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void chooseLocateTarget(Locate action, Map<Character, Runnable> potentialTargets, Runnable noneOption, String msg) {
+    public void chooseLocateTarget(Map<Character, Runnable> potentialTargets, Runnable noneOption, String msg) {
         gui.clearText();
         gui.validate();
         gui.message(msg);

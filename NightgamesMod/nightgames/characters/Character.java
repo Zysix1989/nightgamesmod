@@ -4222,9 +4222,8 @@ public Character clone() throws CloneNotSupportedException {
         return gain;
     }
 
-    public void chooseLocateTarget(Locate action, Map<Character, Runnable> potentialTargets, Runnable noneOption, String msg) {
-        throw new UnsupportedOperationException(
-            String.format("attempted to choose target for %s", action.toString()));
+    public void chooseLocateTarget(Map<Character, Runnable> potentialTargets, Runnable noneOption, String msg) {
+        throw new UnsupportedOperationException("attempted to choose locate target");
     }
 
     public void leaveAction(Locate action) {
