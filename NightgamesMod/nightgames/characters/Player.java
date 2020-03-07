@@ -253,10 +253,10 @@ public class Player extends Character {
     }
 
     private ActionListener encounterOption(Encounter enc, Character target, Encs choice) {
-        return event -> {
+        return encounterOption( () -> {
             enc.parse(choice, Global.getPlayer(), target);
             Global.getMatch().resume();
-        };
+        });
     }
 
     private void presentFightFlightChoice(Character opponent, ActionListener fightCallback, ActionListener flightCallback) {
