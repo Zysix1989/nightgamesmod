@@ -446,7 +446,7 @@ public class DefaultEncounter {
         Spiderweb.onSpiderwebDefeat(attacker, target, location.getTrap().orElseThrow());
     }
 
-    public void intrude(Character intruder, Character assist) {
+    public void intrude(Participant intruder, Participant assist) {
         fight.intervene(intruder, assist);
     }
 

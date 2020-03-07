@@ -13,6 +13,7 @@ import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
 import nightgames.match.DefaultMatchEndListener;
 import nightgames.match.MatchType;
+import nightgames.match.Participant;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.pet.Pet;
 import nightgames.pet.PetCharacter;
@@ -1151,32 +1152,32 @@ public class Combat {
         end();
     }
 
-    public void intervene(Character intruder, Character assist) {
-        Character target;
-        if (p1.getCharacter() == assist) {
-            target = p2.getCharacter();
+    public void intervene(Participant intruder, Participant assist) {
+        Combatant target;
+        if (p1.getParticipant() == assist) {
+            target = p2;
         } else {
-            target = p1.getCharacter();
+            target = p1;
         }
-        if (target.resist3p(this, intruder, assist)) {
-            target.gainXP(20 + target.lvlBonus(intruder));
-            intruder.gainXP(10 + intruder.lvlBonus(target));
-            target.orgasm();
-            target.undress(this);
-            intruder.defeated(target);
-            intruder.defeated(assist);
+        if (target.getCharacter().resist3p(this, intruder.getCharacter(), assist.getCharacter())) {
+            target.getCharacter().gainXP(20 + target.getCharacter().lvlBonus(intruder.getCharacter()));
+            intruder.getCharacter().gainXP(10 + intruder.getCharacter().lvlBonus(target.getCharacter()));
+            target.getCharacter().orgasm();
+            target.getCharacter().undress(this);
+            intruder.getCharacter().defeated(target.getCharacter());
+            intruder.getCharacter().defeated(assist.getCharacter());
         } else {
-            intruder.intervene3p(this, target, assist);
-            assist.victory3p(this, target, intruder);
+            intruder.getCharacter().intervene3p(this, target.getCharacter(), assist.getCharacter());
+            assist.getCharacter().victory3p(this, target.getCharacter(), intruder.getCharacter());
         }
         phase = CombatPhase.RESULTS_SCENE;
-        if (!(p1.getCharacter().human() || p2.getCharacter().human() || intruder.human())) {
+        if (!(p1.getCharacter().human() || p2.getCharacter().human() || intruder.getCharacter().human())) {
             end();
         } else {
             Global.gui().watchCombat(this);
             resumeNoClearFlag();
         }
-        listen(l -> l.postEnd(Optional.of(assist)));
+        listen(l -> l.postEnd(Optional.of(assist.getCharacter())));
     }
 
     /**

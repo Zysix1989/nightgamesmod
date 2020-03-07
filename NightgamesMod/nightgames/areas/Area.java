@@ -118,9 +118,9 @@ public class Area implements Serializable {
         if (fight != null && fight.checkIntrude(p.getCharacter())) {
             options = p.getCharacter().intervene(fight,
                     fight.getFirstParticipant().getCharacter(),
-                    () -> fight.intrude(p.getCharacter(), fight.getFirstParticipant().getCharacter()),
+                    () -> fight.intrude(p, fight.getFirstParticipant()),
                     fight.getSecondParticipant().getCharacter(),
-                    () -> fight.intrude(p.getCharacter(), fight.getSecondParticipant().getCharacter()),
+                    () -> fight.intrude(p, fight.getSecondParticipant()),
                     () -> fight.watch());
         } else if (present.size() > 1) {
             for (Participant opponent : present) {          //FIXME: Currently - encounters repeat - Does this check if they are busy?
