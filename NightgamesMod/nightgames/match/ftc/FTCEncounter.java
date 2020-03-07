@@ -175,7 +175,6 @@ public class FTCEncounter extends DefaultEncounter {
 
     @Override
     public void parse(Encs choice, Character self, Character target) {
-        assert choice != Encs.capitalize;
         switch (choice) {
             case treeAmbush:
                 treeAmbush(self, target);
