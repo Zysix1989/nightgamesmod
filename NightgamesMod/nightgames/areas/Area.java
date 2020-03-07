@@ -140,7 +140,7 @@ public class Area implements Serializable {
                         opponent.getCharacter().promptTrap(
                                 target,
                                 trap,
-                                () -> fight.trap(opponent.getCharacter(), target, trap),
+                                () -> fight.trap(opponent, targetParticipant, trap),
                                 () -> fight.parse(Encs.wait, opponent.getCharacter(), target));
                         return true;
                     }

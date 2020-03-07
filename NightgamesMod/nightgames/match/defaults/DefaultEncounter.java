@@ -490,16 +490,16 @@ public class DefaultEncounter implements Encounter {
         location.endEncounter();
     }
 
-    public void trap(Character opportunist, Character target, Trap.Instance trap) {
-        if (opportunist.human()) {
-            Global.gui().message("You leap out of cover and catch " + target.getName() + " by surprise.");
-        } else if (target.human()) {
-            Global.gui().message("Before you have a chance to recover, " + opportunist.getName() + " pounces on you.");
+    public void trap(Participant opportunist, Participant target, Trap.Instance trap) {
+        if (opportunist.getCharacter().human()) {
+            Global.gui().message("You leap out of cover and catch " + target.getCharacter().getName() + " by surprise.");
+        } else if (target.getCharacter().human()) {
+            Global.gui().message("Before you have a chance to recover, " + opportunist.getCharacter().getName() + " pounces on you.");
         }
-        var startingPosition = trap.capitalize(opportunist, target);
+        var startingPosition = trap.capitalize(opportunist.getCharacter(), target.getCharacter());
         startingPosition.ifPresentOrElse(
-                sp -> fight = new Combat(opportunist, target, opportunist.location(), sp),
-                () -> fight = new Combat(opportunist, target, opportunist.location()));
+                sp -> fight = new Combat(opportunist.getCharacter(), target.getCharacter(), opportunist.getCharacter().location(), sp),
+                () -> fight = new Combat(opportunist.getCharacter(), target.getCharacter(), opportunist.getCharacter().location()));
         if (fight.getP1Character().human() || fight.getP2Character().human()) {
             Global.gui().watchCombat(fight);
         }

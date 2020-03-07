@@ -14,7 +14,7 @@ public interface Encounter {
 
     void intrude(Character intruder, Character assist);
 
-    void trap(Character opportunist, Character target, Trap.Instance trap);
+    void trap(Participant opportunist, Participant target, Trap.Instance trap);
 
     boolean spotCheck();
 
