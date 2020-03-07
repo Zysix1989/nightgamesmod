@@ -591,7 +591,7 @@ public class Player extends Character {
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Surprise Her",
                 encounterOption(() -> {
-                    encounter.showerambush(this, target);
+                    encounter.showerAmbush(this, target);
                     Global.getMatch().resume();
                 })));
         if (!target.mostlyNude()) {

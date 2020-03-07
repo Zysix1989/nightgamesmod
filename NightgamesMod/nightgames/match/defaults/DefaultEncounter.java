@@ -339,7 +339,7 @@ public class DefaultEncounter {
         }
     }
 
-    public void showerambush(Character attacker, Character target) {
+    public void showerAmbush(Character attacker, Character target) {
         startFightTimer();
         
         if (location.id() == AreaIdentity.shower) {

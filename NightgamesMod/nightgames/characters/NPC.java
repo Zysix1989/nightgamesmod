@@ -484,7 +484,7 @@ public class NPC extends Character {
         } else if (!target.mostlyNude() && Global.random(3) >= 2) {
             encounter.steal(this, target);
         } else {
-            encounter.showerambush(this, target);
+            encounter.showerAmbush(this, target);
         }
     }
 
