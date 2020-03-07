@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import nightgames.actions.*;
 import nightgames.areas.Area;
-import nightgames.areas.AreaIdentity;
 import nightgames.areas.Challenge;
 import nightgames.areas.DescriptionModule;
 import nightgames.beans.Property;
@@ -2694,44 +2693,6 @@ public Character clone() throws CloneNotSupportedException {
 
     public void defeated(Character victor) {
         mercy.addIfAbsent(victor);
-    }
-
-    /**Performs the resupply of this character. Performs the correct otucome to evade the problem of camping a clothing location.
-     * 
-     * */
-    public void resupply() {
-        mercy.clear();
-        change();
-        state = State.ready;
-        getWillpower().renew();
-        if (location().getOccupants().size() > 1) {
-            if (location().id() == AreaIdentity.dorm) {
-                if (Global.getMatch().gps("Quad").get().getOccupants().isEmpty()) {
-                    travel(Global.getMatch().gps("Quad").get(),
-                            "You hear your opponents searching around the "
-                                    + "dorm, so once you finish changing, you hop out the window and "
-                                    + "head to the quad.");
-                } else {
-                    travel(Global.getMatch().gps("Laundry").get(),
-                            "You hear your opponents searching around "
-                                    + "the dorm, so once you finish changing, you quietly move "
-                                    + "downstairs to the laundry room.");
-                }
-            }
-            if (location().id() == AreaIdentity.union) {
-                if (Global.getMatch().gps("Quad").get().getOccupants().isEmpty()) {
-                    travel(Global.getMatch().gps("Quad").get(),
-                            "You don't want to be ambushed leaving the "
-                                    + "student union, so once you finish changing, you hop out the "
-                                    + "window and head to the quad.");
-                } else {
-                    travel(Global.getMatch().gps("Pool").get(),
-                            "You don't want to be ambushed leaving "
-                                    + "the student union, so once you finish changing, you sneak out "
-                                    + "the back door and head to the pool.");
-                }
-            }
-        }
     }
 
     /**Performs the tasks associated with finishing a match. temporary traits are removed while meters are reset. 

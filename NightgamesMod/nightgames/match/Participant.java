@@ -3,6 +3,7 @@ package nightgames.match;
 import nightgames.actions.Action;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
+import nightgames.areas.AreaIdentity;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.State;
@@ -171,7 +172,7 @@ public class Participant {
             character.state = State.ready;
             return;
         } else if (character.state == State.resupplying) {
-            character.resupply();
+            resupply();
             return;
         } else if (character.state == State.webbed) {
             character.state = State.ready;
@@ -214,4 +215,40 @@ public class Participant {
     }
 
     public Area getLocation() { return character.location(); }
+
+    public void resupply() {
+        character.mercy.clear();
+        character.change();
+        character.state = State.ready;
+        character.getWillpower().renew();
+        if (character.location().getOccupants().size() > 1) {
+            if (character.location().id() == AreaIdentity.dorm) {
+                if (Global.getMatch().gps("Quad").get().getOccupants().isEmpty()) {
+                    character.travel(Global.getMatch().gps("Quad").get(),
+                            "You hear your opponents searching around the "
+                                    + "dorm, so once you finish changing, you hop out the window and "
+                                    + "head to the quad.");
+                } else {
+                    character.travel(Global.getMatch().gps("Laundry").get(),
+                            "You hear your opponents searching around "
+                                    + "the dorm, so once you finish changing, you quietly move "
+                                    + "downstairs to the laundry room.");
+                }
+            }
+            if (character.location().id() == AreaIdentity.union) {
+                if (Global.getMatch().gps("Quad").get().getOccupants().isEmpty()) {
+                    character.travel(Global.getMatch().gps("Quad").get(),
+                            "You don't want to be ambushed leaving the "
+                                    + "student union, so once you finish changing, you hop out the "
+                                    + "window and head to the quad.");
+                } else {
+                    character.travel(Global.getMatch().gps("Pool").get(),
+                            "You don't want to be ambushed leaving "
+                                    + "the student union, so once you finish changing, you sneak out "
+                                    + "the back door and head to the pool.");
+                }
+            }
+        }
+    }
+
 }
