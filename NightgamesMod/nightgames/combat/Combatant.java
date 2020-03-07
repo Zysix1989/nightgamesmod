@@ -18,6 +18,8 @@ class Combatant {
         return participant.getCharacter();
     }
 
+    Participant getParticipant() { return participant; }
+
     Combatant copy() {
         return new Combatant(this);
     }
