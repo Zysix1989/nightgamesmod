@@ -284,7 +284,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public List<CommandPanelOption> intervene(DefaultEncounter fight, Character p1, Character p2) {
+    public List<CommandPanelOption> intervene(DefaultEncounter fight, Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation) {
         return new ArrayList<>();
     }
 

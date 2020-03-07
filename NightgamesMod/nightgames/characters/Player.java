@@ -617,19 +617,16 @@ public class Player extends Character {
     }
 
     @Override
-    public List<CommandPanelOption> intervene(DefaultEncounter enc, Character p1, Character p2) {
+    public List<CommandPanelOption> intervene(DefaultEncounter enc, Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation) {
         gui.message("You find <b>" + p1.getName() + "</b> and <b>" + p2.getName()
                         + "</b> fighting too intensely to notice your arrival. If you intervene now, it'll essentially decide the winner.");
         gui.message("Then again, you could just wait and see which one of them comes out on top. It'd be entertaining,"
                         + " at the very least.");
 
         ArrayList<CommandPanelOption> options = new ArrayList<>();
-        options.add(new CommandPanelOption("Help " + p1.getName(),
-            event -> enc.intrude(Global.getPlayer(), p1)));
-        options.add(new CommandPanelOption("Help " + p2.getName(),
-            event -> enc.intrude(Global.getPlayer(), p2)));
-        options.add(new CommandPanelOption("Watch them fight",
-            event -> enc.watch()));
+        options.add(new CommandPanelOption("Help " + p1.getName(), event -> p1Continuation.run()));
+        options.add(new CommandPanelOption("Help " + p2.getName(), event -> p2Continuation.run()));
+        options.add(new CommandPanelOption("Watch them fight", event -> noneContinuation.run()));
         Global.getMatch().pause();
         return options;
     }

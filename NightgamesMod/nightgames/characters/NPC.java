@@ -486,12 +486,12 @@ public class NPC extends Character {
     }
 
     @Override
-    public List<CommandPanelOption> intervene(DefaultEncounter enc, Character p1, Character p2) {
+    public List<CommandPanelOption> intervene(DefaultEncounter enc, Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation) {
         if (Global.random(20) + getAffection(p1) + (p1.has(Trait.sympathetic) ? 10 : 0) >= Global.random(20)
                         + getAffection(p2) + (p2.has(Trait.sympathetic) ? 10 : 0)) {
-            enc.intrude(this, p1);
+            p1Continuation.run();
         } else {
-            enc.intrude(this, p2);
+            p2Continuation.run();
         }
         return new ArrayList<>();
     }

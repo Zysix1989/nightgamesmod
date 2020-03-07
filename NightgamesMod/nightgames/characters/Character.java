@@ -1773,7 +1773,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract String taunt(Combat c, Character target);
 
-    public abstract List<CommandPanelOption> intervene(DefaultEncounter fight, Character p1, Character p2);
+    public abstract List<CommandPanelOption> intervene(DefaultEncounter fight, Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation);
 
     public abstract void showerScene(Character target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation);
 
