@@ -39,33 +39,33 @@ public class DefaultEncounter implements Encounter {
         fight = null;
         p1Guaranteed = Optional.empty();
         p2Guaranteed = Optional.empty();
-        checkEnthrall(p1.getCharacter(), p2.getCharacter());
-        checkEnthrall(p2.getCharacter(), p1.getCharacter());
+        checkEnthrall(p1, p2);
+        checkEnthrall(p2, p1);
     }
 
-    private static void checkEnthrall(Character p1, Character p2) {
-        Status enthrall = p1.getStatus(Stsflag.enthralled);
+    private static void checkEnthrall(Participant p1, Participant p2) {
+        Status enthrall = p1.getCharacter().getStatus(Stsflag.enthralled);
         if (enthrall != null) {
-            if (((Enthralled) enthrall).master != p2) {
-                p1.removelist.add(enthrall);
-                p1.addNonCombat(new nightgames.match.Status(new Flatfooted(p1, 2)));
-                p1.addNonCombat(new nightgames.match.Status(new Hypersensitive(p1)));
-                if (p1.human()) {
+            if (((Enthralled) enthrall).master != p2.getCharacter()) {
+                p1.getCharacter().removelist.add(enthrall);
+                p1.getCharacter().addNonCombat(new nightgames.match.Status(new Flatfooted(p1.getCharacter(), 2)));
+                p1.getCharacter().addNonCombat(new nightgames.match.Status(new Hypersensitive(p1.getCharacter())));
+                if (p1.getCharacter().human()) {
                     Global.gui()
-                          .message("At " + p2.getName() + "'s interruption, you break free from the"
+                          .message("At " + p2.getCharacter().getName() + "'s interruption, you break free from the"
                                           + " succubus' hold on your mind. However, the shock all but"
                                           + " short-circuits your brain; you "
                                           + " collapse to the floor, feeling helpless and"
                                           + " strangely oversensitive");
-                } else if (p2.human()) {
+                } else if (p2.getCharacter().human()) {
                     Global.gui().message(String.format(
                                     "%s doesn't appear to notice you at first, but when you wave your hand close to %s face %s "
                                     + "eyes open wide and %s immediately drops to the floor. Although the display leaves you "
                                     + "somewhat worried about %s health, %s is still in a very vulnerable position and you never "
                                     + "were one to let an opportunity pass you by.",
-                                    p1.getName(), p1.possessiveAdjective(), p1.possessiveAdjective(),
-                                    p1.pronoun(),
-                                    p1.possessiveAdjective(), p1.pronoun()));
+                            p1.getCharacter().getName(), p1.getCharacter().possessiveAdjective(),
+                            p1.getCharacter().possessiveAdjective(), p1.getCharacter().pronoun(),
+                            p1.getCharacter().possessiveAdjective(), p1.getCharacter().pronoun()));
                 }
             }
         }
