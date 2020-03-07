@@ -223,26 +223,26 @@ public class Participant {
         character.getWillpower().renew();
         if (character.location().getOccupants().size() > 1) {
             if (character.location().id() == AreaIdentity.dorm) {
-                if (Global.getMatch().gps("Quad").get().getOccupants().isEmpty()) {
-                    character.travel(Global.getMatch().gps("Quad").get(),
+                if (Global.getMatch().gps("Quad").orElseThrow().getOccupants().isEmpty()) {
+                    character.travel(Global.getMatch().gps("Quad").orElseThrow(),
                             "You hear your opponents searching around the "
                                     + "dorm, so once you finish changing, you hop out the window and "
                                     + "head to the quad.");
                 } else {
-                    character.travel(Global.getMatch().gps("Laundry").get(),
+                    character.travel(Global.getMatch().gps("Laundry").orElseThrow(),
                             "You hear your opponents searching around "
                                     + "the dorm, so once you finish changing, you quietly move "
                                     + "downstairs to the laundry room.");
                 }
             }
             if (character.location().id() == AreaIdentity.union) {
-                if (Global.getMatch().gps("Quad").get().getOccupants().isEmpty()) {
-                    character.travel(Global.getMatch().gps("Quad").get(),
+                if (Global.getMatch().gps("Quad").orElseThrow().getOccupants().isEmpty()) {
+                    character.travel(Global.getMatch().gps("Quad").orElseThrow(),
                             "You don't want to be ambushed leaving the "
                                     + "student union, so once you finish changing, you hop out the "
                                     + "window and head to the quad.");
                 } else {
-                    character.travel(Global.getMatch().gps("Pool").get(),
+                    character.travel(Global.getMatch().gps("Pool").orElseThrow(),
                             "You don't want to be ambushed leaving "
                                     + "the student union, so once you finish changing, you sneak out "
                                     + "the back door and head to the pool.");
