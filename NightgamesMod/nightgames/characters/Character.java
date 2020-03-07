@@ -2583,7 +2583,7 @@ public Character clone() throws CloneNotSupportedException {
         getSkills().remove(copy);
     }
 
-    public void travel(Area dest, String message) { }
+    public void notifyTravel(Area dest, String message) { }
 
     public void notifyFlight(Area destination) {}
 

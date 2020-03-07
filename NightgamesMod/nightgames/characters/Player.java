@@ -536,8 +536,8 @@ public class Player extends Character {
     }
 
     @Override
-    public void travel(Area dest, String message) {
-        super.travel(dest, message);
+    public void notifyTravel(Area dest, String message) {
+        super.notifyTravel(dest, message);
         gui.message(message);
     }
 

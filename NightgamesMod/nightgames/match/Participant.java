@@ -263,7 +263,7 @@ public class Participant {
 
     public void travel(Area dest, String message) {
         travel(dest);
-        character.travel(dest, message);
+        character.notifyTravel(dest, message);
     }
 
 }
