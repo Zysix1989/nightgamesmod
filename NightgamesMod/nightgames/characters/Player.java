@@ -254,7 +254,7 @@ public class Player extends Character {
 
     private ActionListener encounterOption(Encounter enc, Character target, Encs choice) {
         return encounterOption( () -> {
-            enc.parse(choice, Global.getPlayer(), target);
+            enc.parse(choice, this, target);
             Global.getMatch().resume();
         });
     }
