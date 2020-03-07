@@ -1,6 +1,5 @@
 package nightgames.actions;
 
-import nightgames.areas.Area;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
@@ -9,7 +8,10 @@ import nightgames.match.Participant;
 import nightgames.match.Status;
 import nightgames.status.Detected;
 import nightgames.status.Horny;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Locate extends Action {
@@ -43,25 +45,27 @@ public class Locate extends Action {
                     msg);
         }
 
+        private static final JtwigTemplate COMPLETION_TEMPLATE = JtwigTemplate.inlineTemplate(
+                "Drawing on the dark energies inside the talisman, you attempt to scry for " +
+                        "{{ target.object().properNoun() }}'s location. " +
+                        "{% if (area.isPresent()) %} " +
+                        "In your mind, an image of the <b><i>{{ area.name }}</i></b> appears. It falls apart as " +
+                        "quickly as it came to be, but you know where {{ target.subject().pronoun() }} currently is. " +
+                        "{% else %}" +
+                        "However, you draw a blank." +
+                        "{% endif %} " +
+                        "Your small talisman is already burning up in those creepy purple flames, the smoke flowing " +
+                        "from your nose straight to your crotch and setting another fire there.");
+
         private void chooseTarget(Participant target) {
             var gui = Global.gui();
-            Area area = target.getCharacter().location();
+            var area = Optional.ofNullable(target.getCharacter().location());
+            area.ifPresent(a -> target.getCharacter().addNonCombat(new Status(new Detected(target.getCharacter(), 10))));
             gui.clearText();
-            if (area != null) {
-                gui.message("Drawing on the dark energies inside the talisman, you attempt to scry for "
-                        + target.getCharacter().nameOrPossessivePronoun() + " location. In your mind, an image of the <b><i>"
-                        + area.name
-                        + "</i></b> appears. It falls apart as quickly as it came to be, but you know where "
-                        + target.getCharacter().getTrueName()
-                        + " currently is. Your small talisman is already burning up in those creepy "
-                        + "purple flames, the smoke flowing from your nose straight to your crotch and setting another fire there.");
-                target.getCharacter().addNonCombat(new Status(new Detected(target.getCharacter(), 10)));
-            } else {
-                gui.message("Drawing on the dark energies inside the talisman, you attempt to scry for "
-                        + target.getCharacter().nameOrPossessivePronoun() + " location. "
-                        + "However, you draw a blank. Your small talisman is already burning up in those creepy "
-                        + "purple flames, the smoke flowing from your nose straight to your crotch and setting another fire there.");
-            }
+            var model = JtwigModel.newModel()
+                    .with("target", target.getCharacter().getGrammar())
+                    .with("area", area);
+            gui.message(COMPLETION_TEMPLATE.render(model));
             scryer.getCharacter().addNonCombat(new Status(new Horny(scryer.getCharacter(), scryer.getCharacter().getArousal().max() / 10, 10, "Scrying Ritual")));
             scryer.getCharacter().leaveAction(action);
         }
