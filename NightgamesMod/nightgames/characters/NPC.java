@@ -478,13 +478,13 @@ public class NPC extends Character {
     }
 
     @Override
-    public void showerScene(Character target, DefaultEncounter encounter) {
+    public void showerScene(Character target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {
         if (this.has(Item.Aphrodisiac)) {
-            encounter.aphrodisiactrick(this, target);
+            ambushContinuation.run();
         } else if (!target.mostlyNude() && Global.random(3) >= 2) {
-            encounter.steal(this, target);
+            stealContinuation.run();
         } else {
-            encounter.showerAmbush(this, target);
+            ambushContinuation.run();
         }
     }
 

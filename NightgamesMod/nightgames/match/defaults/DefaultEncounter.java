@@ -102,10 +102,20 @@ public class DefaultEncounter {
 
     private void eligibleSpotCheck() {
         if (p1.getCharacter().state == State.shower) {
-            p2.getCharacter().showerScene(p1.getCharacter(), this);
+            p2.getCharacter().showerScene(
+                    p1.getCharacter(),
+                    () -> showerAmbush(p2.getCharacter(), p1.getCharacter()),
+                    () -> steal(p2.getCharacter(), p1.getCharacter()),
+                    () -> aphrodisiactrick(p2.getCharacter(), p1.getCharacter()),
+                    () -> parse(Encs.wait, p2.getCharacter(), p1.getCharacter()));
             return;
         } else if (p2.getCharacter().state == State.shower) {
-            p1.getCharacter().showerScene(p2.getCharacter(), this);
+            p1.getCharacter().showerScene(
+                    p2.getCharacter(),
+                    () -> showerAmbush(p1.getCharacter(), p2.getCharacter()),
+                    () -> steal(p1.getCharacter(), p2.getCharacter()),
+                    () -> aphrodisiactrick(p1.getCharacter(), p2.getCharacter()),
+                    () -> parse(Encs.wait, p1.getCharacter(), p2.getCharacter()));
             return;
         } else if (p1.getCharacter().state == State.webbed) {
             spider(p2, p1);
@@ -383,7 +393,6 @@ public class DefaultEncounter {
         p2.getCharacter().undress(fight);
         p1.getCharacter().emote(Emotion.dominant, 50);
         p2.getCharacter().emote(Emotion.nervous, 50);
-        
         target.add(fight, new Flatfooted(target, 4));
     }
 

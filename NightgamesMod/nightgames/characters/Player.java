@@ -575,7 +575,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void showerScene(Character target, DefaultEncounter encounter) {
+    public void showerScene(Character target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {
         if (target.location().name.equals("Showers")) {
             gui.message("You hear running water coming from the first floor showers. There shouldn't be any residents on this floor right now, so it's likely one "
                             + "of your opponents. You peek inside and sure enough, <b>" + target.subject()
@@ -591,26 +591,25 @@ public class Player extends Character {
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Surprise Her",
                 encounterOption(() -> {
-                    encounter.showerAmbush(this, target);
+                    ambushContinuation.run();
                     Global.getMatch().resume();
                 })));
         if (!target.mostlyNude()) {
             options.add(new CommandPanelOption("Steal Clothes",
                     encounterOption(() -> {
-                        encounter.steal(this, target);
+                        stealContinuation.run();
                         Global.getMatch().resume();
                     })));
         }
         if (has(Item.Aphrodisiac)) {
             options.add(new CommandPanelOption("Use Aphrodisiac",
                     encounterOption(() -> {
-                        encounter.aphrodisiactrick(this, target);
                         Global.getMatch().resume();
                     })));
         }
         options.add(new CommandPanelOption("Do Nothing",
                 encounterOption(() -> {
-                    encounter.parse(Encs.wait, this, target);
+                    waitContinuation.run();
                     Global.getMatch().resume();
                 })));
         gui.presentOptions(options);

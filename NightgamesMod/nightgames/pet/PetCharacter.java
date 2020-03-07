@@ -289,7 +289,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void showerScene(Character target, DefaultEncounter encounter) {}
+    public void showerScene(Character target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {}
     @Override
     public void afterParty() {}
     
