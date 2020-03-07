@@ -491,7 +491,7 @@ public class DefaultEncounter {
             Global.gui().message("Before you have a chance to recover, " + opportunist.getCharacter().getName() + " pounces on you.");
         }
 
-        var startingPosition = trap.capitalize(opportunist.getCharacter(), target.getCharacter());
+        var startingPosition = trap.capitalize(opportunist, target);
         fight = new Combat(opportunist.getCharacter(), target.getCharacter(), opportunist.getCharacter().location());
         startingPosition.ifPresent(sp -> fight.setStanceRaw(sp));
 

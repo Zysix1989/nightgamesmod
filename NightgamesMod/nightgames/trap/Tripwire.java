@@ -1,7 +1,6 @@
 package nightgames.trap;
 
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
@@ -61,10 +60,10 @@ public class Tripwire extends Trap {
         }
 
         @Override
-        public Optional<Position> capitalize(Character attacker, Character victim) {
-            victim.addNonCombat(new Status(new Flatfooted(victim, 1)));
-            victim.location().clearTrap();
-            return Optional.of(new StandingOver(attacker, victim));
+        public Optional<Position> capitalize(Participant attacker, Participant victim) {
+            victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 1)));
+            victim.getCharacter().location().clearTrap();
+            return Optional.of(new StandingOver(attacker.getCharacter(), victim.getCharacter()));
         }
     }
     

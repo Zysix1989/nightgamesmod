@@ -1,6 +1,5 @@
 package nightgames.trap;
 
-import nightgames.characters.Character;
 import nightgames.items.Item;
 import nightgames.match.Participant;
 import nightgames.stance.Position;
@@ -37,7 +36,7 @@ public abstract class Trap {
             return self.name;
         }
 
-        public Optional<Position> capitalize(Character attacker, Character victim) {
+        public Optional<Position> capitalize(Participant attacker, Participant victim) {
             return Optional.empty();
         }
     }

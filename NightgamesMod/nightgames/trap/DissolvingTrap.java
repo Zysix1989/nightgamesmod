@@ -1,7 +1,6 @@
 package nightgames.trap;
 
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -70,8 +69,8 @@ public class DissolvingTrap extends Trap {
 
 
         @Override
-        public Optional<Position> capitalize(Character attacker, Character victim) {
-            victim.addNonCombat(new Status(new Flatfooted(victim, 1)));
+        public Optional<Position> capitalize(Participant attacker, Participant victim) {
+            victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 1)));
             return super.capitalize(attacker, victim);
         }
     }

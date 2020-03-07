@@ -1,6 +1,5 @@
 package nightgames.trap;
 
-import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -78,8 +77,8 @@ public class RoboWeb extends Trap {
         }
 
         @Override
-        public Optional<Position> capitalize(Character attacker, Character victim) {
-            attacker.location().clearTrap();
+        public Optional<Position> capitalize(Participant attacker, Participant victim) {
+            attacker.getCharacter().location().clearTrap();
             return super.capitalize(attacker, victim);
         }
 

@@ -1,7 +1,6 @@
 package nightgames.trap;
 
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -52,9 +51,9 @@ public class IllusionTrap extends Trap {
         }
 
         @Override
-        public Optional<Position> capitalize(Character attacker, Character victim) {
-            victim.addNonCombat(new Status(new Flatfooted(victim, 1)));
-            victim.location().clearTrap();
+        public Optional<Position> capitalize(Participant attacker, Participant victim) {
+            victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 1)));
+            victim.getCharacter().location().clearTrap();
             return super.capitalize(attacker, victim);
         }
     }
