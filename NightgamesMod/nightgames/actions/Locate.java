@@ -38,27 +38,27 @@ public class Locate extends Action {
             scryer.getCharacter().chooseLocateTarget(
                     Global.getMatch().getParticipants().stream()
                             .filter(p -> scryer.getCharacter().getAffection(p.getCharacter()) >= MINIMUM_SCRYING_REQUIREMENT)
-                            .collect(Collectors.toMap(Participant::getCharacter, p -> () -> this.chooseTarget(p.getCharacter()))),
+                            .collect(Collectors.toMap(Participant::getCharacter, p -> () -> this.chooseTarget(p))),
                     () -> action.endEvent(),
                     msg);
         }
 
-        private void chooseTarget(Character target) {
+        private void chooseTarget(Participant target) {
             var gui = Global.gui();
-            Area area = target.location();
+            Area area = target.getCharacter().location();
             gui.clearText();
             if (area != null) {
                 gui.message("Drawing on the dark energies inside the talisman, you attempt to scry for "
-                        + target.nameOrPossessivePronoun() + " location. In your mind, an image of the <b><i>"
+                        + target.getCharacter().nameOrPossessivePronoun() + " location. In your mind, an image of the <b><i>"
                         + area.name
                         + "</i></b> appears. It falls apart as quickly as it came to be, but you know where "
-                        + target.getTrueName()
+                        + target.getCharacter().getTrueName()
                         + " currently is. Your small talisman is already burning up in those creepy "
                         + "purple flames, the smoke flowing from your nose straight to your crotch and setting another fire there.");
-                target.addNonCombat(new Status(new Detected(target, 10)));
+                target.getCharacter().addNonCombat(new Status(new Detected(target.getCharacter(), 10)));
             } else {
                 gui.message("Drawing on the dark energies inside the talisman, you attempt to scry for "
-                        + target.nameOrPossessivePronoun() + " location. "
+                        + target.getCharacter().nameOrPossessivePronoun() + " location. "
                         + "However, you draw a blank. Your small talisman is already burning up in those creepy "
                         + "purple flames, the smoke flowing from your nose straight to your crotch and setting another fire there.");
             }
