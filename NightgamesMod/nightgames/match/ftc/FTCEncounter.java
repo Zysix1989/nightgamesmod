@@ -5,7 +5,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.combat.Combat;
-import nightgames.global.Encs;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
@@ -172,22 +171,4 @@ public class FTCEncounter extends DefaultEncounter {
 
         }
     }
-
-    @Override
-    public void parse(Encs choice, Character self, Character target) {
-        switch (choice) {
-            case treeAmbush:
-                treeAmbush(self, target);
-                break;
-            case bushAmbush:
-                bushAmbush(self, target);
-                break;
-            case passAmbush:
-                passAmbush(self, target);
-                break;
-            default:
-                super.parse(choice, self, target);
-        }
-    }
-
 }
