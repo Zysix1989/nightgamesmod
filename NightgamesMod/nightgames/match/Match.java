@@ -492,7 +492,7 @@ public class Match {
             }
             human.getCharacter().location().endEncounter();
         }
-        human.getCharacter().travel(new Area("Retirement", new DescriptionModule.ErrorDescriptionModule(), AreaIdentity.retire));
+        human.travel(new Area("Retirement", new DescriptionModule.ErrorDescriptionModule(), AreaIdentity.retire));
         human.getCharacter().state = State.quit;
         resume();
     }

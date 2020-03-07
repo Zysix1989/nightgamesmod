@@ -57,7 +57,7 @@ public class Move extends Action {
 
     @Override
     public Action.Aftermath execute(Participant user) {
-        user.getCharacter().travel(destination);
+        user.travel(destination);
         return new Aftermath();
     }
 

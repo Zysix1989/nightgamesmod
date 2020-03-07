@@ -2583,24 +2583,7 @@ public Character clone() throws CloneNotSupportedException {
         getSkills().remove(copy);
     }
 
-    /**Moves this character direct from one place to another.
-     * 
-     * @param dest
-     * The destination area. 
-     * */
-    public void travel(Area dest) {
-        state = State.ready;
-        location.get().exit(this);
-        location.set(dest);
-        dest.enter(this);
-        if (dest.name.isEmpty()) {
-            throw new RuntimeException("empty location");
-        }
-    }
-
-    public void travel(Area dest, String message) {
-        travel(dest);
-    }
+    public void travel(Area dest, String message) { }
 
     public void notifyFlight(Area destination) {}
 
