@@ -496,10 +496,11 @@ public class DefaultEncounter implements Encounter {
         } else if (target.getCharacter().human()) {
             Global.gui().message("Before you have a chance to recover, " + opportunist.getCharacter().getName() + " pounces on you.");
         }
+
         var startingPosition = trap.capitalize(opportunist.getCharacter(), target.getCharacter());
-        startingPosition.ifPresentOrElse(
-                sp -> fight = new Combat(opportunist.getCharacter(), target.getCharacter(), opportunist.getCharacter().location(), sp),
-                () -> fight = new Combat(opportunist.getCharacter(), target.getCharacter(), opportunist.getCharacter().location()));
+        fight = new Combat(opportunist.getCharacter(), target.getCharacter(), opportunist.getCharacter().location());
+        startingPosition.ifPresent(sp -> fight.setStanceRaw(sp));
+
         if (fight.getP1Character().human() || fight.getP2Character().human()) {
             Global.gui().watchCombat(fight);
         }

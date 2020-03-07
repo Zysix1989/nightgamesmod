@@ -104,11 +104,6 @@ public class Combat {
         listeners.add(new DefaultMatchEndListener(this));
     }
 
-    public Combat(Character p1, Character p2, Area loc, Position starting) {
-        this(p1, p2, loc);
-        stance = starting;
-    }
-
     private void applyCombatStatuses(Character self, Character other) {
         if (other.human()) {
             write(self.challenge(other));
@@ -1361,6 +1356,10 @@ public class Combat {
         List<BodyPart> parts2 = stance.getPartsFor(this, partner, self);
         parts1.forEach(part -> parts2.forEach(other -> part.onStartPenetration(this, self, partner, other)));
         parts2.forEach(part -> parts1.forEach(other -> part.onStartPenetration(this, partner, self, other)));
+    }
+
+    public void setStanceRaw(Position stance) {
+        this.stance = stance;
     }
 
     public void setStance(Position newStance, Character initiator, boolean voluntary) {
