@@ -100,22 +100,21 @@ public class DefaultEncounter {
         return spotter.getCharacter().check(Attribute.Cunning, dc);
     }
 
+    private void showerScene(Participant attacker, Participant victim) {
+        attacker.getCharacter().showerScene(
+                victim.getCharacter(),
+                () -> showerAmbush(attacker.getCharacter(), victim.getCharacter()),
+                () -> steal(attacker.getCharacter(), victim.getCharacter()),
+                () -> aphrodisiactrick(attacker.getCharacter(), victim.getCharacter()),
+                () -> parse(Encs.wait, attacker.getCharacter(), victim.getCharacter()));
+    }
+
     private void eligibleSpotCheck() {
         if (p1.getCharacter().state == State.shower) {
-            p2.getCharacter().showerScene(
-                    p1.getCharacter(),
-                    () -> showerAmbush(p2.getCharacter(), p1.getCharacter()),
-                    () -> steal(p2.getCharacter(), p1.getCharacter()),
-                    () -> aphrodisiactrick(p2.getCharacter(), p1.getCharacter()),
-                    () -> parse(Encs.wait, p2.getCharacter(), p1.getCharacter()));
+            showerScene(p2, p1);
             return;
         } else if (p2.getCharacter().state == State.shower) {
-            p1.getCharacter().showerScene(
-                    p2.getCharacter(),
-                    () -> showerAmbush(p1.getCharacter(), p2.getCharacter()),
-                    () -> steal(p1.getCharacter(), p2.getCharacter()),
-                    () -> aphrodisiactrick(p1.getCharacter(), p2.getCharacter()),
-                    () -> parse(Encs.wait, p1.getCharacter(), p2.getCharacter()));
+            showerScene(p1, p2);
             return;
         } else if (p1.getCharacter().state == State.webbed) {
             spider(p2, p1);
