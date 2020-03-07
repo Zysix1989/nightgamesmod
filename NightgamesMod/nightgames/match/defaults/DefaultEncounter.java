@@ -372,7 +372,7 @@ public class DefaultEncounter {
                 String admireLine = target.hasBreasts() ?
                                 String.format("You crouch by the edge of the jacuzzi for a few seconds and just admire %s nude body with %s breasts "
                                                 + "just above the surface.", target.possessiveAdjective(), target.possessiveAdjective()) :
-                                String.format("You crouch by the edge of the jacuzzi and just admire % nude body for a few seconds.",
+                                String.format("You crouch by the edge of the jacuzzi and just admire %s nude body for a few seconds.",
                                                 target.possessiveAdjective());
                 Global.gui().message(String.format(
                                 "You creep up to the jacuzzi where %s is soaking comfortably. As you get close, you notice that %s eyes are "
