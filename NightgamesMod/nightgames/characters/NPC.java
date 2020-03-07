@@ -506,7 +506,7 @@ public class NPC extends Character {
 
     @Override
     public void promptTrap(Encounter enc, Character target, Trap.Instance trap) {
-        if (ai.attack(target) && (!target.human() || !false)) {
+        if (ai.attack(target)) {
             enc.trap(this, target, trap);
         } else {
             location.get().endEncounter();
