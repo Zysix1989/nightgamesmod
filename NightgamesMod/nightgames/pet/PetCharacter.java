@@ -297,7 +297,7 @@ public class PetCharacter extends Character {
     public void emote(Emotion emo, int amt) {}
 
     @Override
-    public void promptTrap(Encounter fight, Character target, Trap.Instance trap) {}
+    public void promptTrap(Character target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {}
 
     @Override
     public void counterattack(Character target, Tactics type, Combat c) {}

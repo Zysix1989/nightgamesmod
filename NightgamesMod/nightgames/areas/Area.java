@@ -5,6 +5,7 @@ import nightgames.actions.Move;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.State;
+import nightgames.global.Encs;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Encounter;
@@ -136,7 +137,11 @@ public class Area implements Serializable {
                 if (opponent != targetParticipant) {
                     if (targetParticipant.canStartCombat(opponent) && opponent.canStartCombat(targetParticipant) && fight == null) {
                         fight = Global.getMatch().buildEncounter(opponent, targetParticipant, this);
-                        opponent.getCharacter().promptTrap(fight, target, trap);
+                        opponent.getCharacter().promptTrap(
+                                target,
+                                trap,
+                                () -> fight.trap(opponent.getCharacter(), target, trap),
+                                () -> fight.parse(Encs.wait, opponent.getCharacter(), target));
                         return true;
                     }
                 }

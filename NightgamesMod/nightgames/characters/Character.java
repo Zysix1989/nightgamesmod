@@ -2822,7 +2822,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract String challenge(Character other);
 
-    public abstract void promptTrap(Encounter fight, Character target, Trap.Instance trap);
+    public abstract void promptTrap(Character target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation);
 
     public int lvlBonus(Character opponent) {
         if (opponent.getLevel() > getLevel()) {

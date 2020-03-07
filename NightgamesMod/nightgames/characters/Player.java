@@ -698,7 +698,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void promptTrap(Encounter enc, Character target, Trap.Instance trap) {
+    public void promptTrap(Character target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {
         gui.message("Do you want to take the opportunity to ambush <b>" + target.getName() + "</b>?");
         assessOpponent(target);
         gui.message("<br/>");
@@ -706,12 +706,12 @@ public class Player extends Character {
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Attack " + target.getName(),
                 encounterOption(() -> {
-                    enc.trap(this, target, trap);
+                    attackContinuation.run();
                     Global.getMatch().resume();
                 })));
         options.add(new CommandPanelOption("Wait",
                 encounterOption(() -> {
-                    enc.parse(Encs.wait, this, target);
+                    waitContinuation.run();
                     Global.getMatch().resume();
                 })));
         gui.presentOptions(options);
