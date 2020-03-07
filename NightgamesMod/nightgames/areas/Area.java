@@ -117,10 +117,10 @@ public class Area implements Serializable {
         // We can't run encounters if a fight is already occurring.
         if (fight != null && fight.checkIntrude(p.getCharacter())) {
             options = p.getCharacter().intervene(fight,
-                    fight.getPlayer(1),
-                    () -> fight.intrude(p.getCharacter(), fight.getPlayer(1)),
-                    fight.getPlayer(2),
-                    () -> fight.intrude(p.getCharacter(), fight.getPlayer(2)),
+                    fight.getFirstParticipant().getCharacter(),
+                    () -> fight.intrude(p.getCharacter(), fight.getFirstParticipant().getCharacter()),
+                    fight.getSecondParticipant().getCharacter(),
+                    () -> fight.intrude(p.getCharacter(), fight.getSecondParticipant().getCharacter()),
                     () -> fight.watch());
         } else if (present.size() > 1) {
             for (Participant opponent : present) {          //FIXME: Currently - encounters repeat - Does this check if they are busy?

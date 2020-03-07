@@ -464,12 +464,12 @@ public class DefaultEncounter {
         return fight;
     }
 
-    public Character getPlayer(int i) {
-        if (i == 1) {
-            return p1.getCharacter();
-        } else {
-            return p2.getCharacter();
-        }
+    public Participant getFirstParticipant() {
+        return p1;
+    }
+
+    public Participant getSecondParticipant() {
+        return p2;
     }
 
     public void steal(Character thief, Character target) {
