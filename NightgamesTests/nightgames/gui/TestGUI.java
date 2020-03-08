@@ -33,7 +33,6 @@ public class TestGUI extends GUI {
     @Override
     public void beginCombat(Combat c, NPC p2) {
         combat = c;
-        combat.setBeingObserved(true);
     }
 
     @Override
