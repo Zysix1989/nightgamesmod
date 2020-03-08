@@ -2716,16 +2716,6 @@ public Character clone() throws CloneNotSupportedException {
         Global.getMatch().score(this, score);
     }
 
-    /**Checks if this character can resupply.*/
-    public boolean eligible(Character p2) {
-        boolean ftc = true;
-        if (Global.getMatch().getType() == MatchType.FTC) {
-            FTCMatch match = (FTCMatch) Global.getMatch();
-            ftc = !match.inGracePeriod() || (!match.isPrey(this) && !match.isPrey(p2));
-        }
-        return ftc && !mercy.contains(p2) && state != State.resupplying;
-    }
-
     public void setTrophy(Item trophy) {
         this.trophy = trophy;
     }

@@ -9,6 +9,7 @@ import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.ftc.FTCMatch;
 import nightgames.status.Stsflag;
 
 import java.util.*;
@@ -72,7 +73,12 @@ public class Participant {
     }
 
     public boolean canStartCombat(Participant p2) {
-        return character.eligible(p2.character);
+        boolean ftc = true;
+        if (Global.getMatch().getType() == MatchType.FTC) {
+            FTCMatch match = (FTCMatch) Global.getMatch();
+            ftc = !match.inGracePeriod() || (!match.isPrey(character) && !match.isPrey(p2.getCharacter()));
+        }
+        return ftc && !character.mercy.contains(p2.getCharacter()) && character.state != State.resupplying;
     }
 
     public interface ActionCallback {
@@ -263,6 +269,10 @@ public class Participant {
     public void travel(Area dest, String message) {
         travel(dest);
         character.notifyTravel(dest, message);
+    }
+
+    public boolean eligible(Participant p2) {
+        return canStartCombat(p2);
     }
 
 }
