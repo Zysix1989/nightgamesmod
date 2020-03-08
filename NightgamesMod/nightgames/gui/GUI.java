@@ -163,9 +163,6 @@ public class GUI extends JFrame implements Observer {
         clothesPanel.setBackground(new Color(25, 25, 50));
         centerPanel.add(clothesPanel, USE_CLOSET_UI);
 
-        JButton debug = new JButton("Debug");
-        debug.addActionListener(arg0 -> Global.getMatch().resume());
-
         commandPanel = new CommandPanel();
         gamePanel.add(commandPanel);
 
