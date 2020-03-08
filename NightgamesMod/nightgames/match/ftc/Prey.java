@@ -11,4 +11,8 @@ public class Prey extends Participant {
     public Prey(Character c) {
         super(c);
     }
+
+    public void resetGracePeriod() {
+        gracePeriod = INITIAL_GRACE_PERIOD_ROUNDS;
+    }
 }
