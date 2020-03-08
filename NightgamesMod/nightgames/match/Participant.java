@@ -160,7 +160,7 @@ public class Participant {
             character.handleEnthrall(act -> act.execute(this));
             return;
         } else if (character.state == State.shower || character.state == State.lostclothes) {
-            character.bathe();
+            character.bathe(character.state);
             character.state = State.ready;
             return;
         } else if (character.state == State.crafting) {

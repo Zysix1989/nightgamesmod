@@ -537,8 +537,8 @@ public class Player extends Character {
     }
 
     @Override
-    public void bathe() {
-        super.bathe();
+    public void bathe(State state) {
+        super.bathe(state);
         if (location.get().name.equals("Showers")) {
             gui.message("You let the hot water wash away your exhaustion and soon you're back to peak condition.");
         }
