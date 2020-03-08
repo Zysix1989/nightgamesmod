@@ -4,6 +4,8 @@ import nightgames.characters.Character;
 import nightgames.match.Participant;
 
 public class Prey extends Participant {
+    public int gracePeriod;
+
     public Prey(Character c) {
         super(c);
     }

@@ -21,7 +21,6 @@ import java.util.stream.Stream;
 public class FTCMatch extends Match {
     private Map<Participant, Area> bases;
     private Prey prey;
-    private int gracePeriod;
     private boolean flagInCenter;
     private int flagCounter;
 
@@ -32,7 +31,7 @@ public class FTCMatch extends Match {
                 modifier);
         this.bases = bases;
         this.prey = prey;
-        gracePeriod = 3;
+        prey.gracePeriod = 3;
         flagInCenter = false;
         flagCounter = 0;
     }
@@ -61,7 +60,7 @@ public class FTCMatch extends Match {
     }
 
     public boolean inGracePeriod() {
-        return gracePeriod > 0;
+        return prey.gracePeriod > 0;
     }
 
     @Override
@@ -75,9 +74,9 @@ public class FTCMatch extends Match {
         if (Global.getMatch() == this)
             super.manageConditions(p);
         if (prey.equals(p)) {
-            if (gracePeriod > 0)
-                gracePeriod--;
-            if (p.getCharacter().has(Item.Flag) && gracePeriod == 0 && (++flagCounter % 3) == 0) {
+            if (prey.gracePeriod > 0)
+                prey.gracePeriod--;
+            if (p.getCharacter().has(Item.Flag) && prey.gracePeriod == 0 && (++flagCounter % 3) == 0) {
                 score(p.getCharacter(), 1);
                 if (p.getCharacter().human()) {
                     Global.gui().message("You scored one point for holding the flag.");
@@ -216,7 +215,7 @@ public class FTCMatch extends Match {
 
     public void grabFlag() {
         flagInCenter = false;
-        gracePeriod = 3;
+        prey.gracePeriod = 3;
         flagCounter = 0;
         Global.gui().message(Global.format("{self:SUBJECT-ACTION:grab|grabs} a new flag from the stash. That means"
                         + " {self:pronoun} cannot be attacked for two turns, so {self:pronoun}"
