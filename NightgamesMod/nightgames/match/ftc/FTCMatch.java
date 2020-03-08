@@ -201,12 +201,10 @@ public class FTCMatch extends Match {
 
     public void grabFlag() {
         flagInCenter = false;
-        prey.resetGracePeriod();
-        prey.flagCounter = 0;
+        prey.grabFlag();
         Global.gui().message(Global.format("{self:SUBJECT-ACTION:grab|grabs} a new flag from the stash. That means"
                         + " {self:pronoun} cannot be attacked for two turns, so {self:pronoun}"
                         + " {self:action:have|has} a chance to hide.", prey.getCharacter(), Global.noneCharacter()));
-        prey.getCharacter().gain(Item.Flag);
     }
 
     @Override

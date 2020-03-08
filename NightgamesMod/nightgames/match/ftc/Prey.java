@@ -38,4 +38,10 @@ public class Prey extends Participant {
             }
         }
     }
+
+    public void grabFlag() {
+        resetGracePeriod();
+        flagCounter = 0;
+        character.gain(Item.Flag);
+    }
 }
