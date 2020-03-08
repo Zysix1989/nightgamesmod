@@ -283,6 +283,7 @@ public class GUI extends JFrame implements Observer {
 
     public void chooseSkills(Combat com, Character target, List<SkillGroup> skills) {
         commandPanel.chooseSkills(skills);
+
     }
 
     private CommandPanelOption clearingOption(final CommandPanelOption option) {

@@ -209,6 +209,7 @@ public class Player extends Character {
                 .map(skill -> skill.instantiate(c, target)).collect(Collectors.toSet()))));
 
         gui.chooseSkills(c, target, skillGroups);
+        Global.getMatch().pause();
     }
 
 

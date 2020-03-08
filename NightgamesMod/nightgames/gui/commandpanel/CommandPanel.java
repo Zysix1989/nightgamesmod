@@ -13,7 +13,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
-import nightgames.global.Global;
 import nightgames.gui.GUIColors;
 import nightgames.skills.SkillGroup;
 import nightgames.skills.SkillInstance;
@@ -275,7 +274,6 @@ public class CommandPanel extends JFXPanel {
         }
         skills.forEach(group -> this.skills.put(group.tactics, group));
         addTactics();
-        Global.getMatch().pause();
         refresh();
     }
 
