@@ -1,8 +1,6 @@
 package nightgames.match.ftc;
 
 import nightgames.characters.Character;
-import nightgames.global.Global;
-import nightgames.match.MatchType;
 import nightgames.match.Participant;
 
 public class Prey extends Participant {
@@ -24,11 +22,7 @@ public class Prey extends Participant {
 
     @Override
     public boolean canStartCombat(Participant p2) {
-        boolean ftc = true;
-        if (Global.getMatch().getType() == MatchType.FTC) {
-            FTCMatch match = (FTCMatch) Global.getMatch();
-            ftc = !match.inGracePeriod();
-        }
+        boolean ftc = !(gracePeriod > 0);
         return ftc && super.canStartCombat(p2);
     }
 }

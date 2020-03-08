@@ -59,10 +59,6 @@ public class FTCMatch extends Match {
         return loc != null && loc.equals(getBase(ch));
     }
 
-    public boolean inGracePeriod() {
-        return prey.gracePeriod > 0;
-    }
-
     @Override
     protected void afterEnd() {
         participants.forEach(c -> c.getCharacter().remove(Item.Flag));
