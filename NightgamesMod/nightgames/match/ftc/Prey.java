@@ -12,6 +12,10 @@ public class Prey extends Participant {
         super(c);
     }
 
+    public void decrementGracePeriod() {
+        gracePeriod = Math.min(0, gracePeriod - 1);
+    }
+
     public void resetGracePeriod() {
         gracePeriod = INITIAL_GRACE_PERIOD_ROUNDS;
     }
