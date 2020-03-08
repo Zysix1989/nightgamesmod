@@ -27,7 +27,7 @@ public class Prey extends Participant {
         boolean ftc = true;
         if (Global.getMatch().getType() == MatchType.FTC) {
             FTCMatch match = (FTCMatch) Global.getMatch();
-            ftc = !match.inGracePeriod() || (!match.isPrey(character) && !match.isPrey(p2.getCharacter()));
+            ftc = !match.inGracePeriod();
         }
         return ftc && super.canStartCombat(p2);
     }
