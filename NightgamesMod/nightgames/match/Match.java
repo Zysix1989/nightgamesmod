@@ -220,6 +220,7 @@ public class Match {
     }
 
     protected void manageConditions(Participant p) {
+        p.timePasses();
         condition.handleOutfit(p.getCharacter());
         condition.handleItems(p.getCharacter());
         condition.handleStatus(p.getCharacter());

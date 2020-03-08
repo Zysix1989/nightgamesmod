@@ -66,7 +66,6 @@ public class FTCMatch extends Match {
     public void manageConditions(Participant p) {
         if (Global.getMatch() == this)
             super.manageConditions(p);
-        p.timePasses();
     }
 
     public static FTCMatch newMatch(Collection<Character> combatants, FTCModifier modifier) {
