@@ -318,7 +318,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void spy(Participant opponent, DefaultEncounter enc) {
+    public void spy(Participant opponent, Runnable ambushContinuation) {
         gui.message("You spot <b>" + opponent.getCharacter().nameDirectObject()
                         + "</b> but she hasn't seen you yet. You could probably catch her off guard, or you could remain hidden and hope she doesn't notice you.");
         assessOpponent(opponent);
@@ -326,7 +326,7 @@ public class Player extends Character {
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Ambush",
                 encounterOption(() -> {
-                    enc.ambush(this, opponent.getCharacter());
+                    ambushContinuation.run();
                     Global.getMatch().resume();
                 })));
         options.add(new CommandPanelOption("Wait",

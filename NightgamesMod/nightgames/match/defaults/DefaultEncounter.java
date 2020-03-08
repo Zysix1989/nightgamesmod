@@ -122,10 +122,10 @@ public class DefaultEncounter {
             spider(p1, p2);
             return;
         } else if (p1.state == State.crafting || p1.state == State.searching) {
-            p2.getCharacter().spy(p1, this);
+            p2.getCharacter().spy(p1, () -> ambush(p2, p1));
             return;
         } else if (p2.state == State.crafting || p2.state == State.searching) {
-            p1.getCharacter().spy(p2, this);
+            p1.getCharacter().spy(p2, () -> ambush(p1, p2));
             return;
         } else if (p1.state == State.masturbating) {
             caught(p2.getCharacter(), p1.getCharacter());
@@ -144,9 +144,9 @@ public class DefaultEncounter {
             p1.getCharacter().faceOff(p2, this);
             p2.getCharacter().faceOff(p1, this);
         } else if (p2_sees_p1) {
-            p2.getCharacter().spy(p1, this);
+            p2.getCharacter().spy(p1, () -> ambush(p2, p1));
         } else if (p1_sees_p2) {
-            p1.getCharacter().spy(p2,  this);
+            p1.getCharacter().spy(p2,  () -> ambush(p1, p2) );
         } else {
             // Ships passing in the night :(
             location.endEncounter();
@@ -323,14 +323,14 @@ public class DefaultEncounter {
         }
     }
 
-    public void ambush(Character attacker, Character target) {
+    public void ambush(Participant attacker, Participant target) {
         startFightTimer();
-        target.addNonCombat(new nightgames.match.Status(new Flatfooted(target, 3)));
+        target.getCharacter().addNonCombat(new nightgames.match.Status(new Flatfooted(target.getCharacter(), 3)));
         if (p1.getCharacter().human() || p2.getCharacter().human()) {
-            startFight(attacker, target);
-            Global.gui().message(Global.format("{self:SUBJECT-ACTION:catch|catches} {other:name-do} by surprise and {self:action:attack|attacks}!", attacker, target));
+            startFight(attacker.getCharacter(), target.getCharacter());
+            Global.gui().message(Global.format("{self:SUBJECT-ACTION:catch|catches} {other:name-do} by surprise and {self:action:attack|attacks}!", attacker.getCharacter(), target.getCharacter()));
         } else {
-            fight = new Combat(attacker, target, location);
+            fight = new Combat(attacker.getCharacter(), target.getCharacter(), location);
         }
     }
 

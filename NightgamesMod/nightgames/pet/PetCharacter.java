@@ -330,7 +330,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void spy(Participant opponent, DefaultEncounter enc) {
+    public void spy(Participant opponent, Runnable ambushContinuation) {
         // TODO Auto-generated method stub
     }
 

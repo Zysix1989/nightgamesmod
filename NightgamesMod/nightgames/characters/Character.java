@@ -1729,7 +1729,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract void faceOff(Participant opponent, DefaultEncounter enc);
 
-    public abstract void spy(Participant opponent, DefaultEncounter enc);
+    public abstract void spy(Participant opponent, Runnable ambushContinuation);
 
     public abstract String describe(int per, Character observer);
 

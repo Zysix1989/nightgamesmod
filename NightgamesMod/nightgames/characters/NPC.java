@@ -447,9 +447,9 @@ public class NPC extends Character {
     }
 
     @Override
-    public void spy(Participant opponent, DefaultEncounter enc) {
+    public void spy(Participant opponent, Runnable ambushContinuation) {
         if (ai.attack(opponent.getCharacter())) {
-            enc.ambush(this, opponent.getCharacter());
+            ambushContinuation.run();
         } else {
             location.get().endEncounter();
         }
