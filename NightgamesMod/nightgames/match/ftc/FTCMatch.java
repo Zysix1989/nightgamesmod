@@ -31,7 +31,7 @@ public class FTCMatch extends Match {
                 modifier);
         this.bases = bases;
         this.prey = prey;
-        prey.gracePeriod = 3;
+        prey.gracePeriod = Prey.INITIAL_GRACE_PERIOD_ROUNDS;
         flagInCenter = false;
         flagCounter = 0;
     }
@@ -215,7 +215,7 @@ public class FTCMatch extends Match {
 
     public void grabFlag() {
         flagInCenter = false;
-        prey.gracePeriod = 3;
+        prey.gracePeriod = Prey.INITIAL_GRACE_PERIOD_ROUNDS;
         flagCounter = 0;
         Global.gui().message(Global.format("{self:SUBJECT-ACTION:grab|grabs} a new flag from the stash. That means"
                         + " {self:pronoun} cannot be attacked for two turns, so {self:pronoun}"

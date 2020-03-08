@@ -4,6 +4,8 @@ import nightgames.characters.Character;
 import nightgames.match.Participant;
 
 public class Prey extends Participant {
+    public static int INITIAL_GRACE_PERIOD_ROUNDS = 3;
+
     public int gracePeriod;
 
     public Prey(Character c) {
