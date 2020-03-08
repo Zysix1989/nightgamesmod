@@ -13,6 +13,8 @@ public class Prey extends Participant {
 
     public Prey(Character c) {
         super(c);
+        resetGracePeriod();
+        flagCounter = 0;
     }
 
     public void decrementGracePeriod() {

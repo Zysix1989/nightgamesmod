@@ -30,9 +30,7 @@ public class FTCMatch extends Match {
                 modifier);
         this.bases = bases;
         this.prey = prey;
-        prey.resetGracePeriod();
         flagInCenter = false;
-        prey.flagCounter = 0;
     }
     
     @Override
