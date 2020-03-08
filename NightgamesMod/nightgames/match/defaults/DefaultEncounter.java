@@ -229,9 +229,9 @@ public class DefaultEncounter {
         if (p1ff && p2ff) {
             startFight(p1.getCharacter(), p2.getCharacter());
         } else if (p1ff) {
-            fightOrFlee(p1.getCharacter(), p2.getCharacter());
+            fightOrFlee(p1, p2);
         } else if (p2ff) {
-            fightOrFlee(p2.getCharacter(), p1.getCharacter());
+            fightOrFlee(p2, p1);
         } else {
             bothFlee();
         }
@@ -251,24 +251,22 @@ public class DefaultEncounter {
     }
     
     // One Character wishes to Fight while the other attempts to flee.
-    private void fightOrFlee(Character fighter, Character fleer) {
-        Optional<String> fighterGuaranteed = (fighter == p1.getCharacter()) ? p1Guaranteed : p2Guaranteed;
-        Optional<String> fleerGuaranteed = (fleer == p1.getCharacter()) ? p1Guaranteed : p2Guaranteed;
-
-        var fleerParticipant = (fleer == p1.getCharacter()) ? p1 : p2;
+    private void fightOrFlee(Participant fighter, Participant fleer) {
+        Optional<String> fighterGuaranteed = (fighter == p1) ? p1Guaranteed : p2Guaranteed;
+        Optional<String> fleerGuaranteed = (fleer == p1) ? p1Guaranteed : p2Guaranteed;
 
         // Fighter wins automatically
         if (fighterGuaranteed.isPresent() && !fleerGuaranteed.isPresent()) {
-            if (fighter.human() || fleer.human()) {
+            if (fighter.getCharacter().human() || fleer.getCharacter().human()) {
                 Global.gui().message(fighterGuaranteed.get());
             }
-            startFight(fighter, fleer);
+            startFight(fighter.getCharacter(), fleer.getCharacter());
             return;
         }
 
         // Fleer wins automatically
         if (fleerGuaranteed.isPresent()) {
-            if (fighter.human() || fleer.human()) {
+            if (fighter.getCharacter().human() || fleer.getCharacter().human()) {
                 Global.gui().message(fleerGuaranteed.get());
             }
             p2.flee(location);
@@ -276,24 +274,24 @@ public class DefaultEncounter {
         }
 
         // Roll to see who's will triumphs
-        if (rollFightVsFlee(fighter, fleer)) {
-            if (fighter.human()) {
-                Global.gui().message(fleer.getName() + " dashes away before you can move.");
+        if (rollFightVsFlee(fighter.getCharacter(), fleer.getCharacter())) {
+            if (fighter.getCharacter().human()) {
+                Global.gui().message(fleer.getCharacter().getName() + " dashes away before you can move.");
             }
-            fleerParticipant.flee(location);
+            fleer.flee(location);
         } else {
-            if (fighter.human() || fleer.human()) {
-                if (fighter.human()) {
+            if (fighter.getCharacter().human() || fleer.getCharacter().human()) {
+                if (fighter.getCharacter().human()) {
                     Global.gui().message(String.format(
                         "%s tries to run, but you stay right on %s heels and catch %s.",
-                        fleer.getName(), fleer.possessiveAdjective(), fleer.objectPronoun()));
+                        fleer.getCharacter().getName(), fleer.getCharacter().possessiveAdjective(), fleer.getCharacter().objectPronoun()));
                 } else {
                     Global.gui().message(String.format(
                         "You quickly try to escape, but %s is quicker. %s corners you and attacks.",
-                        fighter.getName(), Global.capitalizeFirstLetter(fighter.pronoun())));
+                        fighter.getCharacter().getName(), Global.capitalizeFirstLetter(fighter.getCharacter().pronoun())));
                 }
             }
-            startFight(fighter, fleer);
+            startFight(fighter.getCharacter(), fleer.getCharacter());
         }
     }
     
