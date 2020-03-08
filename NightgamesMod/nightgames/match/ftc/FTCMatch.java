@@ -62,12 +62,6 @@ public class FTCMatch extends Match {
         super.afterEnd();
     }
 
-    @Override
-    public void manageConditions(Participant p) {
-        if (Global.getMatch() == this)
-            super.manageConditions(p);
-    }
-
     public static FTCMatch newMatch(Collection<Character> combatants, FTCModifier modifier) {
         var hunters = combatants.stream()
                 .filter(c -> c.equals(modifier.getPrey()))
