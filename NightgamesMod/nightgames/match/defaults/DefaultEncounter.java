@@ -257,40 +257,29 @@ public class DefaultEncounter {
 
         // Fighter wins automatically
         if (fighterGuaranteed.isPresent() && !fleerGuaranteed.isPresent()) {
-            if (fighter.getCharacter().human() || fleer.getCharacter().human()) {
-                Global.gui().message(fighterGuaranteed.get());
-            }
+            fighter.getCharacter().message(fighterGuaranteed.get());
             startFight(fighter.getCharacter(), fleer.getCharacter());
             return;
         }
 
         // Fleer wins automatically
         if (fleerGuaranteed.isPresent()) {
-            if (fighter.getCharacter().human() || fleer.getCharacter().human()) {
-                Global.gui().message(fleerGuaranteed.get());
-            }
+            fleer.getCharacter().message(fleerGuaranteed.get());
             p2.flee(location);
             return;
         }
 
         // Roll to see who's will triumphs
         if (rollFightVsFlee(fighter.getCharacter(), fleer.getCharacter())) {
-            if (fighter.getCharacter().human()) {
-                Global.gui().message(fleer.getCharacter().getName() + " dashes away before you can move.");
-            }
+            fighter.getCharacter().message(fleer.getCharacter().getName() + " dashes away before you can move.");
             fleer.flee(location);
         } else {
-            if (fighter.getCharacter().human() || fleer.getCharacter().human()) {
-                if (fighter.getCharacter().human()) {
-                    Global.gui().message(String.format(
-                        "%s tries to run, but you stay right on %s heels and catch %s.",
-                        fleer.getCharacter().getName(), fleer.getCharacter().possessiveAdjective(), fleer.getCharacter().objectPronoun()));
-                } else {
-                    Global.gui().message(String.format(
-                        "You quickly try to escape, but %s is quicker. %s corners you and attacks.",
-                        fighter.getCharacter().getName(), Global.capitalizeFirstLetter(fighter.getCharacter().pronoun())));
-                }
-            }
+            fighter.getCharacter().message(String.format(
+                    "%s tries to run, but you stay right on %s heels and catch %s.",
+                    fleer.getCharacter().getName(), fleer.getCharacter().possessiveAdjective(), fleer.getCharacter().objectPronoun()));
+            fleer.getCharacter().message(String.format(
+                    "You quickly try to escape, but %s is quicker. %s corners you and attacks.",
+                    fighter.getCharacter().getName(), Global.capitalizeFirstLetter(fighter.getCharacter().pronoun())));
             startFight(fighter.getCharacter(), fleer.getCharacter());
         }
     }

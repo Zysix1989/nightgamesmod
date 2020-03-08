@@ -1064,4 +1064,9 @@ public class Player extends Character {
         c.setBeingObserved(true);
         gui.beginCombat(c, (NPC) opponent);
     }
+
+    @Override
+    public void message(String message) {
+        gui.message(message);
+    }
 }
