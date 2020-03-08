@@ -142,7 +142,7 @@ public class Participant {
 
 
     public void move() {
-        character.displayStateMessage(character.location.get().getTrap(this));
+        character.displayStateMessage(character.location.get().getTrap(this), character.state);
         var possibleActions = new ArrayList<Action>();
         possibleActions.addAll(character.location.get().possibleActions(this));
         possibleActions.addAll(character.getItemActions());

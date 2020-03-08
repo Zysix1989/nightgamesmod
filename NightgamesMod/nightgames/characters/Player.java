@@ -363,7 +363,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void displayStateMessage(Optional<Trap.Instance> knownTrap) {
+    public void displayStateMessage(Optional<Trap.Instance> knownTrap, State state) {
         if (Global.getMatch().getType() == MatchType.FTC) {
             Character holder = ((FTCMatch) Global.getMatch()).getFlagHolder();
             if (holder != null && !holder.human()) {
