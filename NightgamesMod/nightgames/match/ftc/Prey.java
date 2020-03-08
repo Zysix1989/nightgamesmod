@@ -13,16 +13,12 @@ public class Prey extends Participant {
 
     public Prey(Character c) {
         super(c);
-        resetGracePeriod();
+        gracePeriod = INITIAL_GRACE_PERIOD_ROUNDS;
         flagCounter = 0;
     }
 
     public void decrementGracePeriod() {
         gracePeriod = Math.min(0, gracePeriod - 1);
-    }
-
-    public void resetGracePeriod() {
-        gracePeriod = INITIAL_GRACE_PERIOD_ROUNDS;
     }
 
     @Override
@@ -42,7 +38,7 @@ public class Prey extends Participant {
     }
 
     public void grabFlag() {
-        resetGracePeriod();
+        gracePeriod = INITIAL_GRACE_PERIOD_ROUNDS;
         flagCounter = 0;
         character.gain(Item.Flag);
     }
