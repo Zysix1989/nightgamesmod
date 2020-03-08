@@ -18,7 +18,7 @@ public class Participant {
     protected Character character;
     private int score = 0;
     private int roundsToWait = 0;
-    public State state;
+    public State state = State.ready;
 
     // Participants this participant has defeated recently.  They are not valid targets until they resupply.
     private Set<Participant> invalidTargets = new HashSet<>();
@@ -36,7 +36,7 @@ public class Participant {
         this.score = p.score;
         this.invalidTargets = p.invalidTargets;
         this.roundsToWait = p.roundsToWait;
-        this.state = State.ready;
+        this.state = p.state;
     }
 
     public Character getCharacter() {
