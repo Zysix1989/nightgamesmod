@@ -299,28 +299,19 @@ public class DefaultEncounter {
     }
     
     private void bothFlee() {
-        boolean humanPresent = p1.getCharacter().human() || p2.getCharacter().human();
         if (p1Guaranteed.isPresent()) {
-            if (humanPresent) {
-                Global.gui().message(p1Guaranteed.get());
-            }
+            p1.getCharacter().message(p1Guaranteed.get());
+            p2.getCharacter().message(p1Guaranteed.get());
             p1.flee(location);
         } else if (p2Guaranteed.isPresent()) {
-            if (humanPresent) {
-                Global.gui().message(p2Guaranteed.get());
-            }
+            p1.getCharacter().message(p2Guaranteed.get());
+            p2.getCharacter().message(p2Guaranteed.get());
             p2.flee(location);
         } else if (p1.getCharacter().get(Attribute.Speed) + Global.random(10) >= p2.getCharacter().get(Attribute.Speed) + Global.random(10)) {
-            if (p2.getCharacter().human()) {
-                Global.gui()
-                      .message(p1.getCharacter().getName() + " dashes away before you can move.");
-            }
+            p2.getCharacter().message(p1.getCharacter().getName() + " dashes away before you can move.");
             p1.flee(location);
         } else {
-            if (p1.getCharacter().human()) {
-                Global.gui()
-                      .message(p2.getCharacter().getName() + " dashes away before you can move.");
-            }
+            p1.getCharacter().message(p2.getCharacter().getName() + " dashes away before you can move.");
             p2.flee(location);
         }
     }
