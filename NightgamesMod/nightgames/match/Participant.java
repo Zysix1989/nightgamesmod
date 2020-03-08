@@ -16,7 +16,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Participant {
-    private Character character;
+    protected Character character;
     private int score = 0;
     private int roundsToWait = 0;
 
