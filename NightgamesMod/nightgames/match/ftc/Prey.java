@@ -22,7 +22,6 @@ public class Prey extends Participant {
 
     @Override
     public boolean canStartCombat(Participant p2) {
-        boolean ftc = !(gracePeriod > 0);
-        return ftc && super.canStartCombat(p2);
+        return gracePeriod <= 0 && super.canStartCombat(p2);
     }
 }
