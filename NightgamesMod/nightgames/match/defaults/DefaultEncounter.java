@@ -336,42 +336,35 @@ public class DefaultEncounter {
 
     public void showerAmbush(Character attacker, Character target) {
         startFightTimer();
-        
+
         if (location.id() == AreaIdentity.shower) {
-            if (target.human()) {
-                Global.gui().message(String.format(
-                                "You aren't in the shower long before you realize you're not alone. %s %s has the drop on you.",
-                                getShowerGrabLine(target), attacker.getName()));
-            } else {
-                Global.gui().message(String.format(
-                            "You stealthily walk up behind %s, enjoying the view of %s wet naked body. When you pinch %s smooth butt, "
-                                            + "%s jumps and lets out a surprised yelp. Before %s can recover from %s surprise, you pounce!",
-                                            target.getName(), target.possessiveAdjective(), target.possessiveAdjective(),
-                                            target.pronoun(), target.pronoun(), target.possessiveAdjective()));
-            }
+            target.message(String.format("You aren't in the shower long before you realize you're not alone. %s %s has the drop on you.",
+                    getShowerGrabLine(target), attacker.getName()));
+            attacker.message(String.format(
+                    "You stealthily walk up behind %s, enjoying the view of %s wet naked body. When you pinch %s smooth butt, "
+                            + "%s jumps and lets out a surprised yelp. Before %s can recover from %s surprise, you pounce!",
+                    target.getName(), target.possessiveAdjective(), target.possessiveAdjective(),
+                    target.pronoun(), target.pronoun(), target.possessiveAdjective()));
         } else if (location.id() == AreaIdentity.pool) {
-            if (target.human()) {
-                Global.gui().message(String.format(
-                                "The relaxing water causes you to lower your guard a bit, so you don't notice %s until %s's standing over you. "
-                                + "There's no chance to escape; you'll have to face %s nude.",
-                                attacker.getName(), attacker.pronoun(), attacker.objectPronoun()));
-            } else {
-                String admireLine = target.hasBreasts() ?
-                                String.format("You crouch by the edge of the jacuzzi for a few seconds and just admire %s nude body with %s breasts "
-                                                + "just above the surface.", target.possessiveAdjective(), target.possessiveAdjective()) :
-                                String.format("You crouch by the edge of the jacuzzi and just admire %s nude body for a few seconds.",
-                                                target.possessiveAdjective());
-                Global.gui().message(String.format(
-                                "You creep up to the jacuzzi where %s is soaking comfortably. As you get close, you notice that %s eyes are "
-                                      + "closed and %s may well be sleeping. %s You lean down and give %s a light kiss on the forehead to wake %s "
-                                      + "up. %s opens her eyes and swears under %s breath when %s sees you. %s scrambles out of the tub, but you "
-                                      + "easily catch %s before %s can get away.",
-                                      target.getName(), target.possessiveAdjective(),
-                                      target.pronoun(), admireLine, target.objectPronoun(), target.objectPronoun(),
-                                      Global.capitalizeFirstLetter(target.pronoun()), target.possessiveAdjective(), target.possessiveAdjective(),
-                                      target.pronoun(), Global.capitalizeFirstLetter(target.pronoun()),
-                                      target.possessiveAdjective(), target.pronoun()));
-            }
+            target.message(String.format(
+                    "The relaxing water causes you to lower your guard a bit, so you don't notice %s until %s's standing over you. "
+                            + "There's no chance to escape; you'll have to face %s nude.",
+                    attacker.getName(), attacker.pronoun(), attacker.objectPronoun()));
+            String admireLine = target.hasBreasts() ?
+                    String.format("You crouch by the edge of the jacuzzi for a few seconds and just admire %s nude body with %s breasts "
+                            + "just above the surface.", target.possessiveAdjective(), target.possessiveAdjective()) :
+                    String.format("You crouch by the edge of the jacuzzi and just admire %s nude body for a few seconds.",
+                            target.possessiveAdjective());
+            attacker.message(String.format(
+                    "You creep up to the jacuzzi where %s is soaking comfortably. As you get close, you notice that %s eyes are "
+                            + "closed and %s may well be sleeping. %s You lean down and give %s a light kiss on the forehead to wake %s "
+                            + "up. %s opens her eyes and swears under %s breath when %s sees you. %s scrambles out of the tub, but you "
+                            + "easily catch %s before %s can get away.",
+                    target.getName(), target.possessiveAdjective(),
+                    target.pronoun(), admireLine, target.objectPronoun(), target.objectPronoun(),
+                    Global.capitalizeFirstLetter(target.pronoun()), target.possessiveAdjective(), target.possessiveAdjective(),
+                    target.pronoun(), Global.capitalizeFirstLetter(target.pronoun()),
+                    target.possessiveAdjective(), target.pronoun()));
         }
         
         startFight(p1.getCharacter(), p2.getCharacter());
