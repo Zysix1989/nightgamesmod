@@ -17,10 +17,6 @@ public class Prey extends Participant {
         flagCounter = 0;
     }
 
-    public void decrementGracePeriod() {
-        gracePeriod = Math.min(0, gracePeriod - 1);
-    }
-
     @Override
     public boolean canStartCombat(Participant p2) {
         return gracePeriod <= 0 && super.canStartCombat(p2);
@@ -28,7 +24,7 @@ public class Prey extends Participant {
 
     @Override
     public void timePasses() {
-        decrementGracePeriod();
+        gracePeriod = Math.min(0, gracePeriod - 1);
         if (character.has(Item.Flag) && gracePeriod == 0 && (++flagCounter % 3) == 0) {
             incrementScore(1);
             if (character.human()) {
