@@ -506,10 +506,6 @@ public class DefaultEncounter {
                         , c.action("disappear", "disappears"));
     }
 
-    private String fleeHiddenMessage(Character c, Character other) {
-        return Global.format("{self:SUBJECT-ACTION:flee} before {other:subject-action:can} notice {self:direct-object}.", c, other);
-    }
-
     public boolean checkIntrude(Character c) {
         return fight != null && !c.equals(p1.getCharacter()) && !c.equals(p2.getCharacter());
     }
