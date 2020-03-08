@@ -130,10 +130,10 @@ public class DefaultEncounter {
             p1.getCharacter().spy(p2, () -> ambush(p1, p2));
             return;
         } else if (p1.state == State.masturbating) {
-            caught(p2.getCharacter(), p1.getCharacter());
+            caught(p2, p1);
             return;
         } else if (p2.state == State.masturbating) {
-            caught(p1.getCharacter(), p2.getCharacter());
+            caught(p1, p2);
             return;
         }
         
@@ -389,32 +389,32 @@ public class DefaultEncounter {
         target.add(fight, new Flatfooted(target, 4));
     }
 
-    protected void caught(Character attacker, Character target) {
-        attacker.gainXP(attacker.getVictoryXP(target));
-        target.gainXP(target.getDefeatXP(attacker));
-        target.message("You jerk off frantically, trying to finish as fast as possible. Just as you feel the familiar sensation of imminent orgasm, you're grabbed from behind. "
+    protected void caught(Participant attacker, Participant target) {
+        attacker.getCharacter().gainXP(attacker.getCharacter().getVictoryXP(target.getCharacter()));
+        target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
+        target.getCharacter().message("You jerk off frantically, trying to finish as fast as possible. Just as you feel the familiar sensation of imminent orgasm, you're grabbed from behind. "
                 + "You freeze, cock still in hand. As you turn your head to look at your attacker, "
-                + attacker.getName()
+                + attacker.getCharacter().getName()
                 + " kisses you on the lips and rubs the head of your penis with her "
                 + "palm. You were so close to the edge that just you cum instantly.");
-        if (!target.mostlyNude()) {
-            target.message("You groan in resignation and reluctantly strip off your clothes and hand them over.");
+        if (!target.getCharacter().mostlyNude()) {
+            target.getCharacter().message("You groan in resignation and reluctantly strip off your clothes and hand them over.");
         }
-        attacker.message("You spot " + target.getName()
+        attacker.getCharacter().message("You spot " + target.getCharacter().getName()
                 + " leaning against the wall with her hand working excitedly between her legs. She is mostly, but not completely successful at "
                 + "stifling her moans. She hasn't noticed you yet, and as best as you can judge, she's pretty close to the end. It'll be an easy victory for you as long as you work fast. "
                 + "You sneak up and hug her from behind while kissing the nape of her neck. She moans and shudders in your arms, but doesn't stop fingering herself. She probably realizes "
                 + "she has no chance of winning even if she fights back. You help her along by licking her neck and fondling her breasts as she hits her climax.");
-        if (!target.mostlyNude()) {
-            attacker.gain(target.getTrophy());
+        if (!target.getCharacter().mostlyNude()) {
+            attacker.getCharacter().gain(target.getCharacter().getTrophy());
         }
-        target.nudify();
-        target.defeated(attacker);
-        target.getArousal().renew();
-        attacker.tempt(20);
-        Global.getMatch().score(attacker,  1);
-        Global.getMatch().findParticipant(attacker).state = State.ready;
-        Global.getMatch().findParticipant(target).state = State.ready;
+        target.getCharacter().nudify();
+        target.getCharacter().defeated(attacker.getCharacter());
+        target.getCharacter().getArousal().renew();
+        attacker.getCharacter().tempt(20);
+        Global.getMatch().score(attacker.getCharacter(),  1);
+        attacker.state = State.ready;
+        target.state = State.ready;
         location.endEncounter();
     }
 
