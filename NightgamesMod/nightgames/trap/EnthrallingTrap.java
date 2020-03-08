@@ -44,14 +44,14 @@ public class EnthrallingTrap extends Trap {
         public void trigger(Participant target) {
             if (target.getCharacter().human()) {
                 if (target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm())
-                        || !target.eligible(owner) || !owner.eligible(target)) {
+                        || !target.canStartCombat(owner) || !owner.canStartCombat(target)) {
                     Global.gui().message(VICTIM_AVOID_MESSAGE);
                 } else {
                     target.getLocation().opportunity(target.getCharacter(), this);
                     Global.gui().message(VICTIM_TRIGGER_MESSAGE);
                     target.getCharacter().addNonCombat(new Status(new Enthralled(target.getCharacter(), owner.getCharacter(), 5 + strength / 20)));
                 }
-            } else if (target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm()) || !target.eligible(owner) || !owner.eligible(target)) {
+            } else if (target.getCharacter().check(Attribute.Perception, 25 + target.getCharacter().baseDisarm()) || !target.canStartCombat(owner) || !owner.canStartCombat(target)) {
                 if (target.getLocation().humanPresent()) {
                     var model = JtwigModel.newModel()
                             .with("victim", target.getCharacter().getGrammar());

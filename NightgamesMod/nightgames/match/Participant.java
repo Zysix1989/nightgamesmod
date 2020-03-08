@@ -265,10 +265,6 @@ public class Participant {
         character.notifyTravel(dest, message);
     }
 
-    public boolean eligible(Participant p2) {
-        return canStartCombat(p2);
-    }
-
     public void timePasses() {};
 
 }
