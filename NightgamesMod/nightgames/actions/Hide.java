@@ -23,7 +23,7 @@ public class Hide extends Action {
 
     @Override
     public boolean usable(Participant user) {
-        return !(user.getCharacter().state == State.hidden) && !user.getCharacter().bound();
+        return !(user.state == State.hidden) && !user.getCharacter().bound();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class Hide extends Action {
         if (user.getCharacter().human()) {
             Global.gui().message("You find a decent hiding place and wait for unwary opponents.");
         }
-        user.getCharacter().state = State.hidden;
+        user.state = State.hidden;
         return new Aftermath();
     }
 

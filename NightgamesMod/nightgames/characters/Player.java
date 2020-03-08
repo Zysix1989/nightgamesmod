@@ -279,7 +279,7 @@ public class Player extends Character {
     private void assessOpponent(Participant opponent) {
         String arousal;
         String stamina;
-        if (opponent.getCharacter().state == State.webbed) {
+        if (opponent.state == State.webbed) {
             gui.message("She is naked and helpless.<br/>");
             return;
         }
@@ -291,7 +291,7 @@ public class Player extends Character {
                             + opponent.getCharacter().get(Attribute.Cunning) + ", and her Seduction is "
                             + opponent.getCharacter().get(Attribute.Seduction));
         }
-        if (opponent.getCharacter().mostlyNude() || opponent.getCharacter().state == State.shower) {
+        if (opponent.getCharacter().mostlyNude() || opponent.state == State.shower) {
             gui.message("She is completely naked.");
         } else {
             gui.message("She is dressed and ready to fight.");

@@ -93,7 +93,6 @@ public abstract class Character extends Observable implements Cloneable {
     private Map<Item, Integer> inventory;
     private Map<String, Integer> flags;             //Needs to be more strongly leveraged in mechanics.  -DSM
     protected Item trophy;                          
-    public State state;                             //State of character - tracked between in combat and out of combat. - DSM
     protected Map<String, Integer> attractions;
     private Map<String, Integer> affections;
     public HashSet<Clothing> closet;                //If clothing can be destroyed, it should stand to reason that characters should purchase replace. Consider reworking - DSM            
@@ -156,7 +155,6 @@ public abstract class Character extends Observable implements Cloneable {
         affections = new HashMap<>(2);
         challenges = new ArrayList<>();
         location = new Property<>(new Area("", new DescriptionModule.ErrorDescriptionModule(), null));
-        state = State.ready;
         // this.combatStats = new CombatStats();       //TODO: Reading, writing, cloning?
         
         setRank(0);

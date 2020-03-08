@@ -38,7 +38,7 @@ public class Bathe extends Action {
                 Global.gui().message(message);
             }
         }
-        user.getCharacter().state = State.shower;
+        user.state = State.shower;
         user.waitRounds(1);
         return new Aftermath();
     }

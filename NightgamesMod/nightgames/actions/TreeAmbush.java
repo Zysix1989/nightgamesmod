@@ -25,7 +25,7 @@ public class TreeAmbush extends Action {
     @Override
     public boolean usable(Participant user) {
         return (user.getCharacter().get(Attribute.Power) >= 20 || user.getCharacter().get(Attribute.Animism) >= 10)
-                        && user.getCharacter().state != State.inTree
+                        && user.state != State.inTree
                         && !user.getCharacter().bound();
     }
 
@@ -41,7 +41,7 @@ public class TreeAmbush extends Action {
                                 + " able to surprise someone passing underneath.");
             }
         }
-        user.getCharacter().state = State.inTree;
+        user.state = State.inTree;
         return new Aftermath();
     }
 

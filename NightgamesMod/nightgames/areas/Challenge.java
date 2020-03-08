@@ -188,7 +188,7 @@ public class Challenge implements Deployable {
 
     @Override
     public boolean resolve(Participant active) {
-        if (active.getCharacter().state == State.ready) {
+        if (active.state == State.ready) {
             var participants = Global.getMatch().getParticipants().stream().filter(p -> p != active).collect(Collectors.toUnmodifiableList());
             if (participants.size() > 0) {
                 owner = active;

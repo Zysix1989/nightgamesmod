@@ -253,7 +253,7 @@ public class Cache implements Deployable {
 
     @Override
     public boolean resolve(Participant active) {
-        if (active.getCharacter().state == State.ready) {
+        if (active.state == State.ready) {
             attributeChecks.stream()
                     .map(c -> c.check(active))
                     .filter(Optional::isPresent)

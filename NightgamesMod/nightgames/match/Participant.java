@@ -18,6 +18,7 @@ public class Participant {
     protected Character character;
     private int score = 0;
     private int roundsToWait = 0;
+    public State state;
 
     // Participants this participant has defeated recently.  They are not valid targets until they resupply.
     private Set<Participant> invalidTargets = new HashSet<>();
@@ -35,6 +36,7 @@ public class Participant {
         this.score = p.score;
         this.invalidTargets = p.invalidTargets;
         this.roundsToWait = p.roundsToWait;
+        this.state = State.ready;
     }
 
     public Character getCharacter() {
@@ -72,7 +74,7 @@ public class Participant {
     }
 
     public boolean canStartCombat(Participant p2) {
-        return !character.mercy.contains(p2.getCharacter()) && character.state != State.resupplying;
+        return !character.mercy.contains(p2.getCharacter()) && state != State.resupplying;
     }
 
     public interface ActionCallback {
@@ -142,13 +144,13 @@ public class Participant {
 
 
     public void move() {
-        character.displayStateMessage(character.location.get().getTrap(this), character.state);
+        character.displayStateMessage(character.location.get().getTrap(this), state);
         var possibleActions = new ArrayList<Action>();
         possibleActions.addAll(character.location.get().possibleActions(this));
         possibleActions.addAll(character.getItemActions());
         possibleActions.addAll(Global.getMatch().getAvailableActions());
         possibleActions.removeIf(a -> !a.usable(this));
-        if (character.state == State.combat) {
+        if (state == State.combat) {
             if (!character.location.get().fight.battle()) {
                 Global.getMatch().resume();
             }
@@ -159,27 +161,27 @@ public class Participant {
         } else if (this.character.is(Stsflag.enthralled)) {
             character.handleEnthrall(act -> act.execute(this));
             return;
-        } else if (character.state == State.shower || character.state == State.lostclothes) {
-            character.bathe(character.state);
-            character.state = State.ready;
+        } else if (state == State.shower || state == State.lostclothes) {
+            character.bathe(state);
+            state = State.ready;
             return;
-        } else if (character.state == State.crafting) {
+        } else if (state == State.crafting) {
             character.craft(craftItems());
-            character.state = State.ready;
+            state = State.ready;
             return;
-        } else if (character.state == State.searching) {
+        } else if (state == State.searching) {
             character.search(searchItems());
-            character.state = State.ready;
+            state = State.ready;
             return;
-        } else if (character.state == State.resupplying) {
+        } else if (state == State.resupplying) {
             resupply();
             return;
-        } else if (character.state == State.webbed) {
-            character.state = State.ready;
+        } else if (state == State.webbed) {
+            state = State.ready;
             return;
-        } else if (character.state == State.masturbating) {
+        } else if (state == State.masturbating) {
             character.masturbate();
-            character.state = State.ready;
+            state = State.ready;
             return;
         }
         character.move(possibleActions, character.location.get().encounter(this), act -> act.execute(this));
@@ -218,7 +220,7 @@ public class Participant {
     public void resupply() {
         character.mercy.clear();
         character.change();
-        character.state = State.ready;
+        state = State.ready;
         character.getWillpower().renew();
         if (character.location().getOccupants().size() > 1) {
             if (character.location().id() == AreaIdentity.dorm) {
@@ -251,7 +253,7 @@ public class Participant {
     }
 
     public void travel(Area dest) {
-        character.state = State.ready;
+        state = State.ready;
         character.location.get().exit(this.character);
         character.location.set(dest);
         dest.enter(this.character);

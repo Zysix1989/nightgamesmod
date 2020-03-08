@@ -69,8 +69,7 @@ public class Area implements Serializable {
             return true;
         }
         for (Participant participant : present) {
-            Character character = participant.getCharacter();
-            if (!(character.check(Attribute.Cunning, Global.random(20) + perception) || character.state == State.hidden) || open()) {
+            if (!(participant.getCharacter().check(Attribute.Cunning, Global.random(20) + perception) || participant.state == State.hidden) || open()) {
                 return true;
             }
         }

@@ -23,7 +23,7 @@ public class PassAmbush extends Action {
 
     @Override
     public boolean usable(Participant user) {
-        return user.getCharacter().state != State.inPass
+        return user.state != State.inPass
                 && !user.getCharacter().bound();
     }
 
@@ -33,7 +33,7 @@ public class PassAmbush extends Action {
             Global.gui().message(
                             "You try to find a decent hiding place in the irregular" + " rock faces lining the pass.");
         }
-        user.getCharacter().state = State.inPass;
+        user.state = State.inPass;
         return new Aftermath();
     }
 

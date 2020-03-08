@@ -89,7 +89,7 @@ public class DefaultEncounter {
             return false;
         }
         int dc = hidden.getCharacter().get(Attribute.Cunning) / 3;
-        if (hidden.getCharacter().state == State.hidden) {
+        if (hidden.state == State.hidden) {
             dc += (hidden.getCharacter().get(Attribute.Cunning) * 2 / 3) + 20;
         }
         if (hidden.getCharacter().has(Trait.Sneaky)) {
@@ -109,28 +109,28 @@ public class DefaultEncounter {
     }
 
     private void eligibleSpotCheck() {
-        if (p1.getCharacter().state == State.shower) {
+        if (p1.state == State.shower) {
             showerScene(p2, p1);
             return;
-        } else if (p2.getCharacter().state == State.shower) {
+        } else if (p2.state == State.shower) {
             showerScene(p1, p2);
             return;
-        } else if (p1.getCharacter().state == State.webbed) {
+        } else if (p1.state == State.webbed) {
             spider(p2, p1);
             return;
-        } else if (p2.getCharacter().state == State.webbed) {
+        } else if (p2.state == State.webbed) {
             spider(p1, p2);
             return;
-        } else if (p1.getCharacter().state == State.crafting || p1.getCharacter().state == State.searching) {
+        } else if (p1.state == State.crafting || p1.state == State.searching) {
             p2.getCharacter().spy(p1, this);
             return;
-        } else if (p2.getCharacter().state == State.crafting || p2.getCharacter().state == State.searching) {
+        } else if (p2.state == State.crafting || p2.state == State.searching) {
             p1.getCharacter().spy(p2, this);
             return;
-        } else if (p1.getCharacter().state == State.masturbating) {
+        } else if (p1.state == State.masturbating) {
             caught(p2.getCharacter(), p1.getCharacter());
             return;
-        } else if (p2.getCharacter().state == State.masturbating) {
+        } else if (p2.state == State.masturbating) {
             caught(p1.getCharacter(), p2.getCharacter());
             return;
         }
@@ -159,8 +159,8 @@ public class DefaultEncounter {
             Character human = p1.getCharacter().human() ? p1.getCharacter() : p2.getCharacter();
             Character npc = p1.getCharacter() != human ? p1.getCharacter() : p2.getCharacter();
             Character masturbating =
-                            p1.getCharacter().state == State.masturbating ? p1.getCharacter() :
-                                (p2.getCharacter().state == State.masturbating ? p2.getCharacter() : null);
+                            p1.state == State.masturbating ? p1.getCharacter() :
+                                (p2.state == State.masturbating ? p2.getCharacter() : null);
             
             if (masturbating != null) {
                 if (human == masturbating) {
@@ -435,8 +435,8 @@ public class DefaultEncounter {
         attacker.tempt(20);
         Global.getMatch()
               .score(attacker,  1);
-        attacker.state = State.ready;
-        target.state = State.ready;
+        Global.getMatch().findParticipant(attacker).state = State.ready;
+        Global.getMatch().findParticipant(target).state = State.ready;
         location.endEncounter();
     }
 
@@ -480,7 +480,7 @@ public class DefaultEncounter {
         }
         thief.gain(target.getTrophy());
         target.nudify();
-        target.state = State.lostclothes;
+        Global.getMatch().findParticipant(target).state = State.lostclothes;
         location.endEncounter();
     }
 
@@ -542,8 +542,8 @@ public class DefaultEncounter {
         target.getArousal().renew();
         attacker.tempt(20);
         Global.getMatch().score(attacker,  1);
-        attacker.state = State.ready;
-        target.state = State.ready;
+        Global.getMatch().findParticipant(attacker).state = State.ready;
+        Global.getMatch().findParticipant(target).state = State.ready;
         location.endEncounter();
     }
 

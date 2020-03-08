@@ -29,7 +29,7 @@ public class Craft extends Action {
 
     @Override
     public Action.Aftermath execute(Participant user) {
-        user.getCharacter().state = State.crafting;
+        user.state = State.crafting;
         return new Aftermath();
     }
 

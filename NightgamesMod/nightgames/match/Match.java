@@ -254,7 +254,7 @@ public class Match {
     }
 
     private void afterTurn(Participant participant) {
-        if (participant.getCharacter().state == State.resupplying) {
+        if (participant.state == State.resupplying) {
             participants.forEach(p -> p.allowTarget(participant));
         }
     }
@@ -293,9 +293,8 @@ public class Match {
             getAreas().forEach(area -> area.setPinged(false));
             while (roundIterator.hasNext()) {
                 var participant = roundIterator.next();
-                var self = participant.getCharacter();
                 Global.gui().refresh();
-                if (self.state != State.quit) {
+                if (participant.state != State.quit) {
                     participant.endOfMatchRound();
                     manageConditions(participant);
                     participant.move();
@@ -375,7 +374,7 @@ public class Match {
                 combatant.modMoney(calculateReward(combatant, sb));
 
                 combatant.challenges.clear();
-                combatant.state = State.ready;
+                p.state = State.ready;
                 condition.undoItems(combatant);
                 combatant.change();
         });
@@ -487,14 +486,14 @@ public class Match {
     
     public final void quit() {
         var human = findParticipant(Global.getPlayer());
-        if (human.getCharacter().state == State.combat) {
+        if (human.state == State.combat) {
             if (human.getCharacter().location().fight.getCombat() != null) {
                 human.getCharacter().location().fight.getCombat().forfeit(human.getCharacter());
             }
             human.getCharacter().location().endEncounter();
         }
         human.travel(new Area("Retirement", new DescriptionModule.ErrorDescriptionModule(), AreaIdentity.retire));
-        human.getCharacter().state = State.quit;
+        human.state = State.quit;
         resume();
     }
 

@@ -25,17 +25,17 @@ public class FTCEncounter extends DefaultEncounter {
     public boolean spotCheck() {
         if (!(p1.canStartCombat(p2) && p2.canStartCombat(p1)))
             return super.spotCheck();
-        if (p1.getCharacter().state == State.inTree) {
+        if (p1.state == State.inTree) {
             treeAmbush(p1.getCharacter(), p2.getCharacter());
-        } else if (p2.getCharacter().state == State.inTree) {
+        } else if (p2.state == State.inTree) {
             treeAmbush(p2.getCharacter(), p1.getCharacter());
-        } else if (p1.getCharacter().state == State.inBushes) {
+        } else if (p1.state == State.inBushes) {
             bushAmbush(p1.getCharacter(), p2.getCharacter());
-        } else if (p2.getCharacter().state == State.inBushes) {
+        } else if (p2.state == State.inBushes) {
             bushAmbush(p2.getCharacter(), p1.getCharacter());
-        } else if (p1.getCharacter().state == State.inPass) {
+        } else if (p1.state == State.inPass) {
             passAmbush(p1.getCharacter(), p2.getCharacter());
-        } else if (p2.getCharacter().state == State.inPass) {
+        } else if (p2.state == State.inPass) {
             passAmbush(p2.getCharacter(), p1.getCharacter());
         } else {
             return super.spotCheck();
