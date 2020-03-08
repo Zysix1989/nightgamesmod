@@ -22,7 +22,6 @@ public class FTCMatch extends Match {
     private Map<Participant, Area> bases;
     private Prey prey;
     private boolean flagInCenter;
-    private int flagCounter;
 
     protected FTCMatch(Set<Participant> hunters, Map<String, Area> map, Map<Participant, Area> bases, Prey prey,
                        FTCModifier modifier) {
@@ -33,7 +32,7 @@ public class FTCMatch extends Match {
         this.prey = prey;
         prey.resetGracePeriod();
         flagInCenter = false;
-        flagCounter = 0;
+        prey.flagCounter = 0;
     }
     
     @Override
@@ -71,7 +70,7 @@ public class FTCMatch extends Match {
             super.manageConditions(p);
         if (prey.equals(p)) {
             prey.decrementGracePeriod();
-            if (p.getCharacter().has(Item.Flag) && prey.gracePeriod == 0 && (++flagCounter % 3) == 0) {
+            if (p.getCharacter().has(Item.Flag) && prey.gracePeriod == 0 && (++prey.flagCounter % 3) == 0) {
                 score(p.getCharacter(), 1);
                 if (p.getCharacter().human()) {
                     Global.gui().message("You scored one point for holding the flag.");
@@ -211,7 +210,7 @@ public class FTCMatch extends Match {
     public void grabFlag() {
         flagInCenter = false;
         prey.resetGracePeriod();
-        flagCounter = 0;
+        prey.flagCounter = 0;
         Global.gui().message(Global.format("{self:SUBJECT-ACTION:grab|grabs} a new flag from the stash. That means"
                         + " {self:pronoun} cannot be attacked for two turns, so {self:pronoun}"
                         + " {self:action:have|has} a chance to hide.", prey.getCharacter(), Global.noneCharacter()));
