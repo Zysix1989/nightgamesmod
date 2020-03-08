@@ -104,7 +104,7 @@ public class DefaultEncounter {
     private void showerScene(Participant attacker, Participant victim) {
         attacker.getCharacter().showerScene(
                 victim,
-                () -> showerAmbush(attacker.getCharacter(), victim.getCharacter()),
+                () -> showerAmbush(attacker, victim),
                 () -> steal(attacker.getCharacter(), victim.getCharacter()),
                 () -> aphrodisiactrick(attacker.getCharacter(), victim.getCharacter()),
                 () -> {});
@@ -367,26 +367,26 @@ public class DefaultEncounter {
                     "out of the tub, but you easily catch {{ target.object().pronoun() }} before " +
                     "{{ target.subject().pronoun() }} can get away.");
 
-    public void showerAmbush(Character attacker, Character target) {
+    public void showerAmbush(Participant attacker, Participant target) {
         startFightTimer();
         var targetModel = JtwigModel.newModel()
-                .with("attacker", attacker.getGrammar())
-                .with("target", target);
+                .with("attacker", attacker.getCharacter().getGrammar())
+                .with("target", target.getLocation());
         var attackerModel = JtwigModel.newModel()
-                .with("target", target.getGrammar());
+                .with("target", target.getCharacter().getGrammar());
         if (location.id() == AreaIdentity.shower) {
-            target.message(SHOWER_TARGET_MESSAGE.render(targetModel));
-            attacker.message(SHOWER_ATTACKER_MESSAGE.render(attackerModel));
+            target.getCharacter().message(SHOWER_TARGET_MESSAGE.render(targetModel));
+            attacker.getCharacter().message(SHOWER_ATTACKER_MESSAGE.render(attackerModel));
         } else if (location.id() == AreaIdentity.pool) {
-            target.message(POOL_TARGET_MESSAGE.render(targetModel));
-            attacker.message(POOL_ATTACKER_MESSAGE.render(attackerModel));
+            target.getCharacter().message(POOL_TARGET_MESSAGE.render(targetModel));
+            attacker.getCharacter().message(POOL_ATTACKER_MESSAGE.render(attackerModel));
         }
         
         startFight(p1.getCharacter(), p2.getCharacter());
         p2.getCharacter().undress(fight);
         p1.getCharacter().emote(Emotion.dominant, 50);
         p2.getCharacter().emote(Emotion.nervous, 50);
-        target.add(fight, new Flatfooted(target, 4));
+        target.getCharacter().add(fight, new Flatfooted(target.getCharacter(), 4));
     }
 
     protected void caught(Participant attacker, Participant target) {
