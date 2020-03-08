@@ -256,7 +256,7 @@ public class DefaultEncounter {
         Optional<String> fleerGuaranteed = (fleer == p1) ? p1Guaranteed : p2Guaranteed;
 
         // Fighter wins automatically
-        if (fighterGuaranteed.isPresent() && !fleerGuaranteed.isPresent()) {
+        if (fighterGuaranteed.isPresent() && fleerGuaranteed.isEmpty()) {
             fighter.getCharacter().message(fighterGuaranteed.get());
             startFight(fighter.getCharacter(), fleer.getCharacter());
             return;
