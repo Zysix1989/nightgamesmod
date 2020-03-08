@@ -11,6 +11,8 @@ import nightgames.match.Participant;
 import nightgames.status.*;
 import nightgames.trap.Spiderweb;
 import nightgames.trap.Trap;
+import org.jtwig.JtwigModel;
+import org.jtwig.JtwigTemplate;
 
 import java.util.Optional;
 
@@ -334,37 +336,59 @@ public class DefaultEncounter {
         }
     }
 
+    private static JtwigTemplate SHOWER_TARGET_MESSAGE = JtwigTemplate.inlineTemplate("You aren't in the shower long " +
+            "before you realize you're not alone. Before you can turn around, " +
+            "{% if (target.hasDick()) %}" +
+            "a soft hand grabs your exposed penis. " +
+            "{% else if (target.hasBreasts()) %}" +
+            "hands reach around to cup your breasts. " +
+            "{% else %}" +
+            "you feel someone grab a handful of your ass. " +
+            "{{ attacker.subject().properNoun() }} has the drop on you.");
+
+    private static JtwigTemplate SHOWER_ATTACKER_MESSAGE = JtwigTemplate.inlineTemplate(
+            "You stealthily walk up behind {{ target.object().properNoun() }}, enjoying the view of " +
+                    "{{ target.possessiveAdjective() }} wet, naked body. When you pinch " +
+                    "{{ target.possessiveAdjective() }} smooth butt, {{ target.subject().pronoun() }} jumps and lets " +
+                    "out a surprised yelp. Before {{ target.subject().pronoun() }} can recover from " +
+                    "{{ target.possessiveAdjective() }} surprise, you pounce!");
+
+    private static JtwigTemplate POOL_TARGET_MESSAGE = JtwigTemplate.inlineTemplate(
+            "The relaxing water causes you to lower your guard a bit, so you don't " +
+                    "notice {{ attacker.object().properNoun() }} until {{ attacker.subject().pronoun() }}'s standing " +
+                    "over you. There's no chance to escape; you'll have to face {{ attacker.object().pronoun() }} nude.");
+
+    private static JtwigTemplate POOL_ATTACKER_MESSAGE = JtwigTemplate.inlineTemplate(
+            "You creep up to the jacuzzi where {{ target.subject().properNoun() }} is soaking comfortably. " +
+                    "As you get close, you notice that {{ target.possessiveAdjective() }} eyes are " +
+                    "closed and {{ target.subject().pronoun() }} may well be sleeping. You crouch by the " +
+                    "edge of the jacuzzi for a few seconds and just admire {{ target.possessiveAdjective() }} " +
+                    "nude body " +
+                    "{% if (targetCharacter.hasBreasts()) %} " +
+                    "with {{ target.possessiveAdjective() }} breasts just above the surface. " +
+                    "{% else %}" +
+                    "for a few seconds. " +
+                    "{% endif %}" +
+                    "You lean down and give {{ target.object().pronoun() }} a light kiss on the forehead " +
+                    "to wake {{ target.object().pronoun() }} up. {{ target.subject().properNoun() }} opens her " +
+                    "eyes and swears under {{ target.possessiveAdjective() }} breath when " +
+                    "{{ target.subject().pronoun() }} sees you. {{ target.subject().pronoun() }} scrambles " +
+                    "out of the tub, but you easily catch {{ target.object().pronoun() }} before " +
+                    "{{ target.subject().pronoun() }} can get away.");
+
     public void showerAmbush(Character attacker, Character target) {
         startFightTimer();
-
+        var targetModel = JtwigModel.newModel()
+                .with("attacker", attacker.getGrammar())
+                .with("target", target);
+        var attackerModel = JtwigModel.newModel()
+                .with("target", target.getGrammar());
         if (location.id() == AreaIdentity.shower) {
-            target.message(String.format("You aren't in the shower long before you realize you're not alone. %s %s has the drop on you.",
-                    getShowerGrabLine(target), attacker.getName()));
-            attacker.message(String.format(
-                    "You stealthily walk up behind %s, enjoying the view of %s wet naked body. When you pinch %s smooth butt, "
-                            + "%s jumps and lets out a surprised yelp. Before %s can recover from %s surprise, you pounce!",
-                    target.getName(), target.possessiveAdjective(), target.possessiveAdjective(),
-                    target.pronoun(), target.pronoun(), target.possessiveAdjective()));
+            target.message(SHOWER_TARGET_MESSAGE.render(targetModel));
+            attacker.message(SHOWER_ATTACKER_MESSAGE.render(attackerModel));
         } else if (location.id() == AreaIdentity.pool) {
-            target.message(String.format(
-                    "The relaxing water causes you to lower your guard a bit, so you don't notice %s until %s's standing over you. "
-                            + "There's no chance to escape; you'll have to face %s nude.",
-                    attacker.getName(), attacker.pronoun(), attacker.objectPronoun()));
-            String admireLine = target.hasBreasts() ?
-                    String.format("You crouch by the edge of the jacuzzi for a few seconds and just admire %s nude body with %s breasts "
-                            + "just above the surface.", target.possessiveAdjective(), target.possessiveAdjective()) :
-                    String.format("You crouch by the edge of the jacuzzi and just admire %s nude body for a few seconds.",
-                            target.possessiveAdjective());
-            attacker.message(String.format(
-                    "You creep up to the jacuzzi where %s is soaking comfortably. As you get close, you notice that %s eyes are "
-                            + "closed and %s may well be sleeping. %s You lean down and give %s a light kiss on the forehead to wake %s "
-                            + "up. %s opens her eyes and swears under %s breath when %s sees you. %s scrambles out of the tub, but you "
-                            + "easily catch %s before %s can get away.",
-                    target.getName(), target.possessiveAdjective(),
-                    target.pronoun(), admireLine, target.objectPronoun(), target.objectPronoun(),
-                    Global.capitalizeFirstLetter(target.pronoun()), target.possessiveAdjective(), target.possessiveAdjective(),
-                    target.pronoun(), Global.capitalizeFirstLetter(target.pronoun()),
-                    target.possessiveAdjective(), target.pronoun()));
+            target.message(POOL_TARGET_MESSAGE.render(targetModel));
+            attacker.message(POOL_ATTACKER_MESSAGE.render(attackerModel));
         }
         
         startFight(p1.getCharacter(), p2.getCharacter());
@@ -372,16 +396,6 @@ public class DefaultEncounter {
         p1.getCharacter().emote(Emotion.dominant, 50);
         p2.getCharacter().emote(Emotion.nervous, 50);
         target.add(fight, new Flatfooted(target, 4));
-    }
-
-    private String getShowerGrabLine(Character target) {
-        if (target.hasDick()) {
-            return "Before you can turn around, a soft hand grabs your exposed penis.";
-        } else if (target.hasBreasts()) {
-            return "Before you can turn around, hands reach around to cup your breasts.";
-        } else {
-            return "Before you can turn around you feel someone grab a handful of your ass.";
-        }
     }
 
     protected void caught(Character attacker, Character target) {
