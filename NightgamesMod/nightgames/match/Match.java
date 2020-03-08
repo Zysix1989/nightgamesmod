@@ -33,7 +33,7 @@ public class Match {
     protected Set<Participant> participants;
     private boolean pause;
     protected Modifier condition;
-    private List<Trigger> beforeRoundTriggers = List.of(new Challenge.SpawnTrigger());
+    private List<Trigger> beforeRoundTriggers = new ArrayList<>(List.of(new Challenge.SpawnTrigger()));
     private Iterator<Participant> roundIterator;
 
     protected Match(Set<Participant> participants, Map<String, Area> map, Modifier condition) {
