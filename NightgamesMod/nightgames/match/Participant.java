@@ -45,7 +45,7 @@ public class Participant {
         return score;
     }
 
-    void incrementScore(int i) {
+    public void incrementScore(int i) {
         score += i;
     }
 
@@ -268,5 +268,7 @@ public class Participant {
     public boolean eligible(Participant p2) {
         return canStartCombat(p2);
     }
+
+    public void timePasses() {};
 
 }

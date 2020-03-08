@@ -68,15 +68,7 @@ public class FTCMatch extends Match {
     public void manageConditions(Participant p) {
         if (Global.getMatch() == this)
             super.manageConditions(p);
-        if (prey.equals(p)) {
-            prey.decrementGracePeriod();
-            if (p.getCharacter().has(Item.Flag) && prey.gracePeriod == 0 && (++prey.flagCounter % 3) == 0) {
-                score(p.getCharacter(), 1);
-                if (p.getCharacter().human()) {
-                    Global.gui().message("You scored one point for holding the flag.");
-                }
-            }
-        }
+        p.timePasses();
     }
 
     public static FTCMatch newMatch(Collection<Character> combatants, FTCModifier modifier) {
