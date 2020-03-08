@@ -1056,4 +1056,11 @@ public class Player extends Character {
     public Person getGrammar() {
         return new SingularSecondPerson(this);
     }
+
+    @Override
+    public void notifyCombatStart(Combat c, Character opponent) {
+        super.notifyCombatStart(c, opponent);
+        assert opponent instanceof NPC: opponent.toString();
+        gui.beginCombat(c, (NPC) opponent);
+    }
 }

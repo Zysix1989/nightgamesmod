@@ -4221,4 +4221,6 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public abstract Person getGrammar();
+
+    public void notifyCombatStart(Combat c, Character opponent) {}
 }
