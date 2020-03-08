@@ -262,7 +262,7 @@ public class Match {
     public void score(Character combatant, int amt) {
         var participant = findParticipant(combatant);
         participant.incrementScore(amt);
-        if ((combatant.human() || combatant.location().humanPresent())) {
+        if ((combatant.human() || participant.getLocation().humanPresent())) {
             Global.gui().message(scoreString(combatant, participant.getScore()));
         }
     }
@@ -487,10 +487,10 @@ public class Match {
     public final void quit() {
         var human = findParticipant(Global.getPlayer());
         if (human.state == State.combat) {
-            if (human.getCharacter().location().fight.getCombat() != null) {
-                human.getCharacter().location().fight.getCombat().forfeit(human.getCharacter());
+            if (human.getLocation().fight.getCombat() != null) {
+                human.getLocation().fight.getCombat().forfeit(human.getCharacter());
             }
-            human.getCharacter().location().endEncounter();
+            human.getLocation().endEncounter();
         }
         human.travel(new Area("Retirement", new DescriptionModule.ErrorDescriptionModule(), AreaIdentity.retire));
         human.state = State.quit;

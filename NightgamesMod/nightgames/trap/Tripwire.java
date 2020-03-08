@@ -62,7 +62,7 @@ public class Tripwire extends Trap {
         @Override
         public Optional<Position> capitalize(Participant attacker, Participant victim) {
             victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 1)));
-            victim.getCharacter().location().clearTrap();
+            victim.getLocation().clearTrap();
             return Optional.of(new StandingOver(attacker.getCharacter(), victim.getCharacter()));
         }
     }

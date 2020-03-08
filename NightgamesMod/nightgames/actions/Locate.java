@@ -58,7 +58,7 @@ public class Locate extends Action {
 
         private void chooseTarget(Participant target) {
             var gui = Global.gui();
-            var area = Optional.ofNullable(target.getCharacter().location());
+            var area = Optional.ofNullable(target.getLocation());
             area.ifPresent(a -> target.getCharacter().addNonCombat(new Status(new Detected(target.getCharacter(), 10))));
             gui.clearText();
             var model = JtwigModel.newModel()

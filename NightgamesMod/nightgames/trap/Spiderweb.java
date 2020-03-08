@@ -94,8 +94,8 @@ public class Spiderweb extends Trap {
         Global.getMatch().score(attacker.getCharacter(),  1);
         attacker.state = State.ready;
         victim.state = State.ready;
-        victim.getCharacter().location().endEncounter();
-        victim.getCharacter().location().clearTrap();
+        victim.getLocation().endEncounter();
+        victim.getLocation().clearTrap();
     }
     
     private static void printSpiderwebLines(Character attacker, Character victim) {

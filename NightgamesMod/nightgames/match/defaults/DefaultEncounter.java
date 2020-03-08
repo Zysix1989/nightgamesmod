@@ -492,7 +492,7 @@ public class DefaultEncounter {
         }
 
         var startingPosition = trap.capitalize(opportunist, target);
-        fight = new Combat(opportunist.getCharacter(), target.getCharacter(), opportunist.getCharacter().location());
+        fight = new Combat(opportunist.getCharacter(), target.getCharacter(), opportunist.getLocation());
         startingPosition.ifPresent(sp -> fight.setStanceRaw(sp));
 
         if (fight.getP1Character().human() || fight.getP2Character().human()) {

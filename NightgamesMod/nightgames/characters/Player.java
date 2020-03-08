@@ -577,12 +577,12 @@ public class Player extends Character {
 
     @Override
     public void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {
-        if (target.getCharacter().location().name.equals("Showers")) {
+        if (target.getLocation().name.equals("Showers")) {
             gui.message("You hear running water coming from the first floor showers. There shouldn't be any residents on this floor right now, so it's likely one "
                             + "of your opponents. You peek inside and sure enough, <b>" + target.getCharacter().subject()
                             + "</b> is taking a shower and looking quite vulnerable. Do you take advantage "
                             + "of her carelessness?");
-        } else if (target.getCharacter().location().name.equals("Pool")) {
+        } else if (target.getLocation().name.equals("Pool")) {
             gui.message("You stumble upon <b>" + target.getCharacter().nameDirectObject()
                             + "</b> skinny dipping in the pool. She hasn't noticed you yet. It would be pretty easy to catch her off-guard.");
         }
