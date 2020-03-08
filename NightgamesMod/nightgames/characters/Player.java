@@ -321,13 +321,21 @@ public class Player extends Character {
     public void spy(Participant opponent, DefaultEncounter enc) {
         gui.message("You spot <b>" + opponent.getCharacter().nameDirectObject()
                         + "</b> but she hasn't seen you yet. You could probably catch her off guard, or you could remain hidden and hope she doesn't notice you.");
-        presentFightFlightChoice(opponent, encounterOption(() -> {
-            enc.fightOrFlight(this, true, Optional.empty());
-            Global.getMatch().resume();
-        }), encounterOption(() -> {
-            enc.fightOrFlight(this, false, Optional.empty());
-            Global.getMatch().resume();
-        }));
+        assessOpponent(opponent);
+        gui.message("<br/>");
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
+        options.add(new CommandPanelOption("Ambush",
+                encounterOption(() -> {
+                    enc.ambush(this, opponent.getCharacter());
+                    Global.getMatch().resume();
+                })));
+        options.add(new CommandPanelOption("Wait",
+                encounterOption(() -> {
+                    location().endEncounter();
+                    Global.getMatch().resume();
+                })));
+        gui.presentOptions(options);
+        Global.getMatch().pause();
     }
 
     private void presentMoveOptions(List<CommandPanelOption> optionChoices,
