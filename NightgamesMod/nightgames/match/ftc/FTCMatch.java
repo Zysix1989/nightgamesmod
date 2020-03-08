@@ -20,12 +20,12 @@ import java.util.stream.Stream;
 
 public class FTCMatch extends Match {
     private Map<Participant, Area> bases;
-    private Participant prey;
+    private Prey prey;
     private int gracePeriod;
     private boolean flagInCenter;
     private int flagCounter;
 
-    protected FTCMatch(Set<Participant> hunters, Map<String, Area> map, Map<Participant, Area> bases, Participant prey,
+    protected FTCMatch(Set<Participant> hunters, Map<String, Area> map, Map<Participant, Area> bases, Prey prey,
                        FTCModifier modifier) {
         super(Stream.concat(hunters.stream(), Set.of(prey).stream()).collect(Collectors.toSet()),
                 map,
@@ -92,7 +92,7 @@ public class FTCMatch extends Match {
                 .map(Participant::new)
                 .collect(Collectors.toList());
         Collections.shuffle(hunters);
-        var preyParticipant = new Participant(modifier.getPrey());
+        var preyParticipant = new Prey(modifier.getPrey());
         Participant north = hunters.get(0);
         Participant west = hunters.get(1);
         Participant south = hunters.get(2);
