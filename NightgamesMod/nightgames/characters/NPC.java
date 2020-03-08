@@ -435,8 +435,8 @@ public class NPC extends Character {
     }
 
     @Override
-    public void faceOff(Character opponent, DefaultEncounter enc) {
-        if (ai.fightFlight(opponent)) {
+    public void faceOff(Participant opponent, DefaultEncounter enc) {
+        if (ai.fightFlight(opponent.getCharacter())) {
             enc.fightOrFlight(this, true, Optional.empty());
         } else if (has(Item.SmokeBomb)) {
             enc.fightOrFlight(this, false, Optional.of(enc.smokeMessage(this)));
@@ -447,9 +447,9 @@ public class NPC extends Character {
     }
 
     @Override
-    public void spy(Character opponent, DefaultEncounter enc) {
-        if (ai.attack(opponent)) {
-            enc.ambush(this, opponent);
+    public void spy(Participant opponent, DefaultEncounter enc) {
+        if (ai.attack(opponent.getCharacter())) {
+            enc.ambush(this, opponent.getCharacter());
         } else {
             location.get().endEncounter();
         }
@@ -465,10 +465,10 @@ public class NPC extends Character {
     }
 
     @Override
-    public void showerScene(Character target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {
+    public void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {
         if (this.has(Item.Aphrodisiac)) {
             ambushContinuation.run();
-        } else if (!target.mostlyNude() && Global.random(3) >= 2) {
+        } else if (!target.getCharacter().mostlyNude() && Global.random(3) >= 2) {
             stealContinuation.run();
         } else {
             ambushContinuation.run();
@@ -487,8 +487,8 @@ public class NPC extends Character {
     }
 
     @Override
-    public void promptTrap(Character target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {
-        if (ai.attack(target)) {
+    public void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {
+        if (ai.attack(target.getCharacter())) {
             attackContinuation.run();
         } else {
             location.get().endEncounter();

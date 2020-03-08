@@ -101,7 +101,7 @@ public class DefaultEncounter {
 
     private void showerScene(Participant attacker, Participant victim) {
         attacker.getCharacter().showerScene(
-                victim.getCharacter(),
+                victim,
                 () -> showerAmbush(attacker.getCharacter(), victim.getCharacter()),
                 () -> steal(attacker.getCharacter(), victim.getCharacter()),
                 () -> aphrodisiactrick(attacker.getCharacter(), victim.getCharacter()),
@@ -122,10 +122,10 @@ public class DefaultEncounter {
             spider(p1, p2);
             return;
         } else if (p1.getCharacter().state == State.crafting || p1.getCharacter().state == State.searching) {
-            p2.getCharacter().spy(p1.getCharacter(), this);
+            p2.getCharacter().spy(p1, this);
             return;
         } else if (p2.getCharacter().state == State.crafting || p2.getCharacter().state == State.searching) {
-            p1.getCharacter().spy(p2.getCharacter(), this);
+            p1.getCharacter().spy(p2, this);
             return;
         } else if (p1.getCharacter().state == State.masturbating) {
             caught(p2.getCharacter(), p1.getCharacter());
@@ -141,12 +141,12 @@ public class DefaultEncounter {
         boolean p1_sees_p2 = spotCheck(p1, p2);
         
         if (p2_sees_p1 && p1_sees_p2) {
-            p1.getCharacter().faceOff(p2.getCharacter(), this);
-            p2.getCharacter().faceOff(p1.getCharacter(), this);
+            p1.getCharacter().faceOff(p2, this);
+            p2.getCharacter().faceOff(p1, this);
         } else if (p2_sees_p1) {
-            p2.getCharacter().spy(p1.getCharacter(), this);
+            p2.getCharacter().spy(p1, this);
         } else if (p1_sees_p2) {
-            p1.getCharacter().spy(p2.getCharacter(),  this);
+            p1.getCharacter().spy(p2,  this);
         } else {
             // Ships passing in the night :(
             location.endEncounter();

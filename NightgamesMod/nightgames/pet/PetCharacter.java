@@ -289,7 +289,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void showerScene(Character target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {}
+    public void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {}
     @Override
     public void afterParty() {}
     
@@ -297,7 +297,7 @@ public class PetCharacter extends Character {
     public void emote(Emotion emo, int amt) {}
 
     @Override
-    public void promptTrap(Character target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {}
+    public void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {}
 
     @Override
     public void counterattack(Character target, Tactics type, Combat c) {}
@@ -324,13 +324,13 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void faceOff(Character opponent, DefaultEncounter enc) {
+    public void faceOff(Participant opponent, DefaultEncounter enc) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public void spy(Character opponent, DefaultEncounter enc) {
+    public void spy(Participant opponent, DefaultEncounter enc) {
         // TODO Auto-generated method stub
     }
 

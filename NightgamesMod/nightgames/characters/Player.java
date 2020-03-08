@@ -251,7 +251,7 @@ public class Player extends Character {
         return event -> continuation.run();
     }
 
-    private void presentFightFlightChoice(Character opponent, ActionListener fightCallback, ActionListener flightCallback) {
+    private void presentFightFlightChoice(Participant opponent, ActionListener fightCallback, ActionListener flightCallback) {
         assessOpponent(opponent);
         gui.message("<br/>");
         ArrayList<CommandPanelOption> options = new ArrayList<>();
@@ -264,8 +264,8 @@ public class Player extends Character {
     }
 
     @Override
-    public void faceOff(Character opponent, DefaultEncounter enc) {
-        gui.message("You run into <b>" + opponent.nameDirectObject()
+    public void faceOff(Participant opponent, DefaultEncounter enc) {
+        gui.message("You run into <b>" + opponent.getCharacter().nameDirectObject()
                         + "</b> and you both hesitate for a moment, deciding whether to attack or retreat.");
         presentFightFlightChoice(opponent, encounterOption(() -> {
             enc.fightOrFlight(this, true, Optional.empty());
@@ -276,37 +276,37 @@ public class Player extends Character {
         }));
     }
 
-    private void assessOpponent(Character opponent) {
+    private void assessOpponent(Participant opponent) {
         String arousal;
         String stamina;
-        if (opponent.state == State.webbed) {
+        if (opponent.getCharacter().state == State.webbed) {
             gui.message("She is naked and helpless.<br/>");
             return;
         }
         if (get(Attribute.Perception) >= 6) {
-            gui.message("She is level " + opponent.getLevel());
+            gui.message("She is level " + opponent.getCharacter().getLevel());
         }
         if (get(Attribute.Perception) >= 8) {
-            gui.message("Her Power is " + opponent.get(Attribute.Power) + ", her Cunning is "
-                            + opponent.get(Attribute.Cunning) + ", and her Seduction is "
-                            + opponent.get(Attribute.Seduction));
+            gui.message("Her Power is " + opponent.getCharacter().get(Attribute.Power) + ", her Cunning is "
+                            + opponent.getCharacter().get(Attribute.Cunning) + ", and her Seduction is "
+                            + opponent.getCharacter().get(Attribute.Seduction));
         }
-        if (opponent.mostlyNude() || opponent.state == State.shower) {
+        if (opponent.getCharacter().mostlyNude() || opponent.getCharacter().state == State.shower) {
             gui.message("She is completely naked.");
         } else {
             gui.message("She is dressed and ready to fight.");
         }
         if (get(Attribute.Perception) >= 4) {
-            if (opponent.getArousal()
+            if (opponent.getCharacter().getArousal()
                         .percent() > 70) {
                 arousal = "horny";
-            } else if (opponent.getArousal()
+            } else if (opponent.getCharacter().getArousal()
                                .percent() > 30) {
                 arousal = "slightly aroused";
             } else {
                 arousal = "composed";
             }
-            if (opponent.getStamina()
+            if (opponent.getCharacter().getStamina()
                         .percent() < 50) {
                 stamina = "tired";
             } else {
@@ -317,8 +317,8 @@ public class Player extends Character {
     }
 
     @Override
-    public void spy(Character opponent, DefaultEncounter enc) {
-        gui.message("You spot <b>" + opponent.nameDirectObject()
+    public void spy(Participant opponent, DefaultEncounter enc) {
+        gui.message("You spot <b>" + opponent.getCharacter().nameDirectObject()
                         + "</b> but she hasn't seen you yet. You could probably catch her off guard, or you could remain hidden and hope she doesn't notice you.");
         presentFightFlightChoice(opponent, encounterOption(() -> {
             enc.fightOrFlight(this, true, Optional.empty());
@@ -575,14 +575,14 @@ public class Player extends Character {
     }
 
     @Override
-    public void showerScene(Character target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {
-        if (target.location().name.equals("Showers")) {
+    public void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {
+        if (target.getCharacter().location().name.equals("Showers")) {
             gui.message("You hear running water coming from the first floor showers. There shouldn't be any residents on this floor right now, so it's likely one "
-                            + "of your opponents. You peek inside and sure enough, <b>" + target.subject()
+                            + "of your opponents. You peek inside and sure enough, <b>" + target.getCharacter().subject()
                             + "</b> is taking a shower and looking quite vulnerable. Do you take advantage "
                             + "of her carelessness?");
-        } else if (target.location().name.equals("Pool")) {
-            gui.message("You stumble upon <b>" + target.nameDirectObject()
+        } else if (target.getCharacter().location().name.equals("Pool")) {
+            gui.message("You stumble upon <b>" + target.getCharacter().nameDirectObject()
                             + "</b> skinny dipping in the pool. She hasn't noticed you yet. It would be pretty easy to catch her off-guard.");
         }
         assessOpponent(target);
@@ -594,7 +594,7 @@ public class Player extends Character {
                     ambushContinuation.run();
                     Global.getMatch().resume();
                 })));
-        if (!target.mostlyNude()) {
+        if (!target.getCharacter().mostlyNude()) {
             options.add(new CommandPanelOption("Steal Clothes",
                     encounterOption(() -> {
                         stealContinuation.run();
@@ -684,13 +684,13 @@ public class Player extends Character {
     }
 
     @Override
-    public void promptTrap(Character target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {
-        gui.message("Do you want to take the opportunity to ambush <b>" + target.getName() + "</b>?");
+    public void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {
+        gui.message("Do you want to take the opportunity to ambush <b>" + target.getCharacter().getName() + "</b>?");
         assessOpponent(target);
         gui.message("<br/>");
 
         ArrayList<CommandPanelOption> options = new ArrayList<>();
-        options.add(new CommandPanelOption("Attack " + target.getName(),
+        options.add(new CommandPanelOption("Attack " + target.getCharacter().getName(),
                 encounterOption(() -> {
                     attackContinuation.run();
                     Global.getMatch().resume();

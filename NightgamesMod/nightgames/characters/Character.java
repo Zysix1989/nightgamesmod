@@ -1729,9 +1729,9 @@ public Character clone() throws CloneNotSupportedException {
         return !(stunned() || distracted() || is(Stsflag.enthralled));
     }
 
-    public abstract void faceOff(Character opponent, DefaultEncounter enc);
+    public abstract void faceOff(Participant opponent, DefaultEncounter enc);
 
-    public abstract void spy(Character opponent, DefaultEncounter enc);
+    public abstract void spy(Participant opponent, DefaultEncounter enc);
 
     public abstract String describe(int per, Character observer);
 
@@ -1775,7 +1775,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract List<CommandPanelOption> intervene(DefaultEncounter fight, Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation);
 
-    public abstract void showerScene(Character target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation);
+    public abstract void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation);
 
     /**Determines if this character is controlled by a human.
      * 
@@ -2751,7 +2751,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract String challenge(Character other);
 
-    public abstract void promptTrap(Character target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation);
+    public abstract void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation);
 
     public int lvlBonus(Character opponent) {
         if (opponent.getLevel() > getLevel()) {
