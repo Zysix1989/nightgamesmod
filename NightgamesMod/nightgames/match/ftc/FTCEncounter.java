@@ -50,6 +50,7 @@ public class FTCEncounter extends DefaultEncounter {
             victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 50, "zip-tie")));
         startFight(attacker, victim);
         fight.setStance(new Pin(attacker.getCharacter(), victim.getCharacter()));
+
         var victimMessage = "As you walk down the trail, you hear a slight rustling in the"
                 + " leaf canopy above you. You look up, but all you see is a flash of ";
         if (attacker.getCharacter().mostlyNude()) {
@@ -62,6 +63,7 @@ public class FTCEncounter extends DefaultEncounter {
                 + " attacker, who now reveals {self:reflective} to be {self:name},"
                 + " whispers in your ear \"Happy to see me, {other:name}?\"";
         victim.getCharacter().message(victimMessage);
+
         var attackerMessage = "Your patience finally pays off as {other:name} approaches the"
                 + " tree you are hiding in. You wait until the perfect moment,"
                 + " when {other:pronoun} is right beneath you, before you jump"
