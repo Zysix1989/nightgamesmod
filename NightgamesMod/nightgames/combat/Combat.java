@@ -708,10 +708,6 @@ public class Combat {
                     CombatPhase.UPKEEP,
                     CombatPhase.DETERMINE_SKILL_ORDER);
 
-    private Phase determinePostCombatPhase() {
-        return new ResultsScenePhase();
-    }
-
     private boolean turn() {
         if (p1.getCharacter().human() && p2.getCharacter() instanceof NPC) {
             Global.gui().loadPortrait((NPC) p2.getCharacter());
@@ -719,7 +715,7 @@ public class Combat {
             Global.gui().loadPortrait((NPC) p1.getCharacter());
         }
         if (phase.getEnum() != CombatPhase.FINISHED_SCENE && phase.getEnum() != CombatPhase.RESULTS_SCENE && checkLosses()) {
-            phase = determinePostCombatPhase();
+            phase = new ResultsScenePhase();
             return next();
         }
         if ((p1.getCharacter().orgasmed || p2.getCharacter().orgasmed) && phase.getEnum() != CombatPhase.RESULTS_SCENE && SKIPPABLE_PHASES.contains(phase.getEnum())) {
