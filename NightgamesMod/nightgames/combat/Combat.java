@@ -113,7 +113,35 @@ public class Combat {
 
         @Override
         public boolean turn(Combat c) {
-            c.phase = c.doPetActions();
+            Set<PetCharacter> alreadyBattled = new HashSet<>();
+            if (c.otherCombatants.size() > 0) {
+                if (!Global.checkFlag("NoPetBattles")) {
+                    ArrayList<PetCharacter> pets = new ArrayList<>(c.otherCombatants);
+                    for (PetCharacter pet : pets) {
+                        if (!c.otherCombatants.contains(pet) || alreadyBattled.contains(pet)) { continue; }
+                        for (PetCharacter otherPet : pets) {
+                            if (!c.otherCombatants.contains(pet) || alreadyBattled.contains(otherPet)) { continue; }
+                            if (!pet.getSelf().owner().equals(otherPet.getSelf().owner()) && Global.random(2) == 0) {
+                                c.listen(l -> l.prePetBattle(pet, otherPet));
+                                c.petbattle(pet.getSelf(), otherPet.getSelf());
+                                alreadyBattled.add(pet);
+                                alreadyBattled.add(otherPet);
+                            }
+                        }
+                    }
+                }
+                List<PetCharacter> actingPets = new ArrayList<>(c.otherCombatants);
+                actingPets.stream().filter(pet -> !alreadyBattled.contains(pet)).forEach(pet -> {
+                    pet.act(c, c.pickTarget(pet));
+                    c.write("<br/>");
+                    if (pet.getSelf().owner().has(Trait.devoteeFervor) && Global.random(2) == 0) {
+                        c.write(pet, Global.format("{self:SUBJECT} seems to have gained a second wind from {self:possessive} religious fervor!", pet, pet.getSelf().owner()));
+                        pet.act(c, c.pickTarget(pet));
+                    }
+                });
+                c.write("<br/>");
+            }
+            c.phase = new DetermineSkillOrderPhase();
             return c.next();
         }
     }
@@ -961,39 +989,6 @@ public class Combat {
         if (c == p2.getCharacter()) {
             p2act = action;
         }
-    }
-
-    private Phase doPetActions() {
-        Set<PetCharacter> alreadyBattled = new HashSet<>();
-        if (otherCombatants.size() > 0) {
-            if (!Global.checkFlag("NoPetBattles")) {
-                ArrayList<PetCharacter> pets = new ArrayList<>(otherCombatants);
-                for (PetCharacter pet : pets) {
-                    if (!otherCombatants.contains(pet) || alreadyBattled.contains(pet)) { continue; }
-                    for (PetCharacter otherPet : pets) {
-                        if (!otherCombatants.contains(pet) || alreadyBattled.contains(otherPet)) { continue; }
-                        if (!pet.getSelf().owner().equals(otherPet.getSelf().owner()) && Global.random(2) == 0) {
-                            listen(l -> l.prePetBattle(pet, otherPet));
-                            petbattle(pet.getSelf(), otherPet.getSelf());
-                            alreadyBattled.add(pet);
-                            alreadyBattled.add(otherPet);
-                        }
-                    }
-                }
-            }
-            List<PetCharacter> actingPets = new ArrayList<>(otherCombatants);
-            actingPets.stream().filter(pet -> !alreadyBattled.contains(pet)).forEach(pet -> {
-                pet.act(this, pickTarget(pet));
-                write("<br/>");
-                if (pet.getSelf().owner().has(Trait.devoteeFervor) && Global.random(2) == 0) {
-                    write(pet, Global.format("{self:SUBJECT} seems to have gained a second wind from {self:possessive} religious fervor!", pet, pet.getSelf().owner()));
-                    pet.act(this, pickTarget(pet));
-                }
-            });
-            write("<br/>");
-            return new DetermineSkillOrderPhase();
-        }
-        return new DetermineSkillOrderPhase();
     }
 
     private Character pickTarget(PetCharacter pet) {
