@@ -323,7 +323,7 @@ public class DefaultEncounter {
             startFight(attacker, target);
             Global.gui().message(Global.format("{self:SUBJECT-ACTION:catch|catches} {other:name-do} by surprise and {self:action:attack|attacks}!", attacker.getCharacter(), target.getCharacter()));
         } else {
-            fight = new Combat(attacker, target, location);
+            startFight(attacker, target);
         }
     }
 
@@ -470,7 +470,7 @@ public class DefaultEncounter {
         }
 
         var startingPosition = trap.capitalize(opportunist, target);
-        fight = new Combat(opportunist, target, opportunist.getLocation());
+        startFight(opportunist, target);
         startingPosition.ifPresent(sp -> fight.setStanceRaw(sp));
 
         if (fight.getP1Character().human() || fight.getP2Character().human()) {

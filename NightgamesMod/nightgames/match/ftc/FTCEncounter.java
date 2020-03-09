@@ -3,7 +3,6 @@ package nightgames.match.ftc;
 import nightgames.areas.Area;
 import nightgames.characters.Attribute;
 import nightgames.characters.State;
-import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
@@ -81,7 +80,7 @@ public class FTCEncounter extends DefaultEncounter {
             Global.gui().message(Global.format(message, attacker.getCharacter(), victim.getCharacter()));
         } else {
             Global.gui().refresh();
-            fight = new Combat(attacker, victim, location);
+            startFight(attacker, victim);
             fight.setStance(new Pin(attacker.getCharacter(), victim.getCharacter()));
         }
     }
@@ -117,7 +116,7 @@ public class FTCEncounter extends DefaultEncounter {
             Global.gui().message(Global.format(message, attacker.getCharacter(), victim.getCharacter()));
         } else {
             Global.gui().refresh();
-            fight = new Combat(attacker, victim, location);
+            startFight(attacker, victim);
             fight.setStance(new Pin(attacker.getCharacter(), victim.getCharacter()));
         }
     }
