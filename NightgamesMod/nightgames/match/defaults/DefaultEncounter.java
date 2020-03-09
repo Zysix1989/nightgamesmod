@@ -473,38 +473,27 @@ public class DefaultEncounter {
         fight.go();
     }
 
-    /** Causes the attacker to be defeated, sending the given message after XP has been gained
-     * but before the rest of the defeat logic.
-     * 
-     * Note: this code seems like it might crop up elsewhere; it has already done so once
-     * in the Spiderweb class. If any more do it's worth extracting this to somewhere
-     * more general, but at the moment I'm not sure where that might be.
-     */
-    private void encounterDefeat(Character attacker, Character target, String message) {
-        attacker.gainXP(attacker.getVictoryXP(target));
-        target.gainXP(target.getDefeatXP(attacker));
-        
+    public void aphrodisiactrick(Participant attacker, Participant target) {
+        attacker.getCharacter().consume(Item.Aphrodisiac, 1);
+        String message = getAphrodisiacTrickMessage(attacker.getCharacter(), target.getCharacter());
+        attacker.getCharacter().gainXP(attacker.getCharacter().getVictoryXP(target.getCharacter()));
+        target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
+
         if (message != null) {
             Global.gui().message(message);
         }
-        
-        if (!target.mostlyNude()) {
-            attacker.gain(target.getTrophy());
-        }
-        target.nudify();
-        target.defeated(attacker);
-        target.getArousal().renew();
-        attacker.tempt(20);
-        Global.getMatch().score(attacker,  1);
-        Global.getMatch().findParticipant(attacker).state = State.ready;
-        Global.getMatch().findParticipant(target).state = State.ready;
-        location.endEncounter();
-    }
 
-    public void aphrodisiactrick(Participant attacker, Participant target) {
-        attacker.getCharacter().consume(Item.Aphrodisiac, 1);
-        encounterDefeat(attacker.getCharacter(), target.getCharacter(),
-                getAphrodisiacTrickMessage(attacker.getCharacter(), target.getCharacter()));
+        if (!target.getCharacter().mostlyNude()) {
+            attacker.getCharacter().gain(target.getCharacter().getTrophy());
+        }
+        target.getCharacter().nudify();
+        target.getCharacter().defeated(attacker.getCharacter());
+        target.getCharacter().getArousal().renew();
+        attacker.getCharacter().tempt(20);
+        Global.getMatch().score(attacker.getCharacter(),  1);
+        Global.getMatch().findParticipant(attacker.getCharacter()).state = State.ready;
+        Global.getMatch().findParticipant(target.getCharacter()).state = State.ready;
+        location.endEncounter();
     }
     
     /** Returns null if no message is to be sent */
