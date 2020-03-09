@@ -276,12 +276,6 @@ public class Match {
         return template.render(model);
     }
 
-    public void invalidateTarget(Character victor, Character loser) {
-        var victorp = findParticipant(victor);
-        var loserp = findParticipant(loser);
-        victorp.defeated(loserp);
-    }
-
     public final void round() {
         while (!time.isBefore(startTime.plusHours(3))) {
             if (!roundIterator.hasNext()) {

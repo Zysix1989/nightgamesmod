@@ -1459,7 +1459,7 @@ public class Combat {
         }
 
         if (winner.isPresent() && winner.get().getCharacter() != Global.noneCharacter()) {
-            Global.getMatch().invalidateTarget(winner.get().getCharacter(), getOpponentCharacter(winner.get().getCharacter()));
+            winner.get().getParticipant().defeated(getOpponent(winner.get().getCharacter()).getParticipant());
         } else {
             p1.getParticipant().defeated(p2.getParticipant());
             p2.getParticipant().defeated(p1.getParticipant());
