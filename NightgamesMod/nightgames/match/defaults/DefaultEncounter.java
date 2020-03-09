@@ -317,14 +317,11 @@ public class DefaultEncounter {
     }
 
     public void ambush(Participant attacker, Participant target) {
-        startFightTimer();
         target.getCharacter().addNonCombat(new nightgames.match.Status(new Flatfooted(target.getCharacter(), 3)));
         if (p1.getCharacter().human() || p2.getCharacter().human()) {
-            startFight(attacker, target);
             Global.gui().message(Global.format("{self:SUBJECT-ACTION:catch|catches} {other:name-do} by surprise and {self:action:attack|attacks}!", attacker.getCharacter(), target.getCharacter()));
-        } else {
-            startFight(attacker, target);
         }
+        startFight(attacker, target);
     }
 
     private static JtwigTemplate SHOWER_TARGET_MESSAGE = JtwigTemplate.inlineTemplate("You aren't in the shower long " +
