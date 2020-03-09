@@ -30,9 +30,9 @@ public class FTCEncounter extends DefaultEncounter {
         } else if (p2.state == State.inTree) {
             treeAmbush(p2, p1);
         } else if (p1.state == State.inBushes) {
-            bushAmbush(p1.getCharacter(), p2.getCharacter());
+            bushAmbush(p1, p2);
         } else if (p2.state == State.inBushes) {
-            bushAmbush(p2.getCharacter(), p1.getCharacter());
+            bushAmbush(p2, p1);
         } else if (p1.state == State.inPass) {
             passAmbush(p1.getCharacter(), p2.getCharacter());
         } else if (p2.state == State.inPass) {
@@ -87,18 +87,18 @@ public class FTCEncounter extends DefaultEncounter {
         }
     }
 
-    private void bushAmbush(Character attacker, Character victim) {
+    private void bushAmbush(Participant attacker, Participant victim) {
         fightTime = 2;
-        victim.addNonCombat(new Status(new Flatfooted(victim, 3)));
-        if (attacker.has(Item.Handcuffs))
-            victim.addNonCombat(new Status(new Bound(victim, 75, "handcuffs")));
+        victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 3)));
+        if (attacker.getCharacter().has(Item.Handcuffs))
+            victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 75, "handcuffs")));
         else
-            victim.addNonCombat(new Status(new Bound(victim, 50, "zip-tie")));
+            victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 50, "zip-tie")));
         if (p1.getCharacter().human() || p2.getCharacter().human()) {
-            startFight(attacker, victim);
-            fight.setStance(new Mount(attacker, victim));
+            startFight(attacker.getCharacter(), victim.getCharacter());
+            fight.setStance(new Mount(attacker.getCharacter(), victim.getCharacter()));
             String message = "";
-            if (victim.human()) {
+            if (victim.getCharacter().human()) {
                 message += "You are having a little difficulty wading through the dense"
                                 + " bushes. Your foot hits something, causing you to trip and fall flat"
                                 + " on your face. A weight settles on your back and your arms are"
@@ -115,11 +115,11 @@ public class FTCEncounter extends DefaultEncounter {
                                 + " Immediately you jump on {other:possessive} back and tie "
                                 + "{other:possessive} hands together.";
             }
-            Global.gui().message(Global.format(message, attacker, victim));
+            Global.gui().message(Global.format(message, attacker.getCharacter(), victim.getCharacter()));
         } else {
             Global.gui().refresh();
-            fight = new Combat(attacker, victim, location);
-            fight.setStance(new Pin(attacker, victim));
+            fight = new Combat(attacker.getCharacter(), victim.getCharacter(), location);
+            fight.setStance(new Pin(attacker.getCharacter(), victim.getCharacter()));
         }
     }
 
