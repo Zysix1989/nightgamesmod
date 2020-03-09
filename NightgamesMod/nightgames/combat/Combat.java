@@ -230,13 +230,13 @@ public class Combat {
         winner = Optional.of(Global.noneCharacter());
     }
 
-    private void victory(Character won) {
+    private void victory(Combatant won) {
         state = eval();
-        p1.getCharacter().evalChallenges(this, won);
-        p2.getCharacter().evalChallenges(this, won);
-        won.victory(this, state);
-        doVictory(won, getOpponentCharacter(won));
-        winner = Optional.of(won);
+        p1.getCharacter().evalChallenges(this, won.getCharacter());
+        p2.getCharacter().evalChallenges(this, won.getCharacter());
+        won.getCharacter().victory(this, state);
+        doVictory(won.getCharacter(), getOpponentCharacter(won.getCharacter()));
+        winner = Optional.of(won.getCharacter());
     }
 
     private boolean checkLosses(boolean doLosses) {
@@ -251,7 +251,7 @@ public class Combat {
         }
         if (p1.getCharacter().checkLoss(this)) {
             if (doLosses) {
-                victory(p2.getCharacter());
+                victory(p2);
             } else {
                 winner = Optional.of(p2.getCharacter());
             }
@@ -259,7 +259,7 @@ public class Combat {
         }
         if (p2.getCharacter().checkLoss(this)) {
             if (doLosses) {
-                victory(p1.getCharacter());
+                victory(p1);
             } else {
                 winner = Optional.of(p1.getCharacter());
             }
