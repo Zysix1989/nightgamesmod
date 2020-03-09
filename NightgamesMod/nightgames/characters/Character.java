@@ -1733,8 +1733,6 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract String describe(int per, Character observer);
 
-    public abstract void victory(Combat c, Result flag, Character loser);
-
     public abstract void intervene3p(Combat c, Character target, Character assist);
 
     public abstract void victory3p(Combat c, Character target, Character assist);
@@ -4224,7 +4222,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public void sendDefeatMessage(Combat c, Result flag) {}
 
-    protected static void endCombat(Combat c, Character winner, Character loser) {
+    public static void endCombat(Combat c, Character winner, Character loser) {
         winner.gainXP(winner.getDefeatXP(loser));
         loser.gainXP(loser.getVictoryXP(winner));
         loser.orgasm();

@@ -186,12 +186,6 @@ public class NPC extends Character {
     }
 
     @Override
-    public void victory(Combat c, Result flag, Character loser) {
-        endCombat(c, this, loser);
-        sendVictoryMessage(c, flag);
-   }
-
-    @Override
     public void sendVictoryMessage(Combat c, Result flag) {
         super.sendVictoryMessage(c, flag);
         c.write(ai.victory(c, flag));

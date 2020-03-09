@@ -156,15 +156,6 @@ public class Player extends Character {
     }
 
     @Override
-    public void victory(Combat c, Result flag, Character loser) {
-        if (has(Trait.slime)) {
-            purge(c);
-        }
-        endCombat(c, this, loser);
-        loser.sendDefeatMessage(c, flag);
-    }
-
-    @Override
     public boolean act(Combat c) {
         Character target = c.getOpponentCharacter(this);
         pickSkills(c, target);
