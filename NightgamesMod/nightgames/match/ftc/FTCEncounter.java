@@ -48,9 +48,9 @@ public class FTCEncounter extends DefaultEncounter {
             victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 75, "handcuffs")));
         else
             victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 50, "zip-tie")));
+        startFight(attacker, victim);
+        fight.setStance(new Pin(attacker.getCharacter(), victim.getCharacter()));
         if (p1.getCharacter().human() || p2.getCharacter().human()) {
-            startFight(attacker, victim);
-            fight.setStance(new Pin(attacker.getCharacter(), victim.getCharacter()));
             String message = "";
             if (victim.getCharacter().human()) {
                 message += "As you walk down the trail, you hear a slight rustling in the"
@@ -80,8 +80,6 @@ public class FTCEncounter extends DefaultEncounter {
             Global.gui().message(Global.format(message, attacker.getCharacter(), victim.getCharacter()));
         } else {
             Global.gui().refresh();
-            startFight(attacker, victim);
-            fight.setStance(new Pin(attacker.getCharacter(), victim.getCharacter()));
         }
     }
 
