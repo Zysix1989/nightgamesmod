@@ -284,30 +284,36 @@ public class Combat {
         this.winner = Optional.of(won.getCharacter());
     }
 
-    private boolean checkLosses(boolean doLosses) {
+    private void checkLossesDoLosses() {
+        if (cloned) {
+            return;
+        }
+        if (p1.getCharacter().checkLoss(this) && p2.getCharacter().checkLoss(this)) {
+            draw();
+            return;
+        }
+        if (p1.getCharacter().checkLoss(this)) {
+            victory(p2);
+            return;
+        }
+        if (p2.getCharacter().checkLoss(this)) {
+            victory(p1);
+        }
+    }
+
+    private boolean checkLosses() {
         if (cloned) {
             return false;
         }
         if (p1.getCharacter().checkLoss(this) && p2.getCharacter().checkLoss(this)) {
-            if (doLosses) {
-                draw();
-            }
             return true;
         }
         if (p1.getCharacter().checkLoss(this)) {
-            if (doLosses) {
-                victory(p2);
-            } else {
-                winner = Optional.of(p2.getCharacter());
-            }
+            winner = Optional.of(p2.getCharacter());
             return true;
         }
         if (p2.getCharacter().checkLoss(this)) {
-            if (doLosses) {
-                victory(p1);
-            } else {
-                winner = Optional.of(p1.getCharacter());
-            }
+            winner = Optional.of(p1.getCharacter());
             return true;
         }
         return false;
@@ -612,7 +618,7 @@ public class Combat {
         } else if (p2.getCharacter().human() && p1.getCharacter() instanceof NPC) {
             Global.gui().loadPortrait((NPC) p1.getCharacter());
         }
-        if (phase != CombatPhase.FINISHED_SCENE && phase != CombatPhase.RESULTS_SCENE && checkLosses(false)) {
+        if (phase != CombatPhase.FINISHED_SCENE && phase != CombatPhase.RESULTS_SCENE && checkLosses()) {
             phase = determinePostCombatPhase();
             return next();
         }
@@ -663,7 +669,7 @@ public class Combat {
                 phase = CombatPhase.PRETURN;
                 return next();
             case RESULTS_SCENE:
-                checkLosses(true);
+                checkLossesDoLosses();
                 phase = CombatPhase.FINISHED_SCENE;
                 return next();
             case FINISHED_SCENE:
