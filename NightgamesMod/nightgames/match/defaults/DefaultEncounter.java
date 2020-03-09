@@ -101,7 +101,7 @@ public class DefaultEncounter {
                 victim,
                 () -> showerAmbush(attacker, victim),
                 () -> steal(attacker.getCharacter(), victim.getCharacter()),
-                () -> aphrodisiactrick(attacker.getCharacter(), victim.getCharacter()),
+                () -> aphrodisiactrick(attacker, victim),
                 () -> {});
     }
 
@@ -501,9 +501,10 @@ public class DefaultEncounter {
         location.endEncounter();
     }
 
-    public void aphrodisiactrick(Character attacker, Character target) {
-        attacker.consume(Item.Aphrodisiac, 1);
-        encounterDefeat(attacker, target, getAphrodisiacTrickMessage(attacker, target));
+    public void aphrodisiactrick(Participant attacker, Participant target) {
+        attacker.getCharacter().consume(Item.Aphrodisiac, 1);
+        encounterDefeat(attacker.getCharacter(), target.getCharacter(),
+                getAphrodisiacTrickMessage(attacker.getCharacter(), target.getCharacter()));
     }
     
     /** Returns null if no message is to be sent */
