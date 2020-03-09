@@ -88,29 +88,25 @@ public class FTCEncounter extends DefaultEncounter {
         startFight(attacker, victim);
         fight.setStance(new Mount(attacker.getCharacter(), victim.getCharacter()));
 
-        if (p1.getCharacter().human() || p2.getCharacter().human()) {
-            String message = "";
-            if (victim.getCharacter().human()) {
-                message += "You are having a little difficulty wading through the dense"
-                                + " bushes. Your foot hits something, causing you to trip and fall flat"
-                                + " on your face. A weight settles on your back and your arms are"
-                                + " pulled behind your back and tied together with something. You"
-                                + " are rolled over, and {self:name} comes into view as {self:pronoun}"
-                                + " settles down on your belly. \"Hi, {other:name}. Surprise!\"";
-            } else {
-                message += "Hiding in the bushes, your vision is somewhat obscured. This is"
-                                + " not a big problem, though, as the rustling leaves alert you to"
-                                + " passing prey. You inch closer to where you suspect they are headed,"
-                                + " and slowly {other:name} comes into view. Just as {other:pronoun}"
-                                + " passes you, you stick out a leg and trip {other:direct-object}."
-                                + " With a satisfying crunch of the leaves, {other:pronoun} falls."
-                                + " Immediately you jump on {other:possessive} back and tie "
-                                + "{other:possessive} hands together.";
-            }
-            Global.gui().message(Global.format(message, attacker.getCharacter(), victim.getCharacter()));
-        } else {
-            Global.gui().refresh();
-        }
+
+        var victimMessage = "You are having a little difficulty wading through the dense"
+                + " bushes. Your foot hits something, causing you to trip and fall flat"
+                + " on your face. A weight settles on your back and your arms are"
+                + " pulled behind your back and tied together with something. You"
+                + " are rolled over, and {self:name} comes into view as {self:pronoun}"
+                + " settles down on your belly. \"Hi, {other:name}. Surprise!\"";
+        victim.getCharacter().message(Global.format(victimMessage, attacker.getCharacter(), victim.getCharacter()));
+
+
+        var attackerMessage = "Hiding in the bushes, your vision is somewhat obscured. This is"
+                + " not a big problem, though, as the rustling leaves alert you to"
+                + " passing prey. You inch closer to where you suspect they are headed,"
+                + " and slowly {other:name} comes into view. Just as {other:pronoun}"
+                + " passes you, you stick out a leg and trip {other:direct-object}."
+                + " With a satisfying crunch of the leaves, {other:pronoun} falls."
+                + " Immediately you jump on {other:possessive} back and tie "
+                + "{other:possessive} hands together.";
+        attacker.getCharacter().message(Global.format(attackerMessage, attacker.getCharacter(), victim.getCharacter()));
     }
 
     private void passAmbush(Participant attacker, Participant victim) {
