@@ -1648,12 +1648,8 @@ public class Combat {
     public void listen(Consumer<CombatListener> cons) {
         listeners.forEach(cons);
     }
-    
-    public void addListener(CombatListener listener) {
-        listeners.add(listener);
-    }
-    
-    
+
+
     /**Collects any substances gained in this victory into an empty bottle.
      * 
      * TODO: Mark this for combat rebuild - this goes to one of the final phases on combat end. 
