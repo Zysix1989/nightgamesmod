@@ -1236,7 +1236,15 @@ public class Combat {
             Global.gui().watchCombat(this);
             resumeNoClearFlag();
         }
-        matchEndListener.postEnd(Optional.of(assistCharacter));
+        Optional<Character> winner1 = Optional.of(assistCharacter);
+        if (winner1.isPresent() && winner1.get() != Global.noneCharacter()) {
+            Global.getMatch().invalidateTarget(winner1.get(), matchEndListener.c.getOpponentCharacter(winner1.get()));
+            //match.score(winner.get(), 1, Optional.of(" for defeating " + c.getOpponent(winner.get()).getName()));
+
+        } else {
+            Global.getMatch().invalidateTarget(matchEndListener.c.getP1Character(), matchEndListener.c.getP2Character());
+            Global.getMatch().invalidateTarget(matchEndListener.c.getP2Character(), matchEndListener.c.getP2Character());
+        }
     }
 
     /**
@@ -1287,7 +1295,15 @@ public class Combat {
         if (doExtendedLog()) {
             log.logEnd(winner);
         }
-        matchEndListener.postEnd(winner);
+
+        if (winner.isPresent() && winner.get() != Global.noneCharacter()) {
+            Global.getMatch().invalidateTarget(winner.get(), matchEndListener.c.getOpponentCharacter(winner.get()));
+            //match.score(winner.get(), 1, Optional.of(" for defeating " + c.getOpponent(winner.get()).getName()));
+
+        } else {
+            Global.getMatch().invalidateTarget(matchEndListener.c.getP1Character(), matchEndListener.c.getP2Character());
+            Global.getMatch().invalidateTarget(matchEndListener.c.getP2Character(), matchEndListener.c.getP2Character());
+        }
         if (!ding && beingObserved) {
             Global.gui().endCombat();
         }

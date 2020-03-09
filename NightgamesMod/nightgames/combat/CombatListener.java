@@ -1,7 +1,5 @@
 package nightgames.combat;
 
-import java.util.Optional;
-import nightgames.characters.Character;
 import nightgames.pet.PetCharacter;
 
 public abstract class CombatListener {
@@ -15,9 +13,4 @@ public abstract class CombatListener {
     public void prePetBattle(PetCharacter a, PetCharacter b) {
         
     }
-
-    public void postEnd(Optional<Character> winner) {
-        
-    }
-    
 }
