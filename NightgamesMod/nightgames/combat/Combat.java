@@ -284,7 +284,7 @@ public class Combat {
         this.winner = Optional.of(won.getCharacter());
     }
 
-    private void checkLossesDoLosses() {
+    private void resultsScene() {
         if (cloned) {
             return;
         }
@@ -669,7 +669,7 @@ public class Combat {
                 phase = CombatPhase.PRETURN;
                 return next();
             case RESULTS_SCENE:
-                checkLossesDoLosses();
+                resultsScene();
                 phase = CombatPhase.FINISHED_SCENE;
                 return next();
             case FINISHED_SCENE:
