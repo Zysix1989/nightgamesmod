@@ -38,7 +38,6 @@ import nightgames.match.Match;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
 import nightgames.match.ftc.FTCMatch;
-import nightgames.modifier.standard.NoRecoveryModifier;
 import nightgames.pet.PetCharacter;
 import nightgames.pet.arms.ArmManager;
 import nightgames.skills.*;
@@ -4222,17 +4221,4 @@ public Character clone() throws CloneNotSupportedException {
 
     public void sendDefeatMessage(Combat c, Result flag) {}
 
-    public static void endCombat(Combat c, Character winner, Character loser) {
-        winner.gainXP(winner.getDefeatXP(loser));
-        loser.gainXP(loser.getVictoryXP(winner));
-        loser.orgasm();
-        if (!winner.human() || !Global.getMatch().getCondition().name().equals(NoRecoveryModifier.NAME)) {
-            winner.orgasm();
-        }
-        winner.dress(c);
-        loser.undress(c);
-        loser.defeated(winner);
-        loser.gainAttraction(winner, 2);
-        winner.gainAttraction(loser, 1);
-    }
 }

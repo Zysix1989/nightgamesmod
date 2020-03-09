@@ -14,6 +14,7 @@ import nightgames.items.clothing.ClothingTrait;
 import nightgames.match.DefaultMatchEndListener;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
+import nightgames.modifier.standard.NoRecoveryModifier;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.pet.Pet;
 import nightgames.pet.PetCharacter;
@@ -234,11 +235,22 @@ public class Combat {
         state = eval();
         p1.getCharacter().evalChallenges(this, won.getCharacter());
         p2.getCharacter().evalChallenges(this, won.getCharacter());
+        var winner = won.getCharacter();
         var loser = getOpponentCharacter(won.getCharacter());
         if (won.getCharacter().has(Trait.slime)) {
             won.getCharacter().purge(this);
         }
-        Character.endCombat(this, won.getCharacter(), loser);
+        winner.gainXP(winner.getDefeatXP(loser));
+        loser.gainXP(loser.getVictoryXP(winner));
+        loser.orgasm();
+        if (!winner.human() || !Global.getMatch().getCondition().name().equals(NoRecoveryModifier.NAME)) {
+            winner.orgasm();
+        }
+        winner.dress(this);
+        loser.undress(this);
+        loser.defeated(winner);
+        loser.gainAttraction(winner, 2);
+        winner.gainAttraction(loser, 1);
 
         if (won.getCharacter().human()) {
             loser.sendDefeatMessage(this, state);
@@ -246,7 +258,7 @@ public class Combat {
             won.getCharacter().sendVictoryMessage(this, state);
         }
         doVictory(won.getCharacter(), loser);
-        winner = Optional.of(won.getCharacter());
+        this.winner = Optional.of(won.getCharacter());
     }
 
     private boolean checkLosses(boolean doLosses) {
