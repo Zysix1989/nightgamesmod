@@ -1359,7 +1359,8 @@ public class Combat {
                 winner = Optional.of(Global.noneCharacter());
             }
         }
-        end();
+        phase = new EndedPhase();
+        phase.next(this);
     }
 
     public void intervene(Participant intruder, Participant assist) {
