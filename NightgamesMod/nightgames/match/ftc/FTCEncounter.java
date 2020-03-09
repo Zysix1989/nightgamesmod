@@ -113,42 +113,46 @@ public class FTCEncounter extends DefaultEncounter {
         int attackerScore = 30 + attacker.getCharacter().get(Attribute.Speed) * 10 + attacker.getCharacter().get(Attribute.Perception) * 5
                         + Global.random(30);
         int victimScore = victim.getCharacter().get(Attribute.Speed) * 10 + victim.getCharacter().get(Attribute.Perception) * 5 + Global.random(30);
+        String attackerMessage;
+        String victimMessage;
         if (attackerScore > victimScore) {
-            var attackerMessage = "You wait in a small alcove, waiting for someone to pass you."
+            attackerMessage = "You wait in a small alcove, waiting for someone to pass you."
                     + " Eventually, you hear footsteps approaching and you get ready."
                     + " As soon as {other:name} comes into view, you jump out and push"
                     + " {other:direct-object} against the opposite wall. The impact seems to"
                     + " daze {other:direct-object}, giving you an edge in the ensuing fight.";
-            attacker.getCharacter().message(Global.format(attackerMessage, attacker.getCharacter(), victim.getCharacter()));
 
-            var victimMessage = "Of course you know that walking through a narrow pass is a"
+            victimMessage = "Of course you know that walking through a narrow pass is a"
                     + " strategic risk, but you do so anyway. Suddenly, {self:name}"
                     + " flies out of an alcove, pushing you against the wall on the"
                     + " other side. The impact knocks the wind out of you, putting you"
                     + " at a disadvantage.";
-            victim.getCharacter().message(Global.format(victimMessage, attacker.getCharacter(), victim.getCharacter()));
-            startFight(attacker, victim);
-            victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 3)));
         } else {
-            var attackerMessage = "While you are hiding behind a rock, waiting for someone to"
+            attackerMessage = "While you are hiding behind a rock, waiting for someone to"
                     + " walk around the corner up ahead, you hear a soft cruch behind"
                     + " you. You turn around, but not fast enough. {other:name} is"
                     + " already on you, and has grabbed your shoulders. You are unable"
                     + " to prevent {other:direct-object} from throwing you to the ground,"
                     + " and {other:pronoun} saunters over. \"Were you waiting for me,"
                     + " {self:name}? Well, here I am.\"";
-            attacker.getCharacter().message(Global.format(attackerMessage, attacker.getCharacter(), victim.getCharacter()));
 
-            var victimMessage = "You are walking through the pass when you see {self:name}"
+            victimMessage = "You are walking through the pass when you see {self:name}"
                     + " crouched behind a rock. Since {self:pronoun} is very focused"
                     + " in looking the other way, {self:pronoun} does not see you coming."
                     + " Not one to look a gift horse in the mouth, you sneak up behind"
                     + " {self:direct-object} and grab {self:direct-object} in a bear hug."
                     + " Then, you throw {self:direct-object} to the side, causing"
                     + " {self:direct-object} to fall to the ground.";
-            victim.getCharacter().message(Global.format(victimMessage, attacker.getCharacter(), victim.getCharacter()));
 
-            startFight(attacker, victim);
+        }
+
+        attacker.getCharacter().message(Global.format(attackerMessage, attacker.getCharacter(), victim.getCharacter()));
+        victim.getCharacter().message(Global.format(victimMessage, attacker.getCharacter(), victim.getCharacter()));
+        startFight(attacker, victim);
+
+        if (attackerScore > victimScore) {
+            victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 3)));
+        } else {
             attacker.getCharacter().addNonCombat(new Status(new Flatfooted(attacker.getCharacter(), 3)));
         }
     }
