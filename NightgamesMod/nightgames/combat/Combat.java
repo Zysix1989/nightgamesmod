@@ -281,7 +281,17 @@ public class Combat {
 
         @Override
         public boolean turn(Combat c) {
-            c.resultsScene();
+            if (!c.cloned) {
+                if (c.p1.getCharacter().checkLoss(c) && c.p2.getCharacter().checkLoss(c)) {
+                    c.draw();
+                } else if (c.p1.getCharacter().checkLoss(c)) {
+                    c.victory(c.p2);
+                } else {
+                    if (c.p2.getCharacter().checkLoss(c)) {
+                        c.victory(c.p1);
+                    }
+                }
+            }
             c.phase = new FinishedScenePhase();
             return c.next();
         }
@@ -542,23 +552,6 @@ public class Combat {
             victor.gain(Item.Flag);
         }
         this.winner = Optional.of(won.getCharacter());
-    }
-
-    private void resultsScene() {
-        if (cloned) {
-            return;
-        }
-        if (p1.getCharacter().checkLoss(this) && p2.getCharacter().checkLoss(this)) {
-            draw();
-            return;
-        }
-        if (p1.getCharacter().checkLoss(this)) {
-            victory(p2);
-            return;
-        }
-        if (p2.getCharacter().checkLoss(this)) {
-            victory(p1);
-        }
     }
 
     private boolean checkLosses() {
