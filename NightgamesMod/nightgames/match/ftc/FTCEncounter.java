@@ -26,9 +26,9 @@ public class FTCEncounter extends DefaultEncounter {
         if (!(p1.canStartCombat(p2) && p2.canStartCombat(p1)))
             return super.spotCheck();
         if (p1.state == State.inTree) {
-            treeAmbush(p1.getCharacter(), p2.getCharacter());
+            treeAmbush(p1, p2);
         } else if (p2.state == State.inTree) {
-            treeAmbush(p2.getCharacter(), p1.getCharacter());
+            treeAmbush(p2, p1);
         } else if (p1.state == State.inBushes) {
             bushAmbush(p1.getCharacter(), p2.getCharacter());
         } else if (p2.state == State.inBushes) {
@@ -43,21 +43,21 @@ public class FTCEncounter extends DefaultEncounter {
         return true;
     }
 
-    private void treeAmbush(Character attacker, Character victim) {
+    private void treeAmbush(Participant attacker, Participant victim) {
         fightTime = 2;
-        victim.addNonCombat(new Status(new Flatfooted(victim, 3)));
-        if (attacker.has(Item.Handcuffs))
-            victim.addNonCombat(new Status(new Bound(victim, 75, "handcuffs")));
+        victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 3)));
+        if (attacker.getCharacter().has(Item.Handcuffs))
+            victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 75, "handcuffs")));
         else
-            victim.addNonCombat(new Status(new Bound(victim, 50, "zip-tie")));
+            victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 50, "zip-tie")));
         if (p1.getCharacter().human() || p2.getCharacter().human()) {
-            startFight(attacker, victim);
-            fight.setStance(new Pin(attacker, victim));
+            startFight(attacker.getCharacter(), victim.getCharacter());
+            fight.setStance(new Pin(attacker.getCharacter(), victim.getCharacter()));
             String message = "";
-            if (victim.human()) {
+            if (victim.getCharacter().human()) {
                 message += "As you walk down the trail, you hear a slight rustling in the"
                                 + " leaf canopy above you. You look up, but all you see is a flash of ";
-                if (attacker.mostlyNude()) {
+                if (attacker.getCharacter().mostlyNude()) {
                     message += "nude flesh";
                 } else {
                     message += "clothes";
@@ -72,18 +72,18 @@ public class FTCEncounter extends DefaultEncounter {
                                 + " when {other:pronoun} is right beneath you, before you jump"
                                 + " down. You land right on {other:possessive} shoulders, pushing"
                                 + " {other:direct-object} firmly to the soft soil. Pulling our a ";
-                if (attacker.has(Item.Handcuffs)) {
+                if (attacker.getCharacter().has(Item.Handcuffs)) {
                     message += "pair of handcuffs, ";
                 } else {
                     message += "zip-tie, ";
                 }
                 message += " you bind {other:possessive} hands together. There are worse" + " ways to start a match.";
             }
-            Global.gui().message(Global.format(message, attacker, victim));
+            Global.gui().message(Global.format(message, attacker.getCharacter(), victim.getCharacter()));
         } else {
             Global.gui().refresh();
-            fight = new Combat(attacker, victim, location);
-            fight.setStance(new Pin(attacker, victim));
+            fight = new Combat(attacker.getCharacter(), victim.getCharacter(), location);
+            fight.setStance(new Pin(attacker.getCharacter(), victim.getCharacter()));
         }
     }
 
