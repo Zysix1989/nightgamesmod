@@ -61,7 +61,7 @@ public class FTCEncounter extends DefaultEncounter {
                 + " what's going on, your hands are tied behind your back and your"
                 + " attacker, who now reveals {self:reflective} to be {self:name},"
                 + " whispers in your ear \"Happy to see me, {other:name}?\"";
-        victim.getCharacter().message(victimMessage);
+        victim.getCharacter().message(Global.format(victimMessage, attacker.getCharacter(), victim.getCharacter()));
 
         var attackerMessage = "Your patience finally pays off as {other:name} approaches the"
                 + " tree you are hiding in. You wait until the perfect moment,"
@@ -74,7 +74,7 @@ public class FTCEncounter extends DefaultEncounter {
             attackerMessage += "zip-tie, ";
         }
         attackerMessage += " you bind {other:possessive} hands together. There are worse" + " ways to start a match.";
-        attacker.getCharacter().message(attackerMessage);
+        attacker.getCharacter().message(Global.format(attackerMessage, attacker.getCharacter(), victim.getCharacter()));
     }
 
     private void bushAmbush(Participant attacker, Participant victim) {
