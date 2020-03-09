@@ -1325,9 +1325,9 @@ public class Combat {
         if (shouldAutoresolve()) {
             return true;
         }
-        if (!(wroteMessage || phase.getEnum() == CombatPhase.START) || !beingObserved
-                || (Global.checkFlag(Flag.AutoNext)
-                && FAST_COMBAT_SKIPPABLE_PHASES.contains(phase.getEnum()))) {
+        if (!(wroteMessage || phase.getEnum() == CombatPhase.START)
+                || !beingObserved
+                || (Global.checkFlag(Flag.AutoNext) && FAST_COMBAT_SKIPPABLE_PHASES.contains(phase.getEnum()))) {
             return false;
         } else {
             if (!paused) {
