@@ -365,7 +365,6 @@ public class DefaultEncounter {
                     "{{ target.subject().pronoun() }} can get away.");
 
     public void showerAmbush(Participant attacker, Participant target) {
-        startFightTimer();
         var targetModel = JtwigModel.newModel()
                 .with("attacker", attacker.getCharacter().getGrammar())
                 .with("target", target.getLocation());
