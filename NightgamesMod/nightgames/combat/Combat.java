@@ -239,6 +239,7 @@ public class Combat {
             won.getCharacter().purge(this);
         }
         Character.endCombat(this, won.getCharacter(), loser);
+
         if (won.getCharacter().human()) {
             loser.sendDefeatMessage(this, state);
         } else if (loser.human()) {
