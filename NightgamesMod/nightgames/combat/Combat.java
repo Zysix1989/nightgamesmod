@@ -56,6 +56,7 @@ public class Combat {
     private interface Phase {
         CombatPhase getEnum();
         boolean turn(Combat c);
+        boolean next(Combat c);
     }
 
     private static class StartPhase implements Phase {
@@ -68,6 +69,11 @@ public class Combat {
         public boolean turn(Combat c) {
             c.phase = new PreTurnPhase();
             return false;
+        }
+
+        @Override
+        public boolean next(Combat c) {
+            return c.next();
         }
     }
 
@@ -110,6 +116,11 @@ public class Combat {
             c.phase = new SkillSelectionPhase();
             return false;
         }
+
+        @Override
+        public boolean next(Combat c) {
+            return c.next();
+        }
     }
 
     private static class SkillSelectionPhase implements Phase {
@@ -128,6 +139,11 @@ public class Combat {
                 c.phase = new PetActionsPhase();
                 return false;
             }
+        }
+
+        @Override
+        public boolean next(Combat c) {
+            return c.next();
         }
     }
 
@@ -168,6 +184,11 @@ public class Combat {
                 c.write("<br/>");
             }
             c.phase = new DetermineSkillOrderPhase();
+            return c.phase.next(c);
+        }
+
+        @Override
+        public boolean next(Combat c) {
             return c.next();
         }
     }
@@ -189,6 +210,11 @@ public class Combat {
             c.phase = result;
             return false;
         }
+
+        @Override
+        public boolean next(Combat c) {
+            return c.next();
+        }
     }
 
     private static class P1ActFirstPhase implements Phase {
@@ -204,6 +230,11 @@ public class Combat {
             } else {
                 c.phase = new P2ActSecondPhase();
             }
+            return c.phase.next(c);
+        }
+
+        @Override
+        public boolean next(Combat c) {
             return c.next();
         }
     }
@@ -221,6 +252,11 @@ public class Combat {
             } else {
                 c.phase = new P1ActSecondPhase();
             }
+            return c.phase.next(c);
+        }
+
+        @Override
+        public boolean next(Combat c) {
             return c.next();
         }
     }
@@ -235,6 +271,11 @@ public class Combat {
         public boolean turn(Combat c) {
             c.doAction(c.p1.getCharacter(), c.p1act.getDefaultTarget(c), c.p1act);
             c.phase = new UpkeepPhase();
+            return c.phase.next(c);
+        }
+
+        @Override
+        public boolean next(Combat c) {
             return c.next();
         }
     }
@@ -249,6 +290,11 @@ public class Combat {
         public boolean turn(Combat c) {
             c.doAction(c.p2.getCharacter(), c.p2act.getDefaultTarget(c), c.p2act);
             c.phase = new UpkeepPhase();
+            return c.phase.next(c);
+        }
+
+        @Override
+        public boolean next(Combat c) {
             return c.next();
         }
     }
@@ -294,6 +340,11 @@ public class Combat {
             c.p1.getCharacter().regen(c);
             c.p2.getCharacter().regen(c);
             c.phase = new PreTurnPhase();
+            return c.phase.next(c);
+        }
+
+        @Override
+        public boolean next(Combat c) {
             return c.next();
         }
     }
@@ -316,6 +367,11 @@ public class Combat {
                 }
             }
             c.phase = new FinishedScenePhase();
+            return c.phase.next(c);
+        }
+
+        @Override
+        public boolean next(Combat c) {
             return c.next();
         }
     }
@@ -329,6 +385,11 @@ public class Combat {
         @Override
         public boolean turn(Combat c) {
             c.phase = new EndedPhase();
+            return c.phase.next(c);
+        }
+
+        @Override
+        public boolean next(Combat c) {
             return c.next();
         }
     }
@@ -341,6 +402,11 @@ public class Combat {
 
         @Override
         public boolean turn(Combat c) {
+            return next(c);
+        }
+
+        @Override
+        public boolean next(Combat c) {
             return c.next();
         }
     }
@@ -466,7 +532,7 @@ public class Combat {
         if (shouldAutoresolve()) {
             autoresolve();
         } else {
-            next();
+            phase.next(this);
         }
     }
 
@@ -828,7 +894,7 @@ public class Combat {
         }
         if (phase.getEnum() != CombatPhase.FINISHED_SCENE && phase.getEnum() != CombatPhase.RESULTS_SCENE && checkLosses()) {
             phase = new ResultsScenePhase();
-            return next();
+            return phase.next(this);
         }
         if ((p1.getCharacter().orgasmed || p2.getCharacter().orgasmed) && phase.getEnum() != CombatPhase.RESULTS_SCENE && SKIPPABLE_PHASES.contains(phase.getEnum())) {
             phase = new UpkeepPhase();
