@@ -427,13 +427,12 @@ public class DefaultEncounter {
         fight.intervene(intruder, assist);
     }
 
-    public boolean battle() {
+    public void battle() {
         fightTime--;
         if (fightTime <= 0 && !fight.isEnded()) {
             fight.go();
-            return true;
         } else {
-            return false;
+            Global.getMatch().resume();
         }
     }
 

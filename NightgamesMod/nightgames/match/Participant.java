@@ -151,9 +151,7 @@ public class Participant {
         possibleActions.addAll(Global.getMatch().getAvailableActions());
         possibleActions.removeIf(a -> !a.usable(this));
         if (state == State.combat) {
-            if (!character.location.get().fight.battle()) {
-                Global.getMatch().resume();
-            }
+            character.location.get().fight.battle();
             return;
         } else if (roundsToWait > 0) {
             roundsToWait--;
