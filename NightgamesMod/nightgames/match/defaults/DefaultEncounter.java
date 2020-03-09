@@ -153,7 +153,7 @@ public class DefaultEncounter {
         } else if (p2_sees_p1) {
             p2.getCharacter().spy(p1, () -> ambush(p2, p1));
         } else if (p1_sees_p2) {
-            p1.getCharacter().spy(p2,  () -> ambush(p1, p2) );
+            p1.getCharacter().spy(p2, () -> ambush(p1, p2));
         } else {
             // Ships passing in the night :(
             location.endEncounter();
@@ -271,14 +271,16 @@ public class DefaultEncounter {
         // Fleer wins automatically
         if (fleerGuaranteed.isPresent()) {
             fleer.getCharacter().message(fleerGuaranteed.get());
-            p2.flee(location);
+            p2.flee();
+            location.endEncounter();
             return;
         }
 
         // Roll to see who's will triumphs
         if (rollFightVsFlee(fighter.getCharacter(), fleer.getCharacter())) {
             fighter.getCharacter().message(fleer.getCharacter().getName() + " dashes away before you can move.");
-            fleer.flee(location);
+            fleer.flee();
+            location.endEncounter();
         } else {
             fighter.getCharacter().message(String.format(
                     "%s tries to run, but you stay right on %s heels and catch %s.",
@@ -306,18 +308,19 @@ public class DefaultEncounter {
         if (p1Guaranteed.isPresent()) {
             p1.getCharacter().message(p1Guaranteed.get());
             p2.getCharacter().message(p1Guaranteed.get());
-            p1.flee(location);
+            p1.flee();
         } else if (p2Guaranteed.isPresent()) {
             p1.getCharacter().message(p2Guaranteed.get());
             p2.getCharacter().message(p2Guaranteed.get());
-            p2.flee(location);
+            p2.flee();
         } else if (p1.getCharacter().get(Attribute.Speed) + Global.random(10) >= p2.getCharacter().get(Attribute.Speed) + Global.random(10)) {
             p2.getCharacter().message(p1.getCharacter().getName() + " dashes away before you can move.");
-            p1.flee(location);
+            p1.flee();
         } else {
             p1.getCharacter().message(p2.getCharacter().getName() + " dashes away before you can move.");
-            p2.flee(location);
+            p2.flee();
         }
+        location.endEncounter();
     }
 
     public void ambush(Participant attacker, Participant target) {

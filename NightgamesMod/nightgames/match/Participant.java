@@ -187,7 +187,7 @@ public class Participant {
         character.move(possibleActions, character.location.get().encounter(this), act -> act.execute(this));
     }
 
-    public void flee(Area area) {
+    public void flee() {
         var options = character.location.get().possibleActions(this);
         var destinations = options.stream()
                 .filter(action -> action instanceof Move)
@@ -196,7 +196,6 @@ public class Participant {
                 .collect(Collectors.toList());
         var destination = destinations.get(Global.random(destinations.size()));
         travel(destination, "You dash away and escape into the <b>" + destination.name + ".</b>");
-        area.endEncounter();
     }
 
     public void waitRounds(int i) {
