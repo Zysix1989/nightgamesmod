@@ -163,18 +163,26 @@ public class DefaultEncounter {
     private void ineligibleSpotCheck() {
         // We can skip a lot of flavor lines if there aren't any humans around
         if (p1.getCharacter().human() || p2.getCharacter().human()) {
-            Character human = p1.getCharacter().human() ? p1.getCharacter() : p2.getCharacter();
-            Character npc = p1.getCharacter() != human ? p1.getCharacter() : p2.getCharacter();
-            Character masturbating =
-                            p1.state == State.masturbating ? p1.getCharacter() :
-                                (p2.state == State.masturbating ? p2.getCharacter() : null);
-            
-            if (masturbating != null) {
-                if (human == masturbating) {
-                    ineligibleHumanCaughtMasturbatingBy(npc);
-                } else {
-                    ineligibleNpcCaughtMasturbating(npc);
-                }
+            if (p1.state == State.masturbating) {
+                p1.getCharacter().message(String.format(
+                        "%s catches you masturbating, but fortunately %s's not yet allowed to attack you, so %s just "
+                                + "watches you pleasure yourself with an amused grin.",
+                        p2.getCharacter().getName(), p2.getCharacter().pronoun(), p2.getCharacter().pronoun()));
+                p2.getCharacter().message(String.format(
+                        "You stumble onto %s with %s hand between %s legs, masturbating. Since you just fought you still can't touch %s, so "
+                                + "you just watch the show until %s orgasms.",
+                        p1.getCharacter().getName(), p1.getCharacter().possessiveAdjective(), p1.getCharacter().possessiveAdjective(), p1.getCharacter().objectPronoun(),
+                        p1.getCharacter().pronoun()));
+            } else if (p2.state == State.masturbating) {
+                p2.getCharacter().message(String.format(
+                        "%s catches you masturbating, but fortunately %s's not yet allowed to attack you, so %s just "
+                                + "watches you pleasure yourself with an amused grin.",
+                        p1.getCharacter().getName(), p1.getCharacter().pronoun(), p1.getCharacter().pronoun()));
+                p1.getCharacter().message(String.format(
+                        "You stumble onto %s with %s hand between %s legs, masturbating. Since you just fought you still can't touch %s, so "
+                                + "you just watch the show until %s orgasms.",
+                        p2.getCharacter().getName(), p2.getCharacter().possessiveAdjective(), p2.getCharacter().possessiveAdjective(), p2.getCharacter().objectPronoun(),
+                        p2.getCharacter().pronoun()));
             } else {
                 if (p1.canStartCombat(p2)) {
                     p1.getCharacter().message("You encounter " + p2.getCharacter().getName() + ", but you still haven't recovered from your last fight.");
@@ -191,21 +199,6 @@ public class DefaultEncounter {
             }
         }
         location.endEncounter();
-    }
-    
-    private void ineligibleHumanCaughtMasturbatingBy(Character npc) {
-        Global.gui().message(String.format(
-                        "%s catches you masturbating, but fortunately %s's not yet allowed to attack you, so %s just "
-                        + "watches you pleasure yourself with an amused grin.",
-                        npc.getName(), npc.pronoun(), npc.pronoun()));
-    }
-    
-    private void ineligibleNpcCaughtMasturbating(Character npc) {
-        Global.gui().message(String.format(
-                        "You stumble onto %s with %s hand between %s legs, masturbating. Since you just fought you still can't touch %s, so "
-                        + "you just watch the show until %s orgasms.",
-                        npc.getName(), npc.possessiveAdjective(), npc.possessiveAdjective(), npc.objectPronoun(),
-                        npc.pronoun()));
     }
 
     /**
