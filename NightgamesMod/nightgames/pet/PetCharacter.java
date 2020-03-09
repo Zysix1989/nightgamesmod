@@ -153,10 +153,10 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void victory(Combat c, Result flag) {}
+    public void victory(Combat c, Result flag, Character loser) {}
 
     @Override
-    public void defeat(Combat c, Result flag) {}
+    public void defeat(Combat c, Result flag, Character winner) {}
 
     @Override
     public void intervene3p(Combat c, Character target, Character assist) {}

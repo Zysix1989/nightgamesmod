@@ -202,15 +202,13 @@ public class NPC extends Character {
     }
 
     @Override
-    public void victory(Combat c, Result flag) {
-        Character target = c.getOpponentCharacter(this);
-        endCombat(c, this, target, ai.victory(c, flag));
+    public void victory(Combat c, Result flag, Character loser) {
+        endCombat(c, this, loser, ai.victory(c, flag));
    }
 
     @Override
-    public void defeat(Combat c, Result flag) {
-        Character target = c.getOpponentCharacter(this);
-        endCombat(c, target, this, ai.defeat(c, flag));
+    public void defeat(Combat c, Result flag, Character winner) {
+        endCombat(c, winner, this, ai.defeat(c, flag));
     }
 
     @Override

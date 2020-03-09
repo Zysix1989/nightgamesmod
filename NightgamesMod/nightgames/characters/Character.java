@@ -1732,9 +1732,9 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract String describe(int per, Character observer);
 
-    public abstract void victory(Combat c, Result flag);
+    public abstract void victory(Combat c, Result flag, Character loser);
 
-    public abstract void defeat(Combat c, Result flag);
+    public abstract void defeat(Combat c, Result flag, Character winner);
 
     public abstract void intervene3p(Combat c, Character target, Character assist);
 

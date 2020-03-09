@@ -234,7 +234,7 @@ public class Combat {
         state = eval();
         p1.getCharacter().evalChallenges(this, won.getCharacter());
         p2.getCharacter().evalChallenges(this, won.getCharacter());
-        won.getCharacter().victory(this, state);
+        won.getCharacter().victory(this, state, getOpponentCharacter(won.getCharacter()));
         doVictory(won.getCharacter(), getOpponentCharacter(won.getCharacter()));
         winner = Optional.of(won.getCharacter());
     }
