@@ -311,10 +311,8 @@ public class Combat {
                     c.draw();
                 } else if (c.p1.getCharacter().checkLoss(c)) {
                     c.victory(c.p2);
-                } else {
-                    if (c.p2.getCharacter().checkLoss(c)) {
-                        c.victory(c.p1);
-                    }
+                } else if (c.p2.getCharacter().checkLoss(c)) {
+                    c.victory(c.p1);
                 }
             }
             c.phase = new FinishedScenePhase();
@@ -999,8 +997,6 @@ public class Combat {
     }
     
     private void doStanceTick(Character self) {
-
-
         Character other = getStance().getPartner(this, self);
         Addiction add = other.getAddiction(AddictionType.DOMINANCE).orElse(null);       //FIXME: Causes trigger even though addiction has 0 magnitude.
         if (add != null && add.atLeast(Severity.MED) && !add.wasCausedBy(self)) {
