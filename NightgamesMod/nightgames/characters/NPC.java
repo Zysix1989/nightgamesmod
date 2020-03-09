@@ -297,21 +297,6 @@ public class NPC extends Character {
         return false;
     }
 
-    public static void endCombat(Combat c, Character first, Character second) {
-        first.gainXP(first.getVictoryXP(second));
-        second.gainXP(second.getVictoryXP(first));
-        first.orgasm();
-        second.orgasm();
-        second.undress(c);
-        first.undress(c);
-        second.gainTrophy(c, first);
-        first.gainTrophy(c, second);
-        second.defeated(first);
-        first.defeated(second);
-        first.gainAttraction(second, 4);
-        second.gainAttraction(first, 4);
-    }
-
     @Override
     public void sendDrawMessage(Combat c, Result flag) {
         super.sendDrawMessage(c, flag);

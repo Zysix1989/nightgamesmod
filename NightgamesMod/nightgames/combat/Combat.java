@@ -233,7 +233,20 @@ public class Combat {
         if (p2.getCharacter().has(Trait.slime)) {
             p2.getCharacter().purge(this);
         }
-        NPC.endCombat(this, p1.getCharacter(), p2.getCharacter());
+        Character first = p1.getCharacter();
+        Character second = p2.getCharacter();
+        first.gainXP(first.getVictoryXP(second));
+        second.gainXP(second.getVictoryXP(first));
+        first.orgasm();
+        second.orgasm();
+        second.undress(this);
+        first.undress(this);
+        second.gainTrophy(this, first);
+        first.gainTrophy(this, second);
+        second.defeated(first);
+        first.defeated(second);
+        first.gainAttraction(second, 4);
+        second.gainAttraction(first, 4);
         if (p1.getCharacter().human()) {
             p2.getCharacter().sendDrawMessage(this, state);
         } else if (p2.getCharacter().human()) {
