@@ -123,10 +123,10 @@ public class DefaultEncounter {
             spider(p1, p2);
             return;
         } else if (p1.state == State.crafting || p1.state == State.searching) {
-            p2.getCharacter().spy(p1, () -> ambush(p2, p1));
+            p2.getCharacter().spy(p1, () -> ambush(p2, p1), () -> location.endEncounter());
             return;
         } else if (p2.state == State.crafting || p2.state == State.searching) {
-            p1.getCharacter().spy(p2, () -> ambush(p1, p2));
+            p1.getCharacter().spy(p2, () -> ambush(p1, p2), () -> location.endEncounter());
             return;
         } else if (p1.state == State.masturbating) {
             caught(p2, p1);
@@ -151,9 +151,9 @@ public class DefaultEncounter {
                     () -> fightOrFlight(p2, false, Optional.empty()),
                     () -> fightOrFlight(p2, false, Optional.of(smokeMessage(p2.getCharacter()))));
         } else if (p2_sees_p1) {
-            p2.getCharacter().spy(p1, () -> ambush(p2, p1));
+            p2.getCharacter().spy(p1, () -> ambush(p2, p1), () -> location.endEncounter());
         } else if (p1_sees_p2) {
-            p1.getCharacter().spy(p2, () -> ambush(p1, p2));
+            p1.getCharacter().spy(p2, () -> ambush(p1, p2), () -> location.endEncounter());
         } else {
             // Ships passing in the night :(
             location.endEncounter();
@@ -206,7 +206,7 @@ public class DefaultEncounter {
      * @param fight Whether the Character wishes to fight (true) or flee (false).
      * @param guaranteed Whether the Character's option is guaranteed to work. If so, the provided
      */
-    public void fightOrFlight(Participant p, boolean fight, Optional<String> guaranteed) {
+    private void fightOrFlight(Participant p, boolean fight, Optional<String> guaranteed) {
         if (p == p1) {
             p1ff = fight;
             p1Guaranteed = guaranteed;

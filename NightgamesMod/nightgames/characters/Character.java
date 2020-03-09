@@ -1728,7 +1728,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract void faceOff(Participant opponent, Runnable fightContinuation, Runnable fleeContinuation, Runnable smokeContinuation);
 
-    public abstract void spy(Participant opponent, Runnable ambushContinuation);
+    public abstract void spy(Participant opponent, Runnable ambushContinuation, Runnable waitContinuation);
 
     public abstract String describe(int per, Character observer);
 
