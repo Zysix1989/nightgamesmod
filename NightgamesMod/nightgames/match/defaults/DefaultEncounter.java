@@ -491,8 +491,8 @@ public class DefaultEncounter {
         target.getCharacter().getArousal().renew();
         attacker.getCharacter().tempt(20);
         Global.getMatch().score(attacker.getCharacter(),  1);
-        Global.getMatch().findParticipant(attacker.getCharacter()).state = State.ready;
-        Global.getMatch().findParticipant(target.getCharacter()).state = State.ready;
+        attacker.state = State.ready;
+        target.state = State.ready;
         location.endEncounter();
     }
     
