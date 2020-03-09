@@ -94,7 +94,14 @@ public class Combat {
 
         @Override
         public boolean turn(Combat c) {
-            return c.pickSkills();
+            if (c.p1act == null) {
+                return c.p1.getCharacter().act(c);
+            } else if (c.p2act == null) {
+                return c.p2.getCharacter().act(c);
+            } else {
+                c.phase = new PetActionsPhase();
+                return false;
+            }
         }
     }
 
@@ -815,17 +822,6 @@ public class Combat {
     private void clear() {
         wroteMessage = false;
         message = "";
-    }
-
-    private boolean pickSkills() {
-        if (p1act == null) {
-            return p1.getCharacter().act(this);
-        } else if (p2act == null) {
-            return p2.getCharacter().act(this);
-        } else {
-            phase = new PetActionsPhase();
-            return false;
-        }
     }
 
     private String describe(Character player, Character other) {
