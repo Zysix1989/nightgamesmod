@@ -234,16 +234,17 @@ public class Combat {
         state = eval();
         p1.getCharacter().evalChallenges(this, won.getCharacter());
         p2.getCharacter().evalChallenges(this, won.getCharacter());
+        var loser = getOpponentCharacter(won.getCharacter());
         if (won.getCharacter().has(Trait.slime)) {
             won.getCharacter().purge(this);
         }
-        Character.endCombat(this, won.getCharacter(), getOpponentCharacter(won.getCharacter()));
+        Character.endCombat(this, won.getCharacter(), loser);
         if (won.getCharacter().human()) {
-            getOpponentCharacter(won.getCharacter()).sendDefeatMessage(this, state);
-        } else if (getOpponentCharacter(won.getCharacter()).human()) {
+            loser.sendDefeatMessage(this, state);
+        } else if (loser.human()) {
             won.getCharacter().sendVictoryMessage(this, state);
         }
-        doVictory(won.getCharacter(), getOpponentCharacter(won.getCharacter()));
+        doVictory(won.getCharacter(), loser);
         winner = Optional.of(won.getCharacter());
     }
 
