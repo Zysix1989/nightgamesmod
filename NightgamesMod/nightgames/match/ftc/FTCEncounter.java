@@ -78,7 +78,6 @@ public class FTCEncounter extends DefaultEncounter {
     }
 
     private void bushAmbush(Participant attacker, Participant victim) {
-        startFightTimer();
         victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 3)));
         if (attacker.getCharacter().has(Item.Handcuffs))
             victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 75, "handcuffs")));
