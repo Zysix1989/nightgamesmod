@@ -324,7 +324,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void faceOff(Participant opponent, DefaultEncounter enc) {
+    public void faceOff(Participant opponent, Runnable fightContinuation, Runnable fleeContinuation, Runnable smokeContinuation) {
         // TODO Auto-generated method stub
         
     }

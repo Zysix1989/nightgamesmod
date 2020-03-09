@@ -1727,7 +1727,7 @@ public Character clone() throws CloneNotSupportedException {
         return !(stunned() || distracted() || is(Stsflag.enthralled));
     }
 
-    public abstract void faceOff(Participant opponent, DefaultEncounter enc);
+    public abstract void faceOff(Participant opponent, Runnable fightContinuation, Runnable fleeContinuation, Runnable smokeContinuation);
 
     public abstract void spy(Participant opponent, Runnable ambushContinuation);
 

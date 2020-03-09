@@ -143,8 +143,14 @@ public class DefaultEncounter {
         boolean p1_sees_p2 = spotCheck(p1, p2);
         
         if (p2_sees_p1 && p1_sees_p2) {
-            p1.getCharacter().faceOff(p2, this);
-            p2.getCharacter().faceOff(p1, this);
+            p1.getCharacter().faceOff(p2,
+                    () -> fightOrFlight(p1.getCharacter(), true, Optional.empty()),
+                    () -> fightOrFlight(p1.getCharacter(), false, Optional.empty()),
+                    () -> fightOrFlight(p1.getCharacter(), false, Optional.of(smokeMessage(p1.getCharacter()))));
+            p2.getCharacter().faceOff(p1,
+                    () -> fightOrFlight(p2.getCharacter(), true, Optional.empty()),
+                    () -> fightOrFlight(p2.getCharacter(), false, Optional.empty()),
+                    () -> fightOrFlight(p2.getCharacter(), false, Optional.of(smokeMessage(p2.getCharacter()))));
         } else if (p2_sees_p1) {
             p2.getCharacter().spy(p1, () -> ambush(p2, p1));
         } else if (p1_sees_p2) {

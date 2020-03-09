@@ -265,14 +265,14 @@ public class Player extends Character {
     }
 
     @Override
-    public void faceOff(Participant opponent, DefaultEncounter enc) {
+    public void faceOff(Participant opponent, Runnable fightContinuation, Runnable fleeContinuation, Runnable smokeContinuation) {
         gui.message("You run into <b>" + opponent.getCharacter().nameDirectObject()
                         + "</b> and you both hesitate for a moment, deciding whether to attack or retreat.");
         presentFightFlightChoice(opponent, encounterOption(() -> {
-            enc.fightOrFlight(this, true, Optional.empty());
+            fightContinuation.run();
             Global.getMatch().resume();
         }), encounterOption(() -> {
-            enc.fightOrFlight(this, false, Optional.empty());
+            fleeContinuation.run();
             Global.getMatch().resume();
         }));
     }

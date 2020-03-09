@@ -435,14 +435,14 @@ public class NPC extends Character {
     }
 
     @Override
-    public void faceOff(Participant opponent, DefaultEncounter enc) {
+    public void faceOff(Participant opponent, Runnable fightContinuation, Runnable fleeContinuation, Runnable smokeContinuation) {
         if (ai.fightFlight(opponent.getCharacter())) {
-            enc.fightOrFlight(this, true, Optional.empty());
+            fightContinuation.run();
         } else if (has(Item.SmokeBomb)) {
-            enc.fightOrFlight(this, false, Optional.of(enc.smokeMessage(this)));
             remove(Item.SmokeBomb);
+            smokeContinuation.run();
         } else {
-            enc.fightOrFlight(this, false, Optional.empty());
+            fleeContinuation.run();
         }
     }
 
