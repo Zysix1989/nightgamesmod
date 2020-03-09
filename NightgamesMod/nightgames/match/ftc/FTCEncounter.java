@@ -2,7 +2,6 @@ package nightgames.match.ftc;
 
 import nightgames.areas.Area;
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -34,9 +33,9 @@ public class FTCEncounter extends DefaultEncounter {
         } else if (p2.state == State.inBushes) {
             bushAmbush(p2, p1);
         } else if (p1.state == State.inPass) {
-            passAmbush(p1.getCharacter(), p2.getCharacter());
+            passAmbush(p1, p2);
         } else if (p2.state == State.inPass) {
-            passAmbush(p2.getCharacter(), p1.getCharacter());
+            passAmbush(p2, p1);
         } else {
             return super.spotCheck();
         }
@@ -123,29 +122,29 @@ public class FTCEncounter extends DefaultEncounter {
         }
     }
 
-    private void passAmbush(Character attacker, Character victim) {
-        int attackerScore = 30 + attacker.get(Attribute.Speed) * 10 + attacker.get(Attribute.Perception) * 5
+    private void passAmbush(Participant attacker, Participant victim) {
+        int attackerScore = 30 + attacker.getCharacter().get(Attribute.Speed) * 10 + attacker.getCharacter().get(Attribute.Perception) * 5
                         + Global.random(30);
-        int victimScore = victim.get(Attribute.Speed) * 10 + victim.get(Attribute.Perception) * 5 + Global.random(30);
+        int victimScore = victim.getCharacter().get(Attribute.Speed) * 10 + victim.getCharacter().get(Attribute.Perception) * 5 + Global.random(30);
         String message = "";
         if (attackerScore > victimScore) {
-            if (attacker.human()) {
+            if (attacker.getCharacter().human()) {
                 message += "You wait in a small alcove, waiting for someone to pass you."
                                 + " Eventually, you hear footsteps approaching and you get ready."
                                 + " As soon as {other:name} comes into view, you jump out and push"
                                 + " {other:direct-object} against the opposite wall. The impact seems to"
                                 + " daze {other:direct-object}, giving you an edge in the ensuing fight.";
-            } else if (victim.human()) {
+            } else if (victim.getCharacter().human()) {
                 message += "Of course you know that walking through a narrow pass is a"
                                 + " strategic risk, but you do so anyway. Suddenly, {self:name}"
                                 + " flies out of an alcove, pushing you against the wall on the"
                                 + " other side. The impact knocks the wind out of you, putting you"
                                 + " at a disadvantage.";
             }
-            startFight(attacker, victim);
-            victim.addNonCombat(new Status(new Flatfooted(victim, 3)));
+            startFight(attacker.getCharacter(), victim.getCharacter());
+            victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 3)));
         } else {
-            if (attacker.human()) {
+            if (attacker.getCharacter().human()) {
                 message += "While you are hiding behind a rock, waiting for someone to"
                                 + " walk around the corner up ahead, you hear a soft cruch behind"
                                 + " you. You turn around, but not fast enough. {other:name} is"
@@ -153,7 +152,7 @@ public class FTCEncounter extends DefaultEncounter {
                                 + " to prevent {other:direct-object} from throwing you to the ground,"
                                 + " and {other:pronoun} saunters over. \"Were you waiting for me,"
                                 + " {self:name}? Well, here I am.\"";
-            } else if (victim.human()) {
+            } else if (victim.getCharacter().human()) {
                 message += "You are walking through the pass when you see {self:name}"
                                 + " crouched behind a rock. Since {self:pronoun} is very focused"
                                 + " in looking the other way, {self:pronoun} does not see you coming."
@@ -162,11 +161,11 @@ public class FTCEncounter extends DefaultEncounter {
                                 + " Then, you throw {self:direct-object} to the side, causing"
                                 + " {self:direct-object} to fall to the ground.";
             }
-            startFight(attacker, victim);
-            attacker.addNonCombat(new Status(new Flatfooted(attacker, 3)));
+            startFight(attacker.getCharacter(), victim.getCharacter());
+            attacker.getCharacter().addNonCombat(new Status(new Flatfooted(attacker.getCharacter(), 3)));
         }
-        if (attacker.human() || victim.human()) {
-            Global.gui().message(Global.format(message, attacker, victim));
+        if (attacker.getCharacter().human() || victim.getCharacter().human()) {
+            Global.gui().message(Global.format(message, attacker.getCharacter(), victim.getCharacter()));
         } else {
 
         }
