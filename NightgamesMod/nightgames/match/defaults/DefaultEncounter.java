@@ -155,41 +155,38 @@ public class DefaultEncounter {
             location.endEncounter();
         }
     }
-    
+
+    private static void ineligibleMasturbatingMessages(Participant masturbater, Participant voyeur) {
+        masturbater.getCharacter().message(String.format(
+                "%s catches you masturbating, but fortunately %s's not yet allowed to attack you, so %s just "
+                        + "watches you pleasure yourself with an amused grin.",
+                voyeur.getCharacter().getName(), voyeur.getCharacter().pronoun(), voyeur.getCharacter().pronoun()));
+        voyeur.getCharacter().message(String.format(
+                "You stumble onto %s with %s hand between %s legs, masturbating. Since you just fought you still can't touch %s, so "
+                        + "you just watch the show until %s orgasms.",
+                masturbater.getCharacter().getName(), masturbater.getCharacter().possessiveAdjective(), masturbater.getCharacter().possessiveAdjective(), masturbater.getCharacter().objectPronoun(),
+                masturbater.getCharacter().pronoun()));
+    }
+
+    private static void ineligibleMessages(Participant pastWinner, Participant pastLoser) {
+        pastLoser.getCharacter().message("You encounter " + pastWinner.getCharacter().getName() + ", but you still haven't recovered from your last fight.");
+        pastWinner.getCharacter().message(String.format(
+                "You find %s still naked from your last encounter, but %s's not fair game again until %s replaces %s clothes.",
+                pastLoser.getCharacter().getName(), pastLoser.getCharacter().pronoun(), pastLoser.getCharacter().pronoun(), pastLoser.getCharacter().possessiveAdjective()));
+    }
+
     private void ineligibleSpotCheck() {
         // We can skip a lot of flavor lines if there aren't any humans around
         if (p1.getCharacter().human() || p2.getCharacter().human()) {
             if (p1.state == State.masturbating) {
-                p1.getCharacter().message(String.format(
-                        "%s catches you masturbating, but fortunately %s's not yet allowed to attack you, so %s just "
-                                + "watches you pleasure yourself with an amused grin.",
-                        p2.getCharacter().getName(), p2.getCharacter().pronoun(), p2.getCharacter().pronoun()));
-                p2.getCharacter().message(String.format(
-                        "You stumble onto %s with %s hand between %s legs, masturbating. Since you just fought you still can't touch %s, so "
-                                + "you just watch the show until %s orgasms.",
-                        p1.getCharacter().getName(), p1.getCharacter().possessiveAdjective(), p1.getCharacter().possessiveAdjective(), p1.getCharacter().objectPronoun(),
-                        p1.getCharacter().pronoun()));
+                ineligibleMasturbatingMessages(p1, p2);
             } else if (p2.state == State.masturbating) {
-                p2.getCharacter().message(String.format(
-                        "%s catches you masturbating, but fortunately %s's not yet allowed to attack you, so %s just "
-                                + "watches you pleasure yourself with an amused grin.",
-                        p1.getCharacter().getName(), p1.getCharacter().pronoun(), p1.getCharacter().pronoun()));
-                p1.getCharacter().message(String.format(
-                        "You stumble onto %s with %s hand between %s legs, masturbating. Since you just fought you still can't touch %s, so "
-                                + "you just watch the show until %s orgasms.",
-                        p2.getCharacter().getName(), p2.getCharacter().possessiveAdjective(), p2.getCharacter().possessiveAdjective(), p2.getCharacter().objectPronoun(),
-                        p2.getCharacter().pronoun()));
+                ineligibleMasturbatingMessages(p2, p1);
             } else {
                 if (p1.canStartCombat(p2)) {
-                    p1.getCharacter().message("You encounter " + p2.getCharacter().getName() + ", but you still haven't recovered from your last fight.");
-                    p2.getCharacter().message(String.format(
-                            "You find %s still naked from your last encounter, but %s's not fair game again until %s replaces %s clothes.",
-                            p1.getCharacter().getName(), p1.getCharacter().pronoun(), p1.getCharacter().pronoun(), p1.getCharacter().possessiveAdjective()));
+                    ineligibleMessages(p2, p1);
                 } else {
-                    p1.getCharacter().message(String.format(
-                            "You find %s still naked from your last encounter, but %s's not fair game again until %s replaces %s clothes.",
-                            p2.getCharacter().getName(), p2.getCharacter().pronoun(), p2.getCharacter().pronoun(), p2.getCharacter().possessiveAdjective()));
-                    p2.getCharacter().message("You encounter " + p1.getCharacter().getName() + ", but you still haven't recovered from your last fight.");
+                    ineligibleMessages(p1, p2);
                 }
             }
         }
