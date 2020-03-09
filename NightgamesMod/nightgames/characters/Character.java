@@ -3508,10 +3508,6 @@ public Character clone() throws CloneNotSupportedException {
         return 0;
     }
 
-    public void startBattle(Combat combat) {
-        orgasms = 0;
-    }
-
     public void drainWillpower(Combat c, Character drainer, int i) {
         int drained = i;
         int bonus = 0;

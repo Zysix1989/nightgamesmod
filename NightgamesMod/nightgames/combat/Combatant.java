@@ -8,6 +8,7 @@ class Combatant {
 
     Combatant(Participant p) {
         participant = p;
+        participant.getCharacter().orgasms = 0;
     }
 
     private Combatant(Combatant c) {

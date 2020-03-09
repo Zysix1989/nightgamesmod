@@ -81,8 +81,6 @@ public class Combat {
         this.p1 = new Combatant(p1);
         combatantData = new HashMap<>();
         this.p2 = new Combatant(p2);
-        p1.getCharacter().startBattle(this);
-        p2.getCharacter().startBattle(this);
         location = loc;
         stance = new Neutral(p1.getCharacter(), p2.getCharacter());
         message = "";
