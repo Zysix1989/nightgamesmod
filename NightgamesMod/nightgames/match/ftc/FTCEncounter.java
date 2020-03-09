@@ -50,7 +50,7 @@ public class FTCEncounter extends DefaultEncounter {
         else
             victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 50, "zip-tie")));
         if (p1.getCharacter().human() || p2.getCharacter().human()) {
-            startFight(attacker.getCharacter(), victim.getCharacter());
+            startFight(attacker, victim);
             fight.setStance(new Pin(attacker.getCharacter(), victim.getCharacter()));
             String message = "";
             if (victim.getCharacter().human()) {
@@ -94,7 +94,7 @@ public class FTCEncounter extends DefaultEncounter {
         else
             victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 50, "zip-tie")));
         if (p1.getCharacter().human() || p2.getCharacter().human()) {
-            startFight(attacker.getCharacter(), victim.getCharacter());
+            startFight(attacker, victim);
             fight.setStance(new Mount(attacker.getCharacter(), victim.getCharacter()));
             String message = "";
             if (victim.getCharacter().human()) {
@@ -141,7 +141,7 @@ public class FTCEncounter extends DefaultEncounter {
                                 + " other side. The impact knocks the wind out of you, putting you"
                                 + " at a disadvantage.";
             }
-            startFight(attacker.getCharacter(), victim.getCharacter());
+            startFight(attacker, victim);
             victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 3)));
         } else {
             if (attacker.getCharacter().human()) {
@@ -161,7 +161,7 @@ public class FTCEncounter extends DefaultEncounter {
                                 + " Then, you throw {self:direct-object} to the side, causing"
                                 + " {self:direct-object} to fall to the ground.";
             }
-            startFight(attacker.getCharacter(), victim.getCharacter());
+            startFight(attacker, victim);
             attacker.getCharacter().addNonCombat(new Status(new Flatfooted(attacker.getCharacter(), 3)));
         }
         if (attacker.getCharacter().human() || victim.getCharacter().human()) {

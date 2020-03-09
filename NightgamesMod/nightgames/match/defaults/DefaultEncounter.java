@@ -229,7 +229,7 @@ public class DefaultEncounter {
     
     private void doFightOrFlight() {
         if (p1ff && p2ff) {
-            startFight(p1.getCharacter(), p2.getCharacter());
+            startFight(p1, p2);
         } else if (p1ff) {
             fightOrFlee(p1, p2);
         } else if (p2ff) {
@@ -239,17 +239,17 @@ public class DefaultEncounter {
         }
     }
 
-    protected void startFight(Character p1, Character p2) {
+    protected void startFight(Participant p1, Participant p2) {
         startFightTimer();
-        if (p1 instanceof Player && p2 instanceof NPC) {
-            this.fight = new Combat(p1, p2, p1.location()); // Not sure if order matters
-        } else if (p2 instanceof Player && p1 instanceof NPC) {
-            this.fight = new Combat(p2, p1, p2.location());
+        if (p1.getCharacter() instanceof Player && p2.getCharacter() instanceof NPC) {
+            this.fight = new Combat(p1.getCharacter(), p2.getCharacter(), p1.getCharacter().location()); // Not sure if order matters
+        } else if (p2.getCharacter() instanceof Player && p1.getCharacter() instanceof NPC) {
+            this.fight = new Combat(p2.getCharacter(), p1.getCharacter(), p2.getCharacter().location());
         } else {
-            this.fight = new Combat(p1, p2, location);
+            this.fight = new Combat(p1.getCharacter(), p2.getCharacter(), location);
         }
-        p1.notifyCombatStart(fight, p2);
-        p2.notifyCombatStart(fight, p1);
+        p1.getCharacter().notifyCombatStart(fight, p2.getCharacter());
+        p2.getCharacter().notifyCombatStart(fight, p1.getCharacter());
     }
     
     // One Character wishes to Fight while the other attempts to flee.
@@ -260,7 +260,7 @@ public class DefaultEncounter {
         // Fighter wins automatically
         if (fighterGuaranteed.isPresent() && fleerGuaranteed.isEmpty()) {
             fighter.getCharacter().message(fighterGuaranteed.get());
-            startFight(fighter.getCharacter(), fleer.getCharacter());
+            startFight(fighter, fleer);
             return;
         }
 
@@ -282,7 +282,7 @@ public class DefaultEncounter {
             fleer.getCharacter().message(String.format(
                     "You quickly try to escape, but %s is quicker. %s corners you and attacks.",
                     fighter.getCharacter().getName(), Global.capitalizeFirstLetter(fighter.getCharacter().pronoun())));
-            startFight(fighter.getCharacter(), fleer.getCharacter());
+            startFight(fighter, fleer);
         }
     }
     
@@ -320,7 +320,7 @@ public class DefaultEncounter {
         startFightTimer();
         target.getCharacter().addNonCombat(new nightgames.match.Status(new Flatfooted(target.getCharacter(), 3)));
         if (p1.getCharacter().human() || p2.getCharacter().human()) {
-            startFight(attacker.getCharacter(), target.getCharacter());
+            startFight(attacker, target);
             Global.gui().message(Global.format("{self:SUBJECT-ACTION:catch|catches} {other:name-do} by surprise and {self:action:attack|attacks}!", attacker.getCharacter(), target.getCharacter()));
         } else {
             fight = new Combat(attacker.getCharacter(), target.getCharacter(), location);
@@ -382,7 +382,7 @@ public class DefaultEncounter {
             attacker.getCharacter().message(POOL_ATTACKER_MESSAGE.render(attackerModel));
         }
         
-        startFight(p1.getCharacter(), p2.getCharacter());
+        startFight(p1, p2);
         p2.getCharacter().undress(fight);
         p1.getCharacter().emote(Emotion.dominant, 50);
         p2.getCharacter().emote(Emotion.nervous, 50);
