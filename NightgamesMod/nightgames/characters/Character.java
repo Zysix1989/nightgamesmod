@@ -4220,4 +4220,8 @@ public Character clone() throws CloneNotSupportedException {
     public void notifyCombatStart(Combat c, Character opponent) {}
 
     public void message(String message) { }
+
+    public void sendVictoryMessage(Combat c, Result flag) {}
+
+    public void sendDefeatMessage(Combat c, Result flag) {}
 }

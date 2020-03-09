@@ -186,7 +186,7 @@ public class NPC extends Character {
         return visible;
     }
 
-    private static void endCombat(Combat c, Character winner, Character loser, String msg) {
+    private static void endCombat(Combat c, Character winner, Character loser) {
         winner.gainXP(winner.getDefeatXP(loser));
         loser.gainXP(loser.getVictoryXP(winner));
         loser.orgasm();
@@ -196,19 +196,32 @@ public class NPC extends Character {
         winner.dress(c);
         loser.undress(c);
         loser.defeated(winner);
-        c.write(msg);
         loser.gainAttraction(winner, 2);
         winner.gainAttraction(loser, 1);
     }
 
     @Override
     public void victory(Combat c, Result flag, Character loser) {
-        endCombat(c, this, loser, ai.victory(c, flag));
+        endCombat(c, this, loser);
+        sendVictoryMessage(c, flag);
    }
 
     @Override
     public void defeat(Combat c, Result flag, Character winner) {
-        endCombat(c, winner, this, ai.defeat(c, flag));
+        endCombat(c, winner, this);
+        sendDefeatMessage(c, flag);
+    }
+
+    @Override
+    public void sendVictoryMessage(Combat c, Result flag) {
+        super.sendVictoryMessage(c, flag);
+        c.write(ai.victory(c, flag));
+    }
+
+    @Override
+    public void sendDefeatMessage(Combat c, Result flag) {
+        super.sendDefeatMessage(c, flag);
+        c.write(ai.defeat(c, flag));
     }
 
     @Override
