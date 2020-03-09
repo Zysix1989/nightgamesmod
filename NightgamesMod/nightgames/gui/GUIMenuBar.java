@@ -1,20 +1,12 @@
 package nightgames.gui;
 
-import java.awt.GridLayout;
-import java.util.Hashtable;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JSlider;
-import javax.swing.SwingConstants;
 import nightgames.debug.DebugGUIPanel;
 import nightgames.global.Flag;
 import nightgames.global.Global;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Hashtable;
 
 class GUIMenuBar {
 
@@ -374,22 +366,6 @@ class GUIMenuBar {
         //mntmCredits.setForeground(Color.WHITE);
         //mntmCredits.setBackground(GUIColors.bgGrey);
         menuBar.add(mntmCredits);
-
-        // menu bar - quit match
-
-        mntmQuitMatch = new JMenuItem("Quit Match");
-        mntmQuitMatch.setEnabled(false);
-        //mntmQuitMatch.setForeground(Color.WHITE);
-        //mntmQuitMatch.setBackground(GUIColors.bgGrey);
-        mntmQuitMatch.addActionListener(arg0 -> {
-            int result = JOptionPane.showConfirmDialog(gui,
-                "Do you want to quit for the night? Your opponents will continue to fight and gain exp.",
-                "Retire early?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
-            if (result == JOptionPane.OK_OPTION) {
-                Global.getMatch().quit();
-            }
-        });
-        menuBar.add(mntmQuitMatch);
 
         mntmCredits.addActionListener(arg0 -> {
             JPanel panel = new JPanel();
