@@ -1402,10 +1402,10 @@ public class Combat {
             resumeNoClearFlag();
         }
         if (assistCharacter != Global.noneCharacter()) {
-            Global.getMatch().invalidateTarget(assistCharacter, getOpponentCharacter(assistCharacter));
+            assist.defeated(getOpponent(assistCharacter).getParticipant());
         } else {
-            Global.getMatch().invalidateTarget(getP1Character(), getP2Character());
-            Global.getMatch().invalidateTarget(getP2Character(), getP1Character());
+            p1.getParticipant().defeated(p2.getParticipant());
+            p2.getParticipant().defeated(p1.getParticipant());
         }
     }
 
@@ -1461,8 +1461,8 @@ public class Combat {
         if (winner.isPresent() && winner.get() != Global.noneCharacter()) {
             Global.getMatch().invalidateTarget(winner.get(), getOpponentCharacter(winner.get()));
         } else {
-            Global.getMatch().invalidateTarget(getP1Character(), getP2Character());
-            Global.getMatch().invalidateTarget(getP2Character(), getP1Character());
+            p1.getParticipant().defeated(p2.getParticipant());
+            p2.getParticipant().defeated(p1.getParticipant());
         }
         if (!ding && beingObserved) {
             Global.gui().endCombat();

@@ -51,7 +51,7 @@ public class Participant {
         score += i;
     }
 
-    void defeated(Participant p) {
+    public void defeated(Participant p) {
         assert !invalidTargets.contains(p);
         invalidTargets.add(p);
         incrementScore(1);
