@@ -1354,9 +1354,9 @@ public class Combat {
             double fitness2 = p2.getCharacter().getFitness(this);
             double diff = Math.abs(fitness1 / fitness2 - 1.0);
             if (diff > NPC_DRAW_ERROR_MARGIN) {
-                winner = Optional.of(fitness1 > fitness2 ? p1.getCharacter() : p2.getCharacter());
+                victory(fitness1 > fitness2 ? p1 : p2);
             } else {
-                winner = Optional.of(Global.noneCharacter());
+                draw();
             }
         }
         phase = new EndedPhase();
