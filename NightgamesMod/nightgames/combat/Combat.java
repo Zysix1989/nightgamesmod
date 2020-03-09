@@ -216,7 +216,6 @@ public class Combat {
 
         @Override
         public boolean turn(Combat c) {
-
             if (c.doAction(c.p2.getCharacter(), c.p2act.getDefaultTarget(c), c.p2act)) {
                 c.phase = new UpkeepPhase();
             } else {
@@ -1498,10 +1497,6 @@ public class Combat {
         }
     }
 
-    public void forfeit(Character player) {
-        end();
-    }
-
     public Position getStance() {
         return stance;
     }
@@ -1850,63 +1845,6 @@ public class Combat {
             victor.consume(Item.EmptyBottle, 1, false);
             victor.gain(Item.MoltenDrippings, 1);
         }
-    }
-    
-    
-    /*COMBAT REWRITE METHODS======================================================================================================================*/
-    
-    /**WIP Proceeds to the combat scene given based on p. This allows an observer to jump into a given Combat's current phase.
-     * TODO: hook this one once combat phases are done.
-     * */
-    public void gotoPhase(CombatPhase p) {
-        if (p == CombatPhase.START) {
-            
-        } else if (p == CombatPhase.PRETURN) {
-            
-        } else if (p == CombatPhase.SKILL_SELECTION) {
-            
-        } else if (p == CombatPhase.PET_ACTIONS) {
-            
-        } else if (p == CombatPhase.DETERMINE_SKILL_ORDER) {
-            
-        } else if (p == CombatPhase.P1_ACT_FIRST) {
-            
-        } else if (p == CombatPhase.P2_ACT_FIRST) {
-            
-        } else if (p == CombatPhase.P1_ACT_SECOND) {
-            
-        } else if (p == CombatPhase.P2_ACT_SECOND) {
-            
-        } else if (p == CombatPhase.UPKEEP) {
-            
-        } else if (p == CombatPhase.RESULTS_SCENE) {
-            
-        } else if (p == CombatPhase.FINISHED_SCENE) {
-            
-        } else if (p == CombatPhase.ENDED) {   
-            
-        } else {
-            
-        }
-    }
-    
-    /**WIP - starts this combat.*/
-    public void startCombat(nightgames.characters.Character P1, nightgames.characters.Character P2){
-        
-    }
-    
-    /**WIP - Ticks this combat, triggering all necessary updates internally. */
-    public void tickCombat(){
-        
-    }
-    
-    /**WIP - Progressings this combat's phases at this level.*/
-    public void progressCombat(){
-        
-    }
-    /**WIP - ends this combat, resolving and cleaning it up.*/
-    public void endCombat(){
-        
     }
 
     public Character getP1Character() {
