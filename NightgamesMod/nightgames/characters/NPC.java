@@ -186,38 +186,31 @@ public class NPC extends Character {
         return visible;
     }
 
+    private static void endCombat(Combat c, Character winner, Character loser, String msg) {
+        winner.gainXP(winner.getDefeatXP(loser));
+        loser.gainXP(loser.getVictoryXP(winner));
+        loser.orgasm();
+        if (!winner.human() || !Global.getMatch().getCondition().name().equals(NoRecoveryModifier.NAME)) {
+            winner.orgasm();
+        }
+        winner.dress(c);
+        loser.undress(c);
+        loser.defeated(winner);
+        c.write(msg);
+        loser.gainAttraction(winner, 2);
+        winner.gainAttraction(loser, 1);
+    }
+
     @Override
     public void victory(Combat c, Result flag) {
         Character target = c.getOpponentCharacter(this);
-        gainXP(getVictoryXP(target));
-        target.gainXP(target.getDefeatXP(this));
-        target.orgasm();
-        dress(c);
-        target.undress(c);
-        gainTrophy(c, target);
-
-        target.defeated(this);
-        c.write(ai.victory(c, flag));
-        gainAttraction(target, 1);
-        target.gainAttraction(this, 2);
+        endCombat(c, this, target, ai.victory(c, flag));
    }
 
     @Override
     public void defeat(Combat c, Result flag) {
         Character target = c.getOpponentCharacter(this);
-        gainXP(getDefeatXP(target));
-        target.gainXP(target.getVictoryXP(this));
-        orgasm();
-        if (!target.human() || !Global.getMatch().getCondition().name().equals(NoRecoveryModifier.NAME)) {
-            target.orgasm();
-        }
-        target.dress(c);
-        undress(c);
-        target.gainTrophy(c, this);
-        defeated(target);
-        c.write(ai.defeat(c, flag));
-        gainAttraction(target, 2);
-        target.gainAttraction(this, 1);
+        endCombat(c, target, this, ai.defeat(c, flag));
     }
 
     @Override
