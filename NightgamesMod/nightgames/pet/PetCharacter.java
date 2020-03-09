@@ -13,7 +13,6 @@ import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Participant;
-import nightgames.match.defaults.DefaultEncounter;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
@@ -284,7 +283,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public List<CommandPanelOption> intervene(DefaultEncounter fight, Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation) {
+    public List<CommandPanelOption> intervene(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation) {
         return new ArrayList<>();
     }
 

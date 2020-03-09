@@ -17,7 +17,6 @@ import org.jtwig.JtwigTemplate;
 import java.util.Optional;
 
 public class DefaultEncounter {
-
     protected Participant p1;
     protected Participant p2;
     
@@ -141,7 +140,7 @@ public class DefaultEncounter {
         // side effects besides.
         boolean p2_sees_p1 = spotCheck(p2, p1);
         boolean p1_sees_p2 = spotCheck(p1, p2);
-        
+
         if (p2_sees_p1 && p1_sees_p2) {
             p1.getCharacter().faceOff(p2,
                     () -> fightOrFlight(p1, true, Optional.empty()),

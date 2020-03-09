@@ -22,7 +22,6 @@ import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.match.Match;
 import nightgames.match.Participant;
-import nightgames.match.defaults.DefaultEncounter;
 import nightgames.modifier.standard.NoRecoveryModifier;
 import nightgames.pet.arms.ArmManager;
 import nightgames.pet.arms.ArmType;
@@ -476,7 +475,7 @@ public class NPC extends Character {
     }
 
     @Override
-    public List<CommandPanelOption> intervene(DefaultEncounter enc, Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation) {
+    public List<CommandPanelOption> intervene(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation) {
         if (Global.random(20) + getAffection(p1) + (p1.has(Trait.sympathetic) ? 10 : 0) >= Global.random(20)
                         + getAffection(p2) + (p2.has(Trait.sympathetic) ? 10 : 0)) {
             p1Continuation.run();

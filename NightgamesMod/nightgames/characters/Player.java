@@ -30,7 +30,6 @@ import nightgames.items.clothing.Clothing;
 import nightgames.match.Match;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
-import nightgames.match.defaults.DefaultEncounter;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.skills.*;
 import nightgames.skills.damage.DamageType;
@@ -626,7 +625,7 @@ public class Player extends Character {
     }
 
     @Override
-    public List<CommandPanelOption> intervene(DefaultEncounter enc, Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation) {
+    public List<CommandPanelOption> intervene(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation) {
         gui.message("You find <b>" + p1.getName() + "</b> and <b>" + p2.getName()
                         + "</b> fighting too intensely to notice your arrival. If you intervene now, it'll essentially decide the winner.");
         gui.message("Then again, you could just wait and see which one of them comes out on top. It'd be entertaining,"

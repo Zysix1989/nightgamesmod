@@ -115,7 +115,7 @@ public class Area implements Serializable {
         List<CommandPanelOption> options = new ArrayList<>();
         // We can't run encounters if a fight is already occurring.
         if (fight != null && fight.checkIntrude(p.getCharacter())) {
-            options = p.getCharacter().intervene(fight,
+            options = p.getCharacter().intervene(
                     fight.getFirstParticipant().getCharacter(),
                     () -> fight.intrude(p, fight.getFirstParticipant()),
                     fight.getSecondParticipant().getCharacter(),
