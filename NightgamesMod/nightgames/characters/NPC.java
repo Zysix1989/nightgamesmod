@@ -22,7 +22,6 @@ import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.match.Match;
 import nightgames.match.Participant;
-import nightgames.modifier.standard.NoRecoveryModifier;
 import nightgames.pet.arms.ArmManager;
 import nightgames.pet.arms.ArmType;
 import nightgames.skills.Nothing;
@@ -186,31 +185,11 @@ public class NPC extends Character {
         return visible;
     }
 
-    private static void endCombat(Combat c, Character winner, Character loser) {
-        winner.gainXP(winner.getDefeatXP(loser));
-        loser.gainXP(loser.getVictoryXP(winner));
-        loser.orgasm();
-        if (!winner.human() || !Global.getMatch().getCondition().name().equals(NoRecoveryModifier.NAME)) {
-            winner.orgasm();
-        }
-        winner.dress(c);
-        loser.undress(c);
-        loser.defeated(winner);
-        loser.gainAttraction(winner, 2);
-        winner.gainAttraction(loser, 1);
-    }
-
     @Override
     public void victory(Combat c, Result flag, Character loser) {
         endCombat(c, this, loser);
         sendVictoryMessage(c, flag);
    }
-
-    @Override
-    public void defeat(Combat c, Result flag, Character winner) {
-        endCombat(c, winner, this);
-        sendDefeatMessage(c, flag);
-    }
 
     @Override
     public void sendVictoryMessage(Combat c, Result flag) {

@@ -160,15 +160,8 @@ public class Player extends Character {
         if (has(Trait.slime)) {
             purge(c);
         }
-        loser.defeat(c, flag, this);
-    }
-
-    @Override
-    public void defeat(Combat c, Result flag, Character winner) {
-        c.write("Bad thing");
-        if (has(Trait.slime)) {
-            purge(c);
-        }
+        endCombat(c, this, loser);
+        loser.sendDefeatMessage(c, flag);
     }
 
     @Override
