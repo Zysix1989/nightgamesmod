@@ -75,6 +75,7 @@ public class Combat {
     private boolean wroteMessage;
     private boolean cloned;
     private List<CombatListener> listeners;
+    private DefaultMatchEndListener matchEndListener;
     
     String imagePath = "";
 
@@ -100,6 +101,7 @@ public class Combat {
         if (doExtendedLog()) {
             log = new CombatLog(this);
         }
+        matchEndListener = new DefaultMatchEndListener(this);
         listeners = new ArrayList<>();
         listeners.add(new DefaultMatchEndListener(this));
     }
@@ -1234,7 +1236,7 @@ public class Combat {
             Global.gui().watchCombat(this);
             resumeNoClearFlag();
         }
-        listen(l -> l.postEnd(Optional.of(assistCharacter)));
+        matchEndListener.postEnd(Optional.of(assistCharacter));
     }
 
     /**
@@ -1285,7 +1287,7 @@ public class Combat {
         if (doExtendedLog()) {
             log.logEnd(winner);
         }
-        listen(l -> l.postEnd(winner));
+        matchEndListener.postEnd(winner);
         if (!ding && beingObserved) {
             Global.gui().endCombat();
         }
