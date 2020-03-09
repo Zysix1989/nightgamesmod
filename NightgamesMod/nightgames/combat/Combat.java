@@ -55,6 +55,7 @@ public class Combat {
 
     private interface Phase {
         CombatPhase getEnum();
+        boolean turn(Combat c);
     }
 
     private static class StartPhase implements Phase {
@@ -63,8 +64,10 @@ public class Combat {
             return CombatPhase.START;
         }
 
-        public Phase turn() {
-            return new PreTurnPhase();
+        @Override
+        public boolean turn(Combat c) {
+            c.phase = new PreTurnPhase();
+            return false;
         }
     }
 
@@ -73,12 +76,25 @@ public class Combat {
         public CombatPhase getEnum() {
             return CombatPhase.PRETURN;
         }
+
+        @Override
+        public boolean turn(Combat c) {
+            c.clear();
+            c.doPreturnUpkeep();
+            c.phase = new SkillSelectionPhase();
+            return false;
+        }
     }
 
     private static class SkillSelectionPhase implements Phase {
         @Override
         public CombatPhase getEnum() {
             return CombatPhase.SKILL_SELECTION;
+        }
+
+        @Override
+        public boolean turn(Combat c) {
+            return c.pickSkills();
         }
     }
 
@@ -87,12 +103,24 @@ public class Combat {
         public CombatPhase getEnum() {
             return CombatPhase.PET_ACTIONS;
         }
+
+        @Override
+        public boolean turn(Combat c) {
+            c.phase = c.doPetActions();
+            return c.next();
+        }
     }
 
     private static class DetermineSkillOrderPhase implements Phase {
         @Override
         public CombatPhase getEnum() {
             return CombatPhase.DETERMINE_SKILL_ORDER;
+        }
+
+        @Override
+        public boolean turn(Combat c) {
+            c.phase = c.determineSkillOrder();
+            return false;
         }
     }
 
@@ -101,12 +129,33 @@ public class Combat {
         public CombatPhase getEnum() {
             return CombatPhase.P1_ACT_FIRST;
         }
+
+        @Override
+        public boolean turn(Combat c) {
+            if (c.doAction(c.p1.getCharacter(), c.p1act.getDefaultTarget(c), c.p1act)) {
+                c.phase = new UpkeepPhase();
+            } else {
+                c.phase = new P2ActSecondPhase();
+            }
+            return c.next();
+        }
     }
 
     private static class P2ActFirstPhase implements Phase {
         @Override
         public CombatPhase getEnum() {
             return CombatPhase.P2_ACT_FIRST;
+        }
+
+        @Override
+        public boolean turn(Combat c) {
+
+            if (c.doAction(c.p2.getCharacter(), c.p2act.getDefaultTarget(c), c.p2act)) {
+                c.phase = new UpkeepPhase();
+            } else {
+                c.phase = new P1ActSecondPhase();
+            }
+            return c.next();
         }
     }
 
@@ -115,12 +164,26 @@ public class Combat {
         public CombatPhase getEnum() {
             return CombatPhase.P1_ACT_SECOND;
         }
+
+        @Override
+        public boolean turn(Combat c) {
+            c.doAction(c.p1.getCharacter(), c.p1act.getDefaultTarget(c), c.p1act);
+            c.phase = new UpkeepPhase();
+            return c.next();
+        }
     }
 
     private static class P2ActSecondPhase implements Phase {
         @Override
         public CombatPhase getEnum() {
             return CombatPhase.P2_ACT_SECOND;
+        }
+
+        @Override
+        public boolean turn(Combat c) {
+            c.doAction(c.p2.getCharacter(), c.p2act.getDefaultTarget(c), c.p2act);
+            c.phase = new UpkeepPhase();
+            return c.next();
         }
     }
 
@@ -129,12 +192,26 @@ public class Combat {
         public CombatPhase getEnum() {
             return CombatPhase.UPKEEP;
         }
+
+        @Override
+        public boolean turn(Combat c) {
+            c.doEndOfTurnUpkeep();
+            c.phase = new PreTurnPhase();
+            return c.next();
+        }
     }
 
     private static class ResultsScenePhase implements Phase {
         @Override
         public CombatPhase getEnum() {
             return CombatPhase.RESULTS_SCENE;
+        }
+
+        @Override
+        public boolean turn(Combat c) {
+            c.resultsScene();
+            c.phase = new FinishedScenePhase();
+            return c.next();
         }
     }
 
@@ -143,12 +220,23 @@ public class Combat {
         public CombatPhase getEnum() {
             return CombatPhase.FINISHED_SCENE;
         }
+
+        @Override
+        public boolean turn(Combat c) {
+            c.phase = new EndedPhase();
+            return c.next();
+        }
     }
 
     private static class EndedPhase implements Phase {
         @Override
         public CombatPhase getEnum() {
             return CombatPhase.ENDED;
+        }
+
+        @Override
+        public boolean turn(Combat c) {
+            return c.next();
         }
     }
 
@@ -721,58 +809,7 @@ public class Combat {
         if ((p1.getCharacter().orgasmed || p2.getCharacter().orgasmed) && phase.getEnum() != CombatPhase.RESULTS_SCENE && SKIPPABLE_PHASES.contains(phase.getEnum())) {
             phase = new UpkeepPhase();
         }
-        switch (phase.getEnum()) {
-            case START:
-                phase = ((StartPhase) phase).turn();
-                return false;
-            case PRETURN:
-                clear();
-                doPreturnUpkeep();
-                phase = new SkillSelectionPhase();
-                return false;
-            case SKILL_SELECTION:
-                return pickSkills();
-            case PET_ACTIONS:
-                phase = doPetActions();
-                return next();
-            case DETERMINE_SKILL_ORDER:
-                phase = determineSkillOrder();
-                return false;
-            case P1_ACT_FIRST:
-                if (doAction(p1.getCharacter(), p1act.getDefaultTarget(this), p1act)) {
-                    phase = new UpkeepPhase();
-                } else {
-                    phase = new P2ActSecondPhase();
-                }
-                return next();
-            case P1_ACT_SECOND:
-                doAction(p1.getCharacter(), p1act.getDefaultTarget(this), p1act);
-                phase = new UpkeepPhase();
-                return next();
-            case P2_ACT_FIRST:
-                if (doAction(p2.getCharacter(), p2act.getDefaultTarget(this), p2act)) {
-                    phase = new UpkeepPhase();
-                } else {
-                    phase = new P1ActSecondPhase();
-                }
-                return next();
-            case P2_ACT_SECOND:
-                doAction(p2.getCharacter(), p2act.getDefaultTarget(this), p2act);
-                phase = new UpkeepPhase();
-                return next();
-            case UPKEEP:
-                doEndOfTurnUpkeep();
-                phase = new PreTurnPhase();
-                return next();
-            case RESULTS_SCENE:
-                resultsScene();
-                phase = new FinishedScenePhase();
-                return next();
-            case FINISHED_SCENE:
-                phase = new EndedPhase();
-            default:
-                return next();
-        }
+        return phase.turn(this);
     }
 
     private void clear() {
