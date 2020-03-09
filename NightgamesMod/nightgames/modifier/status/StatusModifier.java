@@ -16,10 +16,6 @@ public class StatusModifier implements ModifierCategory<StatusModifier>, Modifie
         this.playerOnly = playerOnly;
     }
 
-    public StatusModifier(Status status) {
-        this(status, false);
-    }
-
     protected StatusModifier() {
         status = null;
         playerOnly = true;
