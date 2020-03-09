@@ -175,22 +175,19 @@ public class DefaultEncounter {
                 } else {
                     ineligibleNpcCaughtMasturbating(npc);
                 }
-
-            } else if (p1.getCharacter() == human && p1.canStartCombat(p2)) {
-
-                Global.gui().message("You encounter " + p2.getCharacter().getName() + ", but you still haven't recovered from your last fight.");
-            } else if (p1.getCharacter() == human) {
-                Global.gui().message(String.format(
-                                "You find %s still naked from your last encounter, but %s's not fair game again until %s replaces %s clothes.",
-                                p2.getCharacter().getName(), p2.getCharacter().pronoun(), p2.getCharacter().pronoun(), p2.getCharacter().possessiveAdjective()));
-
-            } else if (!p1.canStartCombat(p2)) {
-                Global.gui().message("You encounter " + p1.getCharacter().getName() + ", but you still haven't recovered from your last fight.");
             } else {
-                Global.gui().message(String.format(
-                                "You find %s still naked from your last encounter, but %s's not fair game again until %s replaces %s clothes.",
-                                p1.getCharacter().getName(), p1.getCharacter().pronoun(), p1.getCharacter().pronoun(), p1.getCharacter().possessiveAdjective()));
+                if (p1.canStartCombat(p2)) {
+                    p1.getCharacter().message("You encounter " + p2.getCharacter().getName() + ", but you still haven't recovered from your last fight.");
+                    p2.getCharacter().message(String.format(
+                            "You find %s still naked from your last encounter, but %s's not fair game again until %s replaces %s clothes.",
+                            p1.getCharacter().getName(), p1.getCharacter().pronoun(), p1.getCharacter().pronoun(), p1.getCharacter().possessiveAdjective()));
+                } else {
+                    p1.getCharacter().message(String.format(
+                            "You find %s still naked from your last encounter, but %s's not fair game again until %s replaces %s clothes.",
+                            p2.getCharacter().getName(), p2.getCharacter().pronoun(), p2.getCharacter().pronoun(), p2.getCharacter().possessiveAdjective()));
 
+                    p2.getCharacter().message("You encounter " + p1.getCharacter().getName() + ", but you still haven't recovered from your last fight.");
+                }
             }
         }
         location.endEncounter();
