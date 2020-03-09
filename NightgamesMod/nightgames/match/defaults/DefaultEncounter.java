@@ -244,7 +244,7 @@ public class DefaultEncounter {
     }
 
     protected void startFight(Participant p1, Participant p2) {
-        startFightTimer();
+        fightTime = 2;
         if (p1.getCharacter() instanceof Player && p2.getCharacter() instanceof NPC) {
             this.fight = new Combat(p1, p2, p1.getCharacter().location()); // Not sure if order matters
         } else if (p2.getCharacter() instanceof Player && p1.getCharacter() instanceof NPC) {
@@ -300,10 +300,6 @@ public class DefaultEncounter {
                         + (fleer.has(Trait.sprinter) ? -5 : 0));
     }
 
-    protected void startFightTimer() {
-        fightTime = 2;
-    }
-    
     private void bothFlee() {
         if (p1Guaranteed.isPresent()) {
             p1.getCharacter().message(p1Guaranteed.get());
