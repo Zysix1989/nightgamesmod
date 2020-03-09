@@ -49,23 +49,19 @@ public class DefaultEncounter {
                 p1.getCharacter().removelist.add(enthrall);
                 p1.getCharacter().addNonCombat(new nightgames.match.Status(new Flatfooted(p1.getCharacter(), 2)));
                 p1.getCharacter().addNonCombat(new nightgames.match.Status(new Hypersensitive(p1.getCharacter())));
-                if (p1.getCharacter().human()) {
-                    Global.gui()
-                          .message("At " + p2.getCharacter().getName() + "'s interruption, you break free from the"
-                                          + " succubus' hold on your mind. However, the shock all but"
-                                          + " short-circuits your brain; you "
-                                          + " collapse to the floor, feeling helpless and"
-                                          + " strangely oversensitive");
-                } else if (p2.getCharacter().human()) {
-                    Global.gui().message(String.format(
-                                    "%s doesn't appear to notice you at first, but when you wave your hand close to %s face %s "
-                                    + "eyes open wide and %s immediately drops to the floor. Although the display leaves you "
-                                    + "somewhat worried about %s health, %s is still in a very vulnerable position and you never "
-                                    + "were one to let an opportunity pass you by.",
-                            p1.getCharacter().getName(), p1.getCharacter().possessiveAdjective(),
-                            p1.getCharacter().possessiveAdjective(), p1.getCharacter().pronoun(),
-                            p1.getCharacter().possessiveAdjective(), p1.getCharacter().pronoun()));
-                }
+                p1.getCharacter().message("At " + p2.getCharacter().getName() + "'s interruption, you break free from the"
+                        + " succubus' hold on your mind. However, the shock all but"
+                        + " short-circuits your brain; you "
+                        + " collapse to the floor, feeling helpless and"
+                        + " strangely oversensitive");
+                p2.getCharacter().message(String.format(
+                        "%s doesn't appear to notice you at first, but when you wave your hand close to %s face %s "
+                                + "eyes open wide and %s immediately drops to the floor. Although the display leaves you "
+                                + "somewhat worried about %s health, %s is still in a very vulnerable position and you never "
+                                + "were one to let an opportunity pass you by.",
+                        p1.getCharacter().getName(), p1.getCharacter().possessiveAdjective(),
+                        p1.getCharacter().possessiveAdjective(), p1.getCharacter().pronoun(),
+                        p1.getCharacter().possessiveAdjective(), p1.getCharacter().pronoun()));
             }
         }
     }
