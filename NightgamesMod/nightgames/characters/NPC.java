@@ -315,6 +315,12 @@ public class NPC extends Character {
     @Override
     public void draw(Combat c, Result flag, Character other) {
         endCombat(c, this, other);
+        sendDrawMessage(c, flag);
+    }
+
+    @Override
+    public void sendDrawMessage(Combat c, Result flag) {
+        super.sendDrawMessage(c, flag);
         c.write(ai.draw(c, flag));
     }
 

@@ -4221,4 +4221,5 @@ public Character clone() throws CloneNotSupportedException {
 
     public void sendDefeatMessage(Combat c, Result flag) {}
 
+    public void sendDrawMessage(Combat c, Result flag) {}
 }
