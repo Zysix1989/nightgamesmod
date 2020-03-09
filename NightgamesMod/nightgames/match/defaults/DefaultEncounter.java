@@ -144,13 +144,13 @@ public class DefaultEncounter {
         
         if (p2_sees_p1 && p1_sees_p2) {
             p1.getCharacter().faceOff(p2,
-                    () -> fightOrFlight(p1.getCharacter(), true, Optional.empty()),
-                    () -> fightOrFlight(p1.getCharacter(), false, Optional.empty()),
-                    () -> fightOrFlight(p1.getCharacter(), false, Optional.of(smokeMessage(p1.getCharacter()))));
+                    () -> fightOrFlight(p1, true, Optional.empty()),
+                    () -> fightOrFlight(p1, false, Optional.empty()),
+                    () -> fightOrFlight(p1, false, Optional.of(smokeMessage(p1.getCharacter()))));
             p2.getCharacter().faceOff(p1,
-                    () -> fightOrFlight(p2.getCharacter(), true, Optional.empty()),
-                    () -> fightOrFlight(p2.getCharacter(), false, Optional.empty()),
-                    () -> fightOrFlight(p2.getCharacter(), false, Optional.of(smokeMessage(p2.getCharacter()))));
+                    () -> fightOrFlight(p2, true, Optional.empty()),
+                    () -> fightOrFlight(p2, false, Optional.empty()),
+                    () -> fightOrFlight(p2, false, Optional.of(smokeMessage(p2.getCharacter()))));
         } else if (p2_sees_p1) {
             p2.getCharacter().spy(p1, () -> ambush(p2, p1));
         } else if (p1_sees_p2) {
@@ -216,10 +216,9 @@ public class DefaultEncounter {
      * @param p The Character making the decision.
      * @param fight Whether the Character wishes to fight (true) or flee (false).
      * @param guaranteed Whether the Character's option is guaranteed to work. If so, the provided
-     * String is messaged to the Character.
      */
-    public void fightOrFlight(Character p, boolean fight, Optional<String> guaranteed) {
-        if (p == p1.getCharacter()) {
+    public void fightOrFlight(Participant p, boolean fight, Optional<String> guaranteed) {
+        if (p == p1) {
             p1ff = fight;
             p1Guaranteed = guaranteed;
             checkin++;
