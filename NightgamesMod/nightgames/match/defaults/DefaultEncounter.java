@@ -294,7 +294,7 @@ public class DefaultEncounter {
                         + (fleer.has(Trait.sprinter) ? -5 : 0));
     }
 
-    private void startFightTimer() {
+    protected void startFightTimer() {
         fightTime = 2;
     }
     

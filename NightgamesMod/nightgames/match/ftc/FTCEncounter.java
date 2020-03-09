@@ -43,7 +43,7 @@ public class FTCEncounter extends DefaultEncounter {
     }
 
     private void treeAmbush(Participant attacker, Participant victim) {
-        fightTime = 2;
+        startFightTimer();
         victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 3)));
         if (attacker.getCharacter().has(Item.Handcuffs))
             victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 75, "handcuffs")));
@@ -87,7 +87,7 @@ public class FTCEncounter extends DefaultEncounter {
     }
 
     private void bushAmbush(Participant attacker, Participant victim) {
-        fightTime = 2;
+        startFightTimer();
         victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 3)));
         if (attacker.getCharacter().has(Item.Handcuffs))
             victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 75, "handcuffs")));
