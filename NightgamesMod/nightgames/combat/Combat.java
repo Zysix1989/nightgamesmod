@@ -62,6 +62,10 @@ public class Combat {
         public CombatPhase getEnum() {
             return CombatPhase.START;
         }
+
+        public Phase turn() {
+            return new PreTurnPhase();
+        }
     }
 
     private static class PreTurnPhase implements Phase {
@@ -723,7 +727,7 @@ public class Combat {
         }
         switch (phase.getEnum()) {
             case START:
-                phase = new PreTurnPhase();
+                phase = ((StartPhase) phase).turn();
                 return false;
             case PRETURN:
                 clear();
