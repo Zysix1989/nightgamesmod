@@ -81,7 +81,32 @@ public class Combat {
         public boolean turn(Combat c) {
             c.wroteMessage = false;
             c.message = "";
-            c.doPreturnUpkeep();
+            c.timer += 1;
+            Character player;
+            Character other;
+            if (c.p1.getCharacter().human()) {
+                player = c.p1.getCharacter();
+                other = c.p2.getCharacter();
+            } else {
+                player = c.p2.getCharacter();
+                other = c.p1.getCharacter();
+            }
+            c.message = c.describe(player, other);
+            if (!c.shouldAutoresolve() && !Global.checkFlag(Flag.noimage)) {
+                Global.gui()
+                      .clearImage();
+                if (!c.imagePath.isEmpty()) {
+                    Global.gui()
+                          .displayImage(c.imagePath, c.images.get(c.imagePath));
+                }
+            }
+            c.p1.getCharacter().preturnUpkeep();
+            c.p2.getCharacter().preturnUpkeep();
+            c.p1act = null;
+            c.p2act = null;
+            if (Global.random(3) == 0 && !c.shouldAutoresolve()) {
+                c.checkForCombatComment();
+            }
             c.phase = new SkillSelectionPhase();
             return false;
         }
@@ -588,35 +613,6 @@ public class Combat {
             if (comment.isPresent()) {
                 write(commenter, "<i>\"" + Global.format(comment.get(), commenter, Global.getPlayer()) + "\"</i>");
             }
-        }
-    }
-
-    private void doPreturnUpkeep() {
-        timer += 1;
-        Character player;
-        Character other;
-        if (p1.getCharacter().human()) {
-            player = p1.getCharacter();
-            other = p2.getCharacter();
-        } else {
-            player = p2.getCharacter();
-            other = p1.getCharacter();
-        }
-        message = describe(player, other);
-        if (!shouldAutoresolve() && !Global.checkFlag(Flag.noimage)) {
-            Global.gui()
-                  .clearImage();
-            if (!imagePath.isEmpty()) {
-                Global.gui()
-                      .displayImage(imagePath, images.get(imagePath));
-            }
-        }
-        p1.getCharacter().preturnUpkeep();
-        p2.getCharacter().preturnUpkeep();
-        p1act = null;
-        p2act = null;
-        if (Global.random(3) == 0 && !shouldAutoresolve()) {
-            checkForCombatComment();
         }
     }
 
