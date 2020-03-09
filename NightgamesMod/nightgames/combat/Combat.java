@@ -407,7 +407,8 @@ public class Combat {
 
         @Override
         public boolean next(Combat c) {
-            return c.next();
+            c.end();
+            return true;
         }
     }
 
@@ -1320,28 +1321,24 @@ public class Combat {
     }
 
     private boolean next() {
-        if (phase.getEnum() != CombatPhase.ENDED) {
-            if (shouldAutoresolve()) {
-                return true;
-            }
-            if (!(wroteMessage || phase.getEnum() == CombatPhase.START) || !beingObserved
-                            || (Global.checkFlag(Flag.AutoNext)
-                            && FAST_COMBAT_SKIPPABLE_PHASES.contains(phase.getEnum()))) {
-                return false;
-            } else {
-                if (!paused) {
-                    p1.getCharacter().nextCombat(this);
-                    p2.getCharacter().nextCombat(this);
-                    // This is a horrible hack to catch the case where the player is watching or
-                    // has intervened in the combat
-                    if (!(p1.getCharacter().human() || p2.getCharacter().human()) && beingObserved) {
-                        Global.getPlayer().nextCombat(this);
-                    }
-                }
-                return true;
-            }
+        assert phase.getEnum() != CombatPhase.ENDED;
+        if (shouldAutoresolve()) {
+            return true;
+        }
+        if (!(wroteMessage || phase.getEnum() == CombatPhase.START) || !beingObserved
+                || (Global.checkFlag(Flag.AutoNext)
+                && FAST_COMBAT_SKIPPABLE_PHASES.contains(phase.getEnum()))) {
+            return false;
         } else {
-            end();
+            if (!paused) {
+                p1.getCharacter().nextCombat(this);
+                p2.getCharacter().nextCombat(this);
+                // This is a horrible hack to catch the case where the player is watching or
+                // has intervened in the combat
+                if (!(p1.getCharacter().human() || p2.getCharacter().human()) && beingObserved) {
+                    Global.getPlayer().nextCombat(this);
+                }
+            }
             return true;
         }
     }
