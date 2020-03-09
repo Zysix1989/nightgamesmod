@@ -242,11 +242,11 @@ public class DefaultEncounter {
     protected void startFight(Participant p1, Participant p2) {
         startFightTimer();
         if (p1.getCharacter() instanceof Player && p2.getCharacter() instanceof NPC) {
-            this.fight = new Combat(p1.getCharacter(), p2.getCharacter(), p1.getCharacter().location()); // Not sure if order matters
+            this.fight = new Combat(p1, p2, p1.getCharacter().location()); // Not sure if order matters
         } else if (p2.getCharacter() instanceof Player && p1.getCharacter() instanceof NPC) {
-            this.fight = new Combat(p2.getCharacter(), p1.getCharacter(), p2.getCharacter().location());
+            this.fight = new Combat(p2, p1, p2.getCharacter().location());
         } else {
-            this.fight = new Combat(p1.getCharacter(), p2.getCharacter(), location);
+            this.fight = new Combat(p1, p2, location);
         }
         p1.getCharacter().notifyCombatStart(fight, p2.getCharacter());
         p2.getCharacter().notifyCombatStart(fight, p1.getCharacter());
@@ -323,7 +323,7 @@ public class DefaultEncounter {
             startFight(attacker, target);
             Global.gui().message(Global.format("{self:SUBJECT-ACTION:catch|catches} {other:name-do} by surprise and {self:action:attack|attacks}!", attacker.getCharacter(), target.getCharacter()));
         } else {
-            fight = new Combat(attacker.getCharacter(), target.getCharacter(), location);
+            fight = new Combat(attacker, target, location);
         }
     }
 
@@ -470,7 +470,7 @@ public class DefaultEncounter {
         }
 
         var startingPosition = trap.capitalize(opportunist, target);
-        fight = new Combat(opportunist.getCharacter(), target.getCharacter(), opportunist.getLocation());
+        fight = new Combat(opportunist, target, opportunist.getLocation());
         startingPosition.ifPresent(sp -> fight.setStanceRaw(sp));
 
         if (fight.getP1Character().human() || fight.getP2Character().human()) {

@@ -77,14 +77,14 @@ public class Combat {
     
     String imagePath = "";
 
-    public Combat(Character p1, Character p2, Area loc) {
-        this.p1 = new Combatant(Global.getMatch().findParticipant(p1));
+    public Combat(Participant p1, Participant p2, Area loc) {
+        this.p1 = new Combatant(p1);
         combatantData = new HashMap<>();
-        this.p2 = new Combatant(Global.getMatch().findParticipant(p2));
-        p1.startBattle(this);
-        p2.startBattle(this);
+        this.p2 = new Combatant(p2);
+        p1.getCharacter().startBattle(this);
+        p2.getCharacter().startBattle(this);
         location = loc;
-        stance = new Neutral(p1, p2);
+        stance = new Neutral(p1.getCharacter(), p2.getCharacter());
         message = "";
         paused = false;
         processedEnding = false;

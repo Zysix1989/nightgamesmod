@@ -81,7 +81,7 @@ public class FTCEncounter extends DefaultEncounter {
             Global.gui().message(Global.format(message, attacker.getCharacter(), victim.getCharacter()));
         } else {
             Global.gui().refresh();
-            fight = new Combat(attacker.getCharacter(), victim.getCharacter(), location);
+            fight = new Combat(attacker, victim, location);
             fight.setStance(new Pin(attacker.getCharacter(), victim.getCharacter()));
         }
     }
@@ -117,7 +117,7 @@ public class FTCEncounter extends DefaultEncounter {
             Global.gui().message(Global.format(message, attacker.getCharacter(), victim.getCharacter()));
         } else {
             Global.gui().refresh();
-            fight = new Combat(attacker.getCharacter(), victim.getCharacter(), location);
+            fight = new Combat(attacker, victim, location);
             fight.setStance(new Pin(attacker.getCharacter(), victim.getCharacter()));
         }
     }

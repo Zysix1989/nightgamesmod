@@ -7,6 +7,7 @@ import nightgames.characters.CharacterSex;
 import nightgames.characters.NPC;
 import nightgames.global.Global;
 import nightgames.match.MatchType;
+import nightgames.match.Participant;
 import nightgames.modifier.standard.NoModifier;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -33,7 +34,7 @@ public class CombatTest {
         self = new BlankPersonality("SelfTestNPC").character;
         other = new BlankPersonality("OtherTestNPC").character;
         Area area = new Area("TestArea", new DescriptionModule.ErrorDescriptionModule(), null);
-        combat = new Combat(self, other, area);
+        combat = new Combat(new Participant(self), new Participant(other), area);
     }
 /*
     @Test public void getDominanceOfStanceNoTraits() throws Exception {
