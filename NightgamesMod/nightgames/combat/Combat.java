@@ -236,7 +236,38 @@ public class Combat {
 
         @Override
         public boolean turn(Combat c) {
-            c.doEndOfTurnUpkeep();
+            c.p1.getCharacter().endOfCombatRound(c, c.p2.getCharacter());
+            c.p2.getCharacter().endOfCombatRound(c, c.p1.getCharacter());
+            // iterate through all the pets here so we don't get concurrent modification issues
+            List<PetCharacter> pets = new ArrayList<>(c.otherCombatants);
+            pets.forEach(other -> {
+                if (c.otherCombatants.contains(other)) {
+                    other.endOfCombatRound(c, c.getOpponentCharacter(other));
+                }
+            });
+            c.checkStamina(c.p1.getCharacter());
+            c.checkStamina(c.p2.getCharacter());
+            pets.forEach(other -> {
+                if (c.otherCombatants.contains(other)) {
+                    c.checkStamina(other);
+                }
+            });
+            c.doStanceTick(c.p1.getCharacter());
+            c.doStanceTick(c.p2.getCharacter());
+
+            List<Character> team1 = new ArrayList<>(c.getPetsFor(c.p1.getCharacter()));
+            team1.add(c.p1.getCharacter());
+            List<Character> team2 = new ArrayList<>(c.getPetsFor(c.p2.getCharacter()));
+            team2.add(c.p2.getCharacter());
+            team1.forEach(self -> c.doAuraTick(self, team1, team2));
+            team2.forEach(self -> c.doAuraTick(self, team2, team1));
+
+            c.combatantData.values().forEach(data -> data.tick(c));
+
+            c.getStance().decay(c);
+            c.getStance().checkOngoing(c);
+            c.p1.getCharacter().regen(c);
+            c.p2.getCharacter().regen(c);
             c.phase = new PreTurnPhase();
             return c.next();
         }
@@ -593,41 +624,6 @@ public class Combat {
         if (Global.random(3) == 0 && !shouldAutoresolve()) {
             checkForCombatComment();
         }
-    }
-
-    private void doEndOfTurnUpkeep() {
-        p1.getCharacter().endOfCombatRound(this, p2.getCharacter());
-        p2.getCharacter().endOfCombatRound(this, p1.getCharacter());
-        // iterate through all the pets here so we don't get concurrent modification issues
-        List<PetCharacter> pets = new ArrayList<>(otherCombatants);
-        pets.forEach(other -> {
-            if (otherCombatants.contains(other)) {
-                other.endOfCombatRound(this, getOpponentCharacter(other));
-            }
-        });  
-        checkStamina(p1.getCharacter());
-        checkStamina(p2.getCharacter());
-        pets.forEach(other -> {
-            if (otherCombatants.contains(other)) {
-                checkStamina(other);
-            }
-        });
-        doStanceTick(p1.getCharacter());
-        doStanceTick(p2.getCharacter());
-
-        List<Character> team1 = new ArrayList<>(getPetsFor(p1.getCharacter()));
-        team1.add(p1.getCharacter());
-        List<Character> team2 = new ArrayList<>(getPetsFor(p2.getCharacter()));
-        team2.add(p2.getCharacter());
-        team1.forEach(self -> doAuraTick(self, team1, team2));
-        team2.forEach(self -> doAuraTick(self, team2, team1));
-
-        combatantData.values().forEach(data -> data.tick(this));
-
-        getStance().decay(this);
-        getStance().checkOngoing(this);
-        p1.getCharacter().regen(this);
-        p2.getCharacter().regen(this);
     }
 
     private void doAuraTick(Character character, List<Character> allies, List<Character> opponents) {
