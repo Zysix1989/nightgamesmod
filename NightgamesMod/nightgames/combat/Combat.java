@@ -154,7 +154,13 @@ public class Combat {
 
         @Override
         public boolean turn(Combat c) {
-            c.phase = c.determineSkillOrder();
+            Phase result;
+            if (c.p1.getCharacter().init() + c.p1act.speed() >= c.p2.getCharacter().init() + c.p2act.speed()) {
+                result = new P1ActFirstPhase();
+            } else {
+                result = new P2ActFirstPhase();
+            }
+            c.phase = result;
             return false;
         }
     }
@@ -1183,14 +1189,6 @@ public class Combat {
 
 	private boolean checkOrgasm(Character user, Character target, Skill skill) {
         return target.orgasmed || user.orgasmed;
-    }
-
-    protected Phase determineSkillOrder() {
-        if (p1.getCharacter().init() + p1act.speed() >= p2.getCharacter().init() + p2act.speed()) {
-            return new P1ActFirstPhase();
-        } else {
-            return new P2ActFirstPhase();
-        }
     }
 
     public void write(String text) {
