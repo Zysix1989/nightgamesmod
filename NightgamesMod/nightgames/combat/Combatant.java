@@ -3,7 +3,7 @@ package nightgames.combat;
 import nightgames.characters.Character;
 import nightgames.match.Participant;
 
-class Combatant {
+public class Combatant {
     private Participant participant;
 
     Combatant(Participant p) {
@@ -15,7 +15,7 @@ class Combatant {
             participant = c.participant.copy();
     }
 
-    Character getCharacter() {
+    public Character getCharacter() {
         return participant.getCharacter();
     }
 

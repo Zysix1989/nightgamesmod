@@ -91,13 +91,13 @@ public class CombatStats {
         synchronized (recordLock) {
             if (!cbt.winner.isPresent()) {
                 System.err.println("Error - winner is empty");
-            } else if (cbt.winner.get().equals(Global.noneCharacter())) {
+            } else if (cbt.winner.get().getCharacter().equals(Global.noneCharacter())) {
                 recordOf(c1).draw(c2);
                 recordOf(c2).draw(c1);
-            } else if (cbt.winner.get().equals(c1)) {
+            } else if (cbt.winner.get().getCharacter().equals(c1)) {
                 recordOf(c1).win(c2);
                 recordOf(c2).lose(c1);
-            } else if (cbt.winner.get().equals(c2)) {
+            } else if (cbt.winner.get().getCharacter().equals(c2)) {
                 recordOf(c1).lose(c2);
                 recordOf(c2).win(c1);
             } else {

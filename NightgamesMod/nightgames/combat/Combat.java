@@ -418,7 +418,7 @@ public class Combat {
     private Combatant p2;
     public List<PetCharacter> otherCombatants;
     public Map<String, CombatantData> combatantData;
-    public Optional<Character> winner;
+    public Optional<Combatant> winner;
     public Phase phase;
     protected Skill p1act;
     protected Skill p2act;
@@ -591,7 +591,7 @@ public class Combat {
         } else if (p2.getCharacter().human()) {
             p1.getCharacter().sendDrawMessage(this, state);
         }
-        winner = Optional.of(Global.noneCharacter());
+        winner = Optional.of(new Combatant(new Participant(Global.noneCharacter())));
     }
 
     private void victory(Combatant won) {
@@ -641,7 +641,7 @@ public class Combat {
             loser.remove(Item.Flag);
             victor.gain(Item.Flag);
         }
-        this.winner = Optional.of(won.getCharacter());
+        this.winner = Optional.of(won);
     }
 
     private boolean checkLosses() {
@@ -652,11 +652,11 @@ public class Combat {
             return true;
         }
         if (p1.getCharacter().checkLoss(this)) {
-            winner = Optional.of(p2.getCharacter());
+            winner = Optional.of(p2);
             return true;
         }
         if (p2.getCharacter().checkLoss(this)) {
-            winner = Optional.of(p1.getCharacter());
+            winner = Optional.of(p1);
             return true;
         }
         return false;
@@ -1455,11 +1455,11 @@ public class Combat {
         boolean ding = p1.getCharacter().levelUpIfPossible(this) && p1.getCharacter().human();
         ding = (p2.getCharacter().levelUpIfPossible(this) && p2.getCharacter().human()) || ding;
         if (doExtendedLog()) {
-            log.logEnd(winner);
+            log.logEnd(winner.map(Combatant::getCharacter));
         }
 
-        if (winner.isPresent() && winner.get() != Global.noneCharacter()) {
-            Global.getMatch().invalidateTarget(winner.get(), getOpponentCharacter(winner.get()));
+        if (winner.isPresent() && winner.get().getCharacter() != Global.noneCharacter()) {
+            Global.getMatch().invalidateTarget(winner.get().getCharacter(), getOpponentCharacter(winner.get().getCharacter()));
         } else {
             p1.getParticipant().defeated(p2.getParticipant());
             p2.getParticipant().defeated(p1.getParticipant());
