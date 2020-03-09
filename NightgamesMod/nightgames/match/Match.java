@@ -294,12 +294,10 @@ public class Match {
             while (roundIterator.hasNext()) {
                 var participant = roundIterator.next();
                 Global.gui().refresh();
-                if (participant.state != State.quit) {
-                    participant.endOfMatchRound();
-                    manageConditions(participant);
-                    participant.move();
-                    afterTurn(participant);
-                }
+                participant.endOfMatchRound();
+                manageConditions(participant);
+                participant.move();
+                afterTurn(participant);
                 if (pause) {
                     return;
                 }
@@ -482,19 +480,6 @@ public class Match {
 
     public DefaultEncounter buildEncounter(Participant first, Participant second, Area location) {
         return new DefaultEncounter(first, second, location);
-    }
-    
-    public final void quit() {
-        var human = findParticipant(Global.getPlayer());
-        if (human.state == State.combat) {
-            if (human.getLocation().fight.getCombat() != null) {
-                human.getLocation().fight.getCombat().forfeit(human.getCharacter());
-            }
-            human.getLocation().endEncounter();
-        }
-        human.travel(new Area("Retirement", new DescriptionModule.ErrorDescriptionModule(), AreaIdentity.retire));
-        human.state = State.quit;
-        resume();
     }
 
     @Deprecated

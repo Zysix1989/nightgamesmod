@@ -11,7 +11,6 @@ public enum State {
     lostclothes,
     webbed,
     masturbating,
-    quit,
 
     // FTC-specific
     inTree,
