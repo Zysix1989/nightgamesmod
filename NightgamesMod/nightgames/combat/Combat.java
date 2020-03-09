@@ -52,6 +52,102 @@ public class Combat {
         FINISHED_SCENE,
         ENDED,
     }
+
+    private interface Phase {
+        CombatPhase getEnum();
+    }
+
+    private static class StartPhase implements Phase {
+        @Override
+        public CombatPhase getEnum() {
+            return CombatPhase.START;
+        }
+    }
+
+    private static class PreTurnPhase implements Phase {
+        @Override
+        public CombatPhase getEnum() {
+            return CombatPhase.PRETURN;
+        }
+    }
+
+    private static class SkillSelectionPhase implements Phase {
+        @Override
+        public CombatPhase getEnum() {
+            return CombatPhase.SKILL_SELECTION;
+        }
+    }
+
+    private static class PetActionsPhase implements Phase {
+        @Override
+        public CombatPhase getEnum() {
+            return CombatPhase.PET_ACTIONS;
+        }
+    }
+
+    private static class DetermineSkillOrderPhase implements Phase {
+        @Override
+        public CombatPhase getEnum() {
+            return CombatPhase.DETERMINE_SKILL_ORDER;
+        }
+    }
+
+    private static class P1ActFirstPhase implements Phase {
+        @Override
+        public CombatPhase getEnum() {
+            return CombatPhase.P1_ACT_FIRST;
+        }
+    }
+
+    private static class P2ActFirstPhase implements Phase {
+        @Override
+        public CombatPhase getEnum() {
+            return CombatPhase.P2_ACT_FIRST;
+        }
+    }
+
+    private static class P1ActSecondPhase implements Phase {
+        @Override
+        public CombatPhase getEnum() {
+            return CombatPhase.P1_ACT_SECOND;
+        }
+    }
+
+    private static class P2ActSecondPhase implements Phase {
+        @Override
+        public CombatPhase getEnum() {
+            return CombatPhase.P2_ACT_SECOND;
+        }
+    }
+
+    private static class UpkeepPhase implements Phase {
+        @Override
+        public CombatPhase getEnum() {
+            return CombatPhase.UPKEEP;
+        }
+    }
+
+    private static class ResultsScenePhase implements Phase {
+        @Override
+        public CombatPhase getEnum() {
+            return CombatPhase.RESULTS_SCENE;
+        }
+    }
+
+    private static class FinishedScenePhase implements Phase {
+        @Override
+        public CombatPhase getEnum() {
+            return CombatPhase.FINISHED_SCENE;
+        }
+    }
+
+    private static class EndedPhase implements Phase {
+        @Override
+        public CombatPhase getEnum() {
+            return CombatPhase.ENDED;
+        }
+    }
+
     
     //TODO: Convert as much of this data as possible to CombatData - DSm
     private Combatant p1;
@@ -59,7 +155,7 @@ public class Combat {
     public List<PetCharacter> otherCombatants;
     public Map<String, CombatantData> combatantData;
     public Optional<Character> winner;
-    public CombatPhase phase;
+    public Phase phase;
     protected Skill p1act;
     protected Skill p2act;
     public Area location;
@@ -96,7 +192,7 @@ public class Combat {
         otherCombatants = new ArrayList<>();
         wroteMessage = false;
         winner = Optional.empty();
-        phase = CombatPhase.START;
+        phase = new StartPhase();
         cloned = false;
         if (doExtendedLog()) {
             log = new CombatLog(this);
@@ -180,7 +276,7 @@ public class Combat {
     private void resumeNoClearFlag() {
         paused = false;
         while(!paused && !turn()) {}
-        if (phase != CombatPhase.ENDED) {
+        if (phase.getEnum() != CombatPhase.ENDED) {
             updateAndClearMessage();
         }
     }
@@ -608,8 +704,8 @@ public class Combat {
                     CombatPhase.UPKEEP,
                     CombatPhase.DETERMINE_SKILL_ORDER);
 
-    private CombatPhase determinePostCombatPhase() {
-        return CombatPhase.RESULTS_SCENE;
+    private Phase determinePostCombatPhase() {
+        return new ResultsScenePhase();
     }
 
     private boolean turn() {
@@ -618,21 +714,21 @@ public class Combat {
         } else if (p2.getCharacter().human() && p1.getCharacter() instanceof NPC) {
             Global.gui().loadPortrait((NPC) p1.getCharacter());
         }
-        if (phase != CombatPhase.FINISHED_SCENE && phase != CombatPhase.RESULTS_SCENE && checkLosses()) {
+        if (phase.getEnum() != CombatPhase.FINISHED_SCENE && phase.getEnum() != CombatPhase.RESULTS_SCENE && checkLosses()) {
             phase = determinePostCombatPhase();
             return next();
         }
-        if ((p1.getCharacter().orgasmed || p2.getCharacter().orgasmed) && phase != CombatPhase.RESULTS_SCENE && SKIPPABLE_PHASES.contains(phase)) {
-            phase = CombatPhase.UPKEEP;
+        if ((p1.getCharacter().orgasmed || p2.getCharacter().orgasmed) && phase.getEnum() != CombatPhase.RESULTS_SCENE && SKIPPABLE_PHASES.contains(phase.getEnum())) {
+            phase = new UpkeepPhase();
         }
-        switch (phase) {
+        switch (phase.getEnum()) {
             case START:
-                phase = CombatPhase.PRETURN;
+                phase = new PreTurnPhase();
                 return false;
             case PRETURN:
                 clear();
                 doPreturnUpkeep();
-                phase = CombatPhase.SKILL_SELECTION;
+                phase = new SkillSelectionPhase();
                 return false;
             case SKILL_SELECTION:
                 return pickSkills();
@@ -644,36 +740,36 @@ public class Combat {
                 return false;
             case P1_ACT_FIRST:
                 if (doAction(p1.getCharacter(), p1act.getDefaultTarget(this), p1act)) {
-                    phase = CombatPhase.UPKEEP;
+                    phase = new UpkeepPhase();
                 } else {
-                    phase = CombatPhase.P2_ACT_SECOND;
+                    phase = new P2ActSecondPhase();
                 }
                 return next();
             case P1_ACT_SECOND:
                 doAction(p1.getCharacter(), p1act.getDefaultTarget(this), p1act);
-                phase = CombatPhase.UPKEEP;
+                phase = new UpkeepPhase();
                 return next();
             case P2_ACT_FIRST:
                 if (doAction(p2.getCharacter(), p2act.getDefaultTarget(this), p2act)) {
-                    phase = CombatPhase.UPKEEP;
+                    phase = new UpkeepPhase();
                 } else {
-                    phase = CombatPhase.P1_ACT_SECOND;
+                    phase = new P1ActSecondPhase();
                 }
                 return next();
             case P2_ACT_SECOND:
                 doAction(p2.getCharacter(), p2act.getDefaultTarget(this), p2act);
-                phase = CombatPhase.UPKEEP;
+                phase = new UpkeepPhase();
                 return next();
             case UPKEEP:
                 doEndOfTurnUpkeep();
-                phase = CombatPhase.PRETURN;
+                phase = new PreTurnPhase();
                 return next();
             case RESULTS_SCENE:
                 resultsScene();
-                phase = CombatPhase.FINISHED_SCENE;
+                phase = new FinishedScenePhase();
                 return next();
             case FINISHED_SCENE:
-                phase = CombatPhase.ENDED;
+                phase = new EndedPhase();
             default:
                 return next();
         }
@@ -690,7 +786,7 @@ public class Combat {
         } else if (p2act == null) {
             return p2.getCharacter().act(this);
         } else {
-            phase = CombatPhase.PET_ACTIONS;
+            phase = new PetActionsPhase();
             return false;
         }
     }
@@ -834,7 +930,7 @@ public class Combat {
         }
     }
 
-    private CombatPhase doPetActions() {
+    private Phase doPetActions() {
         Set<PetCharacter> alreadyBattled = new HashSet<>();
         if (otherCombatants.size() > 0) {
             if (!Global.checkFlag("NoPetBattles")) {
@@ -862,9 +958,9 @@ public class Combat {
                 }
             });
             write("<br/>");
-            return CombatPhase.DETERMINE_SKILL_ORDER;
+            return new DetermineSkillOrderPhase();
         }
-        return CombatPhase.DETERMINE_SKILL_ORDER;
+        return new DetermineSkillOrderPhase();
     }
 
     private Character pickTarget(PetCharacter pet) {
@@ -1061,11 +1157,11 @@ public class Combat {
         return target.orgasmed || user.orgasmed;
     }
 
-    protected CombatPhase determineSkillOrder() {
+    protected Phase determineSkillOrder() {
         if (p1.getCharacter().init() + p1act.speed() >= p2.getCharacter().init() + p2act.speed()) {
-            return CombatPhase.P1_ACT_FIRST;
+            return new P1ActFirstPhase();
         } else {
-            return CombatPhase.P2_ACT_FIRST;
+            return new P2ActFirstPhase();
         }
     }
 
@@ -1156,13 +1252,13 @@ public class Combat {
     }
 
     private boolean next() {
-        if (phase != CombatPhase.ENDED) {
+        if (phase.getEnum() != CombatPhase.ENDED) {
             if (shouldAutoresolve()) {
                 return true;
             }
-            if (!(wroteMessage || phase == CombatPhase.START) || !beingObserved 
+            if (!(wroteMessage || phase.getEnum() == CombatPhase.START) || !beingObserved
                             || (Global.checkFlag(Flag.AutoNext)
-                            && FAST_COMBAT_SKIPPABLE_PHASES.contains(phase))) {
+                            && FAST_COMBAT_SKIPPABLE_PHASES.contains(phase.getEnum()))) {
                 return false;
             } else {
                 if (!paused) {
@@ -1232,7 +1328,7 @@ public class Combat {
             targetCharacter.defeated(assistCharacter);
             assistCharacter.victory3p(this, targetCharacter, intruderCharacter);
         }
-        phase = CombatPhase.RESULTS_SCENE;
+        phase = new ResultsScenePhase();
         if (!(p1.getCharacter().human() || p2.getCharacter().human() || intruderCharacter.human())) {
             end();
         } else {
@@ -1654,7 +1750,7 @@ public class Combat {
     }
 
     public boolean isEnded() {
-        return phase == CombatPhase.FINISHED_SCENE || phase == CombatPhase.ENDED;
+        return phase.getEnum() == CombatPhase.FINISHED_SCENE || phase.getEnum() == CombatPhase.ENDED;
     }
 
     public void pause() {
