@@ -318,9 +318,9 @@ public class DefaultEncounter {
 
     public void ambush(Participant attacker, Participant target) {
         target.getCharacter().addNonCombat(new nightgames.match.Status(new Flatfooted(target.getCharacter(), 3)));
-        if (p1.getCharacter().human() || p2.getCharacter().human()) {
-            Global.gui().message(Global.format("{self:SUBJECT-ACTION:catch|catches} {other:name-do} by surprise and {self:action:attack|attacks}!", attacker.getCharacter(), target.getCharacter()));
-        }
+        var msg = Global.format("{self:SUBJECT-ACTION:catch|catches} {other:name-do} by surprise and {self:action:attack|attacks}!", attacker.getCharacter(), target.getCharacter());
+        p1.getCharacter().message(msg);
+        p2.getCharacter().message(msg);
         startFight(attacker, target);
     }
 
