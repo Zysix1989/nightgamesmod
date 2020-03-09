@@ -16,7 +16,6 @@ import nightgames.characters.corestats.StaminaStat;
 import nightgames.characters.corestats.WillpowerStat;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatSceneChoice;
-import nightgames.combat.Result;
 import nightgames.daytime.*;
 import nightgames.global.Global;
 import nightgames.global.Scene;
@@ -201,14 +200,6 @@ public class Player extends Character {
     @Override
     public boolean human() {
         return true;
-    }
-
-    @Override
-    public void draw(Combat c, Result flag, Character other) {
-        if (has(Trait.slime)) {
-            purge(c);
-        }
-        other.draw(c, flag, this);
     }
 
     @Override

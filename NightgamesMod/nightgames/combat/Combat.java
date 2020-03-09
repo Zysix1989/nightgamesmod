@@ -227,7 +227,18 @@ public class Combat {
         state = eval();
         p1.getCharacter().evalChallenges(this, null);
         p2.getCharacter().evalChallenges(this, null);
-        p2.getCharacter().draw(this, state, p1.getCharacter());
+        if (p1.getCharacter().has(Trait.slime)) {
+            p1.getCharacter().purge(this);
+        }
+        if (p2.getCharacter().has(Trait.slime)) {
+            p2.getCharacter().purge(this);
+        }
+        NPC.endCombat(this, p1.getCharacter(), p2.getCharacter());
+        if (p1.getCharacter().human()) {
+            p2.getCharacter().sendDrawMessage(this, state);
+        } else if (p2.getCharacter().human()) {
+            p1.getCharacter().sendDrawMessage(this, state);
+        }
         winner = Optional.of(Global.noneCharacter());
     }
 

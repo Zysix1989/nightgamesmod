@@ -6,7 +6,6 @@ import nightgames.characters.Character;
 import nightgames.characters.*;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
-import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.grammar.Person;
 import nightgames.grammar.SingularFeminineThirdPerson;
@@ -220,9 +219,6 @@ public class PetCharacter extends Character {
             c.removePet(this);
         }
     }
-
-    @Override
-    public void draw(Combat c, Result flag, Character other) {}
 
     @Override
     public boolean human() {
