@@ -297,25 +297,25 @@ public class NPC extends Character {
         return false;
     }
 
+    public static void endCombat(Combat c, Character first, Character second) {
+        first.gainXP(first.getVictoryXP(second));
+        second.gainXP(second.getVictoryXP(first));
+        first.orgasm();
+        second.orgasm();
+        second.undress(c);
+        first.undress(c);
+        second.gainTrophy(c, first);
+        first.gainTrophy(c, second);
+        second.defeated(first);
+        first.defeated(second);
+        first.gainAttraction(second, 4);
+        second.gainAttraction(first, 4);
+    }
+
     @Override
     public void draw(Combat c, Result flag, Character other) {
-        gainXP(getVictoryXP(other));
-        other.gainXP(getVictoryXP(this));
-        orgasm();
-        other.orgasm();
-        other.undress(c);
-        undress(c);
-        other.gainTrophy(c, this);
-        gainTrophy(c, other);
-        other.defeated(this);
-        defeated(other);
+        endCombat(c, this, other);
         c.write(ai.draw(c, flag));
-        gainAttraction(other, 4);
-        other.gainAttraction(this, 4);
-        if (getAffection(other) > 0) {
-            gainAffection(other, 1);
-            other.gainAffection(this, 1);
-        }
     }
 
     public String getRandomLineFor(String lineType, Combat c, Character other) {
