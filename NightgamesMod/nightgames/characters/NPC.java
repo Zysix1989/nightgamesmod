@@ -298,24 +298,23 @@ public class NPC extends Character {
     }
 
     @Override
-    public void draw(Combat c, Result flag) {
-        Character target = c.getOpponentCharacter(this);
-        gainXP(getVictoryXP(target));
-        target.gainXP(getVictoryXP(this));
+    public void draw(Combat c, Result flag, Character other) {
+        gainXP(getVictoryXP(other));
+        other.gainXP(getVictoryXP(this));
         orgasm();
-        target.orgasm();
-        target.undress(c);
+        other.orgasm();
+        other.undress(c);
         undress(c);
-        target.gainTrophy(c, this);
-        gainTrophy(c, target);
-        target.defeated(this);
-        defeated(target);
+        other.gainTrophy(c, this);
+        gainTrophy(c, other);
+        other.defeated(this);
+        defeated(other);
         c.write(ai.draw(c, flag));
-        gainAttraction(target, 4);
-        target.gainAttraction(this, 4);
-        if (getAffection(target) > 0) {
-            gainAffection(target, 1);
-            target.gainAffection(this, 1);
+        gainAttraction(other, 4);
+        other.gainAttraction(this, 4);
+        if (getAffection(other) > 0) {
+            gainAffection(other, 1);
+            other.gainAffection(this, 1);
         }
     }
 

@@ -227,7 +227,7 @@ public class Combat {
         state = eval();
         p1.getCharacter().evalChallenges(this, null);
         p2.getCharacter().evalChallenges(this, null);
-        p2.getCharacter().draw(this, state);
+        p2.getCharacter().draw(this, state, p1.getCharacter());
         winner = Optional.of(Global.noneCharacter());
     }
 

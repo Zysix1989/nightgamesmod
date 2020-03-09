@@ -222,7 +222,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void draw(Combat c, Result flag) {}
+    public void draw(Combat c, Result flag, Character other) {}
 
     @Override
     public boolean human() {

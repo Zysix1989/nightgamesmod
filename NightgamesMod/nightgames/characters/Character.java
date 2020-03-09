@@ -1752,7 +1752,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract void handleEnthrall(Participant.ActionCallback callback);
 
-    public abstract void draw(Combat c, Result flag);
+    public abstract void draw(Combat c, Result flag, Character other);
 
     /**abstract method for determining if this character is human - meaning the player. 
      * TODO: Reccomend renaming to isHuman(), to make more meaningful name and easier to find.*/

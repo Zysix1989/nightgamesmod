@@ -204,11 +204,11 @@ public class Player extends Character {
     }
 
     @Override
-    public void draw(Combat c, Result flag) {
+    public void draw(Combat c, Result flag, Character other) {
         if (has(Trait.slime)) {
             purge(c);
         }
-        c.getOpponentCharacter(this).draw(c, flag);
+        other.draw(c, flag, this);
     }
 
     @Override
