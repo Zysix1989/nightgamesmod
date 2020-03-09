@@ -50,37 +50,30 @@ public class FTCEncounter extends DefaultEncounter {
             victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 50, "zip-tie")));
         startFight(attacker, victim);
         fight.setStance(new Pin(attacker.getCharacter(), victim.getCharacter()));
-        if (p1.getCharacter().human() || p2.getCharacter().human()) {
-            String message = "";
-            if (victim.getCharacter().human()) {
-                message += "As you walk down the trail, you hear a slight rustling in the"
-                                + " leaf canopy above you. You look up, but all you see is a flash of ";
-                if (attacker.getCharacter().mostlyNude()) {
-                    message += "nude flesh";
-                } else {
-                    message += "clothes";
-                }
-                message += " before you are pushed to the ground. Before you have a chance to process"
-                                + " what's going on, your hands are tied behind your back and your"
-                                + " attacker, who now reveals {self:reflective} to be {self:name},"
-                                + " whispers in your ear \"Happy to see me, {other:name}?\"";
-            } else {
-                message += "Your patience finally pays off as {other:name} approaches the"
-                                + " tree you are hiding in. You wait until the perfect moment,"
-                                + " when {other:pronoun} is right beneath you, before you jump"
-                                + " down. You land right on {other:possessive} shoulders, pushing"
-                                + " {other:direct-object} firmly to the soft soil. Pulling our a ";
-                if (attacker.getCharacter().has(Item.Handcuffs)) {
-                    message += "pair of handcuffs, ";
-                } else {
-                    message += "zip-tie, ";
-                }
-                message += " you bind {other:possessive} hands together. There are worse" + " ways to start a match.";
-            }
-            Global.gui().message(Global.format(message, attacker.getCharacter(), victim.getCharacter()));
+        var victimMessage = "As you walk down the trail, you hear a slight rustling in the"
+                + " leaf canopy above you. You look up, but all you see is a flash of ";
+        if (attacker.getCharacter().mostlyNude()) {
+            victimMessage += "nude flesh";
         } else {
-            Global.gui().refresh();
+            victimMessage += "clothes";
         }
+        victimMessage += " before you are pushed to the ground. Before you have a chance to process"
+                + " what's going on, your hands are tied behind your back and your"
+                + " attacker, who now reveals {self:reflective} to be {self:name},"
+                + " whispers in your ear \"Happy to see me, {other:name}?\"";
+        victim.getCharacter().message(victimMessage);
+        var attackerMessage = "Your patience finally pays off as {other:name} approaches the"
+                + " tree you are hiding in. You wait until the perfect moment,"
+                + " when {other:pronoun} is right beneath you, before you jump"
+                + " down. You land right on {other:possessive} shoulders, pushing"
+                + " {other:direct-object} firmly to the soft soil. Pulling our a ";
+        if (attacker.getCharacter().has(Item.Handcuffs)) {
+            attackerMessage += "pair of handcuffs, ";
+        } else {
+            attackerMessage += "zip-tie, ";
+        }
+        attackerMessage += " you bind {other:possessive} hands together. There are worse" + " ways to start a match.";
+        attacker.getCharacter().message(attackerMessage);
     }
 
     private void bushAmbush(Participant attacker, Participant victim) {
