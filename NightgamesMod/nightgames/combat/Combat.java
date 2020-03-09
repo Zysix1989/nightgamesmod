@@ -1236,14 +1236,11 @@ public class Combat {
             Global.gui().watchCombat(this);
             resumeNoClearFlag();
         }
-        Optional<Character> winner1 = Optional.of(assistCharacter);
-        if (winner1.isPresent() && winner1.get() != Global.noneCharacter()) {
-            Global.getMatch().invalidateTarget(winner1.get(), matchEndListener.c.getOpponentCharacter(winner1.get()));
-            //match.score(winner.get(), 1, Optional.of(" for defeating " + c.getOpponent(winner.get()).getName()));
-
+        if (assistCharacter != Global.noneCharacter()) {
+            Global.getMatch().invalidateTarget(assistCharacter, getOpponentCharacter(assistCharacter));
         } else {
-            Global.getMatch().invalidateTarget(matchEndListener.c.getP1Character(), matchEndListener.c.getP2Character());
-            Global.getMatch().invalidateTarget(matchEndListener.c.getP2Character(), matchEndListener.c.getP2Character());
+            Global.getMatch().invalidateTarget(getP1Character(), getP2Character());
+            Global.getMatch().invalidateTarget(getP2Character(), getP2Character());
         }
     }
 
@@ -1297,12 +1294,10 @@ public class Combat {
         }
 
         if (winner.isPresent() && winner.get() != Global.noneCharacter()) {
-            Global.getMatch().invalidateTarget(winner.get(), matchEndListener.c.getOpponentCharacter(winner.get()));
-            //match.score(winner.get(), 1, Optional.of(" for defeating " + c.getOpponent(winner.get()).getName()));
-
+            Global.getMatch().invalidateTarget(winner.get(), getOpponentCharacter(winner.get()));
         } else {
-            Global.getMatch().invalidateTarget(matchEndListener.c.getP1Character(), matchEndListener.c.getP2Character());
-            Global.getMatch().invalidateTarget(matchEndListener.c.getP2Character(), matchEndListener.c.getP2Character());
+            Global.getMatch().invalidateTarget(getP1Character(), getP2Character());
+            Global.getMatch().invalidateTarget(getP2Character(), getP2Character());
         }
         if (!ding && beingObserved) {
             Global.gui().endCombat();
