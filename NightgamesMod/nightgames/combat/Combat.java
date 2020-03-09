@@ -79,7 +79,8 @@ public class Combat {
 
         @Override
         public boolean turn(Combat c) {
-            c.clear();
+            c.wroteMessage = false;
+            c.message = "";
             c.doPreturnUpkeep();
             c.phase = new SkillSelectionPhase();
             return false;
@@ -840,11 +841,6 @@ public class Combat {
             phase = new UpkeepPhase();
         }
         return phase.turn(this);
-    }
-
-    private void clear() {
-        wroteMessage = false;
-        message = "";
     }
 
     private String describe(Character player, Character other) {
