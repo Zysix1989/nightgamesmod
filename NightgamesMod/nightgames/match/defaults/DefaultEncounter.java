@@ -189,7 +189,6 @@ public class DefaultEncounter {
                     p1.getCharacter().message(String.format(
                             "You find %s still naked from your last encounter, but %s's not fair game again until %s replaces %s clothes.",
                             p2.getCharacter().getName(), p2.getCharacter().pronoun(), p2.getCharacter().pronoun(), p2.getCharacter().possessiveAdjective()));
-
                     p2.getCharacter().message("You encounter " + p1.getCharacter().getName() + ", but you still haven't recovered from your last fight.");
                 }
             }
