@@ -136,18 +136,17 @@ public class Area implements Serializable {
 
     public boolean opportunity(Character target, Trap.Instance trap) {
         var targetParticipant = Global.getMatch().findParticipant(target);
-        if (present.size() > 1) {
-            for (Participant opponent : present) {
-                if (opponent != targetParticipant) {
-                    if (targetParticipant.canStartCombat(opponent) && opponent.canStartCombat(targetParticipant) && fight == null) {
-                        fight = Global.getMatch().buildEncounter(opponent, targetParticipant, this);
-                        opponent.getCharacter().promptTrap(
-                                targetParticipant,
-                                trap,
-                                () -> fight.trap(opponent, targetParticipant, trap),
-                                () -> {});
-                        return true;
-                    }
+        for (Participant opponent : present) {
+            if (opponent != targetParticipant) {
+                if (targetParticipant.canStartCombat(opponent) && opponent.canStartCombat(targetParticipant) && fight == null) {
+                    fight = Global.getMatch().buildEncounter(opponent, targetParticipant, this);
+                    opponent.getCharacter().promptTrap(
+                            targetParticipant,
+                            trap,
+                            () -> fight.trap(opponent, targetParticipant, trap),
+                            () -> {
+                            });
+                    return true;
                 }
             }
         }
