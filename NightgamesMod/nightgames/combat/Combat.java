@@ -202,29 +202,6 @@ public class Combat {
             && loser.body.getRandomPussy().moddedPartCountsAs(modType);
     }
 
-    public void doVictory(Character victor, Character loser) {
-              
-        //Collect Bottle-able substances. 
-        this.doBottleCollection(victor, loser); 
-        
-        //If they lost, Do a willpower gain.
-        if (loser.human() && loser.getWillpower().max() < loser.getMaxWillpowerPossible()) {
-            write("<br/>Ashamed at your loss, you resolve to win next time.");
-            write("<br/><b>Gained 1 Willpower</b>.");
-            loser.getWillpower().gain(1);
-        }
-        victor.getWillpower().renew();
-        loser.getWillpower().renew();
-
-        if (Global.getMatch().getType() == MatchType.FTC && loser.has(Item.Flag)) {
-            write(victor, Global.format(
-                            "<br/><b>{self:SUBJECT-ACTION:take|takes} the " + "Flag from {other:subject}!</b>", victor,
-                            loser));
-            loser.remove(Item.Flag);
-            victor.gain(Item.Flag);
-        }
-    }
-
     private void draw() {
         state = eval();
         p1.getCharacter().evalChallenges(this, null);
@@ -283,7 +260,27 @@ public class Combat {
         } else if (loser.human()) {
             won.getCharacter().sendVictoryMessage(this, state);
         }
-        doVictory(won.getCharacter(), loser);
+        Character victor = won.getCharacter();
+
+        //Collect Bottle-able substances.
+        this.doBottleCollection(victor, loser);
+
+        //If they lost, Do a willpower gain.
+        if (loser.human() && loser.getWillpower().max() < loser.getMaxWillpowerPossible()) {
+            write("<br/>Ashamed at your loss, you resolve to win next time.");
+            write("<br/><b>Gained 1 Willpower</b>.");
+            loser.getWillpower().gain(1);
+        }
+        victor.getWillpower().renew();
+        loser.getWillpower().renew();
+
+        if (Global.getMatch().getType() == MatchType.FTC && loser.has(Item.Flag)) {
+            write(victor, Global.format(
+                            "<br/><b>{self:SUBJECT-ACTION:take|takes} the " + "Flag from {other:subject}!</b>", victor,
+                    loser));
+            loser.remove(Item.Flag);
+            victor.gain(Item.Flag);
+        }
         this.winner = Optional.of(won.getCharacter());
     }
 
