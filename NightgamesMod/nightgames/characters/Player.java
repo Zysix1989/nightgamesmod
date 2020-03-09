@@ -260,7 +260,6 @@ public class Player extends Character {
         options.add(new CommandPanelOption("Flee",
                 flightCallback));
         gui.presentOptions(options);
-        Global.getMatch().pause();
     }
 
     @Override
@@ -274,6 +273,7 @@ public class Player extends Character {
             fleeContinuation.run();
             Global.getMatch().resume();
         }));
+        Global.getMatch().pause();
     }
 
     private void assessOpponent(Participant opponent) {
