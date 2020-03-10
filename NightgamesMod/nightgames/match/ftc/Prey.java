@@ -36,4 +36,14 @@ public class Prey extends Participant {
         flagCounter = 0;
         character.gain(Item.Flag);
     }
+
+    @Override
+    public void bounty(Participant loser) {
+        super.bounty(loser);
+    }
+
+    @Override
+    protected int pointsGivenToVictor() {
+        return 0;
+    }
 }

@@ -10,7 +10,6 @@ import nightgames.characters.State;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.defaults.DefaultEncounter;
-import nightgames.match.ftc.FTCMatch;
 import nightgames.status.Stsflag;
 
 import java.util.*;
@@ -555,26 +554,17 @@ public class Participant {
 
     void finishMatch() {
         for (var victor : invalidAttackers) {
-            victor.bounty( 1, character);
+            victor.bounty(this);
         }
         character.finishMatch();
         invalidAttackers.clear();
     }
 
-    public void bounty(int points, Character loser) {
-        int score = points;
-        if (Global.getMatch().getType() == MatchType.FTC && points == 1) {
-            FTCMatch match = (FTCMatch) Global.getMatch();
-            if (match.isPrey(character)) {
-                score = 3;
-            } else if (!match.isPrey(loser)) {
-                score = 2;
-            } else {
-                score = 0; // Hunter beating prey gets no points, only for flag.
-            }
-        }
-        incrementScore(score);
+    public void bounty(Participant loser) {
+        incrementScore(loser.pointsGivenToVictor());
     }
 
-
+    protected int pointsGivenToVictor() {
+        return 1;
+    }
 }

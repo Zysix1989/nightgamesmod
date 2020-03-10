@@ -65,7 +65,7 @@ public class FTCMatch extends Match {
     public static FTCMatch newMatch(Collection<Character> combatants, FTCModifier modifier) {
         var hunters = combatants.stream()
                 .filter(c -> c.equals(modifier.getPrey()))
-                .map(Participant::new)
+                .map(Hunter::new)
                 .collect(Collectors.toList());
         Collections.shuffle(hunters);
         var preyParticipant = new Prey(modifier.getPrey());
