@@ -2,8 +2,10 @@ package nightgames.match;
 
 import nightgames.actions.*;
 import nightgames.areas.*;
+import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.*;
+import nightgames.characters.Player;
+import nightgames.characters.Trait;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.match.defaults.DefaultEncounter;
@@ -253,12 +255,6 @@ public class Match {
         });
     }
 
-    private void afterTurn(Participant participant) {
-        if (participant.state.getEnum() == State.resupplying) {
-            participants.forEach(p -> p.allowTarget(participant));
-        }
-    }
-
     public void score(Character combatant, int amt) {
         var participant = findParticipant(combatant);
         participant.incrementScore(amt);
@@ -288,7 +284,6 @@ public class Match {
                 participant.endOfMatchRound();
                 manageConditions(participant);
                 participant.move();
-                afterTurn(participant);
                 if (pause) {
                     return;
                 }
