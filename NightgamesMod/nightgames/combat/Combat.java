@@ -1397,8 +1397,7 @@ public class Combat {
             assistCharacter.gainTrophy(this, targetCharacter);
             assistCharacter.victory3p(this, targetCharacter, intruderCharacter);
             assistCharacter.gainAttraction(targetCharacter, 1);
-            assist.incrementScore(assist.pointsForVictory(target.getParticipant()),
-                    "for an unearned win");
+            assist.incrementScore(assist.pointsForVictory(target.getParticipant()), "for an unearned win");
         }
 
         phase = new ResultsScenePhase();
