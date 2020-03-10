@@ -87,9 +87,7 @@ public class DefaultEncounter {
             return false;
         }
         int dc = hidden.getCharacter().get(Attribute.Cunning) / 3;
-        if (hidden.state.getEnum() == State.hidden) {
-            dc += (hidden.getCharacter().get(Attribute.Cunning) * 2 / 3) + 20;
-        }
+        dc += hidden.state.spotCheckDifficultyModifier(hidden);
         if (hidden.getCharacter().has(Trait.Sneaky)) {
             dc += 20;
         }

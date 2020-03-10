@@ -23,6 +23,7 @@ public class Participant {
         void move(Participant p);
         boolean isDetectable();
         Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p);
+        int spotCheckDifficultyModifier(Participant p);
     }
 
     public static class ReadyState implements PState {
@@ -47,6 +48,11 @@ public class Participant {
         @Override
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
             return Optional.empty();
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            return 0;
         }
 
     }
@@ -92,6 +98,12 @@ public class Participant {
             return Optional.empty();
         }
 
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
+        }
+
         public void stealClothes() {
             assert !clothesStolen;
             clothesStolen = true;
@@ -125,6 +137,11 @@ public class Participant {
                     p.getCharacter().getTrueName()));
         }
 
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("%s is already in combat!",
+                    p.getCharacter().getTrueName()));
+        }
     }
 
     public static class SearchingState implements PState {
@@ -174,6 +191,12 @@ public class Participant {
         @Override
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
             return Optional.of(() -> encounter.spy(other, p));
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
         }
 
     }
@@ -246,6 +269,12 @@ public class Participant {
             return Optional.of(() -> encounter.spy(other, p));
         }
 
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
+        }
+
     }
 
     public static class HiddenState implements PState {
@@ -274,6 +303,10 @@ public class Participant {
             return Optional.empty();
         }
 
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            return (p.getCharacter().get(Attribute.Cunning) * 2 / 3) + 20;
+        }
     }
 
     public static class ResupplyingState implements PState {
@@ -334,6 +367,12 @@ public class Participant {
                     p.getCharacter().getTrueName()));
         }
 
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("%s can't be attacked while resupplying",
+                    p.getCharacter().getTrueName()));
+        }
+
     }
 
     public static class WebbedState implements PState {
@@ -361,6 +400,12 @@ public class Participant {
         @Override
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
             return Optional.of(() -> encounter.spider(other, p));
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
         }
 
     }
@@ -392,6 +437,12 @@ public class Participant {
             return Optional.of(() -> encounter.caught(other, p));
         }
 
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
+        }
+
     }
 
     public static class InTreeState implements PState {
@@ -419,6 +470,12 @@ public class Participant {
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
             assert encounter instanceof FTCEncounter;
             return Optional.of(() -> ((FTCEncounter) encounter).treeAmbush(p, other));
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
         }
 
     }
@@ -450,6 +507,12 @@ public class Participant {
             return Optional.of(() -> ((FTCEncounter) encounter).bushAmbush(p, other));
         }
 
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
+        }
+
     }
 
     public static class InPassState implements PState {
@@ -477,6 +540,12 @@ public class Participant {
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
             assert encounter instanceof FTCEncounter;
             return Optional.of(() -> ((FTCEncounter) encounter).passAmbush(p, other));
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
         }
 
     }
