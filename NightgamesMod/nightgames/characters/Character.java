@@ -34,10 +34,8 @@ import nightgames.items.clothing.ClothingTrait;
 import nightgames.items.clothing.Outfit;
 import nightgames.json.JsonUtils;
 import nightgames.match.Match;
-import nightgames.match.MatchType;
 import nightgames.match.Participant;
 import nightgames.match.defaults.DefaultEncounter;
-import nightgames.match.ftc.FTCMatch;
 import nightgames.pet.PetCharacter;
 import nightgames.pet.arms.ArmManager;
 import nightgames.skills.*;
@@ -2673,27 +2671,6 @@ public Character clone() throws CloneNotSupportedException {
         getStamina().renew();
         getArousal().renew();
         getMojo().renew();
-    }
-
-    /**Collects bounty on a target in a FTC match.
-     * @param points
-     * 
-     * @param victor
-     * 
-     * */
-    public void bounty(int points, Character victor) {
-        int score = points;
-        if (Global.getMatch().getType() == MatchType.FTC && points == 1) {
-            FTCMatch match = (FTCMatch) Global.getMatch();
-            if (match.isPrey(this)) {
-                score = 3;
-            } else if (!match.isPrey(victor)) {
-                score = 2;
-            } else {
-                score = 0; // Hunter beating prey gets no points, only for flag.
-            }
-        }
-        Global.getMatch().score(this, score);
     }
 
     public void setTrophy(Item trophy) {
