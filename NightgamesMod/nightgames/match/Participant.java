@@ -23,6 +23,8 @@ public class Participant {
 
     public interface PState {
         State getEnum();
+        boolean allowsNormalActions();
+        void move(Participant p);
     }
 
     public static class ReadyState implements PState {
@@ -30,12 +32,31 @@ public class Participant {
         public State getEnum() {
             return State.ready;
         }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return true;
+        }
+
+        @Override
+        public void move(Participant p) {}
     }
 
     public static class ShowerState implements PState {
         @Override
         public State getEnum() {
             return State.shower;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.character.bathe(getEnum());
+            p.state = new ReadyState();
         }
     }
 
@@ -44,12 +65,33 @@ public class Participant {
         public State getEnum() {
             return State.combat;
         }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.character.location.get().fight.battle();
+        }
     }
 
     public static class SearchingState implements PState {
         @Override
         public State getEnum() {
             return State.searching;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.character.search(p.searchItems());
+            p.state = new ReadyState();
         }
     }
 
@@ -58,12 +100,33 @@ public class Participant {
         public State getEnum() {
             return State.crafting;
         }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.character.craft(p.craftItems());
+            p.state = new ReadyState();
+        }
     }
 
     public static class HiddenState implements PState {
         @Override
         public State getEnum() {
             return State.hidden;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return true;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.character.message("You have found a hiding spot and are waiting for someone to pounce upon.");
         }
     }
 
@@ -72,12 +135,33 @@ public class Participant {
         public State getEnum() {
             return State.resupplying;
         }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.resupply();
+        }
     }
 
     public static class LostClothesState implements PState {
         @Override
         public State getEnum() {
             return State.lostclothes;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.character.bathe(getEnum());
+            p.state = new ReadyState();
         }
     }
 
@@ -86,12 +170,34 @@ public class Participant {
         public State getEnum() {
             return State.webbed;
         }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.character.message("You eventually manage to get an arm free, which you then use to extract yourself from the trap.");
+            p.state = new ReadyState();
+        }
     }
 
     public static class MasturbatingState implements PState {
         @Override
         public State getEnum() {
             return State.masturbating;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.character.masturbate();
+            p.state = new ReadyState();
         }
     }
 
@@ -100,6 +206,16 @@ public class Participant {
         public State getEnum() {
             return State.inTree;
         }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return true;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.character.message("You are hiding in a tree, waiting to drop down on an unwitting foe.");
+        }
     }
 
     public static class InBushesState implements PState {
@@ -107,12 +223,32 @@ public class Participant {
         public State getEnum() {
             return State.inBushes;
         }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return true;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.character.message("You are hiding in dense bushes, waiting for someone to pass by.");
+        }
     }
 
     public static class InPassState implements PState {
         @Override
         public State getEnum() {
             return State.inPass;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.character.message("You are hiding in an alcove in the pass.");
         }
     }
 
@@ -253,48 +389,20 @@ public class Participant {
         possibleActions.addAll(Global.getMatch().getAvailableActions());
         possibleActions.removeIf(a -> !a.usable(this));
         if (state.getEnum() == State.combat) {
-            character.location.get().fight.battle();
-            return;
+            state.move(this);
         } else if (roundsToWait > 0) {
             roundsToWait--;
             return;
         } else if (this.character.is(Stsflag.enthralled)) {
             character.handleEnthrall(act -> act.execute(this));
             return;
-        } else if (state.getEnum() == State.shower || state.getEnum() == State.lostclothes) {
-            character.bathe(state.getEnum());
-            state = new ReadyState();
-            return;
-        } else if (state.getEnum() == State.crafting) {
-            character.craft(craftItems());
-            state = new ReadyState();
-            return;
-        } else if (state.getEnum() == State.searching) {
-            character.search(searchItems());
-            state = new ReadyState();
-            return;
-        } else if (state.getEnum() == State.resupplying) {
-            resupply();
-            return;
-        } else if (state.getEnum() == State.webbed) {
-            character.message("You eventually manage to get an arm free, which you then use to extract yourself from the trap.");
-            state = new ReadyState();
-            return;
-        } else if (state.getEnum() == State.masturbating) {
-            character.masturbate();
-            state = new ReadyState();
-            return;
-        } else if (state.getEnum() == State.inTree) {
-            character.message("You are hiding in a tree, waiting to drop down on an unwitting foe.");
-        } else if (state.getEnum() == State.inBushes) {
-            character.message("You are hiding in dense bushes, waiting for someone to pass by.");
-        } else if (state.getEnum() == State.inPass) {
-            character.message("You are hiding in an alcove in the pass.");
-        } else if (state.getEnum() == State.hidden) {
-            character.message("You have found a hiding spot and are waiting for someone to pounce upon.");
+        } else {
+            state.move(this);
         }
-        if (character.location.get().encounter(this)) {
-            character.move(possibleActions, act -> act.execute(this));
+        if (state.allowsNormalActions()) {
+            if (character.location.get().encounter(this)) {
+                character.move(possibleActions, act -> act.execute(this));
+            }
         }
     }
 
