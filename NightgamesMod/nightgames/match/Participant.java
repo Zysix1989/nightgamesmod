@@ -9,6 +9,7 @@ import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.defaults.DefaultEncounter;
 import nightgames.status.Stsflag;
 
 import java.util.*;
@@ -268,15 +269,13 @@ public class Participant {
 
     public void timePasses() {}
 
-    public void interveneInCombat(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation) {
-        character.intervene(p1, p1Continuation,
-                p2, p2Continuation,
-                noneContinuation,
+    public void interveneInCombat(Set<DefaultEncounter.IntrusionOption> intrusionOptions, Runnable noneContinuation) {
+        character.intervene(intrusionOptions,
                 character.location.get().possibleActions(this).stream()
                         .filter(act -> act instanceof Move)
                         .map(act -> (Move) act)
-                        .collect(Collectors.toList()),
-                act -> act.execute(this));
+                        .collect(Collectors.toList()), act -> act.execute(this), noneContinuation
+        );
     }
 
 }

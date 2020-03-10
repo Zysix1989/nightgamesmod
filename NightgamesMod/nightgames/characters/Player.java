@@ -28,6 +28,7 @@ import nightgames.items.clothing.Clothing;
 import nightgames.match.Match;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.skills.*;
 import nightgames.skills.damage.DamageType;
@@ -594,15 +595,18 @@ public class Player extends Character {
     }
 
     @Override
-    public void intervene(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable neitherContinuation, List<Move> possibleMoves, Participant.ActionCallback actionCallback) {
-        gui.message("You find <b>" + p1.getName() + "</b> and <b>" + p2.getName()
+    public void intervene(Set<DefaultEncounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation) {
+        var listOptions = new ArrayList<>(intrusionOptions);
+        assert listOptions.size() == 2: "No support for more than 2 combatants";
+        gui.message("You find <b>" + listOptions.get(0).target.getName() + "</b> and <b>" + listOptions.get(1).target.getName()
                         + "</b> fighting too intensely to notice your arrival. If you intervene now, it'll essentially decide the winner.");
         gui.message("Then again, you could just wait and see which one of them comes out on top. It'd be entertaining,"
-                        + " at the very least.");
+                        + " at the very least. Alternatively, you could just leave them to it.");
 
-        ArrayList<CommandPanelOption> options = new ArrayList<>();
-        options.add(new CommandPanelOption("Help " + p1.getName(), event -> p1Continuation.run()));
-        options.add(new CommandPanelOption("Help " + p2.getName(), event -> p2Continuation.run()));
+        ArrayList<CommandPanelOption> options = listOptions.stream()
+                .map(option -> new CommandPanelOption("Help " + option.target.getName(),
+                        event -> option.callback.run()))
+                .collect(Collectors.toCollection(ArrayList::new));
         options.add(new CommandPanelOption("Watch them fight", event -> neitherContinuation.run()));
         options.addAll(possibleMoves.stream()
                 .map(move -> new CommandPanelOption("Move (" + move.getDestination() + ")",

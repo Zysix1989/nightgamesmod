@@ -21,6 +21,7 @@ import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.match.Match;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
 import nightgames.pet.arms.ArmManager;
 import nightgames.pet.arms.ArmType;
 import nightgames.skills.Nothing;
@@ -422,14 +423,23 @@ public class NPC extends Character {
         }
     }
 
-    @Override
-    public void intervene(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable neitherContinuation, List<Move> possibleMoves, Participant.ActionCallback actionCallback) {
-        if (Global.random(20) + getAffection(p1) + (p1.has(Trait.sympathetic) ? 10 : 0) >= Global.random(20)
-                        + getAffection(p2) + (p2.has(Trait.sympathetic) ? 10 : 0)) {
-            p1Continuation.run();
-        } else {
-            p2Continuation.run();
+    private static class IntrusionEvaluation {
+        private DefaultEncounter.IntrusionOption option;
+        private int score;
+
+        IntrusionEvaluation(DefaultEncounter.IntrusionOption option, int score) {
+            this.option = option;
+            this.score = score;
         }
+    }
+    @Override
+    public void intervene(Set<DefaultEncounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation) {
+        var bestTarget = intrusionOptions.stream()
+                .map(option -> new IntrusionEvaluation(option,
+                                Global.random(20) + getAffection(option.target) + (option.target.has(Trait.sympathetic) ? 10 : 0)))
+                .reduce(new IntrusionEvaluation(null, Integer.MIN_VALUE),
+                        (best, current) -> best.score >= current.score ? best : current);
+        bestTarget.option.callback.run();
     }
 
     @Override

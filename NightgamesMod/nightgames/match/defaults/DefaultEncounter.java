@@ -15,6 +15,7 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import java.util.Optional;
+import java.util.Set;
 
 public class DefaultEncounter {
     protected Participant p1;
@@ -462,6 +463,26 @@ public class DefaultEncounter {
         return String.format("%s a smoke bomb and %s.", 
                         Global.capitalizeFirstLetter(c.subjectAction("drop", "drops"))
                         , c.action("disappear", "disappears"));
+    }
+
+    public static final class IntrusionOption {
+        public Character target;
+        public Runnable callback;
+
+        private IntrusionOption(Character target, Runnable callback) {
+            this.target = target;
+            this.callback = callback;
+        }
+    }
+
+    public Set<IntrusionOption> getCombatIntrusionOptions(Participant intruder) {
+        if (fight == null ||
+                intruder.getCharacter().equals(p1.getCharacter()) ||
+                intruder.getCharacter().equals(p2.getCharacter())) {
+            return Set.of();
+        }
+        return Set.of(new IntrusionOption(p1.getCharacter(), () -> intrude(intruder, p1)),
+                new IntrusionOption(p2.getCharacter(), () -> intrude(intruder, p2)));
     }
 
     public boolean checkIntrude(Character c) {

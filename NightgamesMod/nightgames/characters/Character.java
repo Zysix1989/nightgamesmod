@@ -36,6 +36,7 @@ import nightgames.json.JsonUtils;
 import nightgames.match.Match;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.pet.PetCharacter;
 import nightgames.pet.arms.ArmManager;
@@ -1762,7 +1763,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract String taunt(Combat c, Character target);
 
-    public abstract void intervene(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable neitherContinuation, List<Move> possibleMoves, Participant.ActionCallback actionCallback);
+    public abstract void intervene(Set<DefaultEncounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation);
 
     public abstract void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation);
 
