@@ -1,8 +1,8 @@
 package nightgames.areas;
 
+import edu.emory.mathcs.backport.java.util.Collections;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.State;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Flag;
@@ -188,18 +188,19 @@ public class Challenge implements Deployable {
 
     @Override
     public boolean resolve(Participant active) {
-        if (active.state.getEnum() == State.ready) {
-            var participants = Global.getMatch().getParticipants().stream().filter(p -> p != active).collect(Collectors.toUnmodifiableList());
-            if (participants.size() > 0) {
-                owner = active;
-                target = participants.get(Global.random(participants.size() - 1));
-                goal = pick();
-                active.getLocation().remove(this);
-                active.getCharacter().accept(this);
-                return true;
-            }
-        }
-        return false;
+        var validTargets = Global.getMatch()
+                .getParticipants()
+                .stream()
+                .filter(p -> p != active)
+                .collect(Collectors.toList());
+        Collections.shuffle(validTargets);
+        assert validTargets.size() > 0 : String.format("%s is playing by themselves!", active.getCharacter().getTrueName());
+        owner = active;
+        target = validTargets.get(0);
+        goal = pick();
+        active.getLocation().remove(this);
+        active.getCharacter().accept(this);
+        return true;
     }
 
     public int reward() {

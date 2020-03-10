@@ -2,7 +2,6 @@ package nightgames.areas;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.State;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -253,23 +252,20 @@ public class Cache implements Deployable {
 
     @Override
     public boolean resolve(Participant active) {
-        if (active.state.getEnum() == State.ready) {
-            attributeChecks.stream()
-                    .map(c -> c.check(active))
-                    .filter(Optional::isPresent)
-                    .map(Optional::get)
-                    .findAny()
-                    .ifPresentOrElse(
-                            msg -> {
-                                if (active.getCharacter().human()) {
-                                    Global.gui().message(msg);
-                                }
-                                grantReward(active);
-                            },
-                            () -> Global.gui().message(failureMessage));
-            active.getLocation().remove(this);
-            return true;
-        }
-        return false;
+        attributeChecks.stream()
+                .map(c -> c.check(active))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .findAny()
+                .ifPresentOrElse(
+                        msg -> {
+                            if (active.getCharacter().human()) {
+                                Global.gui().message(msg);
+                            }
+                            grantReward(active);
+                        },
+                        () -> Global.gui().message(failureMessage));
+        active.getLocation().remove(this);
+        return true;
     }
 }
