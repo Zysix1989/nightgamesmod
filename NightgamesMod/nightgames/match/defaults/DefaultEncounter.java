@@ -145,7 +145,7 @@ public class DefaultEncounter {
         }
     }
 
-    private static void ineligibleMasturbatingMessages(Participant pastWinner, Participant pastLoser) {
+    public static void ineligibleMasturbatingMessages(Participant pastWinner, Participant pastLoser) {
         pastLoser.getCharacter().message(String.format(
                 "%s catches you masturbating, but fortunately %s's not yet allowed to attack you, so %s just "
                         + "watches you pleasure yourself with an amused grin.",
@@ -165,16 +165,10 @@ public class DefaultEncounter {
     }
 
     private void ineligibleSpotCheck() {
-        if (p1.state.getEnum() == State.masturbating) {
-            ineligibleMasturbatingMessages(p2, p1);
-        } else if (p2.state.getEnum() == State.masturbating) {
-            ineligibleMasturbatingMessages(p1, p2);
+        if (p1.canStartCombat(p2)) {
+            p1.state.ineligibleCombatReplacement(p1, p2).orElse(() -> ineligibleMessages(p2, p1)).run();
         } else {
-            if (p1.canStartCombat(p2)) {
-                ineligibleMessages(p2, p1);
-            } else {
-                ineligibleMessages(p1, p2);
-            }
+            p2.state.ineligibleCombatReplacement(p2, p1).orElse(() -> ineligibleMessages(p1, p2)).run();
         }
         location.endEncounter();
     }

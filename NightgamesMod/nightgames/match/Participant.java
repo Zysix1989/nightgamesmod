@@ -23,6 +23,7 @@ public class Participant {
         void move(Participant p);
         boolean isDetectable();
         Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other);
+        Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other);
         int spotCheckDifficultyModifier(Participant p);
     }
 
@@ -47,6 +48,11 @@ public class Participant {
 
         @Override
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
             return Optional.empty();
         }
 
@@ -99,6 +105,11 @@ public class Participant {
         }
 
         @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
         public int spotCheckDifficultyModifier(Participant p) {
             throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
                     p.getCharacter().getTrueName()));
@@ -135,6 +146,11 @@ public class Participant {
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             throw new UnsupportedOperationException(String.format("%s is already in combat!",
                     p.getCharacter().getTrueName()));
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
         }
 
         @Override
@@ -191,6 +207,11 @@ public class Participant {
         @Override
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             return Optional.of(() -> encounter.spy(other, p));
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
         }
 
         @Override
@@ -270,6 +291,11 @@ public class Participant {
         }
 
         @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
         public int spotCheckDifficultyModifier(Participant p) {
             throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
                     p.getCharacter().getTrueName()));
@@ -300,6 +326,11 @@ public class Participant {
 
         @Override
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
             return Optional.empty();
         }
 
@@ -368,6 +399,11 @@ public class Participant {
         }
 
         @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
         public int spotCheckDifficultyModifier(Participant p) {
             throw new UnsupportedOperationException(String.format("%s can't be attacked while resupplying",
                     p.getCharacter().getTrueName()));
@@ -400,6 +436,11 @@ public class Participant {
         @Override
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             return Optional.of(() -> encounter.spider(other, p));
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
         }
 
         @Override
@@ -438,6 +479,11 @@ public class Participant {
         }
 
         @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.of(() -> DefaultEncounter.ineligibleMasturbatingMessages(p, other));
+        }
+
+        @Override
         public int spotCheckDifficultyModifier(Participant p) {
             throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
                     p.getCharacter().getTrueName()));
@@ -470,6 +516,11 @@ public class Participant {
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             assert encounter instanceof FTCEncounter;
             return Optional.of(() -> ((FTCEncounter) encounter).treeAmbush(p, other));
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
         }
 
         @Override
@@ -508,6 +559,11 @@ public class Participant {
         }
 
         @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
         public int spotCheckDifficultyModifier(Participant p) {
             throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
                     p.getCharacter().getTrueName()));
@@ -540,6 +596,11 @@ public class Participant {
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             assert encounter instanceof FTCEncounter;
             return Optional.of(() -> ((FTCEncounter) encounter).passAmbush(p, other));
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
         }
 
         @Override
