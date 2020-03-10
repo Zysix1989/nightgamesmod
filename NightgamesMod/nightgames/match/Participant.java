@@ -12,8 +12,6 @@ import nightgames.items.Item;
 import nightgames.match.defaults.DefaultEncounter;
 import nightgames.status.Stsflag;
 
-import java.io.Reader;
-import java.sql.PseudoColumnUsage;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -247,7 +245,8 @@ public class Participant {
 
 
     public void move() {
-        character.displayStateMessage(character.location.get().getTrap(this), state.getEnum());
+        character.displayStateMessage(character.location.get().getTrap(this));
+
         var possibleActions = new ArrayList<Action>();
         possibleActions.addAll(character.location.get().possibleActions(this));
         possibleActions.addAll(character.getItemActions());
@@ -278,12 +277,21 @@ public class Participant {
             resupply();
             return;
         } else if (state.getEnum() == State.webbed) {
+            character.message("You eventually manage to get an arm free, which you then use to extract yourself from the trap.");
             state = new ReadyState();
             return;
         } else if (state.getEnum() == State.masturbating) {
             character.masturbate();
             state = new ReadyState();
             return;
+        } else if (state.getEnum() == State.inTree) {
+            character.message("You are hiding in a tree, waiting to drop down on an unwitting foe.");
+        } else if (state.getEnum() == State.inBushes) {
+            character.message("You are hiding in dense bushes, waiting for someone to pass by.");
+        } else if (state.getEnum() == State.inPass) {
+            character.message("You are hiding in an alcove in the pass.");
+        } else if (state.getEnum() == State.hidden) {
+            character.message("You have found a hiding spot and are waiting for someone to pounce upon.");
         }
         if (character.location.get().encounter(this)) {
             character.move(possibleActions, act -> act.execute(this));

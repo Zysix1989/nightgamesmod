@@ -344,7 +344,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void displayStateMessage(Optional<Trap.Instance> knownTrap, State state) {
+    public void displayStateMessage(Optional<Trap.Instance> knownTrap) {
         if (Global.getMatch().getType() == MatchType.FTC) {
             Character holder = ((FTCMatch) Global.getMatch()).getFlagHolder();
             if (holder != null && !holder.human()) {
@@ -353,17 +353,6 @@ public class Player extends Character {
         }
         gui.message(location.get().getDescriptions().whereAmI() + "<br/><br/>");
         knownTrap.ifPresent(trap -> gui.message("You've set a " + trap.getName() + " here."));
-        if (state == State.webbed) {
-            gui.message("You eventually manage to get an arm free, which you then use to extract yourself from the trap.");
-        } else if (state == State.inTree) {
-            gui.message("You are hiding in a tree, waiting to drop down on an unwitting foe.");
-        } else if (state == State.inBushes) {
-            gui.message("You are hiding in dense bushes, waiting for someone to pass by.");
-        } else if (state == State.inPass) {
-            gui.message("You are hiding in an alcove in the pass.");
-        } else if (state == State.hidden) {
-            gui.message("You have found a hiding spot and are waiting for someone to pounce upon.");
-        }
     }
 
     @Override

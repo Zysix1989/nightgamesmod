@@ -1744,7 +1744,7 @@ public Character clone() throws CloneNotSupportedException {
      */
     public abstract boolean act(Combat c);
 
-    public void displayStateMessage(Optional<Trap.Instance> knownTrap, State state) {};
+    public void displayStateMessage(Optional<Trap.Instance> knownTrap) {};
 
     public abstract void move(Collection<Action> possibleActions,
                               Participant.ActionCallback callback);
