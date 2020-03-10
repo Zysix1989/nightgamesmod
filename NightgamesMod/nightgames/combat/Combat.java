@@ -1238,9 +1238,8 @@ public class Combat {
 
     public void updateMessage() {
         Global.gui().refresh();
-        if (beingObserved) {
-            Global.gui().message(message);
-        }
+        p1.getCharacter().message(message);
+        p2.getCharacter().message(message);
     }
 
     public void updateAndClearMessage() {
