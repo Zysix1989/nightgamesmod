@@ -553,9 +553,6 @@ public class Participant {
     }
 
     void finishMatch() {
-        for (var victor : invalidAttackers) {
-            victor.incrementScore(victor.bounty(this));
-        }
         character.finishMatch();
         invalidAttackers.clear();
     }

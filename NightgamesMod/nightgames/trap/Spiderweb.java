@@ -92,7 +92,7 @@ public class Spiderweb extends Trap {
         victim.state = new Participant.ReadyState();
 
         attacker.getCharacter().tempt(20);
-        attacker.incrementScore(1);
+        attacker.incrementScore(attacker.bounty(victim));
         attacker.state = new Participant.ReadyState();
 
         victim.getLocation().endEncounter();
