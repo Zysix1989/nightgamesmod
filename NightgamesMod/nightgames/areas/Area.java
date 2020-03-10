@@ -96,11 +96,11 @@ public class Area implements Serializable {
     }
 
     public static class EncounterResult {
-        public boolean exclusive;
+        public boolean canDoActions;
         public List<CommandPanelOption> options;
 
         EncounterResult(boolean exclusive, List<CommandPanelOption> options) {
-            this.exclusive = exclusive;
+            this.canDoActions = exclusive;
             this.options = options;
         }
     }
@@ -127,7 +127,7 @@ public class Area implements Serializable {
                         // && Global.getMatch().canEngage(p, opponent)
                 ) {
                     fight = Global.getMatch().buildEncounter(p, opponent, this);
-                    return new EncounterResult(fight.spotCheck(), new ArrayList<>());
+                    return new EncounterResult(!fight.spotCheck(), new ArrayList<>());
                 }
             }
         }

@@ -383,7 +383,7 @@ public class Player extends Character {
             gui.message("You hear something in the <b>" + room.name + "</b>.");
             room.setPinged(true);
         });
-        if (!encounterResult.exclusive) {
+        if (!encounterResult.canDoActions) {
             for (Action act : possibleActions) {
                 if (Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
                     actionChoices.add(act);

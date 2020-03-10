@@ -376,7 +376,7 @@ public class NPC extends Character {
     public void move(Collection<Action> possibleActions,
                      Area.EncounterResult encounterResult,
                      Participant.ActionCallback callback) {
-        if (!encounterResult.exclusive) {
+        if (!encounterResult.canDoActions) {
             HashSet<Area> radar = new HashSet<>();
             if (!has(Trait.immobile)) {
                 radar.addAll(location.get().noisyNeighbors(get(Attribute.Perception)));
