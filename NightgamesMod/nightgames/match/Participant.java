@@ -1,19 +1,19 @@
 package nightgames.match;
 
-import nightgames.actions.Action;
-import nightgames.actions.Move;
+import nightgames.actions.*;
 import nightgames.areas.Area;
-import nightgames.areas.AreaIdentity;
-import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.State;
+import nightgames.combat.Combat;
 import nightgames.global.Global;
-import nightgames.items.Item;
 import nightgames.match.defaults.DefaultEncounter;
-import nightgames.match.ftc.FTCEncounter;
 import nightgames.status.Stsflag;
+import nightgames.trap.Spiderweb;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Participant {
@@ -36,594 +36,43 @@ public class Participant {
         }
     }
 
-    public static class ReadyState implements PState {
-        @Override
-        public State getEnum() {
-            return State.ready;
-        }
+    public static class ReadyState extends Action.Ready {}
 
-        @Override
-        public boolean allowsNormalActions() {
-            return true;
-        }
-
-        @Override
-        public void move(Participant p) {}
-
-        @Override
-        public boolean isDetectable() {
-            return true;
-        }
-
-        @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
-            return Optional.empty();
-        }
-
-        @Override
-        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
-            return Optional.empty();
-        }
-
-        @Override
-        public int spotCheckDifficultyModifier(Participant p) {
-            return 0;
-        }
-    }
-
-    public static class ShowerState implements PState {
-        private boolean clothesStolen = false;
-        private String message;
-
+    public static class ShowerState extends Bathe.ShowerState {
         public ShowerState(String message) {
-            this.message = message;
-        }
-
-        @Override
-        public State getEnum() {
-            return State.shower;
-        }
-
-        @Override
-        public boolean allowsNormalActions() {
-            return false;
-        }
-
-        @Override
-        public void move(Participant p) {
-            p.character.bathe();
-            p.character.message(message);
-            if (clothesStolen) {
-                p.character.message("Your clothes aren't where you left them. Someone must have come by and taken them.");
-            }
-            p.state = new ReadyState();
-        }
-
-        @Override
-        public boolean isDetectable() {
-            return true;
-        }
-
-        @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
-            if (!clothesStolen) {
-                return Optional.of(() -> encounter.showerScene(other, p));
-            }
-            return Optional.empty();
-        }
-
-        @Override
-        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
-            return Optional.empty();
-        }
-
-        @Override
-        public int spotCheckDifficultyModifier(Participant p) {
-            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
-                    p.getCharacter().getTrueName()));
-        }
-
-        @Override
-        public void sendAssessmentMessage(Participant p, Character observer) {
-            observer.message("She is completely naked.");
-        }
-
-        public void stealClothes() {
-            assert !clothesStolen;
-            clothesStolen = true;
+            super(message);
         }
     }
 
-    public static class CombatState implements PState {
-        @Override
-        public State getEnum() {
-            return State.combat;
-        }
-
-        @Override
-        public boolean allowsNormalActions() {
-            return false;
-        }
-
-        @Override
-        public void move(Participant p) {
-            p.character.location.get().fight.battle();
-        }
-
-        @Override
-        public boolean isDetectable() {
-            return true;
-        }
-
-        @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
-            throw new UnsupportedOperationException(String.format("%s is already in combat!",
-                    p.getCharacter().getTrueName()));
-        }
-
-        @Override
-        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
-            return Optional.empty();
-        }
-
-        @Override
-        public int spotCheckDifficultyModifier(Participant p) {
-            throw new UnsupportedOperationException(String.format("%s is already in combat!",
-                    p.getCharacter().getTrueName()));
-        }
-    }
-
-    public static class SearchingState implements PState {
-        @Override
-        public State getEnum() {
-            return State.searching;
-        }
-
-        @Override
-        public boolean allowsNormalActions() {
-            return false;
-        }
-
-        @Override
-        public void move(Participant p) {
-            Collection<Item> foundItems;
-            int roll = Global.random(10);
-            switch (roll) {
-                case 9:
-                    foundItems = List.of(Item.Tripwire, Item.Tripwire);
-                    break;
-                case 8:
-                    foundItems = List.of(Item.ZipTie, Item.ZipTie, Item.ZipTie);
-                    break;
-                case 7:
-                    foundItems = List.of(Item.Phone);
-                    break;
-                case 6:
-                    foundItems = List.of(Item.Rope);
-                    break;
-                case 5:
-                    foundItems = List.of(Item.Spring);
-                    break;
-                default:
-                    foundItems = List.of();
-                    break;
-            }
-            p.character.search(foundItems);
-            p.state = new ReadyState();
-        }
-
-        @Override
-        public boolean isDetectable() {
-            return true;
-        }
-
-        @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
-            return Optional.of(() -> encounter.spy(other, p));
-        }
-
-        @Override
-        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
-            return Optional.empty();
-        }
-
-        @Override
-        public int spotCheckDifficultyModifier(Participant p) {
-            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
-                    p.getCharacter().getTrueName()));
-        }
-    }
-
-    public static class CraftingState implements PState {
-        @Override
-        public State getEnum() {
-            return State.crafting;
-        }
-
-        @Override
-        public boolean allowsNormalActions() {
-            return false;
-        }
-
-        @Override
-        public void move(Participant p) {
-            Collection<Item> craftedItems;
-            int roll = Global.random(15);
-            if (p.character.check(Attribute.Cunning, 25)) {
-                if (roll == 9) {
-                    craftedItems = List.of(Item.Aphrodisiac, Item.DisSol);
-                } else if (roll >= 5) {
-                    craftedItems = List.of(Item.Aphrodisiac);
-                } else {
-                    craftedItems = List.of(Item.Lubricant, Item.Sedative);
-                }
-            } else if (p.character.check(Attribute.Cunning, 20)) {
-                if (roll == 9) {
-                    craftedItems = List.of(Item.Aphrodisiac);
-                } else if (roll >= 7) {
-                    craftedItems = List.of(Item.DisSol);
-                } else if (roll >= 5) {
-                    craftedItems = List.of(Item.Lubricant);
-                } else if (roll >= 3) {
-                    craftedItems = List.of(Item.Sedative);
-                } else {
-                    craftedItems = List.of(Item.EnergyDrink);
-                }
-            } else if (p.character.check(Attribute.Cunning, 15)) {
-                if (roll == 9) {
-                    craftedItems = List.of(Item.Aphrodisiac);
-                } else if (roll >= 8) {
-                    craftedItems = List.of(Item.DisSol);
-                } else if (roll >= 7) {
-                    craftedItems = List.of(Item.Lubricant);
-                } else if (roll >= 6) {
-                    craftedItems = List.of(Item.EnergyDrink);
-                } else {
-                    craftedItems = List.of();
-                }
-            } else if (roll >= 7) {
-                craftedItems = List.of(Item.Lubricant);
-            } else if (roll >= 5) {
-                craftedItems = List.of(Item.Sedative);
-            } else {
-                craftedItems = List.of();
-            }
-            p.character.craft(craftedItems);
-            p.state = new ReadyState();
-        }
-
-        @Override
-        public boolean isDetectable() {
-            return true;
-        }
-
-        @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
-            return Optional.of(() -> encounter.spy(other, p));
-        }
-
-        @Override
-        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
-            return Optional.empty();
-        }
-
-        @Override
-        public int spotCheckDifficultyModifier(Participant p) {
-            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
-                    p.getCharacter().getTrueName()));
-        }
-    }
-
-    public static class HiddenState implements PState {
-        @Override
-        public State getEnum() {
-            return State.hidden;
-        }
-
-        @Override
-        public boolean allowsNormalActions() {
-            return true;
-        }
-
-        @Override
-        public void move(Participant p) {
-            p.character.message("You have found a hiding spot and are waiting for someone to pounce upon.");
-        }
-
-        @Override
-        public boolean isDetectable() {
-            return false;
-        }
-
-        @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
-            return Optional.empty();
-        }
-
-        @Override
-        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
-            return Optional.empty();
-        }
-
-        @Override
-        public int spotCheckDifficultyModifier(Participant p) {
-            return (p.getCharacter().get(Attribute.Cunning) * 2 / 3) + 20;
-        }
-    }
-
-    public static class ResupplyingState implements PState {
-        @Override
-        public State getEnum() {
-            return State.resupplying;
-        }
-
-        @Override
-        public boolean allowsNormalActions() {
-            return false;
-        }
-
-        @Override
-        public void move(Participant p) {
-            p.invalidAttackers.clear();
-            p.character.change();
-            p.state = new ReadyState();
-            p.character.getWillpower().renew();
-            if (p.character.location().getOccupants().size() > 1) {
-                if (p.character.location().id() == AreaIdentity.dorm) {
-                    if (Global.getMatch().gps("Quad").orElseThrow().getOccupants().isEmpty()) {
-                        p.travel(Global.getMatch().gps("Quad").orElseThrow(),
-                                "You hear your opponents searching around the "
-                                        + "dorm, so once you finish changing, you hop out the window and "
-                                        + "head to the quad.");
-                    } else {
-                        p.travel(Global.getMatch().gps("Laundry").orElseThrow(),
-                                "You hear your opponents searching around "
-                                        + "the dorm, so once you finish changing, you quietly move "
-                                        + "downstairs to the laundry room.");
-                    }
-                }
-                if (p.character.location().id() == AreaIdentity.union) {
-                    if (Global.getMatch().gps("Quad").orElseThrow().getOccupants().isEmpty()) {
-                        p.travel(Global.getMatch().gps("Quad").orElseThrow(),
-                                "You don't want to be ambushed leaving the "
-                                        + "student union, so once you finish changing, you hop out the "
-                                        + "window and head to the quad.");
-                    } else {
-                        p.travel(Global.getMatch().gps("Pool").orElseThrow(),
-                                "You don't want to be ambushed leaving "
-                                        + "the student union, so once you finish changing, you sneak out "
-                                        + "the back door and head to the pool.");
-                    }
-                }
-            }
-        }
-
-        @Override
-        public boolean isDetectable() {
-            return true;
-        }
-
-        @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
-            throw new UnsupportedOperationException(String.format("%s can't be attacked while resupplying",
-                    p.getCharacter().getTrueName()));
-        }
-
-        @Override
-        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
-            return Optional.empty();
-        }
-
-        @Override
-        public int spotCheckDifficultyModifier(Participant p) {
-            throw new UnsupportedOperationException(String.format("%s can't be attacked while resupplying",
-                    p.getCharacter().getTrueName()));
-        }
+    public static class CombatState extends Combat.State {
 
     }
 
-    public static class WebbedState implements PState {
-        @Override
-        public State getEnum() {
-            return State.webbed;
-        }
-
-        @Override
-        public boolean allowsNormalActions() {
-            return false;
-        }
-
-        @Override
-        public void move(Participant p) {
-            p.character.message("You eventually manage to get an arm free, which you then use to extract yourself from the trap.");
-            p.state = new ReadyState();
-        }
-
-        @Override
-        public boolean isDetectable() {
-            return true;
-        }
-
-        @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
-            return Optional.of(() -> encounter.spider(other, p));
-        }
-
-        @Override
-        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
-            return Optional.empty();
-        }
-
-        @Override
-        public int spotCheckDifficultyModifier(Participant p) {
-            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
-                    p.getCharacter().getTrueName()));
-        }
-
-        @Override
-        public void sendAssessmentMessage(Participant p, Character observer) {
-            observer.message("She is naked and helpless. There's no way she could fight back.");
-        }
-
+    public static class SearchingState extends Scavenge.State {
     }
 
-    public static class MasturbatingState implements PState {
-        @Override
-        public State getEnum() {
-            return State.masturbating;
-        }
-
-        @Override
-        public boolean allowsNormalActions() {
-            return false;
-        }
-
-        @Override
-        public void move(Participant p) {
-            p.character.masturbate();
-            p.state = new ReadyState();
-        }
-
-        @Override
-        public boolean isDetectable() {
-            return true;
-        }
-
-        @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
-            return Optional.of(() -> encounter.caught(other, p));
-        }
-
-        @Override
-        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
-            return Optional.of(() -> DefaultEncounter.ineligibleMasturbatingMessages(p, other));
-        }
-
-        @Override
-        public int spotCheckDifficultyModifier(Participant p) {
-            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
-                    p.getCharacter().getTrueName()));
-        }
-
+    public static class CraftingState extends Craft.State {
     }
 
-    public static class InTreeState implements PState {
-        @Override
-        public State getEnum() {
-            return State.inTree;
-        }
-
-        @Override
-        public boolean allowsNormalActions() {
-            return true;
-        }
-
-        @Override
-        public void move(Participant p) {
-            p.character.message("You are hiding in a tree, waiting to drop down on an unwitting foe.");
-        }
-
-        @Override
-        public boolean isDetectable() {
-            return false;
-        }
-
-        @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
-            assert encounter instanceof FTCEncounter;
-            return Optional.of(() -> ((FTCEncounter) encounter).treeAmbush(p, other));
-        }
-
-        @Override
-        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
-            return Optional.empty();
-        }
-
-        @Override
-        public int spotCheckDifficultyModifier(Participant p) {
-            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
-                    p.getCharacter().getTrueName()));
-        }
-
+    public static class HiddenState extends Hide.State {
     }
 
-    public static class InBushesState implements PState {
-        @Override
-        public State getEnum() {
-            return State.inBushes;
-        }
-
-        @Override
-        public boolean allowsNormalActions() {
-            return true;
-        }
-
-        @Override
-        public void move(Participant p) {
-            p.character.message("You are hiding in dense bushes, waiting for someone to pass by.");
-        }
-
-        @Override
-        public boolean isDetectable() {
-            return false;
-        }
-
-        @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
-            assert encounter instanceof FTCEncounter;
-            return Optional.of(() -> ((FTCEncounter) encounter).bushAmbush(p, other));
-        }
-
-        @Override
-        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
-            return Optional.empty();
-        }
-
-        @Override
-        public int spotCheckDifficultyModifier(Participant p) {
-            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
-                    p.getCharacter().getTrueName()));
-        }
-
+    public static class ResupplyingState extends Resupply.State {
     }
 
-    public static class InPassState implements PState {
-        @Override
-        public State getEnum() {
-            return State.inPass;
-        }
+    public static class WebbedState extends Spiderweb.State {
+    }
 
-        @Override
-        public boolean allowsNormalActions() {
-            return false;
-        }
+    public static class MasturbatingState extends MasturbateAction.State {
+    }
 
-        @Override
-        public void move(Participant p) {
-            p.character.message("You are hiding in an alcove in the pass.");
-        }
+    public static class InTreeState extends TreeAmbush.State {
+    }
 
-        @Override
-        public boolean isDetectable() {
-            return false;
-        }
+    public static class InBushesState extends BushAmbush.State {
+    }
 
-        @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
-            assert encounter instanceof FTCEncounter;
-            return Optional.of(() -> ((FTCEncounter) encounter).passAmbush(p, other));
-        }
-
-        @Override
-        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
-            return Optional.empty();
-        }
-
-        @Override
-        public int spotCheckDifficultyModifier(Participant p) {
-            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
-                    p.getCharacter().getTrueName()));
-        }
+    public static class InPassState extends PassAmbush.State {
     }
 
 
@@ -632,7 +81,7 @@ public class Participant {
     private int score = 0;
     private int roundsToWait = 0;
     public PState state = new ReadyState();
-    private Set<Participant> invalidAttackers = new HashSet<>();
+    public Set<Participant> invalidAttackers = new HashSet<>();
 
     public Participant(Character c) {
         this.character = c;

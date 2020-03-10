@@ -1,9 +1,12 @@
 package nightgames.actions;
 
 import nightgames.characters.Character;
+import nightgames.characters.State;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 public abstract class Action implements Serializable {
     /**
@@ -23,6 +26,42 @@ public abstract class Action implements Serializable {
         protected Aftermath() {}
 
         public abstract String describe(Character c);
+    }
+
+    public static class Ready implements Participant.PState {
+        @Override
+        public State getEnum() {
+            return State.ready;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return true;
+        }
+
+        @Override
+        public void move(Participant p) {
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return true;
+        }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            return 0;
+        }
     }
 
     public abstract Aftermath execute(Participant user);

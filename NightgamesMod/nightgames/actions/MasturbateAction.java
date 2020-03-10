@@ -1,11 +1,13 @@
 package nightgames.actions;
 
 import nightgames.characters.Character;
-import nightgames.characters.State;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
+
+import java.util.Optional;
 
 public class MasturbateAction extends Action {
     private static final long serialVersionUID = 3479886040422510833L;
@@ -25,6 +27,46 @@ public class MasturbateAction extends Action {
             }
             return mast + "while trying not to make much noise. It's quite a show.";
         }
+    }
+
+    public static class State implements Participant.PState {
+        @Override
+        public nightgames.characters.State getEnum() {
+            return nightgames.characters.State.masturbating;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.getCharacter().masturbate();
+            p.state = new Participant.ReadyState();
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return true;
+        }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+            return Optional.of(() -> encounter.caught(other, p));
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.of(() -> DefaultEncounter.ineligibleMasturbatingMessages(p, other));
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
+        }
+
     }
 
     public MasturbateAction() {

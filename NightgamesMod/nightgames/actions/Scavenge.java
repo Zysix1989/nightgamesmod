@@ -1,8 +1,14 @@
 package nightgames.actions;
 
 import nightgames.characters.Character;
-import nightgames.characters.State;
+import nightgames.global.Global;
+import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 public class Scavenge extends Action {
     private static final long serialVersionUID = -6692555226745083699L;
@@ -14,6 +20,68 @@ public class Scavenge extends Action {
         public String describe(Character c) {
             return " begin scrounging through some boxes in the corner.";
         }
+    }
+
+    public static class State implements Participant.PState {
+        @Override
+        public nightgames.characters.State getEnum() {
+            return nightgames.characters.State.searching;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            Collection<Item> foundItems;
+            int roll = Global.random(10);
+            switch (roll) {
+                case 9:
+                    foundItems = List.of(Item.Tripwire, Item.Tripwire);
+                    break;
+                case 8:
+                    foundItems = List.of(Item.ZipTie, Item.ZipTie, Item.ZipTie);
+                    break;
+                case 7:
+                    foundItems = List.of(Item.Phone);
+                    break;
+                case 6:
+                    foundItems = List.of(Item.Rope);
+                    break;
+                case 5:
+                    foundItems = List.of(Item.Spring);
+                    break;
+                default:
+                    foundItems = List.of();
+                    break;
+            }
+            p.getCharacter().search(foundItems);
+            p.state = new Participant.ReadyState();
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return true;
+        }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+            return Optional.of(() -> encounter.spy(other, p));
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
+        }
+
     }
 
     public Scavenge() {

@@ -1,8 +1,11 @@
 package nightgames.actions;
 
 import nightgames.characters.Character;
-import nightgames.characters.State;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.ftc.FTCEncounter;
+
+import java.util.Optional;
 
 public class PassAmbush extends Action {
     private static final long serialVersionUID = -1745311550506911281L;
@@ -16,13 +19,53 @@ public class PassAmbush extends Action {
         }
     }
 
+    public static class State implements Participant.PState {
+        @Override
+        public nightgames.characters.State getEnum() {
+            return nightgames.characters.State.inPass;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.getCharacter().message("You are hiding in an alcove in the pass.");
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return false;
+        }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+            assert encounter instanceof FTCEncounter;
+            return Optional.of(() -> ((FTCEncounter) encounter).passAmbush(p, other));
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
+        }
+
+    }
+
     public PassAmbush() {
         super("Try Ambush");
     }
 
     @Override
     public boolean usable(Participant user) {
-        return user.state.getEnum() != State.inPass
+        return user.state.getEnum() != nightgames.characters.State.inPass
                 && !user.getCharacter().bound();
     }
 

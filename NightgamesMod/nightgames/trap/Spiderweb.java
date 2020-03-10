@@ -5,6 +5,7 @@ import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
 import nightgames.stance.Position;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
@@ -54,6 +55,51 @@ public class Spiderweb extends Trap {
             onSpiderwebDefeat(attacker, victim, this);
             return super.capitalize(attacker, victim);
         }
+    }
+
+    public static class State implements Participant.PState {
+        @Override
+        public nightgames.characters.State getEnum() {
+            return nightgames.characters.State.webbed;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.getCharacter().message("You eventually manage to get an arm free, which you then use to extract yourself from the trap.");
+            p.state = new Participant.ReadyState();
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return true;
+        }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+            return Optional.of(() -> encounter.spider(other, p));
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
+        }
+
+        @Override
+        public void sendAssessmentMessage(Participant p, Character observer) {
+            observer.message("She is naked and helpless. There's no way she could fight back.");
+        }
+
     }
     
     public Spiderweb() {

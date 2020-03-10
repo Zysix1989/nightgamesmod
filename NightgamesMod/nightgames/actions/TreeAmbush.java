@@ -2,8 +2,11 @@ package nightgames.actions;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.State;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.ftc.FTCEncounter;
+
+import java.util.Optional;
 
 public class TreeAmbush extends Action {
     private static final long serialVersionUID = -8503564080765172483L;
@@ -17,6 +20,46 @@ public class TreeAmbush extends Action {
         }
     }
 
+    public static class State implements Participant.PState {
+        @Override
+        public nightgames.characters.State getEnum() {
+            return nightgames.characters.State.inTree;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return true;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.getCharacter().message("You are hiding in a tree, waiting to drop down on an unwitting foe.");
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return false;
+        }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+            assert encounter instanceof FTCEncounter;
+            return Optional.of(() -> ((FTCEncounter) encounter).treeAmbush(p, other));
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
+        }
+
+    }
+
     public TreeAmbush() {
         super("Climb a Tree");
     }
@@ -24,7 +67,7 @@ public class TreeAmbush extends Action {
     @Override
     public boolean usable(Participant user) {
         return (user.getCharacter().get(Attribute.Power) >= 20 || user.getCharacter().get(Attribute.Animism) >= 10)
-                        && user.state.getEnum() != State.inTree
+                        && user.state.getEnum() != nightgames.characters.State.inTree
                         && !user.getCharacter().bound();
     }
 

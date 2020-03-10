@@ -1,8 +1,11 @@
 package nightgames.actions;
 
+import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.State;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
+
+import java.util.Optional;
 
 public class Hide extends Action {
     private static final long serialVersionUID = 9222848242102511020L;
@@ -16,13 +19,50 @@ public class Hide extends Action {
         }
     }
 
+    public static class State implements Participant.PState {
+        @Override
+        public nightgames.characters.State getEnum() {
+            return nightgames.characters.State.hidden;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return true;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.getCharacter().message("You have found a hiding spot and are waiting for someone to pounce upon.");
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return false;
+        }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            return (p.getCharacter().get(Attribute.Cunning) * 2 / 3) + 20;
+        }
+    }
+
     public Hide() {
         super("Hide");
     }
 
     @Override
     public boolean usable(Participant user) {
-        return !(user.state.getEnum() == State.hidden) && !user.getCharacter().bound();
+        return !(user.state.getEnum() == nightgames.characters.State.hidden) && !user.getCharacter().bound();
     }
 
     @Override

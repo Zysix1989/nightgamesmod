@@ -2,8 +2,11 @@ package nightgames.actions;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.State;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.ftc.FTCEncounter;
+
+import java.util.Optional;
 
 public class BushAmbush extends Action {
     private static final long serialVersionUID = 2384434976695344978L;
@@ -19,6 +22,45 @@ public class BushAmbush extends Action {
         }
     }
 
+    public static class State implements Participant.PState {
+        @Override
+        public nightgames.characters.State getEnum() {
+            return nightgames.characters.State.inBushes;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return true;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.getCharacter().message("You are hiding in dense bushes, waiting for someone to pass by.");
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return false;
+        }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+            assert encounter instanceof FTCEncounter;
+            return Optional.of(() -> ((FTCEncounter) encounter).bushAmbush(p, other));
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
+        }
+
+    }
     public BushAmbush() {
         super("Hide in Bushes");
     }
@@ -26,7 +68,7 @@ public class BushAmbush extends Action {
     @Override
     public boolean usable(Participant user) {
         return (user.getCharacter().get(Attribute.Cunning) >= 20 || user.getCharacter().get(Attribute.Animism) >= 10)
-                && user.state.getEnum() != State.inBushes
+                && user.state.getEnum() != nightgames.characters.State.inBushes
                 && !user.getCharacter().bound();
     }
 

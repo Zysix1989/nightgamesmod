@@ -1,7 +1,11 @@
 package nightgames.actions;
 
 import nightgames.characters.Character;
+import nightgames.characters.State;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
+
+import java.util.Optional;
 
 public class Bathe extends Action {
 
@@ -17,6 +21,71 @@ public class Bathe extends Action {
             return " start bathing in the nude, not bothered by your presence.";
         }
     }
+
+    public static class ShowerState implements Participant.PState {
+        private boolean clothesStolen = false;
+        private String message;
+
+        public ShowerState(String message) {
+            this.message = message;
+        }
+
+        @Override
+        public State getEnum() {
+            return State.shower;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.getCharacter().bathe();
+            p.getCharacter().message(message);
+            if (clothesStolen) {
+                p.getCharacter().message("Your clothes aren't where you left them. Someone must have come by and taken them.");
+            }
+            p.state = new Participant.ReadyState();
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return true;
+        }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+            if (!clothesStolen) {
+                return Optional.of(() -> encounter.showerScene(other, p));
+            }
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
+                    p.getCharacter().getTrueName()));
+        }
+
+        @Override
+        public void sendAssessmentMessage(Participant p, Character observer) {
+            observer.message("She is completely naked.");
+        }
+
+        public void stealClothes() {
+            assert !clothesStolen;
+            clothesStolen = true;
+        }
+    }
+
+
     private final String startMessage;
     private final String endMessage;
 

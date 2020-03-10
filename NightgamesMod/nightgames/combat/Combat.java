@@ -13,6 +13,7 @@ import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
+import nightgames.match.defaults.DefaultEncounter;
 import nightgames.modifier.standard.NoRecoveryModifier;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.pet.Pet;
@@ -55,6 +56,45 @@ public class Combat {
         CombatPhase getEnum();
         boolean turn(Combat c);
         boolean next(Combat c);
+    }
+
+    public static class State implements Participant.PState {
+        @Override
+        public nightgames.characters.State getEnum() {
+            return nightgames.characters.State.combat;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return false;
+        }
+
+        @Override
+        public void move(Participant p) {
+            p.getLocation().fight.battle();
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return true;
+        }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+            throw new UnsupportedOperationException(String.format("%s is already in combat!",
+                    p.getCharacter().getTrueName()));
+        }
+
+        @Override
+        public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
+            return Optional.empty();
+        }
+
+        @Override
+        public int spotCheckDifficultyModifier(Participant p) {
+            throw new UnsupportedOperationException(String.format("%s is already in combat!",
+                    p.getCharacter().getTrueName()));
+        }
     }
 
     private static class StartPhase implements Phase {
