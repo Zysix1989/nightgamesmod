@@ -178,12 +178,12 @@ public class FTCMatch extends Match {
         }
     }
 
-    public void turnInFlag(Character ch) {
+    public void turnInFlag(Participant flagHolder) {
         flagInCenter = true;
-        score(ch, 5);
+        flagHolder.incrementScore(5);
         Global.gui().message(Global.format("<b>{self:SUBJECT-ACTION:turn|turns} in the flag and "
-                        + "{self:action:gain|gains} five points.</b>", ch, Global.noneCharacter()));
-        ch.remove(Item.Flag);
+                        + "{self:action:gain|gains} five points.</b>", flagHolder.getCharacter(), Global.noneCharacter()));
+        flagHolder.getCharacter().remove(Item.Flag);
     }
 
     public boolean canCollectFlag(Character ch) {
