@@ -381,16 +381,12 @@ public class NPC extends Character {
             if (!has(Trait.immobile)) {
                 radar.addAll(location.get().noisyNeighbors(get(Attribute.Perception)));
             }
-            pickAndDoAction(possibleActions, radar, callback);
-        }
-    }
-
-    private void pickAndDoAction(Collection<Action> available, Collection<Area> radar, Participant.ActionCallback callback) {
-        var chosenAction = ai.move(available, radar);
-        if (location.get().humanPresent()) {
-            Global.gui().message("You notice " + getName() + callback.execute(chosenAction).describe(this));
-        } else {
-            callback.execute(chosenAction);
+            var chosenAction = ai.move(possibleActions, radar);
+            if (location.get().humanPresent()) {
+                Global.gui().message("You notice " + getName() + callback.execute(chosenAction).describe(this));
+            } else {
+                callback.execute(chosenAction);
+            }
         }
     }
 
