@@ -262,9 +262,9 @@ public class Match {
     public void score(Character combatant, int amt) {
         var participant = findParticipant(combatant);
         participant.incrementScore(amt);
-        if ((combatant.human() || participant.getLocation().humanPresent())) {
-            Global.gui().message(scoreString(combatant, amt));
-        }
+        participant.getLocation()
+                .getOccupants()
+                .forEach(p -> p.getCharacter().message(scoreString(combatant, amt)));
     }
 
     private String scoreString(Character combatant, int amt) {
