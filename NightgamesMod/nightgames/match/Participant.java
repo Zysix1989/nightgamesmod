@@ -388,10 +388,6 @@ public class Participant {
         return new Participant(this);
     }
 
-    void allowTarget(Participant p) {
-        p.invalidAttackers.remove(this);
-    }
-
     public void place(Area loc) {
         character.location.set(loc);
         loc.place(this);
