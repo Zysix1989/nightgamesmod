@@ -57,6 +57,10 @@ public class Participant {
         this.invalidAttackers = new HashSet<>(p.invalidAttackers);
     }
 
+    public Participant copy() {
+        return new Participant(this);
+    }
+
     public Character getCharacter() {
         return character;
     }
@@ -70,10 +74,6 @@ public class Participant {
         getLocation()
                 .getOccupants()
                 .forEach(p -> p.getCharacter().message(Match.scoreString(getCharacter(), amt, reason)));
-    }
-
-    public Participant copy() {
-        return new Participant(this);
     }
 
     public void place(Area loc) {
