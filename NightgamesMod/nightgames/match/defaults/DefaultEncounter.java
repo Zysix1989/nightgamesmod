@@ -454,13 +454,20 @@ public class DefaultEncounter {
                         , c.action("disappear", "disappears"));
     }
 
-    public static final class IntrusionOption {
-        public Character target;
-        public Runnable callback;
+    public final class IntrusionOption {
+        private Participant intruder;
+        public Participant target;
 
-        private IntrusionOption(Character target, Runnable callback) {
+        private IntrusionOption(Participant intruder, Participant target) {
             this.target = target;
-            this.callback = callback;
+        }
+
+        public Character getTargetCharacter() {
+            return target.getCharacter();
+        }
+
+        public void callback() {
+            intrude(intruder, target);
         }
     }
 
@@ -470,8 +477,8 @@ public class DefaultEncounter {
                 intruder.getCharacter().equals(p2.getCharacter())) {
             return Set.of();
         }
-        return Set.of(new IntrusionOption(p1.getCharacter(), () -> intrude(intruder, p1)),
-                new IntrusionOption(p2.getCharacter(), () -> intrude(intruder, p2)));
+        return Set.of(new IntrusionOption(intruder, p1),
+                new IntrusionOption(intruder, p2));
     }
 
     public void watch() {

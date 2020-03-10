@@ -436,10 +436,12 @@ public class NPC extends Character {
     public void intrudeInCombat(Set<DefaultEncounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation) {
         var bestTarget = intrusionOptions.stream()
                 .map(option -> new IntrusionEvaluation(option,
-                                Global.random(20) + getAffection(option.target) + (option.target.has(Trait.sympathetic) ? 10 : 0)))
+                                Global.random(20) +
+                                        getAffection(option.getTargetCharacter()) +
+                                        (option.getTargetCharacter().has(Trait.sympathetic) ? 10 : 0)))
                 .reduce(new IntrusionEvaluation(null, Integer.MIN_VALUE),
                         (best, current) -> best.score >= current.score ? best : current);
-        bestTarget.option.callback.run();
+        bestTarget.option.callback();
     }
 
     @Override

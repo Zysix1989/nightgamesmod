@@ -598,14 +598,14 @@ public class Player extends Character {
     public void intrudeInCombat(Set<DefaultEncounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation) {
         var listOptions = new ArrayList<>(intrusionOptions);
         assert listOptions.size() == 2: "No support for more than 2 combatants";
-        gui.message("You find <b>" + listOptions.get(0).target.getName() + "</b> and <b>" + listOptions.get(1).target.getName()
+        gui.message("You find <b>" + listOptions.get(0).getTargetCharacter().getName() + "</b> and <b>" + listOptions.get(1).getTargetCharacter().getName()
                         + "</b> fighting too intensely to notice your arrival. If you intervene now, it'll essentially decide the winner.");
         gui.message("Then again, you could just wait and see which one of them comes out on top. It'd be entertaining,"
                         + " at the very least. Alternatively, you could just leave them to it.");
 
         ArrayList<CommandPanelOption> options = listOptions.stream()
-                .map(option -> new CommandPanelOption("Help " + option.target.getName(),
-                        event -> option.callback.run()))
+                .map(option -> new CommandPanelOption("Help " + option.getTargetCharacter().getName(),
+                        event -> option.callback()))
                 .collect(Collectors.toCollection(ArrayList::new));
         options.add(new CommandPanelOption("Watch them fight", event -> neitherContinuation.run()));
         options.addAll(possibleMoves.stream()
