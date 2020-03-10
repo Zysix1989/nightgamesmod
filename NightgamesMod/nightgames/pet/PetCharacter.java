@@ -273,7 +273,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void intervene(Set<DefaultEncounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation) { }
+    public void intrudeInCombat(Set<DefaultEncounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation) { }
 
     @Override
     public void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {}

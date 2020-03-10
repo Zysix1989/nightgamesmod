@@ -270,7 +270,7 @@ public class Participant {
     public void timePasses() {}
 
     public void interveneInCombat(Set<DefaultEncounter.IntrusionOption> intrusionOptions, Runnable noneContinuation) {
-        character.intervene(intrusionOptions,
+        character.intrudeInCombat(intrusionOptions,
                 character.location.get().possibleActions(this).stream()
                         .filter(act -> act instanceof Move)
                         .map(act -> (Move) act)

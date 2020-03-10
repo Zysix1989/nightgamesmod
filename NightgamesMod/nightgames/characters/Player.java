@@ -595,7 +595,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void intervene(Set<DefaultEncounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation) {
+    public void intrudeInCombat(Set<DefaultEncounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation) {
         var listOptions = new ArrayList<>(intrusionOptions);
         assert listOptions.size() == 2: "No support for more than 2 combatants";
         gui.message("You find <b>" + listOptions.get(0).target.getName() + "</b> and <b>" + listOptions.get(1).target.getName()

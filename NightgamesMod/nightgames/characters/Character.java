@@ -1763,7 +1763,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract String taunt(Combat c, Character target);
 
-    public abstract void intervene(Set<DefaultEncounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation);
+    public abstract void intrudeInCombat(Set<DefaultEncounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation);
 
     public abstract void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation);
 
