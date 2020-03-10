@@ -360,6 +360,7 @@ public class DefaultEncounter {
         public Participant target;
 
         private IntrusionOption(Participant intruder, Participant target) {
+            this.intruder = intruder;
             this.target = target;
         }
 
