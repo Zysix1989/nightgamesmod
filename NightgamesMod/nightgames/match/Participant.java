@@ -573,7 +573,7 @@ public class Participant {
                 score = 0; // Hunter beating prey gets no points, only for flag.
             }
         }
-        Global.getMatch().score(character, score);
+        incrementScore(score);
     }
 
 
