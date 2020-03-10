@@ -554,14 +554,14 @@ public class Participant {
 
     void finishMatch() {
         for (var victor : invalidAttackers) {
-            victor.bounty(this);
+            victor.incrementScore(victor.bounty(this));
         }
         character.finishMatch();
         invalidAttackers.clear();
     }
 
-    public void bounty(Participant loser) {
-        incrementScore(loser.pointsGivenToVictor());
+    public int bounty(Participant loser) {
+        return loser.pointsGivenToVictor();
     }
 
     protected int pointsGivenToVictor() {

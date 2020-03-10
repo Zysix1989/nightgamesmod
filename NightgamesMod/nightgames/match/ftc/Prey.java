@@ -38,8 +38,8 @@ public class Prey extends Participant {
     }
 
     @Override
-    public void bounty(Participant loser) {
-        super.bounty(loser);
+    public int bounty(Participant loser) {
+        return super.bounty(loser);
     }
 
     @Override
