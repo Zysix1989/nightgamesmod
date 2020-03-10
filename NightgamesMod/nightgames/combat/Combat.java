@@ -571,14 +571,14 @@ public class Combat {
         first.orgasm();
         first.undress(this);
         first.gainTrophy(this, second);
-        first.invalidateTarget(second);
+        p1.getParticipant().invalidateTarget(second);
         first.gainAttraction(second, 4);
 
         second.gainXP(second.getVictoryXP(first));
         second.orgasm();
         second.undress(this);
         second.gainTrophy(this, first);
-        second.invalidateTarget(first);
+        p2.getParticipant().invalidateTarget(first);
         second.gainAttraction(first, 4);
 
         if (p1.getCharacter().human()) {
@@ -609,7 +609,7 @@ public class Combat {
         loser.gainXP(loser.getVictoryXP(winner));
         loser.orgasm();
         loser.undress(this);
-        loser.invalidateTarget(winner);
+        getOpponent(winner).getParticipant().invalidateTarget(winner);
         loser.gainAttraction(winner, 2);
 
         if (won.getCharacter().human()) {
@@ -1376,18 +1376,18 @@ public class Combat {
             targetCharacter.undress(this);
 
             intruderCharacter.gainXP(10 + intruderCharacter.lvlBonus(targetCharacter));
-            intruderCharacter.invalidateTarget(targetCharacter);
-            intruderCharacter.invalidateTarget(assistCharacter);
+            intruder.invalidateTarget(targetCharacter);
+            intruder.invalidateTarget(assistCharacter);
 
         } else {
             intruderCharacter.gainXP(intruderCharacter.getAssistXP(targetCharacter));
             intruderCharacter.intervene3p(this, targetCharacter, assistCharacter);
 
-            targetCharacter.invalidateTarget(intruderCharacter);
+            target.getParticipant().invalidateTarget(intruderCharacter);
             targetCharacter.gainXP(targetCharacter.getDefeatXP(assistCharacter));
             targetCharacter.orgasm();
             targetCharacter.undress(this);
-            targetCharacter.invalidateTarget(assistCharacter);
+            target.getParticipant().invalidateTarget(assistCharacter);
             targetCharacter.gainAttraction(assistCharacter, 1);
 
             assistCharacter.gainAttraction(intruderCharacter, 1);

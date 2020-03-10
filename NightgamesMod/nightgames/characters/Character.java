@@ -2662,10 +2662,6 @@ public Character clone() throws CloneNotSupportedException {
         }
     }
 
-    public void invalidateTarget(Character victor) {
-        mercy.addIfAbsent(victor);
-    }
-
     /**Performs the tasks associated with finishing a match. temporary traits are removed while meters are reset. 
      * 
      * */

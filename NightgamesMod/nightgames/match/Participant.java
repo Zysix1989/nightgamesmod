@@ -563,4 +563,8 @@ public class Participant {
         );
     }
 
+    public void invalidateTarget(Character victor) {
+        character.mercy.addIfAbsent(victor);
+    }
+
 }
