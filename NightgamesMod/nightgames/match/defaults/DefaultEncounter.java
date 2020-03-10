@@ -145,16 +145,16 @@ public class DefaultEncounter {
         }
     }
 
-    private static void ineligibleMasturbatingMessages(Participant masturbater, Participant voyeur) {
-        masturbater.getCharacter().message(String.format(
+    private static void ineligibleMasturbatingMessages(Participant pastWinner, Participant pastLoser) {
+        pastLoser.getCharacter().message(String.format(
                 "%s catches you masturbating, but fortunately %s's not yet allowed to attack you, so %s just "
                         + "watches you pleasure yourself with an amused grin.",
-                voyeur.getCharacter().getName(), voyeur.getCharacter().pronoun(), voyeur.getCharacter().pronoun()));
-        voyeur.getCharacter().message(String.format(
+                pastWinner.getCharacter().getName(), pastWinner.getCharacter().pronoun(), pastWinner.getCharacter().pronoun()));
+        pastWinner.getCharacter().message(String.format(
                 "You stumble onto %s with %s hand between %s legs, masturbating. Since you just fought you still can't touch %s, so "
                         + "you just watch the show until %s orgasms.",
-                masturbater.getCharacter().getName(), masturbater.getCharacter().possessiveAdjective(), masturbater.getCharacter().possessiveAdjective(), masturbater.getCharacter().objectPronoun(),
-                masturbater.getCharacter().pronoun()));
+                pastLoser.getCharacter().getName(), pastLoser.getCharacter().possessiveAdjective(), pastLoser.getCharacter().possessiveAdjective(), pastLoser.getCharacter().objectPronoun(),
+                pastLoser.getCharacter().pronoun()));
     }
 
     private static void ineligibleMessages(Participant pastWinner, Participant pastLoser) {
@@ -166,9 +166,9 @@ public class DefaultEncounter {
 
     private void ineligibleSpotCheck() {
         if (p1.state.getEnum() == State.masturbating) {
-            ineligibleMasturbatingMessages(p1, p2);
-        } else if (p2.state.getEnum() == State.masturbating) {
             ineligibleMasturbatingMessages(p2, p1);
+        } else if (p2.state.getEnum() == State.masturbating) {
+            ineligibleMasturbatingMessages(p1, p2);
         } else {
             if (p1.canStartCombat(p2)) {
                 ineligibleMessages(p2, p1);
