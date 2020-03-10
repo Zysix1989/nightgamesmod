@@ -112,15 +112,15 @@ public class Area implements Serializable {
      * being presented with the normal campus Actions.
      */
     public EncounterResult encounter(Participant p) {
-        List<CommandPanelOption> options = new ArrayList<>();
         // We can't run encounters if a fight is already occurring.
         if (fight != null && fight.checkIntrude(p.getCharacter())) {
-            options = p.interveneInCombat(
+            p.interveneInCombat(
                     fight.getFirstParticipant().getCharacter(),
                     () -> fight.intrude(p, fight.getFirstParticipant()),
                     fight.getSecondParticipant().getCharacter(),
                     () -> fight.intrude(p, fight.getSecondParticipant()),
                     () -> fight.watch());
+            return new EncounterResult(true, new ArrayList<>());
         } else if (present.size() > 1) {
             for (Participant opponent : present) {          //FIXME: Currently - encounters repeat - Does this check if they are busy?
                 if (opponent != p
@@ -131,7 +131,7 @@ public class Area implements Serializable {
                 }
             }
         }
-        return new EncounterResult(false, options);
+        return new EncounterResult(false, new ArrayList<>());
     }
 
     public boolean opportunity(Character target, Trap.Instance trap) {

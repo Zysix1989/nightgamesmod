@@ -8,7 +8,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
-import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.status.Stsflag;
 
@@ -267,8 +266,15 @@ public class Participant {
 
     public void timePasses() {}
 
-    public List<CommandPanelOption> interveneInCombat(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation) {
-        return character.intervene(p1, p1Continuation, p2, p2Continuation, noneContinuation);
+    public void interveneInCombat(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation) {
+        character.intervene(p1, p1Continuation,
+                p2, p2Continuation,
+                noneContinuation,
+                character.location.get().possibleActions(this).stream()
+                        .filter(act -> act instanceof Move)
+                        .map(act -> (Move) act)
+                        .collect(Collectors.toList()),
+                act -> act.execute(this));
     }
 
 }

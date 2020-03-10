@@ -1,6 +1,7 @@
 package nightgames.pet;
 
 import nightgames.actions.Action;
+import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.characters.Character;
 import nightgames.characters.*;
@@ -10,7 +11,6 @@ import nightgames.global.Global;
 import nightgames.grammar.Person;
 import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
-import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Participant;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.skills.Skill;
@@ -273,9 +273,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public List<CommandPanelOption> intervene(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable neitherContinuation) {
-        return new ArrayList<>();
-    }
+    public void intervene(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable neitherContinuation, List<Move> possibleMoves, Participant.ActionCallback actionCallback) { }
 
     @Override
     public void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {}

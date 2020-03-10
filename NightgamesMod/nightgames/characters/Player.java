@@ -600,7 +600,7 @@ public class Player extends Character {
     }
 
     @Override
-    public List<CommandPanelOption> intervene(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable neitherContinuation) {
+    public void intervene(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable neitherContinuation, List<Move> possibleMoves, Participant.ActionCallback actionCallback) {
         gui.message("You find <b>" + p1.getName() + "</b> and <b>" + p2.getName()
                         + "</b> fighting too intensely to notice your arrival. If you intervene now, it'll essentially decide the winner.");
         gui.message("Then again, you could just wait and see which one of them comes out on top. It'd be entertaining,"
@@ -610,8 +610,12 @@ public class Player extends Character {
         options.add(new CommandPanelOption("Help " + p1.getName(), event -> p1Continuation.run()));
         options.add(new CommandPanelOption("Help " + p2.getName(), event -> p2Continuation.run()));
         options.add(new CommandPanelOption("Watch them fight", event -> neitherContinuation.run()));
+        options.addAll(possibleMoves.stream()
+                .map(move -> new CommandPanelOption("Move (" + move.getDestination() + ")",
+                        event -> actionCallback.execute(move)))
+                .collect(Collectors.toSet()));
         Global.getMatch().pause();
-        return options;
+        gui.presentOptions(options);
     }
 
     @Override
