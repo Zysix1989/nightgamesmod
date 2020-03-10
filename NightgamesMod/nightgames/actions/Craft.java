@@ -24,7 +24,7 @@ public class Craft extends Action {
         }
     }
 
-    public static class State implements Participant.PState {
+    public static class State implements Participant.State {
 
         @Override
         public boolean allowsNormalActions() {

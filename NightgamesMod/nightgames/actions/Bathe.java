@@ -21,7 +21,7 @@ public class Bathe extends Action {
         }
     }
 
-    public static class ShowerState implements Participant.PState {
+    public static class ShowerState implements Participant.State {
         private boolean clothesStolen = false;
         private String message;
 

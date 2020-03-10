@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class Participant {
 
     // Below, the participant 'p' is the one who holds the state
-    public interface PState {
+    public interface State {
         boolean allowsNormalActions();
         void move(Participant p);
         boolean isDetectable();
@@ -38,7 +38,7 @@ public class Participant {
     protected Character character;
     private int score = 0;
     private int roundsToWait = 0;
-    public PState state = new Action.Ready();
+    public State state = new Action.Ready();
     public Set<Participant> invalidAttackers = new HashSet<>();
 
     public Participant(Character c) {

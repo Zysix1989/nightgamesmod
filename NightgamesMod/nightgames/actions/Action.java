@@ -27,7 +27,7 @@ public abstract class Action implements Serializable {
         public abstract String describe(Character c);
     }
 
-    public static class Ready implements Participant.PState {
+    public static class Ready implements Participant.State {
 
         @Override
         public boolean allowsNormalActions() {
