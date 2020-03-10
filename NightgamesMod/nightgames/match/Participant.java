@@ -22,7 +22,7 @@ public class Participant {
         boolean allowsNormalActions();
         void move(Participant p);
         boolean isDetectable();
-        Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p);
+        Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other);
         int spotCheckDifficultyModifier(Participant p);
     }
 
@@ -46,7 +46,7 @@ public class Participant {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             return Optional.empty();
         }
 
@@ -91,7 +91,7 @@ public class Participant {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             if (!clothesStolen) {
                 return Optional.of(() -> encounter.showerScene(other, p));
             }
@@ -132,7 +132,7 @@ public class Participant {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             throw new UnsupportedOperationException(String.format("%s is already in combat!",
                     p.getCharacter().getTrueName()));
         }
@@ -189,7 +189,7 @@ public class Participant {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             return Optional.of(() -> encounter.spy(other, p));
         }
 
@@ -265,7 +265,7 @@ public class Participant {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             return Optional.of(() -> encounter.spy(other, p));
         }
 
@@ -299,7 +299,7 @@ public class Participant {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             return Optional.empty();
         }
 
@@ -362,7 +362,7 @@ public class Participant {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             throw new UnsupportedOperationException(String.format("%s can't be attacked while resupplying",
                     p.getCharacter().getTrueName()));
         }
@@ -398,7 +398,7 @@ public class Participant {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             return Optional.of(() -> encounter.spider(other, p));
         }
 
@@ -433,7 +433,7 @@ public class Participant {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             return Optional.of(() -> encounter.caught(other, p));
         }
 
@@ -467,7 +467,7 @@ public class Participant {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             assert encounter instanceof FTCEncounter;
             return Optional.of(() -> ((FTCEncounter) encounter).treeAmbush(p, other));
         }
@@ -502,7 +502,7 @@ public class Participant {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             assert encounter instanceof FTCEncounter;
             return Optional.of(() -> ((FTCEncounter) encounter).bushAmbush(p, other));
         }
@@ -537,7 +537,7 @@ public class Participant {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             assert encounter instanceof FTCEncounter;
             return Optional.of(() -> ((FTCEncounter) encounter).passAmbush(p, other));
         }
