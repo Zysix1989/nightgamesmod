@@ -114,8 +114,7 @@ public class Bathe extends Action {
     @Override
     public Action.Aftermath execute(Participant user) {
         user.getCharacter().message(startMessage);
-        String message = endMessage;
-        user.state = new State(message);
+        user.state = new State(endMessage);
         user.waitRounds(1);
         return new Aftermath();
     }
