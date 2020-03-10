@@ -92,8 +92,6 @@ public class Participant {
             return Optional.empty();
         }
 
-        public boolean canStealClothes() { return !clothesStolen; }
-
         public void stealClothes() {
             assert !clothesStolen;
             clothesStolen = true;
