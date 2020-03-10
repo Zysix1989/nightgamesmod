@@ -197,6 +197,7 @@ public class Participant {
         @Override
         public void move(Participant p) {
             p.character.bathe(getEnum());
+            p.character.message("Your clothes aren't where you left them. Someone must have come by and taken them.");
             p.state = new ReadyState();
         }
 

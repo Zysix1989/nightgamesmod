@@ -512,9 +512,6 @@ public class Player extends Character {
         if (location.get().name.equals("Pool")) {
             gui.message("The hot water soothes and relaxes your muscles. You feel a bit exposed, skinny-dipping in such an open area. You decide it's time to get moving.");
         }
-        if (state == State.lostclothes) {
-            gui.message("Your clothes aren't where you left them. Someone must have come by and taken them.");
-        }
     }
 
     @Override
