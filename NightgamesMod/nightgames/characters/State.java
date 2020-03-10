@@ -8,7 +8,6 @@ public enum State {
     crafting,
     hidden,
     resupplying,
-    lostclothes,
     webbed,
     masturbating,
 

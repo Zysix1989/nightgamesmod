@@ -44,6 +44,8 @@ public class Participant {
     }
 
     public static class ShowerState implements PState {
+        private boolean clothesStolen = false;
+
         @Override
         public State getEnum() {
             return State.shower;
@@ -63,12 +65,22 @@ public class Participant {
             if (p.getLocation().name.equals("Pool")) {
                 p.character.message("The hot water soothes and relaxes your muscles. You feel a bit exposed, skinny-dipping in such an open area. You decide it's time to get moving.");
             }
+            if (clothesStolen) {
+                p.character.message("Your clothes aren't where you left them. Someone must have come by and taken them.");
+            }
             p.state = new ReadyState();
         }
 
         @Override
         public boolean isDetectable() {
             return true;
+        }
+
+        public boolean canStealClothes() { return !clothesStolen; }
+
+        public void stealClothes() {
+            assert !clothesStolen;
+            clothesStolen = true;
         }
     }
 
@@ -270,30 +282,6 @@ public class Participant {
                     }
                 }
             }
-        }
-
-        @Override
-        public boolean isDetectable() {
-            return true;
-        }
-    }
-
-    public static class LostClothesState implements PState {
-        @Override
-        public State getEnum() {
-            return State.lostclothes;
-        }
-
-        @Override
-        public boolean allowsNormalActions() {
-            return false;
-        }
-
-        @Override
-        public void move(Participant p) {
-            p.character.bathe(getEnum());
-            p.character.message("Your clothes aren't where you left them. Someone must have come by and taken them.");
-            p.state = new ReadyState();
         }
 
         @Override

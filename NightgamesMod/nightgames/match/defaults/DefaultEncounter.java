@@ -107,10 +107,10 @@ public class DefaultEncounter {
     }
 
     private void eligibleSpotCheck() {
-        if (p1.state.getEnum() == State.shower) {
+        if (p1.state.getEnum() == State.shower && ((Participant.ShowerState) p1.state).canStealClothes()) {
             showerScene(p2, p1);
             return;
-        } else if (p2.state.getEnum() == State.shower) {
+        } else if (p2.state.getEnum() == State.shower && ((Participant.ShowerState) p2.state).canStealClothes()) {
             showerScene(p1, p2);
             return;
         } else if (p1.state.getEnum() == State.webbed) {
@@ -431,7 +431,8 @@ public class DefaultEncounter {
         }
         thief.getCharacter().gain(target.getCharacter().getTrophy());
         target.getCharacter().nudify();
-        target.state = new Participant.LostClothesState();
+        var targetState = (Participant.ShowerState) target.state;
+        targetState.stealClothes();
         location.endEncounter();
     }
 
