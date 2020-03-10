@@ -325,7 +325,7 @@ public class Participant {
     private int roundsToWait = 0;
     public PState state = new ReadyState();
     // Participants this participant has defeated recently.  They are not valid targets until they resupply.
-    private CopyOnWriteArrayList<Character> mercy = new CopyOnWriteArrayList<>();
+    private CopyOnWriteArrayList<Participant> mercy = new CopyOnWriteArrayList<>();
 
     public Participant(Character c) {
         this.character = c;
@@ -359,8 +359,8 @@ public class Participant {
     }
 
     public void defeated(Participant p) {
-        assert !mercy.contains(p.getCharacter());
-        mercy.addIfAbsent(p.getCharacter());
+        assert !mercy.contains(p);
+        mercy.addIfAbsent(p);
         incrementScore(1);
     }
 
@@ -369,7 +369,7 @@ public class Participant {
     }
 
     void allowTarget(Participant p) {
-        mercy.remove(p.getCharacter());
+        mercy.remove(p);
     }
 
     public void place(Area loc) {
@@ -381,7 +381,7 @@ public class Participant {
     }
 
     public boolean canStartCombat(Participant p2) {
-        return !mercy.contains(p2.getCharacter()) && state.getEnum() != State.resupplying;
+        return !mercy.contains(p2) && state.getEnum() != State.resupplying;
     }
 
     public interface ActionCallback {
@@ -567,12 +567,12 @@ public class Participant {
     }
 
     public void invalidateTarget(Participant victor) {
-        mercy.addIfAbsent(victor.getCharacter());
+        mercy.addIfAbsent(victor);
     }
 
     void finishMatch() {
         for (var victor : mercy) {
-            victor.bounty( 1, victor);
+            victor.character.bounty( 1, victor.character);
         }
         character.finishMatch();
         mercy.clear();
