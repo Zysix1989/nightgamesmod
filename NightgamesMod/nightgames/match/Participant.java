@@ -12,7 +12,10 @@ import nightgames.items.Item;
 import nightgames.match.defaults.DefaultEncounter;
 import nightgames.status.Stsflag;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
@@ -321,9 +324,8 @@ public class Participant {
     private int score = 0;
     private int roundsToWait = 0;
     public PState state = new ReadyState();
-    public CopyOnWriteArrayList<Character> mercy = new CopyOnWriteArrayList<>();
     // Participants this participant has defeated recently.  They are not valid targets until they resupply.
-    private Set<Participant> invalidTargets = new HashSet<>();
+    public CopyOnWriteArrayList<Character> mercy = new CopyOnWriteArrayList<>();
 
     public Participant(Character c) {
         this.character = c;
@@ -336,7 +338,6 @@ public class Participant {
             throw new RuntimeException(e);
         }
         this.score = p.score;
-        this.invalidTargets = p.invalidTargets;
         this.roundsToWait = p.roundsToWait;
         this.state = p.state;
         this.mercy = new CopyOnWriteArrayList<>(p.mercy);
@@ -358,8 +359,8 @@ public class Participant {
     }
 
     public void defeated(Participant p) {
-        assert !invalidTargets.contains(p);
-        invalidTargets.add(p);
+        assert !mercy.contains(p.getCharacter());
+        mercy.addIfAbsent(p.getCharacter());
         incrementScore(1);
     }
 
@@ -368,7 +369,7 @@ public class Participant {
     }
 
     void allowTarget(Participant p) {
-        invalidTargets.remove(p);
+        mercy.remove(p.getCharacter());
     }
 
     public void place(Area loc) {
