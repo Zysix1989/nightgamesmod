@@ -2,7 +2,6 @@ package nightgames.actions;
 
 import nightgames.characters.Character;
 import nightgames.characters.State;
-import nightgames.global.Global;
 import nightgames.match.Participant;
 
 public class Bathe extends Action {
@@ -33,11 +32,7 @@ public class Bathe extends Action {
 
     @Override
     public Action.Aftermath execute(Participant user) {
-        if (user.getCharacter().human()) {
-            if (message != null) {
-                Global.gui().message(message);
-            }
-        }
+        user.getCharacter().message(message);
         user.state = State.shower;
         user.waitRounds(1);
         return new Aftermath();
