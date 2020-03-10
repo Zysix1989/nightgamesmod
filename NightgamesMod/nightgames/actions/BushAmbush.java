@@ -26,7 +26,7 @@ public class BushAmbush extends Action {
     @Override
     public boolean usable(Participant user) {
         return (user.getCharacter().get(Attribute.Cunning) >= 20 || user.getCharacter().get(Attribute.Animism) >= 10)
-                && user.state != State.inBushes
+                && user.state.getEnum() != State.inBushes
                 && !user.getCharacter().bound();
     }
 
@@ -39,7 +39,7 @@ public class BushAmbush extends Action {
                     + " they'll make for a decent hiding place. You lie down in them,"
                     + " and wait for someone to walk past.");
         }
-        user.state = State.inBushes;
+        user.state = new Participant.InBushesState();
         return new Aftermath();
     }
 

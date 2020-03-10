@@ -12,6 +12,8 @@ import nightgames.items.Item;
 import nightgames.match.defaults.DefaultEncounter;
 import nightgames.status.Stsflag;
 
+import java.io.Reader;
+import java.sql.PseudoColumnUsage;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -19,7 +21,104 @@ public class Participant {
     protected Character character;
     private int score = 0;
     private int roundsToWait = 0;
-    public State state = State.ready;
+    public PState state = new ReadyState();
+
+    public interface PState {
+        State getEnum();
+    }
+
+    public static class ReadyState implements PState {
+        @Override
+        public State getEnum() {
+            return State.ready;
+        }
+    }
+
+    public static class ShowerState implements PState {
+        @Override
+        public State getEnum() {
+            return State.shower;
+        }
+    }
+
+    public static class CombatState implements PState {
+        @Override
+        public State getEnum() {
+            return State.combat;
+        }
+    }
+
+    public static class SearchingState implements PState {
+        @Override
+        public State getEnum() {
+            return State.searching;
+        }
+    }
+
+    public static class CraftingState implements PState {
+        @Override
+        public State getEnum() {
+            return State.crafting;
+        }
+    }
+
+    public static class HiddenState implements PState {
+        @Override
+        public State getEnum() {
+            return State.hidden;
+        }
+    }
+
+    public static class ResupplyingState implements PState {
+        @Override
+        public State getEnum() {
+            return State.resupplying;
+        }
+    }
+
+    public static class LostClothesState implements PState {
+        @Override
+        public State getEnum() {
+            return State.lostclothes;
+        }
+    }
+
+    public static class WebbedState implements PState {
+        @Override
+        public State getEnum() {
+            return State.webbed;
+        }
+    }
+
+    public static class MasturbatingState implements PState {
+        @Override
+        public State getEnum() {
+            return State.masturbating;
+        }
+    }
+
+    public static class InTreeState implements PState {
+        @Override
+        public State getEnum() {
+            return State.inTree;
+        }
+    }
+
+    public static class InBushesState implements PState {
+        @Override
+        public State getEnum() {
+            return State.inBushes;
+        }
+    }
+
+    public static class InPassState implements PState {
+        @Override
+        public State getEnum() {
+            return State.inPass;
+        }
+    }
+
+
 
     // Participants this participant has defeated recently.  They are not valid targets until they resupply.
     private Set<Participant> invalidTargets = new HashSet<>();
@@ -78,7 +177,7 @@ public class Participant {
     }
 
     public boolean canStartCombat(Participant p2) {
-        return !character.mercy.contains(p2.getCharacter()) && state != State.resupplying;
+        return !character.mercy.contains(p2.getCharacter()) && state.getEnum() != State.resupplying;
     }
 
     public interface ActionCallback {
@@ -148,13 +247,13 @@ public class Participant {
 
 
     public void move() {
-        character.displayStateMessage(character.location.get().getTrap(this), state);
+        character.displayStateMessage(character.location.get().getTrap(this), state.getEnum());
         var possibleActions = new ArrayList<Action>();
         possibleActions.addAll(character.location.get().possibleActions(this));
         possibleActions.addAll(character.getItemActions());
         possibleActions.addAll(Global.getMatch().getAvailableActions());
         possibleActions.removeIf(a -> !a.usable(this));
-        if (state == State.combat) {
+        if (state.getEnum() == State.combat) {
             character.location.get().fight.battle();
             return;
         } else if (roundsToWait > 0) {
@@ -163,27 +262,27 @@ public class Participant {
         } else if (this.character.is(Stsflag.enthralled)) {
             character.handleEnthrall(act -> act.execute(this));
             return;
-        } else if (state == State.shower || state == State.lostclothes) {
-            character.bathe(state);
-            state = State.ready;
+        } else if (state.getEnum() == State.shower || state.getEnum() == State.lostclothes) {
+            character.bathe(state.getEnum());
+            state = new ReadyState();
             return;
-        } else if (state == State.crafting) {
+        } else if (state.getEnum() == State.crafting) {
             character.craft(craftItems());
-            state = State.ready;
+            state = new ReadyState();
             return;
-        } else if (state == State.searching) {
+        } else if (state.getEnum() == State.searching) {
             character.search(searchItems());
-            state = State.ready;
+            state = new ReadyState();
             return;
-        } else if (state == State.resupplying) {
+        } else if (state.getEnum() == State.resupplying) {
             resupply();
             return;
-        } else if (state == State.webbed) {
-            state = State.ready;
+        } else if (state.getEnum() == State.webbed) {
+            state = new ReadyState();
             return;
-        } else if (state == State.masturbating) {
+        } else if (state.getEnum() == State.masturbating) {
             character.masturbate();
-            state = State.ready;
+            state = new ReadyState();
             return;
         }
         if (character.location.get().encounter(this)) {
@@ -223,7 +322,7 @@ public class Participant {
     public void resupply() {
         character.mercy.clear();
         character.change();
-        state = State.ready;
+        state = new ReadyState();
         character.getWillpower().renew();
         if (character.location().getOccupants().size() > 1) {
             if (character.location().id() == AreaIdentity.dorm) {
@@ -256,7 +355,7 @@ public class Participant {
     }
 
     public void travel(Area dest) {
-        state = State.ready;
+        state = new ReadyState();
         character.location.get().exit(this.character);
         character.location.set(dest);
         dest.enter(this.character);

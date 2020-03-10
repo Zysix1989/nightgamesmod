@@ -62,7 +62,7 @@ public class Resupply extends Action {
                 user.getCharacter().message("You pick up a change of clothes and prepare to get back in the fray.");
             }
         }
-        user.state = State.resupplying;
+        user.state = new Participant.ResupplyingState();
         return new Aftermath();
     }
 }

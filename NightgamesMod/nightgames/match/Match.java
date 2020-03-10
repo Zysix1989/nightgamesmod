@@ -254,7 +254,7 @@ public class Match {
     }
 
     private void afterTurn(Participant participant) {
-        if (participant.state == State.resupplying) {
+        if (participant.state.getEnum() == State.resupplying) {
             participants.forEach(p -> p.allowTarget(participant));
         }
     }
@@ -363,7 +363,7 @@ public class Match {
                 combatant.modMoney(calculateReward(combatant, sb));
 
                 combatant.challenges.clear();
-                p.state = State.ready;
+                p.state = new Participant.ReadyState();
                 condition.undoItems(combatant);
                 combatant.change();
         });

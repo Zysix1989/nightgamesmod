@@ -87,7 +87,7 @@ public class DefaultEncounter {
             return false;
         }
         int dc = hidden.getCharacter().get(Attribute.Cunning) / 3;
-        if (hidden.state == State.hidden) {
+        if (hidden.state.getEnum() == State.hidden) {
             dc += (hidden.getCharacter().get(Attribute.Cunning) * 2 / 3) + 20;
         }
         if (hidden.getCharacter().has(Trait.Sneaky)) {
@@ -107,28 +107,28 @@ public class DefaultEncounter {
     }
 
     private void eligibleSpotCheck() {
-        if (p1.state == State.shower) {
+        if (p1.state.getEnum() == State.shower) {
             showerScene(p2, p1);
             return;
-        } else if (p2.state == State.shower) {
+        } else if (p2.state.getEnum() == State.shower) {
             showerScene(p1, p2);
             return;
-        } else if (p1.state == State.webbed) {
+        } else if (p1.state.getEnum() == State.webbed) {
             spider(p2, p1);
             return;
-        } else if (p2.state == State.webbed) {
+        } else if (p2.state.getEnum() == State.webbed) {
             spider(p1, p2);
             return;
-        } else if (p1.state == State.crafting || p1.state == State.searching) {
+        } else if (p1.state.getEnum() == State.crafting || p1.state.getEnum() == State.searching) {
             p2.getCharacter().spy(p1, () -> ambush(p2, p1), () -> location.endEncounter());
             return;
-        } else if (p2.state == State.crafting || p2.state == State.searching) {
+        } else if (p2.state.getEnum() == State.crafting || p2.state.getEnum() == State.searching) {
             p1.getCharacter().spy(p2, () -> ambush(p1, p2), () -> location.endEncounter());
             return;
-        } else if (p1.state == State.masturbating) {
+        } else if (p1.state.getEnum() == State.masturbating) {
             caught(p2, p1);
             return;
-        } else if (p2.state == State.masturbating) {
+        } else if (p2.state.getEnum() == State.masturbating) {
             caught(p1, p2);
             return;
         }
@@ -177,9 +177,9 @@ public class DefaultEncounter {
     }
 
     private void ineligibleSpotCheck() {
-        if (p1.state == State.masturbating) {
+        if (p1.state.getEnum() == State.masturbating) {
             ineligibleMasturbatingMessages(p1, p2);
-        } else if (p2.state == State.masturbating) {
+        } else if (p2.state.getEnum() == State.masturbating) {
             ineligibleMasturbatingMessages(p2, p1);
         } else {
             if (p1.canStartCombat(p2)) {
@@ -389,13 +389,13 @@ public class DefaultEncounter {
         attacker.getCharacter().gainXP(attacker.getCharacter().getVictoryXP(target.getCharacter()));
         attacker.getCharacter().tempt(20);
         attacker.incrementScore(1);
-        attacker.state = State.ready;
+        attacker.state = new Participant.ReadyState();
 
         target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
         target.getCharacter().nudify();
         target.getCharacter().defeated(attacker.getCharacter());
         target.getCharacter().getArousal().renew();
-        target.state = State.ready;
+        target.state = new Participant.ReadyState();
         location.endEncounter();
     }
 
@@ -430,7 +430,7 @@ public class DefaultEncounter {
         }
         thief.gain(target.getTrophy());
         target.nudify();
-        Global.getMatch().findParticipant(target).state = State.lostclothes;
+        Global.getMatch().findParticipant(target).state = new Participant.LostClothesState();
         location.endEncounter();
     }
 
@@ -505,11 +505,11 @@ public class DefaultEncounter {
         target.getCharacter().nudify();
         target.getCharacter().defeated(attacker.getCharacter());
         target.getCharacter().getArousal().renew();
-        target.state = State.ready;
+        target.state = new Participant.ReadyState();
 
         attacker.getCharacter().tempt(20);
         attacker.incrementScore(1);
-        attacker.state = State.ready;
+        attacker.state = new Participant.ReadyState();
 
         location.endEncounter();
     }

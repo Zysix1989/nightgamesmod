@@ -23,17 +23,17 @@ public class FTCEncounter extends DefaultEncounter {
     public boolean spotCheck() {
         if (!(p1.canStartCombat(p2) && p2.canStartCombat(p1)))
             return super.spotCheck();
-        if (p1.state == State.inTree) {
+        if (p1.state.getEnum() == State.inTree) {
             treeAmbush(p1, p2);
-        } else if (p2.state == State.inTree) {
+        } else if (p2.state.getEnum() == State.inTree) {
             treeAmbush(p2, p1);
-        } else if (p1.state == State.inBushes) {
+        } else if (p1.state.getEnum() == State.inBushes) {
             bushAmbush(p1, p2);
-        } else if (p2.state == State.inBushes) {
+        } else if (p2.state.getEnum() == State.inBushes) {
             bushAmbush(p2, p1);
-        } else if (p1.state == State.inPass) {
+        } else if (p1.state.getEnum() == State.inPass) {
             passAmbush(p1, p2);
-        } else if (p2.state == State.inPass) {
+        } else if (p2.state.getEnum() == State.inPass) {
             passAmbush(p2, p1);
         } else {
             return super.spotCheck();

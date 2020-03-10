@@ -29,7 +29,7 @@ public class Craft extends Action {
 
     @Override
     public Action.Aftermath execute(Participant user) {
-        user.state = State.crafting;
+        user.state = new Participant.CraftingState();
         return new Aftermath();
     }
 

@@ -24,7 +24,7 @@ public class TreeAmbush extends Action {
     @Override
     public boolean usable(Participant user) {
         return (user.getCharacter().get(Attribute.Power) >= 20 || user.getCharacter().get(Attribute.Animism) >= 10)
-                        && user.state != State.inTree
+                        && user.state.getEnum() != State.inTree
                         && !user.getCharacter().bound();
     }
 
@@ -37,7 +37,7 @@ public class TreeAmbush extends Action {
                     + " the trail. It's hidden in the leaves, so you should be"
                     + " able to surprise someone passing underneath.");
         }
-        user.state = State.inTree;
+        user.state = new Participant.InTreeState();
         return new Aftermath();
     }
 

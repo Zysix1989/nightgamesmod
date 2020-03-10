@@ -45,7 +45,7 @@ public class Spiderweb extends Trap {
                         .with("victim", target.getCharacter().getGrammar());
                 Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
             }
-            target.state = State.webbed;
+            target.state = new Participant.WebbedState();
             target.waitRounds(1);
             target.getLocation().opportunity(target.getCharacter(), this);
         }
@@ -90,11 +90,11 @@ public class Spiderweb extends Trap {
         victim.getCharacter().nudify();
         victim.getCharacter().defeated(attacker.getCharacter());
         victim.getCharacter().getArousal().renew();
-        victim.state = State.ready;
+        victim.state = new Participant.ReadyState();
 
         attacker.getCharacter().tempt(20);
         attacker.incrementScore(1);
-        attacker.state = State.ready;
+        attacker.state = new Participant.ReadyState();
 
         victim.getLocation().endEncounter();
         victim.getLocation().clearTrap();

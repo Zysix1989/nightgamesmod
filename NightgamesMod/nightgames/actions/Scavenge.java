@@ -27,7 +27,7 @@ public class Scavenge extends Action {
 
     @Override
     public Action.Aftermath execute(Participant user) {
-        user.state = State.searching;
+        user.state = new Participant.SearchingState();
         return new Aftermath();
     }
 

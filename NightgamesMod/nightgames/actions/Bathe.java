@@ -33,7 +33,7 @@ public class Bathe extends Action {
     @Override
     public Action.Aftermath execute(Participant user) {
         user.getCharacter().message(message);
-        user.state = State.shower;
+        user.state = new Participant.ShowerState();
         user.waitRounds(1);
         return new Aftermath();
     }

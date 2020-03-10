@@ -22,14 +22,14 @@ public class PassAmbush extends Action {
 
     @Override
     public boolean usable(Participant user) {
-        return user.state != State.inPass
+        return user.state.getEnum() != State.inPass
                 && !user.getCharacter().bound();
     }
 
     @Override
     public Action.Aftermath execute(Participant user) {
         user.getCharacter().message("You try to find a decent hiding place in the irregular rock faces lining the pass.");
-        user.state = State.inPass;
+        user.state = new Participant.InPassState();
         return new Aftermath();
     }
 

@@ -445,8 +445,8 @@ public class Combat {
         processedEnding = false;
         timer = 0;
         images = new HashMap<String, String>();
-        this.p1.getParticipant().state = State.combat;
-        this.p2.getParticipant().state = State.combat;
+        this.p1.getParticipant().state = new Participant.CombatState();
+        this.p2.getParticipant().state = new Participant.CombatState();
         postCombatScenesSeen = 0;
         otherCombatants = new ArrayList<>();
         wroteMessage = false;
@@ -1417,11 +1417,9 @@ public class Combat {
      * @return true if it should end the fight, false if there are still more scenes
      */
     public void end() {
-        p1.getParticipant().state = State.ready;
-        p2.getParticipant().state = State.ready;
+        p1.getParticipant().state = new Participant.ReadyState();
+        p2.getParticipant().state = new Participant.ReadyState();
         if (processedEnding) {
-            p1.getParticipant().state = State.ready;
-            p2.getParticipant().state = State.ready;
             if (beingObserved) {
                 Global.gui().endCombat();
             }

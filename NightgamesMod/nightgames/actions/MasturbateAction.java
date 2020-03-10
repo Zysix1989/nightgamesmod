@@ -60,7 +60,7 @@ public class MasturbateAction extends Action {
             user.getCharacter().message(
                     "You desperately need to deal with your throbbing body before you run into an opponent. You find an isolated corner and quickly finger your ass to a quick orgasm.");
         }
-        user.state = State.masturbating;
+        user.state = new Participant.MasturbatingState();
         user.waitRounds(1);
         return new Aftermath();
     }

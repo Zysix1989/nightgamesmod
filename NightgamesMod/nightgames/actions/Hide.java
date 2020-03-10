@@ -22,13 +22,13 @@ public class Hide extends Action {
 
     @Override
     public boolean usable(Participant user) {
-        return !(user.state == State.hidden) && !user.getCharacter().bound();
+        return !(user.state.getEnum() == State.hidden) && !user.getCharacter().bound();
     }
 
     @Override
     public Action.Aftermath execute(Participant user) {
         user.getCharacter().message("You find a decent hiding place and wait for unwary opponents.");
-        user.state = State.hidden;
+        user.state = new Participant.HiddenState();
         return new Aftermath();
     }
 
