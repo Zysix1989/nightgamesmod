@@ -170,12 +170,11 @@ public class DefaultEncounter {
         if (p == p1) {
             p1ff = fight;
             p1Guaranteed = guaranteed;
-            checkin++;
         } else {
             p2ff = fight;
             p2Guaranteed = guaranteed;
-            checkin++;
         }
+        checkin++;
         if (checkin >= 2) {
             doFightOrFlight();
         }
