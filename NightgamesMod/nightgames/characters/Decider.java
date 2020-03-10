@@ -172,7 +172,7 @@ public class Decider {
             }
         }
         if (character.getArousal().percent() >= 40 && !character.location().humanPresent() && radar.isEmpty()) {
-            var masturbateAction = available.stream().filter(act -> act instanceof MasturbateAction).findAny();
+            var masturbateAction = available.stream().filter(act -> act instanceof Masturbate).findAny();
             if (masturbateAction.isPresent()) {
                 return masturbateAction.get();
             }

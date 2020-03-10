@@ -1,20 +1,19 @@
 package nightgames.modifier.standard;
 
-import nightgames.actions.MasturbateAction;
+import nightgames.actions.Masturbate;
 import nightgames.characters.Player;
 import nightgames.global.Global;
 import nightgames.modifier.BaseModifier;
 import nightgames.modifier.action.BanActionModifier;
 import nightgames.modifier.skill.BanSkillsModifier;
-import nightgames.skills.Masturbate;
 
 public class NoRecoveryModifier extends BaseModifier {
 
     public static final String NAME = "norecovery";
 
     public NoRecoveryModifier() {
-        actions = new BanActionModifier(new MasturbateAction());
-        skills = new BanSkillsModifier(new Masturbate(null));
+        actions = new BanActionModifier(new Masturbate());
+        skills = new BanSkillsModifier(new nightgames.skills.Masturbate(null));
     }
 
     @Override

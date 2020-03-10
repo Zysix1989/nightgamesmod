@@ -4,6 +4,7 @@ import com.google.gson.*;
 import com.google.gson.stream.JsonWriter;
 import nightgames.Resources.ResourceLoader;
 import nightgames.actions.Action;
+import nightgames.actions.Masturbate;
 import nightgames.actions.Wait;
 import nightgames.actions.*;
 import nightgames.characters.Character;
@@ -300,7 +301,7 @@ public class Global {
         getSkillPool().add(new Dissolve(ch));
         getSkillPool().add(new Sedate(ch));
         getSkillPool().add(new Tie(ch));
-        getSkillPool().add(new Masturbate(ch));
+        getSkillPool().add(new nightgames.skills.Masturbate(ch));
         getSkillPool().add(new Piston(ch));
         getSkillPool().add(new Grind(ch));
         getSkillPool().add(new Thrust(ch));
@@ -522,7 +523,7 @@ public class Global {
         actionPool = new HashSet<>();
         actionPool.add(new Wait());
         actionPool.add(new Locate());
-        actionPool.add(new MasturbateAction());
+        actionPool.add(new Masturbate());
         actionPool.add(new Disguise());
         actionPool.add(new nightgames.actions.Struggle());
         newTrapPool().forEach(t -> actionPool.add(new SetTrap(t)));

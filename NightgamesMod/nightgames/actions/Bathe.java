@@ -21,11 +21,11 @@ public class Bathe extends Action {
         }
     }
 
-    public static class ShowerState implements Participant.State {
+    public static class State implements Participant.State {
         private boolean clothesStolen = false;
         private String message;
 
-        public ShowerState(String message) {
+        public State(String message) {
             this.message = message;
         }
 
@@ -98,7 +98,7 @@ public class Bathe extends Action {
     public Action.Aftermath execute(Participant user) {
         user.getCharacter().message(startMessage);
         String message = endMessage;
-        user.state = new ShowerState(message);
+        user.state = new State(message);
         user.waitRounds(1);
         return new Aftermath();
     }

@@ -415,7 +415,7 @@ public class DefaultEncounter {
         }
         thief.getCharacter().gain(target.getCharacter().getTrophy());
         target.getCharacter().nudify();
-        var targetState = (Bathe.ShowerState) target.state;
+        var targetState = (Bathe.State) target.state;
         targetState.stealClothes();
         location.endEncounter();
     }
