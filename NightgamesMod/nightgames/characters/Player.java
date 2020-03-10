@@ -312,17 +312,15 @@ public class Player extends Character {
         Global.getMatch().pause();
     }
 
-    private void presentMoveOptions(List<CommandPanelOption> optionChoices,
-                                    Collection<Action> actionChoices,
+    private void presentMoveOptions(Collection<Action> actionChoices,
                                     Participant.ActionCallback callback) {
-        optionChoices.addAll(actionChoices.stream()
+        var optionChoices = actionChoices.stream()
                 .map(action -> new CommandPanelOption(
                         action.toString(),
                         event -> {
                             callback.execute(action);
                             Global.getMatch().resume();
-                        })).collect(Collectors.toList()));
-
+                        })).collect(Collectors.toList());
         if (!optionChoices.isEmpty()) {
             // Otherwise someone else is going to provide choices
             gui.presentOptions(optionChoices);
@@ -342,7 +340,7 @@ public class Player extends Character {
                 actionChoices.add(compelled);
             }
         }
-        presentMoveOptions(List.of(), actionChoices, callback);
+        presentMoveOptions(actionChoices, callback);
     }
 
     @Override
@@ -390,7 +388,7 @@ public class Player extends Character {
                 }
             }
         }
-        presentMoveOptions(new ArrayList<>(), actionChoices, callback);
+        presentMoveOptions(actionChoices, callback);
     }
 
     @Override
