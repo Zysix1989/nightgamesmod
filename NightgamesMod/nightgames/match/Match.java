@@ -255,11 +255,6 @@ public class Match {
         });
     }
 
-    public void score(Character combatant, int amt) {
-        var participant = findParticipant(combatant);
-        participant.incrementScore(amt);
-    }
-
     static final JtwigTemplate SCORING_TEMPLATE = JtwigTemplate.inlineTemplate(
             "{{- self.subject() }} scored {{ score }} point{{- (score != 1) ? 's' : '' }}.");
 
