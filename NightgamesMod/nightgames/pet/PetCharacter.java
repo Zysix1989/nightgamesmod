@@ -2,7 +2,6 @@ package nightgames.pet;
 
 import nightgames.actions.Action;
 import nightgames.actions.Move;
-import nightgames.areas.Area;
 import nightgames.characters.Character;
 import nightgames.characters.*;
 import nightgames.characters.body.BodyPart;
@@ -169,7 +168,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void move(Collection<Action> possibleActions, Area.EncounterResult encounterResult, Participant.ActionCallback callback) {
+    public void move(Collection<Action> possibleActions, boolean normalActions, Participant.ActionCallback callback) {
 
     }
 

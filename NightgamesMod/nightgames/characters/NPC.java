@@ -366,16 +366,11 @@ public class NPC extends Character {
         }
     }
 
-    /**This method determines what happens when a character moves.
-     * 
-     * FIXME: Currently, characters may repeat encaounters. THis method, as well as Area.encounter() and NPC.Move and player.Move() might be mixing or looping.
-     *
-     * @param possibleActions*/
     @Override
     public void move(Collection<Action> possibleActions,
-                     Area.EncounterResult encounterResult,
+                     boolean normalActions,
                      Participant.ActionCallback callback) {
-        if (!encounterResult.canDoActions) {
+        if (normalActions) {
             HashSet<Area> radar = new HashSet<>();
             if (!has(Trait.immobile)) {
                 radar.addAll(location.get().noisyNeighbors(get(Attribute.Perception)));

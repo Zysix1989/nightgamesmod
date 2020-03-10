@@ -3,7 +3,6 @@ package nightgames.characters;
 import nightgames.actions.Action;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
-import nightgames.areas.Area.EncounterResult;
 import nightgames.areas.Challenge;
 import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;
@@ -374,14 +373,14 @@ public class Player extends Character {
 
     @Override
     public void move(Collection<Action> possibleActions,
-                     EncounterResult encounterResult,
+                     boolean normalActions,
                      Participant.ActionCallback callback) {
         var actionChoices = new ArrayList<Action>();
         location.get().noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
             gui.message("You hear something in the <b>" + room.name + "</b>.");
             room.setPinged(true);
         });
-        if (!encounterResult.canDoActions) {
+        if (normalActions) {
             for (Action act : possibleActions) {
                 if (Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
                     actionChoices.add(act);

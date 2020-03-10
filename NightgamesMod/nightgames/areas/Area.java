@@ -94,21 +94,10 @@ public class Area implements Serializable {
         }
     }
 
-    public static class EncounterResult {
-        public boolean canDoActions;
-
-        EncounterResult(boolean exclusive) {
-            this.canDoActions = exclusive;
-        }
-    }
-
     /**
-     * Runs the given Character through any situations that might arise as the result
-     * of entering the Area (such as starting a fight, catching someone showering, etc),
-     * returning true if something has come up that prevents the Character from moving
-     * being presented with the normal campus Actions.
+     * Returns true if normal actions should be provided
      */
-    public EncounterResult encounter(Participant p) {
+    public boolean encounter(Participant p) {
         // We can't run encounters if a fight is already occurring.
         if (fight != null && fight.checkIntrude(p.getCharacter())) {
             p.interveneInCombat(
@@ -117,18 +106,18 @@ public class Area implements Serializable {
                     fight.getSecondParticipant().getCharacter(),
                     () -> fight.intrude(p, fight.getSecondParticipant()),
                     () -> fight.watch());
-            return new EncounterResult(true);
+            return true;
         } else if (present.size() > 1) {
             for (Participant opponent : present) {          //FIXME: Currently - encounters repeat - Does this check if they are busy?
                 if (opponent != p
                         // && Global.getMatch().canEngage(p, opponent)
                 ) {
                     fight = Global.getMatch().buildEncounter(p, opponent, this);
-                    return new EncounterResult(!fight.spotCheck());
+                    return !fight.spotCheck();
                 }
             }
         }
-        return new EncounterResult(false);
+        return false;
     }
 
     public boolean opportunity(Character target, Trap.Instance trap) {
