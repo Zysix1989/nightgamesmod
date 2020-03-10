@@ -2,9 +2,11 @@ package nightgames.match;
 
 import nightgames.actions.Action;
 import nightgames.actions.Move;
+import nightgames.actions.Resupply;
 import nightgames.areas.Area;
 import nightgames.characters.Character;
 import nightgames.characters.State;
+import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.match.defaults.DefaultEncounter;
 import nightgames.status.Stsflag;
@@ -85,7 +87,7 @@ public class Participant {
     }
 
     public boolean canStartCombat(Participant p2) {
-        return !p2.invalidAttackers.contains(this) && p2.state.getEnum() != State.resupplying;
+        return !p2.invalidAttackers.contains(this) && !(p2.state instanceof Resupply.State);
     }
 
     public interface ActionCallback {
@@ -100,7 +102,7 @@ public class Participant {
         possibleActions.addAll(character.getItemActions());
         possibleActions.addAll(Global.getMatch().getAvailableActions());
         possibleActions.removeIf(a -> !a.usable(this));
-        if (state.getEnum() == State.combat) {
+        if (state instanceof Combat.State) {
             state.move(this);
         } else if (roundsToWait > 0) {
             roundsToWait--;

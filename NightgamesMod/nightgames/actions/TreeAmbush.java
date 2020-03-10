@@ -67,7 +67,7 @@ public class TreeAmbush extends Action {
     @Override
     public boolean usable(Participant user) {
         return (user.getCharacter().get(Attribute.Power) >= 20 || user.getCharacter().get(Attribute.Animism) >= 10)
-                        && user.state.getEnum() != nightgames.characters.State.inTree
+                        && !(user.state instanceof State)
                         && !user.getCharacter().bound();
     }
 

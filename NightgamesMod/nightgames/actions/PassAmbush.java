@@ -65,7 +65,7 @@ public class PassAmbush extends Action {
 
     @Override
     public boolean usable(Participant user) {
-        return user.state.getEnum() != nightgames.characters.State.inPass
+        return !(user.state instanceof State)
                 && !user.getCharacter().bound();
     }
 

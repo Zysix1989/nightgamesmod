@@ -62,7 +62,7 @@ public class Hide extends Action {
 
     @Override
     public boolean usable(Participant user) {
-        return !(user.state.getEnum() == nightgames.characters.State.hidden) && !user.getCharacter().bound();
+        return !(user.state instanceof State) && !user.getCharacter().bound();
     }
 
     @Override
