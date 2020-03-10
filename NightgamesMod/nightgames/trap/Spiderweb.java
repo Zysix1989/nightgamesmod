@@ -1,7 +1,6 @@
 package nightgames.trap;
 
 import nightgames.characters.Character;
-import nightgames.characters.State;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -88,7 +87,7 @@ public class Spiderweb extends Trap {
             attacker.getCharacter().gain(victim.getCharacter().getTrophy());
         }
         victim.getCharacter().nudify();
-        victim.getCharacter().defeated(attacker.getCharacter());
+        victim.getCharacter().invalidateTarget(attacker.getCharacter());
         victim.getCharacter().getArousal().renew();
         victim.state = new Participant.ReadyState();
 

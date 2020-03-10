@@ -2662,7 +2662,7 @@ public Character clone() throws CloneNotSupportedException {
         }
     }
 
-    public void defeated(Character victor) {
+    public void invalidateTarget(Character victor) {
         mercy.addIfAbsent(victor);
     }
 
