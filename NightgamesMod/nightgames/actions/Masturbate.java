@@ -58,7 +58,7 @@ public class Masturbate extends Action {
 
         @Override
         public Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other) {
-            return Optional.of(() -> DefaultEncounter.ineligibleMasturbatingMessages(p, other));
+            return Optional.of(() -> ineligibleMasturbatingMessages(p, other));
         }
 
         @Override
@@ -107,4 +107,15 @@ public class Masturbate extends Action {
         return new Aftermath();
     }
 
+    private static void ineligibleMasturbatingMessages(Participant pastLoser, Participant pastWinner) {
+        pastLoser.getCharacter().message(String.format(
+                "%s catches you masturbating, but fortunately %s's not yet allowed to attack you, so %s just "
+                        + "watches you pleasure yourself with an amused grin.",
+                pastWinner.getCharacter().getName(), pastWinner.getCharacter().pronoun(), pastWinner.getCharacter().pronoun()));
+        pastWinner.getCharacter().message(String.format(
+                "You stumble onto %s with %s hand between %s legs, masturbating. Since you just fought you still can't touch %s, so "
+                        + "you just watch the show until %s orgasms.",
+                pastLoser.getCharacter().getName(), pastLoser.getCharacter().possessiveAdjective(), pastLoser.getCharacter().possessiveAdjective(), pastLoser.getCharacter().objectPronoun(),
+                pastLoser.getCharacter().pronoun()));
+    }
 }

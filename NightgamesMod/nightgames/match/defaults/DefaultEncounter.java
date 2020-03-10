@@ -133,18 +133,6 @@ public class DefaultEncounter {
         }
     }
 
-    public static void ineligibleMasturbatingMessages(Participant pastWinner, Participant pastLoser) {
-        pastLoser.getCharacter().message(String.format(
-                "%s catches you masturbating, but fortunately %s's not yet allowed to attack you, so %s just "
-                        + "watches you pleasure yourself with an amused grin.",
-                pastWinner.getCharacter().getName(), pastWinner.getCharacter().pronoun(), pastWinner.getCharacter().pronoun()));
-        pastWinner.getCharacter().message(String.format(
-                "You stumble onto %s with %s hand between %s legs, masturbating. Since you just fought you still can't touch %s, so "
-                        + "you just watch the show until %s orgasms.",
-                pastLoser.getCharacter().getName(), pastLoser.getCharacter().possessiveAdjective(), pastLoser.getCharacter().possessiveAdjective(), pastLoser.getCharacter().objectPronoun(),
-                pastLoser.getCharacter().pronoun()));
-    }
-
     private static void ineligibleMessages(Participant pastWinner, Participant pastLoser) {
         pastLoser.getCharacter().message("You encounter " + pastWinner.getCharacter().getName() + ", but you still haven't recovered from your last fight.");
         pastWinner.getCharacter().message(String.format(
@@ -153,7 +141,7 @@ public class DefaultEncounter {
     }
 
     private void ineligibleSpotCheck() {
-        if (p1.canStartCombat(p2)) {
+        if (!p1.canStartCombat(p2)) {
             p1.state.ineligibleCombatReplacement(p1, p2).orElse(() -> ineligibleMessages(p1, p2)).run();
         } else {
             p2.state.ineligibleCombatReplacement(p2, p1).orElse(() -> ineligibleMessages(p2, p1)).run();
