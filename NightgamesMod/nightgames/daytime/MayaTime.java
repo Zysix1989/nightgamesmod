@@ -1,7 +1,5 @@
 package nightgames.daytime;
 
-import java.util.ArrayList;
-import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -16,6 +14,9 @@ import nightgames.requirements.RequirementShortcuts;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.AddictionType;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 public class MayaTime extends BaseNPCTime {
     public MayaTime(Character player) {
         super(player, Global.getNPC("Maya"));
@@ -24,7 +25,7 @@ public class MayaTime extends BaseNPCTime {
         giftedString = "\"Well, thank you!\"";
         giftString = "\"A present? That's very nice of you.\"";
         transformationOptionString = "Hypnotic Suggestions";
-        advTrait = Trait.cursed;        //TODO: Maya doesn't have a core trait for herself, but she is Cursed.
+        advTrait = null;
         transformationIntro = "[Placeholder]Maya explains that she can use her powers to affect you during the games...";
         loveIntro = "";
         transformationFlag = "";
