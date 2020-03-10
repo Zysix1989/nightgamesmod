@@ -6,7 +6,6 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.State;
 import nightgames.global.Global;
-import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.match.Participant;
 import nightgames.match.defaults.DefaultEncounter;
 import nightgames.status.Stsflag;
@@ -97,11 +96,9 @@ public class Area implements Serializable {
 
     public static class EncounterResult {
         public boolean canDoActions;
-        public List<CommandPanelOption> options;
 
-        EncounterResult(boolean exclusive, List<CommandPanelOption> options) {
+        EncounterResult(boolean exclusive) {
             this.canDoActions = exclusive;
-            this.options = options;
         }
     }
 
@@ -120,18 +117,18 @@ public class Area implements Serializable {
                     fight.getSecondParticipant().getCharacter(),
                     () -> fight.intrude(p, fight.getSecondParticipant()),
                     () -> fight.watch());
-            return new EncounterResult(true, new ArrayList<>());
+            return new EncounterResult(true);
         } else if (present.size() > 1) {
             for (Participant opponent : present) {          //FIXME: Currently - encounters repeat - Does this check if they are busy?
                 if (opponent != p
                         // && Global.getMatch().canEngage(p, opponent)
                 ) {
                     fight = Global.getMatch().buildEncounter(p, opponent, this);
-                    return new EncounterResult(!fight.spotCheck(), new ArrayList<>());
+                    return new EncounterResult(!fight.spotCheck());
                 }
             }
         }
-        return new EncounterResult(false, new ArrayList<>());
+        return new EncounterResult(false);
     }
 
     public boolean opportunity(Character target, Trap.Instance trap) {

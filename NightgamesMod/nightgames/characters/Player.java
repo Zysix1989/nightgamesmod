@@ -390,7 +390,7 @@ public class Player extends Character {
                 }
             }
         }
-        presentMoveOptions(encounterResult.options, actionChoices, callback);
+        presentMoveOptions(new ArrayList<>(), actionChoices, callback);
     }
 
     @Override
