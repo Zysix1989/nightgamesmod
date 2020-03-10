@@ -88,7 +88,6 @@ public abstract class Character extends Observable implements Cloneable {
     public Set<Status> removelist;                  //Rename for clarity? - DSM 
     public Set<Status> addlist;                     //Rename for clarity?   -DSM
     private Map<String, Integer> cooldowns;          //May not require this if we add new Skills to characters and they may track their own requirements and cooldowns. - DSM
-    public CopyOnWriteArrayList<Character> mercy;     //Can be changed into a flag that is stored in flags. -DSM
     private Map<Item, Integer> inventory;
     private Map<String, Integer> flags;             //Needs to be more strongly leveraged in mechanics.  -DSM
     protected Item trophy;                          
@@ -148,7 +147,7 @@ public abstract class Character extends Observable implements Cloneable {
         temporaryRemovedTraits = new HashMap<>();
         removelist = new HashSet<>();
         addlist = new HashSet<>();
-        mercy = new CopyOnWriteArrayList<>();
+        //Can be changed into a flag that is stored in flags. -DSM
         inventory = new HashMap<>();
         attractions = new HashMap<>(2);
         affections = new HashMap<>(2);
@@ -194,7 +193,6 @@ public Character clone() throws CloneNotSupportedException {
 
         c.removelist = new HashSet<>(removelist);
         c.addlist = new HashSet<>(addlist);
-        c.mercy = new CopyOnWriteArrayList<>(mercy);
         c.inventory = new HashMap<>(inventory);
         c.attractions = new HashMap<>(attractions);
         c.affections = new HashMap<>(affections);

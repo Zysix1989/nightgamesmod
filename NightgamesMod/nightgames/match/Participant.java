@@ -13,6 +13,7 @@ import nightgames.match.defaults.DefaultEncounter;
 import nightgames.status.Stsflag;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 public class Participant {
@@ -20,6 +21,7 @@ public class Participant {
     private int score = 0;
     private int roundsToWait = 0;
     public PState state = new ReadyState();
+    public CopyOnWriteArrayList<Character> mercy = new CopyOnWriteArrayList<>();
 
     public interface PState {
         State getEnum();
@@ -338,6 +340,7 @@ public class Participant {
         this.invalidTargets = p.invalidTargets;
         this.roundsToWait = p.roundsToWait;
         this.state = p.state;
+        this.mercy = new CopyOnWriteArrayList<>(p.mercy);
     }
 
     public Character getCharacter() {
@@ -378,7 +381,7 @@ public class Participant {
     }
 
     public boolean canStartCombat(Participant p2) {
-        return !character.mercy.contains(p2.getCharacter()) && state.getEnum() != State.resupplying;
+        return !mercy.contains(p2.getCharacter()) && state.getEnum() != State.resupplying;
     }
 
     public interface ActionCallback {
@@ -503,7 +506,7 @@ public class Participant {
     public Area getLocation() { return character.location(); }
 
     public void resupply() {
-        character.mercy.clear();
+        mercy.clear();
         character.change();
         state = new ReadyState();
         character.getWillpower().renew();
@@ -564,15 +567,15 @@ public class Participant {
     }
 
     public void invalidateTarget(Character victor) {
-        character.mercy.addIfAbsent(victor);
+        mercy.addIfAbsent(victor);
     }
 
     void finishMatch() {
-        for (var victor : character.mercy) {
+        for (var victor : mercy) {
             victor.bounty( 1, victor);
         }
         character.finishMatch();
-        character.mercy.clear();
+        mercy.clear();
     }
 
 }
