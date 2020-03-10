@@ -567,4 +567,12 @@ public class Participant {
         character.mercy.addIfAbsent(victor);
     }
 
+    void finishMatch() {
+        for (var victor : character.mercy) {
+            victor.bounty( 1, victor);
+        }
+        character.finishMatch();
+        character.mercy.clear();
+    }
+
 }

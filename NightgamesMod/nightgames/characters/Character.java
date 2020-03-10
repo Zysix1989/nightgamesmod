@@ -2666,11 +2666,7 @@ public Character clone() throws CloneNotSupportedException {
      * 
      * */
     public void finishMatch() {
-        for (var victor : mercy) {
-            victor.bounty( 1, victor);
-        }
         Global.gui().clearImage();
-        mercy.clear();
         change();
         clearStatus();
         temporaryAddedTraits.clear();
