@@ -87,7 +87,7 @@ public class Spiderweb extends Trap {
             attacker.getCharacter().gain(victim.getCharacter().getTrophy());
         }
         victim.getCharacter().nudify();
-        victim.invalidateTarget(attacker);
+        victim.invalidateAttacker(attacker);
         victim.getCharacter().getArousal().renew();
         victim.state = new Participant.ReadyState();
 

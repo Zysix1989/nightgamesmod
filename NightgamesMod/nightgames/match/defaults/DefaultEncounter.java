@@ -393,7 +393,7 @@ public class DefaultEncounter {
 
         target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
         target.getCharacter().nudify();
-        target.invalidateTarget(attacker);
+        target.invalidateAttacker(attacker);
         target.getCharacter().getArousal().renew();
         target.state = new Participant.ReadyState();
         location.endEncounter();
@@ -503,7 +503,7 @@ public class DefaultEncounter {
             attacker.getCharacter().gain(target.getCharacter().getTrophy());
         }
         target.getCharacter().nudify();
-        target.invalidateTarget(attacker);
+        target.invalidateAttacker(attacker);
         target.getCharacter().getArousal().renew();
         target.state = new Participant.ReadyState();
 

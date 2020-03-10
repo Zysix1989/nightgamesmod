@@ -571,14 +571,14 @@ public class Combat {
         first.orgasm();
         first.undress(this);
         first.gainTrophy(this, second);
-        p1.getParticipant().invalidateTarget(p2.getParticipant());
+        p1.getParticipant().invalidateAttacker(p2.getParticipant());
         first.gainAttraction(second, 4);
 
         second.gainXP(second.getVictoryXP(first));
         second.orgasm();
         second.undress(this);
         second.gainTrophy(this, first);
-        p2.getParticipant().invalidateTarget(p1.getParticipant());
+        p2.getParticipant().invalidateAttacker(p1.getParticipant());
         second.gainAttraction(first, 4);
 
         if (p1.getCharacter().human()) {
@@ -605,11 +605,12 @@ public class Combat {
         }
         winner.dress(this);
         winner.gainAttraction(loser, 1);
+        won.getParticipant().incrementScore(1);
 
         loser.gainXP(loser.getVictoryXP(winner));
         loser.orgasm();
         loser.undress(this);
-        getOpponent(winner).getParticipant().invalidateTarget(won.getParticipant());
+        getOpponent(winner).getParticipant().invalidateAttacker(won.getParticipant());
         loser.gainAttraction(winner, 2);
 
         if (won.getCharacter().human()) {
@@ -1376,18 +1377,16 @@ public class Combat {
             targetCharacter.undress(this);
 
             intruderCharacter.gainXP(10 + intruderCharacter.lvlBonus(targetCharacter));
-            intruder.invalidateTarget(target.getParticipant());
-            intruder.invalidateTarget(assist);
-
+            target.getParticipant().invalidateAttacker(intruder);
         } else {
             intruderCharacter.gainXP(intruderCharacter.getAssistXP(targetCharacter));
             intruderCharacter.intervene3p(this, targetCharacter, assistCharacter);
 
-            target.getParticipant().invalidateTarget(intruder);
             targetCharacter.gainXP(targetCharacter.getDefeatXP(assistCharacter));
             targetCharacter.orgasm();
             targetCharacter.undress(this);
-            target.getParticipant().invalidateTarget(assist);
+            target.getParticipant().invalidateAttacker(assist);
+            target.getParticipant().invalidateAttacker(intruder);
             targetCharacter.gainAttraction(assistCharacter, 1);
 
             assistCharacter.gainAttraction(intruderCharacter, 1);
@@ -1396,6 +1395,7 @@ public class Combat {
             assistCharacter.gainTrophy(this, targetCharacter);
             assistCharacter.victory3p(this, targetCharacter, intruderCharacter);
             assistCharacter.gainAttraction(targetCharacter, 1);
+            assist.incrementScore(1);
         }
 
         phase = new ResultsScenePhase();
@@ -1405,18 +1405,9 @@ public class Combat {
             Global.gui().watchCombat(this);
             resumeNoClearFlag();
         }
-        if (assistCharacter != Global.noneCharacter()) {
-            assist.defeated(getOpponent(assistCharacter).getParticipant());
-        } else {
-            p1.getParticipant().defeated(p2.getParticipant());
-            p2.getParticipant().defeated(p1.getParticipant());
-        }
     }
 
-    /**
-     * @return true if it should end the fight, false if there are still more scenes
-     */
-    public void end() {
+    private void end() {
         p1.getParticipant().state = new Participant.ReadyState();
         p2.getParticipant().state = new Participant.ReadyState();
         if (processedEnding) {
@@ -1460,12 +1451,6 @@ public class Combat {
             log.logEnd(winner.map(Combatant::getCharacter));
         }
 
-        if (winner.isPresent() && winner.get().getCharacter() != Global.noneCharacter()) {
-            winner.get().getParticipant().defeated(getOpponent(winner.get().getCharacter()).getParticipant());
-        } else {
-            p1.getParticipant().defeated(p2.getParticipant());
-            p2.getParticipant().defeated(p1.getParticipant());
-        }
         if (!ding && beingObserved) {
             Global.gui().endCombat();
         }

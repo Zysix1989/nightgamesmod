@@ -353,12 +353,6 @@ public class Participant {
                 .forEach(p -> p.getCharacter().message(Match.scoreString(getCharacter(), i)));
     }
 
-    public void defeated(Participant p) {
-        assert p.invalidAttackers.contains(this);
-        p.invalidAttackers.add(this);
-        incrementScore(1);
-    }
-
     public Participant copy() {
         return new Participant(this);
     }
@@ -561,8 +555,8 @@ public class Participant {
         );
     }
 
-    public void invalidateTarget(Participant victor) {
-        victor.invalidAttackers.add(this);
+    public void invalidateAttacker(Participant victor) {
+        invalidAttackers.add(victor);
     }
 
     void finishMatch() {
