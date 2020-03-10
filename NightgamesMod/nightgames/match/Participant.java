@@ -557,7 +557,7 @@ public class Participant {
         invalidAttackers.clear();
     }
 
-    public int bounty(Participant loser) {
+    public int pointsForVictory(Participant loser) {
         return loser.pointsGivenToVictor();
     }
 

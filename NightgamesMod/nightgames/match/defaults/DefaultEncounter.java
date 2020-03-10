@@ -388,7 +388,7 @@ public class DefaultEncounter {
         }
         attacker.getCharacter().gainXP(attacker.getCharacter().getVictoryXP(target.getCharacter()));
         attacker.getCharacter().tempt(20);
-        attacker.incrementScore(attacker.bounty(target));
+        attacker.incrementScore(attacker.pointsForVictory(target));
         attacker.state = new Participant.ReadyState();
 
         target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
@@ -508,7 +508,7 @@ public class DefaultEncounter {
         target.state = new Participant.ReadyState();
 
         attacker.getCharacter().tempt(20);
-        attacker.incrementScore(attacker.bounty(target));
+        attacker.incrementScore(attacker.pointsForVictory(target));
         attacker.state = new Participant.ReadyState();
 
         location.endEncounter();
