@@ -17,12 +17,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 public class Participant {
-    protected Character character;
-    private int score = 0;
-    private int roundsToWait = 0;
-    public PState state = new ReadyState();
-    public CopyOnWriteArrayList<Character> mercy = new CopyOnWriteArrayList<>();
-
     public interface PState {
         State getEnum();
         boolean allowsNormalActions();
@@ -323,6 +317,11 @@ public class Participant {
 
 
 
+    protected Character character;
+    private int score = 0;
+    private int roundsToWait = 0;
+    public PState state = new ReadyState();
+    public CopyOnWriteArrayList<Character> mercy = new CopyOnWriteArrayList<>();
     // Participants this participant has defeated recently.  They are not valid targets until they resupply.
     private Set<Participant> invalidTargets = new HashSet<>();
 
