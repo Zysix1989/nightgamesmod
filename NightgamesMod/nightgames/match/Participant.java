@@ -53,6 +53,11 @@ public class Participant {
 
     public static class ShowerState implements PState {
         private boolean clothesStolen = false;
+        private String message;
+
+        public ShowerState(String message) {
+            this.message = message;
+        }
 
         @Override
         public State getEnum() {
@@ -67,12 +72,7 @@ public class Participant {
         @Override
         public void move(Participant p) {
             p.character.bathe();
-            if (p.getLocation().name.equals("Showers")) {
-                p.character.message("You let the hot water wash away your exhaustion and soon you're back to peak condition.");
-            }
-            if (p.getLocation().name.equals("Pool")) {
-                p.character.message("The hot water soothes and relaxes your muscles. You feel a bit exposed, skinny-dipping in such an open area. You decide it's time to get moving.");
-            }
+            p.character.message(message);
             if (clothesStolen) {
                 p.character.message("Your clothes aren't where you left them. Someone must have come by and taken them.");
             }
