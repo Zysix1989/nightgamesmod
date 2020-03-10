@@ -12,11 +12,7 @@ import nightgames.items.Item;
 import nightgames.match.defaults.DefaultEncounter;
 import nightgames.status.Stsflag;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Participant {
@@ -324,8 +320,7 @@ public class Participant {
     private int score = 0;
     private int roundsToWait = 0;
     public PState state = new ReadyState();
-    // Participants this participant has defeated recently.  They are not valid targets until they resupply.
-    private CopyOnWriteArrayList<Participant> mercy = new CopyOnWriteArrayList<>();
+    private Set<Participant> invalidAttackers = new HashSet<>();
 
     public Participant(Character c) {
         this.character = c;
@@ -340,7 +335,7 @@ public class Participant {
         this.score = p.score;
         this.roundsToWait = p.roundsToWait;
         this.state = p.state;
-        this.mercy = new CopyOnWriteArrayList<>(p.mercy);
+        this.invalidAttackers = new HashSet<>(p.invalidAttackers);
     }
 
     public Character getCharacter() {
@@ -359,8 +354,8 @@ public class Participant {
     }
 
     public void defeated(Participant p) {
-        assert !mercy.contains(p);
-        mercy.addIfAbsent(p);
+        assert p.invalidAttackers.contains(this);
+        p.invalidAttackers.add(this);
         incrementScore(1);
     }
 
@@ -369,7 +364,7 @@ public class Participant {
     }
 
     void allowTarget(Participant p) {
-        mercy.remove(p);
+        p.invalidAttackers.remove(this);
     }
 
     public void place(Area loc) {
@@ -381,7 +376,7 @@ public class Participant {
     }
 
     public boolean canStartCombat(Participant p2) {
-        return !mercy.contains(p2) && state.getEnum() != State.resupplying;
+        return !p2.invalidAttackers.contains(this) && state.getEnum() != State.resupplying;
     }
 
     public interface ActionCallback {
@@ -506,7 +501,7 @@ public class Participant {
     public Area getLocation() { return character.location(); }
 
     public void resupply() {
-        mercy.clear();
+        invalidAttackers.clear();
         character.change();
         state = new ReadyState();
         character.getWillpower().renew();
@@ -567,15 +562,15 @@ public class Participant {
     }
 
     public void invalidateTarget(Participant victor) {
-        mercy.addIfAbsent(victor);
+        victor.invalidAttackers.add(this);
     }
 
     void finishMatch() {
-        for (var victor : mercy) {
-            victor.character.bounty( 1, victor.character);
+        for (var victor : invalidAttackers) {
+            victor.character.bounty( 1, character);
         }
         character.finishMatch();
-        mercy.clear();
+        invalidAttackers.clear();
     }
 
 }
