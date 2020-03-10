@@ -260,13 +260,14 @@ public class Match {
         participant.incrementScore(amt);
     }
 
+    static final JtwigTemplate SCORING_TEMPLATE = JtwigTemplate.inlineTemplate(
+            "{{- self.subject() }} scored {{ score }} point{{- (score != 1) ? 's' : '' }}.");
+
     static String scoreString(Character combatant, int amt) {
         JtwigModel model = new JtwigModel()
             .with("self", combatant)
             .with("score", amt);
-        JtwigTemplate template = JtwigTemplate.inlineTemplate(
-            "{{- self.subject() }} scored {{ score }} point{{- (score != 1) ? 's' : '' }}.");
-        return template.render(model);
+        return SCORING_TEMPLATE.render(model);
     }
 
     public final void round() {
