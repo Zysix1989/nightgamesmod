@@ -169,7 +169,38 @@ public class Participant {
 
         @Override
         public void move(Participant p) {
-            p.resupply();
+            p.invalidAttackers.clear();
+            p.character.change();
+            p.state = new ReadyState();
+            p.character.getWillpower().renew();
+            if (p.character.location().getOccupants().size() > 1) {
+                if (p.character.location().id() == AreaIdentity.dorm) {
+                    if (Global.getMatch().gps("Quad").orElseThrow().getOccupants().isEmpty()) {
+                        p.travel(Global.getMatch().gps("Quad").orElseThrow(),
+                                "You hear your opponents searching around the "
+                                        + "dorm, so once you finish changing, you hop out the window and "
+                                        + "head to the quad.");
+                    } else {
+                        p.travel(Global.getMatch().gps("Laundry").orElseThrow(),
+                                "You hear your opponents searching around "
+                                        + "the dorm, so once you finish changing, you quietly move "
+                                        + "downstairs to the laundry room.");
+                    }
+                }
+                if (p.character.location().id() == AreaIdentity.union) {
+                    if (Global.getMatch().gps("Quad").orElseThrow().getOccupants().isEmpty()) {
+                        p.travel(Global.getMatch().gps("Quad").orElseThrow(),
+                                "You don't want to be ambushed leaving the "
+                                        + "student union, so once you finish changing, you hop out the "
+                                        + "window and head to the quad.");
+                    } else {
+                        p.travel(Global.getMatch().gps("Pool").orElseThrow(),
+                                "You don't want to be ambushed leaving "
+                                        + "the student union, so once you finish changing, you sneak out "
+                                        + "the back door and head to the pool.");
+                    }
+                }
+            }
         }
 
         @Override
@@ -493,41 +524,6 @@ public class Participant {
     }
 
     public Area getLocation() { return character.location(); }
-
-    public void resupply() {
-        invalidAttackers.clear();
-        character.change();
-        state = new ReadyState();
-        character.getWillpower().renew();
-        if (character.location().getOccupants().size() > 1) {
-            if (character.location().id() == AreaIdentity.dorm) {
-                if (Global.getMatch().gps("Quad").orElseThrow().getOccupants().isEmpty()) {
-                    travel(Global.getMatch().gps("Quad").orElseThrow(),
-                            "You hear your opponents searching around the "
-                                    + "dorm, so once you finish changing, you hop out the window and "
-                                    + "head to the quad.");
-                } else {
-                    travel(Global.getMatch().gps("Laundry").orElseThrow(),
-                            "You hear your opponents searching around "
-                                    + "the dorm, so once you finish changing, you quietly move "
-                                    + "downstairs to the laundry room.");
-                }
-            }
-            if (character.location().id() == AreaIdentity.union) {
-                if (Global.getMatch().gps("Quad").orElseThrow().getOccupants().isEmpty()) {
-                    travel(Global.getMatch().gps("Quad").orElseThrow(),
-                            "You don't want to be ambushed leaving the "
-                                    + "student union, so once you finish changing, you hop out the "
-                                    + "window and head to the quad.");
-                } else {
-                    travel(Global.getMatch().gps("Pool").orElseThrow(),
-                            "You don't want to be ambushed leaving "
-                                    + "the student union, so once you finish changing, you sneak out "
-                                    + "the back door and head to the pool.");
-                }
-            }
-        }
-    }
 
     public void travel(Area dest) {
         state = new ReadyState();
