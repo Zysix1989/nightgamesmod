@@ -25,6 +25,7 @@ public class Participant {
         State getEnum();
         boolean allowsNormalActions();
         void move(Participant p);
+        boolean isDetectable();
     }
 
     public static class ReadyState implements PState {
@@ -40,6 +41,11 @@ public class Participant {
 
         @Override
         public void move(Participant p) {}
+
+        @Override
+        public boolean isDetectable() {
+            return true;
+        }
     }
 
     public static class ShowerState implements PState {
@@ -58,6 +64,11 @@ public class Participant {
             p.character.bathe(getEnum());
             p.state = new ReadyState();
         }
+
+        @Override
+        public boolean isDetectable() {
+            return true;
+        }
     }
 
     public static class CombatState implements PState {
@@ -74,6 +85,11 @@ public class Participant {
         @Override
         public void move(Participant p) {
             p.character.location.get().fight.battle();
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return true;
         }
     }
 
@@ -93,6 +109,11 @@ public class Participant {
             p.character.search(p.searchItems());
             p.state = new ReadyState();
         }
+
+        @Override
+        public boolean isDetectable() {
+            return true;
+        }
     }
 
     public static class CraftingState implements PState {
@@ -111,6 +132,11 @@ public class Participant {
             p.character.craft(p.craftItems());
             p.state = new ReadyState();
         }
+
+        @Override
+        public boolean isDetectable() {
+            return true;
+        }
     }
 
     public static class HiddenState implements PState {
@@ -128,6 +154,11 @@ public class Participant {
         public void move(Participant p) {
             p.character.message("You have found a hiding spot and are waiting for someone to pounce upon.");
         }
+
+        @Override
+        public boolean isDetectable() {
+            return false;
+        }
     }
 
     public static class ResupplyingState implements PState {
@@ -144,6 +175,11 @@ public class Participant {
         @Override
         public void move(Participant p) {
             p.resupply();
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return true;
         }
     }
 
@@ -163,6 +199,11 @@ public class Participant {
             p.character.bathe(getEnum());
             p.state = new ReadyState();
         }
+
+        @Override
+        public boolean isDetectable() {
+            return true;
+        }
     }
 
     public static class WebbedState implements PState {
@@ -180,6 +221,11 @@ public class Participant {
         public void move(Participant p) {
             p.character.message("You eventually manage to get an arm free, which you then use to extract yourself from the trap.");
             p.state = new ReadyState();
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return true;
         }
     }
 
@@ -199,6 +245,11 @@ public class Participant {
             p.character.masturbate();
             p.state = new ReadyState();
         }
+
+        @Override
+        public boolean isDetectable() {
+            return true;
+        }
     }
 
     public static class InTreeState implements PState {
@@ -215,6 +266,11 @@ public class Participant {
         @Override
         public void move(Participant p) {
             p.character.message("You are hiding in a tree, waiting to drop down on an unwitting foe.");
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return false;
         }
     }
 
@@ -233,6 +289,11 @@ public class Participant {
         public void move(Participant p) {
             p.character.message("You are hiding in dense bushes, waiting for someone to pass by.");
         }
+
+        @Override
+        public boolean isDetectable() {
+            return false;
+        }
     }
 
     public static class InPassState implements PState {
@@ -249,6 +310,11 @@ public class Participant {
         @Override
         public void move(Participant p) {
             p.character.message("You are hiding in an alcove in the pass.");
+        }
+
+        @Override
+        public boolean isDetectable() {
+            return false;
         }
     }
 

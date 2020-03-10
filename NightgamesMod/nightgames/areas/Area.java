@@ -4,7 +4,6 @@ import nightgames.actions.Action;
 import nightgames.actions.Move;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.State;
 import nightgames.global.Global;
 import nightgames.match.Participant;
 import nightgames.match.defaults.DefaultEncounter;
@@ -68,7 +67,7 @@ public class Area implements Serializable {
             return true;
         }
         for (Participant participant : present) {
-            if (!(participant.getCharacter().check(Attribute.Cunning, Global.random(20) + perception) || participant.state.getEnum() == State.hidden) || open()) {
+            if (!(participant.getCharacter().check(Attribute.Cunning, Global.random(20) + perception) || !participant.state.isDetectable()) || open()) {
                 return true;
             }
         }
