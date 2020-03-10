@@ -37,7 +37,6 @@ public class Participant {
 
     protected Character character;
     private int score = 0;
-    private int roundsToWait = 0;
     public State state = new Action.Ready();
     public Set<Participant> invalidAttackers = new HashSet<>();
 
@@ -52,7 +51,6 @@ public class Participant {
             throw new RuntimeException(e);
         }
         this.score = p.score;
-        this.roundsToWait = p.roundsToWait;
         this.state = p.state;
         this.invalidAttackers = new HashSet<>(p.invalidAttackers);
     }
@@ -102,9 +100,6 @@ public class Participant {
         possibleActions.removeIf(a -> !a.usable(this));
         if (state instanceof Combat.State) {
             state.move(this);
-        } else if (roundsToWait > 0) {
-            roundsToWait--;
-            return;
         } else if (this.character.is(Stsflag.enthralled)) {
             character.handleEnthrall(act -> act.execute(this));
             return;
@@ -127,10 +122,6 @@ public class Participant {
                 .collect(Collectors.toList());
         var destination = destinations.get(Global.random(destinations.size()));
         travel(destination, "You dash away and escape into the <b>" + destination.name + ".</b>");
-    }
-
-    public void waitRounds(int i) {
-        roundsToWait += i;
     }
 
     public void endOfMatchRound() {

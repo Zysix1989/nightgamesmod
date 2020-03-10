@@ -30,11 +30,12 @@ public class Bathe extends Action {
         }
     }
 
-    public class State implements Participant.State {
+    public class State extends Action.Busy {
         private boolean clothesStolen = false;
         private String message;
 
         public State(String message) {
+            super(1);
             this.message = message;
         }
 
@@ -44,7 +45,7 @@ public class Bathe extends Action {
         }
 
         @Override
-        public void move(Participant p) {
+        public void moveAfterDelay(Participant p) {
             Character character = p.getCharacter();
             character.status.removeIf(s -> s.flags().contains(Stsflag.purgable));
             character.stamina.renew();
@@ -115,7 +116,6 @@ public class Bathe extends Action {
     public Action.Aftermath execute(Participant user) {
         user.getCharacter().message(startMessage);
         user.state = new State(endMessage);
-        user.waitRounds(1);
         return new Aftermath();
     }
 

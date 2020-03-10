@@ -59,6 +59,28 @@ public abstract class Action implements Serializable {
         }
     }
 
+    public static abstract class Busy implements Participant.State {
+        private int roundsToWait;
+
+        protected Busy(int roundsToWait) {
+            this.roundsToWait = roundsToWait;
+        }
+
+        @Override
+        public boolean allowsNormalActions() {
+            return roundsToWait <= 0;
+        }
+
+        @Override
+        public final void move(Participant p) {
+            if (roundsToWait-- <= 0) {
+                moveAfterDelay(p);
+            }
+        }
+
+        protected abstract void moveAfterDelay(Participant p);
+    }
+
     public abstract Aftermath execute(Participant user);
 
     @Override

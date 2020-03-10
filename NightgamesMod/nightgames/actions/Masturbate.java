@@ -29,7 +29,10 @@ public class Masturbate extends Action {
         }
     }
 
-    public static class State implements Participant.State {
+    public static class State extends Action.Busy {
+        protected State() {
+            super(1);
+        }
 
         @Override
         public boolean allowsNormalActions() {
@@ -37,7 +40,7 @@ public class Masturbate extends Action {
         }
 
         @Override
-        public void move(Participant p) {
+        public void moveAfterDelay(Participant p) {
             Character character = p.getCharacter();
             character.arousal.renew();
             character.update();
@@ -103,7 +106,6 @@ public class Masturbate extends Action {
                     "You desperately need to deal with your throbbing body before you run into an opponent. You find an isolated corner and quickly finger your ass to a quick orgasm.");
         }
         user.state = new State();
-        user.waitRounds(1);
         return new Aftermath();
     }
 

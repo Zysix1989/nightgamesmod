@@ -47,7 +47,6 @@ public class Spiderweb extends Trap {
                 Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
             }
             target.state = new State();
-            target.waitRounds(1);
             target.getLocation().opportunity(target.getCharacter(), this);
         }
 
@@ -58,7 +57,11 @@ public class Spiderweb extends Trap {
         }
     }
 
-    public static class State implements Participant.State {
+    public static class State extends Action.Busy {
+
+        protected State() {
+            super(1);
+        }
 
         @Override
         public boolean allowsNormalActions() {
@@ -66,7 +69,7 @@ public class Spiderweb extends Trap {
         }
 
         @Override
-        public void move(Participant p) {
+        public void moveAfterDelay(Participant p) {
             p.getCharacter().message("You eventually manage to get an arm free, which you then use to extract yourself from the trap.");
             p.state = new Action.Ready();
         }
