@@ -11,7 +11,6 @@ import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
-import nightgames.match.DefaultMatchEndListener;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
 import nightgames.modifier.standard.NoRecoveryModifier;
@@ -29,7 +28,6 @@ import nightgames.status.addiction.AddictionType;
 import nightgames.utilities.ProseUtils;
 
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class Combat {
@@ -164,7 +162,6 @@ public class Combat {
                         for (PetCharacter otherPet : pets) {
                             if (!c.otherCombatants.contains(pet) || alreadyBattled.contains(otherPet)) { continue; }
                             if (!pet.getSelf().owner().equals(otherPet.getSelf().owner()) && Global.random(2) == 0) {
-                                c.listen(l -> l.prePetBattle(pet, otherPet));
                                 c.petbattle(pet.getSelf(), otherPet.getSelf());
                                 alreadyBattled.add(pet);
                                 alreadyBattled.add(otherPet);
@@ -434,9 +431,7 @@ public class Combat {
     private int postCombatScenesSeen;
     private boolean wroteMessage;
     private boolean cloned;
-    private List<CombatListener> listeners;
-    private DefaultMatchEndListener matchEndListener;
-    
+
     String imagePath = "";
 
     public Combat(Participant p1, Participant p2, Area loc) {
@@ -461,9 +456,6 @@ public class Combat {
         if (doExtendedLog()) {
             log = new CombatLog(this);
         }
-        matchEndListener = new DefaultMatchEndListener(this);
-        listeners = new ArrayList<>();
-        listeners.add(new DefaultMatchEndListener(this));
     }
 
     private void applyCombatStatuses(Character self, Character other) {
@@ -1817,10 +1809,6 @@ public class Combat {
 
     public void pause() {
         this.paused = true;
-    }
-    
-    public void listen(Consumer<CombatListener> cons) {
-        listeners.forEach(cons);
     }
 
 
