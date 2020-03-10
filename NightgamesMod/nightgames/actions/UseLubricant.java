@@ -1,7 +1,6 @@
 package nightgames.actions;
 
 import nightgames.characters.Character;
-import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
 import nightgames.match.Status;
@@ -29,10 +28,8 @@ public class UseLubricant extends Action {
 
     @Override
     public Action.Aftermath execute(Participant user) {
-        if (user.getCharacter().human()) {
-            Global.gui().message(
-                "You cover yourself in slick oil. It's a weird feeling, but it should make it easier to escape from a hold.");
-        }
+        user.getCharacter().message("You cover yourself in slick oil. It's a weird feeling, but it should make " +
+                "it easier to escape from a hold.");
         user.getCharacter().addNonCombat(new Status(new Oiled(user.getCharacter())));
         user.getCharacter().consume(Item.Lubricant, 1);
         return new Aftermath();

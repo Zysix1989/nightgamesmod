@@ -2,7 +2,6 @@ package nightgames.actions;
 
 import nightgames.characters.Character;
 import nightgames.characters.State;
-import nightgames.global.Global;
 import nightgames.match.Participant;
 
 public class PassAmbush extends Action {
@@ -29,10 +28,7 @@ public class PassAmbush extends Action {
 
     @Override
     public Action.Aftermath execute(Participant user) {
-        if (user.getCharacter().human()) {
-            Global.gui().message(
-                            "You try to find a decent hiding place in the irregular" + " rock faces lining the pass.");
-        }
+        user.getCharacter().message("You try to find a decent hiding place in the irregular rock faces lining the pass.");
         user.state = State.inPass;
         return new Aftermath();
     }

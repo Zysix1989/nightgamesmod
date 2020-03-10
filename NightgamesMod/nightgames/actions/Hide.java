@@ -2,7 +2,6 @@ package nightgames.actions;
 
 import nightgames.characters.Character;
 import nightgames.characters.State;
-import nightgames.global.Global;
 import nightgames.match.Participant;
 
 public class Hide extends Action {
@@ -28,9 +27,7 @@ public class Hide extends Action {
 
     @Override
     public Action.Aftermath execute(Participant user) {
-        if (user.getCharacter().human()) {
-            Global.gui().message("You find a decent hiding place and wait for unwary opponents.");
-        }
+        user.getCharacter().message("You find a decent hiding place and wait for unwary opponents.");
         user.state = State.hidden;
         return new Aftermath();
     }

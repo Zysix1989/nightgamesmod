@@ -38,28 +38,27 @@ public class MasturbateAction extends Action {
 
     @Override
     public Action.Aftermath execute(Participant user) {
-        if (user.getCharacter().human()) {
-            if (user.getCharacter().hasDick()) {
-                Global.gui().message(
-                                "You desperately need to deal with your erection before you run into an opponent. You find an isolated corner and quickly jerk off.");
-                if (user.getCharacter().human() && Global.checkFlag(Flag.masturbationSemen)) {
-                    if (user.getCharacter().getArousal().percent() > 50) {
-                        Global.gui().message(
-                                        "You remember that Reyka asked you to bring back some semen for her transformation rituals, and you catch your semen with one of her magic bottles.");
-                        user.getCharacter().gain(Item.semen);
-                    } else {
-                        Global.gui().message(
-                                        "You remember that Reyka asked you to bring back some semen for her transformation rituals, and you catch your semen with one of her magic bottles. "
-                                                        + "However it seems like you aren't quite aroused enough to provide the thick cum that she needs as the bottles seem to vomit back the cum you put in it.");
-                    }
+        if (user.getCharacter().hasDick()) {
+            user.getCharacter().message("You desperately need to deal with your erection before you run into " +
+                    "an opponent. You find an isolated corner and quickly jerk off.");
+            if (Global.checkFlag(Flag.masturbationSemen)) {
+                if (user.getCharacter().getArousal().percent() > 50) {
+                    user.getCharacter().message("You remember that Reyka asked you to bring back some semen for " +
+                            "her transformation rituals, and you catch your semen with one of her magic bottles.");
+                    user.getCharacter().gain(Item.semen);
+                } else {
+                    user.getCharacter().message("You remember that Reyka asked you to bring back some semen for " +
+                            "her transformation rituals, and you catch your semen with one of her magic bottles. " +
+                            "However it seems like you aren't quite aroused enough to provide the thick cum " +
+                            "that she needs as the bottles seem to vomit back the cum you put in it.");
                 }
-            } else if (user.getCharacter().hasPussy()) {
-                Global.gui().message(
-                                "You desperately need to deal with your throbbing pussy before you run into an opponent. You find an isolated corner and quickly finger yourself to a quick orgasm.");
-            } else {
-                Global.gui().message(
-                                "You desperately need to deal with your throbbing body before you run into an opponent. You find an isolated corner and quickly finger your ass to a quick orgasm.");
             }
+        } else if (user.getCharacter().hasPussy()) {
+            user.getCharacter().message(
+                    "You desperately need to deal with your throbbing pussy before you run into an opponent. You find an isolated corner and quickly finger yourself to a quick orgasm.");
+        } else {
+            user.getCharacter().message(
+                    "You desperately need to deal with your throbbing body before you run into an opponent. You find an isolated corner and quickly finger your ass to a quick orgasm.");
         }
         user.state = State.masturbating;
         user.waitRounds(1);

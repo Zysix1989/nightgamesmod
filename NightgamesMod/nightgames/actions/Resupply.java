@@ -48,22 +48,18 @@ public class Resupply extends Action {
     public Action.Aftermath execute(Participant user) {
         if (Global.getMatch().getType() == MatchType.FTC) {
             FTCMatch match = (FTCMatch) Global.getMatch();
-            if (user.getCharacter().human()) {
-                Global.gui().message("You get a change of clothes from the chest placed here.");
-            }
+            user.getCharacter().message("You get a change of clothes from the chest placed here.");
             if (user.getCharacter().has(Item.Flag) && !match.isPrey(user.getCharacter())) {
                 match.turnInFlag(user);
             } else if (match.canCollectFlag(user.getCharacter())) {
                 match.grabFlag();
             }
         } else {
-            if (user.getCharacter().human()) {
-                if (Global.getMatch().getCondition().name().equals(NudistModifier.NAME)) {
-                    Global.gui().message(
-                                    "You check in so that you're eligible to fight again, but you still don't get any clothes.");
-                } else {
-                    Global.gui().message("You pick up a change of clothes and prepare to get back in the fray.");
-                }
+            if (Global.getMatch().getCondition().name().equals(NudistModifier.NAME)) {
+                user.getCharacter().message(
+                        "You check in so that you're eligible to fight again, but you still don't get any clothes.");
+            } else {
+                user.getCharacter().message("You pick up a change of clothes and prepare to get back in the fray.");
             }
         }
         user.state = State.resupplying;

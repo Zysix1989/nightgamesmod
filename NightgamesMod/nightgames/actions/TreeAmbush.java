@@ -3,7 +3,6 @@ package nightgames.actions;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.State;
-import nightgames.global.Global;
 import nightgames.match.Participant;
 
 public class TreeAmbush extends Action {
@@ -31,15 +30,12 @@ public class TreeAmbush extends Action {
 
     @Override
     public Action.Aftermath execute(Participant user) {
-        if (user.getCharacter().human()) {
-            if (user.getCharacter().get(Attribute.Animism) >= 10) {
-                Global.gui().message(
-                                "Following your instincts, you clamber up a tree" + " to await an unwitting passerby.");
-            } else {
-                Global.gui().message("You climb up a tree that has a branch hanging over"
-                                + " the trail. It's hidden in the leaves, so you should be"
-                                + " able to surprise someone passing underneath.");
-            }
+        if (user.getCharacter().get(Attribute.Animism) >= 10) {
+            user.getCharacter().message("Following your instincts, you clamber up a tree" + " to await an unwitting passerby.");
+        } else {
+            user.getCharacter().message("You climb up a tree that has a branch hanging over"
+                    + " the trail. It's hidden in the leaves, so you should be"
+                    + " able to surprise someone passing underneath.");
         }
         user.state = State.inTree;
         return new Aftermath();

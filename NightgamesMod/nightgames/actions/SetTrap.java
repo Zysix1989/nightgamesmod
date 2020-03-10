@@ -1,7 +1,6 @@
 package nightgames.actions;
 
 import nightgames.characters.Character;
-import nightgames.global.Global;
 import nightgames.match.Participant;
 import nightgames.trap.Trap;
 
@@ -36,9 +35,7 @@ public class SetTrap extends Action {
     public Action.Aftermath execute(Participant user) {
         var result = trap.instantiate(user);
         user.getLocation().setTrap(result.instance);
-        if (user.getCharacter().human()) {
-            Global.gui().message(result.message);
-        }
+        user.getCharacter().message(result.message);
         return new Aftermath();
     }
 
