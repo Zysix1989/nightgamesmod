@@ -57,6 +57,12 @@ public class Participant {
         @Override
         public void move(Participant p) {
             p.character.bathe(getEnum());
+            if (p.getLocation().name.equals("Showers")) {
+                p.character.message("You let the hot water wash away your exhaustion and soon you're back to peak condition.");
+            }
+            if (p.getLocation().name.equals("Pool")) {
+                p.character.message("The hot water soothes and relaxes your muscles. You feel a bit exposed, skinny-dipping in such an open area. You decide it's time to get moving.");
+            }
             p.state = new ReadyState();
         }
 

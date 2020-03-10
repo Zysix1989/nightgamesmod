@@ -504,17 +504,6 @@ public class Player extends Character {
     }
 
     @Override
-    public void bathe(State state) {
-        super.bathe(state);
-        if (location.get().name.equals("Showers")) {
-            gui.message("You let the hot water wash away your exhaustion and soon you're back to peak condition.");
-        }
-        if (location.get().name.equals("Pool")) {
-            gui.message("The hot water soothes and relaxes your muscles. You feel a bit exposed, skinny-dipping in such an open area. You decide it's time to get moving.");
-        }
-    }
-
-    @Override
     public void craft(Collection<Item> itemsCrafted) {
         gui.message("You spend some time crafting some potions with the equipment.");
         super.craft(itemsCrafted);
