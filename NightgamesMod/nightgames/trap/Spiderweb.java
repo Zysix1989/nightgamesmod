@@ -90,10 +90,12 @@ public class Spiderweb extends Trap {
         victim.getCharacter().nudify();
         victim.getCharacter().defeated(attacker.getCharacter());
         victim.getCharacter().getArousal().renew();
+        victim.state = State.ready;
+
         attacker.getCharacter().tempt(20);
         Global.getMatch().score(attacker.getCharacter(),  1);
         attacker.state = State.ready;
-        victim.state = State.ready;
+
         victim.getLocation().endEncounter();
         victim.getLocation().clearTrap();
     }

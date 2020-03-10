@@ -566,18 +566,21 @@ public class Combat {
         }
         Character first = p1.getCharacter();
         Character second = p2.getCharacter();
+
         first.gainXP(first.getVictoryXP(second));
-        second.gainXP(second.getVictoryXP(first));
         first.orgasm();
-        second.orgasm();
-        second.undress(this);
         first.undress(this);
-        second.gainTrophy(this, first);
         first.gainTrophy(this, second);
-        second.defeated(first);
         first.defeated(second);
         first.gainAttraction(second, 4);
+
+        second.gainXP(second.getVictoryXP(first));
+        second.orgasm();
+        second.undress(this);
+        second.gainTrophy(this, first);
+        second.defeated(first);
         second.gainAttraction(first, 4);
+
         if (p1.getCharacter().human()) {
             p2.getCharacter().sendDrawMessage(this, state);
         } else if (p2.getCharacter().human()) {
@@ -592,20 +595,22 @@ public class Combat {
         p2.getCharacter().evalChallenges(this, won.getCharacter());
         var winner = won.getCharacter();
         var loser = getOpponentCharacter(won.getCharacter());
+
         if (won.getCharacter().has(Trait.slime)) {
             won.getCharacter().purge(this);
         }
         winner.gainXP(winner.getDefeatXP(loser));
-        loser.gainXP(loser.getVictoryXP(winner));
-        loser.orgasm();
         if (!winner.human() || !Global.getMatch().getCondition().name().equals(NoRecoveryModifier.NAME)) {
             winner.orgasm();
         }
         winner.dress(this);
+        winner.gainAttraction(loser, 1);
+
+        loser.gainXP(loser.getVictoryXP(winner));
+        loser.orgasm();
         loser.undress(this);
         loser.defeated(winner);
         loser.gainAttraction(winner, 2);
-        winner.gainAttraction(loser, 1);
 
         if (won.getCharacter().human()) {
             loser.sendDefeatMessage(this, state);
@@ -1364,27 +1369,33 @@ public class Combat {
         var targetCharacter = target.getCharacter();
         var assistCharacter = assist.getCharacter();
         var intruderCharacter = intruder.getCharacter();
+
         if (targetCharacter.resist3p(this, intruderCharacter, assistCharacter)) {
             targetCharacter.gainXP(20 + targetCharacter.lvlBonus(intruderCharacter));
-            intruderCharacter.gainXP(10 + intruderCharacter.lvlBonus(targetCharacter));
             targetCharacter.orgasm();
             targetCharacter.undress(this);
+
+            intruderCharacter.gainXP(10 + intruderCharacter.lvlBonus(targetCharacter));
             intruderCharacter.defeated(targetCharacter);
             intruderCharacter.defeated(assistCharacter);
+
         } else {
             intruderCharacter.gainXP(intruderCharacter.getAssistXP(targetCharacter));
-            targetCharacter.defeated(intruderCharacter);
-            assistCharacter.gainAttraction(intruderCharacter, 1);
             intruderCharacter.intervene3p(this, targetCharacter, assistCharacter);
-            assistCharacter.gainXP(assistCharacter.getVictoryXP(targetCharacter));
+
+            targetCharacter.defeated(intruderCharacter);
             targetCharacter.gainXP(targetCharacter.getDefeatXP(assistCharacter));
             targetCharacter.orgasm();
-            assistCharacter.dress(this);
             targetCharacter.undress(this);
-            assistCharacter.gainTrophy(this, targetCharacter);
             targetCharacter.defeated(assistCharacter);
+
+            assistCharacter.gainAttraction(intruderCharacter, 1);
+            assistCharacter.gainXP(assistCharacter.getVictoryXP(targetCharacter));
+            assistCharacter.dress(this);
+            assistCharacter.gainTrophy(this, targetCharacter);
             assistCharacter.victory3p(this, targetCharacter, intruderCharacter);
         }
+
         phase = new ResultsScenePhase();
         if (!(p1.getCharacter().human() || p2.getCharacter().human() || intruderCharacter.human())) {
             end();

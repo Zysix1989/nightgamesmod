@@ -369,8 +369,6 @@ public class DefaultEncounter {
     }
 
     protected void caught(Participant attacker, Participant target) {
-        attacker.getCharacter().gainXP(attacker.getCharacter().getVictoryXP(target.getCharacter()));
-        target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
         target.getCharacter().message("You jerk off frantically, trying to finish as fast as possible. Just as you feel the familiar sensation of imminent orgasm, you're grabbed from behind. "
                 + "You freeze, cock still in hand. As you turn your head to look at your attacker, "
                 + attacker.getCharacter().getName()
@@ -384,15 +382,19 @@ public class DefaultEncounter {
                 + "stifling her moans. She hasn't noticed you yet, and as best as you can judge, she's pretty close to the end. It'll be an easy victory for you as long as you work fast. "
                 + "You sneak up and hug her from behind while kissing the nape of her neck. She moans and shudders in your arms, but doesn't stop fingering herself. She probably realizes "
                 + "she has no chance of winning even if she fights back. You help her along by licking her neck and fondling her breasts as she hits her climax.");
+
         if (!target.getCharacter().mostlyNude()) {
             attacker.getCharacter().gain(target.getCharacter().getTrophy());
         }
-        target.getCharacter().nudify();
-        target.getCharacter().defeated(attacker.getCharacter());
-        target.getCharacter().getArousal().renew();
+        attacker.getCharacter().gainXP(attacker.getCharacter().getVictoryXP(target.getCharacter()));
         attacker.getCharacter().tempt(20);
         Global.getMatch().score(attacker.getCharacter(),  1);
         attacker.state = State.ready;
+
+        target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
+        target.getCharacter().nudify();
+        target.getCharacter().defeated(attacker.getCharacter());
+        target.getCharacter().getArousal().renew();
         target.state = State.ready;
         location.endEncounter();
     }
@@ -489,6 +491,7 @@ public class DefaultEncounter {
     public void aphrodisiactrick(Participant attacker, Participant target) {
         attacker.getCharacter().consume(Item.Aphrodisiac, 1);
         String message = getAphrodisiacTrickMessage(attacker.getCharacter(), target.getCharacter());
+
         attacker.getCharacter().gainXP(attacker.getCharacter().getVictoryXP(target.getCharacter()));
         target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
 
@@ -502,10 +505,12 @@ public class DefaultEncounter {
         target.getCharacter().nudify();
         target.getCharacter().defeated(attacker.getCharacter());
         target.getCharacter().getArousal().renew();
+        target.state = State.ready;
+
         attacker.getCharacter().tempt(20);
         Global.getMatch().score(attacker.getCharacter(),  1);
         attacker.state = State.ready;
-        target.state = State.ready;
+
         location.endEncounter();
     }
     
