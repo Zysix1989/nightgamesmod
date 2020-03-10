@@ -11,7 +11,7 @@ import java.util.Optional;
 public class BushAmbush extends Action {
     private static final long serialVersionUID = 2384434976695344978L;
 
-    private static class Aftermath extends Action.Aftermath {
+    private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {
 
         }

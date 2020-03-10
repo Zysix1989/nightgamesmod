@@ -7,7 +7,7 @@ import nightgames.trap.Trap;
 public class SetTrap extends Action {
     private static final long serialVersionUID = 9194305067966782124L;
 
-    private static class Aftermath extends Action.Aftermath {
+    private static final class Aftermath extends Action.Aftermath {
         private Aftermath() { }
 
         @Override

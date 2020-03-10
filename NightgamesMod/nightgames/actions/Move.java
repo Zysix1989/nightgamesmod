@@ -14,7 +14,7 @@ public class Move extends Action {
 
     private static final long serialVersionUID = -6111866290941387475L;
 
-    private class Aftermath extends Action.Aftermath {
+    private final class Aftermath extends Action.Aftermath {
         private Aftermath() {}
 
         @Override

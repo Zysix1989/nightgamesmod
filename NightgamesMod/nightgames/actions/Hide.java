@@ -10,7 +10,7 @@ import java.util.Optional;
 public class Hide extends Action {
     private static final long serialVersionUID = 9222848242102511020L;
 
-    private static class Aftermath extends Action.Aftermath {
+    private static final class Aftermath extends Action.Aftermath {
         private Aftermath() { }
 
         @Override

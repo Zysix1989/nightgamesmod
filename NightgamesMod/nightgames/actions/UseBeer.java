@@ -8,7 +8,7 @@ import nightgames.status.Buzzed;
 
 public class UseBeer extends Action {
 
-    private static class Aftermath extends Action.Aftermath {
+    private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {}
 
         @Override

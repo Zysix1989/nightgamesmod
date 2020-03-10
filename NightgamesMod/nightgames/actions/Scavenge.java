@@ -13,7 +13,7 @@ import java.util.Optional;
 public class Scavenge extends Action {
     private static final long serialVersionUID = -6692555226745083699L;
 
-    private static class Aftermath extends Action.Aftermath {
+    private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {}
 
         @Override

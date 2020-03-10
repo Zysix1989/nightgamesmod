@@ -7,7 +7,7 @@ import nightgames.match.Participant;
 
 public class UseEnergyDrink extends Action {
 
-    private static class Aftermath extends Action.Aftermath {
+    private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {}
 
         @Override

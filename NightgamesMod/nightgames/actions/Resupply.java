@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class Resupply extends Action {
     private static final long serialVersionUID = -3349606637987124335L;
 
-    private static class Aftermath extends Action.Aftermath {
+    private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {}
 
         @Override

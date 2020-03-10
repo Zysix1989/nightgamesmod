@@ -21,7 +21,7 @@ public class Bathe extends Action {
      * 
      */
     private static final long serialVersionUID = 4565550545479306251L;
-    private static class Aftermath extends Action.Aftermath {
+    private static final class Aftermath extends Action.Aftermath {
         private Aftermath() { }
 
         @Override

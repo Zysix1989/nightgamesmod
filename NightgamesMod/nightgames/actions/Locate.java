@@ -18,7 +18,7 @@ public class Locate extends Action {
     private static final long serialVersionUID = 1L;
     private static final int MINIMUM_SCRYING_REQUIREMENT = 5;
 
-    private static class Aftermath extends Action.Aftermath {
+    private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {}
 
         @Override

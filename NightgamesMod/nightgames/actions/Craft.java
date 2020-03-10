@@ -14,7 +14,7 @@ import java.util.Optional;
 public class Craft extends Action {
     private static final long serialVersionUID = 3199968029862277675L;
 
-    private static class Aftermath extends Action.Aftermath {
+    private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {
         }
 

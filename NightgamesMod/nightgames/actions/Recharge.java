@@ -8,7 +8,7 @@ import nightgames.match.Participant;
 public class Recharge extends Action {
     private static final long serialVersionUID = 2089054062272510717L;
 
-    private static class Aftermath extends Action.Aftermath {
+    private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {}
 
         @Override

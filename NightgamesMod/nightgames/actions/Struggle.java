@@ -9,7 +9,7 @@ import nightgames.status.Stsflag;
 public class Struggle extends Action {
     private static final long serialVersionUID = -644996487174479671L;
 
-    private static class Aftermath extends Action.Aftermath {
+    private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {}
 
         @Override
