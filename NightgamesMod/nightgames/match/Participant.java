@@ -566,8 +566,8 @@ public class Participant {
         );
     }
 
-    public void invalidateTarget(Character victor) {
-        mercy.addIfAbsent(victor);
+    public void invalidateTarget(Participant victor) {
+        mercy.addIfAbsent(victor.getCharacter());
     }
 
     void finishMatch() {

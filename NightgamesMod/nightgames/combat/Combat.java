@@ -571,14 +571,14 @@ public class Combat {
         first.orgasm();
         first.undress(this);
         first.gainTrophy(this, second);
-        p1.getParticipant().invalidateTarget(second);
+        p1.getParticipant().invalidateTarget(p2.getParticipant());
         first.gainAttraction(second, 4);
 
         second.gainXP(second.getVictoryXP(first));
         second.orgasm();
         second.undress(this);
         second.gainTrophy(this, first);
-        p2.getParticipant().invalidateTarget(first);
+        p2.getParticipant().invalidateTarget(p1.getParticipant());
         second.gainAttraction(first, 4);
 
         if (p1.getCharacter().human()) {
@@ -609,7 +609,7 @@ public class Combat {
         loser.gainXP(loser.getVictoryXP(winner));
         loser.orgasm();
         loser.undress(this);
-        getOpponent(winner).getParticipant().invalidateTarget(winner);
+        getOpponent(winner).getParticipant().invalidateTarget(won.getParticipant());
         loser.gainAttraction(winner, 2);
 
         if (won.getCharacter().human()) {
@@ -1376,18 +1376,18 @@ public class Combat {
             targetCharacter.undress(this);
 
             intruderCharacter.gainXP(10 + intruderCharacter.lvlBonus(targetCharacter));
-            intruder.invalidateTarget(targetCharacter);
-            intruder.invalidateTarget(assistCharacter);
+            intruder.invalidateTarget(target.getParticipant());
+            intruder.invalidateTarget(assist);
 
         } else {
             intruderCharacter.gainXP(intruderCharacter.getAssistXP(targetCharacter));
             intruderCharacter.intervene3p(this, targetCharacter, assistCharacter);
 
-            target.getParticipant().invalidateTarget(intruderCharacter);
+            target.getParticipant().invalidateTarget(intruder);
             targetCharacter.gainXP(targetCharacter.getDefeatXP(assistCharacter));
             targetCharacter.orgasm();
             targetCharacter.undress(this);
-            target.getParticipant().invalidateTarget(assistCharacter);
+            target.getParticipant().invalidateTarget(assist);
             targetCharacter.gainAttraction(assistCharacter, 1);
 
             assistCharacter.gainAttraction(intruderCharacter, 1);
