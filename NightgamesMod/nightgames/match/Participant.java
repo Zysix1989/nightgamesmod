@@ -101,7 +101,29 @@ public class Participant {
 
         @Override
         public void move(Participant p) {
-            p.character.search(p.searchItems());
+            Collection<Item> foundItems;
+            int roll = Global.random(10);
+            switch (roll) {
+                case 9:
+                    foundItems = List.of(Item.Tripwire, Item.Tripwire);
+                    break;
+                case 8:
+                    foundItems = List.of(Item.ZipTie, Item.ZipTie, Item.ZipTie);
+                    break;
+                case 7:
+                    foundItems = List.of(Item.Phone);
+                    break;
+                case 6:
+                    foundItems = List.of(Item.Rope);
+                    break;
+                case 5:
+                    foundItems = List.of(Item.Spring);
+                    break;
+                default:
+                    foundItems = List.of();
+                    break;
+            }
+            p.character.search(foundItems);
             p.state = new ReadyState();
         }
 
@@ -124,7 +146,47 @@ public class Participant {
 
         @Override
         public void move(Participant p) {
-            p.character.craft(p.craftItems());
+            Collection<Item> craftedItems = null;
+            int roll = Global.random(15);
+            if (p.character.check(Attribute.Cunning, 25)) {
+                if (roll == 9) {
+                    craftedItems = List.of(Item.Aphrodisiac, Item.DisSol);
+                } else if (roll >= 5) {
+                    craftedItems = List.of(Item.Aphrodisiac);
+                } else {
+                    craftedItems = List.of(Item.Lubricant, Item.Sedative);
+                }
+            } else if (p.character.check(Attribute.Cunning, 20)) {
+                if (roll == 9) {
+                    craftedItems = List.of(Item.Aphrodisiac);
+                } else if (roll >= 7) {
+                    craftedItems = List.of(Item.DisSol);
+                } else if (roll >= 5) {
+                    craftedItems = List.of(Item.Lubricant);
+                } else if (roll >= 3) {
+                    craftedItems = List.of(Item.Sedative);
+                } else {
+                    craftedItems = List.of(Item.EnergyDrink);
+                }
+            } else if (p.character.check(Attribute.Cunning, 15)) {
+                if (roll == 9) {
+                    craftedItems = List.of(Item.Aphrodisiac);
+                } else if (roll >= 8) {
+                    craftedItems = List.of(Item.DisSol);
+                } else if (roll >= 7) {
+                    craftedItems = List.of(Item.Lubricant);
+                } else if (roll >= 6) {
+                    craftedItems = List.of(Item.EnergyDrink);
+                }
+            } else if (roll >= 7) {
+                craftedItems = List.of(Item.Lubricant);
+            } else if (roll >= 5) {
+                craftedItems = List.of(Item.Sedative);
+            }
+            if (craftedItems == null) {
+                craftedItems = List.of();
+            }
+            p.character.craft(craftedItems);
             p.state = new ReadyState();
         }
 
@@ -402,67 +464,6 @@ public class Participant {
 
     public interface ActionCallback {
         Action.Aftermath execute(Action a);
-    }
-
-
-    private Collection<Item> craftItems() {
-        int roll = Global.random(15);
-        if (character.check(Attribute.Cunning, 25)) {
-            if (roll == 9) {
-                return List.of(Item.Aphrodisiac, Item.DisSol);
-            } else if (roll >= 5) {
-                return List.of(Item.Aphrodisiac);
-            } else {
-                return List.of(Item.Lubricant, Item.Sedative);
-            }
-        } else if (character.check(Attribute.Cunning, 20)) {
-            if (roll == 9) {
-                return List.of(Item.Aphrodisiac);
-            } else if (roll >= 7) {
-                return List.of(Item.DisSol);
-            } else if (roll >= 5) {
-                return List.of(Item.Lubricant);
-            } else if (roll >= 3) {
-                return List.of(Item.Sedative);
-            } else {
-                return List.of(Item.EnergyDrink);
-            }
-        } else if (character.check(Attribute.Cunning, 15)) {
-            if (roll == 9) {
-                return List.of(Item.Aphrodisiac);
-            } else if (roll >= 8) {
-                return List.of(Item.DisSol);
-            } else if (roll >= 7) {
-                return List.of(Item.Lubricant);
-            } else if (roll >= 6) {
-                return List.of(Item.EnergyDrink);
-            }
-        } else {
-            if (roll >= 7) {
-                return List.of(Item.Lubricant);
-            } else if (roll >= 5) {
-                return List.of(Item.Sedative);
-            }
-        }
-        return List.of();
-    }
-
-    private Collection<Item> searchItems() {
-        int roll = Global.random(10);
-        switch (roll) {
-            case 9:
-                return List.of(Item.Tripwire, Item.Tripwire);
-            case 8:
-                return List.of(Item.ZipTie, Item.ZipTie, Item.ZipTie);
-            case 7:
-                return List.of(Item.Phone);
-            case 6:
-                return List.of(Item.Rope);
-            case 5:
-                return List.of(Item.Spring);
-            default:
-                return List.of();
-        }
     }
 
 
