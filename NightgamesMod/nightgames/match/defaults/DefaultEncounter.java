@@ -423,14 +423,6 @@ public class DefaultEncounter {
         return fight;
     }
 
-    public Participant getFirstParticipant() {
-        return p1;
-    }
-
-    public Participant getSecondParticipant() {
-        return p2;
-    }
-
     public void steal(Character thief, Character target) {
         if (thief.human()) {
             Global.gui()
@@ -483,10 +475,6 @@ public class DefaultEncounter {
         }
         return Set.of(new IntrusionOption(p1.getCharacter(), () -> intrude(intruder, p1)),
                 new IntrusionOption(p2.getCharacter(), () -> intrude(intruder, p2)));
-    }
-
-    public boolean checkIntrude(Character c) {
-        return fight != null && !c.equals(p1.getCharacter()) && !c.equals(p2.getCharacter());
     }
 
     public void watch() {
