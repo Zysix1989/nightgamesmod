@@ -101,7 +101,7 @@ public class DefaultEncounter {
         attacker.getCharacter().showerScene(
                 victim,
                 () -> showerAmbush(attacker, victim),
-                () -> steal(attacker.getCharacter(), victim.getCharacter()),
+                () -> steal(attacker, victim),
                 () -> aphrodisiactrick(attacker, victim),
                 () -> {});
     }
@@ -422,15 +422,15 @@ public class DefaultEncounter {
         return fight;
     }
 
-    public void steal(Character thief, Character target) {
-        if (thief.human()) {
+    public void steal(Participant thief, Participant target) {
+        if (thief.getCharacter().human()) {
             Global.gui()
-                  .message("You quietly swipe " + target.getName()
+                  .message("You quietly swipe " + target.getCharacter().getName()
                                   + "'s clothes while she's occupied. It's a little underhanded, but you can still turn them in for cash just as if you defeated her.");
         }
-        thief.gain(target.getTrophy());
-        target.nudify();
-        Global.getMatch().findParticipant(target).state = new Participant.LostClothesState();
+        thief.getCharacter().gain(target.getCharacter().getTrophy());
+        target.getCharacter().nudify();
+        target.state = new Participant.LostClothesState();
         location.endEncounter();
     }
 
