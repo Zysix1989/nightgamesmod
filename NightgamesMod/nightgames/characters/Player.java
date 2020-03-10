@@ -600,7 +600,7 @@ public class Player extends Character {
     }
 
     @Override
-    public List<CommandPanelOption> intervene(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation) {
+    public List<CommandPanelOption> intervene(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable neitherContinuation) {
         gui.message("You find <b>" + p1.getName() + "</b> and <b>" + p2.getName()
                         + "</b> fighting too intensely to notice your arrival. If you intervene now, it'll essentially decide the winner.");
         gui.message("Then again, you could just wait and see which one of them comes out on top. It'd be entertaining,"
@@ -609,7 +609,7 @@ public class Player extends Character {
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Help " + p1.getName(), event -> p1Continuation.run()));
         options.add(new CommandPanelOption("Help " + p2.getName(), event -> p2Continuation.run()));
-        options.add(new CommandPanelOption("Watch them fight", event -> noneContinuation.run()));
+        options.add(new CommandPanelOption("Watch them fight", event -> neitherContinuation.run()));
         Global.getMatch().pause();
         return options;
     }

@@ -273,7 +273,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public List<CommandPanelOption> intervene(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable noneContinuation) {
+    public List<CommandPanelOption> intervene(Character p1, Runnable p1Continuation, Character p2, Runnable p2Continuation, Runnable neitherContinuation) {
         return new ArrayList<>();
     }
 
