@@ -177,18 +177,15 @@ public class DefaultEncounter {
     }
 
     private void ineligibleSpotCheck() {
-        // We can skip a lot of flavor lines if there aren't any humans around
-        if (p1.getCharacter().human() || p2.getCharacter().human()) {
-            if (p1.state == State.masturbating) {
-                ineligibleMasturbatingMessages(p1, p2);
-            } else if (p2.state == State.masturbating) {
-                ineligibleMasturbatingMessages(p2, p1);
+        if (p1.state == State.masturbating) {
+            ineligibleMasturbatingMessages(p1, p2);
+        } else if (p2.state == State.masturbating) {
+            ineligibleMasturbatingMessages(p2, p1);
+        } else {
+            if (p1.canStartCombat(p2)) {
+                ineligibleMessages(p2, p1);
             } else {
-                if (p1.canStartCombat(p2)) {
-                    ineligibleMessages(p2, p1);
-                } else {
-                    ineligibleMessages(p1, p2);
-                }
+                ineligibleMessages(p1, p2);
             }
         }
         location.endEncounter();
