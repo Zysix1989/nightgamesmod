@@ -663,7 +663,7 @@ public class Participant {
     }
 
     public boolean canStartCombat(Participant p2) {
-        return !p2.invalidAttackers.contains(this) && state.getEnum() != State.resupplying;
+        return !p2.invalidAttackers.contains(this) && p2.state.getEnum() != State.resupplying;
     }
 
     public interface ActionCallback {
