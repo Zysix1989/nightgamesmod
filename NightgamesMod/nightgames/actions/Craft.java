@@ -74,7 +74,13 @@ public class Craft extends Action {
             } else {
                 craftedItems = List.of();
             }
-            p.getCharacter().craft(craftedItems);
+            Character character = p.getCharacter();
+            character.message("You spend some time crafting some potions with the equipment.");
+            craftedItems.forEach(character::gain);
+            character.update();
+            if (craftedItems.isEmpty()) {
+                character.message("Your concoction turns a sickly color and releases a foul smelling smoke. You trash it before you do any more damage.");
+            }
             p.state = new Ready();
         }
 

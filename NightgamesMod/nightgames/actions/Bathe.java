@@ -3,6 +3,7 @@ package nightgames.actions;
 import nightgames.characters.Character;
 import nightgames.match.Participant;
 import nightgames.match.defaults.DefaultEncounter;
+import nightgames.status.Stsflag;
 
 import java.util.Optional;
 
@@ -36,7 +37,10 @@ public class Bathe extends Action {
 
         @Override
         public void move(Participant p) {
-            p.getCharacter().bathe();
+            Character character = p.getCharacter();
+            character.status.removeIf(s -> s.flags().contains(Stsflag.purgable));
+            character.stamina.renew();
+            character.update();
             p.getCharacter().message(message);
             if (clothesStolen) {
                 p.getCharacter().message("Your clothes aren't where you left them. Someone must have come by and taken them.");

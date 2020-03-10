@@ -496,30 +496,6 @@ public class Player extends Character {
     }
 
     @Override
-    public void craft(Collection<Item> itemsCrafted) {
-        gui.message("You spend some time crafting some potions with the equipment.");
-        super.craft(itemsCrafted);
-        if (itemsCrafted.isEmpty()) {
-            gui.message("Your concoction turns a sickly color and releases a foul smelling smoke. You trash it before you do any more damage.");
-        }
-    }
-
-    @Override
-    public void search(Collection<Item> foundItems) {
-        super.search(foundItems);
-        if (foundItems.isEmpty()) {
-            gui.message("You don't find anything useful.");
-        }
-    }
-
-    @Override
-    public void masturbate() {
-        super.masturbate();
-        gui.message("You hurriedly stroke yourself off, eager to finish before someone catches you. After what seems like an eternity, you ejaculate into a tissue and "
-                        + "throw it in the trash. Looks like you got away with it.");
-    }
-
-    @Override
     public void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {
         if (target.getLocation().name.equals("Showers")) {
             gui.message("You hear running water coming from the first floor showers. There shouldn't be any residents on this floor right now, so it's likely one "

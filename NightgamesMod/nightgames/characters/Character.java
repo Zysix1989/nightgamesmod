@@ -70,8 +70,8 @@ public abstract class Character extends Observable implements Cloneable {
     public int rank;
     public int money;
     public Map<Attribute, Integer> att;             //Attributes are good opportunity to move to OOP Implementation - They are very similar to meters with base and modified values - DSM
-    protected StaminaStat stamina;
-    protected ArousalStat arousal;
+    public StaminaStat stamina;
+    public ArousalStat arousal;
     protected MojoStat mojo;
     protected WillpowerStat willpower;
     public Outfit outfit;
@@ -2679,30 +2679,6 @@ public Character clone() throws CloneNotSupportedException {
 
     public Item getTrophy() {
         return trophy;
-    }
-    
-    /**Bathes the character, removing any purgable effects.  */
-    public void bathe() {
-        status.removeIf(s -> s.flags().contains(Stsflag.purgable));
-        stamina.renew();
-        update();
-    }
-
-    public void masturbate() {
-        arousal.renew();
-        update();
-    }
-
-    /**Performs the craft function on the map - the item this character gets is random.
-     * */
-    public void craft(Collection<Item> itemsCrafted) {
-        itemsCrafted.forEach(this::gain);
-        update();
-    }
-
-    /**Searches the area for an item. Provides a random item of a hardcoded set. */
-    public void search(Collection<Item> foundItems) {
-        foundItems.forEach(this::gain);
     }
 
     public abstract String challenge(Character other);

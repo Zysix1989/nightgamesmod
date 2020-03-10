@@ -53,7 +53,11 @@ public class Scavenge extends Action {
                     foundItems = List.of();
                     break;
             }
-            p.getCharacter().search(foundItems);
+            Character character = p.getCharacter();
+            foundItems.forEach(character::gain);
+            if (foundItems.isEmpty()) {
+                character.message("You don't find anything useful.");
+            }
             p.state = new Ready();
         }
 
