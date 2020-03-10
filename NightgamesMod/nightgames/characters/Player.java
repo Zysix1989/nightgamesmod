@@ -610,7 +610,10 @@ public class Player extends Character {
         options.add(new CommandPanelOption("Watch them fight", event -> neitherContinuation.run()));
         options.addAll(possibleMoves.stream()
                 .map(move -> new CommandPanelOption("Move (" + move.getDestination() + ")",
-                        event -> actionCallback.execute(move)))
+                        event -> {
+                            actionCallback.execute(move);
+                            Global.getMatch().resume();
+                        }))
                 .collect(Collectors.toSet()));
         Global.getMatch().pause();
         gui.presentOptions(options);
