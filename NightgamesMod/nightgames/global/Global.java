@@ -641,7 +641,7 @@ public class Global {
                 maxLevelTracker = Math.max(player.getLevel(), maxLevelTracker);
             }
         }
-        final int maxLevel = maxLevelTracker; // Was final int maxLevel = maxLevelTracker / players.size();
+        final int maxLevel = maxLevelTracker;
         players.stream().filter(c -> c.has(Trait.naturalgrowth)).filter(c -> c.getLevel() < maxLevel + 2).forEach(c -> {
             while (c.getLevel() < maxLevel + 2) {
                 c.ding(null);
