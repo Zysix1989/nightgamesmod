@@ -43,26 +43,26 @@ public class DefaultEncounter {
         checkEnthrall(p2, p1);
     }
 
-    private static void checkEnthrall(Participant p1, Participant p2) {
-        Status enthrall = p1.getCharacter().getStatus(Stsflag.enthralled);
+    private static void checkEnthrall(Participant slave, Participant master) {
+        Status enthrall = slave.getCharacter().getStatus(Stsflag.enthralled);
         if (enthrall != null) {
-            if (((Enthralled) enthrall).master != p2.getCharacter()) {
-                p1.getCharacter().removelist.add(enthrall);
-                p1.getCharacter().addNonCombat(new nightgames.match.Status(new Flatfooted(p1.getCharacter(), 2)));
-                p1.getCharacter().addNonCombat(new nightgames.match.Status(new Hypersensitive(p1.getCharacter())));
-                p1.getCharacter().message("At " + p2.getCharacter().getName() + "'s interruption, you break free from the"
+            if (((Enthralled) enthrall).master != master.getCharacter()) {
+                slave.getCharacter().removelist.add(enthrall);
+                slave.getCharacter().addNonCombat(new nightgames.match.Status(new Flatfooted(slave.getCharacter(), 2)));
+                slave.getCharacter().addNonCombat(new nightgames.match.Status(new Hypersensitive(slave.getCharacter())));
+                slave.getCharacter().message("At " + master.getCharacter().getName() + "'s interruption, you break free from the"
                         + " succubus' hold on your mind. However, the shock all but"
                         + " short-circuits your brain; you "
                         + " collapse to the floor, feeling helpless and"
                         + " strangely oversensitive");
-                p2.getCharacter().message(String.format(
+                master.getCharacter().message(String.format(
                         "%s doesn't appear to notice you at first, but when you wave your hand close to %s face %s "
                                 + "eyes open wide and %s immediately drops to the floor. Although the display leaves you "
                                 + "somewhat worried about %s health, %s is still in a very vulnerable position and you never "
                                 + "were one to let an opportunity pass you by.",
-                        p1.getCharacter().getName(), p1.getCharacter().possessiveAdjective(),
-                        p1.getCharacter().possessiveAdjective(), p1.getCharacter().pronoun(),
-                        p1.getCharacter().possessiveAdjective(), p1.getCharacter().pronoun()));
+                        slave.getCharacter().getName(), slave.getCharacter().possessiveAdjective(),
+                        slave.getCharacter().possessiveAdjective(), slave.getCharacter().pronoun(),
+                        slave.getCharacter().possessiveAdjective(), slave.getCharacter().pronoun()));
             }
         }
     }
