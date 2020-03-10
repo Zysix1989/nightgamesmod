@@ -2,7 +2,6 @@ package nightgames.match.ftc;
 
 import nightgames.areas.Area;
 import nightgames.characters.Attribute;
-import nightgames.characters.State;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
@@ -19,26 +18,7 @@ public class FTCEncounter extends DefaultEncounter {
         super(first, second, location);
     }
 
-    @Override
-    public void eligibleSpotCheck() {
-        if (p1.state.getEnum() == State.inTree) {
-            treeAmbush(p1, p2);
-        } else if (p2.state.getEnum() == State.inTree) {
-            treeAmbush(p2, p1);
-        } else if (p1.state.getEnum() == State.inBushes) {
-            bushAmbush(p1, p2);
-        } else if (p2.state.getEnum() == State.inBushes) {
-            bushAmbush(p2, p1);
-        } else if (p1.state.getEnum() == State.inPass) {
-            passAmbush(p1, p2);
-        } else if (p2.state.getEnum() == State.inPass) {
-            passAmbush(p2, p1);
-        } else {
-            super.eligibleSpotCheck();
-        }
-    }
-
-    private void treeAmbush(Participant attacker, Participant victim) {
+    public void treeAmbush(Participant attacker, Participant victim) {
         victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 3)));
         if (attacker.getCharacter().has(Item.Handcuffs))
             victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 75, "handcuffs")));
@@ -74,7 +54,7 @@ public class FTCEncounter extends DefaultEncounter {
         attacker.getCharacter().message(Global.format(attackerMessage, attacker.getCharacter(), victim.getCharacter()));
     }
 
-    private void bushAmbush(Participant attacker, Participant victim) {
+    public void bushAmbush(Participant attacker, Participant victim) {
         victim.getCharacter().addNonCombat(new Status(new Flatfooted(victim.getCharacter(), 3)));
         if (attacker.getCharacter().has(Item.Handcuffs))
             victim.getCharacter().addNonCombat(new Status(new Bound(victim.getCharacter(), 75, "handcuffs")));
@@ -105,7 +85,7 @@ public class FTCEncounter extends DefaultEncounter {
         attacker.getCharacter().message(Global.format(attackerMessage, attacker.getCharacter(), victim.getCharacter()));
     }
 
-    private void passAmbush(Participant attacker, Participant victim) {
+    public void passAmbush(Participant attacker, Participant victim) {
         int attackerScore = 30 + attacker.getCharacter().get(Attribute.Speed) * 10 + attacker.getCharacter().get(Attribute.Perception) * 5
                         + Global.random(30);
         int victimScore = victim.getCharacter().get(Attribute.Speed) * 10 + victim.getCharacter().get(Attribute.Perception) * 5 + Global.random(30);

@@ -10,6 +10,7 @@ import nightgames.characters.State;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.ftc.FTCEncounter;
 import nightgames.status.Stsflag;
 
 import java.util.*;
@@ -21,6 +22,7 @@ public class Participant {
         boolean allowsNormalActions();
         void move(Participant p);
         boolean isDetectable();
+        Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p);
     }
 
     public static class ReadyState implements PState {
@@ -41,6 +43,12 @@ public class Participant {
         public boolean isDetectable() {
             return true;
         }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+            return Optional.empty();
+        }
+
     }
 
     public static class ShowerState implements PState {
@@ -76,6 +84,14 @@ public class Participant {
             return true;
         }
 
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+            if (!clothesStolen) {
+                return Optional.of(() -> encounter.showerScene(other, p));
+            }
+            return Optional.empty();
+        }
+
         public boolean canStealClothes() { return !clothesStolen; }
 
         public void stealClothes() {
@@ -104,6 +120,13 @@ public class Participant {
         public boolean isDetectable() {
             return true;
         }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+            throw new UnsupportedOperationException(String.format("%s is already in combat!",
+                    p.getCharacter().getTrueName()));
+        }
+
     }
 
     public static class SearchingState implements PState {
@@ -149,6 +172,12 @@ public class Participant {
         public boolean isDetectable() {
             return true;
         }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+            return Optional.of(() -> encounter.spy(other, p));
+        }
+
     }
 
     public static class CraftingState implements PState {
@@ -213,6 +242,12 @@ public class Participant {
         public boolean isDetectable() {
             return true;
         }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+            return Optional.of(() -> encounter.spy(other, p));
+        }
+
     }
 
     public static class HiddenState implements PState {
@@ -235,6 +270,12 @@ public class Participant {
         public boolean isDetectable() {
             return false;
         }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+            return Optional.empty();
+        }
+
     }
 
     public static class ResupplyingState implements PState {
@@ -288,6 +329,13 @@ public class Participant {
         public boolean isDetectable() {
             return true;
         }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+            throw new UnsupportedOperationException(String.format("%s can't be attacked while resupplying",
+                    p.getCharacter().getTrueName()));
+        }
+
     }
 
     public static class WebbedState implements PState {
@@ -311,6 +359,12 @@ public class Participant {
         public boolean isDetectable() {
             return true;
         }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+            return Optional.of(() -> encounter.spider(other, p));
+        }
+
     }
 
     public static class MasturbatingState implements PState {
@@ -334,6 +388,12 @@ public class Participant {
         public boolean isDetectable() {
             return true;
         }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+            return Optional.of(() -> encounter.caught(other, p));
+        }
+
     }
 
     public static class InTreeState implements PState {
@@ -356,6 +416,13 @@ public class Participant {
         public boolean isDetectable() {
             return false;
         }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+            assert encounter instanceof FTCEncounter;
+            return Optional.of(() -> ((FTCEncounter) encounter).treeAmbush(p, other));
+        }
+
     }
 
     public static class InBushesState implements PState {
@@ -378,6 +445,13 @@ public class Participant {
         public boolean isDetectable() {
             return false;
         }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+            assert encounter instanceof FTCEncounter;
+            return Optional.of(() -> ((FTCEncounter) encounter).bushAmbush(p, other));
+        }
+
     }
 
     public static class InPassState implements PState {
@@ -400,6 +474,13 @@ public class Participant {
         public boolean isDetectable() {
             return false;
         }
+
+        @Override
+        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant other, Participant p) {
+            assert encounter instanceof FTCEncounter;
+            return Optional.of(() -> ((FTCEncounter) encounter).passAmbush(p, other));
+        }
+
     }
 
 

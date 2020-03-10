@@ -97,7 +97,7 @@ public class DefaultEncounter {
         return spotter.getCharacter().check(Attribute.Cunning, dc);
     }
 
-    private void showerScene(Participant attacker, Participant victim) {
+    public void showerScene(Participant attacker, Participant victim) {
         attacker.getCharacter().showerScene(
                 victim,
                 () -> showerAmbush(attacker, victim),
@@ -106,30 +106,20 @@ public class DefaultEncounter {
                 () -> {});
     }
 
+    public void spy(Participant attacker, Participant victim) {
+        attacker.getCharacter().spy(victim, () -> ambush(attacker, victim), () -> location.endEncounter());
+    }
+
     protected void eligibleSpotCheck() {
-        if (p1.state.getEnum() == State.shower && ((Participant.ShowerState) p1.state).canStealClothes()) {
-            showerScene(p2, p1);
+        var p1Replacement = p1.state.eligibleCombatReplacement(this, p1, p2);
+        var p2Replacement = p2.state.eligibleCombatReplacement(this, p2, p1);
+        assert p1Replacement.isEmpty() || p2Replacement.isEmpty();
+        if (p1Replacement.isPresent()) {
+            p1Replacement.get().run();
             return;
-        } else if (p2.state.getEnum() == State.shower && ((Participant.ShowerState) p2.state).canStealClothes()) {
-            showerScene(p1, p2);
-            return;
-        } else if (p1.state.getEnum() == State.webbed) {
-            spider(p2, p1);
-            return;
-        } else if (p2.state.getEnum() == State.webbed) {
-            spider(p1, p2);
-            return;
-        } else if (p1.state.getEnum() == State.crafting || p1.state.getEnum() == State.searching) {
-            p2.getCharacter().spy(p1, () -> ambush(p2, p1), () -> location.endEncounter());
-            return;
-        } else if (p2.state.getEnum() == State.crafting || p2.state.getEnum() == State.searching) {
-            p1.getCharacter().spy(p2, () -> ambush(p1, p2), () -> location.endEncounter());
-            return;
-        } else if (p1.state.getEnum() == State.masturbating) {
-            caught(p2, p1);
-            return;
-        } else if (p2.state.getEnum() == State.masturbating) {
-            caught(p1, p2);
+        }
+        if (p2Replacement.isPresent()) {
+            p2Replacement.get().run();
             return;
         }
         
@@ -368,7 +358,7 @@ public class DefaultEncounter {
         target.getCharacter().add(fight, new Flatfooted(target.getCharacter(), 4));
     }
 
-    protected void caught(Participant attacker, Participant target) {
+    public void caught(Participant attacker, Participant target) {
         target.getCharacter().message("You jerk off frantically, trying to finish as fast as possible. Just as you feel the familiar sensation of imminent orgasm, you're grabbed from behind. "
                 + "You freeze, cock still in hand. As you turn your head to look at your attacker, "
                 + attacker.getCharacter().getName()
@@ -400,7 +390,7 @@ public class DefaultEncounter {
         location.endEncounter();
     }
 
-    protected void spider(Participant attacker, Participant target) {
+    public void spider(Participant attacker, Participant target) {
         attacker.getCharacter().gainXP(attacker.getCharacter().getVictoryXP(target.getCharacter()));
         target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
         Spiderweb.onSpiderwebDefeat(attacker, target, location.getTrap().orElseThrow());
