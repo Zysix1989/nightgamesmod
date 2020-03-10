@@ -30,10 +30,6 @@ public class MasturbateAction extends Action {
     }
 
     public static class State implements Participant.PState {
-        @Override
-        public nightgames.characters.State getEnum() {
-            return nightgames.characters.State.masturbating;
-        }
 
         @Override
         public boolean allowsNormalActions() {

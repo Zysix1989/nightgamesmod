@@ -1,7 +1,6 @@
 package nightgames.actions;
 
 import nightgames.characters.Character;
-import nightgames.characters.State;
 import nightgames.match.Participant;
 import nightgames.match.defaults.DefaultEncounter;
 
@@ -28,11 +27,6 @@ public class Bathe extends Action {
 
         public ShowerState(String message) {
             this.message = message;
-        }
-
-        @Override
-        public State getEnum() {
-            return State.shower;
         }
 
         @Override

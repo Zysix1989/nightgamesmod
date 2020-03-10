@@ -20,10 +20,6 @@ public class PassAmbush extends Action {
     }
 
     public static class State implements Participant.PState {
-        @Override
-        public nightgames.characters.State getEnum() {
-            return nightgames.characters.State.inPass;
-        }
 
         @Override
         public boolean allowsNormalActions() {

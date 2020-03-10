@@ -20,10 +20,6 @@ public class Hide extends Action {
     }
 
     public static class State implements Participant.PState {
-        @Override
-        public nightgames.characters.State getEnum() {
-            return nightgames.characters.State.hidden;
-        }
 
         @Override
         public boolean allowsNormalActions() {

@@ -5,7 +5,6 @@ import nightgames.actions.Move;
 import nightgames.actions.Resupply;
 import nightgames.areas.Area;
 import nightgames.characters.Character;
-import nightgames.characters.State;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.match.defaults.DefaultEncounter;
@@ -21,7 +20,6 @@ public class Participant {
 
     // Below, the participant 'p' is the one who holds the state
     public interface PState {
-        State getEnum();
         boolean allowsNormalActions();
         void move(Participant p);
         boolean isDetectable();

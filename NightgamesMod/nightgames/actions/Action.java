@@ -1,7 +1,6 @@
 package nightgames.actions;
 
 import nightgames.characters.Character;
-import nightgames.characters.State;
 import nightgames.match.Participant;
 import nightgames.match.defaults.DefaultEncounter;
 
@@ -29,10 +28,6 @@ public abstract class Action implements Serializable {
     }
 
     public static class Ready implements Participant.PState {
-        @Override
-        public State getEnum() {
-            return State.ready;
-        }
 
         @Override
         public boolean allowsNormalActions() {

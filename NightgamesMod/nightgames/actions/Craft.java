@@ -25,10 +25,6 @@ public class Craft extends Action {
     }
 
     public static class State implements Participant.PState {
-        @Override
-        public nightgames.characters.State getEnum() {
-            return nightgames.characters.State.crafting;
-        }
 
         @Override
         public boolean allowsNormalActions() {

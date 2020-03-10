@@ -59,10 +59,6 @@ public class Spiderweb extends Trap {
     }
 
     public static class State implements Participant.PState {
-        @Override
-        public nightgames.characters.State getEnum() {
-            return nightgames.characters.State.webbed;
-        }
 
         @Override
         public boolean allowsNormalActions() {
