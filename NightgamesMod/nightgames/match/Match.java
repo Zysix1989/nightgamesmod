@@ -263,7 +263,7 @@ public class Match {
         var participant = findParticipant(combatant);
         participant.incrementScore(amt);
         if ((combatant.human() || participant.getLocation().humanPresent())) {
-            Global.gui().message(scoreString(combatant, participant.getScore()));
+            Global.gui().message(scoreString(combatant, amt));
         }
     }
 
