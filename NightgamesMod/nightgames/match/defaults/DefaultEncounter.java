@@ -166,9 +166,9 @@ public class DefaultEncounter {
 
     private void ineligibleSpotCheck() {
         if (p1.canStartCombat(p2)) {
-            p1.state.ineligibleCombatReplacement(p1, p2).orElse(() -> ineligibleMessages(p2, p1)).run();
+            p1.state.ineligibleCombatReplacement(p1, p2).orElse(() -> ineligibleMessages(p1, p2)).run();
         } else {
-            p2.state.ineligibleCombatReplacement(p2, p1).orElse(() -> ineligibleMessages(p1, p2)).run();
+            p2.state.ineligibleCombatReplacement(p2, p1).orElse(() -> ineligibleMessages(p2, p1)).run();
         }
         location.endEncounter();
     }
