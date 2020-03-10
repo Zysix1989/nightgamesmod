@@ -72,7 +72,7 @@ public class DefaultEncounter {
      * Returns true if something has come up that prevents them from being presented with the usual
      * campus Actions.
      */
-    public boolean spotCheck() {
+    public final boolean spotCheck() {
         if (p1.canStartCombat(p2) && p2.canStartCombat(p1)) {
             eligibleSpotCheck();
             return true;
@@ -106,7 +106,7 @@ public class DefaultEncounter {
                 () -> {});
     }
 
-    private void eligibleSpotCheck() {
+    protected void eligibleSpotCheck() {
         if (p1.state.getEnum() == State.shower && ((Participant.ShowerState) p1.state).canStealClothes()) {
             showerScene(p2, p1);
             return;

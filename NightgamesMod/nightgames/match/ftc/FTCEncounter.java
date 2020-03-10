@@ -20,9 +20,7 @@ public class FTCEncounter extends DefaultEncounter {
     }
 
     @Override
-    public boolean spotCheck() {
-        if (!(p1.canStartCombat(p2) && p2.canStartCombat(p1)))
-            return super.spotCheck();
+    public void eligibleSpotCheck() {
         if (p1.state.getEnum() == State.inTree) {
             treeAmbush(p1, p2);
         } else if (p2.state.getEnum() == State.inTree) {
@@ -36,9 +34,8 @@ public class FTCEncounter extends DefaultEncounter {
         } else if (p2.state.getEnum() == State.inPass) {
             passAmbush(p2, p1);
         } else {
-            return super.spotCheck();
+            super.eligibleSpotCheck();
         }
-        return true;
     }
 
     private void treeAmbush(Participant attacker, Participant victim) {
