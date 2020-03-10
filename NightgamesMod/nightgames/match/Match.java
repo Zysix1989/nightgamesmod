@@ -262,12 +262,9 @@ public class Match {
     public void score(Character combatant, int amt) {
         var participant = findParticipant(combatant);
         participant.incrementScore(amt);
-        participant.getLocation()
-                .getOccupants()
-                .forEach(p -> p.getCharacter().message(scoreString(combatant, amt)));
     }
 
-    private String scoreString(Character combatant, int amt) {
+    static String scoreString(Character combatant, int amt) {
         JtwigModel model = new JtwigModel()
             .with("self", combatant)
             .with("score", amt);

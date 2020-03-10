@@ -50,6 +50,9 @@ public class Participant {
 
     public void incrementScore(int i) {
         score += i;
+        getLocation()
+                .getOccupants()
+                .forEach(p -> p.getCharacter().message(Match.scoreString(getCharacter(), i)));
     }
 
     public void defeated(Participant p) {
