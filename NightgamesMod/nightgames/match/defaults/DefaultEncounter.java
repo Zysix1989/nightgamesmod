@@ -388,7 +388,8 @@ public class DefaultEncounter {
         }
         attacker.getCharacter().gainXP(attacker.getCharacter().getVictoryXP(target.getCharacter()));
         attacker.getCharacter().tempt(20);
-        attacker.incrementScore(attacker.pointsForVictory(target));
+        attacker.incrementScore(attacker.pointsForVictory(target),
+                "for a win, by being in the right place at the wrong time");
         attacker.state = new Participant.ReadyState();
 
         target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
@@ -508,7 +509,7 @@ public class DefaultEncounter {
         target.state = new Participant.ReadyState();
 
         attacker.getCharacter().tempt(20);
-        attacker.incrementScore(attacker.pointsForVictory(target));
+        attacker.incrementScore(attacker.pointsForVictory(target), "for an underhanded win");
         attacker.state = new Participant.ReadyState();
 
         location.endEncounter();

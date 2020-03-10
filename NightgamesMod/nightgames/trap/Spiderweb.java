@@ -92,7 +92,7 @@ public class Spiderweb extends Trap {
         victim.state = new Participant.ReadyState();
 
         attacker.getCharacter().tempt(20);
-        attacker.incrementScore(attacker.pointsForVictory(victim));
+        attacker.incrementScore(attacker.pointsForVictory(victim), "for a devious victory");
         attacker.state = new Participant.ReadyState();
 
         victim.getLocation().endEncounter();

@@ -605,7 +605,9 @@ public class Combat {
         }
         winner.dress(this);
         winner.gainAttraction(loser, 1);
-        won.getParticipant().incrementScore(won.getParticipant().pointsForVictory(getOpponent(won.getCharacter()).getParticipant()));
+        won.getParticipant().incrementScore(
+                won.getParticipant().pointsForVictory(getOpponent(won.getCharacter()).getParticipant()),
+                "for a win");
 
         loser.gainXP(loser.getVictoryXP(winner));
         loser.orgasm();
@@ -1395,7 +1397,8 @@ public class Combat {
             assistCharacter.gainTrophy(this, targetCharacter);
             assistCharacter.victory3p(this, targetCharacter, intruderCharacter);
             assistCharacter.gainAttraction(targetCharacter, 1);
-            assist.incrementScore(assist.pointsForVictory(target.getParticipant()));
+            assist.incrementScore(assist.pointsForVictory(target.getParticipant()),
+                    "for an unearned win");
         }
 
         phase = new ResultsScenePhase();

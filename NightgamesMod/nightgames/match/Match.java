@@ -256,12 +256,13 @@ public class Match {
     }
 
     static final JtwigTemplate SCORING_TEMPLATE = JtwigTemplate.inlineTemplate(
-            "{{- self.subject() }} scored {{ score }} point{{- (score != 1) ? 's' : '' }}.");
+            "{{- self.subject() }} scored {{ score }} point{{- (score != 1) ? 's' : '' }} {{ reason }}.");
 
-    static String scoreString(Character combatant, int amt) {
+    static String scoreString(Character combatant, int amt, String reason) {
         JtwigModel model = new JtwigModel()
-            .with("self", combatant)
-            .with("score", amt);
+                .with("self", combatant)
+                .with("score", amt)
+                .with("reason", reason);
         return SCORING_TEMPLATE.render(model);
     }
 
@@ -348,7 +349,7 @@ public class Match {
 
         participants.stream().forEachOrdered(p -> {
                 var combatant = p.getCharacter();
-                sb.append(scoreString(combatant, p.getScore()));
+                sb.append(scoreString(combatant, p.getScore(), "in total"));
                 sb.append("<br/>");
                 combatant.modMoney(p.getScore() * combatant.prize());
                 combatant.modMoney(calculateReward(combatant, sb));

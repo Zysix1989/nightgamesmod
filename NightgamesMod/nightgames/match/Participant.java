@@ -440,11 +440,11 @@ public class Participant {
         return score;
     }
 
-    public void incrementScore(int i) {
-        score += i;
+    public void incrementScore(int amt, String reason) {
+        score += amt;
         getLocation()
                 .getOccupants()
-                .forEach(p -> p.getCharacter().message(Match.scoreString(getCharacter(), i)));
+                .forEach(p -> p.getCharacter().message(Match.scoreString(getCharacter(), amt, reason)));
     }
 
     public Participant copy() {

@@ -1,7 +1,6 @@
 package nightgames.match.ftc;
 
 import nightgames.characters.Character;
-import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
 
@@ -24,10 +23,7 @@ public class Prey extends Participant {
     public void timePasses() {
         gracePeriod = Math.min(0, gracePeriod - 1);
         if (character.has(Item.Flag) && gracePeriod == 0 && (++flagCounter % 3) == 0) {
-            incrementScore(1);
-            if (character.human()) {
-                Global.gui().message("You scored one point for holding the flag.");
-            }
+            incrementScore(1, "for holding the flag");
         }
     }
 

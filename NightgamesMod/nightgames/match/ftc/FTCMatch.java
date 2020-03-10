@@ -180,9 +180,11 @@ public class FTCMatch extends Match {
 
     public void turnInFlag(Participant flagHolder) {
         flagInCenter = true;
-        flagHolder.incrementScore(5);
-        Global.gui().message(Global.format("<b>{self:SUBJECT-ACTION:turn|turns} in the flag and "
-                        + "{self:action:gain|gains} five points.</b>", flagHolder.getCharacter(), Global.noneCharacter()));
+        flagHolder.incrementScore(5, "for turning in the flag");
+        participants.stream()
+                .filter(p -> p.getLocation().equals(flagHolder.getLocation()))
+                .forEach(p -> p.getCharacter().message(Global.format("<b>{self:SUBJECT-ACTION:turn|turns} in the flag and "
+                        + "{self:action:gain|gains} five points.</b>", flagHolder.getCharacter(), Global.noneCharacter())));
         flagHolder.getCharacter().remove(Item.Flag);
     }
 
