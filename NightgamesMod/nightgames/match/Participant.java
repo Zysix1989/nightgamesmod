@@ -146,7 +146,7 @@ public class Participant {
 
         @Override
         public void move(Participant p) {
-            Collection<Item> craftedItems = null;
+            Collection<Item> craftedItems;
             int roll = Global.random(15);
             if (p.character.check(Attribute.Cunning, 25)) {
                 if (roll == 9) {
@@ -177,13 +177,14 @@ public class Participant {
                     craftedItems = List.of(Item.Lubricant);
                 } else if (roll >= 6) {
                     craftedItems = List.of(Item.EnergyDrink);
+                } else {
+                    craftedItems = List.of();
                 }
             } else if (roll >= 7) {
                 craftedItems = List.of(Item.Lubricant);
             } else if (roll >= 5) {
                 craftedItems = List.of(Item.Sedative);
-            }
-            if (craftedItems == null) {
+            } else {
                 craftedItems = List.of();
             }
             p.character.craft(craftedItems);
