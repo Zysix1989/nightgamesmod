@@ -79,7 +79,7 @@ public class Craft extends Action {
                 craftedItems = List.of();
             }
             p.getCharacter().craft(craftedItems);
-            p.state = new Participant.ReadyState();
+            p.state = new Ready();
         }
 
         @Override
@@ -115,7 +115,7 @@ public class Craft extends Action {
 
     @Override
     public Action.Aftermath execute(Participant user) {
-        user.state = new Participant.CraftingState();
+        user.state = new State();
         return new Aftermath();
     }
 

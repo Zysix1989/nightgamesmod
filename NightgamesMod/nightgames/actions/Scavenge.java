@@ -58,7 +58,7 @@ public class Scavenge extends Action {
                     break;
             }
             p.getCharacter().search(foundItems);
-            p.state = new Participant.ReadyState();
+            p.state = new Ready();
         }
 
         @Override
@@ -95,7 +95,7 @@ public class Scavenge extends Action {
 
     @Override
     public Action.Aftermath execute(Participant user) {
-        user.state = new Participant.SearchingState();
+        user.state = new State();
         return new Aftermath();
     }
 

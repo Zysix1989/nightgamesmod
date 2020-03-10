@@ -80,7 +80,7 @@ public class TreeAmbush extends Action {
                     + " the trail. It's hidden in the leaves, so you should be"
                     + " able to surprise someone passing underneath.");
         }
-        user.state = new Participant.InTreeState();
+        user.state = new State();
         return new Aftermath();
     }
 

@@ -41,7 +41,7 @@ public class Resupply extends Action {
         public void move(Participant p) {
             p.invalidAttackers.clear();
             p.getCharacter().change();
-            p.state = new Participant.ReadyState();
+            p.state = new Ready();
             p.getCharacter().getWillpower().renew();
             if (p.getLocation().getOccupants().size() > 1) {
                 if (p.getLocation().id() == AreaIdentity.dorm) {
@@ -135,7 +135,7 @@ public class Resupply extends Action {
                 user.getCharacter().message("You pick up a change of clothes and prepare to get back in the fray.");
             }
         }
-        user.state = new Participant.ResupplyingState();
+        user.state = new State();
         return new Aftermath();
     }
 }

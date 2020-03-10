@@ -355,7 +355,7 @@ public class Match {
                 combatant.modMoney(calculateReward(combatant, sb));
 
                 combatant.challenges.clear();
-                p.state = new Participant.ReadyState();
+                p.state = new Action.Ready();
                 condition.undoItems(combatant);
                 combatant.change();
         });

@@ -1,5 +1,7 @@
 package nightgames.match.defaults;
 
+import nightgames.actions.Action;
+import nightgames.actions.Bathe;
 import nightgames.areas.Area;
 import nightgames.areas.AreaIdentity;
 import nightgames.characters.Character;
@@ -372,13 +374,13 @@ public class DefaultEncounter {
         attacker.getCharacter().tempt(20);
         attacker.incrementScore(attacker.pointsForVictory(target),
                 "for a win, by being in the right place at the wrong time");
-        attacker.state = new Participant.ReadyState();
+        attacker.state = new Action.Ready();
 
         target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
         target.getCharacter().nudify();
         target.invalidateAttacker(attacker);
         target.getCharacter().getArousal().renew();
-        target.state = new Participant.ReadyState();
+        target.state = new Action.Ready();
         location.endEncounter();
     }
 
@@ -413,7 +415,7 @@ public class DefaultEncounter {
         }
         thief.getCharacter().gain(target.getCharacter().getTrophy());
         target.getCharacter().nudify();
-        var targetState = (Participant.ShowerState) target.state;
+        var targetState = (Bathe.ShowerState) target.state;
         targetState.stealClothes();
         location.endEncounter();
     }
@@ -489,11 +491,11 @@ public class DefaultEncounter {
         target.getCharacter().nudify();
         target.invalidateAttacker(attacker);
         target.getCharacter().getArousal().renew();
-        target.state = new Participant.ReadyState();
+        target.state = new Action.Ready();
 
         attacker.getCharacter().tempt(20);
         attacker.incrementScore(attacker.pointsForVictory(target), "for an underhanded win");
-        attacker.state = new Participant.ReadyState();
+        attacker.state = new Action.Ready();
 
         location.endEncounter();
     }

@@ -1,5 +1,6 @@
 package nightgames.combat;
 
+import nightgames.actions.Action;
 import nightgames.areas.Area;
 import nightgames.characters.Character;
 import nightgames.characters.*;
@@ -485,8 +486,8 @@ public class Combat {
         processedEnding = false;
         timer = 0;
         images = new HashMap<String, String>();
-        this.p1.getParticipant().state = new Participant.CombatState();
-        this.p2.getParticipant().state = new Participant.CombatState();
+        this.p1.getParticipant().state = new State();
+        this.p2.getParticipant().state = new State();
         postCombatScenesSeen = 0;
         otherCombatants = new ArrayList<>();
         wroteMessage = false;
@@ -1450,8 +1451,8 @@ public class Combat {
     }
 
     private void end() {
-        p1.getParticipant().state = new Participant.ReadyState();
-        p2.getParticipant().state = new Participant.ReadyState();
+        p1.getParticipant().state = new Action.Ready();
+        p2.getParticipant().state = new Action.Ready();
         if (processedEnding) {
             if (beingObserved) {
                 Global.gui().endCombat();

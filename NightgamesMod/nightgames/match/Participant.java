@@ -1,14 +1,13 @@
 package nightgames.match;
 
-import nightgames.actions.*;
+import nightgames.actions.Action;
+import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.characters.Character;
 import nightgames.characters.State;
-import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.match.defaults.DefaultEncounter;
 import nightgames.status.Stsflag;
-import nightgames.trap.Spiderweb;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,51 +35,10 @@ public class Participant {
         }
     }
 
-    public static class ReadyState extends Action.Ready {}
-
-    public static class ShowerState extends Bathe.ShowerState {
-        public ShowerState(String message) {
-            super(message);
-        }
-    }
-
-    public static class CombatState extends Combat.State {
-
-    }
-
-    public static class SearchingState extends Scavenge.State {
-    }
-
-    public static class CraftingState extends Craft.State {
-    }
-
-    public static class HiddenState extends Hide.State {
-    }
-
-    public static class ResupplyingState extends Resupply.State {
-    }
-
-    public static class WebbedState extends Spiderweb.State {
-    }
-
-    public static class MasturbatingState extends MasturbateAction.State {
-    }
-
-    public static class InTreeState extends TreeAmbush.State {
-    }
-
-    public static class InBushesState extends BushAmbush.State {
-    }
-
-    public static class InPassState extends PassAmbush.State {
-    }
-
-
-
     protected Character character;
     private int score = 0;
     private int roundsToWait = 0;
-    public PState state = new ReadyState();
+    public PState state = new Action.Ready();
     public Set<Participant> invalidAttackers = new HashSet<>();
 
     public Participant(Character c) {
@@ -190,7 +148,7 @@ public class Participant {
     public Area getLocation() { return character.location(); }
 
     public void travel(Area dest) {
-        state = new ReadyState();
+        state = new Action.Ready();
         character.location.get().exit(this.character);
         character.location.set(dest);
         dest.enter(this.character);

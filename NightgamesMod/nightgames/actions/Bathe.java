@@ -47,7 +47,7 @@ public class Bathe extends Action {
             if (clothesStolen) {
                 p.getCharacter().message("Your clothes aren't where you left them. Someone must have come by and taken them.");
             }
-            p.state = new Participant.ReadyState();
+            p.state = new Ready();
         }
 
         @Override
@@ -103,7 +103,8 @@ public class Bathe extends Action {
     @Override
     public Action.Aftermath execute(Participant user) {
         user.getCharacter().message(startMessage);
-        user.state = new Participant.ShowerState(endMessage);
+        String message = endMessage;
+        user.state = new ShowerState(message);
         user.waitRounds(1);
         return new Aftermath();
     }

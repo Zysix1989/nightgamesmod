@@ -1,5 +1,6 @@
 package nightgames.trap;
 
+import nightgames.actions.Action;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
@@ -45,7 +46,7 @@ public class Spiderweb extends Trap {
                         .with("victim", target.getCharacter().getGrammar());
                 Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
             }
-            target.state = new Participant.WebbedState();
+            target.state = new State();
             target.waitRounds(1);
             target.getLocation().opportunity(target.getCharacter(), this);
         }
@@ -71,7 +72,7 @@ public class Spiderweb extends Trap {
         @Override
         public void move(Participant p) {
             p.getCharacter().message("You eventually manage to get an arm free, which you then use to extract yourself from the trap.");
-            p.state = new Participant.ReadyState();
+            p.state = new Action.Ready();
         }
 
         @Override
@@ -135,11 +136,11 @@ public class Spiderweb extends Trap {
         victim.getCharacter().nudify();
         victim.invalidateAttacker(attacker);
         victim.getCharacter().getArousal().renew();
-        victim.state = new Participant.ReadyState();
+        victim.state = new Action.Ready();
 
         attacker.getCharacter().tempt(20);
         attacker.incrementScore(attacker.pointsForVictory(victim), "for a devious victory");
-        attacker.state = new Participant.ReadyState();
+        attacker.state = new Action.Ready();
 
         victim.getLocation().endEncounter();
         victim.getLocation().clearTrap();

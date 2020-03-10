@@ -81,7 +81,7 @@ public class BushAmbush extends Action {
                     + " they'll make for a decent hiding place. You lie down in them,"
                     + " and wait for someone to walk past.");
         }
-        user.state = new Participant.InBushesState();
+        user.state = new State();
         return new Aftermath();
     }
 
