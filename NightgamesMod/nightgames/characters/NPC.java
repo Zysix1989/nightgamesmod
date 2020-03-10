@@ -206,7 +206,6 @@ public class NPC extends Character {
     public void victory3p(Combat c, Character target, Character assist) {
         c.updateAndClearMessage();
         c.write(ai.victory3p(c, target, assist));
-        gainAttraction(target, 1);
     }
 
     @Override

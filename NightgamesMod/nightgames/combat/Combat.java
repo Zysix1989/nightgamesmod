@@ -1388,12 +1388,14 @@ public class Combat {
             targetCharacter.orgasm();
             targetCharacter.undress(this);
             targetCharacter.defeated(assistCharacter);
+            targetCharacter.gainAttraction(assistCharacter, 1);
 
             assistCharacter.gainAttraction(intruderCharacter, 1);
             assistCharacter.gainXP(assistCharacter.getVictoryXP(targetCharacter));
             assistCharacter.dress(this);
             assistCharacter.gainTrophy(this, targetCharacter);
             assistCharacter.victory3p(this, targetCharacter, intruderCharacter);
+            assistCharacter.gainAttraction(targetCharacter, 1);
         }
 
         phase = new ResultsScenePhase();

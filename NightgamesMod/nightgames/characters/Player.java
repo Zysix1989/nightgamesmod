@@ -656,8 +656,6 @@ public class Player extends Character {
                             + "longer need to hold her legs, you can focus on her flooded pussy. You pump two fingers in and out of her while licking and sucking her clit. In no "
                             + "time at all, she's trembling and moaning in orgasm.");
         }
-        gainAttraction(target, 1);
-        target.gainAttraction(this, 1);
     }
 
     @Override
