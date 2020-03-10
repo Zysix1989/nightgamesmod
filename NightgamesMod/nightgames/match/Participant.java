@@ -325,7 +325,7 @@ public class Participant {
     private int roundsToWait = 0;
     public PState state = new ReadyState();
     // Participants this participant has defeated recently.  They are not valid targets until they resupply.
-    public CopyOnWriteArrayList<Character> mercy = new CopyOnWriteArrayList<>();
+    private CopyOnWriteArrayList<Character> mercy = new CopyOnWriteArrayList<>();
 
     public Participant(Character c) {
         this.character = c;
