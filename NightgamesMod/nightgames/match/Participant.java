@@ -66,7 +66,7 @@ public class Participant {
 
         @Override
         public void move(Participant p) {
-            p.character.bathe(getEnum());
+            p.character.bathe();
             if (p.getLocation().name.equals("Showers")) {
                 p.character.message("You let the hot water wash away your exhaustion and soon you're back to peak condition.");
             }
