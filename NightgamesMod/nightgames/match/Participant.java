@@ -182,7 +182,9 @@ public class Participant {
             state = State.ready;
             return;
         }
-        character.move(possibleActions, character.location.get().encounter(this), act -> act.execute(this));
+        if (character.location.get().encounter(this)) {
+            character.move(possibleActions, act -> act.execute(this));
+        }
     }
 
     public void flee() {

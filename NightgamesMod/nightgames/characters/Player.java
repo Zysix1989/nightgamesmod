@@ -373,21 +373,18 @@ public class Player extends Character {
 
     @Override
     public void move(Collection<Action> possibleActions,
-                     boolean normalActions,
                      Participant.ActionCallback callback) {
-        if (normalActions) {
-            var actionChoices = new ArrayList<Action>();
-            location.get().noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
-                gui.message("You hear something in the <b>" + room.name + "</b>.");
-                room.setPinged(true);
-            });
-            for (Action act : possibleActions) {
-                if (Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
-                    actionChoices.add(act);
-                }
+        var actionChoices = new ArrayList<Action>();
+        location.get().noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
+            gui.message("You hear something in the <b>" + room.name + "</b>.");
+            room.setPinged(true);
+        });
+        for (Action act : possibleActions) {
+            if (Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
+                actionChoices.add(act);
             }
-            presentMoveOptions(actionChoices, callback);
         }
+        presentMoveOptions(actionChoices, callback);
     }
 
     @Override

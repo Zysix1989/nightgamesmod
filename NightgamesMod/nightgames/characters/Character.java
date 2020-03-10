@@ -1746,7 +1746,6 @@ public Character clone() throws CloneNotSupportedException {
     public void displayStateMessage(Optional<Trap.Instance> knownTrap, State state) {};
 
     public abstract void move(Collection<Action> possibleActions,
-                              boolean normalActions,
                               Participant.ActionCallback callback);
 
     public abstract void handleEnthrall(Participant.ActionCallback callback);

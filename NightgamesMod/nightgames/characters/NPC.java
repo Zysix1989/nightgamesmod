@@ -368,19 +368,16 @@ public class NPC extends Character {
 
     @Override
     public void move(Collection<Action> possibleActions,
-                     boolean normalActions,
                      Participant.ActionCallback callback) {
-        if (normalActions) {
-            HashSet<Area> radar = new HashSet<>();
-            if (!has(Trait.immobile)) {
-                radar.addAll(location.get().noisyNeighbors(get(Attribute.Perception)));
-            }
-            var chosenAction = ai.move(possibleActions, radar);
-            if (location.get().humanPresent()) {
-                Global.gui().message("You notice " + getName() + callback.execute(chosenAction).describe(this));
-            } else {
-                callback.execute(chosenAction);
-            }
+        HashSet<Area> radar = new HashSet<>();
+        if (!has(Trait.immobile)) {
+            radar.addAll(location.get().noisyNeighbors(get(Attribute.Perception)));
+        }
+        var chosenAction = ai.move(possibleActions, radar);
+        if (location.get().humanPresent()) {
+            Global.gui().message("You notice " + getName() + callback.execute(chosenAction).describe(this));
+        } else {
+            callback.execute(chosenAction);
         }
     }
 

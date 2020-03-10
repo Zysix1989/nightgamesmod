@@ -168,7 +168,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void move(Collection<Action> possibleActions, boolean normalActions, Participant.ActionCallback callback) {
+    public void move(Collection<Action> possibleActions, Participant.ActionCallback callback) {
 
     }
 
