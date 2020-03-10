@@ -254,10 +254,6 @@ public class Player extends Character {
     private void assessOpponent(Participant opponent) {
         String arousal;
         String stamina;
-        if (opponent.state.getEnum() == State.webbed) {
-            gui.message("She is naked and helpless.<br/>");
-            return;
-        }
         if (get(Attribute.Perception) >= 6) {
             gui.message("She is level " + opponent.getCharacter().getLevel());
         }
@@ -266,11 +262,7 @@ public class Player extends Character {
                             + opponent.getCharacter().get(Attribute.Cunning) + ", and her Seduction is "
                             + opponent.getCharacter().get(Attribute.Seduction));
         }
-        if (opponent.getCharacter().mostlyNude() || opponent.state.getEnum() == State.shower) {
-            gui.message("She is completely naked.");
-        } else {
-            gui.message("She is dressed and ready to fight.");
-        }
+        opponent.state.sendAssessmentMessage(opponent, this);
         if (get(Attribute.Perception) >= 4) {
             if (opponent.getCharacter().getArousal()
                         .percent() > 70) {

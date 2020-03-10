@@ -17,6 +17,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Participant {
+
+    // Below, the participant 'p' is the one who holds the state
     public interface PState {
         State getEnum();
         boolean allowsNormalActions();
@@ -25,6 +27,13 @@ public class Participant {
         Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other);
         Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other);
         int spotCheckDifficultyModifier(Participant p);
+        default void sendAssessmentMessage(Participant p, Character observer) {
+            if (p.getCharacter().mostlyNude()) {
+                observer.message("She is completely naked.");
+            } else {
+                observer.message("She is dressed and ready to fight.");
+            }
+        }
     }
 
     public static class ReadyState implements PState {
@@ -60,7 +69,6 @@ public class Participant {
         public int spotCheckDifficultyModifier(Participant p) {
             return 0;
         }
-
     }
 
     public static class ShowerState implements PState {
@@ -113,6 +121,11 @@ public class Participant {
         public int spotCheckDifficultyModifier(Participant p) {
             throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
                     p.getCharacter().getTrueName()));
+        }
+
+        @Override
+        public void sendAssessmentMessage(Participant p, Character observer) {
+            observer.message("She is completely naked.");
         }
 
         public void stealClothes() {
@@ -219,7 +232,6 @@ public class Participant {
             throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
                     p.getCharacter().getTrueName()));
         }
-
     }
 
     public static class CraftingState implements PState {
@@ -300,7 +312,6 @@ public class Participant {
             throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
                     p.getCharacter().getTrueName()));
         }
-
     }
 
     public static class HiddenState implements PState {
@@ -447,6 +458,11 @@ public class Participant {
         public int spotCheckDifficultyModifier(Participant p) {
             throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
                     p.getCharacter().getTrueName()));
+        }
+
+        @Override
+        public void sendAssessmentMessage(Participant p, Character observer) {
+            observer.message("She is naked and helpless. There's no way she could fight back.");
         }
 
     }
@@ -608,7 +624,6 @@ public class Participant {
             throw new UnsupportedOperationException(String.format("spot check for %s should have already been replaced",
                     p.getCharacter().getTrueName()));
         }
-
     }
 
 
