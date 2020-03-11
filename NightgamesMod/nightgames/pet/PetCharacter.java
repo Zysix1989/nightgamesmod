@@ -10,8 +10,8 @@ import nightgames.global.Global;
 import nightgames.grammar.Person;
 import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
-import nightgames.match.Participant;
 import nightgames.match.Encounter;
+import nightgames.match.Participant;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
@@ -20,6 +20,7 @@ import nightgames.status.Status;
 import nightgames.trap.Trap;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class PetCharacter extends Character {
@@ -169,12 +170,12 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void move(Collection<Action> possibleActions, Participant.ActionCallback callback) {
+    public void move(Collection<Action> possibleActions, Consumer<Action> callback) {
 
     }
 
     @Override
-    public void handleEnthrall(Participant.ActionCallback callback) {
+    public void handleEnthrall(Consumer<Action> callback) {
 
     }
 

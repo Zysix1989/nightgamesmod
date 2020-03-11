@@ -38,6 +38,7 @@ import nightgames.status.*;
 import nightgames.trap.Trap;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class NPC extends Character {
@@ -357,25 +358,24 @@ public class NPC extends Character {
     }
 
     @Override
-    public void handleEnthrall(Participant.ActionCallback callback) {
+    public void handleEnthrall(Consumer<Action> callback) {
         Character master;
         master = ((Enthralled) getStatus(Stsflag.enthralled)).master;
         Move compelled = findPath(master.location.get());
         if (compelled != null) {
-            callback.execute(compelled);
+            callback.accept(compelled);
         }
     }
 
     @Override
     public void move(Collection<Action> possibleActions,
-                     Participant.ActionCallback callback) {
+                     Consumer<Action> callback) {
         HashSet<Area> radar = new HashSet<>();
         if (!has(Trait.immobile)) {
             radar.addAll(location.get().noisyNeighbors(get(Attribute.Perception)));
         }
         var chosenAction = ai.move(possibleActions, radar);
-        var aftermath = callback.execute(chosenAction).describe(this);
-        location.get().getOccupants().forEach(p -> p.getCharacter().message(aftermath));
+        callback.accept(chosenAction);
     }
 
     @Override

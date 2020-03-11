@@ -43,6 +43,7 @@ import nightgames.trap.Trap;
 
 import java.awt.event.ActionListener;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class Player extends Character {
@@ -304,12 +305,12 @@ public class Player extends Character {
     }
 
     private void presentMoveOptions(Collection<Action> actionChoices,
-                                    Participant.ActionCallback callback) {
+                                    Consumer<Action> callback) {
         var optionChoices = actionChoices.stream()
                 .map(action -> new CommandPanelOption(
                         action.toString(),
                         event -> {
-                            callback.execute(action);
+                            callback.accept(action);
                             Global.getMatch().resume();
                         })).collect(Collectors.toList());
         if (!optionChoices.isEmpty()) {
@@ -320,7 +321,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void handleEnthrall(Participant.ActionCallback callback) {
+    public void handleEnthrall(Consumer<Action> callback) {
         List<Action> actionChoices = new ArrayList<>();
         Character master;
         master = ((Enthralled) getStatus(Stsflag.enthralled)).master;
@@ -348,7 +349,7 @@ public class Player extends Character {
 
     @Override
     public void move(Collection<Action> possibleActions,
-                     Participant.ActionCallback callback) {
+                     Consumer<Action> callback) {
         var actionChoices = new ArrayList<Action>();
         location.get().noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
             gui.message("You hear something in the <b>" + room.name + "</b>.");

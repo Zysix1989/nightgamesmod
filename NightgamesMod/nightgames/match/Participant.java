@@ -11,6 +11,7 @@ import nightgames.global.Global;
 import nightgames.status.Stsflag;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class Participant {
@@ -96,17 +97,21 @@ public class Participant {
         possibleActions.addAll(character.getItemActions());
         possibleActions.addAll(Global.getMatch().getAvailableActions());
         possibleActions.removeIf(a -> !a.usable(this));
+        Consumer<Action> callback = act -> {
+            var aftermath = act.execute(this).describe(character);
+            getLocation().getOccupants().forEach(p -> p.getCharacter().message(aftermath));
+        };
         if (state instanceof Combat.State) {
             state.move(this);
         } else if (this.character.is(Stsflag.enthralled)) {
-            character.handleEnthrall(act -> act.execute(this));
+            character.handleEnthrall(callback);
             return;
         } else {
             state.move(this);
         }
         if (state.allowsNormalActions()) {
             if (character.location.get().encounter(this)) {
-                character.move(possibleActions, act -> act.execute(this));
+                character.move(possibleActions, callback);
             }
         }
     }
