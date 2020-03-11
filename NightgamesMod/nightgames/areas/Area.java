@@ -109,7 +109,7 @@ public class Area implements Serializable {
                 if (opponent != p
                         // && Global.getMatch().canEngage(p, opponent)
                 ) {
-                    fight = Global.getMatch().buildEncounter(p, opponent, this);
+                    fight = new DefaultEncounter(p, opponent, this);
                     return !fight.spotCheck();
                 }
             }
@@ -122,7 +122,7 @@ public class Area implements Serializable {
         for (Participant opponent : present) {
             if (opponent != targetParticipant) {
                 if (targetParticipant.canStartCombat(opponent) && opponent.canStartCombat(targetParticipant) && fight == null) {
-                    fight = Global.getMatch().buildEncounter(opponent, targetParticipant, this);
+                    fight = new DefaultEncounter(opponent, targetParticipant, this);
                     opponent.getCharacter().promptTrap(
                             targetParticipant,
                             trap,

@@ -8,7 +8,6 @@ import nightgames.characters.Player;
 import nightgames.characters.Trait;
 import nightgames.global.Flag;
 import nightgames.global.Global;
-import nightgames.match.defaults.DefaultEncounter;
 import nightgames.match.defaults.DefaultPostmatch;
 import nightgames.modifier.Modifier;
 import nightgames.status.addiction.Addiction;
@@ -459,10 +458,6 @@ public class Match {
 
     public final Modifier getCondition() {
         return condition;
-    }
-
-    public DefaultEncounter buildEncounter(Participant first, Participant second, Area location) {
-        return new DefaultEncounter(first, second, location);
     }
 
     @Deprecated
