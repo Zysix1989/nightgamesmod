@@ -8,8 +8,6 @@ import nightgames.status.Energized;
 import nightgames.status.Stsflag;
 
 public class Energize extends Action {
-    private static final long serialVersionUID = 75530820306364893L;
-
     private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {}
 

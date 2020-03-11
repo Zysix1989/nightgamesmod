@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class Scavenge extends Action {
-    private static final long serialVersionUID = -6692555226745083699L;
 
     private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {}

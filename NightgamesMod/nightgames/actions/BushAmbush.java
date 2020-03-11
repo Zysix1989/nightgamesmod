@@ -4,9 +4,9 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Encounter;
 import nightgames.match.Participant;
 import nightgames.match.Status;
-import nightgames.match.Encounter;
 import nightgames.stance.Mount;
 import nightgames.status.Bound;
 import nightgames.status.Flatfooted;
@@ -14,8 +14,6 @@ import nightgames.status.Flatfooted;
 import java.util.Optional;
 
 public class BushAmbush extends Action {
-    private static final long serialVersionUID = 2384434976695344978L;
-
     private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {
 

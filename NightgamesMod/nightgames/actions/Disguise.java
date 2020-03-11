@@ -12,8 +12,6 @@ import nightgames.status.Stsflag;
 import java.util.stream.Collectors;
 
 public class Disguise extends Action {
-    private static final long serialVersionUID = 2089054062272510717L;
-
     private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {
         }

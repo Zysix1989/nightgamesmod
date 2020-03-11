@@ -4,7 +4,6 @@ import nightgames.characters.Character;
 import nightgames.match.Participant;
 
 public class Wait extends Action {
-    private static final long serialVersionUID = -644996487174479671L;
 
     private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {}

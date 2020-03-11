@@ -4,14 +4,9 @@ import nightgames.characters.Character;
 import nightgames.match.Encounter;
 import nightgames.match.Participant;
 
-import java.io.Serializable;
 import java.util.Optional;
 
-public abstract class Action implements Serializable {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 4981682001213276175L;
+public abstract class Action {
     protected final String name;
 
     protected Action(String name) {

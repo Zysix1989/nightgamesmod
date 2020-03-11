@@ -15,7 +15,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Locate extends Action {
-    private static final long serialVersionUID = 1L;
     private static final int MINIMUM_SCRYING_REQUIREMENT = 5;
 
     private static final class Aftermath extends Action.Aftermath {

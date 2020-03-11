@@ -14,7 +14,6 @@ import nightgames.status.Flatfooted;
 import java.util.Optional;
 
 public class TreeAmbush extends Action {
-    private static final long serialVersionUID = -8503564080765172483L;
 
     private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {}

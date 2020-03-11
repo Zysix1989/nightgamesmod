@@ -2,14 +2,12 @@ package nightgames.actions;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.match.Participant;
 import nightgames.match.Encounter;
+import nightgames.match.Participant;
 
 import java.util.Optional;
 
 public class Hide extends Action {
-    private static final long serialVersionUID = 9222848242102511020L;
-
     private static final class Aftermath extends Action.Aftermath {
         private Aftermath() { }
 

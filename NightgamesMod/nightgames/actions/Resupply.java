@@ -4,9 +4,9 @@ import nightgames.areas.AreaIdentity;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Encounter;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
-import nightgames.match.Encounter;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.modifier.standard.NudistModifier;
 
@@ -15,7 +15,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Resupply extends Action {
-    private static final long serialVersionUID = -3349606637987124335L;
 
     private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {}

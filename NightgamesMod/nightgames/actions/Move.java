@@ -12,8 +12,6 @@ public class Move extends Action {
         boolean check(Character c);
     }
 
-    private static final long serialVersionUID = -6111866290941387475L;
-
     private final class Aftermath extends Action.Aftermath {
         private Aftermath() {}
 

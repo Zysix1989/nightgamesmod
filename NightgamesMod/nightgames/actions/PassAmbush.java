@@ -11,7 +11,6 @@ import nightgames.status.Flatfooted;
 import java.util.Optional;
 
 public class PassAmbush extends Action {
-    private static final long serialVersionUID = -1745311550506911281L;
 
     private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {}

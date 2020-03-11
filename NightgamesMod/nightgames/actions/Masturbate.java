@@ -10,8 +10,6 @@ import nightgames.match.Participant;
 import java.util.Optional;
 
 public class Masturbate extends Action {
-    private static final long serialVersionUID = 3479886040422510833L;
-
     private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {}
 

@@ -4,16 +4,14 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
-import nightgames.match.Participant;
 import nightgames.match.Encounter;
+import nightgames.match.Participant;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 public class Craft extends Action {
-    private static final long serialVersionUID = 3199968029862277675L;
-
     private static final class Aftermath extends Action.Aftermath {
         private Aftermath() {
         }
