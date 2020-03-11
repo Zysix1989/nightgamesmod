@@ -1,5 +1,7 @@
 package nightgames.match.actions;
 
+import edu.emory.mathcs.backport.java.util.Collections;
+import nightgames.areas.Area;
 import nightgames.areas.AreaIdentity;
 import nightgames.characters.Character;
 import nightgames.global.Global;
@@ -11,6 +13,7 @@ import nightgames.match.Participant;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.modifier.standard.NudistModifier;
 
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -40,32 +43,35 @@ public class Resupply extends Action {
             p.state = new Ready();
             p.getCharacter().getWillpower().renew();
             if (p.getLocation().getOccupants().size() > 1) {
+                Set<EscapeRoute> escapeRoutes = Set.of();
                 if (p.getLocation().id() == AreaIdentity.dorm) {
-                    if (Global.getMatch().gps("Quad").orElseThrow().getOccupants().isEmpty()) {
-                        p.travel(Global.getMatch().gps("Quad").orElseThrow(),
-                                "You hear your opponents searching around the "
-                                        + "dorm, so once you finish changing, you hop out the window and "
-                                        + "head to the quad.");
-                    } else {
-                        p.travel(Global.getMatch().gps("Laundry").orElseThrow(),
-                                "You hear your opponents searching around "
-                                        + "the dorm, so once you finish changing, you quietly move "
-                                        + "downstairs to the laundry room.");
-                    }
+                    escapeRoutes = Set.of(new EscapeRoute(Global.getMatch().gps("Quad").orElseThrow(),
+                                    "You hear your opponents searching around the "
+                                            + "dorm, so once you finish changing, you hop out the window and "
+                                            + "head to the quad."),
+                            new EscapeRoute(Global.getMatch().gps("Laundry").orElseThrow(),
+                                    "You hear your opponents searching around "
+                                            + "the dorm, so once you finish changing, you quietly move "
+                                            + "downstairs to the laundry room."));
                 }
                 if (p.getLocation().id() == AreaIdentity.union) {
-                    if (Global.getMatch().gps("Quad").orElseThrow().getOccupants().isEmpty()) {
-                        p.travel(Global.getMatch().gps("Quad").orElseThrow(),
-                                "You don't want to be ambushed leaving the "
-                                        + "student union, so once you finish changing, you hop out the "
-                                        + "window and head to the quad.");
-                    } else {
-                        p.travel(Global.getMatch().gps("Pool").orElseThrow(),
-                                "You don't want to be ambushed leaving "
-                                        + "the student union, so once you finish changing, you sneak out "
-                                        + "the back door and head to the pool.");
-                    }
+                    escapeRoutes = Set.of(
+                            new EscapeRoute(Global.getMatch().gps("Quad").orElseThrow(),
+                                    "You don't want to be ambushed leaving the "
+                                            + "student union, so once you finish changing, you hop out the "
+                                            + "window and head to the quad."),
+                            new EscapeRoute(Global.getMatch().gps("Pool").orElseThrow(),
+                                    "You don't want to be ambushed leaving "
+                                            + "the student union, so once you finish changing, you sneak out "
+                                            + "the back door and head to the pool."));
                 }
+                var finalRoutes = escapeRoutes;
+                var escapeRoute = escapeRoutes.stream().filter(EscapeRoute::usable).findFirst();
+                escapeRoute.or(() -> {
+                    var shuffledRoutes = new ArrayList<>(finalRoutes);
+                    Collections.shuffle(shuffledRoutes);
+                    return shuffledRoutes.stream().findFirst();
+                }).ifPresent(route -> route.use(p));
             }
         }
 
@@ -91,6 +97,24 @@ public class Resupply extends Action {
                     p.getCharacter().getTrueName()));
         }
 
+    }
+
+    public static final class EscapeRoute {
+        private final Area destination;
+        private final String message;
+
+        public EscapeRoute(Area destination, String message) {
+            this.destination = destination;
+            this.message = message;
+        }
+
+        public boolean usable() {
+            return destination.getOccupants().isEmpty();
+        }
+
+        public void use(Participant p) {
+            p.travel(destination, message);
+        }
     }
 
     private final boolean permissioned;
