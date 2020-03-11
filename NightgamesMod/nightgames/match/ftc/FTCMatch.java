@@ -141,7 +141,7 @@ public class FTCMatch extends Match {
         eBase.getPossibleActions().add(new Resupply(Set.of(east)));
         pBase.getPossibleActions().add(new Resupply(Set.of(preyParticipant)));
 
-        pond.getPossibleActions().add(new Bathe("",""));
+        pond.getPossibleActions().add(Bathe.newEmpty());
         pond.getPossibleActions().add(new Hide());
         glade.getPossibleActions().add(new Hide());
         cabin.getPossibleActions().add(new Hide());
@@ -155,7 +155,7 @@ public class FTCMatch extends Match {
         oak.getPossibleActions().add(new Hide());
         oak.getPossibleActions().add(new Recharge());
         pass.getPossibleActions().add(new PassAmbush());
-        waterfall.getPossibleActions().add(new Bathe("",""));
+        waterfall.getPossibleActions().add(Bathe.newEmpty());
         waterfall.getPossibleActions().add(new Hide());
         monument.getPossibleActions().add(new Hide());
         dump.getPossibleActions().add(new Hide());

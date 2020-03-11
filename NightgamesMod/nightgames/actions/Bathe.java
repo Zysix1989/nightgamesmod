@@ -100,13 +100,40 @@ public class Bathe extends Action {
 
     private final String startMessage;
     private final String endMessage;
+    private final Optional<JtwigTemplate> ambushAttackerTemplate;
+    private final Optional<JtwigTemplate> ambushTargetTemplate;
 
-    public Bathe(String startMessage, String endMessage) {
+    private Bathe(String startMessage,
+                  String endMessage,
+                  Optional<JtwigTemplate> ambushAttackerTemplate,
+                  Optional<JtwigTemplate> ambushTargetTemplate) {
         super("Clean Up");
         this.startMessage = startMessage;
         this.endMessage = endMessage;
+        this.ambushAttackerTemplate = ambushAttackerTemplate;
+        this.ambushTargetTemplate = ambushTargetTemplate;
     }
 
+    public static Bathe newShower() {
+        return new Bathe(SHOWER_START_MESSAGE,
+                SHOWER_END_MESSAGE,
+                Optional.of(SHOWER_AMBUSH_ATTACKER_MESSAGE),
+                Optional.of(SHOWER_AMBUSH_TARGET_MESSAGE));
+    }
+
+    public static Bathe newPool() {
+        return new Bathe(POOL_START_MESSAGE,
+                POOL_END_MESSAGE,
+                Optional.of(POOL_AMBUSH_ATTACKER_MESSAGE),
+                Optional.of(POOL_AMBUSH_TARGET_MESSAGE));
+    }
+
+    public static Bathe newEmpty() {
+        return new Bathe("",
+                "",
+                Optional.empty(),
+                Optional.empty());
+    }
     @Override
     public boolean usable(Participant user) {
         return !user.getCharacter().bound();
@@ -126,13 +153,8 @@ public class Bathe extends Action {
                 .with("target", target.getLocation());
         var attackerModel = JtwigModel.newModel()
                 .with("target", target.getCharacter().getGrammar());
-        if (attacker.getLocation().id() == AreaIdentity.shower) {
-            target.getCharacter().message(SHOWER_AMBUSH_TARGET_MESSAGE.render(targetModel));
-            attacker.getCharacter().message(SHOWER_AMBUSH_ATTACKER_MESSAGE.render(attackerModel));
-        } else if (attacker.getLocation().id() == AreaIdentity.pool) {
-            target.getCharacter().message(POOL_AMBUSH_TARGET_MESSAGE.render(targetModel));
-            attacker.getCharacter().message(POOL_AMBUSH_ATTACKER_MESSAGE.render(attackerModel));
-        }
+        ambushTargetTemplate.ifPresent(template -> target.getCharacter().message(template.render(targetModel)));
+        ambushAttackerTemplate.ifPresent(template -> attacker.getCharacter().message(template.render(attackerModel)));
 
         var fight = encounter.startFight(attacker, target);
         target.getCharacter().undress(fight);
