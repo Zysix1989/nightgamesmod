@@ -593,8 +593,8 @@ public class Combat {
 
     private void draw() {
         state = eval();
-        p1.getCharacter().evalChallenges(this, null);
-        p2.getCharacter().evalChallenges(this, null);
+        p1.getParticipant().evalChallenges(this, null);
+        p2.getParticipant().evalChallenges(this, null);
         if (p1.getCharacter().has(Trait.slime)) {
             p1.getCharacter().purge(this);
         }
@@ -628,8 +628,8 @@ public class Combat {
 
     private void victory(Combatant won) {
         state = eval();
-        p1.getCharacter().evalChallenges(this, won.getCharacter());
-        p2.getCharacter().evalChallenges(this, won.getCharacter());
+        p1.getParticipant().evalChallenges(this, won.getCharacter());
+        p2.getParticipant().evalChallenges(this, won.getCharacter());
         var winner = won.getCharacter();
         var loser = getOpponentCharacter(won.getCharacter());
 

@@ -199,7 +199,8 @@ public class Challenge implements Deployable {
         target = validTargets.get(0);
         goal = pick();
         active.getLocation().remove(this);
-        active.getCharacter().accept(this);
+        active.getCharacter().message(startMessage());
+        active.accept(this);
         return true;
     }
 

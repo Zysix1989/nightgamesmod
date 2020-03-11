@@ -3,7 +3,6 @@ package nightgames.characters;
 import nightgames.actions.Action;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
-import nightgames.areas.Challenge;
 import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.mods.ExternalTentaclesMod;
@@ -345,12 +344,6 @@ public class Player extends Character {
         }
         gui.message(location.get().getDescriptions().whereAmI() + "<br/><br/>");
         knownTrap.ifPresent(trap -> gui.message("You've set a " + trap.getName() + " here."));
-    }
-
-    @Override
-    public void accept(Challenge c) {
-        gui.message(c.startMessage());
-        super.accept(c);
     }
 
     @Override

@@ -311,25 +311,25 @@ public class Match {
               }
     }
 
-    private int calculateReward(Character combatant, StringBuilder output) {
+    private int calculateReward(Participant combatant, StringBuilder output) {
         AtomicInteger reward = new AtomicInteger();
         participants.forEach(participant -> {
             var other = participant.getCharacter();
-            while (combatant.has(other.getTrophy())) {
-                combatant.consume(other.getTrophy(), 1, false);
+            while (combatant.getCharacter().has(other.getTrophy())) {
+                combatant.getCharacter().consume(other.getTrophy(), 1, false);
                 reward.addAndGet(other.prize());
             }
         });
-        if (combatant.human()) {
+        if (combatant.getCharacter().human()) {
             output.append("You received $")
                   .append(reward.get())
                   .append(" for turning in your collected trophies.<br/>");
         }
         for (Challenge c : combatant.challenges) {
             if (c.done) {
-                int r = c.reward() + (c.reward() * 3 * combatant.getRank());
+                int r = c.reward() + (c.reward() * 3 * combatant.getCharacter().getRank());
                 reward.addAndGet(r);
-                if (combatant.human()) {
+                if (combatant.getCharacter().human()) {
                     output.append("You received $")
                           .append(r)
                           .append(" for completing a ")
@@ -352,9 +352,9 @@ public class Match {
                 sb.append(scoreString(combatant, p.getScore(), "in total"));
                 sb.append("<br/>");
                 combatant.modMoney(p.getScore() * combatant.prize());
-                combatant.modMoney(calculateReward(combatant, sb));
+                combatant.modMoney(calculateReward(p, sb));
 
-                combatant.challenges.clear();
+                p.challenges.clear();
                 p.state = new Action.Ready();
                 condition.undoItems(combatant);
                 combatant.change();

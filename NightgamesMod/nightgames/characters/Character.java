@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import nightgames.actions.*;
 import nightgames.areas.Area;
-import nightgames.areas.Challenge;
 import nightgames.areas.DescriptionModule;
 import nightgames.beans.Property;
 import nightgames.characters.body.*;
@@ -92,8 +91,7 @@ public abstract class Character extends Observable implements Cloneable {
     protected Map<String, Integer> attractions;
     private Map<String, Integer> affections;
     public HashSet<Clothing> closet;                //If clothing can be destroyed, it should stand to reason that characters should purchase replace. Consider reworking - DSM            
-    public List<Challenge> challenges;
-    public Body body;                               //While current implementation allows for many kinds of parts - it means controlling and finding them gets difficult. - DSM 
+    public Body body;                               //While current implementation allows for many kinds of parts - it means controlling and finding them gets difficult. - DSM
     public int availableAttributePoints;            
     public boolean orgasmed;                        //Merge into tracker object for combat session. -DSM
     public boolean custom;                          //This is not necessary. Every character should be based off custom implementation and added as a configuration is chosen. -DSM
@@ -149,7 +147,6 @@ public abstract class Character extends Observable implements Cloneable {
         inventory = new HashMap<>();
         attractions = new HashMap<>(2);
         affections = new HashMap<>(2);
-        challenges = new ArrayList<>();
         location = new Property<>(new Area("", new DescriptionModule.ErrorDescriptionModule(), null));
         // this.combatStats = new CombatStats();       //TODO: Reading, writing, cloning?
         
@@ -3072,16 +3069,6 @@ public Character clone() throws CloneNotSupportedException {
         b.append("</p>");
 
         return b.toString();
-    }
-
-    public void accept(Challenge c) {
-        challenges.add(c);
-    }
-
-    public void evalChallenges(Combat c, Character victor) {
-        for (Challenge chal : challenges) {
-            chal.check(c, victor);
-        }
     }
 
     public String toString() {

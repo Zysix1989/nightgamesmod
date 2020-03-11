@@ -4,16 +4,14 @@ import nightgames.actions.Action;
 import nightgames.actions.Move;
 import nightgames.actions.Resupply;
 import nightgames.areas.Area;
+import nightgames.areas.Challenge;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.match.defaults.DefaultEncounter;
 import nightgames.status.Stsflag;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Participant {
@@ -39,6 +37,7 @@ public class Participant {
     private int score = 0;
     public State state = new Action.Ready();
     public Set<Participant> invalidAttackers = new HashSet<>();
+    public List<Challenge> challenges = new ArrayList<>();
 
     public Participant(Character c) {
         this.character = c;
@@ -179,5 +178,15 @@ public class Participant {
 
     protected int pointsGivenToVictor() {
         return 1;
+    }
+
+    public void accept(Challenge c) {
+        challenges.add(c);
+    }
+
+    public void evalChallenges(Combat c, Character victor) {
+        for (Challenge chal : challenges) {
+            chal.check(c, victor);
+        }
     }
 }
