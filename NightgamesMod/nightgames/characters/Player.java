@@ -687,8 +687,7 @@ public class Player extends Character {
                 }
                 break;
             case positioning:
-                if (c.getStance()
-                     .dom(this)) {
+                if (c.getStance().dom(this)) {
                     c.write(this, "You outmanuever " + target.getName() + " and you exhausted her from the struggle.");
                     target.weaken(c, (int) this.modifyDamage(DamageType.stance, target, 15));
                 } else {
