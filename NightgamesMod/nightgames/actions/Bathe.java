@@ -127,11 +127,11 @@ public class Bathe extends Action {
         var attackerModel = JtwigModel.newModel()
                 .with("target", target.getCharacter().getGrammar());
         if (attacker.getLocation().id() == AreaIdentity.shower) {
-            target.getCharacter().message(SHOWER_TARGET_MESSAGE.render(targetModel));
-            attacker.getCharacter().message(SHOWER_ATTACKER_MESSAGE.render(attackerModel));
+            target.getCharacter().message(SHOWER_AMBUSH_TARGET_MESSAGE.render(targetModel));
+            attacker.getCharacter().message(SHOWER_AMBUSH_ATTACKER_MESSAGE.render(attackerModel));
         } else if (attacker.getLocation().id() == AreaIdentity.pool) {
-            target.getCharacter().message(POOL_TARGET_MESSAGE.render(targetModel));
-            attacker.getCharacter().message(POOL_ATTACKER_MESSAGE.render(attackerModel));
+            target.getCharacter().message(POOL_AMBUSH_TARGET_MESSAGE.render(targetModel));
+            attacker.getCharacter().message(POOL_AMBUSH_ATTACKER_MESSAGE.render(attackerModel));
         }
 
         var fight = encounter.startFight(attacker, target);
@@ -337,7 +337,7 @@ public class Bathe extends Action {
     public static final String POOL_END_MESSAGE = "The hot water soothes and relaxes your muscles. You feel a bit exposed, skinny-dipping in such an open area. You decide it's time to get moving.";
 
 
-    private static JtwigTemplate SHOWER_TARGET_MESSAGE = JtwigTemplate.inlineTemplate("You aren't in the shower long " +
+    private static JtwigTemplate SHOWER_AMBUSH_TARGET_MESSAGE = JtwigTemplate.inlineTemplate("You aren't in the shower long " +
             "before you realize you're not alone. Before you can turn around, " +
             "{% if (target.hasDick()) %}" +
             "a soft hand grabs your exposed penis. " +
@@ -347,19 +347,19 @@ public class Bathe extends Action {
             "you feel someone grab a handful of your ass. " +
             "{{ attacker.subject().properNoun() }} has the drop on you.");
 
-    private static JtwigTemplate SHOWER_ATTACKER_MESSAGE = JtwigTemplate.inlineTemplate(
+    private static JtwigTemplate SHOWER_AMBUSH_ATTACKER_MESSAGE = JtwigTemplate.inlineTemplate(
             "You stealthily walk up behind {{ target.object().properNoun() }}, enjoying the view of " +
                     "{{ target.possessiveAdjective() }} wet, naked body. When you pinch " +
                     "{{ target.possessiveAdjective() }} smooth butt, {{ target.subject().pronoun() }} jumps and lets " +
                     "out a surprised yelp. Before {{ target.subject().pronoun() }} can recover from " +
                     "{{ target.possessiveAdjective() }} surprise, you pounce!");
 
-    private static JtwigTemplate POOL_TARGET_MESSAGE = JtwigTemplate.inlineTemplate(
+    private static JtwigTemplate POOL_AMBUSH_TARGET_MESSAGE = JtwigTemplate.inlineTemplate(
             "The relaxing water causes you to lower your guard a bit, so you don't " +
                     "notice {{ attacker.object().properNoun() }} until {{ attacker.subject().pronoun() }}'s standing " +
                     "over you. There's no chance to escape; you'll have to face {{ attacker.object().pronoun() }} nude.");
 
-    private static JtwigTemplate POOL_ATTACKER_MESSAGE = JtwigTemplate.inlineTemplate(
+    private static JtwigTemplate POOL_AMBUSH_ATTACKER_MESSAGE = JtwigTemplate.inlineTemplate(
             "You creep up to the jacuzzi where {{ target.subject().properNoun() }} is soaking comfortably. " +
                     "As you get close, you notice that {{ target.possessiveAdjective() }} eyes are " +
                     "closed and {{ target.subject().pronoun() }} may well be sleeping. You crouch by the " +
