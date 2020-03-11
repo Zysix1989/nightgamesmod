@@ -1,17 +1,13 @@
 package nightgames.modifier.action;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.BiPredicate;
-
-import nightgames.actions.Action;
 import nightgames.characters.Character;
+import nightgames.match.Action;
 import nightgames.match.Match;
 import nightgames.modifier.ModifierCategory;
 import nightgames.modifier.ModifierComponent;
+
+import java.util.*;
+import java.util.function.BiPredicate;
 
 public abstract class ActionModifier implements ModifierCategory<ActionModifier>, ModifierComponent {
     public static final ActionModifierLoader loader = new ActionModifierLoader();

@@ -1,6 +1,5 @@
 package nightgames.match;
 
-import nightgames.actions.Action;
 import nightgames.actions.Move;
 import nightgames.actions.Resupply;
 import nightgames.areas.Area;

@@ -1,18 +1,18 @@
 package nightgames.modifier;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.BiConsumer;
-
-import nightgames.actions.Action;
 import nightgames.characters.Character;
 import nightgames.items.Item;
+import nightgames.match.Action;
 import nightgames.match.Match;
 import nightgames.modifier.action.ActionModifier;
 import nightgames.modifier.clothing.ClothingModifier;
 import nightgames.modifier.item.ItemModifier;
 import nightgames.modifier.skill.SkillModifier;
 import nightgames.modifier.status.StatusModifier;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiConsumer;
 
 public abstract class BaseModifier implements Modifier {
 

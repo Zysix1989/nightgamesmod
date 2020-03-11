@@ -1,6 +1,5 @@
 package nightgames.match;
 
-import nightgames.actions.Action;
 import nightgames.areas.Area;
 import nightgames.characters.Character;
 import nightgames.characters.*;

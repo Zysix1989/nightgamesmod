@@ -5,6 +5,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Action;
 import nightgames.match.Encounter;
 import nightgames.match.Participant;
 import nightgames.status.Flatfooted;

@@ -1,6 +1,5 @@
 package nightgames.characters;
 
-import nightgames.actions.Action;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.characters.body.*;
@@ -24,10 +23,7 @@ import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
-import nightgames.match.Encounter;
-import nightgames.match.Match;
-import nightgames.match.MatchType;
-import nightgames.match.Participant;
+import nightgames.match.*;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.skills.*;
 import nightgames.skills.damage.DamageType;

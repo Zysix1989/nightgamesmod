@@ -4,6 +4,7 @@ import nightgames.areas.Area;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
+import nightgames.match.Action;
 import nightgames.match.Participant;
 
 public final class Move extends Action {

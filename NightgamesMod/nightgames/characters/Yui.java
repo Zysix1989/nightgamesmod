@@ -1,6 +1,5 @@
 package nightgames.characters;
 
-import nightgames.actions.Action;
 import nightgames.actions.Energize;
 import nightgames.areas.Area;
 import nightgames.characters.body.BreastsPart;
@@ -15,6 +14,7 @@ import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
+import nightgames.match.Action;
 import nightgames.start.NpcConfiguration;
 import org.jtwig.JtwigTemplate;
 

@@ -4,6 +4,7 @@ import nightgames.areas.AreaIdentity;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Action;
 import nightgames.match.Encounter;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;

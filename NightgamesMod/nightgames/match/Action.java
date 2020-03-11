@@ -1,8 +1,6 @@
-package nightgames.actions;
+package nightgames.match;
 
 import nightgames.characters.Character;
-import nightgames.match.Encounter;
-import nightgames.match.Participant;
 
 import java.util.Optional;
 

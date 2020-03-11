@@ -7,6 +7,7 @@ import nightgames.combat.Combat;
 import nightgames.daytime.Daytime;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Action;
 import nightgames.match.MatchType;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.pet.PetCharacter;

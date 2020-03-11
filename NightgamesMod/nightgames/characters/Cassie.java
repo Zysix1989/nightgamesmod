@@ -1,6 +1,5 @@
 package nightgames.characters;
 
-import nightgames.actions.Action;
 import nightgames.actions.Energize;
 import nightgames.areas.Area;
 import nightgames.characters.body.AssPart;
@@ -24,6 +23,7 @@ import nightgames.global.Global;
 import nightgames.grammar.Shorthand;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
+import nightgames.match.Action;
 import nightgames.skills.strategy.BreastStrategy;
 import nightgames.skills.strategy.NurseStrategy;
 import nightgames.skills.strategy.OralStrategy;

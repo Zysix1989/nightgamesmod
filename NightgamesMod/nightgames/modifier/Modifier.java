@@ -1,7 +1,7 @@
 package nightgames.modifier;
 
-import nightgames.actions.Action;
 import nightgames.characters.Character;
+import nightgames.match.Action;
 import nightgames.match.Match;
 import nightgames.modifier.skill.SkillModifier;
 

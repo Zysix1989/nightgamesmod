@@ -1,6 +1,5 @@
 package nightgames.pet;
 
-import nightgames.actions.Action;
 import nightgames.actions.Move;
 import nightgames.characters.Character;
 import nightgames.characters.*;
@@ -10,6 +9,7 @@ import nightgames.global.Global;
 import nightgames.grammar.Person;
 import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
+import nightgames.match.Action;
 import nightgames.match.Encounter;
 import nightgames.match.Participant;
 import nightgames.nskills.tags.SkillTag;

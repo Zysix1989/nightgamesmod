@@ -1,6 +1,5 @@
 package nightgames.characters;
 
-import nightgames.actions.Action;
 import nightgames.areas.Area;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
@@ -14,6 +13,7 @@ import nightgames.combat.Result;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Action;
 import nightgames.pet.arms.ArmManager;
 import nightgames.skills.Skill;
 import nightgames.start.NpcConfiguration;

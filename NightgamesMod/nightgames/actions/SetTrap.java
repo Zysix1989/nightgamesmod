@@ -1,6 +1,7 @@
 package nightgames.actions;
 
 import nightgames.characters.Character;
+import nightgames.match.Action;
 import nightgames.match.Participant;
 import nightgames.trap.Trap;
 

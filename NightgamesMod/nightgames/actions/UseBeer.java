@@ -2,6 +2,7 @@ package nightgames.actions;
 
 import nightgames.characters.Character;
 import nightgames.items.Item;
+import nightgames.match.Action;
 import nightgames.match.Participant;
 import nightgames.match.Status;
 import nightgames.status.Buzzed;

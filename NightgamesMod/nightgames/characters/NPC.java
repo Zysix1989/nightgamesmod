@@ -1,6 +1,5 @@
 package nightgames.characters;
 
-import nightgames.actions.Action;
 import nightgames.actions.Move;
 import nightgames.areas.Area;
 import nightgames.characters.body.BodyPart;
@@ -19,6 +18,7 @@ import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
+import nightgames.match.Action;
 import nightgames.match.Encounter;
 import nightgames.match.Match;
 import nightgames.match.Participant;

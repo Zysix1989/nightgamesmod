@@ -1,12 +1,12 @@
 package nightgames.trap;
 
-import nightgames.actions.Action;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
-import nightgames.match.Participant;
+import nightgames.match.Action;
 import nightgames.match.Encounter;
+import nightgames.match.Participant;
 import nightgames.stance.Position;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;

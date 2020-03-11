@@ -3,6 +3,7 @@ package nightgames.actions;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Action;
 import nightgames.match.Participant;
 
 public class UseEnergyDrink extends Action {

@@ -2,6 +2,7 @@ package nightgames.actions;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.match.Action;
 import nightgames.match.Encounter;
 import nightgames.match.Participant;
 
