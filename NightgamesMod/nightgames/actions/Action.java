@@ -91,10 +91,11 @@ public abstract class Action implements Serializable {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (name == null ? 0 : name.hashCode());
-        return result;
+        if (name == null) {
+            return 0;
+        } else {
+            return name.hashCode();
+        }
     }
 
     @Override
