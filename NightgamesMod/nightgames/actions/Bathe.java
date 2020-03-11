@@ -212,52 +212,62 @@ public class Bathe extends Action {
         return null;
     }
 
+    private static JtwigTemplate SHOWER_APHRODISIAC_TRICK_ATTACKER_MESSAGE = JtwigTemplate.inlineTemplate(
+            "You empty the bottle of aphrodisiac onto the shower floor, letting the heat from the shower turn it " +
+                    "to steam. You watch {{ target.object().properNoun() }} and wait for a reaction. Just when " +
+                    "you start to worry that it was all washed down the drain, you see " +
+                    "{{ target.possessiveAdjective() }} hand " +
+                    "{% if (targetCharacter.hasPussy() && !targetCharacter.hasDick() %}" +
+                    "slip between {{ target.possessiveAdjective() }} legs. {{ target.possessiveAdjective }} fingers " +
+                    "go to work pleasuring {{ target.reflexivePronoun() }} " +
+                    "{% elseif (targetCharacter.hasDick()) %}" +
+                    "hand slip down to encircle {{ target.possessiveAdjective() }} cock. " +
+                    "{{ target.subject().pronoun() }} builds a steady rhythm jerking {{ target.reflexivePronoun() }}" +
+                    "off " +
+                    "{% else %}" +
+                    "you see {{ target.possessiveAdjective() }} hand reach behind {{ target.object.pronoun() }}. " +
+                    "{{ target.subject().properNoun() }} slides one finger into {{ target.possessiveAdjective() }} ass," +
+                    "then another " +
+                    "{% endif %}" +
+                    "and soon {{ target.subject().pronoun() }} is totally engrossed in " +
+                    "{{ target.possessiveAdjective() }} own sexy business, allowing you to safely get closer without " +
+                    "being noticed. {{ target.subject().properNoun() }} must assume {{ target.subject().pronoun }} " +
+                    "is completely alone, given and you feel a voyeuristic thrill at the show. You can't remain an " +
+                    "observer, however. For this to count as a victory you need to be in physical contact with " +
+                    "{{ target.object().properNoun() }} when {{ target.subject().pronoun() }} orgasms. When you " +
+                    "judge that {{ target.subject().pronoun() }}'s in the home stretch, you embrace " +
+                    "{{ target.object().pronoun() }} from behind and kiss {{ target.possessiveAdjective() }} neck. " +
+                    "{{ target.subject().properNoun() }} freezes in surprise at a new presence in " +
+                    "{{ target.possessiveAdjective() }} world, so you take the opportunity slide your hand " +
+                    "{% if (targetCharacter.hasPussy() && !targetCharacter.hasDick() %}" +
+                    "between {{ target.possessiveAdjective() }} legs " +
+                    "{% elseif (targetCharacter.hasDick()) %} " +
+                    "around {{ target.possessiveAdjective() }} dick " +
+                    "{% else %}" +
+                    "between {{ target.possessiveAdjective() }} cheeks " +
+                    "{% endif %}" +
+                    "to replace {{ target.possessivePronoun() }} and help {{ target.object().pronoun() }} over the " +
+                    "final precipice. " +
+                    "{% if (targetCharacter.hasPussy() && !targetCharacter.hasDick() %}" +
+                    "{{ target.possessiveAdjective() }} pussy is hot, wet, and trembling with need. You stick two " +
+                    "fingers into {{ target.possessiveAdjective() }} love-tunnel and rub " +
+                    "{{ target.possessiveAdjective() }} clit with your thumb. " +
+                    "{% elseif (targetCharacter.hasDick()) %}" +
+                    "{{ target.possessiveAdjective() }} cock is hard, slick, and throbbing with need. You give it " +
+                    "several pumps in rapid succession. " +
+                    "{% endif %} "+
+                    "Looks like you timed it right because {{ target.subject().properNoun() }} " +
+                    "climaxes almost immediately. You give {{ target.object().pronoun() }} a kiss on the cheek and " +
+                    "leave before {{ target.subject().pronoun() }} can process what just happened. You're "
+                    + "feeling pretty horny, but after a show like that it's hardly surprising.\n"
+    );
+
     private String getAphrodisiacTrickShowerMessage(Character attacker, Character target) {
-        if (attacker.human()) {
-            if (target.hasPussy() && !target.hasDick()) {
-                return Global.format("You empty the bottle of aphrodisiac onto the shower floor, letting the heat from the shower turn it to steam. You watch "
-                                + "{other:name} and wait for a reaction. Just when you start to worry that it was all washed down the drain, you see {other:possessive} "
-                                + "hand slip between {other:possessive} legs. {other:POSSESSIVE} fingers go to work pleasuring {other:reflexive} and soon {other:pronoun}'s "
-                                + "utterly engrossed in {other:possessive} masturbation, allowing you to safely get closer without being noticed. {other:NAME}'s "
-                                + "completely unreserved in {other:possessive} assumption of solitude and you feel a voyeuristic thrill at the show. You can't "
-                                + "remain an observer, however. For this to count as a victory you need to be in physical contact with {other:direct-object} "
-                                + "when {other:pronoun} orgasms. When you judge that {other:pronoun}'s in the home stretch, you embrace {other:direct-object} from "
-                                + "behind and kiss {other:direct-object} neck. {other:NAME} freezes in surprise and you move your hand between {other:possessive} "
-                                + "legs to replace {other:possessive} own. {other:POSSESSIVE} pussy is hot, wet, and trembling with need. You stick two fingers into "
-                                + "{other:direct-object} and rub {other:possessive} clit with your thumb. {other:NAME} climaxes almost immediately. You give "
-                                + "{other:direct-object} a kiss on the cheek and leave while {other:pronoun}'s still too dazed to realize what happened. You're "
-                                + "feeling pretty horny, but after a show like that it's hardly surprising.\n",
-                        attacker, target);
-            } else if (target.hasDick()) {
-                return Global.format("You empty the bottle of aphrodisiac onto the shower floor, letting the heat from the shower turn it to steam. You watch "
-                                + "{other:name} and wait for a reaction. Just when you start to worry that it was all washed down the drain, you see {other:possessive} "
-                                + "hand slip down to encircle {other:possessive} cock. {other:POSSESSIVE} hand builds a steady rhythm pleasuring {other:reflexive} "
-                                + "and soon {other:pronoun}'s utterly engrossed in {other:possessive} masturbation, allowing you to safely get closer without being "
-                                + "noticed. {other:NAME}'s completely unreserved in {other:possessive} assumption of solitude and you feel a voyeuristic thrill at "
-                                + "the show. You can't remain an observer, however. For this to count as a victory you need to be in physical contact with "
-                                + "{other:direct-object} when {other:pronoun} orgasms. When you judge that {other:pronoun}'s in the home stretch, you embrace "
-                                + "{other:direct-object} from behind and kiss {other:possessive} neck. {other:NAME} freezes in surprise and you move your hand "
-                                + "between {other:possessive} legs to replace {other:possessive} own. {other:POSSESSIVE} dick is hard, slick, and trembling with "
-                                + "need. You begin stroking it rapidly and {other:pronoun} climaxes almost immediately. You give {other:direct-object} a kiss on "
-                                + "the cheek and leave while {other:pronoun}'s still too dazed to realize what happened. You're feeling pretty horny, but after a show "
-                                + "like that it's hardly surprising.\n",
-                        attacker, target);
-            } else {
-                return Global.format("You empty the bottle of aphrodisiac onto the shower floor, letting the heat from the shower turn it to steam. You watch "
-                                + "{other:name} and wait for a reaction. Just when you start to worry that it was all washed down the drain, you see {other:possessive} "
-                                + "hand reach behind {other:reflexive}. {other:POSSESSIVE} fingers go to work pleasuring {other:possessive} ass and soon "
-                                + "{other:pronoun}'s utterly engrossed in {other:possessive} masturbation, allowing you to safely get closer without being noticed. "
-                                + "{other:NAME}'s completely unreserved in {other:possessive} assumption of solitude and you feel a voyeuristic thrill at the show. "
-                                + "You can't remain an observer, however. For this to count as a victory you need to be in physical contact with {other:direct-object} "
-                                + "when {other:pronoun} orgasms. When you judge that {other:pronoun}'s in the home stretch, you embrace {other:direct-object} from "
-                                + "behind and kiss {other:direct-object} neck. {other:NAME} freezes in surprise and you move your hand between {other:possessive} "
-                                + "cheeks to replace {other:possessive} own. {other:POSSESSIVE} asshole is hot, tight, and pulsing with need. You stick two fingers into "
-                                + "{other:direct-object}, curling and probing. {other:NAME} climaxes almost immediately. You give {other:direct-object} a kiss "
-                                + "and leave while {other:pronoun}'s still too dazed to realize what happened. You're feeling pretty horny, but after a show like that "
-                                + "it's hardly surprising.\n",
-                        attacker, target);
-            }
-        } else if (target.human()) {
+        var model = JtwigModel.newModel()
+                .with("target", target.getGrammar())
+                .with("targetCharacter", target);
+        attacker.message(SHOWER_APHRODISIAC_TRICK_ATTACKER_MESSAGE.render(model));
+        if (target.human()) {
             if (target.hasPussy() && !target.hasDick()) {
                 return Global.format("The hot shower takes your fatigue away, but you can't seem to calm down. Your nipples are almost painfully hard. You need to deal with "
                                 + "this while you have the chance. You rub your labia rapidly, hoping to finish before someone stumbles onto you. Right before you cum, you "
