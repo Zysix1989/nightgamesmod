@@ -11,7 +11,6 @@ import nightgames.items.Item;
 import nightgames.match.Match;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
-import nightgames.match.defaults.DefaultEncounter;
 import nightgames.modifier.standard.FTCModifier;
 
 import java.util.*;
@@ -198,10 +197,5 @@ public class FTCMatch extends Match {
         Global.gui().message(Global.format("{self:SUBJECT-ACTION:grab|grabs} a new flag from the stash. That means"
                         + " {self:pronoun} cannot be attacked for two turns, so {self:pronoun}"
                         + " {self:action:have|has} a chance to hide.", prey.getCharacter(), Global.noneCharacter()));
-    }
-
-    @Override
-    public DefaultEncounter buildEncounter(Participant first, Participant second, Area location) {
-        return new DefaultEncounter(first, second, location);
     }
 }
