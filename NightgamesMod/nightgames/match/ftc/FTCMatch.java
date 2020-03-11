@@ -202,6 +202,6 @@ public class FTCMatch extends Match {
 
     @Override
     public DefaultEncounter buildEncounter(Participant first, Participant second, Area location) {
-        return new FTCEncounter(first, second, location);
+        return new DefaultEncounter(first, second, location);
     }
 }

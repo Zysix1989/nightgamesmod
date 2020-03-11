@@ -6,7 +6,6 @@ import nightgames.global.Global;
 import nightgames.match.Participant;
 import nightgames.match.Status;
 import nightgames.match.defaults.DefaultEncounter;
-import nightgames.match.ftc.FTCEncounter;
 import nightgames.status.Flatfooted;
 
 import java.util.Optional;
@@ -42,7 +41,6 @@ public class PassAmbush extends Action {
 
         @Override
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
-            assert encounter instanceof FTCEncounter;
             return Optional.of(() -> {
                 int attackerScore = 30 + p.getCharacter().get(Attribute.Speed) * 10 + p.getCharacter().get(Attribute.Perception) * 5
                                 + Global.random(30);
