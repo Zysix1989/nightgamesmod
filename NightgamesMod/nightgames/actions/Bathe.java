@@ -150,7 +150,7 @@ public class Bathe extends Action {
     private void showerAmbush(Encounter encounter, Participant attacker, Participant target) {
         var targetModel = JtwigModel.newModel()
                 .with("attacker", attacker.getCharacter().getGrammar())
-                .with("target", target.getLocation());
+                .with("target", target.getCharacter());
         var attackerModel = JtwigModel.newModel()
                 .with("target", target.getCharacter().getGrammar());
         ambushTargetTemplate.ifPresent(template -> target.getCharacter().message(template.render(targetModel)));
