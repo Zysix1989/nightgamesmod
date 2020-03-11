@@ -15,7 +15,7 @@ import org.jtwig.JtwigTemplate;
 
 import java.util.Optional;
 
-public class Bathe extends Action {
+public final class Bathe extends Action {
     private static final class Aftermath extends Action.Aftermath {
         private Aftermath() { }
 

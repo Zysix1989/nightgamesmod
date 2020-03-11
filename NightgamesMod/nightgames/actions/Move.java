@@ -6,7 +6,7 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.match.Participant;
 
-public class Move extends Action {
+public final class Move extends Action {
 
     public interface SkillCheck {
         boolean check(Character c);
