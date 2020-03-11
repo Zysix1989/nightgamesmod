@@ -5,8 +5,8 @@ import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Encounter;
 import nightgames.match.Participant;
-import nightgames.match.DefaultEncounter;
 import nightgames.status.Flatfooted;
 import nightgames.status.Stsflag;
 import nightgames.utilities.NoOps;
@@ -63,7 +63,7 @@ public class Bathe extends Action {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+        public Optional<Runnable> eligibleCombatReplacement(Encounter encounter, Participant p, Participant other) {
             if (!clothesStolen) {
                 return Optional.of(() -> other.getCharacter().showerScene(
                         p,
@@ -147,7 +147,7 @@ public class Bathe extends Action {
     }
 
 
-    private void showerAmbush(DefaultEncounter encounter, Participant attacker, Participant target) {
+    private void showerAmbush(Encounter encounter, Participant attacker, Participant target) {
         var targetModel = JtwigModel.newModel()
                 .with("attacker", attacker.getCharacter().getGrammar())
                 .with("target", target.getLocation());

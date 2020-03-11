@@ -6,7 +6,7 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
 import nightgames.match.Status;
-import nightgames.match.DefaultEncounter;
+import nightgames.match.Encounter;
 import nightgames.stance.Mount;
 import nightgames.status.Bound;
 import nightgames.status.Flatfooted;
@@ -45,7 +45,7 @@ public class BushAmbush extends Action {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+        public Optional<Runnable> eligibleCombatReplacement(Encounter encounter, Participant p, Participant other) {
             return Optional.of(() -> {
                 other.getCharacter().addNonCombat(new Status(new Flatfooted(other.getCharacter(), 3)));
                 if (p.getCharacter().has(Item.Handcuffs))

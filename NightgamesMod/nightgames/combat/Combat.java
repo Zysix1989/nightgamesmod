@@ -12,9 +12,9 @@ import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
+import nightgames.match.Encounter;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
-import nightgames.match.DefaultEncounter;
 import nightgames.modifier.standard.NoRecoveryModifier;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.pet.Pet;
@@ -77,7 +77,7 @@ public class Combat {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+        public Optional<Runnable> eligibleCombatReplacement(Encounter encounter, Participant p, Participant other) {
             throw new UnsupportedOperationException(String.format("%s is already in combat!",
                     p.getCharacter().getTrueName()));
         }

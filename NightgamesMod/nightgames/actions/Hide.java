@@ -3,7 +3,7 @@ package nightgames.actions;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.match.Participant;
-import nightgames.match.DefaultEncounter;
+import nightgames.match.Encounter;
 
 import java.util.Optional;
 
@@ -37,7 +37,7 @@ public class Hide extends Action {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+        public Optional<Runnable> eligibleCombatReplacement(Encounter encounter, Participant p, Participant other) {
             return Optional.empty();
         }
 

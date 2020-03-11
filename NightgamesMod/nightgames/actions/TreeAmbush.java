@@ -4,9 +4,9 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Encounter;
 import nightgames.match.Participant;
 import nightgames.match.Status;
-import nightgames.match.DefaultEncounter;
 import nightgames.stance.Pin;
 import nightgames.status.Bound;
 import nightgames.status.Flatfooted;
@@ -43,7 +43,7 @@ public class TreeAmbush extends Action {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+        public Optional<Runnable> eligibleCombatReplacement(Encounter encounter, Participant p, Participant other) {
             return Optional.of(() -> {
                 other.getCharacter().addNonCombat(new Status(new Flatfooted(other.getCharacter(), 3)));
                 if (p.getCharacter().has(Item.Handcuffs))

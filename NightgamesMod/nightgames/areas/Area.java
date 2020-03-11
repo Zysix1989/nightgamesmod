@@ -5,8 +5,8 @@ import nightgames.actions.Move;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;
+import nightgames.match.Encounter;
 import nightgames.match.Participant;
-import nightgames.match.DefaultEncounter;
 import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
@@ -24,7 +24,7 @@ public class Area implements Serializable {
     private ArrayList<Participant> present = new ArrayList<>();
     private final DescriptionModule descriptions;
 
-    public DefaultEncounter fight;
+    public Encounter fight;
     public boolean alarm = false;
     public ArrayList<Deployable> env = new ArrayList<>();
     public transient MapDrawHint drawHint = new MapDrawHint();
@@ -109,7 +109,7 @@ public class Area implements Serializable {
                 if (opponent != p
                         // && Global.getMatch().canEngage(p, opponent)
                 ) {
-                    fight = new DefaultEncounter(p, opponent, this);
+                    fight = new Encounter(p, opponent, this);
                     return !fight.spotCheck();
                 }
             }
@@ -122,7 +122,7 @@ public class Area implements Serializable {
         for (Participant opponent : present) {
             if (opponent != targetParticipant) {
                 if (targetParticipant.canStartCombat(opponent) && opponent.canStartCombat(targetParticipant) && fight == null) {
-                    fight = new DefaultEncounter(opponent, targetParticipant, this);
+                    fight = new Encounter(opponent, targetParticipant, this);
                     opponent.getCharacter().promptTrap(
                             targetParticipant,
                             trap,

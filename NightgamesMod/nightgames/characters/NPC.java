@@ -19,9 +19,9 @@ import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
+import nightgames.match.Encounter;
 import nightgames.match.Match;
 import nightgames.match.Participant;
-import nightgames.match.DefaultEncounter;
 import nightgames.pet.arms.ArmManager;
 import nightgames.pet.arms.ArmType;
 import nightgames.skills.Nothing;
@@ -423,16 +423,16 @@ public class NPC extends Character {
     }
 
     private static class IntrusionEvaluation {
-        private DefaultEncounter.IntrusionOption option;
+        private Encounter.IntrusionOption option;
         private int score;
 
-        IntrusionEvaluation(DefaultEncounter.IntrusionOption option, int score) {
+        IntrusionEvaluation(Encounter.IntrusionOption option, int score) {
             this.option = option;
             this.score = score;
         }
     }
     @Override
-    public void intrudeInCombat(Set<DefaultEncounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation) {
+    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation) {
         var bestTarget = intrusionOptions.stream()
                 .map(option -> new IntrusionEvaluation(option,
                                 Global.random(20) +

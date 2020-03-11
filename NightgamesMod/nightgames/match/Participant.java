@@ -20,7 +20,7 @@ public class Participant {
         boolean allowsNormalActions();
         void move(Participant p);
         boolean isDetectable();
-        Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other);
+        Optional<Runnable> eligibleCombatReplacement(Encounter encounter, Participant p, Participant other);
         Optional<Runnable> ineligibleCombatReplacement(Participant p, Participant other);
         int spotCheckDifficultyModifier(Participant p);
         default void sendAssessmentMessage(Participant p, Character observer) {
@@ -153,7 +153,7 @@ public class Participant {
 
     public void timePasses() {}
 
-    public void interveneInCombat(Set<DefaultEncounter.IntrusionOption> intrusionOptions, Runnable noneContinuation) {
+    public void interveneInCombat(Set<Encounter.IntrusionOption> intrusionOptions, Runnable noneContinuation) {
         character.intrudeInCombat(intrusionOptions,
                 character.location.get().possibleActions(this).stream()
                         .filter(act -> act instanceof Move)

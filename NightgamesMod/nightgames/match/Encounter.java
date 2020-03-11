@@ -6,15 +6,17 @@ import nightgames.characters.Character;
 import nightgames.characters.*;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
-import nightgames.match.Participant;
-import nightgames.status.*;
+import nightgames.status.Enthralled;
+import nightgames.status.Flatfooted;
+import nightgames.status.Hypersensitive;
+import nightgames.status.Stsflag;
 import nightgames.trap.Spiderweb;
 import nightgames.trap.Trap;
 
 import java.util.Optional;
 import java.util.Set;
 
-public class DefaultEncounter {
+public class Encounter {
     protected Participant p1;
     protected Participant p2;
     
@@ -28,7 +30,7 @@ public class DefaultEncounter {
     private int checkin;
     protected int fightTime;
 
-    public DefaultEncounter(Participant first, Participant second, Area location) {
+    public Encounter(Participant first, Participant second, Area location) {
         this.location = location;
         p1 = first;
         p2 = second;

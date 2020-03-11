@@ -1,8 +1,8 @@
 package nightgames.actions;
 
 import nightgames.characters.Character;
+import nightgames.match.Encounter;
 import nightgames.match.Participant;
-import nightgames.match.DefaultEncounter;
 
 import java.io.Serializable;
 import java.util.Optional;
@@ -44,7 +44,7 @@ public abstract class Action implements Serializable {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+        public Optional<Runnable> eligibleCombatReplacement(Encounter encounter, Participant p, Participant other) {
             return Optional.empty();
         }
 

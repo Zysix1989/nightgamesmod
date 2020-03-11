@@ -3,9 +3,9 @@ package nightgames.actions;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;
+import nightgames.match.Encounter;
 import nightgames.match.Participant;
 import nightgames.match.Status;
-import nightgames.match.DefaultEncounter;
 import nightgames.status.Flatfooted;
 
 import java.util.Optional;
@@ -40,7 +40,7 @@ public class PassAmbush extends Action {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+        public Optional<Runnable> eligibleCombatReplacement(Encounter encounter, Participant p, Participant other) {
             return Optional.of(() -> {
                 int attackerScore = 30 + p.getCharacter().get(Attribute.Speed) * 10 + p.getCharacter().get(Attribute.Perception) * 5
                                 + Global.random(30);

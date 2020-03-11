@@ -4,8 +4,8 @@ import nightgames.characters.Character;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.Encounter;
 import nightgames.match.Participant;
-import nightgames.match.DefaultEncounter;
 
 import java.util.Optional;
 
@@ -55,7 +55,7 @@ public class Masturbate extends Action {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+        public Optional<Runnable> eligibleCombatReplacement(Encounter encounter, Participant p, Participant other) {
             return Optional.of(() -> encounter.caught(other, p));
         }
 

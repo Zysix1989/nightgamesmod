@@ -6,7 +6,7 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
-import nightgames.match.DefaultEncounter;
+import nightgames.match.Encounter;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.modifier.standard.NudistModifier;
 
@@ -75,7 +75,7 @@ public class Resupply extends Action {
         }
 
         @Override
-        public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
+        public Optional<Runnable> eligibleCombatReplacement(Encounter encounter, Participant p, Participant other) {
             throw new UnsupportedOperationException(String.format("%s can't be attacked while resupplying",
                     p.getCharacter().getTrueName()));
         }
