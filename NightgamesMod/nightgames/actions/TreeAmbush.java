@@ -2,9 +2,15 @@ package nightgames.actions;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.global.Global;
+import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.match.defaults.DefaultEncounter;
 import nightgames.match.ftc.FTCEncounter;
+import nightgames.stance.Pin;
+import nightgames.status.Bound;
+import nightgames.status.Flatfooted;
 
 import java.util.Optional;
 
@@ -40,7 +46,41 @@ public class TreeAmbush extends Action {
         @Override
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             assert encounter instanceof FTCEncounter;
-            return Optional.of(() -> ((FTCEncounter) encounter).treeAmbush(p, other));
+            return Optional.of(() -> {
+                other.getCharacter().addNonCombat(new Status(new Flatfooted(other.getCharacter(), 3)));
+                if (p.getCharacter().has(Item.Handcuffs))
+                    other.getCharacter().addNonCombat(new Status(new Bound(other.getCharacter(), 75, "handcuffs")));
+                else
+                    other.getCharacter().addNonCombat(new Status(new Bound(other.getCharacter(), 50, "zip-tie")));
+                var fight = encounter.startFight(p, other);
+                fight.setStance(new Pin(p.getCharacter(), other.getCharacter()));
+
+                var victimMessage = "As you walk down the trail, you hear a slight rustling in the"
+                        + " leaf canopy above you. You look up, but all you see is a flash of ";
+                if (p.getCharacter().mostlyNude()) {
+                    victimMessage += "nude flesh";
+                } else {
+                    victimMessage += "clothes";
+                }
+                victimMessage += " before you are pushed to the ground. Before you have a chance to process"
+                        + " what's going on, your hands are tied behind your back and your"
+                        + " attacker, who now reveals {self:reflective} to be {self:name},"
+                        + " whispers in your ear \"Happy to see me, {other:name}?\"";
+                other.getCharacter().message(Global.format(victimMessage, p.getCharacter(), other.getCharacter()));
+
+                var attackerMessage = "Your patience finally pays off as {other:name} approaches the"
+                        + " tree you are hiding in. You wait until the perfect moment,"
+                        + " when {other:pronoun} is right beneath you, before you jump"
+                        + " down. You land right on {other:possessive} shoulders, pushing"
+                        + " {other:direct-object} firmly to the soft soil. Pulling our a ";
+                if (p.getCharacter().has(Item.Handcuffs)) {
+                    attackerMessage += "pair of handcuffs, ";
+                } else {
+                    attackerMessage += "zip-tie, ";
+                }
+                attackerMessage += " you bind {other:possessive} hands together. There are worse" + " ways to start a match.";
+                p.getCharacter().message(Global.format(attackerMessage, p.getCharacter(), other.getCharacter()));
+            });
         }
 
         @Override

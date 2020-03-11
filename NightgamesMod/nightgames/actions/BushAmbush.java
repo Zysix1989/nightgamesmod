@@ -2,9 +2,15 @@ package nightgames.actions;
 
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.global.Global;
+import nightgames.items.Item;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.match.defaults.DefaultEncounter;
 import nightgames.match.ftc.FTCEncounter;
+import nightgames.stance.Mount;
+import nightgames.status.Bound;
+import nightgames.status.Flatfooted;
 
 import java.util.Optional;
 
@@ -42,7 +48,35 @@ public class BushAmbush extends Action {
         @Override
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             assert encounter instanceof FTCEncounter;
-            return Optional.of(() -> ((FTCEncounter) encounter).bushAmbush(p, other));
+            return Optional.of(() -> {
+                other.getCharacter().addNonCombat(new Status(new Flatfooted(other.getCharacter(), 3)));
+                if (p.getCharacter().has(Item.Handcuffs))
+                    other.getCharacter().addNonCombat(new Status(new Bound(other.getCharacter(), 75, "handcuffs")));
+                else
+                    other.getCharacter().addNonCombat(new Status(new Bound(other.getCharacter(), 50, "zip-tie")));
+
+                var fight = encounter.startFight(p, other);
+                fight.setStance(new Mount(p.getCharacter(), other.getCharacter()));
+
+                var victimMessage = "You are having a little difficulty wading through the dense"
+                        + " bushes. Your foot hits something, causing you to trip and fall flat"
+                        + " on your face. A weight settles on your back and your arms are"
+                        + " pulled behind your back and tied together with something. You"
+                        + " are rolled over, and {self:name} comes into view as {self:pronoun}"
+                        + " settles down on your belly. \"Hi, {other:name}. Surprise!\"";
+                other.getCharacter().message(Global.format(victimMessage, p.getCharacter(), other.getCharacter()));
+
+
+                var attackerMessage = "Hiding in the bushes, your vision is somewhat obscured. This is"
+                        + " not a big problem, though, as the rustling leaves alert you to"
+                        + " passing prey. You inch closer to where you suspect they are headed,"
+                        + " and slowly {other:name} comes into view. Just as {other:pronoun}"
+                        + " passes you, you stick out a leg and trip {other:direct-object}."
+                        + " With a satisfying crunch of the leaves, {other:pronoun} falls."
+                        + " Immediately you jump on {other:possessive} back and tie "
+                        + "{other:possessive} hands together.";
+                p.getCharacter().message(Global.format(attackerMessage, p.getCharacter(), other.getCharacter()));
+            });
         }
 
         @Override

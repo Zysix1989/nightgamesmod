@@ -1,9 +1,13 @@
 package nightgames.actions;
 
+import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.global.Global;
 import nightgames.match.Participant;
+import nightgames.match.Status;
 import nightgames.match.defaults.DefaultEncounter;
 import nightgames.match.ftc.FTCEncounter;
+import nightgames.status.Flatfooted;
 
 import java.util.Optional;
 
@@ -39,7 +43,53 @@ public class PassAmbush extends Action {
         @Override
         public Optional<Runnable> eligibleCombatReplacement(DefaultEncounter encounter, Participant p, Participant other) {
             assert encounter instanceof FTCEncounter;
-            return Optional.of(() -> ((FTCEncounter) encounter).passAmbush(p, other));
+            return Optional.of(() -> {
+                int attackerScore = 30 + p.getCharacter().get(Attribute.Speed) * 10 + p.getCharacter().get(Attribute.Perception) * 5
+                                + Global.random(30);
+                int victimScore = other.getCharacter().get(Attribute.Speed) * 10 + other.getCharacter().get(Attribute.Perception) * 5 + Global.random(30);
+                String attackerMessage;
+                String victimMessage;
+                if (attackerScore > victimScore) {
+                    attackerMessage = "You wait in a small alcove, waiting for someone to pass you."
+                            + " Eventually, you hear footsteps approaching and you get ready."
+                            + " As soon as {other:name} comes into view, you jump out and push"
+                            + " {other:direct-object} against the opposite wall. The impact seems to"
+                            + " daze {other:direct-object}, giving you an edge in the ensuing fight.";
+
+                    victimMessage = "Of course you know that walking through a narrow pass is a"
+                            + " strategic risk, but you do so anyway. Suddenly, {self:name}"
+                            + " flies out of an alcove, pushing you against the wall on the"
+                            + " other side. The impact knocks the wind out of you, putting you"
+                            + " at a disadvantage.";
+                } else {
+                    attackerMessage = "While you are hiding behind a rock, waiting for someone to"
+                            + " walk around the corner up ahead, you hear a soft cruch behind"
+                            + " you. You turn around, but not fast enough. {other:name} is"
+                            + " already on you, and has grabbed your shoulders. You are unable"
+                            + " to prevent {other:direct-object} from throwing you to the ground,"
+                            + " and {other:pronoun} saunters over. \"Were you waiting for me,"
+                            + " {self:name}? Well, here I am.\"";
+
+                    victimMessage = "You are walking through the pass when you see {self:name}"
+                            + " crouched behind a rock. Since {self:pronoun} is very focused"
+                            + " in looking the other way, {self:pronoun} does not see you coming."
+                            + " Not one to look a gift horse in the mouth, you sneak up behind"
+                            + " {self:direct-object} and grab {self:direct-object} in a bear hug."
+                            + " Then, you throw {self:direct-object} to the side, causing"
+                            + " {self:direct-object} to fall to the ground.";
+
+                }
+
+                p.getCharacter().message(Global.format(attackerMessage, p.getCharacter(), other.getCharacter()));
+                other.getCharacter().message(Global.format(victimMessage, p.getCharacter(), other.getCharacter()));
+                encounter.startFight(p, other);
+
+                if (attackerScore > victimScore) {
+                    other.getCharacter().addNonCombat(new Status(new Flatfooted(other.getCharacter(), 3)));
+                } else {
+                    p.getCharacter().addNonCombat(new Status(new Flatfooted(p.getCharacter(), 3)));
+                }
+            });
         }
 
         @Override
