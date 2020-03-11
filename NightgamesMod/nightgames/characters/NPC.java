@@ -374,11 +374,8 @@ public class NPC extends Character {
             radar.addAll(location.get().noisyNeighbors(get(Attribute.Perception)));
         }
         var chosenAction = ai.move(possibleActions, radar);
-        if (location.get().humanPresent()) {
-            Global.gui().message("You notice " + getName() + callback.execute(chosenAction).describe(this));
-        } else {
-            callback.execute(chosenAction);
-        }
+        var aftermath = callback.execute(chosenAction).describe(this);
+        location.get().getOccupants().forEach(p -> p.getCharacter().message(aftermath));
     }
 
     @Override
