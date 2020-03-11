@@ -14,7 +14,7 @@ import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
-import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.DefaultEncounter;
 import nightgames.modifier.standard.NoRecoveryModifier;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.pet.Pet;

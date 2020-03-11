@@ -6,7 +6,7 @@ import nightgames.characters.Emotion;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
-import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.DefaultEncounter;
 import nightgames.status.Flatfooted;
 import nightgames.status.Stsflag;
 import nightgames.utilities.NoOps;

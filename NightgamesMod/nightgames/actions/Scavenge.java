@@ -4,7 +4,7 @@ import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
-import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.DefaultEncounter;
 
 import java.util.Collection;
 import java.util.List;

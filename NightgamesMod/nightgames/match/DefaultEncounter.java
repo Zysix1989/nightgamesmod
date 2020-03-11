@@ -1,4 +1,4 @@
-package nightgames.match.defaults;
+package nightgames.match;
 
 import nightgames.actions.Action;
 import nightgames.areas.Area;
@@ -41,7 +41,7 @@ public class DefaultEncounter {
     }
 
     private static void checkEnthrall(Participant slave, Participant master) {
-        Status enthrall = slave.getCharacter().getStatus(Stsflag.enthralled);
+        nightgames.status.Status enthrall = slave.getCharacter().getStatus(Stsflag.enthralled);
         if (enthrall != null) {
             if (((Enthralled) enthrall).master != master.getCharacter()) {
                 slave.getCharacter().removelist.add(enthrall);

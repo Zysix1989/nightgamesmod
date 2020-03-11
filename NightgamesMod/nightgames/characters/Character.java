@@ -34,7 +34,7 @@ import nightgames.items.clothing.Outfit;
 import nightgames.json.JsonUtils;
 import nightgames.match.Match;
 import nightgames.match.Participant;
-import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.DefaultEncounter;
 import nightgames.pet.PetCharacter;
 import nightgames.pet.arms.ArmManager;
 import nightgames.skills.*;

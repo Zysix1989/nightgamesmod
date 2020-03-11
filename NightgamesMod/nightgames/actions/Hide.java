@@ -3,7 +3,7 @@ package nightgames.actions;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.match.Participant;
-import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.DefaultEncounter;
 
 import java.util.Optional;
 

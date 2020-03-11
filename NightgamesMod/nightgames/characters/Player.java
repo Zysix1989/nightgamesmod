@@ -27,7 +27,7 @@ import nightgames.items.clothing.Clothing;
 import nightgames.match.Match;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
-import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.DefaultEncounter;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.skills.*;
 import nightgames.skills.damage.DamageType;

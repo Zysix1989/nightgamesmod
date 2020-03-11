@@ -2,7 +2,7 @@ package nightgames.actions;
 
 import nightgames.characters.Character;
 import nightgames.match.Participant;
-import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.DefaultEncounter;
 
 import java.io.Serializable;
 import java.util.Optional;

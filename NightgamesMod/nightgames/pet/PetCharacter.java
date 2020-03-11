@@ -11,7 +11,7 @@ import nightgames.grammar.Person;
 import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.match.Participant;
-import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.DefaultEncounter;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;

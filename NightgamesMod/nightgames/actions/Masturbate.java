@@ -5,7 +5,7 @@ import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
-import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.DefaultEncounter;
 
 import java.util.Optional;
 

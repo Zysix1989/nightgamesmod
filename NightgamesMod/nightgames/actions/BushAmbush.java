@@ -6,7 +6,7 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Participant;
 import nightgames.match.Status;
-import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.DefaultEncounter;
 import nightgames.stance.Mount;
 import nightgames.status.Bound;
 import nightgames.status.Flatfooted;

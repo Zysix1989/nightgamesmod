@@ -6,7 +6,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.match.Participant;
-import nightgames.match.defaults.DefaultEncounter;
+import nightgames.match.DefaultEncounter;
 import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 

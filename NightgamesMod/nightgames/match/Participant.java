@@ -8,7 +8,6 @@ import nightgames.areas.Challenge;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
-import nightgames.match.defaults.DefaultEncounter;
 import nightgames.status.Stsflag;
 
 import java.util.*;
