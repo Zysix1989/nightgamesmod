@@ -5,7 +5,6 @@ import nightgames.match.Encounter;
 import nightgames.match.Participant;
 
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.Optional;
 
 public abstract class Action implements Serializable {
@@ -13,9 +12,10 @@ public abstract class Action implements Serializable {
      *
      */
     private static final long serialVersionUID = 4981682001213276175L;
-    protected String name;
+    protected final String name;
 
-    public Action(String name) {
+    protected Action(String name) {
+        assert name != null;
         this.name = name;
     }
 
@@ -91,16 +91,12 @@ public abstract class Action implements Serializable {
 
     @Override
     public int hashCode() {
-        if (name == null) {
-            return 0;
-        } else {
-            return name.hashCode();
-        }
+        return name.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof Action && (Objects.equals(name, ((Action) obj).name));
+        return obj instanceof Action && name.equals(((Action) obj).name);
     }
 
 }
