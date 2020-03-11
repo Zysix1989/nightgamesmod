@@ -101,7 +101,7 @@ public class Area implements Serializable {
         if (fight != null) {
             var intrusionOptions = fight.getCombatIntrusionOptions(p);
             if (!intrusionOptions.isEmpty()) {
-                p.interveneInCombat(intrusionOptions, () -> fight.watch());
+                p.intrudeInCombat(intrusionOptions, () -> fight.watch());
                 return true;
             }
         } else if (present.size() > 1) {
