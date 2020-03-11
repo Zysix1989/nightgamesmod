@@ -1,7 +1,7 @@
 package nightgames.modifier;
 
 import com.google.gson.JsonObject;
-import nightgames.actions.Locate;
+import nightgames.match.actions.Locate;
 import nightgames.characters.Player;
 import nightgames.global.Global;
 import nightgames.gui.TestGUI;

@@ -1,6 +1,6 @@
 package nightgames.characters;
 
-import nightgames.actions.Energize;
+import nightgames.match.actions.Energize;
 import nightgames.areas.Area;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;

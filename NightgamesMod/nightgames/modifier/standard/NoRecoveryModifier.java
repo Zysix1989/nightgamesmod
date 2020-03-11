@@ -1,6 +1,6 @@
 package nightgames.modifier.standard;
 
-import nightgames.actions.Masturbate;
+import nightgames.match.actions.Masturbate;
 import nightgames.characters.Player;
 import nightgames.global.Global;
 import nightgames.modifier.BaseModifier;

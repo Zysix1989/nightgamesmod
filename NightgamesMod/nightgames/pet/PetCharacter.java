@@ -1,6 +1,6 @@
 package nightgames.pet;
 
-import nightgames.actions.Move;
+import nightgames.match.actions.Move;
 import nightgames.characters.Character;
 import nightgames.characters.*;
 import nightgames.characters.body.BodyPart;

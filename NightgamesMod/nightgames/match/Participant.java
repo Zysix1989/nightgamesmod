@@ -1,7 +1,7 @@
 package nightgames.match;
 
-import nightgames.actions.Move;
-import nightgames.actions.Resupply;
+import nightgames.match.actions.Move;
+import nightgames.match.actions.Resupply;
 import nightgames.areas.Area;
 import nightgames.areas.Challenge;
 import nightgames.characters.Character;

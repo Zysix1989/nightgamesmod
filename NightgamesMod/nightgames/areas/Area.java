@@ -1,6 +1,6 @@
 package nightgames.areas;
 
-import nightgames.actions.Move;
+import nightgames.match.actions.Move;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;

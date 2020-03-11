@@ -1,6 +1,6 @@
 package nightgames.match.ftc;
 
-import nightgames.actions.*;
+import nightgames.match.actions.*;
 import nightgames.areas.Area;
 import nightgames.areas.AreaAttribute;
 import nightgames.areas.AreaIdentity;

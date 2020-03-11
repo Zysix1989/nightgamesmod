@@ -1,4 +1,4 @@
-package nightgames.actions;
+package nightgames.match.actions;
 
 import nightgames.areas.Area;
 import nightgames.characters.Attribute;

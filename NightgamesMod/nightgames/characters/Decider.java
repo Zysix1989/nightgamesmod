@@ -1,6 +1,6 @@
 package nightgames.characters;
 
-import nightgames.actions.*;
+import nightgames.match.actions.*;
 import nightgames.areas.Area;
 import nightgames.characters.custom.effect.CustomEffect;
 import nightgames.combat.Combat;
@@ -220,7 +220,7 @@ public class Decider {
                     || act instanceof Scavenge
                     || act instanceof Hide
                     || act instanceof SetTrap
-                    || act instanceof nightgames.actions.Wait
+                    || act instanceof nightgames.match.actions.Wait
                     // TODO: The next two I do NOT understand
                     // If two weeks go by an I haven't figured out why they're here, remove them.
                     // Written 2020-03-03

@@ -1,6 +1,6 @@
 package nightgames.characters;
 
-import nightgames.actions.Move;
+import nightgames.match.actions.Move;
 import nightgames.areas.Area;
 import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;

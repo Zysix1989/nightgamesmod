@@ -3,9 +3,9 @@ package nightgames.global;
 import com.google.gson.*;
 import com.google.gson.stream.JsonWriter;
 import nightgames.Resources.ResourceLoader;
-import nightgames.actions.Masturbate;
-import nightgames.actions.Wait;
-import nightgames.actions.*;
+import nightgames.match.actions.Masturbate;
+import nightgames.match.actions.Wait;
+import nightgames.match.actions.*;
 import nightgames.characters.Character;
 import nightgames.characters.*;
 import nightgames.characters.body.BodyPart;
@@ -525,7 +525,7 @@ public class Global {
         actionPool.add(new Locate());
         actionPool.add(new Masturbate());
         actionPool.add(new Disguise());
-        actionPool.add(new nightgames.actions.Struggle());
+        actionPool.add(new nightgames.match.actions.Struggle());
         newTrapPool().forEach(t -> actionPool.add(new SetTrap(t)));
     }
 
