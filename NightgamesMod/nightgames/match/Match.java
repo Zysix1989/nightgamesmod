@@ -436,10 +436,6 @@ public class Match {
         post.run();
     }
 
-    public final Optional<Area> gps(String name) {
-        return Optional.ofNullable(map.get(name));
-    }
-
     public final int getHour() {
         return time.getHour();
     }
