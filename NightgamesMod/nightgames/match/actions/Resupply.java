@@ -2,7 +2,6 @@ package nightgames.match.actions;
 
 import edu.emory.mathcs.backport.java.util.Collections;
 import nightgames.areas.Area;
-import nightgames.areas.AreaIdentity;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -29,7 +28,7 @@ public class Resupply extends Action {
         }
     }
 
-    public static class State implements Participant.State {
+    public class State implements Participant.State {
 
         @Override
         public boolean allowsNormalActions() {
@@ -43,32 +42,9 @@ public class Resupply extends Action {
             p.state = new Ready();
             p.getCharacter().getWillpower().renew();
             if (p.getLocation().getOccupants().size() > 1) {
-                Set<EscapeRoute> escapeRoutes = Set.of();
-                if (p.getLocation().id() == AreaIdentity.dorm) {
-                    escapeRoutes = Set.of(new EscapeRoute(Global.getMatch().gps("Quad").orElseThrow(),
-                                    "You hear your opponents searching around the "
-                                            + "dorm, so once you finish changing, you hop out the window and "
-                                            + "head to the quad."),
-                            new EscapeRoute(Global.getMatch().gps("Laundry").orElseThrow(),
-                                    "You hear your opponents searching around "
-                                            + "the dorm, so once you finish changing, you quietly move "
-                                            + "downstairs to the laundry room."));
-                }
-                if (p.getLocation().id() == AreaIdentity.union) {
-                    escapeRoutes = Set.of(
-                            new EscapeRoute(Global.getMatch().gps("Quad").orElseThrow(),
-                                    "You don't want to be ambushed leaving the "
-                                            + "student union, so once you finish changing, you hop out the "
-                                            + "window and head to the quad."),
-                            new EscapeRoute(Global.getMatch().gps("Pool").orElseThrow(),
-                                    "You don't want to be ambushed leaving "
-                                            + "the student union, so once you finish changing, you sneak out "
-                                            + "the back door and head to the pool."));
-                }
-                var finalRoutes = escapeRoutes;
                 var escapeRoute = escapeRoutes.stream().filter(EscapeRoute::usable).findFirst();
                 escapeRoute.or(() -> {
-                    var shuffledRoutes = new ArrayList<>(finalRoutes);
+                    var shuffledRoutes = new ArrayList<>(escapeRoutes);
                     Collections.shuffle(shuffledRoutes);
                     return shuffledRoutes.stream().findFirst();
                 }).ifPresent(route -> route.use(p));
@@ -119,17 +95,21 @@ public class Resupply extends Action {
 
     private final boolean permissioned;
     private final Set<Character> validCharacters;
+    private final Set<EscapeRoute> escapeRoutes;
 
-    public Resupply() {
+    private Resupply(Set<Participant> validParticipants, Set<EscapeRoute> escapeRoutes) {
         super("Resupply");
-        permissioned = false;
-        validCharacters = Set.of();
+        permissioned = !validParticipants.isEmpty();
+        validCharacters = validParticipants.stream().map(Participant::getCharacter).collect(Collectors.toSet());
+        this.escapeRoutes = escapeRoutes;
     }
 
-    public Resupply(Set<Participant> validParticipants) {
-        super("Resupply");
-        permissioned = true;
-        validCharacters = validParticipants.stream().map(Participant::getCharacter).collect(Collectors.toSet());
+    public static Resupply withEscapeRoutes(Set<EscapeRoute> escapeRoutes) {
+        return new Resupply(Set.of(), escapeRoutes);
+    }
+
+    public static Resupply limitToCharacters(Set<Participant> validParticipants) {
+        return new Resupply(validParticipants, Set.of());
     }
 
     @Override

@@ -1,6 +1,5 @@
 package nightgames.match.ftc;
 
-import nightgames.match.actions.*;
 import nightgames.areas.Area;
 import nightgames.areas.AreaAttribute;
 import nightgames.areas.AreaIdentity;
@@ -11,6 +10,7 @@ import nightgames.items.Item;
 import nightgames.match.Match;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
+import nightgames.match.actions.*;
 import nightgames.modifier.standard.FTCModifier;
 
 import java.util.*;
@@ -131,14 +131,14 @@ public class FTCMatch extends Match {
         link(glade, lodge);
 
         nBase.getPossibleActions().add(new Hide());
-        nBase.getPossibleActions().add(new Resupply(Set.of(north)));
+        nBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(north)));
         wBase.getPossibleActions().add(new Hide());
-        wBase.getPossibleActions().add(new Resupply(Set.of(west)));
+        wBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(west)));
         sBase.getPossibleActions().add(new Hide());
-        sBase.getPossibleActions().add(new Resupply(Set.of(south)));
+        sBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(south)));
         eBase.getPossibleActions().add(new Hide());
-        eBase.getPossibleActions().add(new Resupply(Set.of(east)));
-        pBase.getPossibleActions().add(new Resupply(Set.of(preyParticipant)));
+        eBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(east)));
+        pBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(preyParticipant)));
 
         pond.getPossibleActions().add(Bathe.newEmpty());
         pond.getPossibleActions().add(new Hide());

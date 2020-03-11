@@ -1,6 +1,5 @@
 package nightgames.match;
 
-import nightgames.match.actions.*;
 import nightgames.areas.*;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
@@ -8,6 +7,7 @@ import nightgames.characters.Player;
 import nightgames.characters.Trait;
 import nightgames.global.Flag;
 import nightgames.global.Global;
+import nightgames.match.actions.*;
 import nightgames.match.defaults.DefaultPostmatch;
 import nightgames.modifier.Modifier;
 import nightgames.status.addiction.Addiction;
@@ -129,7 +129,14 @@ public class Match {
         tunnel.shortcut(library);
 
         dorm.getPossibleActions().add(new Hide());
-        dorm.getPossibleActions().add(new Resupply());
+        dorm.getPossibleActions().add(Resupply.withEscapeRoutes(Set.of(new Resupply.EscapeRoute(quad,
+                        "You hear your opponents searching around the "
+                                + "dorm, so once you finish changing, you hop out the window and "
+                                + "head to the quad."),
+                new Resupply.EscapeRoute(laundry,
+                        "You hear your opponents searching around "
+                                + "the dorm, so once you finish changing, you quietly move "
+                                + "downstairs to the laundry room."))));
         shower.getPossibleActions().add(Bathe.newShower());
         shower.getPossibleActions().add(new Hide());
         laundry.getPossibleActions().add(new Hide());
@@ -150,7 +157,15 @@ public class Match {
         storage.getPossibleActions().add(new Hide());
         storage.getPossibleActions().add(new Scavenge());
         sau.getPossibleActions().add(new Hide());
-        sau.getPossibleActions().add(new Resupply());
+        sau.getPossibleActions().add(Resupply.withEscapeRoutes(Set.of(
+                new Resupply.EscapeRoute(quad,
+                        "You don't want to be ambushed leaving the "
+                                + "student union, so once you finish changing, you hop out the "
+                                + "window and head to the quad."),
+                new Resupply.EscapeRoute(pool,
+                        "You don't want to be ambushed leaving "
+                                + "the student union, so once you finish changing, you sneak out "
+                                + "the back door and head to the pool."))));
         courtyard.getPossibleActions().add(new Hide());
 
         var cacheLocations = Set.of(dorm, shower, laundry, engineering, lab, workshop, libarts, pool, library, dining,
