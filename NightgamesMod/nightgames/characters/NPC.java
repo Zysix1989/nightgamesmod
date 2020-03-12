@@ -13,7 +13,6 @@ import nightgames.global.Global;
 import nightgames.grammar.Person;
 import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
-import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.match.*;
@@ -369,17 +368,6 @@ public class NPC extends Character {
         ai.ding(this);
         if (c != null && c.isBeingObserved()) {
             Global.writeIfCombatUpdateImmediately(c, this, Global.format("{self:subject-action:have} leveled up!", this, this));
-        }
-    }
-
-    @Override
-    public void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {
-        if (this.has(Item.Aphrodisiac)) {
-            ambushContinuation.run();
-        } else if (!target.getCharacter().mostlyNude() && Global.random(3) >= 2) {
-            stealContinuation.run();
-        } else {
-            ambushContinuation.run();
         }
     }
 

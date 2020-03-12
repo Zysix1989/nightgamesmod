@@ -4,6 +4,7 @@ import nightgames.areas.Area;
 import nightgames.characters.Attribute;
 import nightgames.characters.NPC;
 import nightgames.characters.Trait;
+import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.trap.Trap;
 
@@ -60,4 +61,14 @@ public class ArtificialIntelligence implements Intelligence {
         }
     }
 
+    @Override
+    public void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {
+        if (character.has(Item.Aphrodisiac)) {
+            ambushContinuation.run();
+        } else if (!target.getCharacter().mostlyNude() && Global.random(3) >= 2) {
+            stealContinuation.run();
+        } else {
+            ambushContinuation.run();
+        }
+    }
 }

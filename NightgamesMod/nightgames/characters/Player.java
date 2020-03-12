@@ -434,48 +434,6 @@ public class Player extends Character {
     }
 
     @Override
-    public void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {
-        if (target.getLocation().name.equals("Showers")) {
-            gui.message("You hear running water coming from the first floor showers. There shouldn't be any residents on this floor right now, so it's likely one "
-                            + "of your opponents. You peek inside and sure enough, <b>" + target.getCharacter().subject()
-                            + "</b> is taking a shower and looking quite vulnerable. Do you take advantage "
-                            + "of her carelessness?");
-        } else if (target.getLocation().name.equals("Pool")) {
-            gui.message("You stumble upon <b>" + target.getCharacter().nameDirectObject()
-                            + "</b> skinny dipping in the pool. She hasn't noticed you yet. It would be pretty easy to catch her off-guard.");
-        }
-        assessOpponent(target);
-        gui.message("<br/>");
-
-        ArrayList<CommandPanelOption> options = new ArrayList<>();
-        options.add(new CommandPanelOption("Surprise Her",
-                encounterOption(() -> {
-                    ambushContinuation.run();
-                    Global.getMatch().resume();
-                })));
-        if (!target.getCharacter().mostlyNude()) {
-            options.add(new CommandPanelOption("Steal Clothes",
-                    encounterOption(() -> {
-                        stealContinuation.run();
-                        Global.getMatch().resume();
-                    })));
-        }
-        if (has(Item.Aphrodisiac)) {
-            options.add(new CommandPanelOption("Use Aphrodisiac",
-                    encounterOption(() -> {
-                        Global.getMatch().resume();
-                    })));
-        }
-        options.add(new CommandPanelOption("Do Nothing",
-                encounterOption(() -> {
-                    waitContinuation.run();
-                    Global.getMatch().resume();
-                })));
-        gui.presentOptions(options);
-        Global.getMatch().pause();
-    }
-
-    @Override
     public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation) {
         var listOptions = new ArrayList<>(intrusionOptions);
         assert listOptions.size() == 2: "No support for more than 2 combatants";

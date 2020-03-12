@@ -4,6 +4,7 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Player;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
+import nightgames.items.Item;
 import nightgames.trap.Trap;
 
 import java.util.ArrayList;
@@ -89,4 +90,47 @@ public class HumanIntelligence implements Intelligence {
         character.gui.presentOptions(options);
         Global.getMatch().pause();
     }
+
+    @Override
+    public void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {
+        if (target.getLocation().name.equals("Showers")) {
+            character.gui.message("You hear running water coming from the first floor showers. There shouldn't be any residents on this floor right now, so it's likely one "
+                    + "of your opponents. You peek inside and sure enough, <b>" + target.getCharacter().subject()
+                    + "</b> is taking a shower and looking quite vulnerable. Do you take advantage "
+                    + "of her carelessness?");
+        } else if (target.getLocation().name.equals("Pool")) {
+            character.gui.message("You stumble upon <b>" + target.getCharacter().nameDirectObject()
+                    + "</b> skinny dipping in the pool. She hasn't noticed you yet. It would be pretty easy to catch her off-guard.");
+        }
+        character.assessOpponent(target);
+        character.gui.message("<br/>");
+
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
+        options.add(new CommandPanelOption("Surprise Her",
+                character.encounterOption(() -> {
+                    ambushContinuation.run();
+                    Global.getMatch().resume();
+                })));
+        if (!target.getCharacter().mostlyNude()) {
+            options.add(new CommandPanelOption("Steal Clothes",
+                    character.encounterOption(() -> {
+                        stealContinuation.run();
+                        Global.getMatch().resume();
+                    })));
+        }
+        if (character.has(Item.Aphrodisiac)) {
+            options.add(new CommandPanelOption("Use Aphrodisiac",
+                    character.encounterOption(() -> {
+                        Global.getMatch().resume();
+                    })));
+        }
+        options.add(new CommandPanelOption("Do Nothing",
+                character.encounterOption(() -> {
+                    waitContinuation.run();
+                    Global.getMatch().resume();
+                })));
+        character.gui.presentOptions(options);
+        Global.getMatch().pause();
+    }
+
 }

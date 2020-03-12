@@ -61,7 +61,7 @@ public final class Bathe extends Action {
         @Override
         public Optional<Runnable> eligibleCombatReplacement(Encounter encounter, Participant p, Participant other) {
             if (!clothesStolen) {
-                return Optional.of(() -> other.getCharacter().showerScene(
+                return Optional.of(() -> other.getIntelligence().showerScene(
                         p,
                         () -> showerAmbush(encounter, other, p),
                         () -> steal(other, p),

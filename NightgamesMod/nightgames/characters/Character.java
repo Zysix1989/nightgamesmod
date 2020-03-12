@@ -31,7 +31,10 @@ import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
 import nightgames.items.clothing.Outfit;
 import nightgames.json.JsonUtils;
-import nightgames.match.*;
+import nightgames.match.Action;
+import nightgames.match.Encounter;
+import nightgames.match.Intelligence;
+import nightgames.match.Match;
 import nightgames.match.actions.Move;
 import nightgames.match.actions.UseBeer;
 import nightgames.match.actions.UseEnergyDrink;
@@ -42,7 +45,6 @@ import nightgames.skills.*;
 import nightgames.skills.damage.DamageType;
 import nightgames.stance.Neutral;
 import nightgames.stance.Stance;
-import nightgames.status.Status;
 import nightgames.status.*;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.Addiction.Severity;
@@ -1754,8 +1756,6 @@ public Character clone() throws CloneNotSupportedException {
     public abstract String taunt(Combat c, Character target);
 
     public abstract void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation);
-
-    public abstract void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation);
 
     /**Determines if this character is controlled by a human.
      * 
