@@ -6,10 +6,13 @@ import nightgames.characters.NPC;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
+import nightgames.match.actions.Move;
 import nightgames.trap.Trap;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class ArtificialIntelligence implements Intelligence {
@@ -71,4 +74,27 @@ public class ArtificialIntelligence implements Intelligence {
             ambushContinuation.run();
         }
     }
+
+    private static class IntrusionEvaluation {
+        private Encounter.IntrusionOption option;
+        private int score;
+
+        IntrusionEvaluation(Encounter.IntrusionOption option, int score) {
+            this.option = option;
+            this.score = score;
+        }
+    }
+
+    @Override
+    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation) {
+        var bestTarget = intrusionOptions.stream()
+                .map(option -> new IntrusionEvaluation(option,
+                        Global.random(20) +
+                                character.getAffection(option.getTargetCharacter()) +
+                                (option.getTargetCharacter().has(Trait.sympathetic) ? 10 : 0)))
+                .reduce(new IntrusionEvaluation(null, Integer.MIN_VALUE),
+                        (best, current) -> best.score >= current.score ? best : current);
+        bestTarget.option.callback();
+    }
+
 }

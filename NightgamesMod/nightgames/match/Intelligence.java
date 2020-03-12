@@ -1,8 +1,11 @@
 package nightgames.match;
 
+import nightgames.match.actions.Move;
 import nightgames.trap.Trap;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public interface Intelligence {
@@ -17,4 +20,5 @@ public interface Intelligence {
 
     void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation);
 
+    void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation);
 }

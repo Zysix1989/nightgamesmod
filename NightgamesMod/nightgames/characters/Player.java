@@ -434,31 +434,6 @@ public class Player extends Character {
     }
 
     @Override
-    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation) {
-        var listOptions = new ArrayList<>(intrusionOptions);
-        assert listOptions.size() == 2: "No support for more than 2 combatants";
-        gui.message("You find <b>" + listOptions.get(0).getTargetCharacter().getName() + "</b> and <b>" + listOptions.get(1).getTargetCharacter().getName()
-                        + "</b> fighting too intensely to notice your arrival. If you intervene now, it'll essentially decide the winner.");
-        gui.message("Then again, you could just wait and see which one of them comes out on top. It'd be entertaining,"
-                        + " at the very least. Alternatively, you could just leave them to it.");
-
-        ArrayList<CommandPanelOption> options = listOptions.stream()
-                .map(option -> new CommandPanelOption("Help " + option.getTargetCharacter().getName(),
-                        event -> option.callback()))
-                .collect(Collectors.toCollection(ArrayList::new));
-        options.add(new CommandPanelOption("Watch them fight", event -> neitherContinuation.run()));
-        options.addAll(possibleMoves.stream()
-                .map(move -> new CommandPanelOption("Move (" + move.getDestination() + ")",
-                        event -> {
-                            actionCallback.accept(move);
-                            Global.getMatch().resume();
-                        }))
-                .collect(Collectors.toSet()));
-        Global.getMatch().pause();
-        gui.presentOptions(options);
-    }
-
-    @Override
     public void intervene3p(Combat c, Character target, Character assist) {
         c.write("You take your time, approaching " + target.getName() + " and " + assist.getName() + " stealthily. "
                         + assist.getName() + " notices you first and before her reaction "

@@ -15,7 +15,10 @@ import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
-import nightgames.match.*;
+import nightgames.match.Action;
+import nightgames.match.ArtificialIntelligence;
+import nightgames.match.Intelligence;
+import nightgames.match.Match;
 import nightgames.match.actions.Move;
 import nightgames.pet.arms.ArmManager;
 import nightgames.pet.arms.ArmType;
@@ -29,7 +32,6 @@ import nightgames.skills.strategy.DefaultStrategy;
 import nightgames.stance.Behind;
 import nightgames.stance.Neutral;
 import nightgames.stance.Position;
-import nightgames.status.Status;
 import nightgames.status.*;
 
 import java.util.*;
@@ -371,26 +373,6 @@ public class NPC extends Character {
         }
     }
 
-    private static class IntrusionEvaluation {
-        private Encounter.IntrusionOption option;
-        private int score;
-
-        IntrusionEvaluation(Encounter.IntrusionOption option, int score) {
-            this.option = option;
-            this.score = score;
-        }
-    }
-    @Override
-    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation) {
-        var bestTarget = intrusionOptions.stream()
-                .map(option -> new IntrusionEvaluation(option,
-                                Global.random(20) +
-                                        getAffection(option.getTargetCharacter()) +
-                                        (option.getTargetCharacter().has(Trait.sympathetic) ? 10 : 0)))
-                .reduce(new IntrusionEvaluation(null, Integer.MIN_VALUE),
-                        (best, current) -> best.score >= current.score ? best : current);
-        bestTarget.option.callback();
-    }
 
     @Override
     public void afterParty() {

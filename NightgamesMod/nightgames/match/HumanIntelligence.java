@@ -5,11 +5,15 @@ import nightgames.characters.Player;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
+import nightgames.match.actions.Move;
 import nightgames.trap.Trap;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class HumanIntelligence implements Intelligence {
     private Player character;
@@ -132,5 +136,32 @@ public class HumanIntelligence implements Intelligence {
         character.gui.presentOptions(options);
         Global.getMatch().pause();
     }
+
+
+    @Override
+    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation) {
+        var listOptions = new ArrayList<>(intrusionOptions);
+        assert listOptions.size() == 2: "No support for more than 2 combatants";
+        character.gui.message("You find <b>" + listOptions.get(0).getTargetCharacter().getName() + "</b> and <b>" + listOptions.get(1).getTargetCharacter().getName()
+                + "</b> fighting too intensely to notice your arrival. If you intervene now, it'll essentially decide the winner.");
+        character.gui.message("Then again, you could just wait and see which one of them comes out on top. It'd be entertaining,"
+                + " at the very least. Alternatively, you could just leave them to it.");
+
+        ArrayList<CommandPanelOption> options = listOptions.stream()
+                .map(option -> new CommandPanelOption("Help " + option.getTargetCharacter().getName(),
+                        event -> option.callback()))
+                .collect(Collectors.toCollection(ArrayList::new));
+        options.add(new CommandPanelOption("Watch them fight", event -> neitherContinuation.run()));
+        options.addAll(possibleMoves.stream()
+                .map(move -> new CommandPanelOption("Move (" + move.getDestination() + ")",
+                        event -> {
+                            actionCallback.accept(move);
+                            Global.getMatch().resume();
+                        }))
+                .collect(Collectors.toSet()));
+        Global.getMatch().pause();
+        character.gui.presentOptions(options);
+    }
+
 
 }

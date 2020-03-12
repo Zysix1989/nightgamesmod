@@ -32,7 +32,6 @@ import nightgames.items.clothing.ClothingTrait;
 import nightgames.items.clothing.Outfit;
 import nightgames.json.JsonUtils;
 import nightgames.match.Action;
-import nightgames.match.Encounter;
 import nightgames.match.Intelligence;
 import nightgames.match.Match;
 import nightgames.match.actions.Move;
@@ -1754,8 +1753,6 @@ public Character clone() throws CloneNotSupportedException {
     public abstract String stunLiner(Combat c, Character target);
 
     public abstract String taunt(Combat c, Character target);
-
-    public abstract void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation);
 
     /**Determines if this character is controlled by a human.
      * 
