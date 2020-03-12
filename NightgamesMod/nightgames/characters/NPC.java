@@ -17,10 +17,7 @@ import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
-import nightgames.match.Action;
-import nightgames.match.Encounter;
-import nightgames.match.Match;
-import nightgames.match.Participant;
+import nightgames.match.*;
 import nightgames.match.actions.Move;
 import nightgames.pet.arms.ArmManager;
 import nightgames.pet.arms.ArmType;
@@ -34,6 +31,7 @@ import nightgames.skills.strategy.DefaultStrategy;
 import nightgames.stance.Behind;
 import nightgames.stance.Neutral;
 import nightgames.stance.Position;
+import nightgames.status.Status;
 import nightgames.status.*;
 import nightgames.trap.Trap;
 
@@ -296,6 +294,11 @@ public class NPC extends Character {
     public void sendDrawMessage(Combat c, Result flag) {
         super.sendDrawMessage(c, flag);
         c.write(ai.draw(c, flag));
+    }
+
+    @Override
+    public Intelligence makeIntelligence() {
+        return new ArtificialIntelligence(this);
     }
 
     public String getRandomLineFor(String lineType, Combat c, Character other) {

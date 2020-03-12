@@ -985,4 +985,9 @@ public class Player extends Character {
     public void message(String message) {
         gui.message(message);
     }
+
+    @Override
+    public Intelligence makeIntelligence() {
+        return new HumanIntelligence(this);
+    }
 }

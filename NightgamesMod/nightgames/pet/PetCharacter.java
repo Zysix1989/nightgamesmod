@@ -10,6 +10,7 @@ import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.match.Action;
 import nightgames.match.Encounter;
+import nightgames.match.Intelligence;
 import nightgames.match.Participant;
 import nightgames.match.actions.Move;
 import nightgames.nskills.tags.SkillTag;
@@ -324,6 +325,11 @@ public class PetCharacter extends Character {
         } else {
             return new SingularMasculineThirdPerson(this);
         }
+    }
+
+    @Override
+    public Intelligence makeIntelligence() {
+        throw new UnsupportedOperationException("pets aren't intelligent, stupid.");
     }
 
 }

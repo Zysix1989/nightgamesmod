@@ -41,6 +41,7 @@ public class Participant {
 
     public Participant(Character c) {
         this.character = c;
+        this.intelligence = c.makeIntelligence();
     }
 
     Participant(Participant p) {
