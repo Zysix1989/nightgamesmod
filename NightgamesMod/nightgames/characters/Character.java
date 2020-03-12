@@ -2567,10 +2567,6 @@ public Character clone() throws CloneNotSupportedException {
         skills.addIfAbsent(copy.copy(this));
     }
 
-    public void forget(Skill copy) {
-        getSkills().remove(copy);
-    }
-
     public void notifyTravel(Area dest, String message) { }
 
     public void endOfMatchRound() {
