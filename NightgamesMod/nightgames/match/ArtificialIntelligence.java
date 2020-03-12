@@ -4,6 +4,7 @@ import nightgames.areas.Area;
 import nightgames.characters.Attribute;
 import nightgames.characters.NPC;
 import nightgames.characters.Trait;
+import nightgames.items.Item;
 import nightgames.trap.Trap;
 
 import java.util.Collection;
@@ -34,6 +35,19 @@ public class ArtificialIntelligence implements Intelligence {
             attackContinuation.run();
         } else {
             character.location.get().endEncounter();
+        }
+    }
+
+
+    @Override
+    public void faceOff(Participant opponent, Runnable fightContinuation, Runnable fleeContinuation, Runnable smokeContinuation) {
+        if (character.ai.fightFlight(opponent.getCharacter())) {
+            fightContinuation.run();
+        } else if (character.has(Item.SmokeBomb)) {
+            character.remove(Item.SmokeBomb);
+            smokeContinuation.run();
+        } else {
+            fleeContinuation.run();
         }
     }
 

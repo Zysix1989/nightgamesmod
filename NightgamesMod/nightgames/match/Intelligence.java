@@ -11,4 +11,6 @@ public interface Intelligence {
 
     void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation);
 
+    void faceOff(Participant opponent, Runnable fightContinuation, Runnable fleeContinuation, Runnable smokeContinuation);
+
 }

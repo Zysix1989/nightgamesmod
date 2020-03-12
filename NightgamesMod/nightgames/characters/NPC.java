@@ -363,17 +363,6 @@ public class NPC extends Character {
         }
     }
 
-    @Override
-    public void faceOff(Participant opponent, Runnable fightContinuation, Runnable fleeContinuation, Runnable smokeContinuation) {
-        if (ai.fightFlight(opponent.getCharacter())) {
-            fightContinuation.run();
-        } else if (has(Item.SmokeBomb)) {
-            remove(Item.SmokeBomb);
-            smokeContinuation.run();
-        } else {
-            fleeContinuation.run();
-        }
-    }
 
     @Override
     public void spy(Participant opponent, Runnable ambushContinuation, Runnable waitContinuation) {

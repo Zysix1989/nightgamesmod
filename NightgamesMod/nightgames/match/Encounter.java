@@ -116,11 +116,11 @@ public class Encounter {
         boolean p1_sees_p2 = spotCheck(p1, p2);
 
         if (p2_sees_p1 && p1_sees_p2) {
-            p1.getCharacter().faceOff(p2,
+            p1.getIntelligence().faceOff(p2,
                     () -> fightOrFlight(p1, true, Optional.empty()),
                     () -> fightOrFlight(p1, false, Optional.empty()),
                     () -> fightOrFlight(p1, false, Optional.of(smokeMessage(p1.getCharacter()))));
-            p2.getCharacter().faceOff(p1,
+            p2.getIntelligence().faceOff(p1,
                     () -> fightOrFlight(p2, true, Optional.empty()),
                     () -> fightOrFlight(p2, false, Optional.empty()),
                     () -> fightOrFlight(p2, false, Optional.of(smokeMessage(p2.getCharacter()))));

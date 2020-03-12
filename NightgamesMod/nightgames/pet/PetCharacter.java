@@ -299,12 +299,6 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void faceOff(Participant opponent, Runnable fightContinuation, Runnable fleeContinuation, Runnable smokeContinuation) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
     public void spy(Participant opponent, Runnable ambushContinuation, Runnable waitContinuation) {
         // TODO Auto-generated method stub
     }

@@ -221,7 +221,7 @@ public class Player extends Character {
         return event -> continuation.run();
     }
 
-    private void presentFightFlightChoice(Participant opponent, ActionListener fightCallback, ActionListener flightCallback) {
+    public void presentFightFlightChoice(Participant opponent, ActionListener fightCallback, ActionListener flightCallback) {
         assessOpponent(opponent);
         gui.message("<br/>");
         ArrayList<CommandPanelOption> options = new ArrayList<>();
@@ -230,20 +230,6 @@ public class Player extends Character {
         options.add(new CommandPanelOption("Flee",
                 flightCallback));
         gui.presentOptions(options);
-    }
-
-    @Override
-    public void faceOff(Participant opponent, Runnable fightContinuation, Runnable fleeContinuation, Runnable smokeContinuation) {
-        gui.message("You run into <b>" + opponent.getCharacter().nameDirectObject()
-                        + "</b> and you both hesitate for a moment, deciding whether to attack or retreat.");
-        presentFightFlightChoice(opponent, encounterOption(() -> {
-            fightContinuation.run();
-            Global.getMatch().resume();
-        }), encounterOption(() -> {
-            fleeContinuation.run();
-            Global.getMatch().resume();
-        }));
-        Global.getMatch().pause();
     }
 
     public void assessOpponent(Participant opponent) {
