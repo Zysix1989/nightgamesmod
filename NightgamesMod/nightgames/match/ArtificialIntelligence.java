@@ -51,4 +51,13 @@ public class ArtificialIntelligence implements Intelligence {
         }
     }
 
+    @Override
+    public void spy(Participant opponent, Runnable ambushContinuation, Runnable waitContinuation) {
+        if (character.ai.attack(opponent.getCharacter())) {
+            ambushContinuation.run();
+        } else {
+            waitContinuation.run();
+        }
+    }
+
 }

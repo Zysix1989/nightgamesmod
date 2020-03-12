@@ -299,11 +299,6 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void spy(Participant opponent, Runnable ambushContinuation, Runnable waitContinuation) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
     public Person getGrammar() {
         if (useFemalePronouns()) {
             return new SingularFeminineThirdPerson(this);

@@ -264,27 +264,6 @@ public class Player extends Character {
         }
     }
 
-    @Override
-    public void spy(Participant opponent, Runnable ambushContinuation, Runnable waitContinuation) {
-        gui.message("You spot <b>" + opponent.getCharacter().nameDirectObject()
-                        + "</b> but she hasn't seen you yet. You could probably catch her off guard, or you could remain hidden and hope she doesn't notice you.");
-        assessOpponent(opponent);
-        gui.message("<br/>");
-        ArrayList<CommandPanelOption> options = new ArrayList<>();
-        options.add(new CommandPanelOption("Ambush",
-                encounterOption(() -> {
-                    ambushContinuation.run();
-                    Global.getMatch().resume();
-                })));
-        options.add(new CommandPanelOption("Wait",
-                encounterOption(() -> {
-                    waitContinuation.run();
-                    Global.getMatch().resume();
-                })));
-        gui.presentOptions(options);
-        Global.getMatch().pause();
-    }
-
     public void presentMoveOptions(Collection<Action> actionChoices,
                                    Consumer<Action> callback) {
         var optionChoices = actionChoices.stream()

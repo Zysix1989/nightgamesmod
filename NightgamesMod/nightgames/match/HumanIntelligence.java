@@ -68,4 +68,25 @@ public class HumanIntelligence implements Intelligence {
         }));
         Global.getMatch().pause();
     }
+
+    @Override
+    public void spy(Participant opponent, Runnable ambushContinuation, Runnable waitContinuation) {
+        character.gui.message("You spot <b>" + opponent.getCharacter().nameDirectObject()
+                + "</b> but she hasn't seen you yet. You could probably catch her off guard, or you could remain hidden and hope she doesn't notice you.");
+        character.assessOpponent(opponent);
+        character.gui.message("<br/>");
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
+        options.add(new CommandPanelOption("Ambush",
+                character.encounterOption(() -> {
+                    ambushContinuation.run();
+                    Global.getMatch().resume();
+                })));
+        options.add(new CommandPanelOption("Wait",
+                character.encounterOption(() -> {
+                    waitContinuation.run();
+                    Global.getMatch().resume();
+                })));
+        character.gui.presentOptions(options);
+        Global.getMatch().pause();
+    }
 }

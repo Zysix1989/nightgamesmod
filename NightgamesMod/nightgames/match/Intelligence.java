@@ -13,4 +13,5 @@ public interface Intelligence {
 
     void faceOff(Participant opponent, Runnable fightContinuation, Runnable fleeContinuation, Runnable smokeContinuation);
 
+    void spy(Participant opponent, Runnable ambushContinuation, Runnable waitContinuation);
 }

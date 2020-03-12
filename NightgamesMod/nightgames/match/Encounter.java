@@ -94,7 +94,7 @@ public class Encounter {
     }
 
     public void spy(Participant attacker, Participant victim) {
-        attacker.getCharacter().spy(victim, () -> ambush(attacker, victim), () -> location.endEncounter());
+        attacker.getIntelligence().spy(victim, () -> ambush(attacker, victim), () -> location.endEncounter());
     }
 
     protected void eligibleSpotCheck() {
@@ -125,9 +125,9 @@ public class Encounter {
                     () -> fightOrFlight(p2, false, Optional.empty()),
                     () -> fightOrFlight(p2, false, Optional.of(smokeMessage(p2.getCharacter()))));
         } else if (p2_sees_p1) {
-            p2.getCharacter().spy(p1, () -> ambush(p2, p1), () -> location.endEncounter());
+            p2.getIntelligence().spy(p1, () -> ambush(p2, p1), () -> location.endEncounter());
         } else if (p1_sees_p2) {
-            p1.getCharacter().spy(p2, () -> ambush(p1, p2), () -> location.endEncounter());
+            p1.getIntelligence().spy(p2, () -> ambush(p1, p2), () -> location.endEncounter());
         } else {
             // Ships passing in the night :(
             location.endEncounter();
