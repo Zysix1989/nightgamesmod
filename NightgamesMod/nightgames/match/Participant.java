@@ -33,6 +33,7 @@ public class Participant {
     }
 
     protected Character character;
+    private Intelligence intelligence;
     private int score = 0;
     public State state = new Action.Ready();
     public Set<Participant> invalidAttackers = new HashSet<>();
@@ -48,9 +49,11 @@ public class Participant {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
+        this.intelligence = p.intelligence;
         this.score = p.score;
         this.state = p.state;
         this.invalidAttackers = new HashSet<>(p.invalidAttackers);
+        this.challenges = new ArrayList<>(p.challenges);
     }
 
     public Participant copy() {
