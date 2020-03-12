@@ -151,8 +151,7 @@ public class Player extends Character {
     }
 
     @Override
-    public boolean act(Combat c) {
-        Character target = c.getOpponentCharacter(this);
+    public boolean act(Combat c, Character target) {
         pickSkills(c, target);
         return true;
     }

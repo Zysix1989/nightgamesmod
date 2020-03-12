@@ -164,12 +164,6 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public boolean act(Combat c) {
-        act(c, c.getOpponentCharacter(this));
-        return false;
-    }
-
-    @Override
     public void move(Collection<Action> possibleActions, Consumer<Action> callback) {
 
     }
@@ -179,7 +173,7 @@ public class PetCharacter extends Character {
 
     }
 
-    public void act(Combat c, Character target) {
+    public boolean act(Combat c, Character target) {
         List<Skill> allowedEnemySkills = new ArrayList<>(getSkills()
                         .stream().filter(skill -> Skill.isUsableOn(c, skill, target) && Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
                         .collect(Collectors.toList()));
@@ -210,6 +204,7 @@ public class PetCharacter extends Character {
                             getTrueName(), bestMasterSkill.skill.getLabel(c), target.nameDirectObject()));
             Skill.resolve(bestMasterSkill.skill, c, self.owner());
         }
+        return false;
     }
 
     @Override

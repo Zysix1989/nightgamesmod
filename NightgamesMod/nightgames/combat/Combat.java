@@ -167,9 +167,9 @@ public class Combat {
         @Override
         public boolean turn(Combat c) {
             if (c.p1act == null) {
-                return c.p1.getCharacter().act(c);
+                return c.p1.getCharacter().act(c, c.p2.getCharacter());
             } else if (c.p2act == null) {
-                return c.p2.getCharacter().act(c);
+                return c.p2.getCharacter().act(c, c.p1.getCharacter());
             } else {
                 c.phase = new PetActionsPhase();
                 return false;

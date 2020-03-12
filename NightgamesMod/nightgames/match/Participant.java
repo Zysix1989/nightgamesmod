@@ -1,12 +1,12 @@
 package nightgames.match;
 
-import nightgames.match.actions.Move;
-import nightgames.match.actions.Resupply;
 import nightgames.areas.Area;
 import nightgames.areas.Challenge;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
+import nightgames.match.actions.Move;
+import nightgames.match.actions.Resupply;
 import nightgames.status.Stsflag;
 
 import java.util.*;
@@ -82,10 +82,6 @@ public class Participant {
 
     public boolean canStartCombat(Participant p2) {
         return !p2.invalidAttackers.contains(this) && !(p2.state instanceof Resupply.State);
-    }
-
-    public interface ActionCallback {
-        Action.Aftermath execute(Action a);
     }
 
     public void move() {

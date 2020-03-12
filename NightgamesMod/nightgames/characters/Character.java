@@ -1738,9 +1738,10 @@ public Character clone() throws CloneNotSupportedException {
 
     /**
      * @param c combat to act in
+     * @param target
      * @return true if combat should be paused.
      */
-    public abstract boolean act(Combat c);
+    public abstract boolean act(Combat c, Character target);
 
     public void displayStateMessage(Optional<Trap.Instance> knownTrap) {};
 

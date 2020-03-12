@@ -219,12 +219,7 @@ public class NPC extends Character {
     }
 
     @Override
-    public boolean act(Combat c) {
-        return act(c, c.getOpponentCharacter(this));
-    }
-
-    private boolean act(Combat c, Character target) {
-
+    public boolean act(Combat c, Character target) {
         CombatantData combatantData = c.getCombatantData(this);
 
         // if there's no strategy, try getting a new one.
