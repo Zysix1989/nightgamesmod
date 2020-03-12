@@ -21,4 +21,6 @@ public interface Intelligence {
     void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation);
 
     void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation);
+
+    void handleEnthrall(Consumer<Action> callback);
 }

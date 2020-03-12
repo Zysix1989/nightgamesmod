@@ -103,7 +103,7 @@ public class Participant {
         if (state instanceof Combat.State) {
             state.move(this);
         } else if (this.character.is(Stsflag.enthralled)) {
-            character.handleEnthrall(callback);
+            intelligence.handleEnthrall(callback);
             return;
         } else {
             state.move(this);

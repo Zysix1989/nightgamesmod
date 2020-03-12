@@ -15,11 +15,9 @@ import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
-import nightgames.match.Action;
 import nightgames.match.ArtificialIntelligence;
 import nightgames.match.Intelligence;
 import nightgames.match.Match;
-import nightgames.match.actions.Move;
 import nightgames.pet.arms.ArmManager;
 import nightgames.pet.arms.ArmType;
 import nightgames.skills.Nothing;
@@ -32,10 +30,12 @@ import nightgames.skills.strategy.DefaultStrategy;
 import nightgames.stance.Behind;
 import nightgames.stance.Neutral;
 import nightgames.stance.Position;
-import nightgames.status.*;
+import nightgames.status.Disguised;
+import nightgames.status.Pheromones;
+import nightgames.status.Status;
+import nightgames.status.Stsflag;
 
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class NPC extends Character {
@@ -352,16 +352,6 @@ public class NPC extends Character {
     @Override 
     public String loserLiner(Combat c, Character target) {
         return getRandomLineFor(CharacterLine.LOSER_LINER, c, target);
-    }
-
-    @Override
-    public void handleEnthrall(Consumer<Action> callback) {
-        Character master;
-        master = ((Enthralled) getStatus(Stsflag.enthralled)).master;
-        Move compelled = findPath(master.location.get());
-        if (compelled != null) {
-            callback.accept(compelled);
-        }
     }
 
     @Override

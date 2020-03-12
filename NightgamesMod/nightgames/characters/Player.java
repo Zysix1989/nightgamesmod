@@ -23,7 +23,6 @@ import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
 import nightgames.match.*;
-import nightgames.match.actions.Move;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.skills.*;
 import nightgames.skills.damage.DamageType;
@@ -31,10 +30,8 @@ import nightgames.stance.Behind;
 import nightgames.stance.Neutral;
 import nightgames.stance.Position;
 import nightgames.start.PlayerConfiguration;
-import nightgames.status.Enthralled;
 import nightgames.status.PlayerSlimeDummy;
 import nightgames.status.Status;
-import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
 import java.awt.event.ActionListener;
@@ -278,21 +275,6 @@ public class Player extends Character {
             gui.presentOptions(optionChoices);
             Global.getMatch().pause();
         }
-    }
-
-    @Override
-    public void handleEnthrall(Consumer<Action> callback) {
-        List<Action> actionChoices = new ArrayList<>();
-        Character master;
-        master = ((Enthralled) getStatus(Stsflag.enthralled)).master;
-        if (master != null) {
-            Move compelled = findPath(master.location());
-            gui.message("You feel an irresistible compulsion to head to the <b>" + master.location().name + "</b>");
-            if (compelled != null) {
-                actionChoices.add(compelled);
-            }
-        }
-        presentMoveOptions(actionChoices, callback);
     }
 
     @Override

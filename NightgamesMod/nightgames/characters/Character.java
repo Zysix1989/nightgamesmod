@@ -58,7 +58,6 @@ import nightgames.utilities.ProseUtils;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -1739,8 +1738,6 @@ public Character clone() throws CloneNotSupportedException {
     public abstract boolean act(Combat c, Character target);
 
     public void displayStateMessage(Optional<Trap.Instance> knownTrap) {};
-
-    public abstract void handleEnthrall(Consumer<Action> callback);
 
     /**abstract method for determining if this character is human - meaning the player.
      * TODO: Reccomend renaming to isHuman(), to make more meaningful name and easier to find.*/
