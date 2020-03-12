@@ -32,7 +32,6 @@ import nightgames.stance.Neutral;
 import nightgames.stance.Position;
 import nightgames.status.Status;
 import nightgames.status.*;
-import nightgames.trap.Trap;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -424,15 +423,6 @@ public class NPC extends Character {
                 .reduce(new IntrusionEvaluation(null, Integer.MIN_VALUE),
                         (best, current) -> best.score >= current.score ? best : current);
         bestTarget.option.callback();
-    }
-
-    @Override
-    public void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {
-        if (ai.attack(target.getCharacter())) {
-            attackContinuation.run();
-        } else {
-            location.get().endEncounter();
-        }
     }
 
     @Override

@@ -3,6 +3,8 @@ package nightgames.match;
 import nightgames.characters.Attribute;
 import nightgames.characters.Player;
 import nightgames.global.Global;
+import nightgames.gui.commandpanel.CommandPanelOption;
+import nightgames.trap.Trap;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,5 +31,26 @@ public class HumanIntelligence implements Intelligence {
             }
         }
         character.presentMoveOptions(actionChoices, callback);
+    }
+
+    @Override
+    public void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {
+        character.message("Do you want to take the opportunity to ambush <b>" + target.getCharacter().getName() + "</b>?");
+        character.assessOpponent(target);
+        character.message("<br/>");
+
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
+        options.add(new CommandPanelOption("Attack " + target.getCharacter().getName(),
+                character.encounterOption(() -> {
+                    attackContinuation.run();
+                    Global.getMatch().resume();
+                })));
+        options.add(new CommandPanelOption("Wait",
+                character.encounterOption(() -> {
+                    waitContinuation.run();
+                    Global.getMatch().resume();
+                })));
+        character.gui.presentOptions(options);
+        Global.getMatch().pause();
     }
 }

@@ -192,4 +192,8 @@ public class Participant {
             chal.check(c, victor);
         }
     }
+
+    public Intelligence getIntelligence() {
+        return intelligence;
+    }
 }

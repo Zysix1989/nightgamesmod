@@ -2677,8 +2677,6 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract String challenge(Character other);
 
-    public abstract void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation);
-
     public int lvlBonus(Character opponent) {
         if (opponent.getLevel() > getLevel()) {
             return 12 * (opponent.getLevel() - getLevel());

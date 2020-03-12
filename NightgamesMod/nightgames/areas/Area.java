@@ -1,12 +1,12 @@
 package nightgames.areas;
 
-import nightgames.match.actions.Move;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.match.Action;
 import nightgames.match.Encounter;
 import nightgames.match.Participant;
+import nightgames.match.actions.Move;
 import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
@@ -123,7 +123,7 @@ public class Area implements Serializable {
             if (opponent != targetParticipant) {
                 if (targetParticipant.canStartCombat(opponent) && opponent.canStartCombat(targetParticipant) && fight == null) {
                     fight = new Encounter(opponent, targetParticipant, this);
-                    opponent.getCharacter().promptTrap(
+                    opponent.getIntelligence().promptTrap(
                             targetParticipant,
                             trap,
                             () -> fight.trap(opponent, targetParticipant, trap),

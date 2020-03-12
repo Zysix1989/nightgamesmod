@@ -4,6 +4,7 @@ import nightgames.areas.Area;
 import nightgames.characters.Attribute;
 import nightgames.characters.NPC;
 import nightgames.characters.Trait;
+import nightgames.trap.Trap;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -25,4 +26,15 @@ public class ArtificialIntelligence implements Intelligence {
         var chosenAction = character.ai.move(possibleActions, radar);
         callback.accept(chosenAction);
     }
+
+
+    @Override
+    public void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {
+        if (character.ai.attack(target.getCharacter())) {
+            attackContinuation.run();
+        } else {
+            character.location.get().endEncounter();
+        }
+    }
+
 }

@@ -18,7 +18,6 @@ import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
 import nightgames.status.Slimed;
 import nightgames.status.Status;
-import nightgames.trap.Trap;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -274,9 +273,6 @@ public class PetCharacter extends Character {
     
     @Override
     public void emote(Emotion emo, int amt) {}
-
-    @Override
-    public void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {}
 
     @Override
     public void counterattack(Character target, Tactics type, Combat c) {}

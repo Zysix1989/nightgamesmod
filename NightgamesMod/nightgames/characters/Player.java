@@ -44,7 +44,7 @@ import java.util.stream.Collectors;
 
 public class Player extends Character {
 
-    private GUI gui;
+    public GUI gui;
     int traitPoints;
     private int levelsToGain;
     private boolean skippedFeat;
@@ -217,7 +217,7 @@ public class Player extends Character {
         return null;
     }
 
-    private ActionListener encounterOption(Runnable continuation) {
+    public ActionListener encounterOption(Runnable continuation) {
         return event -> continuation.run();
     }
 
@@ -246,7 +246,7 @@ public class Player extends Character {
         Global.getMatch().pause();
     }
 
-    private void assessOpponent(Participant opponent) {
+    public void assessOpponent(Participant opponent) {
         String arousal;
         String stamina;
         if (get(Attribute.Perception) >= 6) {
@@ -585,26 +585,7 @@ public class Player extends Character {
         return null;
     }
 
-    @Override
-    public void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {
-        gui.message("Do you want to take the opportunity to ambush <b>" + target.getCharacter().getName() + "</b>?");
-        assessOpponent(target);
-        gui.message("<br/>");
 
-        ArrayList<CommandPanelOption> options = new ArrayList<>();
-        options.add(new CommandPanelOption("Attack " + target.getCharacter().getName(),
-                encounterOption(() -> {
-                    attackContinuation.run();
-                    Global.getMatch().resume();
-                })));
-        options.add(new CommandPanelOption("Wait",
-                encounterOption(() -> {
-                    waitContinuation.run();
-                    Global.getMatch().resume();
-                })));
-        gui.presentOptions(options);
-        Global.getMatch().pause();
-    }
 
     @Override
     public void afterParty() {
