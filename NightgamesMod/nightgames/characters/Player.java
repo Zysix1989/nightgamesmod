@@ -1,6 +1,5 @@
 package nightgames.characters;
 
-import nightgames.match.actions.Move;
 import nightgames.areas.Area;
 import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;
@@ -24,6 +23,7 @@ import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
 import nightgames.match.*;
+import nightgames.match.actions.Move;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.skills.*;
 import nightgames.skills.damage.DamageType;
@@ -528,7 +528,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation) {
+    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation) {
         var listOptions = new ArrayList<>(intrusionOptions);
         assert listOptions.size() == 2: "No support for more than 2 combatants";
         gui.message("You find <b>" + listOptions.get(0).getTargetCharacter().getName() + "</b> and <b>" + listOptions.get(1).getTargetCharacter().getName()
@@ -544,7 +544,7 @@ public class Player extends Character {
         options.addAll(possibleMoves.stream()
                 .map(move -> new CommandPanelOption("Move (" + move.getDestination() + ")",
                         event -> {
-                            actionCallback.execute(move);
+                            actionCallback.accept(move);
                             Global.getMatch().resume();
                         }))
                 .collect(Collectors.toSet()));

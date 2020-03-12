@@ -3,10 +3,6 @@ package nightgames.characters;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import nightgames.match.actions.Move;
-import nightgames.match.actions.UseBeer;
-import nightgames.match.actions.UseEnergyDrink;
-import nightgames.match.actions.UseLubricant;
 import nightgames.areas.Area;
 import nightgames.areas.DescriptionModule;
 import nightgames.beans.Property;
@@ -39,6 +35,10 @@ import nightgames.match.Action;
 import nightgames.match.Encounter;
 import nightgames.match.Match;
 import nightgames.match.Participant;
+import nightgames.match.actions.Move;
+import nightgames.match.actions.UseBeer;
+import nightgames.match.actions.UseEnergyDrink;
+import nightgames.match.actions.UseLubricant;
 import nightgames.pet.PetCharacter;
 import nightgames.pet.arms.ArmManager;
 import nightgames.skills.*;
@@ -1761,7 +1761,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract String taunt(Combat c, Character target);
 
-    public abstract void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation);
+    public abstract void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation);
 
     public abstract void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation);
 

@@ -1,6 +1,5 @@
 package nightgames.pet;
 
-import nightgames.match.actions.Move;
 import nightgames.characters.Character;
 import nightgames.characters.*;
 import nightgames.characters.body.BodyPart;
@@ -12,6 +11,7 @@ import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.match.Action;
 import nightgames.match.Encounter;
 import nightgames.match.Participant;
+import nightgames.match.actions.Move;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
@@ -274,7 +274,7 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation) { }
+    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation) { }
 
     @Override
     public void showerScene(Participant target, Runnable ambushContinuation, Runnable stealContinuation, Runnable aphrodisiacContinuation, Runnable waitContinuation) {}

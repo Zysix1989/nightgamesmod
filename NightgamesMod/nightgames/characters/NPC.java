@@ -1,6 +1,5 @@
 package nightgames.characters;
 
-import nightgames.match.actions.Move;
 import nightgames.areas.Area;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.StraponPart;
@@ -22,6 +21,7 @@ import nightgames.match.Action;
 import nightgames.match.Encounter;
 import nightgames.match.Match;
 import nightgames.match.Participant;
+import nightgames.match.actions.Move;
 import nightgames.pet.arms.ArmManager;
 import nightgames.pet.arms.ArmType;
 import nightgames.skills.Nothing;
@@ -429,7 +429,7 @@ public class NPC extends Character {
         }
     }
     @Override
-    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Participant.ActionCallback actionCallback, Runnable neitherContinuation) {
+    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation) {
         var bestTarget = intrusionOptions.stream()
                 .map(option -> new IntrusionEvaluation(option,
                                 Global.random(20) +
