@@ -1743,9 +1743,6 @@ public Character clone() throws CloneNotSupportedException {
 
     public void displayStateMessage(Optional<Trap.Instance> knownTrap) {};
 
-    public abstract void move(Collection<Action> possibleActions,
-                              Consumer<Action> callback);
-
     public abstract void handleEnthrall(Consumer<Action> callback);
 
     /**abstract method for determining if this character is human - meaning the player.

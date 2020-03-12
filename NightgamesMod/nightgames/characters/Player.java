@@ -299,8 +299,8 @@ public class Player extends Character {
         Global.getMatch().pause();
     }
 
-    private void presentMoveOptions(Collection<Action> actionChoices,
-                                    Consumer<Action> callback) {
+    public void presentMoveOptions(Collection<Action> actionChoices,
+                                   Consumer<Action> callback) {
         var optionChoices = actionChoices.stream()
                 .map(action -> new CommandPanelOption(
                         action.toString(),
@@ -340,22 +340,6 @@ public class Player extends Character {
         }
         gui.message(location.get().getDescriptions().whereAmI() + "<br/><br/>");
         knownTrap.ifPresent(trap -> gui.message("You've set a " + trap.getName() + " here."));
-    }
-
-    @Override
-    public void move(Collection<Action> possibleActions,
-                     Consumer<Action> callback) {
-        var actionChoices = new ArrayList<Action>();
-        location.get().noisyNeighbors(get(Attribute.Perception)).forEach(room -> {
-            gui.message("You hear something in the <b>" + room.name + "</b>.");
-            room.setPinged(true);
-        });
-        for (Action act : possibleActions) {
-            if (Global.getMatch().getCondition().allowAction(act, this, Global.getMatch())) {
-                actionChoices.add(act);
-            }
-        }
-        presentMoveOptions(actionChoices, callback);
     }
 
     @Override

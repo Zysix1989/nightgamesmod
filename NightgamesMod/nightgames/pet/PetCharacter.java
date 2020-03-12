@@ -165,11 +165,6 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void move(Collection<Action> possibleActions, Consumer<Action> callback) {
-
-    }
-
-    @Override
     public void handleEnthrall(Consumer<Action> callback) {
 
     }

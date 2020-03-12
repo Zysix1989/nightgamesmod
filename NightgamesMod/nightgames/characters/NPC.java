@@ -1,6 +1,5 @@
 package nightgames.characters;
 
-import nightgames.areas.Area;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.StraponPart;
 import nightgames.characters.custom.CharacterLine;
@@ -363,17 +362,6 @@ public class NPC extends Character {
         if (compelled != null) {
             callback.accept(compelled);
         }
-    }
-
-    @Override
-    public void move(Collection<Action> possibleActions,
-                     Consumer<Action> callback) {
-        HashSet<Area> radar = new HashSet<>();
-        if (!has(Trait.immobile)) {
-            radar.addAll(location.get().noisyNeighbors(get(Attribute.Perception)));
-        }
-        var chosenAction = ai.move(possibleActions, radar);
-        callback.accept(chosenAction);
     }
 
     @Override

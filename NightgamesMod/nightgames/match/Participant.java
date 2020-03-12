@@ -110,7 +110,7 @@ public class Participant {
         }
         if (state.allowsNormalActions()) {
             if (character.location.get().encounter(this)) {
-                character.move(possibleActions, callback);
+                intelligence.move(possibleActions, callback);
             }
         }
     }
