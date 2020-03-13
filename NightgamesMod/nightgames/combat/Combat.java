@@ -61,6 +61,12 @@ public class Combat {
 
     public static class State implements Participant.State {
         private int delayRounds = 2;
+        private final Combat combat;
+
+        public State(Combat combat) {
+            this.combat = combat;
+        }
+
 
         @Override
         public boolean allowsNormalActions() {
@@ -69,8 +75,8 @@ public class Combat {
 
         @Override
         public void move(Participant p) {
-            if (--delayRounds <= 0 && !p.getLocation().fight.getCombat().isEnded()) {
-                p.getLocation().fight.battle();
+            if (--delayRounds <= 0 && !combat.isEnded()) {
+                combat.go();
             } else {
                 Global.getMatch().resume();
             }
@@ -487,8 +493,8 @@ public class Combat {
         processedEnding = false;
         timer = 0;
         images = new HashMap<String, String>();
-        this.p1.getParticipant().state = new State();
-        this.p2.getParticipant().state = new State();
+        this.p1.getParticipant().state = new State(this);
+        this.p2.getParticipant().state = new State(this);
         postCombatScenesSeen = 0;
         otherCombatants = new ArrayList<>();
         wroteMessage = false;

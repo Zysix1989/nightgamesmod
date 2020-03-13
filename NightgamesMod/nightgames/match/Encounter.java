@@ -299,10 +299,6 @@ public class Encounter {
         fight.intervene(intruder, assist);
     }
 
-    public void battle() {
-        fight.go();
-    }
-
     public Combat getCombat() {
         return fight;
     }
