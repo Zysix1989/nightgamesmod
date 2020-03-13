@@ -109,7 +109,7 @@ public class Area implements Serializable {
                 if (opponent != p
                         // && Global.getMatch().canEngage(p, opponent)
                 ) {
-                    fight = new Encounter(p, opponent, this);
+                    var fight = new Encounter(p, opponent, this);
                     return fight.spotCheck();
                 }
             }

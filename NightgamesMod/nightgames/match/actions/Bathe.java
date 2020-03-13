@@ -169,7 +169,6 @@ public final class Bathe extends Action {
         target.getCharacter().nudify();
         var targetState = (Bathe.State) target.state;
         targetState.stealClothes();
-        thief.getLocation().endEncounter();
     }
 
     private void aphrodisiactrick(Participant attacker, Participant target) {
@@ -194,8 +193,6 @@ public final class Bathe extends Action {
         attacker.getCharacter().tempt(20);
         attacker.incrementScore(attacker.pointsForVictory(target), "for an underhanded win");
         attacker.state = new Action.Ready();
-
-        attacker.getLocation().endEncounter();
     }
 
     /** Returns null if no message is to be sent */

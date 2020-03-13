@@ -141,7 +141,6 @@ public class Spiderweb extends Trap {
         attacker.incrementScore(attacker.pointsForVictory(victim), "for a devious victory");
         attacker.state = new Action.Ready();
 
-        victim.getLocation().endEncounter();
         victim.getLocation().clearTrap();
     }
     

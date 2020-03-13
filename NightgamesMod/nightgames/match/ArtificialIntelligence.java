@@ -37,8 +37,6 @@ public class ArtificialIntelligence implements Intelligence {
     public void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {
         if (character.ai.attack(target.getCharacter())) {
             attackContinuation.run();
-        } else {
-            character.location.get().endEncounter();
         }
     }
 

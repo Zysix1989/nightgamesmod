@@ -94,7 +94,7 @@ public class Encounter {
     }
 
     public void spy(Participant attacker, Participant victim) {
-        attacker.getIntelligence().spy(victim, () -> ambush(attacker, victim), () -> location.endEncounter());
+        attacker.getIntelligence().spy(victim, () -> ambush(attacker, victim), () -> {});
     }
 
     protected void eligibleSpotCheck() {
@@ -125,12 +125,9 @@ public class Encounter {
                     () -> fightOrFlight(p2, false, Optional.empty()),
                     () -> fightOrFlight(p2, false, Optional.of(smokeMessage(p2.getCharacter()))));
         } else if (p2_sees_p1) {
-            p2.getIntelligence().spy(p1, () -> ambush(p2, p1), () -> location.endEncounter());
+            p2.getIntelligence().spy(p1, () -> ambush(p2, p1), () -> {});
         } else if (p1_sees_p2) {
-            p1.getIntelligence().spy(p2, () -> ambush(p1, p2), () -> location.endEncounter());
-        } else {
-            // Ships passing in the night :(
-            location.endEncounter();
+            p1.getIntelligence().spy(p2, () -> ambush(p1, p2), () -> {});
         }
     }
 
@@ -147,7 +144,6 @@ public class Encounter {
         } else {
             p2.state.ineligibleCombatReplacement(p2, p1).orElse(() -> ineligibleMessages(p2, p1)).run();
         }
-        location.endEncounter();
     }
 
     /**
@@ -192,6 +188,7 @@ public class Encounter {
         }
         p1.getCharacter().notifyCombatStart(fight, p2.getCharacter());
         p2.getCharacter().notifyCombatStart(fight, p1.getCharacter());
+        this.location.fight = this;
         return this.fight;
     }
     
@@ -211,7 +208,6 @@ public class Encounter {
         if (fleerGuaranteed.isPresent()) {
             fleer.getCharacter().message(fleerGuaranteed.get());
             p2.flee();
-            location.endEncounter();
             return;
         }
 
@@ -219,7 +215,6 @@ public class Encounter {
         if (rollFightVsFlee(fighter.getCharacter(), fleer.getCharacter())) {
             fighter.getCharacter().message(fleer.getCharacter().getName() + " dashes away before you can move.");
             fleer.flee();
-            location.endEncounter();
         } else {
             fighter.getCharacter().message(String.format(
                     "%s tries to run, but you stay right on %s heels and catch %s.",
@@ -255,7 +250,6 @@ public class Encounter {
             p1.getCharacter().message(p2.getCharacter().getName() + " dashes away before you can move.");
             p2.flee();
         }
-        location.endEncounter();
     }
 
     public void ambush(Participant attacker, Participant target) {
@@ -295,7 +289,6 @@ public class Encounter {
         target.invalidateAttacker(attacker);
         target.getCharacter().getArousal().renew();
         target.state = new Action.Ready();
-        location.endEncounter();
     }
 
     public void spider(Participant attacker, Participant target) {
