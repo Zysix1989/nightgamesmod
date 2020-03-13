@@ -1,10 +1,6 @@
 package nightgames.status;
 
-import java.util.Optional;
-import java.util.function.Function;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
@@ -14,6 +10,9 @@ import nightgames.stance.Stance;
 import nightgames.stance.StandingOver;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.AddictionType;
+
+import java.util.Optional;
+import java.util.function.Function;
 
 public class DarkChaos extends Status {
 
@@ -38,8 +37,6 @@ public class DarkChaos extends Status {
 
     @Override
     public void tick(Combat c) {
-        if (c == null)
-            return;
         float odds = affected.getAddiction(AddictionType.CORRUPTION).map(Addiction::getMagnitude).orElse(0f)
                         / 4;
         if (odds > Math.random()) {

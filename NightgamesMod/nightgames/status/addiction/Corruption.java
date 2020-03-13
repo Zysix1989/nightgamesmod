@@ -1,33 +1,20 @@
 package nightgames.status.addiction;
 
 import com.google.gson.JsonObject;
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.BodyPart;
-import nightgames.characters.body.CockPart;
+import nightgames.characters.body.*;
 import nightgames.characters.body.CockPart.Size;
-import nightgames.characters.body.GenericBodyPart;
-import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.TailPart;
 import nightgames.characters.body.mods.DemonicTailMod;
 import nightgames.characters.body.mods.DemonicWingsMod;
 import nightgames.characters.body.mods.catcher.DemonicMod;
 import nightgames.characters.body.mods.pitcher.IncubusCockMod;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
-import nightgames.status.Abuff;
-import nightgames.status.Compulsion;
-import nightgames.status.Converted;
-import nightgames.status.DarkChaos;
-import nightgames.status.Status;
-import nightgames.status.Stsflag;
+import nightgames.status.*;
+
+import java.util.*;
 
 public class Corruption extends Addiction {
     public Corruption(Character affected, Character cause, float magnitude) {
@@ -41,10 +28,6 @@ public class Corruption extends Addiction {
     @Override
     public void tick(Combat c) {
         super.tick(c);
-        if (c == null && Global.random(100) < 66) {
-            // if you aren't in combat, just apply corrupt 1/3rd of the time.
-            return;
-        }
         Severity sev = getCombatSeverity();
         int amt = sev.ordinal() * 2;
         if (cause.has(Trait.Subversion) && affected.is(Stsflag.charmed)) {

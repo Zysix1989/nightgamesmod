@@ -1,9 +1,6 @@
 package nightgames.status;
 
 import com.google.gson.JsonObject;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
@@ -15,6 +12,10 @@ import nightgames.skills.FootWorship;
 import nightgames.skills.Masturbate;
 import nightgames.stance.Engulfed;
 import nightgames.stance.Kneeling;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 public class Parasited extends Status {
     private Character other;
@@ -60,9 +61,6 @@ public class Parasited extends Status {
 
     @Override
     public void tick(Combat c) {
-        if (c == null) {
-            return;
-        }
         if (time >= 3) {
             if (stage < 3) {
                 stage = 3;

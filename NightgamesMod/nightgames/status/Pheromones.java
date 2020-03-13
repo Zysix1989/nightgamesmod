@@ -1,12 +1,6 @@
 package nightgames.status;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
@@ -14,6 +8,11 @@ import nightgames.characters.Trait;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.skills.damage.DamageType;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Pheromones extends Horny {
     static List<Attribute> NON_DEBUFFABLE_ATTS = Arrays.asList(
@@ -63,14 +62,14 @@ public class Pheromones extends Horny {
                 Optional<Attribute> att = Global.pickRandom(debuffable);
                 String message = Global.format("{other:NAME-POSSESSIVE} intoxicating aroma is messing with {self:name-possessive} head, "
                                 + "{self:pronoun-action:feel|seems} %s than before.", affected, sourceCharacter, att.get().getLowerPhrase());
-                if (c != null && att.isPresent()) {
+                if (att.isPresent()) {
                     c.write(affected, message);
                 } else {
                     Global.gui().message(message);                
                 }
                 affected.add(c, new Abuff(affected, att.get(), -1, 10));
             }
-            if (c != null && sourceCharacter.has(Trait.FrenzyScent)) {
+            if (sourceCharacter.has(Trait.FrenzyScent)) {
                 if (Global.random(13 - stacks) == 0) {
                     String message;
                     if (affected.human()) {

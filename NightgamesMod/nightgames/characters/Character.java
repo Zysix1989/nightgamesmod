@@ -1274,7 +1274,6 @@ public Character clone() throws CloneNotSupportedException {
 
     public void tick(Combat c) {            
         body.tick(c);
-        status.stream().collect(Collectors.toList()).forEach(s -> s.tick(c));
         countdown(temporaryAddedTraits);
         countdown(temporaryRemovedTraits);
     }
@@ -2384,6 +2383,7 @@ public Character clone() throws CloneNotSupportedException {
     public void endOfCombatRound(Combat c, Character opponent) {
         dropStatus(c, opponent);
         tick(c);
+        status.forEach(s -> s.tick(c));
         List<String> removed = new ArrayList<>();
         for (String s : cooldowns.keySet()) {
             if (cooldowns.get(s) <= 1) {
@@ -2557,7 +2557,8 @@ public Character clone() throws CloneNotSupportedException {
 
     public void endOfMatchRound() {
         regen();
-        tick(null);                     //FIXME: This is the culprit of the Addiction NPE outside of combat. Nulls are not handled by methods used within tick and Addiction.tick()
+        tick(null);
+        status.forEach(Status::afterMatchRound);
         if (has(Trait.Confident)) {
             willpower.recover(10);
             mojo.deplete(5);

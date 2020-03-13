@@ -1,11 +1,6 @@
 package nightgames.status.addiction;
 
-import java.util.Optional;
-
-import javax.naming.OperationNotSupportedException;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
@@ -18,6 +13,9 @@ import nightgames.stance.Stance;
 import nightgames.status.CrisisOfFaith;
 import nightgames.status.DivineCharge;
 import nightgames.status.Status;
+
+import javax.naming.OperationNotSupportedException;
+import java.util.Optional;
 
 public class ZealAddiction extends Addiction {
 
@@ -70,8 +68,7 @@ public class ZealAddiction extends Addiction {
     @Override
     public void tick(Combat c) {
         super.tick(c);
-        if (c != null && (c.getStance().en == Stance.neutral || c.getStance().en == Stance.behind)
-                        && Global.randomdouble() < Math.min(.5f, combatMagnitude / 2.0)) {
+        if ((c.getStance().en == Stance.neutral || c.getStance().en == Stance.behind) && Global.randomdouble() < Math.min(.5f, combatMagnitude / 2.0)) {
             c.write(affected, "Overcome by your desire to serve " + cause.getName() + ", you get on the ground "
                             + "and prostrate yourself in front of " + cause.objectPronoun() + ".");
             boolean behindPossible = cause.hasDick();

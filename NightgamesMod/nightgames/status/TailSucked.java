@@ -1,9 +1,6 @@
 package nightgames.status;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
@@ -12,6 +9,8 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.skills.TailSuck;
 import nightgames.skills.damage.DamageType;
+
+import java.util.Optional;
 
 public class TailSucked extends Status implements InsertedStatus {
 
@@ -51,7 +50,7 @@ public class TailSucked extends Status implements InsertedStatus {
     public void tick(Combat c) {
         BodyPart cock = affected.body.getRandomCock();
         BodyPart tail = sucker.body.getRandom(TailPart.TYPE);
-        if (cock == null || tail == null || c == null) {
+        if (cock == null || tail == null) {
             affected.removelist.add(this);
             return;
         }

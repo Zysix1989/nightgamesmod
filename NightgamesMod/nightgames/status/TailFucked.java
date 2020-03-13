@@ -1,11 +1,6 @@
 package nightgames.status;
 
-import static nightgames.requirements.RequirementShortcuts.eitherinserted;
-
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
@@ -13,6 +8,10 @@ import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.TailPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
+
+import java.util.Optional;
+
+import static nightgames.requirements.RequirementShortcuts.eitherinserted;
 
 public class TailFucked extends Status implements InsertedStatus {
     private String target;
@@ -66,7 +65,7 @@ public class TailFucked extends Status implements InsertedStatus {
     public void tick(Combat c) {
         BodyPart hole = affected.body.getRandom(target);
         BodyPart tail = other.body.getRandom(TailPart.TYPE);
-        if (hole == null || tail == null || c == null) {
+        if (hole == null || tail == null) {
             affected.removelist.add(this);
             return;
         }

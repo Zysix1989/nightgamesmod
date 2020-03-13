@@ -161,4 +161,6 @@ public abstract class Status implements Cloneable {
     public Predicate<Action> makeAllowedActionsPredicate(Participant bearer) {
         return action -> true;
     }
+
+    public void afterMatchRound() {}
 }

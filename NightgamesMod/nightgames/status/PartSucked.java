@@ -1,9 +1,6 @@
 package nightgames.status;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
@@ -11,6 +8,8 @@ import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.json.JsonUtils;
+
+import java.util.Optional;
 
 public class PartSucked extends Status implements InsertedStatus {
     private String target;
@@ -66,7 +65,7 @@ public class PartSucked extends Status implements InsertedStatus {
     @Override
     public void tick(Combat c) {
         BodyPart stick = affected.body.getRandom(target);
-        if (stick == null || penetrated == null || c == null) {
+        if (stick == null || penetrated == null) {
             affected.removelist.add(this);
             return;
         }

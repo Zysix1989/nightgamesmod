@@ -27,19 +27,24 @@ public class RoboWebbed extends Bound {
 
     @Override
     public void tick(Combat c) {
-        int dmg = (int) (affected.getArousal().max() * .25);
         // Message handled in describe
-        if (c == null && trap.isPresent()) {
-            if (affected.human()) {
-                Global.gui().message(Global.format("{self:SUBJECT-ACTION:are|is} hopelessly tangled up in"
-                                + " synthetic webbing, which is sending pleasurable sensations"
-                                + " through {self:possessive} entire body.", affected, Global.noneCharacter()));
-            }
-            affected.tempt(dmg);
-            affected.location().opportunity(affected, trap.get());
-        } else {
-            affected.temptNoSkillNoTempter(c, dmg);
+        affected.temptNoSkillNoTempter(c, arousalInflicted());
+    }
+
+    @Override
+    public void afterMatchRound() {
+        super.afterMatchRound();
+        if (affected.human()) {
+            Global.gui().message(Global.format("{self:SUBJECT-ACTION:are|is} hopelessly tangled up in"
+                    + " synthetic webbing, which is sending pleasurable sensations"
+                    + " through {self:possessive} entire body.", affected, Global.noneCharacter()));
         }
+        affected.tempt(arousalInflicted());
+        affected.location().opportunity(affected, trap.orElseThrow());
+    }
+
+    private int arousalInflicted() {
+        return (int) (affected.getArousal().max() * .25);
     }
 
     @Override

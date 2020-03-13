@@ -1,9 +1,6 @@
 package nightgames.status;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -15,6 +12,8 @@ import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.AddictionType;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
+
+import java.util.Optional;
 
 public class DivineCharge extends Status {
     public double magnitude;
@@ -44,15 +43,13 @@ public class DivineCharge extends Status {
 
     @Override
     public void tick(Combat c) {
-        if (c != null) {
-            Character opponent = c.getOpponentCharacter(affected);
-            if (!c.getStance().havingSex(c, affected) && !(affected.has(Trait.zealinspiring)
-                            && !opponent.getAddiction(AddictionType.ZEAL).map(Addiction::isInWithdrawal).orElse(false))) {
-                magnitude = magnitude / 2;
-                c.write(affected, "The holy energy seeps out of " + affected.nameDirectObject() + ".");
-                if (magnitude < .05f)
-                    affected.removelist.add(this);
-            }
+        Character opponent = c.getOpponentCharacter(affected);
+        if (!c.getStance().havingSex(c, affected) && !(affected.has(Trait.zealinspiring)
+                && !opponent.getAddiction(AddictionType.ZEAL).map(Addiction::isInWithdrawal).orElse(false))) {
+            magnitude = magnitude / 2;
+            c.write(affected, "The holy energy seeps out of " + affected.nameDirectObject() + ".");
+            if (magnitude < .05f)
+                affected.removelist.add(this);
         }
     }
 
