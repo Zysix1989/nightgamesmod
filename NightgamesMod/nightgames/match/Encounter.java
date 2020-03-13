@@ -295,10 +295,6 @@ public class Encounter {
         Spiderweb.onSpiderwebDefeat(attacker, target, location.getTrap().orElseThrow());
     }
 
-    public void intrude(Participant intruder, Participant assist) {
-        fight.intrude(intruder, assist);
-    }
-
     public Combat getCombat() {
         return fight;
     }
@@ -339,7 +335,7 @@ public class Encounter {
         }
 
         public void callback() {
-            intrude(intruder, target);
+            fight.intrude(intruder, target);
         }
 
         public Combat getRelevantCombat() {
