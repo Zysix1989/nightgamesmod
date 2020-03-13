@@ -131,8 +131,6 @@ public class Combat {
 
         @Override
         public boolean turn(Combat c) {
-            c.wroteMessage = false;
-            c.message = "";
             c.timer += 1;
             Character player;
             Character other;
@@ -143,6 +141,7 @@ public class Combat {
                 player = c.p2.getCharacter();
                 other = c.p1.getCharacter();
             }
+            c.wroteMessage = false;
             c.message = c.describe(player, other);
             if (!c.shouldAutoresolve() && !Global.checkFlag(Flag.noimage)) {
                 Global.gui()
