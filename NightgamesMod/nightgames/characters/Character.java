@@ -4137,4 +4137,6 @@ public Character clone() throws CloneNotSupportedException {
     public void sendDrawMessage(Combat c, Result flag) {}
 
     public abstract Intelligence makeIntelligence();
+
+    public void notifyStanceImage(String path, String artist) {};
 }

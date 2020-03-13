@@ -825,4 +825,9 @@ public class Player extends Character {
     public Intelligence makeIntelligence() {
         return new HumanIntelligence(this);
     }
+
+    @Override
+    public void notifyStanceImage(String path, String artist) {
+        gui.displayImage(path, artist);
+    }
 }

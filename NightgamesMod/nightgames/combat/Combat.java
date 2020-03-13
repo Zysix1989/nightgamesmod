@@ -1588,9 +1588,8 @@ public class Combat {
 
     public void offerImage(String path, String artist) {
         imagePath = path;
-        if (!imagePath.isEmpty() && !cloned && isBeingObserved()) {
-            Global.gui()
-                  .displayImage(imagePath, images.get(imagePath));
+        if (!imagePath.isEmpty() && !cloned) {
+            watchers.forEach(w -> w.notifyStanceImage(imagePath, images.get(imagePath)));
         }
     }
 
