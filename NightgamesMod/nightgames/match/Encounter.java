@@ -341,6 +341,10 @@ public class Encounter {
         public void callback() {
             intrude(intruder, target);
         }
+
+        public Combat getRelevantCombat() {
+            return fight;
+        }
     }
 
     public Set<IntrusionOption> getCombatIntrusionOptions(Participant intruder) {

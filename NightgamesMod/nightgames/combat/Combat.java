@@ -1452,7 +1452,6 @@ public class Combat {
         if (!(p1.getCharacter().human() || p2.getCharacter().human() || intruderCharacter.human())) {
             end();
         } else {
-            Global.gui().watchCombat(this);
             resumeNoClearFlag();
         }
     }

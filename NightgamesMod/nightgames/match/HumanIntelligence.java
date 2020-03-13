@@ -146,7 +146,10 @@ public class HumanIntelligence implements Intelligence {
 
         ArrayList<CommandPanelOption> options = listOptions.stream()
                 .map(option -> new CommandPanelOption("Help " + option.getTargetCharacter().getName(),
-                        event -> option.callback()))
+                        event -> {
+                            character.gui.watchCombat(option.getRelevantCombat());
+                            option.callback();
+                        }))
                 .collect(Collectors.toCollection(ArrayList::new));
         options.add(new CommandPanelOption("Watch them fight", event -> neitherContinuation.run()));
         options.addAll(possibleMoves.stream()
