@@ -1408,7 +1408,7 @@ public class Combat {
         phase.next(this);
     }
 
-    public void intervene(Participant intruder, Participant assist) {
+    public void intrude(Participant intruder, Participant assist) {
         Combatant target;
         if (p1.getParticipant() == assist) {
             target = p2;

@@ -296,7 +296,7 @@ public class Encounter {
     }
 
     public void intrude(Participant intruder, Participant assist) {
-        fight.intervene(intruder, assist);
+        fight.intrude(intruder, assist);
     }
 
     public Combat getCombat() {
