@@ -479,6 +479,7 @@ public class Combat {
     private int postCombatScenesSeen;
     private boolean wroteMessage;
     private boolean cloned;
+    private Set<Character> watchers = new HashSet<>();
 
     String imagePath = "";
 
@@ -1764,8 +1765,9 @@ public class Combat {
         return beingObserved;
     }
 
-    public void setBeingObserved(boolean beingObserved) {
-        this.beingObserved = beingObserved;
+    public void addWatcher(Character c) {
+        watchers.add(c);
+        this.beingObserved = true;
     }
     
     public boolean shouldPrintReceive(Character ch, Combat c) {

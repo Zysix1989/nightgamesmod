@@ -812,7 +812,7 @@ public class Player extends Character {
     public void notifyCombatStart(Combat c, Character opponent) {
         super.notifyCombatStart(c, opponent);
         assert opponent instanceof NPC: opponent.toString();
-        c.setBeingObserved(true);
+        c.addWatcher(this);
         gui.beginCombat(c, (NPC) opponent);
     }
 

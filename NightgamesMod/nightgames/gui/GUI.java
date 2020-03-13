@@ -218,7 +218,7 @@ public class GUI extends JFrame implements Observer {
     // Combat spectate ???
     public void watchCombat(Combat c) {
         combat = c;
-        c.setBeingObserved(true);
+        c.addWatcher(Global.getPlayer());
     }
 
     public void populatePlayer(Player player) {
