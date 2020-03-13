@@ -130,33 +130,28 @@ public class Parasited extends Status {
         } else if (time >= 2) {
             if (stage < 2) {
                 stage = 2;
-                if (!c.shouldAutoresolve())
-                Global.gui().message(affected,
+                c.write(affected,
                                 Global.format("The parasite inside {self:subject} starts moving again. After a long journey, it has somehow reached inside {self:possessive} skull. Even though that part of {self:possessive} body should have no nerves, {self:pronoun-action:swear|swears} {self:pronoun} can feel its cold pseudopods integrating themselves with {self:possessive} brain.",
                                 affected, other));
             }
-            if (!c.shouldAutoresolve())
-                Global.gui().message(affected,
+            c.write(affected,
                                 Global.format("{self:NAME-POSSESSIVE} thoughts slow down even further. It's becoming difficult to remember why {self:pronoun-action:are|is} even fighting in the first place.",
                                                 affected, other));
             affected.loseWillpower(c, 2);
         } else if (time >= 1) {
             if (stage < 1) {
                 stage = 1;
-                if (!c.shouldAutoresolve())
-                Global.gui().message(affected,
+                c.write(affected,
                                 Global.format("The slimey parasite inside {self:name-possessive} starts moving again. {self:PRONOUN} can feel it crawling through {self:possessive} head.",
                                                 affected, other));
             }
-            if (!c.shouldAutoresolve())
-            Global.gui().message(affected,
+            c.write(affected,
                             Global.format("{self:NAME-POSSESSIVE} thoughts slow down. Somehow the parasite is sapping {self:possessive} will to fight.",
                                             affected, other));
             affected.loseWillpower(c, 1);
         } else {
-            if (!c.shouldAutoresolve())
-            Global.gui().message(affected, Global.format("A part of {other:name-possessive} slime is lodged inside {self:name-possessive} head. It doesn't feel too uncomfortable, but {self:pronoun-action:are|is} scared of the implications.",
-                            affected, other));
+            c.write(affected, Global.format("A part of {other:name-possessive} slime is lodged inside {self:name-possessive} head. It doesn't feel too uncomfortable, but {self:pronoun-action:are|is} scared of the implications.",
+                    affected, other));
             affected.emote(Emotion.desperate, 5);
             affected.emote(Emotion.nervous, 5);
         }
