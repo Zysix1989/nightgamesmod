@@ -359,7 +359,8 @@ public class NPC extends Character {
         level++;
         ai.ding(this);
         if (c != null && c.isBeingObserved()) {
-            Global.writeIfCombatUpdateImmediately(c, this, Global.format("{self:subject-action:have} leveled up!", this, this));
+            Global.writeIfCombat(c, this, Global.format("{self:subject-action:have} leveled up!", this, this));
+            Global.updateIfCombat(c);
         }
     }
 

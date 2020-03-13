@@ -3,9 +3,6 @@ package nightgames.global;
 import com.google.gson.*;
 import com.google.gson.stream.JsonWriter;
 import nightgames.Resources.ResourceLoader;
-import nightgames.match.actions.Masturbate;
-import nightgames.match.actions.Wait;
-import nightgames.match.actions.*;
 import nightgames.characters.Character;
 import nightgames.characters.*;
 import nightgames.characters.body.BodyPart;
@@ -25,6 +22,9 @@ import nightgames.json.JsonUtils;
 import nightgames.match.Action;
 import nightgames.match.Match;
 import nightgames.match.MatchType;
+import nightgames.match.actions.Masturbate;
+import nightgames.match.actions.Wait;
+import nightgames.match.actions.*;
 import nightgames.modifier.CustomModifierLoader;
 import nightgames.modifier.Modifier;
 import nightgames.modifier.standard.*;
@@ -1582,8 +1582,8 @@ public class Global {
     public static void setTraitRequirements(TraitTree traitRequirements) {
         Global.traitRequirements = traitRequirements;
     }
-    public static void writeIfCombatUpdateImmediately(Combat c, Character self, String string) {
-        writeIfCombat(c, self, string);
+
+    public static void updateIfCombat(Combat c) {
         if (c != null) {
             c.updateMessage();
         }

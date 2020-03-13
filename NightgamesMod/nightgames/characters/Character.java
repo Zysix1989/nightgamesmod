@@ -1336,7 +1336,9 @@ public Character clone() throws CloneNotSupportedException {
 
     public void modAttributeDontSaveData(Attribute a, int i, boolean silent) {
         if (human() && i != 0 && !silent && cloned == 0) {
-            Global.writeIfCombatUpdateImmediately(Global.gui().combat, this, "You have " + (i > 0 ? "gained" : "lost") + " " + Math.abs(i) + " " + a.name());
+            Global.writeIfCombat(Global.gui().combat, this,
+                    "You have " + (i > 0 ? "gained" : "lost") + " " + Math.abs(i) + " " + a.name());
+            Global.updateIfCombat(Global.gui().combat);
         }
         if (a.equals(Attribute.Willpower)) {
             getWillpower().gain(i * 2);
