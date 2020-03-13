@@ -3382,7 +3382,7 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public boolean checkLoss(Combat c) {
-        return (orgasmed || c.getTimer() > 150) && willpower.isAtUnfavorableExtreme() && !this.human();
+        return (orgasmed || c.getTimer() > 150) && willpower.isAtUnfavorableExtreme();
     }
 
     public boolean isCustomNPC() {
