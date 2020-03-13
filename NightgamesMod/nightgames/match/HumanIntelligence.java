@@ -170,10 +170,8 @@ public class HumanIntelligence implements Intelligence {
                             callback.accept(action);
                             Global.getMatch().resume();
                         })).collect(Collectors.toList());
-        if (!optionChoices.isEmpty()) {
-            // Otherwise someone else is going to provide choices
-            character.gui.presentOptions(optionChoices);
-            Global.getMatch().pause();
-        }
+        assert !optionChoices.isEmpty();
+        character.gui.presentOptions(optionChoices);
+        Global.getMatch().pause();
     }
 }
