@@ -1286,8 +1286,7 @@ public class Combat {
         if (text.isEmpty()) {
             return;
         }
-        String added = message + "<br/>" + text;
-        message = added;
+        message = message + "<br/>" + text;
         wroteMessage = true;
     }
 
