@@ -94,7 +94,7 @@ public class Area implements Serializable {
     }
 
     /**
-     * Returns true if normal actions should be provided
+     * Returns true if we took control of the turn
      */
     public boolean encounter(Participant p) {
         // We can't run encounters if a fight is already occurring.
@@ -102,7 +102,7 @@ public class Area implements Serializable {
             var intrusionOptions = fight.getCombatIntrusionOptions(p);
             if (!intrusionOptions.isEmpty()) {
                 p.intrudeInCombat(intrusionOptions, () -> fight.watch());
-                return false;
+                return true;
             }
         } else if (present.size() > 1) {
             for (Participant opponent : present) {          //FIXME: Currently - encounters repeat - Does this check if they are busy?
@@ -110,11 +110,11 @@ public class Area implements Serializable {
                         // && Global.getMatch().canEngage(p, opponent)
                 ) {
                     fight = new Encounter(p, opponent, this);
-                    return !fight.spotCheck();
+                    return fight.spotCheck();
                 }
             }
         }
-        return true;
+        return false;
     }
 
     public boolean opportunity(Character target, Trap.Instance trap) {
@@ -122,7 +122,6 @@ public class Area implements Serializable {
         for (Participant opponent : present) {
             if (opponent != targetParticipant) {
                 if (targetParticipant.canStartCombat(opponent) && opponent.canStartCombat(targetParticipant) && fight == null) {
-                    fight = new Encounter(opponent, targetParticipant, this);
                     opponent.getIntelligence().promptTrap(
                             targetParticipant,
                             trap,

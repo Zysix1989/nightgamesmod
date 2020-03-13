@@ -105,7 +105,7 @@ public class Participant {
         };
         state.move(this);
         if (state.allowsNormalActions()) {
-            if (character.location.get().encounter(this)) {
+            if (!character.location.get().encounter(this)) {
                 intelligence.move(possibleActions, callback);
             }
         }
