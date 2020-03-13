@@ -236,7 +236,6 @@ public class Match {
     }
 
     protected void manageConditions(Participant p) {
-        p.timePasses();
         condition.handleOutfit(p.getCharacter());
         condition.handleItems(p.getCharacter());
         condition.handleStatus(p.getCharacter());
@@ -288,6 +287,7 @@ public class Match {
                 var participant = roundIterator.next();
                 Global.gui().refresh();
                 participant.endOfMatchRound();
+                participant.timePasses();
                 manageConditions(participant);
                 participant.move();
                 if (pause) {
