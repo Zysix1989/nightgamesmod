@@ -289,11 +289,6 @@ public class Match {
                 Global.gui().refresh();
                 participant.endOfMatchRound();
                 manageConditions(participant);
-                if (participant.getCharacter().human()) {
-                    Global.getPlayer()
-                            .getAddictions()
-                            .forEach(Addiction::refreshWithdrawal);
-                }
                 participant.move();
                 if (pause) {
                     return;

@@ -32,6 +32,7 @@ import nightgames.stance.Position;
 import nightgames.start.PlayerConfiguration;
 import nightgames.status.PlayerSlimeDummy;
 import nightgames.status.Status;
+import nightgames.status.addiction.Addiction;
 import nightgames.trap.Trap;
 
 import java.awt.event.ActionListener;
@@ -270,6 +271,12 @@ public class Player extends Character {
         }
         gui.message(location.get().getDescriptions().whereAmI() + "<br/><br/>");
         knownTrap.ifPresent(trap -> gui.message("You've set a " + trap.getName() + " here."));
+    }
+
+    @Override
+    public void endOfMatchRound() {
+        super.endOfMatchRound();
+        getAddictions().forEach(Addiction::refreshWithdrawal);
     }
 
     @Override
