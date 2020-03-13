@@ -401,7 +401,4 @@ class GUIMenuBar {
         mntmOptions.setEnabled(b);
     }
 
-    void setQuitMatchEnabled(boolean b) {
-        mntmQuitMatch.setEnabled(b);
-    }
 }

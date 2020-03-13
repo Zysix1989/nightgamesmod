@@ -262,7 +262,6 @@ public class GUI extends JFrame implements Observer {
         clearText();
         showNone();
         clearImage();
-        menuBar.setQuitMatchEnabled(false);
         combat = null;
         topPanel.removeAll();
     }
@@ -322,14 +321,12 @@ public class GUI extends JFrame implements Observer {
     // Night match initializer
 
     public void startMatch() {
-        menuBar.setQuitMatchEnabled(true);
         showMap();
     }
 
     public void endMatch() {
         combat = null;
         showNone();
-        menuBar.setQuitMatchEnabled(false);
         Global.endNightForSave();
         List<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Go to sleep", event -> Global.startDay()));

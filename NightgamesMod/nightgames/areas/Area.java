@@ -102,7 +102,7 @@ public class Area implements Serializable {
             var intrusionOptions = fight.getCombatIntrusionOptions(p);
             if (!intrusionOptions.isEmpty()) {
                 p.intrudeInCombat(intrusionOptions, () -> fight.watch());
-                return true;
+                return false;
             }
         } else if (present.size() > 1) {
             for (Participant opponent : present) {          //FIXME: Currently - encounters repeat - Does this check if they are busy?
@@ -114,7 +114,7 @@ public class Area implements Serializable {
                 }
             }
         }
-        return false;
+        return true;
     }
 
     public boolean opportunity(Character target, Trap.Instance trap) {
