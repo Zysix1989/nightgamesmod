@@ -475,7 +475,6 @@ public class Combat {
     private HashMap<String, String> images;
     boolean lastFailed = false;
     private CombatLog log;
-    private boolean beingObserved;
     private int postCombatScenesSeen;
     private boolean wroteMessage;
     private boolean cloned;
@@ -953,7 +952,7 @@ public class Combat {
     }
 
     private String describe(Character player, Character other) {
-        if (beingObserved) {
+        if (isBeingObserved()) {
             return "<font color='rgb(255,220,220)'>"
                             + other.describe(Global.getPlayer().get(Attribute.Perception), Global.getPlayer())
                             + "</font><br/><br/><font color='rgb(220,220,255)'>"
@@ -1374,7 +1373,7 @@ public class Combat {
             return true;
         }
         if (!(wroteMessage || phase.getEnum() == CombatPhase.START)
-                || !beingObserved
+                || !isBeingObserved()
                 || (Global.checkFlag(Flag.AutoNext) && FAST_COMBAT_SKIPPABLE_PHASES.contains(phase.getEnum()))) {
             return false;
         } else {
@@ -1383,7 +1382,7 @@ public class Combat {
                 p2.getCharacter().nextCombat(this);
                 // This is a horrible hack to catch the case where the player is watching or
                 // has intervened in the combat
-                if (!(p1.getCharacter().human() || p2.getCharacter().human()) && beingObserved) {
+                if (!(p1.getCharacter().human() || p2.getCharacter().human()) && isBeingObserved()) {
                     Global.getPlayer().nextCombat(this);
                 }
             }
@@ -1392,7 +1391,7 @@ public class Combat {
     }
 
     private void autoresolve() {
-        assert !p1.getCharacter().human() && !p2.getCharacter().human() && !beingObserved;
+        assert !p1.getCharacter().human() && !p2.getCharacter().human() && !isBeingObserved();
         assert timer == 0;
         while (timer < NPC_TURN_LIMIT && !winner.isPresent()) {
             turn();
@@ -1461,7 +1460,7 @@ public class Combat {
         p1.getParticipant().state = new Action.Ready();
         p2.getParticipant().state = new Action.Ready();
         if (processedEnding) {
-            if (beingObserved) {
+            if (isBeingObserved()) {
                 Global.gui().endCombat();
             }
             return;
@@ -1483,7 +1482,7 @@ public class Combat {
                 p2.getCharacter().nextCombat(this);
                 // This is a horrible hack to catch the case where the player is watching or
                 // has intervened in the combat
-                if (!(p1.getCharacter().human() || p2.getCharacter().human()) && beingObserved) {
+                if (!(p1.getCharacter().human() || p2.getCharacter().human()) && isBeingObserved()) {
                     Global.getPlayer().nextCombat(this);
                 }
             }
@@ -1501,7 +1500,7 @@ public class Combat {
             log.logEnd(winner.map(Combatant::getCharacter));
         }
 
-        if (!ding && beingObserved) {
+        if (!ding && isBeingObserved()) {
             Global.gui().endCombat();
         }
     }
@@ -1761,20 +1760,19 @@ public class Combat {
     }
 
     public boolean isBeingObserved() {
-        return beingObserved;
+        return !watchers.isEmpty();
     }
 
     public void addWatcher(Character c) {
         watchers.add(c);
-        this.beingObserved = true;
     }
     
     public boolean shouldPrintReceive(Character ch, Combat c) {
-        return beingObserved || (c.p1.getCharacter().human() || c.p2.getCharacter().human());
+        return isBeingObserved() || (c.p1.getCharacter().human() || c.p2.getCharacter().human());
     }
     
     public boolean shouldAutoresolve() {
-        return !(p1.getCharacter().human() || p2.getCharacter().human()) && !beingObserved;
+        return !(p1.getCharacter().human() || p2.getCharacter().human()) && !isBeingObserved();
     }
 
     public String bothDirectObject(Character target) {
