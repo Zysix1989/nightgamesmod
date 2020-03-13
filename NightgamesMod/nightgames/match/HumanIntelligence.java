@@ -38,7 +38,7 @@ public class HumanIntelligence implements Intelligence {
                 actionChoices.add(act);
             }
         }
-        character.presentMoveOptions(actionChoices, callback);
+        presentMoveOptions(actionChoices, callback);
     }
 
     @Override
@@ -179,7 +179,22 @@ public class HumanIntelligence implements Intelligence {
                 actionChoices.add(compelled);
             }
         }
-        character.presentMoveOptions(actionChoices, callback);
+        presentMoveOptions(actionChoices, callback);
     }
 
+    private void presentMoveOptions(Collection<Action> actionChoices,
+                                   Consumer<Action> callback) {
+        var optionChoices = actionChoices.stream()
+                .map(action -> new CommandPanelOption(
+                        action.toString(),
+                        event -> {
+                            callback.accept(action);
+                            Global.getMatch().resume();
+                        })).collect(Collectors.toList());
+        if (!optionChoices.isEmpty()) {
+            // Otherwise someone else is going to provide choices
+            character.gui.presentOptions(optionChoices);
+            Global.getMatch().pause();
+        }
+    }
 }

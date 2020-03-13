@@ -36,7 +36,6 @@ import nightgames.trap.Trap;
 
 import java.awt.event.ActionListener;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class Player extends Character {
@@ -258,22 +257,6 @@ public class Player extends Character {
                 stamina = "eager";
             }
             gui.message("She looks " + stamina + " and " + arousal + ".");
-        }
-    }
-
-    public void presentMoveOptions(Collection<Action> actionChoices,
-                                   Consumer<Action> callback) {
-        var optionChoices = actionChoices.stream()
-                .map(action -> new CommandPanelOption(
-                        action.toString(),
-                        event -> {
-                            callback.accept(action);
-                            Global.getMatch().resume();
-                        })).collect(Collectors.toList());
-        if (!optionChoices.isEmpty()) {
-            // Otherwise someone else is going to provide choices
-            gui.presentOptions(optionChoices);
-            Global.getMatch().pause();
         }
     }
 
