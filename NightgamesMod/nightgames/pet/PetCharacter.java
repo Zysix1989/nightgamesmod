@@ -8,10 +8,7 @@ import nightgames.global.Global;
 import nightgames.grammar.Person;
 import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
-import nightgames.match.Action;
-import nightgames.match.Encounter;
 import nightgames.match.Intelligence;
-import nightgames.match.actions.Move;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
@@ -19,7 +16,6 @@ import nightgames.status.Slimed;
 import nightgames.status.Status;
 
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class PetCharacter extends Character {
@@ -162,11 +158,6 @@ public class PetCharacter extends Character {
         return true;
     }
 
-    @Override
-    public void handleEnthrall(Consumer<Action> callback) {
-
-    }
-
     public boolean act(Combat c, Character target) {
         List<Skill> allowedEnemySkills = new ArrayList<>(getSkills()
                         .stream().filter(skill -> Skill.isUsableOn(c, skill, target) && Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
@@ -261,9 +252,6 @@ public class PetCharacter extends Character {
         }
         c.removePet(this);
     }
-
-    @Override
-    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation) { }
 
     @Override
     public void afterParty() {}
