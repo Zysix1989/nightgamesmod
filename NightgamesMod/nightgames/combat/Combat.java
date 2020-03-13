@@ -60,6 +60,7 @@ public class Combat {
     }
 
     public static class State implements Participant.State {
+        private int delayRounds = 2;
 
         @Override
         public boolean allowsNormalActions() {
@@ -68,7 +69,11 @@ public class Combat {
 
         @Override
         public void move(Participant p) {
-            p.getLocation().fight.battle();
+            if (--delayRounds <= 0 && !p.getLocation().fight.getCombat().isEnded()) {
+                p.getLocation().fight.battle();
+            } else {
+                Global.getMatch().resume();
+            }
         }
 
         @Override

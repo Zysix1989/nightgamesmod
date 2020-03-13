@@ -27,7 +27,6 @@ public class Encounter {
     protected Area location;
     protected transient Combat fight;
     private int checkin;
-    protected int fightTime;
 
     public Encounter(Participant first, Participant second, Area location) {
         this.location = location;
@@ -178,7 +177,6 @@ public class Encounter {
     }
 
     public Combat startFight(Participant p1, Participant p2) {
-        fightTime = 2;
         if (p1.getCharacter() instanceof Player && p2.getCharacter() instanceof NPC) {
             this.fight = new Combat(p1, p2, p1.getCharacter().location()); // Not sure if order matters
         } else if (p2.getCharacter() instanceof Player && p1.getCharacter() instanceof NPC) {
@@ -302,12 +300,7 @@ public class Encounter {
     }
 
     public void battle() {
-        fightTime--;
-        if (fightTime <= 0 && !fight.isEnded()) {
-            fight.go();
-        } else {
-            Global.getMatch().resume();
-        }
+        fight.go();
     }
 
     public Combat getCombat() {
