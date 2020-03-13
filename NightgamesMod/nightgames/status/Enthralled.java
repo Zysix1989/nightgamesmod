@@ -1,16 +1,19 @@
 package nightgames.status;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
+import nightgames.match.Action;
+import nightgames.match.Participant;
+import nightgames.match.actions.Move;
 import nightgames.pet.PetCharacter;
+
+import java.util.Optional;
+import java.util.function.Predicate;
 
 public class Enthralled extends DurationStatus {
     private int timesRefreshed;
@@ -186,5 +189,15 @@ public class Enthralled extends DurationStatus {
 
     @Override public Status loadFromJson(JsonObject obj) {
         return new Enthralled(null, null, obj.get("duration").getAsInt(), obj.get("makesCynical").getAsBoolean());
+    }
+
+    @Override
+    public Predicate<Action> makeAllowedActionsPredicate(Participant bearer) {
+        if (master != null) {
+            Move compelled = bearer.getCharacter().findPath(master.location());
+            bearer.getCharacter().message("You feel an irresistible compulsion to head to the <b>" + master.location().name + "</b>");
+            return compelled::equals;
+        }
+        throw new RuntimeException("enthralled without a master");
     }
 }

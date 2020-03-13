@@ -5,10 +5,13 @@ import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
+import nightgames.match.Action;
+import nightgames.match.Participant;
 import nightgames.requirements.Requirement;
 import nightgames.skills.Skill;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public abstract class Status implements Cloneable {
     public String name;
@@ -154,4 +157,8 @@ public abstract class Status implements Cloneable {
     public void tick(Combat c) {}
     
     public boolean isAddiction() { return false; }
+
+    public Predicate<Action> makeAllowedActionsPredicate(Participant bearer) {
+        return action -> true;
+    }
 }

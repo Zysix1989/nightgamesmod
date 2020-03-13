@@ -1,14 +1,11 @@
 package nightgames.match;
 
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.characters.Player;
 import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.match.actions.Move;
-import nightgames.status.Enthralled;
-import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
 import java.util.ArrayList;
@@ -163,21 +160,6 @@ public class HumanIntelligence implements Intelligence {
         character.gui.presentOptions(options);
     }
 
-
-    @Override
-    public void handleEnthrall(Consumer<Action> callback) {
-        List<Action> actionChoices = new ArrayList<>();
-        Character master;
-        master = ((Enthralled) character.getStatus(Stsflag.enthralled)).master;
-        if (master != null) {
-            Move compelled = character.findPath(master.location());
-            character.gui.message("You feel an irresistible compulsion to head to the <b>" + master.location().name + "</b>");
-            if (compelled != null) {
-                actionChoices.add(compelled);
-            }
-        }
-        presentMoveOptions(actionChoices, callback);
-    }
 
     private void presentMoveOptions(Collection<Action> actionChoices,
                                    Consumer<Action> callback) {

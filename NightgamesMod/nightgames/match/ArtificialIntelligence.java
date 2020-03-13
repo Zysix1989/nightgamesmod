@@ -2,14 +2,11 @@ package nightgames.match;
 
 import nightgames.areas.Area;
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.characters.NPC;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.actions.Move;
-import nightgames.status.Enthralled;
-import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
 import java.util.Collection;
@@ -100,13 +97,4 @@ public class ArtificialIntelligence implements Intelligence {
         bestTarget.option.callback();
     }
 
-    @Override
-    public void handleEnthrall(Consumer<Action> callback) {
-        Character master;
-        master = ((Enthralled) character.getStatus(Stsflag.enthralled)).master;
-        Move compelled = character.findPath(master.location.get());
-        if (compelled != null) {
-            callback.accept(compelled);
-        }
-    }
 }
