@@ -241,11 +241,6 @@ public class Match {
         condition.handleItems(p.getCharacter());
         condition.handleStatus(p.getCharacter());
         condition.handleTurn(p.getCharacter(), this);
-        if (p.getCharacter().human()) {
-            Global.getPlayer()
-                  .getAddictions()
-                  .forEach(Addiction::refreshWithdrawal);
-        }
     }
 
     private void placeCharacters() {
@@ -294,6 +289,11 @@ public class Match {
                 Global.gui().refresh();
                 participant.endOfMatchRound();
                 manageConditions(participant);
+                if (participant.getCharacter().human()) {
+                    Global.getPlayer()
+                            .getAddictions()
+                            .forEach(Addiction::refreshWithdrawal);
+                }
                 participant.move();
                 if (pause) {
                     return;
