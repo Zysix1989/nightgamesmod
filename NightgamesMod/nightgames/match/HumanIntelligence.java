@@ -28,17 +28,14 @@ public class HumanIntelligence implements Intelligence {
     @Override
     public void move(Collection<Action> possibleActions,
                      Consumer<Action> callback) {
-        var actionChoices = new ArrayList<Action>();
         character.location.get().noisyNeighbors(character.get(Attribute.Perception)).forEach(room -> {
             character.message("You hear something in the <b>" + room.name + "</b>.");
             room.setPinged(true);
         });
-        for (Action act : possibleActions) {
-            if (Global.getMatch().getCondition().allowAction(act, character, Global.getMatch())) {
-                actionChoices.add(act);
-            }
-        }
-        presentMoveOptions(actionChoices, callback);
+        presentMoveOptions(possibleActions.stream()
+                .filter(act -> Global.getMatch().getCondition().allowAction(act, character, Global.getMatch()))
+                .collect(Collectors.toSet()),
+                callback);
     }
 
     @Override
