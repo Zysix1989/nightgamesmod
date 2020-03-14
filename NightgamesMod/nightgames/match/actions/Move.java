@@ -23,9 +23,10 @@ public final class Move extends Action {
     }
 
     private Area destination;
+    private boolean detectDestination;
     private SkillCheck skillCheck;
 
-    private Move(Area destination, String name, SkillCheck check) {
+    private Move(Area destination, String name, boolean detectDestination, SkillCheck check) {
         super(name);
         this.destination = destination;
         this.skillCheck = check;
@@ -34,18 +35,21 @@ public final class Move extends Action {
     public static Move normal(Area adjacentRoom) {
         return new Move(adjacentRoom,
                 "Move(" + adjacentRoom.name + ")",
+                true,
                 ch -> !ch.bound() && !ch.has(Trait.immobile));
     }
 
     public static Move shortcut(Area adjacentRoom) {
         return new Move(adjacentRoom,
                 "Take shortcut to " + adjacentRoom.name,
+                false, // who can tell what's going on in that winding system of tunnels?
                 ch -> ch.getPure(Attribute.Cunning) >= 28 && !ch.bound() && !ch.has(Trait.immobile));
     }
 
     public static Move ninjaLeap(Area adjacentRoom) {
         return new Move(adjacentRoom,
                 "Ninja Leap("+adjacentRoom.name+")",
+                true, // got to be able to spot the landing
                 ch -> ch.getPure(Attribute.Ninjutsu)>=5 && !ch.bound() && !ch.has(Trait.immobile));
     }
 
@@ -62,6 +66,10 @@ public final class Move extends Action {
 
     public Area getDestination() {
         return destination;
+    }
+
+    public boolean maybeDetectOccupancy(int perception) {
+        return destination.ping(perception);
     }
 
 }

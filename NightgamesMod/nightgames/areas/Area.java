@@ -46,10 +46,7 @@ public class Area implements Serializable {
     }
 
     public static void addDoor(Area one, Area other) {
-        one.adjacent.add(other);
         one.possibleActions.add(Move.normal(other));
-
-        other.adjacent.add(one);
         other.possibleActions.add(Move.normal(one));
     }
 
@@ -78,7 +75,11 @@ public class Area implements Serializable {
     }
 
     public Set<Area> noisyNeighbors(int perception) {
-        return adjacent.stream().filter(area -> area.ping(perception)).collect(Collectors.toSet());
+        return possibleActions.stream()
+                .filter(action -> action instanceof Move)
+                .filter(action -> ((Move) action).maybeDetectOccupancy(perception))
+                .map(action -> ((Move) action).getDestination())
+                .collect(Collectors.toSet());
     }
 
     public void enter(Character c) {
