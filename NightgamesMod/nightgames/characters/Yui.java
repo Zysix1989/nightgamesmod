@@ -1,6 +1,5 @@
 package nightgames.characters;
 
-import nightgames.match.actions.Energize;
 import nightgames.areas.Area;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
@@ -15,6 +14,7 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.match.Action;
+import nightgames.match.actions.Energize;
 import nightgames.start.NpcConfiguration;
 import org.jtwig.JtwigTemplate;
 
@@ -110,13 +110,13 @@ public class Yui extends BasePersonality {
     }
 
     @Override
-    public Action move(Collection<Action> available, Collection<Area> radar) {
-        for (Action act : available) {
-            if (act instanceof Energize) {
+    public Action.Instance move(Collection<Action.Instance> available, Collection<Area> radar) {
+        for (var act : available) {
+            if (act.self instanceof Energize) {
                 return act;
             }
         }
-        return Decider.parseMoves(available, radar, character);
+        return super.move(available, radar);
     }
 
     @Override

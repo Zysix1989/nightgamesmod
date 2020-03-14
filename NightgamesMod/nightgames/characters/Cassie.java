@@ -1,6 +1,5 @@
 package nightgames.characters;
 
-import nightgames.match.actions.Energize;
 import nightgames.areas.Area;
 import nightgames.characters.body.AssPart;
 import nightgames.characters.body.AssPart.Size;
@@ -24,6 +23,7 @@ import nightgames.grammar.Shorthand;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.match.Action;
+import nightgames.match.actions.Energize;
 import nightgames.skills.strategy.BreastStrategy;
 import nightgames.skills.strategy.NurseStrategy;
 import nightgames.skills.strategy.OralStrategy;
@@ -269,13 +269,13 @@ public class Cassie extends BasePersonality {
     }
 
     @Override
-    public Action move(Collection<Action> available, Collection<Area> radar) {
-        for (Action act : available) {
-            if (!character.is(Stsflag.energized) && act instanceof Energize) {
+    public Action.Instance move(Collection<Action.Instance> available, Collection<Area> radar) {
+        for (var act : available) {
+            if (!character.is(Stsflag.energized) && act.self instanceof Energize) {
                 return act;
             }
         }
-        return Decider.parseMoves(available, radar, character);
+        return super.move(available, radar);
     }
 
     @Override
