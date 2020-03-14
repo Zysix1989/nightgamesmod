@@ -23,12 +23,12 @@ public class ArtificialIntelligence implements Intelligence {
     }
 
     @Override
-    public void move(Collection<Action> possibleActions, Consumer<Action> callback) {
+    public void move(Collection<Action.Instance> possibleActions, Consumer<Action.Instance> callback) {
         Set<Area> radar = Set.of();
         if (!character.has(Trait.immobile)) {
             radar = possibleActions.stream()
-                    .filter(act -> act instanceof Move)
-                    .map(act -> (Move) act)
+                    .filter(act -> act.self instanceof Move)
+                    .map(act -> (Move) act.self)
                     .filter(act -> act.maybeDetectOccupancy(character.get(Attribute.Perception)))
                     .map(Move::getDestination)
                     .collect(Collectors.toSet());

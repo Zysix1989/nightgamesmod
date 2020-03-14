@@ -21,6 +21,20 @@ public abstract class Action {
         public abstract String describe(Character c);
     }
 
+    public static class Instance {
+        public final Action self;
+        protected final Participant user;
+
+        protected Instance(Action self, Participant user) {
+            this.self = self;
+            this.user = user;
+        }
+
+        public Aftermath execute() {
+            return self.execute(user);
+        }
+    }
+
     public static class Ready implements Participant.State {
 
         @Override
@@ -73,6 +87,10 @@ public abstract class Action {
         }
 
         protected abstract void moveAfterDelay(Participant p);
+    }
+
+    public Instance newInstance(Participant user) {
+        return new Instance(this, user);
     }
 
     public abstract Aftermath execute(Participant user);

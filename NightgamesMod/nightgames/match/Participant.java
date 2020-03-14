@@ -99,14 +99,14 @@ public class Participant {
                 .map(s -> s.makeAllowedActionsPredicate(this))
                 .collect(Collectors.toSet())
                 .forEach(possibleActions::removeIf);
-        Consumer<Action> callback = act -> {
-            var aftermath = act.execute(this).describe(character);
+        Consumer<Action.Instance> callback = act -> {
+            var aftermath = act.execute().describe(character);
             getLocation().getOccupants().forEach(p -> p.getCharacter().message(aftermath));
         };
         state.move(this);
         if (state.allowsNormalActions()) {
             if (!character.location.get().encounter(this)) {
-                intelligence.move(possibleActions, callback);
+                intelligence.move(possibleActions.stream().map(act -> act.newInstance(this)).collect(Collectors.toSet()), callback);
             }
         }
     }

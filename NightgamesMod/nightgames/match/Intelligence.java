@@ -9,8 +9,8 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 public interface Intelligence {
-    void move(Collection<Action> possibleActions,
-              Consumer<Action> callback);
+    void move(Collection<Action.Instance> possibleActions,
+              Consumer<Action.Instance> callback);
 
     void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation);
 

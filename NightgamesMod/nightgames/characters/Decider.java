@@ -1,6 +1,5 @@
 package nightgames.characters;
 
-import nightgames.match.actions.*;
 import nightgames.areas.Area;
 import nightgames.characters.custom.effect.CustomEffect;
 import nightgames.combat.Combat;
@@ -9,6 +8,7 @@ import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Action;
 import nightgames.match.MatchType;
+import nightgames.match.actions.*;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.pet.PetCharacter;
 import nightgames.skills.Skill;
@@ -149,7 +149,7 @@ public class Decider {
          */ return priority;
     }
 
-    private static Optional<Action> searchForAction(Collection<Action> available, NPC character, Predicate<Action> predicate) {
+    private static Optional<Action.Instance> searchForAction(Collection<Action.Instance> available, NPC character, Predicate<Action.Instance> predicate) {
         var action = available.stream().filter(predicate).findAny();
         if (action.isEmpty()) {
             var bestMove = Character.bestMove(character, character.location(), predicate);
@@ -161,31 +161,31 @@ public class Decider {
     }
     
     /**This method parses the actions available to the character and returns an action.*/
-    public static Action parseMoves(Collection<Action> available, Collection<Area> radar, NPC character) {
-        HashSet<Action> enemy = new HashSet<Action>();
-        HashSet<Action> onlyWhenSafe = new HashSet<Action>();
-        HashSet<Action> utility = new HashSet<Action>();
-        HashSet<Action> tactic = new HashSet<Action>();
+    public static Action.Instance parseMoves(Collection<Action.Instance> available, Collection<Area> radar, NPC character) {
+        HashSet<Action.Instance> enemy = new HashSet<>();
+        HashSet<Action.Instance> onlyWhenSafe = new HashSet<>();
+        HashSet<Action.Instance> utility = new HashSet<>();
+        HashSet<Action.Instance> tactic = new HashSet<>();
         if (character.mostlyNude()) {
-            var resupplyAction = searchForAction(available, character, act -> act instanceof Resupply);
+            var resupplyAction = searchForAction(available, character, act -> act.self instanceof Resupply);
             if (resupplyAction.isPresent()) {
                 return resupplyAction.get();
             }
         }
         if (character.getArousal().percent() >= 40 && !character.location().humanPresent() && radar.isEmpty()) {
-            var masturbateAction = available.stream().filter(act -> act instanceof Masturbate).findAny();
+            var masturbateAction = available.stream().filter(act -> act.self instanceof Masturbate).findAny();
             if (masturbateAction.isPresent()) {
                 return masturbateAction.get();
             }
         }
         if (character.getStamina().percent() <= 60 || character.getArousal().percent() >= 30) {
-            var batheAction = searchForAction(available, character, act -> act instanceof Bathe);
+            var batheAction = searchForAction(available, character, act -> act.self instanceof Bathe);
             if (batheAction.isPresent()) {
                 return batheAction.get();
             }
         }
         if (character.get(Attribute.Science) >= 1 && !character.has(Item.Battery, 10)) {
-            var rechargeAction = searchForAction(available, character, act -> act instanceof Recharge);
+            var rechargeAction = searchForAction(available, character, act -> act.self instanceof Recharge);
             if (rechargeAction.isPresent()) {
                 return rechargeAction.get();
             }
@@ -195,7 +195,7 @@ public class Decider {
             match = (FTCMatch) Global.getMatch();
             if (match.isPrey(character) && match.getFlagHolder() == null) {
                 var action = searchForAction(available, character,
-                        act -> act instanceof Move && ((Move) act).getDestination().name.equals("Central Camp"));
+                        act -> act.self instanceof Move && ((Move) act.self).getDestination().name.equals("Central Camp"));
                 if (action.isPresent()) {
                     return action.get();
                 }
@@ -203,30 +203,30 @@ public class Decider {
                     && character.has(Item.Flag)
                     && !match.isBase(character, character.location.get())) {
                 var action = searchForAction(available, character,
-                        act -> act instanceof Move && ((Move) act).getDestination().name.equals(match.getBase(character).name));
+                        act -> act.self instanceof Move && ((Move) act.self).getDestination().name.equals(match.getBase(character).name));
                 if (action.isPresent()) {
                     return action.get();
                 }
             } else if (!match.isPrey(character) && character.has(Item.Flag) && match.isBase(character, character.location.get())) {
-                return searchForAction(available, character, act -> act instanceof Resupply)
+                return searchForAction(available, character, act -> act.self instanceof Resupply)
                         .orElseThrow(() -> new RuntimeException("This is your base. There ought to be a resupply."));
             }
         }
-        for (Action act : available) {
-            if (act instanceof Move && radar.contains(((Move) act).getDestination())) {
+        for (var act : available) {
+            if (act.self instanceof Move && radar.contains(((Move) act.self).getDestination())) {
                 enemy.add(act);
-            } else if (act instanceof Bathe
-                    || act instanceof Craft
-                    || act instanceof Scavenge
-                    || act instanceof Hide
-                    || act instanceof SetTrap
-                    || act instanceof nightgames.match.actions.Wait
+            } else if (act.self instanceof Bathe
+                    || act.self instanceof Craft
+                    || act.self instanceof Scavenge
+                    || act.self instanceof Hide
+                    || act.self instanceof SetTrap
+                    || act.self instanceof nightgames.match.actions.Wait
                     // TODO: The next two I do NOT understand
                     // If two weeks go by an I haven't figured out why they're here, remove them.
                     // Written 2020-03-03
-                    || (act instanceof Move && ((Move) act).getDestination().name.equals("Engineering"))
-                    || (act instanceof Move && ((Move) act).getDestination().name.equals("Dining"))
-                    || act instanceof Disguise) {
+                    || (act.self instanceof Move && ((Move) act.self).getDestination().name.equals("Engineering"))
+                    || (act.self instanceof Move && ((Move) act.self).getDestination().name.equals("Dining"))
+                    || act.self instanceof Disguise) {
                 onlyWhenSafe.add(act);
             } else {
                 utility.add(act);
@@ -245,12 +245,12 @@ public class Decider {
         }
         // give disguise some priority when just picking something random
         if (Global.random(5) == 0) {
-            var maybeDisguise = tactic.stream().filter(a -> a instanceof Disguise).findAny();
+            var maybeDisguise = tactic.stream().filter(a -> a.self instanceof Disguise).findAny();
             if (maybeDisguise.isPresent()) {
                 return maybeDisguise.get();
             }
         }
-        Action[] actions = tactic.toArray(new Action[tactic.size()]);
+        Action.Instance[] actions = tactic.toArray(new Action.Instance[tactic.size()]);
         return actions[Global.random(actions.length)];
     }
 

@@ -134,7 +134,7 @@ public abstract class BasePersonality implements Serializable {
         }
     }
 
-    public Action move(Collection<Action> available, Collection<Area> radar) {
+    public Action.Instance move(Collection<Action.Instance> available, Collection<Area> radar) {
         return Decider.parseMoves(available, radar, character);
     }
 

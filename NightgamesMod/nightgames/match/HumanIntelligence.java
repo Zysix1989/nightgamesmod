@@ -23,18 +23,18 @@ public class HumanIntelligence implements Intelligence {
     }
 
     @Override
-    public void move(Collection<Action> possibleActions,
-                     Consumer<Action> callback) {
+    public void move(Collection<Action.Instance> possibleActions,
+                     Consumer<Action.Instance> callback) {
         possibleActions.stream()
-                .filter(act -> act instanceof Move)
-                .map(act -> (Move) act)
+                .filter(act -> act.self instanceof Move)
+                .map(act -> (Move) act.self)
                 .filter(act -> act.maybeDetectOccupancy(character.get(Attribute.Perception)))
                 .forEach(act -> {
                     character.message("You hear something in the <b>" + act.getDestination().name + "</b>.");
                     act.getDestination().setPinged(true);
                 });
         presentMoveOptions(possibleActions.stream()
-                .filter(act -> Global.getMatch().getCondition().allowAction(act, character, Global.getMatch()))
+                .filter(act -> Global.getMatch().getCondition().allowAction(act.self, character, Global.getMatch()))
                 .collect(Collectors.toSet()),
                 callback);
     }
@@ -168,8 +168,8 @@ public class HumanIntelligence implements Intelligence {
     }
 
 
-    private void presentMoveOptions(Collection<Action> actionChoices,
-                                   Consumer<Action> callback) {
+    private void presentMoveOptions(Collection<Action.Instance> actionChoices,
+                                    Consumer<Action.Instance> callback) {
         var optionChoices = actionChoices.stream()
                 .map(action -> new CommandPanelOption(
                         action.toString(),
