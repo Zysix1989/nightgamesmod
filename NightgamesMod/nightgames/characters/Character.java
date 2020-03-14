@@ -2907,7 +2907,7 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     // finds the best Move to get to an Area with an Action that satisfies the predicate
-    public static Optional<Move> bestMove(Character c, Area initial, Predicate<Action.Instance> predicate) {
+    public static Optional<Move.Instance> bestMove(Character c, Area initial, Predicate<Action.Instance> predicate) {
         var p = Global.getMatch().findParticipant(c);
         if (initial.possibleActions(p).stream().map(act -> act.newInstance(p)).anyMatch(predicate)) {
             throw new RuntimeException("current room already satisfies predicate");
@@ -2925,11 +2925,11 @@ public Character clone() throws CloneNotSupportedException {
                     .map(act -> act.newInstance(p))
                     .collect(Collectors.toUnmodifiableSet());
             var possibleMoves = possibleActions.stream()
-                    .filter(action -> action.self instanceof Move)
-                    .map(action -> (Move) action.self)
+                    .filter(action -> action instanceof Move.Instance)
+                    .map(action -> (Move.Instance) action)
                     .collect(Collectors.toUnmodifiableSet());
             var adjacent = possibleMoves.stream()
-                    .map(Move::getDestination)
+                    .map(Move.Instance::getDestination)
                     .collect(Collectors.toSet());
             if (possibleActions.stream().anyMatch(predicate)) {
                 while (!adjacent.contains(t)) {
@@ -2959,9 +2959,9 @@ public Character clone() throws CloneNotSupportedException {
      * @return 
      * Returns by performing a move().  
      * */
-    public Move findPath(Area target) {
+    public Move.Instance findPath(Area target) {
         return bestMove(this, this.location.get(),
-                action -> action.self instanceof Move && ((Move) action.self).getDestination().name.equals(target.name)
+                action -> action instanceof Move.Instance && ((Move.Instance) action).getDestination().name.equals(target.name)
         ).orElse(null);
     }
 

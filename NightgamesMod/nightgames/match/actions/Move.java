@@ -22,7 +22,7 @@ public final class Move extends Action {
         }
     }
 
-    public static final class Instance extends Action.Instance {
+    public final class Instance extends Action.Instance {
         private Instance(Action self, Participant user) {
             super(self, user);
         }
@@ -30,6 +30,14 @@ public final class Move extends Action {
         @Override
         public Action.Aftermath execute() {
             return self.execute(user);
+        }
+
+        public Area getDestination() {
+            return destination;
+        }
+
+        public boolean maybeDetectOccupancy(int perception) {
+            return detectDestination && destination.ping(perception);
         }
     }
 
@@ -84,10 +92,6 @@ public final class Move extends Action {
 
     public Area getDestination() {
         return destination;
-    }
-
-    public boolean maybeDetectOccupancy(int perception) {
-        return detectDestination && destination.ping(perception);
     }
 
 }

@@ -195,7 +195,7 @@ public class Decider {
             match = (FTCMatch) Global.getMatch();
             if (match.isPrey(character) && match.getFlagHolder() == null) {
                 var action = searchForAction(available, character,
-                        act -> act.self instanceof Move && ((Move) act.self).getDestination().name.equals("Central Camp"));
+                        act -> act instanceof Move.Instance && ((Move.Instance) act).getDestination().name.equals("Central Camp"));
                 if (action.isPresent()) {
                     return action.get();
                 }
@@ -203,7 +203,7 @@ public class Decider {
                     && character.has(Item.Flag)
                     && !match.isBase(character, character.location.get())) {
                 var action = searchForAction(available, character,
-                        act -> act.self instanceof Move && ((Move) act.self).getDestination().name.equals(match.getBase(character).name));
+                        act -> act instanceof Move.Instance && ((Move.Instance) act).getDestination().name.equals(match.getBase(character).name));
                 if (action.isPresent()) {
                     return action.get();
                 }
@@ -213,7 +213,7 @@ public class Decider {
             }
         }
         for (var act : available) {
-            if (act.self instanceof Move && radar.contains(((Move) act.self).getDestination())) {
+            if (act instanceof Move.Instance && radar.contains(((Move.Instance) act).getDestination())) {
                 enemy.add(act);
             } else if (act.self instanceof Bathe
                     || act.self instanceof Craft
@@ -224,8 +224,8 @@ public class Decider {
                     // TODO: The next two I do NOT understand
                     // If two weeks go by an I haven't figured out why they're here, remove them.
                     // Written 2020-03-03
-                    || (act.self instanceof Move && ((Move) act.self).getDestination().name.equals("Engineering"))
-                    || (act.self instanceof Move && ((Move) act.self).getDestination().name.equals("Dining"))
+                    || (act instanceof Move.Instance && ((Move.Instance) act).getDestination().name.equals("Engineering"))
+                    || (act instanceof Move.Instance && ((Move.Instance) act).getDestination().name.equals("Dining"))
                     || act.self instanceof Disguise) {
                 onlyWhenSafe.add(act);
             } else {

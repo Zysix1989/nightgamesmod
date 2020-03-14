@@ -158,7 +158,7 @@ public abstract class Status implements Cloneable {
     
     public boolean isAddiction() { return false; }
 
-    public Predicate<Action> makeAllowedActionsPredicate(Participant bearer) {
+    public Predicate<Action.Instance> makeAllowedActionsPredicate(Participant bearer) {
         return action -> true;
     }
 

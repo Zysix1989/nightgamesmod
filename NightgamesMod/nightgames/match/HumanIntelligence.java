@@ -27,7 +27,7 @@ public class HumanIntelligence implements Intelligence {
                      Consumer<Action.Instance> callback) {
         possibleActions.stream()
                 .filter(act -> act.self instanceof Move)
-                .map(act -> (Move) act.self)
+                .map(act -> (Move.Instance) act)
                 .filter(act -> act.maybeDetectOccupancy(character.get(Attribute.Perception)))
                 .forEach(act -> {
                     character.message("You hear something in the <b>" + act.getDestination().name + "</b>.");
@@ -157,7 +157,7 @@ public class HumanIntelligence implements Intelligence {
                 .collect(Collectors.toCollection(ArrayList::new));
         options.add(new CommandPanelOption("Watch them fight", event -> neitherContinuation.run()));
         options.addAll(possibleMoves.stream()
-                .map(move -> new CommandPanelOption("Move (" + ((Move) move.self).getDestination() + ")",
+                .map(move -> new CommandPanelOption(move.self.name,
                         event -> {
                             actionCallback.accept(move);
                             Global.getMatch().resume();

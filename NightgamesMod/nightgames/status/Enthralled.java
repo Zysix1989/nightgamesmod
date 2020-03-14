@@ -9,7 +9,6 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.match.Action;
 import nightgames.match.Participant;
-import nightgames.match.actions.Move;
 import nightgames.pet.PetCharacter;
 
 import java.util.Optional;
@@ -192,9 +191,9 @@ public class Enthralled extends DurationStatus {
     }
 
     @Override
-    public Predicate<Action> makeAllowedActionsPredicate(Participant bearer) {
+    public Predicate<Action.Instance> makeAllowedActionsPredicate(Participant bearer) {
         if (master != null) {
-            Move compelled = bearer.getCharacter().findPath(master.location());
+            var compelled = bearer.getCharacter().findPath(master.location());
             bearer.getCharacter().message("You feel an irresistible compulsion to head to the <b>" + master.location().name + "</b>");
             return compelled::equals;
         }

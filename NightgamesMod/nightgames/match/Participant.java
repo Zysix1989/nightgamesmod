@@ -95,10 +95,13 @@ public class Participant {
         possibleActions.addAll(character.getItemActions());
         possibleActions.addAll(Global.getMatch().getAvailableActions());
         possibleActions.removeIf(a -> !a.usable(this));
+        var possibleActionInstances = possibleActions.stream()
+                .map(act -> act.newInstance(this))
+                .collect(Collectors.toSet());
         character.status.stream()
                 .map(s -> s.makeAllowedActionsPredicate(this))
                 .collect(Collectors.toSet())
-                .forEach(possibleActions::removeIf);
+                .forEach(possibleActionInstances::removeIf);
         Consumer<Action.Instance> callback = act -> {
             var aftermath = act.execute().describe(character);
             getLocation().getOccupants().forEach(p -> p.getCharacter().message(aftermath));
@@ -106,7 +109,7 @@ public class Participant {
         state.move(this);
         if (state.allowsNormalActions()) {
             if (!character.location.get().encounter(this)) {
-                intelligence.move(possibleActions.stream().map(act -> act.newInstance(this)).collect(Collectors.toSet()), callback);
+                intelligence.move(possibleActionInstances, callback);
             }
         }
     }

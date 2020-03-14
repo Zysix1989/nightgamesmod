@@ -27,10 +27,10 @@ public class ArtificialIntelligence implements Intelligence {
         Set<Area> radar = Set.of();
         if (!character.has(Trait.immobile)) {
             radar = possibleActions.stream()
-                    .filter(act -> act.self instanceof Move)
-                    .map(act -> (Move) act.self)
+                    .filter(act -> act instanceof Move.Instance)
+                    .map(act -> (Move.Instance) act)
                     .filter(act -> act.maybeDetectOccupancy(character.get(Attribute.Perception)))
-                    .map(Move::getDestination)
+                    .map(Move.Instance::getDestination)
                     .collect(Collectors.toSet());
         }
         var chosenAction = character.ai.move(possibleActions, radar);
