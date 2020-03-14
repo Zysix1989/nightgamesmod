@@ -97,8 +97,8 @@ public class Encounter {
     }
 
     protected void eligibleSpotCheck() {
-        var p1Replacement = p1.state.eligibleCombatReplacement(this, p2, p1);
-        var p2Replacement = p2.state.eligibleCombatReplacement(this, p1, p2);
+        var p1Replacement = p1.state.eligibleCombatReplacement(this, p1, p2);
+        var p2Replacement = p2.state.eligibleCombatReplacement(this, p2, p1);
         assert p1Replacement.isEmpty() || p2Replacement.isEmpty();
         if (p1Replacement.isPresent()) {
             p1Replacement.get().run();
