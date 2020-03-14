@@ -1,17 +1,18 @@
 package nightgames.modifier;
 
 import com.google.gson.JsonObject;
-import nightgames.match.actions.Locate;
 import nightgames.characters.Player;
 import nightgames.global.Global;
 import nightgames.gui.TestGUI;
-import nightgames.json.JsonUtils;
 import nightgames.items.clothing.Clothing;
+import nightgames.json.JsonUtils;
+import nightgames.match.actions.Locate;
 import nightgames.modifier.status.StatusModifier;
 import nightgames.skills.Blowjob;
 import nightgames.skills.Kick;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matcher;
 import org.hamcrest.collection.IsMapContaining;
 import org.hamcrest.core.IsCollectionContaining;
@@ -62,7 +63,7 @@ public class CustomModifierLoaderTest {
                                         (Matcher<? super Map<? extends Skill, ? extends Double>>) IsMapContaining
                                                         .hasEntry((Skill) new Kick(player), -2.0)));
         assertThat(mod.skills.toString(), equalTo("Banned:[fucking], Encouraged:{Blow=1.0, Kick=-2.0}"));
-        assertThat(mod.actions.bannedActions(), IsCollectionContaining.hasItem(new Locate()));
+        assertThat(mod.actions.actionIsBanned(new Locate()), CoreMatchers.is(true));
         assertThat(mod.custom, equalTo(BaseModifier.EMPTY_CONSUMER));
     }
 

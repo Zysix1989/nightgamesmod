@@ -37,8 +37,8 @@ public class BanActionModifier extends ActionModifier implements ModifierCompone
     }
 
     @Override
-    public Set<Action> bannedActions() {
-        return absolutes;
+    public boolean actionIsBanned(Action a) {
+        return super.actionIsBanned(a) || absolutes.contains(a);
     }
 
     @Override

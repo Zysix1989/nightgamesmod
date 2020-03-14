@@ -6,15 +6,17 @@ import nightgames.match.Match;
 import nightgames.modifier.ModifierCategory;
 import nightgames.modifier.ModifierComponent;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.BiPredicate;
 
 public abstract class ActionModifier implements ModifierCategory<ActionModifier>, ModifierComponent {
     public static final ActionModifierLoader loader = new ActionModifierLoader();
     public static final ActionModifierCombiner combiner = new ActionModifierCombiner();
 
-    public Set<Action> bannedActions() {
-        return Collections.emptySet();
+    public boolean actionIsBanned(Action a) {
+        return false;
     }
 
     public Map<Action, BiPredicate<Character, Match>> conditionalBans() {
@@ -22,18 +24,16 @@ public abstract class ActionModifier implements ModifierCategory<ActionModifier>
     }
 
     public boolean actionIsBanned(Action act, Character user, Match match) {
-        return bannedActions().contains(act)
-                        || conditionalBans().containsKey(act) && conditionalBans().get(act).test(user, match);
+        return actionIsBanned(act) || conditionalBans().containsKey(act) && conditionalBans().get(act).test(user, match);
     }
 
     @Override public ActionModifier combine(ActionModifier next) {
         ActionModifier first = this;
         return new ActionModifier() {
+
             @Override
-            public Set<Action> bannedActions() {
-                Set<Action> actions = new HashSet<>(first.bannedActions());
-                actions.addAll(next.bannedActions());
-                return Collections.unmodifiableSet(actions);
+            public boolean actionIsBanned(Action a) {
+                return first.actionIsBanned(a) || next.actionIsBanned(a);
             }
 
             @Override
