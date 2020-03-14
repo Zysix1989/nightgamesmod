@@ -74,14 +74,6 @@ public class Area implements Serializable {
         return alarm;
     }
 
-    public Set<Area> noisyNeighbors(int perception) {
-        return possibleActions.stream()
-                .filter(action -> action instanceof Move)
-                .filter(action -> ((Move) action).maybeDetectOccupancy(perception))
-                .map(action -> ((Move) action).getDestination())
-                .collect(Collectors.toSet());
-    }
-
     public void enter(Character c) {
         var p = Global.getMatch().findParticipant(c);
         present.add(p);

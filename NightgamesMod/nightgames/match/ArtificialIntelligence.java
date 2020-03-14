@@ -10,10 +10,10 @@ import nightgames.match.actions.Move;
 import nightgames.trap.Trap;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class ArtificialIntelligence implements Intelligence {
     private NPC character;
@@ -24,9 +24,14 @@ public class ArtificialIntelligence implements Intelligence {
 
     @Override
     public void move(Collection<Action> possibleActions, Consumer<Action> callback) {
-        HashSet<Area> radar = new HashSet<>();
+        Set<Area> radar = Set.of();
         if (!character.has(Trait.immobile)) {
-            radar.addAll(character.location.get().noisyNeighbors(character.get(Attribute.Perception)));
+            radar = possibleActions.stream()
+                    .filter(act -> act instanceof Move)
+                    .map(act -> (Move) act)
+                    .filter(act -> act.maybeDetectOccupancy(character.get(Attribute.Perception)))
+                    .map(Move::getDestination)
+                    .collect(Collectors.toSet());
         }
         var chosenAction = character.ai.move(possibleActions, radar);
         callback.accept(chosenAction);

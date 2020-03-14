@@ -25,10 +25,14 @@ public class HumanIntelligence implements Intelligence {
     @Override
     public void move(Collection<Action> possibleActions,
                      Consumer<Action> callback) {
-        character.location.get().noisyNeighbors(character.get(Attribute.Perception)).forEach(room -> {
-            character.message("You hear something in the <b>" + room.name + "</b>.");
-            room.setPinged(true);
-        });
+        possibleActions.stream()
+                .filter(act -> act instanceof Move)
+                .map(act -> (Move) act)
+                .filter(act -> act.maybeDetectOccupancy(character.get(Attribute.Perception)))
+                .forEach(act -> {
+                    character.message("You hear something in the <b>" + act.getDestination().name + "</b>.");
+                    act.getDestination().setPinged(true);
+                });
         presentMoveOptions(possibleActions.stream()
                 .filter(act -> Global.getMatch().getCondition().allowAction(act, character, Global.getMatch()))
                 .collect(Collectors.toSet()),
