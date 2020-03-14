@@ -12,8 +12,6 @@ import java.util.Map;
 import java.util.function.BiPredicate;
 
 public abstract class ActionModifier implements ModifierCategory<ActionModifier>, ModifierComponent {
-    public static final ActionModifierLoader loader = new ActionModifierLoader();
-    public static final ActionModifierCombiner combiner = new ActionModifierCombiner();
 
     public boolean actionIsBanned(Action a) {
         return false;

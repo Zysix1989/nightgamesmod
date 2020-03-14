@@ -25,7 +25,6 @@ import nightgames.match.MatchType;
 import nightgames.match.actions.Masturbate;
 import nightgames.match.actions.Wait;
 import nightgames.match.actions.*;
-import nightgames.modifier.CustomModifierLoader;
 import nightgames.modifier.Modifier;
 import nightgames.modifier.standard.*;
 import nightgames.pet.PetCharacter;
@@ -45,7 +44,6 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
@@ -568,28 +566,6 @@ public class Global {
         modifierPool.add(new VibrationModifier());
         modifierPool.add(new VulnerableModifier());
         modifierPool.add(new MayaModifier());           //Checks its own condition, so it should be fine, here. - DSM
-
-        File customModFile = new File("data/customModifiers.json");
-        if (customModFile.canRead()) {
-            try {
-                JsonArray array = JsonUtils.rootJson(Files.newBufferedReader(customModFile.toPath())).getAsJsonArray();
-                for (JsonElement element : array) {
-                    JsonObject object;
-                    try {
-                        object = element.getAsJsonObject();
-                    } catch (Exception e) {
-                        System.out.println("Error loading custom modifiers: Non-object element in root array");
-                        continue;
-                    }
-                    Modifier mod = CustomModifierLoader.readModifier(object);
-                    if (!mod.name().equals("DEMO"))
-                        modifierPool.add(mod);
-                }
-            } catch (IOException e) {
-                System.out.println("Error loading custom modifiers: " + e);
-                e.printStackTrace();
-            }
-        }
     }
 
     public static Set<Action> getActions() {

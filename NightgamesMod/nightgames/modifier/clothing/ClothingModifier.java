@@ -1,21 +1,15 @@
 package nightgames.modifier.clothing;
 
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
 import nightgames.items.clothing.Outfit;
 import nightgames.modifier.ModifierCategory;
 import nightgames.modifier.ModifierComponent;
+
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public abstract class ClothingModifier implements ModifierCategory<ClothingModifier>, ModifierComponent {
     protected static final Set<Integer> ALL_LAYERS = Collections
@@ -24,9 +18,6 @@ public abstract class ClothingModifier implements ModifierCategory<ClothingModif
     protected static final Map<ClothingSlot, Set<Integer>> ALL_SLOT_LAYER_COMBOS = Collections
                     .unmodifiableMap(EnumSet.allOf(ClothingSlot.class).stream().collect(Collectors.toMap(t -> t,
                                     t -> IntStream.range(0, Clothing.N_LAYERS).boxed().collect(Collectors.toSet()))));
-
-    public static final ClothingModifierLoader loader = new ClothingModifierLoader();
-    public static final ClothingModifierCombiner combiner = new ClothingModifierCombiner();
 
     public Set<Integer> allowedLayers() {
         return ALL_LAYERS;
@@ -162,7 +153,6 @@ public abstract class ClothingModifier implements ModifierCategory<ClothingModif
 
     public static void main(String[] args) {
         Clothing.buildClothingTable();
-        ClothingModifierCombiner combiner = new ClothingModifierCombiner();
 
         Outfit test1 = new Outfit();
         test1.equip(Clothing.getByID("bra"));
@@ -175,9 +165,6 @@ public abstract class ClothingModifier implements ModifierCategory<ClothingModif
         Outfit test4 = new Outfit(test1);
         Outfit test5 = new Outfit(test1);
 
-        combiner.nullModifier().apply(test1);
-        System.out.println(test1);
-
         new UnderwearOnlyModifier().apply(test2);
         System.out.println(test2);
 
@@ -186,9 +173,5 @@ public abstract class ClothingModifier implements ModifierCategory<ClothingModif
 
         new NoPantiesModifier().combine(new ForceClothingModifier("blouse", "thong")).apply(test4);
         System.out.println(test4);
-
-        Stream.of((ClothingModifier) new UnderwearOnlyModifier(), new ForceClothingModifier("blouse", "thong"),
-                        new NoPantiesModifier()).reduce(combiner.template(), combiner::combine).apply(test5);
-        System.out.println(test5);
     }
 }

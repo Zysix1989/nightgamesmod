@@ -6,7 +6,6 @@ import nightgames.modifier.ModifierComponent;
 import nightgames.status.Status;
 
 public class StatusModifier implements ModifierCategory<StatusModifier>, ModifierComponent {
-    public static final StatusModifierCombiner combiner = new StatusModifierCombiner();
 
     private final Status status;
     private final boolean playerOnly;

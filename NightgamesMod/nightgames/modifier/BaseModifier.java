@@ -5,10 +5,15 @@ import nightgames.items.Item;
 import nightgames.match.Action;
 import nightgames.match.Match;
 import nightgames.modifier.action.ActionModifier;
+import nightgames.modifier.action.ActionModifierCombiner;
 import nightgames.modifier.clothing.ClothingModifier;
+import nightgames.modifier.clothing.ClothingModifierCombiner;
 import nightgames.modifier.item.ItemModifier;
+import nightgames.modifier.item.ItemModifierCombiner;
 import nightgames.modifier.skill.SkillModifier;
+import nightgames.modifier.skill.SkillModifierCombiner;
 import nightgames.modifier.status.StatusModifier;
+import nightgames.modifier.status.StatusModifierCombiner;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,9 +45,9 @@ public abstract class BaseModifier implements Modifier {
     }
 
     protected BaseModifier() {
-        this(ClothingModifier.combiner.nullModifier(), ItemModifier.combiner.nullModifier(),
-                        StatusModifier.combiner.nullModifier(), SkillModifier.combiner.nullModifier(),
-                        ActionModifier.combiner.nullModifier(), EMPTY_CONSUMER);
+        this(ClothingModifierCombiner.NULL_MODIFIER, ItemModifierCombiner.NULL_MODIFIER,
+                StatusModifierCombiner.NULL_MODIFIER, SkillModifierCombiner.NULL_MODIFIER,
+                ActionModifierCombiner.NULL_MODIFIER, EMPTY_CONSUMER);
     }
 
     @Override

@@ -1,19 +1,13 @@
 package nightgames.modifier.item;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import nightgames.characters.Character;
 import nightgames.items.Item;
 import nightgames.modifier.ModifierCategory;
 import nightgames.modifier.ModifierComponent;
 
+import java.util.*;
+
 public abstract class ItemModifier implements ModifierCategory<ItemModifier>, ModifierComponent {
-    public static final ItemModifierLoader loader = new ItemModifierLoader();
-    public static final ItemModifierCombiner combiner = new ItemModifierCombiner();
 
 
     public Set<Item> bannedItems() {

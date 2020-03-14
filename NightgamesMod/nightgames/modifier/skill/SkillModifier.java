@@ -1,11 +1,5 @@
 package nightgames.modifier.skill;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -14,9 +8,9 @@ import nightgames.modifier.ModifierComponent;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
 
+import java.util.*;
+
 public abstract class SkillModifier implements ModifierCategory<SkillModifier>, ModifierComponent {
-    public static final SkillModifierLoader loader = new SkillModifierLoader();
-    public static final SkillModifierCombiner combiner = new SkillModifierCombiner();
 
     public Set<Skill> bannedSkills() {
         return Collections.emptySet();
