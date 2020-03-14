@@ -18,6 +18,17 @@ public class Hide extends Action {
         }
     }
 
+    public static final class Instance extends Action.Instance {
+        private Instance(Action self, Participant user) {
+            super(self, user);
+        }
+
+        @Override
+        public Action.Aftermath execute() {
+            return self.execute(user);
+        }
+    }
+
     public static class State implements Participant.State {
 
         @Override
@@ -58,6 +69,11 @@ public class Hide extends Action {
     @Override
     public boolean usable(Participant user) {
         return !(user.state instanceof State) && !user.getCharacter().bound();
+    }
+
+    @Override
+    public Instance newInstance(Participant user) {
+        return new Instance(this, user);
     }
 
     @Override

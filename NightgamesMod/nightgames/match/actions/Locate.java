@@ -27,6 +27,17 @@ public class Locate extends Action {
         }
     }
 
+    public static final class Instance extends Action.Instance {
+        private Instance(Action self, Participant user) {
+            super(self, user);
+        }
+
+        @Override
+        public Action.Aftermath execute() {
+            return self.execute(user);
+        }
+    }
+
     private static final class Dialog {
         private Participant scryer;
 
@@ -92,6 +103,11 @@ public class Locate extends Action {
             }
         }
         return self.getCharacter().has(Trait.locator) && hasUnderwear && !self.getCharacter().bound();
+    }
+
+    @Override
+    public Instance newInstance(Participant user) {
+        return new Instance(this, user);
     }
 
     @Override

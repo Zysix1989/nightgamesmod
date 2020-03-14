@@ -21,7 +21,7 @@ public abstract class Action {
         public abstract String describe(Character c);
     }
 
-    public static class Instance {
+    public abstract static class Instance {
         public final Action self;
         protected final Participant user;
 
@@ -89,9 +89,7 @@ public abstract class Action {
         protected abstract void moveAfterDelay(Participant p);
     }
 
-    public Instance newInstance(Participant user) {
-        return new Instance(this, user);
-    }
+    public abstract Instance newInstance(Participant user);
 
     public abstract Aftermath execute(Participant user);
 

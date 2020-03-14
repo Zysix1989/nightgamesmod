@@ -17,6 +17,17 @@ public class Recharge extends Action {
         }
     }
 
+    public static final class Instance extends Action.Instance {
+        private Instance(Action self, Participant user) {
+            super(self, user);
+        }
+
+        @Override
+        public Action.Aftermath execute() {
+            return self.execute(user);
+        }
+    }
+
     public Recharge() {
         super("Recharge");
     }
@@ -26,6 +37,11 @@ public class Recharge extends Action {
         return user.getCharacter().get(Attribute.Science) > 0
                 && user.getCharacter().count(Item.Battery) < 20
                 && !user.getCharacter().bound();
+    }
+
+    @Override
+    public Instance newInstance(Participant user) {
+        return new Instance(this, user);
     }
 
     @Override

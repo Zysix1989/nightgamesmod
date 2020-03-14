@@ -18,6 +18,17 @@ public class Energize extends Action {
         }
     }
 
+    public static final class Instance extends Action.Instance {
+        private Instance(Action self, Participant user) {
+            super(self, user);
+        }
+
+        @Override
+        public Action.Aftermath execute() {
+            return self.execute(user);
+        }
+    }
+
     public Energize() {
         super("Absorb Mana");
     }
@@ -27,6 +38,11 @@ public class Energize extends Action {
         return user.getCharacter().get(Attribute.Arcane) >= 1
                 && !user.getCharacter().is(Stsflag.energized)
                 && !user.getCharacter().bound();
+    }
+
+    @Override
+    public Instance newInstance(Participant user) {
+        return new Instance(this, user);
     }
 
     @Override

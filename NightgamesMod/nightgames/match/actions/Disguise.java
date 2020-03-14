@@ -23,6 +23,17 @@ public class Disguise extends Action {
         }
     }
 
+    public static final class Instance extends Action.Instance {
+        private Instance(Action self, Participant user) {
+            super(self, user);
+        }
+
+        @Override
+        public Action.Aftermath execute() {
+            return self.execute(user);
+        }
+    }
+
     public Disguise() {
         super("Disguise");
     }
@@ -42,6 +53,11 @@ public class Disguise extends Action {
                                         && !other.has(Trait.cursed)
                                         && !Global.checkCharacterDisabledFlag(other))
                         .collect(Collectors.toList())).orElse(null);
+    }
+
+    @Override
+    public Instance newInstance(Participant user) {
+        return new Instance(this, user);
     }
 
     @Override

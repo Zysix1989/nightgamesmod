@@ -140,7 +140,7 @@ public class HumanIntelligence implements Intelligence {
 
 
     @Override
-    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation) {
+    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move.Instance> possibleMoves, Consumer<Action.Instance> actionCallback, Runnable neitherContinuation) {
         var listOptions = new ArrayList<>(intrusionOptions);
         assert listOptions.size() == 2: "No support for more than 2 combatants";
         character.gui.message("You find <b>" + listOptions.get(0).getTargetCharacter().getName() + "</b> and <b>" + listOptions.get(1).getTargetCharacter().getName()
@@ -157,7 +157,7 @@ public class HumanIntelligence implements Intelligence {
                 .collect(Collectors.toCollection(ArrayList::new));
         options.add(new CommandPanelOption("Watch them fight", event -> neitherContinuation.run()));
         options.addAll(possibleMoves.stream()
-                .map(move -> new CommandPanelOption("Move (" + move.getDestination() + ")",
+                .map(move -> new CommandPanelOption("Move (" + ((Move) move.self).getDestination() + ")",
                         event -> {
                             actionCallback.accept(move);
                             Global.getMatch().resume();

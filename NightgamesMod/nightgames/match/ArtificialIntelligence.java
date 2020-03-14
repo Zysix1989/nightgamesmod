@@ -89,7 +89,7 @@ public class ArtificialIntelligence implements Intelligence {
     }
 
     @Override
-    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move> possibleMoves, Consumer<Action> actionCallback, Runnable neitherContinuation) {
+    public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move.Instance> possibleMoves, Consumer<Action.Instance> actionCallback, Runnable neitherContinuation) {
         var bestTarget = intrusionOptions.stream()
                 .map(option -> new IntrusionEvaluation(option,
                         Global.random(20) +

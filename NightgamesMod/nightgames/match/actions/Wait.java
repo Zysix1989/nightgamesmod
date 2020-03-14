@@ -15,6 +15,17 @@ public class Wait extends Action {
         }
     }
 
+    public static final class Instance extends Action.Instance {
+        private Instance(Action self, Participant user) {
+            super(self, user);
+        }
+
+        @Override
+        public Action.Aftermath execute() {
+            return self.execute(user);
+        }
+    }
+
     public Wait() {
         super("Wait");
     }
@@ -22,6 +33,11 @@ public class Wait extends Action {
     @Override
     public boolean usable(Participant user) {
         return true;
+    }
+
+    @Override
+    public Instance newInstance(Participant user) {
+        return new Instance(this, user);
     }
 
     @Override

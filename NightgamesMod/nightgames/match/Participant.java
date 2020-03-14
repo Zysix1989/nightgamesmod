@@ -153,8 +153,8 @@ public class Participant {
         intelligence.intrudeInCombat(intrusionOptions,
                 character.location.get().possibleActions(this).stream()
                         .filter(act -> act instanceof Move)
-                        .map(act -> (Move) act)
-                        .collect(Collectors.toList()), act -> act.execute(this), noneContinuation
+                        .map(act -> ((Move) act).newInstance(this))
+                        .collect(Collectors.toList()), Action.Instance::execute, noneContinuation
         );
     }
 

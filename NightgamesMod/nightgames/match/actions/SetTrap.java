@@ -16,6 +16,17 @@ public class SetTrap extends Action {
         }
     }
 
+    public static final class Instance extends Action.Instance {
+        private Instance(Action self, Participant user) {
+            super(self, user);
+        }
+
+        @Override
+        public Action.Aftermath execute() {
+            return self.execute(user);
+        }
+    }
+
     private Trap trap;
 
     public SetTrap(Trap trap) {
@@ -29,6 +40,11 @@ public class SetTrap extends Action {
                 && trap.requirements(user)
                 && !user.getCharacter().bound()
                 && user.getLocation().getTrap().isEmpty();
+    }
+
+    @Override
+    public Instance newInstance(Participant user) {
+        return new Instance(this, user);
     }
 
     @Override

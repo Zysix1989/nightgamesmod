@@ -25,6 +25,17 @@ public class TreeAmbush extends Action {
         }
     }
 
+    public static final class Instance extends Action.Instance {
+        private Instance(Action self, Participant user) {
+            super(self, user);
+        }
+
+        @Override
+        public Action.Aftermath execute() {
+            return self.execute(user);
+        }
+    }
+
     public static class State implements Participant.State {
 
         @Override
@@ -103,6 +114,11 @@ public class TreeAmbush extends Action {
         return (user.getCharacter().get(Attribute.Power) >= 20 || user.getCharacter().get(Attribute.Animism) >= 10)
                         && !(user.state instanceof State)
                         && !user.getCharacter().bound();
+    }
+
+    @Override
+    public Instance newInstance(Participant user) {
+        return new Instance(this, user);
     }
 
     @Override

@@ -26,6 +26,17 @@ public final class Bathe extends Action {
         }
     }
 
+    public static final class Instance extends Action.Instance {
+        private Instance(Action self, Participant user) {
+            super(self, user);
+        }
+
+        @Override
+        public Action.Aftermath execute() {
+            return self.execute(user);
+        }
+    }
+
     public class State extends Action.Busy {
         private boolean clothesStolen = false;
         private String message;
@@ -133,6 +144,11 @@ public final class Bathe extends Action {
     @Override
     public boolean usable(Participant user) {
         return !user.getCharacter().bound();
+    }
+
+    @Override
+    public Instance newInstance(Participant user) {
+        return new Instance(this, user);
     }
 
     @Override
