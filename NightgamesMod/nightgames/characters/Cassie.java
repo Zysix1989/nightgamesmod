@@ -271,7 +271,7 @@ public class Cassie extends BasePersonality {
     @Override
     public Action.Instance move(Collection<Action.Instance> available, Collection<Area> radar) {
         for (var act : available) {
-            if (!character.is(Stsflag.energized) && act.self instanceof Energize) {
+            if (!character.is(Stsflag.energized) && act instanceof Energize.Instance) {
                 return act;
             }
         }

@@ -112,7 +112,7 @@ public class Yui extends BasePersonality {
     @Override
     public Action.Instance move(Collection<Action.Instance> available, Collection<Area> radar) {
         for (var act : available) {
-            if (act.self instanceof Energize) {
+            if (act instanceof Energize.Instance) {
                 return act;
             }
         }
