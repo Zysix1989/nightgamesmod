@@ -58,7 +58,9 @@ public class DebugGUIPanel extends JPanel {
         consoleCommands.add(new DebugCommand("(\\w+)\\.move (\\w+)", (output, list) -> {
             try {
                 Participant target = Global.getMatch().findParticipant(Global.getCharacterByType(list.get(1)));
-                target.travel(Global.getMatch().getAreas().stream().filter(area -> area.name.toLowerCase().contains(list.get(2).toLowerCase())).findAny().orElseThrow());
+                target.travel(
+                        Global.getMatch().getAreas().stream().filter(area -> area.name.toLowerCase().contains(list.get(2).toLowerCase())).findAny().orElseThrow(),
+                        target.getCharacter().getTrueName() + " move to a new area by Magic!");
             } catch (NullPointerException e) {
                 output.setText(list.get(1) + " is not a valid character");
             }

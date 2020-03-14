@@ -136,7 +136,7 @@ public class Participant {
 
     public Area getLocation() { return character.location(); }
 
-    public void travel(Area dest) {
+    public void travel(Area dest, String message) {
         state = new Action.Ready();
         character.location.get().exit(this.character);
         character.location.set(dest);
@@ -144,10 +144,6 @@ public class Participant {
         if (dest.name.isEmpty()) {
             throw new RuntimeException("empty location");
         }
-    }
-
-    public void travel(Area dest, String message) {
-        travel(dest);
         character.notifyTravel(dest, message);
     }
 

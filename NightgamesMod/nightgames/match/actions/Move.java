@@ -61,8 +61,9 @@ public final class Move extends Action {
 
     @Override
     public Action.Aftermath execute(Participant user) {
-        user.travel(destination);
-        return new Aftermath();
+        var aftermath = new Aftermath();
+        user.travel(destination, aftermath.describe(user.getCharacter()));
+        return aftermath;
     }
 
     public Area getDestination() {
