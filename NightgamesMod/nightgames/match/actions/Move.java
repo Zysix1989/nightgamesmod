@@ -28,6 +28,7 @@ public final class Move extends Action {
 
     private Move(Area destination, String name, boolean detectDestination, SkillCheck check) {
         super(name);
+        this.detectDestination = detectDestination;
         this.destination = destination;
         this.skillCheck = check;
     }
@@ -69,7 +70,7 @@ public final class Move extends Action {
     }
 
     public boolean maybeDetectOccupancy(int perception) {
-        return destination.ping(perception);
+        return detectDestination && destination.ping(perception);
     }
 
 }
