@@ -2,10 +2,9 @@ package nightgames.modifier.status;
 
 import nightgames.characters.Character;
 import nightgames.modifier.ModifierCategory;
-import nightgames.modifier.ModifierComponent;
 import nightgames.status.Status;
 
-public class StatusModifier implements ModifierCategory<StatusModifier>, ModifierComponent {
+public class StatusModifier implements ModifierCategory<StatusModifier> {
 
     private final Status status;
     private final boolean playerOnly;
@@ -44,9 +43,5 @@ public class StatusModifier implements ModifierCategory<StatusModifier>, Modifie
     @Override
     public String toString() {
         return status.name;
-    }
-
-    @Override public String name() {
-        return "status-modifier-" + status.name;
     }
 }

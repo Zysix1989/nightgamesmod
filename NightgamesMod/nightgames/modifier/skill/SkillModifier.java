@@ -4,13 +4,12 @@ import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.modifier.ModifierCategory;
-import nightgames.modifier.ModifierComponent;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
 
 import java.util.*;
 
-public abstract class SkillModifier implements ModifierCategory<SkillModifier>, ModifierComponent {
+public abstract class SkillModifier implements ModifierCategory<SkillModifier> {
 
     public Set<Skill> bannedSkills() {
         return Collections.emptySet();
@@ -40,10 +39,6 @@ public abstract class SkillModifier implements ModifierCategory<SkillModifier>, 
         return new SkillModifier() {
             @Override public String toString() {
                 return first.toString() + ", " + next.toString();
-            }
-
-            @Override public String name() {
-                return first.name() + " then " + next.name();
             }
 
             @Override public Set<Skill> allowedSkills(Combat c) {

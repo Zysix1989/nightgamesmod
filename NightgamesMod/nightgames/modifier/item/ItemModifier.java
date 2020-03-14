@@ -3,11 +3,10 @@ package nightgames.modifier.item;
 import nightgames.characters.Character;
 import nightgames.items.Item;
 import nightgames.modifier.ModifierCategory;
-import nightgames.modifier.ModifierComponent;
 
 import java.util.*;
 
-public abstract class ItemModifier implements ModifierCategory<ItemModifier>, ModifierComponent {
+public abstract class ItemModifier implements ModifierCategory<ItemModifier> {
 
 
     public Set<Item> bannedItems() {
@@ -74,9 +73,6 @@ public abstract class ItemModifier implements ModifierCategory<ItemModifier>, Mo
                 return first.toString() + next.toString();
             }
 
-            public String name() {
-                return first.name() + " + " + next.name();
-            }
         };
     }
 
