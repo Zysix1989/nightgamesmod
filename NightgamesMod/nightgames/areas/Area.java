@@ -46,13 +46,11 @@ public class Area implements Serializable {
     }
 
     public static void addDoor(Area one, Area other) {
-        one.link(other);
-        other.link(one);
-    }
+        one.adjacent.add(other);
+        one.possibleActions.add(Move.normal(other));
 
-    public void link(Area adj) {
-        adjacent.add(adj);
-        possibleActions.add(Move.normal(adj));
+        other.adjacent.add(one);
+        other.possibleActions.add(Move.normal(one));
     }
 
     public void shortcut(Area sc) {

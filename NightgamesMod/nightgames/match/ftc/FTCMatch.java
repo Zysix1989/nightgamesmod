@@ -172,8 +172,7 @@ public class FTCMatch extends Match {
 
     private static void link(Area hub, Area... areas) {
         for (Area area : areas) {
-            hub.link(area);
-            area.link(hub);
+            Area.addDoor(hub, area);
         }
     }
 

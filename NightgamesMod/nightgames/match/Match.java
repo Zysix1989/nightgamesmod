@@ -83,50 +83,35 @@ public class Match {
         sau.setMapDrawHint(new MapDrawHint(new Rectangle(10, 12, 3, 5), "S.Union", true));
         courtyard.setMapDrawHint(new MapDrawHint(new Rectangle(6, 14, 3, 6), "Courtyard", true));
 
-        quad.link(dorm);
-        quad.link(engineering);
-        quad.link(libarts);
-        quad.link(dining);
-        quad.link(sau);
-        dorm.link(shower);
-        dorm.link(laundry);
-        dorm.link(quad);
-        shower.link(dorm);
-        laundry.link(dorm);
-        laundry.link(tunnel);
-        engineering.link(quad);
-        engineering.link(lab);
-        engineering.link(workshop);
-        workshop.link(engineering);
-        lab.link(engineering);
-        lab.link(bridge);
-        lab.jump(dining);
-        libarts.link(quad);
-        libarts.link(library);
-        libarts.link(pool);
-        pool.link(libarts);
-        pool.link(sau);
-        pool.link(courtyard);
-        courtyard.link(pool);
-        library.link(libarts);
-        library.link(bridge);
-        dining.link(quad);
-        dining.link(storage);
-        dining.link(kitchen);
-        kitchen.link(dining);
-        storage.link(dining);
-        storage.link(tunnel);
-        tunnel.link(storage);
-        tunnel.link(laundry);
-        bridge.link(lab);
-        bridge.link(library);
-        bridge.jump(quad);
-        sau.link(pool);
-        sau.link(quad);
+        // Right loop
+        Area.addDoor(quad, dorm);
+        Area.addDoor(dorm, shower);
+        Area.addDoor(dorm, laundry);
+        Area.addDoor(laundry, tunnel);
+        Area.addDoor(tunnel, storage);
+        Area.addDoor(storage, dining);
+        Area.addDoor(dining, kitchen);
+        Area.addDoor(dining, quad);
+
+        // Left loop
+        Area.addDoor(quad, sau);
+        Area.addDoor(sau, pool);
+        Area.addDoor(pool, courtyard);
+        Area.addDoor(pool, libarts);
+        Area.addDoor(libarts, quad);
+        Area.addDoor(libarts, library);
+        Area.addDoor(library, bridge);
+        Area.addDoor(bridge, lab);
+        Area.addDoor(lab, engineering);
+        Area.addDoor(engineering, workshop);
+        Area.addDoor(engineering, quad);
+
         workshop.shortcut(pool);
         pool.shortcut(workshop);
         library.shortcut(tunnel);
         tunnel.shortcut(library);
+        lab.jump(dining);
+        bridge.jump(quad);
 
         dorm.getPossibleActions().add(new Hide());
         dorm.getPossibleActions().add(Resupply.withEscapeRoutes(Set.of(new Resupply.EscapeRoute(quad,
