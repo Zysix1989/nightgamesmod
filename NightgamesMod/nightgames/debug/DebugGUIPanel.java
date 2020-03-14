@@ -5,7 +5,6 @@ import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
-import nightgames.match.Participant;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -29,7 +28,7 @@ public class DebugGUIPanel extends JPanel {
     {
         
         consoleCommands.add(new DebugCommand("help", (output, list) -> {
-            output.setText("Available commands are:all.(Command)\n(Charactername).setXp\n(Charactername).setMoney\n(Charactername).move\n(Charactername).addTrait\n(Charactername).removeTrait\n"
+            output.setText("Available commands are:all.(Command)\n(Charactername).setXp\n(Charactername).setMoney\n(Charactername).addTrait\n(Charactername).removeTrait\n"
                             + "(Charactername).addItem\n(Charactername).addAtt\n(Charactername).addAffection\n(Charactername).addAttraction\n(Charactername).ding\n(Charactername).list\n");
         }));
         
@@ -51,16 +50,6 @@ public class DebugGUIPanel extends JPanel {
             try {
                 Character target = Global.getCharacterByType(list.get(1));
                 target.setMoney(Integer.valueOf(list.get(2)));
-            } catch (NullPointerException e) {
-                output.setText(list.get(1) + " is not a valid character");
-            }
-        }));
-        consoleCommands.add(new DebugCommand("(\\w+)\\.move (\\w+)", (output, list) -> {
-            try {
-                Participant target = Global.getMatch().findParticipant(Global.getCharacterByType(list.get(1)));
-                target.travel(
-                        Global.getMatch().getAreas().stream().filter(area -> area.name.toLowerCase().contains(list.get(2).toLowerCase())).findAny().orElseThrow(),
-                        target.getCharacter().getTrueName() + " move to a new area by Magic!");
             } catch (NullPointerException e) {
                 output.setText(list.get(1) + " is not a valid character");
             }
