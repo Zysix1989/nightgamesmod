@@ -34,7 +34,7 @@ public class HumanIntelligence implements Intelligence {
                     act.getDestination().setPinged(true);
                 });
         presentMoveOptions(possibleActions.stream()
-                .filter(act -> Global.getMatch().getCondition().allowAction(act.self, character, Global.getMatch()))
+                .filter(act -> Global.getMatch().getCondition().allowAction(act.self, character))
                 .collect(Collectors.toSet()),
                 callback);
     }

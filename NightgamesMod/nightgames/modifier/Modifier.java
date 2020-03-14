@@ -37,7 +37,7 @@ public interface Modifier {
      */
     void undoItems(Character c);
 
-    boolean allowAction(Action act, Character c, Match match);
+    boolean allowAction(Action act, Character c);
 
     int bonus();
 
