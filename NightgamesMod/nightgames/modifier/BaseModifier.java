@@ -33,21 +33,14 @@ public abstract class BaseModifier implements Modifier {
 
     protected Map<Character, Map<Item, Integer>> moddedItems;
 
-    protected BaseModifier(ClothingModifier clothing, ItemModifier items, StatusModifier status, SkillModifier skills,
-                    ActionModifier actions, BiConsumer<Character, Match> custom) {
-        this.clothing = clothing;
-        this.items = items;
-        this.status = status;
-        this.skills = skills;
-        this.actions = actions;
-        this.custom = custom;
-        moddedItems = new HashMap<>();
-    }
-
     protected BaseModifier() {
-        this(ClothingModifierCombiner.NULL_MODIFIER, ItemModifierCombiner.NULL_MODIFIER,
-                StatusModifierCombiner.NULL_MODIFIER, SkillModifierCombiner.NULL_MODIFIER,
-                ActionModifierCombiner.NULL_MODIFIER, EMPTY_CONSUMER);
+        this.clothing = ClothingModifierCombiner.NULL_MODIFIER;
+        this.items = ItemModifierCombiner.NULL_MODIFIER;
+        this.status = StatusModifierCombiner.NULL_MODIFIER;
+        this.skills = SkillModifierCombiner.NULL_MODIFIER;
+        this.actions = ActionModifierCombiner.NULL_MODIFIER;
+        this.custom = EMPTY_CONSUMER;
+        moddedItems = new HashMap<>();
     }
 
     @Override
