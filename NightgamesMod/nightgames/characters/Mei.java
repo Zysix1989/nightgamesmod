@@ -1,6 +1,5 @@
 package nightgames.characters;
 
-import nightgames.areas.Area;
 import nightgames.characters.body.*;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.mods.DemonicTailMod;
@@ -17,10 +16,8 @@ import nightgames.global.Global;
 import nightgames.grammar.Shorthand;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
-import nightgames.match.Action;
 import nightgames.start.NpcConfiguration;
 
-import java.util.Collection;
 import java.util.Optional;
 
 public class Mei extends BasePersonality {
@@ -95,11 +92,6 @@ public class Mei extends BasePersonality {
         preferredAttributes.add(c -> c.getLevel() >= 30 ? Optional.of(Attribute.Dark) : Optional.empty());
         // mostly feminine face, cute but not quite at Angel's level
         character.body.add(new FacePart(.1, 2.9));
-    }
-
-    @Override
-    public Action move(Collection<Action> available, Collection<Area> radar) {
-        return Decider.parseMoves(available, radar, character);
     }
 
     @Override

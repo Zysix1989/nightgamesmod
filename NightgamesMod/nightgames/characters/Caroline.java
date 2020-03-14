@@ -1,6 +1,5 @@
 package nightgames.characters;
 
-import nightgames.areas.Area;
 import nightgames.characters.body.BreastsPart;
 import nightgames.characters.body.BreastsPart.Size;
 import nightgames.characters.body.FacePart;
@@ -17,10 +16,8 @@ import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
-import nightgames.match.Action;
 import nightgames.start.NpcConfiguration;
 
-import java.util.Collection;
 import java.util.Optional;
 
 public class Caroline extends BasePersonality {
@@ -92,11 +89,6 @@ public class Caroline extends BasePersonality {
         preferredAttributes.add(c -> c.getLevel() >= 30 ? Optional.of(Attribute.Arcane) : Optional.empty());
         // mostly feminine face, cute but not quite at Angel's level
         character.body.add(new FacePart(.1, 2.9));
-    }
-
-    @Override
-    public Action move(Collection<Action> available, Collection<Area> radar) {
-        return Decider.parseMoves(available, radar, character);
     }
 
     @Override
