@@ -41,11 +41,6 @@ public class BanActionModifier extends ActionModifier implements ModifierCompone
         return super.actionIsBanned(a) || absolutes.contains(a);
     }
 
-    @Override
-    public Map<Action, BiPredicate<Character, Match>> conditionalBans() {
-        return conditionals;
-    }
-
     @Override public String name() {
         return name;
     }
