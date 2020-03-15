@@ -35,7 +35,7 @@ public class DescribablePredicate<T> implements Predicate<T> {
 
     @Override
     public String toString() {
-        return "(not " + description + ")";
+        return description;
     }
 
 }
