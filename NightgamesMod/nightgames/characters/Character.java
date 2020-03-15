@@ -2909,7 +2909,7 @@ public Character clone() throws CloneNotSupportedException {
     // finds the best Move to get to an Area with an Action that satisfies the predicate
     public static Optional<Move.Instance> bestMove(Character c, Area initial, Predicate<Action.Instance> predicate) {
         var p = Global.getMatch().findParticipant(c);
-        if (initial.possibleActions(p).stream().map(act -> act.newInstance(p)).anyMatch(predicate)) {
+        if (initial.possibleActions(p).stream().anyMatch(predicate)) {
             throw new RuntimeException("current room already satisfies predicate");
         }
         ArrayDeque<Area> queue = new ArrayDeque<>();
@@ -2921,9 +2921,7 @@ public Character clone() throws CloneNotSupportedException {
         while (!queue.isEmpty()) {
             Area t = queue.pop();
             parents.put(t, last);
-            var possibleActions = t.possibleActions(p).stream()
-                    .map(act -> act.newInstance(p))
-                    .collect(Collectors.toUnmodifiableSet());
+            var possibleActions = t.possibleActions(p);
             var possibleMoves = possibleActions.stream()
                     .filter(action -> action instanceof Move.Instance)
                     .map(action -> (Move.Instance) action)

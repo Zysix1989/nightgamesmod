@@ -95,14 +95,14 @@ public class Participant {
         character.displayStateMessage(character.location.get().getTrap(this));
 
         var possibleActions = new ArrayList<Action>();
-        possibleActions.addAll(character.location.get().possibleActions(this));
         possibleActions.addAll(character.getItemActions());
         possibleActions.addAll(Global.getMatch().getAvailableActions());
         possibleActions.removeIf(a -> !a.usable(this));
-        var possibleActionInstances = possibleActions.stream()
+        var possibleActionInstances = character.location.get().possibleActions(this);
+        possibleActionInstances.addAll(possibleActions.stream()
                 .map(act -> act.newInstance(this))
                 .filter(actionFilter)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet()));
         character.status.stream()
                 .map(s -> s.makeAllowedActionsPredicate(this))
                 .collect(Collectors.toSet())
@@ -122,9 +122,9 @@ public class Participant {
     public void flee() {
         var options = character.location.get().possibleActions(this);
         var destinations = options.stream()
-                .filter(action -> action instanceof Move)
-                .map(action -> (Move) action)
-                .map(Move::getDestination)
+                .filter(action -> action instanceof Move.Instance)
+                .map(action -> (Move.Instance) action)
+                .map(Move.Instance::getDestination)
                 .collect(Collectors.toList());
         var destination = destinations.get(Global.random(destinations.size()));
         travel(destination, "You dash away and escape into the <b>" + destination.name + ".</b>");
@@ -160,8 +160,8 @@ public class Participant {
     public void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, Runnable noneContinuation) {
         intelligence.intrudeInCombat(intrusionOptions,
                 character.location.get().possibleActions(this).stream()
-                        .filter(act -> act instanceof Move)
-                        .map(act -> ((Move) act).newInstance(this))
+                        .filter(act -> act instanceof Move.Instance)
+                        .map(act -> (Move.Instance) act)
                         .collect(Collectors.toList()), Action.Instance::execute, noneContinuation
         );
     }
