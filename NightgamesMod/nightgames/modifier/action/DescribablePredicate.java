@@ -20,13 +20,8 @@ public class DescribablePredicate<T> implements Predicate<T> {
         return predicate.test(act);
     }
 
-    @Override
-    public Predicate<T> and(Predicate<? super T> other) {
-        var result = Predicate.super.and(other);
-        if (other instanceof DescribablePredicate) {
-            return new DescribablePredicate<>("(and " + toString() + " " + other.toString() + ")", result);
-        }
-        return result;
+    public DescribablePredicate<T> and(DescribablePredicate<T> other) {
+        return new DescribablePredicate<>("(and " + toString() + " " + other.toString() + ")", Predicate.super.and(other));
     }
 
     @Override
@@ -34,13 +29,8 @@ public class DescribablePredicate<T> implements Predicate<T> {
         return new DescribablePredicate<>("(not " + toString() + ")", Predicate.super.negate());
     }
 
-    @Override
-    public Predicate<T> or(Predicate<? super T> other) {
-        var result = Predicate.super.or(other);
-        if (other instanceof DescribablePredicate) {
-            return new DescribablePredicate<>("(or " + toString() + " " + other.toString() + ")", result);
-        }
-        return result;
+    public DescribablePredicate<T> or(DescribablePredicate<T> other) {
+        return new DescribablePredicate<>("(or " + toString() + " " + other.toString() + ")", Predicate.super.or(other));
     }
 
     @Override
