@@ -26,7 +26,7 @@ public class BushAmbush extends Action {
         }
     }
 
-    public static final class Instance extends Action.Instance {
+    public final class Instance extends Action.Instance {
         private Instance(Action self, Participant user) {
             super(self, user);
         }

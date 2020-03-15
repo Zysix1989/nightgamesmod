@@ -21,7 +21,7 @@ public abstract class Action {
         public abstract String describe(Character c);
     }
 
-    public abstract static class Instance {
+    public abstract class Instance {
         public final Action self;
         protected final Participant user;
 
@@ -32,6 +32,10 @@ public abstract class Action {
 
         public Aftermath execute() {
             return self.execute(user);
+        }
+
+        public String getName() {
+            return name;
         }
     }
 

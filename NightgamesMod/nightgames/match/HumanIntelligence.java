@@ -35,7 +35,7 @@ public class HumanIntelligence implements Intelligence {
                 });
         var optionChoices = possibleActions.stream()
                 .map(action -> new CommandPanelOption(
-                        action.toString(),
+                        action.getName(),
                         event -> {
                             callback.accept(action);
                             Global.getMatch().resume();
@@ -164,7 +164,7 @@ public class HumanIntelligence implements Intelligence {
                 .collect(Collectors.toCollection(ArrayList::new));
         options.add(new CommandPanelOption("Watch them fight", event -> neitherContinuation.run()));
         options.addAll(possibleMoves.stream()
-                .map(move -> new CommandPanelOption(move.self.name,
+                .map(move -> new CommandPanelOption(move.getName(),
                         event -> {
                             actionCallback.accept(move);
                             Global.getMatch().resume();
