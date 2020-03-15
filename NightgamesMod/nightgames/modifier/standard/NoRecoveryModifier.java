@@ -2,9 +2,10 @@ package nightgames.modifier.standard;
 
 import nightgames.characters.Player;
 import nightgames.global.Global;
+import nightgames.match.Action;
 import nightgames.match.actions.Masturbate;
 import nightgames.modifier.BaseModifier;
-import nightgames.modifier.action.ActionPredicate;
+import nightgames.modifier.action.DescribablePredicate;
 import nightgames.modifier.skill.BanSkillsModifier;
 
 public class NoRecoveryModifier extends BaseModifier {
@@ -12,7 +13,7 @@ public class NoRecoveryModifier extends BaseModifier {
     public static final String NAME = "norecovery";
 
     public NoRecoveryModifier() {
-        actions = new ActionPredicate(new Masturbate().toString(), act -> act instanceof Masturbate).negate();
+        actions = new DescribablePredicate<Action>(new Masturbate().toString(), act -> act instanceof Masturbate).negate();
         skills = new BanSkillsModifier(new nightgames.skills.Masturbate(null));
     }
 
