@@ -11,6 +11,10 @@ public class DescribablePredicate<T> implements Predicate<T> {
         this.predicate = predicate;
     }
 
+    public static <T> DescribablePredicate<T> True() {
+        return new DescribablePredicate<>("true", obj -> true);
+    }
+
     @Override
     public boolean test(T act) {
         return predicate.test(act);
