@@ -7,8 +7,8 @@ import java.util.Set;
 public class BanActionModifier extends ActionModifier {
     private final Set<Action> absolutes;
 
-    public BanActionModifier(Action... actions) {
-        absolutes = Set.of(actions);
+    public BanActionModifier(Action action) {
+        absolutes = Set.of(action);
     }
 
     @Override
