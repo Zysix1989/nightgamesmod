@@ -5,7 +5,6 @@ import nightgames.items.Item;
 import nightgames.match.Action;
 import nightgames.match.Match;
 import nightgames.modifier.action.ActionModifier;
-import nightgames.modifier.action.ActionModifierCombiner;
 import nightgames.modifier.clothing.ClothingModifier;
 import nightgames.modifier.clothing.ClothingModifierCombiner;
 import nightgames.modifier.item.ItemModifier;
@@ -38,7 +37,7 @@ public abstract class BaseModifier implements Modifier {
         this.items = ItemModifierCombiner.NULL_MODIFIER;
         this.status = StatusModifierCombiner.NULL_MODIFIER;
         this.skills = SkillModifierCombiner.NULL_MODIFIER;
-        this.actions = ActionModifierCombiner.NULL_MODIFIER;
+        this.actions = new ActionModifier();
         this.custom = EMPTY_CONSUMER;
         moddedItems = new HashMap<>();
     }
