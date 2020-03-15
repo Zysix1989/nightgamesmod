@@ -32,7 +32,7 @@ public final class Move extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return self.executeOuter(user);
+            return executeOuter(user);
         }
 
         public Area getDestination() {
