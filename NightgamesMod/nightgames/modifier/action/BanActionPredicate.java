@@ -20,7 +20,7 @@ public class BanActionPredicate implements Predicate<Action> {
 
     @Override
     public String toString() {
-        return "Banned: " + description;
+        return "(not " + description + ")";
     }
 
 }
