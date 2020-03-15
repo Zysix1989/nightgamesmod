@@ -16,6 +16,7 @@ import nightgames.modifier.status.StatusModifierCombiner;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiConsumer;
 
 public abstract class BaseModifier {
@@ -94,8 +95,11 @@ public abstract class BaseModifier {
         custom.accept(c, m);
     }
 
-    public boolean allowAction(Action act, Character c) {
-        return !c.human() || actions.test(act);
+    public Optional<DescribablePredicate<Action>> getActionFilterFor(Character c) {
+        if (c.human()) {
+            return Optional.of(actions);
+        }
+        return Optional.empty();
     }
 
     /**
