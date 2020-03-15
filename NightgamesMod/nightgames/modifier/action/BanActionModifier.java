@@ -2,23 +2,21 @@ package nightgames.modifier.action;
 
 import nightgames.match.Action;
 
-import java.util.Set;
-
 public class BanActionModifier extends ActionModifier {
-    private final Set<Action> absolutes;
+    private final Action absolute;
 
     public BanActionModifier(Action action) {
-        absolutes = Set.of(action);
+        absolute = action;
     }
 
     @Override
     public boolean actionIsBanned(Action a) {
-        return super.actionIsBanned(a) || absolutes.contains(a);
+        return super.actionIsBanned(a) || absolute.equals(a);
     }
 
     @Override
     public String toString() {
-        return "Banned:" + absolutes.toString();
+        return "Banned: " + absolute.toString();
     }
 
 }
