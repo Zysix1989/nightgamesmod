@@ -19,11 +19,9 @@ public class Hide extends Action {
     }
 
     public final class Instance extends Action.Instance {
-        public final Action self;
 
-        private Instance(Action self, Participant user) {
+        private Instance(Participant user) {
             super(user);
-            this.self = self;
         }
 
         @Override
@@ -76,7 +74,7 @@ public class Hide extends Action {
 
     @Override
     public Instance newInstance(Participant user) {
-        return new Instance(this, user);
+        return new Instance(user);
     }
 
     @Override
