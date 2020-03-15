@@ -7,6 +7,7 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.match.actions.Move;
 import nightgames.match.actions.Resupply;
+import nightgames.modifier.action.DescribablePredicate;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -37,10 +38,12 @@ public class Participant {
     public State state = new Action.Ready();
     public Set<Participant> invalidAttackers = new HashSet<>();
     public List<Challenge> challenges = new ArrayList<>();
+    public final DescribablePredicate<Action.Instance> actionFilter;
 
     public Participant(Character c) {
         this.character = c;
         this.intelligence = c.makeIntelligence();
+        this.actionFilter = Global.getMatch().getCondition().getActionFilterFor(character);
     }
 
     Participant(Participant p) {
@@ -54,6 +57,7 @@ public class Participant {
         this.state = p.state;
         this.invalidAttackers = new HashSet<>(p.invalidAttackers);
         this.challenges = new ArrayList<>(p.challenges);
+        this.actionFilter = p.actionFilter;
     }
 
     public Participant copy() {
@@ -97,10 +101,7 @@ public class Participant {
         possibleActions.removeIf(a -> !a.usable(this));
         var possibleActionInstances = possibleActions.stream()
                 .map(act -> act.newInstance(this))
-                .filter(act ->
-                        Global.getMatch().getCondition()
-                                .getActionFilterFor(character)
-                                .test(act))
+                .filter(actionFilter)
                 .collect(Collectors.toSet());
         character.status.stream()
                 .map(s -> s.makeAllowedActionsPredicate(this))
