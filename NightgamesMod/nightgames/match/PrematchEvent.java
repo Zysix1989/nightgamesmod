@@ -43,10 +43,8 @@ public abstract class PrematchEvent {
             return new NoModifier();
         }
         Set<Modifier> modifiers = new HashSet<>(Global.getModifierPool());
-        modifiers.removeIf(mod -> !mod.isApplicable() || mod.name()
-                                                            .equals(MayaModifier.NAME));
-        return Global.pickRandom(modifiers.toArray(new Modifier[] {}))
-                     .get();
+        modifiers.removeIf(mod -> !mod.isApplicable() || mod.name().equals(MayaModifier.NAME));
+        return Global.pickRandom(modifiers.toArray(new Modifier[] {})).get();
     }
 
     protected static final class DefaultEvent extends PrematchEvent {
@@ -56,8 +54,7 @@ public abstract class PrematchEvent {
                             + "You greet each of the girls and make some idle chatter with "
                             + "them before you check in with Lilly to see if she has any custom rules for you.<br/><br/>"
                             + type.intro();
-            if (type.name()
-                    .equals(MayaModifier.NAME)) {
+            if (type.name().equals(MayaModifier.NAME)) {
                 options.add(GUI.sceneOption("Start The Match"));
             } else {
                 options.add(GUI.sceneOption("Do it"));
