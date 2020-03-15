@@ -7,10 +7,6 @@ public final class SkillModifierCombiner {
     public static final SkillModifier NULL_MODIFIER = new SkillModifier() {
         private static final String name = "null-skill-modifier";
 
-        @Override public String name() {
-            return name;
-        }
-
         @Override public String toString() {
             return name;
         }

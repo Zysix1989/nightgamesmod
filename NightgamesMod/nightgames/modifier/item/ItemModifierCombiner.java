@@ -10,10 +10,6 @@ public final class ItemModifierCombiner {
         @Override public String toString() {
             return name;
         }
-
-        @Override public String name() {
-            return name;
-        }
     };
 
     private ItemModifierCombiner() {

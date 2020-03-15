@@ -12,9 +12,6 @@ public final class ClothingModifierCombiner {
             return name;
         }
 
-        @Override public String name() {
-            return name;
-        }
     };
 
     private ClothingModifierCombiner() {
