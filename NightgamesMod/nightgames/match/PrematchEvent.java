@@ -30,8 +30,7 @@ public abstract class PrematchEvent {
 
     protected final void run() {
         extraEffects();
-        Global.gui()
-            .promptWithSave(message, options);
+        Global.gui().promptWithSave(message, options);
     }
 
     protected abstract void extraEffects();
