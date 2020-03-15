@@ -14,6 +14,7 @@ import nightgames.items.Item;
 import nightgames.items.clothing.Clothing;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
+import nightgames.modifier.action.DescribablePredicate;
 import nightgames.modifier.standard.NoModifier;
 import nightgames.stance.*;
 import nightgames.status.Alert;
@@ -58,7 +59,7 @@ public class RequirementTest {
         other = new BlankPersonality("OtherTestNPC").character;
         Area area = new Area("TestArea", new DescriptionModule.ErrorDescriptionModule(), null);
         Global.setUpMatch(MatchType.NORMAL, new NoModifier());
-        combat = new Combat(new Participant(self), new Participant(other), area);
+        combat = new Combat(new Participant(self, DescribablePredicate.True()), new Participant(other, DescribablePredicate.True()), area);
     }
 
     @Test public void analTest() throws Exception {

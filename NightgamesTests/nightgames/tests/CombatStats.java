@@ -10,6 +10,7 @@ import nightgames.global.Global;
 import nightgames.gui.TestGUI;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
+import nightgames.modifier.action.DescribablePredicate;
 import nightgames.modifier.standard.NoModifier;
 
 import java.io.File;
@@ -85,7 +86,7 @@ public class CombatStats {
     private void fight(Character c1, Character c2) {
         ((BasePersonality) ((NPC) c1).ai).character = (NPC) c1;
         ((BasePersonality) ((NPC) c2).ai).character = (NPC) c2;
-        Combat cbt = new Combat(new Participant(c1), new Participant(c2), NULL_AREA);
+        Combat cbt = new Combat(new Participant(c1, DescribablePredicate.True()), new Participant(c2, DescribablePredicate.True()), NULL_AREA);
         cbt.go();
         counter.incrementAndGet();
         synchronized (recordLock) {

@@ -2,7 +2,9 @@ package nightgames.match.ftc;
 
 import nightgames.characters.Character;
 import nightgames.items.Item;
+import nightgames.match.Action;
 import nightgames.match.Participant;
+import nightgames.modifier.action.DescribablePredicate;
 
 public class Prey extends Participant {
     public static int INITIAL_GRACE_PERIOD_ROUNDS = 3;
@@ -10,8 +12,8 @@ public class Prey extends Participant {
     public int gracePeriod = INITIAL_GRACE_PERIOD_ROUNDS;
     public int flagCounter = 0;
 
-    public Prey(Character c) {
-        super(c);
+    public Prey(Character c, DescribablePredicate<Action.Instance> actionFilter) {
+        super(c, actionFilter);
     }
 
     @Override

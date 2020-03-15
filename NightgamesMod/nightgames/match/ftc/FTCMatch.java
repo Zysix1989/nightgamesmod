@@ -64,10 +64,10 @@ public class FTCMatch extends Match {
     public static FTCMatch newMatch(Collection<Character> combatants, FTCModifier modifier) {
         var hunters = combatants.stream()
                 .filter(c -> c.equals(modifier.getPrey()))
-                .map(Hunter::new)
+                .map(c -> new Hunter(c, modifier.getActionFilterFor(c)))
                 .collect(Collectors.toList());
         Collections.shuffle(hunters);
-        var preyParticipant = new Prey(modifier.getPrey());
+        var preyParticipant = new Prey(modifier.getPrey(), modifier.getActionFilterFor(modifier.getPrey()));
         Participant north = hunters.get(0);
         Participant west = hunters.get(1);
         Participant south = hunters.get(2);

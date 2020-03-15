@@ -40,10 +40,10 @@ public class Participant {
     public List<Challenge> challenges = new ArrayList<>();
     public final DescribablePredicate<Action.Instance> actionFilter;
 
-    public Participant(Character c) {
+    public Participant(Character c, DescribablePredicate<Action.Instance> actionFilter) {
         this.character = c;
         this.intelligence = c.makeIntelligence();
-        this.actionFilter = Global.getMatch().getCondition().getActionFilterFor(character);
+        this.actionFilter = actionFilter;
     }
 
     Participant(Participant p) {

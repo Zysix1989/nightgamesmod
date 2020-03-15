@@ -173,7 +173,7 @@ public class Match {
         map.put("Union", sau);
         map.put("Courtyard", courtyard);
         var m = new Match(combatants.stream()
-                .map(Participant::new)
+                .map(c -> new Participant(c, condition.getActionFilterFor(c)))
                 .collect(Collectors.toSet()),
                 map,
                 condition);

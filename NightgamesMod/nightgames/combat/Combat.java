@@ -15,6 +15,7 @@ import nightgames.match.Action;
 import nightgames.match.Encounter;
 import nightgames.match.MatchType;
 import nightgames.match.Participant;
+import nightgames.modifier.action.DescribablePredicate;
 import nightgames.modifier.standard.NoRecoveryModifier;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.pet.Pet;
@@ -633,7 +634,7 @@ public class Combat {
         } else if (p2.getCharacter().human()) {
             p1.getCharacter().sendDrawMessage(this, state);
         }
-        winner = Optional.of(new Combatant(new Participant(Global.noneCharacter())));
+        winner = Optional.of(new Combatant(new Participant(Global.noneCharacter(), DescribablePredicate.True())));
     }
 
     private void victory(Combatant won) {
