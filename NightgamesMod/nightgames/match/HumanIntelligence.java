@@ -132,6 +132,7 @@ public class HumanIntelligence implements Intelligence {
         if (character.has(Item.Aphrodisiac)) {
             options.add(new CommandPanelOption("Use Aphrodisiac",
                     character.encounterOption(() -> {
+                        aphrodisiacContinuation.run();
                         Global.getMatch().resume();
                     })));
         }
