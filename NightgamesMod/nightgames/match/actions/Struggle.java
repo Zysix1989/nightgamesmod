@@ -26,7 +26,24 @@ public class Struggle extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return executeOuter(user);
+            Bound status = (Bound) user.getCharacter().getStatus(Stsflag.bound);
+            int difficulty = 20 - user.getCharacter().getEscape(null, null);
+            if (user.getCharacter().check(Attribute.Power, difficulty)) {
+                if (status != null) {
+                    user.getCharacter().message("You manage to break free from the " + status.getVariant() + ".");
+                } else {
+                    user.getCharacter().message("You manage to snap the restraints that are binding your hands.");
+                }
+                user.getCharacter().free();
+            } else {
+                if (status != null) {
+                    user.getCharacter().message("You struggle against the " + status.getVariant() + ", but can't get free.");
+                } else {
+                    user.getCharacter().message("You struggle against your restraints, but can't get free.");
+                }
+                user.getCharacter().struggle();
+            }
+            return new Aftermath();
         }
     }
 
@@ -42,28 +59,6 @@ public class Struggle extends Action {
     @Override
     public Instance newInstance(Participant user) {
         return new Instance(user);
-    }
-
-    @Override
-    public Action.Aftermath executeOuter(Participant user) {
-        Bound status = (Bound) user.getCharacter().getStatus(Stsflag.bound);
-        int difficulty = 20 - user.getCharacter().getEscape(null, null);
-        if (user.getCharacter().check(Attribute.Power, difficulty)) {
-            if (status != null) {
-                user.getCharacter().message("You manage to break free from the " + status.getVariant() + ".");
-            } else {
-                user.getCharacter().message("You manage to snap the restraints that are binding your hands.");
-            }
-            user.getCharacter().free();
-        } else {
-            if (status != null) {
-                user.getCharacter().message("You struggle against the " + status.getVariant() + ", but can't get free.");
-            } else {
-                user.getCharacter().message("You struggle against your restraints, but can't get free.");
-            }
-            user.getCharacter().struggle();
-        }
-        return new Aftermath();
     }
 
 }

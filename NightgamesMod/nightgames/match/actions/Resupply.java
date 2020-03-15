@@ -36,7 +36,24 @@ public class Resupply extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return executeOuter(user);
+            if (Global.getMatch().getType() == MatchType.FTC) {
+                FTCMatch match = (FTCMatch) Global.getMatch();
+                user.getCharacter().message("You get a change of clothes from the chest placed here.");
+                if (user.getCharacter().has(Item.Flag) && !match.isPrey(user.getCharacter())) {
+                    match.turnInFlag(user);
+                } else if (match.canCollectFlag(user.getCharacter())) {
+                    match.grabFlag();
+                }
+            } else {
+                if (Global.getMatch().getCondition().name().equals(NudistModifier.NAME)) {
+                    user.getCharacter().message(
+                            "You check in so that you're eligible to fight again, but you still don't get any clothes.");
+                } else {
+                    user.getCharacter().message("You pick up a change of clothes and prepare to get back in the fray.");
+                }
+            }
+            user.state = new State();
+            return new Aftermath();
         }
     }
 
@@ -134,25 +151,4 @@ public class Resupply extends Action {
         return new Instance(user);
     }
 
-    @Override
-    public Action.Aftermath executeOuter(Participant user) {
-        if (Global.getMatch().getType() == MatchType.FTC) {
-            FTCMatch match = (FTCMatch) Global.getMatch();
-            user.getCharacter().message("You get a change of clothes from the chest placed here.");
-            if (user.getCharacter().has(Item.Flag) && !match.isPrey(user.getCharacter())) {
-                match.turnInFlag(user);
-            } else if (match.canCollectFlag(user.getCharacter())) {
-                match.grabFlag();
-            }
-        } else {
-            if (Global.getMatch().getCondition().name().equals(NudistModifier.NAME)) {
-                user.getCharacter().message(
-                        "You check in so that you're eligible to fight again, but you still don't get any clothes.");
-            } else {
-                user.getCharacter().message("You pick up a change of clothes and prepare to get back in the fray.");
-            }
-        }
-        user.state = new State();
-        return new Aftermath();
-    }
 }

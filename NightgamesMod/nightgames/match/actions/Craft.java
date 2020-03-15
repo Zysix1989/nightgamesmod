@@ -31,7 +31,8 @@ public class Craft extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return executeOuter(user);
+            user.state = new State();
+            return new Aftermath();
         }
     }
 
@@ -129,12 +130,6 @@ public class Craft extends Action {
     @Override
     public Instance newInstance(Participant user) {
         return new Instance(user);
-    }
-
-    @Override
-    public Action.Aftermath executeOuter(Participant user) {
-        user.state = new State();
-        return new Aftermath();
     }
 
 }

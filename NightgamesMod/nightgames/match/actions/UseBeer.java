@@ -26,7 +26,10 @@ public class UseBeer extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return executeOuter(user);
+            user.getCharacter().message("You pop open a beer and chug it down, feeling buzzed and a bit slugish.");
+            user.getCharacter().addNonCombat(new Status(new Buzzed(user.getCharacter())));
+            user.getCharacter().consume(Item.Beer, 1);
+            return new Aftermath();
         }
     }
 
@@ -42,14 +45,6 @@ public class UseBeer extends Action {
     @Override
     public Instance newInstance(Participant user) {
         return new Instance(user);
-    }
-
-    @Override
-    public Action.Aftermath executeOuter(Participant user) {
-        user.getCharacter().message("You pop open a beer and chug it down, feeling buzzed and a bit slugish.");
-        user.getCharacter().addNonCombat(new Status(new Buzzed(user.getCharacter())));
-        user.getCharacter().consume(Item.Beer, 1);
-        return new Aftermath();
     }
 
 }

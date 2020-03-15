@@ -31,7 +31,16 @@ public class Disguise extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return executeOuter(user);
+            NPC target = getRandomNPC(user.getCharacter());
+            if (target != null) {
+                user.getCharacter().addNonCombat(new Status(new Disguised(user.getCharacter(), target)));
+                user.getCharacter().body.mimic(target.body);
+                user.getCharacter().getTraits().forEach(t -> user.getCharacter().removeTemporaryTrait(t, 1000));
+                target.getTraits().forEach(t -> user.getCharacter().addTemporaryTrait(t, 1000));
+                user.getCharacter().completelyNudify(null);
+                target.outfitPlan.forEach(user.getCharacter().outfit::equip);
+            }
+            return new Aftermath();
         }
     }
 
@@ -59,20 +68,6 @@ public class Disguise extends Action {
     @Override
     public Instance newInstance(Participant user) {
         return new Instance(user);
-    }
-
-    @Override
-    public Action.Aftermath executeOuter(Participant user) {
-        NPC target = getRandomNPC(user.getCharacter());
-        if (target != null) {
-            user.getCharacter().addNonCombat(new Status(new Disguised(user.getCharacter(), target)));
-            user.getCharacter().body.mimic(target.body);
-            user.getCharacter().getTraits().forEach(t -> user.getCharacter().removeTemporaryTrait(t, 1000));
-            target.getTraits().forEach(t -> user.getCharacter().addTemporaryTrait(t, 1000));
-            user.getCharacter().completelyNudify(null);
-            target.outfitPlan.forEach(user.getCharacter().outfit::equip);
-        }
-        return new Aftermath();
     }
 
 }

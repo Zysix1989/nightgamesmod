@@ -24,7 +24,10 @@ public class SetTrap extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return executeOuter(user);
+            var result = trap.instantiate(user);
+            user.getLocation().setTrap(result.instance);
+            user.getCharacter().message(result.message);
+            return new Aftermath();
         }
     }
 
@@ -46,14 +49,6 @@ public class SetTrap extends Action {
     @Override
     public Instance newInstance(Participant user) {
         return new Instance(user);
-    }
-
-    @Override
-    public Action.Aftermath executeOuter(Participant user) {
-        var result = trap.instantiate(user);
-        user.getLocation().setTrap(result.instance);
-        user.getCharacter().message(result.message);
-        return new Aftermath();
     }
 
 }

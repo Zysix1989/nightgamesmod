@@ -26,7 +26,11 @@ public class UseLubricant extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return executeOuter(user);
+            user.getCharacter().message("You cover yourself in slick oil. It's a weird feeling, but it should make " +
+                    "it easier to escape from a hold.");
+            user.getCharacter().addNonCombat(new Status(new Oiled(user.getCharacter())));
+            user.getCharacter().consume(Item.Lubricant, 1);
+            return new Aftermath();
         }
     }
 
@@ -42,15 +46,6 @@ public class UseLubricant extends Action {
     @Override
     public Instance newInstance(Participant user) {
         return new Instance(user);
-    }
-
-    @Override
-    public Action.Aftermath executeOuter(Participant user) {
-        user.getCharacter().message("You cover yourself in slick oil. It's a weird feeling, but it should make " +
-                "it easier to escape from a hold.");
-        user.getCharacter().addNonCombat(new Status(new Oiled(user.getCharacter())));
-        user.getCharacter().consume(Item.Lubricant, 1);
-        return new Aftermath();
     }
 
 }

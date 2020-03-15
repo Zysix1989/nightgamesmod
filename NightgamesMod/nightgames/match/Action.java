@@ -91,8 +91,6 @@ public abstract class Action {
 
     public abstract Instance newInstance(Participant user);
 
-    public abstract Aftermath executeOuter(Participant user);
-
     @Override
     public String toString() {
         return name;

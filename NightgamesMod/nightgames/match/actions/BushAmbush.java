@@ -34,7 +34,15 @@ public class BushAmbush extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return executeOuter(user);
+            if (user.getCharacter().get(Attribute.Animism) >= 10) {
+                user.getCharacter().message("You crouch down in some dense bushes, ready" + " to pounce on passing prey.");
+            } else {
+                user.getCharacter().message("You spot some particularly dense bushes, and figure"
+                        + " they'll make for a decent hiding place. You lie down in them,"
+                        + " and wait for someone to walk past.");
+            }
+            user.state = new State();
+            return new Aftermath();
         }
     }
 
@@ -114,19 +122,6 @@ public class BushAmbush extends Action {
     @Override
     public Instance newInstance(Participant user) {
         return new Instance(user);
-    }
-
-    @Override
-    public Action.Aftermath executeOuter(Participant user) {
-        if (user.getCharacter().get(Attribute.Animism) >= 10) {
-            user.getCharacter().message("You crouch down in some dense bushes, ready" + " to pounce on passing prey.");
-        } else {
-            user.getCharacter().message("You spot some particularly dense bushes, and figure"
-                    + " they'll make for a decent hiding place. You lie down in them,"
-                    + " and wait for someone to walk past.");
-        }
-        user.state = new State();
-        return new Aftermath();
     }
 
 }

@@ -23,7 +23,7 @@ public class Wait extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return executeOuter(user);
+            return new Aftermath();
         }
     }
 
@@ -41,8 +41,4 @@ public class Wait extends Action {
         return new Instance(user);
     }
 
-    @Override
-    public Action.Aftermath executeOuter(Participant user) {
-        return new Aftermath();
-    }
 }

@@ -34,7 +34,9 @@ public final class Bathe extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return executeOuter(user);
+            user.getCharacter().message(startMessage);
+            user.state = new State(endMessage);
+            return new Aftermath();
         }
     }
 
@@ -150,13 +152,6 @@ public final class Bathe extends Action {
     @Override
     public Instance newInstance(Participant user) {
         return new Instance(user);
-    }
-
-    @Override
-    public Action.Aftermath executeOuter(Participant user) {
-        user.getCharacter().message(startMessage);
-        user.state = new State(endMessage);
-        return new Aftermath();
     }
 
 

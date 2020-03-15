@@ -35,7 +35,9 @@ public class Locate extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return executeOuter(user);
+            var dialog = new Dialog(user);
+            dialog.start();
+            return new Aftermath();
         }
     }
 
@@ -111,10 +113,4 @@ public class Locate extends Action {
         return new Instance(user);
     }
 
-    @Override
-    public Action.Aftermath executeOuter(Participant self) {
-        var dialog = new Dialog(self);
-        dialog.start();
-        return new Aftermath();
-    }
 }

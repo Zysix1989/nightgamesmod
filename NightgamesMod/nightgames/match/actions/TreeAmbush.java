@@ -33,7 +33,15 @@ public class TreeAmbush extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return executeOuter(user);
+            if (user.getCharacter().get(Attribute.Animism) >= 10) {
+                user.getCharacter().message("Following your instincts, you clamber up a tree" + " to await an unwitting passerby.");
+            } else {
+                user.getCharacter().message("You climb up a tree that has a branch hanging over"
+                        + " the trail. It's hidden in the leaves, so you should be"
+                        + " able to surprise someone passing underneath.");
+            }
+            user.state = new State();
+            return new Aftermath();
         }
     }
 
@@ -120,19 +128,6 @@ public class TreeAmbush extends Action {
     @Override
     public Instance newInstance(Participant user) {
         return new Instance(user);
-    }
-
-    @Override
-    public Action.Aftermath executeOuter(Participant user) {
-        if (user.getCharacter().get(Attribute.Animism) >= 10) {
-            user.getCharacter().message("Following your instincts, you clamber up a tree" + " to await an unwitting passerby.");
-        } else {
-            user.getCharacter().message("You climb up a tree that has a branch hanging over"
-                    + " the trail. It's hidden in the leaves, so you should be"
-                    + " able to surprise someone passing underneath.");
-        }
-        user.state = new State();
-        return new Aftermath();
     }
 
 }

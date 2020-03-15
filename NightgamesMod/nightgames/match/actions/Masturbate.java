@@ -36,7 +36,30 @@ public class Masturbate extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return executeOuter(user);
+            if (user.getCharacter().hasDick()) {
+                user.getCharacter().message("You desperately need to deal with your erection before you run into " +
+                        "an opponent. You find an isolated corner and quickly jerk off.");
+                if (Global.checkFlag(Flag.masturbationSemen)) {
+                    if (user.getCharacter().getArousal().percent() > 50) {
+                        user.getCharacter().message("You remember that Reyka asked you to bring back some semen for " +
+                                "her transformation rituals, and you catch your semen with one of her magic bottles.");
+                        user.getCharacter().gain(Item.semen);
+                    } else {
+                        user.getCharacter().message("You remember that Reyka asked you to bring back some semen for " +
+                                "her transformation rituals, and you catch your semen with one of her magic bottles. " +
+                                "However it seems like you aren't quite aroused enough to provide the thick cum " +
+                                "that she needs as the bottles seem to vomit back the cum you put in it.");
+                    }
+                }
+            } else if (user.getCharacter().hasPussy()) {
+                user.getCharacter().message(
+                        "You desperately need to deal with your throbbing pussy before you run into an opponent. You find an isolated corner and quickly finger yourself to a quick orgasm.");
+            } else {
+                user.getCharacter().message(
+                        "You desperately need to deal with your throbbing body before you run into an opponent. You find an isolated corner and quickly finger your ass to a quick orgasm.");
+            }
+            user.state = new State();
+            return new Aftermath();
         }
     }
 
@@ -95,34 +118,6 @@ public class Masturbate extends Action {
     @Override
     public Instance newInstance(Participant user) {
         return new Instance(user);
-    }
-
-    @Override
-    public Action.Aftermath executeOuter(Participant user) {
-        if (user.getCharacter().hasDick()) {
-            user.getCharacter().message("You desperately need to deal with your erection before you run into " +
-                    "an opponent. You find an isolated corner and quickly jerk off.");
-            if (Global.checkFlag(Flag.masturbationSemen)) {
-                if (user.getCharacter().getArousal().percent() > 50) {
-                    user.getCharacter().message("You remember that Reyka asked you to bring back some semen for " +
-                            "her transformation rituals, and you catch your semen with one of her magic bottles.");
-                    user.getCharacter().gain(Item.semen);
-                } else {
-                    user.getCharacter().message("You remember that Reyka asked you to bring back some semen for " +
-                            "her transformation rituals, and you catch your semen with one of her magic bottles. " +
-                            "However it seems like you aren't quite aroused enough to provide the thick cum " +
-                            "that she needs as the bottles seem to vomit back the cum you put in it.");
-                }
-            }
-        } else if (user.getCharacter().hasPussy()) {
-            user.getCharacter().message(
-                    "You desperately need to deal with your throbbing pussy before you run into an opponent. You find an isolated corner and quickly finger yourself to a quick orgasm.");
-        } else {
-            user.getCharacter().message(
-                    "You desperately need to deal with your throbbing body before you run into an opponent. You find an isolated corner and quickly finger your ass to a quick orgasm.");
-        }
-        user.state = new State();
-        return new Aftermath();
     }
 
     private static void ineligibleMasturbatingMessages(Participant pastLoser, Participant pastWinner) {
