@@ -8,9 +8,9 @@ public class BanActionModifier extends ActionModifier {
     private final String description;
     private final Predicate<Action> predicate;
 
-    public BanActionModifier(Action action) {
-        description = action.toString();
-        predicate = action::equals;
+    public BanActionModifier(String description, Predicate<Action> predicate) {
+        this.description = description;
+        this.predicate = predicate;
     }
 
     @Override
