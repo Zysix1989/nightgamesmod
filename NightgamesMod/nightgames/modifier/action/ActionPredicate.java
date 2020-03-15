@@ -2,6 +2,6 @@ package nightgames.modifier.action;
 
 import nightgames.match.Action;
 
-public interface ActionPredicate {
-    boolean allowAction(Action act);
-}
+import java.util.function.Predicate;
+
+public interface ActionPredicate extends Predicate<Action> {}

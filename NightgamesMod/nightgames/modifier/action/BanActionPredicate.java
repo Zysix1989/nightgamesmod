@@ -14,7 +14,7 @@ public class BanActionPredicate implements ActionPredicate {
     }
 
     @Override
-    public boolean allowAction(Action act) {
+    public boolean test(Action act) {
         return !predicate.test(act);
     }
 
