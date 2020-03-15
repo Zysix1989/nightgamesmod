@@ -22,11 +22,9 @@ public abstract class Action {
     }
 
     public abstract class Instance {
-        public final Action self;
         protected final Participant user;
 
-        protected Instance(Action self, Participant user) {
-            this.self = self;
+        protected Instance(Participant user) {
             this.user = user;
         }
 
