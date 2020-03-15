@@ -86,7 +86,7 @@ public abstract class BaseModifier implements Modifier {
 
     @Override
     public boolean allowAction(Action act, Character c) {
-        return !c.human() || !actions.actionIsBanned(act);
+        return !c.human() || actions.allowAction(act);
     }
 
     @Override

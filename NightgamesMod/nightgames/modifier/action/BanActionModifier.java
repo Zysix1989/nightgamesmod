@@ -14,8 +14,8 @@ public class BanActionModifier extends ActionModifier {
     }
 
     @Override
-    public boolean actionIsBanned(Action a) {
-        return super.actionIsBanned(a) || predicate.test(a);
+    public boolean allowAction(Action act) {
+        return super.allowAction(act) && !predicate.test(act);
     }
 
     @Override
