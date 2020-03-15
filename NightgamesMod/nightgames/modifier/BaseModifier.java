@@ -37,7 +37,7 @@ public abstract class BaseModifier implements Modifier {
         this.items = ItemModifierCombiner.NULL_MODIFIER;
         this.status = StatusModifierCombiner.NULL_MODIFIER;
         this.skills = SkillModifierCombiner.NULL_MODIFIER;
-        this.actions = new ActionModifier();
+        this.actions = act -> true;
         this.custom = EMPTY_CONSUMER;
         moddedItems = new HashMap<>();
     }

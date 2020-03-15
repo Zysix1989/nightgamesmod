@@ -4,7 +4,7 @@ import nightgames.match.Action;
 
 import java.util.function.Predicate;
 
-public class BanActionModifier extends ActionModifier {
+public class BanActionModifier implements ActionModifier {
     private final String description;
     private final Predicate<Action> predicate;
 
@@ -15,7 +15,7 @@ public class BanActionModifier extends ActionModifier {
 
     @Override
     public boolean allowAction(Action act) {
-        return super.allowAction(act) && !predicate.test(act);
+        return !predicate.test(act);
     }
 
     @Override
