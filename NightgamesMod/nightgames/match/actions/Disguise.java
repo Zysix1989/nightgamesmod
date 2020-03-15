@@ -32,7 +32,7 @@ public class Disguise extends Action {
         }
 
         @Override
-        public Action.Aftermath execute() {
+        public void execute() {
             NPC target = getRandomNPC(user.getCharacter());
             if (target != null) {
                 user.getCharacter().addNonCombat(new Status(new Disguised(user.getCharacter(), target)));
@@ -42,7 +42,7 @@ public class Disguise extends Action {
                 user.getCharacter().completelyNudify(null);
                 target.outfitPlan.forEach(user.getCharacter().outfit::equip);
             }
-            return new Aftermath(user);
+            messageOthersInLocation(new Aftermath(user).describe());
         }
     }
 

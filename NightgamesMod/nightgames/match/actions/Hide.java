@@ -28,10 +28,10 @@ public class Hide extends Action {
         }
 
         @Override
-        public Action.Aftermath execute() {
+        public void execute() {
             user.getCharacter().message("You find a decent hiding place and wait for unwary opponents.");
             user.state = new State();
-            return new Aftermath(user);
+            messageOthersInLocation(new Aftermath(user).describe());
         }
     }
 

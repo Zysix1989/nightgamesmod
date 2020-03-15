@@ -35,7 +35,7 @@ public class TreeAmbush extends Action {
         }
 
         @Override
-        public Action.Aftermath execute() {
+        public void execute() {
             if (user.getCharacter().get(Attribute.Animism) >= 10) {
                 user.getCharacter().message("Following your instincts, you clamber up a tree" + " to await an unwitting passerby.");
             } else {
@@ -44,7 +44,7 @@ public class TreeAmbush extends Action {
                         + " able to surprise someone passing underneath.");
             }
             user.state = new State();
-            return new Aftermath(user);
+            messageOthersInLocation(new Aftermath(user).describe());
         }
     }
 

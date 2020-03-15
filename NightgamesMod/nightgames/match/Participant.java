@@ -107,10 +107,7 @@ public class Participant {
                 .map(s -> s.makeAllowedActionsPredicate(this))
                 .collect(Collectors.toSet())
                 .forEach(possibleActionInstances::removeIf);
-        Consumer<Action.Instance> callback = act -> {
-            var aftermath = act.execute().describe();
-            getLocation().getOccupants().forEach(p -> p.getCharacter().message(aftermath));
-        };
+        Consumer<Action.Instance> callback = Action.Instance::execute;
         state.move(this);
         if (state.allowsNormalActions()) {
             if (!character.location.get().encounter(this)) {

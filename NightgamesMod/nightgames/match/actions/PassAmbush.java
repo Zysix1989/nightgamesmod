@@ -32,10 +32,10 @@ public class PassAmbush extends Action {
         }
 
         @Override
-        public Action.Aftermath execute() {
+        public void execute() {
             user.getCharacter().message("You try to find a decent hiding place in the irregular rock faces lining the pass.");
             user.state = new State();
-            return new Aftermath(user);
+            messageOthersInLocation(new Aftermath(user).describe());
         }
     }
 

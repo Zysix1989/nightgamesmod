@@ -37,7 +37,7 @@ public class Resupply extends Action {
         }
 
         @Override
-        public Action.Aftermath execute() {
+        public void execute() {
             if (Global.getMatch().getType() == MatchType.FTC) {
                 FTCMatch match = (FTCMatch) Global.getMatch();
                 user.getCharacter().message("You get a change of clothes from the chest placed here.");
@@ -55,7 +55,7 @@ public class Resupply extends Action {
                 }
             }
             user.state = new State();
-            return new Aftermath(user);
+            messageOthersInLocation(new Aftermath(user).describe());
         }
     }
 

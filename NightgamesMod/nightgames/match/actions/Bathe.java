@@ -36,10 +36,10 @@ public final class Bathe extends Action {
         }
 
         @Override
-        public Action.Aftermath execute() {
+        public void execute() {
             user.getCharacter().message(startMessage);
             user.state = new State(endMessage);
-            return new Aftermath(user);
+            messageOthersInLocation(new Aftermath(user).describe());
         }
     }
 

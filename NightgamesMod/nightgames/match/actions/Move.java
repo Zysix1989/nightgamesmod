@@ -31,10 +31,9 @@ public final class Move extends Action {
         }
 
         @Override
-        public Action.Aftermath execute() {
+        public void execute() {
             var aftermath = new Aftermath(user);
             user.travel(destination, aftermath.describe());
-            return aftermath;
         }
 
         public Area getDestination() {

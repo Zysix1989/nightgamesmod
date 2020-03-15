@@ -27,10 +27,10 @@ public class Recharge extends Action {
         }
 
         @Override
-        public Action.Aftermath execute() {
+        public void execute() {
             user.getCharacter().message("You find a power supply and restore your batteries to full.");
             user.getCharacter().chargeBattery();
-            return new Aftermath(user);
+            messageOthersInLocation(new Aftermath(user).describe());
         }
     }
 

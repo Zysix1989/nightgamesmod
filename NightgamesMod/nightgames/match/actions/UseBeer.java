@@ -28,11 +28,11 @@ public class UseBeer extends Action {
         }
 
         @Override
-        public Action.Aftermath execute() {
+        public void execute() {
             user.getCharacter().message("You pop open a beer and chug it down, feeling buzzed and a bit slugish.");
             user.getCharacter().addNonCombat(new Status(new Buzzed(user.getCharacter())));
             user.getCharacter().consume(Item.Beer, 1);
-            return new Aftermath(user);
+            messageOthersInLocation(new Aftermath(user).describe());
         }
     }
 

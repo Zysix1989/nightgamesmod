@@ -37,10 +37,10 @@ public class Locate extends Action {
         }
 
         @Override
-        public Action.Aftermath execute() {
+        public void execute() {
             var dialog = new Dialog(user);
             dialog.start();
-            return new Aftermath(user);
+            messageOthersInLocation(new Aftermath(user).describe());
         }
     }
 

@@ -26,11 +26,11 @@ public class SetTrap extends Action {
         }
 
         @Override
-        public Action.Aftermath execute() {
+        public void execute() {
             var result = trap.instantiate(user);
             user.getLocation().setTrap(result.instance);
             user.getCharacter().message(result.message);
-            return new Aftermath(user);
+            messageOthersInLocation(new Aftermath(user).describe());
         }
     }
 

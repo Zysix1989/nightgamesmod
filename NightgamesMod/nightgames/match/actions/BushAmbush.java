@@ -34,7 +34,7 @@ public class BushAmbush extends Action {
         }
 
         @Override
-        public Action.Aftermath execute() {
+        public void execute() {
             if (user.getCharacter().get(Attribute.Animism) >= 10) {
                 user.getCharacter().message("You crouch down in some dense bushes, ready" + " to pounce on passing prey.");
             } else {
@@ -43,7 +43,7 @@ public class BushAmbush extends Action {
                         + " and wait for someone to walk past.");
             }
             user.state = new State();
-            return new Aftermath(user);
+            messageOthersInLocation(new Aftermath(user).describe());
         }
     }
 

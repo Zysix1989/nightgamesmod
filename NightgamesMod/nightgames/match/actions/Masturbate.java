@@ -38,7 +38,7 @@ public class Masturbate extends Action {
         }
 
         @Override
-        public Action.Aftermath execute() {
+        public void execute() {
             if (user.getCharacter().hasDick()) {
                 user.getCharacter().message("You desperately need to deal with your erection before you run into " +
                         "an opponent. You find an isolated corner and quickly jerk off.");
@@ -62,7 +62,7 @@ public class Masturbate extends Action {
                         "You desperately need to deal with your throbbing body before you run into an opponent. You find an isolated corner and quickly finger your ass to a quick orgasm.");
             }
             user.state = new State();
-            return new Aftermath(user);
+            messageOthersInLocation(new Aftermath(user).describe());
         }
     }
 

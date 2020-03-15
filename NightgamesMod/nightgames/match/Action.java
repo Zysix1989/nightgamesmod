@@ -38,10 +38,16 @@ public abstract class Action {
             this.location = location;
         }
 
-        public abstract Aftermath execute();
+        public abstract void execute();
 
         public String getName() {
             return name;
+        }
+
+        protected void messageOthersInLocation(String message) {
+            location.getOccupants().stream()
+                    .filter(p -> !p.equals(user))
+                    .forEach(p -> p.getCharacter().message(message));
         }
     }
 

@@ -25,8 +25,8 @@ public class Wait extends Action {
         }
 
         @Override
-        public Action.Aftermath execute() {
-            return new Aftermath(user);
+        public void execute() {
+            messageOthersInLocation(new Aftermath(user).describe());
         }
     }
 
