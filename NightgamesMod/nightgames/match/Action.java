@@ -30,9 +30,7 @@ public abstract class Action {
             this.user = user;
         }
 
-        public Aftermath execute() {
-            return self.execute(user);
-        }
+        public abstract Aftermath execute();
 
         public String getName() {
             return name;
