@@ -4,7 +4,7 @@ import nightgames.characters.Character;
 import nightgames.match.defaults.DefaultPrematch;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.match.ftc.FTCPrematch;
-import nightgames.modifier.Modifier;
+import nightgames.modifier.BaseModifier;
 import nightgames.modifier.standard.FTCModifier;
 import nightgames.modifier.standard.NoModifier;
 
@@ -14,7 +14,7 @@ public enum MatchType {
     NORMAL,
     FTC;
 
-    public Match buildMatch(Collection<Character> combatants, Modifier condition) {
+    public Match buildMatch(Collection<Character> combatants, BaseModifier condition) {
         switch (this) {
             case FTC:
                 assert condition instanceof FTCModifier;

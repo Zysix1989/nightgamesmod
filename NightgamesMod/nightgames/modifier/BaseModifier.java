@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-public abstract class BaseModifier implements Modifier {
+public abstract class BaseModifier {
 
     protected static final BiConsumer<Character, Match> EMPTY_CONSUMER = (c, m) -> {
     };
@@ -42,14 +42,18 @@ public abstract class BaseModifier implements Modifier {
         moddedItems = new HashMap<>();
     }
 
-    @Override
+    /**
+     * Ensure that the character has an appropriate outfit
+     */
     public void handleOutfit(Character c) {
         if (c.human() || !clothing.playerOnly()) {
             clothing.apply(c.outfit);
         }
     }
 
-    @Override
+    /**
+     * Ensure that the character has a legal inventory
+     */
     public void handleItems(Character c) {
         moddedItems.putIfAbsent(c, new HashMap<>());
         Map<Item, Integer> inventory = new HashMap<>(c.getInventory());
@@ -69,34 +73,40 @@ public abstract class BaseModifier implements Modifier {
         });
     }
 
-    @Override
+    /**
+     * Apply any required statuses
+     */
     public void handleStatus(Character c) {
         status.apply(c);
     }
 
-    @Override
+    /**
+     * Get a SkillModifier specific to the current Match
+     */
     public SkillModifier getSkillModifier() {
         return skills;
     }
 
-    @Override
+    /**
+     * Process non-combat turn
+     */
     public void handleTurn(Character c, Match m) {
         custom.accept(c, m);
     }
 
-    @Override
     public boolean allowAction(Action act, Character c) {
         return !c.human() || actions.test(act);
     }
 
-    @Override
+    /**
+     * Undo all changes to the character's inventory made by handleItems
+     */
     public void undoItems(Character c) {
         if (moddedItems.containsKey(c)) {
             moddedItems.get(c).forEach((item, count) -> c.gain(item, -count));
         }
     }
 
-    @Override
     public boolean isApplicable() {
         return true;
     }
@@ -109,4 +119,12 @@ public abstract class BaseModifier implements Modifier {
                         clothing.toString(), items.toString(), status.toString(), skills.toString(), actions.toString(),
                         custom == EMPTY_CONSUMER ? "no" : "yes");
     }
+
+    public abstract int bonus();
+
+    public abstract String name();
+
+    public abstract String intro();
+
+    public abstract String acceptance();
 }

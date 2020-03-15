@@ -9,7 +9,7 @@ import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.match.actions.*;
 import nightgames.match.defaults.DefaultPostmatch;
-import nightgames.modifier.Modifier;
+import nightgames.modifier.BaseModifier;
 import nightgames.status.addiction.Addiction;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
@@ -33,11 +33,11 @@ public class Match {
     protected Map<String, Area> map;
     protected Set<Participant> participants;
     private boolean pause;
-    protected Modifier condition;
+    protected BaseModifier condition;
     private List<Trigger> beforeRoundTriggers = new ArrayList<>(List.of(new Challenge.SpawnTrigger()));
     private Iterator<Participant> roundIterator;
 
-    protected Match(Set<Participant> participants, Map<String, Area> map, Modifier condition) {
+    protected Match(Set<Participant> participants, Map<String, Area> map, BaseModifier condition) {
         time = startTime;
         this.map = map;
         this.participants = new HashSet<>(participants);
@@ -46,7 +46,7 @@ public class Match {
         roundIterator = Collections.emptyIterator();
     }
 
-    public static Match newMatch(Collection<Character> combatants, Modifier condition) {
+    public static Match newMatch(Collection<Character> combatants, BaseModifier condition) {
         Area quad = new Area("Quad", DescriptionModule.quad(), AreaIdentity.quad, Set.of(AreaAttribute.Open));
         Area dorm = new Area("Dorm", DescriptionModule.dorm(), AreaIdentity.dorm);
         Area shower = new Area("Showers", DescriptionModule.shower(), AreaIdentity.shower);
@@ -447,7 +447,7 @@ public class Match {
             .collect(Collectors.toUnmodifiableList());
     }
 
-    public final Modifier getCondition() {
+    public final BaseModifier getCondition() {
         return condition;
     }
 

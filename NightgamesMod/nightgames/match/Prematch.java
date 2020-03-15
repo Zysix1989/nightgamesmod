@@ -3,7 +3,7 @@ package nightgames.match;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.global.Scene;
-import nightgames.modifier.Modifier;
+import nightgames.modifier.BaseModifier;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class Prematch implements Scene {
     private final List<PrematchEvent> specialEvents;
     
-    protected Modifier type;
+    protected BaseModifier type;
     protected PrematchEvent chosenEvent;
 
     protected Prematch(List<PrematchEvent> events) {

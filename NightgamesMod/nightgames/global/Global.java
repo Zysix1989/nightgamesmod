@@ -25,7 +25,7 @@ import nightgames.match.MatchType;
 import nightgames.match.actions.Masturbate;
 import nightgames.match.actions.Wait;
 import nightgames.match.actions.*;
-import nightgames.modifier.Modifier;
+import nightgames.modifier.BaseModifier;
 import nightgames.modifier.standard.*;
 import nightgames.pet.PetCharacter;
 import nightgames.pet.Ptype;
@@ -79,7 +79,7 @@ public class Global {
     private static Set<Skill> skillPool = new HashSet<>();          //These central peices of data are not going to change. so they should be gathered and separated for better management. - DSM 
     private static Set<Action> actionPool;
     private static Set<Trait> featPool;
-    private static Set<Modifier> modifierPool;
+    private static Set<BaseModifier> modifierPool;
     private static Set<Character> players;
     private static Set<Character> debugChars;
     private static Set<Character> resting;
@@ -738,7 +738,7 @@ public class Global {
         return result;
     }
 
-    public static void setUpFTCMatch(Modifier matchmod) {
+    public static void setUpFTCMatch(BaseModifier matchmod) {
         var data = setUpMatchCommon();
         Character prey = ((FTCModifier) matchmod).getPrey();
         if (!prey.human()) {
@@ -753,7 +753,7 @@ public class Global {
     /**Sets up a match by assigning the player lineup.
      *
      * FIXME: Also includes code that checks for Maya and adds her. This should be extracted out into some kind of event. - DSM*/
-    public static void setUpMatch(MatchType matchType, Modifier matchmod) {
+    public static void setUpMatch(MatchType matchType, BaseModifier matchmod) {
         var data = setUpMatchCommon();
         //TODO: This really should be taken out of this in favor of something that processes extra events of this kind. - DSM
         if (matchmod.name().equals(MayaModifier.NAME)) {
@@ -1513,7 +1513,7 @@ public class Global {
         return skillPool;
     }
 
-    public static Set<Modifier> getModifierPool() {
+    public static Set<BaseModifier> getModifierPool() {
         return modifierPool;
     }
 

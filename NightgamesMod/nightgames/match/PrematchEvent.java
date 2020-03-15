@@ -3,7 +3,7 @@ package nightgames.match;
 import nightgames.global.Global;
 import nightgames.gui.GUI;
 import nightgames.gui.commandpanel.CommandPanelOption;
-import nightgames.modifier.Modifier;
+import nightgames.modifier.BaseModifier;
 import nightgames.modifier.standard.MayaModifier;
 import nightgames.modifier.standard.NoModifier;
 
@@ -14,13 +14,13 @@ import java.util.Set;
 public abstract class PrematchEvent {
 
     protected String message;
-    protected Modifier type;
+    protected BaseModifier type;
 
     protected PrematchEvent() {
         this("", offer());
     }
 
-    protected PrematchEvent(String message, Modifier type) {
+    protected PrematchEvent(String message, BaseModifier type) {
         this.message = message;
         this.type = type;
 
@@ -42,13 +42,13 @@ public abstract class PrematchEvent {
 
     protected abstract boolean valid();
 
-    protected static Modifier offer() {
+    protected static BaseModifier offer() {
         if (Global.random(10) > 4) {
             return new NoModifier();
         }
-        Set<Modifier> modifiers = new HashSet<>(Global.getModifierPool());
+        Set<BaseModifier> modifiers = new HashSet<>(Global.getModifierPool());
         modifiers.removeIf(mod -> !mod.isApplicable() || mod.name().equals(MayaModifier.NAME));
-        return Global.pickRandom(modifiers.toArray(new Modifier[] {})).get();
+        return Global.pickRandom(modifiers.toArray(new BaseModifier[] {})).get();
     }
 
     protected static final class DefaultEvent extends PrematchEvent {
