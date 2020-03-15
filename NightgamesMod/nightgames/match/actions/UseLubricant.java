@@ -10,7 +10,9 @@ import nightgames.status.Oiled;
 public class UseLubricant extends Action {
 
     private static final class Aftermath extends Action.Aftermath {
-        private Aftermath() {}
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
+        }
 
         @Override
         public String describe(Character c) {
@@ -30,7 +32,7 @@ public class UseLubricant extends Action {
                     "it easier to escape from a hold.");
             user.getCharacter().addNonCombat(new Status(new Oiled(user.getCharacter())));
             user.getCharacter().consume(Item.Lubricant, 1);
-            return new Aftermath();
+            return new Aftermath(user);
         }
     }
 

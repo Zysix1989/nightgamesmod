@@ -18,7 +18,9 @@ import java.util.Optional;
 
 public final class Bathe extends Action {
     private static final class Aftermath extends Action.Aftermath {
-        private Aftermath() { }
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
+        }
 
         @Override
         public String describe(Character c) {
@@ -36,7 +38,7 @@ public final class Bathe extends Action {
         public Action.Aftermath execute() {
             user.getCharacter().message(startMessage);
             user.state = new State(endMessage);
-            return new Aftermath();
+            return new Aftermath(user);
         }
     }
 

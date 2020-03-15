@@ -12,7 +12,9 @@ import java.util.Optional;
 
 public class Masturbate extends Action {
     private static final class Aftermath extends Action.Aftermath {
-        private Aftermath() {}
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
+        }
 
         @Override
         public String describe(Character c) {
@@ -59,7 +61,7 @@ public class Masturbate extends Action {
                         "You desperately need to deal with your throbbing body before you run into an opponent. You find an isolated corner and quickly finger your ass to a quick orgasm.");
             }
             user.state = new State();
-            return new Aftermath();
+            return new Aftermath(user);
         }
     }
 

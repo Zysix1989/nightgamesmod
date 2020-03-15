@@ -14,7 +14,9 @@ public final class Move extends Action {
     }
 
     private final class Aftermath extends Action.Aftermath {
-        private Aftermath() {}
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
+        }
 
         @Override
         public String describe(Character c) {
@@ -30,8 +32,8 @@ public final class Move extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            var aftermath = new Aftermath();
-            user.travel(destination, aftermath.describe(user.getCharacter()));
+            var aftermath = new Aftermath(user);
+            user.travel(destination, aftermath.describe());
             return aftermath;
         }
 

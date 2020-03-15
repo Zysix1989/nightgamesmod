@@ -108,7 +108,7 @@ public class Participant {
                 .collect(Collectors.toSet())
                 .forEach(possibleActionInstances::removeIf);
         Consumer<Action.Instance> callback = act -> {
-            var aftermath = act.execute().describe(character);
+            var aftermath = act.execute().describe();
             getLocation().getOccupants().forEach(p -> p.getCharacter().message(aftermath));
         };
         state.move(this);

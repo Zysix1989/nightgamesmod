@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
 
 public class Disguise extends Action {
     private static final class Aftermath extends Action.Aftermath {
-        private Aftermath() {
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
         }
 
         @Override
@@ -40,7 +41,7 @@ public class Disguise extends Action {
                 user.getCharacter().completelyNudify(null);
                 target.outfitPlan.forEach(user.getCharacter().outfit::equip);
             }
-            return new Aftermath();
+            return new Aftermath(user);
         }
     }
 

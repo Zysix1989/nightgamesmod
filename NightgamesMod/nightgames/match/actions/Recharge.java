@@ -9,7 +9,9 @@ import nightgames.match.Participant;
 public class Recharge extends Action {
 
     private static final class Aftermath extends Action.Aftermath {
-        private Aftermath() {}
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
+        }
 
         @Override
         public String describe(Character c) {
@@ -27,7 +29,7 @@ public class Recharge extends Action {
         public Action.Aftermath execute() {
             user.getCharacter().message("You find a power supply and restore your batteries to full.");
             user.getCharacter().chargeBattery();
-            return new Aftermath();
+            return new Aftermath(user);
         }
     }
 

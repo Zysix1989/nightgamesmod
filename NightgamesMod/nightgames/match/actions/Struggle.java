@@ -10,7 +10,9 @@ import nightgames.status.Stsflag;
 public class Struggle extends Action {
 
     private static final class Aftermath extends Action.Aftermath {
-        private Aftermath() {}
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
+        }
 
         @Override
         public String describe(Character c) {
@@ -43,7 +45,7 @@ public class Struggle extends Action {
                 }
                 user.getCharacter().struggle();
             }
-            return new Aftermath();
+            return new Aftermath(user);
         }
     }
 

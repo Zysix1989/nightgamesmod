@@ -14,7 +14,9 @@ import java.util.Optional;
 public class Scavenge extends Action {
 
     private static final class Aftermath extends Action.Aftermath {
-        private Aftermath() {}
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
+        }
 
         @Override
         public String describe(Character c) {
@@ -31,7 +33,7 @@ public class Scavenge extends Action {
         @Override
         public Action.Aftermath execute() {
             user.state = new State();
-            return new Aftermath();
+            return new Aftermath(user);
         }
     }
 

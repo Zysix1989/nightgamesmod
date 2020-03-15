@@ -9,7 +9,9 @@ import nightgames.match.Participant;
 public class UseEnergyDrink extends Action {
 
     private static final class Aftermath extends Action.Aftermath {
-        private Aftermath() {}
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
+        }
 
         @Override
         public String describe(Character c) {
@@ -28,7 +30,7 @@ public class UseEnergyDrink extends Action {
             user.getCharacter().message("You chug down the unpleasant drink. Your tiredness immediately starts to recede.");
             user.getCharacter().heal(null, 10 + Global.random(10));
             user.getCharacter().consume(Item.EnergyDrink, 1);
-            return new Aftermath();
+            return new Aftermath(user);
         }
     }
 

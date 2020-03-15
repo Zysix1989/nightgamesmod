@@ -19,7 +19,9 @@ public class Locate extends Action {
     private static final int MINIMUM_SCRYING_REQUIREMENT = 5;
 
     private static final class Aftermath extends Action.Aftermath {
-        private Aftermath() {}
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
+        }
 
         @Override
         public String describe(Character c) {
@@ -37,7 +39,7 @@ public class Locate extends Action {
         public Action.Aftermath execute() {
             var dialog = new Dialog(user);
             dialog.start();
-            return new Aftermath();
+            return new Aftermath(user);
         }
     }
 

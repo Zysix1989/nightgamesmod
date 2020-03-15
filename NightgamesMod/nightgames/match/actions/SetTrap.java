@@ -8,7 +8,9 @@ import nightgames.trap.Trap;
 public class SetTrap extends Action {
 
     private static final class Aftermath extends Action.Aftermath {
-        private Aftermath() { }
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
+        }
 
         @Override
         public String describe(Character c) {
@@ -27,7 +29,7 @@ public class SetTrap extends Action {
             var result = trap.instantiate(user);
             user.getLocation().setTrap(result.instance);
             user.getCharacter().message(result.message);
-            return new Aftermath();
+            return new Aftermath(user);
         }
     }
 

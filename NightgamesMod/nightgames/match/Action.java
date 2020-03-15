@@ -15,10 +15,17 @@ public abstract class Action {
     public abstract boolean usable(Participant user);
 
     public static abstract class Aftermath {
+        protected Character usedAction;
 
-        protected Aftermath() {}
+        protected Aftermath(Participant usedAction) {
+            this.usedAction = usedAction.character;
+        }
 
         public abstract String describe(Character c);
+
+        public String describe() {
+            return usedAction.getGrammar().subject().defaultNoun() + describe(usedAction);
+        }
     }
 
     public abstract class Instance {

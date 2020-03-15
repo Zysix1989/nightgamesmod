@@ -10,7 +10,9 @@ import nightgames.status.Stsflag;
 
 public class Energize extends Action {
     private static final class Aftermath extends Action.Aftermath {
-        private Aftermath() {}
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
+        }
 
         @Override
         public String describe(Character c) {
@@ -32,7 +34,7 @@ public class Energize extends Action {
                     "until you're overflowing with mana.");
             user.getCharacter().getMojo().build(user.getCharacter().getMojo().max());
             user.getCharacter().addNonCombat(new Status(new Energized(user.getCharacter(), 20)));
-            return new Aftermath();
+            return new Aftermath(user);
         }
     }
 

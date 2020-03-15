@@ -20,7 +20,9 @@ import java.util.stream.Collectors;
 public class Resupply extends Action {
 
     private static final class Aftermath extends Action.Aftermath {
-        private Aftermath() {}
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
+        }
 
         @Override
         public String describe(Character c) {
@@ -53,7 +55,7 @@ public class Resupply extends Action {
                 }
             }
             user.state = new State();
-            return new Aftermath();
+            return new Aftermath(user);
         }
     }
 

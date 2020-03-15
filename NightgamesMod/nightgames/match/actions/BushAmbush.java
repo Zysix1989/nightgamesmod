@@ -16,8 +16,8 @@ import java.util.Optional;
 
 public class BushAmbush extends Action {
     private static final class Aftermath extends Action.Aftermath {
-        private Aftermath() {
-
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
         }
 
         @Override
@@ -42,7 +42,7 @@ public class BushAmbush extends Action {
                         + " and wait for someone to walk past.");
             }
             user.state = new State();
-            return new Aftermath();
+            return new Aftermath(user);
         }
     }
 

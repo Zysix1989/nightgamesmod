@@ -14,7 +14,8 @@ import java.util.Optional;
 
 public class Craft extends Action {
     private static final class Aftermath extends Action.Aftermath {
-        private Aftermath() {
+        private Aftermath(Participant usedAction) {
+            super(usedAction);
         }
 
         @Override
@@ -32,7 +33,7 @@ public class Craft extends Action {
         @Override
         public Action.Aftermath execute() {
             user.state = new State();
-            return new Aftermath();
+            return new Aftermath(user);
         }
     }
 
