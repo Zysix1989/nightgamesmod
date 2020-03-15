@@ -26,7 +26,7 @@ public class Wait extends Action {
 
         @Override
         public void execute() {
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 

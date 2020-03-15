@@ -31,7 +31,7 @@ public class Hide extends Action {
         public void execute() {
             user.getCharacter().message("You find a decent hiding place and wait for unwary opponents.");
             user.state = new State();
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 

@@ -62,7 +62,7 @@ public class Masturbate extends Action {
                         "You desperately need to deal with your throbbing body before you run into an opponent. You find an isolated corner and quickly finger your ass to a quick orgasm.");
             }
             user.state = new State();
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 

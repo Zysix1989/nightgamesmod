@@ -30,7 +30,7 @@ public class Recharge extends Action {
         public void execute() {
             user.getCharacter().message("You find a power supply and restore your batteries to full.");
             user.getCharacter().chargeBattery();
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 

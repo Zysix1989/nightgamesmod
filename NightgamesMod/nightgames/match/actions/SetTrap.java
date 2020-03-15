@@ -30,7 +30,7 @@ public class SetTrap extends Action {
             var result = trap.instantiate(user);
             user.getLocation().setTrap(result.instance);
             user.getCharacter().message(result.message);
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 

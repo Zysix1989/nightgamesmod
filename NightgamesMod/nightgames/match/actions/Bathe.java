@@ -39,7 +39,7 @@ public final class Bathe extends Action {
         public void execute() {
             user.getCharacter().message(startMessage);
             user.state = new State(endMessage);
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 

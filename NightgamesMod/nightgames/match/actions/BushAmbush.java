@@ -43,7 +43,7 @@ public class BushAmbush extends Action {
                         + " and wait for someone to walk past.");
             }
             user.state = new State();
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 

@@ -55,7 +55,7 @@ public class Resupply extends Action {
                 }
             }
             user.state = new State();
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 

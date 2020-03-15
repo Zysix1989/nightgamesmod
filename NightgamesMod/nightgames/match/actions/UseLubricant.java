@@ -33,7 +33,7 @@ public class UseLubricant extends Action {
                     "it easier to escape from a hold.");
             user.getCharacter().addNonCombat(new Status(new Oiled(user.getCharacter())));
             user.getCharacter().consume(Item.Lubricant, 1);
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 

@@ -23,10 +23,6 @@ public abstract class Action {
         }
 
         public abstract String describe(Character c);
-
-        public String describe() {
-            return usedAction.getGrammar().subject().defaultNoun() + describe(usedAction);
-        }
     }
 
     public abstract class Instance {

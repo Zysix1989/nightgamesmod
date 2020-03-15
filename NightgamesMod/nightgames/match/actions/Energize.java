@@ -35,7 +35,7 @@ public class Energize extends Action {
                     "until you're overflowing with mana.");
             user.getCharacter().getMojo().build(user.getCharacter().getMojo().max());
             user.getCharacter().addNonCombat(new Status(new Energized(user.getCharacter(), 20)));
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 

@@ -32,7 +32,7 @@ public class UseBeer extends Action {
             user.getCharacter().message("You pop open a beer and chug it down, feeling buzzed and a bit slugish.");
             user.getCharacter().addNonCombat(new Status(new Buzzed(user.getCharacter())));
             user.getCharacter().consume(Item.Beer, 1);
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 

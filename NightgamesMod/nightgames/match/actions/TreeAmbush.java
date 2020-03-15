@@ -44,7 +44,7 @@ public class TreeAmbush extends Action {
                         + " able to surprise someone passing underneath.");
             }
             user.state = new State();
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 

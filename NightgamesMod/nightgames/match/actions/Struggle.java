@@ -46,7 +46,7 @@ public class Struggle extends Action {
                 }
                 user.getCharacter().struggle();
             }
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 

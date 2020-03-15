@@ -42,7 +42,7 @@ public class Disguise extends Action {
                 user.getCharacter().completelyNudify(null);
                 target.outfitPlan.forEach(user.getCharacter().outfit::equip);
             }
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 

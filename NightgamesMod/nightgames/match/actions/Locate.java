@@ -40,7 +40,7 @@ public class Locate extends Action {
         public void execute() {
             var dialog = new Dialog(user);
             dialog.start();
-            messageOthersInLocation(new Aftermath(user).describe());
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
         }
     }
 
