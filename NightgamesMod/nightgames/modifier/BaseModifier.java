@@ -28,7 +28,7 @@ public abstract class BaseModifier {
     protected ItemModifier items;
     protected StatusModifier status;
     protected SkillModifier skills;
-    protected DescribablePredicate<Action> actions;
+    protected DescribablePredicate<Action.Instance> actions;
     protected BiConsumer<Character, Match> custom;
 
     protected Map<Character, Map<Item, Integer>> moddedItems;
@@ -95,7 +95,7 @@ public abstract class BaseModifier {
         custom.accept(c, m);
     }
 
-    public Optional<DescribablePredicate<Action>> getActionFilterFor(Character c) {
+    public Optional<DescribablePredicate<Action.Instance>> getActionFilterFor(Character c) {
         if (c.human()) {
             return Optional.of(actions);
         }

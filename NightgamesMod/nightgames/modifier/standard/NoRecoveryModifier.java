@@ -13,7 +13,8 @@ public class NoRecoveryModifier extends BaseModifier {
     public static final String NAME = "norecovery";
 
     public NoRecoveryModifier() {
-        actions = new DescribablePredicate<Action>(new Masturbate().toString(), act -> act instanceof Masturbate).negate();
+        actions = new DescribablePredicate<Action.Instance>(new Masturbate().toString(),
+                act -> act instanceof Masturbate.Instance).negate();
         skills = new BanSkillsModifier(new nightgames.skills.Masturbate(null));
     }
 

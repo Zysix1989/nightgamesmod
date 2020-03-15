@@ -39,7 +39,7 @@ public class HumanIntelligence implements Intelligence {
                                 Global.getMatch().getCondition()
                                         .getActionFilterFor(character)
                                         .orElse(DescribablePredicate.True())
-                                        .test(act.self))
+                                        .test(act))
                         .collect(Collectors.toSet()),
                 callback);
     }
