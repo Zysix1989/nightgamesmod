@@ -6,7 +6,6 @@ import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.match.actions.Move;
-import nightgames.modifier.action.DescribablePredicate;
 import nightgames.trap.Trap;
 
 import java.util.ArrayList;
@@ -38,7 +37,6 @@ public class HumanIntelligence implements Intelligence {
                         .filter(act ->
                                 Global.getMatch().getCondition()
                                         .getActionFilterFor(character)
-                                        .orElse(DescribablePredicate.True())
                                         .test(act))
                         .collect(Collectors.toSet()),
                 callback);

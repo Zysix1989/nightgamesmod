@@ -16,7 +16,6 @@ import nightgames.modifier.status.StatusModifierCombiner;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.BiConsumer;
 
 public abstract class BaseModifier {
@@ -95,11 +94,12 @@ public abstract class BaseModifier {
         custom.accept(c, m);
     }
 
-    public Optional<DescribablePredicate<Action.Instance>> getActionFilterFor(Character c) {
-        if (c.human()) {
-            return Optional.of(actions);
-        }
-        return Optional.empty();
+    protected DescribablePredicate<Action.Instance> getActionFilter() {
+        return actions;
+    }
+
+    public DescribablePredicate<Action.Instance> getActionFilterFor(Character c) {
+        return getActionFilter().or(new DescribablePredicate<>("NPCs ignore conditions", act -> !c.human()));
     }
 
     /**
