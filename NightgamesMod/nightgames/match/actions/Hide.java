@@ -1,5 +1,6 @@
 package nightgames.match.actions;
 
+import nightgames.areas.Area;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.match.Action;
@@ -22,8 +23,8 @@ public class Hide extends Action {
 
     public final class Instance extends Action.Instance {
 
-        private Instance(Participant user) {
-            super(user);
+        private Instance(Participant user, Area location) {
+            super(user, location);
         }
 
         @Override
@@ -77,8 +78,8 @@ public class Hide extends Action {
     }
 
     @Override
-    public Instance newInstance(Participant user) {
-        return new Instance(user);
+    public Instance newInstance(Participant user, Area location) {
+        return new Instance(user, location);
     }
 
 }

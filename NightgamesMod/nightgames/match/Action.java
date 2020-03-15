@@ -1,5 +1,6 @@
 package nightgames.match;
 
+import nightgames.areas.Area;
 import nightgames.characters.Character;
 
 import java.util.Optional;
@@ -30,9 +31,11 @@ public abstract class Action {
 
     public abstract class Instance {
         protected final Participant user;
+        protected final Area location;
 
-        protected Instance(Participant user) {
+        protected Instance(Participant user, Area location) {
             this.user = user;
+            this.location = location;
         }
 
         public abstract Aftermath execute();
@@ -96,7 +99,7 @@ public abstract class Action {
         protected abstract void moveAfterDelay(Participant p);
     }
 
-    public abstract Instance newInstance(Participant user);
+    public abstract Instance newInstance(Participant user, Area location);
 
     @Override
     public String toString() {

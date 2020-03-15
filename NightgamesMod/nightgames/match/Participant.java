@@ -100,7 +100,7 @@ public class Participant {
         possibleActions.removeIf(a -> !a.usable(this));
         var possibleActionInstances = character.location.get().possibleActions(this);
         possibleActionInstances.addAll(possibleActions.stream()
-                .map(act -> act.newInstance(this))
+                .map(act -> act.newInstance(this, character.location()))
                 .filter(actionFilter)
                 .collect(Collectors.toSet()));
         character.status.stream()
