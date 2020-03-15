@@ -33,7 +33,16 @@ public class HumanIntelligence implements Intelligence {
                     character.message("You hear something in the <b>" + act.getDestination().name + "</b>.");
                     act.getDestination().setPinged(true);
                 });
-        presentMoveOptions(possibleActions, callback);
+        var optionChoices = possibleActions.stream()
+                .map(action -> new CommandPanelOption(
+                        action.toString(),
+                        event -> {
+                            callback.accept(action);
+                            Global.getMatch().resume();
+                        })).collect(Collectors.toList());
+        assert !optionChoices.isEmpty();
+        character.gui.presentOptions(optionChoices);
+        Global.getMatch().pause();
     }
 
     @Override
@@ -165,17 +174,4 @@ public class HumanIntelligence implements Intelligence {
     }
 
 
-    private void presentMoveOptions(Collection<Action.Instance> actionChoices,
-                                    Consumer<Action.Instance> callback) {
-        var optionChoices = actionChoices.stream()
-                .map(action -> new CommandPanelOption(
-                        action.toString(),
-                        event -> {
-                            callback.accept(action);
-                            Global.getMatch().resume();
-                        })).collect(Collectors.toList());
-        assert !optionChoices.isEmpty();
-        character.gui.presentOptions(optionChoices);
-        Global.getMatch().pause();
-    }
 }
