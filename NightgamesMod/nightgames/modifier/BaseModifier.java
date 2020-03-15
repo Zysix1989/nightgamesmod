@@ -4,7 +4,6 @@ import nightgames.characters.Character;
 import nightgames.items.Item;
 import nightgames.match.Action;
 import nightgames.match.Match;
-import nightgames.modifier.action.ActionPredicate;
 import nightgames.modifier.clothing.ClothingModifier;
 import nightgames.modifier.clothing.ClothingModifierCombiner;
 import nightgames.modifier.item.ItemModifier;
@@ -17,6 +16,7 @@ import nightgames.modifier.status.StatusModifierCombiner;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 
 public abstract class BaseModifier implements Modifier {
 
@@ -27,7 +27,7 @@ public abstract class BaseModifier implements Modifier {
     protected ItemModifier items;
     protected StatusModifier status;
     protected SkillModifier skills;
-    protected ActionPredicate actions;
+    protected Predicate<Action> actions;
     protected BiConsumer<Character, Match> custom;
 
     protected Map<Character, Map<Item, Integer>> moddedItems;

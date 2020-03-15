@@ -4,7 +4,7 @@ import nightgames.match.Action;
 
 import java.util.function.Predicate;
 
-public class BanActionPredicate implements ActionPredicate {
+public class BanActionPredicate implements Predicate<Action> {
     private final String description;
     private final Predicate<Action> predicate;
 
