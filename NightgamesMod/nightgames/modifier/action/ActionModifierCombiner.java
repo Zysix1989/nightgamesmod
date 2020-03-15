@@ -5,10 +5,9 @@ package nightgames.modifier.action;
  */
 public final class ActionModifierCombiner {
     public static final ActionModifier NULL_MODIFIER = new ActionModifier() {
-        private final String name = "null-action-modifier";
 
         @Override public String toString() {
-            return name;
+            return "null-action-modifier";
         }
 
     };
