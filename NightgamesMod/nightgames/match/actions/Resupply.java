@@ -38,7 +38,7 @@ public class Resupply extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return self.execute(user);
+            return self.executeOuter(user);
         }
     }
 
@@ -137,7 +137,7 @@ public class Resupply extends Action {
     }
 
     @Override
-    public Action.Aftermath execute(Participant user) {
+    public Action.Aftermath executeOuter(Participant user) {
         if (Global.getMatch().getType() == MatchType.FTC) {
             FTCMatch match = (FTCMatch) Global.getMatch();
             user.getCharacter().message("You get a change of clothes from the chest placed here.");

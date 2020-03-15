@@ -32,7 +32,7 @@ public final class Move extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return self.execute(user);
+            return self.executeOuter(user);
         }
 
         public Area getDestination() {
@@ -87,7 +87,7 @@ public final class Move extends Action {
     }
 
     @Override
-    public Action.Aftermath execute(Participant user) {
+    public Action.Aftermath executeOuter(Participant user) {
         var aftermath = new Aftermath();
         user.travel(destination, aftermath.describe(user.getCharacter()));
         return aftermath;

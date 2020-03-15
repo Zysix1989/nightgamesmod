@@ -28,7 +28,7 @@ public class UseLubricant extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return self.execute(user);
+            return self.executeOuter(user);
         }
     }
 
@@ -47,7 +47,7 @@ public class UseLubricant extends Action {
     }
 
     @Override
-    public Action.Aftermath execute(Participant user) {
+    public Action.Aftermath executeOuter(Participant user) {
         user.getCharacter().message("You cover yourself in slick oil. It's a weird feeling, but it should make " +
                 "it easier to escape from a hold.");
         user.getCharacter().addNonCombat(new Status(new Oiled(user.getCharacter())));

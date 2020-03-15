@@ -27,7 +27,7 @@ public class Recharge extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return self.execute(user);
+            return self.executeOuter(user);
         }
     }
 
@@ -48,7 +48,7 @@ public class Recharge extends Action {
     }
 
     @Override
-    public Action.Aftermath execute(Participant user) {
+    public Action.Aftermath executeOuter(Participant user) {
         user.getCharacter().message("You find a power supply and restore your batteries to full.");
         user.getCharacter().chargeBattery();
         return new Aftermath();

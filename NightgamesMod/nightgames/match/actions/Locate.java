@@ -37,7 +37,7 @@ public class Locate extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return self.execute(user);
+            return self.executeOuter(user);
         }
     }
 
@@ -114,7 +114,7 @@ public class Locate extends Action {
     }
 
     @Override
-    public Action.Aftermath execute(Participant self) {
+    public Action.Aftermath executeOuter(Participant self) {
         var dialog = new Dialog(self);
         dialog.start();
         return new Aftermath();

@@ -27,7 +27,7 @@ public class UseEnergyDrink extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return self.execute(user);
+            return self.executeOuter(user);
         }
     }
 
@@ -46,7 +46,7 @@ public class UseEnergyDrink extends Action {
     }
 
     @Override
-    public Action.Aftermath execute(Participant user) {
+    public Action.Aftermath executeOuter(Participant user) {
         user.getCharacter().message("You chug down the unpleasant drink. Your tiredness immediately starts to recede.");
         user.getCharacter().heal(null, 10 + Global.random(10));
         user.getCharacter().consume(Item.EnergyDrink, 1);

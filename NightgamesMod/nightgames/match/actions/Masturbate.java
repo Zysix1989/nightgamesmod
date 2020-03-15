@@ -38,7 +38,7 @@ public class Masturbate extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return self.execute(user);
+            return self.executeOuter(user);
         }
     }
 
@@ -100,7 +100,7 @@ public class Masturbate extends Action {
     }
 
     @Override
-    public Action.Aftermath execute(Participant user) {
+    public Action.Aftermath executeOuter(Participant user) {
         if (user.getCharacter().hasDick()) {
             user.getCharacter().message("You desperately need to deal with your erection before you run into " +
                     "an opponent. You find an isolated corner and quickly jerk off.");

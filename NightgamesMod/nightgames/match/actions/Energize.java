@@ -28,7 +28,7 @@ public class Energize extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return self.execute(user);
+            return self.executeOuter(user);
         }
     }
 
@@ -49,7 +49,7 @@ public class Energize extends Action {
     }
 
     @Override
-    public Action.Aftermath execute(Participant user) {
+    public Action.Aftermath executeOuter(Participant user) {
         user.getCharacter().message("You duck into the creative writing room and find a spellbook sitting out " +
                 "in the open. Aisha must have left it for you. The spellbook builds mana continuously and the " +
                 "first lesson you learned was how to siphon off the excess. You absorb as much as you can hold, " +

@@ -33,7 +33,7 @@ public class Disguise extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return self.execute(user);
+            return self.executeOuter(user);
         }
     }
 
@@ -64,7 +64,7 @@ public class Disguise extends Action {
     }
 
     @Override
-    public Action.Aftermath execute(Participant user) {
+    public Action.Aftermath executeOuter(Participant user) {
         NPC target = getRandomNPC(user.getCharacter());
         if (target != null) {
             user.getCharacter().addNonCombat(new Status(new Disguised(user.getCharacter(), target)));

@@ -28,7 +28,7 @@ public class Hide extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return self.execute(user);
+            return self.executeOuter(user);
         }
     }
 
@@ -80,7 +80,7 @@ public class Hide extends Action {
     }
 
     @Override
-    public Action.Aftermath execute(Participant user) {
+    public Action.Aftermath executeOuter(Participant user) {
         user.getCharacter().message("You find a decent hiding place and wait for unwary opponents.");
         user.state = new State();
         return new Aftermath();

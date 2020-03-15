@@ -28,7 +28,7 @@ public class UseBeer extends Action {
 
         @Override
         public Action.Aftermath execute() {
-            return self.execute(user);
+            return self.executeOuter(user);
         }
     }
 
@@ -47,7 +47,7 @@ public class UseBeer extends Action {
     }
 
     @Override
-    public Action.Aftermath execute(Participant user) {
+    public Action.Aftermath executeOuter(Participant user) {
         user.getCharacter().message("You pop open a beer and chug it down, feeling buzzed and a bit slugish.");
         user.getCharacter().addNonCombat(new Status(new Buzzed(user.getCharacter())));
         user.getCharacter().consume(Item.Beer, 1);
