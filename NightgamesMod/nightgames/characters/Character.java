@@ -2913,7 +2913,7 @@ public Character clone() throws CloneNotSupportedException {
             throw new RuntimeException("current room already satisfies predicate");
         }
         ArrayDeque<Area> queue = new ArrayDeque<>();
-        Vector<Area> vector = new Vector<>();
+        List<Area> vector = new ArrayList<>();
         HashMap<Area, Area> parents = new HashMap<>();
         queue.push(initial);
         vector.add(initial);
