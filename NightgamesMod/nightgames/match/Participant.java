@@ -97,6 +97,10 @@ public class Participant {
         possibleActions.removeIf(a -> !a.usable(this));
         var possibleActionInstances = possibleActions.stream()
                 .map(act -> act.newInstance(this))
+                .filter(act ->
+                        Global.getMatch().getCondition()
+                                .getActionFilterFor(character)
+                                .test(act))
                 .collect(Collectors.toSet());
         character.status.stream()
                 .map(s -> s.makeAllowedActionsPredicate(this))

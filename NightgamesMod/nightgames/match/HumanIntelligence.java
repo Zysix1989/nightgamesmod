@@ -33,13 +33,7 @@ public class HumanIntelligence implements Intelligence {
                     character.message("You hear something in the <b>" + act.getDestination().name + "</b>.");
                     act.getDestination().setPinged(true);
                 });
-        presentMoveOptions(possibleActions.stream()
-                        .filter(act ->
-                                Global.getMatch().getCondition()
-                                        .getActionFilterFor(character)
-                                        .test(act))
-                        .collect(Collectors.toSet()),
-                callback);
+        presentMoveOptions(possibleActions, callback);
     }
 
     @Override
