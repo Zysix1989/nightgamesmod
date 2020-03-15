@@ -2,6 +2,6 @@ package nightgames.modifier.action;
 
 import nightgames.match.Action;
 
-public interface ActionModifier {
+public interface ActionPredicate {
     boolean allowAction(Action act);
 }

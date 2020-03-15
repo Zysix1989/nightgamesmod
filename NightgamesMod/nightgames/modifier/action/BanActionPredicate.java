@@ -4,11 +4,11 @@ import nightgames.match.Action;
 
 import java.util.function.Predicate;
 
-public class BanActionModifier implements ActionModifier {
+public class BanActionPredicate implements ActionPredicate {
     private final String description;
     private final Predicate<Action> predicate;
 
-    public BanActionModifier(String description, Predicate<Action> predicate) {
+    public BanActionPredicate(String description, Predicate<Action> predicate) {
         this.description = description;
         this.predicate = predicate;
     }

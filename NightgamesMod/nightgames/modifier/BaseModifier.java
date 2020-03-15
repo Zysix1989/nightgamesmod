@@ -4,7 +4,7 @@ import nightgames.characters.Character;
 import nightgames.items.Item;
 import nightgames.match.Action;
 import nightgames.match.Match;
-import nightgames.modifier.action.ActionModifier;
+import nightgames.modifier.action.ActionPredicate;
 import nightgames.modifier.clothing.ClothingModifier;
 import nightgames.modifier.clothing.ClothingModifierCombiner;
 import nightgames.modifier.item.ItemModifier;
@@ -27,7 +27,7 @@ public abstract class BaseModifier implements Modifier {
     protected ItemModifier items;
     protected StatusModifier status;
     protected SkillModifier skills;
-    protected ActionModifier actions;
+    protected ActionPredicate actions;
     protected BiConsumer<Character, Match> custom;
 
     protected Map<Character, Map<Item, Integer>> moddedItems;
