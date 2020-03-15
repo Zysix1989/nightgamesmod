@@ -26,7 +26,7 @@ public class HumanIntelligence implements Intelligence {
     public void move(Collection<Action.Instance> possibleActions,
                      Consumer<Action.Instance> callback) {
         possibleActions.stream()
-                .filter(act -> act.self instanceof Move)
+                .filter(act -> act instanceof Move.Instance)
                 .map(act -> (Move.Instance) act)
                 .filter(act -> act.maybeDetectOccupancy(character.get(Attribute.Perception)))
                 .forEach(act -> {
