@@ -12,8 +12,6 @@ import nightgames.modifier.standard.NoModifier;
 import nightgames.modifier.standard.UnderwearOnlyModifier;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class DefaultPrematch extends Prematch {
@@ -44,7 +42,7 @@ public class DefaultPrematch extends Prematch {
             super("You arrive at the student union a few minutes before the start of the match. "
                             + "You have enough time to check in and make idle chat with your opponents before "
                             + "you head to your assigned starting point and wait. At exactly 10:00, the match is on.",
-                new NoModifier(), Collections.singletonList(GUI.sceneOption("Start the Match")));
+                new NoModifier());
         }
 
         @Override
@@ -81,8 +79,8 @@ public class DefaultPrematch extends Prematch {
                             + "tonight's match, you're only allowed to wear your underwear. Even when you come back here for a change of clothes, you'll only get your underwear. If you "
                             + "agree to this, I'll throw an extra $" + new UnderwearOnlyModifier().bonus()
                             + " on top of your normal prize for each point you score. Interested?\"</i>",
-                            new UnderwearOnlyModifier(),
-                Arrays.asList(GUI.sceneOption("Do It"), GUI.sceneOption("Not Interested")));
+                            new UnderwearOnlyModifier()
+            );
         }
 
         @Override
@@ -121,8 +119,8 @@ public class DefaultPrematch extends Prematch {
                             + "Lilly takes the lead again. <i>\"If any of you actually manage to make "
                             + "Maya cum, I'll give you multiple points for it. Otherwise you can just"
                             + " consider this a learning opportunity and a chance to experience an "
-                            + "orgasm at the hands of a master.\"</i><br/><br/>\n\n", new MayaModifier(),
-                Collections.singletonList(GUI.sceneOption("Start the Match")));
+                            + "orgasm at the hands of a master.\"</i><br/><br/>\n\n", new MayaModifier()
+            );
         }
 
         @Override
@@ -149,12 +147,6 @@ public class DefaultPrematch extends Prematch {
                             + " a visible smirk. Your instincts tells you something is wrong, but"
                             + " you decide to ignore it for now.<br/><br/>"
                             + "<b>Airi has entered the games.</b><br/><br/>";
-            if (type.name().equals(MayaModifier.NAME)) {
-                options.add(GUI.sceneOption("Start The Match"));
-            } else {
-                options.add(GUI.sceneOption("Do it"));
-                options.add(GUI.sceneOption("Not interested"));
-            }
         }
 
         @Override

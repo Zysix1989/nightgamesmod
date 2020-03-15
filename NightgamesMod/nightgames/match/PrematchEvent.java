@@ -9,27 +9,32 @@ import nightgames.modifier.standard.NoModifier;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public abstract class PrematchEvent {
 
     protected String message;
-    protected List<CommandPanelOption> options;
     protected Modifier type;
 
     protected PrematchEvent() {
-        this("", offer(), new ArrayList<>());
+        this("", offer());
     }
 
-    protected PrematchEvent(String message, Modifier type, List<CommandPanelOption> options) {
+    protected PrematchEvent(String message, Modifier type) {
         this.message = message;
         this.type = type;
-        this.options = new ArrayList<>(options);
+
     }
 
     protected final void run() {
         extraEffects();
+        var options = new ArrayList<CommandPanelOption>();
+        if (type.name().equals(MayaModifier.NAME)) {
+            options.add(GUI.sceneOption("Start The Match"));
+        } else {
+            options.add(GUI.sceneOption("Do it"));
+            options.add(GUI.sceneOption("Not interested"));
+        }
         Global.gui().promptWithSave(message, options);
     }
 
@@ -53,12 +58,6 @@ public abstract class PrematchEvent {
                             + "You greet each of the girls and make some idle chatter with "
                             + "them before you check in with Lilly to see if she has any custom rules for you.<br/><br/>"
                             + type.intro();
-            if (type.name().equals(MayaModifier.NAME)) {
-                options.add(GUI.sceneOption("Start The Match"));
-            } else {
-                options.add(GUI.sceneOption("Do it"));
-                options.add(GUI.sceneOption("Not interested"));
-            }
         }
 
         @Override

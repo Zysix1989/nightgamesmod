@@ -10,7 +10,6 @@ import nightgames.match.PrematchEvent;
 import nightgames.modifier.standard.FTCModifier;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -102,8 +101,8 @@ public class FTCPrematch extends Prematch {
                             + " and five points for delivering a Flag to their base. The Prey gets one"
                             + " point for every 15 minutes they hold on to the Flag, plus three points for every"
                             + " fight they win. Everyone will get $100 per point at the end of the night."
-                            + " So, anyone want to volunteer to be our first Prey?\"", null,
-                Arrays.asList(GUI.sceneOption("Volunteer"), GUI.sceneOption("Keep Silent")));
+                            + " So, anyone want to volunteer to be our first Prey?\"", null
+            );
         }
         
         @Override
@@ -123,8 +122,8 @@ public class FTCPrematch extends Prematch {
         FTCIntroEvent() {
             super("You find a note in the student union saying that tonight's match will"
                             + " take place in the forest again. When you get to the van, Lilly asks the"
-                            + " assembled competitors who wants to be the Prey tonight.\"", null,
-                Arrays.asList(GUI.sceneOption("Volunteer"), GUI.sceneOption("Keep Silent")));
+                            + " assembled competitors who wants to be the Prey tonight.\"", null
+            );
         }
         
         @Override
