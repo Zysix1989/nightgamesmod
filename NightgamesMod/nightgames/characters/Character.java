@@ -34,7 +34,6 @@ import nightgames.json.JsonUtils;
 import nightgames.match.Action;
 import nightgames.match.Intelligence;
 import nightgames.match.Match;
-import nightgames.match.actions.Move;
 import nightgames.match.actions.UseBeer;
 import nightgames.match.actions.UseEnergyDrink;
 import nightgames.match.actions.UseLubricant;
@@ -58,7 +57,6 @@ import nightgames.utilities.ProseUtils;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -2904,49 +2902,6 @@ public Character clone() throws CloneNotSupportedException {
         } else {
             return 50;
         }
-    }
-
-    // finds the best Move to get to an Area with an Action that satisfies the predicate
-    public static Optional<Move.Instance> bestMove(Character c, Area initial, Predicate<Action.Instance> predicate) {
-        var p = Global.getMatch().findParticipant(c);
-        if (initial.possibleActions(p).stream().anyMatch(predicate)) {
-            throw new RuntimeException("current room already satisfies predicate");
-        }
-        ArrayDeque<Area> queue = new ArrayDeque<>();
-        List<Area> vector = new ArrayList<>();
-        HashMap<Area, Area> parents = new HashMap<>();
-        queue.push(initial);
-        vector.add(initial);
-        Area last = null;
-        while (!queue.isEmpty()) {
-            Area t = queue.pop();
-            parents.put(t, last);
-            var possibleActions = t.possibleActions(p);
-            var possibleMoves = possibleActions.stream()
-                    .filter(action -> action instanceof Move.Instance)
-                    .map(action -> (Move.Instance) action)
-                    .collect(Collectors.toUnmodifiableSet());
-            var adjacent = possibleMoves.stream()
-                    .map(Move.Instance::getDestination)
-                    .collect(Collectors.toSet());
-            if (possibleActions.stream().anyMatch(predicate)) {
-                while (!adjacent.contains(t)) {
-                    t = parents.get(t);
-                }
-                final var nextDest = t;
-                return possibleMoves.stream()
-                        .filter(move -> move.getDestination().equals(nextDest))
-                        .findAny();
-            }
-            adjacent.stream()
-                    .filter(Predicate.not(vector::contains))
-                    .forEach(area -> {
-                        vector.add(area);
-                        queue.push(area);
-                    });
-            last = t;
-        }
-        return Optional.empty();
     }
 
 

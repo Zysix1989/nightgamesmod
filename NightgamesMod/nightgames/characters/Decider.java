@@ -152,7 +152,7 @@ public class Decider {
     private static Optional<Action.Instance> searchForAction(Collection<Action.Instance> available, NPC character, Predicate<Action.Instance> predicate) {
         var action = available.stream().filter(predicate).findAny();
         if (action.isEmpty()) {
-            var bestMove = Character.bestMove(character, character.location(), predicate);
+            var bestMove = bestMove(character, character.location(), predicate);
             if (bestMove.isPresent()) {
                 action = available.stream().filter(act -> act.equals(bestMove.get())).findAny();
             }
@@ -452,5 +452,48 @@ public class Decider {
         double selfFitnessDelta = newObserver.getFitness(c) - selfFit;
         double otherFitnessDelta = newObserver.getOtherFitness(c, newOpponent) - otherFit;
         return selfFitnessDelta - otherFitnessDelta;
+    }
+
+    // finds the best Move to get to an Area with an Action that satisfies the predicate
+    public static Optional<Move.Instance> bestMove(Character c, Area initial, Predicate<Action.Instance> predicate) {
+        var p = Global.getMatch().findParticipant(c);
+        if (initial.possibleActions(p).stream().anyMatch(predicate)) {
+            throw new RuntimeException("current room already satisfies predicate");
+        }
+        ArrayDeque<Area> queue = new ArrayDeque<>();
+        List<Area> vector = new ArrayList<>();
+        HashMap<Area, Area> parents = new HashMap<>();
+        queue.push(initial);
+        vector.add(initial);
+        Area last = null;
+        while (!queue.isEmpty()) {
+            Area t = queue.pop();
+            parents.put(t, last);
+            var possibleActions = t.possibleActions(p);
+            var possibleMoves = possibleActions.stream()
+                    .filter(action -> action instanceof Move.Instance)
+                    .map(action -> (Move.Instance) action)
+                    .collect(Collectors.toUnmodifiableSet());
+            var adjacent = possibleMoves.stream()
+                    .map(Move.Instance::getDestination)
+                    .collect(Collectors.toSet());
+            if (possibleActions.stream().anyMatch(predicate)) {
+                while (!adjacent.contains(t)) {
+                    t = parents.get(t);
+                }
+                final var nextDest = t;
+                return possibleMoves.stream()
+                        .filter(move -> move.getDestination().equals(nextDest))
+                        .findAny();
+            }
+            adjacent.stream()
+                    .filter(Predicate.not(vector::contains))
+                    .forEach(area -> {
+                        vector.add(area);
+                        queue.push(area);
+                    });
+            last = t;
+        }
+        return Optional.empty();
     }
 }

@@ -3,6 +3,7 @@ package nightgames.status;
 import com.google.gson.JsonObject;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.characters.Decider;
 import nightgames.characters.Emotion;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
@@ -196,7 +197,7 @@ public class Enthralled extends DurationStatus {
     public Predicate<Action.Instance> makeAllowedActionsPredicate(Participant bearer) {
         if (master != null) {
             Character character = bearer.getCharacter();
-            var compelled = Character.bestMove(character, character.location.get(),
+            var compelled = Decider.bestMove(character, character.location.get(),
                     action -> action instanceof Move.Instance && ((Move.Instance) action).getDestination().name.equals(master.location().name)
             );
             bearer.getCharacter().message("You feel an irresistible compulsion to head to the <b>" + master.location().name + "</b>");
