@@ -12,12 +12,6 @@ import nightgames.match.Participant;
 import java.util.Optional;
 
 public class Masturbate extends Action {
-    private static final class Aftermath extends Action.Aftermath {
-        private Aftermath(Participant usedAction) {
-            super(usedAction);
-        }
-
-    }
 
     public final class Instance extends Action.Instance {
 

@@ -13,13 +13,6 @@ public final class Move extends Action {
         boolean check(Character c);
     }
 
-    private final class Aftermath extends Action.Aftermath {
-        private Aftermath(Participant usedAction) {
-            super(usedAction);
-        }
-
-    }
-
     public final class Instance extends Action.Instance {
 
         private Instance(Participant user, Area location) {

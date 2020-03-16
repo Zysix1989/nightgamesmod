@@ -14,13 +14,6 @@ import java.util.Optional;
 
 public class Scavenge extends Action {
 
-    private static final class Aftermath extends Action.Aftermath {
-        private Aftermath(Participant usedAction) {
-            super(usedAction);
-        }
-
-    }
-
     public final class Instance extends Action.Instance {
 
         private Instance(Participant user, Area location) {

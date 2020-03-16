@@ -18,13 +18,6 @@ import java.util.stream.Collectors;
 public class Locate extends Action {
     private static final int MINIMUM_SCRYING_REQUIREMENT = 5;
 
-    private static final class Aftermath extends Action.Aftermath {
-        private Aftermath(Participant usedAction) {
-            super(usedAction);
-        }
-
-    }
-
     public final class Instance extends Action.Instance {
 
         private Instance(Participant user, Area location) {
