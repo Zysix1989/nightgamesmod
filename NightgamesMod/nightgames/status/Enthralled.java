@@ -10,6 +10,7 @@ import nightgames.global.Global;
 import nightgames.match.Action;
 import nightgames.match.Participant;
 import nightgames.match.actions.Move;
+import nightgames.match.actions.Wait;
 import nightgames.pet.PetCharacter;
 
 import java.util.Optional;
@@ -197,9 +198,15 @@ public class Enthralled extends DurationStatus {
             Character character = bearer.getCharacter();
             var compelled = Character.bestMove(character, character.location.get(),
                     action -> action instanceof Move.Instance && ((Move.Instance) action).getDestination().name.equals(master.location().name)
-            ).orElse(null);
+            );
             bearer.getCharacter().message("You feel an irresistible compulsion to head to the <b>" + master.location().name + "</b>");
-            return compelled::equals;
+            if (compelled.isPresent()) {
+                return compelled.get()::equals;
+            } else {
+                bearer.getCharacter().message("However, you can't figure out how to get there, so instead you just " +
+                        "wander aimlessly.");
+                return act -> act instanceof Wait.Instance;
+            }
         }
         throw new RuntimeException("enthralled without a master");
     }
