@@ -1,11 +1,10 @@
 package nightgames.pet;
 
-import java.util.HashMap;
-import nightgames.characters.Character;
 import nightgames.characters.Player;
-import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.items.clothing.Outfit;
+
+import java.util.HashMap;
 
 public class PlayerPetCharacter extends PetCharacter {
     private Player prototype;
@@ -29,40 +28,5 @@ public class PlayerPetCharacter extends PetCharacter {
         getArousal().renew();
         getMojo().renew();
         Global.learnSkills(this);
-    }
-
-    @Override
-    public String bbLiner(Combat c, Character target) {
-        return "";
-    }
-
-    @Override
-    public String nakedLiner(Combat c, Character target) {
-        return "";
-    }
-
-    @Override
-    public String stunLiner(Combat c, Character target) {
-        return "";
-    }
-
-    @Override
-    public String taunt(Combat c, Character target) {
-        return "";
-    }
-
-    @Override
-    public String temptLiner(Combat c, Character target) {
-        return "";
-    }
-
-    @Override
-    public String challenge(Character other) {
-        return "";
-    }
-
-    @Override
-    public String getPortrait() {
-        return "";
     }
 }
