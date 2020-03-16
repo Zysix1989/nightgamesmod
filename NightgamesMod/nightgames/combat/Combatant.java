@@ -24,4 +24,8 @@ public class Combatant {
     Combatant copy() {
         return new Combatant(this);
     }
+
+    boolean act(Combat c, Combatant target) {
+        return getCharacter().act(c, target.getCharacter());
+    }
 }
