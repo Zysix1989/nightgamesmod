@@ -76,8 +76,4 @@ public final class Move extends Action {
         return new Instance(user, location);
     }
 
-    public Area getDestination() {
-        return destination;
-    }
-
 }
