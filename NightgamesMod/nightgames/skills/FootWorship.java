@@ -1,6 +1,5 @@
 package nightgames.skills;
 
-import java.util.Optional;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.FeetPart;
@@ -11,7 +10,12 @@ import nightgames.nskills.tags.SkillTag;
 import nightgames.stance.Kneeling;
 import nightgames.status.BodyFetish;
 
+import java.util.Optional;
+
 public class FootWorship extends Skill {
+
+    public static final String FLAG_FOOTWORSHIPPED = "footworshipped";
+
     public FootWorship(Character self) {
         super("Foot Worship", self);
         addTag(SkillTag.pleasure);
@@ -65,7 +69,7 @@ public class FootWorship extends Skill {
         if (!c.getStance().sub(getSelf())) {
             c.setStance(new Kneeling(target, getSelf()), getSelf(), true);
         }
-        c.getCombatantData(getSelf()).toggleFlagOn("footworshipped", true);
+        c.getCombatantData(getSelf()).toggleFlagOn(FLAG_FOOTWORSHIPPED, true);
         return result != Result.miss;
     }
 
@@ -86,7 +90,7 @@ public class FootWorship extends Skill {
 
     @Override
     public String deal(Combat c, int damage, Result modifier, Character target) {
-        if (!c.getCombatantData(getSelf()).getBooleanFlag("footworshipped")) {
+        if (!c.getCombatantData(getSelf()).getBooleanFlag(FLAG_FOOTWORSHIPPED)) {
             return "You throw yourself at " + target.nameOrPossessivePronoun()
                             + " dainty feet and start sucking on her toes. " + target.subject()
                             + " seems surprised at first, "
@@ -98,7 +102,7 @@ public class FootWorship extends Skill {
 
     @Override
     public String receive(Combat c, int damage, Result modifier, Character target) {
-        if (!c.getCombatantData(getSelf()).getBooleanFlag("footworshipped")) {
+        if (!c.getCombatantData(getSelf()).getBooleanFlag(FLAG_FOOTWORSHIPPED)) {
             return String.format("%s throws %s at %s feet. %s worshipfully grasps %s feet "
                             + "and starts licking between %s toes, all while %s face displays a mask of ecstasy.",
                             getSelf().subject(), getSelf().reflexivePronoun(), target.nameOrPossessivePronoun(),
