@@ -15,10 +15,6 @@ public class Energize extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return String.format(" doing something with a large book. When %s's finished, you can see a sort of aura coming from %s.", c.pronoun(), c.possessiveAdjective());
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -35,7 +31,8 @@ public class Energize extends Action {
                     "until you're overflowing with mana.");
             user.getCharacter().getMojo().build(user.getCharacter().getMojo().max());
             user.getCharacter().addNonCombat(new Status(new Energized(user.getCharacter(), 20)));
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            Character c = user.getCharacter();
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + String.format(" doing something with a large book. When %s's finished, you can see a sort of aura coming from %s.", c.pronoun(), c.possessiveAdjective()));
         }
     }
 

@@ -17,18 +17,6 @@ public class Masturbate extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            String mast;
-            if (c.hasDick()) {
-                mast = String.format(" starts to stroke %s cock ", c.possessiveAdjective());
-            } else if (c.hasPussy()) {
-                mast = String.format(" starts to stroke %s pussy ", c.possessiveAdjective());
-            } else {
-                mast = String.format(" starts to finger %s ass ", c.possessiveAdjective());
-            }
-            return mast + "while trying not to make much noise. It's quite a show.";
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -62,7 +50,16 @@ public class Masturbate extends Action {
                         "You desperately need to deal with your throbbing body before you run into an opponent. You find an isolated corner and quickly finger your ass to a quick orgasm.");
             }
             user.state = new State();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            Character c = user.getCharacter();
+            String mast;
+            if (c.hasDick()) {
+                mast = String.format(" starts to stroke %s cock ", c.possessiveAdjective());
+            } else if (c.hasPussy()) {
+                mast = String.format(" starts to stroke %s pussy ", c.possessiveAdjective());
+            } else {
+                mast = String.format(" starts to finger %s ass ", c.possessiveAdjective());
+            }
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + (mast + "while trying not to make much noise. It's quite a show."));
         }
     }
 

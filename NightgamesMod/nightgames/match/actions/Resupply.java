@@ -24,10 +24,6 @@ public class Resupply extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return " heads for one of the safe rooms, probably to get a change of clothes.";
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -55,7 +51,7 @@ public class Resupply extends Action {
                 }
             }
             user.state = new State();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " heads for one of the safe rooms, probably to get a change of clothes.");
         }
     }
 

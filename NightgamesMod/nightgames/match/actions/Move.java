@@ -18,10 +18,6 @@ public final class Move extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return destination.getMovementToAreaDescription(c);
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -32,7 +28,7 @@ public final class Move extends Action {
 
         @Override
         public void execute() {
-            user.travel(destination, user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            user.travel(destination, user.getCharacter().getGrammar().subject().defaultNoun() + destination.getMovementToAreaDescription(user.getCharacter()));
         }
 
         public Area getDestination() {

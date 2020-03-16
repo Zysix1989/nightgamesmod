@@ -1,7 +1,6 @@
 package nightgames.match.actions;
 
 import nightgames.areas.Area;
-import nightgames.characters.Character;
 import nightgames.match.Action;
 import nightgames.match.Participant;
 import nightgames.trap.Trap;
@@ -13,10 +12,6 @@ public class SetTrap extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return " start rigging up something weird, probably a trap.";
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -30,7 +25,7 @@ public class SetTrap extends Action {
             var result = trap.instantiate(user);
             user.getLocation().setTrap(result.instance);
             user.getCharacter().message(result.message);
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " start rigging up something weird, probably a trap.");
         }
     }
 

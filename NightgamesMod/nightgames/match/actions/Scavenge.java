@@ -19,10 +19,6 @@ public class Scavenge extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return " begin scrounging through some boxes in the corner.";
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -34,7 +30,7 @@ public class Scavenge extends Action {
         @Override
         public void execute() {
             user.state = new State();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " begin scrounging through some boxes in the corner.");
         }
     }
 

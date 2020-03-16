@@ -19,10 +19,6 @@ public class Disguise extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return " shimmer and turn into someone else!";
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -42,7 +38,7 @@ public class Disguise extends Action {
                 user.getCharacter().completelyNudify(null);
                 target.outfitPlan.forEach(user.getCharacter().outfit::equip);
             }
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " shimmer and turn into someone else!");
         }
     }
 

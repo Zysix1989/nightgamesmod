@@ -2,7 +2,6 @@ package nightgames.match.actions;
 
 import nightgames.areas.Area;
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Action;
@@ -21,10 +20,6 @@ public class BushAmbush extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return " dive into some bushes.";
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -43,7 +38,7 @@ public class BushAmbush extends Action {
                         + " and wait for someone to walk past.");
             }
             user.state = new State();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " dive into some bushes.");
         }
     }
 

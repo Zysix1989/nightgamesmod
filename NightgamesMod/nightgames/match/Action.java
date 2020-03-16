@@ -21,8 +21,6 @@ public abstract class Action {
         protected Aftermath(Participant usedAction) {
             this.usedAction = usedAction.character;
         }
-
-        public abstract String describe(Character c);
     }
 
     public abstract class Instance {

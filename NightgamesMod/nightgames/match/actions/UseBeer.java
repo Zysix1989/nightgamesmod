@@ -1,7 +1,6 @@
 package nightgames.match.actions;
 
 import nightgames.areas.Area;
-import nightgames.characters.Character;
 import nightgames.items.Item;
 import nightgames.match.Action;
 import nightgames.match.Participant;
@@ -15,10 +14,6 @@ public class UseBeer extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return " opening a beer and downing the whole thing.";
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -32,7 +27,7 @@ public class UseBeer extends Action {
             user.getCharacter().message("You pop open a beer and chug it down, feeling buzzed and a bit slugish.");
             user.getCharacter().addNonCombat(new Status(new Buzzed(user.getCharacter())));
             user.getCharacter().consume(Item.Beer, 1);
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " opening a beer and downing the whole thing.");
         }
     }
 

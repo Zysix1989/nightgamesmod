@@ -2,7 +2,6 @@ package nightgames.match.actions;
 
 import nightgames.areas.Area;
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Action;
@@ -22,10 +21,6 @@ public class TreeAmbush extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return " climb up a tree.";
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -44,7 +39,7 @@ public class TreeAmbush extends Action {
                         + " able to surprise someone passing underneath.");
             }
             user.state = new State();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " climb up a tree.");
         }
     }
 

@@ -2,7 +2,6 @@ package nightgames.match.actions;
 
 import nightgames.areas.Area;
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.global.Global;
 import nightgames.match.Action;
 import nightgames.match.Encounter;
@@ -19,10 +18,6 @@ public class PassAmbush extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return " slip into an alcove.";
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -35,7 +30,7 @@ public class PassAmbush extends Action {
         public void execute() {
             user.getCharacter().message("You try to find a decent hiding place in the irregular rock faces lining the pass.");
             user.state = new State();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " slip into an alcove.");
         }
     }
 

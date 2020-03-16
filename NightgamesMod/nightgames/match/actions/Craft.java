@@ -19,10 +19,6 @@ public class Craft extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return " start mixing various liquids. Whatever it is doesn't look healthy.";
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -34,7 +30,7 @@ public class Craft extends Action {
         @Override
         public void execute() {
             user.state = new State();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " start mixing various liquids. Whatever it is doesn't look healthy.");
         }
     }
 

@@ -23,10 +23,6 @@ public final class Bathe extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return " start bathing in the nude, not bothered by your presence.";
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -39,7 +35,7 @@ public final class Bathe extends Action {
         public void execute() {
             user.getCharacter().message(startMessage);
             user.state = new State(endMessage);
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " start bathing in the nude, not bothered by your presence.");
         }
     }
 

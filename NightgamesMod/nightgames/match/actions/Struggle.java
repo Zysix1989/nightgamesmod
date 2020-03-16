@@ -2,7 +2,6 @@ package nightgames.match.actions;
 
 import nightgames.areas.Area;
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.match.Action;
 import nightgames.match.Participant;
 import nightgames.status.Bound;
@@ -15,10 +14,6 @@ public class Struggle extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return String.format(" is struggling against %s bondage.", c.possessiveAdjective());
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -46,7 +41,7 @@ public class Struggle extends Action {
                 }
                 user.getCharacter().struggle();
             }
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + String.format(" is struggling against %s bondage.", user.getCharacter().possessiveAdjective()));
         }
     }
 

@@ -2,7 +2,6 @@ package nightgames.match.actions;
 
 import nightgames.areas.Area;
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.match.Action;
 import nightgames.match.Encounter;
 import nightgames.match.Participant;
@@ -15,10 +14,6 @@ public class Hide extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return " disappear into a hiding place.";
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -31,7 +26,7 @@ public class Hide extends Action {
         public void execute() {
             user.getCharacter().message("You find a decent hiding place and wait for unwary opponents.");
             user.state = new State();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " disappear into a hiding place.");
         }
     }
 

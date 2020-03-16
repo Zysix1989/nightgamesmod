@@ -1,7 +1,6 @@
 package nightgames.match.actions;
 
 import nightgames.areas.Area;
-import nightgames.characters.Character;
 import nightgames.match.Action;
 import nightgames.match.Participant;
 
@@ -12,10 +11,6 @@ public class Wait extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return " loitering nearby";
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -26,7 +21,7 @@ public class Wait extends Action {
 
         @Override
         public void execute() {
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " loitering nearby");
         }
     }
 

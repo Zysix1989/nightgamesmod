@@ -1,7 +1,6 @@
 package nightgames.match.actions;
 
 import nightgames.areas.Area;
-import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -24,10 +23,6 @@ public class Locate extends Action {
             super(usedAction);
         }
 
-        @Override
-        public String describe(Character c) {
-            return String.format(" is holding someone's underwear in %s hands and breathing deeply. Strange.", c.possessiveAdjective());
-        }
     }
 
     public final class Instance extends Action.Instance {
@@ -40,7 +35,7 @@ public class Locate extends Action {
         public void execute() {
             var dialog = new Dialog(user);
             dialog.start();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + new Aftermath(user).describe(user.getCharacter()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + String.format(" is holding someone's underwear in %s hands and breathing deeply. Strange.", user.getCharacter().possessiveAdjective()));
         }
     }
 
