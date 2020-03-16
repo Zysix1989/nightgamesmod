@@ -36,6 +36,7 @@ import java.util.stream.Collectors;
 public class Combat {
     private static final int NPC_TURN_LIMIT = 75;
     private static final double NPC_DRAW_ERROR_MARGIN = .15;
+    public static final String FLAG_RESURRECTED = "resurrected";
 
     /**Combat phases.*/
     private enum CombatPhase {
@@ -1791,17 +1792,17 @@ public class Combat {
     }
 
     public void removePet(PetCharacter self) {
-        if (self.has(Trait.resurrection) && !getCombatantData(self).getBooleanFlag("resurrected")) {
+        if (self.has(Trait.resurrection) && !getCombatantData(self).getBooleanFlag(FLAG_RESURRECTED)) {
             write(self, "Just as " + self.subject() + " was about to disappear, a dazzling light covers " 
             + self.possessiveAdjective() + " body. When the light fades, " + self.pronoun() + " looks completely refreshed!");
-            getCombatantData(self).setBooleanFlag("resurrected", true);
+            getCombatantData(self).setBooleanFlag(FLAG_RESURRECTED, true);
             self.getStamina().renew();
             self.getArousal().renew();
             self.getMojo().renew();
             self.getWillpower().renew();
             return;
         }
-        getCombatantData(self).setBooleanFlag("resurrected", false);
+        getCombatantData(self).setBooleanFlag(FLAG_RESURRECTED, false);
         otherCombatants.remove(self);
     }
 
