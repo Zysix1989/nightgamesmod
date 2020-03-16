@@ -207,9 +207,9 @@ public class Combat {
                 if (!Global.checkFlag("NoPetBattles")) {
                     ArrayList<PetCharacter> pets = new ArrayList<>(c.otherCombatants);
                     for (PetCharacter pet : pets) {
-                        if (!c.otherCombatants.contains(pet) || alreadyBattled.contains(pet)) { continue; }
+                        if (alreadyBattled.contains(pet)) { continue; }
                         for (PetCharacter otherPet : pets) {
-                            if (!c.otherCombatants.contains(pet) || alreadyBattled.contains(otherPet)) { continue; }
+                            if (alreadyBattled.contains(otherPet)) { continue; }
                             if (!pet.getSelf().owner().equals(otherPet.getSelf().owner()) && Global.random(2) == 0) {
                                 c.petbattle(pet.getSelf(), otherPet.getSelf());
                                 alreadyBattled.add(pet);
@@ -357,11 +357,7 @@ public class Combat {
             c.p2.getCharacter().endOfCombatRound(c, c.p1.getCharacter());
             // iterate through all the pets here so we don't get concurrent modification issues
             List<PetCharacter> pets = new ArrayList<>(c.otherCombatants);
-            pets.forEach(other -> {
-                if (c.otherCombatants.contains(other)) {
-                    other.endOfCombatRound(c, c.getOpponentCharacter(other));
-                }
-            });
+            pets.forEach(other -> other.endOfCombatRound(c, c.getOpponentCharacter(other)));
             c.checkStamina(c.p1.getCharacter());
             c.checkStamina(c.p2.getCharacter());
             pets.forEach(other -> {
