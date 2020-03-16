@@ -2950,19 +2950,6 @@ public Character clone() throws CloneNotSupportedException {
     }
 
 
-    /**This method determines the path to a destination for this character. 
-     * 
-     * @return null
-     * Returns null of the desitnation is the same as thej starting location.
-     * @return 
-     * Returns by performing a move().  
-     * */
-    public Move.Instance findPath(Area target) {
-        return bestMove(this, this.location.get(),
-                action -> action instanceof Move.Instance && ((Move.Instance) action).getDestination().name.equals(target.name)
-        ).orElse(null);
-    }
-
     /**Processes teh end of the battle for this character. */
     public void endofbattle(Combat c) {
         for (Status s : status) {
