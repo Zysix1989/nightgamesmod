@@ -21,8 +21,10 @@ public final class Move extends Action {
 
         @Override
         public void execute() {
-            user.travel(destination, user.getCharacter().getGrammar().subject().defaultNoun() +
-                    destination.getMovementToAreaDescription(user.getCharacter()));
+            var message = user.getCharacter().getGrammar().subject().defaultNoun() +
+                    destination.getMovementToAreaDescription(user.getCharacter());
+            user.travel(destination, message);
+            messageOthersInLocation(message);
         }
 
         public Area getDestination() {
