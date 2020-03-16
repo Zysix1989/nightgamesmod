@@ -28,7 +28,9 @@ public class Locate extends Action {
         public void execute() {
             var dialog = new Dialog(user);
             dialog.start();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + String.format(" is holding someone's underwear in %s hands and breathing deeply. Strange.", user.getCharacter().possessiveAdjective()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() +
+                    String.format(" is holding someone's underwear in %s hands and breathing deeply. Strange.",
+                            user.getCharacter().possessiveAdjective()));
         }
     }
 

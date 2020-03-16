@@ -31,7 +31,8 @@ public class BushAmbush extends Action {
                         + " and wait for someone to walk past.");
             }
             user.state = new State();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " dive into some bushes.");
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() +
+                    " dive into some bushes.");
         }
     }
 

@@ -21,7 +21,9 @@ public class UseLubricant extends Action {
                     "it easier to escape from a hold.");
             user.getCharacter().addNonCombat(new Status(new Oiled(user.getCharacter())));
             user.getCharacter().consume(Item.Lubricant, 1);
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + String.format(" rubbing body oil on every inch of %s skin. Wow, you wouldn't mind watching that again.", user.getCharacter().possessiveAdjective()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() +
+                    String.format(" rubbing body oil on every inch of %s skin. Wow, you wouldn't mind " +
+                            "watching that again.", user.getCharacter().possessiveAdjective()));
         }
     }
 

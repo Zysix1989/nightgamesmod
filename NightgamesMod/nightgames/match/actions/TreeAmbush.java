@@ -25,7 +25,8 @@ public class TreeAmbush extends Action {
         @Override
         public void execute() {
             if (user.getCharacter().get(Attribute.Animism) >= 10) {
-                user.getCharacter().message("Following your instincts, you clamber up a tree" + " to await an unwitting passerby.");
+                user.getCharacter().message("Following your instincts, you clamber up a tree to await an " +
+                        "unwitting passerby.");
             } else {
                 user.getCharacter().message("You climb up a tree that has a branch hanging over"
                         + " the trail. It's hidden in the leaves, so you should be"

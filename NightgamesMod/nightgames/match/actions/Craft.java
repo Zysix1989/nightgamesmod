@@ -23,7 +23,8 @@ public class Craft extends Action {
         @Override
         public void execute() {
             user.state = new State();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " start mixing various liquids. Whatever it is doesn't look healthy.");
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() +
+                    " start mixing various liquids. Whatever it is doesn't look healthy.");
         }
     }
 
@@ -82,7 +83,8 @@ public class Craft extends Action {
             craftedItems.forEach(character::gain);
             character.update();
             if (craftedItems.isEmpty()) {
-                character.message("Your concoction turns a sickly color and releases a foul smelling smoke. You trash it before you do any more damage.");
+                character.message("Your concoction turns a sickly color and releases a foul smelling smoke. " +
+                        "You trash it before you do any more damage.");
             }
             p.state = new Ready();
         }

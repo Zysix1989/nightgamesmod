@@ -34,7 +34,8 @@ public class Struggle extends Action {
                 }
                 user.getCharacter().struggle();
             }
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + String.format(" is struggling against %s bondage.", user.getCharacter().possessiveAdjective()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() +
+                    String.format(" is struggling against %s bondage.", user.getCharacter().possessiveAdjective()));
         }
     }
 

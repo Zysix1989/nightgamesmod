@@ -28,7 +28,8 @@ public final class Bathe extends Action {
         public void execute() {
             user.getCharacter().message(startMessage);
             user.state = new State(endMessage);
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " start bathing in the nude, not bothered by your presence.");
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() +
+                    " start bathing in the nude, not bothered by your presence.");
         }
     }
 

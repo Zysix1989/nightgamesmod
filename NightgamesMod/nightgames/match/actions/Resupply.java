@@ -44,7 +44,8 @@ public class Resupply extends Action {
                 }
             }
             user.state = new State();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " heads for one of the safe rooms, probably to get a change of clothes.");
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() +
+                    " heads for one of the safe rooms, probably to get a change of clothes.");
         }
     }
 

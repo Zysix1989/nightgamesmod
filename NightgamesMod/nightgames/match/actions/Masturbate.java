@@ -38,10 +38,12 @@ public class Masturbate extends Action {
                 }
             } else if (user.getCharacter().hasPussy()) {
                 user.getCharacter().message(
-                        "You desperately need to deal with your throbbing pussy before you run into an opponent. You find an isolated corner and quickly finger yourself to a quick orgasm.");
+                        "You desperately need to deal with your throbbing pussy before you run into an opponent. " +
+                                "You find an isolated corner and quickly finger yourself to a quick orgasm.");
             } else {
                 user.getCharacter().message(
-                        "You desperately need to deal with your throbbing body before you run into an opponent. You find an isolated corner and quickly finger your ass to a quick orgasm.");
+                        "You desperately need to deal with your throbbing body before you run into an opponent. " +
+                                "You find an isolated corner and quickly finger your ass to a quick orgasm.");
             }
             user.state = new State();
             Character c = user.getCharacter();
@@ -53,7 +55,8 @@ public class Masturbate extends Action {
             } else {
                 mast = String.format(" starts to finger %s ass ", c.possessiveAdjective());
             }
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + (mast + "while trying not to make much noise. It's quite a show."));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() +
+                    (mast + "while trying not to make much noise. It's quite a show."));
         }
     }
 
@@ -72,7 +75,8 @@ public class Masturbate extends Action {
             Character character = p.getCharacter();
             character.arousal.renew();
             character.update();
-            p.getCharacter().message("You hurriedly stroke yourself off, eager to finish before someone catches you. After what seems like an eternity, you ejaculate into a tissue and "
+            p.getCharacter().message("You hurriedly stroke yourself off, eager to finish before someone catches you. " +
+                    "After what seems like an eternity, you ejaculate into a tissue and "
                     + "throw it in the trash. Looks like you got away with it.");
             p.state = new Ready();
         }

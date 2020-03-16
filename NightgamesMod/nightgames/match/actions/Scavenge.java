@@ -23,7 +23,8 @@ public class Scavenge extends Action {
         @Override
         public void execute() {
             user.state = new State();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " begin scrounging through some boxes in the corner.");
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() +
+                    " begin scrounging through some boxes in the corner.");
         }
     }
 

@@ -31,7 +31,8 @@ public class Disguise extends Action {
                 user.getCharacter().completelyNudify(null);
                 target.outfitPlan.forEach(user.getCharacter().outfit::equip);
             }
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " shimmer and turn into someone else!");
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() +
+                    " shimmer and turn into someone else!");
         }
     }
 

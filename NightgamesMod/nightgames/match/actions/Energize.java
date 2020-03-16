@@ -25,7 +25,11 @@ public class Energize extends Action {
             user.getCharacter().getMojo().build(user.getCharacter().getMojo().max());
             user.getCharacter().addNonCombat(new Status(new Energized(user.getCharacter(), 20)));
             Character c = user.getCharacter();
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + String.format(" doing something with a large book. When %s's finished, you can see a sort of aura coming from %s.", c.pronoun(), c.possessiveAdjective()));
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() +
+                    String.format(" doing something with a large book. When %s's finished, you can see a sort of " +
+                            "aura coming from %s.",
+                            c.pronoun(),
+                            c.possessiveAdjective()));
         }
     }
 

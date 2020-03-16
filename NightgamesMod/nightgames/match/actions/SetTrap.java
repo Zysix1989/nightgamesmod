@@ -18,7 +18,8 @@ public class SetTrap extends Action {
             var result = trap.instantiate(user);
             user.getLocation().setTrap(result.instance);
             user.getCharacter().message(result.message);
-            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() + " start rigging up something weird, probably a trap.");
+            messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() +
+                    " start rigging up something weird, probably a trap.");
         }
     }
 
