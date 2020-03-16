@@ -149,12 +149,6 @@ public class Player extends Character {
 
     @Override
     public boolean act(Combat c, Character target) {
-        pickSkills(c, target);
-        return true;
-    }
-
-    /**Adds skills to the GUI*/
-    private void pickSkills(Combat c, Character target) {
         HashSet<Skill> available = new HashSet<>();
         HashSet<Skill> cds = new HashSet<>();
         for (Skill a : getSkills()) {
@@ -184,6 +178,7 @@ public class Player extends Character {
 
         gui.chooseSkills(c, target, skillGroups);
         Global.getMatch().pause();
+        return true;
     }
 
 
