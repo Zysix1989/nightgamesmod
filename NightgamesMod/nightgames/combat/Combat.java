@@ -205,7 +205,9 @@ public class Combat {
             Set<PetCharacter> alreadyBattled = new HashSet<>();
             if (c.otherCombatants.size() > 0) {
                 if (!Global.checkFlag("NoPetBattles")) {
-                    ArrayList<PetCharacter> pets = new ArrayList<>(c.otherCombatants);
+                    ArrayList<PetCharacter> pets = c.otherCombatants.stream()
+                            .map(Assistant::getCharacter)
+                            .collect(Collectors.toCollection(ArrayList::new));
                     for (PetCharacter pet : pets) {
                         if (alreadyBattled.contains(pet)) { continue; }
                         for (PetCharacter otherPet : pets) {
@@ -218,7 +220,9 @@ public class Combat {
                         }
                     }
                 }
-                List<PetCharacter> actingPets = new ArrayList<>(c.otherCombatants);
+                List<PetCharacter> actingPets = c.otherCombatants.stream()
+                .map(Assistant::getCharacter)
+                .collect(Collectors.toList());
                 actingPets.stream().filter(pet -> !alreadyBattled.contains(pet)).forEach(pet -> {
                     pet.act(c, c.pickTarget(pet));
                     c.write("<br/>");
@@ -356,15 +360,13 @@ public class Combat {
             c.p1.getCharacter().endOfCombatRound(c, c.p2.getCharacter());
             c.p2.getCharacter().endOfCombatRound(c, c.p1.getCharacter());
             // iterate through all the pets here so we don't get concurrent modification issues
-            List<PetCharacter> pets = new ArrayList<>(c.otherCombatants);
+            List<PetCharacter> pets = c.otherCombatants.stream()
+                    .map(Assistant::getCharacter)
+                    .collect(Collectors.toList());
             pets.forEach(other -> other.endOfCombatRound(c, c.getOpponentCharacter(other)));
             c.checkStamina(c.p1.getCharacter());
             c.checkStamina(c.p2.getCharacter());
-            pets.forEach(other -> {
-                if (c.otherCombatants.contains(other)) {
-                    c.checkStamina(other);
-                }
-            });
+            pets.forEach(c::checkStamina);
             c.doStanceTick(c.p1.getCharacter());
             c.doStanceTick(c.p2.getCharacter());
 
@@ -458,7 +460,7 @@ public class Combat {
     //TODO: Convert as much of this data as possible to CombatData - DSm
     private Combatant p1;
     private Combatant p2;
-    public List<PetCharacter> otherCombatants;
+    public List<Assistant> otherCombatants;
     public Map<String, CombatantData> combatantData;
     public Optional<Combatant> winner;
     public Phase phase;
@@ -1093,7 +1095,7 @@ public class Combat {
         }
         Character tgt;
         do {
-            tgt = Global.pickRandom(otherCombatants).get();
+            tgt = Global.pickRandom(otherCombatants).get().getCharacter();
         } while (!petsCanFight(pet, tgt));
         return tgt;
     }
@@ -1558,14 +1560,14 @@ public class Combat {
             c.getStance().bottom = c.p2.getCharacter();
         }
         c.otherCombatants = new ArrayList<>();
-        for (PetCharacter pet : otherCombatants) {
-            if (pet.isPetOf(p1.getCharacter())) {
-                c.otherCombatants.add(pet.cloneWithOwner(c.p1.getCharacter()));
-            } else if (pet.isPetOf(p2.getCharacter())) {
-                c.otherCombatants.add(pet.cloneWithOwner(c.p2.getCharacter()));
+        for (Assistant pet : otherCombatants) {
+            if (pet.getCharacter().isPetOf(p1.getCharacter())) {
+                c.otherCombatants.add(new Assistant(pet.getCharacter().cloneWithOwner(c.p1.getCharacter())));
+            } else if (pet.getCharacter().isPetOf(p2.getCharacter())) {
+                c.otherCombatants.add(new Assistant(pet.getCharacter().cloneWithOwner(c.p2.getCharacter())));
             }
         }
-        c.getStance().setOtherCombatants(c.otherCombatants);
+        c.getStance().setOtherCombatants(c.otherCombatants.stream().map(Assistant::getCharacter).collect(Collectors.toList()));
         c.postCombatScenesSeen = this.postCombatScenesSeen;
         c.cloned = true;
         return c;
@@ -1784,7 +1786,7 @@ public class Combat {
     }
 
     public List<PetCharacter> getPetsFor(Character target) {
-        return otherCombatants.stream().filter(c -> c.isPetOf(target)).collect(Collectors.toList());
+        return otherCombatants.stream().map(Assistant::getCharacter).filter(c -> c.isPetOf(target)).collect(Collectors.toList());
     }
 
     public void removePet(PetCharacter self) {
@@ -1799,7 +1801,7 @@ public class Combat {
             return;
         }
         getCombatantData(self).setBooleanFlag(FLAG_RESURRECTED, false);
-        otherCombatants.remove(self);
+        otherCombatants.removeIf(a -> a.getCharacter().equals(self));
     }
 
     public void addPet(Character master, PetCharacter self) {
@@ -1808,7 +1810,7 @@ public class Combat {
             Thread.dumpStack();
             return;
         }
-        if (otherCombatants.contains(self)) {
+        if (otherCombatants.stream().anyMatch(a -> a.getCharacter().equals(self))) {
             write(String.format("<b>ERROR: Tried to add %s as a pet for %s,"
                             + " but there is already a %s who is a pet for %s."
                             + " Please report this as a bug. The extra pet will not"
@@ -1834,12 +1836,12 @@ public class Combat {
         self.getArousal().renew();
         writeSystemMessage(self, Global.format("{self:SUBJECT-ACTION:have|has} summoned {other:name-do} (Level %s)",
                                         master, self, self.getLevel()));
-        otherCombatants.add(self);
+        otherCombatants.add(new Assistant(self));
         this.write(self, self.challenge(getOpponentCharacter(self)));
     }
 
     public List<PetCharacter> getOtherCombatants() {
-        return otherCombatants;
+        return otherCombatants.stream().map(Assistant::getCharacter).collect(Collectors.toList());
     }
 
     public boolean isEnded() {
