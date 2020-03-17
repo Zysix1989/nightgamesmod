@@ -106,10 +106,8 @@ public class Assistant {
         final double RATING_FACTOR = 0.02f;
 
         // Starting fitness
-        Character master1 = character.getSelf().owner();
-        Character other = c.getOpponentCharacter(character);
-        double masterFit = master1.getFitness(c);
-        double otherFit = master1.getOtherFitness(c, other);
+        double masterFit = character.getSelf().owner().getFitness(c);
+        double otherFit = character.getSelf().owner().getOtherFitness(c, c.getOpponentCharacter(character));
 
         // Now simulate the result of all actions
         ArrayList<WeightedSkill> moveList = new ArrayList<>();
