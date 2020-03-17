@@ -59,12 +59,7 @@ public class Assistant {
         }
 
         var finalCombatants = c.otherCombatants.stream()
-                .filter(target -> {
-                    if (equals(target)) {
-                        return false;
-                    }
-                    return !(target.getCharacter().getSelf().owner().equals(getCharacter().getSelf().owner()));
-                })
+                .filter(target -> !(target.getCharacter().getSelf().owner().equals(getCharacter().getSelf().owner())))
                 .collect(Collectors.toList());
         Collections.shuffle(finalCombatants);
         return finalCombatants.stream().findFirst().orElseThrow().getCharacter();
