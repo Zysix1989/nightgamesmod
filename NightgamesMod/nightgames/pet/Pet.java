@@ -38,10 +38,6 @@ public abstract class Pet implements Cloneable {
 
     public abstract String describe();
 
-    public void act(Combat c, Character target) {
-        getSelf().act(c, target);
-    }
-
     public abstract void vanquish(Combat c, Pet opponent);
 
     public abstract void caught(Combat c, Character captor);
