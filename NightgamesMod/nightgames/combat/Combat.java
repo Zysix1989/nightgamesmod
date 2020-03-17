@@ -18,7 +18,6 @@ import nightgames.match.Participant;
 import nightgames.modifier.action.DescribablePredicate;
 import nightgames.modifier.standard.NoRecoveryModifier;
 import nightgames.nskills.tags.SkillTag;
-import nightgames.pet.Pet;
 import nightgames.pet.PetCharacter;
 import nightgames.skills.*;
 import nightgames.stance.*;
@@ -205,17 +204,15 @@ public class Combat {
             Set<PetCharacter> alreadyBattled = new HashSet<>();
             if (c.otherCombatants.size() > 0) {
                 if (!Global.checkFlag("NoPetBattles")) {
-                    ArrayList<PetCharacter> pets = c.otherCombatants.stream()
-                            .map(Assistant::getCharacter)
-                            .collect(Collectors.toCollection(ArrayList::new));
-                    for (PetCharacter pet : pets) {
-                        if (alreadyBattled.contains(pet)) { continue; }
-                        for (PetCharacter otherPet : pets) {
-                            if (alreadyBattled.contains(otherPet)) { continue; }
-                            if (!pet.getSelf().owner().equals(otherPet.getSelf().owner()) && Global.random(2) == 0) {
-                                c.petbattle(pet.getSelf(), otherPet.getSelf());
-                                alreadyBattled.add(pet);
-                                alreadyBattled.add(otherPet);
+                    ArrayList<Assistant> pets = new ArrayList<>(c.otherCombatants);
+                    for (var pet : pets) {
+                        if (alreadyBattled.contains(pet.getCharacter())) { continue; }
+                        for (var otherPet : pets) {
+                            if (alreadyBattled.contains(otherPet.getCharacter())) { continue; }
+                            if (!pet.getCharacter().getSelf().owner().equals(otherPet.getCharacter().getSelf().owner()) && Global.random(2) == 0) {
+                                c.petbattle(pet, otherPet);
+                                alreadyBattled.add(pet.getCharacter());
+                                alreadyBattled.add(otherPet.getCharacter());
                             }
                         }
                     }
@@ -1518,20 +1515,20 @@ public class Combat {
         }
     }
 
-    public void petbattle(Pet one, Pet two) {
-        int roll1 = Global.random(20) + one.power();
-        int roll2 = Global.random(20) + two.power();
-        if (one.hasPussy() && two.hasDick()) {
+    public void petbattle(Assistant one, Assistant two) {
+        int roll1 = Global.random(20) + one.getCharacter().getSelf().power();
+        int roll2 = Global.random(20) + two.getCharacter().getSelf().power();
+        if (one.getCharacter().hasPussy() && two.getCharacter().hasDick()) {
             roll1 += 3;
-        } else if (one.hasDick() && two.hasPussy()) {
+        } else if (one.getCharacter().hasDick() && two.getCharacter().hasPussy()) {
             roll2 += 3;
         }
         if (roll1 > roll2) {
-            one.vanquish(this, two);
+            one.getCharacter().getSelf().vanquish(this, two.getCharacter().getSelf());
         } else if (roll2 > roll1) {
-            two.vanquish(this, one);
+            two.getCharacter().getSelf().vanquish(this, one.getCharacter().getSelf());
         } else {
-            write(one.getName() + " and " + two.getName()
+            write(one.getCharacter().getName() + " and " + two.getCharacter().getName()
                             + " engage each other for awhile, but neither can gain the upper hand.");
         }
     }
