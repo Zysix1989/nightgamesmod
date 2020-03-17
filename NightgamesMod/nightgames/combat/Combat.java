@@ -1098,22 +1098,20 @@ public class Combat {
         }
 
         var finalCombatants = otherCombatants.stream()
-                .filter(target -> petsCanFight(pet.getCharacter(), target.getCharacter()))
+                .filter(target -> {
+                    if (pet.equals(target) || pet.getCharacter().getSelf().owner().equals(target.getCharacter())) {
+                        return false;
+                    }
+                    if (!target.getCharacter().isPet()) {
+                        return true;
+                    }
+                    return !(target.getCharacter().getSelf().owner().equals(pet.getCharacter().getSelf().owner()));
+                })
                 .collect(Collectors.toList());
         Collections.shuffle(finalCombatants);
         return finalCombatants.stream().findFirst().orElseThrow().getCharacter();
     }
 
-    private boolean petsCanFight(PetCharacter pet, Character target) {
-        if (target == null || pet == target || pet.getSelf().owner().equals(target)) {
-            return false;
-        }
-        if (!target.isPet()) {
-            return true;
-        }
-        return !((PetCharacter) target).getSelf().owner().equals(pet.getSelf().owner());
-    }
-    
     private void doStanceTick(Character self) {
         Character other = getStance().getPartner(this, self);
         Addiction add = other.getAddiction(AddictionType.DOMINANCE).orElse(null);       //FIXME: Causes trigger even though addiction has 0 magnitude.
