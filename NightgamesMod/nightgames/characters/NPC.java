@@ -7,7 +7,6 @@ import nightgames.characters.custom.CommentSituation;
 import nightgames.characters.custom.RecruitmentData;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatScene;
-import nightgames.combat.CombatantData;
 import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.grammar.Person;
@@ -20,13 +19,11 @@ import nightgames.match.Intelligence;
 import nightgames.match.Match;
 import nightgames.pet.arms.ArmManager;
 import nightgames.pet.arms.ArmType;
-import nightgames.skills.Nothing;
 import nightgames.skills.Skill;
 import nightgames.skills.Stage;
 import nightgames.skills.Tactics;
 import nightgames.skills.damage.DamageType;
 import nightgames.skills.strategy.CombatStrategy;
-import nightgames.skills.strategy.DefaultStrategy;
 import nightgames.stance.Behind;
 import nightgames.stance.Neutral;
 import nightgames.stance.Position;
@@ -44,7 +41,7 @@ public class NPC extends Character {
     public Emotion mood;
     public Plan plan;
     public boolean isStartCharacter = false;
-    private List<CombatStrategy> personalStrategies;
+    public List<CombatStrategy> personalStrategies;
     private List<CombatScene> postCombatScenes;
 
     public NPC(String name, int level, BasePersonality ai) {
@@ -215,73 +212,6 @@ public class NPC extends Character {
         return false;
     }
 
-    public boolean act(Combat c, Character target) {
-        CombatantData combatantData = c.getCombatantData(this);
-
-        // if there's no strategy, try getting a new one.
-        if (!combatantData.hasStrategy()) {
-            combatantData.setStrategy(c, this, pickStrategy(c));
-        }
-        CombatStrategy strategy = combatantData.getStrategy().get();
-        
-        // if the strategy is out of moves, try getting a new one.
-        Collection<Skill> possibleSkills = strategy.nextSkills(c, this);
-        if (possibleSkills.isEmpty()) {
-            strategy = combatantData.setStrategy(c, this, pickStrategy(c));
-            possibleSkills = strategy.nextSkills(c, this);
-        }
-
-        // if there are still no moves, just use all available skills for this turn and try again next turn.
-        if (possibleSkills.isEmpty()) {
-            possibleSkills = getSkills();
-        }
-        HashSet<Skill> available = new HashSet<>();
-        for (Skill act : possibleSkills) {
-            if (Skill.isUsable(c, act) && cooldownAvailable(act)) {
-                available.add(act);
-            }
-        }
-        Skill.filterAllowedSkills(c, available, this, target);
-        if (available.size() == 0) {
-            available.add(new Nothing(this));
-        }
-        c.act(this, ai.act(available, c));
-        return false;
-    }
-
-    /**
-     * We choose a random strategy from union of the defaults and this NPC's
-     * personal strategies. The weights given to each strategy are dynamic,
-     * calculated from the state of the given Combat.
-     */
-    private CombatStrategy pickStrategy(Combat c) {
-        if (Global.random(100) < 60 ) {
-            // most of the time don't bother using a strategy.
-            return new DefaultStrategy();
-        }
-
-        Map<Double, CombatStrategy> stratsWithCumulativeWeights = new HashMap<>();
-        DefaultStrategy defaultStrat = new DefaultStrategy();
-        double lastWeight = defaultStrat.weight(c, this);
-        stratsWithCumulativeWeights.put(lastWeight, defaultStrat);
-        List<CombatStrategy> allStrategies = new ArrayList<>(CombatStrategy.availableStrategies);
-        allStrategies.addAll(personalStrategies);
-        for (CombatStrategy strat: allStrategies) {
-            if (strat.weight(c, this) < .01 || strat.nextSkills(c, this).isEmpty()) {
-                continue;
-            }
-            lastWeight += strat.weight(c, this);
-            stratsWithCumulativeWeights.put(lastWeight, strat);
-        }
-        double random = Global.randomdouble() * lastWeight;
-        for (Map.Entry<Double, CombatStrategy> entry: stratsWithCumulativeWeights.entrySet()) {
-            if (random < entry.getKey()) {
-                return entry.getValue();
-            }
-        }
-        // we should have picked something, but w/e just return the default if we need to
-        return defaultStrat;
-    }
 
     @Override
     public boolean human() {
