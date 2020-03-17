@@ -9,7 +9,10 @@ import nightgames.nskills.tags.SkillTag;
 import nightgames.pet.PetCharacter;
 import nightgames.skills.Skill;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Assistant {
@@ -63,8 +66,6 @@ public class Assistant {
                 .filter(skill -> Skill.isUsableOn(c, skill, target) && Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG)).collect(Collectors.toList());
         Skill.filterAllowedSkills(c, allowedEnemySkills, character, target);
 
-        List<Skill> possibleMasterSkills = new ArrayList<>(character.getSkills());
-        possibleMasterSkills.addAll(Combat.WORSHIP_SKILLS);
         List<Skill> allowedMasterSkills = character.getSkills()
                 .stream().filter(skill -> Skill.isUsableOn(c, skill, character.getSelf().owner)
                         && (skill.getTags(c).contains(SkillTag.helping) || (character.getSelf().owner.has(Trait.showmanship) && skill.getTags(c).contains(SkillTag.worship)))
