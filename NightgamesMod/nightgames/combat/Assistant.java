@@ -59,17 +59,18 @@ public class Assistant {
 
     public boolean act(Combat c, Character target) {
         List<Skill> allowedEnemySkills = new ArrayList<>(character.getSkills()
-                        .stream().filter(skill -> Skill.isUsableOn(c, skill, target) && Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
-                        .collect(Collectors.toList()));
+                .stream()
+                .filter(skill -> Skill.isUsableOn(c, skill, target) && Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
+                .collect(Collectors.toList()));
         Skill.filterAllowedSkills(c, allowedEnemySkills, character, target);
 
         List<Skill> possibleMasterSkills = new ArrayList<>(character.getSkills());
         possibleMasterSkills.addAll(Combat.WORSHIP_SKILLS);
         List<Skill> allowedMasterSkills = new ArrayList<>(character.getSkills()
-                        .stream().filter(skill -> Skill.isUsableOn(c, skill, character.getSelf().owner)
-                                        && (skill.getTags(c).contains(SkillTag.helping) || (character.getSelf().owner.has(Trait.showmanship) && skill.getTags(c).contains(SkillTag.worship)))
-                                        && Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
-                        .collect(Collectors.toList()));
+                .stream().filter(skill -> Skill.isUsableOn(c, skill, character.getSelf().owner)
+                        && (skill.getTags(c).contains(SkillTag.helping) || (character.getSelf().owner.has(Trait.showmanship) && skill.getTags(c).contains(SkillTag.worship)))
+                        && Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
+                .collect(Collectors.toList()));
         Skill.filterAllowedSkills(c, allowedMasterSkills, character, character.getSelf().owner);
         WeightedSkill bestEnemySkill = Decider.prioritizePet(character, target, allowedEnemySkills, c);
         WeightedSkill bestMasterSkill = Decider.prioritizePet(character, character.getSelf().owner, allowedMasterSkills, c);
@@ -81,11 +82,11 @@ public class Assistant {
         double roll = Global.randomdouble(masterSkillRating + enemySkillRating) - masterSkillRating;
         if (roll >= 0) {
             c.write(character, String.format("<b>%s uses %s against %s</b>\n", character.getTrueName(),
-                            bestEnemySkill.skill.getLabel(c), target.nameDirectObject()));
+                    bestEnemySkill.skill.getLabel(c), target.nameDirectObject()));
             Skill.resolve(bestEnemySkill.skill, c, target);
         } else {
             c.write(character, String.format("<b>%s uses %s against %s</b>\n",
-                            character.getTrueName(), bestMasterSkill.skill.getLabel(c), target.nameDirectObject()));
+                    character.getTrueName(), bestMasterSkill.skill.getLabel(c), target.nameDirectObject()));
             Skill.resolve(bestMasterSkill.skill, c, character.self.owner());
         }
         return false;
