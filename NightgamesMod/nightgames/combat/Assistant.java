@@ -8,11 +8,10 @@ import nightgames.global.Global;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.pet.PetCharacter;
 import nightgames.skills.Skill;
+import nightgames.skills.Tactics;
+import nightgames.skills.Wait;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Assistant {
@@ -77,8 +76,8 @@ public class Assistant {
                         Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
                 .collect(Collectors.toList());
         Skill.filterAllowedSkills(c, allowedMasterSkills, character, character.getSelf().owner);
-        WeightedSkill bestEnemySkill = Decider.prioritizePet(character, target, allowedEnemySkills, c);
-        WeightedSkill bestMasterSkill = Decider.prioritizePet(character, character.getSelf().owner, allowedMasterSkills, c);
+        WeightedSkill bestEnemySkill = prioritizePet(character, target, allowedEnemySkills, c);
+        WeightedSkill bestMasterSkill = prioritizePet(character, character.getSelf().owner, allowedMasterSkills, c);
 
         // don't let the ratings be negative.
         double masterSkillRating = Math.max(.001, bestMasterSkill.rating);
@@ -95,5 +94,68 @@ public class Assistant {
             Skill.resolve(bestMasterSkill.skill, c, character.self.owner());
         }
         return false;
+    }
+
+    /**Decides which weightedskill a summoned pet uses*/
+    public static WeightedSkill prioritizePet(PetCharacter self, Character target, List<Skill> plist, Combat c) {
+        List<WeightedSkill> weightedList = plist.stream().map(skill -> new WeightedSkill(1.0, skill)).collect(Collectors.toList());
+        return prioritizePetWithWeights(self, target, weightedList, c);
+    }
+
+    public static WeightedSkill prioritizePetWithWeights(PetCharacter self, Character target, List<WeightedSkill> plist, Combat c) {
+        if (plist.isEmpty()) {
+            return new WeightedSkill(1.0, new Wait(self));
+        }
+        // The higher, the better the AI will plan for "rare" events better
+        final int RUN_COUNT = 3;
+        // Decrease to get an "easier" AI. Make negative to get a suicidal AI.
+        final double RATING_FACTOR = 0.02f;
+
+        // Starting fitness
+        Character master = self.getSelf().owner();
+        Character other = c.getOpponentCharacter(self);
+        double masterFit = master.getFitness(c);
+        double otherFit = master.getOtherFitness(c, other);
+
+        // Now simulate the result of all actions
+        ArrayList<WeightedSkill> moveList = new ArrayList<>();
+        double sum = 0;
+
+        for (WeightedSkill wskill : plist) {
+            // Run it a couple of times
+            double rating, raw_rating = 0;
+            if (wskill.skill.type(c) == Tactics.damage && self.has(Trait.sadist)) {
+                wskill.weight += 1.0;
+            }
+            for (int j = 0; j < RUN_COUNT; j++) {
+                raw_rating += ratePetMove(self, wskill.skill, target, c, masterFit, otherFit);
+            }
+
+            // Sum up rating, add to map
+            rating = (double) Math.pow(2, RATING_FACTOR * raw_rating + wskill.weight + wskill.skill.priorityMod(c)
+                    + Global.getMatch().getCondition().getSkillModifier().encouragement(wskill.skill, c, self));
+            sum += rating;
+            moveList.add(new WeightedSkill(sum, raw_rating, rating, wskill.skill));
+        }
+        if (sum == 0 || moveList.size() == 0) {
+            return null;
+        }
+        // Select
+        double s = Global.randomdouble() * sum;
+        for (WeightedSkill entry : moveList) {
+            if (entry.weight > s) {
+                return entry;
+            }
+        }
+        return moveList.get(moveList.size() - 1);
+    }
+
+    private static double ratePetMove(PetCharacter self, Skill skill, Character target, Combat c, double masterFit, double otherFit) {
+        return Decider.rateActionWithObserver(self, self.getSelf().owner(), target, c, masterFit, otherFit, (combat, selfCopy, other) -> {
+            skill.setSelf(selfCopy);
+            skill.resolve(combat, other);
+            skill.setSelf(self);
+            return true;
+        });
     }
 }
