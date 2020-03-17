@@ -204,10 +204,9 @@ public class Combat {
             Set<PetCharacter> alreadyBattled = new HashSet<>();
             if (c.otherCombatants.size() > 0) {
                 if (!Global.checkFlag("NoPetBattles")) {
-                    ArrayList<Assistant> pets = new ArrayList<>(c.otherCombatants);
-                    for (var pet : pets) {
+                    for (var pet : c.otherCombatants) {
                         if (alreadyBattled.contains(pet.getCharacter())) { continue; }
-                        for (var otherPet : pets) {
+                        for (var otherPet : c.otherCombatants) {
                             if (alreadyBattled.contains(otherPet.getCharacter())) { continue; }
                             if (!pet.getCharacter().getSelf().owner().equals(otherPet.getCharacter().getSelf().owner()) && Global.random(2) == 0) {
                                 c.petbattle(pet, otherPet);
@@ -217,8 +216,7 @@ public class Combat {
                         }
                     }
                 }
-                List<Assistant> actingPets = new ArrayList<>(c.otherCombatants);
-                actingPets.stream().filter(pet -> !alreadyBattled.contains(pet.getCharacter())).forEach(pet -> {
+                c.otherCombatants.stream().filter(pet -> !alreadyBattled.contains(pet.getCharacter())).forEach(pet -> {
                     pet.act(c, c.pickTarget(pet.getCharacter()));
                     c.write("<br/>");
                     if (pet.getCharacter().getSelf().owner().has(Trait.devoteeFervor) && Global.random(2) == 0) {
