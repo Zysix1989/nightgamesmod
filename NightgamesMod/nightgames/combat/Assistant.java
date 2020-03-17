@@ -120,17 +120,28 @@ public class Assistant {
                 wskill.weight += 1.0;
             }
             for (int j = 0; j < RUN_COUNT; j++) {
-                raw_rating += Decider.rateActionWithObserver(character, character.getSelf().owner(), target, c, masterFit, otherFit, (combat, selfCopy, other1) -> {
-                    wskill.skill.setSelf(selfCopy);
-                    wskill.skill.resolve(combat, other1);
-                    wskill.skill.setSelf(character);
-                    return true;
-                });
+                raw_rating += Decider.rateActionWithObserver(character,
+                        character.getSelf().owner(),
+                        target,
+                        c,
+                        masterFit,
+                        otherFit,
+                        (combat, selfCopy, other1) -> {
+                            wskill.skill.setSelf(selfCopy);
+                            wskill.skill.resolve(combat, other1);
+                            wskill.skill.setSelf(character);
+                            return true;
+                        });
             }
 
             // Sum up rating, add to map
-            rating = Math.pow(2, RATING_FACTOR * raw_rating + wskill.weight + wskill.skill.priorityMod(c)
-                    + Global.getMatch().getCondition().getSkillModifier().encouragement(wskill.skill, c, character));
+            rating = Math.pow(2,
+                    RATING_FACTOR * raw_rating +
+                            wskill.weight +
+                            wskill.skill.priorityMod(c) +
+                            Global.getMatch().getCondition().getSkillModifier().encouragement(wskill.skill,
+                                    c,
+                                    character));
             sum += rating;
             moveList.add(new WeightedSkill(sum, raw_rating, rating, wskill.skill));
         }
