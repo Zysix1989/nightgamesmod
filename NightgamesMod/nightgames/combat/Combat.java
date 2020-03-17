@@ -1844,7 +1844,7 @@ public class Combat {
         self.getArousal().renew();
         writeSystemMessage(self, Global.format("{self:SUBJECT-ACTION:have|has} summoned {other:name-do} (Level %s)",
                                         master, self, self.getLevel()));
-        otherCombatants.add(new Assistant(self, master));
+        otherCombatants.add(new Assistant(self));
         this.write(self, self.challenge(getOpponentCharacter(self)));
     }
 

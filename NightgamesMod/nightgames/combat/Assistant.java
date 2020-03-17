@@ -24,17 +24,14 @@ public class Assistant {
     }
 
     private final PetCharacter character;
-    private final Character master;
 
-    Assistant(PetCharacter c, Character master) {
+    Assistant(PetCharacter c) {
         this.character = c;
-        this.master = master;
     }
 
     Assistant(Assistant a, Character newMaster) {
         try {
             this.character = a.character.cloneWithOwner(newMaster);
-            this.master = newMaster;
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
@@ -49,7 +46,7 @@ public class Assistant {
     }
 
     public Character getMaster() {
-        return this.master;
+        return getCharacter().getSelf().owner;
     }
 
     public double getFitness() {
