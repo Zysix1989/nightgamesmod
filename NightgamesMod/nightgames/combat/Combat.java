@@ -1747,6 +1747,12 @@ public class Combat {
         return getOpponent(self).getCharacter();
     }
 
+    public Set<Assistant> getOpponentAssistants(Character self) {
+        return otherCombatants.stream()
+                .filter(assistant -> !assistant.getCharacter().getSelf().owner.equals(self))
+                .collect(Collectors.toSet());
+    }
+
     public void writeSystemMessage(String battleString, boolean basic) {
         if (Global.checkFlag(Flag.systemMessages) || basic 
                         && Global.checkFlag(Flag.basicSystemMessages)) {

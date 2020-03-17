@@ -54,15 +54,13 @@ public class Assistant {
     }
 
     public Character pickTarget(Combat c) {
-        if (c.otherCombatants.size() == 1 || Global.random(2) == 0) {
+        var opponentAssistants = new ArrayList<>(c.getOpponentAssistants(getCharacter().getSelf().owner));
+        if (opponentAssistants.isEmpty() || Global.random(2) == 0) {
             return c.getOpponentCharacter(getCharacter());
         }
 
-        var finalCombatants = c.otherCombatants.stream()
-                .filter(target -> !(target.getCharacter().getSelf().owner().equals(getCharacter().getSelf().owner())))
-                .collect(Collectors.toList());
-        Collections.shuffle(finalCombatants);
-        return finalCombatants.stream().findFirst().orElseThrow().getCharacter();
+        Collections.shuffle(opponentAssistants);
+        return opponentAssistants.stream().findFirst().orElseThrow().getCharacter();
     }
 
     public boolean act(Combat c, Character target) {
