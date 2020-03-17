@@ -1562,9 +1562,9 @@ public class Combat {
         c.otherCombatants = new ArrayList<>();
         for (Assistant pet : otherCombatants) {
             if (pet.getCharacter().isPetOf(p1.getCharacter())) {
-                c.otherCombatants.add(new Assistant(pet.getCharacter().cloneWithOwner(c.p1.getCharacter())));
+                c.otherCombatants.add(new Assistant(pet.getCharacter().cloneWithOwner(c.p1.getCharacter()), p1.getCharacter()));
             } else if (pet.getCharacter().isPetOf(p2.getCharacter())) {
-                c.otherCombatants.add(new Assistant(pet.getCharacter().cloneWithOwner(c.p2.getCharacter())));
+                c.otherCombatants.add(new Assistant(pet.getCharacter().cloneWithOwner(c.p2.getCharacter()), p2.getCharacter()));
             }
         }
         c.getStance().setOtherCombatants(c.otherCombatants.stream().map(Assistant::getCharacter).collect(Collectors.toList()));
@@ -1836,7 +1836,7 @@ public class Combat {
         self.getArousal().renew();
         writeSystemMessage(self, Global.format("{self:SUBJECT-ACTION:have|has} summoned {other:name-do} (Level %s)",
                                         master, self, self.getLevel()));
-        otherCombatants.add(new Assistant(self));
+        otherCombatants.add(new Assistant(self, master));
         this.write(self, self.challenge(getOpponentCharacter(self)));
     }
 
