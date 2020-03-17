@@ -60,7 +60,7 @@ public class Assistant {
 
         var finalCombatants = c.otherCombatants.stream()
                 .filter(target -> {
-                    if (equals(target) || getCharacter().getSelf().owner().equals(target.getCharacter())) {
+                    if (equals(target)) {
                         return false;
                     }
                     return !(target.getCharacter().getSelf().owner().equals(getCharacter().getSelf().owner()));
