@@ -63,9 +63,6 @@ public class Assistant {
                     if (equals(target) || getCharacter().getSelf().owner().equals(target.getCharacter())) {
                         return false;
                     }
-                    if (!target.getCharacter().isPet()) {
-                        return true;
-                    }
                     return !(target.getCharacter().getSelf().owner().equals(getCharacter().getSelf().owner()));
                 })
                 .collect(Collectors.toList());
