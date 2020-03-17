@@ -71,13 +71,20 @@ public class HumanIntelligence implements Intelligence {
     public void faceOff(Participant opponent, Runnable fightContinuation, Runnable fleeContinuation, Runnable smokeContinuation) {
         character.gui.message("You run into <b>" + opponent.getCharacter().nameDirectObject()
                 + "</b> and you both hesitate for a moment, deciding whether to attack or retreat.");
-        character.presentFightFlightChoice(opponent, character.encounterOption(() -> {
+        character.assessOpponent(opponent);
+        character.gui.message("<br/>");
+        ArrayList<CommandPanelOption> options = new ArrayList<>();
+        options.add(new CommandPanelOption("Fight",
+                character.encounterOption(() -> {
             fightContinuation.run();
             Global.getMatch().resume();
-        }), character.encounterOption(() -> {
+        })));
+        options.add(new CommandPanelOption("Flee",
+                character.encounterOption(() -> {
             fleeContinuation.run();
             Global.getMatch().resume();
-        }));
+        })));
+        character.gui.presentOptions(options);
         Global.getMatch().pause();
     }
 

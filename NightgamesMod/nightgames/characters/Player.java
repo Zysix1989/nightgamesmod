@@ -213,17 +213,6 @@ public class Player extends Character {
         return event -> continuation.run();
     }
 
-    public void presentFightFlightChoice(Participant opponent, ActionListener fightCallback, ActionListener flightCallback) {
-        assessOpponent(opponent);
-        gui.message("<br/>");
-        ArrayList<CommandPanelOption> options = new ArrayList<>();
-        options.add(new CommandPanelOption("Fight",
-                fightCallback));
-        options.add(new CommandPanelOption("Flee",
-                flightCallback));
-        gui.presentOptions(options);
-    }
-
     public void assessOpponent(Participant opponent) {
         String arousal;
         String stamina;
