@@ -133,7 +133,7 @@ public class Assistant {
             }
 
             // Sum up rating, add to map
-            rating = (double) Math.pow(2, RATING_FACTOR * raw_rating + wskill.weight + wskill.skill.priorityMod(c)
+            rating = Math.pow(2, RATING_FACTOR * raw_rating + wskill.weight + wskill.skill.priorityMod(c)
                     + Global.getMatch().getCondition().getSkillModifier().encouragement(wskill.skill, c, character));
             sum += rating;
             moveList.add(new WeightedSkill(sum, raw_rating, rating, wskill.skill));
