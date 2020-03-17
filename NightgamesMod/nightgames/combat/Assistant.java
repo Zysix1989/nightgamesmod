@@ -12,6 +12,7 @@ import nightgames.skills.Tactics;
 import nightgames.skills.Wait;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Assistant {
@@ -60,24 +61,16 @@ public class Assistant {
     }
 
     public boolean act(Combat c, Character target) {
-        List<Skill> allowedEnemySkills = character.getSkills()
-                .stream()
-                .filter(skill -> Skill.isUsableOn(c, skill, target) &&
-                        Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
-                .collect(Collectors.toList());
-        Skill.filterAllowedSkills(c, allowedEnemySkills, character, target);
-
-        List<Skill> allowedMasterSkills = character.getSkills()
-                .stream()
-                .filter(skill -> Skill.isUsableOn(c, skill, character.getSelf().owner) &&
+        WeightedSkill bestEnemySkill = prioritizePet(target,
+                skill -> Skill.isUsableOn(c, skill, target) &&
+                        Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG), c);
+        WeightedSkill bestMasterSkill = prioritizePet(character.getSelf().owner,
+                skill -> Skill.isUsableOn(c, skill, character.getSelf().owner) &&
                         (skill.getTags(c).contains(SkillTag.helping) ||
                                 (character.getSelf().owner.has(Trait.showmanship) &&
-                                        skill.getTags(c).contains(SkillTag.worship))) &&
-                        Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
-                .collect(Collectors.toList());
-        Skill.filterAllowedSkills(c, allowedMasterSkills, character, character.getSelf().owner);
-        WeightedSkill bestEnemySkill = prioritizePet(target, allowedEnemySkills, c);
-        WeightedSkill bestMasterSkill = prioritizePet(character.getSelf().owner, allowedMasterSkills, c);
+                                        skill.getTags(c).contains(SkillTag.worship)) &&
+                                        Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG)),
+                c);
 
         // don't let the ratings be negative.
         double masterSkillRating = Math.max(.001, bestMasterSkill.rating);
@@ -97,7 +90,12 @@ public class Assistant {
     }
 
     /**Decides which weightedskill a summoned pet uses*/
-    public WeightedSkill prioritizePet(Character target, List<Skill> plist, Combat c) {
+    public WeightedSkill prioritizePet(Character target, Predicate<Skill> filter, Combat c) {
+        List<Skill> plist = character.getSkills()
+                .stream()
+                .filter(filter)
+                .collect(Collectors.toList());
+        Skill.filterAllowedSkills(c, plist, character, target);
         List<WeightedSkill> weightedList = plist.stream().map(skill -> new WeightedSkill(1.0, skill)).collect(Collectors.toList());
         if (weightedList.isEmpty()) {
             return new WeightedSkill(1.0, new Wait(character));
