@@ -224,14 +224,14 @@ public class Combat {
                 c.otherCombatants.stream()
                         .filter(pet -> !alreadyBattled.contains(pet.getCharacter()))
                         .forEach(pet -> {
-                            pet.act(c, c.pickTarget(pet));
+                            pet.act(c, pet.pickTarget(c));
                             c.write("<br/>");
                             if (pet.getCharacter().getSelf().owner().has(Trait.devoteeFervor) && Global.random(2) == 0) {
                                 c.write(pet.getCharacter(),
                                         Global.format("{self:SUBJECT} seems to have gained a second wind from {self:possessive} religious fervor!",
                                                 pet.getCharacter(),
                                                 pet.getCharacter().getSelf().owner()));
-                                pet.act(c, c.pickTarget(pet));
+                                pet.act(c, pet.pickTarget(c));
                             }
                         });
                 c.write("<br/>");

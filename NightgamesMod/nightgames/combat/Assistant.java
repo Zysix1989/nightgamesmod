@@ -46,11 +46,31 @@ public class Assistant {
     }
 
     public double getFitness() {
-        return  (10 + character.getSelf().power()) * ((100 + character.percentHealth()) / 200.0) / 2;
+        return (10 + character.getSelf().power()) * ((100 + character.percentHealth()) / 200.0) / 2;
     }
 
     public void vanquish(Combat c, Assistant other) {
         character.getSelf().vanquish(c, other.getCharacter().getSelf());
+    }
+
+    public Character pickTarget(Combat c) {
+        if (c.otherCombatants.size() == 1 || Global.random(2) == 0) {
+            return c.getOpponentCharacter(getCharacter());
+        }
+
+        var finalCombatants = c.otherCombatants.stream()
+                .filter(target -> {
+                    if (equals(target) || getCharacter().getSelf().owner().equals(target.getCharacter())) {
+                        return false;
+                    }
+                    if (!target.getCharacter().isPet()) {
+                        return true;
+                    }
+                    return !(target.getCharacter().getSelf().owner().equals(getCharacter().getSelf().owner()));
+                })
+                .collect(Collectors.toList());
+        Collections.shuffle(finalCombatants);
+        return finalCombatants.stream().findFirst().orElseThrow().getCharacter();
     }
 
     public boolean act(Combat c, Character target) {
