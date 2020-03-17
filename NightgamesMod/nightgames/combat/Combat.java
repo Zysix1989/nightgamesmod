@@ -217,15 +217,13 @@ public class Combat {
                         }
                     }
                 }
-                List<PetCharacter> actingPets = c.otherCombatants.stream()
-                .map(Assistant::getCharacter)
-                .collect(Collectors.toList());
-                actingPets.stream().filter(pet -> !alreadyBattled.contains(pet)).forEach(pet -> {
-                    pet.act(c, c.pickTarget(pet));
+                List<Assistant> actingPets = new ArrayList<>(c.otherCombatants);
+                actingPets.stream().filter(pet -> !alreadyBattled.contains(pet.getCharacter())).forEach(pet -> {
+                    pet.getCharacter().act(c, c.pickTarget(pet.getCharacter()));
                     c.write("<br/>");
-                    if (pet.getSelf().owner().has(Trait.devoteeFervor) && Global.random(2) == 0) {
-                        c.write(pet, Global.format("{self:SUBJECT} seems to have gained a second wind from {self:possessive} religious fervor!", pet, pet.getSelf().owner()));
-                        pet.act(c, c.pickTarget(pet));
+                    if (pet.getCharacter().getSelf().owner().has(Trait.devoteeFervor) && Global.random(2) == 0) {
+                        c.write(pet.getCharacter(), Global.format("{self:SUBJECT} seems to have gained a second wind from {self:possessive} religious fervor!", pet.getCharacter(), pet.getCharacter().getSelf().owner()));
+                        pet.getCharacter().act(c, c.pickTarget(pet.getCharacter()));
                     }
                 });
                 c.write("<br/>");
