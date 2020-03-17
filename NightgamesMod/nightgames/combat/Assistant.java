@@ -99,12 +99,8 @@ public class Assistant {
     /**Decides which weightedskill a summoned pet uses*/
     public WeightedSkill prioritizePet(Character target, List<Skill> plist, Combat c) {
         List<WeightedSkill> weightedList = plist.stream().map(skill -> new WeightedSkill(1.0, skill)).collect(Collectors.toList());
-        return prioritizePetWithWeights(character, target, weightedList, c);
-    }
-
-    public static WeightedSkill prioritizePetWithWeights(PetCharacter self, Character target, List<WeightedSkill> plist, Combat c) {
-        if (plist.isEmpty()) {
-            return new WeightedSkill(1.0, new Wait(self));
+        if (weightedList.isEmpty()) {
+            return new WeightedSkill(1.0, new Wait(character));
         }
         // The higher, the better the AI will plan for "rare" events better
         final int RUN_COUNT = 3;
@@ -112,28 +108,28 @@ public class Assistant {
         final double RATING_FACTOR = 0.02f;
 
         // Starting fitness
-        Character master = self.getSelf().owner();
-        Character other = c.getOpponentCharacter(self);
-        double masterFit = master.getFitness(c);
-        double otherFit = master.getOtherFitness(c, other);
+        Character master1 = character.getSelf().owner();
+        Character other = c.getOpponentCharacter(character);
+        double masterFit = master1.getFitness(c);
+        double otherFit = master1.getOtherFitness(c, other);
 
         // Now simulate the result of all actions
         ArrayList<WeightedSkill> moveList = new ArrayList<>();
         double sum = 0;
 
-        for (WeightedSkill wskill : plist) {
+        for (WeightedSkill wskill : weightedList) {
             // Run it a couple of times
             double rating, raw_rating = 0;
-            if (wskill.skill.type(c) == Tactics.damage && self.has(Trait.sadist)) {
+            if (wskill.skill.type(c) == Tactics.damage && character.has(Trait.sadist)) {
                 wskill.weight += 1.0;
             }
             for (int j = 0; j < RUN_COUNT; j++) {
-                raw_rating += ratePetMove(self, wskill.skill, target, c, masterFit, otherFit);
+                raw_rating += ratePetMove(character, wskill.skill, target, c, masterFit, otherFit);
             }
 
             // Sum up rating, add to map
             rating = (double) Math.pow(2, RATING_FACTOR * raw_rating + wskill.weight + wskill.skill.priorityMod(c)
-                    + Global.getMatch().getCondition().getSkillModifier().encouragement(wskill.skill, c, self));
+                    + Global.getMatch().getCondition().getSkillModifier().encouragement(wskill.skill, c, character));
             sum += rating;
             moveList.add(new WeightedSkill(sum, raw_rating, rating, wskill.skill));
         }
