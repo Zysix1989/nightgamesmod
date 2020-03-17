@@ -13,8 +13,12 @@ public class Assistant {
     }
 
     Assistant(Assistant a) {
-        this.character = a.character;
-        this.master = a.master;
+        try {
+            this.character = a.character.cloneWithOwner(a.master);
+            this.master = a.master;
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Assistant copy() {

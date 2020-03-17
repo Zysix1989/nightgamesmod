@@ -1560,13 +1560,9 @@ public class Combat {
             c.getStance().bottom = c.p2.getCharacter();
         }
         c.otherCombatants = new ArrayList<>();
-        for (Assistant pet : otherCombatants) {
-            if (pet.getCharacter().isPetOf(p1.getCharacter())) {
-                c.otherCombatants.add(new Assistant(pet.getCharacter().cloneWithOwner(c.p1.getCharacter()), p1.getCharacter()));
-            } else if (pet.getCharacter().isPetOf(p2.getCharacter())) {
-                c.otherCombatants.add(new Assistant(pet.getCharacter().cloneWithOwner(c.p2.getCharacter()), p2.getCharacter()));
-            }
-        }
+        c.otherCombatants = otherCombatants.stream()
+                .map(Assistant::copy)
+                .collect(Collectors.toList());
         c.getStance().setOtherCombatants(c.otherCombatants.stream().map(Assistant::getCharacter).collect(Collectors.toList()));
         c.postCombatScenesSeen = this.postCombatScenesSeen;
         c.cloned = true;
