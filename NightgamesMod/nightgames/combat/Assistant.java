@@ -58,19 +58,17 @@ public class Assistant {
     }
 
     public boolean act(Combat c, Character target) {
-        List<Skill> allowedEnemySkills = new ArrayList<>(character.getSkills()
+        List<Skill> allowedEnemySkills = character.getSkills()
                 .stream()
-                .filter(skill -> Skill.isUsableOn(c, skill, target) && Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
-                .collect(Collectors.toList()));
+                .filter(skill -> Skill.isUsableOn(c, skill, target) && Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG)).collect(Collectors.toList());
         Skill.filterAllowedSkills(c, allowedEnemySkills, character, target);
 
         List<Skill> possibleMasterSkills = new ArrayList<>(character.getSkills());
         possibleMasterSkills.addAll(Combat.WORSHIP_SKILLS);
-        List<Skill> allowedMasterSkills = new ArrayList<>(character.getSkills()
+        List<Skill> allowedMasterSkills = character.getSkills()
                 .stream().filter(skill -> Skill.isUsableOn(c, skill, character.getSelf().owner)
                         && (skill.getTags(c).contains(SkillTag.helping) || (character.getSelf().owner.has(Trait.showmanship) && skill.getTags(c).contains(SkillTag.worship)))
-                        && Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
-                .collect(Collectors.toList()));
+                        && Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG)).collect(Collectors.toList());
         Skill.filterAllowedSkills(c, allowedMasterSkills, character, character.getSelf().owner);
         WeightedSkill bestEnemySkill = Decider.prioritizePet(character, target, allowedEnemySkills, c);
         WeightedSkill bestMasterSkill = Decider.prioritizePet(character, character.getSelf().owner, allowedMasterSkills, c);
