@@ -124,7 +124,12 @@ public class Assistant {
                 wskill.weight += 1.0;
             }
             for (int j = 0; j < RUN_COUNT; j++) {
-                raw_rating += ratePetMove(character, wskill.skill, target, c, masterFit, otherFit);
+                raw_rating += Decider.rateActionWithObserver(character, character.getSelf().owner(), target, c, masterFit, otherFit, (combat, selfCopy, other1) -> {
+                    wskill.skill.setSelf(selfCopy);
+                    wskill.skill.resolve(combat, other1);
+                    wskill.skill.setSelf(character);
+                    return true;
+                });
             }
 
             // Sum up rating, add to map
@@ -146,12 +151,4 @@ public class Assistant {
         return moveList.get(moveList.size() - 1);
     }
 
-    private static double ratePetMove(PetCharacter self, Skill skill, Character target, Combat c, double masterFit, double otherFit) {
-        return Decider.rateActionWithObserver(self, self.getSelf().owner(), target, c, masterFit, otherFit, (combat, selfCopy, other) -> {
-            skill.setSelf(selfCopy);
-            skill.resolve(combat, other);
-            skill.setSelf(self);
-            return true;
-        });
-    }
 }
