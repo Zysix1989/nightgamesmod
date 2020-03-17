@@ -1,7 +1,9 @@
 package nightgames.pet;
 
 import nightgames.characters.Character;
-import nightgames.characters.*;
+import nightgames.characters.Emotion;
+import nightgames.characters.Growth;
+import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
@@ -9,28 +11,20 @@ import nightgames.grammar.Person;
 import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.match.Intelligence;
-import nightgames.nskills.tags.SkillTag;
-import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
 import nightgames.status.Slimed;
 import nightgames.status.Status;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
 
 public class PetCharacter extends Character {
     
     public static final PetCharacter DUMMY = new PetCharacter();
-    
-    private static final Set<SkillTag> PET_UNUSABLE_TAG = new HashSet<>();
-    static {
-        PET_UNUSABLE_TAG.add(SkillTag.suicidal);
-        PET_UNUSABLE_TAG.add(SkillTag.petDisallowed);
-        PET_UNUSABLE_TAG.add(SkillTag.counter);
-    }
+
     private String type;
     private String ownerType;
-    private Pet self;
+    public Pet self;
 
     @Override
     public final int getPetLimit() {
@@ -156,40 +150,6 @@ public class PetCharacter extends Character {
     @Override
     public boolean resist3p(Combat c, Character target, Character assist) {
         return true;
-    }
-
-    public boolean act(Combat c, Character target) {
-        List<Skill> allowedEnemySkills = new ArrayList<>(getSkills()
-                        .stream().filter(skill -> Skill.isUsableOn(c, skill, target) && Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
-                        .collect(Collectors.toList()));
-        Skill.filterAllowedSkills(c, allowedEnemySkills, this, target);        
-
-        List<Skill> possibleMasterSkills = new ArrayList<>(getSkills());
-        possibleMasterSkills.addAll(Combat.WORSHIP_SKILLS);
-        List<Skill> allowedMasterSkills = new ArrayList<>(getSkills()
-                        .stream().filter(skill -> Skill.isUsableOn(c, skill, getSelf().owner)
-                                        && (skill.getTags(c).contains(SkillTag.helping) || (getSelf().owner.has(Trait.showmanship) && skill.getTags(c).contains(SkillTag.worship)))
-                                        && Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
-                        .collect(Collectors.toList()));
-        Skill.filterAllowedSkills(c, allowedMasterSkills, this, getSelf().owner);
-        WeightedSkill bestEnemySkill = Decider.prioritizePet(this, target, allowedEnemySkills, c);
-        WeightedSkill bestMasterSkill = Decider.prioritizePet(this, getSelf().owner, allowedMasterSkills, c);
-
-        // don't let the ratings be negative.
-        double masterSkillRating = Math.max(.001, bestMasterSkill.rating);
-        double enemySkillRating = Math.max(.001, bestEnemySkill.rating);
-
-        double roll = Global.randomdouble(masterSkillRating + enemySkillRating) - masterSkillRating;
-        if (roll >= 0) {
-            c.write(this, String.format("<b>%s uses %s against %s</b>\n", getTrueName(), 
-                            bestEnemySkill.skill.getLabel(c), target.nameDirectObject()));
-            Skill.resolve(bestEnemySkill.skill, c, target);
-        } else {
-            c.write(this, String.format("<b>%s uses %s against %s</b>\n", 
-                            getTrueName(), bestMasterSkill.skill.getLabel(c), target.nameDirectObject()));
-            Skill.resolve(bestMasterSkill.skill, c, self.owner());
-        }
-        return false;
     }
 
     @Override

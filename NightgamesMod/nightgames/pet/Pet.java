@@ -8,7 +8,7 @@ public abstract class Pet implements Cloneable {
     private String name;
     private PetCharacter self;
     protected Ptype type;
-    protected Character owner;
+    public Character owner;
     private int power;
     private int ac;
 
