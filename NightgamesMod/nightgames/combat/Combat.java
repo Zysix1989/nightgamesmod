@@ -1096,11 +1096,12 @@ public class Combat {
         if (otherCombatants.size() == 1 || Global.random(2) == 0) {
             return getOpponentCharacter(pet);
         }
-        Character tgt;
-        do {
-            tgt = Global.pickRandom(otherCombatants).get().getCharacter();
-        } while (!petsCanFight(pet, tgt));
-        return tgt;
+
+        var finalCombatants = otherCombatants.stream()
+                .filter(target -> petsCanFight(pet, target.getCharacter()))
+                .collect(Collectors.toList());
+        Collections.shuffle(finalCombatants);
+        return finalCombatants.stream().findFirst().orElseThrow().getCharacter();
     }
 
     private boolean petsCanFight(PetCharacter pet, Character target) {
