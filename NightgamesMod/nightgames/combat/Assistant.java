@@ -37,5 +37,9 @@ public class Assistant {
         return  (10 + character.getSelf().power()) * ((100 + character.percentHealth()) / 200.0) / 2;
     }
 
+    public void vanquish(Combat c, Assistant other) {
+        character.getSelf().vanquish(c, other.getCharacter().getSelf());
+    }
+
 
 }

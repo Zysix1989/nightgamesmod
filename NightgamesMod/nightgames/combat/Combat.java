@@ -1524,9 +1524,9 @@ public class Combat {
             roll2 += 3;
         }
         if (roll1 > roll2) {
-            one.getCharacter().getSelf().vanquish(this, two.getCharacter().getSelf());
+            one.vanquish(this, two);
         } else if (roll2 > roll1) {
-            two.getCharacter().getSelf().vanquish(this, one.getCharacter().getSelf());
+            two.vanquish(this, one);
         } else {
             write(one.getCharacter().getName() + " and " + two.getCharacter().getName()
                             + " engage each other for awhile, but neither can gain the upper hand.");
