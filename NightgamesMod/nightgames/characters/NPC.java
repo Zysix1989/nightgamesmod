@@ -215,7 +215,6 @@ public class NPC extends Character {
         return false;
     }
 
-    @Override
     public boolean act(Combat c, Character target) {
         CombatantData combatantData = c.getCombatantData(this);
 

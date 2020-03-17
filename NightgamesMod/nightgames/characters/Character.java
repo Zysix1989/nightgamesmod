@@ -1730,13 +1730,6 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract boolean resist3p(Combat c, Character target, Character assist);
 
-    /**
-     * @param c combat to act in
-     * @param target
-     * @return true if combat should be paused.
-     */
-    public abstract boolean act(Combat c, Character target);
-
     public void displayStateMessage(Optional<Trap.Instance> knownTrap) {};
 
     /**abstract method for determining if this character is human - meaning the player.

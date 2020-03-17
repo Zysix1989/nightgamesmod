@@ -149,7 +149,6 @@ public class Player extends Character {
         return description;
     }
 
-    @Override
     public boolean act(Combat c, Character target) {
         HashSet<Skill> available = new HashSet<>();
         HashSet<Skill> cds = new HashSet<>();
