@@ -1556,7 +1556,20 @@ public class Combat {
         }
         c.otherCombatants = new ArrayList<>();
         c.otherCombatants = otherCombatants.stream()
-                .map(Assistant::copy)
+                .map(a -> {
+                    var oldMaster = a.getMaster();
+                    if (oldMaster.equals(c.p1.getCharacter())) {
+                        return a.copy(c.p1.getCharacter());
+                    } else if (oldMaster.equals(c.p2.getCharacter())) {
+                        return a.copy(c.p2.getCharacter());
+                    } else {
+                        throw new RuntimeException(String.format(
+                                "unable to find copy of master: (oldmaster:%s p1:%s p2:%s",
+                                oldMaster.getTrueName(),
+                                p1.getCharacter().getTrueName(),
+                                p2.getCharacter().getTrueName()));
+                    }
+                })
                 .collect(Collectors.toList());
         c.getStance().setOtherCombatants(c.otherCombatants.stream().map(Assistant::getCharacter).collect(Collectors.toList()));
         c.postCombatScenesSeen = this.postCombatScenesSeen;

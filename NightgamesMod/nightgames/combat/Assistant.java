@@ -31,17 +31,17 @@ public class Assistant {
         this.master = master;
     }
 
-    Assistant(Assistant a) {
+    Assistant(Assistant a, Character newMaster) {
         try {
-            this.character = a.character.cloneWithOwner(a.master);
-            this.master = a.master;
+            this.character = a.character.cloneWithOwner(newMaster);
+            this.master = newMaster;
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public Assistant copy() {
-        return new Assistant(this);
+    public Assistant copy(Character newMaster) {
+        return new Assistant(this, newMaster);
     }
 
     public PetCharacter getCharacter() {
