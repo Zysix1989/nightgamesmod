@@ -8,6 +8,7 @@ import nightgames.items.Item;
 import nightgames.match.actions.Move;
 import nightgames.trap.Trap;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -48,17 +49,17 @@ public class HumanIntelligence implements Intelligence {
     @Override
     public void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {
         character.message("Do you want to take the opportunity to ambush <b>" + target.getCharacter().getName() + "</b>?");
-        character.assessOpponent(target);
+        assessOpponent(target);
         character.message("<br/>");
 
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Attack " + target.getCharacter().getName(),
-                character.encounterOption(() -> {
+                encounterOption(() -> {
                     attackContinuation.run();
                     Global.getMatch().resume();
                 })));
         options.add(new CommandPanelOption("Wait",
-                character.encounterOption(() -> {
+                encounterOption(() -> {
                     waitContinuation.run();
                     Global.getMatch().resume();
                 })));
@@ -71,16 +72,16 @@ public class HumanIntelligence implements Intelligence {
     public void faceOff(Participant opponent, Runnable fightContinuation, Runnable fleeContinuation, Runnable smokeContinuation) {
         character.gui.message("You run into <b>" + opponent.getCharacter().nameDirectObject()
                 + "</b> and you both hesitate for a moment, deciding whether to attack or retreat.");
-        character.assessOpponent(opponent);
+        assessOpponent(opponent);
         character.gui.message("<br/>");
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Fight",
-                character.encounterOption(() -> {
+                encounterOption(() -> {
             fightContinuation.run();
             Global.getMatch().resume();
         })));
         options.add(new CommandPanelOption("Flee",
-                character.encounterOption(() -> {
+                encounterOption(() -> {
             fleeContinuation.run();
             Global.getMatch().resume();
         })));
@@ -92,16 +93,16 @@ public class HumanIntelligence implements Intelligence {
     public void spy(Participant opponent, Runnable ambushContinuation, Runnable waitContinuation) {
         character.gui.message("You spot <b>" + opponent.getCharacter().nameDirectObject()
                 + "</b> but she hasn't seen you yet. You could probably catch her off guard, or you could remain hidden and hope she doesn't notice you.");
-        character.assessOpponent(opponent);
+        assessOpponent(opponent);
         character.gui.message("<br/>");
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Ambush",
-                character.encounterOption(() -> {
+                encounterOption(() -> {
                     ambushContinuation.run();
                     Global.getMatch().resume();
                 })));
         options.add(new CommandPanelOption("Wait",
-                character.encounterOption(() -> {
+                encounterOption(() -> {
                     waitContinuation.run();
                     Global.getMatch().resume();
                 })));
@@ -120,31 +121,31 @@ public class HumanIntelligence implements Intelligence {
             character.gui.message("You stumble upon <b>" + target.getCharacter().nameDirectObject()
                     + "</b> skinny dipping in the pool. She hasn't noticed you yet. It would be pretty easy to catch her off-guard.");
         }
-        character.assessOpponent(target);
+        assessOpponent(target);
         character.gui.message("<br/>");
 
         ArrayList<CommandPanelOption> options = new ArrayList<>();
         options.add(new CommandPanelOption("Surprise Her",
-                character.encounterOption(() -> {
+                encounterOption(() -> {
                     ambushContinuation.run();
                     Global.getMatch().resume();
                 })));
         if (!target.getCharacter().mostlyNude()) {
             options.add(new CommandPanelOption("Steal Clothes",
-                    character.encounterOption(() -> {
+                    encounterOption(() -> {
                         stealContinuation.run();
                         Global.getMatch().resume();
                     })));
         }
         if (character.has(Item.Aphrodisiac)) {
             options.add(new CommandPanelOption("Use Aphrodisiac",
-                    character.encounterOption(() -> {
+                    encounterOption(() -> {
                         aphrodisiacContinuation.run();
                         Global.getMatch().resume();
                     })));
         }
         options.add(new CommandPanelOption("Do Nothing",
-                character.encounterOption(() -> {
+                encounterOption(() -> {
                     waitContinuation.run();
                     Global.getMatch().resume();
                 })));
@@ -179,6 +180,42 @@ public class HumanIntelligence implements Intelligence {
                 .collect(Collectors.toSet()));
         Global.getMatch().pause();
         character.gui.presentOptions(options);
+    }
+
+    private void assessOpponent(Participant opponent) {
+        String arousal;
+        String stamina;
+        if (character.get(Attribute.Perception) >= 6) {
+            character.gui.message("She is level " + opponent.getCharacter().getLevel());
+        }
+        if (character.get(Attribute.Perception) >= 8) {
+            character.gui.message("Her Power is " + opponent.getCharacter().get(Attribute.Power) + ", her Cunning is "
+                    + opponent.getCharacter().get(Attribute.Cunning) + ", and her Seduction is "
+                    + opponent.getCharacter().get(Attribute.Seduction));
+        }
+        opponent.state.sendAssessmentMessage(opponent, character);
+        if (character.get(Attribute.Perception) >= 4) {
+            if (opponent.getCharacter().getArousal()
+                    .percent() > 70) {
+                arousal = "horny";
+            } else if (opponent.getCharacter().getArousal()
+                    .percent() > 30) {
+                arousal = "slightly aroused";
+            } else {
+                arousal = "composed";
+            }
+            if (opponent.getCharacter().getStamina()
+                    .percent() < 50) {
+                stamina = "tired";
+            } else {
+                stamina = "eager";
+            }
+            character.gui.message("She looks " + stamina + " and " + arousal + ".");
+        }
+    }
+
+    private ActionListener encounterOption(Runnable continuation) {
+        return event -> continuation.run();
     }
 
     @Override

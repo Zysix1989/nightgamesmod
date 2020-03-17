@@ -22,7 +22,10 @@ import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
-import nightgames.match.*;
+import nightgames.match.HumanIntelligence;
+import nightgames.match.Intelligence;
+import nightgames.match.Match;
+import nightgames.match.MatchType;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.skills.*;
 import nightgames.skills.damage.DamageType;
@@ -35,7 +38,6 @@ import nightgames.status.Status;
 import nightgames.status.addiction.Addiction;
 import nightgames.trap.Trap;
 
-import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -207,42 +209,6 @@ public class Player extends Character {
     @Override
     public String taunt(Combat c, Character target) {
         return null;
-    }
-
-    public ActionListener encounterOption(Runnable continuation) {
-        return event -> continuation.run();
-    }
-
-    public void assessOpponent(Participant opponent) {
-        String arousal;
-        String stamina;
-        if (get(Attribute.Perception) >= 6) {
-            gui.message("She is level " + opponent.getCharacter().getLevel());
-        }
-        if (get(Attribute.Perception) >= 8) {
-            gui.message("Her Power is " + opponent.getCharacter().get(Attribute.Power) + ", her Cunning is "
-                            + opponent.getCharacter().get(Attribute.Cunning) + ", and her Seduction is "
-                            + opponent.getCharacter().get(Attribute.Seduction));
-        }
-        opponent.state.sendAssessmentMessage(opponent, this);
-        if (get(Attribute.Perception) >= 4) {
-            if (opponent.getCharacter().getArousal()
-                        .percent() > 70) {
-                arousal = "horny";
-            } else if (opponent.getCharacter().getArousal()
-                               .percent() > 30) {
-                arousal = "slightly aroused";
-            } else {
-                arousal = "composed";
-            }
-            if (opponent.getCharacter().getStamina()
-                        .percent() < 50) {
-                stamina = "tired";
-            } else {
-                stamina = "eager";
-            }
-            gui.message("She looks " + stamina + " and " + arousal + ".");
-        }
     }
 
     @Override
