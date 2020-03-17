@@ -1782,6 +1782,10 @@ public class Combat {
         return otherCombatants.stream().map(Assistant::getCharacter).filter(c -> c.isPetOf(target)).collect(Collectors.toList());
     }
 
+    public Set<Assistant> assistantsOf(Character target) {
+        return otherCombatants.stream().filter(a -> a.getMaster().equals(target)).collect(Collectors.toUnmodifiableSet());
+    }
+
     public void removePet(PetCharacter self) {
         if (self.has(Trait.resurrection) && !getCombatantData(self).getBooleanFlag(FLAG_RESURRECTED)) {
             write(self, "Just as " + self.subject() + " was about to disappear, a dazzling light covers " 

@@ -29,5 +29,13 @@ public class Assistant {
         return this.character;
     }
 
+    public Character getMaster() {
+        return this.master;
+    }
+
+    public double getFitness() {
+        return  (10 + character.getSelf().power()) * ((100 + character.percentHealth()) / 200.0) / 2;
+    }
+
 
 }

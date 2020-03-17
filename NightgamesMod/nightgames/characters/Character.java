@@ -15,6 +15,7 @@ import nightgames.characters.corestats.MojoStat;
 import nightgames.characters.corestats.StaminaStat;
 import nightgames.characters.corestats.WillpowerStat;
 import nightgames.characters.custom.AiModifiers;
+import nightgames.combat.Assistant;
 import nightgames.combat.Combat;
 import nightgames.combat.CombatantData;
 import nightgames.combat.Result;
@@ -3047,7 +3048,7 @@ public Character clone() throws CloneNotSupportedException {
             fit -= (pussyPreference() - 3) * 4;
         }
 
-        fit += c.getPetsFor(other).stream().mapToDouble(pet -> (10 + pet.getSelf().power()) * ((100 + pet.percentHealth()) / 200.0) / 2).sum();
+        fit += c.assistantsOf(other).stream().mapToDouble(Assistant::getFitness).sum();
 
         fit += other.outfit.getFitness(c, bottomFitness, topFitness);
         fit += other.body.getCharismaBonus(c, this);
@@ -3101,7 +3102,7 @@ public Character clone() throws CloneNotSupportedException {
         fit += Math.sqrt(totalAtts) * 5;
         // Always important: Position
 
-        fit += c.getPetsFor(this).stream().mapToDouble(pet -> (10 + pet.getSelf().power()) * ((100 + pet.percentHealth()) / 200.0) / 2).sum();
+        fit += c.assistantsOf(this).stream().mapToDouble(Assistant::getFitness).sum();
 
         int escape = getEscape(c, other);
         if (escape > 1) {
