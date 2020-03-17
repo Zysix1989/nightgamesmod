@@ -23,8 +23,8 @@ public class Assistant {
         PET_UNUSABLE_TAG.add(SkillTag.counter);
     }
 
-    private PetCharacter character;
-    private Character master;
+    private final PetCharacter character;
+    private final Character master;
 
     Assistant(PetCharacter c, Character master) {
         this.character = c;
