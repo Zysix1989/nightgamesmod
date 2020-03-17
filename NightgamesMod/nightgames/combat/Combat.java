@@ -1557,7 +1557,7 @@ public class Combat {
         c.otherCombatants = new ArrayList<>();
         c.otherCombatants = otherCombatants.stream()
                 .map(a -> {
-                    var oldMaster = a.getMaster();
+                    var oldMaster = a.getCharacter().getSelf().owner;
                     if (oldMaster.equals(c.p1.getCharacter())) {
                         return a.copy(c.p1.getCharacter());
                     } else if (oldMaster.equals(c.p2.getCharacter())) {
@@ -1794,7 +1794,7 @@ public class Combat {
     }
 
     public Set<Assistant> assistantsOf(Character target) {
-        return otherCombatants.stream().filter(a -> a.getMaster().equals(target)).collect(Collectors.toUnmodifiableSet());
+        return otherCombatants.stream().filter(a -> a.getCharacter().getSelf().owner.equals(target)).collect(Collectors.toUnmodifiableSet());
     }
 
     public void removePet(PetCharacter self) {
