@@ -41,5 +41,7 @@ public class Assistant {
         character.getSelf().vanquish(c, other.getCharacter().getSelf());
     }
 
-
+    public boolean act(Combat c, Character target) {
+        return character.act(c, target);
+    }
 }
