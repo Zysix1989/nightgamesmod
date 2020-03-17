@@ -224,14 +224,14 @@ public class Combat {
                 c.otherCombatants.stream()
                         .filter(pet -> !alreadyBattled.contains(pet.getCharacter()))
                         .forEach(pet -> {
-                            pet.act(c, c.pickTarget(pet.getCharacter()));
+                            pet.act(c, c.pickTarget(pet));
                             c.write("<br/>");
                             if (pet.getCharacter().getSelf().owner().has(Trait.devoteeFervor) && Global.random(2) == 0) {
                                 c.write(pet.getCharacter(),
                                         Global.format("{self:SUBJECT} seems to have gained a second wind from {self:possessive} religious fervor!",
                                                 pet.getCharacter(),
                                                 pet.getCharacter().getSelf().owner()));
-                                pet.act(c, c.pickTarget(pet.getCharacter()));
+                                pet.act(c, c.pickTarget(pet));
                             }
                         });
                 c.write("<br/>");
@@ -1092,13 +1092,13 @@ public class Combat {
         }
     }
 
-    private Character pickTarget(PetCharacter pet) {
+    private Character pickTarget(Assistant pet) {
         if (otherCombatants.size() == 1 || Global.random(2) == 0) {
-            return getOpponentCharacter(pet);
+            return getOpponentCharacter(pet.getCharacter());
         }
 
         var finalCombatants = otherCombatants.stream()
-                .filter(target -> petsCanFight(pet, target.getCharacter()))
+                .filter(target -> petsCanFight(pet.getCharacter(), target.getCharacter()))
                 .collect(Collectors.toList());
         Collections.shuffle(finalCombatants);
         return finalCombatants.stream().findFirst().orElseThrow().getCharacter();
