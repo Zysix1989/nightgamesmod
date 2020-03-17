@@ -193,4 +193,8 @@ public class Participant {
     public Intelligence getIntelligence() {
         return intelligence;
     }
+
+    public nightgames.combat.Intelligence makeCombatIntelligence() {
+        return intelligence.makeCombatIntelligence();
+    }
 }

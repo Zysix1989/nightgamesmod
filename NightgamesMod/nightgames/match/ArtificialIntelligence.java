@@ -100,4 +100,9 @@ public class ArtificialIntelligence implements Intelligence {
         bestTarget.option.callback();
     }
 
+    @Override
+    public nightgames.combat.ArtificialIntelligence makeCombatIntelligence() {
+        return new nightgames.combat.ArtificialIntelligence(character);
+    }
+
 }

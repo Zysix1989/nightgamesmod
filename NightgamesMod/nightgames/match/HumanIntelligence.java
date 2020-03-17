@@ -174,5 +174,10 @@ public class HumanIntelligence implements Intelligence {
         character.gui.presentOptions(options);
     }
 
+    @Override
+    public nightgames.combat.HumanIntelligence makeCombatIntelligence() {
+        return new nightgames.combat.HumanIntelligence(character);
+    }
+
 
 }

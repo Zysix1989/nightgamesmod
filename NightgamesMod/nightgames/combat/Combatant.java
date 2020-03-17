@@ -5,14 +5,17 @@ import nightgames.match.Participant;
 
 public class Combatant {
     private Participant participant;
+    private final Intelligence intelligence;
 
     Combatant(Participant p) {
         participant = p;
         participant.getCharacter().orgasms = 0;
+        intelligence = participant.makeCombatIntelligence();
     }
 
     private Combatant(Combatant c) {
             participant = c.participant.copy();
+            intelligence = participant.makeCombatIntelligence();
     }
 
     public Character getCharacter() {
@@ -26,6 +29,6 @@ public class Combatant {
     }
 
     boolean act(Combat c, Combatant target) {
-        return getCharacter().act(c, target.getCharacter());
+        return intelligence.act(c, target.getCharacter());
     }
 }

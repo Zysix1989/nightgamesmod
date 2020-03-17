@@ -22,4 +22,5 @@ public interface Intelligence {
 
     void intrudeInCombat(Set<Encounter.IntrusionOption> intrusionOptions, List<Move.Instance> possibleMoves, Consumer<Action.Instance> actionCallback, Runnable neitherContinuation);
 
+    nightgames.combat.Intelligence makeCombatIntelligence();
 }
