@@ -76,8 +76,8 @@ public class Assistant {
                         Collections.disjoint(skill.getTags(c), PET_UNUSABLE_TAG))
                 .collect(Collectors.toList());
         Skill.filterAllowedSkills(c, allowedMasterSkills, character, character.getSelf().owner);
-        WeightedSkill bestEnemySkill = prioritizePet(character, target, allowedEnemySkills, c);
-        WeightedSkill bestMasterSkill = prioritizePet(character, character.getSelf().owner, allowedMasterSkills, c);
+        WeightedSkill bestEnemySkill = prioritizePet(target, allowedEnemySkills, c);
+        WeightedSkill bestMasterSkill = prioritizePet(character.getSelf().owner, allowedMasterSkills, c);
 
         // don't let the ratings be negative.
         double masterSkillRating = Math.max(.001, bestMasterSkill.rating);
@@ -97,9 +97,9 @@ public class Assistant {
     }
 
     /**Decides which weightedskill a summoned pet uses*/
-    public static WeightedSkill prioritizePet(PetCharacter self, Character target, List<Skill> plist, Combat c) {
+    public WeightedSkill prioritizePet(Character target, List<Skill> plist, Combat c) {
         List<WeightedSkill> weightedList = plist.stream().map(skill -> new WeightedSkill(1.0, skill)).collect(Collectors.toList());
-        return prioritizePetWithWeights(self, target, weightedList, c);
+        return prioritizePetWithWeights(character, target, weightedList, c);
     }
 
     public static WeightedSkill prioritizePetWithWeights(PetCharacter self, Character target, List<WeightedSkill> plist, Combat c) {
