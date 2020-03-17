@@ -27,7 +27,8 @@ import nightgames.match.Intelligence;
 import nightgames.match.Match;
 import nightgames.match.MatchType;
 import nightgames.match.ftc.FTCMatch;
-import nightgames.skills.*;
+import nightgames.skills.Stage;
+import nightgames.skills.Tactics;
 import nightgames.skills.damage.DamageType;
 import nightgames.stance.Behind;
 import nightgames.stance.Neutral;
@@ -147,39 +148,6 @@ public class Player extends Character {
         description += Stage.describe(this);
         
         return description;
-    }
-
-    public boolean act(Combat c, Character target) {
-        HashSet<Skill> available = new HashSet<>();
-        HashSet<Skill> cds = new HashSet<>();
-        for (Skill a : getSkills()) {
-            if (Skill.isUsable(c, a)) {
-                if (cooldownAvailable(a)) {
-                    available.add(a);
-                } else {
-                    cds.add(a);
-                }
-            }
-        }
-        HashMap<Tactics, HashSet<Skill>> skillMap = new HashMap<>();
-        Skill.filterAllowedSkills(c, available, this, target);
-        if (available.size() == 0) {
-            available.add(new Nothing(this));
-        }
-        available.addAll(cds);
-        available.forEach(skill -> {
-            if (!skillMap.containsKey(skill.type(c))) {
-                skillMap.put(skill.type(c), new HashSet<>());
-            }
-            skillMap.get(skill.type(c)).add(skill);
-        });
-        ArrayList<SkillGroup> skillGroups = new ArrayList<>();
-        skillMap.forEach((tactic, skills) -> skillGroups.add(new SkillGroup(tactic, skills.stream()
-                .map(skill -> skill.instantiate(c, target)).collect(Collectors.toSet()))));
-
-        gui.chooseSkills(c, target, skillGroups);
-        Global.getMatch().pause();
-        return true;
     }
 
 
