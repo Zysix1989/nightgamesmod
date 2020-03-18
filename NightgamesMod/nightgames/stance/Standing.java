@@ -85,15 +85,11 @@ public class Standing extends MaledomSexStance {
     @Override
     public void checkOngoing(Combat c) {
         if (top.getStamina().get() < 10) {
-            if (top.human()) {
-                c.write("Your legs give out and you fall on the floor. " + bottom.getName()
-                                + " lands heavily on your lap.");
-                c.setStance(new Cowgirl(bottom, top));
-            } else {
-                c.write(Global.format("{self:SUBJECT-ACTION:lose} {self:possessive} balance and {self:action:fall}, "
-                                + "pulling {other:name-do} down on top of {self:direct-object}.", top, bottom));
-                c.setStance(new Cowgirl(bottom, top));
-            }
+            top.message("Your legs give out and you fall on the floor. " + bottom.getName()
+                    + " lands heavily on your lap.");
+            bottom.message(Global.format("{self:SUBJECT-ACTION:lose} {self:possessive} balance and {self:action:fall}, "
+                    + "pulling {other:name-do} down on top of {self:direct-object}.", top, bottom));
+            c.setStance(new Cowgirl(bottom, top));
         } else {
             super.checkOngoing(c);
         }
