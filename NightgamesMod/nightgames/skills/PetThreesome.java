@@ -11,14 +11,10 @@ import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.nskills.tags.SkillTag;
-import nightgames.stance.FFMCowgirlThreesome;
-import nightgames.stance.FFMFacesittingThreesome;
-import nightgames.stance.FFXTribThreesome;
-import nightgames.stance.MFFMissionaryThreesome;
-import nightgames.stance.MFMDoublePenThreesome;
-import nightgames.stance.MFMSpitroastThreesome;
-import nightgames.stance.ReverseXHFDaisyChainThreesome;
-import nightgames.stance.XHFDaisyChainThreesome;
+import nightgames.stance.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class PetThreesome extends Skill {
     public PetThreesome(String name, Character self, int cooldown) {
@@ -72,7 +68,9 @@ public class PetThreesome extends Skill {
     }
 
     protected Character getFucker(Combat c) {
-        return Global.pickRandom(c.getPetsFor(getSelf())).orElse(null);
+        var assistants = new ArrayList<>(c.assistantsOf(getSelf()));
+        Collections.shuffle(assistants);
+        return assistants.stream().findFirst().orElseThrow().getCharacter();
     }
 
     protected Character getMaster(Combat c) {
