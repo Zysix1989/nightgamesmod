@@ -1,12 +1,14 @@
 package nightgames.skills;
 
-import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.combat.Assistant;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
-import nightgames.pet.PetCharacter;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Honeypot extends Skill {
     public Honeypot(Character self) {
@@ -20,7 +22,7 @@ public class Honeypot extends Skill {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return !c.getPetsFor(target).isEmpty() && getSelf().canAct() && c.getStance().mobile(getSelf())
+        return !c.assistantsOf(target).isEmpty() && getSelf().canAct() && c.getStance().mobile(getSelf())
                         && !c.getStance().prone(getSelf());
     }
 
@@ -36,7 +38,9 @@ public class Honeypot extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        Optional<PetCharacter> targetPet = Global.pickRandom(c.getPetsFor(target));
+        var assistants = new ArrayList<>(c.assistantsOf(target));
+        Collections.shuffle(assistants);
+        var targetPet = assistants.stream().findFirst().map(Assistant::getCharacter);
         if (targetPet.isPresent()) {
             writeOutput(c, Result.normal, targetPet.get());
             double m = Global.random(10, 25);
