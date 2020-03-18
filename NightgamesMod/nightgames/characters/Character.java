@@ -241,15 +241,13 @@ public Character clone() throws CloneNotSupportedException {
     public List<Resistance> getResistances(Combat c) {
         List<Resistance> resistances = traits.stream().map(Trait::getResistance).collect(Collectors.toList());
         if (c != null) {
-            Optional<PetCharacter> petOptional = c.getPetsFor(this).stream().filter(pet -> pet.has(Trait.protective)).findAny();
-            if (petOptional.isPresent()) {
-                resistances.add((combat, self, status) -> {
-                    if (Global.random(100) < 50 && status.flags().contains(Stsflag.debuff) && status.flags().contains(Stsflag.purgable) ) {
-                        return petOptional.get().nameOrPossessivePronoun() + " Protection";
-                    }
-                    return "";
-                });
-            } 
+            var petOptional = c.assistantsOf(this).stream().filter(pet -> pet.getCharacter().has(Trait.protective)).findAny();
+            petOptional.ifPresent(petCharacter -> resistances.add((combat, self, status) -> {
+                if (Global.random(100) < 50 && status.flags().contains(Stsflag.debuff) && status.flags().contains(Stsflag.purgable)) {
+                    return petCharacter.getCharacter().nameOrPossessivePronoun() + " Protection";
+                }
+                return "";
+            }));
         }
         return resistances;
     }
