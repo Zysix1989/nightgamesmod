@@ -1,14 +1,13 @@
 package nightgames.stance;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import nightgames.characters.Character;
-import nightgames.characters.body.AssPart;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AnalCowgirl extends AnalSexStance {
 
@@ -89,23 +88,17 @@ public class AnalCowgirl extends AnalSexStance {
         Character inserted = inserted(top) ? bottom : top;
 
         if (!inserter.hasInsertable()) {
-            if (inserter.human()) {
-                c.write("With " + inserter.possessiveAdjective()
-                                + " pole gone, you groan in frustration and cease your merciless movements.");
-            } else {
-                c.write(inserted.getName() + " groans with frustration with the sudden disappearance of "
-                                + inserter.nameOrPossessivePronoun() + " pole.");
-            }
+            inserter.message("With " + inserter.possessiveAdjective()
+                    + " pole gone, you groan in frustration and cease your merciless movements.");
+            inserted.message(inserted.getName() + " groans with frustration with the sudden disappearance of "
+                    + inserter.nameOrPossessivePronoun() + " pole.");
             c.setStance(insertRandom(c));
         }
         if (inserted.body.getRandomAss() == null) {
-            if (inserted.human()) {
-                c.write("With your asshole suddenly disappearing, you can't continue riding " + inserter.getName()
-                                + " anymore.");
-            } else {
-                c.write(inserted.getName() + " groans with frustration with the sudden disappearance of "
-                                + inserted.possessiveAdjective() + " asshole.");
-            }
+            inserted.message("With your asshole suddenly disappearing, you can't continue riding " + inserter.getName()
+                    + " anymore.");
+            inserter.message(inserted.getName() + " groans with frustration with the sudden disappearance of "
+                    + inserted.possessiveAdjective() + " asshole.");
             c.setStance(insertRandom(c));
         }
     }
