@@ -19,13 +19,14 @@ public final class HiveMind {
                             + "{other:if-human: Shit you've seen this before, she somehow switched "
                             + "bodies with one of her clones!}",
                     bearer, c.getOpponentCharacter(bearer)));
-            while (!c.getPetsFor(bearer).isEmpty() && bearer.checkOrgasm()) {
-                int amount = Math.min(bearer.getArousal().get(), bearer.getArousal().max());
-                bearer.getArousal().calm(amount);
-                Character pet = c.getPetsFor(bearer).iterator().next();
-                pet.arouse(amount, c, Global.format("({self:master}'s orgasm)", bearer, opponent));
-                pet.doOrgasm(c, pet, null, null);
-            }
+            c.getPetsFor(bearer).forEach(assistant -> {
+                if (bearer.checkOrgasm()) {
+                    int amount = Math.min(bearer.getArousal().get(), bearer.getArousal().max());
+                    bearer.getArousal().calm(amount);
+                    assistant.arouse(amount, c, Global.format("({self:master}'s orgasm)", bearer, opponent));
+                    assistant.doOrgasm(c, assistant, null, null);
+                }
+            });
             c.setStance(new Neutral(bearer, c.getOpponentCharacter(bearer)));
             if (!bearer.checkOrgasm()) {
                 return true;
