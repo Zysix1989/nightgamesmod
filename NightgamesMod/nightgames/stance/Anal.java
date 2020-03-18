@@ -2,7 +2,6 @@ package nightgames.stance;
 
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
-import nightgames.characters.body.AssPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 
@@ -98,23 +97,17 @@ public class Anal extends AnalSexStance {
         Character inserted = inserted(top) ? bottom : top;
 
         if (!inserter.hasInsertable()) {
-            if (inserted.human()) {
-                c.write("With " + inserter.getName() + "'s pole gone, your ass gets a respite.");
-            } else {
-                c.write(inserted.getName() + " sighs with relief with "
-                                + inserter.nameOrPossessivePronoun() + " phallus gone.");
-            }
+            inserted.message("With " + inserter.getName() + "'s pole gone, your ass gets a respite.");
+            inserter.message(inserted.getName() + " sighs with relief with "
+                    + inserter.nameOrPossessivePronoun() + " phallus gone.");
             c.setStance(insertRandom(c));
         }
         if (inserted.body.getRandomAss() == null) {
-            if (inserted.human()) {
-                c.write("With your asshole suddenly disappearing, " + inserter.getName()
-                                + "'s dick pops out of what was once your sphincter.");
-            } else {
-                c.write(Global.capitalizeFirstLetter(inserter.nameOrPossessivePronoun()) + 
-                                " dick pops out of " + inserted.getName() 
-                                + " as "+inserted.possessiveAdjective()+" asshole shrinks and disappears.");
-            }
+            inserted.message("With your asshole suddenly disappearing, " + inserter.getName()
+                    + "'s dick pops out of what was once your sphincter.");
+            inserter.message(Global.capitalizeFirstLetter(inserter.nameOrPossessivePronoun()) +
+                    " dick pops out of " + inserted.getName()
+                    + " as "+inserted.possessiveAdjective()+" asshole shrinks and disappears.");
             c.setStance(insertRandom(c));
         }
     }
