@@ -1,18 +1,16 @@
 package nightgames.traits;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import nightgames.characters.BasePersonality;
-import nightgames.characters.Caroline;
 import nightgames.characters.Character;
-import nightgames.characters.Mei;
-import nightgames.characters.Sarah;
+import nightgames.characters.*;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.pet.CharacterPet;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Apostles {
     private static final String APOSTLES_COUNT_FLAG = "APOSTLES_COUNT";
@@ -39,7 +37,8 @@ public class Apostles {
         if (character.canRespond()
             && combat.getCombatantData(character).getIntegerFlag(APOSTLES_COUNT_FLAG) >= 4) {
             List<BasePersonality> possibleApostles = Stream.of(new Mei(), new Caroline(), new Sarah())
-                .filter(possible -> !combat.getOtherCombatants().contains(possible))
+                .filter(possible -> combat.getOtherCombatants().stream()
+                        .noneMatch(existing -> existing.getName().equals(possible.character.getName())))
                 .collect(Collectors.toList());
             var targetApostle = Global.pickRandom(possibleApostles);
             if (targetApostle.isPresent()) {
