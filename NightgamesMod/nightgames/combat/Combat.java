@@ -1092,26 +1092,6 @@ public class Combat {
         }
     }
 
-    private Character pickTarget(Assistant pet) {
-        if (otherCombatants.size() == 1 || Global.random(2) == 0) {
-            return getOpponentCharacter(pet.getCharacter());
-        }
-
-        var finalCombatants = otherCombatants.stream()
-                .filter(target -> {
-                    if (pet.equals(target) || pet.getCharacter().getSelf().owner().equals(target.getCharacter())) {
-                        return false;
-                    }
-                    if (!target.getCharacter().isPet()) {
-                        return true;
-                    }
-                    return !(target.getCharacter().getSelf().owner().equals(pet.getCharacter().getSelf().owner()));
-                })
-                .collect(Collectors.toList());
-        Collections.shuffle(finalCombatants);
-        return finalCombatants.stream().findFirst().orElseThrow().getCharacter();
-    }
-
     private void doStanceTick(Character self) {
         Character other = getStance().getPartner(this, self);
         Addiction add = other.getAddiction(AddictionType.DOMINANCE).orElse(null);       //FIXME: Causes trigger even though addiction has 0 magnitude.
