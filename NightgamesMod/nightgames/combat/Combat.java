@@ -773,33 +773,33 @@ public class Combat {
     
     private void fetishDisadvantageAura(Character character, List<Character> opponents, String fetishType, ClothingSlot clothingType) {
         float ifPartNotNull = 0;
-        if (fetishType == BreastsPart.TYPE && opponents.get(0).hasBreasts()) {
+        if (fetishType.equals(BreastsPart.TYPE) && opponents.get(0).hasBreasts()) {
             ifPartNotNull = 1;
-        } else if (fetishType == PussyPart.TYPE && opponents.get(0).hasPussy()) {
+        } else if (fetishType.equals(PussyPart.TYPE) && opponents.get(0).hasPussy()) {
             ifPartNotNull = 1;
-        } else if (fetishType == CockPart.TYPE && opponents.get(0).hasDick()) {
+        } else if (fetishType.equals(CockPart.TYPE) && opponents.get(0).hasDick()) {
             ifPartNotNull = 1;
-        } else if (fetishType == AssPart.TYPE) {
+        } else if (fetishType.equals(AssPart.TYPE)) {
             ifPartNotNull = 1;
-        } else if (fetishType == FeetPart.TYPE) {
+        } else if (fetishType.equals(FeetPart.TYPE)) {
             ifPartNotNull = 1;
         } else {
             ifPartNotNull = 0;
         }
         if (ifPartNotNull == 1) {
             Optional<Character> otherWithAura = opponents.stream().filter(other -> other.body.getRandom(fetishType) != null).findFirst();
-            Clothing clothes = otherWithAura.get().getOutfit().getTopOfSlot(clothingType);
+            Clothing clothes = otherWithAura.orElseThrow().getOutfit().getTopOfSlot(clothingType);
             boolean seeFetish = clothes == null || clothes.getLayer() <= 1 || otherWithAura.get().getOutfit().getExposure() >= .5;
             String partDescrip;
 
-            if (fetishType == BreastsPart.TYPE) {
-                partDescrip = otherWithAura.get().body.getRandomBreasts().describe(otherWithAura.get());
-            } else if (fetishType == AssPart.TYPE) {
-                partDescrip = otherWithAura.get().body.getRandomAss().describe(otherWithAura.get());
-            } else if (fetishType == PussyPart.TYPE) {
-                partDescrip = otherWithAura.get().body.getRandomPussy().describe(otherWithAura.get());
-            } else if (fetishType == CockPart.TYPE) {
-                partDescrip = otherWithAura.get().body.getRandomCock().describe(otherWithAura.get());
+            if (fetishType.equals(BreastsPart.TYPE)) {
+                partDescrip = otherWithAura.orElseThrow().body.getRandomBreasts().describe(otherWithAura.get());
+            } else if (fetishType.equals(AssPart.TYPE)) {
+                partDescrip = otherWithAura.orElseThrow().body.getRandomAss().describe(otherWithAura.get());
+            } else if (fetishType.equals(PussyPart.TYPE)) {
+                partDescrip = otherWithAura.orElseThrow().body.getRandomPussy().describe(otherWithAura.get());
+            } else if (fetishType.equals(CockPart.TYPE)) {
+                partDescrip = otherWithAura.orElseThrow().body.getRandomCock().describe(otherWithAura.get());
             } else {
                 partDescrip = fetishType;
             }
