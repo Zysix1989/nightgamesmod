@@ -38,7 +38,6 @@ import nightgames.match.Match;
 import nightgames.match.actions.UseBeer;
 import nightgames.match.actions.UseEnergyDrink;
 import nightgames.match.actions.UseLubricant;
-import nightgames.pet.PetCharacter;
 import nightgames.pet.arms.ArmManager;
 import nightgames.skills.*;
 import nightgames.skills.damage.DamageType;
@@ -2475,9 +2474,11 @@ public Character clone() throws CloneNotSupportedException {
         }
 
         pleasured = false;
-        Optional<PetCharacter> randomOpponentPetOptional = Global.pickRandom(c.getPetsFor(opponent));
+        var opponentAssistants = new ArrayList<>(c.assistantsOf(opponent));
+        Collections.shuffle(opponentAssistants);
+        var randomOpponentPetOptional = opponentAssistants.stream().findFirst();
         if (!isPet() && randomOpponentPetOptional.isPresent()) {
-            PetCharacter pet = randomOpponentPetOptional.get();
+            var pet = randomOpponentPetOptional.get().getCharacter();
             boolean weakenBetter = modifyDamage(DamageType.physical, pet, 100) / pet.getStamina().remaining() 
                             > 100 / pet.getStamina().remaining();
             if (canAct() && c.getStance().mobile(this) && pet.roll(this, c, 20)) {
