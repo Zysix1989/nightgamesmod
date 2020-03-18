@@ -1561,7 +1561,6 @@ public class Combat {
         if (c.getStance().bottom == p2.getCharacter()) {
             c.getStance().bottom = c.p2.getCharacter();
         }
-        c.otherCombatants = new ArrayList<>();
         c.otherCombatants = otherCombatants.stream()
                 .map(a -> {
                     var oldMaster = a.getCharacter().getSelf().owner;
