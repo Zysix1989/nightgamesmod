@@ -21,7 +21,8 @@ public final class HiveMind {
                     bearer, c.getOpponentCharacter(bearer)));
             c.getPetsFor(bearer).forEach(assistant -> {
                 if (bearer.checkOrgasm()) {
-                    int amount = Math.min(bearer.getArousal().get(), assistant.getArousal().max());
+                    int amount = Math.min(bearer.getArousal().get(),
+                            Math.max(0, assistant.getArousal().max() - assistant.getArousal().get()));
                     bearer.getArousal().calm(amount);
                     assistant.arouse(amount, c, Global.format("({self:master}'s orgasm)", bearer, opponent));
                     assistant.doOrgasm(c, assistant, null, null);
