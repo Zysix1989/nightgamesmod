@@ -1,10 +1,7 @@
 package nightgames.skills;
 
-import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.CharacterSex;
-import nightgames.characters.NPC;
-import nightgames.characters.Player;
+import nightgames.characters.*;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -26,7 +23,7 @@ public class Simulacrum extends Skill {
         return getSelf().canAct()
             && c.getStance().mobile(getSelf())
             && !c.getStance().prone(getSelf())
-            && c.getPetsFor(getSelf()).size() < getSelf().getPetLimit()
+            && c.assistantsOf(getSelf()).size() < getSelf().getPetLimit()
             && !target.isPet();
     }
 
