@@ -373,9 +373,13 @@ public class Combat {
             c.doStanceTick(c.p1.getCharacter());
             c.doStanceTick(c.p2.getCharacter());
 
-            List<Character> team1 = new ArrayList<>(c.getPetsFor(c.p1.getCharacter()));
+            List<Character> team1 = c.assistantsOf(c.p1.getCharacter()).stream()
+                    .map(Assistant::getCharacter)
+                    .collect(Collectors.toList());
             team1.add(c.p1.getCharacter());
-            List<Character> team2 = new ArrayList<>(c.getPetsFor(c.p2.getCharacter()));
+            List<Character> team2 = c.assistantsOf(c.p2.getCharacter()).stream()
+                    .map(Assistant::getCharacter)
+                    .collect(Collectors.toList());
             team2.add(c.p2.getCharacter());
             team1.forEach(self -> c.doAuraTick(self, team2));
             team2.forEach(self -> c.doAuraTick(self, team1));
