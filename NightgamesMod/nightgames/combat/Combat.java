@@ -377,8 +377,8 @@ public class Combat {
             team1.add(c.p1.getCharacter());
             List<Character> team2 = new ArrayList<>(c.getPetsFor(c.p2.getCharacter()));
             team2.add(c.p2.getCharacter());
-            team1.forEach(self -> c.doAuraTick(self, team1, team2));
-            team2.forEach(self -> c.doAuraTick(self, team2, team1));
+            team1.forEach(self -> c.doAuraTick(self, team2));
+            team2.forEach(self -> c.doAuraTick(self, team1));
 
             c.combatantData.values().forEach(data -> data.tick(c));
 
@@ -730,18 +730,18 @@ public class Combat {
         }
     }
 
-    private void doAuraTick(Character character, List<Character> allies, List<Character> opponents) {
+    private void doAuraTick(Character character, List<Character> opponents) {
         if (character.has(Trait.overwhelmingPresence)) {
             write(character, Global.format("{self:NAME-POSSESSIVE} overwhelming presence mentally exhausts {self:possessive} opponents.", character, character));
             opponents.forEach(opponent -> opponent.weaken(this, opponent.getStamina().max() / 10));
         }
         String beguilingbreastCompletedFlag = Trait.beguilingbreasts.name() + "Completed";
         //Fix for Beguiling Breasts being seen when it shouldn't.
-        if (character.has(Trait.beguilingbreasts)
-            && !getCombatantData(character).getBooleanFlag(beguilingbreastCompletedFlag)
-            && character.outfit.slotOpen(ClothingSlot.top)
-            && getStance().facing(character, getOpponentCharacter(character))
-            && !getOpponentCharacter(character).is(Stsflag.blinded)) {
+        if (character.has(Trait.beguilingbreasts) &&
+                !getCombatantData(character).getBooleanFlag(beguilingbreastCompletedFlag) &&
+                character.outfit.slotOpen(ClothingSlot.top) &&
+                getStance().facing(character, getOpponentCharacter(character)) &&
+                !getOpponentCharacter(character).is(Stsflag.blinded)) {
             Character mainOpponent = getOpponentCharacter(character);
             write(character, Global.format("The instant {self:subject-action:lay|lays} {self:possessive} eyes on {other:name-possessive} bare breasts, {self:possessive} consciousness flies out of {self:possessive} mind. " +
                             (character.canAct() ? "{other:SUBJECT-ACTION:giggle|giggles} a bit and {other:action:cup} {other:possessive} {other:body-part:breasts}"
@@ -752,26 +752,26 @@ public class Combat {
         }
 
         if (character.has(Trait.footfetishist)) {
-            fetishDisadvantageAura(character, allies, opponents, FeetPart.TYPE, ClothingSlot.feet);
+            fetishDisadvantageAura(character, opponents, FeetPart.TYPE, ClothingSlot.feet);
         }
         if (character.has(Trait.breastobsessed)) {
-            fetishDisadvantageAura(character, allies, opponents, BreastsPart.TYPE, ClothingSlot.top);
+            fetishDisadvantageAura(character, opponents, BreastsPart.TYPE, ClothingSlot.top);
         }
         if(character.has(Trait.assaddict)) {
-            fetishDisadvantageAura(character, allies, opponents, AssPart.TYPE, ClothingSlot.bottom);
+            fetishDisadvantageAura(character, opponents, AssPart.TYPE, ClothingSlot.bottom);
         }
         if(character.has(Trait.pussywhipped ) )  {
-            fetishDisadvantageAura(character, allies, opponents, PussyPart.TYPE, ClothingSlot.bottom);
+            fetishDisadvantageAura(character, opponents, PussyPart.TYPE, ClothingSlot.bottom);
         }
         if(character.has(Trait.cockcraver)) {
-            fetishDisadvantageAura(character, allies, opponents, CockPart.TYPE, ClothingSlot.bottom);
+            fetishDisadvantageAura(character, opponents, CockPart.TYPE, ClothingSlot.bottom);
         }
         
         opponents.forEach(opponent -> checkIndividualAuraEffects(character, opponent));
     }
     
     
-    private void fetishDisadvantageAura(Character character, List<Character> allies, List<Character> opponents, String fetishType, ClothingSlot clothingType) {
+    private void fetishDisadvantageAura(Character character, List<Character> opponents, String fetishType, ClothingSlot clothingType) {
        
         float ifPartNotNull = 0;
        
