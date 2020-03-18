@@ -1751,10 +1751,6 @@ public class Combat {
         return target.human() ? "you" : "they";
     }
 
-    public List<PetCharacter> getPetsFor(Character target) {
-        return otherCombatants.stream().map(Assistant::getCharacter).filter(c -> c.isPetOf(target)).collect(Collectors.toList());
-    }
-
     public Set<Assistant> assistantsOf(Character target) {
         return otherCombatants.stream().filter(a -> a.getCharacter().getSelf().owner.equals(target)).collect(Collectors.toUnmodifiableSet());
     }
