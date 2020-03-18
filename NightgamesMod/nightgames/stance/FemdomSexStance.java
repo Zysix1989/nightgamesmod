@@ -1,9 +1,5 @@
 package nightgames.stance;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
@@ -11,6 +7,10 @@ import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.CockBound;
 import nightgames.status.Stsflag;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class FemdomSexStance extends Position {
     public FemdomSexStance(Character top, Character bottom, Stance stance) {
@@ -36,22 +36,16 @@ public abstract class FemdomSexStance extends Position {
         Character inserted = inserted(domSexCharacter(c)) ? bottom : domSexCharacter(c);
 
         if (!inserter.hasInsertable()) {
-            if (inserter.human()) {
-                c.write(inserted.getName() + " groans with frustration with the sudden disappearance of your pole.");
-            } else {
-                c.write(Global.format("With {self:name-possessive} {self:body-part:cock} gone,"
-                                + " {other:subject-action:groan} in frustration and {other:action:cease}"
-                                + " {other:possessive} merciless riding.", inserter, inserted));
-            }
+            inserter.message(inserted.getName() + " groans with frustration with the sudden disappearance of your pole.");
+            inserted.message(Global.format("With {self:name-possessive} {self:body-part:cock} gone,"
+                    + " {other:subject-action:groan} in frustration and {other:action:cease}"
+                    + " {other:possessive} merciless riding.", inserter, inserted));
             c.setStance(insertRandom(c));
         }
         if (!inserted.hasPussy()) {
-            if (inserted.human()) {
-                c.write("With your pussy suddenly disappearing, you can't continue riding " + inserter.getName()
-                                + " anymore.");
-            } else {
-                c.write(inserted.getName() + " groans with frustration with the sudden disappearance of her pussy.");
-            }
+            inserted.message("With your pussy suddenly disappearing, you can't continue riding " + inserter.getName()
+                    + " anymore.");
+            inserter.message(inserted.getName() + " groans with frustration with the sudden disappearance of her pussy.");
             c.setStance(insertRandom(c));
         }
     }
