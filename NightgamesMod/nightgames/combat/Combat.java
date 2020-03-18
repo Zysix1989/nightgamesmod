@@ -772,45 +772,18 @@ public class Combat {
     
     
     private void fetishDisadvantageAura(Character character, List<Character> opponents, String fetishType, ClothingSlot clothingType) {
-        float ifPartNotNull = 0;
-        if (fetishType.equals(BreastsPart.TYPE) && opponents.get(0).hasBreasts()) {
-            ifPartNotNull = 1;
-        } else if (fetishType.equals(PussyPart.TYPE) && opponents.get(0).hasPussy()) {
-            ifPartNotNull = 1;
-        } else if (fetishType.equals(CockPart.TYPE) && opponents.get(0).hasDick()) {
-            ifPartNotNull = 1;
-        } else if (fetishType.equals(AssPart.TYPE)) {
-            ifPartNotNull = 1;
-        } else if (fetishType.equals(FeetPart.TYPE)) {
-            ifPartNotNull = 1;
-        } else {
-            ifPartNotNull = 0;
-        }
-        if (ifPartNotNull == 1) {
-            Optional<Character> otherWithAura = opponents.stream().filter(other -> other.body.getRandom(fetishType) != null).findFirst();
-            Clothing clothes = otherWithAura.orElseThrow().getOutfit().getTopOfSlot(clothingType);
-            boolean seeFetish = clothes == null || clothes.getLayer() <= 1 || otherWithAura.get().getOutfit().getExposure() >= .5;
-            String partDescrip;
-
-            if (fetishType.equals(BreastsPart.TYPE)) {
-                partDescrip = otherWithAura.orElseThrow().body.getRandomBreasts().describe(otherWithAura.get());
-            } else if (fetishType.equals(AssPart.TYPE)) {
-                partDescrip = otherWithAura.orElseThrow().body.getRandomAss().describe(otherWithAura.get());
-            } else if (fetishType.equals(PussyPart.TYPE)) {
-                partDescrip = otherWithAura.orElseThrow().body.getRandomPussy().describe(otherWithAura.get());
-            } else if (fetishType.equals(CockPart.TYPE)) {
-                partDescrip = otherWithAura.orElseThrow().body.getRandomCock().describe(otherWithAura.get());
-            } else {
-                partDescrip = fetishType;
-            }
-
-            if (otherWithAura.isPresent() && seeFetish && Global.random(5) == 0) {
+        Optional<Character> otherWithAura = opponents.stream().filter(other -> other.body.getRandom(fetishType) != null).findFirst();
+        otherWithAura.ifPresent(other -> {
+            Clothing clothes = other.getOutfit().getTopOfSlot(clothingType);
+            boolean seeFetish = clothes == null || clothes.getLayer() <= 1 || other.getOutfit().getExposure() >= .5;
+            var partDescription = other.body.getRandom(fetishType).describe(other);
+            if (seeFetish && Global.random(5) == 0) {
                 if (character.human()) {
-                    write(character, "You can't help thinking about " + otherWithAura.get().nameOrPossessivePronoun() + " " + partDescrip + ".");
+                    write(character, "You can't help thinking about " + otherWithAura.get().nameOrPossessivePronoun() + " " + partDescription + ".");
                 }
                 character.add(this, new BodyFetish(character, null, fetishType, .05));
             }
-        }
+        });
     }
     
     private void checkIndividualAuraEffects(Character self, Character other) {
