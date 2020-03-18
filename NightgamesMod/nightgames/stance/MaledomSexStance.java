@@ -1,15 +1,15 @@
 package nightgames.stance;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
 import nightgames.status.Stsflag;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class MaledomSexStance extends Position {
     public MaledomSexStance(Character top, Character bottom, Stance stance) {
@@ -35,22 +35,16 @@ public abstract class MaledomSexStance extends Position {
         Character inserted = inserted(top) ? bottom : top;
 
         if (!inserter.hasInsertable()) {
-            if (inserter.human()) {
-                c.write("With your phallus gone, you groan in frustration and cease your merciless movements.");
-            } else {
-                c.write(inserter.getName() + " groans with frustration with the sudden disappearance of "
-                                + inserter.possessiveAdjective() + " pole.");
-            }
+            inserter.message("With your phallus gone, you groan in frustration and cease your merciless movements.");
+            inserted.message(inserter.getName() + " groans with frustration with the sudden disappearance of "
+                    + inserter.possessiveAdjective() + " pole.");
             c.setStance(insertRandom(c));
         }
         if (!inserted.hasPussy() && !anallyPenetratedBy(c, inserted, inserter)) {
-            if (inserted.human()) {
-                c.write("With your pussy suddenly disappearing, " + inserter.subject()
-                                + " can't continue fucking you anymore.");
-            } else {
-                c.write("You groan with frustration with the sudden disappearance of "
-                                + inserted.nameOrPossessivePronoun() + " pussy.");
-            }
+            inserted.message("With your pussy suddenly disappearing, " + inserter.subject()
+                    + " can't continue fucking you anymore.");
+            inserter.message("You groan with frustration with the sudden disappearance of "
+                    + inserted.nameOrPossessivePronoun() + " pussy.");
             c.setStance(insertRandom(c));
         }
     }
