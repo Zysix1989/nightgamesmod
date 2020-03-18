@@ -26,7 +26,7 @@ public class SpawnFGoblin extends Skill {
         return getSelf().canAct() && c.getStance()
                                       .mobile(getSelf())
                         && !c.getStance().prone(getSelf()) && getSelf().getArousal().get() >= 25
-                             && c.getPetsFor(getSelf()).size() < getSelf().getPetLimit();
+                             && c.assistantsOf(getSelf()).size() < getSelf().getPetLimit();
     }
 
     @Override

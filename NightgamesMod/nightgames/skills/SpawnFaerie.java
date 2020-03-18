@@ -28,7 +28,7 @@ public class SpawnFaerie extends Skill {
     @Override
     public boolean usable(Combat c, Character target) {
         return getSelf().canAct() && c.getStance().mobile(getSelf()) && !c.getStance().prone(getSelf())
-                        && c.getPetsFor(getSelf()).size() < getSelf().getPetLimit();
+                        && c.assistantsOf(getSelf()).size() < getSelf().getPetLimit();
     }
 
     @Override
