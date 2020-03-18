@@ -55,7 +55,7 @@ public class Apostles {
                 combat.getCombatantData(character).setIntegerFlag(APOSTLES_COUNT_FLAG, 0);
             }
         }
-        if (combat.getPetsFor(character).size() < character.getPetLimit()) {
+        if (combat.assistantsOf(character).size() < character.getPetLimit()) {
             combat.getCombatantData(character).setIntegerFlag(APOSTLES_COUNT_FLAG, combat.getCombatantData(character).getIntegerFlag(APOSTLES_COUNT_FLAG) + 1);
         }
     }
