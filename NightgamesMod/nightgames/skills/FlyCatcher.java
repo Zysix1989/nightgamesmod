@@ -1,14 +1,17 @@
 package nightgames.skills;
 
-import java.util.Optional;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
+import nightgames.combat.Assistant;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.pet.PetCharacter;
 import nightgames.skills.damage.DamageType;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Optional;
 
 public class FlyCatcher extends Skill {
     public FlyCatcher(Character self) {
@@ -22,7 +25,7 @@ public class FlyCatcher extends Skill {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return !c.getPetsFor(target).isEmpty() && getSelf().canAct() && c.getStance().mobile(getSelf())
+        return !c.assistantsOf(target).isEmpty() && getSelf().canAct() && c.getStance().mobile(getSelf())
                         && !c.getStance().prone(getSelf());
     }
 
@@ -39,15 +42,18 @@ public class FlyCatcher extends Skill {
     @Override
     public boolean resolve(Combat c, Character target) {
         Optional<PetCharacter> targetPet = Global.pickRandom(c.getPetsFor(target));
+        var assistants = new ArrayList<>(c.assistantsOf(target));
+        Collections.shuffle(assistants);
+        targetPet = assistants.stream().findFirst().map(Assistant::getCharacter);
         if (targetPet.isPresent()) {
             writeOutput(c, Result.normal, targetPet.get());
             double m = Global.random(30, 50);
             targetPet.get().pain(c, getSelf(), (int) getSelf().modifyDamage(DamageType.physical, targetPet.get(), m));
             getSelf().weaken(c, getSelf().getStamina().max() / 4);
-        return true;
+            return true;
         } else {
             writeOutput(c, Result.normal, target);
-            return false;   
+            return false;
         }
     }
 
