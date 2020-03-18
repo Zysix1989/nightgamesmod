@@ -747,6 +747,7 @@ public class Combat {
                             (character.canAct() ? "{other:SUBJECT-ACTION:giggle|giggles} a bit and {other:action:cup} {other:possessive} {other:body-part:breasts}"
                                                 + "  and {other:action:give} them a little squeeze to which {self:subject} can only moan." : ""), 
                             mainOpponent, character));
+            // TODO: 50 turns seems so long.  This can't be balanced.
             opponents.forEach(opponent -> opponent.add(this, new Trance(opponent, 50)));
             getCombatantData(character).setBooleanFlag(beguilingbreastCompletedFlag, true);
         }
