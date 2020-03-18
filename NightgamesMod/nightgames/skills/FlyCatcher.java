@@ -41,10 +41,9 @@ public class FlyCatcher extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        Optional<PetCharacter> targetPet = Global.pickRandom(c.getPetsFor(target));
         var assistants = new ArrayList<>(c.assistantsOf(target));
         Collections.shuffle(assistants);
-        targetPet = assistants.stream().findFirst().map(Assistant::getCharacter);
+        Optional<PetCharacter> targetPet = assistants.stream().findFirst().map(Assistant::getCharacter);
         if (targetPet.isPresent()) {
             writeOutput(c, Result.normal, targetPet.get());
             double m = Global.random(30, 50);
