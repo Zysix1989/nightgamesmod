@@ -258,7 +258,7 @@ public Character clone() throws CloneNotSupportedException {
      * @return
      * returns a formulatic number based on the current level.   
      * */
-    public int getXPReqToNextLevel() {
+    public final int getXPReqToNextLevel() {
         return Math.min(45 + 5 * getLevel(), 100);
     }
 
@@ -272,7 +272,7 @@ public Character clone() throws CloneNotSupportedException {
      * @return
      * Returns a value based on a total complied from a combinations of Traits, ClothingTraits, and Attributes. 
      * */
-    public int get(Attribute a) {
+    public final int get(Attribute a) {
         if (a == Attribute.Slime && !has(Trait.slime)) {
             // always return 0 if there's no trait for it.
             return 0;
@@ -378,7 +378,7 @@ public Character clone() throws CloneNotSupportedException {
      *  @return
      *  Returns true if the outfit has the given attribute.  
      * */
-    public boolean has(ClothingTrait attribute) {
+    public final boolean has(ClothingTrait attribute) {
         return outfit.has(attribute);
     }
 
@@ -391,7 +391,7 @@ public Character clone() throws CloneNotSupportedException {
      * @return total
      * 
      * */
-    public int getPure(Attribute a) {
+    public final int getPure(Attribute a) {
         int total = 0;
         if (att.containsKey(a) && !a.equals(Attribute.Willpower)) {
             total = att.get(a);
@@ -413,7 +413,7 @@ public Character clone() throws CloneNotSupportedException {
      *  @return
      *  Returns true if the roll beats the DC.
      * */
-    public boolean check(Attribute a, int dc) {
+    public final boolean check(Attribute a, int dc) {
         int rand = Global.random(20);
         if (rand == 0) {
             // critical hit
@@ -431,7 +431,7 @@ public Character clone() throws CloneNotSupportedException {
      * @return level
      * Returns the level of the Character.
      * */
-    public int getLevel() {
+    public final int getLevel() {
         return level;
     }
 
@@ -439,7 +439,7 @@ public Character clone() throws CloneNotSupportedException {
      * @param i
      * The value of experience to increment by.
      * */
-    public void gainXPPure(int i) {
+    public final void gainXPPure(int i) {
         xp += i;
         update();
     }
@@ -450,7 +450,7 @@ public Character clone() throws CloneNotSupportedException {
      * @param i
      * The value of experience to increment by.
      * */
-    public void gainXP(int i) {
+    public final void gainXP(int i) {
         assert i >= 0;
         double rate = 1.0;
         if (has(Trait.fastLearner)) {
@@ -468,26 +468,26 @@ public Character clone() throws CloneNotSupportedException {
      * @param i
      * The value to set the xp member to. 
      * */
-    public void setXP(int i) {
+    public final void setXP(int i) {
         xp = i;
         update();
     }
 
-    public int getRank() {
+    public final int getRank() {
         return rank;
     }
 
-    public void setRank(int rank) {
+    public final void setRank(int rank) {
         this.rank = rank;
     }
 
-    public void rankup() {
+    public final void rankup() {
         rank++;
     }
 
     public abstract void ding(Combat c);
 
-    public int getXP() {
+    public final int getXP() {
         return xp;
     }
 
@@ -506,7 +506,7 @@ public Character clone() throws CloneNotSupportedException {
      * Returns a minium value of a double calculated from a moderation between the maximum and minimum damage.
      *  
      *  */
-    public double modifyDamage(DamageType type, Character other, double baseDamage) {
+    public final double modifyDamage(DamageType type, Character other, double baseDamage) {
         // so for each damage type, one level from the attacker should result in about 3% increased damage, while a point in defense should reduce damage by around 1.5% per level.
         // this differential should be max capped to (2 * (100 + attacker's level * 1.5))%
         // this differential should be min capped to (.5 * (100 + attacker's level * 1.5))%
@@ -524,7 +524,7 @@ public Character clone() throws CloneNotSupportedException {
      * @return
      * Returns a different value based upon the damage type.
      * */
-    private double getDefensivePower(DamageType type){
+    private final double getDefensivePower(DamageType type){
         switch (type) {
             case arcane:
                 return get(Attribute.Arcane) + get(Attribute.Dark) / 2 + get(Attribute.Divinity) / 2 + get(Attribute.Ki) / 2;
@@ -559,7 +559,7 @@ public Character clone() throws CloneNotSupportedException {
      * @return
      * Returns a different value based upon the damage type.
      * */
-    private double getOffensivePower(DamageType type){
+    private final double getOffensivePower(DamageType type){
         switch (type) {
             case biological:
                 return (get(Attribute.Animism) + get(Attribute.Bio) + get(Attribute.Medicine) + get(Attribute.Science)) / 2;
@@ -597,7 +597,7 @@ public Character clone() throws CloneNotSupportedException {
      *  TODO: Someone explain this implementation.
      *  
      * */
-    public void pain(Combat c, Character other, int i) {
+    public final void pain(Combat c, Character other, int i) {
         pain(c, other, i, true, true);
     }
 
@@ -618,7 +618,7 @@ public Character clone() throws CloneNotSupportedException {
      * Indicates if hte pain is physical.
      *
      * */
-    public void pain(Combat c, Character other, int i, boolean primary, boolean physical) {
+    public final void pain(Combat c, Character other, int i, boolean primary, boolean physical) {
         int pain = i;
         int bonus = 0;
         if (is(Stsflag.rewired) && physical) {
@@ -707,7 +707,7 @@ public Character clone() throws CloneNotSupportedException {
      * @param i
      * The base value to drain this character's stamina.
      * */
-    public void drain(Combat c, Character drainer, int i) {
+    public final void drain(Combat c, Character drainer, int i) {
         int drained = i;
         int bonus = 0;
 
@@ -738,7 +738,7 @@ public Character clone() throws CloneNotSupportedException {
      * The base value, which is modified by bonuses.
      * 
      * */
-    public void weaken(Combat c, final int i) {
+    public final void weaken(Combat c, final int i) {
         int weak = i;
         int bonus = 0;
         for (Status s : getStatuses()) {
@@ -758,10 +758,10 @@ public Character clone() throws CloneNotSupportedException {
         }
     }
 
-    public void heal(Combat c, int i) {
+    public final void heal(Combat c, int i) {
         heal(c, i, "");
     }
-    public void heal(Combat c, int i, String reason) {
+    public final void heal(Combat c, int i, String reason) {
         i = Math.max(1, i);
         if (c != null) {
             c.writeSystemMessage(String.format("%s healed for <font color='rgb(100,240,30)'>%d<font color='white'>%s",
@@ -770,15 +770,15 @@ public Character clone() throws CloneNotSupportedException {
         stamina.recover(i);
     }
 
-    public String subject() {
+    public final String subject() {
         return getGrammar().subject().defaultNoun();
     }
 
-    public int pleasure(int i, Combat c, Character source) {
+    public final int pleasure(int i, Combat c, Character source) {
         return resolvePleasure(i, c, source, Body.nonePart, Body.nonePart);
     }
 
-    public int resolvePleasure(int i, Combat c, Character source, BodyPart selfPart, BodyPart opponentPart) {
+    public final int resolvePleasure(int i, Combat c, Character source, BodyPart selfPart, BodyPart opponentPart) {
         int pleasure = i;
 
         emote(Emotion.horny, i / 4 + 1);
@@ -794,23 +794,23 @@ public Character clone() throws CloneNotSupportedException {
         return pleasure;
     }
 
-    public void temptNoSkillNoTempter(Combat c, int i) {
+    public final void temptNoSkillNoTempter(Combat c, int i) {
         temptNoSkillNoSource(c, null, i);
     }
 
-    public void temptNoSkillNoSource(Combat c, Character tempter, int i) {
+    public final void temptNoSkillNoSource(Combat c, Character tempter, int i) {
         tempt(c, tempter, null, i, Optional.empty());
     }
 
-    public void temptNoSource(Combat c, Character tempter, int i, Skill skill) {
+    public final void temptNoSource(Combat c, Character tempter, int i, Skill skill) {
         tempt(c, tempter, null, i, Optional.ofNullable(skill));
     }
 
-    public void temptNoSkill(Combat c, Character tempter, BodyPart with, int i) {
+    public final void temptNoSkill(Combat c, Character tempter, BodyPart with, int i) {
         tempt(c, tempter, with, i, Optional.empty());
     }
 
-    public void temptWithSkill(Combat c, Character tempter, BodyPart with, int i, Skill skill) {
+    public final void temptWithSkill(Combat c, Character tempter, BodyPart with, int i, Skill skill) {
         tempt(c, tempter, with, i, Optional.ofNullable(skill));
     }
 
@@ -834,7 +834,7 @@ public Character clone() throws CloneNotSupportedException {
      *  An optional Skill.
      * 
      * */
-    public void tempt(Combat c, Character tempter, BodyPart with, int i, Optional<Skill> skillOptional) {
+    public final void tempt(Combat c, Character tempter, BodyPart with, int i, Optional<Skill> skillOptional) {
         String extraMsg = "";
         double baseModifier = 1.0;
         if (has(Trait.oblivious)) {
@@ -950,7 +950,7 @@ public Character clone() throws CloneNotSupportedException {
         }
     }
 
-    public void arouse(int i, Combat c) {
+    public final void arouse(int i, Combat c) {
         arouse(i, c, "");
     }
     
@@ -962,7 +962,7 @@ public Character clone() throws CloneNotSupportedException {
      * @param source
      * The source of the arousal damage.
      * */
-    public void arouse(int i, Combat c, String source) {
+    public final void arouse(int i, Combat c, String source) {
         String extraMsg = "";
         if (has(Trait.Unsatisfied) && (getArousal().percent() >= 50 || getWillpower().percent() < 25)) {
             extraMsg += " (Unsatisfied)";
