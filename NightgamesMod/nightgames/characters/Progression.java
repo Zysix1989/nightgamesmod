@@ -1,12 +1,24 @@
 package nightgames.characters;
 
+import com.google.gson.JsonObject;
+
 public class Progression {
+    private static final String JSON_LEVEL = "level";
+    private static final String JSON_XP = "xp";
+    private static final String JSON_RANK = "rank";
+
     private int level;
     private int xp = 0;
     private int rank = 0;
 
     Progression(int level) {
         this.level = level;
+    }
+
+    Progression(JsonObject js) {
+        this.level = js.get(JSON_LEVEL).getAsInt();
+        this.xp = js.get(JSON_XP).getAsInt();
+        this.rank = js.get(JSON_RANK).getAsInt();
     }
 
     public int getLevel() {

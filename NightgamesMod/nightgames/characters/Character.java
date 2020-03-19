@@ -65,7 +65,7 @@ public abstract class Character extends Observable implements Cloneable {
 
     private String name;
     public CharacterSex initialGender;
-    private final Progression progression;
+    private Progression progression;
     public int money;
     public Map<Attribute, Integer> att;             //Attributes are good opportunity to move to OOP Implementation - They are very similar to meters with base and modified values - DSM
     public StaminaStat stamina;
@@ -1809,9 +1809,7 @@ public Character clone() throws CloneNotSupportedException {
      * */
     public void load(JsonObject object) {
         name = object.get("name").getAsString();
-        progression.setLevel(object.get("level").getAsInt());
-        progression.setRank(object.get("rank").getAsInt());
-        progression.setXp(object.get("xp").getAsInt());
+        progression = new Progression(object);
         if (object.has("growth")) {
             growth = JsonUtils.getGson().fromJson(object.get("growth"), Growth.class);
             growth.removeNullTraits();
