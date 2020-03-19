@@ -251,17 +251,6 @@ public Character clone() throws CloneNotSupportedException {
         return resistances;
     }
 
-    /**Returns the experienced required for the next level. It is formulatic.
-     * 
-     * FIXME: We all know PEMDAS but no one in the universe likes taking time to figure out who's going first. - DSM.  
-     * 
-     * @return
-     * returns a formulatic number based on the current level.   
-     * */
-    public final int getXPReqToNextLevel() {
-        return Math.min(45 + 5 * getProgression().getLevel(), 100);
-    }
-
     /**Nondescriptive getter for some value. 
      * 
      * FIXME: No, really, what is this and why is it needed? - DSM
@@ -3509,7 +3498,7 @@ public Character clone() throws CloneNotSupportedException {
     public final boolean levelUpIfPossible(Combat c) {
         int req;
         boolean dinged = false;
-        while (progression.getXp() > (req = getXPReqToNextLevel())) {
+        while (progression.getXp() > (req = Progression.xpRequirementForNextLevel(progression.getLevel()))) {
             progression.setXp(progression.getXp() - req);
             ding(c);
             dinged = true;

@@ -58,4 +58,8 @@ public class Progression {
                 xp == other.xp &&
                 rank == other.rank;
     }
+
+    public static int xpRequirementForNextLevel(int currentLevel) {
+        return Math.min(45 + 5 * currentLevel, 100);
+    }
 }
