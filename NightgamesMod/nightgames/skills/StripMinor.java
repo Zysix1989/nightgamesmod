@@ -96,8 +96,8 @@ public class StripMinor extends Skill {
             return false;
         }
         clothing = articleToStrip.get();
-        int difficulty = clothing.dc() 
-                        + target.getLevel()
+        int difficulty = clothing.dc()
+                        + target.getProgression().getLevel()
                         + (target.getStamina().percent() / 4
                         - target.getArousal().percent()) / 5
                         - (!target.canAct() || c.getStance().sub(target) ? 20 : 0);

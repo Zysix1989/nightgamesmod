@@ -110,9 +110,9 @@ public class Angel extends BasePersonality {
                         c -> c.get(Attribute.Divinity) < 50 ? Optional.of(Attribute.Divinity) : Optional.empty());
         preferredAttributes.add(c -> Optional.of(Attribute.Seduction));
         preferredAttributes.add(
-                        c -> (c.has(Trait.nymphomania)
-                            && c.get(Attribute.Nymphomania) < (c.getLevel() - 10) / 2)
-                            ? Optional.of(Attribute.Nymphomania) : Optional.empty());
+                c -> (c.has(Trait.nymphomania)
+                    && c.get(Attribute.Nymphomania) < (c.getProgression().getLevel() - 10) / 2)
+                    ? Optional.of(Attribute.Nymphomania) : Optional.empty());
     }
 
     private void useSex() {
@@ -226,7 +226,7 @@ public class Angel extends BasePersonality {
             if (!character.has(Trait.lacedjuices) && character.money >= 1000) {
                 character.money -= 1000;
                 character.getGrowth()
-                         .addTrait(Math.min(20, character.getLevel()), Trait.lacedjuices);
+                         .addTrait(Math.min(20, character.getProgression().getLevel()), Trait.lacedjuices);
             }
             if (character.money > 0) {
                 Global.getDay()
@@ -686,7 +686,7 @@ public class Angel extends BasePersonality {
      * */
     private void addFirstFocusScene(){
         character.addCombatScene(new CombatScene((c, self, other) -> {
-            return self.getLevel() >= 10 && !Global.checkFlag(ANGEL_SEX_FOCUS)
+            return self.getProgression().getLevel() >= 10 && !Global.checkFlag(ANGEL_SEX_FOCUS)
                             && !Global.checkFlag(ANGEL_NYMPHOMANIA_FOCUS);
         }, (c, self, player) -> Global.format(
                         "After another exhausting fight with her where you've been pretty much been driven insane with her sexual prowess, "
@@ -744,7 +744,7 @@ public class Angel extends BasePersonality {
      * */
     private void addSecondFocusScene(){
         character.addCombatScene(new CombatScene((c, self, other) -> {
-            return self.getLevel() >= 20 && !Global.checkFlag(ANGEL_FOLLOWERS_FOCUS)
+            return self.getProgression().getLevel() >= 20 && !Global.checkFlag(ANGEL_FOLLOWERS_FOCUS)
                             && !Global.checkFlag(ANGEL_WORSHIP_FOCUS)
                             && (Global.checkFlag(ANGEL_SEX_FOCUS) || Global.checkFlag(ANGEL_NYMPHOMANIA_FOCUS));
         }, (c, self, player) -> "After another session of fantastic sex with your favorite sex goddess, Angel looks a bit reluctant to leave. "

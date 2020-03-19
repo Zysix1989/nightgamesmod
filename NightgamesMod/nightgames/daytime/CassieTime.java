@@ -102,7 +102,7 @@ public class CassieTime extends BaseNPCTime {
             arcaneMouth.ingredients.put(Item.BewitchingDraught, 15);
             arcaneMouth.ingredients.put(Item.FaeScroll, 3);
             arcaneMouth.addRequirement((c, self, other) -> {
-                return self.getLevel() >= 30;
+                return self.getProgression().getLevel() >= 30;
             }, "At least level 30");
             arcaneMouth.option = "Arcane Lipstick";
             arcaneMouth.scene = "[Placeholder]<br/>Cassie enchants a tube of lipstick and gives it to you.";
@@ -113,7 +113,7 @@ public class CassieTime extends BaseNPCTime {
             arcaneAss.ingredients.put(Item.BewitchingDraught, 15);
             arcaneAss.ingredients.put(Item.FaeScroll, 3);
             arcaneAss.addRequirement((c, self, other) -> {
-                return self.getLevel() >= 30;
+                return self.getProgression().getLevel() >= 30;
             }, "At least level 30");
             arcaneAss.option = "Runic Ass Tattoos";
             arcaneAss.scene = "[Placeholder]<br/>Cassie decorates your rosebud with some runic tattoos.";

@@ -149,7 +149,7 @@ public class Jewel extends BasePersonality {
         this.addFirstFocusScene();      //TODO: Add below addcombatscene block to this method.  NOTE: Growth in this scope breaks Jewel's first scene. 
         
         character.addCombatScene(new CombatScene((c, self, other) -> {
-            return character.getLevel() >= 10 && !Global.checkFlag(JEWEL_ANAL_FOCUS)
+            return character.getProgression().getLevel() >= 10 && !Global.checkFlag(JEWEL_ANAL_FOCUS)
                             && !Global.checkFlag(JEWEL_MARTIAL_FOCUS);
         }, (c, self, player) -> character.subject() + " leans back a bit as she watches you recover from your fight."
                         + " <i>\"Hey, " + player.getName() + ". Pop quiz. If I were to knock you on your ass and then"
@@ -230,7 +230,7 @@ public class Jewel extends BasePersonality {
                 advance();
             }
         }
-        if (character.getLevel() >= 40 && Global.checkFlag(JEWEL_ANAL_FOCUS)) {
+        if (character.getProgression().getLevel() >= 40 && Global.checkFlag(JEWEL_ANAL_FOCUS)) {
             if (character.body.getRandomAss().getMods().stream().noneMatch(mod -> mod.countsAs(TrainedMod.TYPE))) {
                 character.body.getRandomAss().addMod(new TrainedMod());
             }
@@ -776,7 +776,7 @@ public class Jewel extends BasePersonality {
      * */
     private void addFirstFocusScene(){
         character.addCombatScene(new CombatScene((c, self, other) -> {
-            return character.getLevel() >= 10 && !Global.checkFlag(JEWEL_ANAL_FOCUS)
+            return character.getProgression().getLevel() >= 10 && !Global.checkFlag(JEWEL_ANAL_FOCUS)
                             && !Global.checkFlag(JEWEL_MARTIAL_FOCUS);
         }, (c, self, player) -> character.subject() + " leans back a bit as she watches you recover from your fight."
                         + " <i>\"Hey, " + player.getName() + ". Pop quiz. If I were to knock you on your ass and then"
@@ -819,7 +819,7 @@ public class Jewel extends BasePersonality {
      * */
     private void addSecondFocusScene(){
         character.addCombatScene(new CombatScene((c, self, other) -> {
-            return character.getLevel() >= 20 && !Global.checkFlag(JEWEL_MENTAL_FOCUS)
+            return character.getProgression().getLevel() >= 20 && !Global.checkFlag(JEWEL_MENTAL_FOCUS)
                             && !Global.checkFlag(JEWEL_PHYSICAL_FOCUS)
                             && (Global.checkFlag(JEWEL_MARTIAL_FOCUS) || Global.checkFlag(JEWEL_ANAL_FOCUS));
         }, (c, self, player) -> "Jewel stands over you after the fight while looking at you rather coldly, <i>\"So, "

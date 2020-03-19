@@ -33,7 +33,7 @@ public class TentacleInjectVenom extends TentacleArmSkill {
                             + "{other:pronoun-action:yelp} and {other:action:pull} it out straight away. Unfortunately, "
                             + "{other:pronoun} already {other:action:start} to feel sluggish as {other:pronoun-action:realize} "
                             + "{other:pronoun-action:have} been poisoned.", owner, target));
-            target.add(c, new Atrophy(target, owner.getLevel() / 3, 10, getSourceString(owner)));
+            target.add(c, new Atrophy(target, owner.getProgression().getLevel() / 3, 10, getSourceString(owner)));
             target.add(c, new Abuff(target, Attribute.Power, target.getPure(Attribute.Power) / 3, 10));
             target.add(c, new Abuff(target, Attribute.Speed, target.getPure(Attribute.Speed) / 3, 10));
             return true;

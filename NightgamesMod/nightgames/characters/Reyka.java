@@ -508,9 +508,9 @@ public class Reyka extends BasePersonality {
      * 
      * */
     private void addFirstFocusScene(){
-        character.addCombatScene(new CombatScene((c, self, other) -> self.getLevel() >= 12 
+        character.addCombatScene(new CombatScene((c, self, other) -> self.getProgression().getLevel() >= 12
                         && !Global.checkFlag(REYKA_DISABLING_FOCUS) && !Global.checkFlag(REYKA_SEDUCTION_FOCUS)
-                        , (c, self, other) -> Global.format("You had turned your back to Reyka after your fight."
+                , (c, self, other) -> Global.format("You had turned your back to Reyka after your fight."
                                         + " Big mistake. Out of nowhere, {self:pronoun} crashes into"
                                         + " you from behind with great force, knocking you down."
                                         + " You quickly roll over, but Reyka binds your legs together at"
@@ -572,10 +572,10 @@ public class Reyka extends BasePersonality {
      * 
      * */
     private void addSecondFocusScene(){
-        character.addCombatScene(new CombatScene((c, self, other) -> self.getLevel() >= 22
+        character.addCombatScene(new CombatScene((c, self, other) -> self.getProgression().getLevel() >= 22
                         && !Global.checkFlag(REYKA_DRAINING_FOCUS) && !Global.checkFlag(REYKA_CORRUPTION_FOCUS)
                         && (Global.checkFlag(REYKA_DISABLING_FOCUS) || Global.checkFlag(REYKA_SEDUCTION_FOCUS))
-                        , (c, self, other) -> Global.format("After your fight, Reyka is staring at you"
+                , (c, self, other) -> Global.format("After your fight, Reyka is staring at you"
                                         + " appraisingly. <i>\"{other:name}, your progress lately has"
                                         + " been impressive. I've been keeping a close eye on you -"
                                         + " sometimes a </i>very<i> close eye - and I've determined"

@@ -22,7 +22,7 @@ public class IllusionTrap extends Trap {
         public Instance(Trap self, Participant owner) {
             super(self, owner);
             var ch = owner.getCharacter();
-            strength = ch.get(Attribute.Arcane) + ch.getLevel() / 2;
+            strength = ch.get(Attribute.Arcane) + ch.getProgression().getLevel() / 2;
         }
 
         private static final String VICTIM_TRIGGER_MESSAGE = "You run into a girl you don't recognize, but she's " +

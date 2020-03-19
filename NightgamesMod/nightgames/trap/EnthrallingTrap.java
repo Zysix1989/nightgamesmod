@@ -22,7 +22,7 @@ public class EnthrallingTrap extends Trap {
         public Instance(Trap self, Participant owner) {
             super(self, owner);
             var ch = owner.getCharacter();
-            strength = ch.get(Attribute.Dark) + ch.get(Attribute.Arcane) + ch.getLevel() / 2;
+            strength = ch.get(Attribute.Dark) + ch.get(Attribute.Arcane) + ch.getProgression().getLevel() / 2;
         }
 
         private static final String VICTIM_AVOID_MESSAGE = "As you walk through the area, you notice a pentagram " +

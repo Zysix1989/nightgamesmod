@@ -14,7 +14,7 @@ public class LevelRequirement extends BaseRequirement {
     }
 
     @Override public boolean meets(Combat c, Character self, Character other) {
-        return self.getLevel() >= level;
+        return self.getProgression().getLevel() >= level;
     }
 
     @Override public boolean equals(Object o) {

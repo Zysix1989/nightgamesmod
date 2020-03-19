@@ -207,7 +207,7 @@ public class ReykaTime extends BaseNPCTime {
             devilishAss.ingredients.put(Item.semen, 5);
             devilishAss.option = "Devil's Ass";
             devilishAss.addRequirement((c, self, other) -> {
-                return self.getLevel() >= 30;
+                return self.getProgression().getLevel() >= 30;
             }, "At least level 30");
             devilishAss.scene = "[Placeholder] You ask Reyka if she could give your asshole a bit of demonic power.<br/><br/>"
                             + "<i>\"Ohhh, just your asshole? I guess there's no accounting for taste. I knew youd go for this kind of stuff when I met you, though. Of course I could do that. Just hand me those and show me your asshole.\"</i>\"<br/>"
@@ -224,7 +224,7 @@ public class ReykaTime extends BaseNPCTime {
             demonicMouth.ingredients.put(Item.semen, 5);
             demonicMouth.option = "Demonic Mouth";
             demonicMouth.addRequirement((c, self, other) -> {
-                return self.getLevel() >= 30;
+                return self.getProgression().getLevel() >= 30;
             }, "At least level 30");
             demonicMouth.scene = "[Placeholder] You ask Reyka if she could give you a demonic mouth, capable of draining people with a lewd kiss.<br/>"
                             + "<i>\"Ohhh, that's so romantic. I knew you'd go for this kind of stuff when I met you, though. Hand me those. I think we'll both really enjoy this.\"</i>\"<br/>"

@@ -22,7 +22,7 @@ public class AphrodisiacTrap extends Trap {
         public Instance(Trap self, Participant owner) {
             super(self, owner);
             var ch = owner.getCharacter();
-            strength = ch.get(Attribute.Cunning) + ch.get(Attribute.Science) + ch.getLevel() / 2;
+            strength = ch.get(Attribute.Cunning) + ch.get(Attribute.Science) + ch.getProgression().getLevel() / 2;
         }
 
         private static final String VICTIM_DISARM_MESSAGE = "You spot a liquid spray trap in time to avoid setting " +

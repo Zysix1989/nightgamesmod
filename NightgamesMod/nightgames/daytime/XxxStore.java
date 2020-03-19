@@ -113,7 +113,7 @@ public class XxxStore extends Store {
                     "You see Alice hanging around near the bondage gear. You aren't sure whether she's waiting for you or not.");
                 choices.add("Talk to Alice");
             }
-            if (player.getLevel() >= 5 && !Global.checkFlag(Flag.metAlice) && !Global
+            if (player.getProgression().getLevel() >= 5 && !Global.checkFlag(Flag.metAlice) && !Global
                 .checkFlag(Flag.victory)) {
                 choices.add("Learn to be Submissive");
             }

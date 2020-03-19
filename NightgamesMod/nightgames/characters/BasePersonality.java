@@ -68,7 +68,7 @@ public abstract class BasePersonality implements Serializable {
         }
         p.character.body.makeGenitalOrgans(p.character.initialGender);
         p.character.body.finishBody(p.character.initialGender);
-        for (int i = 1; i < p.character.getLevel(); i++) {
+        for (int i = 1; i < p.character.getProgression().getLevel(); i++) {
             p.character.getGrowth().levelUp(p.character);
         }
         p.character.distributePoints(p.preferredAttributes);

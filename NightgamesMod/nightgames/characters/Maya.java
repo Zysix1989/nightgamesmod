@@ -47,7 +47,7 @@ public class Maya extends BasePersonality {
         character.plan = Plan.hunting;
         character.mood = Emotion.confident;
         setupCharacter(this,charConfig, commonConfig);
-        while (character.getLevel() < playerLevel + 20) {
+        while (character.getProgression().getLevel() < playerLevel + 20) {
             character.ding(null);
         }
         constructLines();
@@ -436,7 +436,7 @@ public class Maya extends BasePersonality {
      * */
     private void addFirstFocusScene(){
         character.addCombatScene(new CombatScene(
-                        (c, self, other) -> self.getLevel() >= 40 && !Global.checkFlag(MAYA_FIRSTTYPE1_FOCUS) && !Global.checkFlag(MAYA_FIRSTTYPE2_FOCUS) && !Global.checkFlag(MAYA_FIRSTTYPE_DONE),
+                (c, self, other) -> self.getProgression().getLevel() >= 40 && !Global.checkFlag(MAYA_FIRSTTYPE1_FOCUS) && !Global.checkFlag(MAYA_FIRSTTYPE2_FOCUS) && !Global.checkFlag(MAYA_FIRSTTYPE_DONE),
                         (c, self, other) -> Global.format(
                                         "[Placeholder] You see {self:name} in some sort of setup scenario. She asks you a question relevant to her advancement."
                                         + "\n\n \"<i>You know what? I was thinking - Now that I'm playing again, I could focus on THIS or THAT. What do you think?</i>\"",
@@ -476,7 +476,7 @@ public class Maya extends BasePersonality {
      * */
     private void addSecondFocusScene(){
         character.addCombatScene(new CombatScene(
-                        (c, self, other) -> self.getLevel() >= 50 && !Global.checkFlag(MAYA_SECONDTYPE1_FOCUS) && !Global.checkFlag(MAYA_SECONDTYPE2_FOCUS) && Global.checkFlag(MAYA_FIRSTTYPE_DONE) && !Global.checkFlag(MAYA_SECONDTYPE_DONE),
+                (c, self, other) -> self.getProgression().getLevel() >= 50 && !Global.checkFlag(MAYA_SECONDTYPE1_FOCUS) && !Global.checkFlag(MAYA_SECONDTYPE2_FOCUS) && Global.checkFlag(MAYA_FIRSTTYPE_DONE) && !Global.checkFlag(MAYA_SECONDTYPE_DONE),
                         (c, self, other) -> Global.format(
                                         "[Placeholder] You see {self:name} consider how strong the competition is now. She wonders if she should really cut loose and go full power, but how?",
                                         self, other),

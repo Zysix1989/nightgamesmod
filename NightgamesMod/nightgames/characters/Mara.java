@@ -667,8 +667,8 @@ public class Mara extends BasePersonality {
      * */
     private void addFirstFocusScene(){
         character.addCombatScene(new CombatScene(
-                        (c, self, other) -> self.getLevel() >= 10 && !Global.checkFlag(MARA_GENERAL_TECH_FOCUS)
-                                        && !Global.checkFlag(MARA_HARPOON_FOCUS),
+                (c, self, other) -> self.getProgression().getLevel() >= 10 && !Global.checkFlag(MARA_GENERAL_TECH_FOCUS)
+                                && !Global.checkFlag(MARA_HARPOON_FOCUS),
                         (c, self, other) -> Global.format(
                                         "You see {self:name} fiddling with the device on her arm"
                                                         + " as you both recover from your match. <i>\"Damn thing is on the fritz"
@@ -739,8 +739,8 @@ public class Mara extends BasePersonality {
      * */
     private void addSecondFocusScene(){
         character.addCombatScene(new CombatScene(
-                        (c, self, other) -> self.getLevel() >= 20 && !Global.checkFlag(MARA_OCTO_FOCUS)
-                                        && !Global.checkFlag(MARA_MIND_CONTROL_FOCUS),
+                (c, self, other) -> self.getProgression().getLevel() >= 20 && !Global.checkFlag(MARA_OCTO_FOCUS)
+                                && !Global.checkFlag(MARA_MIND_CONTROL_FOCUS),
                         (c, self, other) -> Global.format(
                                         "You and {self:name} are both getting back up after your match,"
                                                         + " cleaning yourselves as much as possible before moving on. <i>\"Hey, {other:name}."
@@ -801,7 +801,7 @@ public class Mara extends BasePersonality {
     @Override
     void initializeArms(ArmManager manager) {
         if (character.has(Trait.octo)) {
-            if (character.getLevel() < 30) {
+            if (character.getProgression().getLevel() < 30) {
                 if (Global.randomdouble() < .5) {
                     manager.addArm(new Grabber(manager));
                     manager.addArm(new Grabber(manager));

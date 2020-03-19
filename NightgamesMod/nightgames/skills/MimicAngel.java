@@ -50,22 +50,22 @@ public class MimicAngel extends Skill {
         //NOTE: Should Airi really mimic the traits of the other characters?
         if (getSelf().has(Trait.ImitatedStrength)) {
             getSelf().addTemporaryTrait(Trait.divinity, 10);
-            if (getSelf().getLevel() >= 20) {
+            if (getSelf().getProgression().getLevel() >= 20) {
                 getSelf().addTemporaryTrait(Trait.objectOfWorship, 10);
             }
-            if (getSelf().getLevel() >= 28) {
+            if (getSelf().getProgression().getLevel() >= 28) {
                 getSelf().addTemporaryTrait(Trait.lastStand, 10);
             }
-            if (getSelf().getLevel() >= 36) {
+            if (getSelf().getProgression().getLevel() >= 36) {
                 getSelf().addTemporaryTrait(Trait.erophage, 10);
             }
-            if (getSelf().getLevel() >= 44) {
+            if (getSelf().getProgression().getLevel() >= 44) {
                 getSelf().addTemporaryTrait(Trait.sacrosanct, 10);
             }
-            if (getSelf().getLevel() >= 52) {
+            if (getSelf().getProgression().getLevel() >= 52) {
                 getSelf().addTemporaryTrait(Trait.genuflection, 10);
             }
-            if (getSelf().getLevel() >= 60) {
+            if (getSelf().getProgression().getLevel() >= 60) {
                 getSelf().addTemporaryTrait(Trait.revered, 10);
             }
         }

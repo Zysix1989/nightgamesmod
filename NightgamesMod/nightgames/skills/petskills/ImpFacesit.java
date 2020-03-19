@@ -29,7 +29,7 @@ public class ImpFacesit extends SimpleEnemySkill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        int m = Global.random(3,6) + getSelf().getLevel() / 5;
+        int m = Global.random(3,6) + getSelf().getProgression().getLevel() / 5;
         c.write(getSelf(), Global.format("{self:SUBJECT} straddles {other:name-possessive} face, forcing {self:possessive} wet pussy onto {other:possessive} nose and mouth. "
                         + "{self:POSSESSIVE} scent is unnaturally intoxicating and fires up {other:possessive} libido.", getSelf(), target));
         getSelf().body.pleasure(target, target.body.getRandomMouth(), getSelf().body.getRandomPussy(), 10, c);

@@ -77,7 +77,7 @@ public class Yui extends BasePersonality {
     @Override
     public void setGrowth() {
         character.setGrowth(newGrowth());
-        preferredAttributes.add(c -> c.get(Attribute.Ninjutsu) < 60 && c.getLevel() >= 10 ? Optional.of(Attribute.Ninjutsu)  : Optional.empty());
+        preferredAttributes.add(c -> c.get(Attribute.Ninjutsu) < 60 && c.getProgression().getLevel() >= 10 ? Optional.of(Attribute.Ninjutsu)  : Optional.empty());
         preferredAttributes.add(c -> c.get(Attribute.Cunning) < 50 ? Optional.of(Attribute.Cunning) : Optional.empty());
 
         character.getGrowth().addTrait(0, Trait.obedient);

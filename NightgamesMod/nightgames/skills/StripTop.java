@@ -36,7 +36,7 @@ public class StripTop extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        int difficulty = target.getOutfit().getTopOfSlot(ClothingSlot.top).dc() + target.getLevel()
+        int difficulty = target.getOutfit().getTopOfSlot(ClothingSlot.top).dc() + target.getProgression().getLevel()
                         + (target.getStamina().percent() / 5 - target.getArousal().percent()) / 4
                         - (!target.canAct() || c.getStance().sub(target) ? 20 : 0);
         if (getSelf().check(Attribute.Cunning, difficulty) || !target.canAct()) {

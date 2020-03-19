@@ -40,7 +40,7 @@ class GUIPlayerBio {
         name = labelForString(player.getTrueName());
         panel.add(name);
 
-        level = labelForString("Lvl: " + player.getLevel());
+        level = labelForString("Lvl: " + player.getProgression().getLevel());
         panel.add(level);
 
         xp = labelForString("XP: " + player.getProgression().getXp());
@@ -70,7 +70,7 @@ class GUIPlayerBio {
     }
 
     void refresh() {
-        level.setText("Lvl: " + player.getLevel());
+        level.setText("Lvl: " + player.getProgression().getLevel());
         xp.setText("XP: " + player.getProgression().getXp());
 
         location.setText(player.location().name);

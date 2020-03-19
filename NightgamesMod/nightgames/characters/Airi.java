@@ -147,7 +147,7 @@ public class Airi extends BasePersonality {
     public void setGrowth() {
         character.setGrowth(newGrowth());
         character.addCombatScene(new CombatScene((c, self, other) -> {
-            return self.getLevel() >= 13 && self.has(Trait.slime) && !Global.checkFlag(AIRI_SLIME_FOCUS) && !Global.checkFlag(AIRI_MIMICRY_FOCUS);
+            return self.getProgression().getLevel() >= 13 && self.has(Trait.slime) && !Global.checkFlag(AIRI_SLIME_FOCUS) && !Global.checkFlag(AIRI_MIMICRY_FOCUS);
         }, (c, self, player) ->
             "After the match, you spend a few minutes examining the slime girl. "
                 + "It's quite curious how she can easily transform between slime and human form. "
@@ -271,7 +271,7 @@ public class Airi extends BasePersonality {
                     )
                 ));
         character.addCombatScene(new CombatScene((c, self, other) -> {
-            return self.getLevel() >= 22 && self.has(Trait.slime) && !Global.checkFlag(AIRI_REPLICATION_FOCUS) && !Global.checkFlag(AIRI_TENTACLES_FOCUS)
+            return self.getProgression().getLevel() >= 22 && self.has(Trait.slime) && !Global.checkFlag(AIRI_REPLICATION_FOCUS) && !Global.checkFlag(AIRI_TENTACLES_FOCUS)
                             && (Global.checkFlag(AIRI_SLIME_FOCUS) || Global.checkFlag(AIRI_MIMICRY_FOCUS));
         }, (c, self, player) -> "It's been a while since Airi has joined you in the games and it definitely shows. "
                         + "She seems much more confident and more experienced with sex fighting. "
@@ -363,7 +363,7 @@ public class Airi extends BasePersonality {
         character.getGrowth().addTrait(46, Trait.responsive);
         character.getGrowth().addTrait(61, Trait.desensitized);
 
-        preferredAttributes.add(c -> c.getPure(Attribute.Slime) < c.getLevel() * 1.5 ? Optional.of(Attribute.Slime) : Optional.empty());
+        preferredAttributes.add(c -> c.getPure(Attribute.Slime) < c.getProgression().getLevel() * 1.5 ? Optional.of(Attribute.Slime) : Optional.empty());
     }
 
     private void useMimicry() {
@@ -477,13 +477,13 @@ public class Airi extends BasePersonality {
             }
             ((GenericBodyPart) self.body.getSkin()).addTemporaryMod(new GooeySkinMod(), 999);
             self.body.temporaryAddPart(new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);
-            if (self.getLevel() >= 25) {
+            if (self.getProgression().getLevel() >= 25) {
                 self.addTemporaryTrait(Trait.shameless, 999);
             }
-            if (self.getLevel() >= 40) {
+            if (self.getProgression().getLevel() >= 40) {
                 self.addTemporaryTrait(Trait.Slippery, 999);
             }
-            if (self.getLevel() >= 52) {
+            if (self.getProgression().getLevel() >= 52) {
                 self.addTemporaryTrait(Trait.strongwilled, 999);
             }
             if (self.has(Trait.Pseudopod) && armManager.isEmpty()) {
@@ -860,17 +860,17 @@ public class Airi extends BasePersonality {
     void initializeArms(ArmManager manager) {
         if (character.has(Trait.Pseudopod) && character.has(Trait.slime)) {
             manager.addArm(new TentacleClinger(manager));
-            if (character.getLevel() >= 58 && character.has(Trait.Imposter)) {
+            if (character.getProgression().getLevel() >= 58 && character.has(Trait.Imposter)) {
                 manager.addArm(new TentacleImpaler(manager, Global.pickRandom(IMPALER_MODS)));
                 manager.addArm(new TentacleSucker(manager, Global.pickRandom(SUCKER_MODS)));
-            } else if (character.getLevel() >= 28) {
+            } else if (character.getProgression().getLevel() >= 28) {
                 manager.addArm(new TentacleImpaler(manager, Optional.empty()));
                 manager.addArm(new TentacleSucker(manager, Optional.empty()));
             }
-            if (character.getLevel() >= 48) {
+            if (character.getProgression().getLevel() >= 48) {
                 manager.addArm(new TentacleInjector(manager));
             }
-            if (character.getLevel() >= 58 && character.has(Trait.VolatileSubstrate)) {
+            if (character.getProgression().getLevel() >= 58 && character.has(Trait.VolatileSubstrate)) {
                 manager.addArm(new TentacleSquirter(manager));
             }
         }

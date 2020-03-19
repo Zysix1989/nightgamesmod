@@ -52,7 +52,7 @@ public class DefaultPrematch extends Prematch {
 
         @Override
         protected boolean valid() {
-            return Global.getPlayer().getLevel() < 5;
+            return Global.getPlayer().getProgression().getLevel() < 5;
         }
 
     }

@@ -294,18 +294,18 @@ public class Player extends Character {
     }
 
     private void actuallyDing() {
-        getProgression().setLevel(getLevel() + 1);
+        getProgression().setLevel(getProgression().getLevel() + 1);
         getGrowth().levelUpCoreStatsOnly(this);
         availableAttributePoints += getGrowth().attributePointsForRank(getProgression().getRank());
         gui.message(this, "You've gained a Level!<br/>Select which attributes to increase.");
-        if (getLevel() % 3 == 0 && getLevel() < 10 || (getLevel() + 1) % 2 == 0 && getLevel() > 10) {
+        if (getProgression().getLevel() % 3 == 0 && getProgression().getLevel() < 10 || (getProgression().getLevel() + 1) % 2 == 0 && getProgression().getLevel() > 10) {
             traitPoints += 1;
         }
     }
 
     @Override
     public int getMaxWillpowerPossible() {
-        return 50 + getLevel() * 5 - get(Attribute.Submissive) * 2;
+        return 50 + getProgression().getLevel() * 5 - get(Attribute.Submissive) * 2;
     }
 
     @Override

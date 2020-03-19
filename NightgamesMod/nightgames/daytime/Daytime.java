@@ -54,7 +54,7 @@ public class Daytime {
         if (eventMgr.playMorningScene()) {
             time = 12;
             return true;
-        } else if (player.getLevel() >= 10 && player.getProgression().getRank() == 0) {
+        } else if (player.getProgression().getLevel() >= 10 && player.getProgression().getRank() == 0) {
             Global.gui()
                   .message("The next day, just after getting out of class you receive call from a restricted number. Normally you'd just ignore it, "
                                   + "but for some reason you feel compelled to answer this one. You're greeted by a man with a clear deep voice. <i>\"Hello "
@@ -65,7 +65,7 @@ public class Daytime {
                                   + "someone overseeing the Game, but he hasn't even given you his name. Why all the secrecy? <i>\"If you're looking for more information, you "
                                   + "know someone who sells it.\"</i> There's a click and the call ends.");
             player.rankup();
-        } else if (player.getLevel() >= 20 && player.getProgression().getRank() == 1) {
+        } else if (player.getProgression().getLevel() >= 20 && player.getProgression().getRank() == 1) {
             Global.gui()
                   .message("In the morning, you receive a call from a restricted number. You have a pretty decent guess who it might be. Hopefully it is good news. <i>\"Hello again "
                                   + player.getTrueName()
@@ -76,7 +76,7 @@ public class Daytime {
                                   + "Keep searching. If you have as much potential as I think you do, we'll meet soon enough.\"</i>");
             player.rankup();
             time = 15;
-        } else if (player.getLevel() >= 30 && player.getProgression().getRank() == 2) {
+        } else if (player.getProgression().getLevel() >= 30 && player.getProgression().getRank() == 2) {
             Global.gui()
                   .message("In the morning, you receive a call from a restricted number. You are not at all surprised to hear the voice of your anonymous Benefactor again. It did seem about time for him to call again. <i>\"Hello "
                                   + player.getTrueName() + ". Have you been keeping busy? You've been putting "
@@ -91,7 +91,7 @@ public class Daytime {
                                   + "you've built with your opponents to good use. Well then, I shall wait to hear from you this time.\"</i> There's a click and the call ends.");
             player.rankup();
             time = 15;
-        } else if (player.getLevel() / 10 > player.getProgression().getRank()) {
+        } else if (player.getProgression().getLevel() / 10 > player.getProgression().getRank()) {
             player.rankup();
             Global.gui().message("You have advanced to rank " + player.getProgression().getRank() + "!");
             time = 15;
@@ -128,7 +128,7 @@ public class Daytime {
         } else {
             for (Character npc : Global.everyone()) {
                 if (!npc.human() && npc instanceof NPC) {
-                    if (npc.getLevel() / 10 > npc.getProgression().getRank()) {
+                    if (npc.getProgression().getLevel() / 10 > npc.getProgression().getRank()) {
                         npc.rankup();
                     }
                     ((NPC) npc).daytime(daylength);

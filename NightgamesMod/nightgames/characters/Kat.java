@@ -146,7 +146,7 @@ public class Kat extends BasePersonality {
         this.addFirstFocusScene();      //TODO: Add below combatscene block to this method.
         
         character.addCombatScene(new CombatScene((c, self, other) -> {
-            return self.getLevel() >= 13 && !Global.checkFlag(KAT_POWER_FOCUS) && !Global.checkFlag(KAT_SPEED_FOCUS);
+            return self.getProgression().getLevel() >= 13 && !Global.checkFlag(KAT_POWER_FOCUS) && !Global.checkFlag(KAT_SPEED_FOCUS);
         }, (c, self, player) -> Global.format("Exhilarated after the fight, Kat pounces on you once again. "
                         + "She doesn't seem too keen on having more sex, so you just hold her in your lap and pet her cute cat ears. "
                         + "Kat narrows her eyes and purrs, <i>\"So what do you think nya? I've gotten better right?\"</i> "
@@ -196,7 +196,7 @@ public class Kat extends BasePersonality {
         this.addSecondFocusScene();      //TODO: Add below combatscene block to this method.
         
         character.addCombatScene(new CombatScene((c, self, other) -> {
-            return self.getLevel() >= 22 && !Global.checkFlag(KAT_FRENZY_FOCUS) && !Global.checkFlag(KAT_PHEROMONE_FOCUS)
+            return self.getProgression().getLevel() >= 22 && !Global.checkFlag(KAT_FRENZY_FOCUS) && !Global.checkFlag(KAT_PHEROMONE_FOCUS)
                             && (Global.checkFlag(KAT_POWER_FOCUS) || Global.checkFlag(KAT_SPEED_FOCUS));
         }, (c, self, player) -> "Kat smells like an animal in heat, and her scent is driving you wild. "
                         + "You're not sure if she notices this herself, but you can definitely tell that "

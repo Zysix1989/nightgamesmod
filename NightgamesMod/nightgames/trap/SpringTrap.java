@@ -45,7 +45,7 @@ public class SpringTrap extends Trap {
                             .with("victim", target.getCharacter().getGrammar());
                     Global.gui().message(OWNER_TRIGGER_TEMPLATE.render(model));
                 }
-                int m = 50 + target.getCharacter().getLevel() * 5;
+                int m = 50 + target.getCharacter().getProgression().getLevel() * 5;
                 if (target.getCharacter().has(ClothingTrait.armored)) {
                     m /= 2;
                     target.getCharacter().pain(null, null, m);

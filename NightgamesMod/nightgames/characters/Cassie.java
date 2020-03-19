@@ -758,7 +758,7 @@ public class Cassie extends BasePersonality {
      * */
     private void addFirstFocusScene(){
         character.addCombatScene(new CombatScene((c, self, other) -> {
-            return self.getLevel() >= 10 && !Global.checkFlag(CASSIE_BREAST_FOCUS) && !Global.checkFlag(CASSIE_MOUTH_FOCUS);
+            return self.getProgression().getLevel() >= 10 && !Global.checkFlag(CASSIE_BREAST_FOCUS) && !Global.checkFlag(CASSIE_MOUTH_FOCUS);
         }, (c, self, player) -> "Before leaving, " + character.getName() + " turns and asks you \"Hey " + player.getName() + ", what turns you on more? Just for the sakes of... science let's say. I noticed you spending a lot of time on my boobs... are you a tits " + Shorthand.guyOrGirl(player) + "? Or do you prefer something more romantic? Maybe a kiss would do?\"",
                 Arrays.asList(
                         new CombatSceneChoice("Stare at her breasts", (c, self, other) -> {
@@ -793,7 +793,7 @@ public class Cassie extends BasePersonality {
      * */
     private void addSecondFocusScene(){
         character.addCombatScene(new CombatScene((c, self, other) -> {
-            return self.getLevel() >= 20 && !Global.checkFlag(CASSIE_SUBMISSIVE_FOCUS) && !Global.checkFlag(CASSIE_ENCHANTRESS_FOCUS)
+            return self.getProgression().getLevel() >= 20 && !Global.checkFlag(CASSIE_SUBMISSIVE_FOCUS) && !Global.checkFlag(CASSIE_ENCHANTRESS_FOCUS)
                             && (Global.checkFlag(CASSIE_BREAST_FOCUS) || Global.checkFlag(CASSIE_MOUTH_FOCUS));
         }, (c, self, player) -> "After you two recover from your afterglow, Cassie turns towards you. \"You know, we've been competing in the games for a while now. I can't believe how much I've changed! "
                         + "When we just started, I've only gone all the way with a " + Shorthand.boyOrGirl(c.getOpponentCharacter(character)) + " once. I barely knew what to do even! Now though...\" Cassie gigles and starts tickling your spent "

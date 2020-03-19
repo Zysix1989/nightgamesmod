@@ -101,7 +101,7 @@ public class JewelTime extends BaseNPCTime {
             moltenAss.ingredients.put(Item.EnergyDrink, 20);
             moltenAss.ingredients.put(Item.JuggernautJuice, 10);
             moltenAss.addRequirement((c, self, other) -> {
-                return self.getLevel() >= 30;
+                return self.getProgression().getLevel() >= 30;
             }, "At least level 30");
             moltenAss.option = "Molten Ass";
             moltenAss.scene = "[Placeholder]<br/>Jewel trains you so you can concentrate your ki inside your ass.";

@@ -33,7 +33,7 @@ public class TentacleInjectAphrodisiac extends TentacleArmSkill {
                             + "With no time to dodge, {other:pronoun} can only yelp in pain at the sudden prick of a hypodermic needle penetrating {other:possessive} skin. "
                             + "{other:SUBJECT} quickly {other:action:pull} the tentacle off {other:possessive} arm, but by then it's too late: an unnatural heat rips through {other:possessive} body, "
                             + "causing {other:direct-object} to drop to {other:possessive} knees.", owner, target));
-            target.add(c, new Horny(target, owner.getLevel() / 5, 10, getSourceString(owner)));
+            target.add(c, new Horny(target, owner.getProgression().getLevel() / 5, 10, getSourceString(owner)));
             if (!c.getStance().dom(owner)) {
                 c.setStance(new Kneeling(owner, target));
             }

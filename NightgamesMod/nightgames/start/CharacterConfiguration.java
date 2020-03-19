@@ -75,7 +75,7 @@ public abstract class CharacterConfiguration {
         Map<Integer, Map<Attribute, Integer>> attributeLevelPlan = new HashMap<>();
         // k this is some terrible code but what it's doing is trying to simulate level ups for a character based on the number of levels
         // it gets and what final attributes it has
-        for (int i = base.getLevel() + 1; i <= desiredLevel; i++) {
+        for (int i = base.getProgression().getLevel() + 1; i <= desiredLevel; i++) {
             // calculates how many more attributes it needs to add
             int attsLeftToAdd = deltaAtts.values().stream().mapToInt(Integer::intValue).sum();
             // calculates how many more levels left to distribute points (counting the current level)
@@ -140,10 +140,10 @@ public abstract class CharacterConfiguration {
         level.ifPresent(desiredLevel -> {
             Map<Integer, Map<Attribute, Integer>> attributeLevelPlan = calculateAttributeLevelPlan(base, desiredLevel, attributes);
             System.out.println(attributeLevelPlan);
-            while (base.getLevel() < desiredLevel) {
-                base.getProgression().setLevel(base.getLevel() + 1);
+            while (base.getProgression().getLevel() < desiredLevel) {
+                base.getProgression().setLevel(base.getProgression().getLevel() + 1);
                 modMeters(base, 1); // multiplication to compensate for missed daytime gains
-                attributeLevelPlan.get(base.getLevel()).forEach((a, val) -> {
+                attributeLevelPlan.get(base.getProgression().getLevel()).forEach((a, val) -> {
                     if (val > 0) {
                         base.mod(a, val, true);
                     }

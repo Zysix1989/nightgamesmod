@@ -30,7 +30,7 @@ public class Tripwire extends Trap {
                 "You see {{ victim.object().defaultNoun() }} carefully step over the carefully placed tripwire.");
         @Override
         public void trigger(Participant target) {
-            int m = 30 + target.getCharacter().getLevel() * 5;
+            int m = 30 + target.getCharacter().getProgression().getLevel() * 5;
             if (target.getCharacter().human()) {
                 if (!target.getCharacter().check(Attribute.Perception, 20 + target.getCharacter().baseDisarm())) {
                     Global.gui().message(VICTIM_TRIGGER_MESSAGE);

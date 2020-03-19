@@ -52,22 +52,22 @@ public class MimicCat extends Skill {
         }
         if (getSelf().has(Trait.ImitatedStrength)) {
             getSelf().addTemporaryTrait(Trait.pheromones, 10);
-            if (getSelf().getLevel() >= 20) {
+            if (getSelf().getProgression().getLevel() >= 20) {
                 getSelf().addTemporaryTrait(Trait.nymphomania, 10);
             }
-            if (getSelf().getLevel() >= 28) {
+            if (getSelf().getProgression().getLevel() >= 28) {
                 getSelf().addTemporaryTrait(Trait.catstongue, 10);
             }
-            if (getSelf().getLevel() >= 36) {
+            if (getSelf().getProgression().getLevel() >= 36) {
                 getSelf().addTemporaryTrait(Trait.FeralStrength, 10);
             }
-            if (getSelf().getLevel() >= 44) {
+            if (getSelf().getProgression().getLevel() >= 44) {
                 getSelf().addTemporaryTrait(Trait.BefuddlingFragrance, 10);
             }
-            if (getSelf().getLevel() >= 52) {
+            if (getSelf().getProgression().getLevel() >= 52) {
                 getSelf().addTemporaryTrait(Trait.Jackhammer, 10);
             }
-            if (getSelf().getLevel() >= 60) {
+            if (getSelf().getProgression().getLevel() >= 60) {
                 getSelf().addTemporaryTrait(Trait.Unsatisfied, 10);
             }
         }

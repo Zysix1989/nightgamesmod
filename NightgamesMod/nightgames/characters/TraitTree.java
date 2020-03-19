@@ -69,7 +69,7 @@ public class TraitTree {
             } else if (qName.equals("Trait")) {
                 requirements.put(Trait.valueOf(trait), reqs);
             } else if (qName.equals("LevelReq")) {
-                reqs.add(c -> c.getLevel() > Integer.valueOf(val.trim()));
+                reqs.add(c -> c.getProgression().getLevel() > Integer.valueOf(val.trim()));
             } else if (qName.equals("TraitReq")) {
                 reqs.add(c -> c.has(Trait.valueOf(val.trim())));
             } else if (qName.equals("NoTraitReq")) {

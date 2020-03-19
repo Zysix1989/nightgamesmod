@@ -464,7 +464,7 @@ public class Eve extends BasePersonality {
      * */
     private void addFirstFocusScene(){
         character.addCombatScene(new CombatScene(
-                        (c, self, other) -> self.getLevel() >= 40 && !Global.checkFlag(EVE_FIRSTTYPE1_FOCUS) && !Global.checkFlag(EVE_FIRSTTYPE2_FOCUS) && !Global.checkFlag(EVE_FIRSTTYPE_DONE),
+                (c, self, other) -> self.getProgression().getLevel() >= 40 && !Global.checkFlag(EVE_FIRSTTYPE1_FOCUS) && !Global.checkFlag(EVE_FIRSTTYPE2_FOCUS) && !Global.checkFlag(EVE_FIRSTTYPE_DONE),
                         (c, self, other) -> Global.format(
                                         "[Placeholder] You see {self:name} in some sort of setup scenario. She asks you a question relevant to her advancement."
                                         + "\n\n \"<i>Hey, fuccboi. You know what? I was thinking - What do you like more, I could focus on THIS or THAT. What do you think?</i>\"",
@@ -501,7 +501,7 @@ public class Eve extends BasePersonality {
      * */
     private void addSecondFocusScene(){
         character.addCombatScene(new CombatScene(
-                        (c, self, other) -> self.getLevel() >= 50 && !Global.checkFlag(EVE_SECONDTYPE1_FOCUS) && !Global.checkFlag(EVE_SECONDTYPE2_FOCUS) && Global.checkFlag(EVE_FIRSTTYPE_DONE) && !Global.checkFlag(EVE_SECONDTYPE_DONE),
+                (c, self, other) -> self.getProgression().getLevel() >= 50 && !Global.checkFlag(EVE_SECONDTYPE1_FOCUS) && !Global.checkFlag(EVE_SECONDTYPE2_FOCUS) && Global.checkFlag(EVE_FIRSTTYPE_DONE) && !Global.checkFlag(EVE_SECONDTYPE_DONE),
                         (c, self, other) -> Global.format(
                                         "[Placeholder] You see {self:name} consider how strong the competition is now. She wonders if she should really cut loose and go full power, but how?",
                                         self, other),

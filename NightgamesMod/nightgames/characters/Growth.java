@@ -107,7 +107,7 @@ public class Growth implements Cloneable {
         for (int level : levels) {
             if (!(traitPoints.containsKey(level))) traitPoints.put(level, 0);
             traitPoints.put(level,traitPoints.get(level)+1);
-            if (charfor.getLevel() <= level) ((Player)charfor).traitPoints+=1;
+            if (charfor.getProgression().getLevel() <= level) ((Player)charfor).traitPoints+=1;
         }
     }
 
@@ -133,11 +133,11 @@ public class Growth implements Cloneable {
     
     public void addOrRemoveTraits(Character character, boolean addonly) {
         if (!addonly) {
-            traits.keySet().stream().filter(i -> i > character.getLevel()).forEach(i -> {
+            traits.keySet().stream().filter(i -> i > character.getProgression().getLevel()).forEach(i -> {
                 traits.get(i).forEach(character::remove);
             });
         }
-        traits.keySet().stream().filter(i -> i <= character.getLevel()).forEach(i -> {
+        traits.keySet().stream().filter(i -> i <= character.getProgression().getLevel()).forEach(i -> {
             traits.get(i).forEach(character::add);
         });
         bodyParts.forEach((level, parts) ->  {
@@ -146,7 +146,7 @@ public class Growth implements Cloneable {
                 String existingPartDesc = existingPart == null ? "NO_EXISTING_PART" : existingPart.canonicalDescription();
                 String loadedPartDesc = part.canonicalDescription();
                 // only add parts if the level matches
-                if (level <= character.getLevel()) {
+                if (level <= character.getProgression().getLevel()) {
                     if (existingPart == null || !existingPartDesc.equals(loadedPartDesc)) {
                         character.body.add(part);
                     }
@@ -156,7 +156,7 @@ public class Growth implements Cloneable {
         bodyPartMods.forEach((level, mods) ->  {
             mods.forEach(mod -> {
                 // only add parts if the level matches
-                if (level <= character.getLevel()) {
+                if (level <= character.getProgression().getLevel()) {
                     BodyPart existingPart = character.body.getRandom(mod.getBodyPartType());
                     if (existingPart instanceof GenericBodyPart) {
                         GenericBodyPart part = (GenericBodyPart) existingPart;
@@ -168,7 +168,7 @@ public class Growth implements Cloneable {
             });
         });
         clothing.forEach((level, c) -> {
-           if (character.getLevel() >= level) {
+            if (character.getProgression().getLevel() >= level) {
                character.outfitPlan.add(c);
            } else {
                character.outfitPlan.remove(c);
@@ -182,7 +182,7 @@ public class Growth implements Cloneable {
 
     public void levelUp(Character character) {
         levelUpCoreStatsOnly(character);
-        if (traitPoints.containsKey(character.getLevel()) && character instanceof Player) ((Player)character).traitPoints+=traitPoints.get(character.getLevel());
+        if (traitPoints.containsKey(character.getProgression().getLevel()) && character instanceof Player) ((Player)character).traitPoints+=traitPoints.get(character.getProgression().getLevel());
 
         character.availableAttributePoints += attributePointsForRank(character.getProgression().getRank()) + extraAttributes;
 

@@ -21,7 +21,7 @@ public class Snare extends Trap {
         public Instance(Trap self, Participant owner) {
             super(self, owner);
             var ch = owner.getCharacter();
-            strength = ch.get(Attribute.Cunning) + ch.getLevel() / 2;
+            strength = ch.get(Attribute.Cunning) + ch.getProgression().getLevel() / 2;
         }
 
         private static final String VICTIM_DISARM_MESSAGE = "You notice a snare on the floor in front of you and " +

@@ -169,12 +169,12 @@ public class FaceSitting extends AbstractBehindStance {
                 c.write(top, Global.format("{self:name-possessive} ass seems to <i>inhale</i>, drawing"
                                 + " great gouts of {other:name-possessive} strength from {other:possessive}"
                                 + " body.", top, bottom));
-                bottom.drain(c, top, top.getLevel());
+                bottom.drain(c, top, top.getProgression().getLevel());
                 Drained.drain(c, top, bottom, Attribute.Power, 3, 10, true);
             } else {
                 c.write(top, Global.format("{other:SUBJECT-ACTION:feel} both {other:possessive} breath and energy being stolen by {self:NAME-POSSESSIVE} ass overlapping {other:POSSESSIVE} face."
                                 + " .", top, bottom));
-                bottom.drain(c, top, top.getLevel()/2);
+                bottom.drain(c, top, top.getProgression().getLevel() /2);
             }
         }
     }

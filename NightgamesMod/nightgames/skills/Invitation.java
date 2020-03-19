@@ -131,9 +131,9 @@ public class Invitation extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        int difficulty = target.getLevel() - target.getArousal().get() * 10 / target.getArousal().max()
+        int difficulty = target.getProgression().getLevel() - target.getArousal().get() * 10 / target.getArousal().max()
                         + target.get(Attribute.Seduction);
-        int strength = getSelf().getLevel() + getSelf().get(Attribute.Seduction)
+        int strength = getSelf().getProgression().getLevel() + getSelf().get(Attribute.Seduction)
                         * (getSelf().has(Trait.submissive) ? 2 : 1) * (hasDivinity() ? 2 : 1);
 
         boolean success = Global.random(Math.min(Math.max(difficulty - strength, 1), 10)) == 0;

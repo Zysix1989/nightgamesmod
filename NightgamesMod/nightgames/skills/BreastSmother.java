@@ -25,7 +25,7 @@ public class BreastSmother extends Skill {
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
-        return user.getLevel() >= 15 || user.get(Attribute.Seduction) >= 30 && user.hasBreasts();
+        return user.getProgression().getLevel() >= 15 || user.get(Attribute.Seduction) >= 30 && user.hasBreasts();
     }
 
     @Override

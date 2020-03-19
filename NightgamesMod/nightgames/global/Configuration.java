@@ -6,9 +6,9 @@ import nightgames.characters.Character;
  */
 public class Configuration {
     public static int getMaximumStaminaPossible(Character c) {
-        return 100 + c.getLevel() * 5;
+        return 100 + c.getProgression().getLevel() * 5;
     }
     public static int getMaximumArousalPossible(Character c) {
-        return 100 + c.getLevel() * 6;
+        return 100 + c.getProgression().getLevel() * 6;
     }
 }

@@ -45,8 +45,8 @@ public class Apostles {
                 var quote = Global.pickRandom(SUMMON_APOSTLE_QUOTE);
                 CharacterPet pet = new CharacterPet(character,
                     targetApostle.get().getCharacter(),
-                    character.getLevel() - 5,
-                    character.getLevel()/4);
+                    character.getProgression().getLevel() - 5,
+                    character.getProgression().getLevel() /4);
                 var model = JtwigModel.newModel()
                     .with("self", character)
                     .with("opponent", opponent);

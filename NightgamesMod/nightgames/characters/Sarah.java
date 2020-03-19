@@ -84,7 +84,7 @@ public class Sarah extends BasePersonality {
         character.getGrowth().addTrait(55, Trait.resurrection);
 
         preferredAttributes.add(c -> Optional.of(Attribute.Power));
-        preferredAttributes.add(c -> c.getLevel() >= 30 ? Optional.of(Attribute.Ki) : Optional.empty());
+        preferredAttributes.add(c -> c.getProgression().getLevel() >= 30 ? Optional.of(Attribute.Ki) : Optional.empty());
         character.body.add(new FacePart(.1, 2.9));
     }
     @Override

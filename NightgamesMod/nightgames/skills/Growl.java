@@ -41,7 +41,7 @@ public class Growl extends Skill {
 
     @Override
     public boolean resolve(Combat c, Character target) {
-        if (Global.random(target.getLevel()) <= getSelf().get(Attribute.Animism) * ((Player)target).getAddiction(AddictionType.BREEDER).get().getMagnitude()
+        if (Global.random(target.getProgression().getLevel()) <= getSelf().get(Attribute.Animism) * ((Player)target).getAddiction(AddictionType.BREEDER).get().getMagnitude()
                         * target.getArousal().percent() / 100 && !target.wary()) {
             int damage = getSelf().getArousal().getReal() / 10;
             if (damage < 10) {

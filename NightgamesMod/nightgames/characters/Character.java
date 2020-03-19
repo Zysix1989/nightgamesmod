@@ -259,7 +259,7 @@ public Character clone() throws CloneNotSupportedException {
      * returns a formulatic number based on the current level.   
      * */
     public final int getXPReqToNextLevel() {
-        return Math.min(45 + 5 * getLevel(), 100);
+        return Math.min(45 + 5 * getProgression().getLevel(), 100);
     }
 
     /**Nondescriptive getter for some value. 
@@ -315,16 +315,16 @@ public Character clone() throws CloneNotSupportedException {
             case Cunning:
                 if (has(Trait.FeralAgility) && is(Stsflag.feral)) {
                     // extra 5 strength at 10, extra 17 at 60.
-                    total += Math.pow(getLevel(), .7);
+                    total += Math.pow(getProgression().getLevel(), .7);
                 }
                 break;
             case Power:
                 if (has(Trait.testosterone) && hasDick()) {
-                    total += Math.min(20, 10 + getLevel() / 4);
+                    total += Math.min(20, 10 + getProgression().getLevel() / 4);
                 }
                 if (has(Trait.FeralStrength) && is(Stsflag.feral)) {
                     // extra 5 strength at 10, extra 17 at 60.
-                    total += Math.pow(getLevel(), .7);
+                    total += Math.pow(getProgression().getLevel(), .7);
                 }
                 if (has(Trait.valkyrie)) {
                     total += 10;
@@ -430,15 +430,6 @@ public Character clone() throws CloneNotSupportedException {
         return progression;
     }
 
-    /**Accessor method to get the level. 
-     * FIXME: Implicitly this.level, but it should be fixed. 
-     * @return level
-     * Returns the level of the Character.
-     * */
-    public final int getLevel() {
-        return getProgression().getLevel();
-    }
-
     /**Simple method for gaining the amount of exp given in i and updates the character accordingly. Does not account for traits.
      * @param i
      * The value of experience to increment by.
@@ -502,8 +493,8 @@ public Character clone() throws CloneNotSupportedException {
         // so for each damage type, one level from the attacker should result in about 3% increased damage, while a point in defense should reduce damage by around 1.5% per level.
         // this differential should be max capped to (2 * (100 + attacker's level * 1.5))%
         // this differential should be min capped to (.5 * (100 + attacker's level * 1.5))%
-        double maxDamage = baseDamage * 2 * (1 + .015 * getLevel());
-        double minDamage = baseDamage * .5 * (1 + .015 * getLevel());
+        double maxDamage = baseDamage * 2 * (1 + .015 * getProgression().getLevel());
+        double minDamage = baseDamage * .5 * (1 + .015 * getProgression().getLevel());
         double multiplier = (1 + .03 * getOffensivePower(type) - .015 * other.getDefensivePower(type));
         double damage = baseDamage * multiplier;
         return Math.min(Math.max(minDamage, damage), maxDamage);
@@ -539,7 +530,7 @@ public Character clone() throws CloneNotSupportedException {
             case weaken:
                 return (get(Attribute.Dark) * 2 + get(Attribute.Divinity)) / 2.0;
             case willpower:
-                return (get(Attribute.Dark) + get(Attribute.Fetish) + get(Attribute.Divinity) * 2 + getLevel()) / 2.0;
+                return (get(Attribute.Dark) + get(Attribute.Fetish) + get(Attribute.Divinity) * 2 + getProgression().getLevel()) / 2.0;
             default:
                 return 0;
         }
@@ -578,7 +569,7 @@ public Character clone() throws CloneNotSupportedException {
             case weaken:
                 return (get(Attribute.Dark) * 2 + get(Attribute.Divinity) + get(Attribute.Ki)) / 3.0;
             case willpower:
-                return (get(Attribute.Dark) + get(Attribute.Fetish) + get(Attribute.Divinity) * 2 + getLevel()) / 3.0;
+                return (get(Attribute.Dark) + get(Attribute.Fetish) + get(Attribute.Divinity) * 2 + getProgression().getLevel()) / 3.0;
             default:
                 return 0;
         }
@@ -1341,7 +1332,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public void mod(Attribute a, int i, boolean silent) {
         modAttributeDontSaveData(a, i, silent);
-        getLevelUpFor(getLevel()).modAttribute(a, i);
+        getLevelUpFor(getProgression().getLevel()).modAttribute(a, i);
     }
 
     public boolean addTraitDontSaveData(Trait t) {
@@ -1361,7 +1352,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public boolean add(Trait t) {
         if (addTraitDontSaveData(t)) {
-            getLevelUpFor(getLevel()).addTrait(t);
+            getLevelUpFor(getProgression().getLevel()).addTrait(t);
             return true;
         }
         return false;
@@ -1379,7 +1370,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public boolean remove(Trait t) {
         if (removeTraitDontSaveData(t)) {
-            getLevelUpFor(getLevel()).removeTrait(t);
+            getLevelUpFor(getProgression().getLevel()).removeTrait(t);
             return true;
         }
         return false;
@@ -2628,8 +2619,8 @@ public Character clone() throws CloneNotSupportedException {
     public abstract String challenge(Character other);
 
     public int lvlBonus(Character opponent) {
-        if (opponent.getLevel() > getLevel()) {
-            return 12 * (opponent.getLevel() - getLevel());
+        if (opponent.getProgression().getLevel() > getProgression().getLevel()) {
+            return 12 * (opponent.getProgression().getLevel() - getProgression().getLevel());
         } else {
             return 0;
         }
@@ -2780,7 +2771,7 @@ public Character clone() throws CloneNotSupportedException {
     public int getChanceToHit(Character attacker, Combat c, int accuracy) {
         int hitDiff = attacker.getSpeedDifference(this) + (attacker.get(Attribute.Perception) - get(
                         Attribute.Perception));
-        int levelDiff = Math.min(attacker.getLevel() - getLevel(), 5);
+        int levelDiff = Math.min(attacker.getProgression().getLevel() - getProgression().getLevel(), 5);
         levelDiff = Math.max(levelDiff, -5);
 
         // with no level or hit differences and an default accuracy of 80, 80%
@@ -2931,7 +2922,7 @@ public Character clone() throws CloneNotSupportedException {
     public String dumpstats(boolean notableOnly) {
         StringBuilder b = new StringBuilder();
         b.append("<b>");
-        b.append(getTrueName() + ": Level " + getLevel() + "; ");
+        b.append(getTrueName() + ": Level " + getProgression().getLevel() + "; ");
         for (Attribute a : att.keySet()) {
             b.append(a.name() + " " + att.get(a) + ", ");
         }

@@ -44,7 +44,7 @@ public class ImpStrip extends SimpleEnemySkill {
     @Override
     public boolean resolve(Combat c, Character target) {        
         Optional<ClothingSlot> targetSlot = Global.pickRandom(getStrippableSlots(c, target));
-        int difficulty = !targetSlot.isPresent() ? 999999 : target.getOutfit().getTopOfSlot(targetSlot.get()).dc() + target.getLevel()
+        int difficulty = !targetSlot.isPresent() ? 999999 : target.getOutfit().getTopOfSlot(targetSlot.get()).dc() + target.getProgression().getLevel()
                 + (target.getStamina().percent() / 5 - target.getArousal().percent()) / 4
                 - (!target.canAct() || c.getStance().sub(target) ? 20 : 0);
         if (getSelf().check(Attribute.Cunning, difficulty)) {

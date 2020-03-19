@@ -25,7 +25,7 @@ public class FairyHeal extends SimpleMasterSkill {
     @Override
     public boolean resolve(Combat c, Character target) {
         if (target.roll(getSelf(), c, accuracy(c, target))) {
-            int m = Global.random(7, 14) + getSelf().getLevel();
+            int m = Global.random(7, 14) + getSelf().getProgression().getLevel();
             c.write(getSelf(), Global.format("{self:SUBJECT} flies around {other:name-do}, rains magic energy on {other:direct-object}, restoring {other:possessive} strength.", getSelf(), target));
             target.heal(c, m);
         } else {

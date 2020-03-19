@@ -39,7 +39,7 @@ public abstract class SimpleEnemySkill extends Skill {
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
-        return getSelf().getLevel() >= levelReq;
+        return getSelf().getProgression().getLevel() >= levelReq;
     }
 
     @Override
