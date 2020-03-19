@@ -44,6 +44,11 @@ class GUIPlayerBio {
         panel.add(level);
 
         xp = labelForString("XP: " + player.getProgression().getXp());
+        player.getProgression()
+                .getXPProperty()
+                .addPropertyChangeListener((oldValue, newValue) ->
+                        SwingUtilities.invokeLater(() ->
+                                xp.setText("XP: " + newValue)));
         panel.add(xp);
 
         attributes = new GUIPlayerAttributes(player, statusTarget, refreshTarget);
@@ -71,7 +76,6 @@ class GUIPlayerBio {
 
     void refresh() {
         level.setText("Lvl: " + player.getProgression().getLevel());
-        xp.setText("XP: " + player.getProgression().getXp());
 
         location.setText(player.location().name);
         cash.setText("$" + player.money);

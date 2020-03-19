@@ -1,6 +1,7 @@
 package nightgames.characters;
 
 import com.google.gson.JsonObject;
+import nightgames.beans.Property;
 
 public class Progression {
     private static final String JSON_LEVEL = "level";
@@ -8,7 +9,7 @@ public class Progression {
     private static final String JSON_RANK = "rank";
 
     private int level;
-    private int xp = 0;
+    private Property<Integer> xp = new Property<>(0);
     private int rank = 0;
 
     Progression(int level) {
@@ -17,14 +18,14 @@ public class Progression {
 
     Progression(JsonObject js) {
         this.level = js.get(JSON_LEVEL).getAsInt();
-        this.xp = js.get(JSON_XP).getAsInt();
+        this.xp = new Property<>(js.get(JSON_XP).getAsInt());
         this.rank = js.get(JSON_RANK).getAsInt();
     }
 
     JsonObject save() {
         var object = new JsonObject();
         object.addProperty(JSON_LEVEL, level);
-        object.addProperty(JSON_XP, xp);
+        object.addProperty(JSON_XP, xp.get());
         object.addProperty(JSON_RANK, rank);
         return object;
     }
@@ -37,12 +38,16 @@ public class Progression {
         this.level = level;
     }
 
-    public int getXp() {
+    public Property<Integer> getXPProperty() {
         return xp;
     }
 
+    public int getXp() {
+        return xp.get();
+    }
+
     public void setXp(int xp) {
-        this.xp = xp;
+        this.xp.set(xp);
     }
 
     public int getRank() {
@@ -60,12 +65,12 @@ public class Progression {
     }
 
     public boolean canLevelUp() {
-        return xp > Progression.xpRequirementForNextLevel(level);
+        return xp.get() > Progression.xpRequirementForNextLevel(level);
     }
 
     public void levelUp() {
         assert canLevelUp();
-        xp -= Progression.xpRequirementForNextLevel(level);
+        xp.set(xp.get() - Progression.xpRequirementForNextLevel(level));
         // TODO: level += 1
     }
 
