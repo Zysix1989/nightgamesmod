@@ -65,7 +65,7 @@ public abstract class Character extends Observable implements Cloneable {
 
     private String name;
     public CharacterSex initialGender;
-    public int level;
+    private int level;
     private int xp = 0;
     public int rank;
     public int money;
