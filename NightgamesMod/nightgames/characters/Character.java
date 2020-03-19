@@ -3154,12 +3154,6 @@ public Character clone() throws CloneNotSupportedException {
         update();
     }
 
-    public void loseXP(int i) {
-        assert i >= 0;
-        progression.setXp(progression.getXp() - i);
-        update();
-    }
-
     public String pronoun() {
         return getGrammar().subject().pronoun();
     }
