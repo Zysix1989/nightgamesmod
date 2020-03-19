@@ -3577,13 +3577,7 @@ public Character clone() throws CloneNotSupportedException {
         if (!getType().equals(character.getType())) {
             return false;
         }
-        if (!(progression.getLevel() == character.progression.getLevel())) {
-            return false;
-        }
-        if (!(progression.getXp() == character.progression.getXp())) {
-            return false;
-        }
-        if (!(progression.getRank() == character.progression.getRank())) {
+        if (!progression.hasSameStats(character.progression)) {
             return false;
         }
         if (!(money == character.money)) {

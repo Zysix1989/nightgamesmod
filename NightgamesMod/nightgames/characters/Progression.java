@@ -33,4 +33,9 @@ public class Progression {
         this.rank = rank;
     }
 
+    boolean hasSameStats(Progression other) {
+        return level == other.level &&
+                xp == other.xp &&
+                rank == other.rank;
+    }
 }
