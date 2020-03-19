@@ -31,7 +31,6 @@ public class TestAngel extends BasePersonality {
     private static NPC makeBaseAngel() {
         NPC baseChar = new NPC("TestAngel", 1, null);
         baseChar.setName("TestAngel");
-        baseChar.level = 1;
 
         baseChar.att.put(Attribute.Power, 5);
         baseChar.att.put(Attribute.Seduction, 7);
