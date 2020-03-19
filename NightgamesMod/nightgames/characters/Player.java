@@ -447,11 +447,6 @@ public class Player extends Character {
     }
 
     @Override
-    public String subject() {
-        return "you";
-    }
-
-    @Override
     protected String subjectWas() {
         return subject() + " were";
     }
