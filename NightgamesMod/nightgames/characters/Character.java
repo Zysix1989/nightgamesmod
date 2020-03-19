@@ -424,8 +424,7 @@ public Character clone() throws CloneNotSupportedException {
      * The value of experience to increment by.
      * */
     public final void gainXPPure(int i) {
-        progression.setXp(progression.getXp() + i);
-        update();
+        progression.gainXP(i);
     }
     
     /**Simple method for gaining the amount of exp given in i and updates the character accordingly. 

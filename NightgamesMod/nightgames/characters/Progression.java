@@ -50,10 +50,6 @@ public class Progression {
         return xp.get();
     }
 
-    public void setXp(int xp) {
-        this.xp.set(xp);
-    }
-
     public int getRank() {
         return rank;
     }
@@ -66,6 +62,10 @@ public class Progression {
         return level == other.level &&
                 xp == other.xp &&
                 rank == other.rank;
+    }
+
+    public void gainXP(int amount) {
+        xp.set(xp.get() + amount);
     }
 
     public boolean canLevelUp() {
