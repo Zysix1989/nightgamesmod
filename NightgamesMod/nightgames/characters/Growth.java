@@ -1,12 +1,6 @@
 package nightgames.characters;
 
 import com.google.gson.JsonObject;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.GenericBodyPart;
 import nightgames.characters.body.mods.PartMod;
@@ -18,6 +12,8 @@ import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
 import nightgames.utilities.DebugHelper;
+
+import java.util.*;
 
 public class Growth implements Cloneable {
     private static final Integer maxRank = 3;
@@ -111,7 +107,7 @@ public class Growth implements Cloneable {
         for (int level : levels) {
             if (!(traitPoints.containsKey(level))) traitPoints.put(level, 0);
             traitPoints.put(level,traitPoints.get(level)+1);
-            if (charfor.level <= level) ((Player)charfor).traitPoints+=1;
+            if (charfor.getLevel() <= level) ((Player)charfor).traitPoints+=1;
         }
     }
 
@@ -137,11 +133,11 @@ public class Growth implements Cloneable {
     
     public void addOrRemoveTraits(Character character, boolean addonly) {
         if (!addonly) {
-            traits.keySet().stream().filter(i -> i > character.level).forEach(i -> {
+            traits.keySet().stream().filter(i -> i > character.getLevel()).forEach(i -> {
                 traits.get(i).forEach(character::remove);
             });
         }
-        traits.keySet().stream().filter(i -> i <= character.level).forEach(i -> {
+        traits.keySet().stream().filter(i -> i <= character.getLevel()).forEach(i -> {
             traits.get(i).forEach(character::add);
         });
         bodyParts.forEach((level, parts) ->  {
@@ -186,7 +182,7 @@ public class Growth implements Cloneable {
 
     public void levelUp(Character character) {
         levelUpCoreStatsOnly(character);
-        if (traitPoints.containsKey(character.level) && character instanceof Player) ((Player)character).traitPoints+=traitPoints.get(character.level);
+        if (traitPoints.containsKey(character.getLevel()) && character instanceof Player) ((Player)character).traitPoints+=traitPoints.get(character.getLevel());
 
         character.availableAttributePoints += attributePointsForRank(character.rank) + extraAttributes;
 

@@ -1,30 +1,22 @@
 package nightgames.start;
 
-import static nightgames.start.ConfigurationUtils.mergeCollections;
-import static nightgames.start.ConfigurationUtils.mergeOptionals;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import nightgames.characters.Attribute;
 import nightgames.characters.Character;
-import nightgames.characters.CharacterSex;
-import nightgames.characters.Growth;
-import nightgames.characters.Trait;
+import nightgames.characters.*;
 import nightgames.global.Global;
 import nightgames.items.clothing.Clothing;
 import nightgames.json.JsonUtils;
+
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static nightgames.start.ConfigurationUtils.mergeCollections;
+import static nightgames.start.ConfigurationUtils.mergeOptionals;
 
 public abstract class CharacterConfiguration {
 
@@ -83,7 +75,7 @@ public abstract class CharacterConfiguration {
         Map<Integer, Map<Attribute, Integer>> attributeLevelPlan = new HashMap<>();
         // k this is some terrible code but what it's doing is trying to simulate level ups for a character based on the number of levels
         // it gets and what final attributes it has
-        for (int i = base.level + 1; i <= desiredLevel; i++) {
+        for (int i = base.getLevel() + 1; i <= desiredLevel; i++) {
             // calculates how many more attributes it needs to add
             int attsLeftToAdd = deltaAtts.values().stream().mapToInt(Integer::intValue).sum();
             // calculates how many more levels left to distribute points (counting the current level)
@@ -148,10 +140,10 @@ public abstract class CharacterConfiguration {
         level.ifPresent(desiredLevel -> {
             Map<Integer, Map<Attribute, Integer>> attributeLevelPlan = calculateAttributeLevelPlan(base, desiredLevel, attributes);
             System.out.println(attributeLevelPlan);
-            while (base.level < desiredLevel) {
+            while (base.getLevel() < desiredLevel) {
                 base.level += 1;
                 modMeters(base, 1); // multiplication to compensate for missed daytime gains
-                attributeLevelPlan.get(base.level).forEach((a, val) -> {
+                attributeLevelPlan.get(base.getLevel()).forEach((a, val) -> {
                     if (val > 0) {
                         base.mod(a, val, true);
                     }

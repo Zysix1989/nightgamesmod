@@ -801,7 +801,7 @@ public class Mara extends BasePersonality {
     @Override
     void initializeArms(ArmManager manager) {
         if (character.has(Trait.octo)) {
-            if (character.level < 30) {
+            if (character.getLevel() < 30) {
                 if (Global.randomdouble() < .5) {
                     manager.addArm(new Grabber(manager));
                     manager.addArm(new Grabber(manager));

@@ -298,7 +298,7 @@ public class Player extends Character {
         getGrowth().levelUpCoreStatsOnly(this);
         availableAttributePoints += getGrowth().attributePointsForRank(rank);
         gui.message(this, "You've gained a Level!<br/>Select which attributes to increase.");
-        if (getLevel() % 3 == 0 && level < 10 || (getLevel() + 1) % 2 == 0 && level > 10) {
+        if (getLevel() % 3 == 0 && getLevel() < 10 || (getLevel() + 1) % 2 == 0 && getLevel() > 10) {
             traitPoints += 1;
         }
     }

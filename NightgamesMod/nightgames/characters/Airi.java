@@ -477,13 +477,13 @@ public class Airi extends BasePersonality {
             }
             ((GenericBodyPart) self.body.getSkin()).addTemporaryMod(new GooeySkinMod(), 999);
             self.body.temporaryAddPart(new TentaclePart("slime pseudopod", "back", "slime", 0.0, 1.0, 1.0), 999);
-            if (self.level >= 25) {
+            if (self.getLevel() >= 25) {
                 self.addTemporaryTrait(Trait.shameless, 999);
             }
-            if (self.level >= 40) {
+            if (self.getLevel() >= 40) {
                 self.addTemporaryTrait(Trait.Slippery, 999);
             }
-            if (self.level >= 52) {
+            if (self.getLevel() >= 52) {
                 self.addTemporaryTrait(Trait.strongwilled, 999);
             }
             if (self.has(Trait.Pseudopod) && armManager.isEmpty()) {
@@ -860,17 +860,17 @@ public class Airi extends BasePersonality {
     void initializeArms(ArmManager manager) {
         if (character.has(Trait.Pseudopod) && character.has(Trait.slime)) {
             manager.addArm(new TentacleClinger(manager));
-            if (character.level >= 58 && character.has(Trait.Imposter)) {
+            if (character.getLevel() >= 58 && character.has(Trait.Imposter)) {
                 manager.addArm(new TentacleImpaler(manager, Global.pickRandom(IMPALER_MODS)));
                 manager.addArm(new TentacleSucker(manager, Global.pickRandom(SUCKER_MODS)));
-            } else if (character.level >= 28) {
+            } else if (character.getLevel() >= 28) {
                 manager.addArm(new TentacleImpaler(manager, Optional.empty()));
                 manager.addArm(new TentacleSucker(manager, Optional.empty()));
             }
-            if (character.level >= 48) {
+            if (character.getLevel() >= 48) {
                 manager.addArm(new TentacleInjector(manager));
             }
-            if (character.level >= 58 && character.has(Trait.VolatileSubstrate)) {
+            if (character.getLevel() >= 58 && character.has(Trait.VolatileSubstrate)) {
                 manager.addArm(new TentacleSquirter(manager));
             }
         }
