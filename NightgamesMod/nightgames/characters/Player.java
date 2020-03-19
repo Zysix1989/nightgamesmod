@@ -330,8 +330,6 @@ public class Player extends Character {
         return null;
     }
 
-
-
     @Override
     public void afterParty() {
     }
