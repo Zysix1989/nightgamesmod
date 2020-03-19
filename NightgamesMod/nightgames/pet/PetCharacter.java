@@ -132,7 +132,7 @@ public class PetCharacter extends Character {
 
     @Override
     public void ding(Combat c) {
-        level += 1;
+        setLevel(getLevel() + 1);
         getGrowth().levelUp(this);
         distributePoints(Arrays.asList());
     }
