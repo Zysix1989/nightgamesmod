@@ -3555,9 +3555,6 @@ public Character clone() throws CloneNotSupportedException {
      * 
      * */
     public void matchPrep(Match m) {
-        if(getPure(Attribute.Ninjutsu)>=9){
-            Global.gainSkills(this);
-        }
         if (has(Trait.RemoteControl)) {
             int currentCount = inventory.getOrDefault(Item.RemoteControl, 0);
             gain(Item.RemoteControl, 2 - currentCount + get(Attribute.Science) / 10);
