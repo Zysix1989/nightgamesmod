@@ -14,6 +14,7 @@ import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.Action;
+import nightgames.match.Dialog;
 import nightgames.pet.arms.ArmManager;
 import nightgames.skills.Skill;
 import nightgames.start.NpcConfiguration;
@@ -250,5 +251,20 @@ public abstract class BasePersonality implements Serializable {
 
     Optional<ArmManager> getArmManager() {
         return Optional.empty();
+    }
+
+    Dialog makeDialog() {
+        return new Dialog() {
+            @Override
+            public void intrudeInCombat(Combat c, Character target, Character assist) {
+                c.write(intervene3p(c, target, assist));
+            }
+
+            @Override
+            public void assistedByIntruder(Combat c, Character target, Character assist) {
+                c.updateAndClearMessage();
+                c.write(victory3p(c, target, assist));
+            }
+        };
     }
 }

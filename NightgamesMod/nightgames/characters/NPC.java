@@ -221,18 +221,7 @@ public class NPC extends Character {
 
     @Override
     public Dialog makeDialog() {
-        return new Dialog() {
-            @Override
-            public void intrudeInCombat(Combat c, Character target, Character assist) {
-                c.write(ai.intervene3p(c, target, assist));
-            }
-
-            @Override
-            public void assistedByIntruder(Combat c, Character target, Character assist) {
-                c.updateAndClearMessage();
-                c.write(ai.victory3p(c, target, assist));
-            }
-        };
+        return ai.makeDialog();
     }
 
     public String getRandomLineFor(String lineType, Combat c, Character other) {
