@@ -3523,11 +3523,11 @@ public Character clone() throws CloneNotSupportedException {
     /**
      * If true, count insertions by this character as voluntary
      */
-    public boolean canMakeOwnDecision() {
+    public final boolean canMakeOwnDecision() {
         return !is(Stsflag.charmed) && !is(Stsflag.lovestruck) && !is(Stsflag.frenzied);
     }
 
-    public String printStats() {
+    public final String printStats() {
         return "Character{" + "name='" + name + '\'' + ", type=" + getType() + ", level=" + level + ", xp=" + xp
                         + ", rank=" + rank + ", money=" + money + ", att=" + att + ", stamina=" + stamina.max()
                         + ", arousal=" + arousal.max() + ", mojo=" + mojo.max() + ", willpower=" + willpower.max()
@@ -3540,7 +3540,7 @@ public Character clone() throws CloneNotSupportedException {
         return Integer.MAX_VALUE;
     }
 
-    public boolean levelUpIfPossible(Combat c) {
+    public final boolean levelUpIfPossible(Combat c) {
         int req;
         boolean dinged = false;
         while (xp > (req = getXPReqToNextLevel())) {
@@ -3567,7 +3567,7 @@ public Character clone() throws CloneNotSupportedException {
      * 
      * Returns true only if all values are the same. 
      * */
-    public boolean hasSameStats(Character character) {
+    public final boolean hasSameStats(Character character) {
         if (!name.equals(character.name)) {
             return false;
         }
@@ -3626,16 +3626,16 @@ public Character clone() throws CloneNotSupportedException {
 
     }
 
-    public void flagStatus(Stsflag flag) {
+    public final void flagStatus(Stsflag flag) {
         statusFlags.add(flag);
     }
     
-    public void unflagStatus(Stsflag flag) {
+    public final void unflagStatus(Stsflag flag) {
         statusFlags.remove(flag);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o)                      //If it has the same memory address - DSM
             return true;
         if (o == null || !getClass().equals(o.getClass()))      //Becuse this is overridden at the character level this must be if it's a character... - DSM
@@ -3646,19 +3646,19 @@ public Character clone() throws CloneNotSupportedException {
         return getType().equals(character.getType()) && name.equals(character.name);
     }
 
-    @Override public int hashCode() {
+    @Override public final int hashCode() {
         int result = getType().hashCode();
         return result * 31 + name.hashCode();
     }
 
-    public Growth getGrowth() {
+    public final Growth getGrowth() {
         return growth;
     }
 
-    public void setGrowth(Growth growth) {
+    public final void setGrowth(Growth growth) {
         this.growth = growth;
     }
-    public Collection<Skill> getSkills() {
+    public final Collection<Skill> getSkills() {
         return skills;
     }
     
@@ -3669,7 +3669,7 @@ public Character clone() throws CloneNotSupportedException {
      * 
      * 
      * */
-    public void distributePoints(List<PreferredAttribute> preferredAttributes) {
+    public final void distributePoints(List<PreferredAttribute> preferredAttributes) {
         if (availableAttributePoints <= 0) {
             return;
         }
@@ -3728,39 +3728,39 @@ public Character clone() throws CloneNotSupportedException {
         return has(Trait.congregation) ? 2 : 1;
     }
 
-    public void setName(String name) {
+    public final void setName(String name) {
         this.name = name;
     }
 
-    public boolean hasStatusVariant(String variant) {
+    public final boolean hasStatusVariant(String variant) {
         return status.stream().anyMatch(s -> s.getVariant().equals(variant));
     }
 
-    public List<Addiction> getAddictions() {
+    public final List<Addiction> getAddictions() {
         return getAdditionStream().collect(Collectors.toList());
     }
 
-    public List<Status> getPermanentStatuses() {
+    public final List<Status> getPermanentStatuses() {
         return getStatusStreamWithFlag(Stsflag.permanent).collect(Collectors.toList());
     }
 
-    public Stream<Status> getStatusStreamWithFlag(Stsflag flag) {
+    public final Stream<Status> getStatusStreamWithFlag(Stsflag flag) {
         return status.stream().filter(status -> status.flags().contains(flag));
     }
 
-    public Stream<Addiction> getAdditionStream() {
+    public final Stream<Addiction> getAdditionStream() {
         return status.stream().filter(status -> status instanceof Addiction).map(s -> (Addiction)s);
     }
 
-    public boolean hasAddiction(AddictionType type) {
+    public final boolean hasAddiction(AddictionType type) {
         return getAdditionStream().anyMatch(a -> a.getType() == type);
     }
 
-    public Optional<Addiction> getAddiction(AddictionType type) {
+    public final Optional<Addiction> getAddiction(AddictionType type) {
         return getAdditionStream().filter(a -> a.getType() == type).findAny();
     }
 
-    public Optional<Addiction> getStrongestAddiction() {
+    public final Optional<Addiction> getStrongestAddiction() {
         return getAdditionStream().max(Comparator.comparing(Addiction::getSeverity));
     }
 
@@ -3779,7 +3779,7 @@ public Character clone() throws CloneNotSupportedException {
      * 
      * */
     private static final Set<AddictionType> NPC_ADDICTABLES = EnumSet.of(AddictionType.CORRUPTION);                     
-    public void addict(Combat c, AddictionType type, Character cause, float mag) {
+    public final void addict(Combat c, AddictionType type, Character cause, float mag) {
         boolean dbg = false;
         if (!human() && !NPC_ADDICTABLES.contains(type)) {
             if (dbg) {
@@ -3820,7 +3820,7 @@ public Character clone() throws CloneNotSupportedException {
      * The magnitude to decrease the addiction.
      * 
      * */
-    public void unaddict(Combat c, AddictionType type, float mag) {
+    public final void unaddict(Combat c, AddictionType type, float mag) {
         boolean dbg = false;
         if (dbg) {
             System.out.printf("Alleviating %s on player by %.3f\n", type.name(), mag);
@@ -3840,7 +3840,7 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     /**Removes the given status from this character. Used by Addiction removal.*/
-    public void removeStatusImmediately(Status status) {
+    public final void removeStatusImmediately(Status status) {
         this.status.remove(status);
     }
 
@@ -3860,7 +3860,7 @@ public Character clone() throws CloneNotSupportedException {
      * @param mag
      * The magnitude to increase the addiction.
      * */
-    public void addictCombat(AddictionType type, Character cause, float mag, Combat c) {
+    public final void addictCombat(AddictionType type, Character cause, float mag, Combat c) {
         boolean dbg = false;
         Optional<Addiction> addiction = getAddiction(type);
         if (addiction.isPresent()) {
@@ -3898,7 +3898,7 @@ public Character clone() throws CloneNotSupportedException {
      * The magnitude to decrease the addiction.
      * 
      * */
-    public void unaddictCombat(AddictionType type, Character cause, float mag, Combat c) {
+    public final void unaddictCombat(AddictionType type, Character cause, float mag, Combat c) {
         boolean dbg = false;
         Optional<Addiction> addict = getAddiction(type);
         if (addict.isPresent()) {
@@ -3910,19 +3910,19 @@ public Character clone() throws CloneNotSupportedException {
         }
     }
 
-    public Severity getAddictionSeverity(AddictionType type) {
+    public final Severity getAddictionSeverity(AddictionType type) {
         return getAddiction(type).map(Addiction::getSeverity).orElse(Severity.NONE);
     }
 
-    public boolean checkAddiction() {
+    public final boolean checkAddiction() {
         return getAdditionStream().anyMatch(a -> a.atLeast(Severity.LOW));
     }
     
-    public boolean checkAddiction(AddictionType type) {
+    public final boolean checkAddiction(AddictionType type) {
         return getAddiction(type).map(Addiction::isActive).orElse(false);
     }
     
-    public boolean checkAddiction(AddictionType type, Character cause) {
+    public final boolean checkAddiction(AddictionType type, Character cause) {
         return getAddiction(type).map(addiction -> addiction.isActive() && addiction.wasCausedBy(cause)).orElse(false);
     }
 
