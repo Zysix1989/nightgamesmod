@@ -1,8 +1,5 @@
 package nightgames.pet;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 import nightgames.characters.Character;
 import nightgames.characters.NPC;
 import nightgames.characters.custom.CharacterLine;
@@ -11,6 +8,10 @@ import nightgames.global.Global;
 import nightgames.items.clothing.Outfit;
 import nightgames.status.Disguised;
 import nightgames.status.Stsflag;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class NPCPetCharacter extends PetCharacter {
     private NPC prototype;
@@ -21,7 +22,7 @@ public class NPCPetCharacter extends PetCharacter {
         prototype = prototypeCharacter.clone();
         prototype.ai.applyBasicStats(this);
         for (int i = 1; i < level; i++) {
-            this.level += 1;
+            setLevel(getLevel() + 1);
             getGrowth().levelUp(this);
         }
         distributePoints(prototypeCharacter.ai.getPreferredAttributes());

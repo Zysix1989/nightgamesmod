@@ -98,7 +98,7 @@ public class PetCharacter extends Character {
         this.type = type;
         this.setGrowth(growth);
         for (int i = 1; i < level; i++) {
-            this.level += 1;
+            setLevel(getLevel() + 1);
             getGrowth().levelUp(this);
         }
         distributePoints(Arrays.asList());

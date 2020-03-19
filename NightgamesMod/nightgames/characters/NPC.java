@@ -280,7 +280,7 @@ public class NPC extends Character {
 
     @Override
     public void ding(Combat c) {
-        level++;
+        setLevel(getLevel() + 1);
         ai.ding(this);
         if (c != null) {
             String string = Global.format("{self:subject-action:have} leveled up!", this, this);

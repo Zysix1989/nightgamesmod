@@ -294,7 +294,7 @@ public class Player extends Character {
     }
 
     private void actuallyDing() {
-        level += 1;
+        setLevel(getLevel() + 1);
         getGrowth().levelUpCoreStatsOnly(this);
         availableAttributePoints += getGrowth().attributePointsForRank(rank);
         gui.message(this, "You've gained a Level!<br/>Select which attributes to increase.");
