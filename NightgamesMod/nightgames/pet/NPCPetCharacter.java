@@ -22,7 +22,7 @@ public class NPCPetCharacter extends PetCharacter {
         prototype = prototypeCharacter.clone();
         prototype.ai.applyBasicStats(this);
         for (int i = 1; i < level; i++) {
-            setLevel(getLevel() + 1);
+            getProgression().setLevel(getLevel() + 1);
             getGrowth().levelUp(this);
         }
         distributePoints(prototypeCharacter.ai.getPreferredAttributes());

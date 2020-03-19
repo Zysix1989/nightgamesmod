@@ -125,7 +125,7 @@ public abstract class CharacterConfiguration {
 
         }
         level.ifPresent(l -> {
-            base.setLevel(l);
+            base.getProgression().setLevel(l);
             modMeters(base, l * 2); // multiplication to compensate for missed daytime gains
         });
 
@@ -141,7 +141,7 @@ public abstract class CharacterConfiguration {
             Map<Integer, Map<Attribute, Integer>> attributeLevelPlan = calculateAttributeLevelPlan(base, desiredLevel, attributes);
             System.out.println(attributeLevelPlan);
             while (base.getLevel() < desiredLevel) {
-                base.setLevel(base.getLevel() + 1);
+                base.getProgression().setLevel(base.getLevel() + 1);
                 modMeters(base, 1); // multiplication to compensate for missed daytime gains
                 attributeLevelPlan.get(base.getLevel()).forEach((a, val) -> {
                     if (val > 0) {

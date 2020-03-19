@@ -439,10 +439,6 @@ public Character clone() throws CloneNotSupportedException {
         return getProgression().getLevel();
     }
 
-    public final void setLevel(int newLevel) {
-        getProgression().setLevel(newLevel);
-    }
-
     /**Simple method for gaining the amount of exp given in i and updates the character accordingly. Does not account for traits.
      * @param i
      * The value of experience to increment by.
