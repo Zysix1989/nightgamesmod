@@ -1,8 +1,5 @@
 package nightgames.daytime;
 
-import java.util.ArrayList;
-
-import java.util.stream.Collectors;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.NPC;
@@ -10,6 +7,9 @@ import nightgames.characters.Player;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.status.addiction.Addiction;
+
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Daytime {
     private ArrayList<Activity> activities;
@@ -92,7 +92,8 @@ public class Daytime {
             player.rankup();
             time = 15;
         } else if (player.getLevel() / 10 > player.getRank()) {
-            Global.gui().message("You have advanced to rank " + ++player.rank + "!");
+            player.rankup();
+            Global.gui().message("You have advanced to rank " + player.getRank() + "!");
             time = 15;
         } else if (Global.getDate() % 7 == 6 || Global.getDate() % 7 == 0) {
             Global.gui()

@@ -45,7 +45,7 @@ public class Sarah extends BasePersonality {
         character.modAttributeDontSaveData(Attribute.Speed, 2);
         character.getStamina().setMax(150);
         character.getArousal().setMax(100);
-        character.rank = 1;
+        character.setRank(1);
         Global.gainSkills(character);
 
         character.getMojo().setMax(90);

@@ -47,7 +47,7 @@ public class Mei extends BasePersonality {
         character.modAttributeDontSaveData(Attribute.Speed, 1);
         character.getStamina().setMax(100);
         character.getArousal().setMax(150);
-        character.rank = 1;
+        character.setRank(1);
         Global.gainSkills(character);
 
         character.getMojo().setMax(110);

@@ -57,7 +57,7 @@ public class Yui extends BasePersonality {
         character.modAttributeDontSaveData(Attribute.Speed, 2);
         character.getStamina().setMax(100);
         character.getArousal().setMax(90);
-        character.rank = 1;
+        character.setRank(1);
         Global.gainSkills(character);
 
         character.getMojo().setMax(130);
@@ -135,7 +135,7 @@ public class Yui extends BasePersonality {
             character.gain(Item.Onahole2);
             character.money -= 300;
         }
-        if (character.rank >= 1) {
+        if (character.getRank() >= 1) {
             if (character.money > 0) {
                 Global.getDay().visit("Body Shop", character, Global.random(character.money));
             }

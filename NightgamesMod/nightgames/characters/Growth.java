@@ -184,7 +184,7 @@ public class Growth implements Cloneable {
         levelUpCoreStatsOnly(character);
         if (traitPoints.containsKey(character.getLevel()) && character instanceof Player) ((Player)character).traitPoints+=traitPoints.get(character.getLevel());
 
-        character.availableAttributePoints += attributePointsForRank(character.rank) + extraAttributes;
+        character.availableAttributePoints += attributePointsForRank(character.getRank()) + extraAttributes;
 
         if (Global.checkFlag(Flag.hardmode)) {
             character.availableAttributePoints += 1;

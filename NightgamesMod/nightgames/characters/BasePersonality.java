@@ -82,7 +82,7 @@ public abstract class BasePersonality implements Serializable {
     abstract public void setGrowth();
 
     public void rest(int time) {
-        if (preferredCockMod.isPresent() && character.rank > 0) {
+        if (preferredCockMod.isPresent() && character.getRank() > 0) {
             Optional<BodyPart> optDick = Optional.ofNullable(character.body.getRandomCock());
             if (optDick.isPresent()) {
                 CockPart part = (CockPart) optDick.get();

@@ -256,14 +256,14 @@ public class Mara extends BasePersonality {
 
     @Override
     protected void onLevelUp(Character self) {
-        if (self.rank >= 4) {
+        if (self.getRank() >= 4) {
 
         }
     }
 
     @Override
     public void rest(int time) {
-        if (character.rank == 1 && !character.has(Trait.madscientist)) {
+        if (character.getRank() == 1 && !character.has(Trait.madscientist)) {
             advance();
         }
         super.rest(time);
@@ -287,11 +287,11 @@ public class Mara extends BasePersonality {
             character.gain(Item.Strapon);
             character.money -= 600;
         }
-        if (character.money > 0 && character.rank >= 1) {
+        if (character.money > 0 && character.getRank() >= 1) {
             Global.getDay()
                   .visit("Body Shop", character, Global.random(character.money));
         }
-        if (character.money > 0 && character.rank >= 1) {
+        if (character.money > 0 && character.getRank() >= 1) {
             Global.getDay()
                   .visit("Workshop", character, Global.random(character.money));
         }
