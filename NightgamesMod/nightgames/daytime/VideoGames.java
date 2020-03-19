@@ -1,11 +1,11 @@
 package nightgames.daytime;
 
-import java.util.ArrayList;
-
-import java.util.List;
 import nightgames.characters.Character;
 import nightgames.global.Flag;
 import nightgames.global.Global;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class VideoGames extends Activity {
     private boolean paid;
@@ -46,7 +46,7 @@ public class VideoGames extends Activity {
             if (paid) {
                 if (Global.random(3) == 0) {
                     Global.gui().message("<br/><br/><b>You feel like your experiences have grown from playing the game.</b>");
-                    player.gainXPPure(50);
+                    player.getProgression().gainXP(50);
                     player.levelUpIfPossible(null);
                 }
             }

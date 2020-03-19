@@ -129,7 +129,7 @@ public abstract class CharacterConfiguration {
             modMeters(base, l * 2); // multiplication to compensate for missed daytime gains
         });
 
-        xp.ifPresent(x -> base.gainXPPure(x));
+        xp.ifPresent(x -> base.getProgression().gainXP(x));
 
         Map<Attribute, Integer> start = new HashMap<>(base.att);
         Map<Attribute, Integer> deltaAtts = attributes.keySet()

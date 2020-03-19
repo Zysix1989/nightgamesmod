@@ -419,15 +419,7 @@ public Character clone() throws CloneNotSupportedException {
         return progression;
     }
 
-    /**Simple method for gaining the amount of exp given in i and updates the character accordingly. Does not account for traits.
-     * @param i
-     * The value of experience to increment by.
-     * */
-    public final void gainXPPure(int i) {
-        progression.gainXP(i);
-    }
-    
-    /**Simple method for gaining the amount of exp given in i and updates the character accordingly. 
+    /**Simple method for gaining the amount of exp given in i and updates the character accordingly.
      * Accounts for traits like fastlearner and Leveldrainer.
      * 
      * @param i
@@ -442,7 +434,7 @@ public Character clone() throws CloneNotSupportedException {
         rate *= Global.xpRate;
         i = (int) Math.round(i * rate);
 
-        gainXPPure(i);
+        progression.gainXP(i);
     }
 
     public final void rankup() {
