@@ -40,7 +40,6 @@ public class TestAngel extends BasePersonality {
         baseChar.att.put(Attribute.Speed, 5);
 
         baseChar.money = 0;
-        baseChar.xp = 0;
 
         baseChar.clearTraits();
         baseChar.add(Trait.undisciplined);
