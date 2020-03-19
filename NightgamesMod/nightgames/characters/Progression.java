@@ -21,6 +21,14 @@ public class Progression {
         this.rank = js.get(JSON_RANK).getAsInt();
     }
 
+    JsonObject save() {
+        var object = new JsonObject();
+        object.addProperty(JSON_LEVEL, level);
+        object.addProperty(JSON_XP, xp);
+        object.addProperty(JSON_RANK, rank);
+        return object;
+    }
+
     public int getLevel() {
         return level;
     }

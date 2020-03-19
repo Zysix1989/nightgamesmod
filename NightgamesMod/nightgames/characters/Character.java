@@ -63,6 +63,8 @@ import java.util.stream.Stream;
 @SuppressWarnings("unused")
 public abstract class Character extends Observable implements Cloneable {
 
+    private static final String JSON_PROGRESSION = "progression";
+
     private String name;
     public CharacterSex initialGender;
     private Progression progression;
@@ -1766,6 +1768,7 @@ public Character clone() throws CloneNotSupportedException {
         JsonObject saveObj = new JsonObject();
         saveObj.addProperty("name", name);
         saveObj.addProperty("type", getType());
+        saveObj.add(JSON_PROGRESSION, progression.save());
         saveObj.addProperty("level", progression.getLevel());
         saveObj.addProperty("rank", getRank());
         saveObj.addProperty("xp", progression.getXp());
@@ -1809,7 +1812,7 @@ public Character clone() throws CloneNotSupportedException {
      * */
     public void load(JsonObject object) {
         name = object.get("name").getAsString();
-        progression = new Progression(object);
+        progression = new Progression(object.get(JSON_PROGRESSION).getAsJsonObject());
         if (object.has("growth")) {
             growth = JsonUtils.getGson().fromJson(object.get("growth"), Growth.class);
             growth.removeNullTraits();
