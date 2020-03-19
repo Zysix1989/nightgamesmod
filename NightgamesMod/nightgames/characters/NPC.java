@@ -193,15 +193,6 @@ public class NPC extends Character {
         c.write(ai.defeat(c, flag));
     }
 
-    public void intervene3p(Combat c, Character target, Character assist) {
-        c.write(ai.intervene3p(c, target, assist));
-    }
-
-    public void victory3p(Combat c, Character target, Character assist) {
-        c.updateAndClearMessage();
-        c.write(ai.victory3p(c, target, assist));
-    }
-
     @Override
     public boolean resist3p(Combat combat, Character intruder, Character assist) {
         if (has(Trait.cursed)) {
@@ -233,12 +224,13 @@ public class NPC extends Character {
         return new Dialog() {
             @Override
             public void intrudeInCombat(Combat c, Character target, Character assist) {
-                intervene3p(c, target, assist);
+                c.write(ai.intervene3p(c, target, assist));
             }
 
             @Override
             public void assistedByIntruder(Combat c, Character target, Character assist) {
-                victory3p(c, target, assist);
+                c.updateAndClearMessage();
+                c.write(ai.victory3p(c, target, assist));
             }
         };
     }

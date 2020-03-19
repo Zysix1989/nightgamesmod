@@ -319,43 +319,6 @@ public class Player extends Character {
         gui.message(message);
     }
 
-    public void intervene3p(Combat c, Character target, Character assist) {
-        c.write("You take your time, approaching " + target.getName() + " and " + assist.getName() + " stealthily. "
-                        + assist.getName() + " notices you first and before her reaction "
-                        + "gives you away, you quickly lunge and grab " + target.getName()
-                        + " from behind. She freezes in surprise for just a second, but that's all you need to "
-                        + "restrain her arms and leave her completely helpless. Both your hands are occupied holding her, so you focus on kissing and licking the "
-                        + "sensitive nape of her neck.<br/><br/>");
-    }
-
-    public void victory3p(Combat c, Character target, Character assist) {
-        if (target.hasDick()) {
-            c.write(String.format(
-                            "You position yourself between %s's legs, gently "
-                                            + "forcing them open with your knees. %s dick stands erect, fully "
-                                            + "exposed and ready for attention. You grip the needy member and "
-                                            + "start jerking it with a practiced hand. %s moans softly, but seems"
-                                            + " to be able to handle this level of stimulation. You need to turn "
-                                            + "up the heat some more. Well, if you weren't prepared to suck a cock"
-                                            + " or two, you may have joined the wrong competition. You take just "
-                                            + "the glans into your mouth, attacking the most senstitive area with "
-                                            + "your tongue. %s lets out a gasp and shudders. That's a more promising "
-                                            + "reaction.<br/><br/>You continue your oral assault until you hear a breathy "
-                                            + "moan, <i>\"I'm gonna cum!\"</i> You hastily remove %s dick out of "
-                                            + "your mouth and pump it rapidly. %s shoots %s load into the air, barely "
-                                            + "missing you.", target.getName(),
-                            Global.capitalizeFirstLetter(target.possessiveAdjective()), target.getName(),
-                            Global.capitalizeFirstLetter(target.pronoun()), target.possessiveAdjective(), target.getName(),
-                            target.possessiveAdjective()));
-        } else {
-            c.write(target.nameOrPossessivePronoun()
-                            + " arms are firmly pinned, so she tries to kick you ineffectually. You catch her ankles and slowly begin kissing and licking your way "
-                            + "up her legs while gently, but firmly, forcing them apart. By the time you reach her inner thighs, she's given up trying to resist. Since you no "
-                            + "longer need to hold her legs, you can focus on her flooded pussy. You pump two fingers in and out of her while licking and sucking her clit. In no "
-                            + "time at all, she's trembling and moaning in orgasm.");
-        }
-    }
-
     @Override
     public void gain(Item item) {
         gui.message("<b>You've gained " + item.pre() + item.getName() + ".</b>");
@@ -743,12 +706,41 @@ public class Player extends Character {
         return new Dialog() {
             @Override
             public void intrudeInCombat(Combat c, Character target, Character assist) {
-                intervene3p(c, target, assist);
+                c.write("You take your time, approaching " + target.getName() + " and " + assist.getName() + " stealthily. "
+                                + assist.getName() + " notices you first and before her reaction "
+                                + "gives you away, you quickly lunge and grab " + target.getName()
+                                + " from behind. She freezes in surprise for just a second, but that's all you need to "
+                                + "restrain her arms and leave her completely helpless. Both your hands are occupied holding her, so you focus on kissing and licking the "
+                                + "sensitive nape of her neck.<br/><br/>");
             }
 
             @Override
             public void assistedByIntruder(Combat c, Character target, Character assist) {
-                victory3p(c, target, assist);
+                if (target.hasDick()) {
+                    c.write(String.format(
+                                    "You position yourself between %s's legs, gently "
+                                                    + "forcing them open with your knees. %s dick stands erect, fully "
+                                                    + "exposed and ready for attention. You grip the needy member and "
+                                                    + "start jerking it with a practiced hand. %s moans softly, but seems"
+                                                    + " to be able to handle this level of stimulation. You need to turn "
+                                                    + "up the heat some more. Well, if you weren't prepared to suck a cock"
+                                                    + " or two, you may have joined the wrong competition. You take just "
+                                                    + "the glans into your mouth, attacking the most senstitive area with "
+                                                    + "your tongue. %s lets out a gasp and shudders. That's a more promising "
+                                                    + "reaction.<br/><br/>You continue your oral assault until you hear a breathy "
+                                                    + "moan, <i>\"I'm gonna cum!\"</i> You hastily remove %s dick out of "
+                                                    + "your mouth and pump it rapidly. %s shoots %s load into the air, barely "
+                                                    + "missing you.", target.getName(),
+                                    Global.capitalizeFirstLetter(target.possessiveAdjective()), target.getName(),
+                                    Global.capitalizeFirstLetter(target.pronoun()), target.possessiveAdjective(), target.getName(),
+                                    target.possessiveAdjective()));
+                } else {
+                    c.write(target.nameOrPossessivePronoun()
+                                    + " arms are firmly pinned, so she tries to kick you ineffectually. You catch her ankles and slowly begin kissing and licking your way "
+                                    + "up her legs while gently, but firmly, forcing them apart. By the time you reach her inner thighs, she's given up trying to resist. Since you no "
+                                    + "longer need to hold her legs, you can focus on her flooded pussy. You pump two fingers in and out of her while licking and sucking her clit. In no "
+                                    + "time at all, she's trembling and moaning in orgasm.");
+                }
             }
         };
     }
