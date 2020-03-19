@@ -15,6 +15,7 @@ import nightgames.grammar.SingularMasculineThirdPerson;
 import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.match.ArtificialIntelligence;
+import nightgames.match.Dialog;
 import nightgames.match.Intelligence;
 import nightgames.match.Match;
 import nightgames.pet.arms.ArmManager;
@@ -192,12 +193,10 @@ public class NPC extends Character {
         c.write(ai.defeat(c, flag));
     }
 
-    @Override
     public void intervene3p(Combat c, Character target, Character assist) {
         c.write(ai.intervene3p(c, target, assist));
     }
 
-    @Override
     public void victory3p(Combat c, Character target, Character assist) {
         c.updateAndClearMessage();
         c.write(ai.victory3p(c, target, assist));
@@ -227,6 +226,21 @@ public class NPC extends Character {
     @Override
     public Intelligence makeIntelligence() {
         return new ArtificialIntelligence(this);
+    }
+
+    @Override
+    public Dialog makeDialog() {
+        return new Dialog() {
+            @Override
+            public void intrudeInCombat(Combat c, Character target, Character assist) {
+                intervene3p(c, target, assist);
+            }
+
+            @Override
+            public void assistedByIntruder(Combat c, Character target, Character assist) {
+                victory3p(c, target, assist);
+            }
+        };
     }
 
     public String getRandomLineFor(String lineType, Combat c, Character other) {

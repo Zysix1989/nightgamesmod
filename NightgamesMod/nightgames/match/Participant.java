@@ -34,6 +34,7 @@ public class Participant {
 
     protected Character character;
     private Intelligence intelligence;
+    private Dialog dialog;
     private int score = 0;
     public State state = new Action.Ready();
     public Set<Participant> invalidAttackers = new HashSet<>();
@@ -43,6 +44,7 @@ public class Participant {
     public Participant(Character c, DescribablePredicate<Action.Instance> actionFilter) {
         this.character = c;
         this.intelligence = c.makeIntelligence();
+        this.dialog = c.makeDialog();
         this.actionFilter = actionFilter;
     }
 
@@ -53,6 +55,7 @@ public class Participant {
             throw new RuntimeException(e);
         }
         this.intelligence = p.intelligence;
+        this.dialog = p.dialog;
         this.score = p.score;
         this.state = p.state;
         this.invalidAttackers = new HashSet<>(p.invalidAttackers);
@@ -192,6 +195,10 @@ public class Participant {
 
     public Intelligence getIntelligence() {
         return intelligence;
+    }
+
+    public Dialog getDialog() {
+        return dialog;
     }
 
     public nightgames.combat.Intelligence makeCombatIntelligence() {

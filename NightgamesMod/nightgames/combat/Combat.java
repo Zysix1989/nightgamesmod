@@ -1380,7 +1380,7 @@ public class Combat {
             target.getParticipant().invalidateAttacker(intruder);
         } else {
             intruderCharacter.gainXP(intruderCharacter.getAssistXP(targetCharacter));
-            intruderCharacter.intervene3p(this, targetCharacter, assistCharacter);
+            intruder.getDialog().intrudeInCombat(this, targetCharacter, assistCharacter);
 
             targetCharacter.gainXP(targetCharacter.getDefeatXP(assistCharacter));
             targetCharacter.orgasm();
@@ -1393,7 +1393,7 @@ public class Combat {
             assistCharacter.gainXP(assistCharacter.getVictoryXP(targetCharacter));
             assistCharacter.dress(this);
             assistCharacter.gainTrophy(this, targetCharacter);
-            assistCharacter.victory3p(this, targetCharacter, intruderCharacter);
+            assist.getDialog().assistedByIntruder(this, targetCharacter, intruderCharacter);
             assistCharacter.gainAttraction(targetCharacter, 1);
             assist.incrementScore(assist.pointsForVictory(target.getParticipant()), "for an unearned win");
         }

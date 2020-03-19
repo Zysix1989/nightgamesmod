@@ -33,6 +33,7 @@ import nightgames.items.clothing.ClothingTrait;
 import nightgames.items.clothing.Outfit;
 import nightgames.json.JsonUtils;
 import nightgames.match.Action;
+import nightgames.match.Dialog;
 import nightgames.match.Intelligence;
 import nightgames.match.Match;
 import nightgames.match.actions.UseBeer;
@@ -1719,10 +1720,6 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public abstract String describe(int per, Character observer);
-
-    public abstract void intervene3p(Combat c, Character target, Character assist);
-
-    public abstract void victory3p(Combat c, Character target, Character assist);
 
     public abstract boolean resist3p(Combat c, Character target, Character assist);
 
@@ -4051,6 +4048,8 @@ public Character clone() throws CloneNotSupportedException {
     public void sendDrawMessage(Combat c, Result flag) {}
 
     public abstract Intelligence makeIntelligence();
+
+    public abstract Dialog makeDialog();
 
     public void notifyStanceImage(String path, String artist) {};
 }

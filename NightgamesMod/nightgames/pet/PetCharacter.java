@@ -10,6 +10,7 @@ import nightgames.global.Global;
 import nightgames.grammar.Person;
 import nightgames.grammar.SingularFeminineThirdPerson;
 import nightgames.grammar.SingularMasculineThirdPerson;
+import nightgames.match.Dialog;
 import nightgames.match.Intelligence;
 import nightgames.skills.Tactics;
 import nightgames.status.Slimed;
@@ -142,12 +143,6 @@ public class PetCharacter extends Character {
     }
 
     @Override
-    public void intervene3p(Combat c, Character target, Character assist) {}
-
-    @Override
-    public void victory3p(Combat c, Character target, Character assist) {}
-
-    @Override
     public boolean resist3p(Combat c, Character target, Character assist) {
         return true;
     }
@@ -257,4 +252,8 @@ public class PetCharacter extends Character {
         throw new UnsupportedOperationException("pets aren't intelligent, stupid.");
     }
 
+    @Override
+    public Dialog makeDialog() {
+        throw new UnsupportedOperationException("pets don't have match dialog");
+    }
 }

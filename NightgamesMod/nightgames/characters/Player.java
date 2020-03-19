@@ -22,10 +22,7 @@ import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.items.Loot;
 import nightgames.items.clothing.Clothing;
-import nightgames.match.HumanIntelligence;
-import nightgames.match.Intelligence;
-import nightgames.match.Match;
-import nightgames.match.MatchType;
+import nightgames.match.*;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.skills.Stage;
 import nightgames.skills.Tactics;
@@ -322,7 +319,6 @@ public class Player extends Character {
         gui.message(message);
     }
 
-    @Override
     public void intervene3p(Combat c, Character target, Character assist) {
         c.write("You take your time, approaching " + target.getName() + " and " + assist.getName() + " stealthily. "
                         + assist.getName() + " notices you first and before her reaction "
@@ -332,7 +328,6 @@ public class Player extends Character {
                         + "sensitive nape of her neck.<br/><br/>");
     }
 
-    @Override
     public void victory3p(Combat c, Character target, Character assist) {
         if (target.hasDick()) {
             c.write(String.format(
@@ -741,6 +736,21 @@ public class Player extends Character {
     @Override
     public Intelligence makeIntelligence() {
         return new HumanIntelligence(this);
+    }
+
+    @Override
+    public Dialog makeDialog() {
+        return new Dialog() {
+            @Override
+            public void intrudeInCombat(Combat c, Character target, Character assist) {
+                intervene3p(c, target, assist);
+            }
+
+            @Override
+            public void assistedByIntruder(Combat c, Character target, Character assist) {
+                victory3p(c, target, assist);
+            }
+        };
     }
 
     @Override
