@@ -46,7 +46,7 @@ public class VideoGames extends Activity {
             if (paid) {
                 if (Global.random(3) == 0) {
                     Global.gui().message("<br/><br/><b>You feel like your experiences have grown from playing the game.</b>");
-                    player.getProgression().gainXP(50);
+                    player.gainXP(50);
                     player.levelUpIfPossible(null);
                 }
             }
