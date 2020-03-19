@@ -457,17 +457,6 @@ public Character clone() throws CloneNotSupportedException {
         gainXPPure(i);
     }
 
-    /**Mutator method for setting the experience of a character, then updating. 
-     * 
-     * NOTE: Only useful in the case of known experience/Level values. Only called by a debug function. -DSM
-     * @param i
-     * The value to set the xp member to. 
-     * */
-    public final void setXP(int i) {
-        progression.setXp(i);
-        update();
-    }
-
     public final void rankup() {
         progression.setRank(progression.getRank() + 1);
     }

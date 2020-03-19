@@ -38,14 +38,6 @@ public class DebugGUIPanel extends JPanel {
                 consoleCommands.stream().filter(cc -> cc.checkAndExecute(output, participant.getType() + "." + list.get(1))).findFirst();
             });
         }));
-        consoleCommands.add(new DebugCommand("(\\w+)\\.setXP (\\d+)", (output, list) -> {
-            try {
-                Character target = Global.getCharacterByType(list.get(1));
-                target.setXP(Integer.valueOf(list.get(2)));
-            } catch (NullPointerException e) {
-                output.setText(list.get(1) + " is not a valid character");
-            }
-        }));
         consoleCommands.add(new DebugCommand("(\\w+)\\.setMoney (\\d+)", (output, list) -> {
             try {
                 Character target = Global.getCharacterByType(list.get(1));
