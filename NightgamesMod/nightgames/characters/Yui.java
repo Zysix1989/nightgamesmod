@@ -57,7 +57,7 @@ public class Yui extends BasePersonality {
         character.modAttributeDontSaveData(Attribute.Speed, 2);
         character.getStamina().setMax(100);
         character.getArousal().setMax(90);
-        character.setRank(1);
+        character.getProgression().setRank(1);
         Global.gainSkills(character);
 
         character.getMojo().setMax(130);

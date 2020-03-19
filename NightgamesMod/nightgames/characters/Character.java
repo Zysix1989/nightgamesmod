@@ -150,8 +150,8 @@ public abstract class Character extends Observable implements Cloneable {
         affections = new HashMap<>(2);
         location = new Property<>(new Area("", new DescriptionModule.ErrorDescriptionModule(), null));
         // this.combatStats = new CombatStats();       //TODO: Reading, writing, cloning?
-        
-        setRank(0);
+
+        getProgression().setRank(0);
 
         Global.learnSkills(this);
     }
@@ -436,11 +436,11 @@ public Character clone() throws CloneNotSupportedException {
      * Returns the level of the Character.
      * */
     public final int getLevel() {
-        return progression.getLevel();
+        return getProgression().getLevel();
     }
 
     public final void setLevel(int newLevel) {
-        progression.setLevel(newLevel);
+        getProgression().setLevel(newLevel);
     }
 
     /**Simple method for gaining the amount of exp given in i and updates the character accordingly. Does not account for traits.
@@ -482,11 +482,7 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public final int getRank() {
-        return progression.getRank();
-    }
-
-    public final void setRank(int rank) {
-        progression.setRank(rank);
+        return getProgression().getRank();
     }
 
     public final void rankup() {

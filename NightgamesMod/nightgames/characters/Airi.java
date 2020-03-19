@@ -66,7 +66,7 @@ public class Airi extends BasePersonality {
         self.outfitPlan.add(Clothing.getByID("pantyhose"));
         self.outfitPlan.add(Clothing.getByID("shoes"));
         self.change();
-        self.setRank(1);
+        self.getProgression().setRank(1);
         self.modAttributeDontSaveData(Attribute.Power, -1);
         self.modAttributeDontSaveData(Attribute.Slime, 1);
         self.modAttributeDontSaveData(Attribute.Cunning, 2);
