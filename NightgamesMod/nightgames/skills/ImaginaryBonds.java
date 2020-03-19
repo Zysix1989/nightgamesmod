@@ -8,6 +8,7 @@ import nightgames.combat.Result;
 import nightgames.global.Global;
 import nightgames.nskills.tags.SkillTag;
 import nightgames.status.Bound;
+import nightgames.status.Stsflag;
 
 public class ImaginaryBonds extends Skill {
 
@@ -23,7 +24,7 @@ public class ImaginaryBonds extends Skill {
 
     @Override
     public boolean usable(Combat c, Character target) {
-        return target.isHypnotized();
+        return target.is(Stsflag.drowsy) || target.is(Stsflag.enthralled) || target.is(Stsflag.charmed) || target.is(Stsflag.trance) || target.is(Stsflag.lovestruck);
     }
 
     @Override

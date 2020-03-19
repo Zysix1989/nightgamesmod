@@ -3731,10 +3731,6 @@ public Character clone() throws CloneNotSupportedException {
         return has(Trait.congregation) ? 2 : 1;
     }
 
-    public boolean isHypnotized() {
-        return is(Stsflag.drowsy) || is(Stsflag.enthralled) || is(Stsflag.charmed) || is(Stsflag.trance) || is(Stsflag.lovestruck);
-    }
-
     public void setName(String name) {
         this.name = name;
     }
