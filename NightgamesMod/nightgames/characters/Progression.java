@@ -8,34 +8,38 @@ public class Progression {
     private static final String JSON_XP = "xp";
     private static final String JSON_RANK = "rank";
 
-    private int level;
+    private Property<Integer> level;
     private Property<Integer> xp = new Property<>(0);
     private int rank = 0;
 
     Progression(int level) {
-        this.level = level;
+        this.level = new Property<>(level);
     }
 
     Progression(JsonObject js) {
-        this.level = js.get(JSON_LEVEL).getAsInt();
+        this.level = new Property<>(js.get(JSON_LEVEL).getAsInt());
         this.xp = new Property<>(js.get(JSON_XP).getAsInt());
         this.rank = js.get(JSON_RANK).getAsInt();
     }
 
     JsonObject save() {
         var object = new JsonObject();
-        object.addProperty(JSON_LEVEL, level);
+        object.addProperty(JSON_LEVEL, level.get());
         object.addProperty(JSON_XP, xp.get());
         object.addProperty(JSON_RANK, rank);
         return object;
     }
 
     public int getLevel() {
-        return level;
+        return level.get();
     }
 
     public void setLevel(int level) {
-        this.level = level;
+        this.level.set(level);
+    }
+
+    public Property<Integer> getLevelProperty() {
+        return level;
     }
 
     public Property<Integer> getXPProperty() {
@@ -65,12 +69,12 @@ public class Progression {
     }
 
     public boolean canLevelUp() {
-        return xp.get() > Progression.xpRequirementForNextLevel(level);
+        return xp.get() > Progression.xpRequirementForNextLevel(level.get());
     }
 
     public void levelUp() {
         assert canLevelUp();
-        xp.set(xp.get() - Progression.xpRequirementForNextLevel(level));
+        xp.set(xp.get() - Progression.xpRequirementForNextLevel(level.get()));
         // TODO: level += 1
     }
 
