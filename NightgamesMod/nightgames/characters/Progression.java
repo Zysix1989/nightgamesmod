@@ -59,7 +59,17 @@ public class Progression {
                 rank == other.rank;
     }
 
-    public static int xpRequirementForNextLevel(int currentLevel) {
+    public boolean canLevelUp() {
+        return xp > Progression.xpRequirementForNextLevel(level);
+    }
+
+    public void levelUp() {
+        assert canLevelUp();
+        xp -= Progression.xpRequirementForNextLevel(level);
+        // TODO: level += 1
+    }
+
+    private static int xpRequirementForNextLevel(int currentLevel) {
         return Math.min(45 + 5 * currentLevel, 100);
     }
 }

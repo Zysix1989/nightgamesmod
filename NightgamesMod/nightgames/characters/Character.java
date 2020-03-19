@@ -3498,8 +3498,8 @@ public Character clone() throws CloneNotSupportedException {
     public final boolean levelUpIfPossible(Combat c) {
         int req;
         boolean dinged = false;
-        while (progression.getXp() > (req = Progression.xpRequirementForNextLevel(progression.getLevel()))) {
-            progression.setXp(progression.getXp() - req);
+        while (progression.canLevelUp()) {
+            progression.levelUp();
             ding(c);
             dinged = true;
         }
