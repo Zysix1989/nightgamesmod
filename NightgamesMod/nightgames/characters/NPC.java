@@ -583,8 +583,7 @@ public class NPC extends Character {
     @Override
     public void matchPrep(Match m) {
         super.matchPrep(m);
-        var optManager = ai.getArmManager();
-        optManager.ifPresent(manager -> {
+        ai.getArmManager().ifPresent(manager -> {
             ai.initializeArms(manager);
             if (manager.getActiveArms().stream().anyMatch(a -> a.getType() == ArmType.STABILIZER)) {
                 add(Trait.stabilized);
