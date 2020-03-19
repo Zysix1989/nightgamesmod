@@ -217,11 +217,6 @@ public class PetCharacter extends Character {
     @Override
     public void counterattack(Character target, Tactics type, Combat c) {}
 
-    @Override
-    public Growth getGrowth() {
-        return super.getGrowth();
-    }
-
     public boolean isPetOf(Character other) {
         return other != null && !isDummy() && ownerType.equals(other.getType());
     }
