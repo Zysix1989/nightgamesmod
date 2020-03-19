@@ -426,6 +426,10 @@ public Character clone() throws CloneNotSupportedException {
         return get(a) != 0 && get(a) + rand >= dc;
     }
 
+    public final Progression getProgression() {
+        return progression;
+    }
+
     /**Accessor method to get the level. 
      * FIXME: Implicitly this.level, but it should be fixed. 
      * @return level
