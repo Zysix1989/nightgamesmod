@@ -209,7 +209,7 @@ public Character clone() throws CloneNotSupportedException {
      * @param other
      * 
      * */
-    public void finishClone(Character other) {
+    public final void finishClone(Character other) {
         List<Status> oldstatus = status;
         status = new ArrayList<>();
         for (Status s : oldstatus) {

@@ -67,11 +67,6 @@ public class Player extends Character {
         finishCharacter(pickedTraits, selectedAttributes);
     }
 
-    @Override
-    public void finishClone(Character other) {
-        super.finishClone(other);
-    }
-
     public void applyBasicStats(Character self) {
         self.getStamina().setMax(80);
         self.getArousal().setMax(80);
