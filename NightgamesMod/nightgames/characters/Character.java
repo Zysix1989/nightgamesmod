@@ -1726,9 +1726,6 @@ public Character clone() throws CloneNotSupportedException {
         saveObj.addProperty("name", name);
         saveObj.addProperty("type", getType());
         saveObj.add(JSON_PROGRESSION, progression.save());
-        saveObj.addProperty("level", progression.getLevel());
-        saveObj.addProperty("rank", getProgression().getRank());
-        saveObj.addProperty("xp", progression.getXp());
         saveObj.addProperty("money", money);
         {
             JsonObject jsCoreStats = new JsonObject();
