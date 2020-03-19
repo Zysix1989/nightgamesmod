@@ -4,6 +4,8 @@ import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.pet.PetCharacter;
 
+import java.util.Optional;
+
 public class PetInitiatedThreesome extends PetThreesome {
     public PetInitiatedThreesome(Character self) {
         super("Initiate Threesome", self, 0);
@@ -19,8 +21,8 @@ public class PetInitiatedThreesome extends PetThreesome {
         return new PetInitiatedThreesome(user);
     }
 
-    protected Character getFucker(Combat c) {
-        return getSelf();
+    protected Optional<Character> getFucker(Combat c) {
+        return Optional.of(getSelf());
     }
 
     protected Character getMaster(Combat c) {

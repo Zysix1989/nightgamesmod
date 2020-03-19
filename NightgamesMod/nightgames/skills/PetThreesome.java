@@ -6,6 +6,7 @@ import nightgames.characters.Trait;
 import nightgames.characters.body.BodyPart;
 import nightgames.characters.body.CockPart;
 import nightgames.characters.body.PussyPart;
+import nightgames.combat.Assistant;
 import nightgames.combat.Combat;
 import nightgames.combat.Result;
 import nightgames.global.Global;
@@ -15,6 +16,7 @@ import nightgames.stance.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Optional;
 
 public class PetThreesome extends Skill {
     public PetThreesome(String name, Character self, int cooldown) {
@@ -42,15 +44,15 @@ public class PetThreesome extends Skill {
     }
 
     public boolean fuckable(Combat c, Character target) {
-        Character fucker = getFucker(c);
-        if (fucker == null) {
+        var fucker = getFucker(c);
+        if (getFucker(c).isEmpty()) {
             return false;
-        }
+        };
 
-        BodyPart selfO = getSelfOrgan(fucker, c);
+        BodyPart selfO = getSelfOrgan(fucker.orElseThrow(), c);
         BodyPart targetO = getTargetOrgan(target);
         // You can't really have a threesome with a fairy... or can you?
-        boolean possible = fucker.body.getHeight() > 70 && selfO != null && targetO != null;
+        boolean possible = fucker.orElseThrow().body.getHeight() > 70 && selfO != null && targetO != null;
         boolean ready = possible;
         boolean stancePossible = !c.getStance().havingSex(c);
         return possible && ready && stancePossible && canGetToCrotch(target);
@@ -67,10 +69,10 @@ public class PetThreesome extends Skill {
         return fuckable(c, target) && c.getStance().mobile(getSelf()) && (!c.getStance().mobile(target) || c.getStance().prone(target)) && getSelf().canAct();
     }
 
-    protected Character getFucker(Combat c) {
+    protected Optional<Character> getFucker(Combat c) {
         var assistants = new ArrayList<>(c.assistantsOf(getSelf()));
         Collections.shuffle(assistants);
-        return assistants.stream().findFirst().orElseThrow().getCharacter();
+        return assistants.stream().findFirst().map(Assistant::getCharacter);
     }
 
     protected Character getMaster(Combat c) {
@@ -81,7 +83,7 @@ public class PetThreesome extends Skill {
     public boolean resolve(Combat c, Character target) {
         int m = 5 + Global.random(5);
         int otherm = m;
-        Character fucker = getFucker(c);
+        Character fucker = getFucker(c).orElseThrow();
         Character master = getMaster(c);
         BodyPart selfO = getSelfOrgan(fucker, c);
         BodyPart targetO = getTargetOrgan(target);
