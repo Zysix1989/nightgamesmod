@@ -1,8 +1,5 @@
 package nightgames.skills;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import nightgames.characters.Character;
 import nightgames.characters.NPC;
 import nightgames.characters.Player;
@@ -13,6 +10,9 @@ import nightgames.global.Global;
 import nightgames.pet.CharacterPet;
 import nightgames.pet.Pet;
 import nightgames.skills.petskills.SlimeCloneParasite;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Divide extends Skill {
     public Divide(Character self) {
@@ -49,9 +49,9 @@ public class Divide extends Skill {
     public static Pet makeClone(Combat c, Character self) {
         int power;
         if (self.has(Trait.NoblesseOblige)) {
-            power = Math.max(1, self.getLevel() * 3 / 4);
+            power = Math.max(1, self.getProgression().getLevel() * 3 / 4);
         } else {
-            power = Math.max(1, self.getLevel() / 2);
+            power = Math.max(1, self.getProgression().getLevel() / 2);
         }
         int ac = 4 + power / 3;
         CharacterPet pet = null;

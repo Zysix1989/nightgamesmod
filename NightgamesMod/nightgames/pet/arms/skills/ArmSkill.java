@@ -15,7 +15,7 @@ public abstract class ArmSkill {
     }
 
     public boolean usable(Combat c, Arm arm, Character owner, Character target) {
-        return owner.getLevel() >= level;
+        return owner.getProgression().getLevel() >= level;
     }
     
     public final String getName() {

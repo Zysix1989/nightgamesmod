@@ -56,7 +56,7 @@ public class Charm extends Skill {
     }
 
     private boolean resolvePurr(Combat c, Character target) {
-        if (Global.random(target.getLevel()) <= getSelf().get(Attribute.Animism) * getSelf().getArousal().percent()
+        if (Global.random(target.getProgression().getLevel()) <= getSelf().get(Attribute.Animism) * getSelf().getArousal().percent()
                         / 100 && !target.wary()) {
             int damage = getSelf().getArousal().getReal() / 10;
             if (damage < 10) {

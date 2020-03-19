@@ -1,13 +1,12 @@
 package nightgames.status;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
+
+import java.util.Optional;
 
 public class SapphicSeduction extends Status {
     public SapphicSeduction(Character affected) {
@@ -27,7 +26,7 @@ public class SapphicSeduction extends Status {
     @Override
     public int mod(Attribute a) {
         if (a == Attribute.Seduction) {
-            return affected.getLevel() / 2;
+            return affected.getProgression().getLevel() / 2;
         }
         return 0;
     }

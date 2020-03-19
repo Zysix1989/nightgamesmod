@@ -1,20 +1,19 @@
 package nightgames.status;
 
-import java.util.Optional;
-
 import com.google.gson.JsonObject;
-
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.body.BodyPart;
 import nightgames.combat.Combat;
+
+import java.util.Optional;
 
 public class Satiated extends DurationStatus {
     int value;
 
     public Satiated(Character affected, int xp, int levels) {
         super("Satiated", affected, 1);
-        value = xp + 95 + 5 * (affected.getLevel() + levels);
+        value = xp + 95 + 5 * (affected.getProgression().getLevel() + levels);
     }
 
     public Satiated(Character affected, int value) {

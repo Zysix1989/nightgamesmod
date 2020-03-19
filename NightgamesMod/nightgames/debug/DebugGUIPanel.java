@@ -158,7 +158,7 @@ public class DebugGUIPanel extends JPanel {
             try {
                 Character target = Global.getCharacterByType(list.get(1));
                 StringBuilder sb = new StringBuilder();
-                sb.append("Level: " + target.getLevel() + "\n");
+                sb.append("Level: " + target.getProgression().getLevel() + "\n");
                 List<Trait> traits = new ArrayList<>(target.getTraits());
                 for (int i = 0; i < traits.size(); i++) {
                     sb.append(traits.get(i));

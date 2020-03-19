@@ -100,7 +100,7 @@ public class Bound extends Status {
 
     @Override
     public void struggle(Character self) {
-        int struggleAmount = (int) (5 + Math.sqrt((self.getLevel() + self.get(Attribute.Power) + self.get(Attribute.Cunning))));
+        int struggleAmount = (int) (5 + Math.sqrt((self.getProgression().getLevel() + self.get(Attribute.Power) + self.get(Attribute.Cunning))));
         toughness = Math.max(toughness - struggleAmount, 0);
     }
 

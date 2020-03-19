@@ -26,7 +26,7 @@ public abstract class SimpleMasterSkill extends Skill {
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
-        return getSelf().getLevel() >= this.levelReq;
+        return getSelf().getProgression().getLevel() >= this.levelReq;
     }
 
     @Override

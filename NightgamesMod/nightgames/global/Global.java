@@ -613,14 +613,14 @@ public class Global {
             player.getArousal().renew();
             player.getMojo().renew();
             player.change();
-            level += player.getLevel();
+            level += player.getProgression().getLevel();
             if (!player.has(Trait.unnaturalgrowth) && !player.has(Trait.naturalgrowth)) {
-                maxLevelTracker = Math.max(player.getLevel(), maxLevelTracker);
+                maxLevelTracker = Math.max(player.getProgression().getLevel(), maxLevelTracker);
             }
         }
         final int maxLevel = maxLevelTracker;
-        players.stream().filter(c -> c.has(Trait.naturalgrowth)).filter(c -> c.getLevel() < maxLevel + 2).forEach(c -> {
-            while (c.getLevel() < maxLevel + 2) {
+        players.stream().filter(c -> c.has(Trait.naturalgrowth)).filter(c -> c.getProgression().getLevel() < maxLevel + 2).forEach(c -> {
+            while (c.getProgression().getLevel() < maxLevel + 2) {
                 c.ding(null);
             }
         });
@@ -636,9 +636,9 @@ public class Global {
          * */
         
         
-        players.stream().filter(c -> c.has(Trait.unnaturalgrowth)).filter(c -> c.getLevel() < maxLevel + 5)
+        players.stream().filter(c -> c.has(Trait.unnaturalgrowth)).filter(c -> c.getProgression().getLevel() < maxLevel + 5)
                         .forEach(c -> {
-                            while (c.getLevel() < maxLevel + 5) {
+                            while (c.getProgression().getLevel() < maxLevel + 5) {
                                 c.ding(null);
                             }
                         });
@@ -646,7 +646,7 @@ public class Global {
         level /= players.size();
 
         for (Character rested : resting) {
-            rested.gainXP(100 + Math.max(0, (int) Math.round(10 * (level - rested.getLevel()))));
+            rested.gainXP(100 + Math.max(0, (int) Math.round(10 * (level - rested.getProgression().getLevel()))));
         }
         date++;
         time = Time.DAY;
@@ -679,7 +679,7 @@ public class Global {
     
     public static void startNight() {
         var currentMatchType = MatchType.NORMAL;
-        if (getPlayer().getLevel() >= 15 && random(10) < 2) {
+        if (getPlayer().getProgression().getLevel() >= 15 && random(10) < 2) {
             currentMatchType = MatchType.FTC;
         }
         currentMatchType.runPrematch();
@@ -758,7 +758,7 @@ public class Global {
         //TODO: This really should be taken out of this in favor of something that processes extra events of this kind. - DSM
         if (matchmod.name().equals(MayaModifier.NAME)) {
             if (!checkFlag(Flag.Maya)) {
-                newChallenger(new Maya(human.getLevel()));
+                newChallenger(new Maya(human.getProgression().getLevel()));
                 flag(Flag.Maya);
             }
             NPC maya = Optional.ofNullable(getNPC("Maya")).orElseThrow(() -> new IllegalStateException(
@@ -1088,8 +1088,8 @@ public class Global {
 
     public static boolean newChallenger(BasePersonality challenger) {
         if (!players.contains(challenger.getCharacter())) {
-            int targetLevel = human.getLevel();
-            while (challenger.getCharacter().getLevel() <= targetLevel) {
+            int targetLevel = human.getProgression().getLevel();
+            while (challenger.getCharacter().getProgression().getLevel() <= targetLevel) {
                 challenger.getCharacter().ding(null);
             }
             players.add(challenger.getCharacter());

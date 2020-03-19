@@ -47,22 +47,22 @@ public class MimicWitch extends Skill {
         if (getSelf().has(Trait.ImitatedStrength)) {
             getSelf().addTemporaryTrait(Trait.witch, 10);
             getSelf().addTemporaryTrait(Trait.lactating, 10);
-            if (getSelf().getLevel() >= 20) {
+            if (getSelf().getProgression().getLevel() >= 20) {
                 getSelf().addTemporaryTrait(Trait.responsive, 10);
             }
-            if (getSelf().getLevel() >= 28) {
+            if (getSelf().getProgression().getLevel() >= 28) {
                 getSelf().addTemporaryTrait(Trait.temptingtits, 10);
             }
-            if (getSelf().getLevel() >= 36) {
+            if (getSelf().getProgression().getLevel() >= 36) {
                 getSelf().addTemporaryTrait(Trait.beguilingbreasts, 10);
             }
-            if (getSelf().getLevel() >= 44) {
+            if (getSelf().getProgression().getLevel() >= 44) {
                 getSelf().addTemporaryTrait(Trait.sedativecream, 10);
             }
-            if (getSelf().getLevel() >= 52) {
+            if (getSelf().getProgression().getLevel() >= 52) {
                 getSelf().addTemporaryTrait(Trait.enchantingVoice, 10);
             }
-            if (getSelf().getLevel() >= 60) {
+            if (getSelf().getProgression().getLevel() >= 60) {
                 ((GenericBodyPart) getSelf().body.getRandomMouth()).addTemporaryMod(new ArcaneMod(), 10);
             }
         }

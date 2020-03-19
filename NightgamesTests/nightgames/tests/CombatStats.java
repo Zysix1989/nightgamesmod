@@ -189,7 +189,7 @@ public class CombatStats {
             List<Character> combatants = new ArrayList<>(Global.getParticipants());
             combatants.removeIf(Character::human);
             combatants.forEach(c -> {
-                while (c.getLevel() < level) {
+                while (c.getProgression().getLevel() < level) {
                     c.ding(null);
                     Character partner;
                     do {

@@ -20,7 +20,7 @@ public class RoboWeb extends Trap {
         public Instance(Trap self, Participant owner) {
             super(self, owner);
             var ch = owner.getCharacter();
-            strength = ch.getLevel();
+            strength = ch.getProgression().getLevel();
         }
 
         private static String victimTriggerMessage(Participant target) {

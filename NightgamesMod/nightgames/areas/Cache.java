@@ -1,7 +1,6 @@
 package nightgames.areas;
 
 import nightgames.characters.Attribute;
-import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
@@ -190,7 +189,7 @@ public class Cache implements Deployable {
         public void fire(Match m) {
             var meanParticipantLevel = m.getParticipants().stream()
                     .map(Participant::getCharacter)
-                    .mapToInt(Character::getLevel)
+                    .mapToInt(character -> character.getProgression().getLevel())
                     .average()
                     .orElseThrow();
             if (meanParticipantLevel > 3.0 &&

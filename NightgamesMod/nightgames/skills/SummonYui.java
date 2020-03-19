@@ -36,7 +36,7 @@ public class SummonYui extends Skill {
     @Override
     public boolean resolve(Combat c, Character target) {
         NPC yui = Global.getNPCByType("Yui");
-        int power = (getSelf().getLevel() + target.getLevel()) / 2;
+        int power = (getSelf().getProgression().getLevel() + target.getProgression().getLevel()) / 2;
         int ac = 4 + power / 3;
         writeOutput(c, Result.normal, target);
         yui.gainAffection(getSelf(), -1);

@@ -40,7 +40,7 @@ public class Simulacrum extends Skill {
     @Override
     public boolean resolve(Combat c, Character target) {
         Pet pet;
-        int power = Math.max(10, getSelf().getLevel() - 2);
+        int power = Math.max(10, getSelf().getProgression().getLevel() - 2);
         int ac = 4 + power / 3;
 
         String cloneName = String.format("%s clone", target.nameOrPossessivePronoun());

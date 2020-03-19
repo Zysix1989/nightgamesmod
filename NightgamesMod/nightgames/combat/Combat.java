@@ -851,7 +851,7 @@ public class Combat {
                                                     other, self));
                 }
                 (new Command(self)).resolve(this, other);
-                int cooldown = Math.max(1, 6 - (self.getLevel() - other.getLevel() / 5));
+                int cooldown = Math.max(1, 6 - (self.getProgression().getLevel() - other.getProgression().getLevel() / 5));
                 getCombatantData(self).setIntegerFlag("enchantingvoice-count", -cooldown);
             } else {
                 getCombatantData(self).setIntegerFlag("enchantingvoice-count", voiceCount + 1);
@@ -983,7 +983,7 @@ public class Combat {
     private boolean rollWorship(Character self, Character other) {
         if (!other.isPet() && (other.has(Trait.objectOfWorship) || self.is(Stsflag.lovestruck))
                         && (other.breastsAvailable() || other.crotchAvailable())) {
-            double chance = Math.min(20, Math.max(5, other.get(Attribute.Divinity) + 10 - self.getLevel()));
+            double chance = Math.min(20, Math.max(5, other.get(Attribute.Divinity) + 10 - self.getProgression().getLevel()));
             if (other.has(Trait.revered)) {
                 chance += 10;
             }
@@ -1787,7 +1787,7 @@ public class Combat {
             return;
         }
         if (master.has(Trait.leadership)) {
-            int levelups = Math.max(5, master.getLevel() / 4);
+            int levelups = Math.max(5, master.getProgression().getLevel() / 4);
             self.getSelf().setPower(self.getSelf().getPower() + levelups);
             for (int i = 0; i < levelups; i++) {
                 self.ding(this);
@@ -1801,7 +1801,7 @@ public class Combat {
         self.getStamina().renew();
         self.getArousal().renew();
         writeSystemMessage(self, Global.format("{self:SUBJECT-ACTION:have|has} summoned {other:name-do} (Level %s)",
-                                        master, self, self.getLevel()));
+                                        master, self, self.getProgression().getLevel()));
         otherCombatants.add(new Assistant(self));
         this.write(self, self.challenge(getOpponentCharacter(self)));
     }

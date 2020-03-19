@@ -47,22 +47,22 @@ public class MimicDryad extends Skill {
         }
         if (getSelf().has(Trait.ImitatedStrength)) {
             getSelf().addTemporaryTrait(Trait.dryad, 10);
-            if (getSelf().getLevel() >= 20) {
+            if (getSelf().getProgression().getLevel() >= 20) {
                 getSelf().addTemporaryTrait(Trait.magicEyeFrenzy, 10);
             }
-            if (getSelf().getLevel() >= 28) {
+            if (getSelf().getProgression().getLevel() >= 28) {
                 getSelf().addTemporaryTrait(Trait.lacedjuices, 10);
             }
-            if (getSelf().getLevel() >= 36) {
+            if (getSelf().getProgression().getLevel() >= 36) {
                 getSelf().addTemporaryTrait(Trait.RawSexuality, 10);
             }
-            if (getSelf().getLevel() >= 44) {
+            if (getSelf().getProgression().getLevel() >= 44) {
                 getSelf().addTemporaryTrait(Trait.temptingtits, 10);
             }
-            if (getSelf().getLevel() >= 52) {
+            if (getSelf().getProgression().getLevel() >= 52) {
                 getSelf().addTemporaryTrait(Trait.addictivefluids, 10);
             }
-            if (getSelf().getLevel() >= 60) {
+            if (getSelf().getProgression().getLevel() >= 60) {
                 getSelf().body.getRandomPussy().addTemporaryMod(new TentacledMod(), 10);
             }
         }

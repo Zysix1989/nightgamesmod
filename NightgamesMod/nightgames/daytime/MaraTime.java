@@ -1,7 +1,5 @@
 package nightgames.daytime;
 
-import java.util.ArrayList;
-import java.util.Optional;
 import nightgames.characters.Attribute;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
@@ -20,6 +18,9 @@ import nightgames.requirements.NotRequirement;
 import nightgames.requirements.RequirementShortcuts;
 import nightgames.status.addiction.Addiction;
 import nightgames.status.addiction.AddictionType;
+
+import java.util.ArrayList;
+import java.util.Optional;
 
 public class MaraTime extends BaseNPCTime {
     public MaraTime(Character player) {
@@ -107,7 +108,7 @@ public class MaraTime extends BaseNPCTime {
             biomechAss.ingredients.put(Item.Onahole, 1);
             biomechAss.option = "Biomech Ass";
             biomechAss.addRequirement((c, self, other) -> {
-                return self.getLevel() >= 30;
+                return self.getProgression().getLevel() >= 30;
             }, "At least level 30");
             biomechAss.scene = "[Placeholder]<br/>Mara installs a biomech rectum on you.";
             transformationOptions.add(biomechAss);
@@ -121,7 +122,7 @@ public class MaraTime extends BaseNPCTime {
             prostheticMouth.ingredients.put(Item.Onahole, 1);
             prostheticMouth.option = "Prosthetic Mouth";
             prostheticMouth.addRequirement((c, self, other) -> {
-                return self.getLevel() >= 30;
+                return self.getProgression().getLevel() >= 30;
             }, "At least level 30");
             prostheticMouth.scene = "[Placeholder]<br/>Mara replaces your mouth with advanced computer augmented prosthetics.";
             transformationOptions.add(prostheticMouth);

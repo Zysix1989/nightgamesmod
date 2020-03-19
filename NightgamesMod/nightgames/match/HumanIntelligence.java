@@ -186,7 +186,7 @@ public class HumanIntelligence implements Intelligence {
         String arousal;
         String stamina;
         if (character.get(Attribute.Perception) >= 6) {
-            character.gui.message("She is level " + opponent.getCharacter().getLevel());
+            character.gui.message("She is level " + opponent.getCharacter().getProgression().getLevel());
         }
         if (character.get(Attribute.Perception) >= 8) {
             character.gui.message("Her Power is " + opponent.getCharacter().get(Attribute.Power) + ", her Cunning is "
