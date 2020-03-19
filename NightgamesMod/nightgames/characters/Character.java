@@ -65,9 +65,7 @@ public abstract class Character extends Observable implements Cloneable {
 
     private String name;
     public CharacterSex initialGender;
-    private int level;
-    private int xp = 0;
-    private int rank;
+    private final Progression progression;
     public int money;
     public Map<Attribute, Integer> att;             //Attributes are good opportunity to move to OOP Implementation - They are very similar to meters with base and modified values - DSM
     public StaminaStat stamina;
@@ -110,7 +108,7 @@ public abstract class Character extends Observable implements Cloneable {
      * */
     public Character(String name, int level) {
         this.name = name;
-        this.level = level;
+        this.progression = new Progression(level);
         this.growth = new Growth();
         cloned = 0;
         custom = false;
@@ -432,11 +430,11 @@ public Character clone() throws CloneNotSupportedException {
      * Returns the level of the Character.
      * */
     public final int getLevel() {
-        return level;
+        return progression.getLevel();
     }
 
     public final void setLevel(int newLevel) {
-        this.level = newLevel;
+        progression.setLevel(newLevel);
     }
 
     /**Simple method for gaining the amount of exp given in i and updates the character accordingly. Does not account for traits.
@@ -444,7 +442,7 @@ public Character clone() throws CloneNotSupportedException {
      * The value of experience to increment by.
      * */
     public final void gainXPPure(int i) {
-        xp += i;
+        progression.setXp(progression.getXp() + i);
         update();
     }
     
@@ -473,26 +471,26 @@ public Character clone() throws CloneNotSupportedException {
      * The value to set the xp member to. 
      * */
     public final void setXP(int i) {
-        xp = i;
+        progression.setXp(i);
         update();
     }
 
     public final int getRank() {
-        return rank;
+        return progression.getRank();
     }
 
     public final void setRank(int rank) {
-        this.rank = rank;
+        progression.setRank(rank);
     }
 
     public final void rankup() {
-        rank++;
+        progression.setRank(progression.getRank() + 1);
     }
 
     public abstract void ding(Combat c);
 
     public final int getXP() {
-        return xp;
+        return progression.getXp();
     }
 
     /**Modifies a given base damage value by a given parameters.
@@ -1768,9 +1766,9 @@ public Character clone() throws CloneNotSupportedException {
         JsonObject saveObj = new JsonObject();
         saveObj.addProperty("name", name);
         saveObj.addProperty("type", getType());
-        saveObj.addProperty("level", level);
+        saveObj.addProperty("level", progression.getLevel());
         saveObj.addProperty("rank", getRank());
-        saveObj.addProperty("xp", xp);
+        saveObj.addProperty("xp", progression.getXp());
         saveObj.addProperty("money", money);
         {
             JsonObject jsCoreStats = new JsonObject();
@@ -1811,9 +1809,9 @@ public Character clone() throws CloneNotSupportedException {
      * */
     public void load(JsonObject object) {
         name = object.get("name").getAsString();
-        level = object.get("level").getAsInt();
-        rank = object.get("rank").getAsInt();
-        xp = object.get("xp").getAsInt();
+        progression.setLevel(object.get("level").getAsInt());
+        progression.setRank(object.get("rank").getAsInt());
+        progression.setXp(object.get("xp").getAsInt());
         if (object.has("growth")) {
             growth = JsonUtils.getGson().fromJson(object.get("growth"), Growth.class);
             growth.removeNullTraits();
@@ -2793,7 +2791,7 @@ public Character clone() throws CloneNotSupportedException {
     public int getChanceToHit(Character attacker, Combat c, int accuracy) {
         int hitDiff = attacker.getSpeedDifference(this) + (attacker.get(Attribute.Perception) - get(
                         Attribute.Perception));
-        int levelDiff = Math.min(attacker.level - level, 5);
+        int levelDiff = Math.min(attacker.getLevel() - getLevel(), 5);
         levelDiff = Math.max(levelDiff, -5);
 
         // with no level or hit differences and an default accuracy of 80, 80%
@@ -3178,7 +3176,7 @@ public Character clone() throws CloneNotSupportedException {
 
     public void loseXP(int i) {
         assert i >= 0;
-        xp -= i;
+        progression.setXp(progression.getXp() - i);
         update();
     }
 
@@ -3532,8 +3530,9 @@ public Character clone() throws CloneNotSupportedException {
     }
 
     public final String printStats() {
-        return "Character{" + "name='" + name + '\'' + ", type=" + getType() + ", level=" + level + ", xp=" + xp
-                        + ", rank=" + rank + ", money=" + money + ", att=" + att + ", stamina=" + stamina.max()
+        return "Character{" + "name='" + name + '\'' + ", type=" + getType() + ", level=" + progression.getLevel() +
+                ", xp=" + progression.getXp() + ", rank=" + progression.getRank() + ", money=" + money +
+                ", att=" + att + ", stamina=" + stamina.max()
                         + ", arousal=" + arousal.max() + ", mojo=" + mojo.max() + ", willpower=" + willpower.max()
                         + ", outfit=" + outfit + ", traits=" + traits + ", inventory=" + inventory + ", flags=" + flags
                         + ", trophy=" + trophy + ", closet=" + closet + ", body=" + body + ", availableAttributePoints="
@@ -3547,8 +3546,8 @@ public Character clone() throws CloneNotSupportedException {
     public final boolean levelUpIfPossible(Combat c) {
         int req;
         boolean dinged = false;
-        while (xp > (req = getXPReqToNextLevel())) {
-            xp -= req;
+        while (progression.getXp() > (req = getXPReqToNextLevel())) {
+            progression.setXp(progression.getXp() - req);
             ding(c);
             dinged = true;
         }
@@ -3578,13 +3577,13 @@ public Character clone() throws CloneNotSupportedException {
         if (!getType().equals(character.getType())) {
             return false;
         }
-        if (!(level == character.level)) {
+        if (!(progression.getLevel() == character.progression.getLevel())) {
             return false;
         }
-        if (!(xp == character.xp)) {
+        if (!(progression.getXp() == character.progression.getXp())) {
             return false;
         }
-        if (!(rank == character.rank)) {
+        if (!(progression.getRank() == character.progression.getRank())) {
             return false;
         }
         if (!(money == character.money)) {
