@@ -1,13 +1,11 @@
 package nightgames.gui;
 
-import java.awt.Font;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import nightgames.characters.Player;
 import nightgames.global.Global;
 import nightgames.global.Time;
+
+import javax.swing.*;
+import java.awt.*;
 
 class GUIPlayerBio {
     private static JLabel labelForString(String s) {
@@ -45,7 +43,7 @@ class GUIPlayerBio {
         level = labelForString("Lvl: " + player.getLevel());
         panel.add(level);
 
-        xp = labelForString("XP: " + player.getXP());
+        xp = labelForString("XP: " + player.getProgression().getXp());
         panel.add(xp);
 
         attributes = new GUIPlayerAttributes(player, statusTarget, refreshTarget);
@@ -73,7 +71,7 @@ class GUIPlayerBio {
 
     void refresh() {
         level.setText("Lvl: " + player.getLevel());
-        xp.setText("XP: " + player.getXP());
+        xp.setText("XP: " + player.getProgression().getXp());
 
         location.setText(player.location().name);
         cash.setText("$" + player.money);

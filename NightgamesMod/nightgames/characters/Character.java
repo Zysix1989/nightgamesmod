@@ -495,10 +495,6 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract void ding(Combat c);
 
-    public final int getXP() {
-        return progression.getXp();
-    }
-
     /**Modifies a given base damage value by a given parameters.
      * 
      * @param type
