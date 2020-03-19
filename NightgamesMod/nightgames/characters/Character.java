@@ -67,7 +67,7 @@ public abstract class Character extends Observable implements Cloneable {
     public CharacterSex initialGender;
     private int level;
     private int xp = 0;
-    public int rank;
+    private int rank;
     public int money;
     public Map<Attribute, Integer> att;             //Attributes are good opportunity to move to OOP Implementation - They are very similar to meters with base and modified values - DSM
     public StaminaStat stamina;
