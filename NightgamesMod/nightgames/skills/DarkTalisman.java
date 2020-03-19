@@ -18,7 +18,7 @@ public class DarkTalisman extends Skill {
 
     @Override
     public boolean requirements(Combat c, Character user, Character target) {
-        return getSelf().getRank() >= 1;
+        return getSelf().getProgression().getRank() >= 1;
     }
 
     @Override

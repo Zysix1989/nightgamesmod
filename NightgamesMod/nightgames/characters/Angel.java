@@ -192,7 +192,7 @@ public class Angel extends BasePersonality {
 
     @Override
     public void rest(int time) {
-        if (character.getRank() >= 1) {
+        if (character.getProgression().getRank() >= 1) {
             if (!character.has(Trait.demigoddess)
                 && (Global.checkFlag(ANGEL_SEX_FOCUS) || Global.checkFlag(ANGEL_NYMPHOMANIA_FOCUS))) {
                 advance();
@@ -222,7 +222,7 @@ public class Angel extends BasePersonality {
             character.money -= 500;
         }
         buyUpTo(Item.PriapusDraft, 3);
-        if (character.getRank() >= 1) {
+        if (character.getProgression().getRank() >= 1) {
             if (!character.has(Trait.lacedjuices) && character.money >= 1000) {
                 character.money -= 1000;
                 character.getGrowth()

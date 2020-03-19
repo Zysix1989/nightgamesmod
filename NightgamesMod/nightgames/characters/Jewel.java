@@ -225,7 +225,7 @@ public class Jewel extends BasePersonality {
 
     @Override
     public void rest(int time) {
-        if (character.getRank() >= 1) {
+        if (character.getProgression().getRank() >= 1) {
             if (!character.has(Trait.fighter) && (Global.checkFlag(JEWEL_MARTIAL_FOCUS) || Global.checkFlag(JEWEL_ANAL_FOCUS))) {
                 advance();
             }
@@ -249,7 +249,7 @@ public class Jewel extends BasePersonality {
             character.money -= 600;
         }
 
-        if (character.getRank() >= 1) {
+        if (character.getProgression().getRank() >= 1) {
             if (character.money > 0) {
                 Global.getDay()
                       .visit("Dojo", character, Global.random(character.money));

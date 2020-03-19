@@ -1,12 +1,10 @@
 package nightgames.daytime;
 
-import java.util.ArrayList;
-
 import nightgames.characters.Character;
-import nightgames.characters.Trait;
-import nightgames.global.Configuration;
 import nightgames.global.Flag;
 import nightgames.global.Global;
+
+import java.util.ArrayList;
 
 public class Exercise extends Activity {
 
@@ -163,7 +161,7 @@ public class Exercise extends Activity {
 
     public Scene pickScene(int gain) {
         ArrayList<Scene> available = new ArrayList<Scene>();
-        if(player.getRank()>=1&&!Global.checkFlag(Flag.metYui)){
+        if(player.getProgression().getRank() >=1&&!Global.checkFlag(Flag.metYui)){
             available.add(Scene.yuiintro1);
         }
 

@@ -1,16 +1,16 @@
 package nightgames.daytime;
 
-import java.util.ArrayList;
-import java.util.Map;
-
-import java.util.Set;
-import java.util.stream.Collectors;
 import nightgames.characters.Character;
 import nightgames.characters.Trait;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.items.Loot;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class HWStore extends Store {
     public HWStore(Character player) {
@@ -62,7 +62,7 @@ public class HWStore extends Store {
     @Override
     protected Set<Item> getItems() {
         return stock.keySet().stream()
-            .filter(i -> i != Item.EmptyBottle || player.getRank() > 0)
+            .filter(i -> i != Item.EmptyBottle || player.getProgression().getRank() > 0)
             .collect(Collectors.toSet());
     }
 

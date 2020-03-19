@@ -135,7 +135,7 @@ public class Yui extends BasePersonality {
             character.gain(Item.Onahole2);
             character.money -= 300;
         }
-        if (character.getRank() >= 1) {
+        if (character.getProgression().getRank() >= 1) {
             if (character.money > 0) {
                 Global.getDay().visit("Body Shop", character, Global.random(character.money));
             }

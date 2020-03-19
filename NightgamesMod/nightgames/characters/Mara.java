@@ -184,7 +184,7 @@ public class Mara extends BasePersonality {
        
         this.addSecondFocusScene();     
      
-        preferredAttributes.add(c -> c.getRank() >= 4 && c.get(Attribute.Temporal) < 20
+        preferredAttributes.add(c -> c.getProgression().getRank() >= 4 && c.get(Attribute.Temporal) < 20
                         ? Optional.of(Attribute.Temporal) : Optional.empty());
         preferredAttributes.add(c -> c.get(Attribute.Science) < 15 ? Optional.of(Attribute.Science) : Optional.empty());
         preferredAttributes.add(c -> c.get(Attribute.Science) >= 15 && c.get(Attribute.Fetish) < 50
@@ -256,14 +256,14 @@ public class Mara extends BasePersonality {
 
     @Override
     protected void onLevelUp(Character self) {
-        if (self.getRank() >= 4) {
+        if (self.getProgression().getRank() >= 4) {
 
         }
     }
 
     @Override
     public void rest(int time) {
-        if (character.getRank() == 1 && !character.has(Trait.madscientist)) {
+        if (character.getProgression().getRank() == 1 && !character.has(Trait.madscientist)) {
             advance();
         }
         super.rest(time);
@@ -287,11 +287,11 @@ public class Mara extends BasePersonality {
             character.gain(Item.Strapon);
             character.money -= 600;
         }
-        if (character.money > 0 && character.getRank() >= 1) {
+        if (character.money > 0 && character.getProgression().getRank() >= 1) {
             Global.getDay()
                   .visit("Body Shop", character, Global.random(character.money));
         }
-        if (character.money > 0 && character.getRank() >= 1) {
+        if (character.money > 0 && character.getProgression().getRank() >= 1) {
             Global.getDay()
                   .visit("Workshop", character, Global.random(character.money));
         }

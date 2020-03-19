@@ -1,23 +1,15 @@
 package nightgames.daytime;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import nightgames.characters.Airi;
 import nightgames.characters.Character;
-import nightgames.characters.Eve;
-import nightgames.characters.Kat;
-import nightgames.characters.NPC;
-import nightgames.characters.Player;
-import nightgames.characters.Reyka;
+import nightgames.characters.*;
 import nightgames.characters.custom.RecruitmentData;
 import nightgames.global.Flag;
 import nightgames.global.Global;
 import nightgames.grammar.Shorthand;
 import nightgames.status.addiction.Addiction;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Informant extends Activity {
     boolean acted;
@@ -140,7 +132,7 @@ public class Informant extends Activity {
             return new VisitResult(true, choices);
         }
 
-        if (player.getRank() >= 1 && !Global.checkFlag(Flag.rank1)) {
+        if (player.getProgression().getRank() >= 1 && !Global.checkFlag(Flag.rank1)) {
             rankOneEvent();
         } else if (choice.equals("Start") || choice.equals("Back")) {
             Global.gui().message(
@@ -389,7 +381,7 @@ public class Informant extends Activity {
                                   + "than you.\"</i><br/><br/>");
             choices.add("Kat: $1000");
         }
-        if (!Global.checkFlag(Flag.Eve) && Global.checkFlag(Flag.blackMarketPlus) && player.getRank() >= 2) {
+        if (!Global.checkFlag(Flag.Eve) && Global.checkFlag(Flag.blackMarketPlus) && player.getProgression().getRank() >= 2) {
             Global.gui()
                   .message("<i>\"Eve Ranger is... a lot of things, but mostly a cautionary tale. "
                                   + "She started the same year I did. From the beginning, it was obvious"

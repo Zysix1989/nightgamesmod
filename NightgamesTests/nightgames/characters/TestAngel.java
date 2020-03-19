@@ -134,7 +134,7 @@ public class TestAngel extends BasePersonality {
     }
 
     @Override public void rest(int time) {
-        if (character.getRank() >= 1) {
+        if (character.getProgression().getRank() >= 1) {
             if (!character.has(Trait.demigoddess) && character.money >= 1000) {
                 advance();
             }
@@ -166,7 +166,7 @@ public class TestAngel extends BasePersonality {
             character.money -= 500;
         }
         buyUpTo(Item.PriapusDraft, 3);
-        if (character.getRank() >= 1) {
+        if (character.getProgression().getRank() >= 1) {
             if (!character.has(Trait.lacedjuices) && character.money >= 1000) {
                 character.money -= 1000;
                 character.add(Trait.lacedjuices);

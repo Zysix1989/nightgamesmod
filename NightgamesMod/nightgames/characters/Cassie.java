@@ -280,7 +280,7 @@ public class Cassie extends BasePersonality {
 
     @Override
     public void rest(int time) {
-        if (character.getRank() >= 1) {
+        if (character.getProgression().getRank() >= 1) {
             if (!character.has(Trait.witch) && (Global.checkFlag(CASSIE_BREAST_FOCUS) || Global.checkFlag(CASSIE_MOUTH_FOCUS))) {
                 advance();
             }
@@ -304,7 +304,7 @@ public class Cassie extends BasePersonality {
             character.money -= Item.Lactaid.getPrice();
             character.gain(Item.Lactaid);
         }
-        if (character.getRank() >= 1) {
+        if (character.getProgression().getRank() >= 1) {
             if (character.money > 0) {
                 Global.getDay().visit("Magic Training", character, Global.random(character.money));
             }

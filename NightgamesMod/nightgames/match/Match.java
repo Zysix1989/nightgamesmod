@@ -321,7 +321,7 @@ public class Match {
         }
         for (Challenge c : combatant.challenges) {
             if (c.done) {
-                int r = c.reward() + (c.reward() * 3 * combatant.getCharacter().getRank());
+                int r = c.reward() + (c.reward() * 3 * combatant.getCharacter().getProgression().getRank());
                 reward.addAndGet(r);
                 if (combatant.getCharacter().human()) {
                     output.append("You received $")

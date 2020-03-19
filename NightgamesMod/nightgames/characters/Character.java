@@ -481,10 +481,6 @@ public Character clone() throws CloneNotSupportedException {
         update();
     }
 
-    public final int getRank() {
-        return getProgression().getRank();
-    }
-
     public final void rankup() {
         progression.setRank(progression.getRank() + 1);
     }
@@ -1766,7 +1762,7 @@ public Character clone() throws CloneNotSupportedException {
         saveObj.addProperty("type", getType());
         saveObj.add(JSON_PROGRESSION, progression.save());
         saveObj.addProperty("level", progression.getLevel());
-        saveObj.addProperty("rank", getRank());
+        saveObj.addProperty("rank", getProgression().getRank());
         saveObj.addProperty("xp", progression.getXp());
         saveObj.addProperty("money", money);
         {
@@ -2862,9 +2858,9 @@ public Character clone() throws CloneNotSupportedException {
     
     /**Returns an Integer representing the value of prize for --defeating?-- this character. The prize depends on the rank of the characcter.*/
     public Integer prize() {
-        if (getRank() >= 2) {
+        if (getProgression().getRank() >= 2) {
             return 500;
-        } else if (getRank() == 1) {
+        } else if (getProgression().getRank() == 1) {
             return 200;
         } else {
             return 50;
