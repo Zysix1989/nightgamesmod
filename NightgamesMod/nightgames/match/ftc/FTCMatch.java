@@ -79,10 +79,6 @@ public class FTCMatch extends Match {
         return MatchType.FTC;
     }
 
-    public boolean isPrey(Character ch) {
-        return prey.equals(findParticipant(ch));
-    }
-
     public Area getBase(Character ch) {
         return bases.get(findParticipant(ch));
     }

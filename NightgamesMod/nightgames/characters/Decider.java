@@ -10,6 +10,8 @@ import nightgames.match.Action;
 import nightgames.match.MatchType;
 import nightgames.match.actions.*;
 import nightgames.match.ftc.FTCMatch;
+import nightgames.match.ftc.Hunter;
+import nightgames.match.ftc.Prey;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
 
@@ -160,6 +162,7 @@ public class Decider {
     
     /**This method parses the actions available to the character and returns an action.*/
     public static Action.Instance parseMoves(Collection<Action.Instance> available, Collection<Area> radar, NPC character) {
+        var thisParticipant = Global.getMatch().findParticipant(character);
         HashSet<Action.Instance> enemy = new HashSet<>();
         HashSet<Action.Instance> onlyWhenSafe = new HashSet<>();
         HashSet<Action.Instance> utility = new HashSet<>();
@@ -191,13 +194,13 @@ public class Decider {
         FTCMatch match;
         if (Global.getMatch().getType() == MatchType.FTC) {
             match = (FTCMatch) Global.getMatch();
-            if (match.isPrey(character) && match.getFlagHolder() == null) {
+            if (thisParticipant instanceof Prey && match.getFlagHolder() == null) {
                 var action = searchForAction(available, character,
                         act -> act instanceof Move.Instance && ((Move.Instance) act).getDestination().name.equals("Central Camp"));
                 if (action.isPresent()) {
                     return action.get();
                 }
-            } else if (!match.isPrey(character)
+            } else if (thisParticipant instanceof Hunter
                     && character.has(Item.Flag)
                     && !match.isBase(character, character.location.get())) {
                 var action = searchForAction(available, character,
@@ -205,7 +208,7 @@ public class Decider {
                 if (action.isPresent()) {
                     return action.get();
                 }
-            } else if (!match.isPrey(character) && character.has(Item.Flag) && match.isBase(character, character.location.get())) {
+            } else if (thisParticipant instanceof Hunter && character.has(Item.Flag) && match.isBase(character, character.location.get())) {
                 return searchForAction(available, character, act -> act instanceof Resupply.Instance)
                         .orElseThrow(() -> new RuntimeException("This is your base. There ought to be a resupply."));
             }
