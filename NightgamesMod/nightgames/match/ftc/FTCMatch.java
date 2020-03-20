@@ -186,8 +186,8 @@ public class FTCMatch extends Match {
         flagHolder.getCharacter().remove(Item.Flag);
     }
 
-    public boolean canCollectFlag(Character ch) {
-        return isPrey(ch) && flagInCenter && ch.location().id() == AreaIdentity.ftcCenter;
+    public boolean canCollectFlag(Participant p) {
+        return p instanceof Prey && flagInCenter && p.getCharacter().location().id() == AreaIdentity.ftcCenter;
     }
 
     public void grabFlag() {

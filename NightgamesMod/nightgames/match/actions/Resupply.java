@@ -32,7 +32,7 @@ public class Resupply extends Action {
                 user.getCharacter().message("You get a change of clothes from the chest placed here.");
                 if (user.getCharacter().has(Item.Flag) && !match.isPrey(user.getCharacter())) {
                     match.turnInFlag(user);
-                } else if (match.canCollectFlag(user.getCharacter())) {
+                } else if (match.canCollectFlag(user)) {
                     match.grabFlag();
                 }
             } else {
