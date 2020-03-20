@@ -172,14 +172,14 @@ public class FTCMatch extends Match {
                 .collect(Collectors.toSet()));
 
         nBase.getPossibleActions().add(new Hide());
-        nBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(north), Set.of(flag.getSink())));
+        nBase.getPossibleActions().add(new ResupplyFTC(Set.of(north), Set.of(flag.getSink())));
         wBase.getPossibleActions().add(new Hide());
-        wBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(west), Set.of(flag.getSink())));
+        wBase.getPossibleActions().add(new ResupplyFTC(Set.of(west), Set.of(flag.getSink())));
         sBase.getPossibleActions().add(new Hide());
-        sBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(south), Set.of(flag.getSink())));
+        sBase.getPossibleActions().add(new ResupplyFTC(Set.of(south), Set.of(flag.getSink())));
         eBase.getPossibleActions().add(new Hide());
-        eBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(east), Set.of(flag.getSink())));
-        pBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(preyParticipant), Set.of(flag.getSource())));
+        eBase.getPossibleActions().add(new ResupplyFTC(Set.of(east), Set.of(flag.getSink())));
+        pBase.getPossibleActions().add(new ResupplyFTC(Set.of(preyParticipant), Set.of(flag.getSource())));
 
         pond.getPossibleActions().add(Bathe.newEmpty());
         pond.getPossibleActions().add(new Hide());

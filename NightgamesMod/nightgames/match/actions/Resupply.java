@@ -6,7 +6,6 @@ import nightgames.match.Encounter;
 import nightgames.match.Participant;
 
 import java.util.Optional;
-import java.util.Set;
 
 public class Resupply extends Action {
 
@@ -88,14 +87,6 @@ public class Resupply extends Action {
 
     protected Resupply() {
         super("Resupply");
-    }
-
-    public static Resupply withEscapeRoutes(Set<EscapeRoute> escapeRoutes) {
-        return new ResupplyNormal(escapeRoutes);
-    }
-
-    public static Resupply limitToCharacters(Set<Participant> validParticipants, Set<Trigger> actionStartTriggers) {
-        return new ResupplyFTC(validParticipants, actionStartTriggers);
     }
 
     @Override
