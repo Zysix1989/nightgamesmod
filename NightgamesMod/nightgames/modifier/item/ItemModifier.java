@@ -22,14 +22,6 @@ public abstract class ItemModifier {
         return !playerOnly() || c.human() && bannedItems().contains(i);
     }
 
-    public void giveRequiredItems(Character c) {
-        ensuredItems().forEach((item, count) -> {
-            while (!c.has(item, count)) {
-                c.gain(item);
-            }
-        });
-    }
-
     public boolean playerOnly() {
         return true;
     }
