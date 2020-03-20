@@ -114,11 +114,11 @@ public class Match {
         bridge.jump(quad);
 
         dorm.getPossibleActions().add(new Hide());
-        dorm.getPossibleActions().add(new ResupplyNormal(Set.of(new Resupply.EscapeRoute(quad,
+        dorm.getPossibleActions().add(new ResupplyNormal(Set.of(new ResupplyNormal.EscapeRoute(quad,
                         "You hear your opponents searching around the "
                                 + "dorm, so once you finish changing, you hop out the window and "
                                 + "head to the quad."),
-                new Resupply.EscapeRoute(laundry,
+                new ResupplyNormal.EscapeRoute(laundry,
                         "You hear your opponents searching around "
                                 + "the dorm, so once you finish changing, you quietly move "
                                 + "downstairs to the laundry room."))));
@@ -143,11 +143,11 @@ public class Match {
         storage.getPossibleActions().add(new Scavenge());
         sau.getPossibleActions().add(new Hide());
         sau.getPossibleActions().add(new ResupplyNormal(Set.of(
-                new Resupply.EscapeRoute(quad,
+                new ResupplyNormal.EscapeRoute(quad,
                         "You don't want to be ambushed leaving the "
                                 + "student union, so once you finish changing, you hop out the "
                                 + "window and head to the quad."),
-                new Resupply.EscapeRoute(pool,
+                new ResupplyNormal.EscapeRoute(pool,
                         "You don't want to be ambushed leaving "
                                 + "the student union, so once you finish changing, you sneak out "
                                 + "the back door and head to the pool."))));
