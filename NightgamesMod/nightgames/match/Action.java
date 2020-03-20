@@ -90,6 +90,10 @@ public abstract class Action {
         protected abstract void moveAfterDelay(Participant p);
     }
 
+    public interface LocationDescription {
+        String describeLocation();
+    }
+
     public abstract Instance newInstance(Participant user, Area location);
 
     @Override

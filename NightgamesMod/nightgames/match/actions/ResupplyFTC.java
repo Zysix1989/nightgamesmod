@@ -1,6 +1,7 @@
 package nightgames.match.actions;
 
 import nightgames.areas.Area;
+import nightgames.match.Action;
 import nightgames.match.Participant;
 import nightgames.match.ftc.FTCMatch;
 import nightgames.match.ftc.Hunter;
@@ -8,7 +9,7 @@ import nightgames.match.ftc.Prey;
 
 import java.util.Set;
 
-public final class ResupplyFTC extends Resupply {
+public final class ResupplyFTC extends Resupply implements Action.LocationDescription {
     public final class Instance extends Resupply.Instance {
 
         private Instance(Participant user, Area location) {
@@ -57,7 +58,8 @@ public final class ResupplyFTC extends Resupply {
         return new Instance(user, location);
     }
 
-    public String describe() {
+    @Override
+    public String describeLocation() {
         return description;
     }
 }
