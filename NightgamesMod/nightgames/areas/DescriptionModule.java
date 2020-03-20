@@ -1,7 +1,5 @@
 package nightgames.areas;
 
-import nightgames.match.Participant;
-
 public class DescriptionModule {
 
     public static final class ErrorDescriptionModule extends DescriptionModule {
@@ -258,7 +256,7 @@ public class DescriptionModule {
         return new DescriptionModule(DUMP_WHERE_AM_I, DUMP_MOVED_TO);
     }
 
-    private static String baseWhereAmI(Participant p, String direction) {
+    private static String baseWhereAmI(String direction) {
         return "You are in a small camp on the " + direction + "ern edge of the forest. ";
     }
 
@@ -266,17 +264,17 @@ public class DescriptionModule {
         return "head to the " + direction + "base";
     }
 
-    public static DescriptionModule base(Participant p, String direction) {
-        return new DescriptionModule(baseWhereAmI(p, direction), baseMovedTo(direction));
+    public static DescriptionModule base(String direction) {
+        return new DescriptionModule(baseWhereAmI(direction), baseMovedTo(direction));
     }
 
-    private static String campWhereAmI(Participant prey) {
+    private static String campWhereAmI() {
         return "You are in a clearing in the middle of the forest. There are no trees here.";
     }
     public static final String CAMP_MOVED_TO = " head to the central clearing.";
 
-    public static DescriptionModule camp(Participant p) {
-        return new DescriptionModule(campWhereAmI(p), CAMP_MOVED_TO);
+    public static DescriptionModule camp() {
+        return new DescriptionModule(campWhereAmI(), CAMP_MOVED_TO);
     }
 
     private final String whereAmI;

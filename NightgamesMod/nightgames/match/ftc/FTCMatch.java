@@ -109,11 +109,11 @@ public class FTCMatch extends Match {
         Hunter south = hunters.get(2);
         Hunter east = hunters.get(3);
 
-        Area nBase = new Area("North Base", DescriptionModule.base(north, "north"), AreaIdentity.ftcNorthBase);
-        Area wBase = new Area("West Base", DescriptionModule.base(west, "west"), AreaIdentity.ftcWestBase);
-        Area sBase = new Area("South Base", DescriptionModule.base(south, "south"), AreaIdentity.ftcSouthBase);
-        Area eBase = new Area("East Base", DescriptionModule.base(east, "east"), AreaIdentity.ftcEastBase);
-        Area pBase = new Area("Central Camp", DescriptionModule.camp(preyParticipant), AreaIdentity.ftcCenter, Set.of(AreaAttribute.Open));
+        Area nBase = new Area("North Base", DescriptionModule.base("north"), AreaIdentity.ftcNorthBase);
+        Area wBase = new Area("West Base", DescriptionModule.base("west"), AreaIdentity.ftcWestBase);
+        Area sBase = new Area("South Base", DescriptionModule.base("south"), AreaIdentity.ftcSouthBase);
+        Area eBase = new Area("East Base", DescriptionModule.base("east"), AreaIdentity.ftcEastBase);
+        Area pBase = new Area("Central Camp", DescriptionModule.camp(), AreaIdentity.ftcCenter, Set.of(AreaAttribute.Open));
 
         var map = new HashMap<>(Map.of("North Base", nBase));
         map.put("West Base", wBase);
