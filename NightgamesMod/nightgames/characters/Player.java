@@ -178,7 +178,7 @@ public class Player extends Character {
                 gui.message("<b>" + holder.subject() + " currently holds the Flag.</b></br>");
             }
         }
-        gui.message(location.get().getDescriptions().whereAmI() + "<br/><br/>");
+        gui.message(location.get().describe() + "<br/><br/>");
         knownTrap.ifPresent(trap -> gui.message("You've set a " + trap.getName() + " here."));
     }
 

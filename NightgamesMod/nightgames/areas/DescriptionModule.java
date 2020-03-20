@@ -259,9 +259,7 @@ public class DescriptionModule {
     }
 
     private static String baseWhereAmI(Participant p, String direction) {
-        return String.format("You are in a small camp on the " + direction + "ern edge of the forest. "
-                        + "%s %s base here.", p.getCharacter().subjectAction("have", "has"),
-                p.getCharacter().possessiveAdjective());
+        return "You are in a small camp on the " + direction + "ern edge of the forest. ";
     }
 
     private static String baseMovedTo(String direction) {
@@ -273,9 +271,7 @@ public class DescriptionModule {
     }
 
     private static String campWhereAmI(Participant prey) {
-        return String.format("You are in a clearing in the middle of the forest. There are no"
-                + " trees here, just a small camp where %s can "
-                + "get a new Flag if it gets captured.", prey.getCharacter().subject());
+        return "You are in a clearing in the middle of the forest. There are no trees here.";
     }
     public static final String CAMP_MOVED_TO = " head to the central clearing.";
 

@@ -104,10 +104,10 @@ public class FTCMatch extends Match {
                 .collect(Collectors.toList());
         Collections.shuffle(hunters);
         var preyParticipant = new Prey(modifier.getPrey(), modifier.getActionFilterFor(modifier.getPrey()));
-        Participant north = hunters.get(0);
-        Participant west = hunters.get(1);
-        Participant south = hunters.get(2);
-        Participant east = hunters.get(3);
+        Hunter north = hunters.get(0);
+        Hunter west = hunters.get(1);
+        Hunter south = hunters.get(2);
+        Hunter east = hunters.get(3);
 
         Area nBase = new Area("North Base", DescriptionModule.base(north, "north"), AreaIdentity.ftcNorthBase);
         Area wBase = new Area("West Base", DescriptionModule.base(west, "west"), AreaIdentity.ftcWestBase);
@@ -170,14 +170,14 @@ public class FTCMatch extends Match {
                 .collect(Collectors.toSet()));
 
         nBase.getPossibleActions().add(new Hide());
-        nBase.getPossibleActions().add(new ResupplyFTC(north, Set.of(flag.getSink())));
+        nBase.getPossibleActions().add(ResupplyFTC.newHunterBase(north, flag));
         wBase.getPossibleActions().add(new Hide());
-        wBase.getPossibleActions().add(new ResupplyFTC(west, Set.of(flag.getSink())));
+        wBase.getPossibleActions().add(ResupplyFTC.newHunterBase(west, flag));
         sBase.getPossibleActions().add(new Hide());
-        sBase.getPossibleActions().add(new ResupplyFTC(south, Set.of(flag.getSink())));
+        wBase.getPossibleActions().add(ResupplyFTC.newHunterBase(south, flag));
         eBase.getPossibleActions().add(new Hide());
-        eBase.getPossibleActions().add(new ResupplyFTC(east, Set.of(flag.getSink())));
-        pBase.getPossibleActions().add(new ResupplyFTC(preyParticipant, Set.of(flag.getSource())));
+        wBase.getPossibleActions().add(ResupplyFTC.newHunterBase(east, flag));
+        pBase.getPossibleActions().add(ResupplyFTC.newPreyCamp(preyParticipant, flag));
 
         pond.getPossibleActions().add(Bathe.newEmpty());
         pond.getPossibleActions().add(new Hide());

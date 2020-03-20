@@ -7,6 +7,7 @@ import nightgames.match.Action;
 import nightgames.match.Encounter;
 import nightgames.match.Participant;
 import nightgames.match.actions.Move;
+import nightgames.match.actions.ResupplyFTC;
 import nightgames.status.Stsflag;
 import nightgames.trap.Trap;
 
@@ -223,7 +224,11 @@ public class Area implements Serializable {
         return possibleActions;
     }
 
-    public DescriptionModule getDescriptions() {
-        return descriptions;
+    public String describe() {
+        return descriptions.whereAmI() + possibleActions.stream()
+                .filter(act -> act instanceof ResupplyFTC)
+                .map(act -> ((ResupplyFTC) act).describe())
+                .reduce(String::concat);
     }
+
 }
