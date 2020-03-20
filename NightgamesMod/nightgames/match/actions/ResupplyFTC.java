@@ -45,7 +45,7 @@ public final class ResupplyFTC extends Resupply implements Action.LocationDescri
 
     public static ResupplyFTC newPreyCamp(Prey owner, FTCMatch.Flag flag) {
         return new ResupplyFTC(owner, Set.of(flag.getSource()), String.format("It's just a small camp where %s can " +
-                "get a new flag if a hunter captures it", owner.getCharacter().getGrammar().subject().defaultNoun()));
+                "get a new flag if a hunter captures it.", owner.getCharacter().getGrammar().subject().defaultNoun()));
     }
 
     @Override
