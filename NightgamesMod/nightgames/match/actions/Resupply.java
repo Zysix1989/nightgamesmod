@@ -13,7 +13,7 @@ public abstract class Resupply extends Action {
         void onActionStart(Participant usedAction);
     }
 
-    protected class Instance extends Action.Instance {
+    public class Instance extends Action.Instance {
 
         protected Instance(Participant user, Area location) {
             super(user, location);
