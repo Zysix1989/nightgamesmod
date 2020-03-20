@@ -200,17 +200,9 @@ public class Decider {
                 if (action.isPresent()) {
                     return action.get();
                 }
-            } else if (thisParticipant instanceof Hunter
-                    && character.has(Item.Flag)
-                    && !match.isBase(character, character.location.get())) {
-                var action = searchForAction(available, character,
-                        act -> act instanceof Move.Instance && ((Move.Instance) act).getDestination().name.equals(match.getBase(character).name));
-                if (action.isPresent()) {
-                    return action.get();
-                }
-            } else if (thisParticipant instanceof Hunter && character.has(Item.Flag) && match.isBase(character, character.location.get())) {
+            } else if (thisParticipant instanceof Hunter && character.has(Item.Flag)) {
                 return searchForAction(available, character, act -> act instanceof Resupply.Instance)
-                        .orElseThrow(() -> new RuntimeException("This is your base. There ought to be a resupply."));
+                        .orElseThrow(() -> new RuntimeException(String.format("Found no resupply for %s.", thisParticipant.getCharacter().getTrueName())));
             }
         }
         for (var act : available) {
