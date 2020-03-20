@@ -57,7 +57,7 @@ public class RequirementTest {
     @Before public void setUp() throws Exception {
         self = new BlankPersonality("SelfTestNPC").character;
         other = new BlankPersonality("OtherTestNPC").character;
-        Area area = new Area("TestArea", new DescriptionModule.ErrorDescriptionModule(), null);
+        Area area = new Area("TestArea", new DescriptionModule.ErrorDescriptionModule());
         Global.setUpMatch(MatchType.NORMAL, new NoModifier());
         combat = new Combat(new Participant(self, DescribablePredicate.True()), new Participant(other, DescribablePredicate.True()), area);
     }

@@ -47,23 +47,23 @@ public class Match {
     }
 
     public static Match newMatch(Collection<Character> combatants, BaseModifier condition) {
-        Area quad = new Area("Quad", DescriptionModule.quad(), AreaIdentity.quad, Set.of(AreaAttribute.Open));
-        Area dorm = new Area("Dorm", DescriptionModule.dorm(), AreaIdentity.dorm);
-        Area shower = new Area("Showers", DescriptionModule.shower(), AreaIdentity.shower);
-        Area laundry = new Area("Laundry Room", DescriptionModule.laundry(), AreaIdentity.laundry);
-        Area engineering = new Area("Engineering", DescriptionModule.engineering(), AreaIdentity.engineering);
-        Area lab = new Area("Chemistry Lab", DescriptionModule.lab(), AreaIdentity.lab);
-        Area workshop = new Area("Workshop", DescriptionModule.workshop(), AreaIdentity.workshop);
-        Area libarts = new Area("Liberal Arts", DescriptionModule.liberalArts(), AreaIdentity.la);
-        Area pool = new Area("Pool", DescriptionModule.pool(), AreaIdentity.pool);
-        Area library = new Area("Library", DescriptionModule.library(), AreaIdentity.library);
-        Area dining = new Area("Dining Hall", DescriptionModule.diningHall(), AreaIdentity.dining);
-        Area kitchen = new Area("Kitchen", DescriptionModule.kitchen(), AreaIdentity.kitchen);
-        Area storage = new Area("Storage Room", DescriptionModule.storage(), AreaIdentity.storage);
-        Area tunnel = new Area("Tunnel", DescriptionModule.tunnel(), AreaIdentity.tunnel);
-        Area bridge = new Area("Bridge", DescriptionModule.bridge(), AreaIdentity.bridge);
-        Area sau = new Area("Student Union", DescriptionModule.studentUnion(), AreaIdentity.union);
-        Area courtyard = new Area("Courtyard", DescriptionModule.courtyard(), AreaIdentity.courtyard);
+        Area quad = new Area("Quad", DescriptionModule.quad(), Set.of(AreaAttribute.Open));
+        Area dorm = new Area("Dorm", DescriptionModule.dorm());
+        Area shower = new Area("Showers", DescriptionModule.shower());
+        Area laundry = new Area("Laundry Room", DescriptionModule.laundry());
+        Area engineering = new Area("Engineering", DescriptionModule.engineering());
+        Area lab = new Area("Chemistry Lab", DescriptionModule.lab());
+        Area workshop = new Area("Workshop", DescriptionModule.workshop());
+        Area libarts = new Area("Liberal Arts", DescriptionModule.liberalArts());
+        Area pool = new Area("Pool", DescriptionModule.pool());
+        Area library = new Area("Library", DescriptionModule.library());
+        Area dining = new Area("Dining Hall", DescriptionModule.diningHall());
+        Area kitchen = new Area("Kitchen", DescriptionModule.kitchen());
+        Area storage = new Area("Storage Room", DescriptionModule.storage());
+        Area tunnel = new Area("Tunnel", DescriptionModule.tunnel());
+        Area bridge = new Area("Bridge", DescriptionModule.bridge());
+        Area sau = new Area("Student Union", DescriptionModule.studentUnion());
+        Area courtyard = new Area("Courtyard", DescriptionModule.courtyard());
 
         quad.setMapDrawHint(new MapDrawHint(new Rectangle(10, 3, 7, 9), "Quad", false));
         dorm.setMapDrawHint(new MapDrawHint(new Rectangle(14, 12, 3, 5), "Dorm", false));

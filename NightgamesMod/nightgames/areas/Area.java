@@ -28,20 +28,18 @@ public class Area implements Serializable {
     public boolean alarm = false;
     public ArrayList<Deployable> env = new ArrayList<>();
     public transient MapDrawHint drawHint = new MapDrawHint();
-    private AreaIdentity enumerator;
     private boolean pinged;
     private Set<AreaAttribute> attributes = Set.of();
     private Set<Action> possibleActions = new HashSet<>();
     private Trap.Instance trap = null;
 
-    public Area(String name, DescriptionModule descriptions, AreaIdentity enumerator) {
+    public Area(String name, DescriptionModule descriptions) {
         this.name = name;
         this.descriptions = descriptions;
-        this.enumerator = enumerator;
     }
 
-    public Area(String name, DescriptionModule descriptions, AreaIdentity enumerator, Set<AreaAttribute> attributes) {
-        this(name, descriptions, enumerator);
+    public Area(String name, DescriptionModule descriptions, Set<AreaAttribute> attributes) {
+        this(name, descriptions);
         this.attributes = attributes;
     }
 
@@ -151,10 +149,6 @@ public class Area implements Serializable {
 
     public void endEncounter() {
         fight = null;
-    }
-
-    public AreaIdentity id() {
-        return enumerator;
     }
 
     public String getMovementToAreaDescription(Character c) {

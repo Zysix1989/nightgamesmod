@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class CombatStats {
-    private static final Area NULL_AREA = new Area("", new DescriptionModule.ErrorDescriptionModule(), null);
+    private static final Area NULL_AREA = new Area("", new DescriptionModule.ErrorDescriptionModule());
     private static final int MATCH_COUNT = 10;
 
     private List<Character> combatants;

@@ -148,7 +148,7 @@ public abstract class Character extends Observable implements Cloneable {
         inventory = new HashMap<>();
         attractions = new HashMap<>(2);
         affections = new HashMap<>(2);
-        location = new Property<>(new Area("", new DescriptionModule.ErrorDescriptionModule(), null));
+        location = new Property<>(new Area("", new DescriptionModule.ErrorDescriptionModule()));
         // this.combatStats = new CombatStats();       //TODO: Reading, writing, cloning?
 
         getProgression().setRank(0);

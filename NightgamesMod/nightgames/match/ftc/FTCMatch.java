@@ -2,7 +2,6 @@ package nightgames.match.ftc;
 
 import nightgames.areas.Area;
 import nightgames.areas.AreaAttribute;
-import nightgames.areas.AreaIdentity;
 import nightgames.areas.DescriptionModule;
 import nightgames.characters.Character;
 import nightgames.global.Global;
@@ -109,11 +108,11 @@ public class FTCMatch extends Match {
         Hunter south = hunters.get(2);
         Hunter east = hunters.get(3);
 
-        Area nBase = new Area("North Base", DescriptionModule.base("north"), AreaIdentity.ftcNorthBase);
-        Area wBase = new Area("West Base", DescriptionModule.base("west"), AreaIdentity.ftcWestBase);
-        Area sBase = new Area("South Base", DescriptionModule.base("south"), AreaIdentity.ftcSouthBase);
-        Area eBase = new Area("East Base", DescriptionModule.base("east"), AreaIdentity.ftcEastBase);
-        Area pBase = new Area("Central Camp", DescriptionModule.camp(), AreaIdentity.ftcCenter, Set.of(AreaAttribute.Open));
+        Area nBase = new Area("North Base", DescriptionModule.base("north"));
+        Area wBase = new Area("West Base", DescriptionModule.base("west"));
+        Area sBase = new Area("South Base", DescriptionModule.base("south"));
+        Area eBase = new Area("East Base", DescriptionModule.base("east"));
+        Area pBase = new Area("Central Camp", DescriptionModule.camp(), Set.of(AreaAttribute.Open));
 
         var map = new HashMap<>(Map.of("North Base", nBase));
         map.put("West Base", wBase);
@@ -128,18 +127,18 @@ public class FTCMatch extends Match {
         bases.put(preyParticipant, pBase);
         bases.forEach(Participant::place);
 
-        Area pond = new Area("Small Pond", DescriptionModule.pond(), AreaIdentity.ftcPond);
-        Area glade = new Area("Glade", DescriptionModule.glade(), AreaIdentity.ftcGlade);
-        Area cabin = new Area("Cabin", DescriptionModule.cabin(), AreaIdentity.ftcCabin);
-        Area trail = new Area("Trail", DescriptionModule.trail(), AreaIdentity.ftcTrail);
-        Area lodge = new Area("Lodge", DescriptionModule.lodge(), AreaIdentity.ftcLodge);
-        Area hill = new Area("Hill", DescriptionModule.hill(), AreaIdentity.ftcHill);
-        Area path = new Area("Path", DescriptionModule.path(), AreaIdentity.ftcPath);
-        Area oak = new Area("Oak", DescriptionModule.oak(), AreaIdentity.ftcOak);
-        Area pass = new Area("Narrow Pass", DescriptionModule.pass(), AreaIdentity.ftcPass);
-        Area waterfall = new Area("Waterfall", DescriptionModule.waterfall(), AreaIdentity.ftcWaterfall);
-        Area monument = new Area("Monument", DescriptionModule.monument(), AreaIdentity.ftcMonument);
-        Area dump = new Area("Dump Site", DescriptionModule.dump(), AreaIdentity.ftcDump);
+        Area pond = new Area("Small Pond", DescriptionModule.pond());
+        Area glade = new Area("Glade", DescriptionModule.glade());
+        Area cabin = new Area("Cabin", DescriptionModule.cabin());
+        Area trail = new Area("Trail", DescriptionModule.trail());
+        Area lodge = new Area("Lodge", DescriptionModule.lodge());
+        Area hill = new Area("Hill", DescriptionModule.hill());
+        Area path = new Area("Path", DescriptionModule.path());
+        Area oak = new Area("Oak", DescriptionModule.oak());
+        Area pass = new Area("Narrow Pass", DescriptionModule.pass());
+        Area waterfall = new Area("Waterfall", DescriptionModule.waterfall());
+        Area monument = new Area("Monument", DescriptionModule.monument());
+        Area dump = new Area("Dump Site", DescriptionModule.dump());
         map.put("Small Pond", pond);
         map.put("Glade", glade);
         map.put("Cabin", cabin);
