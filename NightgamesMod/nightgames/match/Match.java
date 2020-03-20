@@ -222,7 +222,7 @@ public class Match {
 
     protected void manageConditions(Participant p) {
         condition.handleOutfit(p.getCharacter());
-        condition.handleItems(p.getCharacter());
+        condition.handleItems(p);
         condition.handleStatus(p.getCharacter());
         condition.handleTurn(p.getCharacter(), this);
     }

@@ -4,6 +4,7 @@ import nightgames.characters.Character;
 import nightgames.items.Item;
 import nightgames.match.Action;
 import nightgames.match.Match;
+import nightgames.match.Participant;
 import nightgames.modifier.action.DescribablePredicate;
 import nightgames.modifier.clothing.ClothingModifier;
 import nightgames.modifier.clothing.ClothingModifierCombiner;
@@ -54,21 +55,21 @@ public abstract class BaseModifier {
     /**
      * Ensure that the character has a legal inventory
      */
-    public void handleItems(Character c) {
-        moddedItems.putIfAbsent(c, new HashMap<>());
-        Map<Item, Integer> inventory = new HashMap<>(c.getInventory());
+    public void handleItems(Participant p) {
+        moddedItems.putIfAbsent(p.getCharacter(), new HashMap<>());
+        Map<Item, Integer> inventory = new HashMap<>(p.getCharacter().getInventory());
         inventory.forEach((item, count) -> {
-            if (items.itemIsBanned(c, item)) {
-                c.getInventory().remove(item);
-                moddedItems.get(c).putIfAbsent(item, 0);
-                moddedItems.get(c).compute(item, (i, cnt) -> cnt - count);
+            if (items.itemIsBanned(p.getCharacter(), item)) {
+                p.getCharacter().getInventory().remove(item);
+                moddedItems.get(p.getCharacter()).putIfAbsent(item, 0);
+                moddedItems.get(p.getCharacter()).compute(item, (i, cnt) -> cnt - count);
             }
         });
         items.ensuredItems().forEach((item, count) -> {
-            while (!c.has(item, count)) {
-                c.gain(item);
-                moddedItems.get(c).putIfAbsent(item, 0);
-                moddedItems.get(c).compute(item, (i, cnt) -> cnt + 1);
+            while (!p.getCharacter().has(item, count)) {
+                p.getCharacter().gain(item);
+                moddedItems.get(p.getCharacter()).putIfAbsent(item, 0);
+                moddedItems.get(p.getCharacter()).compute(item, (i, cnt) -> cnt + 1);
             }
         });
     }
