@@ -3,7 +3,6 @@ package nightgames.modifier.skill;
 import nightgames.characters.Character;
 import nightgames.combat.Combat;
 import nightgames.global.Global;
-import nightgames.modifier.ModifierCategory;
 import nightgames.skills.Skill;
 import nightgames.skills.Tactics;
 
@@ -12,7 +11,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class SkillModifier implements ModifierCategory<SkillModifier> {
+public abstract class SkillModifier {
 
     public Set<Skill> bannedSkills() {
         return Collections.emptySet();

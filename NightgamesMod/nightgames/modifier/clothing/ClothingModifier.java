@@ -4,13 +4,12 @@ import nightgames.items.clothing.Clothing;
 import nightgames.items.clothing.ClothingSlot;
 import nightgames.items.clothing.ClothingTrait;
 import nightgames.items.clothing.Outfit;
-import nightgames.modifier.ModifierCategory;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public abstract class ClothingModifier implements ModifierCategory<ClothingModifier> {
+public abstract class ClothingModifier {
     protected static final Set<Integer> ALL_LAYERS = Collections
                     .unmodifiableSet(IntStream.range(0, Clothing.N_LAYERS).boxed().collect(Collectors.toSet()));
     protected static final Set<ClothingSlot> ALL_SLOTS = Collections.unmodifiableSet(EnumSet.allOf(ClothingSlot.class));

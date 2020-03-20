@@ -2,13 +2,12 @@ package nightgames.modifier.item;
 
 import nightgames.characters.Character;
 import nightgames.items.Item;
-import nightgames.modifier.ModifierCategory;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class ItemModifier implements ModifierCategory<ItemModifier> {
+public abstract class ItemModifier {
 
 
     public Set<Item> bannedItems() {

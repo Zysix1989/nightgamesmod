@@ -1,15 +1,14 @@
 package nightgames.modifier;
 
-import java.util.Collection;
-
 import com.google.gson.JsonObject;
-
 import nightgames.json.JsonUtils;
+
+import java.util.Collection;
 
 /**
  * TODO: Write class-level documentation.
  */
-public interface ModifierCategoryLoader<T extends ModifierCategory<T>> {
+public interface ModifierCategoryLoader<T> {
     Collection<ModifierComponentLoader<T>> getTemplates();
 
     default T instance(JsonObject object) {

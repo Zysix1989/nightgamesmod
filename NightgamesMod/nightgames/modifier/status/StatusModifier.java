@@ -1,10 +1,9 @@
 package nightgames.modifier.status;
 
 import nightgames.characters.Character;
-import nightgames.modifier.ModifierCategory;
 import nightgames.status.Status;
 
-public class StatusModifier implements ModifierCategory<StatusModifier> {
+public class StatusModifier {
 
     private final Status status;
     private final boolean playerOnly;
