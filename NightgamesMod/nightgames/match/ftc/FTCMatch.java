@@ -18,9 +18,51 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FTCMatch extends Match {
+    public static class Flag {
+        private boolean flagInCenter = false;
+        private final Set<Participant> participants;
+
+        public Flag(Set<Participant> participants) {
+            this.participants = participants;
+        }
+
+        public FlagSource getSource() {
+            return new FlagSource();
+        }
+
+        public class FlagSource implements Resupply.Trigger {
+            public void onActionStart(Participant usedAction) {
+                if (usedAction instanceof Prey && flagInCenter && usedAction.getCharacter().location().id() == AreaIdentity.ftcCenter) {
+                    flagInCenter = false;
+                    ((Prey) usedAction).grabFlag();
+                    participants.forEach(p -> p.getCharacter().message(Global.format("{self:SUBJECT-ACTION:grab|grabs} a new flag from the stash. That means"
+                                    + " {self:pronoun} cannot be attacked for two turns, so {self:pronoun}"
+                                    + " {self:action:have|has} a chance to hide.", usedAction.getCharacter(), Global.noneCharacter())));
+                }
+            }
+        }
+
+        public FlagSink getSink() {
+            return new FlagSink();
+        }
+
+        public class FlagSink implements Resupply.Trigger {
+            public void onActionStart(Participant usedAction) {
+                if (usedAction.getCharacter().has(Item.Flag) && !(usedAction instanceof Prey)) {
+                    flagInCenter = true;
+                    usedAction.incrementScore(5, "for turning in the flag");
+                    participants.stream()
+                            .filter(p1 -> p1.getLocation().equals(usedAction.getLocation()))
+                            .forEach(p1 -> p1.getCharacter().message(Global.format("<b>{self:SUBJECT-ACTION:turn|turns} in the flag and "
+                                    + "{self:action:gain|gains} five points.</b>", usedAction.getCharacter(), Global.noneCharacter())));
+                    usedAction.getCharacter().remove(Item.Flag);
+                }
+            }
+        }
+    }
+
     private Map<Participant, Area> bases;
     private Prey prey;
-    private boolean flagInCenter;
 
     protected FTCMatch(Set<Participant> hunters, Map<String, Area> map, Map<Participant, Area> bases, Prey prey,
                        FTCModifier modifier) {
@@ -29,7 +71,6 @@ public class FTCMatch extends Match {
                 modifier);
         this.bases = bases;
         this.prey = prey;
-        flagInCenter = false;
     }
     
     @Override
@@ -130,15 +171,18 @@ public class FTCMatch extends Match {
         link(dump, waterfall);
         link(glade, lodge);
 
+        var flag = new Flag(Stream.concat(hunters.stream(), Set.of(preyParticipant).stream())
+                .collect(Collectors.toSet()));
+
         nBase.getPossibleActions().add(new Hide());
-        nBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(north)));
+        nBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(north), Set.of(flag.getSink())));
         wBase.getPossibleActions().add(new Hide());
-        wBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(west)));
+        wBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(west), Set.of(flag.getSink())));
         sBase.getPossibleActions().add(new Hide());
-        sBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(south)));
+        sBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(south), Set.of(flag.getSink())));
         eBase.getPossibleActions().add(new Hide());
-        eBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(east)));
-        pBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(preyParticipant)));
+        eBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(east), Set.of(flag.getSink())));
+        pBase.getPossibleActions().add(Resupply.limitToCharacters(Set.of(preyParticipant), Set.of(flag.getSource())));
 
         pond.getPossibleActions().add(Bathe.newEmpty());
         pond.getPossibleActions().add(new Hide());
@@ -176,25 +220,4 @@ public class FTCMatch extends Match {
         }
     }
 
-    public void turnInFlag(Participant flagHolder) {
-        flagInCenter = true;
-        flagHolder.incrementScore(5, "for turning in the flag");
-        participants.stream()
-                .filter(p -> p.getLocation().equals(flagHolder.getLocation()))
-                .forEach(p -> p.getCharacter().message(Global.format("<b>{self:SUBJECT-ACTION:turn|turns} in the flag and "
-                        + "{self:action:gain|gains} five points.</b>", flagHolder.getCharacter(), Global.noneCharacter())));
-        flagHolder.getCharacter().remove(Item.Flag);
-    }
-
-    public boolean canCollectFlag(Participant p) {
-        return p instanceof Prey && flagInCenter && p.getCharacter().location().id() == AreaIdentity.ftcCenter;
-    }
-
-    public void grabFlag() {
-        flagInCenter = false;
-        prey.grabFlag();
-        Global.gui().message(Global.format("{self:SUBJECT-ACTION:grab|grabs} a new flag from the stash. That means"
-                        + " {self:pronoun} cannot be attacked for two turns, so {self:pronoun}"
-                        + " {self:action:have|has} a chance to hide.", prey.getCharacter(), Global.noneCharacter()));
-    }
 }
