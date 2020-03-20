@@ -7,13 +7,13 @@ import nightgames.match.Participant;
 
 import java.util.Optional;
 
-public class Resupply extends Action {
+public abstract class Resupply extends Action {
 
     public interface Trigger {
         void onActionStart(Participant usedAction);
     }
 
-    public class Instance extends Action.Instance {
+    protected class Instance extends Action.Instance {
 
         protected Instance(Participant user, Area location) {
             super(user, location);
@@ -93,10 +93,4 @@ public class Resupply extends Action {
     public boolean usable(Participant user) {
         return !user.getCharacter().bound();
     }
-
-    @Override
-    public Instance newInstance(Participant user, Area location) {
-        return new Instance(user, location);
-    }
-
 }

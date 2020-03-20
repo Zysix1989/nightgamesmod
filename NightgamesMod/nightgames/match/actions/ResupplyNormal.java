@@ -19,13 +19,14 @@ public class ResupplyNormal extends Resupply {
 
         @Override
         public void execute() {
+            super.execute();
             if (Global.getMatch().getCondition().name().equals(NudistModifier.NAME)) {
                 user.getCharacter().message(
                         "You check in so that you're eligible to fight again, but you still don't get any clothes.");
             } else {
                 user.getCharacter().message("You pick up a change of clothes and prepare to get back in the fray.");
             }
-            super.execute();
+            user.state = new State();
         }
     }
 
@@ -48,5 +49,10 @@ public class ResupplyNormal extends Resupply {
 
     public ResupplyNormal(Set<EscapeRoute> escapeRoutes) {
         this.escapeRoutes = escapeRoutes;
+    }
+
+    @Override
+    public Instance newInstance(Participant user, Area location) {
+        return new Instance(user, location);
     }
 }

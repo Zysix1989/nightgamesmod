@@ -37,4 +37,9 @@ public class ResupplyFTC extends Resupply {
     public boolean usable(Participant user) {
         return super.usable(user) && validCharacters.contains(user.getCharacter());
     }
+
+    @Override
+    public Instance newInstance(Participant user, Area location) {
+        return new Instance(user, location);
+    }
 }
