@@ -189,7 +189,9 @@ public final class Bathe extends Action {
         attacker.getCharacter().gainXP(attacker.getCharacter().getVictoryXP(target.getCharacter()));
         target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
 
-        message.ifPresent(m -> Global.gui().message(m));
+        message.ifPresent(m -> {
+            target.getCharacter().message(m);
+        });
 
         if (!target.getCharacter().mostlyNude()) {
             attacker.getCharacter().gain(target.getCharacter().getTrophy());
