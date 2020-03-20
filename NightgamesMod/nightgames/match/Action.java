@@ -1,7 +1,6 @@
 package nightgames.match;
 
 import nightgames.areas.Area;
-import nightgames.characters.Character;
 
 import java.util.Optional;
 
@@ -14,14 +13,6 @@ public abstract class Action {
     }
 
     public abstract boolean usable(Participant user);
-
-    public static abstract class Aftermath {
-        protected Character usedAction;
-
-        protected Aftermath(Participant usedAction) {
-            this.usedAction = usedAction.character;
-        }
-    }
 
     public abstract class Instance {
         protected final Participant user;
