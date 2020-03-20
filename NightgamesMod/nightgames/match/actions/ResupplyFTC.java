@@ -21,19 +21,19 @@ public class ResupplyFTC extends Resupply {
     }
 
 
-    private final Set<Participant> validCharacters;
+    private final Participant owner;
     private final Set<Trigger> actionStartTriggers;
 
 
-    public ResupplyFTC(Set<Participant> validParticipants, Set<Trigger> actionStartTriggers) {
+    public ResupplyFTC(Participant owner, Set<Trigger> actionStartTriggers) {
         super();
-        validCharacters = Set.copyOf(validParticipants);
+        this.owner = owner;
         this.actionStartTriggers = actionStartTriggers;
     }
 
     @Override
     public boolean usable(Participant user) {
-        return super.usable(user) && validCharacters.contains(user);
+        return super.usable(user) && owner.equals(user);
     }
 
     @Override
