@@ -32,7 +32,7 @@ public class FTCMatch extends Match {
 
         public class FlagSource implements Resupply.Trigger {
             public void onActionStart(Participant usedAction) {
-                if (usedAction instanceof Prey && flagInCenter && usedAction.getCharacter().location().id() == AreaIdentity.ftcCenter) {
+                if (usedAction instanceof Prey && flagInCenter) {
                     flagInCenter = false;
                     ((Prey) usedAction).grabFlag();
                     participants.forEach(p -> p.getCharacter().message(Global.format("{self:SUBJECT-ACTION:grab|grabs} a new flag from the stash. That means"
