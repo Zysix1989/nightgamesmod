@@ -1,19 +1,12 @@
 package nightgames.match.actions;
 
-import edu.emory.mathcs.backport.java.util.Collections;
 import nightgames.areas.Area;
-import nightgames.characters.Character;
-import nightgames.global.Global;
 import nightgames.match.Action;
 import nightgames.match.Encounter;
-import nightgames.match.MatchType;
 import nightgames.match.Participant;
-import nightgames.modifier.standard.NudistModifier;
 
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Resupply extends Action {
 
@@ -21,25 +14,14 @@ public class Resupply extends Action {
         void onActionStart(Participant usedAction);
     }
 
-    public final class Instance extends Action.Instance {
+    public class Instance extends Action.Instance {
 
-        private Instance(Participant user, Area location) {
+        protected Instance(Participant user, Area location) {
             super(user, location);
         }
 
         @Override
         public void execute() {
-            if (Global.getMatch().getType() == MatchType.FTC) {
-                user.getCharacter().message("You get a change of clothes from the chest placed here.");
-            } else {
-                if (Global.getMatch().getCondition().name().equals(NudistModifier.NAME)) {
-                    user.getCharacter().message(
-                            "You check in so that you're eligible to fight again, but you still don't get any clothes.");
-                } else {
-                    user.getCharacter().message("You pick up a change of clothes and prepare to get back in the fray.");
-                }
-            }
-            actionStartTriggers.forEach(trigger -> trigger.onActionStart(user));
             user.state = new State();
             messageOthersInLocation(user.getCharacter().getGrammar().subject().defaultNoun() +
                     " heads for one of the safe rooms, probably to get a change of clothes.");
@@ -59,14 +41,6 @@ public class Resupply extends Action {
             p.getCharacter().change();
             p.state = new Ready();
             p.getCharacter().getWillpower().renew();
-            if (p.getLocation().getOccupants().size() > 1) {
-                var escapeRoute = escapeRoutes.stream().filter(EscapeRoute::usable).findFirst();
-                escapeRoute.or(() -> {
-                    var shuffledRoutes = new ArrayList<>(escapeRoutes);
-                    Collections.shuffle(shuffledRoutes);
-                    return shuffledRoutes.stream().findFirst();
-                }).ifPresent(route -> route.use(p));
-            }
         }
 
         @Override
@@ -111,30 +85,22 @@ public class Resupply extends Action {
         }
     }
 
-    private final boolean permissioned;
-    private final Set<Character> validCharacters;
-    private final Set<EscapeRoute> escapeRoutes;
-    private final Set<Trigger> actionStartTriggers;
 
-    private Resupply(Set<Participant> validParticipants, Set<EscapeRoute> escapeRoutes, Set<Trigger> actionStartTriggers) {
+    protected Resupply() {
         super("Resupply");
-        permissioned = !validParticipants.isEmpty();
-        validCharacters = validParticipants.stream().map(Participant::getCharacter).collect(Collectors.toSet());
-        this.escapeRoutes = escapeRoutes;
-        this.actionStartTriggers = actionStartTriggers;
     }
 
     public static Resupply withEscapeRoutes(Set<EscapeRoute> escapeRoutes) {
-        return new Resupply(Set.of(), escapeRoutes, Set.of());
+        return new ResupplyNormal(escapeRoutes);
     }
 
     public static Resupply limitToCharacters(Set<Participant> validParticipants, Set<Trigger> actionStartTriggers) {
-        return new Resupply(validParticipants, Set.of(), actionStartTriggers);
+        return new ResupplyFTC(validParticipants, actionStartTriggers);
     }
 
     @Override
     public boolean usable(Participant user) {
-        return !user.getCharacter().bound() && (!permissioned || validCharacters.contains(user.getCharacter()));
+        return !user.getCharacter().bound();
     }
 
     @Override
