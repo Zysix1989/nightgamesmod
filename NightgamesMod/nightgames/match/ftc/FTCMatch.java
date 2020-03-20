@@ -61,14 +61,11 @@ public class FTCMatch extends Match {
         }
     }
 
-    private Map<Participant, Area> bases;
-
-    protected FTCMatch(Set<Participant> hunters, Map<String, Area> map, Map<Participant, Area> bases, Prey prey,
+    protected FTCMatch(Set<Participant> hunters, Map<String, Area> map, Prey prey,
                        FTCModifier modifier) {
         super(Stream.concat(hunters.stream(), Set.of(prey).stream()).collect(Collectors.toSet()),
                 map,
                 modifier);
-        this.bases = bases;
     }
     
     @Override
@@ -192,7 +189,6 @@ public class FTCMatch extends Match {
         var match = new FTCMatch(Stream.concat(hunters.stream(), Set.of(preyParticipant).stream())
                 .collect(Collectors.toSet()),
                 map,
-                bases,
                 preyParticipant,
                 modifier);
 
