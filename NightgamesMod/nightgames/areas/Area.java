@@ -20,7 +20,6 @@ public class Area implements Serializable {
      */
     private static final long serialVersionUID = -1372128249588089014L;
     public String name;
-    private HashSet<Area> adjacent = new HashSet<>();
     private ArrayList<Participant> present = new ArrayList<>();
     private final DescriptionModule descriptions;
 
@@ -118,7 +117,6 @@ public class Area implements Serializable {
                 if (targetParticipant.canStartCombat(opponent) && opponent.canStartCombat(targetParticipant) && fight == null) {
                     opponent.getIntelligence().promptTrap(
                             targetParticipant,
-                            trap,
                             () -> fight.trap(opponent, targetParticipant, trap),
                             () -> {
                             });
