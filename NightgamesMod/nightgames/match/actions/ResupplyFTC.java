@@ -1,11 +1,9 @@
 package nightgames.match.actions;
 
 import nightgames.areas.Area;
-import nightgames.characters.Character;
 import nightgames.match.Participant;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ResupplyFTC extends Resupply {
     public final class Instance extends Resupply.Instance {
@@ -23,19 +21,19 @@ public class ResupplyFTC extends Resupply {
     }
 
 
-    private final Set<Character> validCharacters;
+    private final Set<Participant> validCharacters;
     private final Set<Trigger> actionStartTriggers;
 
 
     public ResupplyFTC(Set<Participant> validParticipants, Set<Trigger> actionStartTriggers) {
         super();
-        validCharacters = validParticipants.stream().map(Participant::getCharacter).collect(Collectors.toSet());
+        validCharacters = Set.copyOf(validParticipants);
         this.actionStartTriggers = actionStartTriggers;
     }
 
     @Override
     public boolean usable(Participant user) {
-        return super.usable(user) && validCharacters.contains(user.getCharacter());
+        return super.usable(user) && validCharacters.contains(user);
     }
 
     @Override
