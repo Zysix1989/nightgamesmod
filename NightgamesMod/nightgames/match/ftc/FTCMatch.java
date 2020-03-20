@@ -76,18 +76,10 @@ public class FTCMatch extends Match {
         return MatchType.FTC;
     }
 
-    public Area getBase(Character ch) {
-        return bases.get(findParticipant(ch));
-    }
-
     public Character getFlagHolder() {
         return participants.stream()
             .map(Participant::getCharacter)
             .filter(c -> c.has(Item.Flag)).findAny().orElse(null);
-    }
-
-    public boolean isBase(Character ch, Area loc) {
-        return loc != null && loc.equals(getBase(ch));
     }
 
     @Override
