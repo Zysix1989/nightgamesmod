@@ -1,7 +1,6 @@
 package nightgames.match;
 
 import nightgames.match.actions.Move;
-import nightgames.trap.Trap;
 
 import java.util.Collection;
 import java.util.List;
@@ -12,7 +11,7 @@ public interface Intelligence {
     void move(Collection<Action.Instance> possibleActions,
               Consumer<Action.Instance> callback);
 
-    void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation);
+    void promptTrap(Participant target, Runnable attackContinuation, Runnable waitContinuation);
 
     void faceOff(Participant opponent, Runnable fightContinuation, Runnable fleeContinuation, Runnable smokeContinuation);
 

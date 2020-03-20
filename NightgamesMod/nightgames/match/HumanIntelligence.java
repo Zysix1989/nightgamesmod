@@ -6,7 +6,6 @@ import nightgames.global.Global;
 import nightgames.gui.commandpanel.CommandPanelOption;
 import nightgames.items.Item;
 import nightgames.match.actions.Move;
-import nightgames.trap.Trap;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -47,7 +46,7 @@ public class HumanIntelligence implements Intelligence {
     }
 
     @Override
-    public void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {
+    public void promptTrap(Participant target, Runnable attackContinuation, Runnable waitContinuation) {
         character.message("Do you want to take the opportunity to ambush <b>" + target.getCharacter().getName() + "</b>?");
         assessOpponent(target);
         character.message("<br/>");

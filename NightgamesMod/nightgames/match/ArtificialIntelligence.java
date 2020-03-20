@@ -7,7 +7,6 @@ import nightgames.characters.Trait;
 import nightgames.global.Global;
 import nightgames.items.Item;
 import nightgames.match.actions.Move;
-import nightgames.trap.Trap;
 
 import java.util.Collection;
 import java.util.List;
@@ -39,7 +38,7 @@ public class ArtificialIntelligence implements Intelligence {
 
 
     @Override
-    public void promptTrap(Participant target, Trap.Instance trap, Runnable attackContinuation, Runnable waitContinuation) {
+    public void promptTrap(Participant target, Runnable attackContinuation, Runnable waitContinuation) {
         if (character.ai.attack(target.getCharacter())) {
             attackContinuation.run();
         }
