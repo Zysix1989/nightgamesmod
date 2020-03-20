@@ -63,7 +63,6 @@ public class FTCMatch extends Match {
     }
 
     private Map<Participant, Area> bases;
-    private Prey prey;
 
     protected FTCMatch(Set<Participant> hunters, Map<String, Area> map, Map<Participant, Area> bases, Prey prey,
                        FTCModifier modifier) {
@@ -71,7 +70,6 @@ public class FTCMatch extends Match {
                 map,
                 modifier);
         this.bases = bases;
-        this.prey = prey;
     }
     
     @Override
