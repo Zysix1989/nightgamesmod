@@ -45,6 +45,24 @@ public class ResupplyNormal extends Resupply {
         }
     }
 
+    public static final class EscapeRoute {
+        private final Area destination;
+        private final String message;
+
+        public EscapeRoute(Area destination, String message) {
+            this.destination = destination;
+            this.message = message;
+        }
+
+        public boolean usable() {
+            return destination.getOccupants().isEmpty();
+        }
+
+        public void use(Participant p) {
+            p.travel(destination, message);
+        }
+    }
+
     private final Set<EscapeRoute> escapeRoutes;
 
     public ResupplyNormal(Set<EscapeRoute> escapeRoutes) {

@@ -27,7 +27,7 @@ public abstract class Resupply extends Action {
         }
     }
 
-    public class State implements Participant.State {
+    public static class State implements Participant.State {
 
         @Override
         public boolean allowsNormalActions() {
@@ -65,25 +65,6 @@ public abstract class Resupply extends Action {
         }
 
     }
-
-    public static final class EscapeRoute {
-        private final Area destination;
-        private final String message;
-
-        public EscapeRoute(Area destination, String message) {
-            this.destination = destination;
-            this.message = message;
-        }
-
-        public boolean usable() {
-            return destination.getOccupants().isEmpty();
-        }
-
-        public void use(Participant p) {
-            p.travel(destination, message);
-        }
-    }
-
 
     protected Resupply() {
         super("Resupply");
