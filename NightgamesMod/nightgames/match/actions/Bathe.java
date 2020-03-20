@@ -1,7 +1,6 @@
 package nightgames.match.actions;
 
 import nightgames.areas.Area;
-import nightgames.areas.AreaIdentity;
 import nightgames.characters.Character;
 import nightgames.characters.Emotion;
 import nightgames.global.Global;
@@ -16,6 +15,7 @@ import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import java.util.Optional;
+import java.util.function.BiFunction;
 
 public final class Bathe extends Action {
     public final class Instance extends Action.Instance {
@@ -105,35 +105,41 @@ public final class Bathe extends Action {
     private final String endMessage;
     private final Optional<JtwigTemplate> ambushAttackerTemplate;
     private final Optional<JtwigTemplate> ambushTargetTemplate;
+    private final Optional<BiFunction<Character, Character, String>> aphrodisiacTrickMessage;
 
     private Bathe(String startMessage,
                   String endMessage,
                   Optional<JtwigTemplate> ambushAttackerTemplate,
-                  Optional<JtwigTemplate> ambushTargetTemplate) {
+                  Optional<JtwigTemplate> ambushTargetTemplate,
+                  Optional<BiFunction<Character, Character, String>> aphrodisiacTrickMessage) {
         super("Clean Up");
         this.startMessage = startMessage;
         this.endMessage = endMessage;
         this.ambushAttackerTemplate = ambushAttackerTemplate;
         this.ambushTargetTemplate = ambushTargetTemplate;
+        this.aphrodisiacTrickMessage = aphrodisiacTrickMessage;
     }
 
     public static Bathe newShower() {
         return new Bathe(SHOWER_START_MESSAGE,
                 SHOWER_END_MESSAGE,
                 Optional.of(SHOWER_AMBUSH_ATTACKER_MESSAGE),
-                Optional.of(SHOWER_AMBUSH_TARGET_MESSAGE));
+                Optional.of(SHOWER_AMBUSH_TARGET_MESSAGE),
+                Optional.of(Bathe::getAphrodisiacTrickShowerMessage));
     }
 
     public static Bathe newPool() {
         return new Bathe(POOL_START_MESSAGE,
                 POOL_END_MESSAGE,
                 Optional.of(POOL_AMBUSH_ATTACKER_MESSAGE),
-                Optional.of(POOL_AMBUSH_TARGET_MESSAGE));
+                Optional.of(POOL_AMBUSH_TARGET_MESSAGE),
+                Optional.of(Bathe::getAphrodisiacTrickPoolMessage));
     }
 
     public static Bathe newEmpty() {
         return new Bathe("",
                 "",
+                Optional.empty(),
                 Optional.empty(),
                 Optional.empty());
     }
@@ -178,14 +184,12 @@ public final class Bathe extends Action {
 
     private void aphrodisiactrick(Participant attacker, Participant target) {
         attacker.getCharacter().consume(Item.Aphrodisiac, 1);
-        String message = getAphrodisiacTrickMessage(attacker.getCharacter(), target.getCharacter());
+        Optional<String> message = aphrodisiacTrickMessage.map(f -> f.apply(attacker.getCharacter(), target.getCharacter()));
 
         attacker.getCharacter().gainXP(attacker.getCharacter().getVictoryXP(target.getCharacter()));
         target.getCharacter().gainXP(target.getCharacter().getDefeatXP(attacker.getCharacter()));
 
-        if (message != null) {
-            Global.gui().message(message);
-        }
+        message.ifPresent(m -> Global.gui().message(m));
 
         if (!target.getCharacter().mostlyNude()) {
             attacker.getCharacter().gain(target.getCharacter().getTrophy());
@@ -198,16 +202,6 @@ public final class Bathe extends Action {
         attacker.getCharacter().tempt(20);
         attacker.incrementScore(attacker.pointsForVictory(target), "for an underhanded win");
         attacker.state = new Action.Ready();
-    }
-
-    /** Returns null if no message is to be sent */
-    private String getAphrodisiacTrickMessage(Character attacker, Character target) {
-        if (attacker.location().id() == AreaIdentity.shower) {
-            return getAphrodisiacTrickShowerMessage(attacker, target);
-        } else if (target.location().id() == AreaIdentity.pool) {
-            return getAphrodisiacTrickPoolMessage(attacker, target);
-        }
-        return null;
     }
 
     private static JtwigTemplate SHOWER_APHRODISIAC_TRICK_ATTACKER_MESSAGE = JtwigTemplate.inlineTemplate(
@@ -260,7 +254,7 @@ public final class Bathe extends Action {
                     + "feeling pretty horny, but after a show like that it's hardly surprising.\n"
     );
 
-    private String getAphrodisiacTrickShowerMessage(Character attacker, Character target) {
+    private static String getAphrodisiacTrickShowerMessage(Character attacker, Character target) {
         var model = JtwigModel.newModel()
                 .with("target", target.getGrammar())
                 .with("targetCharacter", target);
@@ -293,7 +287,7 @@ public final class Bathe extends Action {
     }
 
 
-    private String getAphrodisiacTrickPoolMessage(Character attacker, Character target) {
+    private static String getAphrodisiacTrickPoolMessage(Character attacker, Character target) {
         if (attacker.human()) {
             if (target.hasPussy() && !target.hasDick()) {
                 return Global.format("You sneak up to the jacuzzi and empty the aphrodisiac into the water without {other:name} noticing. You slip away and find a hiding "
