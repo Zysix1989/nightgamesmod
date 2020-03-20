@@ -32,7 +32,8 @@ public class FTCMatch extends Match {
 
         public class FlagSource implements Resupply.Trigger {
             public void onActionStart(Participant usedAction) {
-                if (usedAction instanceof Prey && flagInCenter) {
+                if (flagInCenter) {
+                    assert usedAction instanceof Prey;
                     flagInCenter = false;
                     ((Prey) usedAction).grabFlag();
                     participants.forEach(p -> p.getCharacter().message(Global.format("{self:SUBJECT-ACTION:grab|grabs} a new flag from the stash. That means"
@@ -48,7 +49,7 @@ public class FTCMatch extends Match {
 
         public class FlagSink implements Resupply.Trigger {
             public void onActionStart(Participant usedAction) {
-                if (usedAction.getCharacter().has(Item.Flag) && !(usedAction instanceof Prey)) {
+                if (usedAction.getCharacter().has(Item.Flag)) {
                     flagInCenter = true;
                     usedAction.incrementScore(5, "for turning in the flag");
                     participants.stream()
