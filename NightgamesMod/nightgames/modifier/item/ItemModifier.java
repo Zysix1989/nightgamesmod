@@ -4,7 +4,9 @@ import nightgames.characters.Character;
 import nightgames.items.Item;
 import nightgames.modifier.ModifierCategory;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class ItemModifier implements ModifierCategory<ItemModifier> {
 
@@ -31,49 +33,6 @@ public abstract class ItemModifier implements ModifierCategory<ItemModifier> {
 
     public boolean playerOnly() {
         return true;
-    }
-
-    @Override public ItemModifier combine(ItemModifier next) {
-        ItemModifier first = this;
-        return new ItemModifier() {
-            @Override public Set<Item> bannedItems() {
-                // bans items banned by either modifier
-                Set<Item> bannedItems = new HashSet<>(first.bannedItems());
-                bannedItems.addAll(next.bannedItems());
-                return bannedItems;
-            }
-
-            @Override public Map<Item, Integer> ensuredItems() {
-                // ensures items ensured by either modifier. If both modifiers ensure an item, ensures the sum of each item's amount.
-                // {Item A: 4, Item B: 6}
-                // combined with
-                // {Item B: 3, Item C: 1}
-                // gives
-                // {Item A: 4, Item B: 9, Item C: 1}
-                Map<Item, Integer> ensuredItems = new HashMap<>(first.ensuredItems());
-                for (Map.Entry<Item, Integer> entry : next.ensuredItems().entrySet()) {
-                    ensuredItems.merge(entry.getKey(), entry.getValue(), (oldValue, newValue) -> oldValue + newValue);
-                }
-                return ensuredItems;
-            }
-
-            @Override
-            public void giveRequiredItems(Character c) {
-                first.giveRequiredItems(c);
-                next.giveRequiredItems(c);
-            }
-
-            @Override
-            public boolean itemIsBanned(Character c, Item i) {
-                return first.itemIsBanned(c, i) || next.itemIsBanned(c, i);
-            }
-
-            @Override
-            public String toString() {
-                return first.toString() + next.toString();
-            }
-
-        };
     }
 
     @Override

@@ -25,21 +25,6 @@ public class StatusModifier implements ModifierCategory<StatusModifier> {
         }
     }
 
-    public StatusModifier combine(StatusModifier next) {
-        StatusModifier first = this;
-        return new StatusModifier() {
-            @Override
-            public void apply(Character c) {
-                first.apply(c);
-                next.apply(c);
-            }
-
-            @Override public String toString() {
-                return first.toString() + " and " + next.toString();
-            }
-        };
-    }
-
     @Override
     public String toString() {
         return status.name;
