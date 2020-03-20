@@ -1,7 +1,7 @@
 package nightgames.modifier.item;
 
-import nightgames.characters.Character;
 import nightgames.items.Item;
+import nightgames.match.Participant;
 
 import java.util.Collections;
 import java.util.Map;
@@ -18,8 +18,8 @@ public abstract class ItemModifier {
         return Collections.emptyMap();
     }
 
-    public boolean itemIsBanned(Character c, Item i) {
-        return !playerOnly() || c.human() && bannedItems().contains(i);
+    public boolean itemIsBanned(Participant p, Item i) {
+        return !playerOnly() || p.getCharacter().human() && bannedItems().contains(i);
     }
 
     public boolean playerOnly() {

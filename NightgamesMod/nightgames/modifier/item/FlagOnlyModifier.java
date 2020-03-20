@@ -1,16 +1,15 @@
 package nightgames.modifier.item;
 
-import nightgames.characters.Character;
-import nightgames.global.Global;
 import nightgames.items.Item;
-import nightgames.match.ftc.FTCMatch;
+import nightgames.match.Participant;
+import nightgames.match.ftc.Prey;
 
 public class FlagOnlyModifier extends ItemModifier {
     private static final String name = "flag-only";
 
     @Override
-    public boolean itemIsBanned(Character c, Item i) {
-        return ((FTCMatch) Global.getMatch()).isPrey(c) && i != Item.Flag;
+    public boolean itemIsBanned(Participant p, Item i) {
+        return p instanceof Prey && i != Item.Flag;
     }
 
     @Override

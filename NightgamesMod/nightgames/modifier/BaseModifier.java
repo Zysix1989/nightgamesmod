@@ -59,7 +59,7 @@ public abstract class BaseModifier {
         moddedItems.putIfAbsent(p.getCharacter(), new HashMap<>());
         Map<Item, Integer> inventory = new HashMap<>(p.getCharacter().getInventory());
         inventory.forEach((item, count) -> {
-            if (items.itemIsBanned(p.getCharacter(), item)) {
+            if (items.itemIsBanned(p, item)) {
                 p.getCharacter().getInventory().remove(item);
                 moddedItems.get(p.getCharacter()).putIfAbsent(item, 0);
                 moddedItems.get(p.getCharacter()).compute(item, (i, cnt) -> cnt - count);
