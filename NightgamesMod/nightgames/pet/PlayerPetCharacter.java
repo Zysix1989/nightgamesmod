@@ -1,5 +1,6 @@
 package nightgames.pet;
 
+import nightgames.characters.Character;
 import nightgames.characters.Player;
 import nightgames.global.Global;
 import nightgames.items.clothing.Outfit;
@@ -9,7 +10,7 @@ import java.util.HashMap;
 public class PlayerPetCharacter extends PetCharacter {
     private Player prototype;
 
-    public PlayerPetCharacter(String name, Pet self, Player prototypeCharacter, int level) throws CloneNotSupportedException {
+    public PlayerPetCharacter(String name, Pet self, Character prototypeCharacter, int level) throws CloneNotSupportedException {
         super(self, name, prototypeCharacter.getType() + "Pet", prototypeCharacter.getGrowth(), 1);
         prototype = (Player) prototypeCharacter.clone();
         prototype.applyBasicStats(this);
