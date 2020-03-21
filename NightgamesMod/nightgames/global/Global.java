@@ -483,7 +483,6 @@ public class Global {
         getSkillPool().add(new ThrowSlime(ch));
         getSkillPool().add(new Edge(ch));
         getSkillPool().add(new SummonYui(ch));
-        getSkillPool().add(new Simulacrum(ch));
         getSkillPool().add(new Divide(ch));
         getSkillPool().add(new PetThreesome(ch));
         getSkillPool().add(new ReversePetThreesome(ch));
