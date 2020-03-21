@@ -2,13 +2,7 @@ package nightgames.pet;
 
 import nightgames.characters.Character;
 import nightgames.characters.Growth;
-import nightgames.characters.body.Body;
-import nightgames.characters.body.CockPart;
-import nightgames.characters.body.GenericBodyPart;
-import nightgames.characters.body.HandsPart;
-import nightgames.characters.body.PussyPart;
-import nightgames.characters.body.SkinPart;
-import nightgames.characters.body.TentaclePart;
+import nightgames.characters.body.*;
 import nightgames.characters.body.mods.catcher.GooeyMod;
 import nightgames.characters.body.mods.pitcher.SlimyCockMod;
 import nightgames.combat.Combat;
@@ -21,6 +15,8 @@ import nightgames.skills.petskills.SlimeJob;
 import nightgames.skills.petskills.SlimeMelt;
 import nightgames.skills.petskills.SlimeOil;
 import nightgames.skills.petskills.SlimeTrip;
+
+import java.util.Optional;
 
 public class Slime extends Pet {
     public Slime(Character owner) {
@@ -38,38 +34,47 @@ public class Slime extends Pet {
 
     @Override
     public void vanquish(Combat c, Pet opponent) {
+        var instakillScene = instakillScene(opponent);
+        if (instakillScene.isPresent()) {
+            c.write(getSelf(), instakillScene.get());
+            c.removePet(opponent.getSelf());
+        } else {
+            (new SlimeJob(getSelf())).resolve(c, opponent.getSelf());
+        }
+    }
+
+    public Optional<String> instakillScene(Pet opponent) {
         if (opponent.type() == Ptype.slime) {
-            c.write(getSelf(), "The two slimes circle around each other, while gradually taking on human shape. One of the oozes looks vaguely like "
-                            + own() + "small slimy twin, while the other takes " + opponent.own()
-                            + "form. The two grapple and melt into each other so it's impossible to tell where one ends and the other begins. You can make out vaguely sexual shapes being formed "
-                            + "in the mix. Somehow you can tell that they're each trying to pleasure the other. Eventually the battle ends and a single humanoid shape forms from the amorphous mass, "
-                            + "revealing that " + own() + "slime was victorious.");
+            return Optional.of("The two slimes circle around each other, while gradually taking on human shape. One of the oozes looks vaguely like "
+                    + own() + "small slimy twin, while the other takes " + opponent.own()
+                    + "form. The two grapple and melt into each other so it's impossible to tell where one ends and the other begins. You can make out vaguely sexual shapes being formed "
+                    + "in the mix. Somehow you can tell that they're each trying to pleasure the other. Eventually the battle ends and a single humanoid shape forms from the amorphous mass, "
+                    + "revealing that " + own() + "slime was victorious.");
         } if (opponent.getSelf().body.getHeight() < 50) {
             if (opponent.getSelf().hasDick()) {
-                c.write(getSelf(), opponent.own() + "faerie flies too close to " + own()
-                + "slime and is suddenly engulfed up to his waist before he can react. He tries to free himself, but "
-                + "groans as it starts to suck and massage his penis. He tries to push the slime off his groin, but it just sucks in his hands, leaving him completely "
-                + "helpless until he ejaculates.");
+                return Optional.of(opponent.own() + "faerie flies too close to " + own()
+                        + "slime and is suddenly engulfed up to his waist before he can react. He tries to free himself, but "
+                        + "groans as it starts to suck and massage his penis. He tries to push the slime off his groin, but it just sucks in his hands, leaving him completely "
+                        + "helpless until he ejaculates.");
             } else {
-                c.write(getSelf(), opponent.own() + "faerie flies over " + own()
-                + "slime and begins casting a spells. Without warning, several appendages shoot out from the blob and snag "
-                + "the faerie girl's limbs before she can escape. More appendages attach to her breasts and groin as the slime starts to vibrate. The faerie lets out a "
-                + "high pitched moan and squirms against her bonds until she shudders in orgasm and vanishes.");
+                return Optional.of(opponent.own() + "faerie flies over " + own()
+                        + "slime and begins casting a spells. Without warning, several appendages shoot out from the blob and snag "
+                        + "the faerie girl's limbs before she can escape. More appendages attach to her breasts and groin as the slime starts to vibrate. The faerie lets out a "
+                        + "high pitched moan and squirms against her bonds until she shudders in orgasm and vanishes.");
             }
-        } else if (opponent instanceof CharacterPet) { 
-            (new SlimeJob(getSelf())).resolve(c, opponent.getSelf());
+        } else if (opponent instanceof CharacterPet) {
+            return Optional.empty();
         } else {
             if (!opponent.hasDick()) {
-                c.write(getSelf(), Global.format("{self:SUBJECT} gathers around {other:name-possessive} ankles. With unexpected speed, it surges up {other:possessive} legs and simultaneously penetrates {other:possessive} pussy and "
-                                + "ass. {other:PRONOUN} screams in pleasure and falls to {other:possessive} knees as the amorphous blob fucks both {other:possessive} holes. By the time {other:subject} climaxes and disappears, {other:pronoun} is completely "
-                                + "fucked senseless.", getSelf(), opponent.getSelf()));
+                return Optional.of(Global.format("{self:SUBJECT} gathers around {other:name-possessive} ankles. With unexpected speed, it surges up {other:possessive} legs and simultaneously penetrates {other:possessive} pussy and "
+                        + "ass. {other:PRONOUN} screams in pleasure and falls to {other:possessive} knees as the amorphous blob fucks both {other:possessive} holes. By the time {other:subject} climaxes and disappears, {other:pronoun} is completely "
+                        + "fucked senseless.", getSelf(), opponent.getSelf()));
             } else {
-                c.write(getSelf(), Global.format("{other:SUBJECT} grabs for {self:name-do}, but it leaps past {other:possessive} guard and covers {other:possessive} cock. The slime forms perfectly to {other:possessive} dick and balls, milking "
-                                + "as much pre-cum as it can get. {other:SUBJECT} tries to pull off the slime, but it acts as lubricant and {other:possessive} attempts to remove it devolve into masturbation. "
-                                + "{other:PRONOUN} ejaculates into the slime and disappears.", getSelf(), opponent.getSelf()));
+                return Optional.of(Global.format("{other:SUBJECT} grabs for {self:name-do}, but it leaps past {other:possessive} guard and covers {other:possessive} cock. The slime forms perfectly to {other:possessive} dick and balls, milking "
+                        + "as much pre-cum as it can get. {other:SUBJECT} tries to pull off the slime, but it acts as lubricant and {other:possessive} attempts to remove it devolve into masturbation. "
+                        + "{other:PRONOUN} ejaculates into the slime and disappears.", getSelf(), opponent.getSelf()));
             }
         }
-        c.removePet(opponent.getSelf());
     }
 
     @Override
