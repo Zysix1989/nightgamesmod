@@ -59,6 +59,7 @@ public class Combat {
         CombatPhase getEnum();
         boolean turn(Combat c);
         boolean next(Combat c);
+        boolean isFastSkippable();
     }
 
     public static class State implements Participant.State {
@@ -105,6 +106,7 @@ public class Combat {
             throw new UnsupportedOperationException(String.format("%s is already in combat!",
                     p.getCharacter().getTrueName()));
         }
+
     }
 
     private static class StartPhase implements Phase {
@@ -122,6 +124,11 @@ public class Combat {
         @Override
         public boolean next(Combat c) {
             return c.next();
+        }
+
+        @Override
+        public boolean isFastSkippable() {
+            return false;
         }
     }
 
@@ -166,6 +173,11 @@ public class Combat {
         public boolean next(Combat c) {
             return c.next();
         }
+
+        @Override
+        public boolean isFastSkippable() {
+            return false;
+        }
     }
 
     private static class SkillSelectionPhase implements Phase {
@@ -189,6 +201,11 @@ public class Combat {
         @Override
         public boolean next(Combat c) {
             return c.next();
+        }
+
+        @Override
+        public boolean isFastSkippable() {
+            return false;
         }
     }
 
@@ -243,6 +260,11 @@ public class Combat {
         public boolean next(Combat c) {
             return c.next();
         }
+
+        @Override
+        public boolean isFastSkippable() {
+            return true;
+        }
     }
 
     private static class DetermineSkillOrderPhase implements Phase {
@@ -267,6 +289,11 @@ public class Combat {
         public boolean next(Combat c) {
             return c.next();
         }
+
+        @Override
+        public boolean isFastSkippable() {
+            return true;
+        }
     }
 
     private static class P1ActFirstPhase implements Phase {
@@ -288,6 +315,11 @@ public class Combat {
         @Override
         public boolean next(Combat c) {
             return c.next();
+        }
+
+        @Override
+        public boolean isFastSkippable() {
+            return true;
         }
     }
 
@@ -311,6 +343,11 @@ public class Combat {
         public boolean next(Combat c) {
             return c.next();
         }
+
+        @Override
+        public boolean isFastSkippable() {
+            return true;
+        }
     }
 
     private static class P1ActSecondPhase implements Phase {
@@ -330,6 +367,11 @@ public class Combat {
         public boolean next(Combat c) {
             return c.next();
         }
+
+        @Override
+        public boolean isFastSkippable() {
+            return true;
+        }
     }
 
     private static class P2ActSecondPhase implements Phase {
@@ -348,6 +390,11 @@ public class Combat {
         @Override
         public boolean next(Combat c) {
             return c.next();
+        }
+
+        @Override
+        public boolean isFastSkippable() {
+            return true;
         }
     }
 
@@ -397,6 +444,11 @@ public class Combat {
         public boolean next(Combat c) {
             return c.next();
         }
+
+        @Override
+        public boolean isFastSkippable() {
+            return true;
+        }
     }
 
     private static class ResultsScenePhase implements Phase {
@@ -424,6 +476,11 @@ public class Combat {
         public boolean next(Combat c) {
             return c.next();
         }
+
+        @Override
+        public boolean isFastSkippable() {
+            return false;
+        }
     }
 
     private static class FinishedScenePhase implements Phase {
@@ -442,6 +499,11 @@ public class Combat {
         public boolean next(Combat c) {
             return c.next();
         }
+
+        @Override
+        public boolean isFastSkippable() {
+            return false;
+        }
     }
 
     private static class EndedPhase implements Phase {
@@ -459,6 +521,11 @@ public class Combat {
         public boolean next(Combat c) {
             c.end();
             return true;
+        }
+
+        @Override
+        public boolean isFastSkippable() {
+            return false;
         }
     }
 
@@ -892,16 +959,6 @@ public class Combat {
                     CombatPhase.P2_ACT_FIRST,
                     CombatPhase.P2_ACT_SECOND);
 
-    private static final List<CombatPhase> FAST_COMBAT_SKIPPABLE_PHASES = 
-                    Arrays.asList(
-                    CombatPhase.PET_ACTIONS,
-                    CombatPhase.P1_ACT_FIRST,
-                    CombatPhase.P1_ACT_SECOND,
-                    CombatPhase.P2_ACT_FIRST,
-                    CombatPhase.P2_ACT_SECOND,
-                    CombatPhase.UPKEEP,
-                    CombatPhase.DETERMINE_SKILL_ORDER);
-
     private boolean turn() {
         if (p1.getCharacter().human() && p2.getCharacter() instanceof NPC) {
             Global.gui().loadPortrait((NPC) p2.getCharacter());
@@ -1318,7 +1375,7 @@ public class Combat {
         }
         if (!(wroteMessage || phase.getEnum() == CombatPhase.START)
                 || !isBeingObserved()
-                || (Global.checkFlag(Flag.AutoNext) && FAST_COMBAT_SKIPPABLE_PHASES.contains(phase.getEnum()))) {
+                || (Global.checkFlag(Flag.AutoNext) && phase.isFastSkippable())) {
             return false;
         } else {
             if (!paused) {
