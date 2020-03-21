@@ -31,6 +31,7 @@ import nightgames.utilities.ProseUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Combat {
     private static final int NPC_TURN_LIMIT = 75;
@@ -142,8 +143,7 @@ public class Combat {
                 player = c.p2.getCharacter();
                 other = c.p1.getCharacter();
             }
-            c.wroteMessage = false;
-            c.message = c.describe(player, other);
+            c.write(c.describe(player, other));
             if (!c.shouldAutoresolve() && !Global.checkFlag(Flag.noimage)) {
                 Global.gui()
                       .clearImage();
@@ -474,7 +474,6 @@ public class Combat {
     protected Skill p1act;
     protected Skill p2act;
     public Area location;
-    private String message;
     private Position stance;
     protected int timer;
     public Result state;
@@ -494,7 +493,6 @@ public class Combat {
         this.p2 = new Combatant(p2);
         location = loc;
         stance = new Neutral(p1.getCharacter(), p2.getCharacter());
-        message = "";
         paused = false;
         processedEnding = false;
         timer = 0;
@@ -1234,18 +1232,11 @@ public class Combat {
     }
 
     public void write(String text) {
-        text = Global.capitalizeFirstLetter(text);
-        if (text.isEmpty()) {
-            return;
-        }
-        message = message + "<br/>" + text;
-        wroteMessage = true;
+        broadcastMessageRaw("<br/>" + text);
     }
 
     public void updateMessage() {
         Global.gui().refresh();
-        p1.getCharacter().message(message);
-        p2.getCharacter().message(message);
     }
 
     public void updateAndClearMessage() {
@@ -1254,8 +1245,15 @@ public class Combat {
     }
 
     public void write(Character user, String text) {
-        text = Global.capitalizeFirstLetter(text);
-        message = message + Global.colorizeMessage(user, text);
+        broadcastMessageRaw(Global.colorizeMessage(user, Global.capitalizeFirstLetter(text)));
+    }
+
+    private void broadcastMessageRaw(String text) {
+        if (text.isEmpty()) {
+            return;
+        }
+        Stream.concat(Set.of(p1.getCharacter(), p2.getCharacter()).stream(), watchers.stream())
+                .forEach(watcher -> watcher.message(text));
         wroteMessage = true;
     }
 
