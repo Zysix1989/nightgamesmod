@@ -494,7 +494,6 @@ public class Combat {
         paused = false;
         processedEnding = false;
         timer = 0;
-        HashMap<String, String> images = new HashMap<String, String>();
         this.p1.getParticipant().state = new State(this);
         this.p2.getParticipant().state = new State(this);
         postCombatScenesSeen = 0;
