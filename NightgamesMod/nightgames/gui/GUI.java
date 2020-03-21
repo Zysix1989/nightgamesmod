@@ -186,8 +186,8 @@ public class GUI extends JFrame implements Observer {
         showPortrait();
     }
 
-    public void displayImage(String path, String artist) {
-        storyImage.displayImage(path, artist);
+    public void displayImage(String path) {
+        storyImage.displayImage(path);
     }
 
     public void clearImage() {

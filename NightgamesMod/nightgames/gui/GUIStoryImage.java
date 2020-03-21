@@ -1,17 +1,15 @@
 package nightgames.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import nightgames.Resources.ResourceLoader;
+import nightgames.global.Flag;
+import nightgames.global.Global;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import nightgames.Resources.ResourceLoader;
-import nightgames.global.*;
 
 class GUIStoryImage {
     private JPanel panel;
@@ -33,7 +31,7 @@ class GUIStoryImage {
         return panel;
     }
 
-    void displayImage(String path, String artist) {
+    void displayImage(String path) {
         if (Global.checkFlag(Flag.noimage)) {
             return;
         }
@@ -50,7 +48,6 @@ class GUIStoryImage {
         if (pic != null) {
             label.setIcon(new ImageIcon(pic));
             label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setToolTipText(artist);
         }
     }
 

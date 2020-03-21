@@ -734,7 +734,7 @@ public class Player extends Character {
     }
 
     @Override
-    public void notifyStanceImage(String path, String artist) {
-        gui.displayImage(path, artist);
+    public void notifyStanceImage(String path) {
+        gui.displayImage(path);
     }
 }

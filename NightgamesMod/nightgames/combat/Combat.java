@@ -148,8 +148,7 @@ public class Combat {
                 Global.gui()
                       .clearImage();
                 if (!c.imagePath.isEmpty()) {
-                    Global.gui()
-                          .displayImage(c.imagePath, c.images.get(c.imagePath));
+                    Global.gui().displayImage(c.imagePath);
                 }
             }
             c.p1.getCharacter().preturnUpkeep();
@@ -477,7 +476,6 @@ public class Combat {
     private Position stance;
     protected int timer;
     public Result state;
-    private HashMap<String, String> images;
     boolean lastFailed = false;
     private CombatLog log;
     private int postCombatScenesSeen;
@@ -496,7 +494,7 @@ public class Combat {
         paused = false;
         processedEnding = false;
         timer = 0;
-        images = new HashMap<String, String>();
+        HashMap<String, String> images = new HashMap<String, String>();
         this.p1.getParticipant().state = new State(this);
         this.p2.getParticipant().state = new State(this);
         postCombatScenesSeen = 0;
@@ -1541,10 +1539,10 @@ public class Combat {
         }
     }
 
-    public void offerImage(String path, String artist) {
+    public void offerImage(String path) {
         imagePath = path;
         if (!imagePath.isEmpty() && !cloned) {
-            watchers.forEach(w -> w.notifyStanceImage(imagePath, images.get(imagePath)));
+            watchers.forEach(w -> w.notifyStanceImage(imagePath));
         }
     }
 
@@ -1657,7 +1655,7 @@ public class Combat {
             initiator.add(this, new Alluring(initiator, 1));
         }
         stance = newStance;
-        offerImage(stance.image(), "");
+        offerImage(stance.image());
     }
 
     /**Checks if the opponent has breeder - currently presumes Kat is the only character with it and outputs text. 

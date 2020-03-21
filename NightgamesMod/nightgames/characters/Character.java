@@ -3981,5 +3981,5 @@ public Character clone() throws CloneNotSupportedException {
 
     public abstract Dialog makeDialog();
 
-    public void notifyStanceImage(String path, String artist) {};
+    public void notifyStanceImage(String path) {};
 }
