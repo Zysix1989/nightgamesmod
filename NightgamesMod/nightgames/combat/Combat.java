@@ -951,7 +951,6 @@ public class Combat {
     public static List<Skill> WORSHIP_SKILLS = Arrays.asList(new BreastWorship(null), new CockWorship(null), new FootWorship(null),
                     new PussyWorship(null), new Anilingus(null));
     public static final String TEMPT_WORSHIP_BONUS = "TEMPT_WORSHIP_BONUS";
-    public boolean combatMessageChanged;
     private boolean paused;
     private boolean processedEnding;
 
