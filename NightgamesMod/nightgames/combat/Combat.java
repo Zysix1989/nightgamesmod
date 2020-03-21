@@ -56,7 +56,6 @@ public class Combat {
     }
 
     private interface Phase {
-        CombatPhase getEnum();
         boolean turn(Combat c);
         boolean next(Combat c);
     }
@@ -113,10 +112,6 @@ public class Combat {
     }
 
     private static class StartPhase implements Phase {
-        @Override
-        public CombatPhase getEnum() {
-            return CombatPhase.START;
-        }
 
         @Override
         public boolean turn(Combat c) {
@@ -132,10 +127,6 @@ public class Combat {
     }
 
     private static class PreTurnPhase implements Phase {
-        @Override
-        public CombatPhase getEnum() {
-            return CombatPhase.PRETURN;
-        }
 
         @Override
         public boolean turn(Combat c) {
@@ -176,10 +167,6 @@ public class Combat {
     }
 
     private static class SkillSelectionPhase implements Phase {
-        @Override
-        public CombatPhase getEnum() {
-            return CombatPhase.SKILL_SELECTION;
-        }
 
         @Override
         public boolean turn(Combat c) {
@@ -201,10 +188,6 @@ public class Combat {
     }
 
     private static class PetActionsPhase implements SkippablePhase {
-        @Override
-        public CombatPhase getEnum() {
-            return CombatPhase.PET_ACTIONS;
-        }
 
         @Override
         public boolean turn(Combat c) {
@@ -255,10 +238,6 @@ public class Combat {
     }
 
     private static class DetermineSkillOrderPhase implements FastSkippablePhase {
-        @Override
-        public CombatPhase getEnum() {
-            return CombatPhase.DETERMINE_SKILL_ORDER;
-        }
 
         @Override
         public boolean turn(Combat c) {
@@ -280,10 +259,6 @@ public class Combat {
     }
 
     private static class P1ActFirstPhase implements SkippablePhase {
-        @Override
-        public CombatPhase getEnum() {
-            return CombatPhase.P1_ACT_FIRST;
-        }
 
         @Override
         public boolean turn(Combat c) {
@@ -303,10 +278,6 @@ public class Combat {
     }
 
     private static class P2ActFirstPhase implements SkippablePhase {
-        @Override
-        public CombatPhase getEnum() {
-            return CombatPhase.P2_ACT_FIRST;
-        }
 
         @Override
         public boolean turn(Combat c) {
@@ -326,10 +297,6 @@ public class Combat {
     }
 
     private static class P1ActSecondPhase implements SkippablePhase {
-        @Override
-        public CombatPhase getEnum() {
-            return CombatPhase.P1_ACT_SECOND;
-        }
 
         @Override
         public boolean turn(Combat c) {
@@ -346,10 +313,6 @@ public class Combat {
     }
 
     private static class P2ActSecondPhase implements SkippablePhase {
-        @Override
-        public CombatPhase getEnum() {
-            return CombatPhase.P2_ACT_SECOND;
-        }
 
         @Override
         public boolean turn(Combat c) {
@@ -366,10 +329,6 @@ public class Combat {
     }
 
     private static class UpkeepPhase implements FastSkippablePhase {
-        @Override
-        public CombatPhase getEnum() {
-            return CombatPhase.UPKEEP;
-        }
 
         @Override
         public boolean turn(Combat c) {
@@ -415,10 +374,6 @@ public class Combat {
     }
 
     private static class ResultsScenePhase implements Phase {
-        @Override
-        public CombatPhase getEnum() {
-            return CombatPhase.RESULTS_SCENE;
-        }
 
         @Override
         public boolean turn(Combat c) {
@@ -443,10 +398,6 @@ public class Combat {
     }
 
     private static class FinishedScenePhase implements Phase {
-        @Override
-        public CombatPhase getEnum() {
-            return CombatPhase.FINISHED_SCENE;
-        }
 
         @Override
         public boolean turn(Combat c) {
@@ -462,10 +413,6 @@ public class Combat {
     }
 
     private static class EndedPhase implements Phase {
-        @Override
-        public CombatPhase getEnum() {
-            return CombatPhase.ENDED;
-        }
 
         @Override
         public boolean turn(Combat c) {
@@ -599,7 +546,7 @@ public class Combat {
     private void resumeNoClearFlag() {
         paused = false;
         while(!paused && !turn()) {}
-        if (phase.getEnum() != CombatPhase.ENDED) {
+        if (phase instanceof EndedPhase) {
             updateAndClearMessage();
         }
     }
@@ -908,12 +855,13 @@ public class Combat {
         } else if (p2.getCharacter().human() && p1.getCharacter() instanceof NPC) {
             Global.gui().loadPortrait((NPC) p1.getCharacter());
         }
-        if (phase.getEnum() != CombatPhase.FINISHED_SCENE && phase.getEnum() != CombatPhase.RESULTS_SCENE && checkLosses()) {
+        if (!(phase instanceof FinishedScenePhase || phase instanceof ResultsScenePhase)
+                && checkLosses()) {
             phase = new ResultsScenePhase();
             return phase.next(this);
         }
         if ((p1.getCharacter().orgasmed || p2.getCharacter().orgasmed)
-                && phase.getEnum() != CombatPhase.RESULTS_SCENE
+                && !(phase instanceof ResultsScenePhase)
                 && phase instanceof SkippablePhase) {
             phase = new UpkeepPhase();
         }
@@ -1314,11 +1262,11 @@ public class Combat {
     }
 
     private boolean next() {
-        assert phase.getEnum() != CombatPhase.ENDED;
+        assert !(phase instanceof EndedPhase);
         if (shouldAutoresolve()) {
             return true;
         }
-        if (!(wroteMessage || phase.getEnum() == CombatPhase.START)
+        if (!(wroteMessage || phase instanceof StartPhase)
                 || !isBeingObserved()
                 || (Global.checkFlag(Flag.AutoNext) && phase instanceof FastSkippablePhase)) {
             return false;
@@ -1807,7 +1755,7 @@ public class Combat {
     }
 
     public boolean isEnded() {
-        return phase.getEnum() == CombatPhase.FINISHED_SCENE || phase.getEnum() == CombatPhase.ENDED;
+        return phase instanceof FinishedScenePhase || phase instanceof EndedPhase;
     }
 
     public void pause() {
