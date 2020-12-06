@@ -42,7 +42,7 @@ public class Slap extends Skill {
         if (target.roll(getSelf(), c, accuracy(c, target))) {
             if (isSlime()) {
                 writeOutput(c, Result.critical, target);
-                target.pain(c, getSelf(), Math.min(80, Global.random(10) + getSelf().get(Attribute.Slime) + getSelf().get(Attribute.Power) / 2));
+                target.pain(c, getSelf(), Math.min(8000, Global.random(10) + getSelf().get(Attribute.Slime) + getSelf().get(Attribute.Power) / 2));
                 if (c.getStance().en == Stance.neutral && Global.random(5) == 0) {
                     c.setStance(new StandingOver(getSelf(), target), getSelf(), true);
                     c.write(getSelf(),
